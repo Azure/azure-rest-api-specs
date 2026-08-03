@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxx-xxxx-xxxx-xxxx",
+    "resourceGroup": "myResourceGroup",
+    "fluidRelayServerName": "myFluidRelayServer",
+    "api-version": "2022-04-21",
+    "location": "west-us",
+    "resource": {
+      "tags": {
+        "Category": "sales"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer",
+        "name": "myFluidRelayServer",
+        "type": "Microsoft.FluidRelay/fluidRelayServers",
+        "location": "west-us",
+        "properties": {
+          "frsTenantId": "yyyy-yyyy-yyyyy-yyyy",
+          "fluidRelayEndpoints": {
+            "ordererEndpoints": [
+              "https://www.contoso.org/orderer"
+            ],
+            "storageEndpoints": [
+              "https://www.contoso.org/storage"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Category": "sales"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DiskResourceProviderClient",
+    "description": "The Disk Resource Provider Client.",
+    "version": "2023-10-02"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "EncryptionSettingsCollection": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Set this flag to true and provide DiskEncryptionKey and optional KeyEncryptionKey to enable encryption. Set this flag to false and remove DiskEncryptionKey and KeyEncryptionKey to disable encryption. If EncryptionSettings is null in the request object, the existing settings remain unchanged."
+        },
+        "encryptionSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncryptionSettingsElement"
+          },
+          "x-ms-identifiers": [
+            "diskEncryptionKey/sourceVault/id"
+          ],
+          "description": "A collection of encryption settings, one for each disk volume."
+        },
+        "encryptionSettingsVersion": {
+          "type": "string",
+          "description": "Describes what type of encryption is used for the disks. Once this field is set, it cannot be overwritten. '1.0' corresponds to Azure Disk Encryption with AAD app.'1.1' corresponds to Azure Disk Encryption."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Encryption settings for disk or snapshot"
+    },
+    "EncryptionSettingsElement": {
+      "properties": {
+        "diskEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndSecretReference",
+          "description": "Key Vault Secret Url and vault id of the disk encryption key"
+        },
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "description": "Key Vault Key Url and vault id of the key encryption key. KeyEncryptionKey is optional and when provided is used to unwrap the disk encryption key."
+        }
+      },
+      "description": "Encryption settings for one disk volume."
+    },
+    "KeyVaultAndSecretReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "secretUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "secretUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Secret Url and vault id of the encryption key "
+    },
+    "KeyVaultAndKeyReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "keyUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey"
+    },
+    "SourceVault": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "The vault id is an Azure Resource Manager Resource id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
+    },
+    "EncryptionType": {
+      "type": "string",
+      "description": "The type of key used to encrypt the data of the disk.",
+      "enum": [
+        "EncryptionAtRestWithPlatformKey",
+        "EncryptionAtRestWithCustomerKey",
+        "EncryptionAtRestWithPlatformAndCustomerKeys"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EncryptionAtRestWithPlatformKey",
+            "description": "Disk is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets."
+          },
+          {
+            "value": "EncryptionAtRestWithCustomerKey",
+            "description": "Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+          },
+          {
+            "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+            "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          }
+        ]
+      }
+    },
+    "Encryption": {
+      "properties": {
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
+        },
+        "type": {
+          "$ref": "#/definitions/EncryptionType"
+        }
+      },
+      "description": "Encryption at rest settings for disk or snapshot"
+    },
+    "NetworkAccessPolicy": {
+      "type": "string",
+      "description": "Policy for accessing the disk via network.",
+      "enum": [
+        "AllowAll",
+        "AllowPrivate",
+        "DenyAll"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkAccessPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AllowAll",
+            "description": "The disk can be exported or uploaded to from any network."
+          },
+          {
+            "value": "AllowPrivate",
+            "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
+          },
+          {
+            "value": "DenyAll",
+            "description": "The disk cannot be exported."
+          }
+        ]
+      }
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Policy for controlling export on the disk.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "You can generate a SAS URI to access the underlying data of the disk publicly on the internet when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate."
+          },
+          {
+            "value": "Disabled",
+            "description": "You cannot access the underlying data of the disk publicly on the internet even when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate."
+          }
+        ]
+      }
+    },
+    "DiskState": {
+      "type": "string",
+      "description": "This enumerates the possible state of the disk.",
+      "readOnly": true,
+      "enum": [
+        "Unattached",
+        "Attached",
+        "Reserved",
+        "Frozen",
+        "ActiveSAS",
+        "ActiveSASFrozen",
+        "ReadyToUpload",
+        "ActiveUpload"
+      ],
+      "x-ms-enum": {
+        "name": "DiskState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unattached",
+            "description": "The disk is not being used and can be attached to a VM."
+          },
+          {
+            "value": "Attached",
+            "description": "The disk is currently attached to a running VM."
+          },
+          {
+            "value": "Reserved",
+            "description": "The disk is attached to a stopped-deallocated VM."
+          },
+          {
+            "value": "Frozen",
+            "description": "The disk is attached to a VM which is in hibernated state."
+          },
+          {
+            "value": "ActiveSAS",
+            "description": "The disk currently has an Active SAS Uri associated with it."
+          },
+          {
+            "value": "ActiveSASFrozen",
+            "description": "The disk is attached to a VM in hibernated state and has an active SAS URI associated with it."
+          },
+          {
+            "value": "ReadyToUpload",
+            "description": "A disk is ready to be created by upload by requesting a write token."
+          },
+          {
+            "value": "ActiveUpload",
+            "description": "A disk is created for upload and a write token has been issued for uploading to it."
+          }
+        ]
+      }
+    },
+    "CreationData": {
+      "properties": {
+        "createOption": {
+          "type": "string",
+          "enum": [
+            "Empty",
+            "Attach",
+            "FromImage",
+            "Import",
+            "Copy",
+            "Restore",
+            "Upload",
+            "CopyStart",
+            "ImportSecure",
+            "UploadPreparedSecure",
+            "CopyFromSanSnapshot"
+          ],
+          "x-ms-enum": {
+            "name": "DiskCreateOption",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Empty",
+                "description": "Create an empty data disk of a size given by diskSizeGB."
+              },
+              {
+                "value": "Attach",
+                "description": "Disk will be attached to a VM."
+              },
+              {
+                "value": "FromImage",
+                "description": "Create a new disk from a platform image specified by the given imageReference or galleryImageReference."
+              },
+              {
+                "value": "Import",
+                "description": "Create a disk by importing from a blob specified by a sourceUri in a storage account specified by storageAccountId."
+              },
+              {
+                "value": "Copy",
+                "description": "Create a new disk or snapshot by copying from a disk or snapshot specified by the given sourceResourceId."
+              },
+              {
+                "value": "Restore",
+                "description": "Create a new disk by copying from a backup recovery point."
+              },
+              {
+                "value": "Upload",
+                "description": "Create a new disk by obtaining a write token and using it to directly upload the contents of the disk."
+              },
+              {
+                "value": "CopyStart",
+                "description": "Create a new disk by using a deep copy process, where the resource creation is considered complete only after all data has been copied from the source."
+              },
+              {
+                "value": "ImportSecure",
+                "description": "Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId"
+              },
+              {
+                "value": "UploadPreparedSecure",
+                "description": "Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state"
+              },
+              {
+                "value": "CopyFromSanSnapshot",
+                "description": "Create a new disk by exporting from elastic san volume snapshot"
+              }
+            ]
+          },
+          "description": "This enumerates the possible sources of a disk's creation."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "Required if createOption is Import. The Azure Resource Manager identifier of the storage account containing the blob to import as a disk."
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageDiskReference",
+          "description": "Disk source information for PIR or user images."
+        },
+        "galleryImageReference": {
+          "$ref": "#/definitions/ImageDiskReference",
+          "description": "Required if creating from a Gallery Image. The id/sharedGalleryImageId/communityGalleryImageId of the ImageDiskReference will be the ARM id of the shared galley image version from which to create a disk."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "If createOption is Import, this is the URI of a blob to be imported into a managed disk."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk."
+        },
+        "sourceUniqueId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "If this field is set, this is the unique id identifying the source of this resource."
+        },
+        "uploadSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If createOption is Upload, this is the size of the contents of the upload including the VHD footer. This value should be between 20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32 TiB + 512 bytes for the VHD footer)."
+        },
+        "logicalSectorSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default."
+        },
+        "securityDataUri": {
+          "type": "string",
+          "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM guest state."
+        },
+        "performancePlus": {
+          "type": "boolean",
+          "description": "Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled."
+        },
+        "elasticSanResourceId": {
+          "type": "string",
+          "description": "Required if createOption is CopyFromSanSnapshot. This is the ARM id of the source elastic san volume snapshot."
+        },
+        "provisionedBandwidthCopySpeed": {
+          "type": "string",
+          "description": "If this field is set on a snapshot and createOption is CopyStart, the snapshot will be copied at a quicker speed.",
+          "enum": [
+            "None",
+            "Enhanced"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisionedBandwidthCopyOption",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "createOption"
+      ],
+      "description": "Data used when creating a disk."
+    },
+    "ImageDiskReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A relative uri containing either a Platform Image Repository, user image, or Azure Compute Gallery image reference."
+        },
+        "sharedGalleryImageId": {
+          "type": "string",
+          "description": "A relative uri containing a direct shared Azure Compute Gallery image reference."
+        },
+        "communityGalleryImageId": {
+          "type": "string",
+          "description": "A relative uri containing a community Azure Compute Gallery image reference."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the disk is created from an image's data disk, this is an index that indicates which of the data disks in the image to use. For OS disks, this field is null."
+        }
+      },
+      "description": "The source image used for creating the disk."
+    },
+    "PurchasePlan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The Offer Promotion Code."
+        }
+      },
+      "required": [
+        "publisher",
+        "name",
+        "product"
+      ],
+      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
+    },
+    "CopyCompletionError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Indicates the error code if the background copy of a resource created via the CopyStart operation fails.",
+          "enum": [
+            "CopySourceNotFound"
+          ],
+          "x-ms-enum": {
+            "name": "CopyCompletionErrorReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CopySourceNotFound",
+                "description": "Indicates that the source snapshot was deleted while the background copy of the resource created via CopyStart operation was in progress."
+              }
+            ]
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Indicates the error message if the background copy of a resource created via the CopyStart operation fails."
+        }
+      },
+      "required": [
+        "errorCode",
+        "errorMessage"
+      ],
+      "description": "Indicates the error details if the background copy of a resource created via the CopyStart operation fails."
+    },
+    "SupportedCapabilities": {
+      "type": "object",
+      "properties": {
+        "diskControllerTypes": {
+          "type": "string",
+          "description": "The disk controllers that an OS disk supports. If set it can be SCSI or SCSI, NVME or NVME, SCSI."
+        },
+        "acceleratedNetwork": {
+          "type": "boolean",
+          "description": "True if the image from which the OS disk is created supports accelerated networking."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture supported by an OS disk.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "List of supported capabilities persisted on the disk resource for VM use."
+    },
+    "DiskSecurityType": {
+      "type": "string",
+      "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+      "enum": [
+        "TrustedLaunch",
+        "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+        "ConfidentialVM_DiskEncryptedWithPlatformKey",
+        "ConfidentialVM_DiskEncryptedWithCustomerKey",
+        "ConfidentialVM_NonPersistedTPM"
+      ],
+      "x-ms-enum": {
+        "name": "DiskSecurityTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TrustedLaunch",
+            "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+          },
+          {
+            "value": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+            "description": "Indicates Confidential VM disk with only VM guest state encrypted"
+          },
+          {
+            "value": "ConfidentialVM_DiskEncryptedWithPlatformKey",
+            "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key"
+          },
+          {
+            "value": "ConfidentialVM_DiskEncryptedWithCustomerKey",
+            "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key"
+          },
+          {
+            "value": "ConfidentialVM_NonPersistedTPM",
+            "description": "Indicates Confidential VM disk with a ephemeral vTPM. vTPM state is not persisted across VM reboots."
+          }
+        ]
+      }
+    },
+    "DiskSecurityProfile": {
+      "properties": {
+        "securityType": {
+          "$ref": "#/definitions/DiskSecurityType"
+        },
+        "secureVMDiskEncryptionSetId": {
+          "type": "string",
+          "description": "ResourceId of the disk encryption set associated to Confidential VM supported disk encrypted with customer managed key"
+        }
+      },
+      "description": "Contains the security related information for the resource."
+    },
+    "GrantAccessData": {
+      "properties": {
+        "access": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Read",
+            "Write"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          }
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time duration in seconds until the SAS access expires."
+        },
+        "getSecureVMGuestStateSAS": {
+          "type": "boolean",
+          "description": "Set this flag to true to get additional SAS for VM guest state"
+        },
+        "fileFormat": {
+          "type": "string",
+          "description": "Used to specify the file format when making request for SAS on a VHDX file format snapshot",
+          "enum": [
+            "VHD",
+            "VHDX"
+          ],
+          "x-ms-enum": {
+            "name": "FileFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "VHD",
+                "description": "A VHD file is a disk image file in the Virtual Hard Disk file format."
+              },
+              {
+                "value": "VHDX",
+                "description": "A VHDX file is a disk image file in the Virtual Hard Disk v2 file format."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "access",
+        "durationInSeconds"
+      ],
+      "description": "Data used for requesting a SAS."
+    },
+    "AccessUri": {
+      "properties": {
+        "accessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a disk."
+        },
+        "securityDataAccessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a VM guest state."
+        }
+      },
+      "description": "A disk access SAS uri."
+    },
+    "DataAccessAuthMode": {
+      "type": "string",
+      "description": "Additional authentication requirements when exporting or uploading to a disk or snapshot.",
+      "enum": [
+        "AzureActiveDirectory",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "DataAccessAuthMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureActiveDirectory",
+            "description": "When export/upload URL is used, the system checks if the user has an identity in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth."
+          },
+          {
+            "value": "None",
+            "description": "No additional authentication would be performed when accessing export/upload URL."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

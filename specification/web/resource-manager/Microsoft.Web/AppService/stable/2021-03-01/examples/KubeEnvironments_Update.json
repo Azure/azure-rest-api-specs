@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "name": "testkubeenv",
+    "api-version": "2021-03-01",
+    "kind": "kubernetes",
+    "location": "East US",
+    "extendedLocation": {
+      "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+      "type": "customLocation"
+    },
+    "kubeEnvironmentEnvelope": {
+      "properties": {
+        "staticIp": "1.2.3.4"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
+        "name": "testkubeenv",
+        "type": "Microsoft.Web/kubeEnvironments",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "customLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "internalLoadBalancerEnabled": false,
+          "defaultDomain": "testkubeenv.k4apps.io",
+          "staticIp": "1.2.3.4",
+          "arcConfiguration": null,
+          "appLogsConfiguration": null,
+          "aksResourceID": "test"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
+        "name": "testkubeenv",
+        "type": "Microsoft.Web/kubeEnvironments",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "customLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "InitializationInProgress",
+          "deploymentErrors": null,
+          "internalLoadBalancerEnabled": false,
+          "defaultDomain": "testkubeenv.k4apps.io",
+          "staticIp": "1.2.3.4",
+          "arcConfiguration": null,
+          "appLogsConfiguration": null,
+          "aksResourceID": "test"
+        }
+      }
+    }
+  }
+}

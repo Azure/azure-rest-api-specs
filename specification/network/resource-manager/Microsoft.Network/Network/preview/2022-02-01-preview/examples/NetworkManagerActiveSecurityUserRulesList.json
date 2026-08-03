@@ -1,0 +1,71 @@
+{
+  "title": "Get Azure Virtual Network Manager Active Security User Rules",
+  "parameters": {
+    "api-version": "2022-02-01-preview",
+    "subscriptionId": "subscriptionA",
+    "resourceGroupName": "myResourceGroup",
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+      "regions": [
+        "westus"
+      ],
+      "skipToken": "fakeSkipTokenCode"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "region": "westus",
+            "commitTime": "2020-07-10T18:03:22.2578238+05:30",
+            "id": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
+            "configurationDescription": "SampleDescription",
+            "ruleCollectionDescription": "SampleRuleCollectionDescription",
+            "ruleCollectionAppliesToGroups": [
+              {
+                "networkGroupId": "/subscriptions/subscriptionA/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1"
+              }
+            ],
+            "kind": "Custom",
+            "properties": {
+              "description": "Sample User Rule",
+              "protocol": "Tcp",
+              "sources": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "destinations": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "destinationPortRanges": [
+                "22"
+              ],
+              "direction": "Inbound",
+              "provisioningState": "Succeeded"
+            },
+            "ruleGroups": [
+              {
+                "id": "/subscriptions/subscriptionA/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
+                "properties": {
+                  "description": "A group for all test Virtual Networks",
+                  "memberType": "Microsoft.Network/virtualNetworks",
+                  "provisioningState": "Succeeded"
+                }
+              }
+            ]
+          }
+        ],
+        "skipToken": "FakeSkipTokenCode"
+      }
+    }
+  }
+}

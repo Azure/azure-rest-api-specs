@@ -1,0 +1,211 @@
+{
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "mycluster",
+    "deploymentSettingsName": "default",
+    "api-version": "2024-02-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/deploymentSettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/clusters/deploymentSettings",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentMode": "Deploy",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          ],
+          "deploymentConfiguration": {
+            "version": "string",
+            "scaleUnits": [
+              {
+                "deploymentData": {
+                  "securitySettings": {
+                    "hvciProtection": true,
+                    "drtmProtection": true,
+                    "driftControlEnforced": true,
+                    "credentialGuardEnforced": false,
+                    "smbSigningEnforced": true,
+                    "smbClusterEncryption": false,
+                    "sideChannelMitigationEnforced": true,
+                    "bitlockerBootVolume": true,
+                    "bitlockerDataVolumes": true,
+                    "wdacEnforced": true
+                  },
+                  "observability": {
+                    "streamingDataClient": true,
+                    "euLocation": false,
+                    "episodicDataUpload": true
+                  },
+                  "cluster": {
+                    "name": "testHCICluster",
+                    "witnessType": "Cloud",
+                    "witnessPath": "Cloud",
+                    "cloudAccountName": "myasestoragacct",
+                    "azureServiceEndpoint": "core.windows.net"
+                  },
+                  "storage": {
+                    "configurationMode": "Express"
+                  },
+                  "namingPrefix": "ms169",
+                  "domainFqdn": "ASZ1PLab8.nttest.microsoft.com",
+                  "infrastructureNetwork": [
+                    {
+                      "subnetMask": "255.255.248.0",
+                      "gateway": "255.255.248.0",
+                      "ipPools": [
+                        {
+                          "startingAddress": "10.57.48.60",
+                          "endingAddress": "10.57.48.66"
+                        }
+                      ],
+                      "dnsServers": [
+                        "10.57.50.90"
+                      ]
+                    }
+                  ],
+                  "physicalNodes": [
+                    {
+                      "name": "ms169host",
+                      "ipv4Address": "10.57.51.224"
+                    },
+                    {
+                      "name": "ms154host",
+                      "ipv4Address": "10.57.53.236"
+                    }
+                  ],
+                  "hostNetwork": {
+                    "intents": [
+                      {
+                        "name": "Compute_Management",
+                        "trafficType": [
+                          "Compute",
+                          "Management"
+                        ],
+                        "adapter": [
+                          "Port2"
+                        ],
+                        "overrideVirtualSwitchConfiguration": false,
+                        "virtualSwitchConfigurationOverrides": {
+                          "enableIov": "True",
+                          "loadBalancingAlgorithm": "HyperVPort"
+                        },
+                        "overrideQosPolicy": false,
+                        "qosPolicyOverrides": {
+                          "priorityValue8021Action_Cluster": "7",
+                          "priorityValue8021Action_SMB": "3",
+                          "bandwidthPercentage_SMB": "50"
+                        },
+                        "overrideAdapterProperty": false,
+                        "adapterPropertyOverrides": {
+                          "jumboPacket": "1514",
+                          "networkDirect": "Enabled",
+                          "networkDirectTechnology": "iWARP"
+                        }
+                      }
+                    ],
+                    "storageNetworks": [
+                      {
+                        "name": "Storage1Network",
+                        "networkAdapterName": "Port3",
+                        "vlanId": "5"
+                      }
+                    ],
+                    "storageConnectivitySwitchless": true
+                  },
+                  "adouPath": "OU=ms169,DC=ASZ1PLab8,DC=nttest,DC=microsoft,DC=com",
+                  "secretsLocation": "/subscriptions/db4e2fdb-6d80-4e6e-b7cd-xxxxxxx/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/abcd123",
+                  "optionalServices": {
+                    "customLocation": "customLocationName"
+                  }
+                }
+              }
+            ]
+          },
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Cloud Deployment",
+                  "description": "Deploy Cloud.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10"
+                    },
+                    {
+                      "fullStepIndex": "0.36",
+                      "name": "Clean up temporary content",
+                      "description": "Clean up temporary content",
+                      "startTimeUtc": "2023-06-09T03:58:37",
+                      "endTimeUtc": "2023-06-09T04:01:47",
+                      "status": "Error",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Cloud Deployment",
+                  "description": "Deploy Cloud.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10"
+                    },
+                    {
+                      "fullStepIndex": "0.36",
+                      "name": "Clean up temporary content",
+                      "description": "Clean up temporary content",
+                      "startTimeUtc": "2023-06-09T03:58:37",
+                      "endTimeUtc": "2023-06-09T04:01:47",
+                      "status": "Error",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

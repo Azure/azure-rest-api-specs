@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "monitoringSettingResource": {
+      "properties": {
+        "traceEnabled": true,
+        "appInsightsInstrumentationKey": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "api-version": "2020-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2020-07-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2020-07-01"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "traceEnabled": true,
+          "appInsightsInstrumentationKey": "00000000-0000-0000-0000-000000000000"
+        },
+        "type": "Microsoft.AppPlatform/Spring/monitoringSettings",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/monitoringSettings/default",
+        "name": "default"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "traceEnabled": true,
+          "appInsightsInstrumentationKey": "00000000-0000-0000-0000-000000000000"
+        },
+        "type": "Microsoft.AppPlatform/Spring/monitoringSettings",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/monitoringSettings/default",
+        "name": "default"
+      }
+    }
+  }
+}

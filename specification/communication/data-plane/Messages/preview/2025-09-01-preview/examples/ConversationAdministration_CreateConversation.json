@@ -1,0 +1,79 @@
+{
+  "title": "Creates a new conversation",
+  "operationId": "ConversationAdministrationOperations_CreateConversation",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "content-type": "application/json",
+    "body": {
+      "conversation": {
+        "topic": "Test",
+        "deliveryChannelIds": [
+          "0f0eb78e-a576-1dfc-b414-0f0756de3338"
+        ],
+        "outboundDeliveryStrategy": "allParticipants",
+        "participants": [
+          {
+            "displayName": "Customer",
+            "kind": "external",
+            "contacts": [
+              {
+                "id": "12345678901",
+                "kind": "whatsApp"
+              }
+            ]
+          },
+          {
+            "displayName": "Support",
+            "kind": "internal",
+            "contact": {
+              "id": "8:acs:uuid1",
+              "kind": "communication"
+            }
+          }
+        ]
+      },
+      "initialMessage": {
+        "content": "I need help"
+      }
+    },
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2",
+        "topic": "Test",
+        "deliveryChannelIds": [
+          "0f0eb78e-a576-1dfc-b414-0f0756de3338"
+        ],
+        "outboundDeliveryStrategy": "allParticipants",
+        "participants": [
+          {
+            "id": "8:acs:uuid2",
+            "displayName": "Customer",
+            "kind": "external",
+            "contacts": [
+              {
+                "id": "12345678901",
+                "kind": "whatsApp"
+              },
+              {
+                "id": "8:acs:uuid2",
+                "kind": "communication"
+              }
+            ]
+          },
+          {
+            "id": "8:acs:uuid1",
+            "displayName": "Support",
+            "kind": "internal",
+            "contact": {
+              "id": "8:acs:uuid1",
+              "kind": "communication"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

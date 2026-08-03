@@ -1,0 +1,43 @@
+{
+  "title": "Agents_Start",
+  "operationId": "Agents_Start",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent",
+        "name": "testAgent",
+        "type": "Microsoft.App/agents",
+        "location": "East US",
+        "tags": {
+          "environment": "production",
+          "team": "platform"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentEndpoint": "https://testAgent.eastus.agents.azurecontainerapps.io",
+          "runningState": "Running",
+          "powerState": "Running",
+          "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+          "upgradeChannel": "Stable"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/87654321-4321-4321-4321-210987654321",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/87654321-4321-4321-4321-210987654321"
+      }
+    }
+  }
+}

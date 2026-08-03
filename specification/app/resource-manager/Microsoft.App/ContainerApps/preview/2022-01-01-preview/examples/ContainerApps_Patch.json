@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "name": "testcontainerapp0",
+    "api-version": "2022-01-01-preview",
+    "containerAppEnvelope": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerapp0",
+        "name": "testcontainerapp0",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerapp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "transport": "auto"
+            },
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "grpc"
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testcontainerapp0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                }
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

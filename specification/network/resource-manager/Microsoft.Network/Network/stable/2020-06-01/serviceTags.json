@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2020-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/serviceTags": {
+      "get": {
+        "operationId": "ServiceTags_List",
+        "description": "Gets a list of service tag information resources.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location that will be used as a reference for version (not as a filter based on location, you will get the list of service tags with prefix details across all regions but limited to the cloud that your subscription belongs to)."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns a list of service tag information resources.",
+            "schema": {
+              "$ref": "#/definitions/ServiceTagsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of service tags": {
+            "$ref": "./examples/ServiceTagsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceTagsListResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the cloud."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the cloud."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The azure resource type."
+        },
+        "changeNumber": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The iteration number."
+        },
+        "cloud": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the cloud."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceTagInformation"
+          },
+          "readOnly": true,
+          "description": "The list of service tag information resources."
+        }
+      },
+      "description": "Response for the ListServiceTags API service call."
+    },
+    "ServiceTagInformation": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceTagInformationPropertiesFormat",
+          "readOnly": true,
+          "description": "Properties of the service tag information."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of service tag."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of service tag."
+        }
+      },
+      "description": "The service tag information."
+    },
+    "ServiceTagInformationPropertiesFormat": {
+      "properties": {
+        "changeNumber": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The iteration number of service tag."
+        },
+        "region": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The region of service tag."
+        },
+        "systemService": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of system service."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of IP address prefixes."
+        }
+      },
+      "description": "Properties of the service tag information."
+    }
+  }
+}

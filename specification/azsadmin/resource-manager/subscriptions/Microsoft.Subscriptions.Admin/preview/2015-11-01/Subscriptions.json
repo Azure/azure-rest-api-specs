@@ -39,6 +39,12 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -54,7 +60,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "UpdateEncryption",
+        "operationId": "Subscriptions_UpdateEncryption",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -66,6 +72,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -81,7 +93,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "RestoreData",
+        "operationId": "Subscriptions_RestoreData",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -95,6 +107,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SubscriptionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -111,7 +129,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "CheckIdentityHealth",
+        "operationId": "Subscriptions_CheckIdentityHealth",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -125,6 +143,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/IdentityHealthCheckReportDefinition"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -157,11 +181,17 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
+          },
           "204": {
             "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
           },
-          "202": {
-            "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -194,11 +224,17 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
+          },
           "204": {
             "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
           },
-          "202": {
-            "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -232,6 +268,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SubscriptionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         },
@@ -270,6 +312,12 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -303,6 +351,12 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionDefinition"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -332,16 +386,22 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDefinition"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/SubscriptionDefinition"
             }
           },
-          "200": {
-            "description": "OK",
+          "default": {
+            "description": "Unexpected Error",
             "schema": {
-              "$ref": "#/definitions/SubscriptionDefinition"
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -374,6 +434,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -414,35 +480,79 @@
       },
       "x-ms-azure-resource": true
     },
+    "Error": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Operation": {
       "description": "Supported REST operation.",
       "type": "object",
       "properties": {
         "display": {
           "description": "Display information for the operation.",
-          "type": "object",
-          "properties": {
-            "description": {
-              "description": "Description for the operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Display name of the operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "provider": {
-              "description": "Resource provider display name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource type display name related to the operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
         },
         "name": {
           "description": "Name of the operation being performed on an object.",
@@ -465,7 +575,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -533,7 +646,10 @@
           "description": "Directory tenant health report.",
           "items": {
             "$ref": "#/definitions/DirectoryTenantHealthReport"
-          }
+          },
+          "x-ms-identifiers": [
+            "tenantId"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -571,7 +687,8 @@
           "description": "A report of the health status of an identity applications.",
           "items": {
             "$ref": "#/definitions/ApplicationHealthReport"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -617,7 +734,10 @@
           "description": "A report of the health status of an AppRoleAssignment.",
           "items": {
             "$ref": "#/definitions/AppRoleAssignmentHealthReport"
-          }
+          },
+          "x-ms-identifiers": [
+            "appRoleAssignment/resource"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -665,7 +785,10 @@
           "description": "A report of the health status of an OAuth2PermissionGrant.",
           "items": {
             "$ref": "#/definitions/OAuth2PermissionGrantHealthReport"
-          }
+          },
+          "x-ms-identifiers": [
+            "oAuth2PermissionGrant/resource"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -713,7 +836,10 @@
           "description": "A report of the health status of a tag on an identity application service principal.",
           "items": {
             "$ref": "#/definitions/ServicePrincipalTagHealthReport"
-          }
+          },
+          "x-ms-identifiers": [
+            "servicePrincipalTag"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -811,7 +937,8 @@
           "description": "Directory tenant identifier.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "SubscriptionList": {
       "description": "List of subscriptions.",
@@ -990,7 +1117,8 @@
         },
         "count": {
           "description": "Number of measurements for metric sample period.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "properties": {
           "x-ms-client-name": "extendedProperties",
@@ -1007,7 +1135,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/MetricValue"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "MetricDefinition": {
       "description": "Metric Definition",
@@ -1140,7 +1269,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/MetricAvailability"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "MetricList": {
       "description": "List of metrics.",
@@ -1150,7 +1280,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Metric"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1166,7 +1297,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",

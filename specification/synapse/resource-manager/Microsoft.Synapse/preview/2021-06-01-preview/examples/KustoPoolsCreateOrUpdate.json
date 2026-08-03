@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "workspaceName": "synapseWorkspaceName",
+    "kustoPoolName": "kustoclusterrptest4",
+    "api-version": "2021-06-01-preview",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Storage optimized",
+        "size": "Medium",
+        "capacity": 2
+      },
+      "properties": {
+        "workspaceUID": "11111111-2222-3333-444444444444",
+        "enableStreamingIngest": true,
+        "enablePurge": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Synapse/workspaces/synapseWorkspaceName/kustopools/KustoClusterRPTest4",
+        "name": "KustoClusterRPTest4",
+        "type": "Microsoft.Synapse/workspaces/kustopools",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableStreamingIngest": true,
+          "enablePurge": true
+        },
+        "sku": {
+          "name": "Storage optimized",
+          "size": "Medium",
+          "capacity": 2
+        },
+        "etag": "abcd"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Synapse/workspaces/synapseWorkspaceName/kustopools/KustoClusterRPTest4",
+        "name": "KustoClusterRPTest4",
+        "type": "Microsoft.Synapse/workspaces/kustopools",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableStreamingIngest": true,
+          "enablePurge": true
+        },
+        "sku": {
+          "name": "Storage optimized",
+          "size": "Medium",
+          "capacity": 2
+        },
+        "etag": "abcd123"
+      }
+    }
+  }
+}

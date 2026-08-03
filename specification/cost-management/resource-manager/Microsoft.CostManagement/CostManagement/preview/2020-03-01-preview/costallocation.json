@@ -1,0 +1,601 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CostManagementClient",
+    "version": "2020-03-01-preview"
+  },
+  "tags": [
+    {
+      "name": "CostAllocationRules",
+      "description": "An API for creating and managing cost allocation rules within a billing account or enterprise enrollment. These rules can be used to reallocate cost between resources, filtered by Resource Group, Subscription, or Tag."
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules": {
+      "get": {
+        "tags": [
+          "CostAllocationRules"
+        ],
+        "operationId": "CostAllocationRules_List",
+        "description": "Get the list of all cost allocation rules for a billing account or enterprise enrollment.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CostAllocationRulesList": {
+            "$ref": "./examples/CostAllocationRulesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of cost allocation rules for the billing account or enterprise enrollment.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CostAllocationRules"
+        ],
+        "operationId": "CostAllocationRules_CheckNameAvailability",
+        "description": "Checks availability and correctness of a name for a cost allocation rule",
+        "x-ms-examples": {
+          "CostAllocationRuleCheckNameAvailability": {
+            "$ref": "./examples/CostAllocationRuleCheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "costAllocationRuleCheckNameAvailabilityRequest",
+            "description": "Cost allocation rule to be created or updated",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleCheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of cost allocation rule name availability.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleCheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/{ruleName}": {
+      "get": {
+        "tags": [
+          "CostAllocationRules"
+        ],
+        "operationId": "CostAllocationRules_Get",
+        "description": "Get a cost allocation rule by rule name and billing account or enterprise enrollment.",
+        "x-ms-examples": {
+          "CostAllocationRules": {
+            "$ref": "./examples/CostAllocationRuleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CostAllocationRules"
+        ],
+        "operationId": "CostAllocationRules_CreateOrUpdate",
+        "description": "Create/Update a rule to allocate cost between different resources within a billing account or enterprise enrollment.",
+        "x-ms-examples": {
+          "CostAllocationRulesCreateResourceGroup": {
+            "$ref": "./examples/CostAllocationRuleCreate.json"
+          },
+          "CostAllocationRulesCreateTag": {
+            "$ref": "./examples/CostAllocationRuleCreateTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          },
+          {
+            "name": "costAllocationRule",
+            "description": "Cost allocation rule to be created or updated",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CostAllocationRules"
+        ],
+        "operationId": "CostAllocationRules_Delete",
+        "description": "Delete cost allocation rule for billing account or enterprise enrollment.",
+        "x-ms-examples": {
+          "CostAllocationRules": {
+            "$ref": "./examples/CostAllocationRuleDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "NoContent. Rule did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "CostAllocationRuleList": {
+      "type": "object",
+      "description": "Result of listing cost allocation rules. It contains a list of available rules in the billing account or enterprise enrollment provided.",
+      "properties": {
+        "value": {
+          "description": "The list of cost allocation rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostAllocationRuleDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of rule list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CostAllocationRuleCheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The cost allocation rule check name availability request",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Rule name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. This is expected to be Microsoft.CostManagement/costAllocationRules"
+        }
+      }
+    },
+    "CostAllocationRuleCheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The cost allocation rule check name availability response",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Whether this rule name is available"
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason",
+          "description": "The reason this name is not available"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message if the name is not available"
+        }
+      }
+    },
+    "Reason": {
+      "type": "string",
+      "description": "The reason this name is not available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists",
+        "Valid"
+      ],
+      "x-ms-enum": {
+        "name": "Reason",
+        "modelAsString": true
+      }
+    },
+    "CostAllocationRuleDefinition": {
+      "type": "object",
+      "description": "The cost allocation rule model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure Resource Manager Id for the rule. This is a read ony value."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the rule. This is a read only value."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type of the rule. This is a read only value of Microsoft.CostManagement/CostAllocationRule."
+        },
+        "properties": {
+          "description": "Cost allocation rule properties",
+          "$ref": "#/definitions/CostAllocationRuleProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CostAllocationRuleProperties": {
+      "type": "object",
+      "description": "The properties of a cost allocation rule",
+      "additionalProperties": false,
+      "required": [
+        "details",
+        "status"
+      ],
+      "properties": {
+        "description": {
+          "description": "Description of a cost allocation rule.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Resource information for the cost allocation rule",
+          "$ref": "#/definitions/CostAllocationRuleDetails"
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus",
+          "description": "Status of the rule"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Time at which the rule was created. Rules that change cost for the same resource are applied in order of creation."
+        },
+        "updatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Time at which the rule was last updated."
+        }
+      }
+    },
+    "RuleStatus": {
+      "type": "string",
+      "description": "Current status of the rule.",
+      "enum": [
+        "NotActive",
+        "Active",
+        "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "RuleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotActive",
+            "description": "Rule is saved but not used to allocate costs.",
+            "name": "NotActive"
+          },
+          {
+            "value": "Active",
+            "description": "Rule is saved and impacting cost allocation.",
+            "name": "Active"
+          },
+          {
+            "value": "Processing",
+            "description": "Rule is saved and cost allocation is being updated. Readonly value that cannot be submitted in a put request.",
+            "name": "Processing"
+          }
+        ]
+      }
+    },
+    "CostAllocationRuleDetails": {
+      "type": "object",
+      "description": "Resource details of the cost allocation rule",
+      "properties": {
+        "sourceResources": {
+          "description": "Source resources for cost allocation. At this time, this list can contain no more than one element.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceCostAllocationResource"
+          }
+        },
+        "targetResources": {
+          "type": "array",
+          "description": "Target resources for cost allocation. At this time, this list can contain no more than one element.",
+          "items": {
+            "$ref": "#/definitions/TargetCostAllocationResource"
+          }
+        }
+      }
+    },
+    "CostAllocationResource": {
+      "type": "object",
+      "description": "Common values for resources for cost allocation",
+      "required": [
+        "resourceType",
+        "name"
+      ],
+      "properties": {
+        "resourceType": {
+          "description": "Type of resources contained in this cost allocation rule",
+          "$ref": "#/definitions/CostAllocationResourceType"
+        },
+        "name": {
+          "description": "If resource type is dimension, this must be either ResourceGroupName or SubscriptionId. If resource type is tag, this must be a valid Azure tag",
+          "type": "string"
+        }
+      }
+    },
+    "SourceCostAllocationResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "values": {
+              "description": "Source Resources for cost allocation. This list cannot contain more than 25 values.",
+              "type": "array",
+              "items": {
+                "description": "Source resource for cost allocation",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "values"
+          ]
+        }
+      ],
+      "description": "Source resources for cost allocation"
+    },
+    "TargetCostAllocationResource": {
+      "description": "Target resources for cost allocation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "values": {
+              "description": "Target resources for cost allocation. This list cannot contain more than 25 values.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CostAllocationProportion"
+              }
+            },
+            "policyType": {
+              "description": "Method of cost allocation for the rule",
+              "$ref": "#/definitions/CostAllocationPolicyType"
+            }
+          },
+          "required": [
+            "values",
+            "policyType"
+          ]
+        }
+      ]
+    },
+    "CostAllocationResourceType": {
+      "type": "string",
+      "description": "Category of resource to use for allocation.",
+      "enum": [
+        "Dimension",
+        "Tag"
+      ],
+      "x-ms-enum": {
+        "name": "CostAllocationResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Dimension",
+            "description": "Indicates an Azure dimension such as a subscription id or resource group name is being used for allocation.",
+            "name": "Dimension"
+          },
+          {
+            "value": "Tag",
+            "description": "Allocates cost based on Azure Tag key value pairs.",
+            "name": "Tag"
+          }
+        ]
+      }
+    },
+    "CostAllocationProportion": {
+      "type": "object",
+      "description": "Target resources and allocation",
+      "required": [
+        "percentage",
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "Target resource for cost allocation",
+          "type": "string"
+        },
+        "percentage": {
+          "description": "Percentage of source cost to allocate to this resource. This value can be specified to two decimal places and the total percentage of all resources in this rule must sum to 100.00.",
+          "type": "number"
+        }
+      }
+    },
+    "CostAllocationPolicyType": {
+      "type": "string",
+      "description": "Method to use for allocating cost. FixedProportion indicates that cost will be split based on specified percentage values.",
+      "enum": [
+        "FixedProportion"
+      ],
+      "x-ms-enum": {
+        "name": "CostAllocationPolicyType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request (e.g. '2020-06-01')."
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ruleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "description": "Cost allocation rule name. The name cannot include spaces or any non alphanumeric characters other than '_' and '-'. The max length is 260 characters.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

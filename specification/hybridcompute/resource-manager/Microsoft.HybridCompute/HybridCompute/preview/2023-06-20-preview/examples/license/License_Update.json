@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "licenseName": "{licenseName}",
+    "api-version": "2023-06-20-preview",
+    "parameters": {
+      "properties": {
+        "licenseType": "ESU",
+        "licenseDetails": {
+          "state": "Activated",
+          "target": "Windows Server 2012",
+          "edition": "Datacenter",
+          "type": "pCore",
+          "processors": 6
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/licenses/{licenseName}",
+        "name": "{licenseName}",
+        "type": "Microsoft.HybridCompute/licenses",
+        "location": "eastus2euap",
+        "properties": {
+          "tenantId": "{tenandId}",
+          "licenseType": "ESU",
+          "licenseDetails": {
+            "state": "Activated",
+            "target": "Windows Server 2012",
+            "edition": "Datacenter",
+            "type": "pCore",
+            "processors": 6,
+            "assignedLicenses": 8,
+            "immutableId": "<generated Guid>"
+          }
+        }
+      }
+    }
+  }
+}

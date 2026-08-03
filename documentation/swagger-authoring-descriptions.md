@@ -2,11 +2,11 @@
 > C+E CSI SDK Documentation Team
 
 
-> **The descriptions you write for the code elements in Swagger become the baseline public Azure REST API documentation on http://docs.microsoft.com.**
+> **The descriptions you write for the code elements in Swagger become the baseline public Azure REST API documentation on http://learn.microsoft.com.**
 
 These descriptions are also passed through by AutoRest to become triple-slash (///) comments in the corresponding client SDKs, which are likewise transformed into published baseline ref documentation.
 
-This means that these docs are part of your product, and as ScottGu notes, a key part of your user experience. They're not just served up on docs.microsoft.com; they can also be discovered through Swagger UI (or other REST documentation client tools), command-line tools, and IntelliSense (for client SDKs). These descriptions represent your product and the hard work you put into making great APIs, and since we are Microsoft, our readers expect a polished experience.
+This means that these docs are part of your product, and as ScottGu notes, a key part of your user experience. They're not just served up on learn.microsoft.com; they can also be discovered through Swagger UI (or other REST documentation client tools), command-line tools, and IntelliSense (for client SDKs). These descriptions represent your product and the hard work you put into making great APIs, and since we are Microsoft, our readers expect a polished experience.
 Therefore, take the time to craft your descriptions well! This doc provides some basic advice from the C+E CSI content team, as well as various tips to ensure that your public Azure ref documentation looks clean, consistent, and great!
 
 ## Getting started
@@ -16,7 +16,7 @@ Therefore, take the time to craft your descriptions well! This doc provides some
 2. Set yourself up with some good content support tools.
     - [Grammarly](http://www.grammarly.com) is a web site that provides an English language grammar checker. Just cut-and-paste your description strings into it and review the suggested fixes.
     - If you're using VSCode to edit your Swagger, consider one of these Swagger doc previewer extensions:
-        - [swagger-doc-viewer](https://marketplace.visualstudio.com/items?itemName=mimarec.swagger-doc-viewer) renders your Swagger file to a more readable format. Note that this format is not the same style as what will be generated for docs.microsoft.com.
+        - [swagger-doc-viewer](https://marketplace.visualstudio.com/items?itemName=mimarec.swagger-doc-viewer) renders your Swagger file to a more readable format. Note that this format is not the same style as what will be generated for learn.microsoft.com.
         - [Arjun Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer) is another Swagger preview extension, but has less validation warnings.
         - [OpenAPI Linting Extension](https://github.com/Azure/openapi-lint-extension#preview) can be used to check your Swagger for common mistakes.
 

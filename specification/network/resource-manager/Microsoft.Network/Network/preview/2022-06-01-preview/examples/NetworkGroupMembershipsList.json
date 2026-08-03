@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2022-06-01-preview",
+    "subscriptionId": "subscriptionA",
+    "resourceGroupName": "myResourceGroup",
+    "virtualNetworkName": "testVirtualNetwork"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/testVirtualNetwork/providers/Microsoft.Network/networkGroupMemberships/Default",
+            "type": "Microsoft.Network/networkGroupMemberships",
+            "name": "Default",
+            "location": "useast",
+            "properties": {
+              "groupMemberships": [
+                {
+                  "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNM/networkGroups/testng",
+                  "sources": [
+                    {
+                      "kind": "StaticMembership",
+                      "staticMemberId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNM/networkGroups/testng/staticMembers/testsm"
+                    }
+                  ]
+                },
+                {
+                  "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNM/networkGroups/testng2",
+                  "sources": [
+                    {
+                      "kind": "Policy",
+                      "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.Authorization/policyAssignments/TestPolicy",
+                      "policySetDefinitionId": "/providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.Authorization/policySetDefinitions/TestPolicy",
+                      "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.Authorization/policyDefinitions/TestPolicy",
+                      "policyDefinitionReferenceId": "1111111111111111111"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

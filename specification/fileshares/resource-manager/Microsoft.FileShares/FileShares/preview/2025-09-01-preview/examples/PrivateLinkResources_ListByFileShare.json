@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "resourceGroupName": "res4303",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceName": "testfileshare01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4303/providers/Microsoft.FileShares/fileShares/testfileshare01/privateLinkResources/fileshare",
+            "name": "fileshare",
+            "type": "Microsoft.FileShares/privateLinkResources",
+            "properties": {
+              "groupId": "fileshare",
+              "requiredMembers": [
+                "file"
+              ],
+              "requiredZoneNames": [
+                "privatelink.file.core.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_List",
+  "title": "List PrivateLinkResources"
+}

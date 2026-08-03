@@ -1,0 +1,1281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Ec2Images"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ec2Images": {
+      "get": {
+        "operationId": "Ec2Images_ListBySubscription",
+        "tags": [
+          "Ec2Images"
+        ],
+        "description": "List Ec2Image resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2ImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Images_ListBySubscription": {
+            "$ref": "./examples/Ec2Images_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2Images": {
+      "get": {
+        "operationId": "Ec2Images_ListByResourceGroup",
+        "tags": [
+          "Ec2Images"
+        ],
+        "description": "List Ec2Image resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2ImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Images_ListByResourceGroup": {
+            "$ref": "./examples/Ec2Images_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2Images/{name}": {
+      "get": {
+        "operationId": "Ec2Images_Get",
+        "tags": [
+          "Ec2Images"
+        ],
+        "description": "Get a Ec2Image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2Image"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Images_Get": {
+            "$ref": "./examples/Ec2Images_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ec2Images_CreateOrReplace",
+        "tags": [
+          "Ec2Images"
+        ],
+        "description": "Create a Ec2Image. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2Image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Ec2Image' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2Image"
+            }
+          },
+          "201": {
+            "description": "Resource 'Ec2Image' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2Image"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Images_CreateOrReplace": {
+            "$ref": "./examples/Ec2Images_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Ec2Images_Update",
+        "tags": [
+          "Ec2Images"
+        ],
+        "description": "Update a Ec2Image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2ImageTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2Image"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Images_Update": {
+            "$ref": "./examples/Ec2Images_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Ec2Images_Delete",
+        "tags": [
+          "Ec2Images"
+        ],
+        "description": "Delete a Ec2Image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2Images_Delete": {
+            "$ref": "./examples/Ec2Images_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ArchitectureValues": {
+      "type": "string",
+      "description": "ArchitectureValues enum",
+      "enum": [
+        "arm64",
+        "arm64_mac",
+        "i386",
+        "x86_64",
+        "x86_64_mac"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Arm64",
+            "value": "arm64",
+            "description": "ArchitectureValues enum arm64"
+          },
+          {
+            "name": "Arm64_mac",
+            "value": "arm64_mac",
+            "description": "ArchitectureValues enum arm64_mac"
+          },
+          {
+            "name": "I386",
+            "value": "i386",
+            "description": "ArchitectureValues enum i386"
+          },
+          {
+            "name": "X86_64",
+            "value": "x86_64",
+            "description": "ArchitectureValues enum x86_64"
+          },
+          {
+            "name": "X86_64_mac",
+            "value": "x86_64_mac",
+            "description": "ArchitectureValues enum x86_64_mac"
+          }
+        ]
+      }
+    },
+    "ArchitectureValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of ArchitectureValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ArchitectureValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "AwsEc2ImageProperties": {
+      "type": "object",
+      "description": "Definition of awsEc2Image",
+      "properties": {
+        "architecture": {
+          "$ref": "#/definitions/ArchitectureValuesEnumValue",
+          "description": "<p>The architecture of the image.</p>"
+        },
+        "blockDeviceMappings": {
+          "type": "array",
+          "description": "<p>Any block device mapping entries.</p>",
+          "items": {
+            "$ref": "#/definitions/BlockDeviceMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "bootMode": {
+          "$ref": "#/definitions/BootModeValuesEnumValue",
+          "description": "<p>The boot mode of the image. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        },
+        "creationDate": {
+          "type": "string",
+          "description": "<p>The date and time the image was created.</p>"
+        },
+        "deprecationTime": {
+          "type": "string",
+          "description": "<p>The date and time to deprecate the AMI, in UTC, in the following format: <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.</p>"
+        },
+        "deregistrationProtection": {
+          "type": "string",
+          "description": "<p>Indicates whether deregistration protection is enabled for the AMI.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>The description of the AMI that was provided during image creation.</p>"
+        },
+        "enaSupport": {
+          "type": "boolean",
+          "description": "<p>Specifies whether enhanced networking with ENA is enabled.</p>"
+        },
+        "hypervisor": {
+          "$ref": "#/definitions/HypervisorTypeEnumValue",
+          "description": "<p>The hypervisor type of the image. Only <code>xen</code> is supported. <code>ovm</code> is not supported.</p>"
+        },
+        "imageId": {
+          "type": "string",
+          "description": "<p>The ID of the AMI.</p>"
+        },
+        "imageLocation": {
+          "type": "string",
+          "description": "<p>The location of the AMI.</p>"
+        },
+        "imageOwnerAlias": {
+          "type": "string",
+          "description": "<p>The owner alias (<code>amazon</code> | <code>aws-marketplace</code>).</p>"
+        },
+        "imageType": {
+          "$ref": "#/definitions/ImageTypeValuesEnumValue",
+          "description": "<p>The type of image.</p>"
+        },
+        "imdsSupport": {
+          "$ref": "#/definitions/ImdsSupportValuesEnumValue",
+          "description": "<p>If <code>v2.0</code>, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have <code>HttpTokens</code> automatically set to <code>required</code> so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, <code>HttpPutResponseHopLimit</code> is set to <code>2</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration'>Configure the AMI</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        },
+        "kernelId": {
+          "type": "string",
+          "description": "<p>The kernel associated with the image, if any. Only applicable for machine images.</p>"
+        },
+        "lastLaunchedTime": {
+          "type": "string",
+          "description": "<p>The date and time, in <a href='http://www.iso.org/iso/iso8601'>ISO 8601 date-time format</a>, when the AMI was last used to launch an EC2 instance. When the AMI is used to launch an instance, there is a 24-hour delay before that usage is reported.</p> <note> <p> <code>lastLaunchedTime</code> data is available starting April 2017.</p> </note>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the AMI that was provided during image creation.</p>"
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "<p>The ID of the Amazon Web Services account that owns the image.</p>"
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformValuesEnumValue",
+          "description": "<p>This value is set to <code>windows</code> for Windows AMIs; otherwise, it is blank.</p>"
+        },
+        "platformDetails": {
+          "type": "string",
+          "description": "<p>The platform details associated with the billing code of the AMI. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html'>Understand AMI billing information</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        },
+        "productCodes": {
+          "type": "array",
+          "description": "<p>Any product codes associated with the AMI.</p>",
+          "items": {
+            "$ref": "#/definitions/ProductCode"
+          },
+          "x-ms-identifiers": []
+        },
+        "public": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the image has public launch permissions. The value is <code>true</code> if this image has public launch permissions or <code>false</code> if it has only implicit and explicit launch permissions.</p>"
+        },
+        "ramdiskId": {
+          "type": "string",
+          "description": "<p>The RAM disk associated with the image, if any. Only applicable for machine images.</p>"
+        },
+        "rootDeviceName": {
+          "type": "string",
+          "description": "<p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>"
+        },
+        "rootDeviceType": {
+          "$ref": "#/definitions/DeviceTypeEnumValue",
+          "description": "<p>The type of root device used by the AMI. The AMI can use an Amazon EBS volume or an instance store volume.</p>"
+        },
+        "sourceInstanceId": {
+          "type": "string",
+          "description": "<p>The ID of the instance that the AMI was created from if the AMI was created using <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html'>CreateImage</a>. This field only appears if the AMI was created using CreateImage.</p>"
+        },
+        "sriovNetSupport": {
+          "type": "string",
+          "description": "<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>"
+        },
+        "state": {
+          "$ref": "#/definitions/ImageStateEnumValue",
+          "description": "<p>The current state of the AMI. If the state is <code>available</code>, the image is successfully registered and can be used to launch an instance.</p>"
+        },
+        "stateReason": {
+          "$ref": "#/definitions/StateReason",
+          "description": "<p>The reason for the state change.</p>"
+        },
+        "tags": {
+          "type": "array",
+          "description": "<p>Any tags assigned to the image.</p>",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "tpmSupport": {
+          "$ref": "#/definitions/TpmSupportValuesEnumValue",
+          "description": "<p>If the image is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        },
+        "usageOperation": {
+          "type": "string",
+          "description": "<p>The operation of the Amazon EC2 instance and the billing code that is associated with the AMI. <code>usageOperation</code> corresponds to the <a href='https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation'>lineitem/Operation</a> column on your Amazon Web Services Cost and Usage Report and in the <a href='https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html'>Amazon Web Services Price List API</a>. You can view these fields on the <b>Instances</b> or <b>AMIs</b> pages in the Amazon EC2 console, or in the responses that are returned by the <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html'>DescribeImages</a> command in the Amazon EC2 API, or the <a href='https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html'>describe-images</a> command in the CLI.</p>"
+        },
+        "virtualizationType": {
+          "$ref": "#/definitions/VirtualizationTypeEnumValue",
+          "description": "<p>The type of virtualization of the AMI.</p>"
+        }
+      }
+    },
+    "BlockDeviceMapping": {
+      "type": "object",
+      "description": "Definition of BlockDeviceMapping",
+      "properties": {
+        "deviceName": {
+          "type": "string",
+          "description": "<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>"
+        },
+        "ebs": {
+          "$ref": "#/definitions/EbsBlockDevice",
+          "description": "<p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>"
+        },
+        "noDevice": {
+          "type": "string",
+          "description": "<p>To omit the device from the block device mapping, specify an empty string. When this property is specified, the device is removed from the block device mapping regardless of the assigned value.</p>"
+        },
+        "virtualName": {
+          "type": "string",
+          "description": "<p>The virtual device name (<code>ephemeral</code>N). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for <code>ephemeral0</code> and <code>ephemeral1</code>. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.</p> <p>NVMe instance store volumes are automatically enumerated and assigned a device name. Including them in your block device mapping has no effect.</p> <p>Constraints: For M3 instances, you must specify instance store volumes in the block device mapping for the instance. When you launch an M3 instance, we ignore any instance store volumes specified in the block device mapping for the AMI.</p>"
+        }
+      }
+    },
+    "BootModeValues": {
+      "type": "string",
+      "description": "BootModeValues enum",
+      "enum": [
+        "legacy-bios",
+        "uefi",
+        "uefi-preferred"
+      ],
+      "x-ms-enum": {
+        "name": "BootModeValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LegacyBios",
+            "value": "legacy-bios",
+            "description": "BootModeValues enum legacy-bios"
+          },
+          {
+            "name": "Uefi",
+            "value": "uefi",
+            "description": "BootModeValues enum uefi"
+          },
+          {
+            "name": "UefiPreferred",
+            "value": "uefi-preferred",
+            "description": "BootModeValues enum uefi-preferred"
+          }
+        ]
+      }
+    },
+    "BootModeValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of BootModeValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/BootModeValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "DeviceType": {
+      "type": "string",
+      "description": "DeviceType enum",
+      "enum": [
+        "ebs",
+        "instance-store"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ebs",
+            "value": "ebs",
+            "description": "DeviceType enum ebs"
+          },
+          {
+            "name": "InstanceStore",
+            "value": "instance-store",
+            "description": "DeviceType enum instance-store"
+          }
+        ]
+      }
+    },
+    "DeviceTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of DeviceTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DeviceType",
+          "description": "Property value"
+        }
+      }
+    },
+    "EbsBlockDevice": {
+      "type": "object",
+      "description": "Definition of EbsBlockDevice",
+      "properties": {
+        "deleteOnTermination": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the EBS volume is deleted on instance termination. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination'>Preserving Amazon EBS volumes on instance termination</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        },
+        "encrypted": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see <a href='https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters'>Amazon EBS encryption</a> in the <i>Amazon EBS User Guide</i>.</p> <p>In no case can you remove encryption from an encrypted volume.</p> <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see <a href='https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances'>Supported instance types</a>.</p> <p>This parameter is not returned by <a>DescribeImageAttribute</a>.</p> <p>For <a>CreateImage</a> and <a>RegisterImage</a>, whether you can include this parameter, and the allowed values differ depending on the type of block device mapping you are creating.</p> <ul> <li> <p>If you are creating a block device mapping for a <b>new (empty) volume</b>, you can include this parameter, and specify either <code>true</code> for an encrypted volume, or <code>false</code> for an unencrypted volume. If you omit this parameter, it defaults to <code>false</code> (unencrypted).</p> </li> <li> <p>If you are creating a block device mapping from an <b>existing encrypted or unencrypted snapshot</b>, you must omit this parameter. If you include this parameter, the request will fail, regardless of the value that you specify.</p> </li> <li> <p>If you are creating a block device mapping from an <b>existing unencrypted volume</b>, you can include this parameter, but you must specify <code>false</code>. If you specify <code>true</code>, the request will fail. In this case, we recommend that you omit the parameter.</p> </li> <li> <p>If you are creating a block device mapping from an <b>existing encrypted volume</b>, you can include this parameter, and specify either <code>true</code> or <code>false</code>. However, if you specify <code>false</code>, the parameter is ignored and the block device mapping is always encrypted. In this case, we recommend that you omit the parameter.</p> </li> </ul>"
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000 - 16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100 - 64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100 - 256,000 IOPS</p> </li> </ul> <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances'>instances built on the Nitro System</a>. On other instances, you can achieve performance up to 32,000 IOPS.</p> <p>This parameter is required for <code>io1</code> and <code>io2</code> volumes. The default for <code>gp3</code> volumes is 3,000 IOPS.</p>"
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html'>RunInstances</a>, <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html'>RequestSpotFleet</a>, and <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html'>RequestSpotInstances</a>.</p>"
+        },
+        "outpostArn": {
+          "type": "string",
+          "description": "<p>The ARN of the Outpost on which the snapshot is stored.</p> <p>This parameter is not supported when using <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html'>CreateImage</a>.</p>"
+        },
+        "snapshotId": {
+          "type": "string",
+          "description": "<p>The ID of the snapshot.</p>"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The throughput that the volume supports, in MiB/s.</p> <p>This parameter is valid only for <code>gp3</code> volumes.</p> <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>"
+        },
+        "volumeSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.</p> <p>The following are the supported sizes for each volume type:</p> <ul> <li> <p> <code>gp2</code> and <code>gp3</code>: 1 - 16,384 GiB</p> </li> <li> <p> <code>io1</code>: 4 - 16,384 GiB</p> </li> <li> <p> <code>io2</code>: 4 - 65,536 GiB</p> </li> <li> <p> <code>st1</code> and <code>sc1</code>: 125 - 16,384 GiB</p> </li> <li> <p> <code>standard</code>: 1 - 1024 GiB</p> </li> </ul>"
+        },
+        "volumeType": {
+          "$ref": "#/definitions/VolumeTypeEnumValue",
+          "description": "<p>The volume type. For more information, see <a href='https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html'>Amazon EBS volume types</a> in the <i>Amazon EBS User Guide</i>.</p>"
+        }
+      }
+    },
+    "Ec2Image": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Ec2ImageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Ec2ImageListResult": {
+      "type": "object",
+      "description": "The response of a Ec2Image list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Ec2Image items on this page",
+          "items": {
+            "$ref": "#/definitions/Ec2Image"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Ec2ImageProperties": {
+      "type": "object",
+      "description": "Definition of Ec2Image",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEc2ImageProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Ec2ImageTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Ec2Image resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HypervisorType": {
+      "type": "string",
+      "description": "HypervisorType enum",
+      "enum": [
+        "ovm",
+        "xen"
+      ],
+      "x-ms-enum": {
+        "name": "HypervisorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ovm",
+            "value": "ovm",
+            "description": "HypervisorType enum ovm"
+          },
+          {
+            "name": "Xen",
+            "value": "xen",
+            "description": "HypervisorType enum xen"
+          }
+        ]
+      }
+    },
+    "HypervisorTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of HypervisorTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/HypervisorType",
+          "description": "Property value"
+        }
+      }
+    },
+    "ImageState": {
+      "type": "string",
+      "description": "ImageState enum",
+      "enum": [
+        "available",
+        "deregistered",
+        "disabled",
+        "error",
+        "failed",
+        "invalid",
+        "pending",
+        "transient"
+      ],
+      "x-ms-enum": {
+        "name": "ImageState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "available",
+            "description": "ImageState enum available"
+          },
+          {
+            "name": "Deregistered",
+            "value": "deregistered",
+            "description": "ImageState enum deregistered"
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "ImageState enum disabled"
+          },
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "ImageState enum error"
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "ImageState enum failed"
+          },
+          {
+            "name": "Invalid",
+            "value": "invalid",
+            "description": "ImageState enum invalid"
+          },
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "ImageState enum pending"
+          },
+          {
+            "name": "Transient",
+            "value": "transient",
+            "description": "ImageState enum transient"
+          }
+        ]
+      }
+    },
+    "ImageStateEnumValue": {
+      "type": "object",
+      "description": "Definition of ImageStateEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ImageState",
+          "description": "Property value"
+        }
+      }
+    },
+    "ImageTypeValues": {
+      "type": "string",
+      "description": "ImageTypeValues enum",
+      "enum": [
+        "kernel",
+        "machine",
+        "ramdisk"
+      ],
+      "x-ms-enum": {
+        "name": "ImageTypeValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Kernel",
+            "value": "kernel",
+            "description": "ImageTypeValues enum kernel"
+          },
+          {
+            "name": "Machine",
+            "value": "machine",
+            "description": "ImageTypeValues enum machine"
+          },
+          {
+            "name": "Ramdisk",
+            "value": "ramdisk",
+            "description": "ImageTypeValues enum ramdisk"
+          }
+        ]
+      }
+    },
+    "ImageTypeValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of ImageTypeValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ImageTypeValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "ImdsSupportValues": {
+      "type": "string",
+      "description": "ImdsSupportValues enum",
+      "enum": [
+        "v2.0"
+      ],
+      "x-ms-enum": {
+        "name": "ImdsSupportValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V20",
+            "value": "v2.0",
+            "description": "ImdsSupportValues enum v2.0"
+          }
+        ]
+      }
+    },
+    "ImdsSupportValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of ImdsSupportValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ImdsSupportValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "PlatformValues": {
+      "type": "string",
+      "description": "PlatformValues enum",
+      "enum": [
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "PlatformValues enum Windows"
+          }
+        ]
+      }
+    },
+    "PlatformValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of PlatformValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PlatformValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProductCode": {
+      "type": "object",
+      "description": "Definition of ProductCode",
+      "properties": {
+        "productCodeId": {
+          "type": "string",
+          "description": "<p>The product code.</p>"
+        },
+        "productCodeType": {
+          "$ref": "#/definitions/ProductCodeValuesEnumValue",
+          "description": "<p>The type of product code.</p>"
+        }
+      }
+    },
+    "ProductCodeValues": {
+      "type": "string",
+      "description": "ProductCodeValues enum",
+      "enum": [
+        "devpay",
+        "marketplace"
+      ],
+      "x-ms-enum": {
+        "name": "ProductCodeValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Devpay",
+            "value": "devpay",
+            "description": "ProductCodeValues enum devpay"
+          },
+          {
+            "name": "Marketplace",
+            "value": "marketplace",
+            "description": "ProductCodeValues enum marketplace"
+          }
+        ]
+      }
+    },
+    "ProductCodeValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of ProductCodeValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ProductCodeValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StateReason": {
+      "type": "object",
+      "description": "Definition of StateReason",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "<p>The reason code for the state change.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down from the operating system of the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
+        }
+      }
+    },
+    "TpmSupportValues": {
+      "type": "string",
+      "description": "TpmSupportValues enum",
+      "enum": [
+        "v2.0"
+      ],
+      "x-ms-enum": {
+        "name": "TpmSupportValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V20",
+            "value": "v2.0",
+            "description": "TpmSupportValues enum v2.0"
+          }
+        ]
+      }
+    },
+    "TpmSupportValuesEnumValue": {
+      "type": "object",
+      "description": "Definition of TpmSupportValuesEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/TpmSupportValues",
+          "description": "Property value"
+        }
+      }
+    },
+    "VirtualizationType": {
+      "type": "string",
+      "description": "VirtualizationType enum",
+      "enum": [
+        "hvm",
+        "paravirtual"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualizationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hvm",
+            "value": "hvm",
+            "description": "VirtualizationType enum hvm"
+          },
+          {
+            "name": "Paravirtual",
+            "value": "paravirtual",
+            "description": "VirtualizationType enum paravirtual"
+          }
+        ]
+      }
+    },
+    "VirtualizationTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of VirtualizationTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/VirtualizationType",
+          "description": "Property value"
+        }
+      }
+    },
+    "VolumeType": {
+      "type": "string",
+      "description": "VolumeType enum",
+      "enum": [
+        "gp2",
+        "gp3",
+        "io1",
+        "io2",
+        "sc1",
+        "st1",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Gp2",
+            "value": "gp2",
+            "description": "VolumeType enum gp2"
+          },
+          {
+            "name": "Gp3",
+            "value": "gp3",
+            "description": "VolumeType enum gp3"
+          },
+          {
+            "name": "Io1",
+            "value": "io1",
+            "description": "VolumeType enum io1"
+          },
+          {
+            "name": "Io2",
+            "value": "io2",
+            "description": "VolumeType enum io2"
+          },
+          {
+            "name": "Sc1",
+            "value": "sc1",
+            "description": "VolumeType enum sc1"
+          },
+          {
+            "name": "St1",
+            "value": "st1",
+            "description": "VolumeType enum st1"
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "VolumeType enum standard"
+          }
+        ]
+      }
+    },
+    "VolumeTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of VolumeTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/VolumeType",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

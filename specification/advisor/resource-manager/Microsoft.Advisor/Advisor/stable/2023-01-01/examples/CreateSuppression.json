@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "resourceUri": "resourceUri",
+    "recommendationId": "recommendationId",
+    "name": "suppressionName1",
+    "suppressionContract": {
+      "properties": {
+        "ttl": "07:00:00:00"
+      }
+    },
+    "api-version": "2023-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
+        "name": "suppressionName1",
+        "type": "Microsoft.Advisor/suppressions",
+        "properties": {
+          "suppressionId": "suppressionId",
+          "ttl": "07:00:00:00"
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Recommendation to be suppressed is not found. Subscription Id:{0} Recommendation Id:{1}"
+        }
+      }
+    }
+  }
+}

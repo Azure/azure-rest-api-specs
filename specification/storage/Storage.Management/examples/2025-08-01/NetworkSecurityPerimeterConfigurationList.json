@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "accountName": "sto8607",
+    "api-version": "2025-08-01",
+    "resourceGroupName": "res4410",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
+            "type": "Microsoft.Storage/storageAccounts/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/networkSecurityPerimeterConfigurations/dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/dbedb4e0-40e6-4145-81f3-f1314c150774/resourceGroups/res4794/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
+                "location": "East US",
+                "perimeterGuid": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5"
+              },
+              "profile": {
+                "name": "profile1",
+                "accessRules": [
+                  {
+                    "name": "inVpnRule",
+                    "properties": {
+                      "addressPrefixes": [
+                        "148.0.0.0/8",
+                        "152.4.6.0/24"
+                      ],
+                      "direction": "Inbound"
+                    }
+                  }
+                ],
+                "accessRulesVersion": 10,
+                "diagnosticSettingsVersion": 5,
+                "enabledLogCategories": [
+                  "NspPublicInboundPerimeterRulesAllowed",
+                  "NspPublicInboundPerimeterRulesDenied"
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "resourceAssociation": {
+                "name": "association1",
+                "accessMode": "Enforced"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_List",
+  "title": "NetworkSecurityPerimeterConfigurationList"
+}

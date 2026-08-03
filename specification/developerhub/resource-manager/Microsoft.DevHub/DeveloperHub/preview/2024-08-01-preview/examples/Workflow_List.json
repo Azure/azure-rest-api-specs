@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+            "location": "location1",
+            "name": "workflow1",
+            "type": "Micfosoft.DevHub/Workflow",
+            "tags": {
+              "appname": "testapp"
+            },
+            "systemData": {
+              "createdBy": "foo@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2018-04-24T16:30:55+00:00",
+              "lastModifiedBy": "foo@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+            },
+            "properties": {
+              "githubWorkflowProfile": {
+                "repositoryOwner": "owner1",
+                "repositoryName": "repo1",
+                "branchName": "branch1",
+                "dockerfile": "repo1/images/Dockerfile",
+                "dockerBuildContext": "repo1/src/",
+                "deploymentProperties": {
+                  "manifestType": "kube",
+                  "overrides": {
+                    "key1": "value1"
+                  }
+                },
+                "acr": {
+                  "acrSubscriptionId": "00000000-0000-0000-0000-000000000000",
+                  "acrResourceGroup": "resourceGroup1",
+                  "acrRegistryName": "registry1",
+                  "acrRepositoryName": "repo1"
+                },
+                "oidcCredentials": {
+                  "azureClientId": "12345678-3456-7890-5678-012345678901",
+                  "azureTenantId": "66666666-3456-7890-5678-012345678901"
+                },
+                "aksResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+                "prURL": "https://github.com/User/repo1/pull/6567",
+                "pullNumber": 6567,
+                "prStatus": "submitted",
+                "authStatus": "Authorized"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com:443/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/workflows?api-version=2018-05-05-preview&timeRange=1&$skipToken="
+      }
+    }
+  }
+}

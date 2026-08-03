@@ -1,0 +1,2617 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Custom voice API",
+    "description": "Custom voice API to create and deploy your voice.",
+    "contact": {
+      "name": "Azure AI - Speech Services",
+      "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
+    },
+    "version": "2023-12-01-preview"
+  },
+  "paths": {
+    "/projects": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Gets a list of projects for the authenticated Speech service resource.",
+        "operationId": "Projects_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjects"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all projects": {
+            "$ref": "./examples/get_projects.json"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Gets the project identified by the given ID.",
+        "operationId": "Projects_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a project": {
+            "$ref": "./examples/get_project.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Deletes the project identified by the given ID. All data (like consent, training set) in this project will be deleted automatically.",
+        "operationId": "Projects_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "in": "query",
+            "name": "forceDelete",
+            "type": "boolean",
+            "description": "Set this to true if you want to delete a project with model and endpoint. Otherwise, the delete operation will fail.",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a project": {
+            "$ref": "./examples/delete_project.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Creates a new project.",
+        "operationId": "Projects_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "project",
+            "description": "project definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/create_project.json"
+          }
+        }
+      }
+    },
+    "/consents": {
+      "get": {
+        "tags": [
+          "Consent"
+        ],
+        "description": "Gets a list of consents for the authenticated Speech service resource.",
+        "operationId": "Consents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedConsents"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all consents": {
+            "$ref": "./examples/get_consents.json"
+          }
+        }
+      }
+    },
+    "/consents/{id}": {
+      "get": {
+        "tags": [
+          "Consent"
+        ],
+        "description": "Gets the consent identified by the given ID.",
+        "operationId": "Consents_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a consent": {
+            "$ref": "./examples/get_consent.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Consent"
+        ],
+        "description": "Deletes the consent identified by the given ID.",
+        "operationId": "Consents_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a consent": {
+            "$ref": "./examples/delete_consent.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Consent"
+        ],
+        "description": "Creates a new voice talent consent with the provided audio URL.",
+        "operationId": "Consents_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "consent",
+            "description": "consent definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a consent": {
+            "$ref": "./examples/create_consent.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Consent"
+        ],
+        "description": "Creates a new voice talent consent with the provided audio file.",
+        "operationId": "Consents_Post",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "formData",
+            "name": "projectId",
+            "description": "The project ID.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "in": "formData",
+            "name": "displayName",
+            "description": "The display name of this consent.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "description": "Optional description of this consent.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "voiceTalentName",
+            "description": "The name of voice talent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "companyName",
+            "description": "The name of company.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "audiodata",
+            "description": "An audio file containing the audio data.",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "locale",
+            "description": "The locale of this consent. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "properties",
+            "description": "properties.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-examples": {
+          "Create a consent": {
+            "$ref": "./examples/create_consent_with_multipart_form.json"
+          }
+        }
+      }
+    },
+    "/trainingsets": {
+      "get": {
+        "tags": [
+          "TrainingSet"
+        ],
+        "description": "Gets a list of training sets for the authenticated Speech service resource.",
+        "operationId": "TrainingSets_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedTrainingSets"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all training sets": {
+            "$ref": "./examples/get_trainingsets.json"
+          }
+        }
+      }
+    },
+    "/trainingsets/{id}": {
+      "get": {
+        "tags": [
+          "TrainingSet"
+        ],
+        "description": "Gets the training set identified by the given ID.",
+        "operationId": "TrainingSets_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TrainingSet"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a training set": {
+            "$ref": "./examples/get_trainingset.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TrainingSet"
+        ],
+        "description": "Deletes the training set identified by the given ID.",
+        "operationId": "TrainingSets_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a training set": {
+            "$ref": "./examples/delete_trainingset.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TrainingSet"
+        ],
+        "description": "Creates a new training set.",
+        "operationId": "TrainingSets_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "trainingset",
+            "description": "training set definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainingSet"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TrainingSet"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a training set": {
+            "$ref": "./examples/create_trainingset.json"
+          }
+        }
+      }
+    },
+    "/trainingsets/{id}:upload": {
+      "post": {
+        "tags": [
+          "TrainingSet"
+        ],
+        "description": "Uploads data to the specified training set.",
+        "operationId": "TrainingSets_UploadData",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "dataset",
+            "description": "Dataset to be uploaded",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-examples": {
+          "Upload data to a training set": {
+            "$ref": "./examples/upload_trainingset.json"
+          }
+        }
+      }
+    },
+    "/modelrecipes": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "description": "Get a list of supported recipes for model building. Different recipes have different capabilities such as support for multi-style voice models.",
+        "operationId": "Models_ListRecipes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Recipe"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all recipes": {
+            "$ref": "./examples/get_recipes.json"
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "description": "Gets the list of models for the authenticated Speech service resource.",
+        "operationId": "Models_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedModels"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all models": {
+            "$ref": "./examples/get_models.json"
+          }
+        }
+      }
+    },
+    "/models/{id}": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "description": "Gets the model identified by the given ID.",
+        "operationId": "Models_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a model": {
+            "$ref": "./examples/get_model.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Model"
+        ],
+        "description": "Deletes the model identified by the given ID.",
+        "operationId": "Models_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a model": {
+            "$ref": "./examples/delete_model.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Model"
+        ],
+        "description": "Creates a new voice model.",
+        "operationId": "Models_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "model",
+            "description": "Model definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a model": {
+            "$ref": "./examples/create_model.json"
+          },
+          "Create a multi style model": {
+            "$ref": "./examples/create_multi_style_model.json"
+          }
+        }
+      }
+    },
+    "/endpoints": {
+      "get": {
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Gets a list of endpoints for the authenticated Speech service resource.",
+        "operationId": "Endpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedEndpoints"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all endpoints": {
+            "$ref": "./examples/get_endpoints.json"
+          }
+        }
+      }
+    },
+    "/endpoints/{id}": {
+      "get": {
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Gets the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathUuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an endpoint": {
+            "$ref": "./examples/get_endpoint.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Deletes the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathUuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an endpoint": {
+            "$ref": "./examples/delete_endpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Creates a new endpoint.",
+        "operationId": "Endpoints_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathUuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "endpoint",
+            "description": "Endpoint definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create an endpoint": {
+            "$ref": "./examples/create_endpoint.json"
+          }
+        }
+      }
+    },
+    "/endpoints/{id}:resume": {
+      "post": {
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Resumes the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Resume",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathUuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-examples": {
+          "Resume an endpoint": {
+            "$ref": "./examples/resume_endpoint.json"
+          }
+        }
+      }
+    },
+    "/endpoints/{id}:suspend": {
+      "post": {
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Suspends the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Suspend",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathUuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-examples": {
+          "Suspend an endpoint": {
+            "$ref": "./examples/suspend_endpoint.json"
+          }
+        }
+      }
+    },
+    "/basemodels": {
+      "get": {
+        "tags": [
+          "BaseModel"
+        ],
+        "description": "Gets a list of base models.",
+        "operationId": "BaseModels_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BaseModel"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get base models": {
+            "$ref": "./examples/get_base_models.json"
+          }
+        }
+      }
+    },
+    "/personalvoices": {
+      "get": {
+        "tags": [
+          "PersonalVoice"
+        ],
+        "description": "Gets a list of personal voices for the authenticated Speech service resource.",
+        "operationId": "PersonalVoices_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedPersonalVoices"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all personal voices": {
+            "$ref": "./examples/get_personalvoices.json"
+          }
+        }
+      }
+    },
+    "/personalvoices/{id}": {
+      "get": {
+        "tags": [
+          "PersonalVoice"
+        ],
+        "description": "Gets the personal voice identified by the given ID.",
+        "operationId": "PersonalVoices_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a personal voice": {
+            "$ref": "./examples/get_personalvoice.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PersonalVoice"
+        ],
+        "description": "Deletes the personal voice identified by the given ID.",
+        "operationId": "PersonalVoices_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a personal voice": {
+            "$ref": "./examples/delete_personalvoice.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PersonalVoice"
+        ],
+        "description": "Creates a new personal voice with audio files in Azure Blob Storage.",
+        "operationId": "PersonalVoices_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "personalvoice",
+            "description": "personal voice definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a personal voice": {
+            "$ref": "./examples/create_personalvoice.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PersonalVoice"
+        ],
+        "description": "Creates a new personal voice with audio files in the client.",
+        "operationId": "PersonalVoices_Post",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "formData",
+            "name": "displayName",
+            "description": "The display name of this model.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "description": "Optional description of this model.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "projectId",
+            "description": "The project ID.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "in": "formData",
+            "name": "audioData",
+            "description": "Audio files.",
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "properties",
+            "description": "properties.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-examples": {
+          "Create a personal voice": {
+            "$ref": "./examples/create_personalvoice_with_multipart_form.json"
+          }
+        }
+      }
+    },
+    "/operations/{id}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Gets operation info.",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the operation",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "Error encountered.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_operation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureBlobContentSource": {
+      "description": "Azure Blob Storage content. With the examples below, it represents files https://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav",
+      "type": "object",
+      "required": [
+        "containerUrl",
+        "extensions"
+      ],
+      "properties": {
+        "containerUrl": {
+          "description": "Azure Blob Storage container URL with [SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview). Need both read and list permissions.",
+          "type": "string",
+          "format": "url",
+          "example": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken"
+        },
+        "prefix": {
+          "description": "Blob name prefix.",
+          "type": "string",
+          "example": "jessica"
+        },
+        "extensions": {
+          "description": "File name extensions.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ".wav"
+          }
+        }
+      }
+    },
+    "BaseModel": {
+      "description": "Base model",
+      "required": [
+        "name",
+        "releaseDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "releaseDateTime": {
+          "description": "The stamp when the base model was released. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "description": "The timestamp when TTS service will stop serving this base model. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string"
+        },
+        "capabilities": {
+          "description": "Capabilities of base model",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelCapability"
+          }
+        }
+      }
+    },
+    "Consent": {
+      "description": "Consent object",
+      "required": [
+        "voiceTalentName",
+        "companyName",
+        "locale",
+        "projectId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "description": "Name of consent.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of consent.",
+          "type": "string"
+        },
+        "voiceTalentName": {
+          "description": "Voice talent name. Must match the voice talent name in the consent audio file.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name. Must match the company name in the consent audio file.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "audioUrl": {
+          "description": "The public accessible URL of the consent audio file. It's recommended to be an Azure blob URL with [SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview). This property is only available in request.",
+          "type": "string",
+          "format": "uri"
+        },
+        "locale": {
+          "description": "The locale of this consent. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Dataset": {
+      "description": "Dataset object",
+      "required": [
+        "kind",
+        "audios"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The name of this dataset.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Optional description of this dataset.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind"
+        },
+        "audios": {
+          "$ref": "#/definitions/AzureBlobContentSource"
+        },
+        "scripts": {
+          "$ref": "#/definitions/AzureBlobContentSource"
+        }
+      }
+    },
+    "DatasetKind": {
+      "description": "Dataset kind",
+      "enum": [
+        "AudioAndScript",
+        "LongAudio",
+        "AudioOnly"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": true
+      }
+    },
+    "Endpoint": {
+      "description": "Endpoint object",
+      "required": [
+        "projectId",
+        "modelId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Endpoint Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "displayName": {
+          "description": "Endpoint name",
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "description": "Endpoint description",
+          "type": "string"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "modelId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointKind": {
+      "description": "Endpoint kind",
+      "enum": [
+        "HighPerformance",
+        "FastResume"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointKind",
+        "modelAsString": true
+      }
+    },
+    "EndpointProperties": {
+      "description": "Endpoint properties",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EndpointKind"
+        }
+      }
+    },
+    "Error": {
+      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains an top-level error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "target": {
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Top-level error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional supportive details regarding the error and/or expected policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "ErrorCode": {
+      "description": "Top-level error code",
+      "enum": [
+        "BadRequest",
+        "BadArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "UnsupportedMediaType",
+        "TooManyRequests",
+        "InternalServerError",
+        "ServiceUnavailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "VoiceKind": {
+      "description": "Voice kind",
+      "enum": [
+        "Male",
+        "Female"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "VoiceKind",
+        "modelAsString": true
+      }
+    },
+    "InnerError": {
+      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains required properties error code, message and optional properties target, inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Detailed error code to help diagnostic.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "Model": {
+      "description": "Model object",
+      "required": [
+        "recipe",
+        "projectId",
+        "consentId",
+        "trainingSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "voiceName": {
+          "description": "Voice name",
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "description": "Model description",
+          "type": "string"
+        },
+        "recipe": {
+          "$ref": "#/definitions/Recipe"
+        },
+        "locale": {
+          "description": "The locale of this model. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "consentId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "trainingSetId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "engineVersion": {
+          "description": "Engine version. Update this version can get the latest pronunciation bug fixing.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModelFailureReason": {
+      "description": "Model training failure reason",
+      "enum": [
+        "None",
+        "InaccessibleCustomerStorage",
+        "SpeakerVerificationFailed",
+        "TerminateByUser",
+        "Internal"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelFailureReason",
+        "modelAsString": true
+      }
+    },
+    "ModelCapability": {
+      "description": "Model capability",
+      "enum": [
+        "PersonalVoice"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelCapability",
+        "modelAsString": true
+      }
+    },
+    "ModelProperties": {
+      "description": "Model properties",
+      "type": "object",
+      "properties": {
+        "presetStyles": {
+          "description": "Preset styles of this model.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "styleTrainingSetIds": {
+          "description": "Customized styles and associated training sets.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceId"
+          }
+        },
+        "voiceStyles": {
+          "description": "All styles supported by this model.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "failureReason": {
+          "$ref": "#/definitions/ModelFailureReason"
+        }
+      }
+    },
+    "OperationId": {
+      "description": "Unique operation ID.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "Operation": {
+      "description": "Status of a long running operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/OperationId"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Status of an operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true
+      }
+    },
+    "PaginatedConsents": {
+      "description": "Paginated consent list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Consent list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Consent"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedEndpoints": {
+      "description": "Paginated endpoint list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Endpoint list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedModels": {
+      "description": "Paginated model list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Model list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedProjects": {
+      "description": "Paginated project list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Project list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedTrainingSets": {
+      "description": "Paginated training set list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Training set list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrainingSet"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedPersonalVoices": {
+      "description": "Paginated personal voice list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Personal voice list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonalVoice"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PresetStyleItem": {
+      "description": "Preset styles supported by the recipe. The voice model can support these styles without any style training set.",
+      "type": "object",
+      "properties": {
+        "male": {
+          "description": "Preset styles supported on male voice model.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "female": {
+          "description": "Preset styles supported on female voice model.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Project": {
+      "description": "Project object. Consents, training sets, models, and endpoints are organized in a project.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "description": "Project name",
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "description": "Project description",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/ProjectKind"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectKind": {
+      "description": "Project kind",
+      "enum": [
+        "ProfessionalVoice",
+        "PersonalVoice"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true
+      }
+    },
+    "Recipe": {
+      "description": "Recipe for model building. Different recipes have different capability.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Recipe kind",
+          "type": "string"
+        },
+        "version": {
+          "description": "Recipe version",
+          "type": "string"
+        },
+        "description": {
+          "description": "Recipe description",
+          "type": "string",
+          "readOnly": true
+        },
+        "minUtteranceCount": {
+          "description": "Minimum utterance count required to train a voice model with this recipe.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "minStyleUtteranceCount": {
+          "description": "Minimum utterance count required to train each customized style.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxCustomStyleNum": {
+          "description": "Maximum customized style number supported in one voice model.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "datasetLocales": {
+          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "en-US"
+          },
+          "readOnly": true
+        },
+        "modelLocales": {
+          "description": "The locale that a voice model can speak with this recipe. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "en-US"
+          },
+          "readOnly": true
+        },
+        "presetStyles": {
+          "description": "Preset styles supported by this recipe per locale. You can get these styles without any style training set.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PresetStyleItem"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceId": {
+      "description": "Resource id",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "Status": {
+      "description": "Status of a resource.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Disabling",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "TrainingSet": {
+      "description": "Training set",
+      "required": [
+        "locale",
+        "projectId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "description": "Training set name",
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "description": "Training set description",
+          "type": "string"
+        },
+        "locale": {
+          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "voiceKind": {
+          "$ref": "#/definitions/VoiceKind"
+        },
+        "properties": {
+          "$ref": "#/definitions/TrainingSetProperties"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrainingSetProperties": {
+      "description": "Training set properties",
+      "type": "object",
+      "properties": {
+        "utteranceCount": {
+          "description": "Utterance count in this training set",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "readOnly": true
+    },
+    "PersonalVoice": {
+      "description": "Personal voice object",
+      "required": [
+        "projectId",
+        "consentId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "speakerProfileId": {
+          "description": "Personal voice speaker profile id. Fill this property in SSML.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of personal voice",
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "description": "Personal voice description",
+          "type": "string"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "consentId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "audios": {
+          "$ref": "#/definitions/AzureBlobContentSource"
+        },
+        "properties": {
+          "$ref": "#/definitions/PersonalVoiceProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PersonalVoiceProperties": {
+      "description": "Personal voice properties",
+      "type": "object",
+      "properties": {
+        "failureReason": {
+          "$ref": "#/definitions/ModelFailureReason"
+        }
+      },
+      "readOnly": true
+    }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your Speech resource key here."
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Microsoft identity platform](entra/identity-platform/v2-overview) flows.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    }
+  },
+  "security": [
+    {
+      "subscription_key": [],
+      "AADToken": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/customvoice",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "parameters": {
+    "QueryApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "QuerySkip": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryMaxPageSize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of items to include in a single response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryFilter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter condition.\r\n  - **Supported properties:** projectId, createdDateTime, locale, kind\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n    - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n    - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PathId": {
+      "name": "id",
+      "in": "path",
+      "description": "The ID of the resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PathUuid": {
+      "name": "id",
+      "in": "path",
+      "description": "The resource ID, which should be UUID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "HeaderOperationId": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+      "required": false,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

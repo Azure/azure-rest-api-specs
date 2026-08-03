@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateLinkResources/sql",
+            "name": "sql",
+            "type": "Microsoft.Synapse/workspaces/privateLinkResources",
+            "properties": {
+              "groupId": "sql",
+              "requiredMembers": [
+                "sql"
+              ],
+              "requiredZoneNames": [
+                "privatelink.sql.azuresynapse.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

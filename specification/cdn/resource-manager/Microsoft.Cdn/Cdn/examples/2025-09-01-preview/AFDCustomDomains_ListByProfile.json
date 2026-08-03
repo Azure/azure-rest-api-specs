@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "domain1",
+            "type": "Microsoft.Cdn/profiles/customdomains",
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/domain1",
+            "properties": {
+              "azureDnsZone": {
+                "id": ""
+              },
+              "deploymentStatus": "NotStarted",
+              "domainValidationState": "Pending",
+              "hostName": "www.contoso.com",
+              "mtlsSettings": {
+                "scenario": "ClientCertificateRequiredAndOriginValidates"
+              },
+              "preValidatedCustomDomainResourceId": {
+                "id": ""
+              },
+              "profileName": "profile1",
+              "provisioningState": "Updating",
+              "tlsSettings": {
+                "certificateType": "ManagedCertificate",
+                "cipherSuiteSetType": "Customized",
+                "customizedCipherSuiteSet": {
+                  "cipherSuiteSetForTls12": [
+                    "ECDHE_RSA_AES128_GCM_SHA256"
+                  ],
+                  "cipherSuiteSetForTls13": [
+                    "TLS_AES_128_GCM_SHA256",
+                    "TLS_AES_256_GCM_SHA384"
+                  ]
+                },
+                "minimumTlsVersion": "TLS12",
+                "secret": {
+                  "id": ""
+                }
+              },
+              "validationProperties": {
+                "expirationDate": "2009-06-15T13:45:43.0000000Z",
+                "validationToken": "8c9912db-c615-4eeb-8465"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AFDCustomDomains_ListByProfile",
+  "title": "AFDCustomDomains_ListByProfile"
+}

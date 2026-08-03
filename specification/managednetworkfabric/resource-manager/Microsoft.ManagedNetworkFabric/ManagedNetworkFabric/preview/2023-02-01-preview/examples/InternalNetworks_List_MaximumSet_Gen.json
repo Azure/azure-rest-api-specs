@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2023-02-01-preview",
+    "l3IsolationDomainName": "example-l3domain"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "disabledOnResources": [
+                "string"
+              ],
+              "administrativeState": "Enabled",
+              "bgpDisabledOnResources": [
+                "string"
+              ],
+              "bfdDisabledOnResources": [
+                "string"
+              ],
+              "bfdForStaticRoutesDisabledOnResources": [
+                "string"
+              ],
+              "provisioningState": "Succeeded",
+              "annotation": "lab 1",
+              "vlanId": 501,
+              "mtu": 1500,
+              "connectedIPv4Subnets": [
+                {
+                  "prefix": "10.0.0.0/24"
+                }
+              ],
+              "connectedIPv6Subnets": [
+                {
+                  "prefix": "3FFE:FFFF:0:CD30::a0/29"
+                }
+              ],
+              "staticRouteConfiguration": {
+                "bfdConfiguration": {
+                  "administrativeState": "Enabled",
+                  "interval": 4,
+                  "multiplier": 13
+                },
+                "ipv4Routes": [
+                  {
+                    "prefix": "10.1.0.0/24",
+                    "nextHop": [
+                      "10.0.0.1"
+                    ]
+                  }
+                ],
+                "ipv6Routes": [
+                  {
+                    "prefix": "2fff::/64",
+                    "nextHop": [
+                      "2ffe::1"
+                    ]
+                  }
+                ]
+              },
+              "bgpConfiguration": {
+                "bfdConfiguration": {
+                  "administrativeState": "Enabled",
+                  "interval": 4,
+                  "multiplier": 13
+                },
+                "defaultRouteOriginate": "True",
+                "allowAS": 1,
+                "allowASOverride": "Enable",
+                "fabricASN": 21,
+                "peerASN": 6,
+                "ipv4ListenRangePrefixes": [
+                  "10.1.0.0/25"
+                ],
+                "ipv6ListenRangePrefixes": [
+                  "2fff::/66"
+                ],
+                "ipv4NeighborAddress": [
+                  {
+                    "address": "10.1.0.0",
+                    "operationalState": "Provisioned"
+                  }
+                ],
+                "ipv6NeighborAddress": [
+                  {
+                    "address": "2fff::",
+                    "operationalState": "Provisioned"
+                  }
+                ]
+              },
+              "importRoutePolicyId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName1",
+              "exportRoutePolicyId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName2"
+            },
+            "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/example-l3domain/externalNetworks/example-externalnetwork",
+            "name": "example-externalnetwork",
+            "type": "microsoft.managednetworkfabric/example-externalnetwork",
+            "systemData": {
+              "createdBy": "email@address.com",
+              "createdByType": "User",
+              "createdAt": "2023-02-09T18:35:44.070Z",
+              "lastModifiedBy": "UserId",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-02-09T18:35:44.070Z"
+            }
+          }
+        ],
+        "nextLink": "next Link"
+      }
+    }
+  }
+}

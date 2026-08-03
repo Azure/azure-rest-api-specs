@@ -57,7 +57,7 @@
             "$ref": "Disks.json#/parameters/DiskStartParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -65,6 +65,12 @@
             "description": "OK -- The list of disks has been returned.",
             "schema": {
               "$ref": "Disks.json#/definitions/DiskList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         },
@@ -96,7 +102,7 @@
             "$ref": "Disks.json#/parameters/DiskIdParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -104,6 +110,12 @@
             "description": "OK -- The disk has been returned.",
             "schema": {
               "$ref": "Disks.json#/definitions/Disk"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -248,14 +260,6 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string",
-      "default": "2018-07-30-preview"
-    },
     "UserSubscriptionIdParameter": {
       "description": "User Subscription Id which the resource belongs to.",
       "name": "userSubscriptionId",

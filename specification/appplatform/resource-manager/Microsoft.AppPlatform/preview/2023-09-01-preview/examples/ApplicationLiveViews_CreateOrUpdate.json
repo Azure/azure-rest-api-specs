@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "applicationLiveViewName": "default",
+    "applicationLiveViewResource": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "components": [
+            {
+              "name": "app-live-view-server",
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "1Gi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "app-live-view-server-name",
+                  "status": "Running"
+                }
+              ]
+            },
+            {
+              "name": "app-live-view-connector",
+              "resourceRequests": {
+                "cpu": "500m",
+                "memory": "500Mi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "app-live-view-connector-name1",
+                  "status": "Starting"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/applicationLiveViews",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationLiveViews/default",
+        "name": "default"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "components": [
+            {
+              "name": "app-live-view-server",
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "1Gi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "app-live-view-server-name",
+                  "status": "Running"
+                }
+              ]
+            },
+            {
+              "name": "app-live-view-connector",
+              "resourceRequests": {
+                "cpu": "500m",
+                "memory": "500Mi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "app-live-view-connector-name1",
+                  "status": "Starting"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/applicationLiveViews",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationLiveViews/default",
+        "name": "default"
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "title": "List all data exports connected to the given destination",
+  "description": "Get a list of data exports connected to the given destination, returned exports include everything except the destination.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "1.2-preview",
+    "destinationId": "destination1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "newTest",
+            "displayName": "Test Export 1",
+            "enabled": true,
+            "source": "telemetry",
+            "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
+            "enrichments": {
+              "abc": {
+                "path": "$templateDisplayName"
+              }
+            },
+            "destinations": [],
+            "status": "healthy"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
+    "api-version": "2024-02-01-preview",
+    "$expand": "details",
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ImportToAzure",
+          "isCancellable": false,
+          "isDeletable": true,
+          "isShippingAddressEditable": false,
+          "isPrepareToShipEnabled": true,
+          "status": "CompletedWithWarnings",
+          "startTime": "2021-03-05T12:56:12.6384315+05:30",
+          "details": {
+            "copyProgress": [
+              {
+                "storageAccountName": "YourStorageAccountName",
+                "transferType": "ImportToAzure",
+                "dataAccountType": "StorageAccount",
+                "accountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
+                "bytesProcessed": 2000,
+                "totalBytesToProcess": 2000,
+                "filesProcessed": 100,
+                "totalFilesToProcess": 110,
+                "invalidFilesProcessed": 10,
+                "invalidFileBytesUploaded": 10,
+                "renamedContainerCount": 60,
+                "filesErroredOut": 0,
+                "directoriesErroredOut": 0,
+                "invalidDirectoriesProcessed": 0,
+                "isEnumerationInProgress": false
+              }
+            ],
+            "expectedDataSizeInTeraBytes": 0,
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T12:56:25.3911023+05:30"
+              },
+              {
+                "stageName": "DevicePrepared",
+                "displayName": "Processed",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T13:07:49.676421+05:30"
+              },
+              {
+                "stageName": "Dispatched",
+                "displayName": "Dispatched",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:21:06+05:30"
+              },
+              {
+                "stageName": "Delivered",
+                "displayName": "Delivered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:21:13+05:30"
+              },
+              {
+                "stageName": "PickedUp",
+                "displayName": "Picked up",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:23:10+05:30"
+              },
+              {
+                "stageName": "AtAzureDC",
+                "displayName": "Received",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:23:17+05:30"
+              },
+              {
+                "stageName": "DataCopy",
+                "displayName": "Data copy in progress",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T13:34:20.1497635+05:30"
+              },
+              {
+                "stageName": "CompletedWithWarnings",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T14:08:38.250614+05:30"
+              }
+            ],
+            "contactDetails": {
+              "contactName": "XXXX XXXX",
+              "phone": "0000000000",
+              "phoneExtension": "",
+              "emailList": [
+                "xxxx@xxxx.xxx"
+              ],
+              "notificationPreference": [
+                {
+                  "stageName": "DevicePrepared",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Dispatched",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Delivered",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "PickedUp",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "AtAzureDC",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "DataCopy",
+                  "sendNotification": true
+                }
+              ]
+            },
+            "shippingAddress": {
+              "streetAddress1": "164 TOWNSEND ST",
+              "streetAddress2": "XXXX XXXX",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "companyName": "XXXX XXXX",
+              "addressType": "None"
+            },
+            "deliveryPackage": {
+              "trackingUrl": "https://xxx.xxx.xx",
+              "carrierName": "Ups",
+              "trackingId": "5fb6965e-0b80-4f38-b21a-32673fed2d84"
+            },
+            "returnPackage": {
+              "trackingUrl": "https://xxx.xxx.xx",
+              "carrierName": "Ups",
+              "trackingId": "b3875a34-aad6-4dbe-83a9-3f39cb21b0e8"
+            },
+            "dataImportDetails": [
+              {
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
+                  "dataAccountType": "StorageAccount"
+                }
+              }
+            ],
+            "jobDetailsType": "DataBox",
+            "preferences": {},
+            "copyLogDetails": [
+              {
+                "accountName": "YourStorageAccountName",
+                "copyLogLink": "databoxcopylog/xxx.xml",
+                "copyLogDetailsType": "DataBox"
+              }
+            ],
+            "reverseShipmentLabelSasKey": "http://xxx.xxx.xxx",
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            },
+            "actions": [],
+            "lastMitigationActionOnJob": {
+              "actionDateTimeInUtc": "2021-03-05T08:28:18.8107951Z",
+              "isPerformedByCustomer": true,
+              "customerResolution": "MoveToCleanUpDevice"
+            }
+          },
+          "deliveryType": "NonScheduled",
+          "isCancellableWithoutFee": false
+        },
+        "location": "westus",
+        "tags": {
+          "defaultTagsKey": "defaultTagsValue"
+        },
+        "sku": {
+          "name": "DataBox"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "name": "TestJobName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

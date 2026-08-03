@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "eventTrackingId": "BC_1-FXZ",
+    "api-version": "2023-07-01-preview",
+    "$filter": "targetRegion eq 'westus'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/abc-123-ghj-456",
+            "name": "abc-123-ghj-456",
+            "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "properties": {
+              "targetResourceType": "Microsoft.Compute/VirtualMachines",
+              "targetResourceId": "{resourceId-1}",
+              "targetRegion": "westus"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/wer-345-tyu-789",
+            "name": "wer-345-tyu-789",
+            "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "properties": {
+              "targetResourceType": "Microsoft.Compute/VirtualMachines",
+              "targetResourceId": "{resourceId-2}",
+              "targetRegion": "westus"
+            }
+          }
+        ],
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+      }
+    }
+  }
+}

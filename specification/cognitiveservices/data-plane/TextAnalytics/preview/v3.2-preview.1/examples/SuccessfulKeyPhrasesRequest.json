@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "ApiVersion": "v3.2-preview.1",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "id": "1",
+          "language": "en",
+          "text": "Microsoft was founded by Bill Gates and Paul Allen."
+        },
+        {
+          "id": "2",
+          "language": "en",
+          "text": "Text Analytics is one of the Azure Cognitive Services."
+        },
+        {
+          "id": "3",
+          "language": "en",
+          "text": "My cat might need to see a veterinarian."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "keyPhrases": [
+              "Bill Gates",
+              "Paul Allen",
+              "Microsoft"
+            ],
+            "warnings": []
+          },
+          {
+            "id": "2",
+            "keyPhrases": [
+              "Azure Cognitive Services",
+              "Text Analytics"
+            ],
+            "warnings": []
+          },
+          {
+            "id": "3",
+            "keyPhrases": [
+              "cat",
+              "veterinarian"
+            ],
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2019-10-01"
+      }
+    }
+  }
+}

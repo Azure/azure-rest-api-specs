@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateLinkResources/redisEnterpriseCache",
+            "name": "redisEnterpriseCache",
+            "type": "Microsoft.Cache/redisEnterprise/privateLinkResources",
+            "properties": {
+              "groupId": "redisEnterpriseCache",
+              "requiredMembers": [
+                "redisEnterpriseCache"
+              ],
+              "requiredZoneNames": [
+                "privatelink.redisenterprise.cache.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

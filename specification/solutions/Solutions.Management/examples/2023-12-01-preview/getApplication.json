@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "applicationName": "myManagedApplication",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myManagedApplication",
+        "type": "Microsoft.Solutions/applications",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
+        "identity": null,
+        "kind": "ServiceCatalog",
+        "managedBy": null,
+        "plan": null,
+        "properties": {
+          "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef",
+          "artifacts": [],
+          "authorizations": [
+            {
+              "principalId": "validprincipalguid",
+              "roleDefinitionId": "validroleguid"
+            }
+          ],
+          "billingDetails": null,
+          "createdBy": {
+            "applicationId": "ClientApplicationId",
+            "oid": "ClientOid",
+            "puid": "ClientPuid"
+          },
+          "customerSupport": null,
+          "jitAccessPolicy": null,
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "managementMode": "Managed",
+          "outputs": null,
+          "parameters": null,
+          "provisioningState": "Created",
+          "publisherTenantId": null,
+          "supportUrls": null,
+          "updatedBy": {
+            "applicationId": "ClientApplicationId",
+            "oid": "ClientOid",
+            "puid": "ClientPuid"
+          }
+        },
+        "sku": null
+      },
+      "headers": {}
+    },
+    "404": {}
+  },
+  "operationId": "Applications_Get",
+  "title": "Get a managed application"
+}

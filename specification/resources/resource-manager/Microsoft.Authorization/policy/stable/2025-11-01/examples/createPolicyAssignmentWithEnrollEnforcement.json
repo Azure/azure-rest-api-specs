@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "parameters": {
+      "properties": {
+        "description": "Force resource names to begin with given DeptA and end with -LC",
+        "displayName": "Enforce resource naming rules",
+        "enforcementMode": "Enroll",
+        "metadata": {
+          "assignedBy": "Special Someone"
+        },
+        "parameters": {
+          "prefix": {
+            "value": "DeptA"
+          },
+          "suffix": {
+            "value": "-LC"
+          }
+        },
+        "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming"
+      }
+    },
+    "policyAssignmentName": "EnforceNamingEnroll",
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "EnforceNamingEnroll",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/EnforceNamingEnroll",
+        "properties": {
+          "description": "Force resource names to begin with given DeptA and end with -LC",
+          "definitionVersion": "1.*.*",
+          "displayName": "Enforce resource naming rules",
+          "enforcementMode": "Enroll",
+          "instanceId": "f2b3c4d5-e6f7-8a9b-0c1d-2e3f4a5b6c7d",
+          "metadata": {
+            "assignedBy": "Special Someone"
+          },
+          "notScopes": [],
+          "parameters": {
+            "prefix": {
+              "value": "DeptA"
+            },
+            "suffix": {
+              "value": "-LC"
+            }
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyAssignments_Create",
+  "title": "Create or update a policy assignment to enforce policy effect only on enrolled resources during resource creation or update."
+}

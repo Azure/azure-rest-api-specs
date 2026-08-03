@@ -872,7 +872,8 @@
           "description": "If the data type is categorical, this provides the list of accepted categories.",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "x-ms-isnullable": {
           "type": "boolean",
@@ -900,8 +901,10 @@
               "type": "array",
               "items": {
                 "type": "object"
-              }
-            }
+              },
+              "x-ms-identifiers": []
+            },
+            "x-ms-identifiers": []
           }
         },
         "globalParameters": {
@@ -967,7 +970,10 @@
           "description": "If the asset is a custom module, this holds the module's parameters.",
           "items": {
             "$ref": "#/definitions/ModuleAssetParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -1027,7 +1033,10 @@
           "description": "The definition of the parameter.",
           "items": {
             "$ref": "#/definitions/ModuleAssetParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1083,7 +1092,13 @@
           "description": "The list of edges making up the graph.",
           "items": {
             "$ref": "#/definitions/GraphEdge"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceNodeId",
+            "sourcePortId",
+            "targetNodeId",
+            "targetPortId"
+          ]
         },
         "graphParameters": {
           "type": "object",
@@ -1176,7 +1191,11 @@
           "description": "Association links for this parameter to nodes in the graph.",
           "items": {
             "$ref": "#/definitions/GraphParameterLink"
-          }
+          },
+          "x-ms-identifiers": [
+            "nodeId",
+            "parameterKey"
+          ]
         }
       },
       "required": [
@@ -1294,7 +1313,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/AsyncOperationErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     },
@@ -1308,7 +1330,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

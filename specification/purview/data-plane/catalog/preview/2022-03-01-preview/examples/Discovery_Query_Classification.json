@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": null,
+      "limit": 10,
+      "filter": {
+        "classification": "MICROSOFT.PERSONAL.EMAIL",
+        "includeSubClassifications": true
+      }
+    },
+    "api-version": "2022-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 5,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "b9638b91-884f-4e5e-98b5-29f6f6f60000",
+            "qualifiedName": "mssql://exampleserver.database.windows.net/examplesqldb/examplepath/exampledata1",
+            "name": "exampledata1",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_sql_table",
+            "classification": [
+              "MICROSOFT.PERSONAL.NAME",
+              "MICROSOFT.PERSONAL.EU.PHONE_NUMBER",
+              "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+              "MICROSOFT.PERSONAL.EMAIL"
+            ],
+            "label": [],
+            "assetType": [
+              "Azure SQL Database"
+            ],
+            "term": [],
+            "contact": []
+          },
+          {
+            "@search.score": 1.0,
+            "id": "01aefb9a-61cd-4a02-a572-70f6f6f60000",
+            "qualifiedName": "mssql://exampleserver.database.windows.net/exampledw/examplepath/exampledata2",
+            "name": "exampledata2",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_sql_dw_table",
+            "classification": [
+              "MICROSOFT.GOVERNMENT.CITY_NAME",
+              "MICROSOFT.GOVERNMENT.US.STATE",
+              "MICROSOFT.PERSONAL.NAME",
+              "MICROSOFT.PERSONAL.EU.PHONE_NUMBER",
+              "MICROSOFT.PERSONAL.EMAIL"
+            ],
+            "label": [],
+            "assetType": [
+              "Azure SQL Data Warehouse"
+            ],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  }
+}

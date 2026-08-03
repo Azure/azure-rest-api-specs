@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "blueshark",
+            "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark",
+            "properties": {
+              "componentType": "SpringBootAdmin",
+              "configurations": [
+                {
+                  "propertyName": "spring.boot.admin.ui.enable-toasts",
+                  "value": "true"
+                },
+                {
+                  "propertyName": "spring.boot.admin.monitor.status-interval",
+                  "value": "10000ms"
+                }
+              ],
+              "ingress": {
+                "fqdn": "myjavacomponent.myenvironment.test.net"
+              },
+              "provisioningState": "Succeeded",
+              "scale": {
+                "maxReplicas": 1,
+                "minReplicas": 1
+              }
+            }
+          },
+          {
+            "name": "yellowcat",
+            "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat",
+            "properties": {
+              "componentType": "SpringCloudEureka",
+              "configurations": [
+                {
+                  "propertyName": "spring.cloud.config.server.git.uri",
+                  "value": "<GIT-URL>"
+                }
+              ],
+              "ingress": {
+                "fqdn": "myjavacomponent.myenvironment.test.net"
+              },
+              "provisioningState": "Succeeded",
+              "scale": {
+                "maxReplicas": 1,
+                "minReplicas": 1
+              }
+            }
+          },
+          {
+            "name": "reddog",
+            "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/reddog",
+            "properties": {
+              "componentType": "SpringCloudGateway",
+              "configurations": [
+                {
+                  "propertyName": "spring.cloud.gateway.enabled",
+                  "value": "true"
+                }
+              ],
+              "ingress": {
+                "fqdn": "myjavacomponent.myenvironment.test.net"
+              },
+              "provisioningState": "Succeeded",
+              "scale": {
+                "maxReplicas": 1,
+                "minReplicas": 1
+              },
+              "springCloudGatewayRoutes": [
+                {
+                  "filters": [
+                    "SetPath=/{path}"
+                  ],
+                  "id": "route1",
+                  "predicates": [
+                    "Path=/v1/{path}",
+                    "After=2024-01-20T17:42:47.789-07:00[America/Denver]"
+                  ],
+                  "uri": "https://otherjavacomponent.myenvironment.test.net"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "JavaComponents_List",
+  "title": "List Java Components"
+}

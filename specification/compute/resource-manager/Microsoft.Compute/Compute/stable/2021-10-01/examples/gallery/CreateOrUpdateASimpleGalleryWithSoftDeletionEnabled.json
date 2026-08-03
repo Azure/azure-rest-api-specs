@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-10-01",
+    "galleryName": "myGalleryName",
+    "gallery": {
+      "location": "West US",
+      "properties": {
+        "description": "This is the gallery description.",
+        "softDeletePolicy": {
+          "isSoftDeleteEnabled": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Updating",
+          "softDeletePolicy": {
+            "isSoftDeleteEnabled": true
+          }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Creating",
+          "softDeletePolicy": {
+            "isSoftDeleteEnabled": true
+          }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Updating",
+          "softDeletePolicy": {
+            "isSoftDeleteEnabled": true
+          }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
+      }
+    }
+  }
+}

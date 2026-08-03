@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "netsdktestrg",
+    "vaultName": "testVault",
+    "fabricName": "Azure",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "protectedItemName": "VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "recoveryPointId": "348916168024334",
+    "api-version": "2021-10-01",
+    "parameters": {
+      "properties": {
+        "objectType": "IaasVMRestoreWithRehydrationRequest",
+        "recoveryPointId": "348916168024334",
+        "recoveryType": "AlternateLocation",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+        "targetVirtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg2/providers/Microsoft.Compute/virtualmachines/RSMDALRVM981435",
+        "targetResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg2",
+        "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Storage/storageAccounts/testingAccount",
+        "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Network/virtualNetworks/testNet",
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Network/virtualNetworks/testNet/subnets/default",
+        "region": "southeastasia",
+        "createNewCloudService": false,
+        "originalStorageAccountOption": false,
+        "encryptionDetails": {
+          "encryptionEnabled": false
+        },
+        "recoveryPointRehydrationInfo": {
+          "rehydrationRetentionDuration": "P7D",
+          "rehydrationPriority": "High"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Retry-After": 60
+      }
+    }
+  }
+}

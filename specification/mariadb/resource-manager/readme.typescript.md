@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-mariadb"
   output-folder: "$(typescript-sdks-folder)/sdk/mariadb/arm-mariadb"
-  clear-output-folder: true
   generate-metadata: true
 ```

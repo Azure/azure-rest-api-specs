@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts": {
       "get": {
         "x-ms-examples": {
           "Get a list of downloaded products.": {
@@ -27,7 +27,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/DownloadedProductResourcesPage"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "produces": [
@@ -55,7 +61,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts/{productName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts/{productName}": {
       "get": {
         "x-ms-examples": {
           "Gets the specified downloaded product.": {
@@ -72,7 +78,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -91,8 +97,11 @@
               "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "produces": [
@@ -118,7 +127,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -143,8 +152,14 @@
               "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -171,7 +186,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -197,6 +212,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
             }
           }
         },

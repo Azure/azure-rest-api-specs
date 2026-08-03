@@ -1,0 +1,65 @@
+{
+  "title": "List all product recognition run of a model.",
+  "operationId": "ProductRecognition_List",
+  "parameters": {
+    "modelName": "model-1",
+    "skip": 0,
+    "top": 10,
+    "api-version": "2023-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "runName": "run-1",
+            "modelName": "model-1",
+            "createdDateTime": "2023-04-12T21:56:42.827Z",
+            "updatedDateTime": "2023-04-12T21:56:42.827Z",
+            "status": "completed",
+            "result": {
+              "imageMetadata": {
+                "width": 660,
+                "height": 495
+              },
+              "products": [
+                {
+                  "id": "1",
+                  "boundingBox": {
+                    "x": 197,
+                    "y": 68,
+                    "w": 356,
+                    "h": 394
+                  },
+                  "tags": [
+                    {
+                      "name": "class1",
+                      "confidence": 0.92431640625
+                    }
+                  ]
+                }
+              ],
+              "gaps": [
+                {
+                  "id": "1",
+                  "boundingBox": {
+                    "x": 197,
+                    "y": 68,
+                    "w": 356,
+                    "h": 394
+                  },
+                  "tags": [
+                    {
+                      "name": "gap",
+                      "confidence": 0.92431640625
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

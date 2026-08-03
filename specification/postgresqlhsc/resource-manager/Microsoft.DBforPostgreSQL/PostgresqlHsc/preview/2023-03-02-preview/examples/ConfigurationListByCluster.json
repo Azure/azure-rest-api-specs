@@ -1,0 +1,150 @@
+{
+  "operationId": "Configurations_ListByCluster",
+  "parameters": {
+    "api-version": "2023-03-02-preview",
+    "clusterName": "testcluster",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "title": "List configurations of the cluster",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "array_nulls",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/configurations/array_nulls",
+            "properties": {
+              "description": "Enable input of NULL elements in arrays.",
+              "allowedValues": "on,off",
+              "dataType": "Boolean",
+              "provisioningState": "Succeeded",
+              "serverRoleGroupConfigurations": [
+                {
+                  "defaultValue": "on",
+                  "role": "Coordinator",
+                  "source": "system-default",
+                  "value": "on"
+                },
+                {
+                  "defaultValue": "on",
+                  "role": "Worker",
+                  "source": "user-override",
+                  "value": "off"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "backslash_quote",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/configurations/backslash_quote",
+            "properties": {
+              "description": "Sets whether \"\\'\" is allowed in string literals.",
+              "allowedValues": "safe_encoding,on,off",
+              "dataType": "Enumeration",
+              "provisioningState": "Succeeded",
+              "serverRoleGroupConfigurations": [
+                {
+                  "defaultValue": "safe_encoding",
+                  "role": "Coordinator",
+                  "source": "user-override",
+                  "value": "off"
+                },
+                {
+                  "defaultValue": "safe_encoding",
+                  "role": "Worker",
+                  "source": "system-default",
+                  "value": "safe_encoding"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "work_mem",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/configurations/work_mem",
+            "properties": {
+              "description": "Sets the amount of memory to be used by internal sort operations and hash tables before writing to temporary disk files.",
+              "allowedValues": "4096-2097151",
+              "dataType": "Integer",
+              "provisioningState": "Succeeded",
+              "serverRoleGroupConfigurations": [
+                {
+                  "defaultValue": "158720",
+                  "role": "Coordinator",
+                  "source": "system-default",
+                  "value": "158720"
+                },
+                {
+                  "defaultValue": "115712",
+                  "role": "Worker",
+                  "source": "system-default",
+                  "value": "115712"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "client_encoding",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/configurations/client_encoding",
+            "properties": {
+              "description": "Sets the client's character set encoding.",
+              "allowedValues": "BIG5,EUC_CN,EUC_JP,EUC_JIS_2004,EUC_KR,EUC_TW,GB18030,GBK,ISO_8859_5,ISO_8859_6,ISO_8859_7,ISO_8859_8,JOHAB,KOI8R,KOI8U,LATIN1,LATIN2,LATIN3,LATIN4,LATIN5,LATIN6,LATIN7,LATIN8,LATIN9,LATIN10,MULE_INTERNAL,SJIS,SHIFT_JIS_2004,SQL_ASCII,UHC,UTF8,WIN866,WIN874,WIN1250,WIN1251,WIN1252,WIN1253,WIN1254,WIN1255,WIN1256,WIN1257,WIN1258",
+              "dataType": "Enumeration",
+              "provisioningState": "Succeeded",
+              "serverRoleGroupConfigurations": [
+                {
+                  "defaultValue": "sql_ascii",
+                  "role": "Coordinator",
+                  "source": "user-override",
+                  "value": "ISO_8859_7"
+                },
+                {
+                  "defaultValue": "sql_ascii",
+                  "role": "Worker",
+                  "source": "user-override",
+                  "value": "ISO_8859_7"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

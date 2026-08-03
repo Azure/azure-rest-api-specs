@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "0b352192-dcac-4cc7-992e-a96190ccc68c",
+    "vaultName": "sampleVault",
+    "resourceGroupName": "SampleResourceGroup",
+    "resourceGuardProxyName": "swaggerExample",
+    "api-version": "2021-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/backupmanagement/resources/sampleVault/backupResourceGuardProxies/swaggerExample",
+        "name": "swaggerExample",
+        "type": "Microsoft.RecoveryServices/vaults/backupResourceGuardProxies",
+        "properties": {
+          "resourceGuardResourceId": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/vaultguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew",
+          "resourceGuardOperationDetails": [
+            {
+              "vaultCriticalOperation": "Microsoft.DataProtection/resourceGuards/deleteResourceGuardProxyRequests",
+              "defaultResourceRequest": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/vaultguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew/deleteResourceGuardProxyRequests/default"
+            },
+            {
+              "vaultCriticalOperation": "Microsoft.DataProtection/resourceGuards/disableSoftDeleteRequests",
+              "defaultResourceRequest": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/resourceguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew/disableSoftDeleteRequests/default"
+            }
+          ],
+          "lastUpdatedTime": "2021-02-11T12:20:47.8210031Z",
+          "description": "Please take JIT access before performing any of the critical operation"
+        }
+      }
+    }
+  }
+}

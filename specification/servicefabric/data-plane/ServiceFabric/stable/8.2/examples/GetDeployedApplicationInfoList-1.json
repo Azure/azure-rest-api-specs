@@ -1,0 +1,40 @@
+{
+  "operationId": "GetDeployedApplicationInfoList",
+  "description": "This example shows how to specify the number of applications returned by the query when getting information about applications deployed on a specific node. The number of results in a page are limited to maximum of 2 using the MaxResult parameter. Health state is not requested in this example, so the returned health state will be Unknown.",
+  "parameters": {
+    "api-version": "6.1",
+    "nodeName": "_Node_0",
+    "MaxResults": 2
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "fabric:/samples/PQueueApp1",
+        "Items": [
+          {
+            "Id": "samples~CalculatorApp",
+            "Name": "fabric:/samples/CalculatorApp",
+            "TypeName": "CalculatorApp",
+            "TypeVersion": "1.0.0",
+            "Status": "Active",
+            "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\CalculatorApp_App0\\work",
+            "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\CalculatorApp_App0\\log",
+            "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\CalculatorApp_App0\\temp",
+            "HealthState": "Unknown"
+          },
+          {
+            "Id": "samples~PQueueApp1",
+            "Name": "fabric:/samples/PQueueApp1",
+            "TypeName": "PersistentQueueApp",
+            "Status": "Active",
+            "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\PersistentQueueApp_App1\\work",
+            "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\PersistentQueueApp_App1\\log",
+            "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\PersistentQueueApp_App1\\temp",
+            "HealthState": "Unknown"
+          }
+        ]
+      }
+    }
+  }
+}

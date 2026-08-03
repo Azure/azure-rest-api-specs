@@ -1,0 +1,154 @@
+{
+  "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_List",
+  "title": "List the available Deployment stack what-if results at management group scope",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "managementGroupId": "myMg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacksWhatIfResults/simpleDeploymentStackWhatIfResult",
+            "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
+            "name": "simpleDeploymentStackWhatIfResult",
+            "location": "eastus",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2025-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2025-02-02T02:03:01.1974346Z"
+            },
+            "properties": {
+              "deploymentStackResourceId": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+              "deploymentStackLastModified": "2025-01-01T01:01:01.1075056Z",
+              "retentionInterval": "P7D",
+              "correlationId": "00000000-0000-0000-0000-000000000000",
+              "templateLink": {
+                "uri": "https://example.com/exampleTemplate.json"
+              },
+              "parameters": {},
+              "actionOnUnmanage": {
+                "resources": "delete",
+                "resourceGroups": "delete",
+                "managementGroups": "detach"
+              },
+              "denySettings": {
+                "mode": "none",
+                "applyToChildScopes": false
+              },
+              "provisioningState": "succeeded",
+              "changes": {
+                "resourceChanges": [
+                  {
+                    "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                    "managementStatusChange": {
+                      "before": "notManaged",
+                      "after": "managed"
+                    },
+                    "changeType": "create",
+                    "changeCertainty": "definite"
+                  }
+                ],
+                "denySettingsChange": {
+                  "after": {
+                    "mode": "none",
+                    "excludedPrincipals": [],
+                    "excludedActions": [],
+                    "applyToChildScopes": false
+                  },
+                  "delta": [
+                    {
+                      "path": "Mode",
+                      "changeType": "create",
+                      "after": "none"
+                    },
+                    {
+                      "path": "ApplyToChildScopes",
+                      "changeType": "create",
+                      "after": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacksWhatIfResults/changedDeploymentStackWhatIfResult",
+            "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
+            "name": "changedDeploymentStackWhatIfResult",
+            "location": "eastus",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2025-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2025-02-02T02:03:01.1974346Z"
+            },
+            "properties": {
+              "deploymentStackResourceId": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/deploymentStack2",
+              "deploymentStackLastModified": "2025-01-03T03:01:01.3141592Z",
+              "retentionInterval": "P7D",
+              "correlationId": "00000000-0000-0000-0000-000000000000",
+              "templateLink": {
+                "uri": "https://example.com/anotherTemplate.json"
+              },
+              "parameters": {},
+              "actionOnUnmanage": {
+                "resources": "delete",
+                "resourceGroups": "delete",
+                "managementGroups": "detach"
+              },
+              "denySettings": {
+                "mode": "none",
+                "applyToChildScopes": false
+              },
+              "provisioningState": "succeeded",
+              "changes": {
+                "resourceChanges": [
+                  {
+                    "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyAssignments/anotherPolicyAssignment",
+                    "managementStatusChange": {
+                      "before": "notManaged",
+                      "after": "managed"
+                    },
+                    "changeType": "create",
+                    "changeCertainty": "definite"
+                  },
+                  {
+                    "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyAssignments/thirdPolicyAssignment",
+                    "managementStatusChange": {
+                      "before": "managed",
+                      "after": "managed"
+                    },
+                    "changeType": "noChange",
+                    "changeCertainty": "definite"
+                  }
+                ],
+                "denySettingsChange": {
+                  "before": {
+                    "mode": "none",
+                    "excludedPrincipals": [],
+                    "excludedActions": [],
+                    "applyToChildScopes": false
+                  },
+                  "after": {
+                    "mode": "none",
+                    "excludedPrincipals": [],
+                    "excludedActions": [],
+                    "applyToChildScopes": false
+                  },
+                  "delta": []
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

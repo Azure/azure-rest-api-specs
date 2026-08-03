@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "runCommandName": "myRunCommand",
+    "api-version": "2024-07-31-preview",
+    "runCommandProperties": {
+      "location": "eastus2",
+      "properties": {
+        "source": {
+          "script": "Write-Host Hello World!"
+        },
+        "parameters": [
+          {
+            "name": "param1",
+            "value": "value1"
+          },
+          {
+            "name": "param2",
+            "value": "value2"
+          }
+        ],
+        "asyncExecution": false,
+        "runAsUser": "user1",
+        "runAsPassword": "<runAsPassword>",
+        "timeoutInSeconds": 3600,
+        "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+        "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
+        "name": "myRunCommand",
+        "type": "Microsoft.HybridCompute/machines/runcommands",
+        "location": "eastus2",
+        "properties": {
+          "source": {
+            "script": "Write-Host Hello World!"
+          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "asyncExecution": false,
+          "runAsUser": "user1",
+          "timeoutInSeconds": 3600,
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      },
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
+        "name": "myRunCommand",
+        "type": "Microsoft.HybridCompute/machines/runcommands",
+        "location": "eastus2",
+        "properties": {
+          "source": {
+            "script": "Write-Host Hello World!"
+          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "asyncExecution": false,
+          "runAsUser": "user1",
+          "timeoutInSeconds": 3600,
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

@@ -22,33 +22,33 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "description": "The name of the private endpoint connection.",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateEndpointConnections"
         ],
         "description": "Gets a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "consumes": [],
         "produces": [
           "application/json"
@@ -56,13 +56,13 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -81,23 +81,13 @@
         "operationId": "PrivateEndpointConnections_Create",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
+            "name": "request",
+            "in": "body",
+            "description": "Request body of private endpoint connection to create.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
+            }
           }
         ],
         "consumes": [
@@ -106,26 +96,29 @@
         "produces": [
           "application/json"
         ],
-        "x-ms-long-running-operation": true,
         "responses": {
-          "201": {
+          "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
-          "200": {
+          "201": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Approve private endpoint connection": {
@@ -139,27 +132,6 @@
         ],
         "description": "Delete a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "consumes": [
           "application/json"
         ],
@@ -168,6 +140,9 @@
         ],
         "x-ms-long-running-operation": true,
         "responses": {
+          "200": {
+            "description": ""
+          },
           "202": {
             "schema": {
               "$ref": "./operations.json#/definitions/OperationResource"
@@ -179,7 +154,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -209,7 +184,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "consumes": [],
@@ -222,13 +197,13 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionList"
             },
             "description": "Private endpoint connection"
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -237,99 +212,6 @@
           "List private endpoint connections in workspace": {
             "$ref": "./examples/ListPrivateEndpointConnections.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "PrivateEndpointConnectionList": {
-      "description": "A list of private endpoint connections",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Private endpoint connection properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the private endpoint connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpoint": {
-      "description": "Private endpoint details",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the private endpoint.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "PrivateLinkServiceConnectionState": {
-      "description": "Connection state details of the private endpoint",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The private link service connection status.",
-          "type": "string",
-          "enum": [
-            "Approved",
-            "Pending",
-            "Rejected",
-            "Disconnected"
-          ]
-        },
-        "description": {
-          "description": "The private link service connection description.",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "The actions required for private link service connection.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }

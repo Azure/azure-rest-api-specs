@@ -1,0 +1,1994 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Workflow Service",
+    "version": "2023-10-01-preview",
+    "description": "Workflows are automated, repeatable business processes which allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.Workflow service is a micro service within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
+  },
+  "host": "purview.azure.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/workflow",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "https://purview.azure.net/.default": "Default authorization scope."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ],
+  "paths": {
+    "/workflows": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "description": "List all workflows.",
+        "operationId": "Workflows_List",
+        "x-ms-examples": {
+          "Workflows_List": {
+            "$ref": "./examples/ListWorkflows.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Get a specific workflow.",
+        "operationId": "Workflow_Get",
+        "x-ms-examples": {
+          "Workflow_Get": {
+            "$ref": "./examples/GetWorkflow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/workflowId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Create or replace a workflow.",
+        "operationId": "Workflow_CreateOrReplace",
+        "x-ms-examples": {
+          "Workflow_CreateOrUpdate": {
+            "$ref": "./examples/CreateOrReplaceWorkflow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/workflowId"
+          },
+          {
+            "name": "workflowCreateOrUpdateCommand",
+            "in": "body",
+            "required": true,
+            "description": "Create or update workflow payload.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowCreateOrUpdateCommand"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Delete a workflow.",
+        "operationId": "Workflow_Delete",
+        "x-ms-examples": {
+          "Workflow_Delete": {
+            "$ref": "./examples/DeleteWorkflow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/workflowId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}/validate": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Validate a workflow.",
+        "operationId": "Workflow_Validate",
+        "x-ms-examples": {
+          "Workflow_CreateOrUpdate": {
+            "$ref": "./examples/ValidateWorkflow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/workflowId"
+          },
+          {
+            "name": "workflowValidateQuery",
+            "in": "body",
+            "required": true,
+            "description": "Check workflow payload.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowCreateOrUpdateCommand"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowValidationRuleViolationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/userrequests": {
+      "post": {
+        "tags": [
+          "UserRequests"
+        ],
+        "description": "Submit a user request for requestor, a user  request describes user ask to do operation(s) on Purview. If any workflow's trigger matches with an operation in request, a run of the workflow is created.",
+        "operationId": "UserRequests_Submit",
+        "x-ms-examples": {
+          "UserRequests_Submit": {
+            "$ref": "./examples/SubmitUserRequests.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "userRequestsPayload",
+            "in": "body",
+            "required": true,
+            "description": "The payload of submitting a user request.",
+            "schema": {
+              "$ref": "#/definitions/UserRequestPayload"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserRequestResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowruns": {
+      "get": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "description": "List workflow runs.",
+        "operationId": "WorkflowRuns_List",
+        "x-ms-examples": {
+          "WorkflowRuns_List": {
+            "$ref": "./examples/ListWorkflowRuns.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/workflowRunViewMode"
+          },
+          {
+            "$ref": "#/parameters/timeWindow"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "status desc",
+              "status asc",
+              "requestor desc",
+              "requestor asc",
+              "startTime desc",
+              "startTime asc"
+            ],
+            "x-ms-enum": {
+              "name": "orderby",
+              "modelAsString": true
+            },
+            "description": "The key word which used to sort the results.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/runStatuses"
+          },
+          {
+            "$ref": "#/parameters/workflowIds"
+          },
+          {
+            "$ref": "#/parameters/requestors"
+          },
+          {
+            "$ref": "#/parameters/maxpagesize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowruns/{workflowRunId}": {
+      "get": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "description": "Get a workflow run.",
+        "operationId": "WorkflowRun_Get",
+        "x-ms-examples": {
+          "WorkflowRun_Get": {
+            "$ref": "./examples/GetWorkflowRun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/workflowRunId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowruns/{workflowRunId}/cancel": {
+      "post": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "description": "Cancel a workflow run.",
+        "operationId": "WorkflowRun_Cancel",
+        "x-ms-examples": {
+          "WorkflowRun_Cancel": {
+            "$ref": "./examples/CancelWorkflowRun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/workflowRunId"
+          },
+          {
+            "name": "runCancelReply",
+            "in": "body",
+            "required": true,
+            "description": "Reply of canceling a workflow run.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunCancelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowtasks": {
+      "get": {
+        "tags": [
+          "WorkflowTasks"
+        ],
+        "description": "Get all workflow tasks.",
+        "operationId": "WorkflowTasks_List",
+        "x-ms-examples": {
+          "WorkflowTasks_List": {
+            "$ref": "./examples/ListWorkflowTasks.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/viewMode"
+          },
+          {
+            "$ref": "#/parameters/workflowIds"
+          },
+          {
+            "$ref": "#/parameters/timeWindow"
+          },
+          {
+            "$ref": "#/parameters/maxpagesize"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "createdTime desc",
+              "createdTime asc",
+              "requestor desc",
+              "requestor asc"
+            ],
+            "x-ms-enum": {
+              "name": "orderby",
+              "modelAsString": true
+            },
+            "description": "The key word which used to sort the results.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/taskTypes"
+          },
+          {
+            "$ref": "#/parameters/taskStatuses"
+          },
+          {
+            "$ref": "#/parameters/requestors"
+          },
+          {
+            "$ref": "#/parameters/assignees"
+          },
+          {
+            "$ref": "#/parameters/workflowNameKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TasksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowtasks/{taskId}": {
+      "get": {
+        "tags": [
+          "WorkflowTasks"
+        ],
+        "description": "Get a workflow task.",
+        "operationId": "WorkflowTask_Get",
+        "x-ms-examples": {
+          "WorkTask_Get": {
+            "$ref": "./examples/GetWorkflowTask.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/taskId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTask"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowtasks/{taskId}/approve-approval": {
+      "post": {
+        "tags": [
+          "WorkflowTasks"
+        ],
+        "description": "Approve an approval.",
+        "operationId": "Approval_Approve",
+        "x-ms-examples": {
+          "Approval_Approve": {
+            "$ref": "./examples/ApproveApproval.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/taskId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "approvalResponseComment",
+            "in": "body",
+            "required": true,
+            "description": "The request body of approving an approval type of workflow task.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResponseComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowtasks/{taskId}/reject-approval": {
+      "post": {
+        "tags": [
+          "WorkflowTasks"
+        ],
+        "description": "Reject an approval.",
+        "operationId": "Approval_Reject",
+        "x-ms-examples": {
+          "Approval_Reject": {
+            "$ref": "./examples/RejectApproval.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/taskId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "approvalResponseComment",
+            "in": "body",
+            "required": true,
+            "description": "The request body of rejecting an approval type of workflow task.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResponseComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowtasks/{taskId}/reassign": {
+      "post": {
+        "tags": [
+          "WorkflowTasks"
+        ],
+        "description": "Reassign a workflow task.",
+        "operationId": "WorkflowTask_Reassign",
+        "x-ms-examples": {
+          "WorkflowTask_Reassign": {
+            "$ref": "./examples/ReassignWorkflowTask.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/taskId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "reassignCommand",
+            "in": "body",
+            "required": true,
+            "description": "The request body of reassigning a workflow task.",
+            "schema": {
+              "$ref": "#/definitions/ReassignCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/workflowtasks/{taskId}/change-task-status": {
+      "post": {
+        "tags": [
+          "WorkflowTasks"
+        ],
+        "description": "Update the status of a workflow task request.",
+        "operationId": "TaskStatus_Update",
+        "x-ms-examples": {
+          "TaskRequest_Update": {
+            "$ref": "./examples/UpdateTaskRequest.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/taskId"
+          },
+          {
+            "name": "taskUpdateCommand",
+            "in": "body",
+            "required": true,
+            "description": "Request body of updating workflow task request.",
+            "schema": {
+              "$ref": "#/definitions/TaskUpdateCommand"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkflowMetadataList": {
+      "type": "object",
+      "description": "The workflow list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowMetadata"
+          },
+          "description": "The value of workflow list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkflowMetadata": {
+      "description": "The workflow metadata, action DAGs are not included.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The id of workflow."
+        },
+        "triggers": {
+          "$ref": "#/definitions/Triggers"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of workflow."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The person who created the workflow."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time."
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "The person who updated the workflow."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of a workflow."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether the workflow is enabled or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of a workflow."
+        }
+      },
+      "required": [
+        "id",
+        "triggers",
+        "name",
+        "isEnabled",
+        "description"
+      ]
+    },
+    "Triggers": {
+      "type": "array",
+      "description": "It describes under what condition a workflow will run.  ",
+      "items": {
+        "$ref": "#/definitions/Trigger"
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "description": "Describes under what condition a workflow will run.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "when_term_creation_is_requested",
+            "when_term_deletion_is_requested",
+            "when_term_update_is_requested",
+            "when_terms_import_is_requested",
+            "when_data_access_grant_is_requested",
+            "when_asset_update_is_requested"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": true
+          }
+        },
+        "underGlossaryHierarchy": {
+          "type": "string",
+          "description": "Glossary term hierarchy path."
+        },
+        "underCollection": {
+          "type": "string",
+          "description": "The collection name."
+        },
+        "underGlossary": {
+          "type": "string",
+          "description": "The glossary guid."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "WorkflowCreateOrUpdateCommand": {
+      "type": "object",
+      "description": "Create or update workflow payload.",
+      "properties": {
+        "triggers": {
+          "$ref": "#/definitions/Triggers"
+        },
+        "name": {
+          "type": "string",
+          "description": "The workflow name."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether the workflow enabled or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of a workflow."
+        },
+        "actionDag": {
+          "type": "object",
+          "description": "The action DAG(Directed Acyclic Graph), it defines actual flow."
+        }
+      },
+      "required": [
+        "triggers",
+        "name",
+        "isEnabled",
+        "description"
+      ]
+    },
+    "Workflow": {
+      "description": "The workflow properties. It includes the triggers, actual flow and other properties of a workflow.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowMetadata"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actionDag": {
+              "type": "object",
+              "description": "The action DAG(Directed Acyclic Graph), it defines steps to be executed in a workflow run and their order."
+            }
+          },
+          "required": [
+            "actionDag"
+          ]
+        }
+      ]
+    },
+    "UserRequestPayload": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "The list of operations user want to submit, each operation matches one Purview API call and will do the operation directly.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment when submit a user request."
+        }
+      },
+      "required": [
+        "operations"
+      ]
+    },
+    "Operation": {
+      "type": "object",
+      "description": "The operation user wants to perform.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OperationType"
+        },
+        "payload": {
+          "type": "object",
+          "description": "The payload of each operation which user want to submit."
+        }
+      },
+      "required": [
+        "type",
+        "payload"
+      ]
+    },
+    "UserRequestResponse": {
+      "description": "Describes user ask to do operation(s) on Purview.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The user request id."
+        },
+        "requestor": {
+          "$ref": "#/definitions/RequestorId"
+        },
+        "operations": {
+          "type": "array",
+          "description": "The list of operations user want to submit, each operation matches one Purview API call and will do the operation directly.",
+          "items": {
+            "type": "object",
+            "description": "The operation user wants to perform.",
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/OperationType"
+              },
+              "payload": {
+                "type": "object",
+                "description": "The payload of each operation which user want to submit."
+              },
+              "workflowRunIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/WorkflowRunId"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "payload"
+            ]
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment when submit a user request."
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        }
+      },
+      "required": [
+        "requestId",
+        "requestor",
+        "operations",
+        "status"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Failed",
+        "Completed",
+        "Canceling",
+        "CancellationFailed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "UserRequestStatus",
+        "modelAsString": true
+      }
+    },
+    "WorkflowRunId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The workflow run id."
+    },
+    "WorkflowId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The workflow id."
+    },
+    "RequestorId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The person who submitted the user request."
+    },
+    "WorkflowRunList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunMetadata"
+          },
+          "description": "The value of workflow run list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkflowRunMetadata": {
+      "description": "The execution of a workflow. It includes status of the entire run and other properties of a run. ",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/WorkflowRunId"
+        },
+        "workflowId": {
+          "$ref": "#/definitions/WorkflowId"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Workflow run start time.",
+          "format": "date-time"
+        },
+        "requestor": {
+          "$ref": "#/definitions/RequestorId"
+        },
+        "userRequestId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The user request id."
+        },
+        "runPayload": {
+          "$ref": "#/definitions/WorkflowRunPayload"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of workflow run completed."
+        },
+        "cancelTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of workflow run be canceled."
+        },
+        "cancelComment": {
+          "type": "string",
+          "description": "The comment when cancel a workflow run."
+        }
+      },
+      "required": [
+        "id",
+        "workflowId",
+        "startTime",
+        "requestor",
+        "runPayload",
+        "status"
+      ]
+    },
+    "WorkflowRunPayload": {
+      "type": "object",
+      "description": "The input of a workflow run. Align with operation in user request. ",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkflowRunPayloadType"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "The target value which need involve workflow to update."
+        }
+      },
+      "required": [
+        "type",
+        "targetValue"
+      ]
+    },
+    "WorkflowRunPayloadType": {
+      "type": "string",
+      "description": "The workflow run payload type.",
+      "enum": [
+        "CreateTerm",
+        "UpdateTerm",
+        "DeleteTerm",
+        "ImportTerms",
+        "UpdateAsset",
+        "GrantDataAccess"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowRunPayloadType",
+        "modelAsString": true
+      }
+    },
+    "WorkflowRun": {
+      "description": "The execution of a workflow. It includes workflow action DAG at run time (action DAG snapshot), run payload, status of the entire run and other properties of a run. ",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/WorkflowRunId"
+        },
+        "workflowId": {
+          "$ref": "#/definitions/WorkflowId"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Workflow run start time.",
+          "format": "date-time"
+        },
+        "requestor": {
+          "$ref": "#/definitions/RequestorId"
+        },
+        "userRequestId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The user request id."
+        },
+        "runPayload": {
+          "type": "object",
+          "description": "The input of a workflow run. Align with operation in user request. ",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/WorkflowRunPayloadType"
+            },
+            "targetValue": {
+              "type": "string",
+              "description": "The target value which need involve workflow to update."
+            },
+            "payload": {
+              "type": "object",
+              "description": "The payload of each operation which user want to submit."
+            }
+          },
+          "required": [
+            "type",
+            "targetValue",
+            "payload"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of workflow run completed."
+        },
+        "cancelTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of workflow run be canceled."
+        },
+        "cancelComment": {
+          "type": "string",
+          "description": "The comment when cancel a workflow run."
+        },
+        "actionDag": {
+          "type": "object",
+          "description": "The action DAG(Directed Acyclic Graph), it defines actual flow."
+        },
+        "detail": {
+          "$ref": "#/definitions/WorkflowRunDetail"
+        }
+      },
+      "required": [
+        "actionDag",
+        "detail"
+      ]
+    },
+    "WorkflowRunDetail": {
+      "type": "object",
+      "description": "It refers to the \"detail\" property of a workflow run object, which contains run context and runtime information of actions.",
+      "properties": {
+        "runInput": {
+          "description": "Built-in variables starts with @runInput. Its properties are determined by trigger type at workflow run time. ",
+          "type": "object"
+        },
+        "actions": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "runInput",
+        "actions"
+      ]
+    },
+    "WorkflowRunCancelRequest": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "The comment of canceling a workflow run."
+        }
+      }
+    },
+    "TasksList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowTask"
+          },
+          "description": "The value of workflow tasks list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkflowValidationRuleViolationsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowValidationRuleViolation"
+          },
+          "description": "The value of violated validation rule list."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkflowValidationRuleViolation": {
+      "type": "object",
+      "description": "The detail of validation rule violated in a workflow.",
+      "properties": {
+        "severity": {
+          "type": "string",
+          "description": "The severity of the validation rule.",
+          "enum": [
+            "error",
+            "warning"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationRuleSeverity",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "type": "object",
+          "description": "The location where the violation happens.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The validation violation location type.",
+              "enum": [
+                "workflow",
+                "action",
+                "actionParameter"
+              ],
+              "x-ms-enum": {
+                "name": "ValidationRuleViolationLocation",
+                "modelAsString": true
+              }
+            },
+            "actionName": {
+              "type": "string",
+              "description": "The name of the action where the violation happens."
+            },
+            "parameterKey": {
+              "type": "string",
+              "description": "The key of the action parameter where the violation happens."
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "The detail about how the validation rule is violated."
+        }
+      },
+      "required": [
+        "severity",
+        "location",
+        "message"
+      ]
+    },
+    "WorkflowTask": {
+      "discriminator": "type",
+      "type": "object",
+      "description": "An actionable item assigned to assignees. It is created when approval or task action starts to execute. Approval is one kind of task.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The workflow task type.",
+          "enum": [
+            "Approval",
+            "SimpleTask"
+          ],
+          "x-ms-enum": {
+            "name": "TaskType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The workflow task id."
+        },
+        "title": {
+          "type": "string",
+          "description": "The workflow task title."
+        },
+        "workflowRunId": {
+          "$ref": "#/definitions/WorkflowRunId"
+        },
+        "workflowId": {
+          "$ref": "#/definitions/WorkflowId"
+        },
+        "requestor": {
+          "$ref": "#/definitions/RequestorId"
+        },
+        "createdTime": {
+          "$ref": "#/definitions/CreatedTime"
+        },
+        "lastUpdateTime": {
+          "$ref": "#/definitions/LastUpdateTime"
+        },
+        "payload": {
+          "$ref": "#/definitions/TaskPayload"
+        },
+        "reminderInfo": {
+          "type": "object",
+          "description": "Info of task reminder.",
+          "properties": {
+            "lastRemindTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The last update time."
+            },
+            "nextRemindTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The next remind time."
+            },
+            "reminderSettings": {
+              "type": "object",
+              "description": "The reminder settings."
+            }
+          },
+          "required": [
+            "nextRemindTime",
+            "reminderSettings"
+          ]
+        },
+        "expiryInfo": {
+          "type": "object",
+          "description": "Info of task expiry.",
+          "properties": {
+            "lastExpiryNotificationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The last expiry notification time."
+            },
+            "nextExpiryNotificationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The next expiry notification time."
+            },
+            "expiryTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The expiry time."
+            },
+            "expirySettings": {
+              "type": "object",
+              "properties": {
+                "expireAfter": {
+                  "type": "object",
+                  "description": "The time of expiry."
+                },
+                "notifyOnExpiration": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Notify user on expiration."
+                  }
+                }
+              },
+              "required": [
+                "expireAfter"
+              ]
+            }
+          },
+          "required": [
+            "nextExpiryNotificationTime",
+            "expiryTime",
+            "expirySettings"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "workflowRunId",
+        "workflowId",
+        "requestor",
+        "createdTime",
+        "lastUpdateTime",
+        "payload"
+      ]
+    },
+    "TaskPayload": {
+      "type": "object",
+      "description": "Info and material that helps assignees to take action.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TaskPayloadType"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "The target value of entity which user want to involve workflow to update."
+        },
+        "payload": {
+          "type": "object",
+          "description": "The payload of the task."
+        }
+      },
+      "required": [
+        "type",
+        "targetValue"
+      ]
+    },
+    "TaskPayloadType": {
+      "type": "string",
+      "description": "The task payload type.",
+      "enum": [
+        "CreateTerm",
+        "UpdateTerm",
+        "DeleteTerm",
+        "ImportTerms",
+        "UpdateAsset",
+        "GrantDataAccess"
+      ],
+      "x-ms-enum": {
+        "name": "TaskPayloadType",
+        "modelAsString": true
+      }
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "The operation type.",
+      "enum": [
+        "CreateTerm",
+        "UpdateTerm",
+        "DeleteTerm",
+        "ImportTerms",
+        "UpdateAsset",
+        "GrantDataAccess"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true
+      }
+    },
+    "SubmittedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The submitted time."
+    },
+    "CreatedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The created time."
+    },
+    "LastUpdateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The last update time."
+    },
+    "Approval": {
+      "x-ms-discriminator-value": "Approval",
+      "description": "The workflow approval properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowTask"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "approvalDetail": {
+              "$ref": "#/definitions/ApprovalDetail"
+            }
+          }
+        }
+      ]
+    },
+    "ApprovalDetail": {
+      "type": "object",
+      "description": "The approval details",
+      "properties": {
+        "approvalType": {
+          "type": "string",
+          "description": "The approval type of an approval.",
+          "enum": [
+            "PendingOnAny",
+            "PendingOnAll"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of an approval.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalStatus",
+            "modelAsString": true
+          }
+        },
+        "approvers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApproverResponse"
+          },
+          "description": "The list of approvers with reply."
+        }
+      },
+      "required": [
+        "approvalType",
+        "status",
+        "approvers"
+      ]
+    },
+    "ApproverResponse": {
+      "type": "object",
+      "description": "The response of approvers for an approval type of workflow task.",
+      "properties": {
+        "reply": {
+          "type": "string",
+          "description": "The response for an approval type of workflow task.",
+          "enum": [
+            "Approved",
+            "Rejected",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalResponse",
+            "modelAsString": true
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment of approving or rejecting an approval type of workflow task."
+        },
+        "responseTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The reply time of approver to a workflow task."
+        }
+      },
+      "required": [
+        "reply"
+      ]
+    },
+    "SimpleTask": {
+      "x-ms-discriminator-value": "SimpleTask",
+      "description": "The workflow simple task properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowTask"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "taskDetail": {
+              "$ref": "#/definitions/SimpleTaskDetail"
+            }
+          }
+        }
+      ]
+    },
+    "SimpleTaskDetail": {
+      "type": "object",
+      "description": "Workflow simple task details.",
+      "properties": {
+        "taskBody": {
+          "type": "string",
+          "description": "The simple task body."
+        },
+        "assignedTo": {
+          "type": "array",
+          "description": "The users or groups were assigned the simple task.",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Simple task status.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SimpleTaskStatus",
+            "modelAsString": true
+          }
+        },
+        "changeHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaskChangeEvent"
+          }
+        }
+      },
+      "required": [
+        "taskBody",
+        "assignedTo",
+        "status",
+        "changeHistory"
+      ]
+    },
+    "TaskChangeEvent": {
+      "type": "object",
+      "description": "History of changes made on task."
+    },
+    "ApprovalResponseComment": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "The comment of approving or rejecting an approval type of workflow task."
+        }
+      }
+    },
+    "ReassignCommand": {
+      "type": "object",
+      "description": "The request payload of reassigning a workflow task.",
+      "properties": {
+        "reassignments": {
+          "type": "array",
+          "description": "The request body of reassigning a workflow task.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reassignFrom": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reassign a workflow task from a user or a group."
+              },
+              "reassignTo": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reassign a workflow task to a user or a group."
+              }
+            },
+            "required": [
+              "reassignFrom",
+              "reassignTo"
+            ]
+          }
+        }
+      }
+    },
+    "TaskUpdateCommand": {
+      "type": "object",
+      "properties": {
+        "newStatus": {
+          "type": "string",
+          "description": "The new status will be used to update the task.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "TaskStatus",
+            "modelAsString": true
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment when update a task."
+        }
+      },
+      "required": [
+        "newStatus"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Default error response model",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorModel": {
+      "description": "Default error model",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the code.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Gets or sets the details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        },
+        "message": {
+          "description": "Gets or sets the messages.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Gets or sets the target.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "description": "Version of Purview APIs",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "endpoint": {
+      "name": "endpoint",
+      "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "format": "url",
+      "x-ms-skip-url-encoding": true
+    },
+    "workflowId": {
+      "name": "workflowId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The workflow id.",
+      "x-ms-parameter-location": "method"
+    },
+    "requestId": {
+      "name": "requestId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The request id.",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowRunId": {
+      "name": "workflowRunId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The workflow run id.",
+      "x-ms-parameter-location": "method"
+    },
+    "taskId": {
+      "name": "taskId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The task id.",
+      "x-ms-parameter-location": "method"
+    },
+    "timeWindow": {
+      "name": "timeWindow",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "1d",
+        "7d",
+        "30d",
+        "90d"
+      ],
+      "x-ms-enum": {
+        "name": "TimeWindow",
+        "modelAsString": true
+      },
+      "description": "Time window of filtering items.",
+      "x-ms-parameter-location": "method"
+    },
+    "maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The maximum page size to get the items at one time. The default value is 100.",
+      "x-ms-parameter-location": "method"
+    },
+    "taskTypes": {
+      "name": "taskTypes",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "approval",
+          "simpleTask"
+        ],
+        "x-ms-enum": {
+          "name": "TaskType",
+          "modelAsString": true
+        }
+      },
+      "description": "Filter items by workflow task type.",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowIds": {
+      "name": "workflowIds",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Filter items by workflow id list.",
+      "x-ms-parameter-location": "method"
+    },
+    "runStatuses": {
+      "name": "runStatuses",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "InProgress",
+          "Failed",
+          "Completed",
+          "NotStarted",
+          "Canceling",
+          "CancellationFailed",
+          "Canceled"
+        ],
+        "x-ms-enum": {
+          "name": "status",
+          "modelAsString": true
+        }
+      },
+      "description": "Filter workflow runs by workflow run status.",
+      "x-ms-parameter-location": "method"
+    },
+    "taskStatuses": {
+      "name": "taskStatuses",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Approved",
+          "Rejected",
+          "Canceled",
+          "NotStarted",
+          "InProgress",
+          "Completed"
+        ],
+        "x-ms-enum": {
+          "name": "status",
+          "modelAsString": true
+        }
+      },
+      "description": "Filter workflow tasks by status.",
+      "x-ms-parameter-location": "method"
+    },
+    "requestors": {
+      "name": "requestors",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Requestors' ids to filter.",
+      "x-ms-parameter-location": "method"
+    },
+    "assignees": {
+      "name": "assignees",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Assignees' ids to filter.",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowNameKeyword": {
+      "name": "workflowNameKeyword",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The key word which could used to filter workflow item with related workflow.",
+      "x-ms-parameter-location": "method"
+    },
+    "viewMode": {
+      "name": "viewMode",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "items": {
+        "type": "string",
+        "enum": [
+          "sent",
+          "received",
+          "history",
+          "mine"
+        ],
+        "x-ms-enum": {
+          "name": "status",
+          "modelAsString": true
+        }
+      },
+      "description": "To filter user's sent, received or history workflow tasks.",
+      "x-ms-parameter-location": "method"
+    },
+    "workflowRunViewMode": {
+      "name": "viewMode",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "items": {
+        "type": "string",
+        "enum": [
+          "admin",
+          "mine"
+        ],
+        "x-ms-enum": {
+          "name": "status",
+          "modelAsString": true
+        }
+      },
+      "description": "To filter user's workflow runs or view as admin.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

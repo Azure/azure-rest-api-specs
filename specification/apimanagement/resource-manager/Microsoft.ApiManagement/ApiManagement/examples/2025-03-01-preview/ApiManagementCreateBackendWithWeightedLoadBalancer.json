@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "backendId": "weighted-load-balancer",
+    "parameters": {
+      "properties": {
+        "type": "Pool",
+        "pool": {
+          "services": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-1",
+              "weight": 75
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-2",
+              "weight": 25
+            }
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "weighted-load-balancer",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/weighted-load-balancer",
+        "properties": {
+          "type": "Pool",
+          "pool": {
+            "services": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-1",
+                "weight": 75
+              },
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-2",
+                "weight": 25
+              }
+            ]
+          },
+          "title": null,
+          "url": null,
+          "protocol": null
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "weighted-load-balancer",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/weighted-load-balancer",
+        "properties": {
+          "type": "Pool",
+          "pool": {
+            "services": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-1",
+                "weight": 75
+              },
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-2",
+                "weight": 25
+              }
+            ]
+          },
+          "title": null,
+          "url": null,
+          "protocol": null
+        }
+      }
+    }
+  },
+  "operationId": "Backend_CreateOrUpdate",
+  "title": "ApiManagementCreateBackendWithWeightedLoadBalancer"
+}

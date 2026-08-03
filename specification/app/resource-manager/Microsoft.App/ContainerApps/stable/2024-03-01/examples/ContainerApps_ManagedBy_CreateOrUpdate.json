@@ -1,0 +1,204 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerappmanagedby",
+    "api-version": "2024-03-01",
+    "containerAppEnvelope": {
+      "location": "East US",
+      "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
+      "properties": {
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "configuration": {
+          "ingress": {
+            "external": true,
+            "targetPort": 3000,
+            "exposedPort": 4000,
+            "transport": "tcp",
+            "traffic": [
+              {
+                "weight": 100,
+                "revisionName": "testcontainerappmanagedby-ab1234"
+              }
+            ]
+          }
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "repo/testcontainerappmanagedby:v1",
+              "name": "testcontainerappmanagedby",
+              "probes": [
+                {
+                  "type": "Liveness",
+                  "tcpSocket": {
+                    "port": 8080
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 5,
+            "rules": [
+              {
+                "name": "tcpscalingrule",
+                "tcp": {
+                  "metadata": {
+                    "concurrentConnections": "50"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerappmanagedby",
+        "name": "testcontainerappmanagedby",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerappmanagedby-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerappmanagedby-pjxhsye",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerappmanagedby.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "exposedPort": 4000,
+              "transport": "tcp",
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerappmanagedby-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerappmanagedby-ab4321"
+                }
+              ]
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerappmanagedby:v4",
+                "name": "testcontainerappmanagedby",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "tcpSocket": {
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "tcpscalingrule",
+                  "tcp": {
+                    "metadata": {
+                      "concurrentConnections": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerappmanagedby",
+        "name": "testcontainerappmanagedby",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
+        "properties": {
+          "provisioningState": "InProgress",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerappmanagedby-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerappmanagedby.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "exposedPort": 4000,
+              "transport": "tcp",
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerappmanagedby-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerappmanagedby-ab4321"
+                }
+              ]
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerappmanagedby:v4",
+                "name": "testcontainerappmanagedby",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "tcpSocket": {
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "tcpscalingrule",
+                  "tcp": {
+                    "metadata": {
+                      "concurrentConnections": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

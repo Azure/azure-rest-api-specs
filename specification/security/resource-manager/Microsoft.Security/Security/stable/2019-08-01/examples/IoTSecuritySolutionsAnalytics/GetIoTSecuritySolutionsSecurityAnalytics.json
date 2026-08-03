@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2019-08-01",
+    "resourceGroupName": "MyGroup",
+    "solutionName": "default",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default",
+        "type": "Microsoft.Security/iotSecuritySolutions/analyticsModels",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default",
+        "properties": {
+          "devicesMetrics": [
+            {
+              "date": "2019-02-01T00:00:00Z",
+              "devicesMetrics": {
+                "high": 3,
+                "low": 70,
+                "medium": 15
+              }
+            },
+            {
+              "date": "2019-02-02T00:00:00Z",
+              "devicesMetrics": {
+                "high": 3,
+                "low": 65,
+                "medium": 45
+              }
+            }
+          ],
+          "metrics": {
+            "high": 5,
+            "low": 102,
+            "medium": 200
+          },
+          "mostPrevalentDeviceAlerts": [
+            {
+              "alertDisplayName": "Custom Alert - number of device to cloud messages in AMQP protocol is not in the allowed range",
+              "alertsCount": 200,
+              "reportedSeverity": "Low"
+            },
+            {
+              "alertDisplayName": "Custom Alert - execution of a process that is not allowed",
+              "alertsCount": 170,
+              "reportedSeverity": "Medium"
+            },
+            {
+              "alertDisplayName": "Successful Bruteforce",
+              "alertsCount": 150,
+              "reportedSeverity": "Low"
+            }
+          ],
+          "mostPrevalentDeviceRecommendations": [
+            {
+              "devicesCount": 200,
+              "recommendationDisplayName": "Install the Azure Security of Things Agent",
+              "reportedSeverity": "Low"
+            },
+            {
+              "devicesCount": 170,
+              "recommendationDisplayName": "High level permissions configured in Edge model twin for Edge module",
+              "reportedSeverity": "Low"
+            },
+            {
+              "devicesCount": 150,
+              "recommendationDisplayName": "Same Authentication Credentials used by multiple devices",
+              "reportedSeverity": "Medium"
+            }
+          ],
+          "topAlertedDevices": [
+            {
+              "alertsCount": 200,
+              "deviceId": "id1"
+            },
+            {
+              "alertsCount": 170,
+              "deviceId": "id2"
+            },
+            {
+              "alertsCount": 150,
+              "deviceId": "id3"
+            }
+          ],
+          "unhealthyDeviceCount": 1200
+        }
+      }
+    }
+  },
+  "operationId": "IotSecuritySolutionAnalytics_Get",
+  "title": "Get Security Solution Analytics"
+}

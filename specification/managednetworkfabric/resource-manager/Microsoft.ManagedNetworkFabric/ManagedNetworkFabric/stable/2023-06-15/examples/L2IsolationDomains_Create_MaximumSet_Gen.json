@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2023-06-15",
+    "l2IsolationDomainName": "example-l2domain",
+    "body": {
+      "properties": {
+        "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+        "vlanId": 501,
+        "mtu": 1500,
+        "annotation": "annotation"
+      },
+      "tags": {
+        "keyID": "keyValue"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+          "vlanId": 501,
+          "mtu": 1500,
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled",
+          "annotation": "annotation"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/example-l2domain",
+        "name": "example-l2domain",
+        "type": "microsoft.managednetworkfabric/l2IsolationDomains",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-05T17:42:03.977Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-05T17:42:03.978Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+          "vlanId": 501,
+          "mtu": 1500,
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled",
+          "annotation": "annotation"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/example-l2domain",
+        "name": "example-l2domain",
+        "type": "microsoft.managednetworkfabric/l2IsolationDomains",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-05T17:42:03.977Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-05T17:42:03.978Z"
+        }
+      }
+    }
+  }
+}

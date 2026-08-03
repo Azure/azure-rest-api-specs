@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "virtualMachineIdentitySettings": {
+          "type": "UserAssigned",
+          "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testvmidentity"
+        },
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "additionalVmPatch": "WU",
+          "enableAutomaticUpgrade": false,
+          "leastPrivilegeMode": "Enabled",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "sqlImageOffer": "SQL2022-WS2022",
+          "sqlImageSku": "Enterprise",
+          "sqlManagement": "Full",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineIdentitySettings": {
+            "type": "UserAssigned",
+            "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testvmidentity"
+          },
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvm",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "enableAutomaticUpgrade": true,
+          "leastPrivilegeMode": "NotSet",
+          "provisioningState": "Provisioning",
+          "sqlImageSku": "Unknown",
+          "sqlServerLicenseType": "PAYG",
+          "virtualMachineIdentitySettings": {
+            "type": "UserAssigned",
+            "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testvmidentity"
+          },
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachines_CreateOrUpdate",
+  "title": "Creates or updates a SQL virtual machine to enable the usage of Virtual Machine managed identity."
+}

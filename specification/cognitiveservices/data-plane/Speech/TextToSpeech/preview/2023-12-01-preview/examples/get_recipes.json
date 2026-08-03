@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2023-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "version": "V7.2023.03",
+            "kind": "Default",
+            "description": "Model updated with a robust vocoder for higher audio quality. 15-50 compute hours estimated for each training.",
+            "minUtteranceCount": 300,
+            "datasetLocales": [
+              "en-US",
+              "en-GB",
+              "fr-FR",
+              "it-IT"
+            ]
+          },
+          {
+            "version": "V3.2023.06",
+            "kind": "MultiStyle",
+            "description": "Basic version to adapt the voice to speak with multiple emotional styles, or create your own speaking style with custom style training data. 25-50 computer hours estimated for each training. Style degree tuning supported.",
+            "minUtteranceCount": 300,
+            "minStyleUtteranceCount": 100,
+            "maxCustomStyleNum": 5,
+            "datasetLocales": [
+              "en-US",
+              "ja-JP"
+            ],
+            "presetStyles": {
+              "en-US": {
+                "Male": [
+                  "angry",
+                  "excited",
+                  "cheerful",
+                  "friendly",
+                  "hopeful",
+                  "sad",
+                  "shouting",
+                  "terrified",
+                  "unfriendly",
+                  "whispering"
+                ],
+                "Female": [
+                  "angry",
+                  "excited",
+                  "cheerful",
+                  "friendly",
+                  "hopeful",
+                  "sad",
+                  "shouting",
+                  "terrified",
+                  "unfriendly",
+                  "whispering"
+                ]
+              },
+              "ja-JP": {
+                "Male": [
+                  "angry",
+                  "cheerful",
+                  "sad"
+                ],
+                "Female": [
+                  "angry",
+                  "cheerful",
+                  "sad"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

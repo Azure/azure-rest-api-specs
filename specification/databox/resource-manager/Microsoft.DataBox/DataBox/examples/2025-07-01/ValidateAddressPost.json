@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "Accept-Language": [
+      "en-US"
+    ],
+    "Content-Length": [
+      "351"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2025-07-01",
+    "location": "westus",
+    "subscriptionId": "YourSubscriptionId",
+    "validateAddress": {
+      "deviceType": "DataBox",
+      "model": "DataBox",
+      "shippingAddress": {
+        "addressType": "Commercial",
+        "city": "XXXX XXXX",
+        "companyName": "XXXX XXXX",
+        "country": "XX",
+        "postalCode": "00000",
+        "stateOrProvince": "XX",
+        "streetAddress1": "XXXX XXXX",
+        "streetAddress2": "XXXX XXXX"
+      },
+      "validationType": "ValidateAddress"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "alternateAddresses": [
+            {
+              "addressType": "None",
+              "city": "XXXX XXXX",
+              "country": "XX",
+              "postalCode": "00000",
+              "stateOrProvince": "XX",
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "streetAddress3": ""
+            }
+          ],
+          "validationStatus": "Valid",
+          "validationType": "ValidateAddress"
+        }
+      }
+    }
+  },
+  "operationId": "Service_ValidateAddress",
+  "title": "ValidateAddressPost"
+}

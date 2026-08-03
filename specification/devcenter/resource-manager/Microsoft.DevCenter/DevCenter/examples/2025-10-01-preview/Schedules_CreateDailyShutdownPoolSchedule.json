@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "body": {
+      "properties": {
+        "type": "StopDevBox",
+        "frequency": "Daily",
+        "state": "Enabled",
+        "time": "17:30",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "poolName": "DevPool",
+    "projectName": "DevProject",
+    "resourceGroupName": "rg1",
+    "scheduleName": "autoShutdown",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "autoShutdown",
+        "type": "Microsoft.DevCenter/pools/schedules",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
+        "properties": {
+          "type": "StopDevBox",
+          "frequency": "Daily",
+          "provisioningState": "Succeeded",
+          "state": "Enabled",
+          "time": "17:30",
+          "timeZone": "America/Los_Angeles"
+        },
+        "systemData": {
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "autoShutdown",
+        "type": "Microsoft.DevCenter/pools/schedules",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
+        "properties": {
+          "type": "StopDevBox",
+          "frequency": "Daily",
+          "provisioningState": "Accepted",
+          "state": "Enabled",
+          "time": "17:30",
+          "timeZone": "America/Los_Angeles"
+        },
+        "systemData": {
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Schedules_CreateOrUpdate",
+  "title": "Schedules_CreateDailyShutdownPoolSchedule"
+}

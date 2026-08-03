@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testcl",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "distributedAvailabilityGroupName": "dag",
+              "distributedAvailabilityGroupId": "c856cff5-a6fe-418e-8894-17799cc20f5d",
+              "replicationMode": "Async",
+              "partnerLinkRole": "Secondary",
+              "partnerAvailabilityGroupName": "BoxLocalAg1",
+              "partnerEndpoint": "TCP://SERVER:7022",
+              "instanceLinkRole": "Primary",
+              "instanceAvailabilityGroupName": "testcl",
+              "failoverMode": "None",
+              "seedingMode": "Automatic",
+              "databases": [
+                {
+                  "databaseName": "testdb",
+                  "instanceReplicaId": "4713ed91-1e8c-497d-9bd4-d8a3935ae49a",
+                  "partnerReplicaId": "8ffa9723-a1ec-4323-b929-c4aedee3894b",
+                  "replicaState": "Catchup",
+                  "synchronizationHealth": "HEALTHY",
+                  "connectedState": "CONNECTED",
+                  "lastReceivedLsn": "71000009407900001",
+                  "lastReceivedTime": "2023-08-01T00:00:00Z",
+                  "lastCommitLsn": "71000009407900004",
+                  "lastCommitTime": "2023-08-01T00:00:00Z",
+                  "lastHardenedLsn": "71000009408100001",
+                  "lastHardenedTime": "2023-08-01T00:00:00Z",
+                  "lastBackupLsn": "71000009405700001",
+                  "lastBackupTime": "2023-08-01T00:00:00Z",
+                  "instanceSendReplicationLagSeconds": 1,
+                  "instanceRedoReplicationLagSeconds": 1
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+            "name": "dag",
+            "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups"
+          },
+          {
+            "properties": {
+              "distributedAvailabilityGroupName": "dag2",
+              "distributedAvailabilityGroupId": "8a52d869-c17e-4546-ab03-e038569e672a",
+              "replicationMode": "Async",
+              "partnerLinkRole": "Primary",
+              "partnerAvailabilityGroupName": "BoxLocalAg2",
+              "partnerEndpoint": "TCP://SERVER:7022",
+              "instanceLinkRole": "Secondary",
+              "instanceAvailabilityGroupName": "testcl2",
+              "databases": [
+                {
+                  "databaseName": "testdb2",
+                  "instanceReplicaId": "81608df4-0840-4219-b3ae-9cc46be9dae9",
+                  "partnerReplicaId": "57bc3421-e77a-4fdc-8a62-af105c4b1e38",
+                  "replicaState": "Seeding",
+                  "seedingProgress": "80%",
+                  "synchronizationHealth": "HEALTHY",
+                  "connectedState": "CONNECTED",
+                  "lastReceivedLsn": "71000009407900001",
+                  "lastReceivedTime": "2023-08-01T00:00:00Z",
+                  "lastCommitLsn": "71000009407900004",
+                  "lastCommitTime": "2023-08-01T00:00:00Z",
+                  "lastHardenedLsn": "71000009408100001",
+                  "lastHardenedTime": "2023-08-01T00:00:00Z",
+                  "lastBackupLsn": "71000009405700001",
+                  "lastBackupTime": "2023-08-01T00:00:00Z"
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag2",
+            "name": "dag2",
+            "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups"
+          }
+        ]
+      }
+    }
+  }
+}

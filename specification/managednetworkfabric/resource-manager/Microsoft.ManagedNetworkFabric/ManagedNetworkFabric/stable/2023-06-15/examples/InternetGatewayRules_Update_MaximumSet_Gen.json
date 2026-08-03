@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2023-06-15",
+    "internetGatewayRuleName": "example-internetGatewayRule",
+    "body": {
+      "tags": {
+        "key3311": "1234"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ruleProperties": {
+            "action": "Allow",
+            "addressList": [
+              "10.10.10.10"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "internetGatewayIds": [
+            "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
+          ],
+          "annotation": "annotationValue"
+        },
+        "tags": {
+          "key3311": "1234"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-InternetGatewayRule",
+        "name": "example-internetGatewayRule",
+        "type": "microsoft.managednetworkfabric/internetGatewayRules",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-24T18:22:51.443Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-24T18:22:51.443Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

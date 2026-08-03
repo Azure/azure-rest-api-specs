@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "endpoint": "testWs.dev.azuresynapse.net",
+    "linkConnectionName": "testLinkConnection",
+    "api-version": "2021-12-01-preview",
+    "editTablesRequest": {
+      "linkTables": [
+        {
+          "id": "33f01131-553b-4b97-83a8-0db255a66901",
+          "source": {
+            "tableName": "exampleSourceTable",
+            "schemaName": "exampleSourceSchema"
+          },
+          "target": {
+            "tableName": "exampleTargetTable",
+            "schemaName": "exampleTargetSchema",
+            "distributionOptions": {
+              "type": "Round_RoBin"
+            }
+          },
+          "operationType": "Add"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

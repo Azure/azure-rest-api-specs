@@ -1,0 +1,46 @@
+{
+  "title": "List de-identification jobs.",
+  "operationId": "ListJobs",
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "maxpagesize": 10,
+    "continuationToken": "K1JJRDpzOEtaQWZabUQrQUNBQUFBQUFBQUFBQT09I1JUOjEjVFJDOjEwI0ZQQzpBZ0VBQUFBTUFDUUFBQUFBQUE9PQ==",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "job_smith_documents_1",
+            "operation": "Redact",
+            "sourceLocation": {
+              "location": "https://blobtest.blob.core.windows.net/container",
+              "prefix": "documents/"
+            },
+            "targetLocation": {
+              "location": "https://blobtest.blob.core.windows.net/container",
+              "prefix": "_output/",
+              "overwrite": true
+            },
+            "customizations": {
+              "redactionFormat": "[{type}]"
+            },
+            "status": "Succeeded",
+            "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
+            "createdAt": "2024-01-25T23:27:43.009Z",
+            "startedAt": "2024-01-25T23:27:43.009Z",
+            "summary": {
+              "successful": 10,
+              "failed": 0,
+              "canceled": 0,
+              "total": 10,
+              "bytesProcessed": 4096
+            }
+          }
+        ],
+        "nextLink": "https://deidtest.api.deid.azure.com/jobs?maxpagesize=10&continuationToken=K1JJRDpzOEtaQWZabUQrQUNBQUFBQUFBQUFBQT09I1JUOjEjVFJDOjEwI0ZQQzpBZ0VBQUFBTUFDUUFBQUFBQUE9PQ=="
+      }
+    }
+  }
+}

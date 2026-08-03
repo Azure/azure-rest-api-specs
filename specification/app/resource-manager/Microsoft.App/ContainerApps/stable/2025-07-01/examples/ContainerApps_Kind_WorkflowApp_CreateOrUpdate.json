@@ -1,0 +1,169 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerAppKind",
+    "api-version": "2025-07-01",
+    "containerAppEnvelope": {
+      "location": "East Us",
+      "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Web/sites/testcontainerAppKind",
+      "kind": "workflowapp",
+      "properties": {
+        "managedEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+        "configuration": {
+          "activeRevisionsMode": "Single",
+          "ingress": {
+            "external": true,
+            "targetPort": 443,
+            "allowInsecure": false
+          }
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "default/logicapps-base:latest",
+              "name": "logicapps-container",
+              "resources": {
+                "cpu": 1.0,
+                "memory": "2.0Gi"
+              }
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 30,
+            "cooldownPeriod": 350,
+            "pollingInterval": 35
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerapps/testcontainerAppKind",
+        "name": "testcontainerAppKind",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Web/sites/testcontainerAppKind",
+        "kind": "workflowapp",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runningStatus": "Running",
+          "managedEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "workloadProfileName": null,
+          "latestRevisionName": "testcontainerAppKind--2rltv14",
+          "latestReadyRevisionName": "testcontainerAppKind--2rltv14",
+          "latestRevisionFqdn": "testcontainerAppKind--2rltv14.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+          "configuration": {
+            "activeRevisionsMode": "Single",
+            "ingress": {
+              "fqdn": "testcontainerAppKind.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+              "external": true,
+              "targetPort": 80,
+              "exposedPort": 0,
+              "transport": "auto",
+              "traffic": [
+                {
+                  "weight": 100,
+                  "latestRevision": true
+                }
+              ]
+            }
+          },
+          "template": {
+            "revisionSuffix": "",
+            "terminationGracePeriodSeconds": null,
+            "containers": [
+              {
+                "image": "default/logicapps-base:latest",
+                "name": "logicapps-container",
+                "resources": {
+                  "cpu": 1.0,
+                  "memory": "2Gi",
+                  "ephemeralStorage": "4Gi"
+                }
+              }
+            ],
+            "initContainers": null,
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 30,
+              "cooldownPeriod": 350,
+              "pollingInterval": 35
+            }
+          },
+          "eventStreamEndpoint": "https://azurecontainerapps-test.dev/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/containerApps/testcontainerAppKind/eventstream"
+        },
+        "identity": {
+          "type": "None"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerapps/testcontainerAppKind",
+        "name": "testcontainerAppKind",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Web/sites/testcontainerAppKind",
+        "kind": "workflowapp",
+        "properties": {
+          "provisioningState": "InProgress",
+          "runningStatus": "Progressing",
+          "managedEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "workloadProfileName": null,
+          "latestRevisionName": "testcontainerAppKind--2rltv14",
+          "latestReadyRevisionName": "testcontainerAppKind--2rltv14",
+          "latestRevisionFqdn": "testcontainerAppKind--2rltv14.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+          "configuration": {
+            "activeRevisionsMode": "Single",
+            "ingress": {
+              "fqdn": "testcontainerAppKind.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+              "external": true,
+              "targetPort": 80,
+              "exposedPort": 0,
+              "transport": "auto",
+              "traffic": [
+                {
+                  "weight": 100,
+                  "latestRevision": true
+                }
+              ]
+            }
+          },
+          "template": {
+            "revisionSuffix": "",
+            "terminationGracePeriodSeconds": null,
+            "containers": [
+              {
+                "image": "default/logicapps-base:latest",
+                "name": "logicapps-container",
+                "resources": {
+                  "cpu": 1.0,
+                  "memory": "2Gi",
+                  "ephemeralStorage": "4Gi"
+                }
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 30,
+              "cooldownPeriod": 350,
+              "pollingInterval": 35
+            }
+          },
+          "eventStreamEndpoint": "https://azurecontainerapps-test.dev/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/containerApps/testcontainerAppKind/eventstream"
+        },
+        "identity": {
+          "type": "None"
+        }
+      }
+    }
+  }
+}

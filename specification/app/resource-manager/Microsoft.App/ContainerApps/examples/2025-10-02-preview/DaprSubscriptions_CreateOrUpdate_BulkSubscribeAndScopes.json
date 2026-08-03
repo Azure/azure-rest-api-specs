@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "name": "mysubscription",
+    "api-version": "2025-10-02-preview",
+    "daprSubscriptionEnvelope": {
+      "properties": {
+        "bulkSubscribe": {
+          "enabled": true,
+          "maxAwaitDurationMs": 500,
+          "maxMessagesCount": 123
+        },
+        "pubsubName": "mypubsubcomponent",
+        "routes": {
+          "default": "/products"
+        },
+        "scopes": [
+          "warehouseapp",
+          "customersupportapp"
+        ],
+        "topic": "inventory"
+      }
+    },
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysubscription",
+        "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
+        "properties": {
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxAwaitDurationMs": 500,
+            "maxMessagesCount": 123
+          },
+          "pubsubName": "mypubsubcomponent",
+          "routes": {
+            "default": "/products",
+            "rules": []
+          },
+          "scopes": [
+            "warehouseapp",
+            "customersupportapp"
+          ],
+          "topic": "inventory"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysubscription",
+        "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
+        "properties": {
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxAwaitDurationMs": 500,
+            "maxMessagesCount": 123
+          },
+          "pubsubName": "mypubsubcomponent",
+          "routes": {
+            "default": "/products",
+            "rules": []
+          },
+          "scopes": [
+            "warehouseapp",
+            "customersupportapp"
+          ],
+          "topic": "inventory"
+        }
+      }
+    }
+  },
+  "operationId": "DaprSubscriptions_CreateOrUpdate",
+  "title": "Create or update dapr subscription with bulk subscribe configuration and scopes"
+}

@@ -1,0 +1,233 @@
+{
+  "parameters": {
+    "resource": {
+      "properties": {
+        "networkProfile": {
+          "serviceRuntimeSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/serviceRuntime",
+          "appSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/apps",
+          "serviceCidr": "10.8.0.0/16,10.244.0.0/16,10.245.0.1/16",
+          "serviceRuntimeNetworkResourceGroup": "my-service-runtime-network-rg",
+          "appNetworkResourceGroup": "my-app-network-rg"
+        }
+      },
+      "sku": {
+        "name": "S0",
+        "tier": "Standard"
+      },
+      "location": "eastus",
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "api-version": "2022-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "networkProfile": {
+            "serviceRuntimeSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/serviceRuntime",
+            "appSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/apps",
+            "serviceCidr": "10.8.0.0/16,10.244.0.0/16,10.245.0.1/16",
+            "serviceRuntimeNetworkResourceGroup": "my-service-runtime-network-rg",
+            "appNetworkResourceGroup": "my-app-network-rg",
+            "outboundIPs": {
+              "publicIPs": [
+                "40.64.67.13"
+              ]
+            },
+            "requiredTraffics": [
+              {
+                "protocol": "TCP",
+                "port": 443,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "UDP",
+                "port": 1194,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "TCP",
+                "port": 9000,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              }
+            ]
+          },
+          "serviceId": "12345678abcd1234abcd12345678abcd"
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring",
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice",
+        "name": "myservice"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkProfile": {
+            "serviceRuntimeSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/serviceRuntime",
+            "appSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/apps",
+            "serviceCidr": "10.8.0.0/16,10.244.0.0/16,10.245.0.1/16",
+            "serviceRuntimeNetworkResourceGroup": "my-service-runtime-network-rg",
+            "appNetworkResourceGroup": "my-app-network-rg",
+            "outboundIPs": {
+              "publicIPs": [
+                "40.64.67.13"
+              ]
+            },
+            "requiredTraffics": [
+              {
+                "protocol": "TCP",
+                "port": 443,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "UDP",
+                "port": 1194,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "TCP",
+                "port": 9000,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              }
+            ]
+          },
+          "serviceId": "12345678abcd1234abcd12345678abcd"
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring",
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice",
+        "name": "myservice"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "networkProfile": {
+            "serviceRuntimeSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/serviceRuntime",
+            "appSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/apps",
+            "serviceCidr": "10.8.0.0/16,10.244.0.0/16,10.245.0.1/16",
+            "serviceRuntimeNetworkResourceGroup": "my-service-runtime-network-rg",
+            "appNetworkResourceGroup": "my-app-network-rg",
+            "outboundIPs": {
+              "publicIPs": [
+                "40.64.67.13"
+              ]
+            },
+            "requiredTraffics": [
+              {
+                "protocol": "TCP",
+                "port": 443,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "UDP",
+                "port": 1194,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "TCP",
+                "port": 9000,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              }
+            ]
+          },
+          "serviceId": "12345678abcd1234abcd12345678abcd"
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring",
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice",
+        "name": "myservice"
+      }
+    }
+  }
+}

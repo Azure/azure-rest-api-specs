@@ -1,0 +1,88 @@
+{
+  "operationId": "TopologyImpacts_Create",
+  "title": "Reporting a topology impact",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-12-01-preview",
+    "topologyImpactName": "impact-002",
+    "resource": {
+      "properties": {
+        "impactedResources": [
+          {
+            "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1"
+          }
+        ],
+        "startDateTime": "2022-06-15T05:59:46.6517821Z",
+        "endDateTime": null,
+        "impactDescription": "one of the resources is unavailable",
+        "impactCategory": "Availability",
+        "additionalProperties": {
+          "errorCode": "504",
+          "errorMessage": "Gateway timeout error"
+        },
+        "workload": {
+          "context": "webapp/scenario1",
+          "toolset": "Other"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/topologyImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/topologyImpacts",
+        "properties": {
+          "impactedResources": [
+            {
+              "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1"
+            }
+          ],
+          "topologyImpactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "one of the resources is unavailable",
+          "impactCategory": "Availability",
+          "additionalProperties": {
+            "errorCode": "504",
+            "errorMessage": "Gateway timeout error"
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/topologyImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/topologyImpacts",
+        "properties": {
+          "impactedResources": [
+            {
+              "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1"
+            }
+          ],
+          "topologyImpactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "one of the resources is unavailable",
+          "impactCategory": "Availability",
+          "additionalProperties": {
+            "errorCode": "504",
+            "errorMessage": "Gateway timeout error"
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          }
+        }
+      }
+    }
+  }
+}

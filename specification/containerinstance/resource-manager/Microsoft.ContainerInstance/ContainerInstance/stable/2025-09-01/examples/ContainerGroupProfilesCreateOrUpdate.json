@@ -1,0 +1,295 @@
+{
+  "parameters": {
+    "ContainerGroupProfile": {
+      "location": "west us",
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "gpu": {
+                    "count": 1,
+                    "sku": "K80"
+                  },
+                  "memoryInGB": 1.5
+                }
+              },
+              "volumeMounts": [
+                {
+                  "name": "volume1",
+                  "mountPath": "/mnt/volume1",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume2",
+                  "mountPath": "/mnt/volume2",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume3",
+                  "mountPath": "/mnt/volume3",
+                  "readOnly": true
+                }
+              ]
+            }
+          }
+        ],
+        "diagnostics": {
+          "logAnalytics": {
+            "logType": "ContainerInsights",
+            "metadata": {
+              "pod-uuid": "test-metadata-value"
+            },
+            "workspaceId": "workspaceid",
+            "workspaceKey": "workspaceKey",
+            "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/microsoft.operationalinsights/workspaces/workspace"
+          }
+        },
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "type": "Public",
+          "ports": [
+            {
+              "port": 80,
+              "protocol": "TCP"
+            }
+          ]
+        },
+        "osType": "Linux",
+        "volumes": [
+          {
+            "name": "volume1",
+            "azureFile": {
+              "shareName": "shareName",
+              "storageAccountKey": "accountKey",
+              "storageAccountName": "accountName"
+            }
+          },
+          {
+            "name": "volume2",
+            "emptyDir": {}
+          },
+          {
+            "name": "volume3",
+            "secret": {
+              "secretKey1": "SecretValue1InBase64",
+              "secretKey2": "SecretValue2InBase64"
+            }
+          }
+        ]
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "api-version": "2025-09-01",
+    "containerGroupProfileName": "demo1",
+    "resourceGroupName": "demo",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "location": "WestUs",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    },
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "diagnostics": {
+            "logAnalytics": {
+              "logType": "ContainerInsights",
+              "metadata": {
+                "pod-uuid": "test-metadata-value"
+              },
+              "workspaceId": "workspaceid"
+            }
+          },
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "type": "Public",
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ]
+          },
+          "osType": "Linux",
+          "revision": 0,
+          "sku": "Standard",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "location": "WestUs",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    },
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "diagnostics": {
+            "logAnalytics": {
+              "logType": "ContainerInsights",
+              "metadata": {
+                "pod-uuid": "test-metadata-value"
+              },
+              "workspaceId": "workspaceid"
+            }
+          },
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "type": "Public",
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ]
+          },
+          "osType": "Linux",
+          "revision": 1,
+          "sku": "Standard",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "CGProfile_CreateOrUpdate",
+  "title": "ContainerGroupProfilesCreateOrUpdate"
+}

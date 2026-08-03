@@ -24,7 +24,7 @@ These are the global settings for the Network API.
 title: NetworkAdminClient
 description: Network Admin Client
 openapi-type: arm
-tag: package-2015-06-15
+tag: package-2022-02-01
 ```
 
 ``` yaml
@@ -34,9 +34,23 @@ input-file:
     - Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json
     - Microsoft.Network.Admin/preview/2015-06-15/Quotas.json
     - Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json
+    - Microsoft.Network.Admin/stable/2022-02-01/VirtualNetworkGatewayConnections.json
 ```
+### Tag: package-2022-02-01
 
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01'
+input-file:
+    - Microsoft.Network.Admin/preview/2015-06-15/Network.json
+    - Microsoft.Network.Admin/preview/2015-06-15/LoadBalancers.json
+    - Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json
+    - Microsoft.Network.Admin/preview/2015-06-15/Quotas.json
+    - Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json
+    - Microsoft.Network.Admin/stable/2022-02-01/VirtualNetworkGatewayConnections.json
+```
 ---
+
 # Code Generation
 
 ## C#
@@ -71,7 +85,7 @@ input-file:
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/Quotas.json
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json
-
+  - $(this-folder)/Microsoft.Network.Admin/stable/2022-02-01/VirtualNetworkGatewayConnections.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,

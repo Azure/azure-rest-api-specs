@@ -1,0 +1,188 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "2020week10",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Default rollout resource.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+        "name": "Microsoft.Contoso/2020week10",
+        "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        },
+        "properties": {
+          "provisioningState": "Cancelled",
+          "specification": {
+            "expeditedRollout": {
+              "enabled": true
+            },
+            "canary": {
+              "regions": [
+                "eastus2euap",
+                "centraluseuap"
+              ],
+              "skipRegions": [
+                "brazilus"
+              ]
+            },
+            "lowTraffic": {
+              "regions": [
+                "southeastasia"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "mediumTraffic": {
+              "regions": [
+                "uksouth",
+                "indiawest"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "highTraffic": {
+              "regions": [
+                "australiasoutheast",
+                "otherhightraficregions"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "restOfTheWorldGroupOne": {
+              "regions": [
+                "koreacentral",
+                "francecentral",
+                "australiacentral",
+                "westus",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            },
+            "restOfTheWorldGroupTwo": {
+              "regions": [
+                "germanynorth",
+                "norwayeast",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            },
+            "providerRegistration": {
+              "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
+              "name": "Microsoft.Contoso",
+              "type": "Microsoft.ProviderHub/providerRegistrations",
+              "properties": {
+                "providerHubMetadata": {
+                  "providerAuthentication": {
+                    "allowedAudiences": [
+                      "https://management.core.windows.net/"
+                    ]
+                  }
+                },
+                "provisioningState": "Succeeded",
+                "providerAuthorizations": [
+                  {
+                    "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+                    "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+                  }
+                ],
+                "namespace": "microsoft.contoso",
+                "providerVersion": "2.0",
+                "providerType": "Internal, Hidden",
+                "management": {
+                  "manifestOwners": [
+                    "SPARTA-PlatformServiceAdministrator"
+                  ],
+                  "incidentRoutingService": "",
+                  "incidentRoutingTeam": "",
+                  "incidentContactEmail": "helpme@contoso.com",
+                  "resourceAccessPolicy": "NotSpecified"
+                },
+                "capabilities": [
+                  {
+                    "quotaId": "CSP_2015-05-01",
+                    "effect": "Allow"
+                  },
+                  {
+                    "quotaId": "CSP_MG_2017-12-01",
+                    "effect": "Allow"
+                  }
+                ],
+                "metadata": null
+              }
+            },
+            "resourceTypeRegistrations": [
+              {
+                "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
+                "name": "Microsoft.Contoso/employees",
+                "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
+                "properties": {
+                  "routingType": "Default",
+                  "regionality": "Regional",
+                  "endpoints": [
+                    {
+                      "apiVersions": [
+                        "2018-11-01-preview",
+                        "2020-01-01-preview",
+                        "2019-01-01"
+                      ],
+                      "locations": [
+                        "East Asia",
+                        "East US",
+                        "North Europe",
+                        "Southeast Asia",
+                        "East US 2 EUAP",
+                        "Central US EUAP",
+                        "West Europe",
+                        "West US",
+                        "West Central US",
+                        "West US 2"
+                      ],
+                      "requiredFeatures": [
+                        "Microsoft.Contoso/RPaaSSampleApp"
+                      ]
+                    }
+                  ],
+                  "swaggerSpecifications": [
+                    {
+                      "apiVersions": [
+                        "2018-11-01-preview",
+                        "2020-01-01-preview",
+                        "2019-01-01"
+                      ],
+                      "swaggerSpecFolderUri": "https://github.com/Azure/azure-rest-api-specs/blob/feature/azure/contoso/specification/contoso/resource-manager/Microsoft.SampleRP/"
+                    }
+                  ],
+                  "enableAsyncOperation": false,
+                  "provisioningState": "Succeeded",
+                  "enableThirdPartyS2S": false
+                }
+              }
+            ]
+          },
+          "status": {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap",
+              "allcompletedregions"
+            ],
+            "failedOrSkippedRegions": {
+              "westus2": {
+                "code": "RolloutStoppedByUser",
+                "message": "Rollout was explicitly stopped by the user."
+              }
+            },
+            "subscriptionReregistrationResult": "ConditionalUpdate"
+          }
+        }
+      }
+    }
+  }
+}

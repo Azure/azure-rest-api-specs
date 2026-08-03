@@ -1,0 +1,100 @@
+{
+  "title": "Create a new dashboard with LKV tile",
+  "description": "Create a new dashboard with LKV tile",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "dashboardId": "urn:homepageView:uqxri3i7x",
+    "api-version": "2022-06-30-preview",
+    "body": {
+      "displayName": "My Dashboard",
+      "tiles": [
+        {
+          "displayName": "LKV - root",
+          "configuration": {
+            "type": "lkv",
+            "capabilities": [
+              {
+                "capability": "acceleration.y",
+                "aggregateFunction": "avg"
+              },
+              {
+                "capability": "complexDouble.value1",
+                "aggregateFunction": "avg"
+              },
+              {
+                "capability": "complexString.value1",
+                "aggregateFunction": "count"
+              }
+            ],
+            "devices": [
+              "1on0f5oyp9c",
+              "h0fqspqcgq",
+              "1j1ve3ag88s",
+              "121g9cxvu3a"
+            ],
+            "group": "953ef094-1198-4645-82d1-87a21266abc6",
+            "format": {
+              "abbreviateValue": false,
+              "wordWrap": false,
+              "textSize": 14
+            }
+          },
+          "x": 0,
+          "y": 0,
+          "width": 2,
+          "height": 2
+        }
+      ],
+      "favorite": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "urn:homepageView:uqxri3i7x",
+        "displayName": "My Dashboard",
+        "personal": false,
+        "tiles": [
+          {
+            "displayName": "LKV - root",
+            "configuration": {
+              "type": "lkv",
+              "capabilities": [
+                {
+                  "capability": "acceleration.y",
+                  "aggregateFunction": "avg"
+                },
+                {
+                  "capability": "complexDouble.value1",
+                  "aggregateFunction": "avg"
+                },
+                {
+                  "capability": "complexString.value1",
+                  "aggregateFunction": "count"
+                }
+              ],
+              "devices": [
+                "1on0f5oyp9c",
+                "h0fqspqcgq",
+                "1j1ve3ag88s",
+                "121g9cxvu3a"
+              ],
+              "group": "953ef094-1198-4645-82d1-87a21266abc6",
+              "format": {
+                "abbreviateValue": false,
+                "wordWrap": false,
+                "textSize": 14
+              }
+            },
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        ],
+        "favorite": false
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-02-01-preview",
+    "id": "d6916a55-2cbc-4ed4-bd19-739e9a13b0ab",
+    "Operation-Id": "284b7e37-f42d-4054-8fa9-08523c3de345",
+    "dataset": {
+      "kind": "AudioAndScript",
+      "audios": {
+        "containerUrl": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken",
+        "prefix": "jessica300/",
+        "extensions": [
+          ".wav"
+        ]
+      },
+      "scripts": {
+        "containerUrl": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken",
+        "prefix": "jessica300/",
+        "extensions": [
+          ".txt"
+        ]
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/284b7e37-f42d-4054-8fa9-08523c3de345?api-version=2024-02-01-preview",
+        "Operation-Id": "284b7e37-f42d-4054-8fa9-08523c3de345"
+      }
+    }
+  }
+}

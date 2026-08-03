@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "parameters": {
+      "model": {
+        "format": "OpenAI",
+        "name": "gpt-4",
+        "version": "0613"
+      },
+      "skuName": "ProvisionedManaged",
+      "workloads": [
+        {
+          "requestPerMinute": 10,
+          "requestParameters": {
+            "avgPromptTokens": 30,
+            "avgGeneratedTokens": 50
+          }
+        },
+        {
+          "requestPerMinute": 20,
+          "requestParameters": {
+            "avgPromptTokens": 60,
+            "avgGeneratedTokens": 20
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "model": {
+          "format": "OpenAI",
+          "name": "gpt-4",
+          "version": "0613"
+        },
+        "skuName": "ProvisionedManaged",
+        "estimatedCapacity": {
+          "value": 346,
+          "deployableValue": 400
+        }
+      }
+    }
+  }
+}

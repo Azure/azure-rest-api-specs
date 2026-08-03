@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "peeringServiceName": "peeringServiceName",
+    "api-version": "2022-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "sourceAgent": "Example Source Agent",
+              "destination": "Example Destination",
+              "destinationPort": 443,
+              "testFrequencyInSec": 30,
+              "isTestSuccessful": true,
+              "path": [
+                "source",
+                "hop1",
+                "hop2",
+                "destination"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "name": "connectionMonitorTestName1",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName1"
+          },
+          {
+            "properties": {
+              "sourceAgent": "Example Source Agent",
+              "destination": "Example Destination 2",
+              "destinationPort": 443,
+              "testFrequencyInSec": 30,
+              "isTestSuccessful": false,
+              "path": [
+                "source",
+                "hop1",
+                "hop2",
+                "destination"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "name": "connectionMonitorTestName2",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName2"
+          }
+        ]
+      }
+    }
+  }
+}

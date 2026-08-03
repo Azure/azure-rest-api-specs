@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "body": {
+      "trunks": {
+        "vendor.xyz.biz": {
+          "sipSignalingPort": 5061
+        }
+      },
+      "routes": [
+        {
+          "name": "VendorXYZ",
+          "description": "External route XYZ",
+          "numberPattern": "^\\+?\\d+$",
+          "trunks": [
+            "vendor.xyz.biz"
+          ]
+        }
+      ]
+    },
+    "endpoint": "https://resourcename.communication.azure.com"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "trunks": {
+          "vendor.xyz.biz": {
+            "sipSignalingPort": 5061
+          }
+        },
+        "routes": [
+          {
+            "name": "VendorXYZ",
+            "description": "External route XYZ",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "vendor.xyz.biz"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

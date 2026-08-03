@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "groupId": "signalr",
+              "requiredMembers": [
+                "signalr"
+              ],
+              "requiredZoneNames": [
+                "privatelink.service.signalr.net"
+              ],
+              "shareablePrivateLinkResourceTypes": [
+                {
+                  "name": "site",
+                  "properties": {
+                    "description": "Azure App Service can be used as an upstream",
+                    "groupId": "sites",
+                    "type": "Microsoft.Web/sites"
+                  }
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateLinkResources/myPrivateLink",
+            "name": "myPrivateLink",
+            "type": "privateLinkResources"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToMoreResults..."
+      }
+    }
+  }
+}

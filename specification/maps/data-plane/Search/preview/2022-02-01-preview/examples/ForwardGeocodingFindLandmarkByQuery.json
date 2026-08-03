@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01-preview",
+    "query": "empire state building",
+    "AzureKey": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "address": {
+                "countryRegion": {
+                  "name": "United States"
+                },
+                "adminDistricts": [
+                  {
+                    "shortName": "NY"
+                  }
+                ],
+                "formattedAddress": "Empire State Building, NY",
+                "locality": "New York"
+              },
+              "type": "PointOfInterest",
+              "confidence": "High",
+              "matchCodes": [
+                "Ambiguous"
+              ],
+              "geocodePoints": [
+                {
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                      -73.98580932617188,
+                      40.748435974121094
+                    ]
+                  },
+                  "calculationMethod": "Rooftop",
+                  "usageTypes": [
+                    "Display"
+                  ]
+                }
+              ]
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -73.98580932617188,
+                40.748435974121094
+              ]
+            },
+            "bbox": [
+              -73.98590850830078,
+              40.74833679199219,
+              -73.98571014404297,
+              40.74853515625
+            ]
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "address": {
+                "countryRegion": {
+                  "name": "United States"
+                },
+                "adminDistricts": [
+                  {
+                    "shortName": "NY"
+                  },
+                  {
+                    "shortName": "New York County"
+                  }
+                ],
+                "formattedAddress": "Empire State Building, NY",
+                "locality": "Manhattan"
+              },
+              "type": "LandmarkBuilding",
+              "confidence": "High",
+              "matchCodes": [
+                "Ambiguous"
+              ],
+              "geocodePoints": [
+                {
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                      -73.98500061035156,
+                      40.74815368652344
+                    ]
+                  },
+                  "calculationMethod": "Rooftop",
+                  "usageTypes": [
+                    "Display"
+                  ]
+                }
+              ]
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -73.98500061035156,
+                40.74815368652344
+              ]
+            },
+            "bbox": [
+              -73.98710632324219,
+              40.747314453125,
+              -73.98412322998047,
+              40.74958038330078
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

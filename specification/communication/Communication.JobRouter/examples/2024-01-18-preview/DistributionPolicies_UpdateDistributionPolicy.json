@@ -1,0 +1,49 @@
+{
+  "title": "Updates a distribution policy",
+  "operationId": "JobRouterAdministrationOperations_UpsertDistributionPolicy",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "distributionPolicyId": "d9033d56-659c-437a-b5b7-4f3b14301dd4",
+    "resource": {
+      "mode": {
+        "kind": "longestIdle",
+        "minConcurrentOffers": 1,
+        "maxConcurrentOffers": 5,
+        "bypassSelectors": false
+      },
+      "offerExpiresAfterSeconds": 300,
+      "name": "Main"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "d9033d56-659c-437a-b5b7-4f3b14301dd4",
+        "name": "Main",
+        "offerExpiresAfterSeconds": 300,
+        "mode": {
+          "kind": "longestIdle",
+          "minConcurrentOffers": 1,
+          "maxConcurrentOffers": 5,
+          "bypassSelectors": false
+        },
+        "etag": "etag"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "d9033d56-659c-437a-b5b7-4f3b14301dd4",
+        "name": "Main",
+        "offerExpiresAfterSeconds": 300,
+        "mode": {
+          "kind": "longestIdle",
+          "minConcurrentOffers": 1,
+          "maxConcurrentOffers": 5,
+          "bypassSelectors": false
+        },
+        "etag": "etag"
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "parameters": {
+      "location": "eastus",
+      "subscriptionIds": [
+        "subscriptions/11111111-1111-1111-1111-111111111111"
+      ]
+    },
+    "subscriptionId": "8d65815f-a5b6-402f-9298-045155da7d74"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "availabilityZonePeers": [
+          {
+            "availabilityZone": "1",
+            "peers": [
+              {
+                "availabilityZone": "3",
+                "subscriptionId": "11111111-1111-1111-1111-111111111111"
+              }
+            ]
+          },
+          {
+            "availabilityZone": "2",
+            "peers": [
+              {
+                "availabilityZone": "2",
+                "subscriptionId": "11111111-1111-1111-1111-111111111111"
+              }
+            ]
+          },
+          {
+            "availabilityZone": "3",
+            "peers": [
+              {
+                "availabilityZone": "1",
+                "subscriptionId": "11111111-1111-1111-1111-111111111111"
+              }
+            ]
+          }
+        ],
+        "location": "eastus2",
+        "subscriptionId": "8d65815f-a5b6-402f-9298-045155da7d74"
+      }
+    }
+  },
+  "operationId": "Subscriptions_CheckZonePeers",
+  "title": "GetLogicalZoneMapping"
+}

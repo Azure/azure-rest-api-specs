@@ -1,0 +1,1098 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-10-01-preview",
+    "title": "Workloads Client",
+    "description": "The workloads connector client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/connectors/{connectorName}": {
+      "put": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connectors_Create",
+        "x-ms-examples": {
+          "Create a connector resource.": {
+            "$ref": "./examples/connectors/Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "description": "Creates a connector resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "description": "Connector resource request body.",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Describes the connector resource created.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "200": {
+            "description": "Describes the connector resource which is updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connectors_Get",
+        "x-ms-examples": {
+          "Get the connector resource.": {
+            "$ref": "./examples/connectors/Get.json"
+          }
+        },
+        "description": "Gets a connector resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the connector resource",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connectors_Update",
+        "x-ms-examples": {
+          "Update the connector resource.": {
+            "$ref": "./examples/connectors/Update.json"
+          }
+        },
+        "description": "Updates a connector resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body to update a connector resource.",
+            "schema": {
+              "$ref": "#/definitions/UpdateConnectorRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the connector resource which is successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connectors_Delete",
+        "x-ms-examples": {
+          "Delete the connector resource.": {
+            "$ref": "./examples/connectors/Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "description": "Deletes a connector resource and its child resources, which are the associated connection resources. All the child resources have to be deleted before deleting the connector resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/connectors": {
+      "get": {
+        "tags": [
+          "Connectors"
+        ],
+        "operationId": "Connectors_ListByResourceGroup",
+        "x-ms-examples": {
+          "List all connector resources in a resource group.": {
+            "$ref": "./examples/connectors/ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets all connector resources in a Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of all connector resources.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/connectors": {
+      "get": {
+        "tags": [
+          "Connectors"
+        ],
+        "operationId": "Connectors_ListBySubscription",
+        "x-ms-examples": {
+          "List all connector resources in a subscription.": {
+            "$ref": "./examples/connectors/ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets all connector resources in a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of all connector resources in the Subscription.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/connectors/{connectorName}/acssBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "ACSSBackupConnection"
+        ],
+        "operationId": "ACSSBackupConnections_Get",
+        "x-ms-examples": {
+          "Get the backup connection resource of virtual instance for SAP.": {
+            "$ref": "./examples/ACSSBackup/Get.json"
+          }
+        },
+        "description": "Gets the backup connection resource of virtual instance for SAP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the backup connection resource.",
+            "schema": {
+              "$ref": "#/definitions/ACSSBackupConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ACSSBackupConnection"
+        ],
+        "operationId": "ACSSBackupConnections_Create",
+        "x-ms-examples": {
+          "Create a vm backup connection with a new backup policy.": {
+            "$ref": "./examples/ACSSBackup/VM_New_Create.json"
+          },
+          "Create a vm backup connection with an existing backup policy.": {
+            "$ref": "./examples/ACSSBackup/VM_Existing_Create.json"
+          },
+          "Create a db backup connection with a new backup policy.": {
+            "$ref": "./examples/ACSSBackup/DB_New_Create.json"
+          },
+          "Create a db backup connection with an existing backup policy.": {
+            "$ref": "./examples/ACSSBackup/DB_Existing_Create.json"
+          },
+          "Create a HANA backup connection with a new backup policy.": {
+            "$ref": "./examples/ACSSBackup/HANA_NewPolicy.json"
+          },
+          "Create a SQL backup connection with a new backup policy.": {
+            "$ref": "./examples/ACSSBackup/SQL_NewPolicy.json"
+          },
+          "Create a VM backup connection with a new backup policy with tieringPolicy.": {
+            "$ref": "./examples/ACSSBackup/VM_NewPolicy.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "description": "Creates the backup connection resource of virtual instance for SAP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body of backup connection of virtual instance for SAP.",
+            "schema": {
+              "$ref": "#/definitions/ACSSBackupConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Describes the backup connection resource of virtual instance for SAP.",
+            "schema": {
+              "$ref": "#/definitions/ACSSBackupConnection"
+            }
+          },
+          "200": {
+            "description": "Describes the backup connection resource of virtual instance for SAP.",
+            "schema": {
+              "$ref": "#/definitions/ACSSBackupConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ACSSBackupConnection"
+        ],
+        "operationId": "ACSSBackupConnections_Update",
+        "x-ms-examples": {
+          "Update an backup connection resource of virtual instance for SAP.": {
+            "$ref": "./examples/ACSSBackup/Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "description": "Updates the backup connection resource of virtual instance for SAP. <br><br>This can be used to update tags on the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body of backup connection resource of virtual instance for SAP.",
+            "schema": {
+              "$ref": "#/definitions/UpdateACSSBackupConnectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Describes the backup connection resource created which is being updated.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Describes the backup connection resource of virtual instance for SAP.",
+            "schema": {
+              "$ref": "#/definitions/ACSSBackupConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ACSSBackupConnection"
+        ],
+        "operationId": "ACSSBackupConnections_Delete",
+        "x-ms-examples": {
+          "Delete a backup connection resource of virtual instance for SAP.": {
+            "$ref": "./examples/ACSSBackup/Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "description": "Deletes the backup connection resource of virtual instance for SAP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/connectors/{connectorName}/acssBackups": {
+      "get": {
+        "tags": [
+          "ACSSBackupConnections"
+        ],
+        "operationId": "ACSSBackupConnections_List",
+        "x-ms-examples": {
+          "List the backup connection resources of virtual instance for SAP under the given connector resource.": {
+            "$ref": "./examples/ACSSBackup/List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists the backup connection resources of virtual instance for SAP under the given connector resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the backup connection resource of virtual instance for SAP.",
+            "schema": {
+              "$ref": "#/definitions/ACSSBackupConnectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectorProvisioningState": {
+      "description": "Defines the provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ConnectorProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "UpdateConnectorRequest": {
+      "description": "Defines the request body for updating a connector.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        }
+      }
+    },
+    "UpdateACSSBackupConnectionRequest": {
+      "description": "Defines the request body for updating backup connection resource of virtual instance for SAP.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConnectorProperties": {
+      "description": "Defines the connector resource properties.",
+      "type": "object",
+      "required": [
+        "sourceResourceId"
+      ],
+      "properties": {
+        "sourceResourceId": {
+          "description": "Defines the ID of the connector's source resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Indicates any errors on the connector resource.",
+          "$ref": "#/definitions/ConnectorErrorDefinition",
+          "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
+        }
+      }
+    },
+    "Connector": {
+      "description": "Define the connector resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectorProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ConnectorList": {
+      "description": "Defines the collection of connector resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "description": "Gets the list of connector resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Connector"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ACSSBackupConnectionList": {
+      "description": "Defines the collection of backup connection resources of virtual instances for SAP.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "description": "Gets the list of backup connection resources of virtual instances for SAP.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ACSSBackupConnection"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "NewRecoveryServicesVault": {
+      "x-ms-discriminator-value": "New",
+      "description": "New recovery services vault.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryServicesVaultProperties"
+        }
+      ],
+      "required": [
+        "name",
+        "resourceGroup"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the recovery services vault has to be created."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The name of the resource group where the recovery services vault has to be created."
+        }
+      }
+    },
+    "ExistingRecoveryServicesVault": {
+      "x-ms-discriminator-value": "Existing",
+      "description": "Existing recovery services vault.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryServicesVaultProperties"
+        }
+      ],
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the recovery services vault that has been created."
+        }
+      }
+    },
+    "RecoveryServicesVaultProperties": {
+      "description": "The properties of the recovery services vault used for backup.",
+      "type": "object",
+      "required": [
+        "vaultType"
+      ],
+      "properties": {
+        "vaultType": {
+          "description": "The vault type, whether it is existing or has to be created.",
+          "type": "string",
+          "enum": [
+            "Existing",
+            "New"
+          ],
+          "x-ms-enum": {
+            "name": "vaultType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "vaultType"
+    },
+    "VMBackupPolicyProperties": {
+      "description": "Defines the policy properties for virtual machine backup.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the VM Backup policy."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./backupTypes.json#/definitions/AzureIaaSVMProtectionPolicy"
+        }
+      }
+    },
+    "DiskExclusionProperties": {
+      "description": "Defines the disk exclusion properties for virtual machine backup.",
+      "type": "object",
+      "required": [
+        "diskLunList",
+        "isInclusionList"
+      ],
+      "properties": {
+        "diskLunList": {
+          "description": "List of Disks' Logical Unit Numbers (LUN) to be used for VM Protection.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "isInclusionList": {
+          "description": "Flag to indicate whether DiskLunList is to be included/ excluded from backup.",
+          "type": "boolean"
+        }
+      }
+    },
+    "VMBackupData": {
+      "description": "Defines the VM Backup data for a virtual instance for SAP.",
+      "x-ms-discriminator-value": "VM",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupData"
+        }
+      ],
+      "properties": {
+        "backupPolicy": {
+          "$ref": "#/definitions/VMBackupPolicyProperties"
+        },
+        "diskExclusionProperties": {
+          "$ref": "#/definitions/DiskExclusionProperties"
+        }
+      },
+      "required": [
+        "backupPolicy"
+      ]
+    },
+    "DBBackupPolicyProperties": {
+      "description": "Defines the policy properties for database backup.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the DB backup policy."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./backupTypes.json#/definitions/AzureVmWorkloadProtectionPolicy"
+        }
+      }
+    },
+    "SSLConfiguration": {
+      "description": "Specify the HANA database TLS/SSL properties which will be used for enabling Azure Backup for this database. You need to specify these details if you have enabled secure communication for your HANA database.",
+      "type": "object",
+      "properties": {
+        "sslKeyStore": {
+          "type": "string",
+          "description": "Specify the name of the keystore file that contains the client's identity (eg. sapsrv.pse). The script will search for the file in the appropriate directory depending on the crypto provider mentioned. If this argument is not provided, it is automatically determined by searching in the configuration files."
+        },
+        "sslTrustStore": {
+          "type": "string",
+          "description": "Specify the name of the trust store file that contains the server’s public certificates (eg. sapsrv.pse). The script will search for the file in the appropriate directory depending on the crypto provider mentioned. If this argument is not provided, it is automatically determined by searching in the configuration files."
+        },
+        "sslHostNameInCertificate": {
+          "type": "string",
+          "description": "Specify the hostname as mentioned in the SSL certificate. If this argument is not provided, it is automatically determined by searching in the SSL certificate."
+        },
+        "sslCryptoProvider": {
+          "type": "string",
+          "description": "Specify the crypto provider being used (commoncrypto/openssl). If this argument is not provided, it is automatically determined by searching in the configuration files.",
+          "enum": [
+            "commoncrypto",
+            "openssl"
+          ],
+          "x-ms-enum": {
+            "name": "sslCryptoProvider",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "HanaBackupData": {
+      "description": "Defines the HANA Backup data for a virtual instance for SAP.",
+      "x-ms-discriminator-value": "HANA",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupData"
+        }
+      ],
+      "required": [
+        "backupPolicy",
+        "hdbuserstoreKeyName"
+      ],
+      "properties": {
+        "sslConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/SSLConfiguration",
+          "description": "Path of the SSL key store."
+        },
+        "backupPolicy": {
+          "$ref": "#/definitions/DBBackupPolicyProperties"
+        },
+        "hdbuserstoreKeyName": {
+          "type": "string",
+          "description": "Name of the HANA Database User Store Key."
+        },
+        "instanceNumber": {
+          "description": "Gets or sets the database instance number.",
+          "type": "string"
+        },
+        "dbInstanceSnapshotBackupPolicy": {
+          "$ref": "#/definitions/DBBackupPolicyProperties"
+        }
+      }
+    },
+    "SqlBackupData": {
+      "description": "Defines the SQL Backup data for a virtual instance for SAP.",
+      "x-ms-discriminator-value": "SQL",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupData"
+        }
+      ],
+      "required": [
+        "backupPolicy"
+      ],
+      "properties": {
+        "backupPolicy": {
+          "$ref": "#/definitions/DBBackupPolicyProperties"
+        }
+      }
+    },
+    "ACSSBackupConnectionProperties": {
+      "description": "Defines the backup connection properties for a virtual instance for SAP.",
+      "type": "object",
+      "properties": {
+        "backupData": {
+          "$ref": "#/definitions/BackupData"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Defines the errors related to backup connection resource of virtual instance for SAP.",
+          "readOnly": true,
+          "$ref": "#/definitions/ConnectorErrorDefinition"
+        }
+      }
+    },
+    "BackupData": {
+      "description": "Information about the recovery services vault and backup policy used for backup.",
+      "type": "object",
+      "required": [
+        "backupType",
+        "recoveryServicesVault"
+      ],
+      "properties": {
+        "backupType": {
+          "$ref": "#/definitions/BackupType"
+        },
+        "recoveryServicesVault": {
+          "$ref": "#/definitions/RecoveryServicesVaultProperties"
+        }
+      },
+      "discriminator": "backupType"
+    },
+    "BackupType": {
+      "description": "The type of backup, VM, SQL or HANA.",
+      "type": "string",
+      "enum": [
+        "VM",
+        "SQL",
+        "HANA"
+      ],
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ],
+      "x-ms-enum": {
+        "name": "backupType",
+        "modelAsString": true
+      }
+    },
+    "ACSSBackupConnection": {
+      "description": "Define the backup connection resource of virtual instance for SAP..",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ACSSBackupConnectionProperties"
+        }
+      }
+    },
+    "ConnectorErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedRGConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConnectorNameParameter": {
+      "name": "connectorName",
+      "in": "path",
+      "required": true,
+      "pattern": "^[A-Za-z0-9]+-?[A-Za-z0-9]*$",
+      "type": "string",
+      "description": "The name of the connector resource",
+      "x-ms-parameter-location": "method"
+    },
+    "BackupNameParameter": {
+      "name": "backupName",
+      "in": "path",
+      "required": true,
+      "pattern": "^.+",
+      "type": "string",
+      "description": "The name of the backup connection resource of virtual instance for SAP.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

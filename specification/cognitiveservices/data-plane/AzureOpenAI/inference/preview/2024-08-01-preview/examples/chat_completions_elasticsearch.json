@@ -1,0 +1,65 @@
+{
+  "title": "Creates a completion for the provided Elasticsearch.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "deployment-id": "<deployment-id>",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you tell me how to care for a dog?"
+        }
+      ],
+      "data_sources": [
+        {
+          "type": "elasticsearch",
+          "parameters": {
+            "endpoint": "https://your-elasticsearch-endpoint.eastus.azurecontainer.io",
+            "index_name": "{index name}",
+            "authentication": {
+              "type": "key_and_key_id",
+              "key": "{key}",
+              "key_id": "{key id}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "chatcmpl-7R1nGnsXO8n4oi9UPz2f3UHdgAYMn",
+        "created": 1686676106,
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "Content of the completion [doc1].",
+              "context": {
+                "citations": [
+                  {
+                    "content": "Citation content.",
+                    "title": "Citation Title",
+                    "filepath": "contoso.txt",
+                    "url": "https://contoso.blob.windows.net/container/contoso.txt",
+                    "chunk_id": "0"
+                  }
+                ],
+                "intent": "dog care"
+              }
+            }
+          }
+        ],
+        "usage": {
+          "completion_tokens": 557,
+          "prompt_tokens": 33,
+          "total_tokens": 590
+        }
+      }
+    }
+  }
+}
