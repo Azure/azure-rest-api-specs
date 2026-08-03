@@ -1,10 +1,13 @@
-﻿{
+{
   "operationId": "Indexes_List",
   "title": "SearchServiceListIndexes",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
-    "$select": null,
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
+    "search": "preview",
+    "pageSize": 1,
+    "searchType": null,
+    "Accept": "application/json;odata.metadata=minimal",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -193,7 +196,20 @@
                 "synonymMaps": []
               },
               {
-                "name": "sensitivityLabels",
+                "name": "sensitivityLabelIds",
+                "type": "Collection(Edm.String)",
+                "searchable": true,
+                "filterable": true,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": true,
+                "key": false,
+                "sensitivityLabelId": true,
+                "synonymMaps": []
+              },
+              {
+                "name": "sensitivityLabelNames",
                 "type": "Collection(Edm.String)",
                 "searchable": true,
                 "filterable": true,
@@ -203,6 +219,32 @@
                 "facetable": true,
                 "key": false,
                 "sensitivityLabelName": true,
+                "synonymMaps": []
+              },
+              {
+                "name": "sourceDocumentId",
+                "type": "Edm.String",
+                "searchable": true,
+                "filterable": true,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": true,
+                "key": false,
+                "sourceDocumentId": true,
+                "synonymMaps": []
+              },
+              {
+                "name": "sharepointSiteUrl",
+                "type": "Edm.String",
+                "searchable": true,
+                "filterable": true,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": true,
+                "key": false,
+                "sharepointSiteUrl": true,
                 "synonymMaps": []
               }
             ],
@@ -405,8 +447,8 @@
                     "timeout": "PT1M",
                     "authResourceId": "api://f89d1c93-58a7-4b07-9a5b-5f89048b927b",
                     "httpHeaders": {
-                      "header1": "value1",
-                      "header2": "value2"
+                      "header1": "<redacted>",
+                      "header2": "<redacted>"
                     },
                     "authIdentity": {
                       "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
@@ -471,9 +513,15 @@
                   }
                 }
               ]
+            },
+            "sharePointConnectorAppRegistration": {
+              "applicationId": "00000000-0000-0000-0000-000000000000",
+              "federatedCredentialId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
             }
           }
-        ]
+        ],
+        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/indexes?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxwcmV2aWV3fHByZXZpZXctdGVzdC0y"
       }
     }
   }

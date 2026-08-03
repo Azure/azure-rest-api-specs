@@ -1,14 +1,14 @@
 {
   "operationId": "Skillsets_List",
-  "title": "SearchServiceListSkillsets",
+  "title": "SearchServiceListSkillsetsNextPage",
   "parameters": {
     "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
     "$select": null,
-    "search": "myskillset",
-    "pageSize": 1,
+    "search": null,
+    "pageSize": null,
     "searchType": null,
-    "Accept": "application/json;odata.metadata=minimal",
+    "Accept": "application/json",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -17,7 +17,7 @@
         "value": [
           {
             "@odata.etag": "0x1234568AE7E58A1",
-            "name": "myskillset",
+            "name": "myskillset-2",
             "description": "Extract entities, detect language and extract key-phrases",
             "skills": [
               {
@@ -296,8 +296,7 @@
               "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com"
             }
           }
-        ],
-        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/skillsets?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxteXNraWxsc2V0fG15c2tpbGxzZXQtMg%3d%3d"
+        ]
       }
     }
   }

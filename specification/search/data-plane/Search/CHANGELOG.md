@@ -78,6 +78,7 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 **New optional fields on existing models**:
 
 - `KnowledgeBase`: `retrieveDefaults` (`KnowledgeBaseRetrieveDefaults`: `maxRuntimeInSeconds`, `maxOutputDocuments`), `tags` (`Record<string>`, up to 10 user-defined key-value pairs for categorizing a knowledge base and attributing usage/costs).
+- `KnowledgeBaseAgenticReasoningActivityRecord`: `logicalReasoningEffort`, reporting the requested logical effort when it differs from the execution or billing tier in `retrievalReasoningEffort`.
 - `FileKnowledgeSource`: `corsOptions`; `FileKnowledgeSourceParameters`: `queryHints`.
 - File upload/metadata: `FileUploadMetadata` (`fileName`, `metadata` — the service chooses parsing and extraction mode; the caller does not supply them), `FileKnowledgeSourceExtractionMode` (`minimal`, `standard`); `KnowledgeSourceFile`: `prefix`, `metadata`, `parsingMode`, `extractionMode`.
 - Service limits: `maxVectorIndexSizePerIndexInBytes` (per-index vector index memory quota, in bytes).

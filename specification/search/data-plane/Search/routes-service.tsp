@@ -982,7 +982,6 @@ interface KnowledgeSources {
     },
     KnowledgeSourceFile & {
       /** A process exit code. */
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "201";
     }
@@ -1007,7 +1006,6 @@ interface KnowledgeSources {
       };
     },
     KnowledgeSourceFile & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "201";
     }

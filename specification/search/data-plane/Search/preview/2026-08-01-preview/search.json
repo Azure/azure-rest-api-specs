@@ -143,6 +143,9 @@
         "x-ms-examples": {
           "SearchServiceListAliases": {
             "$ref": "./examples/SearchServiceListAliases.json"
+          },
+          "SearchServiceListAliasesNextPage": {
+            "$ref": "./examples/SearchServiceListAliasesNextPage.json"
           }
         },
         "x-ms-pageable": {
@@ -519,6 +522,9 @@
         "x-ms-examples": {
           "SearchServiceListDataSources": {
             "$ref": "./examples/SearchServiceListDataSources.json"
+          },
+          "SearchServiceListDataSourcesNextPage": {
+            "$ref": "./examples/SearchServiceListDataSourcesNextPage.json"
           }
         }
       },
@@ -900,6 +906,9 @@
         "x-ms-examples": {
           "SearchServiceListIndexers": {
             "$ref": "./examples/SearchServiceListIndexers.json"
+          },
+          "SearchServiceListIndexersNextPage": {
+            "$ref": "./examples/SearchServiceListIndexersNextPage.json"
           }
         }
       },
@@ -1569,6 +1578,9 @@
         "x-ms-examples": {
           "SearchServiceListIndexes": {
             "$ref": "./examples/SearchServiceListIndexes.json"
+          },
+          "SearchServiceListIndexesNextPage": {
+            "$ref": "./examples/SearchServiceListIndexesNextPage.json"
           }
         },
         "x-ms-pageable": {
@@ -3020,6 +3032,9 @@
         "x-ms-examples": {
           "SearchServiceListKnowledgeBases": {
             "$ref": "./examples/SearchServiceListKnowledgeBases.json"
+          },
+          "SearchServiceListKnowledgeBasesNextPage": {
+            "$ref": "./examples/SearchServiceListKnowledgeBasesNextPage.json"
           }
         },
         "x-ms-pageable": {
@@ -3495,8 +3510,14 @@
           "SearchServiceListKnowledgeSourcesIndexedSharePoint": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
           },
+          "SearchServiceListKnowledgeSourcesIndexedSql": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSql.json"
+          },
           "SearchServiceListKnowledgeSourcesMcpServer": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesMcpServer.json"
+          },
+          "SearchServiceListKnowledgeSourcesNextPage": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesNextPage.json"
           },
           "SearchServiceListKnowledgeSourcesWeb": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
@@ -4375,6 +4396,9 @@
         "x-ms-examples": {
           "SearchServiceListSkillsets": {
             "$ref": "./examples/SearchServiceListSkillsets.json"
+          },
+          "SearchServiceListSkillsetsNextPage": {
+            "$ref": "./examples/SearchServiceListSkillsetsNextPage.json"
           }
         }
       },
@@ -4824,6 +4848,9 @@
         "x-ms-examples": {
           "SearchServiceListSynonymMaps": {
             "$ref": "./examples/SearchServiceListSynonymMaps.json"
+          },
+          "SearchServiceListSynonymMapsNextPage": {
+            "$ref": "./examples/SearchServiceListSynonymMapsNextPage.json"
           }
         }
       },
@@ -10870,6 +10897,16 @@
           "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
           "description": "The type of the activity record."
         },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the activity started."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the activity completed."
+        },
         "elapsedMs": {
           "type": "integer",
           "format": "int32",
@@ -11014,7 +11051,7 @@
     },
     "KnowledgeBaseActivityStartedEvent": {
       "type": "object",
-      "description": "TODO(shape TBD): Emitted when an individual activity (e.g. a search index or web retrieval step) begins executing.",
+      "description": "Emitted immediately before an individual retrieval activity begins executing.",
       "properties": {
         "id": {
           "type": "integer",
@@ -11024,11 +11061,21 @@
         "type": {
           "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
           "description": "The type of the activity that has started."
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the activity started."
+        },
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source used by the activity, when the activity targets a knowledge source."
         }
       },
       "required": [
         "id",
-        "type"
+        "type",
+        "startedAt"
       ]
     },
     "KnowledgeBaseAgenticReasoningActivityRecord": {
@@ -11043,6 +11090,10 @@
         "retrievalReasoningEffort": {
           "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
           "description": "The retrieval reasoning effort configuration."
+        },
+        "logicalReasoningEffort": {
+          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
+          "description": "The logical reasoning effort requested by the customer. This is distinct from `retrievalReasoningEffort`, which reports the reasoning effort used for billing."
         }
       },
       "allOf": [
@@ -11052,17 +11103,23 @@
       ],
       "x-ms-discriminator-value": "agenticReasoning"
     },
-    "KnowledgeBaseAnswerDeltaEvent": {
+    "KnowledgeBaseAnswerCompletedEvent": {
       "type": "object",
-      "description": "TODO(shape TBD): Emitted for each incremental chunk of generated answer text, before the final `answer.completed` event.",
+      "description": "Emitted when a fully validated and post-processed synthesized answer is available.",
       "properties": {
-        "delta": {
-          "type": "string",
-          "description": "TODO(shape TBD): the incremental text fragment to append to the in-progress answer. Needs confirmation of naming/shape against the runtime's actual delta emission (e.g. does it need an index, role, or content-part type like KnowledgeBaseMessageContent?)."
+        "messageIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based index of the completed message in the final response array."
+        },
+        "message": {
+          "$ref": "#/definitions/KnowledgeBaseMessage",
+          "description": "The completed answer message."
         }
       },
       "required": [
-        "delta"
+        "messageIndex",
+        "message"
       ]
     },
     "KnowledgeBaseAzureBlobActivityArguments": {
@@ -12116,6 +12173,24 @@
       ],
       "x-ms-discriminator-value": "remoteSharePoint"
     },
+    "KnowledgeBaseResponseCompletedEvent": {
+      "type": "object",
+      "description": "Emitted after retrieval completes successfully.",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStatusCode",
+          "description": "The semantic HTTP status of the completed retrieval."
+        },
+        "response": {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalResponse",
+          "description": "The authoritative completed retrieval response."
+        }
+      },
+      "required": [
+        "statusCode",
+        "response"
+      ]
+    },
     "KnowledgeBaseRetrievalActivityRecord": {
       "type": "object",
       "description": "Common fields for retrieval activity records. Used via spread in concrete retrieval models.",
@@ -12258,12 +12333,54 @@
     },
     "KnowledgeBaseRetrievalStartedEvent": {
       "type": "object",
-      "description": "TODO(shape TBD): Emitted once the retrieval stream begins, before any activity or answer content is produced.",
+      "description": "Emitted once retrieval preflight validation completes, before any activity begins.",
       "properties": {
         "requestId": {
           "type": "string",
-          "description": "TODO(shape TBD): placeholder field; replace once the runtime defines what this event should carry (e.g. a correlation/request id)."
+          "description": "A service-generated identifier that correlates all events in this retrieval stream."
+        },
+        "knowledgeBaseName": {
+          "type": "string",
+          "description": "The name of the knowledge base being queried."
+        },
+        "outputMode": {
+          "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
+          "description": "The effective output mode for this retrieval."
+        },
+        "reasoningEffort": {
+          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
+          "description": "The effective reasoning effort for this retrieval."
         }
+      },
+      "required": [
+        "requestId",
+        "knowledgeBaseName",
+        "outputMode",
+        "reasoningEffort"
+      ]
+    },
+    "KnowledgeBaseRetrievalStatusCode": {
+      "type": "number",
+      "description": "The semantic HTTP status of a completed streaming retrieval.",
+      "enum": [
+        200,
+        206
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseRetrievalStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OK",
+            "value": 200,
+            "description": "The retrieval completed successfully."
+          },
+          {
+            "name": "PartialContent",
+            "value": 206,
+            "description": "The retrieval completed with partial results."
+          }
+        ]
       }
     },
     "KnowledgeBaseRetrievalStreamEvents": {},
@@ -12402,16 +12519,20 @@
     },
     "KnowledgeBaseStreamErrorEvent": {
       "type": "object",
-      "description": "TODO(shape TBD): Emitted in place of `response.completed` if the retrieval fails before the stream can complete normally.",
+      "description": "Emitted in place of `response.completed` if retrieval fails after the stream starts.",
       "properties": {
         "error": {
           "$ref": "#/definitions/KnowledgeBaseErrorDetail",
           "description": "The error detail explaining why the retrieval stream failed."
+        },
+        "activity": {
+          "type": "array",
+          "description": "Activity records that completed before the retrieval failed.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+          }
         }
-      },
-      "required": [
-        "error"
-      ]
+      }
     },
     "KnowledgeBaseWebActivityArguments": {
       "type": "object",

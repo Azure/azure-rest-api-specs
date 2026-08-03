@@ -2,9 +2,13 @@
   "operationId": "Skillsets_List",
   "title": "SearchServiceListSkillsets",
   "parameters": {
-    "endpoint": "https://previewexampleservice.search.windows.net",
-    "$select": null,
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
+    "$select": null,
+    "search": "myskillset",
+    "pageSize": 1,
+    "searchType": null,
+    "Accept": "application/json;odata.metadata=minimal",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -14,7 +18,7 @@
           {
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "myskillset",
-            "description": "Skillset for extracting entities and more",
+            "description": "Extract entities, detect language and extract key-phrases",
             "skills": [
               {
                 "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
@@ -243,11 +247,11 @@
                     "schema": {
                       "type": "object",
                       "additionalProperties": false,
+                      "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}",
                       "required": [
                         "steps",
                         "answer"
-                      ],
-                      "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
+                      ]
                     }
                   }
                 }
@@ -256,7 +260,10 @@
                 "@odata.type": "#Microsoft.Skills.Util.ContentUnderstandingSkill",
                 "name": "contentUnderstandingSKill",
                 "context": "/document",
-                "extractionOptions": [],
+                "extractionOptions": [
+                  "images",
+                  "locationMetadata"
+                ],
                 "inputs": [
                   {
                     "name": "file_data",
@@ -273,11 +280,24 @@
                     "name": "normalized_images",
                     "targetName": "normalized_images2"
                   }
-                ]
+                ],
+                "chunkingProperties": {
+                  "method": "fixedSize",
+                  "unit": "characters",
+                  "maximumLength": 500,
+                  "overlapLength": 50
+                }
               }
-            ]
+            ],
+            "cognitiveServices": {
+              "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",
+              "description": "Description of the Azure AI service resource attached to a skillset",
+              "key": "<redacted>",
+              "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com"
+            }
           }
-        ]
+        ],
+        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/skillsets?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxteXNraWxsc2V0fG15c2tpbGxzZXQtMg%3d%3d"
       }
     }
   }

@@ -1,14 +1,14 @@
 {
   "operationId": "Indexers_List",
-  "title": "SearchServiceListIndexers",
+  "title": "SearchServiceListIndexersNextPage",
   "parameters": {
     "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
     "$select": null,
-    "search": "myindexer",
-    "pageSize": 1,
+    "search": null,
+    "pageSize": null,
     "searchType": null,
-    "Accept": "application/json;odata.metadata=minimal",
+    "Accept": "application/json",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -17,7 +17,7 @@
         "value": [
           {
             "@odata.etag": "0x1234568AE7E58A1",
-            "name": "myindexer",
+            "name": "myindexer-2",
             "description": "Description of the indexer",
             "dataSourceName": "indexertestdatasource",
             "skillsetName": "myskillset",
@@ -52,8 +52,7 @@
               }
             ]
           }
-        ],
-        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/indexers?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxteWluZGV4ZXJ8bXlpbmRleGVyLTI%3d"
+        ]
       }
     }
   }

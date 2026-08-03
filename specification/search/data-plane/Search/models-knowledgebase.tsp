@@ -16,7 +16,6 @@ using TypeSpec.SSE;
 namespace Search;
 
 /** The input contract for the retrieval request. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
   @added(Versions.v2026_05_01_preview)
@@ -60,7 +59,6 @@ model KnowledgeBaseRetrievalRequest {
 }
 
 /** The output contract for the retrieval response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalResponse {
   /** The response messages. */
   response?: KnowledgeBaseMessage[];
@@ -485,6 +483,14 @@ model KnowledgeBaseActivityRecord {
 
   /** The type of the activity record. */
   type: KnowledgeBaseActivityRecordType;
+
+  /** The time at which the activity started. */
+  @added(Versions.v2026_08_01_preview)
+  startedAt?: utcDateTime;
+
+  /** The time at which the activity completed. */
+  @added(Versions.v2026_08_01_preview)
+  completedAt?: utcDateTime;
 
   /** The elapsed time in milliseconds for the retrieval activity. */
   elapsedMs?: int32;
@@ -912,6 +918,10 @@ model KnowledgeBaseAgenticReasoningActivityRecord
 
   /** The retrieval reasoning effort configuration. */
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
+
+  /** The logical reasoning effort requested by the customer. This is distinct from `retrievalReasoningEffort`, which reports the reasoning effort used for billing. */
+  @added(Versions.v2026_08_01_preview)
+  logicalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 }
 
 /** The type of reference. */
@@ -1319,7 +1329,6 @@ model KnowledgeBaseErrorAdditionalInfo {
 }
 
 /** Successful retrieval response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalSuccessResponse {
   /** The retrieval response is successfully returned. */
   @statusCode
@@ -1331,7 +1340,6 @@ model KnowledgeBaseRetrievalSuccessResponse {
 }
 
 /** Partial retrieval response. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalPartialResponse {
   /** A partial retrieval response is returned. */
   @statusCode
@@ -1381,38 +1389,38 @@ union KnowledgeBaseRetrievalStreamEvents {
   /** An individual activity has finished executing, successfully or not. */
   `activity.completed`: KnowledgeBaseActivityRecord,
 
-  /** An incremental chunk of generated answer text, to be appended to the in-progress answer. */
-  `answer.delta`: KnowledgeBaseAnswerDeltaEvent,
-
   /** The answer message has finished streaming and is now complete. */
-  `answer.completed`: KnowledgeBaseMessage,
+  `answer.completed`: KnowledgeBaseAnswerCompletedEvent,
 
   /** The references used to produce the response are available. */
   `references.completed`: KnowledgeBaseReference[],
 
   /** The retrieval failed before the stream could complete normally. */
+  @terminalEvent
   error: KnowledgeBaseStreamErrorEvent,
 
   /** The retrieval has completed successfully; this is the final event of the stream. */
   @terminalEvent
-  `response.completed`: KnowledgeBaseRetrievalResponse,
+  `response.completed`: KnowledgeBaseResponseCompletedEvent,
 }
 
-// NOTE: The event payload types below (KnowledgeBaseRetrievalStartedEvent,
-// KnowledgeBaseActivityStartedEvent, KnowledgeBaseAnswerDeltaEvent, KnowledgeBaseStreamErrorEvent)
-// do not exist anywhere else in the spec today. They are stubbed out here with a minimal,
-// best-guess shape so that KnowledgeBaseRetrievalStreamEvents compiles and can be reviewed as a
-// whole. Their fields are NOT final -- they need to be reviewed/fleshed out with the KB
-// retrieval runtime owners before this ships.
-
-/** TODO(shape TBD): Emitted once the retrieval stream begins, before any activity or answer content is produced. */
+/** Emitted once retrieval preflight validation completes, before any activity begins. */
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseRetrievalStartedEvent {
-  /** TODO(shape TBD): placeholder field; replace once the runtime defines what this event should carry (e.g. a correlation/request id). */
-  requestId?: string;
+  /** A service-generated identifier that correlates all events in this retrieval stream. */
+  requestId: string;
+
+  /** The name of the knowledge base being queried. */
+  knowledgeBaseName: string;
+
+  /** The effective output mode for this retrieval. */
+  outputMode: KnowledgeRetrievalOutputMode;
+
+  /** The effective reasoning effort for this retrieval. */
+  reasoningEffort: KnowledgeRetrievalReasoningEffort;
 }
 
-/** TODO(shape TBD): Emitted when an individual activity (e.g. a search index or web retrieval step) begins executing. */
+/** Emitted immediately before an individual retrieval activity begins executing. */
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseActivityStartedEvent {
   /** The ID of the activity record, matching the `id` on the corresponding `activity.completed` event. */
@@ -1420,20 +1428,54 @@ model KnowledgeBaseActivityStartedEvent {
 
   /** The type of the activity that has started. */
   type: KnowledgeBaseActivityRecordType;
+
+  /** The time at which the activity started. */
+  startedAt: utcDateTime;
+
+  /** The knowledge source used by the activity, when the activity targets a knowledge source. */
+  knowledgeSourceName?: string;
 }
 
-/** TODO(shape TBD): Emitted for each incremental chunk of generated answer text, before the final `answer.completed` event. */
+/** Emitted when a fully validated and post-processed synthesized answer is available. */
 @added(Versions.v2026_08_01_preview)
-model KnowledgeBaseAnswerDeltaEvent {
-  /** TODO(shape TBD): the incremental text fragment to append to the in-progress answer. Needs confirmation of naming/shape against the runtime's actual delta emission (e.g. does it need an index, role, or content-part type like KnowledgeBaseMessageContent?). */
-  delta: string;
+model KnowledgeBaseAnswerCompletedEvent {
+  /** The zero-based index of the completed message in the final response array. */
+  messageIndex: int32;
+
+  /** The completed answer message. */
+  message: KnowledgeBaseMessage;
 }
 
-/** TODO(shape TBD): Emitted in place of `response.completed` if the retrieval fails before the stream can complete normally. */
+/** Emitted in place of `response.completed` if retrieval fails after the stream starts. */
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseStreamErrorEvent {
   /** The error detail explaining why the retrieval stream failed. */
-  error: KnowledgeBaseErrorDetail;
+  error?: KnowledgeBaseErrorDetail;
+
+  /** Activity records that completed before the retrieval failed. */
+  activity?: KnowledgeBaseActivityRecord[];
+}
+
+/** The semantic HTTP status of a completed streaming retrieval. */
+@added(Versions.v2026_08_01_preview)
+union KnowledgeBaseRetrievalStatusCode {
+  int32,
+
+  /** The retrieval completed successfully. */
+  OK: 200,
+
+  /** The retrieval completed with partial results. */
+  PartialContent: 206,
+}
+
+/** Emitted after retrieval completes successfully. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseResponseCompletedEvent {
+  /** The semantic HTTP status of the completed retrieval. */
+  statusCode: KnowledgeBaseRetrievalStatusCode;
+
+  /** The authoritative completed retrieval response. */
+  response: KnowledgeBaseRetrievalResponse;
 }
 
 /** Parameters for AI Services. */

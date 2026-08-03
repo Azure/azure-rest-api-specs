@@ -4,6 +4,9 @@
   "parameters": {
     "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
+    "search": "ks-preview-test",
+    "pageSize": 1,
+    "searchType": null,
     "Accept": "application/json;odata.metadata=minimal",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
@@ -15,7 +18,7 @@
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "ks-preview-test",
             "kind": "searchIndex",
-            "description": "Description of the knowledge source.",
+            "description": "<encrypted>",
             "resultsProcessing": "none",
             "encryptionKey": {
               "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
@@ -29,37 +32,37 @@
             },
             "searchIndexParameters": {
               "searchIndexName": "preview-test",
-              "semanticConfigurationName": "testconfig",
-              "baseFilter": "category eq 'news'",
+              "semanticConfigurationName": "<encrypted>",
+              "baseFilter": "<encrypted>",
               "sourceDataFields": [
                 {
-                  "name": "description"
+                  "name": "<encrypted>"
                 },
                 {
-                  "name": "category"
+                  "name": "<encrypted>"
                 }
               ],
               "searchFields": [
                 {
-                  "name": "*"
+                  "name": "<encrypted>"
                 }
               ],
               "queryHints": {
                 "filters": [
                   {
-                    "field": "model",
+                    "field": "<encrypted>",
                     "fieldValues": [
                       "Model-X100",
                       "Model-X200",
                       "Model-Pro"
                     ],
-                    "filterInstructions": "Product model name."
+                    "filterInstructions": "<encrypted>"
                   }
                 ],
                 "boosts": [
                   {
                     "kind": "fieldValue",
-                    "field": "language",
+                    "field": "<encrypted>",
                     "fieldValues": [
                       "en",
                       "ja",
@@ -67,13 +70,14 @@
                       "de"
                     ],
                     "boost": 2.0,
-                    "boostInstructions": "Document language; pick from the user's locale."
+                    "boostInstructions": "<encrypted>"
                   }
                 ]
               }
             }
           }
-        ]
+        ],
+        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/knowledgesources?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxrcy1wcmV2aWV3LXRlc3R8a3MtcHJldmlldy10ZXN0LTI%3d"
       }
     }
   }
