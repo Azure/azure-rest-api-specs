@@ -11655,10 +11655,34 @@ model AssetJobOutput {
   assetName?: string | null;
 
   /**
+   * Output Asset Version.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  assetVersion?: string | null;
+
+  /**
    * Output data delivery mode enums.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: OutputDeliveryMode = OutputDeliveryMode.ReadWriteMount;
+
+  /**
+   * Output Asset Delivery Path.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  pathOnCompute?: string | null;
 
   /**
    * Output Asset URI.

@@ -147,7 +147,7 @@ model JobDetails extends ItemDetails {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 @parentResource(Quantum.Workspace.QuantumWorkspace)
-@resource("jobUpdateOptions")
+@resource("jobs")
 model JobUpdateOptions {
   /** Id of the job. */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
@@ -166,4 +166,17 @@ model JobUpdateOptions {
   /** List of user-supplied tags associated with the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
+}
+
+/** Response returned when a job update succeeds. */
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+model JobUpdateResponse {
+  /** The name of the job. */
+  name: string;
+
+  /** Priority of job. */
+  priority?: Priority;
+
+  /** List of user-supplied tags associated with the job. */
+  tags: string[];
 }
