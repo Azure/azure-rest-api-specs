@@ -1,4 +1,6 @@
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using Microsoft.Migrate;
 
 @doc("Strategy for migration to Azure")
 union Strategy {
@@ -60,5 +62,62 @@ union TaskType {
 @doc("Migration Specific Properties Instance Types.")
 union MigrationSpecificPropertiesInstanceType {
   ServerMigration: "ServerMigration",
+  string,
+}
+
+@doc("Runbook scope type.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookScopeType {
+  @doc("Wave-scoped runbook.")
+  Wave: "Wave",
+
+  string,
+}
+
+@doc("Runbook execution action.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookExecutionAction {
+  @doc("Start runbook execution.")
+  Start: "Start",
+
+  @doc("Pause runbook execution.")
+  Pause: "Pause",
+
+  @doc("Resume runbook execution.")
+  Resume: "Resume",
+
+  @doc("Cancel runbook execution.")
+  Cancel: "Cancel",
+
+  @doc("Retry runbook execution.")
+  Retry: "Retry",
+
+  @doc("Complete runbook execution step.")
+  Complete: "Complete",
+
+  @doc("Fail runbook execution step.")
+  Fail: "Fail",
+
+  @doc("Skip runbook execution step.")
+  Skip: "Skip",
+
+  @doc("Approve runbook execution step.")
+  Approve: "Approve",
+
+  @doc("Reject runbook execution step.")
+  Reject: "Reject",
+
+  string,
+}
+
+@doc("Dependency mode between runbook steps.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookStepDependencyMode {
+  @doc("Step-level dependency.")
+  Step: "Step",
+
+  @doc("Migration entity-level dependency.")
+  MigrationEntity: "MigrationEntity",
+
   string,
 }

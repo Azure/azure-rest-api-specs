@@ -56,6 +56,12 @@
     },
     {
       "name": "Tasks"
+    },
+    {
+      "name": "Runbooks"
+    },
+    {
+      "name": "RunbookExecutions"
     }
   ],
   "paths": {
@@ -1006,6 +1012,1598 @@
         "x-ms-examples": {
           "MigrateProjects_RefreshEntities_MaximumSet": {
             "$ref": "./examples/MigrateProjects_RefreshEntities_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks": {
+      "get": {
+        "operationId": "Runbooks_ListByParent",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "List Runbook resources by MigrateProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_ListByParent_MaximumSet": {
+            "$ref": "./examples/Runbooks_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}": {
+      "get": {
+        "operationId": "Runbooks_Get",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "Get a Runbook",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_Get_MaximumSet": {
+            "$ref": "./examples/Runbooks_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Runbooks_Create",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "Create a Runbook",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Runbook' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "201": {
+            "description": "Resource 'Runbook' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_Create_MaximumSet": {
+            "$ref": "./examples/Runbooks_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Runbooks_Delete",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "Delete a Runbook",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_Delete_MaximumSet": {
+            "$ref": "./examples/Runbooks_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/addStep": {
+      "post": {
+        "operationId": "Runbooks_AddStep",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookStepAddRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_AddStep_MaximumSet": {
+            "$ref": "./examples/Runbooks_AddStep_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/deleteStep": {
+      "post": {
+        "operationId": "Runbooks_DeleteStep",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookStepDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_DeleteStep_MaximumSet": {
+            "$ref": "./examples/Runbooks_DeleteStep_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/execute": {
+      "post": {
+        "operationId": "Runbooks_Execute",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecution"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_Execute_MaximumSet": {
+            "$ref": "./examples/Runbooks_Execute_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions": {
+      "get": {
+        "operationId": "RunbookExecutions_ListByParent",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "List RunbookExecution resources by Runbook",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_ListByParent_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}": {
+      "get": {
+        "operationId": "RunbookExecutions_Get",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "Get a RunbookExecution",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_Get_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "RunbookExecutions_Update",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "Update a RunbookExecution",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecution"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_Update_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/generateDownloadUrl": {
+      "post": {
+        "operationId": "RunbookExecutions_GenerateDownloadUrl",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionDownloadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_GenerateDownloadUrl_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_GenerateDownloadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/performAction": {
+      "post": {
+        "operationId": "RunbookExecutions_PerformAction",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecution"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_PerformAction_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_PerformAction_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/provideApproval": {
+      "post": {
+        "operationId": "RunbookExecutions_ProvideApproval",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecution"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_ProvideApproval_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_ProvideApproval_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/updateStepStatus": {
+      "post": {
+        "operationId": "RunbookExecutions_UpdateStepStatus",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecution"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_UpdateStepStatus_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_UpdateStepStatus_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateDownloadUrl": {
+      "post": {
+        "operationId": "Runbooks_GenerateDownloadUrl",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookDownloadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_GenerateDownloadUrl_MaximumSet": {
+            "$ref": "./examples/Runbooks_GenerateDownloadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateInputDownloadUrl": {
+      "post": {
+        "operationId": "Runbooks_GenerateInputDownloadUrl",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookInputDownloadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_GenerateInputDownloadUrl_MaximumSet": {
+            "$ref": "./examples/Runbooks_GenerateInputDownloadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateInputUploadUrl": {
+      "post": {
+        "operationId": "Runbooks_GenerateInputUploadUrl",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookInputUploadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_GenerateInputUploadUrl_MaximumSet": {
+            "$ref": "./examples/Runbooks_GenerateInputUploadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/mergeWorkstreams": {
+      "post": {
+        "operationId": "Runbooks_MergeWorkstreams",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookWorkstreamsMergeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_MergeWorkstreams_MaximumSet": {
+            "$ref": "./examples/Runbooks_MergeWorkstreams_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/regenerate": {
+      "post": {
+        "operationId": "Runbooks_Regenerate",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_Regenerate_MaximumSet": {
+            "$ref": "./examples/Runbooks_Regenerate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/splitWorkstream": {
+      "post": {
+        "operationId": "Runbooks_SplitWorkstream",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookWorkstreamSplitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_SplitWorkstream_MaximumSet": {
+            "$ref": "./examples/Runbooks_SplitWorkstream_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/updateStep": {
+      "post": {
+        "operationId": "Runbooks_UpdateStep",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunbookStepUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_UpdateStep_MaximumSet": {
+            "$ref": "./examples/Runbooks_UpdateStep_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/validateInput": {
+      "post": {
+        "operationId": "Runbooks_ValidateInput",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Runbook"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_ValidateInput_MaximumSet": {
+            "$ref": "./examples/Runbooks_ValidateInput_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2705,6 +4303,654 @@
           }
         ]
       }
+    },
+    "Runbook": {
+      "type": "object",
+      "description": "Runbook resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunbookProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RunbookDownloadUrlResponse": {
+      "type": "object",
+      "description": "Runbook download URL response.",
+      "properties": {
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Download URL for runbook content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the download URL."
+        }
+      },
+      "required": [
+        "downloadUrl",
+        "expiresAt"
+      ]
+    },
+    "RunbookExecution": {
+      "type": "object",
+      "description": "Runbook execution resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunbookExecutionProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RunbookExecutionAction": {
+      "type": "string",
+      "description": "Runbook execution action.",
+      "enum": [
+        "Start",
+        "Pause",
+        "Resume",
+        "Cancel",
+        "Retry",
+        "Complete",
+        "Fail",
+        "Skip",
+        "Approve",
+        "Reject"
+      ],
+      "x-ms-enum": {
+        "name": "RunbookExecutionAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start runbook execution."
+          },
+          {
+            "name": "Pause",
+            "value": "Pause",
+            "description": "Pause runbook execution."
+          },
+          {
+            "name": "Resume",
+            "value": "Resume",
+            "description": "Resume runbook execution."
+          },
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Cancel runbook execution."
+          },
+          {
+            "name": "Retry",
+            "value": "Retry",
+            "description": "Retry runbook execution."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "Complete runbook execution step."
+          },
+          {
+            "name": "Fail",
+            "value": "Fail",
+            "description": "Fail runbook execution step."
+          },
+          {
+            "name": "Skip",
+            "value": "Skip",
+            "description": "Skip runbook execution step."
+          },
+          {
+            "name": "Approve",
+            "value": "Approve",
+            "description": "Approve runbook execution step."
+          },
+          {
+            "name": "Reject",
+            "value": "Reject",
+            "description": "Reject runbook execution step."
+          }
+        ]
+      }
+    },
+    "RunbookExecutionActionRequest": {
+      "type": "object",
+      "description": "Request payload for runbook execution actions.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/RunbookExecutionAction",
+          "description": "Action to be performed on runbook execution."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Optional comment associated with the action.",
+          "maxLength": 256
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Target identifier for the action."
+        },
+        "migrationEntityIds": {
+          "type": "array",
+          "description": "Migration entity ARM IDs in scope for this action.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "action",
+        "targetId",
+        "migrationEntityIds"
+      ]
+    },
+    "RunbookExecutionDownloadUrlResponse": {
+      "type": "object",
+      "description": "Runbook execution download URL response.",
+      "properties": {
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Download URL for runbook execution artifacts."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the download URL."
+        }
+      },
+      "required": [
+        "downloadUrl",
+        "expiresAt"
+      ]
+    },
+    "RunbookExecutionListResult": {
+      "type": "object",
+      "description": "The response of a RunbookExecution list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RunbookExecution items on this page",
+          "items": {
+            "$ref": "#/definitions/RunbookExecution"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RunbookExecutionPatchProperties": {
+      "type": "object",
+      "description": "Patch payload for runbook execution.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Updated status for runbook execution."
+        }
+      }
+    },
+    "RunbookExecutionProperties": {
+      "type": "object",
+      "description": "Runbook execution properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "runbookArtifactVersionId": {
+          "type": "string",
+          "description": "Runbook artifact version identifier used for this execution.",
+          "readOnly": true
+        },
+        "executionArtifactId": {
+          "type": "string",
+          "description": "Execution artifact identifier for this runbook execution.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Current runbook execution status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of runbook execution.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of runbook execution.",
+          "readOnly": true
+        }
+      }
+    },
+    "RunbookExecutionUpdate": {
+      "type": "object",
+      "description": "Runbook execution resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunbookExecutionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RunbookInputDownloadUrlResponse": {
+      "type": "object",
+      "description": "Runbook input download URL response.",
+      "properties": {
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Download URL for runbook input content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the download URL."
+        }
+      },
+      "required": [
+        "downloadUrl",
+        "expiresAt"
+      ]
+    },
+    "RunbookInputUploadUrlResponse": {
+      "type": "object",
+      "description": "Runbook input upload URL response.",
+      "properties": {
+        "uploadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Upload URL for runbook input content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the upload URL."
+        }
+      },
+      "required": [
+        "uploadUrl",
+        "expiresAt"
+      ]
+    },
+    "RunbookListResult": {
+      "type": "object",
+      "description": "The response of a Runbook list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Runbook items on this page",
+          "items": {
+            "$ref": "#/definitions/Runbook"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RunbookProperties": {
+      "type": "object",
+      "description": "Runbook properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/RunbookScopeProperties",
+          "description": "Runbook scope definition."
+        },
+        "artifactId": {
+          "type": "string",
+          "description": "Artifact identifier associated with this runbook.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Current runbook state.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Runbook description.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "scope",
+        "description"
+      ]
+    },
+    "RunbookScopeProperties": {
+      "type": "object",
+      "description": "Base runbook scope model.",
+      "properties": {
+        "scopeType": {
+          "$ref": "#/definitions/RunbookScopeType",
+          "description": "Scope type for this runbook."
+        }
+      },
+      "discriminator": "scopeType",
+      "required": [
+        "scopeType"
+      ]
+    },
+    "RunbookScopeType": {
+      "type": "string",
+      "description": "Runbook scope type.",
+      "enum": [
+        "Wave"
+      ],
+      "x-ms-enum": {
+        "name": "RunbookScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wave",
+            "value": "Wave",
+            "description": "Wave-scoped runbook."
+          }
+        ]
+      }
+    },
+    "RunbookScopeWaveProperties": {
+      "type": "object",
+      "description": "Wave scope for a runbook.",
+      "properties": {
+        "waveId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Wave ARM identifier for wave-scoped runbooks.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/waves"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunbookScopeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Wave"
+    },
+    "RunbookStepAddRequest": {
+      "type": "object",
+      "description": "Request payload for adding a runbook step.",
+      "properties": {
+        "stepName": {
+          "type": "string",
+          "description": "Runbook step name.",
+          "maxLength": 64
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the runbook step.",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "Runbook step description.",
+          "maxLength": 256
+        },
+        "stepRef": {
+          "type": "string",
+          "description": "Partner step reference identifier."
+        },
+        "migrationEntityIds": {
+          "type": "array",
+          "description": "Migration entity ARM IDs associated with this step.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+                }
+              ]
+            }
+          }
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Dependencies for this runbook step.",
+          "items": {
+            "$ref": "#/definitions/RunbookStepDependency"
+          },
+          "x-ms-identifiers": [
+            "stepId"
+          ]
+        }
+      },
+      "required": [
+        "stepName",
+        "displayName",
+        "description",
+        "stepRef"
+      ]
+    },
+    "RunbookStepDeleteRequest": {
+      "type": "object",
+      "description": "Request payload for deleting a runbook step.",
+      "properties": {
+        "stepId": {
+          "type": "string",
+          "description": "Runbook step identifier."
+        }
+      },
+      "required": [
+        "stepId"
+      ]
+    },
+    "RunbookStepDependency": {
+      "type": "object",
+      "description": "Dependency relationship for a runbook step.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/RunbookStepDependencyMode",
+          "description": "Dependency mode between source and target steps."
+        },
+        "stepId": {
+          "type": "string",
+          "description": "Target step identifier this step depends on."
+        },
+        "entityMap": {
+          "type": "array",
+          "description": "Entity mapping for migration entity mode dependencies.",
+          "items": {
+            "$ref": "#/definitions/RunbookStepEntityMapEntry"
+          },
+          "x-ms-identifiers": [
+            "from",
+            "to"
+          ]
+        }
+      },
+      "required": [
+        "stepId"
+      ]
+    },
+    "RunbookStepDependencyMode": {
+      "type": "string",
+      "description": "Dependency mode between runbook steps.",
+      "enum": [
+        "Step",
+        "MigrationEntity"
+      ],
+      "x-ms-enum": {
+        "name": "RunbookStepDependencyMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Step",
+            "value": "Step",
+            "description": "Step-level dependency."
+          },
+          {
+            "name": "MigrationEntity",
+            "value": "MigrationEntity",
+            "description": "Migration entity-level dependency."
+          }
+        ]
+      }
+    },
+    "RunbookStepEntityMapEntry": {
+      "type": "object",
+      "description": "Entity mapping entry for runbook step dependency.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Source migration entity identifier."
+        },
+        "to": {
+          "type": "string",
+          "description": "Target migration entity identifier."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "RunbookStepUpdateRequest": {
+      "type": "object",
+      "description": "Request payload for updating a runbook step.",
+      "properties": {
+        "stepId": {
+          "type": "string",
+          "description": "Runbook step identifier."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the runbook step.",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "Runbook step description.",
+          "maxLength": 256
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Dependencies for this runbook step.",
+          "items": {
+            "$ref": "#/definitions/RunbookStepDependency"
+          },
+          "x-ms-identifiers": [
+            "stepId"
+          ]
+        }
+      },
+      "required": [
+        "stepId"
+      ]
+    },
+    "RunbookWorkstreamSplitRequest": {
+      "type": "object",
+      "description": "Request payload for splitting a runbook workstream.",
+      "properties": {
+        "sourceWorkstreamId": {
+          "type": "string",
+          "description": "Source workstream identifier."
+        },
+        "stepIds": {
+          "type": "array",
+          "description": "Runbook step IDs to move to the new workstream.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "newWorkstreamName": {
+          "type": "string",
+          "description": "Name of the new workstream.",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "sourceWorkstreamId",
+        "stepIds",
+        "newWorkstreamName"
+      ]
+    },
+    "RunbookWorkstreamsMergeRequest": {
+      "type": "object",
+      "description": "Request payload for merging runbook workstreams.",
+      "properties": {
+        "workstreamId": {
+          "type": "array",
+          "description": "Workstream IDs to merge.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "newWorkstreamName": {
+          "type": "string",
+          "description": "Optional new workstream name for the merged output.",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "workstreamId"
+      ]
     },
     "ServerMigrationSpecificProperties": {
       "type": "object",

@@ -1,0 +1,38 @@
+{
+  "title": "RunbookExecutions_Update_MaximumSet",
+  "operationId": "RunbookExecutions_Update",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1",
+    "runbookExecutionName": "exec1",
+    "properties": {
+      "status": "InProgress"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runbookArtifactVersionId": "rbv-001",
+          "executionArtifactId": "exec-art-001",
+          "status": "InProgress",
+          "startTime": "2026-02-12T12:54:26.848Z",
+          "endTime": "2026-02-12T13:54:26.848Z"
+        },
+        "eTag": "vabkq",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/migrateProjects/MyMigrateProject/runbooks/runbook1/executions/exec1",
+        "name": "exec1",
+        "type": "Microsoft.Migrate/migrateProjects/runbooks/executions"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
