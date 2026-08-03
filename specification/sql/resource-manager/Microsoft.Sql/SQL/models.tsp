@@ -2768,17 +2768,38 @@ union PrivateEndpointProvisioningState {
   /**
    * Approving
    */
+  @removed(Versions.v2025_08_01_preview)
   Approving: "Approving",
+
+  /**
+   * Provisioning Created
+   */
+  @added(Versions.v2025_08_01_preview)
+  Created: "Created",
 
   /**
    * Ready
    */
+  @removed(Versions.v2025_08_01_preview)
   Ready: "Ready",
+
+  /**
+   * Provisioning InProgress
+   */
+  @added(Versions.v2025_08_01_preview)
+  InProgress: "InProgress",
 
   /**
    * Dropping
    */
+  @removed(Versions.v2025_08_01_preview)
   Dropping: "Dropping",
+
+  /**
+   * Provisioning Succeeded
+   */
+  @added(Versions.v2025_08_01_preview)
+  Succeeded: "Succeeded",
 
   /**
    * Failed
@@ -2788,7 +2809,14 @@ union PrivateEndpointProvisioningState {
   /**
    * Rejecting
    */
+  @removed(Versions.v2025_08_01_preview)
   Rejecting: "Rejecting",
+
+  /**
+   * Provisioning Canceled
+   */
+  @added(Versions.v2025_08_01_preview)
+  Canceled: "Canceled",
 }
 
 /**
