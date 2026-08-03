@@ -923,6 +923,12 @@ union DataConnectorKind {
    */
   @added(Versions.v2026_08_01_preview)
   PurviewAudit: "PurviewAudit",
+
+  /**
+   * Push
+   */
+  @added(Versions.v2026_07_01)
+  Push: "Push",
 }
 
 /**
@@ -3058,6 +3064,12 @@ union CcpAuthType {
    * None
    */
   None: "None",
+
+  /**
+   * Push
+   */
+  @added(Versions.v2026_07_01)
+  Push: "Push",
 }
 
 /**
@@ -11650,6 +11662,43 @@ model RestApiPollerDataConnector extends DataConnector {
 }
 
 /**
+ * Represents Push data connector.
+ */
+@added(Versions.v2026_07_01)
+model PushDataConnector extends DataConnector {
+  /**
+   * Push data connector properties.
+   */
+  properties?: PushDataConnectorProperties;
+
+  /**
+   * The data connector kind
+   */
+  kind: "Push";
+}
+
+/**
+ * Push data connector properties.
+ */
+@added(Versions.v2026_07_01)
+model PushDataConnectorProperties {
+  /**
+   * The connector definition name (the dataConnectorDefinition resource id).
+   */
+  connectorDefinitionName: string;
+
+  /**
+   * The authentication model.
+   */
+  auth: CcpAuthConfig;
+
+  /**
+   * The DCR related properties.
+   */
+  dcrConfig?: DCRConfiguration;
+}
+
+/**
  * Rest Api Poller data connector properties.
  */
 model RestApiPollerDataConnectorProperties {
@@ -12199,6 +12248,27 @@ model BasicAuthModel extends CcpAuthConfig {
    * The auth type
    */
   type: "Basic";
+}
+
+/**
+ * Model for API authentication for Push data connectors.
+ */
+@added(Versions.v2026_07_01)
+model PushAuthModel extends CcpAuthConfig {
+  /**
+   * The Entra application (client) id used to push data to the data collection endpoint.
+   */
+  appId?: string;
+
+  /**
+   * The service principal id of the Entra application.
+   */
+  servicePrincipalId?: string;
+
+  /**
+   * The auth type
+   */
+  type: "Push";
 }
 
 /**
