@@ -24,6 +24,7 @@ import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
+import "../state-stores/routes.tsp";
 import "../models/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";
@@ -36,6 +37,7 @@ import "../agents-session-files/routes.tsp";
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
 import "../sdk-common/ops-relocation-agent-insights.tsp";
+import "../sdk-common/ops-relocation-state-stores.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -629,6 +631,21 @@ using Azure.AI.Projects;
 // conflicting with the unrelated EvaluationTarget defined in src\evaluations\models.tsp),
 // but exposed to python/js clients as EvaluationTarget.
 @@clientName(FoundryEvaluationTarget, "EvaluationTarget");
+
+// --------------------------------------------------------------------------------
+// Beta State Stores sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(StateStores.createStateStore, "create");
+@@clientName(StateStores.listStateStores, "list");
+@@clientName(StateStores.getStateStore, "get");
+@@clientName(StateStores.updateStateStore, "update");
+@@clientName(StateStores.deleteStateStore, "delete");
+@@clientName(StateStores.createStateStoreItem, "createItem");
+@@clientName(StateStores.listStateStoreItemKeys, "listKeys");
+@@clientName(StateStores.putStateStoreItem, "putItem");
+@@clientName(StateStores.getStateStoreItem, "getItem");
+@@clientName(StateStores.deleteStateStoreItem, "deleteItem");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
