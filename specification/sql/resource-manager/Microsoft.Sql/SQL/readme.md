@@ -11375,5 +11375,4 @@ suppressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"].delete.responses.default.schema["$ref"]
-
 ```
