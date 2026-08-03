@@ -32,6 +32,44 @@ openapi-subtype: arm
 tag: package-2025-10-01
 ```
 
+### Tag: package-2026-02-01-preview
+
+These settings apply only when `--tag=package-2026-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01-preview'
+input-file:
+  - Microsoft.ProviderHub/preview/2026-02-01-preview/providerhub.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistrationProperties.properties.resourceConcurrencyControlOptions
+      - $.definitions.ResourceTypeRegistrationProperties.properties.metadata
+      - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
+      - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
+    reason: This version requires metadata to be defined as an additional property or has already been there which will break customers if we change now.
+  - suppress: PutRequestResponseSchemeArm
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: PutResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}"].delete
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: providerhub.json
+    where:
+      - $.definitions.ManifestInfo
+    reason: The GET manifest operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}" returns a manifest information. The name of the operation cannot be changed at this point.
+```
+
 ### Tag: package-2025-10-01
 
 These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
