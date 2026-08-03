@@ -2403,6 +2403,61 @@ union ComputeUsageUnit {
 );
 
 // ════════════════════════════════════════════════════════════════════════════
+// region: Compute ↔ ComputeDisk — collision disambiguation (all languages)
+// The Compute namespace (VM/VMSS) redeclares two unions that already exist in
+// the ComputeDisk namespace:
+//   Compute.NetworkAccessPolicy        vs ComputeDisk.NetworkAccessPolicy
+//   Compute.AvailabilityPolicyDiskDelay vs ComputeDisk.AvailabilityPolicyDiskDelay
+// Since Compute and ComputeDisk are both aggregated into the same flattened
+// SDK client, these names collide and fail
+// @azure-tools/typespec-client-generator-core/duplicate-client-name across
+// java/csharp/python/go. Rename the newer Compute-side names in every
+// language scope to preserve the already-shipped ComputeDisk SDK API surface.
+// ════════════════════════════════════════════════════════════════════════════
+
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "csharp"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "java"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "python"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "go"
+);
+
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "csharp"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "java"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "python"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "go"
+);
+
+// ════════════════════════════════════════════════════════════════════════════
 // region: ComputeGallery — type/property renames (csharp)
 // Restore backward-compatible C# names for the Gallery RP during TypeSpec migration.
 // ════════════════════════════════════════════════════════════════════════════

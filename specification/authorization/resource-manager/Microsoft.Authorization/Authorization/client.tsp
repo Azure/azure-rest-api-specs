@@ -86,6 +86,14 @@ union RoleManagementScopeType {
   "java"
 );
 
+// Preserve the existing SDK PrincipalType while the REST contract uses the
+// RoleAssignment-scoped union that adds the agent values.
+@@alternateType(
+  Microsoft.RoleAssignment.RoleAssignmentProperties.principalType,
+  Microsoft.Common.PrincipalType,
+  "java,python"
+);
+
 // Restore C# GA resource, model, and extensible-enum names.
 @@clientName(
   Microsoft.ProviderOperations.ProviderOperationsMetadata,
