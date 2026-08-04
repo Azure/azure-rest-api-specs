@@ -15,16 +15,25 @@ using Microsoft.ContainerService;
   "csharp"
 );
 
-// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types.
-@@clientName(ListBootstrapDataRequest, "ListBootstrapDataContent", "csharp");
+// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types; add the
+// AgentPool owner prefix so the request pairs symmetrically with its response
+// (PoolBootstrapData -> AgentPoolBootstrapInfo).
+@@clientName(
+  ListBootstrapDataRequest,
+  "AgentPoolBootstrapDataContent",
+  "csharp"
+);
 
 // .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
 @@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
 
 // .NET SDK naming: add RP/service context prefix for IntelliSense clarity.
+// AllowedSubject belongs to IdentityBinding (referenced only by
+// IdentityBindingProperties.allowedSubjects), so it takes the IdentityBinding
+// client-name prefix to match ManagedClusterIdentityBindingProperties.
 @@clientName(
   AllowedSubject,
-  "ManagedClusterLoadBalancerAllowedSubject",
+  "ManagedClusterIdentityBindingAllowedSubject",
   "csharp"
 );
 @@clientName(
@@ -45,6 +54,11 @@ using Microsoft.ContainerService;
 @@clientName(
   AlertConfigurationProvisioningState,
   "ContainerServiceAlertConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  AlertNotification,
+  "ContainerServiceAlertNotification",
   "csharp"
 );
 
