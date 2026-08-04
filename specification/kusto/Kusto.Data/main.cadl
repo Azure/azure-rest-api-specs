@@ -1,0 +1,49 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+import "@cadl-lang/rest";
+import "./models.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+using KustoData.Models;
+
+@service({title: "Kusto Query/Management API"})
+@server("https://{cluster}.kusto.windows.net", "Kusto Cluster", {
+    @doc("Kusto Cluster Name")
+    cluster?: string,
+})
+
+@doc("This is the entry point for Kusto Data operations")
+namespace KustoData;
+
+@doc("Kusto Query V2 REST operations")
+@route("/v2/rest/query")
+namespace Query {
+    @get
+    @doc("Query Kusto V2")
+    op get(
+        ...KustoRequestParameters;
+        ...KustoRequestTelemetryHeaders;
+        ...KustoRequestQueryParameters;
+    ): {
+        @doc("Successful status code")
+        @statusCode statusCode: 200;
+        @doc("The V2 Response")
+        @body body: V2Frames;
+    };
+
+    @post
+    @doc("Query Kusto V2")
+    op post(
+        @doc("The Kusto Request parameters body")
+        @body requestParameters: KustoRequestBodyParameters;        
+        ...KustoRequestParameters,
+        ...KustoRequestTelemetryHeaders,
+    ): {
+        @doc("Successful status code")
+        @statusCode statusCode: 200;
+        @doc("The V2 Response")
+        @body body: V2Frames;
+    };
+}
