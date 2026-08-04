@@ -31,6 +31,7 @@ on:
 if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'data-plane-api-review-needed'
 permissions:
   contents: read
+  copilot-requests: write
   pull-requests: read
 # The agent reads PR files through the GitHub MCP toolsets, never from disk,
 # so no checkout is needed — and pull_request_target must not check out fork code.
