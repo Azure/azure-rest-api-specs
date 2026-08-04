@@ -411,7 +411,6 @@ model StartMalwareScanRequestProperties {
 /**
  * Request body for starting a malware scan with optional filters.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_01_01_preview)
 model StartMalwareScanRequest {
   /**

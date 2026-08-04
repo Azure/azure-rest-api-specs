@@ -2004,7 +2004,6 @@ model FrontendIPConfigurationPropertiesFormat {
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01)
 model DdosFrontendIpConfigurationSettings {
   /** The reference to the DDoS Custom Policy resource. */
