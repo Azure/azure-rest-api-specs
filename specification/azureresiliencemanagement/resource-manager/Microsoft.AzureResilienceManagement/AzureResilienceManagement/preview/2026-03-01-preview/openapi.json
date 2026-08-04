@@ -8692,18 +8692,6 @@
           "$ref": "#/definitions/RequirementSelected",
           "description": "Whether zonal resiliency is required for this goal assignment."
         },
-        "requireRegionalResiliency": {
-          "$ref": "#/definitions/RequirementSelected",
-          "description": "Whether regional resiliency is required for this goal assignment."
-        },
-        "regionalRecoveryPointObjective": {
-          "type": "string",
-          "description": "The regional recovery point objective (RPO) expressed as an ISO 8601 duration."
-        },
-        "regionalRecoveryTimeObjective": {
-          "type": "string",
-          "description": "The regional recovery time objective (RTO) expressed as an ISO 8601 duration."
-        },
         "serviceLevelResources": {
           "type": "array",
           "description": "List of service level resources.",
@@ -8810,13 +8798,9 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
-        "zonalGoalParticipation": {
-          "$ref": "#/definitions/ExclusionState",
-          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
-        },
-        "zonalAttestationStatus": {
-          "$ref": "#/definitions/AttestationState",
-          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
+        "zonalResiliency": {
+          "$ref": "#/definitions/ZonalResiliencyProperties",
+          "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
         },
         "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
@@ -8826,43 +8810,15 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
-        "regionalGoalParticipation": {
-          "$ref": "#/definitions/ExclusionState",
-          "description": "Flag which depicts whether the Arm resource is excluded for regional resiliency recommendation."
-        },
-        "regionalAttestationStatus": {
-          "$ref": "#/definitions/AttestationState",
-          "description": "Flag which depicts whether the Arm resource is manually attested for regional resiliency recommendation."
-        },
         "exclusionReasonForHighAvailabilityGoals": {
           "$ref": "#/definitions/ExclusionReason",
           "description": "Reason for exclusion from high availability goals.",
-          "readOnly": true
-        },
-        "zonalExclusionReason": {
-          "$ref": "#/definitions/ExclusionReason",
-          "description": "Reason for exclusion from zonal resiliency goals.",
           "readOnly": true
         },
         "exclusionReasonForDisasterRecoveryGoals": {
           "$ref": "#/definitions/ExclusionReason",
           "description": "Reason for exclusion from disaster recovery goals.",
           "readOnly": true
-        },
-        "regionalExclusionReason": {
-          "$ref": "#/definitions/ExclusionReason",
-          "description": "Reason for exclusion from regional resiliency goals.",
-          "readOnly": true
-        },
-        "userConfirmationForHighAvailability": {
-          "type": "array",
-          "description": "List of user confirmations for high availability solutions.",
-          "items": {
-            "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
-          },
-          "x-ms-identifiers": [
-            "solutionDisplayName"
-          ]
         },
         "serviceGroupMemberships": {
           "type": "array",
@@ -12842,6 +12798,35 @@
         }
       ],
       "x-ms-discriminator-value": "Zonal"
+    },
+    "ZonalResiliencyProperties": {
+      "type": "object",
+      "description": "Zonal resiliency posture for a goal resource.",
+      "properties": {
+        "goalParticipation": {
+          "$ref": "#/definitions/ExclusionState",
+          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
+        },
+        "attestationStatus": {
+          "$ref": "#/definitions/AttestationState",
+          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
+        },
+        "exclusionReason": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from zonal resiliency goals.",
+          "readOnly": true
+        },
+        "userConfirmation": {
+          "type": "array",
+          "description": "List of user confirmations for zonal resiliency solutions.",
+          "items": {
+            "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
+          },
+          "x-ms-identifiers": [
+            "solutionDisplayName"
+          ]
+        }
+      }
     }
   },
   "parameters": {
