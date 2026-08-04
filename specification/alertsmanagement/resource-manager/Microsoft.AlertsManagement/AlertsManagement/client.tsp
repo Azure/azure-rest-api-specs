@@ -88,7 +88,7 @@ model AlertsClientOptions {
 @@clientName(Essentials, "ServiceAlertEssentials", "csharp");
 @@clientName(SignalType, "ServiceAlertSignalType", "csharp");
 @@clientName(Identifier, "RetrievedInformationIdentifier", "csharp");
-@@clientName(NotificationResult.statusURL, "StatusUrl", "csharp");
+@@clientName(NotificationResult.statusURL, "StatusUri", "csharp");
 @@clientName(
   AlertModificationItem,
   "ServiceAlertModificationItemInfo",
