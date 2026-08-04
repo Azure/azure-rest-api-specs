@@ -557,6 +557,7 @@ union HttpsRedirect {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_08_01_preview)
 union AFDRouteGrpcState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2341,6 +2342,7 @@ enum ProbeProtocol {
 
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   Grpc,
 }
 
@@ -3397,6 +3399,7 @@ model RouteUpdatePropertiesParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   grpcState?: AFDRouteGrpcState;
 }
 

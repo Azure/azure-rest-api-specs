@@ -8985,6 +8985,28 @@
         }
       }
     },
+    "AFDRouteGrpcState": {
+      "type": "string",
+      "description": "Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AFDRouteGrpcState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
     "AFDStateProperties": {
       "type": "object",
       "description": "The tracking states for afd resources.",
@@ -14823,7 +14845,8 @@
       "enum": [
         "NotSet",
         "Http",
-        "Https"
+        "Https",
+        "Grpc"
       ],
       "x-ms-enum": {
         "name": "ProbeProtocol",
@@ -16439,6 +16462,10 @@
           "$ref": "#/definitions/EnabledState",
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'"
         },
+        "grpcState": {
+          "$ref": "#/definitions/AFDRouteGrpcState",
+          "description": "Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'"
+        },
         "provisioningState": {
           "$ref": "#/definitions/AfdProvisioningState",
           "description": "Provisioning status",
@@ -16591,6 +16618,10 @@
         "enabledState": {
           "$ref": "#/definitions/EnabledState",
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'"
+        },
+        "grpcState": {
+          "$ref": "#/definitions/AFDRouteGrpcState",
+          "description": "Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'"
         }
       }
     },
