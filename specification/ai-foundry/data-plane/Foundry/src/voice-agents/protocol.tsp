@@ -166,7 +166,7 @@ union VoiceAgentMcpApprovalPolicy {
 @doc("Fields shared by MCP-backed tools in a voice-agent session.")
 model VoiceAgentSessionMcpToolProperties {
   ...PickProperties<VoiceAgentMcpTool, "server_label">;
-  server_url: string;
+  server_url: url;
   authorization?: VoiceAgentMcpAuthorization;
   headers?: Record<string>;
   allowed_tools?: string[];
@@ -943,7 +943,7 @@ union VoiceAgentResponseMessageItem {
 @doc("A web-search source URL.")
 model VoiceAgentWebSearchSource {
   type: "url";
-  url: string;
+  url: url;
 }
 
 @doc("A web search action.")
@@ -956,14 +956,14 @@ model VoiceAgentWebSearchActionSearch {
 @doc("An action that opens a web page.")
 model VoiceAgentWebSearchActionOpenPage {
   type: "open_page";
-  url: string;
+  url: url;
 }
 
 @doc("An action that finds text on a web page.")
 model VoiceAgentWebSearchActionFind {
   type: "find";
   pattern: string;
-  url: string;
+  url: url;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Web-search actions are selected by their `type` property."
