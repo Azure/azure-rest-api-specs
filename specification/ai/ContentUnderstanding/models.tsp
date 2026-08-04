@@ -204,6 +204,7 @@ model LabeledDataKnowledgeSource extends KnowledgeSource {
   @doc("A blob container containing labeled data.")
   kind: KnowledgeSourceKind.labeledData;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the blob container containing labeled data.")
   containerUrl: url;
 
@@ -523,6 +524,7 @@ model AnalyzeParameters {
   processingLocation?: ProcessingLocation = ProcessingLocation.global;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Analyze operation request.")
 model AnalyzeRequest {
   ...AnalyzeParameters;
@@ -573,6 +575,7 @@ model AnalysisInput {
   range?: RangeExpression;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Analyze operation request directly from binary content.")
 model AnalyzeBinaryRequest {
   ...AnalyzeParameters;
@@ -852,6 +855,7 @@ model ContentUnderstandingDefaults {
   modelDeployments: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 @doc("Copy operation request.")
 model CopyRequest {
@@ -865,6 +869,7 @@ model CopyRequest {
   sourceAnalyzerId: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 @doc("Grant copy authorization request.")
 model GrantCopyAuthorizationRequest {

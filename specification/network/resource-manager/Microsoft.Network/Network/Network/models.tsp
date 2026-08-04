@@ -7374,6 +7374,7 @@ model ApplicationGatewayBackendSettingsPropertiesFormat {
   /**
    * Whether to send Proxy Protocol header to backend servers over TCP or TLS protocols. Default value is false.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableL4ClientIpPreservation?: boolean;
 
   /**
@@ -7492,6 +7493,7 @@ model ApplicationGatewayCustomError {
   /**
    * Error page URL of the application gateway custom error.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customErrorPageUrl?: string;
 }
 
@@ -8203,6 +8205,7 @@ model ApplicationGatewayRedirectConfigurationPropertiesFormat {
   /**
    * Url to redirect the request to.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   targetUrl?: string;
 
   /**
@@ -8434,6 +8437,7 @@ model ApplicationGatewayPrivateLinkIpConfiguration extends SubResource {
 /**
  * Properties of an application gateway private link IP configuration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkIpConfigurationProperties {
@@ -9948,6 +9952,7 @@ model FirewallPacketCaptureParameters {
   /**
    * Upload capture location
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -10394,6 +10399,7 @@ model BastionActiveSession {
   /**
    * The IP Address of the target.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetIpAddress?: string;
 
@@ -10500,6 +10506,7 @@ model SwapResourceListResult {
 /**
  * Custom IP prefix properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model CustomIpPrefixPropertiesFormat {
@@ -13491,6 +13498,7 @@ model CommonResource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 @summary("Error response")
 model CommonErrorResponse {
@@ -13794,6 +13802,7 @@ model CommonProxyResource extends CommonResource {}
 /**
  * Properties of the IpAllocation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
@@ -13847,6 +13856,7 @@ model IpAllocationPropertiesFormat {
 /**
  * The IpGroups property information.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpGroupPropertiesFormat {
@@ -13927,6 +13937,7 @@ model QueryInboundNatRulePortMappingRequest {
   /**
    * NetworkInterfaceIPConfiguration set in load balancer backend address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfiguration?: SubResource;
 
   /**
@@ -15642,6 +15653,7 @@ model ContainerNetworkInterfaceIpConfiguration {
 /**
  * Properties of the container network interface IP configuration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterfaceIpConfigurationPropertiesFormat {
@@ -15740,6 +15752,7 @@ model SecurityPerimeterSystemData {
 /**
  * Update tags request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model UpdateTagsRequest {
@@ -16951,11 +16964,13 @@ model NetworkVirtualApplianceBootDiagnosticParameters {
   /**
    * Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serialConsoleStorageSasUrl?: url;
 
   /**
    * Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   consoleScreenshotStorageSasUrl?: url;
 }
 
@@ -17138,6 +17153,7 @@ model InboundSecurityRules {
 /**
  * The error object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @error
@@ -18619,6 +18635,7 @@ model NetworkConfigurationDiagnosticProfile {
 /**
  * Results of network configuration diagnostic on the target resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkConfigurationDiagnosticResponse {
@@ -19650,6 +19667,7 @@ model PrivateDnsZoneGroupListResult is Azure.Core.Page<PrivateDnsZoneGroup>;
 /**
  * Request body of the CheckPrivateLinkServiceVisibility API service call.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model CheckPrivateLinkServiceVisibilityRequest {
@@ -19841,6 +19859,7 @@ model PublicIPPrefixPropertiesFormat {
 /**
  * Reference to a public IP address.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ReferencedPublicIpAddress {
@@ -22000,6 +22019,7 @@ model VpnPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on virtual network gateway.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -22807,6 +22827,7 @@ model VpnClientConnectionHealthDetail {
 /**
  * List of p2s vpn connections to be disconnected.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
@@ -22839,6 +22860,7 @@ model VirtualNetworkGatewayMigrationParameters {
   /**
    * Resource url that needs to be passed in to migration.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   resourceUrl?: string;
 }
 
@@ -23178,6 +23200,7 @@ model GetVpnSitesConfigurationRequest {
   /**
    * The sas-url to download the configurations for vpn-sites.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   outputBlobSasUrl: string;
 }
 
@@ -24619,6 +24642,7 @@ model VpnGatewayPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn gateway.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -24689,6 +24713,7 @@ model VpnConnectionPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn connection.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -24743,12 +24768,14 @@ model P2SVpnProfileParameters {
 /**
  * Vpn Profile Response for package generation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnProfileResponse {
   /**
    * URL to the VPN profile.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   profileUrl?: string;
 }
 
@@ -24767,6 +24794,7 @@ model P2SVpnConnectionHealthRequest {
   /**
    * The sas-url to download the P2S Vpn connection health detail.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   outputBlobSasUrl?: string;
 }
 
@@ -24780,12 +24808,14 @@ model P2SVpnConnectionHealth {
   /**
    * Returned sas url of the blob to which the p2s vpn connection detailed health will be written.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
 /**
  * VpnServerConfigurations list associated with VirtualWan Response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigurationsResponse {
@@ -25216,6 +25246,7 @@ model HubIPConfigurationPropertiesFormat {
 /**
  * VirtualHubIpConfigurations list.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ListVirtualHubIpConfigurationResults
@@ -27149,6 +27180,7 @@ model ServiceGatewayUpdateServicesRequest {
 /**
  * Properties of the service gateway services request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayServiceRequest {
@@ -27218,6 +27250,7 @@ model GetServiceGatewayAddressLocationsResult
 /**
  * Properties of the service gateway address location.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
 model ServiceGatewayAddressLocationResponse {
@@ -27330,6 +27363,7 @@ model VirtualNetworkApplianceIpConfiguration extends SubResource {
 /**
  * Properties of virtual network appliance IP configuration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model VirtualNetworkApplianceIpConfigurationProperties {

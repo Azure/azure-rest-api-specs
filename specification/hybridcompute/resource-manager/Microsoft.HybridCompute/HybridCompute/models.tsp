@@ -1443,6 +1443,7 @@ model AgentConfiguration {
   /**
    * Specifies the URL of the proxy to be used.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   proxyUrl?: string;
 
@@ -3824,6 +3825,7 @@ model AgentVersion {
   /**
    * Defines the os type.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 }
 

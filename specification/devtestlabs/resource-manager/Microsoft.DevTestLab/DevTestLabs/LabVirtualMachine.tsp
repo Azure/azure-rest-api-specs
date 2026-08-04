@@ -14,8 +14,10 @@ namespace Microsoft.DevTestLab;
  * A virtual machine.
  */
 @parentResource(Lab)
-model LabVirtualMachine
-  is Azure.ResourceManager.ProxyResource<LabVirtualMachineProperties, false> {
+model LabVirtualMachine is Azure.ResourceManager.ProxyResource<
+  LabVirtualMachineProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LabVirtualMachine,
     KeyName = "virtualMachineName",

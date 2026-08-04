@@ -231,6 +231,14 @@ suppressions:
     reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"]
+  - code: ResourceNameRestriction
+    from: networkGateway.json
+    reason: >-
+      The resource name parameter 'virtualNetworkGatewayName' is inherited from prior stable API
+      versions (2025-07-01 and earlier) where it was defined without a 'pattern' restriction. Adding
+      a pattern constraint now would be a breaking change to existing clients that rely on the
+      current parameter schema across all virtualNetworkGateways/* operations. The ARM RP already
+      enforces the resource name format at runtime.
   - code: PostResponseCodes
     from: virtualNetwork.json
     reason: LRO POST operation returns 200 with no schema for completion status and 202 for async acceptance. This is the standard TypeSpec ArmResourceActionAsync pattern for void LRO operations.

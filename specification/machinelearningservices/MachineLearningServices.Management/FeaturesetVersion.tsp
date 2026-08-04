@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(FeaturesetContainer)
-model FeaturesetVersion
-  is Azure.ResourceManager.ProxyResource<FeaturesetVersionProperties, false> {
+model FeaturesetVersion is Azure.ResourceManager.ProxyResource<
+  FeaturesetVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FeaturesetVersion,
     KeyName = "version",
