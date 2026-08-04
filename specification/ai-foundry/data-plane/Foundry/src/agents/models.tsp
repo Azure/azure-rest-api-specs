@@ -1,4 +1,4 @@
-import "../openai-responses/models.tsp";
+import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
@@ -15,7 +15,7 @@ const AllConditionalAgentDefinitionPreviews = #{
   ],
 };
 
-@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -40,6 +40,7 @@ model CreateAgentVersionRequest {
   draft?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentVersionFromManifestRequest {
   ...MetadataPropertyForRequest;
 
@@ -54,6 +55,7 @@ model CreateAgentVersionFromManifestRequest {
   parameter_values: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateAgentFromManifestRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -67,10 +69,12 @@ model CreateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentRequest {
   @doc("""
@@ -94,11 +98,13 @@ model CreateAgentRequest {
   agent_card?: AgentCard;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
@@ -270,7 +276,6 @@ model RaiConfig {
 }
 
 @discriminator("kind")
-@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model AgentDefinition {
   kind: AgentKind;
 
@@ -334,6 +339,7 @@ model PromptAgentDefinition extends AgentDefinition {
 /**
  * Configuration options for a text response from the model. Can be plain text or structured JSON data.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PromptAgentDefinitionTextOptions {
   format?: OpenAI.TextResponseFormatConfiguration;
 }
@@ -493,6 +499,7 @@ alias ListAgentQueryParameters = {
   ...CommonPageQueryParameters;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted agent Object")
 model DeleteAgentResponse {
   @doc("The object type. Always 'agent.deleted'.")
@@ -505,6 +512,7 @@ model DeleteAgentResponse {
   deleted: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted agent version Object")
 model DeleteAgentVersionResponse {
   @doc("The object type. Always 'agent.version.deleted'.")
@@ -678,6 +686,20 @@ model AgentIdentity {
 
   @doc("The client ID of the agent instance. Also referred to as the instance ID")
   client_id: string;
+
+  @doc("The status of the agent identity. Present for both the agent instance identity and the agent blueprint.")
+  status?: AgentIdentityStatus;
+}
+
+@doc("The status of an agent identity, applicable to both the agent instance identity and the agent blueprint.")
+union AgentIdentityStatus {
+  string,
+
+  @doc("The agent identity is active and can be used to access resources.")
+  active: "active",
+
+  @doc("The agent identity is disabled and cannot be used to access resources.")
+  disabled: "disabled",
 }
 
 union AgentBlueprintReferenceType {
@@ -781,6 +803,7 @@ model CreateAgentFromCodeContent {
  * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
  * of the content-type label.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DownloadAgentCodeResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")
@@ -890,6 +913,7 @@ model AgentSessionResource {
 // ── Session Request Models ──────────────────────────────
 
 /** Request body for creating a new agent session. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request to create a new agent session.")
 model CreateAgentSessionRequest {
   /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
