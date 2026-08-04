@@ -164,6 +164,18 @@ interface SingleDocumentTranslationClient {
 );
 
 @@clientName(
+  DocumentTranslationClient.getDocumentsStatus,
+  "listDocumentStatuses",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslationClient.getTranslationsStatus,
+  "listTranslationStatuses",
+  "javascript"
+);
+
+@@clientName(
   DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "created_on",
   "python"
@@ -183,7 +195,7 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(
   DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
-  "lastActionAt",
+  "updatedAt",
   "javascript"
 );
 
