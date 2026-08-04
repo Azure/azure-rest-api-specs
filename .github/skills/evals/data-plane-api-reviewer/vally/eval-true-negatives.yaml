@@ -32,10 +32,11 @@ defaults:
   # 2/3 rather than being indistinguishable from a flake.
   runs: 3
   timeout: "420s"
-  # These two MUST stay equal to `engine.model` in
+  # `model` MUST stay equal to the top-level `model:` in
   # .github/workflows/data-plane-api-review.md. Measuring the false-positive
-  # rate on one model and shipping another transfers nothing.
-  model: claude-opus-4.6
+  # rate on one model and shipping another transfers nothing. `judge_model`
+  # remains frozen separately; see the eval README.
+  model: gpt-5.6-sol
   judge_model: claude-sonnet-4.6
 
 scoring:
