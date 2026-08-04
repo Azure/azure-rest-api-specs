@@ -3113,32 +3113,6 @@
       "type": "object",
       "description": "A region with available Relay cluster capacity.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the available cluster region.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the region.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/AvailableRelayClusterRegionProperties",
-          "description": "Properties of the available cluster region.",
-          "readOnly": true
-        }
-      }
-    },
-    "AvailableRelayClusterRegionProperties": {
-      "type": "object",
-      "description": "Properties of an available Relay cluster region.",
-      "properties": {
         "location": {
           "type": "string",
           "description": "The Azure region location.",
@@ -3155,7 +3129,10 @@
           "description": "Regions containing available Relay cluster capacity.",
           "items": {
             "$ref": "#/definitions/AvailableRelayClusterRegion"
-          }
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
         }
       },
       "required": [
@@ -3730,22 +3707,31 @@
       "type": "string",
       "description": "Provisioning state of a Relay cluster.",
       "enum": [
-        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
         "Creating",
         "Deleting",
-        "Scaling",
-        "Failed",
-        "Succeeded",
-        "Canceled"
+        "Scaling"
       ],
       "x-ms-enum": {
         "name": "RelayClusterProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The provisioning state is unknown."
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Creating",
@@ -3761,21 +3747,6 @@
             "name": "Scaling",
             "value": "Scaling",
             "description": "The cluster is being scaled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The cluster operation failed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The cluster operation succeeded."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The cluster operation was canceled."
           }
         ]
       }
@@ -3861,32 +3832,6 @@
       "type": "object",
       "description": "A SKU supported by a Relay cluster.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the SKU.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type to which the SKU applies.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RelayClusterSkuInfoProperties",
-          "description": "Properties of the SKU.",
-          "readOnly": true
-        }
-      }
-    },
-    "RelayClusterSkuInfoProperties": {
-      "type": "object",
-      "description": "Properties of a Relay cluster SKU.",
-      "properties": {
         "resourceType": {
           "type": "string",
           "description": "The resource type to which the SKU applies.",
@@ -3913,7 +3858,10 @@
           "description": "The SKUs supported by the Relay cluster.",
           "items": {
             "$ref": "#/definitions/RelayClusterSkuInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ]
         }
       },
       "required": [
@@ -4150,32 +4098,6 @@
       "description": "A reference to a Relay namespace assigned to a cluster.",
       "properties": {
         "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the namespace reference.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the namespace reference.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the namespace reference.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RelayNamespaceReferenceProperties",
-          "description": "Properties of the namespace reference.",
-          "readOnly": true
-        }
-      }
-    },
-    "RelayNamespaceReferenceProperties": {
-      "type": "object",
-      "description": "Properties of a Relay namespace reference.",
-      "properties": {
-        "namespaceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The full Azure resource ID of the Relay namespace.",

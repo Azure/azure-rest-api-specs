@@ -254,10 +254,11 @@ directive:
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.operationId
   - suppress: RequiredPropertiesMissingInResourceModel
     reason: >
-      These collection responses (AvailableRelayClustersList, RelayClusterSkuListResult, RelayNamespaceIdListResult) use @action endpoints rather than full ARM proxy resource collections.
-      The response items follow ARM resource shape (id, name, type, properties) but represent read-only utility/catalog data rather than lifecycle-managed resources.
-      SKUs and available regions are computed/discovered data; namespace references are lightweight pointers to top-level Microsoft.Relay/namespaces resources.
-      This preview implementation prioritizes service delivery; migration to full proxy resource collections can be evaluated before GA if service requirements change.
+      These collection responses (AvailableRelayClustersList, RelayClusterSkuListResult, RelayNamespaceIdListResult) return catalog or reference data rather than lifecycle-managed ARM resources.
+      AvailableRelayClustersList returns region availability information (utility/discovery data).
+      RelayClusterSkuListResult returns SKU capability information (catalog data).
+      RelayNamespaceIdListResult returns lightweight references to existing Microsoft.Relay/namespaces resources that are fully managed through their own CRUD operations.
+      These endpoints intentionally use simplified data models without full ARM proxy resource patterns (no point GET operations) because they provide read-only utility information rather than independent resource lifecycle management.
     where:
       - $.definitions.AvailableRelayClustersList
       - $.definitions.RelayClusterSkuListResult

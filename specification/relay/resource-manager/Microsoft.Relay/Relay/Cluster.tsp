@@ -48,10 +48,7 @@ union RelayClusterSkuScaleType {
  */
 @added(Versions.v2026_07_01_preview)
 union RelayClusterProvisioningState {
-  string,
-
-  /** The provisioning state is unknown. */
-  Unknown: "Unknown",
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /** The cluster is being created. */
   Creating: "Creating",
@@ -61,15 +58,6 @@ union RelayClusterProvisioningState {
 
   /** The cluster is being scaled. */
   Scaling: "Scaling",
-
-  /** The cluster operation failed. */
-  Failed: "Failed",
-
-  /** The cluster operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The cluster operation was canceled. */
-  Canceled: "Canceled",
 }
 
 /**
@@ -202,40 +190,10 @@ model RelayNamespaceIdListResult {
 @added(Versions.v2026_07_01_preview)
 model RelayNamespaceReference {
   /**
-   * Fully qualified resource ID for the namespace reference.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the namespace reference.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The resource type of the namespace reference.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Properties of the namespace reference.
-   */
-  @visibility(Lifecycle.Read)
-  properties?: RelayNamespaceReferenceProperties;
-}
-
-/**
- * Properties of a Relay namespace reference.
- */
-@added(Versions.v2026_07_01_preview)
-model RelayNamespaceReferenceProperties {
-  /**
    * The full Azure resource ID of the Relay namespace.
    */
   @visibility(Lifecycle.Read)
-  namespaceId?: Azure.Core.armResourceIdentifier<[
+  id?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Relay/namespaces";
     }
@@ -250,6 +208,7 @@ model AvailableRelayClustersList {
   /**
    * Regions containing available Relay cluster capacity.
    */
+  @identifiers(#["location"])
   value: AvailableRelayClusterRegion[];
 }
 
@@ -258,36 +217,6 @@ model AvailableRelayClustersList {
  */
 @added(Versions.v2026_07_01_preview)
 model AvailableRelayClusterRegion {
-  /**
-   * Fully qualified resource ID for the available cluster region.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the region.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Properties of the available cluster region.
-   */
-  @visibility(Lifecycle.Read)
-  properties?: AvailableRelayClusterRegionProperties;
-}
-
-/**
- * Properties of an available Relay cluster region.
- */
-@added(Versions.v2026_07_01_preview)
-model AvailableRelayClusterRegionProperties {
   /**
    * The Azure region location.
    */
@@ -303,6 +232,7 @@ model RelayClusterSkuListResult {
   /**
    * The SKUs supported by the Relay cluster.
    */
+  @identifiers(#["resourceType"])
   value: RelayClusterSkuInfo[];
 }
 
@@ -311,36 +241,6 @@ model RelayClusterSkuListResult {
  */
 @added(Versions.v2026_07_01_preview)
 model RelayClusterSkuInfo {
-  /**
-   * Fully qualified resource ID for the SKU.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the SKU.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The resource type to which the SKU applies.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Properties of the SKU.
-   */
-  @visibility(Lifecycle.Read)
-  properties?: RelayClusterSkuInfoProperties;
-}
-
-/**
- * Properties of a Relay cluster SKU.
- */
-@added(Versions.v2026_07_01_preview)
-model RelayClusterSkuInfoProperties {
   /**
    * The resource type to which the SKU applies.
    */
