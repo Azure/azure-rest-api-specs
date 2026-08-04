@@ -16,6 +16,7 @@ permissions:
 jobs:
   validate-approval:
     name: Validate Package Name Approval
+    if: github.repository == 'Azure/azure-rest-api-specs'
     runs-on: ubuntu-24.04
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write permissions.

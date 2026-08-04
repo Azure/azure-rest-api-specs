@@ -14,6 +14,7 @@ permissions:
 jobs:
   post-results:
     name: Post Package Name Results
+    if: github.repository == 'Azure/azure-rest-api-specs'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
