@@ -786,13 +786,15 @@ interface ScheduledActions {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("ScheduledActions")
 interface ScheduledActionExtension {
   listByVms is ArmResourceListByParent<ScheduledActionResources>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+@tag("ScheduledActions")
 interface ScheduledActionOperationStatus {
   @doc("Get the status of a ScheduledActions asynchronous operation. Both the `Azure-AsyncOperation` and `Location` headers returned by long-running operations point at this endpoint.")
   @get
@@ -818,9 +820,12 @@ interface ScheduledActionOperationStatus {
 
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ omitTags: true })
-@tag("ScheduledActions")
+@tag("Scheduled Actions - Occurrence")
 interface Occurrences {
+  @doc("Gets the specified occurrence.")
   get is ArmResourceRead<Occurrence>;
+
+  @doc("Lists occurrences for the specified scheduled action.")
   listByScheduledAction is ArmResourceListByParent<Occurrence>;
 
   @autoRoute
@@ -828,12 +833,12 @@ interface Occurrences {
   @armResourceList(OccurrenceResource)
   @list
   @get
-  @doc("List resources attached to Scheduled Actions for the given occurrence")
+  @doc("Lists resources for the specified occurrence.")
   listResources(
     ...ResourceInstanceParameters<OccurrenceResource>,
   ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
 
-  /** Cancel the occurrence so its pending operations do not run. */
+  @doc("Cancels the specified occurrence for the specified resource IDs.")
   cancel is ArmResourceActionAsync<
     Occurrence,
     CancelOccurrenceRequest,
@@ -842,7 +847,7 @@ interface Occurrences {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Delay the occurrence to a later time. */
+  @doc("Delays the specified occurrence for the specified resource IDs.")
   delay is ArmResourceActionAsync<
     Occurrence,
     DelayRequest,
