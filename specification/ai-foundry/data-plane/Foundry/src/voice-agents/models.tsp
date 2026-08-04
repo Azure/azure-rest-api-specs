@@ -566,6 +566,107 @@ model TelephonyBindingList {
   next_cursor?: string;
 }
 
+@doc("The lifecycle status of an inbound telephony call.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallStatus {
+  string,
+
+  @doc("The call has started and has not reached a terminal state.")
+  in_progress: "in_progress",
+
+  @doc("The call ended successfully.")
+  success: "success",
+
+  @doc("The call ended because of a provider or management failure.")
+  failed: "failed",
+}
+
+@doc("A durable history record for an inbound call to a voice agent.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyCallRecord {
+  @doc("The service-generated call identifier.")
+  id: string;
+
+  @doc("The name of the voice agent that handled the call.")
+  agent_name: string;
+
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The provider-assigned call identifier, when available.")
+  provider_call_id?: string;
+
+  @doc("The caller's phone number, when supplied by the provider.")
+  caller_number?: string;
+
+  @doc("The Azure Communication Service or Twilio number that received the call.")
+  provider_number?: string;
+
+  @doc("The lifecycle status of the call.")
+  status: TelephonyCallStatus;
+
+  @doc("The Unix timestamp (in seconds) for when the call started.")
+  started_at: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the call connected.")
+  connected_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the call ended.")
+  ended_at?: FoundryTimestamp;
+
+  @doc("The call duration in seconds.")
+  duration_seconds?: int64;
+
+  @doc("The service-generated reason that the call ended.")
+  end_reason?: string;
+
+  @doc("The provider status code associated with the terminal result.")
+  provider_status_code?: int32;
+
+  @doc("The provider subcode associated with the terminal result.")
+  provider_sub_code?: int32;
+
+  @doc("The provider message associated with the terminal result.")
+  provider_message?: string;
+}
+
+@doc("A page of inbound telephony call records for one voice agent.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyCallRecordList {
+  @doc("The call records in this page.")
+  @pageItems
+  data: TelephonyCallRecord[];
+
+  @doc("Whether another page of call records is available.")
+  has_more: boolean;
+
+  @doc("The cursor to pass as `after` to retrieve the next page.")
+  @continuationToken
+  next_cursor?: string;
+}
+
+@doc("A command that can be applied to an active telephony call.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallManageCommand {
+  string,
+
+  @doc("Hang up the call.")
+  hangup: "hangup",
+
+  @doc("Transfer the call to a configured transfer target.")
+  transfer: "transfer",
+}
+
+@doc("A request to manage an active telephony call.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyCallManageRequest {
+  @doc("The operation to perform on the call.")
+  command: TelephonyCallManageCommand;
+
+  @doc("For a transfer command, the name of a transfer target configured for the voice agent.")
+  target?: string;
+}
+
 @doc("The telephony transfer targets configured for one voice agent.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
 model TelephonyTransferTargets {

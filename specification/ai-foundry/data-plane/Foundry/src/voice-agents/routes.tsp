@@ -639,6 +639,80 @@ interface AgentTelephony {
     NoContentResponse
   >;
 
+  /** Returns the durable inbound call history for the voice agent named in the path. */
+  @summary("List agent telephony calls")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony/calls")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  listTelephonyCalls is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose calls are listed. */
+      @path agent_name: string;
+
+      /** Filters calls by provider. */
+      @query provider?: TelephonyProvider;
+
+      /** Filters calls by lifecycle status. */
+      @query status?: TelephonyCallStatus;
+
+      /** Includes calls that started at or after this Unix timestamp in seconds. */
+      @query started_after?: FoundryTimestamp;
+
+      /** Includes calls that started at or before this Unix timestamp in seconds. */
+      @query started_before?: FoundryTimestamp;
+
+      /** The maximum number of call records to return. */
+      @minValue(1)
+      @maxValue(100)
+      @query
+      limit?: int32 = 100;
+
+      /** A cursor returned by the previous page. */
+      @query
+      @continuationToken
+      after?: string;
+    },
+    TelephonyCallRecordList
+  >;
+
+  /** Retrieves a durable inbound call record owned by the voice agent named in the path. */
+  @summary("Get an agent telephony call")
+  @get
+  @route("/agents/{agent_name}/telephony/calls/{call_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  getTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the call record. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: string;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Applies a command to an active inbound call owned by the voice agent named in the path. */
+  @summary("Manage an active agent telephony call")
+  @post
+  @route("/agents/{agent_name}/telephony/calls/{call_id}/manage")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  manageTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the active call. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: string;
+
+      ...TelephonyCallManageRequest;
+    },
+    TelephonyCallRecord
+  >;
+
   /** Returns all transfer targets configured for the voice agent named in the path. */
   @summary("Get agent telephony transfer targets")
   @get
