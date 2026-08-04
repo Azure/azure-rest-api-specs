@@ -383,6 +383,7 @@ model ScheduledActionResource {
 
 @@identifiers(ResourceListResponse.value, #[]);
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
@@ -529,6 +530,7 @@ model ScheduledActionsExtensionProperties {
   resourceNotificationSettings?: Array<NotificationProperties>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ScheduledActionResourceOperationResponse {
@@ -626,6 +628,7 @@ model OccurrenceResource is ScheduledActionResource {
 
 @@identifiers(OccurrenceResourceListResponse.value, #[]);
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
