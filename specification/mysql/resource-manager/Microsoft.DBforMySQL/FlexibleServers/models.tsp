@@ -1223,6 +1223,7 @@ model ImportSourceProperties {
   /**
    * Uri of the import source storage.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageUrl?: string;
 
@@ -1931,6 +1932,7 @@ model OperationProgressResponseType {
 /**
  * The response of get private dns zone suffix.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetPrivateDnsZoneSuffixResponse {
   /**
    * Represents the private DNS zone suffix.

@@ -635,6 +635,35 @@ interface Container {
     }
   >;
 
+  /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @added(Versions.v2026_12_06)
+  @get
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  listBlobFlatSegmentApacheArrow is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: "application/vnd.apache.arrow.stream,application/xml";
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
+  >;
+
   /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -659,6 +688,38 @@ interface Container {
       @body
       enumerationResults: ListBlobsHierarchicalResponse;
     }
+  >;
+
+  /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @added(Versions.v2026_12_06)
+  @get
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  listBlobHierarchySegmentApacheArrow is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: "application/vnd.apache.arrow.stream,application/xml";
+
+      /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      @query delimiter: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
   >;
 
   /** Returns information about the storage account. */
@@ -740,6 +801,12 @@ interface Blob {
         ...ContentLanguageResponseHeader;
         ...BlobSequenceNumberResponseHeader;
         ...BlobTypeResponseHeader;
+
+        /** The CRC64 hash of the content. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-content-crc64")
+        contentCrc64?: bytes;
+
         ...CopyCompletionTimeResponseHeader;
         ...CopyStatusDescriptionResponseHeader;
         ...CopyIdResponseHeader;
@@ -766,6 +833,29 @@ interface Blob {
         ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
+
+        /** The access tier of the blob. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier")
+        accessTier?: string;
+
+        /** Included if the access tier is inferred. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier-inferred")
+        accessTierInferred?: boolean;
+
+        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+        @added(Versions.v2026_10_06)
+        @encode("rfc7231")
+        @header("x-ms-access-tier-change-time")
+        accessTierChangeTime?: utcDateTime;
+
+        /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-smart-access-tier")
+        smartAccessTier?: string;
+
         ...ApiVersionHeader;
       })
     | (BodyParameter & {
@@ -820,6 +910,29 @@ interface Blob {
         ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
+
+        /** The access tier of the blob. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier")
+        accessTier?: string;
+
+        /** Included if the access tier is inferred. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier-inferred")
+        accessTierInferred?: boolean;
+
+        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+        @added(Versions.v2026_10_06)
+        @encode("rfc7231")
+        @header("x-ms-access-tier-change-time")
+        accessTierChangeTime?: utcDateTime;
+
+        /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-smart-access-tier")
+        smartAccessTier?: string;
+
         ...ApiVersionHeader;
       })
     | Error;
@@ -1727,6 +1840,7 @@ interface PageBlob {
       prevsnapshot?: string;
 
       /** Specifies the previous snapshot URL to be compared in the diff. */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @header("x-ms-previous-snapshot-url")
       prevSnapshotUrl?: string;
 
@@ -2124,6 +2238,12 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
+
+      /** The CRC64 hash of the content. */
+      @added(Versions.v2026_10_06)
+      @header("x-ms-content-crc64")
+      contentCrc64?: bytes;
+
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
