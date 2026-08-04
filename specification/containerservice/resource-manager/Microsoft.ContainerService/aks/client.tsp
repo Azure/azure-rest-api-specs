@@ -56,11 +56,7 @@ using Microsoft.ContainerService;
   "ContainerServiceAlertConfigurationProvisioningState",
   "csharp"
 );
-@@clientName(
-  AlertNotification,
-  "ContainerServiceAlertNotification",
-  "csharp"
-);
+@@clientName(AlertNotification, "ContainerServiceAlertNotification", "csharp");
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
