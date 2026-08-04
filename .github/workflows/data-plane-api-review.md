@@ -31,6 +31,7 @@ on:
 if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'data-plane-api-review-needed'
 permissions:
   contents: read
+  copilot-requests: write
   pull-requests: read
 # The agent reads PR files through the GitHub MCP toolsets, never from disk,
 # so no checkout is needed — and pull_request_target must not check out fork code.
@@ -45,10 +46,10 @@ checkout: false
 # change without a PR.
 #
 # The top-level `model:` is passed through to the Copilot CLI as `COPILOT_MODEL`
-# verbatim; gh-aw does not validate it. `claude-opus-4.6` was verified to be a
-# valid Copilot CLI model identifier, so the vally `model:` namespace and gh-aw's
-# coincide for this value and no mapping is needed. (This was `engine.model`
-# until gh-aw v0.83.1 deprecated that spelling; the compiled output is identical.)
+# verbatim; gh-aw does not validate it. Keep the vally `model:` pins on the same
+# Copilot CLI identifier; no mapping is needed for `gpt-5.6-sol`. (This was
+# `engine.model` until gh-aw v0.83.1 deprecated that spelling; the compiled
+# output is identical.)
 #
 # Do NOT upgrade to a newer model piecemeal. A model change is a re-baselining
 # event: bump this pin and every `model:` in the eval suite in the SAME PR,
@@ -56,7 +57,7 @@ checkout: false
 # side alone is caught by .github/workflows/data-plane-review-alignment.yaml.
 engine:
   id: copilot
-model: claude-opus-4.6
+model: gpt-5.6-sol
 tools:
   github:
     # Read-only toolsets only. This workflow reads untrusted fork content, and

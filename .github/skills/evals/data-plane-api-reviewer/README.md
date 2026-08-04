@@ -1065,7 +1065,7 @@ Two separate pins, with two separate rules.
 
 `model` in every eval file **must** stay equal to the top-level `model:` in
 [`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md).
-Both are currently `claude-opus-4.6`.
+Both are currently `gpt-5.6-sol`.
 
 This coupling is the whole reason the workflow pins a model at all. The
 false-positive rate is the promotion criterion for rollout phases 2 and 3;
@@ -1074,10 +1074,8 @@ configuration that is never shipped.
 
 `vally`'s `model:` and gh-aw's are nominally different namespaces — gh-aw
 passes its pin through to the Copilot CLI as `COPILOT_MODEL` without validating
-it. `claude-opus-4.6` was verified to be a valid Copilot CLI model identifier,
-so for this value the two namespaces coincide and no mapping is needed. If a
-future model's identifiers differ between the two, document the mapping next to
-both pins.
+it. Both use `gpt-5.6-sol`, so no mapping is needed. If a future model's
+identifiers differ between the two, document the mapping next to both pins.
 
 The workflow pin was spelled `engine.model` until gh-aw v0.83.1 deprecated that
 form in favor of a top-level `model:`. The alignment check accepts both, so a
