@@ -13,7 +13,9 @@ namespace Microsoft.Sql;
 /**
  * Usage Metric of a Subscription in a Location.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 model SubscriptionUsage
   is Azure.ResourceManager.ProxyResource<SubscriptionUsageProperties> {
   ...ResourceNameParameter<
@@ -34,7 +36,7 @@ alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** Name of usage metric to return. */
@@ -45,7 +47,9 @@ alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 interface SubscriptionUsages {
   /**
    * Gets a subscription usage metric.

@@ -16,6 +16,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./SapMonitor.tsp";
 import "./ProviderInstance.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

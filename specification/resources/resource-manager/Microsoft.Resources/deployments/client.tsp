@@ -277,3 +277,17 @@ using Microsoft.Resources;
 
 @@apiVersion(ProviderResourceType.apiVersions, false);
 @@apiVersion(AliasPath.apiVersions, false);
+@@responseAsBool(Deployments.checkExistenceAtScope, "javascript");
+@@responseAsBool(
+  DeploymentsExtendedTenant.checkExistenceAtTenantScope,
+  "javascript"
+);
+@@responseAsBool(
+  DeploymentExtendedManagementGroup.checkExistenceAtManagementGroupScope,
+  "javascript"
+);
+@@responseAsBool(
+  DeploymentExtendedSubscriptionGroup.checkExistenceAtSubscriptionScope,
+  "javascript"
+);
+@@responseAsBool(DeploymentExtendedOperationGroup.checkExistence, "javascript");

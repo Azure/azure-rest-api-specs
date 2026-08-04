@@ -301,8 +301,12 @@ using Microsoft.App;
   LogicApps.deployWorkflowArtifacts::parameters.body,
   "workflowArtifacts"
 );
+@@clientLocation(LogicApps.createOrUpdate, "LogicApps");
+@@clientLocation(LogicApps.createOrUpdateStable, "LogicApps");
+@@clientName(LogicApps.createOrUpdateStable, "CreateOrUpdate");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LogicApp.properties);
+@@TypeSpec.Versioning.removed(LogicApp.properties, Versions.v2026_01_01);
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
 

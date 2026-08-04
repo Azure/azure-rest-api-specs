@@ -53,7 +53,7 @@
         "description": "List all snapshots of a resource for a given time interval.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "request",
@@ -69,8 +69,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/ResourcesHistoryResult"
             }
           },
           "default": {
@@ -255,6 +254,10 @@
           "description": "Defines in which format query result returned."
         }
       }
+    },
+    "ResourcesHistoryResult": {
+      "type": "object",
+      "additionalProperties": {}
     }
   },
   "parameters": {}

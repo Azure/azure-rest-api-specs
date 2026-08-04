@@ -22,7 +22,7 @@ model PolicySetDefinition
     Resource = PolicySetDefinition,
     KeyName = "policySetDefinitionName",
     SegmentName = "policySetDefinitions",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -43,7 +43,7 @@ alias PolicySetDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   }
 >;
@@ -64,7 +64,7 @@ alias PolicySetDefinitionTenantOps = Azure.ResourceManager.Legacy.ExtensionOpera
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   }
 >;
@@ -95,7 +95,7 @@ alias PolicySetDefinitionManagementGroupOps = Azure.ResourceManager.Legacy.Exten
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   }
 >;

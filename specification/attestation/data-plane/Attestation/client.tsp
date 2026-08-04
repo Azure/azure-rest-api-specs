@@ -4,10 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AttestationService;
 
-@@clientName(AttestationService, "AttestationClient");
+@@clientName(AttestationService, "AttestationClient", "!autorest");
 
-@@clientName(AttestationResult.`x-ms-sgx-svn`, "svn");
-@@clientName(AttestationResult.svn, "deprecatedSvn");
+@@clientName(AttestationResult.`x-ms-sgx-svn`, "svn", "!autorest");
+@@clientName(AttestationResult.svn, "deprecatedSvn", "!autorest");
 
 @@usage(CertificateModification, Usage.output);
 @@usage(PolicyModification, Usage.output);

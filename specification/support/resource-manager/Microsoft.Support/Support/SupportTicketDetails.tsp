@@ -15,11 +15,10 @@ namespace Microsoft.Support;
 /**
  * Object that represents SupportTicketDetails resource.
  */
-model SupportTicketDetails
-  is Azure.ResourceManager.ProxyResource<
-    SupportTicketDetailsProperties,
-    false
-  > {
+model SupportTicketDetails is Azure.ResourceManager.ProxyResource<
+  SupportTicketDetailsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SupportTicketDetails,
     KeyName = "supportTicketName",

@@ -24,7 +24,8 @@ model SshPublicKeyResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("SshPublicKeys")
 interface SshPublicKeyResources {
   /**
    * Retrieves information about an SSH public key.

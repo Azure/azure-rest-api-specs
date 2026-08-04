@@ -8,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Information about the SourceToCloud builder resource.
  */
+@removed(Versions.v2026_01_01)
 model BuilderResource
   is Azure.ResourceManager.TrackedResource<BuilderProperties> {
   ...ResourceNameParameter<
@@ -24,6 +26,7 @@ model BuilderResource
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface Builders {
   /**

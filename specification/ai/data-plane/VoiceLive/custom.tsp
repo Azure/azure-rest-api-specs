@@ -10,6 +10,7 @@ namespace VoiceLive;
 
 /** Base for session configuration shared between request and response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model RequestSession {
   ...SessionBase;
@@ -69,6 +70,10 @@ model RequestSession {
 
   /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
+
+  /** Whether the model is allowed to call tools in parallel. */
+  @added(Versions.v2026_06_01_preview)
+  parallel_tool_calls?: boolean = true;
 
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
@@ -133,6 +138,8 @@ union ReasoningEffort {
 }
 
 /** Base for session configuration in the response. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(ResponseUsage)
 model ResponseSession is RequestSession {
   ...SessionBase;
@@ -142,6 +149,12 @@ model ResponseSession is RequestSession {
 
   /** The unique identifier for the session. */
   id?: string;
+
+  /** Expiration time for the session. This value is set by the server and cannot be changed with `session.update`. */
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but the legacy rule only allows int32 or int64."
+  @added(Versions.v2026_07_15)
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  expires_at?: utcDateTime;
 }
 
 /** Supported OpenAI voice names (string enum). */
@@ -459,7 +472,7 @@ union PersonalVoiceModels {
 
   /** Use the MAI-Voice-1 model. */
   @added(Versions.v2026_04_10)
-  "MAI-Voice-1",
+  `MAI-Voice-1`: "MAI-Voice-1",
 }
 
 /** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
@@ -532,6 +545,68 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   volume?: string;
 }
 
+/**
+ * Currently known voice names for the Azure realtime native voice type.
+ * This is an extensible enum; additional voice names may be accepted by the
+ * service in the future.
+ */
+@added(Versions.v2026_06_01_preview)
+union AzureRealtimeNativeVoiceName {
+  string,
+
+  /** Aarti voice. */
+  aarti: "aarti",
+
+  /** Andrew voice. */
+  andrew: "andrew",
+
+  /** Ava voice. */
+  ava: "ava",
+
+  /** Denise voice. */
+  denise: "denise",
+
+  /** Diya voice. */
+  diya: "diya",
+
+  /** Elsa voice. */
+  elsa: "elsa",
+
+  /** Florian voice. */
+  florian: "florian",
+
+  /** Francisca voice. */
+  francisca: "francisca",
+
+  /** Meera voice. */
+  meera: "meera",
+
+  /** Xiaoxiao voice. */
+  xiaoxiao: "xiaoxiao",
+
+  /** Yunxi voice. */
+  yunxi: "yunxi",
+
+  /** Ximena voice. */
+  ximena: "ximena",
+}
+
+/**
+ * Azure realtime native voice configuration. These voices are natively
+ * supported by the `azure-realtime` model and offer higher quality speech
+ * synthesis than standard Azure voices. Only valid when using the
+ * `azure-realtime` model.
+ */
+@added(Versions.v2026_06_01_preview)
+@usage(DualUsage)
+model AzureRealtimeNativeVoice {
+  /** The type of the voice. */
+  type: "azure-realtime-native";
+
+  /** The name of the Azure realtime native voice. */
+  name: AzureRealtimeNativeVoiceName;
+}
+
 // --- Top-level Voice union -------------------------------------------------
 
 /** Union of all supported voice configurations. */
@@ -540,6 +615,9 @@ union Voice {
   OAIVoice,
   OpenAIVoice,
   AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
+
+  @added(Versions.v2026_06_01_preview)
+  AzureRealtimeNativeVoice,
 }
 
 /** Input audio format types supported. */
@@ -590,6 +668,7 @@ union AudioInputTranscriptionModel {
 
 /** Configuration for input audio transcription. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model AudioInputTranscriptionOptions {
   /**
@@ -648,6 +727,23 @@ union Modality {
 @usage(RequestUsage)
 model EouDetection {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  @typeChangedFrom(
+    Versions.v2026_06_01_preview,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | string
+  )
+  @typeChangedFrom(
+    Versions.v2026_07_15,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | "smart_end_of_turn_detection"
+      | string
+  )
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
@@ -709,6 +805,26 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
   threshold_level?: EouThresholdLevel;
 
   /** Timeout in milliseconds. Recommended instead of `timeout`. */
+  @minValue(0)
+  timeout_ms?: int32;
+}
+
+/**
+ * Audio-based end-of-turn detection. Operates directly on the input audio
+ * stream rather than text. Use `threshold_level` and `timeout_ms` to tune
+ * detection.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
+@usage(RequestUsage)
+model SmartEndOfTurnDetection extends EouDetection {
+  `model`: "smart_end_of_turn_detection";
+
+  /** Threshold level setting. One of `low`, `medium`, `high`, or `default`. */
+  threshold_level?: EouThresholdLevel;
+
+  /** Timeout in milliseconds. */
   @minValue(0)
   timeout_ms?: int32;
 }
@@ -881,10 +997,43 @@ model AudioNoiseReduction {
 }
 
 /** Echo cancellation configuration for server-side audio processing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
 @usage(RequestUsage)
 model AudioEchoCancellation {
   /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
+
+  /**
+   * The source of the echo cancellation reference signal.
+   * - `server`: EC uses the internal TTS loopback as the reference signal (default, existing behavior).
+   * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
+   */
+  @added(Versions.v2026_06_01_preview)
+  reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
+
+  /**
+   * Number of input audio channels.
+   * - `1`: Mono input (default).
+   * - `2`: Interleaved stereo input where channel 0 is the microphone signal and channel 1 is the echo reference signal.
+   * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @minValue(1)
+  @maxValue(2)
+  channels?: int32 = 1;
+}
+
+/** The source of the echo cancellation reference signal. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
+@added(Versions.v2026_06_01_preview)
+union EchoCancellationReferenceSource {
+  string,
+
+  /** EC uses the internal TTS loopback as the reference signal. */
+  server: "server",
+
+  /** EC uses the client-supplied reference channel from the stereo input stream. */
+  client: "client",
 }
 
 /** Output timestamp types supported in audio response content. */
@@ -909,6 +1058,7 @@ union AnimationOutputType {
 
 /** Configuration for animation outputs including blendshapes and visemes metadata. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model Animation {
   /** The name of the animation model to use. */
@@ -1033,6 +1183,7 @@ model IceServer {
 
 /** Configuration for the agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model AgentConfig {
   /** The type of agent to use. */

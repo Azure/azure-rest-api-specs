@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A private link resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstancePrivateLinkResources
+)
 model ManagedInstancePrivateLink
   is Azure.ResourceManager.ProxyResource<ManagedInstancePrivateLinkProperties> {
   ...ResourceNameParameter<
@@ -25,7 +29,11 @@ model ManagedInstancePrivateLink
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstancePrivateLinkResources
+)
 interface ManagedInstancePrivateLinks {
   /**
    * Gets a private link resource for SQL server.

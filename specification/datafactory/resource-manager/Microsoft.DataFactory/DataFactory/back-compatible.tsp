@@ -1171,7 +1171,7 @@ using Microsoft.DataFactory;
 @@clientLocation(
   PrivateEndpointConnectionResources.listByFactory,
   "privateEndPointConnections",
-  "!java"
+  "!java,!python"
 );
 
 @@clientLocation(GlobalParameterResources.get, "GlobalParameters");

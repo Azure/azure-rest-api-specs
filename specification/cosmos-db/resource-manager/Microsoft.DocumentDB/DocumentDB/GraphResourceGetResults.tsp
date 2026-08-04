@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./DatabaseAccountGetResults.tsp";
 
@@ -9,12 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Graph resource.
  */
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model GraphResourceGetResults
   is Azure.ResourceManager.ProxyResource<GraphResourceGetProperties> {
   ...ResourceNameParameter<
@@ -40,6 +43,7 @@ model GraphResourceGetResults
   identity?: ManagedServiceIdentity;
 }
 
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface GraphResources {
   /**

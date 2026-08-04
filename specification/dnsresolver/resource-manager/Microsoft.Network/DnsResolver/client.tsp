@@ -105,7 +105,6 @@ using Microsoft.Network;
 );
 @@alternateType(TargetDnsServer.ipAddress, Azure.Core.ipV4Address, "csharp");
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
-@@access(SubResource, Access.internal, "csharp");
 @@alternateType(
   VirtualNetworkDnsForwardingRuleset.id,
   Azure.Core.armResourceIdentifier,

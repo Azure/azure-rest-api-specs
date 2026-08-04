@@ -2,13 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/openapi";
 
 using Azure.ResourceManager;
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 
@@ -24,15 +22,10 @@ namespace Microsoft.Chaos;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
 @autoRoute
 @armResourceAction(Resource)
 @post
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
+@Azure.Core.useFinalStateVia("location")
 op ArmResourceActionAsyncWithLocation<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
@@ -67,15 +60,10 @@ op ArmResourceActionAsyncWithLocation<
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
 @autoRoute
 @armResourceAction(Resource)
 @post
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
+@Azure.Core.useFinalStateVia("location")
 op ArmResourceActionNoContentAsyncWithLocationResult<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
@@ -107,15 +95,10 @@ op ArmResourceActionNoContentAsyncWithLocationResult<
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Custom LRO operation with specific response codes"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for LRO extensions in OpenAPI output"
 @autoRoute
 @armResourceAction(Resource)
 @post
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "location" }
-)
+@Azure.Core.useFinalStateVia("location")
 op ArmResourceActionNoBodyAsyncWithLocation<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
