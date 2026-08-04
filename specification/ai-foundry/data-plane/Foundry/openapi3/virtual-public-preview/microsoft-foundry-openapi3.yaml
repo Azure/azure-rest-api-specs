@@ -42625,7 +42625,7 @@ components:
             - benchmark_preview
           description: Data schema scenario, always `benchmark` for benchmark evaluations.
         benchmark_name:
-          type: string
+          $ref: '#/components/schemas/BenchmarkName'
           description: The name of the benchmark specification.
         benchmark_version:
           type: string
@@ -43540,6 +43540,23 @@ components:
           None: '#/components/schemas/NoAuthenticationCredentials'
           AgenticIdentityToken_Preview: '#/components/schemas/AgenticIdentityPreviewCredentials'
       description: A base class for connection credentials
+    BenchmarkName:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - builtin.gpqa_diamond
+            - builtin.bbeh
+            - builtin.bigbenchhard
+            - builtin.frontierscience
+            - builtin.ifeval
+            - builtin.musr
+            - builtin.truthful_qa
+            - builtin.inspect_ai.aime2025
+            - builtin.inspect_ai.browse_comp
+            - builtin.inspect_ai.chembench
+            - builtin.inspect_ai.tau2_telecom
+      description: The set of available benchmark specifications.
     BingCustomSearchConfiguration:
       type: object
       required:
@@ -44754,6 +44771,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+              - $ref: '#/components/schemas/EvalGraderInspectAI'
           description: A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
         properties:
           type: object
@@ -45872,6 +45890,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+              - $ref: '#/components/schemas/EvalGraderInspectAI'
           description: A list of testing criteria.
         created_at:
           type: integer
@@ -45967,6 +45986,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a CSV data source for evaluation runs.
+    EvalGraderInspectAI:
+      type: object
+      required:
+        - type
+        - name
+        - task_name
+      properties:
+        type:
+          type: string
+          enum:
+            - inspect_ai
+          description: The object type, which is always `inspect_ai`.
+        name:
+          type: string
+          description: The display name of the benchmark.
+        task_name:
+          type: string
+          description: The inspect_ai task module path (e.g., `inspect_evals/aime2025`).
+      description: Grader inspect_ai definition for inspect_ai benchmark evaluators.
     EvalResult:
       type: object
       required:
