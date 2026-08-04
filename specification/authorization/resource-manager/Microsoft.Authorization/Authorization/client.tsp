@@ -22,7 +22,6 @@ using Microsoft.RoleAssignment;
 using Microsoft.RoleDefinitions;
 using Microsoft.RoleManagementAlerts;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [
@@ -84,6 +83,14 @@ union RoleManagementScopeType {
   Microsoft.RoleAssignment.RoleAssignment,
   Azure.ClientGenerator.Core.Usage.input,
   "java"
+);
+
+// Preserve the existing SDK PrincipalType while the REST contract uses the
+// RoleAssignment-scoped union that adds the agent values.
+@@alternateType(
+  Microsoft.RoleAssignment.RoleAssignmentProperties.principalType,
+  Microsoft.Common.PrincipalType,
+  "java,python"
 );
 
 // Restore C# GA resource, model, and extensible-enum names.
