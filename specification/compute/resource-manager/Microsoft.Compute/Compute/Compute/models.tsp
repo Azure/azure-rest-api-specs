@@ -5790,6 +5790,7 @@ model ManagedDiskProperties {
   /**
    * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
    */
+  @minValue(1)
   maxShares?: int32;
 
   /**
@@ -5832,7 +5833,7 @@ model DiskAvailabilityPolicy {
 }
 
 /**
- * Determines on how to handle disks with slow I/O.
+ * Determines how to handle disks with slow I/O.
  */
 @added(Versions.v2026_04_01)
 union AvailabilityPolicyDiskDelay {
