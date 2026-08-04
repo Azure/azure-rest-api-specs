@@ -560,7 +560,7 @@ union TlsVersion {
   `1.2`: "1.2",
 
   /**
-   * 1.3
+   * TLS version 1.3.
    */
   @added(Versions.v2026_06_15_preview)
   `1.3`: "1.3",
