@@ -33514,6 +33514,13 @@
             "type": "string",
             "description": "The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number."
           },
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "The destinations to which the voice agent may transfer calls. This compatibility field replaces the agent-scoped transfer-target configuration when supplied."
+          },
           "connection_name": {
             "type": "string",
             "description": "The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token."
@@ -81172,6 +81179,7 @@
           "provider",
           "identifier",
           "status",
+          "transfer_targets",
           "connection_name",
           "incoming_call_url"
         ],
@@ -81195,6 +81203,13 @@
           "status": {
             "$ref": "#/components/schemas/TelephonyBindingStatus",
             "description": "The lifecycle status."
+          },
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "The agent-scoped destinations to which the voice agent may transfer calls."
           },
           "connection_name": {
             "type": "string",
@@ -82276,6 +82291,13 @@
           "status": {
             "$ref": "#/components/schemas/TelephonyBindingStatus",
             "description": "The new lifecycle status."
+          },
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "Replacement transfer targets. This compatibility field updates the agent-scoped configuration; an empty array clears all targets."
           },
           "connection_name": {
             "type": "string",

@@ -497,6 +497,9 @@ model CreateTelephonyBindingRequest {
   @doc("The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number.")
   identifier: string;
 
+  @doc("The destinations to which the voice agent may transfer calls. This compatibility field replaces the agent-scoped transfer-target configuration when supplied.")
+  transfer_targets?: TelephonyTransferTarget[];
+
   @doc("The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token.")
   connection_name: string;
 }
@@ -509,6 +512,9 @@ model UpdateTelephonyBindingRequest {
 
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
+
+  @doc("Replacement transfer targets. This compatibility field updates the agent-scoped configuration; an empty array clears all targets.")
+  transfer_targets?: TelephonyTransferTarget[];
 
   @doc("The replacement Foundry connection that configures provider access.")
   connection_name?: string;
@@ -531,6 +537,9 @@ model TelephonyBinding {
 
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
+
+  @doc("The agent-scoped destinations to which the voice agent may transfer calls.")
+  transfer_targets: TelephonyTransferTarget[];
 
   @doc("The Foundry connection that configures provider access. Secrets are referenced, not returned.")
   connection_name: string;
