@@ -224,90 +224,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}": {
-      "get": {
-        "operationId": "ClusterOperationResults_Get",
-        "description": "Gets the status of a Relay cluster long-running operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/OperationIdParameter"
-          },
-          {
-            "name": "isAsyncHeader",
-            "in": "query",
-            "description": "Indicates that the response uses the Azure asynchronous operation status shape.",
-            "required": true,
-            "type": "boolean",
-            "enum": [
-              true
-            ]
-          },
-          {
-            "name": "resourceName",
-            "in": "query",
-            "description": "The Relay cluster name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "query",
-            "description": "The resource type used by the Relay cluster operation coordinator.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "cluster"
-            ],
-            "x-ms-enum": {
-              "name": "ClusterOperationResourceType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Cluster",
-                  "value": "cluster",
-                  "description": "A Relay cluster resource."
-                }
-              ]
-            }
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "query",
-            "description": "The resource group containing the Relay cluster.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ClusterOperationResultGet": {
-            "$ref": "./examples/Clusters/ClusterOperationResultGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/namespaces": {
       "get": {
         "operationId": "Namespaces_List",
@@ -484,32 +400,6 @@
             "description": "Resource 'RelayCluster' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/RelayCluster"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -523,12 +413,7 @@
           "ClusterPut": {
             "$ref": "./examples/Clusters/ClusterPut.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/RelayCluster"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Clusters_Update",
@@ -573,25 +458,6 @@
               "$ref": "#/definitions/RelayCluster"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -603,12 +469,7 @@
           "ClusterPatch": {
             "$ref": "./examples/Clusters/ClusterPatch.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/RelayCluster"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Clusters_Delete",
@@ -641,25 +502,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -674,11 +516,7 @@
           "ClusterDelete": {
             "$ref": "./examples/Clusters/ClusterDelete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}/namespaces": {
@@ -3240,29 +3078,53 @@
         "rights"
       ]
     },
-    "AvailableRelayCluster": {
+    "AvailableRelayClusterRegion": {
       "type": "object",
-      "description": "A region containing an available pre-provisioned Relay cluster.",
+      "description": "A region with available Relay cluster capacity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the available cluster region.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the region.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableRelayClusterRegionProperties",
+          "description": "Properties of the available cluster region.",
+          "readOnly": true
+        }
+      }
+    },
+    "AvailableRelayClusterRegionProperties": {
+      "type": "object",
+      "description": "Properties of an available Relay cluster region.",
       "properties": {
         "location": {
           "type": "string",
-          "description": "The Azure region of the available Relay cluster."
+          "description": "The Azure region location.",
+          "readOnly": true
         }
       }
     },
     "AvailableRelayClustersList": {
       "type": "object",
-      "description": "The response from listing regions that have pre-provisioned Relay clusters.",
+      "description": "The response from listing regions that have available Relay cluster capacity.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Regions containing available pre-provisioned Relay clusters.",
+          "description": "Regions containing available Relay cluster capacity.",
           "items": {
-            "$ref": "#/definitions/AvailableRelayCluster"
-          },
-          "x-ms-identifiers": [
-            "location"
-          ]
+            "$ref": "#/definitions/AvailableRelayClusterRegion"
+          }
         }
       }
     },
@@ -3766,6 +3628,9 @@
           "description": "The Relay cluster SKU."
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -3901,6 +3766,10 @@
           "$ref": "#/definitions/RelayClusterSkuName",
           "description": "Name of the Relay cluster SKU."
         },
+        "tier": {
+          "$ref": "#/definitions/RelayClusterSkuTier",
+          "description": "Tier of the Relay cluster SKU."
+        },
         "capacity": {
           "type": "integer",
           "format": "int32",
@@ -3970,6 +3839,32 @@
       "type": "object",
       "description": "A SKU supported by a Relay cluster.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the SKU.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type to which the SKU applies.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RelayClusterSkuInfoProperties",
+          "description": "Properties of the SKU.",
+          "readOnly": true
+        }
+      }
+    },
+    "RelayClusterSkuInfoProperties": {
+      "type": "object",
+      "description": "Properties of a Relay cluster SKU.",
+      "properties": {
         "resourceType": {
           "type": "string",
           "description": "The resource type to which the SKU applies.",
@@ -3996,12 +3891,7 @@
           "description": "The SKUs supported by the Relay cluster.",
           "items": {
             "$ref": "#/definitions/RelayClusterSkuInfo"
-          },
-          "x-ms-identifiers": [
-            "resourceType",
-            "/sku/name",
-            "/sku/tier"
-          ]
+          }
         }
       }
     },
@@ -4067,6 +3957,10 @@
           "$ref": "#/definitions/RelayClusterSkuName",
           "description": "Name of the Relay cluster SKU."
         },
+        "tier": {
+          "$ref": "#/definitions/RelayClusterSkuTier",
+          "description": "Tier of the Relay cluster SKU."
+        },
         "capacity": {
           "type": "integer",
           "format": "int32",
@@ -4112,37 +4006,16 @@
         }
       ]
     },
-    "RelayNamespaceId": {
-      "type": "object",
-      "description": "A Relay namespace resource ID.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The full Azure resource ID of the Relay namespace.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Relay/namespaces"
-              }
-            ]
-          }
-        }
-      }
-    },
     "RelayNamespaceIdListResult": {
       "type": "object",
-      "description": "The response from listing Relay namespace resource IDs in a cluster.",
+      "description": "The response from listing Relay namespace references in a cluster.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Relay namespace resource IDs assigned to the cluster.",
+          "description": "Relay namespace references assigned to the cluster.",
           "items": {
-            "$ref": "#/definitions/RelayNamespaceId"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+            "$ref": "#/definitions/RelayNamespaceReference"
+          }
         }
       }
     },
@@ -4241,6 +4114,51 @@
         "minimumTlsVersion": {
           "$ref": "#/definitions/TlsVersion",
           "description": "The minimum TLS version for the namespace.\nSupported values are 1.2 and 1.3.\nThe service defaults to 1.2 when the property is omitted.\nExisting namespaces configured with TLS 1.0 or 1.1 are reported as TLS 1.2."
+        }
+      }
+    },
+    "RelayNamespaceReference": {
+      "type": "object",
+      "description": "A reference to a Relay namespace assigned to a cluster.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the namespace reference.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the namespace reference.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the namespace reference.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RelayNamespaceReferenceProperties",
+          "description": "Properties of the namespace reference.",
+          "readOnly": true
+        }
+      }
+    },
+    "RelayNamespaceReferenceProperties": {
+      "type": "object",
+      "description": "Properties of a Relay namespace reference.",
+      "properties": {
+        "namespaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource ID of the Relay namespace.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Relay/namespaces"
+              }
+            ]
+          }
         }
       }
     },

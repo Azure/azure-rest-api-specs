@@ -178,9 +178,8 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses.201.schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses.202.schema
   - suppress: PutResponseCodes
-    reason: These responses match the implemented Relay contract. Cluster PUT uses 202 for asynchronous allocation, while inherited resource responses cannot be changed without breaking existing clients.
+    reason: These responses match the implemented Relay contract for inherited resources that cannot be changed without breaking existing clients.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}"].put
@@ -192,9 +191,8 @@ directive:
     reason: The inherited namespace PATCH response codes are part of the existing Relay service contract and changing them would be breaking; the new cluster PATCH emits only 200 and 202.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].patch
   - suppress: DeleteResponseCodes
-    reason: These responses match the implemented Relay contract. Cluster deletion can return 200 while starting cleanup, and inherited responses cannot be changed without breaking clients.
+    reason: These responses match the implemented Relay contract for inherited resources that cannot be changed without breaking clients.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/clusters/{clusterName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].delete
   - suppress: GetResponseCodes
@@ -257,9 +255,6 @@ directive:
   - suppress: ParametersInPointGet
     reason: This is the implemented Relay long-running operation status endpoint, not a resource point GET; the query parameters identify the cluster operation being polled.
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters
-  - suppress: XmsEnumValidation
-    reason: isAsyncHeader is constrained to true because this operation documents the Azure-AsyncOperation status response; false returns the final resource through the separate Location polling contract.
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters[4]
   - suppress: RequiredPropertiesMissingInResourceModel
     reason: These definitions are non-resource list response wrappers whose names trigger the resource-model heuristic; their items are regions, SKU descriptions, or namespace resource IDs.
     where:

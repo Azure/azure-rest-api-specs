@@ -15,19 +15,6 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Relay;
 
-/**
- * Resource type supported by Relay cluster operation polling.
- */
-@added(Versions.v2026_07_01_preview)
-union ClusterOperationResourceType {
-  string,
-
-  /**
-   * A Relay cluster resource.
-   */
-  Cluster: "cluster",
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains a provider-level action rather than resource operations."
 @added(Versions.v2026_07_01_preview)
 interface ClustersOperationGroup {
@@ -42,49 +29,6 @@ interface ClustersOperationGroup {
     Scope = SubscriptionActionScope,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface exposes the implemented Relay cluster long-running operation polling route."
-@added(Versions.v2026_07_01_preview)
-@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
-interface ClusterOperationResults {
-  /**
-   * Gets the status of a Relay cluster long-running operation.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-    ...Azure.ResourceManager.Foundations.OperationIdParameter,
-
-    /**
-     * Indicates that the response uses the Azure asynchronous operation status shape.
-     */
-    @query
-    isAsyncHeader: true,
-
-    /**
-     * The Relay cluster name.
-     */
-    @query
-    resourceName: string,
-
-    /**
-     * The resource type used by the Relay cluster operation coordinator.
-     */
-    @query
-    resourceType: ClusterOperationResourceType,
-
-    /**
-     * The resource group containing the Relay cluster.
-     */
-    @query
-    resourceGroupName: string,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
-    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

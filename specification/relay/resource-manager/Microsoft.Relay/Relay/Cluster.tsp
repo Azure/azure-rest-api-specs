@@ -83,6 +83,11 @@ model RelayClusterSku {
   name: RelayClusterSkuName;
 
   /**
+   * Tier of the Relay cluster SKU.
+   */
+  tier?: RelayClusterSkuTier;
+
+  /**
    * The number of capacity units assigned to the Relay cluster.
    */
   @minValue(1)
@@ -148,6 +153,11 @@ model RelayClusterSkuUpdate {
   name?: RelayClusterSkuName;
 
   /**
+   * Tier of the Relay cluster SKU.
+   */
+  tier?: RelayClusterSkuTier;
+
+  /**
    * The number of capacity units assigned to the Relay cluster.
    */
   @minValue(1)
@@ -184,30 +194,60 @@ model RelayCluster
    * The Relay cluster SKU.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The Relay service implements the established Event Hubs cluster envelope with the SKU outside properties."
-  sku?: RelayClusterSku;
+  sku: RelayClusterSku;
 }
 
 /**
- * The response from listing Relay namespace resource IDs in a cluster.
+ * The response from listing Relay namespace references in a cluster.
  */
 @added(Versions.v2026_07_01_preview)
 model RelayNamespaceIdListResult {
   /**
-   * Relay namespace resource IDs assigned to the cluster.
+   * Relay namespace references assigned to the cluster.
    */
-  @Azure.ResourceManager.identifiers(#["id"])
-  value?: RelayNamespaceId[];
+  value?: RelayNamespaceReference[];
 }
 
 /**
- * A Relay namespace resource ID.
+ * A reference to a Relay namespace assigned to a cluster.
  */
 @added(Versions.v2026_07_01_preview)
-model RelayNamespaceId {
+model RelayNamespaceReference {
+  /**
+   * Fully qualified resource ID for the namespace reference.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the namespace reference.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The resource type of the namespace reference.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Properties of the namespace reference.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: RelayNamespaceReferenceProperties;
+}
+
+/**
+ * Properties of a Relay namespace reference.
+ */
+@added(Versions.v2026_07_01_preview)
+model RelayNamespaceReferenceProperties {
   /**
    * The full Azure resource ID of the Relay namespace.
    */
-  id?: Azure.Core.armResourceIdentifier<[
+  @visibility(Lifecycle.Read)
+  namespaceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Relay/namespaces";
     }
@@ -215,25 +255,55 @@ model RelayNamespaceId {
 }
 
 /**
- * The response from listing regions that have pre-provisioned Relay clusters.
+ * The response from listing regions that have available Relay cluster capacity.
  */
 @added(Versions.v2026_07_01_preview)
 model AvailableRelayClustersList {
   /**
-   * Regions containing available pre-provisioned Relay clusters.
+   * Regions containing available Relay cluster capacity.
    */
-  @Azure.ResourceManager.identifiers(#["location"])
-  value?: AvailableRelayCluster[];
+  value?: AvailableRelayClusterRegion[];
 }
 
 /**
- * A region containing an available pre-provisioned Relay cluster.
+ * A region with available Relay cluster capacity.
  */
 @added(Versions.v2026_07_01_preview)
-model AvailableRelayCluster {
+model AvailableRelayClusterRegion {
   /**
-   * The Azure region of the available Relay cluster.
+   * Fully qualified resource ID for the available cluster region.
    */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the region.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Properties of the available cluster region.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: AvailableRelayClusterRegionProperties;
+}
+
+/**
+ * Properties of an available Relay cluster region.
+ */
+@added(Versions.v2026_07_01_preview)
+model AvailableRelayClusterRegionProperties {
+  /**
+   * The Azure region location.
+   */
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -245,11 +315,6 @@ model RelayClusterSkuListResult {
   /**
    * The SKUs supported by the Relay cluster.
    */
-  @Azure.ResourceManager.identifiers(#[
-    "resourceType",
-    "/sku/name",
-    "/sku/tier"
-  ])
   value?: RelayClusterSkuInfo[];
 }
 
@@ -258,6 +323,36 @@ model RelayClusterSkuListResult {
  */
 @added(Versions.v2026_07_01_preview)
 model RelayClusterSkuInfo {
+  /**
+   * Fully qualified resource ID for the SKU.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the SKU.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The resource type to which the SKU applies.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Properties of the SKU.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: RelayClusterSkuInfoProperties;
+}
+
+/**
+ * Properties of a Relay cluster SKU.
+ */
+@added(Versions.v2026_07_01_preview)
+model RelayClusterSkuInfoProperties {
   /**
    * The resource type to which the SKU applies.
    */
@@ -345,14 +440,8 @@ interface Clusters {
   /**
    * Creates or updates a Relay cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The response codes match the implemented Relay cluster contract."
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     RelayCluster,
-    Response =
-      | ArmResourceUpdatedResponse<RelayCluster>
-      | ArmResourceCreatedResponse<RelayCluster>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RelayCluster> &
-          Azure.Core.Foundations.RetryAfterHeader>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
@@ -360,27 +449,17 @@ interface Clusters {
    * Updates mutable properties of a Relay cluster.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     RelayCluster,
     PatchModel = RelayClusterUpdate,
-    Response =
-      | ArmResponse<RelayCluster>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RelayCluster> &
-          Azure.Core.Foundations.RetryAfterHeader>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
   /**
    * Deletes a Relay cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The response codes match the implemented Relay cluster contract."
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ArmResourceDeleteSync<
     RelayCluster,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
