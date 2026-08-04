@@ -15569,6 +15569,33 @@
         }
       }
     },
+    "DiskApiVersion": {
+      "type": "string",
+      "description": "Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD.",
+      "enum": [
+        "2025-01-02",
+        "2026-03-02",
+        "2026-07-02"
+      ],
+      "x-ms-enum": {
+        "name": "DiskApiVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2025-01-02",
+            "value": "2025-01-02"
+          },
+          {
+            "name": "2026-03-02",
+            "value": "2026-03-02"
+          },
+          {
+            "name": "2026-07-02",
+            "value": "2026-07-02"
+          }
+        ]
+      }
+    },
     "DiskAvailabilityPolicy": {
       "type": "object",
       "description": "In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.",
@@ -17228,7 +17255,7 @@
     },
     "ManagedDiskProperties": {
       "type": "object",
-      "description": "Specifies the properties of a managed disk that can be updated when attaching the disk to a virtual machine.",
+      "description": "Specifies the properties of a managed disk that can be set at the time of implicit creation of the disk.",
       "properties": {
         "tier": {
           "type": "string",
@@ -20260,8 +20287,8 @@
           "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
         },
         "diskApiVersion": {
-          "type": "string",
-          "description": "Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-04-01\")."
+          "$ref": "#/definitions/DiskApiVersion",
+          "description": "Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-03-02\")."
         }
       }
     },
@@ -23797,8 +23824,8 @@
           "description": "Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01"
         },
         "diskApiVersion": {
-          "type": "string",
-          "description": "Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-04-01\")."
+          "$ref": "#/definitions/DiskApiVersion",
+          "description": "Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-03-02\")."
         }
       }
     },
@@ -24225,8 +24252,8 @@
           "description": "Specifies the disk controller type configured for the virtual machines in the scale set. **Note:** You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set. Minimum api-version: 2022-08-01"
         },
         "diskApiVersion": {
-          "type": "string",
-          "description": "Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-04-01\")."
+          "$ref": "#/definitions/DiskApiVersion",
+          "description": "Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-03-02\")."
         }
       }
     },
