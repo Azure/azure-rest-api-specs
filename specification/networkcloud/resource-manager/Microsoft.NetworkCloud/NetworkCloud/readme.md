@@ -59,6 +59,9 @@ suppressions:
     from: networkcloud.json
     reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
+  - code: BodyTopLevelProperties
+    from: networkcloud.json
+    reason: Bug in Linter, see https://github.com/Azure/azure-openapi-validator/issues/722
 ```
 
 ### Tag: package-2025-02-01
@@ -701,7 +704,15 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/start"].post
   - code: PatchBodyParametersSchema
     from: networkcloud.json
-    reason: Patch schema has required values to support polymorphic types that require fields to be changed to prevent improper wire contract violations.
+    reason: >-
+      The PATCH body reaches the polymorphic SecretArchiveProviderConfiguration through the
+      optional secretArchiveSettings.providerConfiguration. The required properties are scoped
+      within that optional sub-object, not at the top level: the discriminator (provider) plus
+      per-provider required fields (CyberArk: applicationId, safeName; HashiCorpVault/OpenBao:
+      authenticationMethod). A discriminated sub-object cannot follow RFC 7396 field-merge
+      semantics, so when providerConfiguration is supplied it must be a complete, valid config
+      for the chosen provider; omitting it leaves the setting unchanged. This shape was
+      recommended by ARM reviewers after discussion (azure-rest-api-specs-pr#28719).
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[6].schema.properties.properties
 ```
 

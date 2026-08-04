@@ -1036,7 +1036,7 @@ model SecretArchiveSettings {
   associatedIdentity?: IdentitySelector;
 
   /**
-   * The public key used to encrypt secrets that are archived into the key vault. Expected encoding is a PEM-encoded RSA public key with a minimum key size of 3072 bits. Additional key formats or sizes may be supported in future versions.
+   * The public key used to encrypt secrets before they are written to the secret archive. Expected encoding is a PEM-encoded RSA public key with a minimum key size of 3072 bits. Additional key formats or sizes may be supported in future versions.
    */
   @added(Versions.v2026_08_01_preview)
   encryptionPublicKey?: string;
@@ -1048,7 +1048,7 @@ model SecretArchiveSettings {
   providerConfiguration?: SecretArchiveProviderConfiguration;
 
   /**
-   * The URI for the key vault used as the secret archive. The URI must use the `https://` scheme.
+   * The URI of the secret archive endpoint. The URI must use the `https://` scheme.
    */
   vaultUri?: url;
 }
@@ -1147,7 +1147,7 @@ model CyberArkSecretArchiveProviderConfiguration
   safeName: string;
 
   /**
-   * The folder name within the safe. Defaults to Root if not specified.
+   * The folder name within the safe. When not specified, the service uses `Root`.
    */
   folderName?: string;
 
@@ -1169,12 +1169,12 @@ model HashiCorpVaultSecretArchiveProviderConfiguration
   provider: SecretArchiveProviderType.HashiCorpVault;
 
   /**
-   * The key value secrets engine mount path. Defaults to secret if not specified.
+   * The key value secrets engine mount path. When not specified, the service uses `secret`.
    */
   mountPath?: string;
 
   /**
-   * The key value engine version. Supports values `V1` and `V2`, defaults to `V2`.
+   * The key value engine version. Supports values `V1` and `V2`. When not specified, the service uses `V2`.
    */
   keyValueVersion?: KeyValueVersion;
 
@@ -1184,7 +1184,7 @@ model HashiCorpVaultSecretArchiveProviderConfiguration
   `namespace`?: string;
 
   /**
-   * The secret path pattern. Defaults to `edge-credentials/{namespace}/{name}`.
+   * The secret path pattern. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time. When not specified, the service uses `edge-credentials/{namespace}/{name}`.
    */
   pathTemplate?: string;
 
@@ -1216,12 +1216,12 @@ model OpenBaoSecretArchiveProviderConfiguration
   provider: SecretArchiveProviderType.OpenBao;
 
   /**
-   * The key value secrets engine mount path. Defaults to secret if not specified.
+   * The key value secrets engine mount path. When not specified, the service uses `secret`.
    */
   mountPath?: string;
 
   /**
-   * The key value engine version. Supports values `V1` and `V2`, defaults to `V2`.
+   * The key value engine version. Supports values `V1` and `V2`. When not specified, the service uses `V2`.
    */
   keyValueVersion?: KeyValueVersion;
 
@@ -1231,7 +1231,7 @@ model OpenBaoSecretArchiveProviderConfiguration
   `namespace`?: string;
 
   /**
-   * The secret path pattern. Defaults to `edge-credentials/{namespace}/{name}`.
+   * The secret path pattern. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time. When not specified, the service uses `edge-credentials/{namespace}/{name}`.
    */
   pathTemplate?: string;
 

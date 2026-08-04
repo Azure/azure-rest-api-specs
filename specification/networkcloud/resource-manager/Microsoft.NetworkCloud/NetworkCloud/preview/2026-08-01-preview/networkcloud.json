@@ -14462,7 +14462,7 @@
         },
         "folderName": {
           "type": "string",
-          "description": "The folder name within the safe. Defaults to Root if not specified."
+          "description": "The folder name within the safe. When not specified, the service uses `Root`."
         },
         "objectNameTemplate": {
           "type": "string",
@@ -14771,11 +14771,11 @@
       "properties": {
         "mountPath": {
           "type": "string",
-          "description": "The key value secrets engine mount path. Defaults to secret if not specified."
+          "description": "The key value secrets engine mount path. When not specified, the service uses `secret`."
         },
         "keyValueVersion": {
           "$ref": "#/definitions/KeyValueVersion",
-          "description": "The key value engine version. Supports values `V1` and `V2`, defaults to `V2`."
+          "description": "The key value engine version. Supports values `V1` and `V2`. When not specified, the service uses `V2`."
         },
         "namespace": {
           "type": "string",
@@ -14783,7 +14783,7 @@
         },
         "pathTemplate": {
           "type": "string",
-          "description": "The secret path pattern. Defaults to `edge-credentials/{namespace}/{name}`."
+          "description": "The secret path pattern. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time. When not specified, the service uses `edge-credentials/{namespace}/{name}`."
         },
         "authenticationMethod": {
           "$ref": "#/definitions/VaultAuthenticationMethod",
@@ -17354,11 +17354,11 @@
       "properties": {
         "mountPath": {
           "type": "string",
-          "description": "The key value secrets engine mount path. Defaults to secret if not specified."
+          "description": "The key value secrets engine mount path. When not specified, the service uses `secret`."
         },
         "keyValueVersion": {
           "$ref": "#/definitions/KeyValueVersion",
-          "description": "The key value engine version. Supports values `V1` and `V2`, defaults to `V2`."
+          "description": "The key value engine version. Supports values `V1` and `V2`. When not specified, the service uses `V2`."
         },
         "namespace": {
           "type": "string",
@@ -17366,7 +17366,7 @@
         },
         "pathTemplate": {
           "type": "string",
-          "description": "The secret path pattern. Defaults to `edge-credentials/{namespace}/{name}`."
+          "description": "The secret path pattern. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time. When not specified, the service uses `edge-credentials/{namespace}/{name}`."
         },
         "authenticationMethod": {
           "$ref": "#/definitions/VaultAuthenticationMethod",
@@ -18487,7 +18487,7 @@
         },
         "encryptionPublicKey": {
           "type": "string",
-          "description": "The public key used to encrypt secrets that are archived into the key vault. Expected encoding is a PEM-encoded RSA public key with a minimum key size of 3072 bits. Additional key formats or sizes may be supported in future versions."
+          "description": "The public key used to encrypt secrets before they are written to the secret archive. Expected encoding is a PEM-encoded RSA public key with a minimum key size of 3072 bits. Additional key formats or sizes may be supported in future versions."
         },
         "providerConfiguration": {
           "$ref": "#/definitions/SecretArchiveProviderConfiguration",
@@ -18496,7 +18496,7 @@
         "vaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI for the key vault used as the secret archive. The URI must use the `https://` scheme."
+          "description": "The URI of the secret archive endpoint. The URI must use the `https://` scheme."
         }
       }
     },
