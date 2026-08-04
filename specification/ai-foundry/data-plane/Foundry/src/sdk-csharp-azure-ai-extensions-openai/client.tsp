@@ -675,104 +675,270 @@ namespace Azure.AI.Projects {
   // one shared source of truth instead of re-emitting duplicates.
   @@access(OpenAI.OutputItemFunctionShellCall, Access.public);
   @@usage(OpenAI.OutputItemFunctionShellCall, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputItemFunctionShellCall, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.OutputItemFunctionShellCall,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@clientName(OpenAI.FunctionShellCall.id, "ItemId", "csharp");
 
   @@access(OpenAI.OutputItemFunctionShellCallOutput, Access.public);
   @@usage(OpenAI.OutputItemFunctionShellCallOutput, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputItemFunctionShellCallOutput, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.OutputItemFunctionShellCallOutput,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@clientName(OpenAI.FunctionShellCallOutput.id, "ItemId", "csharp");
 
   @@access(OpenAI.OutputItemLocalShellToolCall, Access.public);
   @@usage(OpenAI.OutputItemLocalShellToolCall, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputItemLocalShellToolCall, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.OutputItemLocalShellToolCall,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@clientName(OpenAI.LocalShellToolCall.id, "ItemId", "csharp");
 
   @@access(OpenAI.OutputItemLocalShellToolCallOutput, Access.public);
-  @@usage(OpenAI.OutputItemLocalShellToolCallOutput, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputItemLocalShellToolCallOutput, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.OutputItemLocalShellToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.OutputItemLocalShellToolCallOutput,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@clientName(OpenAI.LocalShellToolCallOutput.id, "ItemId", "csharp");
 
   @@access(OpenAI.OutputItemCompactionBody, Access.public);
   @@usage(OpenAI.OutputItemCompactionBody, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputItemCompactionBody, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.OutputItemCompactionBody,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@clientName(OpenAI.CompactionBody.id, "ItemId", "csharp");
 
   @@access(OpenAI.OutputMessageContent, Access.public);
   @@usage(OpenAI.OutputMessageContent, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputMessageContent, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.OutputMessageContent,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.OutputMessageContentOutputTextContent, Access.public);
-  @@usage(OpenAI.OutputMessageContentOutputTextContent, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputMessageContentOutputTextContent, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.OutputMessageContentOutputTextContent,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.OutputMessageContentOutputTextContent,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.OutputMessageContentRefusalContent, Access.public);
-  @@usage(OpenAI.OutputMessageContentRefusalContent, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.OutputMessageContentRefusalContent, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.OutputMessageContentRefusalContent,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.OutputMessageContentRefusalContent,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.FunctionShellCallItemParam, Access.public);
   @@usage(OpenAI.FunctionShellCallItemParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallItemParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellCallItemParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.FunctionShellCallOutputItemParam, Access.public);
   @@usage(OpenAI.FunctionShellCallOutputItemParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputItemParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputItemParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.FunctionShellCallItemParamEnvironment, Access.public);
-  @@usage(OpenAI.FunctionShellCallItemParamEnvironment, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallItemParamEnvironment, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallItemParamEnvironment,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallItemParamEnvironment,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.FunctionShellCallOutputOutcomeParam, Access.public);
-  @@usage(OpenAI.FunctionShellCallOutputOutcomeParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputOutcomeParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallOutputOutcomeParam,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputOutcomeParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@access(OpenAI.FunctionShellAction, Access.public);
   @@usage(OpenAI.FunctionShellAction, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellAction, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellAction,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellActionParam, Access.public);
   @@usage(OpenAI.FunctionShellActionParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellActionParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellActionParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallEnvironment, Access.public);
   @@usage(OpenAI.FunctionShellCallEnvironment, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallEnvironment, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellCallEnvironment,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.ContainerReferenceResource, Access.public);
   @@usage(OpenAI.ContainerReferenceResource, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.ContainerReferenceResource, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.ContainerReferenceResource,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.LocalEnvironmentResource, Access.public);
   @@usage(OpenAI.LocalEnvironmentResource, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.LocalEnvironmentResource, "Azure.AI.Extensions.OpenAI", "csharp");
-  @@access(OpenAI.FunctionShellCallItemParamEnvironmentContainerReferenceParam, Access.public);
-  @@usage(OpenAI.FunctionShellCallItemParamEnvironmentContainerReferenceParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallItemParamEnvironmentContainerReferenceParam, "Azure.AI.Extensions.OpenAI", "csharp");
-  @@access(OpenAI.FunctionShellCallItemParamEnvironmentLocalEnvironmentParam, Access.public);
-  @@usage(OpenAI.FunctionShellCallItemParamEnvironmentLocalEnvironmentParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallItemParamEnvironmentLocalEnvironmentParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.LocalEnvironmentResource,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
+  @@access(
+    OpenAI.FunctionShellCallItemParamEnvironmentContainerReferenceParam,
+    Access.public
+  );
+  @@usage(
+    OpenAI.FunctionShellCallItemParamEnvironmentContainerReferenceParam,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallItemParamEnvironmentContainerReferenceParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
+  @@access(
+    OpenAI.FunctionShellCallItemParamEnvironmentLocalEnvironmentParam,
+    Access.public
+  );
+  @@usage(
+    OpenAI.FunctionShellCallItemParamEnvironmentLocalEnvironmentParam,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallItemParamEnvironmentLocalEnvironmentParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputContent, Access.public);
   @@usage(OpenAI.FunctionShellCallOutputContent, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputContent, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputContent,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputContentParam, Access.public);
-  @@usage(OpenAI.FunctionShellCallOutputContentParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputContentParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallOutputContentParam,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputContentParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputOutcome, Access.public);
   @@usage(OpenAI.FunctionShellCallOutputOutcome, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputOutcome, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputOutcome,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputExitOutcome, Access.public);
-  @@usage(OpenAI.FunctionShellCallOutputExitOutcome, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputExitOutcome, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallOutputExitOutcome,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputExitOutcome,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputTimeoutOutcome, Access.public);
-  @@usage(OpenAI.FunctionShellCallOutputTimeoutOutcome, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputTimeoutOutcome, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallOutputTimeoutOutcome,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputTimeoutOutcome,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputExitOutcomeParam, Access.public);
-  @@usage(OpenAI.FunctionShellCallOutputExitOutcomeParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputExitOutcomeParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallOutputExitOutcomeParam,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputExitOutcomeParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.FunctionShellCallOutputTimeoutOutcomeParam, Access.public);
-  @@usage(OpenAI.FunctionShellCallOutputTimeoutOutcomeParam, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.FunctionShellCallOutputTimeoutOutcomeParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@usage(
+    OpenAI.FunctionShellCallOutputTimeoutOutcomeParam,
+    Usage.input | Usage.output
+  );
+  @@clientNamespace(
+    OpenAI.FunctionShellCallOutputTimeoutOutcomeParam,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
   @@access(OpenAI.LocalShellExecAction, Access.public);
   @@usage(OpenAI.LocalShellExecAction, Usage.input | Usage.output);
-  @@clientNamespace(OpenAI.LocalShellExecAction, "Azure.AI.Extensions.OpenAI", "csharp");
-  @@alternateType(OpenAI.OutputItemComputerToolCallOutput, { identity: "OpenAI.Responses.ComputerCallOutputResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.OutputItemFunctionToolCallOutput, { identity: "OpenAI.Responses.FunctionCallOutputResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@clientNamespace(
+    OpenAI.LocalShellExecAction,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItemComputerToolCallOutput,
+    {
+      identity: "OpenAI.Responses.ComputerCallOutputResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItemFunctionToolCallOutput,
+    {
+      identity: "OpenAI.Responses.FunctionCallOutputResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------

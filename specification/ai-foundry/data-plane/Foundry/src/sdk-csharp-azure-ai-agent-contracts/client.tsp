@@ -330,61 +330,493 @@ namespace Azure.AI.Projects {
   // Consume concrete models from their owning packages: official OpenAI response
   // models from OpenAI, and Azure-specific Foundry additions from
   // Azure.AI.Extensions.OpenAI.
-  @@alternateType(OpenAI.OutputItemType, { identity: "OpenAI.Responses.ResponseItemKind", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ToolType, { identity: "OpenAI.Responses.ResponseToolKind", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.OutputItem, { identity: "OpenAI.Responses.ResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.InputItem, { identity: "OpenAI.Responses.ResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ItemMessage, { identity: "OpenAI.Responses.MessageResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.OutputMessage, { identity: "OpenAI.Responses.MessageResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.Tool, { identity: "OpenAI.Responses.ResponseTool", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.Message, { identity: "OpenAI.Responses.MessageResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.Response, { identity: "OpenAI.Responses.ResponseResult", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ResponseError, { identity: "OpenAI.Responses.ResponseError", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ResponseErrorCode, { identity: "OpenAI.Responses.ResponseErrorCode", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.CreateResponse, { identity: "OpenAI.Responses.CreateResponseOptions", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ResponseStreamEvent, { identity: "OpenAI.Responses.ResponseStreamEvent", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ContainerNetworkPolicyParam, { identity: "OpenAI.Containers.ContainerNetworkPolicy", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ContainerNetworkPolicyAllowlistParam, { identity: "OpenAI.Containers.ContainerAllowlistNetworkPolicy", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ContainerNetworkPolicyDisabledParam, { identity: "OpenAI.Containers.ContainerDisabledNetworkPolicy", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ContainerNetworkPolicyDomainSecretParam, { identity: "OpenAI.Containers.ContainerNetworkPolicyDomainSecret", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.ContainerMemoryLimit, { identity: "OpenAI.Containers.ContainerMemoryLimit", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
-  @@alternateType(OpenAI.MCPToolFilter, { identity: "OpenAI.Responses.McpToolFilter", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(
+    OpenAI.OutputItemType,
+    {
+      identity: "OpenAI.Responses.ResponseItemKind",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ToolType,
+    {
+      identity: "OpenAI.Responses.ResponseToolKind",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItem,
+    {
+      identity: "OpenAI.Responses.ResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.InputItem,
+    {
+      identity: "OpenAI.Responses.ResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ItemMessage,
+    {
+      identity: "OpenAI.Responses.MessageResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputMessage,
+    {
+      identity: "OpenAI.Responses.MessageResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.Tool,
+    {
+      identity: "OpenAI.Responses.ResponseTool",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.Message,
+    {
+      identity: "OpenAI.Responses.MessageResponseItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.Response,
+    {
+      identity: "OpenAI.Responses.ResponseResult",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ResponseError,
+    {
+      identity: "OpenAI.Responses.ResponseError",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ResponseErrorCode,
+    {
+      identity: "OpenAI.Responses.ResponseErrorCode",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.CreateResponse,
+    {
+      identity: "OpenAI.Responses.CreateResponseOptions",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ResponseStreamEvent,
+    {
+      identity: "OpenAI.Responses.ResponseStreamEvent",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ContainerNetworkPolicyParam,
+    {
+      identity: "OpenAI.Containers.ContainerNetworkPolicy",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ContainerNetworkPolicyAllowlistParam,
+    {
+      identity: "OpenAI.Containers.ContainerAllowlistNetworkPolicy",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ContainerNetworkPolicyDisabledParam,
+    {
+      identity: "OpenAI.Containers.ContainerDisabledNetworkPolicy",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ContainerNetworkPolicyDomainSecretParam,
+    {
+      identity: "OpenAI.Containers.ContainerNetworkPolicyDomainSecret",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ContainerMemoryLimit,
+    {
+      identity: "OpenAI.Containers.ContainerMemoryLimit",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.MCPToolFilter,
+    {
+      identity: "OpenAI.Responses.McpToolFilter",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
-  @@alternateType(AgentReference, { identity: "Azure.AI.Extensions.OpenAI.AgentReference", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(A2APreviewTool, { identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(A2AToolCall, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(A2AToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(AzureAISearchTool, { identity: "Azure.AI.Extensions.OpenAI.AzureAISearchTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(AzureAISearchToolCall, { identity: "Azure.AI.Extensions.OpenAI.AzureAISearchToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(AzureAISearchToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.AzureAISearchToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(AzureFunctionTool, { identity: "Azure.AI.Extensions.OpenAI.AzureFunctionTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(AzureFunctionToolCall, { identity: "Azure.AI.Extensions.OpenAI.AzureFunctionToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(AzureFunctionToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.AzureFunctionToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BingCustomSearchPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BingCustomSearchToolCall, { identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BingCustomSearchToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BingGroundingTool, { identity: "Azure.AI.Extensions.OpenAI.BingGroundingTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BingGroundingToolCall, { identity: "Azure.AI.Extensions.OpenAI.BingGroundingToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BingGroundingToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.BingGroundingToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BrowserAutomationPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BrowserAutomationToolCall, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(BrowserAutomationToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(CaptureStructuredOutputsTool, { identity: "Azure.AI.Extensions.OpenAI.CaptureStructuredOutputsTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(FabricDataAgentToolCall, { identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(FabricDataAgentToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(FabricIQPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.FabricIQPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(MemoryCommandToolCall, { identity: "Azure.AI.Extensions.OpenAI.MemoryCommandToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(MemoryCommandToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.MemoryCommandToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(MemorySearchPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.MemorySearchPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(MemorySearchToolCall, { identity: "Azure.AI.Extensions.OpenAI.MemorySearchToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(MicrosoftFabricPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.MicrosoftFabricPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenApiTool, { identity: "Azure.AI.Extensions.OpenAI.OpenApiTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenApiToolCall, { identity: "Azure.AI.Extensions.OpenAI.OpenApiToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenApiToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.OpenApiToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(SharepointPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.SharepointPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(SharepointGroundingToolCall, { identity: "Azure.AI.Extensions.OpenAI.SharepointGroundingToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(SharepointGroundingToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.SharepointGroundingToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(WorkIQPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.WorkIQPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(
+    AgentReference,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AgentReference",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    A2APreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    A2AToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.A2AToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    A2AToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.A2AToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    AzureAISearchTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AzureAISearchTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    AzureAISearchToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AzureAISearchToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    AzureAISearchToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AzureAISearchToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    AzureFunctionTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    AzureFunctionToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    AzureFunctionToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BingCustomSearchPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BingCustomSearchToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BingCustomSearchToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BingGroundingTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingGroundingTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BingGroundingToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingGroundingToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BingGroundingToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingGroundingToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BrowserAutomationPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BrowserAutomationToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    BrowserAutomationToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    CaptureStructuredOutputsTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.CaptureStructuredOutputsTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    FabricDataAgentToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    FabricDataAgentToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    FabricIQPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FabricIQPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    MemoryCommandToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.MemoryCommandToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    MemoryCommandToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.MemoryCommandToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    MemorySearchPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.MemorySearchPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    MemorySearchToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.MemorySearchToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    MicrosoftFabricPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.MicrosoftFabricPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenApiTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenApiToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenApiToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    SharepointPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.SharepointPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    SharepointGroundingToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.SharepointGroundingToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    SharepointGroundingToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.SharepointGroundingToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    WorkIQPreviewTool,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.WorkIQPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
 
   // AgentServer custom/server code still consumes these protocol helper models
   // directly. Keep them generated locally even though data-plane clients are
@@ -398,17 +830,100 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.CustomToolCallResource, "OutputItemCustomToolCall");
   @@usage(OpenAI.CustomToolCallOutputResource, Usage.output | Usage.json);
   @@access(OpenAI.CustomToolCallOutputResource, Access.public);
-  @@clientName(OpenAI.CustomToolCallOutputResource, "OutputItemCustomToolCallOutput");
-  @@alternateType(OpenAI.OutputItemLocalShellToolCall, { identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.OutputItemLocalShellToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.OutputItemFunctionShellCall, { identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.OutputItemFunctionShellCallOutput, { identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.OutputItemCompactionBody, { identity: "Azure.AI.Extensions.OpenAI.OutputItemCompactionBody", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.FunctionShellCallItemParam, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallItemParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.FunctionShellCallOutputItemParam, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallOutputItemParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.FunctionShellCallItemParamEnvironment, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallItemParamEnvironment", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.FunctionShellCallOutputOutcomeParam, { identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallOutputOutcomeParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.OutputMessageContent, { identity: "Azure.AI.Extensions.OpenAI.OutputMessageContent", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@clientName(
+    OpenAI.CustomToolCallOutputResource,
+    "OutputItemCustomToolCallOutput"
+  );
+  @@alternateType(
+    OpenAI.OutputItemLocalShellToolCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItemLocalShellToolCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItemFunctionShellCall,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCall",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItemFunctionShellCallOutput,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCallOutput",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputItemCompactionBody,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OutputItemCompactionBody",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.FunctionShellCallItemParam,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallItemParam",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.FunctionShellCallOutputItemParam,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallOutputItemParam",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.FunctionShellCallItemParamEnvironment,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallItemParamEnvironment",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.FunctionShellCallOutputOutcomeParam,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.FunctionShellCallOutputOutcomeParam",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.OutputMessageContent,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OutputMessageContent",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
 
   // Remove created_by from specific models to avoid and facilitate base union
   @@withoutOmittedProperties(
@@ -439,5 +954,4 @@ namespace Azure.AI.Projects {
   @@usage(UpdateAgentFromManifestRequest, Usage.input);
   @@access(UpdateAgentRequest, Access.public);
   @@usage(UpdateAgentRequest, Usage.input);
-
 }
