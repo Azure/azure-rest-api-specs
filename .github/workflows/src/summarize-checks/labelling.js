@@ -416,7 +416,12 @@ export const breakingChangesCheckType = {
  */
 export function processArmReviewLabels(context, existingLabels) {
   // only kick this off if the ARMReview label is present and NotReadyForARMReview is not present
-  if (existingLabels.includes("ARMReview") && !existingLabels.includes("NotReadyForARMReview")) {
+  // and ARMReview is not being removed (e.g. because required checks are failing)
+  if (
+    existingLabels.includes("ARMReview") &&
+    !existingLabels.includes("NotReadyForARMReview") &&
+    !context.toRemove.has("ARMReview")
+  ) {
     // the important part about how this will work depends how the users use it
     // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
     // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
@@ -470,9 +475,15 @@ This function does the following, **among other things**:
 /**
  * @param {LabelContext} labelContext
  * @param {ImpactAssessment} impactAssessment
+ * @param {boolean} [anyRequiredChecksFailing] - If true, the ARMReview label will be removed
+ *   because required checks are failing and the PR should not be in the ARM review queue.
  * @returns {{armReviewLabelShouldBePresent: boolean}}
  */
-export function processImpactAssessment(labelContext, impactAssessment) {
+export function processImpactAssessment(
+  labelContext,
+  impactAssessment,
+  anyRequiredChecksFailing = false,
+) {
   console.log("ENTER definition processARMReview");
 
   // By default these two should not be present. We may determine later in this function that they should be present after all.
@@ -539,7 +550,8 @@ export function processImpactAssessment(labelContext, impactAssessment) {
       newApiVersionLabel.shouldBePresent = true;
     }
 
-    armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
+    armReviewLabel.shouldBePresent =
+      impactAssessment.resourceManagerRequired && !anyRequiredChecksFailing;
     processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
