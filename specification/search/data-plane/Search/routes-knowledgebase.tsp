@@ -39,9 +39,14 @@ interface KnowledgeRetrieval {
   >;
 
   /**
-   * KnowledgeBase retrieves relevant data from backing stores, streaming progress and results as
-   * server-sent events on the same connection as they become available, instead of waiting for the
-   * full retrieval to complete.
+   * Retrieves relevant data from backing stores and streams progress and results as server-sent
+   * events.
+   *
+   * Process the response incrementally using server-sent event framing. Each event contains an
+   * event name and a JSON-encoded data payload. The stream ends with either a `response.completed`
+   * event or an `error` event. OpenAPI 2.0 represents the response body as a string, so generated
+   * clients may expose the raw response without typed event parsing. Do not deserialize the
+   * complete response body as a single JSON document.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @added(Versions.v2026_08_01_preview)
@@ -72,8 +77,8 @@ interface KnowledgeRetrieval {
     // result the OpenAPI 2.0 output for this 200 response is currently just `{"type": "string"}` --
     // no $ref to KnowledgeBaseRetrievalStreamEvents or its variants, and no Content-Type header -- and
     // the generated C# protocol method is a plain buffered Task<Response> with no typed per-event
-    // parsing. This is acceptable for preview; revisit before GA once upstream codegen support lands
-    // (or hand-roll a documented response alias again, as this operation used before this change).
+    // parsing. Revisit before GA once upstream codegen support lands (or use a documented response
+    // alias if a supported representation is agreed upon).
     SSEStream<KnowledgeBaseRetrievalStreamEvents>,
     {},
     ErrorResponse

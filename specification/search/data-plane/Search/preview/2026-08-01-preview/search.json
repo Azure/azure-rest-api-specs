@@ -5257,7 +5257,7 @@
     "/knowledgebases('{knowledgeBaseName}')/retrieve?_overload=retrieveStream": {
       "post": {
         "operationId": "KnowledgeRetrieval_RetrieveStream",
-        "description": "KnowledgeBase retrieves relevant data from backing stores, streaming progress and results as\nserver-sent events on the same connection as they become available, instead of waiting for the\nfull retrieval to complete.",
+        "description": "Retrieves relevant data from backing stores and streams progress and results as server-sent\nevents.\n\nProcess the response incrementally using server-sent event framing. Each event contains an\nevent name and a JSON-encoded data payload. The stream ends with either a `response.completed`\nevent or an `error` event. OpenAPI 2.0 represents the response body as a string, so generated\nclients may expose the raw response without typed event parsing. Do not deserialize the\ncomplete response body as a single JSON document.",
         "produces": [
           "text/event-stream",
           "application/json"
@@ -12238,11 +12238,11 @@
     },
     "KnowledgeBaseRetrievalEventStreamResponse": {
       "type": "object",
-      "description": "Server-sent events response for streaming knowledge base retrieval, added in version\n2026-08-01-preview. Each server-sent event's data payload uses this shape; the connection stays\nopen and multiple events may be sent before the stream ends.",
+      "description": "Server-sent events response for streaming knowledge base retrieval, added in version\n2026-08-01-preview. The response schema documents the aggregate retrieval response carried by\nthe terminal `response.completed` event; the connection stays open and emits other event types\nbefore the stream ends.",
       "properties": {
         "body": {
           "$ref": "#/definitions/KnowledgeBaseRetrievalResponse",
-          "description": "The retrieval response body."
+          "description": "The aggregate retrieval response carried by the terminal `response.completed` event."
         }
       },
       "required": [
