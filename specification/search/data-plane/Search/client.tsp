@@ -686,8 +686,6 @@ namespace KnowledgeBaseRetrievalClient {
   "python"
 );
 
-@@clientNamespace(Search, "Azure.Search.Documents");
-@@clientNamespace(Search, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorResponse, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ErrorDetail, "Azure.Search.Documents");
