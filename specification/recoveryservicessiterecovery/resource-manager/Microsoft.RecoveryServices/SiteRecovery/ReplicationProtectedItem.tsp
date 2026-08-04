@@ -69,6 +69,7 @@ alias ReplicationProtectedItemsOps = Azure.ResourceManager.Legacy.LegacyOperatio
   }
 >;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReplicationProtectedItemAcceptedLroResponse<FinalResult extends
   | TypeSpec.Reflection.Model
   | unknown

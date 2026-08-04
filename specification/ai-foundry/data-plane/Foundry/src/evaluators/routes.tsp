@@ -37,9 +37,9 @@ interface Evaluators {
   >;
 
   // GET /evaluators
+  /** Lists the latest version of each evaluator. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List latest evaluator versions")
-  @doc("Lists the latest version of each evaluator")
   @Rest.listsResource(EvaluatorVersion)
   listLatestVersions is FoundryResourceList<
     EvaluatorVersion,
@@ -137,6 +137,7 @@ interface Evaluators {
   startPendingUpload is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
+      /** The name path parameter. */
       @path
       name: string;
 
@@ -165,6 +166,7 @@ interface Evaluators {
   getCredentials is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
+      /** The name path parameter. */
       @path
       name: string;
 
