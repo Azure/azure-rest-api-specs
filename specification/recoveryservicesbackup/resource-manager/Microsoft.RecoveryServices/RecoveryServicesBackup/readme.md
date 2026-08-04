@@ -36,10 +36,6 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
-### Stamp Configuration
-
-These settings apply only to passive/active stamp deployments and do not affect the default tag.
-
 ```yaml $(package-passivestamp)
 tag: package-passivestamp-2023-01-15
 ```
