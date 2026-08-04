@@ -315,6 +315,23 @@ union NetworkInterfaceAuxiliarySku {
 }
 
 /**
+ * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD.
+ */
+@added(Versions.v2026_04_01)
+union DiskApiVersion {
+  string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
+  `2025-01-02`: "2025-01-02",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
+  `2026-03-02`: "2026-03-02",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
+  `2026-07-02`: "2026-07-02",
+}
+
+/**
  * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations
  */
 union NetworkApiVersion {
@@ -2645,10 +2662,10 @@ model VirtualMachineScaleSetStorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-04-01").
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
    */
   @added(Versions.v2026_04_01)
-  diskApiVersion?: string;
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -4189,10 +4206,10 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-04-01").
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
    */
   @added(Versions.v2026_04_01)
-  diskApiVersion?: string;
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -5601,10 +5618,10 @@ model StorageProfile {
   alignRegionalDisksToVMZone?: boolean;
 
   /**
-   * Specifies the API version used for additionalDiskProperties of managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-04-01").
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
    */
   @added(Versions.v2026_04_01)
-  diskApiVersion?: string;
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
