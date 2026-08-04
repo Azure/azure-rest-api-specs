@@ -70,6 +70,28 @@ input-file:
   - stable/2025-09-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  # --- stable/2018-10-01/vmssNetwork.json ---
+  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
+  # exception" at the top of this readme. These are pre-existing traits of the 2018-10-01
+  # contract; every one of them would be a breaking change to "fix".
+  - code: PathResourceProviderMatchNamespace
+    from: vmssNetwork.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+  - code: ResourceNameRestriction
+    from: vmssNetwork.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+  - code: OperationIdNounVerb
+    from: vmssNetwork.json
+    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+  - code: ParametersInPointGet
+    from: vmssNetwork.json
+    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+  # --- stable/2025-09-01/networkGateway.json ---
+  - code: ResourceNameRestriction
+    from: networkGateway.json
+    reason: virtualNetworkGatewayName is an existing parent resource path parameter, used consistently across all 36 VirtualNetworkGateways operations in this spec - none of which define a pattern (established in 2025-07-01 and earlier). Adding a pattern only on the new VirtualNetworkGateways_GetEffectiveRoutes operation would be inconsistent with the rest of the resource, and adding it across all operations would be a breaking change to prior API versions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getEffectiveRoutes"]
   - code: ResourceNameRestriction
     from: virtualNetwork.json
     reason: networkVirtualApplianceName is an existing parent resource path parameter established in prior API versions (2025-07-01 and earlier). Adding a pattern constraint would be a breaking change to those versions.
@@ -278,6 +300,21 @@ input-file:
   - stable/2025-07-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  # --- stable/2018-10-01/vmssNetwork.json ---
+  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
+  # exception" at the top of this readme.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssNetwork.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+  - code: ResourceNameRestriction
+    from: vmssNetwork.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+  - code: OperationIdNounVerb
+    from: vmssNetwork.json
+    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+  - code: ParametersInPointGet
+    from: vmssNetwork.json
+    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
   - code: ParametersInPointGet
     from: loadBalancer.json
     where:
@@ -404,6 +441,21 @@ input-file:
   - stable/2025-05-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  # --- stable/2018-10-01/vmssNetwork.json ---
+  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
+  # exception" at the top of this readme.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssNetwork.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+  - code: ResourceNameRestriction
+    from: vmssNetwork.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+  - code: OperationIdNounVerb
+    from: vmssNetwork.json
+    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+  - code: ParametersInPointGet
+    from: vmssNetwork.json
+    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
