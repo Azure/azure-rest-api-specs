@@ -655,7 +655,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
 @@access(SearchIndexClient.deleteIndex, Access.internal, "python");
-@@access(SearchIndexClient.analyze, Access.internal, "python,csharp");
+@@access(SearchIndexClient.analyze, Access.internal, "python");
 @@access(SearchIndexClient.getStatistics, Access.internal, "python");
 @@access(SearchIndexClient.listIndexes, Access.internal, "python");
 @@access(
@@ -686,6 +686,8 @@ namespace KnowledgeBaseRetrievalClient {
   "python"
 );
 
+@@clientNamespace(Search, "Azure.Search.Documents");
+@@clientNamespace(Search, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorResponse, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ErrorDetail, "Azure.Search.Documents");
