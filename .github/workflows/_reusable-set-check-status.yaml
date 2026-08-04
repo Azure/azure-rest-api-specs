@@ -53,6 +53,14 @@ jobs:
           # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
+            eng/tools/suppressions
+
+      - name: Install suppressions dependencies
+        if: |
+          startsWith(inputs.required_check_name, 'Swagger ') ||
+          inputs.required_check_name == 'Breaking Change(Cross-Version)'
+        working-directory: eng/tools/suppressions
+        run: npm install --omit dev --no-package-lock --no-audit --no-fund --ignore-scripts
 
       - name: "Set Status"
         uses: actions/github-script@v8

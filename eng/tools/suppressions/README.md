@@ -85,6 +85,34 @@ const suppressions: Suppression[] = await getSuppressions(
 `getSuppressions(tool, path)` resolves `path`, throws if it does not exist, walks up the directory
 tree collecting `suppressions.yaml` files, and returns the matching `Suppression[]`.
 
+### Skipping Swagger checks
+
+Swagger status checks recognize whole-check suppressions with no `rules` or `sub-rules`. Use
+`SwaggerAll` to skip every Swagger check, or one of the per-check tool names below:
+
+| Required check name            | Suppression tool                    |
+| ------------------------------ | ----------------------------------- |
+| Swagger Avocado                | `SwaggerAvocado`                    |
+| Swagger LintDiff               | `SwaggerLintDiff`                   |
+| Swagger ModelValidation        | `SwaggerModelValidation`            |
+| Swagger SemanticValidation     | `SwaggerSemanticValidation`         |
+| Swagger BreakingChange         | `SwaggerBreakingChange`             |
+| Breaking Change(Cross-Version) | `SwaggerBreakingChangeCrossVersion` |
+| All Swagger checks             | `SwaggerAll`                        |
+
+For example, an entry in `specification/suppressions.yaml` can cover a specification centrally:
+
+```yaml
+- tool: SwaggerAll
+  path: contoso/**
+  reason: Swagger checks are not applicable to this specification.
+```
+
+The status gate walks from every changed specification path up to
+`specification/suppressions.yaml`, matching the existing closest-file-first behavior. Every changed
+specification path must have a matching suppression or the check runs normally. The gate reads
+suppression policy from the pull request base commit, so new exemptions become active after merge.
+
 ## Folder structure & contributing
 
 ```

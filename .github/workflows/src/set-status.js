@@ -8,6 +8,7 @@ import {
 } from "../../shared/src/github.js";
 import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
+import { getSwaggerCheckSuppression, isSwaggerCheck } from "./swagger-check-suppressions.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -58,6 +59,7 @@ export default async function setStatus(
  * @param {string} params.monitoredWorkflowName
  * @param {string} params.requiredStatusName
  * @param {string} params.overridingLabel
+ * @param {typeof getSwaggerCheckSuppression} [params.swaggerCheckSuppressionResolver]
  * @returns {Promise<void>}
  */
 export async function setStatusImpl({
@@ -71,6 +73,7 @@ export async function setStatusImpl({
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
+  swaggerCheckSuppressionResolver = getSwaggerCheckSuppression,
 }) {
   if (!isFullGitSha(head_sha)) {
     throw new Error(`head_sha is not a valid full git SHA: '${head_sha}'`);
@@ -122,6 +125,35 @@ export async function setStatusImpl({
     });
 
     return;
+  }
+
+  if (isSwaggerCheck(requiredStatusName)) {
+    const suppression = await swaggerCheckSuppressionResolver({
+      github,
+      owner,
+      repo,
+      pullNumber: issue_number,
+      checkName: requiredStatusName,
+    });
+
+    if (suppression.skip) {
+      const description = truncateStatusDescription(
+        `Skipped via suppressions.yaml: ${suppression.reason}`,
+      );
+      core.info(description);
+
+      await github.rest.repos.createCommitStatus({
+        owner,
+        repo,
+        sha: head_sha,
+        state: CommitStatusState.SUCCESS,
+        context: requiredStatusName,
+        description,
+        target_url,
+      });
+
+      return;
+    }
   }
 
   const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
@@ -238,4 +270,14 @@ export async function setStatusImpl({
       target_url,
     });
   }
+}
+
+/**
+ * Commit status descriptions have a maximum length of 140 characters.
+ *
+ * @param {string} description
+ * @returns {string}
+ */
+function truncateStatusDescription(description) {
+  return description.length <= 140 ? description : `${description.slice(0, 137)}...`;
 }

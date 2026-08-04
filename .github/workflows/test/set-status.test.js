@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
 import { fullGitSha } from "../../shared/test/examples.js";
 import { setStatusImpl } from "../src/set-status.js";
@@ -250,6 +250,80 @@ describe("setStatusImpl", () => {
       sha: fullGitSha,
       state: CommitStatusState.PENDING,
       context: "Swagger BreakingChange",
+      target_url: "https://test.com/set_status_url",
+    });
+  });
+
+  it("sets success when all changed specification paths have a configured exemption", async () => {
+    const swaggerCheckSuppressionResolver = vi.fn().mockResolvedValue({
+      skip: true,
+      reason: "Swagger validation is not applicable",
+    });
+
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "Swagger Avocado - Analyze Code",
+        requiredStatusName: "Swagger Avocado",
+        overridingLabel: "Approved-Avocado",
+        swaggerCheckSuppressionResolver,
+      }),
+    ).resolves.toBeUndefined();
+
+    expect(github.rest.repos.createCommitStatus).toBeCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      sha: fullGitSha,
+      state: CommitStatusState.SUCCESS,
+      context: "Swagger Avocado",
+      description: "Skipped via suppressions.yaml: Swagger validation is not applicable",
+      target_url: "https://test.com/set_status_url",
+    });
+    expect(swaggerCheckSuppressionResolver).toHaveBeenCalledWith({
+      github,
+      owner: "test-owner",
+      repo: "test-repo",
+      pullNumber: 123,
+      checkName: "Swagger Avocado",
+    });
+    expect(github.rest.actions.listWorkflowRunsForRepo).not.toHaveBeenCalled();
+  });
+
+  it("does not consult exemptions for a non-Swagger check", async () => {
+    const swaggerCheckSuppressionResolver = vi.fn();
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: [],
+    });
+
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "TypeSpec Suppressions - Analyze Code",
+        requiredStatusName: "TypeSpec Suppressions",
+        overridingLabel: "",
+        swaggerCheckSuppressionResolver,
+      }),
+    ).resolves.toBeUndefined();
+
+    expect(swaggerCheckSuppressionResolver).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toBeCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      sha: fullGitSha,
+      state: CommitStatusState.PENDING,
+      context: "TypeSpec Suppressions",
       target_url: "https://test.com/set_status_url",
     });
   });

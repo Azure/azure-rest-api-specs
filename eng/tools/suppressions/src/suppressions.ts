@@ -24,7 +24,7 @@ const suppressionSchema = z.array(
     .object({
       tool: z.string(),
       if: z.string().optional(),
-      // For now, input allows "path" alongside "paths".  Lather, may deprecate "path".
+      // For now, input allows "path" alongside "paths".  Later, may deprecate "path".
       path: z.string().optional(),
       paths: z.array(z.string()).optional(),
       rules: z.array(z.string()).optional(),
@@ -105,30 +105,15 @@ export async function getSuppressions(
 
 /**
  * Returns the suppressions for a tool applicable to a path, given the path and content of the suppressions.yaml.
- * Extracted for unit testing.
- *
- * @internal
+ * Extracted for unit testing and API-backed consumers.
  *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
  * @param path Path to file under analysis.
  * @param suppressionsFile Path to suppressions.yaml file.
  * @param suppressionsYaml Content of suppressions.yaml file.
+ * @param context Values available to conditional suppressions.
+ * @param options Matching options.
  * @returns Array of suppressions matching tool and path (may be empty).
- * @example
- * ```
- * // Prints
- * // '[{
- * //    "tool":"TypeSpecRequirement",
- * //    "path":"data-plane/foo/stable/2024-01-01/*.json",
- * //    "reason":"foo"
- * // }]':
- * console.log(JSON.stringify(_getSuppressionsFromYaml(
- *  "TypeSpecRequirement",
- *  "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json",
- *  "specification/foo/suppressions.yaml",
- *  '- tool: TypeSpecRequirement\n paths: ["data-plane/foo/stable/2024-01-01/*.json"]\n reason: foo'
- * )));
- * ```
  */
 export function getSuppressionsFromYaml(
   tool: string,
@@ -136,6 +121,7 @@ export function getSuppressionsFromYaml(
   suppressionsFile: string,
   suppressionsYaml: string,
   context: Record<string, unknown> = {},
+  options: { evaluateIf?: boolean } = {},
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
@@ -155,6 +141,7 @@ export function getSuppressionsFromYaml(
     throw finalErr;
   }
 
+  const evaluateIf = options.evaluateIf ?? true;
   // Make "require" available inside sandbox for CJS imports
   const sandbox = { ...context, require: createRequire(import.meta.url) };
 
@@ -175,7 +162,9 @@ export function getSuppressionsFromYaml(
         });
       })
       // If
-      .filter((s) => s.if === undefined || vm.runInNewContext(s.if, sandbox))
+      .filter(
+        (s) => s.if === undefined || (evaluateIf && Boolean(vm.runInNewContext(s.if, sandbox))),
+      )
   );
 }
 
