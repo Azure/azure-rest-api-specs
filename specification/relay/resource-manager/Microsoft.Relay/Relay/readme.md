@@ -188,7 +188,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}"].put
   - suppress: PatchResponseCodes
-    reason: The inherited namespace PATCH response codes are part of the existing Relay service contract and changing them would be breaking; the new cluster PATCH emits only 200 and 202.
+    reason: The inherited namespace PATCH response codes are part of the existing Relay service contract and changing them would be breaking; the new cluster PATCH emits only 200.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}"].patch
   - suppress: DeleteResponseCodes
     reason: These responses match the implemented Relay contract for inherited resources that cannot be changed without breaking clients.
@@ -252,11 +252,12 @@ directive:
   - suppress: OperationIdNounVerb
     reason: Clusters_ListAvailableClusterRegion matches the established Event Hubs cluster operation name and keeps the corresponding Relay and Event Hubs SDK surfaces consistent.
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/availableClusterRegions"].get.operationId
-  - suppress: ParametersInPointGet
-    reason: This is the implemented Relay long-running operation status endpoint, not a resource point GET; the query parameters identify the cluster operation being polled.
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Relay/locations/{location}/clusterOperationResults/{operationId}"].get.parameters
   - suppress: RequiredPropertiesMissingInResourceModel
-    reason: These definitions are non-resource list response wrappers whose names trigger the resource-model heuristic; their items are regions, SKU descriptions, or namespace resource IDs.
+    reason: >
+      These collection responses (AvailableRelayClustersList, RelayClusterSkuListResult, RelayNamespaceIdListResult) use @action endpoints rather than full ARM proxy resource collections.
+      The response items follow ARM resource shape (id, name, type, properties) but represent read-only utility/catalog data rather than lifecycle-managed resources.
+      SKUs and available regions are computed/discovered data; namespace references are lightweight pointers to top-level Microsoft.Relay/namespaces resources.
+      This preview implementation prioritizes service delivery; migration to full proxy resource collections can be evaluated before GA if service requirements change.
     where:
       - $.definitions.AvailableRelayClustersList
       - $.definitions.RelayClusterSkuListResult

@@ -100,22 +100,10 @@ model RelayClusterSku {
 @added(Versions.v2026_07_01_preview)
 model RelayClusterProperties {
   /**
-   * The UTC time when the Relay cluster was created.
-   */
-  @visibility(Lifecycle.Read)
-  createdAt?: utcDateTime;
-
-  /**
    * The provisioning state of the Relay cluster.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: RelayClusterProvisioningState;
-
-  /**
-   * The UTC time when the Relay cluster was last updated.
-   */
-  @visibility(Lifecycle.Read)
-  updatedAt?: utcDateTime;
 
   /**
    * The metric ID of the Relay cluster.
@@ -205,7 +193,7 @@ model RelayNamespaceIdListResult {
   /**
    * Relay namespace references assigned to the cluster.
    */
-  value?: RelayNamespaceReference[];
+  value: RelayNamespaceReference[];
 }
 
 /**
@@ -262,7 +250,7 @@ model AvailableRelayClustersList {
   /**
    * Regions containing available Relay cluster capacity.
    */
-  value?: AvailableRelayClusterRegion[];
+  value: AvailableRelayClusterRegion[];
 }
 
 /**
@@ -315,7 +303,7 @@ model RelayClusterSkuListResult {
   /**
    * The SKUs supported by the Relay cluster.
    */
-  value?: RelayClusterSkuInfo[];
+  value: RelayClusterSkuInfo[];
 }
 
 /**
@@ -440,7 +428,7 @@ interface Clusters {
   /**
    * Creates or updates a Relay cluster.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RelayCluster,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
@@ -458,7 +446,7 @@ interface Clusters {
   /**
    * Deletes a Relay cluster.
    */
-  delete is ArmResourceDeleteSync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     RelayCluster,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
