@@ -1477,6 +1477,20 @@
           "items": {
             "type": "string"
           }
+        },
+        "requestedInfo": {
+          "description": "Phone number(s) information requested as response",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "OperatorInformation"
+            ],
+            "x-ms-enum": {
+              "name": "RequestedInfoType",
+              "modelAsString": true
+            }
+          }
         }
       }
     },
@@ -1517,6 +1531,14 @@
         },
         "isoCountryCode": {
           "description": "ISO 3166-1 two character ('alpha-2') code associated with the phone number.",
+          "type": "string"
+        },
+        "internationalFormat": {
+          "description": "International format associated with the phone number.",
+          "type": "string"
+        },
+        "nationalFormat": {
+          "description": "National format associated with the phone number.",
           "type": "string"
         },
         "operatorDetails": {
