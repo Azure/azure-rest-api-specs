@@ -30987,6 +30987,7 @@
           },
           "name": {
             "$ref": "#/components/schemas/AzureRealtimeNativeVoiceName",
+            "minLength": 1,
             "description": "The Azure realtime-native voice name."
           }
         },
@@ -31037,7 +31038,7 @@
             ]
           }
         ],
-        "description": "A known Azure realtime-native voice name. Additional values may be added over time."
+        "description": "A known Azure realtime-native voice name. This union is extensible, so additional service-supported names do not require an SDK update."
       },
       "AzureStandardVoice": {
         "type": "object",
@@ -37714,6 +37715,47 @@
           }
         ],
         "description": "Extensible status values shared by Foundry jobs."
+      },
+      "LlmGeneratedVoiceGreetingConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "llm_generated"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Handlebars prompt that guides the opening turn."
+          },
+          "fallback_text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The optional Handlebars text template synthesized when generation fails before any greeting output."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/VoiceGreetingToolChoice",
+            "description": "The tool-selection policy for the opening response. Defaults to `none`.",
+            "default": "none"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceGreetingConfig"
+          }
+        ],
+        "description": "A greeting authored by the session model from a scoped opening-turn prompt.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "LoraConfig": {
         "type": "object",
@@ -79894,6 +79936,37 @@
         ],
         "description": "The transport protocol for telemetry export."
       },
+      "TemplateVoiceGreetingConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "template"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Handlebars text template spoken at session start."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceGreetingConfig"
+          }
+        ],
+        "description": "A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
         "required": [
@@ -80999,6 +81072,10 @@
             "type": "string",
             "description": "A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts."
           },
+          "greeting": {
+            "$ref": "#/components/schemas/VoiceGreetingConfig",
+            "description": "Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools."
+          },
           "audio": {
             "$ref": "#/components/schemas/VoiceAudioConfig",
             "description": "The audio configuration, including input and output formats, voice, turn detection, noise reduction, and\ntranscription. These values are session defaults; a client may override supported fields when connecting."
@@ -81045,14 +81122,21 @@
         }
       },
       "VoiceAgentMcpResponseScheduling": {
-        "type": "string",
-        "enum": [
-          "silent",
-          "when_idle",
-          "interrupt",
-          "skip_if_busy"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "silent",
+              "when_idle",
+              "interrupt",
+              "skip_if_busy"
+            ]
+          }
         ],
-        "description": "When an MCP invocation creates a follow-up response.",
+        "description": "When an MCP invocation creates a follow-up response. Additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -81077,34 +81161,6 @@
           "server_label": {
             "type": "string",
             "description": "A label for this MCP server, used to identify it in tool calls."
-          },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
-          },
-          "connector_id": {
-            "type": "string",
-            "enum": [
-              "connector_dropbox",
-              "connector_gmail",
-              "connector_googlecalendar",
-              "connector_googledrive",
-              "connector_microsoftteams",
-              "connector_outlookcalendar",
-              "connector_outlookemail",
-              "connector_sharepoint"
-            ],
-            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
-          },
-          "tunnel_id": {
-            "type": "string",
-            "pattern": "^tunnel_[a-z0-9]{32}$",
-            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
-          },
-          "authorization": {
-            "type": "string",
-            "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
           },
           "server_description": {
             "type": "string",
@@ -81185,6 +81241,11 @@
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
             "deprecated": true
+          },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL for the MCP server."
           },
           "response_scheduling": {
             "$ref": "#/components/schemas/VoiceAgentMcpResponseScheduling",
@@ -81683,7 +81744,7 @@
             "format": "float",
             "minimum": 0.25,
             "maximum": 1.5,
-            "description": "The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.",
+            "description": "The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.\nFor Azure synthesized voices, use `voice.rate` instead.",
             "default": 1
           }
         },
@@ -81918,6 +81979,7 @@
           "speech_duration_ms": {
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "remove_filler_words": {
@@ -81991,6 +82053,7 @@
           "speech_duration_ms": {
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "remove_filler_words": {
@@ -82071,6 +82134,7 @@
           "speech_duration_ms": {
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "remove_filler_words": {
@@ -82435,6 +82499,45 @@
           }
         ],
         "description": "A function call output item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceGreetingConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The greeting mode."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "template": "#/components/schemas/TemplateVoiceGreetingConfig",
+            "llm_generated": "#/components/schemas/LlmGeneratedVoiceGreetingConfig"
+          }
+        },
+        "description": "Session-start greeting configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceGreetingToolChoice": {
+        "type": "string",
+        "enum": [
+          "none",
+          "auto",
+          "required"
+        ],
+        "description": "The tool-selection policy for an LLM-generated greeting.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

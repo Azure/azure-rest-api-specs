@@ -177,12 +177,26 @@ model VoiceResponse {
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceConversationItemType {
   string,
+
+  @doc("A message item.")
   message: "message",
+
+  @doc("A function-call request item.")
   function_call: "function_call",
+
+  @doc("A function-call output item.")
   function_call_output: "function_call_output",
+
+  @doc("An MCP list-tools item.")
   mcp_list_tools: "mcp_list_tools",
+
+  @doc("An MCP call item.")
   mcp_call: "mcp_call",
+
+  @doc("An MCP approval request item.")
   mcp_approval_request: "mcp_approval_request",
+
+  @doc("An MCP approval response item.")
   mcp_approval_response: "mcp_approval_response",
 }
 

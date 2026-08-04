@@ -46,6 +46,9 @@ model VoiceAgentDefinition {
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
 
+  @doc("Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.")
+  greeting?: VoiceGreetingConfig;
+
   @doc("""
     The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
     transcription. These values are session defaults; a client may override supported fields when connecting.
@@ -80,6 +83,54 @@ model VoiceAgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Session-start greeting configuration for a voice agent.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceGreetingConfig {
+  @doc("The greeting mode.")
+  type: string;
+}
+
+@doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model TemplateVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "template";
+
+  @doc("The Handlebars text template spoken at session start.")
+  @minLength(1)
+  text: string;
+}
+
+@doc("A greeting authored by the session model from a scoped opening-turn prompt.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "llm_generated";
+
+  @doc("The Handlebars prompt that guides the opening turn.")
+  @minLength(1)
+  prompt: string;
+
+  @doc("The optional Handlebars text template synthesized when generation fails before any greeting output.")
+  @minLength(1)
+  fallback_text?: string;
+
+  @doc("The tool-selection policy for the opening response. Defaults to `none`.")
+  tool_choice?: VoiceGreetingToolChoice = VoiceGreetingToolChoice.none;
+}
+
+@doc("The tool-selection policy for an LLM-generated greeting.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceGreetingToolChoice {
+  @doc("Do not use tools for the opening response.")
+  none: "none",
+
+  @doc("Allow the model to select configured tools for the opening response.")
+  auto: "auto",
+
+  @doc("Require the opening response to use a configured tool.")
+  required: "required",
 }
 
 @doc("""
@@ -117,9 +168,11 @@ union VoiceAgentTool {
   toolbox: VoiceToolboxTool,
 }
 
-@doc("When an MCP invocation creates a follow-up response.")
+@doc("When an MCP invocation creates a follow-up response. Additional values may be added over time.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceAgentMcpResponseScheduling {
+  string,
+
   @doc("Do not create a follow-up response after the MCP invocation completes.")
   silent: "silent",
 
@@ -136,7 +189,13 @@ union VoiceAgentMcpResponseScheduling {
 @doc("An MCP tool available to a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAgentMcpTool {
-  ...OpenAI.MCPTool;
+  ...OmitProperties<
+    OpenAI.MCPTool,
+    "authorization" | "connector_id" | "tunnel_id" | "server_url"
+  >;
+
+  @doc("The URL for the MCP server.")
+  server_url?: url;
 
   @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle` so the agent continues after the tool call completes.")
   response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.when_idle;
@@ -214,7 +273,10 @@ model VoiceAudioOutputConfig {
   @doc("The typed voice configuration.")
   voice?: VoiceAgentVoice;
 
-  @doc("The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.")
+  @doc("""
+    The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
+    For Azure synthesized voices, use `voice.rate` instead.
+    """)
   @minValue(0.25)
   @maxValue(1.5)
   speed?: float32 = 1;
@@ -310,8 +372,14 @@ model VoiceSemanticVadTurnDetection extends VoiceTurnDetection {
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceEndOfUtteranceDetectionModel {
   string,
+
+  @doc("The default semantic detection model.")
   semantic_detection_v1: "semantic_detection_v1",
+
+  @doc("The English-optimized semantic detection model.")
   semantic_detection_v1_en: "semantic_detection_v1_en",
+
+  @doc("The multilingual semantic detection model.")
   semantic_detection_v1_multilingual: "semantic_detection_v1_multilingual",
 }
 
@@ -319,9 +387,17 @@ union VoiceEndOfUtteranceDetectionModel {
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceEndOfUtteranceThresholdLevel {
   string,
+
+  @doc("The low sensitivity threshold.")
   low: "low",
+
+  @doc("The medium sensitivity threshold.")
   medium: "medium",
+
+  @doc("The high sensitivity threshold.")
   high: "high",
+
+  @doc("The service-selected sensitivity threshold.")
   default: "default",
 }
 
@@ -333,6 +409,7 @@ model VoiceEndOfUtteranceDetection {
   `model`: VoiceEndOfUtteranceDetectionModel;
 }
 
+/** Options shared by Azure semantic end-of-utterance detection configurations. */
 alias VoiceAzureSemanticDetectionOptions = {
   @doc("The sensitivity threshold.")
   threshold_level?: VoiceEndOfUtteranceThresholdLevel;
@@ -361,6 +438,7 @@ model VoiceAzureSemanticDetectionMultilingual
   ...VoiceAzureSemanticDetectionOptions;
 }
 
+/** Options shared by Azure semantic voice activity detection configurations. */
 alias VoiceAzureSemanticVadOptions = {
   @doc("Activation threshold for voice activity detection, from 0 to 1.")
   @minValue(0)
@@ -379,6 +457,7 @@ alias VoiceAzureSemanticVadOptions = {
   end_of_utterance_detection?: VoiceEndOfUtteranceDetection;
 
   @doc("Minimum speech duration required to trigger detection, in milliseconds.")
+  @minValue(0)
   speech_duration_ms?: int32;
 
   @doc("Whether filler words are removed from transcription.")
@@ -607,10 +686,11 @@ model AzureRealtimeNativeVoice {
   type: "azure-realtime-native";
 
   @doc("The Azure realtime-native voice name.")
+  @minLength(1)
   name: AzureRealtimeNativeVoiceName;
 }
 
-@doc("A known Azure realtime-native voice name. Additional values may be added over time.")
+@doc("A known Azure realtime-native voice name. This union is extensible, so additional service-supported names do not require an SDK update.")
 union AzureRealtimeNativeVoiceName {
   string,
 
