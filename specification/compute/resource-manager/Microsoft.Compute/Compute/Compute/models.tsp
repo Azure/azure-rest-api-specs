@@ -5756,7 +5756,7 @@ model AdditionalDiskProperties {
 }
 
 /**
- * Specifies the properties of a managed disk that can be updated when attaching the disk to a virtual machine.
+ * Specifies the properties of a managed disk that can be set at the time of implicit creation of the disk.
  */
 @added(Versions.v2026_04_01)
 model ManagedDiskProperties {
