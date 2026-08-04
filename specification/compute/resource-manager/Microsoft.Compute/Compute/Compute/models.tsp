@@ -5748,6 +5748,8 @@ model ManagedDiskParameters extends SubResource {
  * Specifies additional properties for a managed disk that can be set at the time of implicit creation of the disk.
  */
 @added(Versions.v2026_04_01)
+// AdditionalDiskProperties is intentionally structured as a wrapper to allow future
+// sibling property categories alongside managedDiskProperties without a breaking API change.
 model AdditionalDiskProperties {
   /**
    * Specifies the managed disk properties that can be set on the disk at the time of implicit creation of the disk.
