@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.EventGrid;
 
@@ -557,6 +558,30 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * 1.3
+   */
+  @added(Versions.v2026_06_15_preview)
+  `1.3`: "1.3",
+}
+
+/**
+ * Specifies the IP address type for the namespace.
+ */
+@added(Versions.v2026_06_15_preview)
+union IpAddressType {
+  string,
+
+  /**
+   * The namespace supports IPv4 only. This is the default.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The namespace supports both IPv4 and IPv6 (dual-stack).
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -3574,6 +3599,12 @@ model NamespaceProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
+   * This property specifies the IP address type for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
@@ -4018,6 +4049,12 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * This property specifies the IP address type for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
 
   /**
    * Auto-scale configuration for the namespace resource
