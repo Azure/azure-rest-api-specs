@@ -4,22 +4,23 @@
  * In the "breakingChanges directory invocation depth" this file has depth 3
  * i.e. it is invoked by files with depth 2.
  */
+import { BreakingChangeLabelsToBeAdded } from "../command-helpers.ts";
 import {
   ApiVersionLifecycleStage,
-  BreakingChangesCheckType,
-  ReviewRequiredLabel,
+  type BreakingChangesCheckType,
+  type ReviewRequiredLabel,
   VersioningReviewRequiredLabel,
-} from "../types/breaking-change.js";
-import { OadMessage } from "../types/oad-types.js";
-import { BreakingChangeLabelsToBeAdded } from "../command-helpers.js";
+} from "../types/breaking-change.ts";
+import { type OadMessage } from "../types/oad-types.ts";
 
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { logMessage, logMessageAsync, logWarning } from "../log.ts";
 import {
-  OadMessageRule,
+  type OadMessageRule,
   fallbackLabel,
   fallbackRule as fallbackOadMessageRule,
   oadMessagesRuleMap,
-} from "./oad-rule-map.js";
-import { logMessage, logWarning } from "../log.js";
+} from "./oad-rule-map.ts";
 
 /**
  * The function applyRules() applies oadMessagesRuleMap to OAD messages returned by runOad().
@@ -29,11 +30,11 @@ import { logMessage, logWarning } from "../log.js";
  *
  * This function is invoked by the BreakingChangeDetector.doBreakingChangeDetection()
  */
-export function applyRules(
+export async function applyRules(
   oadMessages: OadMessage[],
   scenario: BreakingChangesCheckType,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
-): OadMessage[] {
+): Promise<OadMessage[]> {
   logMessage("ENTER definition applyRules");
   let outputOadMessages: OadMessage[] = [];
   let outputOadMessage: OadMessage;
@@ -44,14 +45,14 @@ export function applyRules(
     );
 
     if (rule !== undefined) {
-      outputOadMessage = applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
+      outputOadMessage = await applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
     } else {
       logWarning(
         `ASSERTION VIOLATION! No rule found for scenario: '${scenario}', oadMessage: '${JSON.stringify(
           oadMessage,
         )}'. Using fallback rule: '${JSON.stringify(fallbackOadMessageRule)}'.`,
       );
-      outputOadMessage = applyRule(
+      outputOadMessage = await applyRule(
         oadMessage,
         { ...fallbackOadMessageRule, scenario },
         previousApiVersionLifecycleStage,
@@ -71,13 +72,14 @@ export function applyRules(
   return outputOadMessages;
 }
 
-function applyRule(
+async function applyRule(
   oadMessage: OadMessage,
   rule: Omit<OadMessageRule, "code">,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
-): OadMessage {
+): Promise<OadMessage> {
   const isSameVersionOnPreview =
-    previousApiVersionLifecycleStage === "preview" && rule.scenario === "SameVersion";
+    previousApiVersionLifecycleStage === "preview" &&
+    rule.scenario === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
 
   // Comparing against previous previews always decreases failure severity from error to warning.
   // The fact we set this to true corresponds to the green "Ignore" rectangle for
@@ -86,7 +88,8 @@ function applyRule(
   // See also:
   // https://github.com/Azure/azure-sdk-tools/issues/6396
   const isCrossVersionAgainstPreviousPreview =
-    previousApiVersionLifecycleStage === "preview" && rule.scenario === "CrossVersion";
+    previousApiVersionLifecycleStage === "preview" &&
+    rule.scenario === BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION;
 
   const appliedSeverity =
     rule.severity === "Error" && isCrossVersionAgainstPreviousPreview ? "Warning" : rule.severity;
@@ -120,7 +123,8 @@ function applyRule(
     type: appliedSeverity,
   };
 
-  logMessage(
+  // Use async, backpressure-aware log method to ensure all messages written despite stdout backpressure
+  await logMessageAsync(
     `applyRule: addLabel: ${addLabel}, labelToAdd: ${labelToAdd}, rule: '${JSON.stringify(
       rule,
     )}', outputOadMessage: '${JSON.stringify(outputOadMessage)}'.`,

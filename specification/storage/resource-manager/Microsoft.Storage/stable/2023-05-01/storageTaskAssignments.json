@@ -273,7 +273,7 @@
             "$ref": "./storage.json#/parameters/StorageAccountName"
           },
           {
-            "name": "$maxpagesize",
+            "name": "$top",
             "in": "query",
             "type": "integer",
             "format": "int32",
@@ -784,7 +784,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the storage task assignment within the specified resource group. Storage task assignment names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-      "pattern": "^[a-z0-9]{3,24}$",
+      "pattern": "^[a-z][a-z0-9]{2,23}$",
       "maxLength": 24,
       "minLength": 3,
       "x-ms-parameter-location": "method"

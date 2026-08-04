@@ -129,6 +129,11 @@ param (
 
 $wellKnownTMETenants = @('70a036f6-8e4d-4615-bad6-149c02e7720d')
 
+# People keep passing this legacy parameter. Throw an error to save them future keystrokes
+if ($NewTestResourcesRemainingArguments -like '*UserAuth*') {
+    throw "The -UserAuth parameter is deprecated and is now the default behavior"
+}
+
 if (!$ServicePrincipalAuth) {
     # Clear secrets if not using Service Principal auth. This prevents secrets
     # from being passed to pre- and post-scripts.
@@ -174,7 +179,7 @@ try {
         }
         Write-Verbose "Overriding test resources search directory to '$root'"
     }
-    
+
     $templateFiles = @()
 
     "$ResourceType-resources.json", "$ResourceType-resources.bicep" | ForEach-Object {
@@ -198,7 +203,7 @@ try {
 
     # returns empty string if $ServiceDirectory is not set
     $serviceName = GetServiceLeafDirectoryName $ServiceDirectory
-    
+
     # in ci, random names are used
     # in non-ci, without BaseName, ResourceGroupName or ServiceDirectory, all invocations will
     # generate the same resource group name and base name for a given user
@@ -267,13 +272,13 @@ try {
             if ($context.Tenant.Name -like '*TME*') {
                 if ($currentSubscriptionId -ne '4d042dc6-fe17-4698-a23f-ec6a8d1e98f4') {
                     Log "Attempting to select subscription 'Azure SDK Test Resources - TME (4d042dc6-fe17-4698-a23f-ec6a8d1e98f4)'"
-                    $null = Select-AzSubscription -Subscription '4d042dc6-fe17-4698-a23f-ec6a8d1e98f4' -ErrorAction Ignore
+                    $null = Select-AzSubscription -Subscription '4d042dc6-fe17-4698-a23f-ec6a8d1e98f4' -ErrorAction Ignore -WarningAction Ignore
                     # Update the context.
                     $context = Get-AzContext
                 }
             } elseif ($currentSubcriptionId -ne 'faa080af-c1d8-40ad-9cce-e1a450ca5b57') {
                 Log "Attempting to select subscription 'Azure SDK Developer Playground (faa080af-c1d8-40ad-9cce-e1a450ca5b57)'"
-                $null = Select-AzSubscription -Subscription 'faa080af-c1d8-40ad-9cce-e1a450ca5b57' -ErrorAction Ignore
+                $null = Select-AzSubscription -Subscription 'faa080af-c1d8-40ad-9cce-e1a450ca5b57' -ErrorAction Ignore -WarningAction Ignore
                 # Update the context.
                 $context = Get-AzContext
             }
@@ -305,8 +310,8 @@ try {
         }
     }
 
-    # This needs to happen after we set the TenantId but before we use the ResourceGroupName	
-    if ($wellKnownTMETenants.Contains($TenantId)) {
+    # This needs to happen after we set the TenantId but before we use the ResourceGroupName
+    if ($wellKnownTMETenants.Contains($TenantId) -and !$ResourceGroupName.StartsWith("SSS3PT_", [System.StringComparison]::OrdinalIgnoreCase)) {
         # Add a prefix to the resource group name to avoid flagging the usages of local auth
         # See details at https://eng.ms/docs/products/onecert-certificates-key-vault-and-dsms/key-vault-dsms/certandsecretmngmt/credfreefaqs#how-can-i-disable-s360-reporting-when-testing-customer-facing-3p-features-that-depend-on-use-of-unsafe-local-auth
         $ResourceGroupName = "SSS3PT_" + $ResourceGroupName
@@ -353,15 +358,19 @@ try {
     # Make sure the provisioner OID is set so we can pass it through to the deployment.
     if (!$ProvisionerApplicationId -and !$ProvisionerApplicationOid) {
         if ($context.Account.Type -eq 'User') {
-            # Support corp tenant and TME tenant user id lookups
-            $user = Get-AzADUser -Mail $context.Account.Id
-            if ($null -eq $user -or !$user.Id) {
-                $user = Get-AzADUser -UserPrincipalName $context.Account.Id
+            # Calls to graph API in corp tenant get blocked by conditional access policy now
+            # but not in TME. For corp tenant we get the user's id from the login context
+            # but for TME it is different so we have to source it from graph
+            $userAccountId = if ($wellKnownTMETenants.Contains($TenantId)) {
+                (Get-AzADUser -SignedIn).Id
+            } else {
+                # HomeAccountId format is '<object id>.<tenant id>'
+                (Get-AzContext).Account.ExtendedProperties.HomeAccountId.Split('.')[0]
             }
-            if ($null -eq $user -or !$user.Id) {
+            if ($null -eq $userAccountId) {
                 throw "Failed to find entra object ID for the current user"
             }
-            $ProvisionerApplicationOid = $user.Id
+            $ProvisionerApplicationOid = $userAccountId
         } elseif ($context.Account.Type -eq 'ServicePrincipal') {
             $sp = Get-AzADServicePrincipal -ApplicationId $context.Account.Id
             $ProvisionerApplicationOid = $sp.Id
@@ -428,20 +437,25 @@ try {
 
     if (!$CI -and !$ServicePrincipalAuth) {
         if ($TestApplicationId) {
-            Write-Warning "The specified TestApplicationId '$TestApplicationId' will be ignored when -ServicePrincipalAutth is not set."
+            Write-Warning "The specified TestApplicationId '$TestApplicationId' will be ignored when -ServicePrincipalAuth is not set."
         }
 
-        # Support corp tenant and TME tenant user id lookups
-        $userAccount = (Get-AzADUser -Mail (Get-AzContext).Account.Id)
-        if ($null -eq $userAccount -or !$userAccount.Id) {
-            $userAccount = (Get-AzADUser -UserPrincipalName (Get-AzContext).Account)
+        $userAccountName = (Get-AzContext).Account.Id
+        # HomeAccountId format is '<object id>.<tenant id>'
+        # Calls to graph API in corp tenant get blocked by conditional access policy now
+        # but not in TME. For corp tenant we get the user's id from the login context
+        # but for TME it is different so we have to source it from graph
+        $userAccountId = if ($wellKnownTMETenants.Contains($TenantId)) {
+            (Get-AzADUser -SignedIn).Id
+        } else {
+            # HomeAccountId format is '<object id>.<tenant id>'
+            (Get-AzContext).Account.ExtendedProperties.HomeAccountId.Split('.')[0]
         }
-        if ($null -eq $userAccount -or !$userAccount.Id) {
+        if ($null -eq $userAccountId) {
             throw "Failed to find entra object ID for the current user"
         }
-        $TestApplicationOid = $userAccount.Id
+        $TestApplicationOid = $userAccountId
         $TestApplicationId = $testApplicationOid
-        $userAccountName = $userAccount.UserPrincipalName
         Log "User authentication with user '$userAccountName' ('$TestApplicationId') will be used."
     }
     # If user has specified -ServicePrincipalAuth
@@ -613,22 +627,44 @@ try {
         }
         Log $msg
 
-        $deployment = Retry {
-            New-AzResourceGroupDeployment `
+        # Run a first pass outside of Retry to fail fast for
+        # template validation errors that won't be fixed with retries.
+        # Only run Test-AzResourceGroupDeployment after error because it can
+        # take a while for large templates even during success cases.
+        try {
+            $deployment = New-AzResourceGroupDeployment `
+                            -Name $BaseName `
+                            -ResourceGroupName $resourceGroup.ResourceGroupName `
+                            -TemplateFile $templateFile.jsonFilePath `
+                            -TemplateParameterObject $templateFileParameters `
+                            -Force:$Force
+        } catch {
+            # Throw if we hit a template validation error, otherwise proceed
+            if ($_.Exception.Message -like '*InvalidTemplateDeployment*') {
+                $validation = Test-AzResourceGroupDeployment `
+                    -ResourceGroupName $resourceGroup.ResourceGroupName `
+                    -TemplateFile $templateFile.jsonFilePath `
+                    -TemplateParameterObject $templateFileParameters
+
+                HandleTemplateDeploymentError $validation
+                throw
+            }
+        }
+
+        if (!$deployment -or $deployment.ProvisioningState -ne 'Succeeded') {
+            Write-Warning "Initial deployment attempt failed, retrying..."
+            $deployment = Retry -Attempts 4 -Action {
+                New-AzResourceGroupDeployment `
                     -Name $BaseName `
                     -ResourceGroupName $resourceGroup.ResourceGroupName `
                     -TemplateFile $templateFile.jsonFilePath `
                     -TemplateParameterObject $templateFileParameters `
                     -Force:$Force
+            }
         }
+
         if ($deployment.ProvisioningState -ne 'Succeeded') {
-            Write-Host "Deployment '$($deployment.DeploymentName)' has state '$($deployment.ProvisioningState)' with CorrelationId '$($deployment.CorrelationId)'. Exiting..."
-            Write-Host @'
-#####################################################
-# For help debugging live test provisioning issues, #
-# see http://aka.ms/azsdk/engsys/live-test-help     #
-#####################################################
-'@
+            HandleDeploymentFailure $deployment
             exit 1
         }
 

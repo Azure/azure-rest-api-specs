@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -37,7 +39,6 @@ model DeidentificationJob {
 
   @doc("Current status of a job.")
   @visibility(Lifecycle.Read)
-  @pollingOperationParameter
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
@@ -124,6 +125,7 @@ model DeidentificationDocumentLocation {
 }
 
 // TODO: Add documentation link for customization options.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Customizations options to override default service behaviors for job usage.")
 model DeidentificationJobCustomizationOptions {
   ...SharedCustomizationOptions;

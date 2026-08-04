@@ -1,22 +1,27 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
-import * as log from "../src/log.js";
-import * as utils from "../src/utils.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import { fileURLToPath } from "node:url";
+import { type APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  appendErrorsToVsoLog,
+  generateArtifact,
   getBreakingChangeInfo,
+  getBuildFailedInfo,
   getRequiredSettingValue,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  generateArtifact,
+  selectGenerationTool,
+  setBuildFailedLabelVariable,
   setPipelineVariables,
-} from "../src/command-helpers.js";
-import { LogLevel } from "../src/log.js";
-import { APIViewRequestData } from "../src/types.js";
+} from "../src/command-helpers.ts";
+import * as log from "../src/log.ts";
+import { LogLevel } from "../src/log.ts";
+import * as specHelpers from "../src/spec-helpers.ts";
+import type { ExecutionReport } from "../src/types.ts";
+import * as utils from "../src/utils.ts";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -152,7 +157,7 @@ describe("commands.ts", () => {
         headBranch: "main",
         apiVersion: "2021-01-01",
         sdkReleaseType: "beta",
-        sdkLanguage: "typescript",
+        sdkLanguage: SdkName.Js,
       };
 
       const result = prepareSpecGenSdkCommand(commandInput);
@@ -365,9 +370,55 @@ describe("commands.ts", () => {
     });
   });
 
+  describe("appendErrorsToVsoLog", () => {
+    test("should append errors to an existing log entry", () => {
+      const mockLogContent = {
+        key1: { errors: ["error1"], warnings: ["warning1"] },
+      };
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockLogContent));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "key1", ["error2"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            key1: { errors: ["error1", "error2"], warnings: ["warning1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+
+    test("should create a new log entry when the key does not exist", () => {
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify({}));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "Python package namespace validation", ["error1"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            "Python package namespace validation": { errors: ["error1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+  });
+
   describe("getBreakingChangeInfo", () => {
     test("should return breaking change info if applicable", () => {
-      const mockExecutionReport = {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "succeeded",
         packages: [{ shouldLabelBreakingChange: true }],
       };
 
@@ -377,7 +428,8 @@ describe("commands.ts", () => {
     });
 
     test("should return no breaking change info if not applicable", () => {
-      const mockExecutionReport = {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "succeeded",
         packages: [{ shouldLabelBreakingChange: false }],
       };
 
@@ -387,13 +439,92 @@ describe("commands.ts", () => {
     });
 
     test("should return no breaking change info if not executionReport", () => {
-      const mockExecutionReport = {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "succeeded",
         packages: [],
       };
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
       expect(result).toBe(false);
+    });
+  });
+
+  describe("getBuildFailedInfo", () => {
+    test("should return true when the execution result is a warning", () => {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "warning",
+        packages: [],
+      };
+
+      expect(getBuildFailedInfo(mockExecutionReport)).toBe(true);
+    });
+
+    test("should return false when the execution result is not a warning", () => {
+      for (const executionResult of ["succeeded", "failed", "notEnabled"] as const) {
+        const mockExecutionReport: ExecutionReport = {
+          executionResult,
+          packages: [],
+        };
+
+        expect(getBuildFailedInfo(mockExecutionReport)).toBe(false);
+      }
+    });
+  });
+
+  describe("setBuildFailedLabelVariable", () => {
+    const mockCommandInput = (sdkLanguage: SdkName) => ({
+      workingFolder: "/working/folder",
+      sdkLanguage,
+      runMode: "",
+      localSpecRepoPath: "",
+      localSdkRepoPath: "",
+      sdkRepoName: "",
+      specCommitSha: "abc123",
+      specRepoHttpsUrl: "",
+    });
+
+    beforeEach(() => {
+      vi.clearAllMocks();
+    });
+
+    test("should set the BuildFailedLabel variable for .NET when the build failed", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Net), {
+        executionResult: "warning",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).toHaveBeenCalledWith("BuildFailedLabel", "auto-sdk-build-fix");
+    });
+
+    test("should not set the variable when the build did not fail", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Net), {
+        executionResult: "succeeded",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
+    });
+
+    test("should not set the variable for languages without a configured build-failed label", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Python), {
+        executionResult: "warning",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
     });
   });
 
@@ -417,17 +548,19 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-js",
+        sdkLanguage: SdkName.Js,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
+        prNumber: "123",
         sdkRepoName: "",
-        specCommitSha: "",
+        specCommitSha: "abc123",
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
+      const mockhasTypeSpecProjects = false;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
       const mockApiViewRequestData: APIViewRequestData[] = [];
       const result = generateArtifact(
@@ -435,6 +568,7 @@ describe("commands.ts", () => {
         mockResult,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
+        mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
       );
@@ -455,8 +589,10 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-js",
             result: "succeeded",
+            headSha: "abc123",
+            prNumber: "123",
             labelAction: false,
-            isSpecGenSdkCheckRequired: false,
+            isSpecGenSdkCheckRequired: true,
             apiViewRequestData: [],
           },
           undefined,
@@ -493,7 +629,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "javascript",
+        sdkLanguage: SdkName.Js,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -505,6 +641,7 @@ describe("commands.ts", () => {
       const mockResult = "failed";
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
+      const mockhasTypeSpecProjects = false;
       const mockStagedArtifactsFolder = "";
       const mockApiViewRequestData: APIViewRequestData[] = [];
       const result = generateArtifact(
@@ -512,6 +649,7 @@ describe("commands.ts", () => {
         mockResult,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
+        mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
       );
@@ -538,7 +676,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-go",
+        sdkLanguage: SdkName.Go,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -551,6 +689,7 @@ describe("commands.ts", () => {
       // Using true for hasManagementPlaneSpecs, which would normally make isSpecGenSdkCheckRequired=true
       // for Go SDK (as tested in the getRequiredSettingValue tests)
       const mockhasManagementPlaneSpecs = true;
+      const mockhasTypeSpecProjects = true;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
       const mockApiViewRequestData: APIViewRequestData[] = [];
 
@@ -560,6 +699,7 @@ describe("commands.ts", () => {
         mockResult,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
+        mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
         false, // sdkGenerationExecuted = false
@@ -580,6 +720,7 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-go",
             result: "succeeded",
+            headSha: "",
             labelAction: false,
             isSpecGenSdkCheckRequired: false, // This should be false when sdkGenerationExecuted is false
             apiViewRequestData: [],
@@ -593,23 +734,79 @@ describe("commands.ts", () => {
 
   describe("getRequiredSettingValue", () => {
     test("should return managementPlane setting when hasManagementPlaneSpecs is true", () => {
-      const result = getRequiredSettingValue(true, "azure-sdk-for-go");
+      const result = getRequiredSettingValue(true, true, "azure-sdk-for-go");
       // Based on the constants in types.ts, Go SDK requires check for management plane
       expect(result).toBe(true);
 
-      const result2 = getRequiredSettingValue(true, "azure-sdk-for-net");
-      // Based on the constants in types.ts, .NET SDK does not require check for management plane
-      expect(result2).toBe(false);
+      const result2 = getRequiredSettingValue(true, true, "azure-sdk-for-net");
+      // .NET SDK set (managementPlane: true)
+      expect(result2).toBe(true);
     });
 
     test("should return dataPlane setting when hasManagementPlaneSpecs is false", () => {
-      const result = getRequiredSettingValue(false, "azure-sdk-for-go");
+      const result = getRequiredSettingValue(false, true, "azure-sdk-for-go");
       // Based on the constants in types.ts, Go SDK requires check for data plane
       expect(result).toBe(true);
 
-      const result2 = getRequiredSettingValue(false, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
+      // Based on the constants in types.ts, JS SDK requires check for data plane
+      expect(result2).toBe(true);
+
+      const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
+      // .NET SDK set (dataPlane: true)
+      expect(result3).toBe(true);
+    });
+
+    test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
+      // Test the special case for .NET SDK without TypeSpec projects
+      const result = getRequiredSettingValue(true, false, "azure-sdk-for-net");
+      expect(result).toBe(false);
+
+      const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-net");
       expect(result2).toBe(false);
+    });
+
+    test("should follow normal rules for other SDKs when hasTypeSpecProjects is false", () => {
+      // Other SDKs should follow normal rules regardless of hasTypeSpecProjects
+      const result = getRequiredSettingValue(true, false, "azure-sdk-for-go");
+      expect(result).toBe(true);
+
+      const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
+      expect(result2).toBe(true);
+    });
+  });
+
+  describe("selectGenerationTool", () => {
+    test("should return 'skipped' for Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Rust,
+      );
+      expect(result).toBe("skipped");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with tspconfig path", () => {
+      const result = selectGenerationTool(
+        "specification/compute/Compute.Management/tspconfig.yaml",
+        undefined,
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' when no paths are provided", () => {
+      const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
+      expect(result).toBe("spec-gen-sdk");
     });
   });
 });

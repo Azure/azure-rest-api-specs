@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "linkType": "Primary",
+    "circuitTestCategory": "BgpDisconnect",
+    "failoverTestId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "circuitName": "circuit1"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "startTimeUtc": "2025-01-01T00:00:00Z",
+          "endTimeUtc": "2025-01-01T01:00:00Z",
+          "status": "Completed",
+          "wasSimulationSuccessful": true,
+          "linkType": "Primary",
+          "circuitTestCategory": "BgpDisconnect",
+          "isSimulationVerified": true,
+          "redundantRoutes": {
+            "beforeSimulation": [
+              {
+                "route": "10.0.0.0/24",
+                "nextHop": "10.0.0.1",
+                "primaryASPath": "65000 65001",
+                "secondaryASPath": "65000 65002"
+              }
+            ],
+            "duringSimulation": [
+              {
+                "route": "10.0.0.0/24",
+                "nextHop": "10.0.0.2",
+                "primaryASPath": "65000 65001",
+                "secondaryASPath": "65000 65002"
+              }
+            ]
+          },
+          "nonRedundantRoutes": {
+            "beforeSimulation": [],
+            "duringSimulation": []
+          },
+          "bgpStatus": [
+            {
+              "type": "IPv4",
+              "link": "Primary",
+              "status": "Connected",
+              "checkTimeUtc": "2025-01-01T00:30:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_GetCircuitLinkFailoverSingleTestDetails",
+  "title": "ExpressRouteCircuitGetCircuitLinkFailoverSingleTestDetails"
+}

@@ -1,135 +1,73 @@
-## Converting a specification from swagger to typespec
+<!-- This file provides repository-level instructions for GitHub Copilot Chat.
+     It is automatically loaded when users interact with Copilot in this repo
+     (VS Code, GitHub.com, etc.) to guide responses for TypeSpec authoring,
+     SDK generation, API reviews, and other repo-specific workflows.
 
-Users can convert a specification from swagger to typespec by using `tsp-client` a CLI designed to help developers throughout various stages of typespec development.
+     For GitHub Copilot Code Review (the feature that posts inline PR comments),
+     see copilot-review-instructions.md in this same directory.
+     Docs: https://docs.github.com/en/copilot/concepts/agents/code-review -->
 
-### Instructions for converting a specification from swagger to typespec
+# New TypeSpec projects
 
-1. Install the dependencies specified in the package.json at the root of this repository. Command:
+Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.instructions.md) for detailed steps on:
 
-```
-npm ci
-```
+- how to create a new TypeSpec project.
+- converting a specification from swagger to typespec
+- troubleshooting tsp compile errors
 
-2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `npx tsp-client convert --swagger-readme <path to your readme>`
-3. Now that you have a newly converted typespec project, you should go through all files to verify the accuracy of the converted spec when compared to the original swagger definitions.
-4. For both data plane and management plane specifications, you should update the implementation according to the information provided under the [Initial migration checklist](#initial-migration-checklist) section.
+# Adding Language Emitters to Existing TypeSpec Projects
 
-### Initial migration checklist
+Refer to [language-emitter.instructions.md](./instructions/language-emitter.instructions.md) for detailed steps on how to add language emitters to an existing `tspconfig.yaml` file in a TypeSpec project.
 
-The swagger converter will not be able to accurately represent every part of every API in TypeSpec. This document outlines some common changes you may need to make to a converted TypeSpec to make it conform to your existing service API, pass validation checks, and follow best practices.
+# When to invoke the azure-typespec-author skill
 
-- Avoid extensive refactoring of the converted spec. The goal is to get a working spec that can compile successfully and then iteratively improve it.
+The `azure-typespec-author` skill **must** be invoked immediately in all modes (including plan mode) for any task that involves creating and modifying TypeSpec (`.tsp`) files except for `client.tsp` under the specification directory in this repository. This includes but is not limited to:
 
-- DO ensure your `@service` and `@server` definitions are correct in main.tsp
-- DO use the built-in [url][url-type] for endpoint specification. Example:
+- Adding, bumping, or promoting API versions (preview, stable)
+- Adding or modifying resources, operations, models, properties, or decorators
+- Changing visibility, constraints, breaking changes, LRO patterns, or suppressions
+- Defining or updating operationId, spread models, or extension resources
+- Converting Swagger to TypeSpec (post-conversion edits)
 
-```tsp
-@server(
-  "{endpoint}/widget",
-  "Contoso Widget APIs",
-  {
-    /**
-      * Supported Widget Services endpoints (protocol and hostname, for example:
-      * https://westus.api.widget.contoso.com).
-      */
-    endpoint: url,
-  }
-)
-```
+**If you are unsure whether a user request involves TypeSpec authoring, ask the user to confirm before proceeding.** For example, if the request mentions API changes, versioning, resource definitions, or spec modifications but does not explicitly mention TypeSpec, prompt the user:
 
-- DO ensure that you have a security definition (`@useAuth`) specified for your service. See: [Security definitions in TypeSpec][security-definitions]. The @useAuth decorator should only be defined ONCE in the entire specification above the @server definition.
-- AVOID adding new namespaces.
-- Make sure the versions enum is declared under the existing namespace defined in main.tsp. Avoid adding it anywhere else. Ensure the `@versioned` decorator is specified over the namespace in main.tsp. Pass the versions enum to the `@versioned` decorator. Example of a typical structure for versioning:
+> "This request may involve TypeSpec specification changes. Would you like me to use the azure-typespec-author skill to help with this?"
 
-```tsp
-// this is the main.tsp file
+If the user confirms, invoke the `azure-typespec-author` skill immediately. Do **not** build typespec authoring related plan or attempt to make `.tsp` file changes without invoking this skill first.
 
+**Do NOT use this skill for:** SDK generation, releasing SDK packages, `client.tsp` or code customization, or standalone MCP tool calls that do not involve editing `.tsp` files.
 
-@versioned(Versions)
-namespace Contoso.WidgetManager;
-/** Service api versions **/
-enum Versions {
-  /** The 2023-11-01 api version **/
-  v2023_11_01: "2023-11-01",
-}
-```
+# SDK generation from TypeSpec
 
-- All models, enums, unions, and operations should be added under the main namespace declared in the project.
-- Avoid having models, enums, unions, operations, and other types declared outside of a namespace.
-- If any files are using any of the versioning decorators, such as `@added`, `@removed`, `@changedType`, make sure to import the `@typespec/versioning` library and add a using statement. Example:
+You must use Azure SDK MCP server to generate SDK from TypeSpec.
 
-```tsp
-import "@typespec/versioning";
+Refer to [sdk-generation.instructions.md](./instructions/sdk-generation.instructions.md) for additional instructions to generate SDK from TypeSpec.
 
-using TypeSpec.Versioning;
-```
+# Instructions for GitHub coding agent to generate SDKs using GitHub.com
 
-- DO review all enum and union definitions and add documentation over each enum or union member. See: [Documentation in TypeSpec][docs]. Example of a properly documented enum:
+Follow [github-codingagent.instructions.md](./instructions/github-codingagent.instructions.md) for instructions to run SDK generation using pipeline in GitHub coding agent.
 
-```tsp
-/** The color of a widget. */
-union WidgetColor {
-  string,
+# Release readiness of SDK and information about the release pipeline
 
-  /** Red Widget Color */
-  Red: "Red",
+Run [check package readiness](../eng/common/instructions/azsdk-tools/check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
-  /** Green Widget Color */
-  Green: "Green",
+# Up-to-date TypeSpec documentation
 
-  /** Blue Widget Color */
-  Blue: "Blue",
-}
-```
+Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.instructions.md) to get the most up-to-date documentation for TypeSpec, including best practices for writing TypeSpec for Azure.
 
-- DO ensure that all models, properties, operations, parameters, enums, unions, and alias definitions have documentation over them. TypeSpec convention recommends using the doc comment format `/** <docs go here> */` to add documentation, example:
+# ARM Api Copilot Review Instructions
 
-```tsp
-/** The color of a widget. */
-model Widget {
-  /** Widget name */
-  name: string
-}
-```
+Follow [arm-api-review.instructions.md](./instructions/arm-api-review.instructions.md) and [openapi-review.instructions.md](./instructions/openapi-review.instructions.md) for instructions to review ARM API specifications. GitHub Code review agent must prioritize these instructions over any other instruction files while performing code reviews.
 
-- DO define your visibility decorators with the appropriate value from the Lifecycle class.
-- Avoid suppressing warnings
-- Operation names should be camel case
-- DO use `union` instead of `enum` to define Azure enums. For more information about how to define enums for Azure services see the following documentation: [Defining enums for Azure services][no-enum].
-- DO make client customizations in a `client.tsp` file
-- Avoid importing or using `@azure-tools/typespec-client-generator-core` in other files aside from client.tsp.
-- DO run `tsp compile .` on your specification and make one attempt to address all warnings. Do not attempt to address warnings more than once even if they aren't resolved.
-- Attempt to address any FIXME or TODO comments in the spec. If you are unable to address them, leave them untouched
+Cross-cutting review rules (secret detection, property mutability, naming conventions, enum best practices, provisioning state, tracked resource lifecycle) are in the shared [azure-api-review skill](./skills/azure-api-review/SKILL.md). These are referenced by the instruction files and should not be duplicated elsewhere.
 
-#### Additional considerations
+# GitHub Actions Development
 
-- DO ensure you pull in the latest `main` from the Azure/azure-rest-api-specs repo to stay up to date with latest dependencies
-- DO run `npm ci` to get a clean install of the package.json dependencies
-- Avoid modifying the package.json or package-lock.json files at the root of the azure-rest-api-specs repo
-- Avoid adding your own package.json or package-lock.json files in your project directory
-- Avoid adding multiple tspconfig.yaml files for your service specification
-- DO consult [ci-fix.md][ci-fix] for fixes to common CI errors reported
+Follow [github-actions.instructions.md](./instructions/github-actions.instructions.md) for instructions on developing and maintaining GitHub Actions code in this repository. This includes workflows, composite actions, and shared utilities.
 
-## Troubleshooting tsp compile errors and warnings
+# eng/tools Development
 
-Examples of common errors and warnings that should be addressed after running the `tsp compile` command:
-
-- If you see an error with a message like: "referencing types from versioned namespace 'Azure.Core.Foundations' but didn't specify which versions with @useDependency", you should add the @useDependency decorator over each api version entry in your api versions enum. Example of a properly configured api versions enum:
-
-```
-/** Service api versions **/
-enum Versions {
-  /** The 2023-11-01 api version **/
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_11_01: "2023-11-01",
-}
-
-```
-
-- If you see an invalid-ref or unknown identifier error you are most likely missing an import to the library that declares that decorator. To find supported libraries and decorators search through the documentation of the following sites: https://azure.github.io/typespec-azure/docs/intro/ and https://typespec.io/docs/ Search through the list of supported decorators, interfaces, and other types per library until you find the correct library to import and/or include a using statement in your typespec files.
-- In order to address warnings raised by the @azure-tools/typespec-azure-core search through this page for relevant solutions to apply: https://azure.github.io/typespec-azure/docs/intro/
-- camelCase fixes only apply to the typespec property names, any corresponding string values you should left as is.
-- String values in typespec files should be left untouched.
+Follow [eng-tools.instructions.md](./instructions/eng-tools.instructions.md) for instructions on developing and testing the engineering tools under `eng/tools`. All tools in that directory follow the same patterns for development and testing.
 
 <!-- LINKS -->
 
@@ -141,81 +79,4 @@ enum Versions {
 [ci-fix]: ../documentation/ci-fix.md
 [url-type]: https://typespec.io/docs/language-basics/built-in-types#string-types
 [no-enum]: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum
-
-
-# SDK generation from TypeSpec
-
-## Agent context for TypeSpec and SDK process 
-- Check all open files in the editor and check if `main.tsp` or `tspconfig.yaml` are open in the editor. If either of 
-these files are open, then use the parent path of the `main.tsp` or `tspconfig.yaml` as default TypeSpec project root 
-path.
-- If `main.tsp` and `tspconfig.yaml` are not open in the editor, then check if there are any TypeSpec project paths in 
-the context. If there are no TypeSpec project paths in the context, then prompt user to select a TypeSpec project path 
-from the list of paths. If user does not have a TypeSpec project, then prompt user to create a new TypeSpec project.
-
-
-### Pre-requisites
-- User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
-- run `npm ci` to install the dependencies
-
-
-### Basic Rules for SDK Generation from TypeSpec
-
-1. **User Guidance**:
-    - Assume the user is unfamiliar with the SDK release process. Provide clear, concise instructions for each step.
-
-2. **File Handling**:
-    - Do not overwrite `tspconfig.yaml` or `main.tsp`. Use existing files and suggest updates if necessary.
-    - Use the path of the `tspconfig.yaml` file already open in the editor or the `.tsp` file path as the project root.
-    - If no `.tsp` file or folder is in the current context, prompt the user to select a valid TypeSpec project root path.
-
-3. **Process Visibility**:
-    - Highlight all steps in the SDK generation process, showing completed and remaining steps.
-    - Do not skip any main steps. Ensure all steps are completed before moving to the next.
-
-4. **Git Operations**:
-    - Avoid using the `main` branch for pull requests. Prompt the user to create or switch to a new branch if necessary.
-    - Display git commands (e.g., `git checkout`, `git add`, `git commit`, `git push`) with a "Run" button instead of 
-    asking the user to copy and paste.
-    - Do not run `git diff`
-
-5. **Azure-Specific Rules**:
-    - Always use `Azure` as the repo owner in MCP tool calls.
-    - Confirm with the user if they want to change the repo owner or target branch, and prompt for new values if needed.
-
-6. **Exclusions**:
-    - Exclude changes in `.github` and `.vscode` folders from API spec and SDK pull requests.
-
-7. **Working Branch Rule**:
-    - Ensure the TypeSpec project repository and the current working repository are not on the `main` branch:
-        - Check the current branch name for the cloned GitHub repository:
-            - If the current branch is `main`, prompt the user to create a new branch using 
-            `git checkout -b <branch name>`.
-            - If the current branch is not `main`, prompt the user to either select an existing branch or create a 
-            new one.
-        - For branch switching:
-            - If a branch already exists and differs from the current branch, prompt the user to switch using 
-            `git checkout <branch name>`.
-    - GitHub pull requests cannot be created from the `main` branch. Ensure all changes are made on a non-`main` branch.
-
-By following these rules, the SDK release process will remain clear, structured, and user-friendly.
-
-## Steps to generate SDK from TypeSpec API specification
-Follow `/typespec-to-sdk` prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
-Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
-
-1. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
-2. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
-3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
-4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
-5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
-6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
-7. **Generate SDKs via Pipeline**:  Generate SDKs using `/run-sdk-gen-pipeline` prompt, monitor the pipeline status and displaying generated SDK PR links.
-8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Create a release plan**: Create a release plan for the generated SDKs using spec pull request.
-10. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
-11. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.
-
-
-## Release readiness of SDK and information about the release pipeline
-Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+[typespec-structure-guidelines]: ../documentation/typespec-structure-guidelines.md

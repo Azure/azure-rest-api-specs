@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { Suppression, getSuppressionsFromYaml } from "../src/suppressions.js";
+import { type Suppression, getSuppressionsFromYaml } from "../src/suppressions.ts";
 
 test("empty suppressions.yaml", () => {
   const suppressions: Suppression[] = getSuppressionsFromYaml(
@@ -237,21 +237,21 @@ test("suppression path relative to suppressions file", () => {
 test("yaml not array", () => {
   expect(() =>
     getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
-  ).toThrowErrorMatchingInlineSnapshot(
-    `[ZodValidationError: Validation error: Expected array, received string]`,
-  );
+  ).toThrowErrorMatchingInlineSnapshot(`[Error: ✖ Invalid input: expected array, received string]`);
 });
 
 test("yaml array not suppression", () => {
-  expect(() =>
-    getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
-  ).toThrowErrorMatchingInlineSnapshot(
-    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].reason"]`,
-  );
+  expect(() => getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"))
+    .toThrowErrorMatchingInlineSnapshot(`
+    [Error: ✖ Invalid input: expected string, received undefined
+      → at [0].tool
+    ✖ Invalid input: expected string, received undefined
+      → at [0].reason]
+  `);
 });
 
 test("suppression with rules", () => {
-  let suppressions: Suppression[] = getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "foo",
     "suppressions.yaml",
@@ -318,7 +318,7 @@ test.each([
   reason: process-version
 `;
 
-  let suppressions: Suppression[] = getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "test-path",
     "suppressions.yaml",

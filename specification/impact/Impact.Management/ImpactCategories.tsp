@@ -40,7 +40,7 @@ model ImpactCategoryProperties is ResourceProperties {
   description?: string;
 
   @doc("The workloadImpact properties which are required when reporting with the impact category")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   requiredImpactProperties?: RequiredImpactProperties[];
 }
 
@@ -77,5 +77,5 @@ model CustomParameters {
   @query
   @minLength(1)
   @doc("Filter by resource type")
-  resourceType: string;
+  resourceType?: string;
 }

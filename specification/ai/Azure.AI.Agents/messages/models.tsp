@@ -1,4 +1,5 @@
 import "../tools/models.tsp";
+import "../common/models.tsp";
 import "@typespec/versioning";
 
 namespace Azure.AI.Agents;
@@ -65,6 +66,7 @@ model MessageInputImageUrlBlock extends MessageInputContentBlock {
   @doc("Must be 'image_url' for an externally hosted image block.")
   type: "image_url";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Information about the external image URL, including the URL and optional detail level.")
   @encodedName("application/json", "image_url")
   imageUrl: MessageImageUrlParam;
@@ -110,6 +112,7 @@ model MessageImageUrlParam {
  * A single message within an agent thread,
  * as provided during that thread's creation for its initial state.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model ThreadMessageOptions {
   /**
@@ -606,4 +609,14 @@ model MessageDeltaTextFilePathAnnotationObject {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")
   fileId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
+@doc("The status of a thread message deletion operation.")
+@added(Versions.v1)
+model MessageDeletionStatus {
+  ...DeletionStatus;
+
+  @doc("The object type, which is always 'thread.message.deleted'.")
+  object: "thread.message.deleted";
 }

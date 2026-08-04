@@ -1,13 +1,15 @@
 import { join } from "path";
-import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { fileExists, readTspConfig } from "../utils.ts";
 
 export class EmitAutorestRule implements Rule {
   readonly name = "EmitAutorest";
 
   readonly description = 'Must emit "@azure-tools/typespec-autorest" by default';
+
+  readonly suppressable = true;
 
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
@@ -19,7 +21,7 @@ export class EmitAutorestRule implements Rule {
 
     if (mainTspExists) {
       const configText = await readTspConfig(folder);
-      const config = yamlParse(configText);
+      const config = parse(configText);
 
       const emit = config?.emit;
       stdOutput += `emit: ${JSON.stringify(emit)}\n`;

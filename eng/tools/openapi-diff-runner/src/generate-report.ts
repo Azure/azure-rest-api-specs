@@ -1,18 +1,18 @@
+import { addToSummary, logMessage, logWarning } from "./log.ts";
+import { ApiVersionLifecycleStage, type Context } from "./types/breaking-change.ts";
 import {
-  BrChMsgRecord,
+  type BrChMsgRecord,
   getKey,
-  MessageLevel,
-  RawMessageRecord,
-  ResultMessageRecord,
-} from "./types/message.js";
-import { ApiVersionLifecycleStage, Context } from "./types/breaking-change.js";
+  type MessageLevel,
+  type RawMessageRecord,
+  type ResultMessageRecord,
+} from "./types/message.ts";
 import {
-  BreakingChangeMdReport,
+  type BreakingChangeMdReport,
   createBreakingChangeMdReport,
   reportToString,
   sortBreakingChangeMdReports,
-} from "./utils/markdown-report.js";
-import { addToSummary, logMessage, logWarning } from "./log.js";
+} from "./utils/markdown-report.ts";
 
 // Per the GitHub documentation [1], the length limit of a check pane is 65535 characters.
 // While not immediately obvious, it looks like the 65535 limit applies to the total length of the text and summary,
@@ -140,10 +140,10 @@ function getReports(
 
   Object.entries(msgsByKey).forEach(([, msgs]) => {
     const stableMsgs = msgs.filter(
-      (msg) => (msg.groupName as ApiVersionLifecycleStage) == "stable",
+      (msg) => (msg.groupName as ApiVersionLifecycleStage) == ApiVersionLifecycleStage.STABLE,
     );
     const previewMsgs = msgs.filter(
-      (msg) => (msg.groupName as ApiVersionLifecycleStage) == "preview",
+      (msg) => (msg.groupName as ApiVersionLifecycleStage) == ApiVersionLifecycleStage.PREVIEW,
     );
 
     if (stableMsgs.length > 0) {
@@ -189,12 +189,12 @@ function getComparedApiVersionsReportsString(
 ): string {
   const stableApiVersionComparisonReportsString: string = getReportsComparedToApiVersionString(
     stableReports,
-    "stable",
+    ApiVersionLifecycleStage.STABLE,
     maxRowCount,
   );
   const previewApiVersionComparisonReportsString: string = getReportsComparedToApiVersionString(
     previewReports,
-    "preview",
+    ApiVersionLifecycleStage.PREVIEW,
     maxRowCount,
   );
   return stableApiVersionComparisonReportsString + previewApiVersionComparisonReportsString;
@@ -251,8 +251,8 @@ function getSummaryData(
   return (
     summaryTitle +
     summaryDataSuppressionAndDetailsText +
-    `> [!IMPORTANT]\n` +
-    `> Browse to the job logs to see the details.\n`
+    `\n\n> [!IMPORTANT]\n` +
+    `> Browse to the job logs to see the details.\n\n`
   );
 }
 
@@ -284,6 +284,6 @@ async function writeToJobSummary(markdownContent: string): Promise<void> {
     );
   }
 
-  addToSummary(finalContent);
+  await addToSummary(finalContent);
   logMessage(`Successfully wrote ${finalContent.length} characters to GitHub Actions job summary.`);
 }

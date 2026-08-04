@@ -2,6 +2,7 @@ import "./apis/location.tsp";
 import "./apis/network.tsp";
 import "./apis/number.tsp";
 import "./apis/simswap.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -24,7 +25,7 @@ using Azure.Core;
   "Azure Programmable Connectivity Endpoint.",
   {
     @doc("An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example https://{region}.apcgatewayapi.azure.com")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(APCVersions)
@@ -34,6 +35,5 @@ namespace Azure.ProgrammableConnectivity;
 @doc("APC Versions")
 enum APCVersions {
   @doc("Version 2024-02-09-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_09_preview: "2024-02-09-preview",
 }

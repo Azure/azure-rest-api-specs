@@ -1,11 +1,11 @@
-import { parseArgs, ParseArgsConfig } from "node:util";
-import { pathExists, getDependencyVersion, getPathToDependency } from "./util.js";
-import { getRunList } from "./processChanges.js";
-import { runChecks, getAutorestErrors } from "./runChecks.js";
-import { correlateRuns } from "./correlateResults.js";
-import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
-import { writeFile } from "node:fs/promises";
 import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
+import { writeFile } from "node:fs/promises";
+import { inspect, parseArgs, type ParseArgsConfig } from "node:util";
+import { correlateRuns } from "./correlateResults.ts";
+import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.ts";
+import { getRunList } from "./processChanges.ts";
+import { getAutorestErrors, runChecks } from "./runChecks.ts";
+import { getDependencyVersion, getPathToDependency, pathExists } from "./util.ts";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -67,13 +67,13 @@ export async function main() {
   // TODO: Handle trailing slashes properly
   if (!beforeArg || !(await pathExists(beforeArg as string))) {
     validArgs = false;
-    console.log(`--before must be a valid path. Value passed: ${beforeArg || "<empty>"}`);
+    console.log(`--before must be a valid path. Value passed: ${inspect(beforeArg) || "<empty>"}`);
   }
 
   // TODO: Handle trailing slashes properly
   if (!afterArg || !(await pathExists(afterArg as string))) {
     validArgs = false;
-    console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
+    console.log(`--after must be a valid path. Value passed: ${inspect(afterArg) || "<empty>"}`);
   }
 
   if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
@@ -120,10 +120,8 @@ async function runLintDiff(
     );
   } catch (error) {
     if (error instanceof SpecModelError) {
-      console.log("\n\n");
-      console.log("❌ Error building Spec Model from changed file list:");
-      console.log(`${error}`);
-      console.log("Ensure input files and references are valid.");
+      console.log("\n❌ Error building Spec Model from changed file list:");
+      console.log(`${inspect(error)}`);
 
       process.exitCode = 1;
       return;
@@ -146,7 +144,10 @@ async function runLintDiff(
 
   // It may be possible to run these in parallel as they're running against
   // different directories.
+  console.log("Running checks on before state...");
   const beforeChecks = await runChecks(beforePath, beforeList);
+
+  console.log("Running checks on after state...");
   const afterChecks = await runChecks(afterPath, afterList);
 
   // If afterChecks has AutoRest errors, fail the run.
@@ -156,7 +157,7 @@ async function runLintDiff(
     })
     .filter((result) => result.errors.length > 0);
   if (autoRestErrors.length > 0) {
-    generateAutoRestErrorReport(autoRestErrors, outFile);
+    await generateAutoRestErrorReport(autoRestErrors, outFile);
     console.log("AutoRest errors found. See workflow summary for details.");
 
     process.exitCode = 1;

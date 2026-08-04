@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "Content-Type": "multipart/form-data",
+    "definition": "{ \"locales\":  [\"en-US\"], \"enhancedMode\": { \"enabled\": true, \"task\": \"translate\", \"targetLanguage\": \"zh\" } }",
+    "audio": "{binary}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "durationMilliseconds": 2000,
+        "combinedPhrases": [
+          {
+            "text": "天气"
+          }
+        ],
+        "phrases": [
+          {
+            "offsetMilliseconds": 40,
+            "durationMilliseconds": 320,
+            "text": "天气",
+            "words": [
+              {
+                "text": "天",
+                "offsetMilliseconds": 0,
+                "durationMilliseconds": 0
+              },
+              {
+                "text": "气",
+                "offsetMilliseconds": 0,
+                "durationMilliseconds": 0
+              }
+            ],
+            "locale": "zh-CN",
+            "confidence": 0.78983736
+          }
+        ]
+      }
+    }
+  }
+}

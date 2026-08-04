@@ -6,15 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 /**
- * Interval legends element used to define a color map
- */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" ""
-union IntervalLegendsElement {
-  Interval,
-  Record<string>,
-}
-
-/**
  * Interval legend response model.
  *
  * Represents a color map for intervals, where each interval is defined by:
@@ -40,6 +31,7 @@ union IntervalLegendsElement {
  * - The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).
  * - The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntervalLegendsResponse {
   /**
    * status code
@@ -55,24 +47,13 @@ model IntervalLegendsResponse {
    * body
    */
   @body
-  body: IntervalLegendsElement[][];
+  body: int64[][][];
 }
 
 /**
- * Interval type alias.
+ * ClassMap legend response model.
  */
-alias Interval = int64[];
-
-/**
- * Classmap legend color.
- *
- * The color is represented as a 4-tuple of integers, each in the range [0, 255].
- * The first three integers represent the red, green, and blue components of the
- * color, respectively. The fourth integer represents the alpha (opacity) value.
- */
-alias RgbaColor = int64[];
-
-/**
- * Classmap legend response model.
- */
-model ClassmapLegendResponse is Record<RgbaColor>;
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "ClassMap legend values are RGBA color arrays, not strings."
+#suppress "@azure-tools/typespec-autorest/no-unknown" "ClassMap legend values are RGBA color arrays but additionalProperties cannot express array items."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+model ClassMapLegendResponse is Record<unknown>;

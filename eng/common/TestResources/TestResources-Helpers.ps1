@@ -185,8 +185,6 @@ function LintBicepFile([string] $path) {
     }
 
     # Work around lack of config file override: https://github.com/Azure/bicep/issues/5013
-    $output = bicep lint $path 2>&1
-
     if ($useBicepCli) {
         $output = bicep lint $path 2>&1
     } else {
@@ -264,9 +262,10 @@ function SetDeploymentOutputs(
 ) {
     $deploymentEnvironmentVariables = $environmentVariables.Clone()
     $deploymentOutputs = BuildDeploymentOutputs $serviceName $azContext $deployment $deploymentEnvironmentVariables
+    $isBicep = $templateFile.originalFilePath -and $templateFile.originalFilePath.EndsWith(".bicep")
 
-    if ($OutFile) {
-        if ($IsWindows -and $Language -eq 'dotnet') {
+    # Azure SDK for .NET on Windows uses DPAPI-encrypted, JSON-encoded environment variables.
+    if ($OutFile -and $IsWindows -and $Language -eq 'dotnet') {
             $outputFile = "$($templateFile.originalFilePath).env"
 
             $environmentText = $deploymentOutputs | ConvertTo-Json;
@@ -276,29 +275,29 @@ function SetDeploymentOutputs(
             Set-Content $outputFile -Value $protectedBytes -AsByteStream -Force
 
             Write-Host "Test environment settings`n$environmentText`nstored into encrypted $outputFile"
+    }
+    # Any Bicep template in a repo that has opted into .env files.
+    elseif ($OutFile -and $isBicep) {
+        $bicepTemplateFile = $templateFile.originalFilePath
+
+        # Make sure the file would not write secrets to .env file.
+        if (!(LintBicepFile $bicepTemplateFile)) {
+            Write-Error "$bicepTemplateFile may write secrets. No file written."
         }
-        elseif ($templateFile.originalFilePath -and $templateFile.originalFilePath.EndsWith(".bicep")) {
-            $bicepTemplateFile = $templateFile.originalFilePath
+        $outputFile = $bicepTemplateFile | Split-Path | Join-Path -ChildPath '.env'
 
-            # Make sure the file would not write secrets to .env file.
-            if (!(LintBicepFile $bicepTemplateFile)) {
-                Write-Error "$bicepTemplateFile may write secrets. No file written."
+        # Make sure the file would be ignored.
+        git check-ignore -- "$outputFile" > $null
+        if ($?) {
+            $environmentText = foreach ($kv in $deploymentOutputs.GetEnumerator()) {
+                "$($kv.Key)=`"$($kv.Value)`""
             }
-            $outputFile = $bicepTemplateFile | Split-Path | Join-Path -ChildPath '.env'
 
-            # Make sure the file would be ignored.
-            git check-ignore -- "$outputFile" > $null
-            if ($?) {
-                $environmentText = foreach ($kv in $deploymentOutputs.GetEnumerator()) {
-                    "$($kv.Key)=`"$($kv.Value)`""
-                }
-
-                Set-Content $outputFile -Value $environmentText -Force
-                Write-Host "Test environment settings`n$environmentText`nstored in $outputFile"
-            }
-            else {
-                Write-Error "$outputFile is not ignored by .gitignore. No file written."
-            }
+            Set-Content $outputFile -Value $environmentText -Force
+            Write-Host "Test environment settings`n$environmentText`nstored in $outputFile"
+        }
+        else {
+            Write-Error "$outputFile is not ignored by .gitignore. No file written."
         }
     }
     else {
@@ -348,4 +347,36 @@ function SetDeploymentOutputs(
     }
 
     return $deploymentEnvironmentVariables, $deploymentOutputs
+}
+
+function HandleTemplateDeploymentError($templateValidationResult) {
+    Write-Warning "Deployment template validation failed"
+
+    if (!$templateValidationResult.Details.Message) {
+        Write-Warning "Could not parse template validation error"
+        return
+    }
+
+    # Retrieve one or more messages then decode the strings for readability (remove quote escapes, fix link readability, etc.)
+    $parsedMessage = ($templateValidationResult.Details.Message -join "$([System.Environment]::NewLine)$([System.Environment]::NewLine)")
+    $parsedMessage = [System.Net.WebUtility]::UrlDecode($parsedMessage)
+
+    Write-Warning "#####################################################"
+    Write-Warning "######### TEMPLATE VALIDATION ERROR DETAILS #########"
+    Write-Warning "#####################################################"
+    Write-Host $parsedMessage
+    Write-Warning "#####################################################"
+}
+
+function HandleDeploymentFailure($deployment) {
+    Write-Host "Deployment '$($deployment.DeploymentName)' has state '$($deployment.ProvisioningState)' with CorrelationId '$($deployment.CorrelationId)'. Exiting..."
+    Write-Host @'
+#####################################################
+# For help debugging live test provisioning issues, #
+# see http://aka.ms/azsdk/engsys/live-test-help     #
+#####################################################
+'@
+    $queryTime = (Get-Date).AddMinutes(-10).ToString("o")
+    Write-Host "To check the activity log with the below command after waiting 2 minutes for propagation:"
+    Write-Host "(Get-AzActivityLog -CorrelationId '$($deployment.CorrelationId)' -StartTime '$queryTime').Properties.Content.statusMessage"
 }

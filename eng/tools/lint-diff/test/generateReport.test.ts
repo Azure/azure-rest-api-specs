@@ -1,38 +1,39 @@
-import { beforeEach, test, describe, expect, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   compareLintDiffViolations,
   generateAutoRestErrorReport,
   generateLintDiffReport,
+  getAutoRestFailedMessage,
   getDocUrl,
   getFile,
   getFileLink,
   getLine,
   getPathSegment,
   iconFor,
-} from "../src/generateReport.js";
+} from "../src/generateReport.ts";
 import {
-  Source,
-  LintDiffViolation,
-  BeforeAfter,
-  AutorestRunResult,
-  AutoRestMessage,
-} from "../src/lintdiff-types.js";
-import { isWindows } from "./test-util.js";
+  type AutoRestMessage,
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+  type Source,
+} from "../src/lintdiff-types.ts";
+import { isWindows } from "./test-util.ts";
 
 import { vol } from "memfs";
 
 vi.mock("node:fs/promises", async () => {
-  const memfs = (await vi.importActual("memfs")) as typeof import("memfs");
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
   return {
     ...memfs.fs.promises,
   };
 });
 
-import { readFile } from "fs/promises";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { readFile } from "fs/promises";
 
-vi.mock("../src/util.js", async () => {
-  const original = await vi.importActual("../src/util.js");
+vi.mock("../src/util.ts", async () => {
+  const original = await vi.importActual("../src/util.ts");
   return {
     ...original,
     getDependencyVersion: vi.fn().mockResolvedValue("1.0.0"),
@@ -51,13 +52,43 @@ describe("iconFor", () => {
   });
 });
 
+describe("getAutoRestFailedMessage", () => {
+  test("returns empty string when result is null", () => {
+    expect(getAutoRestFailedMessage(null)).toEqual("");
+  });
+
+  test("returns empty string when result has no error", () => {
+    const result: AutorestRunResult = {
+      error: null,
+      rootPath: "",
+      readme: new Readme("file.md"),
+      tag: "default",
+      stdout: "",
+      stderr: "",
+    };
+    expect(getAutoRestFailedMessage(result)).toEqual("");
+  });
+
+  test("returns 'Autorest Failed' when result has an error", () => {
+    const result: AutorestRunResult = {
+      error: new Error("Autorest failed"),
+      rootPath: "",
+      readme: new Readme("file.md"),
+      tag: "default",
+      stdout: "",
+      stderr: "",
+    };
+    expect(getAutoRestFailedMessage(result)).toEqual("Autorest Failed");
+  });
+});
+
 describe("getLine", () => {
   test("returns the line number", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
 
@@ -111,7 +142,7 @@ describe("getFile", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
 
@@ -177,7 +208,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a };
@@ -208,7 +239,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a, level: "warning" };
@@ -222,7 +253,7 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a, level: "error" };
@@ -236,12 +267,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -253,12 +284,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -270,12 +301,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -287,12 +318,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -304,7 +335,7 @@ describe("compareLintDiffViolations", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b: LintDiffViolation = {
@@ -321,7 +352,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b: LintDiffViolation = {
@@ -352,7 +383,7 @@ describe("generateLintDiffReport", () => {
           document:
             "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
           position: { line: 1, colomn: 1 },
-        } as Source,
+        },
       ],
       details: {},
     };
@@ -396,7 +427,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -455,7 +486,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -464,6 +495,65 @@ describe("generateLintDiffReport", () => {
       "
     `);
   });
+
+  test.skipIf(isWindows())(
+    "passes and displays warning if before has errors",
+    async ({ expect }) => {
+      const afterViolation = {
+        extensionName: "@microsoft.azure/openapi-validator",
+        level: "warning",
+        code: "SomeCode",
+        message: "A warning occurred",
+        source: [],
+        details: {},
+      };
+
+      const beforeResult = {
+        error: new Error("Autorest failed"),
+        stdout: "",
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+      const afterResult = {
+        error: null,
+        stdout: JSON.stringify(afterViolation),
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+
+      const runCorrelations = new Map<string, BeforeAfter>([
+        ["file1.md", { before: beforeResult, after: afterResult }],
+      ]);
+
+      const outFile = "test-output-fatal.md";
+      const actual = await generateLintDiffReport(
+        runCorrelations,
+        new Set<string>([
+          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+        ]),
+        outFile,
+        "baseBranch",
+        "compareSha",
+        "repo/path",
+      );
+      expect(actual).toBe(true);
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+      | --- | --- | --- |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) Autorest Failed|
+
+
+      > [!WARNING]
+      > Autorest failed checking before state of file1.md 
+
+      "
+    `);
+    },
+  );
 
   test.skipIf(isWindows())(
     "passes if new violations do not include an error (warnings only)",
@@ -478,7 +568,7 @@ describe("generateLintDiffReport", () => {
             document:
               "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
             position: { line: 1, colomn: 1 },
-          } as Source,
+          },
         ],
         details: {},
       };
@@ -523,7 +613,7 @@ describe("generateLintDiffReport", () => {
         | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-        **[must fix]The following errors/warnings are intorduced by current PR:**
+        **[must fix]The following errors/warnings are introduced by current PR:**
 
         | Rule | Message | Related RPC [For API reviewers] |
         | ---- | ------- | ------------------------------- |

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "containerAppName": "myContainerApp",
+    "resourceGroupName": "myResourceGroup",
+    "revisionName": "myContainerApp-abc123",
+    "subscriptionId": "12345678-1234-1234-1234-123456789abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "myContainerApp/myContainerApp-abc123/HttpExample",
+            "type": "Microsoft.App/containerApps/revisions/functions",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
+            "properties": {
+              "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
+              "isDisabled": false,
+              "triggerType": "httpTrigger",
+              "language": "dotnet-isolated"
+            }
+          },
+          {
+            "name": "myContainerApp/myContainerApp-abc123/TimerFunction",
+            "type": "Microsoft.App/containerApps/revisions/functions",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/TimerFunction",
+            "properties": {
+              "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
+              "isDisabled": false,
+              "triggerType": "timerTrigger",
+              "language": "dotnet-isolated"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContainerAppsRevisionFunctions_List",
+  "title": "List Container App Revision's functions"
+}

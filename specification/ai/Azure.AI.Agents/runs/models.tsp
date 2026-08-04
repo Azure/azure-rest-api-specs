@@ -187,6 +187,7 @@ model RunCompletionUsage {
   totalTokens: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The details used when creating a new run of an agent thread.")
 @added(Versions.v2025_05_01)
 model CreateRunOptions {
@@ -218,6 +219,11 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools that the agent should use to run the thread.")
   tools?: ToolDefinition[] | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The overridden enabled tool resources that the agent should use to run the thread.")
+  @encodedName("application/json", "tool_resources")
+  tool_resources?: ToolResources | null;
 
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
@@ -326,6 +332,10 @@ union RunStatus {
 
   @doc("Represents a run that expired before it could otherwise finish.")
   expired: "expired",
+
+  @doc("Represents a run that cannot be completed due to safety guardrails.")
+  @added(Versions.v2025_05_15_preview)
+  incomplete: "incomplete",
 }
 
 @discriminator("type")
@@ -356,6 +366,26 @@ model SubmitToolOutputsDetails {
   toolCalls: RequiredToolCall[];
 }
 
+@doc("The details for required tool call approval that must be submitted for an agent thread run to continue.")
+@added(Versions.v2025_05_15_preview)
+model SubmitToolApprovalAction extends RequiredAction {
+  @doc("The object type, which is always 'submit_tool_approval'.")
+  type: "submit_tool_approval";
+
+  @encodedName("application/json", "submit_tool_approval")
+  @doc("The details describing tools that should be approved to continue run.")
+  submitToolApproval: SubmitToolApprovalDetails;
+}
+
+@doc("The details describing tools that should be approved.")
+@added(Versions.v2025_05_15_preview)
+model SubmitToolApprovalDetails {
+  @encodedName("application/json", "tool_calls")
+  @doc("The list of tool calls that must be approved for the agent thread run to continue.")
+  toolCalls: RequiredToolCall[];
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The details used when creating and immediately running a new agent thread.")
 @added(Versions.v2025_05_01)
 model CreateAndRunThreadOptions {

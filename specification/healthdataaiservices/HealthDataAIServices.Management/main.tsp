@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -17,12 +18,6 @@ namespace Microsoft.HealthDataAIServices;
 
 @doc("Supported API versions for the Microsoft.HealthDataAIServices resource provider.")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @doc("The 2024-02-28-preview version.")
-  v2024_02_28_preview: "2024-02-28-preview",
-
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-09-20 version.")
   v2024_09_20: "2024-09-20",
@@ -103,6 +98,7 @@ model DeidServiceProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("Deid service url.")
   serviceUrl?: string;

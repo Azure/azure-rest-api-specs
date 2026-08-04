@@ -1,30 +1,17 @@
 #!/usr/bin/env node
 
-import { checkSpecs, checkExamples } from "./runner.js";
 import {
   outputAnnotatedErrors,
   outputErrorSummary,
   outputSuccessSummary,
-  ReportableOavError,
-} from "./formatting.js";
+  type ReportableOavError,
+} from "./formatting.ts";
+import { checkExamples, checkSpecs } from "./runner.ts";
 
-import { resolve } from "path";
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "node:fs/promises";
-import { simpleGit } from "simple-git";
-
-export async function getRootFolder(inputPath: string): Promise<string> {
-  try {
-    const gitRoot = await simpleGit(inputPath).revparse("--show-toplevel");
-    return resolve(gitRoot.trim());
-  } catch (error) {
-    console.error(
-      `Error: Unable to determine the root folder of the git repository.`,
-      `Please ensure you are running this command within a git repository OR providing a targeted directory that is within a git repo.`,
-    );
-    process.exit(1);
-  }
-}
+import { parseArgs, type ParseArgsConfig } from "node:util";
+import { resolve } from "path";
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -45,16 +32,20 @@ export async function main() {
     allowPositionals: true,
   };
 
-  const { values: opts, positionals } = parseArgs(config);
-  // this option has a default value of process.cwd(), so we can assume it is always defined
-  // just need to resolve that here to make ts aware of it
-  const targetDirectory = opts.targetDirectory as string;
+  const { values: opts, positionals } = parseArgs(config) as {
+    values: {
+      // this option has a default value of process.cwd(), so we can assume it is always defined
+      targetDirectory: string;
+      fileList?: string;
+    };
+    positionals: string[];
+  };
 
-  const resolvedGitRoot = await getRootFolder(targetDirectory);
+  const resolvedGitRoot = await getRootFolder(opts.targetDirectory);
 
   let fileList: string[] | undefined = undefined;
   if (opts.fileList !== undefined) {
-    const fileListPath = resolve(opts.fileList as string);
+    const fileListPath = resolve(opts.fileList);
     try {
       const fileContent = await fs.readFile(fileListPath, { encoding: "utf-8" });
       fileList = fileContent
@@ -102,9 +93,9 @@ export async function main() {
     outputAnnotatedErrors(errorList);
 
     // print the errors in a summary report that we can later output to
-    outputErrorSummary(errorList, reportName);
+    await outputErrorSummary(errorList, reportName);
   } else {
-    outputSuccessSummary(scannedSwaggerFiles, reportName);
+    await outputSuccessSummary(scannedSwaggerFiles, reportName);
   }
 
   process.exit(exitCode);

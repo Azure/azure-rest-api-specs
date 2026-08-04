@@ -1,0 +1,27 @@
+{
+  "title": "Addons_Get_HCX_With_Networks",
+  "operationId": "Addons_Get",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "addonName": "hcx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/addons/hcx",
+        "name": "hcx",
+        "properties": {
+          "addonType": "HCX",
+          "offer": "VMware MaaS Cloud Provider (Enterprise)",
+          "provisioningState": "Succeeded",
+          "managementNetwork": "10.3.1.0/24",
+          "uplinkNetwork": "10.3.2.0/24"
+        },
+        "type": "Microsoft.AVS/privateClouds/addons"
+      }
+    }
+  }
+}

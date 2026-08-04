@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "parameters": {
+      "location": "East US 2 EUAP",
+      "properties": {
+        "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk",
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+        },
+        "virtualNetworkType": "External"
+      },
+      "sku": {
+        "name": "Premium",
+        "capacity": 2
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      },
+      "zones": [
+        "1",
+        "2"
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAGTAs=",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "East US 2 EUAP",
+        "properties": {
+          "createdAtUtc": "2021-02-22T06:53:46.6409875Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
+          },
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimService1-eastus2euap-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "defaultSslBinding": true,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "platformVersion": "stv2",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "20.47.137.XXX"
+          ],
+          "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 2
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAiXto=",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "East US 2 EUAP",
+        "properties": {
+          "createdAtUtc": "2020-07-28T23:18:14.6562474Z",
+          "disableGateway": false,
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": true,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "platformVersion": "stv2.1",
+          "provisioningState": "Created",
+          "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "targetProvisioningState": "Activating",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 2
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "zones": [
+          "1",
+          "2"
+        ]
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse"
+      }
+    }
+  },
+  "operationId": "ApiManagementService_CreateOrUpdate",
+  "title": "ApiManagementCreateServiceInVnetWithPublicIP"
+}

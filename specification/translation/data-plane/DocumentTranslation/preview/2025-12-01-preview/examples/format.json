@@ -1,0 +1,85 @@
+{
+  "title": "Returns a list of supported document formats",
+  "operationId": "DocumentTranslationOperations_GetSupportedFormats",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "type": "Document"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "retry-after": "30",
+        "ETag": "686897696a7c876b7e"
+      },
+      "body": {
+        "value": [
+          {
+            "format": "PlainText",
+            "fileExtensions": [
+              ".txt"
+            ],
+            "contentTypes": [
+              "text/plain"
+            ],
+            "type": "Document"
+          },
+          {
+            "format": "PortableDocumentFormat",
+            "fileExtensions": [
+              ".pdf"
+            ],
+            "contentTypes": [
+              "application/pdf"
+            ],
+            "type": "Document"
+          },
+          {
+            "format": "OpenXmlWord",
+            "fileExtensions": [
+              ".docx"
+            ],
+            "contentTypes": [
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ],
+            "type": "Document"
+          },
+          {
+            "format": "OpenXmlPresentation",
+            "fileExtensions": [
+              ".pptx"
+            ],
+            "contentTypes": [
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            ],
+            "type": "Document"
+          },
+          {
+            "format": "OpenXmlSpreadsheet",
+            "fileExtensions": [
+              ".xlsx"
+            ],
+            "contentTypes": [
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ],
+            "type": "Document"
+          },
+          {
+            "format": "HtmlFile",
+            "fileExtensions": [
+              ".html",
+              ".htm"
+            ],
+            "contentTypes": [
+              "text/html"
+            ],
+            "type": "Document"
+          }
+        ]
+      }
+    }
+  }
+}

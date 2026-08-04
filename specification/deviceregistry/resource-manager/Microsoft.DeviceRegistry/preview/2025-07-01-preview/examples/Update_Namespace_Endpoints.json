@@ -1,0 +1,71 @@
+{
+  "title": "Update_Namespace_Endpoints",
+  "operationId": "Namespaces_Update",
+  "description": "Update a namespace endpoints",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "adr-namespace-gbk0925-n01",
+    "properties": {
+      "properties": {
+        "messaging": {
+          "endpoints": {
+            "eventGridEndpoint": {
+              "endpointType": "Microsoft.EventGrid",
+              "address": "https://myeventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk0925-n01",
+        "name": "adr-namespace-gbk0925-n01",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "North Europe",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-09-25T23:41:41.8591157Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-01T21:03:33.5993192Z"
+        },
+        "identity": {
+          "principalId": "00000000-0000-0000-9d20-8a5570c3eb6e",
+          "tenantId": "0006f47a-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "uuid": "cbfe124a-6971-4c90-a7a9-99be82def1ab",
+          "provisioningState": "Succeeded",
+          "messaging": {
+            "endpoints": {
+              "eventGridEndpoint1": {
+                "endpointType": "Microsoft.EventGrid",
+                "address": "https://myeventgridtopic1.westeurope-1.eventgrid.azure.net/api/events"
+              },
+              "eventGridEndpoint2": {
+                "endpointType": "Microsoft.EventGrid",
+                "address": "https://myeventgridtopic2.westeurope-1.eventgrid.azure.net/api/events"
+              },
+              "eventGridEndpoint3": {
+                "endpointType": "Microsoft.EventGrid",
+                "address": "https://myeventgridtopic3.westeurope-1.eventgrid.azure.net/api/events"
+              }
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

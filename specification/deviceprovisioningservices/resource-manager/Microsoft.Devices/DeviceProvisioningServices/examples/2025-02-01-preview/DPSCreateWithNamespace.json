@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "iotDpsDescription": {
+      "location": "East US",
+      "properties": {
+        "enableDataResidency": false
+      },
+      "sku": {
+        "name": "S1",
+        "capacity": 1
+      },
+      "tags": {}
+    },
+    "provisioningServiceName": "myFirstProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myFirstProvisioningService",
+        "type": "Microsoft.Devices/ProvisioningServices",
+        "etag": "AAAAAAAADGk=",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups//providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
+        "location": "eastus",
+        "properties": {
+          "allocationPolicy": "Hashed",
+          "authorizationPolicies": [],
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
+          "enableDataResidency": false,
+          "idScope": "0ne00000012",
+          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "state": "Active",
+          "deviceRegistryNamespace": {
+            "resourceId": "/subscriptions/8c64812d-6e59-4e65-96b3-14a7cdb1a4e4/resourceGroups/myRg/providers/Microsoft.DeviceRegistry/namespaces/myNamespace",
+            "authenticationType": "UserAssigned",
+            "selectedUserAssignedIdentityResourceId": "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1"
+          }
+        },
+        "resourcegroup": "myResourceGroup",
+        "sku": {
+          "name": "S1",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1": {},
+            "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-2": {}
+          }
+        },
+        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myFirstProvisioningService",
+        "type": "Microsoft.Devices/ProvisioningServices",
+        "etag": "AAAAAAAADGk=",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups//providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
+        "location": "eastus",
+        "properties": {
+          "allocationPolicy": "Hashed",
+          "authorizationPolicies": [],
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
+          "enableDataResidency": false,
+          "idScope": "0ne00000012",
+          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "state": "Active",
+          "deviceRegistryNamespace": {
+            "resourceId": "/subscriptions/8c64812d-6e59-4e65-96b3-14a7cdb1a4e4/resourceGroups/myRg/providers/Microsoft.DeviceRegistry/namespaces/myNamespace",
+            "authenticationType": "UserAssigned",
+            "selectedUserAssignedIdentityResourceId": "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1"
+          }
+        },
+        "resourcegroup": "myResourceGroup",
+        "sku": {
+          "name": "S1",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1": {},
+            "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-2": {}
+          }
+        },
+        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "IotDpsResource_CreateOrUpdate",
+  "title": "DPSCreateWithNamespace"
+}

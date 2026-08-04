@@ -1,0 +1,39 @@
+{
+  "title": "AgentSpacesConnectors_ListByAgentSpace",
+  "operationId": "AgentSpacesConnectors_ListByAgentSpace",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-kusto-connector",
+            "name": "shared-kusto-connector",
+            "type": "Microsoft.App/agentSpaces/connectors",
+            "properties": {
+              "dataConnectorType": "Kusto",
+              "endpoint": "https://shared-kusto.kusto.windows.net",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedKustoIdentity"
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-icm-connector",
+            "name": "shared-icm-connector",
+            "type": "Microsoft.App/agentSpaces/connectors",
+            "properties": {
+              "dataConnectorType": "Icm",
+              "endpoint": "https://portal.microsofticm.com",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedIcmIdentity"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

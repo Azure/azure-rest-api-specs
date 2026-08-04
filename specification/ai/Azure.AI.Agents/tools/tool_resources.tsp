@@ -30,6 +30,10 @@ model ToolResources {
   /** Resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
   azureAISearch?: AzureAISearchToolResource;
+
+  /** Resources to be used by the `mcp` tool consisting of a server label and headers. */
+  @added(Versions.v2025_05_15_preview)
+  mcp?: MCPToolResource[];
 }
 
 /**
@@ -135,6 +139,57 @@ model AISearchIndexResource {
    */
   @encodedName("application/json", "index_asset_id")
   indexAssetId?: string;
+}
+
+/**
+ * A set of resources that are used by the `mcp` tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model MCPToolResource {
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The headers for the MCP server updates")
+  headers: Record<string>;
+
+  @doc("Does MCP server require approval")
+  @encodedName("application/json", "require_approval")
+  requireApproval?: MCPRequiredApproval;
+}
+
+/** The Union of approval types. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+@added(Versions.v2025_05_15_preview)
+union MCPRequiredApproval {
+  string,
+
+  /** The approval is not required for any of the tools. */
+  `never`: "never",
+
+  /** The approval is required for all tools. */
+  always: "always",
+
+  /** Customized MCP approval object, listing tools requiring and not requiring approvals */
+  MCPApprovalPerTool,
+}
+
+/** Customized MCP approval object, listing tools requiring and not requiring approvals */
+@added(Versions.v2025_05_15_preview)
+model MCPApprovalPerTool {
+  /** The list of tools, not requiring approval. */
+  `never`?: MCPToolList;
+
+  /** The list of tools, always requiring approval. */
+  always?: MCPToolList;
+}
+
+/** The object, containing list of tools for approvals. */
+@added(Versions.v2025_05_15_preview)
+model MCPToolList {
+  /** The list of tools for approval. */
+  @encodedName("application/json", "tool_names")
+  toolNames: string[];
 }
 
 /** Available query types for Azure AI Search tool. */

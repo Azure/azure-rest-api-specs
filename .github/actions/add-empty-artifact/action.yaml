@@ -19,7 +19,7 @@ runs:
 
     # The maximum length is reported to be 260 characters. A full list of invalid artifact name characters is documented here:
     # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ inputs.name }}=${{ inputs.value }}
         path: ${{ runner.temp }}/empty.txt

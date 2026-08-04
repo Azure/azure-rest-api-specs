@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "$apply": "groupby((properties/billingProfileId))",
+    "api-version": "2024-08-01",
+    "endDate": "2019-09-30",
+    "scope": "providers/Microsoft.Billing/billingAccounts/1234:56789",
+    "startDate": "2019-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "chargeSummaryId1",
+            "type": "Microsoft.Consumption/charges",
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+            "kind": "modern",
+            "properties": {
+              "azureCharges": {
+                "currency": "USD",
+                "value": 5000
+              },
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1234:56789",
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/billingProfiles/123456/providers/Microsoft.Billing/billingPeriods/201909",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/billingProfiles/123456",
+              "chargesBilledSeparately": {
+                "currency": "USD",
+                "value": 60.9
+              },
+              "isInvoiced": false,
+              "marketplaceCharges": {
+                "currency": "USD",
+                "value": 100
+              },
+              "usageEnd": "2019-09-30",
+              "usageStart": "2019-09-01"
+            }
+          },
+          {
+            "name": "chargeSummaryId2",
+            "type": "Microsoft.Consumption/charges",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234:56789/billingProfiles/42425/providers/Microsoft.Consumption/charges/chargeSummaryId2",
+            "kind": "modern",
+            "properties": {
+              "azureCharges": {
+                "currency": "USD",
+                "value": 5000
+              },
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1234:56789",
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Billing/billingPeriods/201909",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/billingProfiles/42425",
+              "chargesBilledSeparately": {
+                "currency": "USD",
+                "value": 60.9
+              },
+              "marketplaceCharges": {
+                "currency": "USD",
+                "value": 100
+              },
+              "usageEnd": "2019-09-30",
+              "usageStart": "2019-09-01"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Charges_List",
+  "title": "ChargesListByBillingAccountGroupByBillingProfileId-Modern"
+}

@@ -4,12 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./models/models.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using OpenAPI;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Microsoft.AppComplianceAutomation;
 
@@ -29,7 +24,11 @@ alias ArmProviderActionAsync<
   Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters,
-  LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
+  LroHeaders = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    Response,
+    string
+  >
 >;
 
 alias ArmProviderActionSync<
@@ -81,12 +80,14 @@ interface ProviderActions {
   >;
 }
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(ArmProviderActionAsync::parameters.body,
+@@encodedName(
+  ArmProviderActionAsync::parameters.body,
   "application/json",
   "parameters"
 );
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(ArmProviderActionSync::parameters.body,
+@@encodedName(
+  ArmProviderActionSync::parameters.body,
   "application/json",
   "parameters"
 );

@@ -1,5 +1,5 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { ExecException } from "node:child_process";
+import { type ExecException } from "node:child_process";
 
 // TODO: Reduce to minimal set of properties
 export type AutorestRunResult = {
@@ -14,7 +14,7 @@ export type AutorestRunResult = {
 
 export interface AutoRestMessage {
   level: "information" | "warning" | "error" | "debug" | "verbose" | "fatal";
-  code?: any;
+  code?: unknown;
   message: string;
   readme?: string;
   tag?: string;

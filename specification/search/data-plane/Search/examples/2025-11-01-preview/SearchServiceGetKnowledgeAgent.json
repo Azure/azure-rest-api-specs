@@ -1,0 +1,50 @@
+{
+  "operationId": "KnowledgeAgents_Get",
+  "title": "SearchServiceGetKnowledgeAgent",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "agentName": "myagent"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myagent",
+        "description": "My knowledge agent for customer support",
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://myopenai.openai.azure.com",
+              "deploymentId": "gpt-4",
+              "modelName": "gpt-4"
+            }
+          }
+        ],
+        "knowledgeSources": [
+          {
+            "name": "myknowledgesource",
+            "includeReferences": true,
+            "includeReferenceSourceData": true,
+            "alwaysQuerySource": false,
+            "maxSubQueries": 5,
+            "rerankerThreshold": 0.7
+          }
+        ],
+        "retrievalInstructions": "Provide accurate and helpful information to customer queries.",
+        "outputConfiguration": {
+          "modality": "answerSynthesis",
+          "answerInstructions": "Be concise and professional",
+          "attemptFastPath": true,
+          "includeActivity": true
+        },
+        "requestLimits": {
+          "maxRuntimeInSeconds": 30,
+          "maxOutputSize": 4000
+        },
+        "eTag": "0x8D9A1234567890A"
+      }
+    }
+  }
+}

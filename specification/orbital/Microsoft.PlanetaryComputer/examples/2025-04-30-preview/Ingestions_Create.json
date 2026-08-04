@@ -2,24 +2,26 @@
   "title": "Ingestions_Create",
   "operationId": "Ingestions_Create",
   "parameters": {
-    "collectionId": "collectionId",
+    "collectionId": "naip-atl",
     "api-version": "2025-04-30-preview",
-    "definition": {
+    "body": {
       "importType": "StaticCatalog",
-      "sourceCatalogUrl": "https://sample.blob.core.windows.net/sample.json",
-      "skipExistingItems": false,
-      "keepOriginalAssets": false
+      "displayName": "Ingestion",
+      "sourceCatalogUrl": "https://raw.githubusercontent.com/aloverro/mpcpro-sample-datasets/main/datasets/planetary_computer/naip/catalog.json",
+      "keepOriginalAssets": true,
+      "skipExistingItems": true
     }
   },
   "responses": {
     "201": {
       "body": {
-        "id": "e1b1b8aa-0b32-4b0a-a25c-d0f806a9133a",
-        "creationTime": "2024-10-09T08:37:48.1509869Z",
+        "id": "00000000-0000-0000-0000-000000000000",
+        "creationTime": "2025-10-28T18:41:17.9174531Z",
         "importType": "StaticCatalog",
-        "sourceCatalogUrl": "https://sample.blob.core.windows.net/sample.json",
-        "skipExistingItems": false,
-        "keepOriginalAssets": false,
+        "displayName": "Ingestion",
+        "sourceCatalogUrl": "https://raw.githubusercontent.com/aloverro/mpcpro-sample-datasets/main/datasets/planetary_computer/naip/catalog.json",
+        "skipExistingItems": true,
+        "keepOriginalAssets": true,
         "status": "Ready"
       }
     }

@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -17,7 +18,6 @@ namespace Microsoft.AgriculturePlatform;
 @doc("Supported API versions for the Microsoft.AgriculturePlatform resource provider.")
 enum Versions {
   @doc("The 2024-06-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }
@@ -242,6 +242,8 @@ model MoboBrokerResource {
 interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AgriServiceResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -269,9 +271,9 @@ op ArmResourceListActionSync<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmResponse<TResponse>
+  | ErrorResponse;
 
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {

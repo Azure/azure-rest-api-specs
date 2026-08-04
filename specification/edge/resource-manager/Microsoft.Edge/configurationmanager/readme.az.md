@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: configurationmanager
-    namespace: azure.mgmt.configurationmanager
-    package-name: azure-mgmt-configurationmanager
-az-output-folder: $(azure-cli-extension-folder)/src/configurationmanager
-python-sdk-output-folder: "$(az-output-folder)/azext_configurationmanager/vendored_sdks/configurationmanager"
+    extensions: workloadorchestration
+    namespace: azure.mgmt.workloadorchestration
+    package-name: azure-mgmt-workloadorchestration
+az-output-folder: $(azure-cli-extension-folder)/src/workloadorchestration
+python-sdk-output-folder: "$(az-output-folder)/azext_workloadorchestration/vendored_sdks/workloadorchestration"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_configurationmanager/vendor
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: configurationmanager
-  namespace: azure.mgmt.configurationmanager
-  package-name: azure-mgmt-configurationmanager
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/configurationmanager
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/configurationmanager"
+  extensions: workloadorchestration
+  namespace: azure.mgmt.workloadorchestration
+  package-name: azure-mgmt-workloadorchestration
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/workloadorchestration
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/workloadorchestration"
 ``` 

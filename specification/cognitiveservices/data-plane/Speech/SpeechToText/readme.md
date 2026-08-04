@@ -4,10 +4,10 @@
 
 Configuration for generating SpeechToText SDK.
 
-The current release for the SpeechToText is `release_2024_11_15`.
+The current release for the SpeechToText is `release_2025_10_15`.
 
 ``` yaml
-tag: release_2024_11_15
+tag: release_2025_10_15
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -194,6 +194,29 @@ These settings apply only when `--tag=release_2024_11_15` is specified on the co
 ```yaml $(tag) == 'release_2024_11_15'
 input-file:
   - stable/2024-11-15/speechtotext.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
+  - suppress: OperationIdNounVerb
+    where: $..paths[($..operationId["Models_*"])]
+    reason: There is a sub-route called /models/base/ that refers to the base models. Therefore, the correct operation ID seems to be "Models_GetBaseModel", for example.
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
+## Tag: release_2025_10_15
+
+These settings apply only when `--tag=release_2025_10_15` is specified on the command line.
+
+```yaml $(tag) == 'release_2025_10_15'
+input-file:
+  - stable/2025-10-15/speechtotext.json
 ```
 
 AutoRest-Linter Suppressions

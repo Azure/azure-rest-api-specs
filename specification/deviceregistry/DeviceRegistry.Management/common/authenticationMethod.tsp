@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
 
-using Azure.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.DeviceRegistry;

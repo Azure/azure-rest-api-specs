@@ -3,7 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(Easm.Versions.v2024_10_01_preview)
 namespace Customizations;
 
@@ -94,15 +93,18 @@ interface EasmClient {
 @@clientName(Easm.Location, "ObservedLocationDetails", "csharp");
 @@clientName(Easm.Port, "PortDetails", "csharp");
 @@clientName(Easm.Port.port, "portName", "csharp");
-@@clientName(Easm.ReportAssetSnapshotExportRequest,
+@@clientName(
+  Easm.ReportAssetSnapshotExportRequest,
   "ReportAssetSnapshotExportPayload",
   "csharp"
 );
-@@clientName(Easm.ReportAssetSnapshotRequest,
+@@clientName(
+  Easm.ReportAssetSnapshotRequest,
   "ReportAssetSnapshotPayload",
   "csharp"
 );
-@@clientName(Easm.ReportAssetSummaryRequest,
+@@clientName(
+  Easm.ReportAssetSummaryRequest,
   "ReportAssetSummaryPayload",
   "csharp"
 );
@@ -116,15 +118,55 @@ interface EasmClient {
 @@clientName(Easm.TaskState, "TaskResourceState", "csharp");
 @@clientName(Easm.TaskPhase, "TaskResourcePhase", "csharp");
 @@clientName(Easm.DiscoSourceKind, "DiscoverySourceKind", "csharp");
-@@clientName(Easm.LogAnalyticsDataConnectionData,
+@@clientName(
+  Easm.LogAnalyticsDataConnectionData,
   "LogAnalyticsDataConnectionPayload",
   "csharp"
 );
-@@clientName(Easm.AzureDataExplorerDataConnectionData,
+@@clientName(
+  Easm.AzureDataExplorerDataConnectionData,
   "AzureDataExplorerDataConnectionPayload",
   "csharp"
 );
-@@clientName(Easm.DiscoGroupNameParameter,
+@@clientName(
+  Easm.DiscoGroupNameParameter,
   "DiscoveryGroupNameParameter",
   "csharp"
+);
+@@clientName(Easm.DeltaTypeResponse, "DeltaTypeResult", "csharp");
+@@clientName(Easm.ActionParameters, "ActionParametersContent", "csharp");
+@@clientName(Easm.AssetChainRequest, "AssetChainRequestContent", "csharp");
+@@clientName(Easm.AssetsExportRequest, "AssetsExportRequestContent", "csharp");
+@@clientName(Easm.DailyDeltaTypeResponse, "DailyDeltaTypeResult", "csharp");
+@@clientName(Easm.DeltaDetailsRequest, "DeltaDetailsRequestContent", "csharp");
+@@clientName(Easm.DeltaSummaryRequest, "DeltaSummaryRequestContent", "csharp");
+@@clientName(
+  Easm.DiscoGroupSummaryResult,
+  "DiscoveryGroupSummaryResult",
+  "csharp"
+);
+@@clientName(Easm.Policy, "EasmPolicy", "csharp");
+@@clientName(EasmClient.runDiscoGroup, "RunDiscoveryGroup", "csharp");
+@@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
+@@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
+@@clientName(EasmClient.listRuns, "GetDiscoveryGroupRuns", "csharp");
+@@clientName(
+  EasmClient.createOrReplaceDiscoGroup,
+  "CreateOrReplaceDiscoveryGroup",
+  "csharp"
+);
+@@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
+@@clientName(EasmClient.listAssetResource, "GetAssetResources", "csharp");
+@@clientName(EasmClient.listDataConnection, "GetDataConnections", "csharp");
+@@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
+@@clientName(EasmClient.listPolicy, "GetPolicies", "csharp");
+@@clientName(EasmClient.listSavedFilter, "GetSavedFilters", "csharp");
+@@clientName(EasmClient.listTask, "GetTasks", "csharp");
+@@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
+
+// rename for duplicate model from Azure.Core.Foundations
+@@clientName(
+  Azure.Core.Foundations.InnerError,
+  "CoreInnerError",
+  "java,go,python,csharp"
 );

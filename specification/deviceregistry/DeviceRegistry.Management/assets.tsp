@@ -11,7 +11,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -376,6 +375,8 @@ interface Assets {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Asset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

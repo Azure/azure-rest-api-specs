@@ -19,7 +19,6 @@ namespace Microsoft.ManufacturingPlatform;
 @doc("Supported API versions for the Microsoft.ManufacturingPlatform resource provider.")
 enum Versions {
   @doc("The 2025-03-01 version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_03_01: "2025-03-01",
 }
 
@@ -116,6 +115,7 @@ model MdsResourceProperties {
   @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$")
   aksAdminGroupId?: string = "00000000-0000-0000-0000-000000000000";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("Service Url")
   serviceUrl?: string;
@@ -381,6 +381,8 @@ interface ManufacturingDataServices {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
   // update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
   //temporary fix until typespec fix the issue of generating update classes
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     MdsResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -408,9 +410,9 @@ op ArmResourceListActionSync<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmResponse<TResponse>
+  | ErrorResponse;
 
 @doc("The list of available versions")
 model AvailableVersionListResult {

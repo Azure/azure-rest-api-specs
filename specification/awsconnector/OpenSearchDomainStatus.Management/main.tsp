@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -28,7 +25,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -1093,12 +1089,14 @@ model SAMLOptionsOutput {
   @doc("<p>Describes the SAML identity provider's information.</p>")
   idp?: SAMLIdp;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The key used for matching the SAML roles attribute.</p>")
   rolesKey?: string;
 
   @doc("<p>The duration, in minutes, after which a user session becomes inactive.</p>")
   sessionTimeoutMinutes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The key used for matching the SAML subject attribute.</p>")
   subjectKey?: string;
 }

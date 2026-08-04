@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "nspConfigName": "00000001-2222-3333-4444-111144444444.assoc1",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "00000001-2222-3333-4444-111144444444.assoc1",
+        "type": "Microsoft.Search/searchServices/networkSecurityPerimeterConfigurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/networkSecurityPerimeterConfigurations/00000001-2222-3333-4444-111144444444.assoc1",
+        "properties": {
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/networkRG/providers/Microsoft.Network/networkSecurityPerimeters/perimeter1",
+            "location": "westus"
+          },
+          "profile": {
+            "name": "profile1",
+            "accessRules": [
+              {
+                "name": "rule1",
+                "properties": {
+                  "addressPrefixes": [
+                    "148.0.0.0/8",
+                    "152.4.6.0/24"
+                  ],
+                  "direction": "Inbound"
+                }
+              }
+            ],
+            "accessRulesVersion": 0
+          },
+          "provisioningState": "Accepted",
+          "resourceAssociation": {
+            "name": "assoc1",
+            "accessMode": "Enforced"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+  "title": "Get an NSP config by name"
+}

@@ -2,7 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -201,8 +200,8 @@ model SAPMigrateError {
   /**
    * The SAP Discovery site resource error body.
    */
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ErrorDefinition;
 }
 
@@ -361,6 +360,7 @@ model ServerInstanceProperties {
 /**
  * Defines the request body for updating Server Instances resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateServerInstanceRequest {
   /**
    * Server instances properties.
@@ -464,6 +464,7 @@ model ExcelPerformanceData extends PerformanceData {
    * Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   totalSourceDbSizeGB?: int32;
 

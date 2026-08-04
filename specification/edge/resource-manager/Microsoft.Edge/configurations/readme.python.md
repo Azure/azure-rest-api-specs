@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-configurations
-namespace: azure.mgmt.configurations
+package-name: azure-mgmt-edgesiteconfiguration
+namespace: azure.mgmt.edgesiteconfiguration
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/configurations/azure-mgmt-configurations/azure/mgmt/configurations
+output-folder: $(python-sdks-folder)/configurations/azure-mgmt-edgesiteconfiguration/azure/mgmt/edgesiteconfiguration
 ```
 
 ``` yaml $(python)

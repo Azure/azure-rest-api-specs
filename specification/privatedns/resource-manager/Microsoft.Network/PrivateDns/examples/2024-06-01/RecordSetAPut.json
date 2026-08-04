@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "aRecords": [
+          {
+            "ipv4Address": "1.2.3.4"
+          }
+        ],
+        "metadata": {
+          "key1": "value1"
+        },
+        "ttl": 3600
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "A",
+    "relativeRecordSetName": "recordA",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recorda",
+        "type": "Microsoft.Network/privateDnsZones/A",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda",
+        "properties": {
+          "aRecords": [
+            {
+              "ipv4Address": "1.2.3.4"
+            }
+          ],
+          "fqdn": "recorda.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "recorda",
+        "type": "Microsoft.Network/privateDnsZones/A",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda",
+        "properties": {
+          "aRecords": [
+            {
+              "ipv4Address": "1.2.3.4"
+            }
+          ],
+          "fqdn": "recorda.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_CreateOrUpdate",
+  "title": "PUT Private DNS Zone A Record Set"
+}

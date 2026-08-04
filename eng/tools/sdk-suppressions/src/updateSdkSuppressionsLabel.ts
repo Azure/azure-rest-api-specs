@@ -1,16 +1,16 @@
-import _ from "lodash";
+import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import debug from "debug";
 import { writeFileSync } from "fs";
+import _ from "lodash";
 import { simpleGit } from "simple-git";
-import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.ts";
 import {
-  SdkSuppressionsYml,
-  SdkSuppressionsSection,
+  type SdkPackageSuppressionsEntry,
   sdkSuppressionsFileName,
-  SdkPackageSuppressionsEntry,
+  type SdkSuppressionsSection,
+  type SdkSuppressionsYml,
   validateSdkSuppressionsFile,
-} from "./sdkSuppressions.js";
-import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.js";
+} from "./sdkSuppressions.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");

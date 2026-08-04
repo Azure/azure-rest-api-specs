@@ -1,0 +1,65 @@
+{
+  "operationId": "GetLatestSnapshot",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataProductId": "223e4567-e89b-12d3-a456-426614174111",
+    "assetId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "title": "LatestSnapshot_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+        "dataProductId": "00000000-0000-0000-0000-000000000000",
+        "assetId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000",
+        "originAssetId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000",
+        "isStandaloneAsset": false,
+        "assetScore": 1,
+        "rules": [
+          {
+            "name": "Empty/blank_fields_actual_shipping_cost",
+            "id": "Emptyblank_fields_actual_shippin",
+            "description": "",
+            "type": "NotNull",
+            "typeProperties": {
+              "column": {
+                "value": "actual_shipping_cost",
+                "type": "Column"
+              }
+            },
+            "status": "Active",
+            "score": 1,
+            "dimension": "Completeness",
+            "lastModifiedAt": "2025-11-13T01:37:12.9302796Z",
+            "lastModifiedBy": "d3c08f4c-8973-419c-a0cd-a32724e54365",
+            "createdBy": "d3c08f4c-8973-419c-a0cd-a32724e54365",
+            "createdAt": "2025-11-12T21:00:05.2288404Z",
+            "businessDomain": {
+              "type": "BusinessDomainReference",
+              "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+            },
+            "dataProduct": {
+              "type": "DataProductReference",
+              "referenceId": "00000000-0000-0000-0000-000000000000"
+            },
+            "dataAsset": {
+              "type": "DataAssetReference",
+              "referenceId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000"
+            },
+            "totalRows": 1,
+            "failedRows": 0,
+            "passedRows": 1,
+            "emptyRows": 0,
+            "miscastRows": 0,
+            "queryExecuted": null
+          }
+        ],
+        "job": {
+          "jobId": "5b6ce30a-718b-442e-a075-31d39c0cb15f",
+          "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+        }
+      }
+    }
+  }
+}

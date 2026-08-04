@@ -1,0 +1,155 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "policyName": "Policy1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Policy1",
+        "type": "Microsoft.Network/frontdoorwebapplicationfirewallpolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/Policy1",
+        "location": "WestUs",
+        "properties": {
+          "customRules": {
+            "rules": [
+              {
+                "name": "Rule1",
+                "action": "Block",
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ],
+                    "matchVariable": "RemoteAddr",
+                    "negateCondition": false,
+                    "operator": "IPMatch",
+                    "selector": null,
+                    "transforms": []
+                  }
+                ],
+                "priority": 1,
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000,
+                "ruleType": "RateLimitRule"
+              },
+              {
+                "name": "Rule2",
+                "action": "Block",
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchValue": [
+                      "CH"
+                    ],
+                    "matchVariable": "RemoteAddr",
+                    "negateCondition": false,
+                    "operator": "GeoMatch",
+                    "selector": null
+                  },
+                  {
+                    "matchValue": [
+                      "windows"
+                    ],
+                    "matchVariable": "RequestHeader",
+                    "negateCondition": false,
+                    "operator": "Contains",
+                    "selector": "UserAgent",
+                    "transforms": [
+                      "Lowercase"
+                    ]
+                  }
+                ],
+                "priority": 2,
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 0,
+                "ruleType": "MatchRule"
+              }
+            ]
+          },
+          "frontendEndpointLinks": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontdoors/fd1/frontendendpoints/fd1-azurefd-net"
+            }
+          ],
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "exclusions": [
+                  {
+                    "matchVariable": "RequestHeaderNames",
+                    "selector": "User-Agent",
+                    "selectorMatchOperator": "Equals"
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "exclusions": [],
+                    "ruleGroupName": "SQLI",
+                    "rules": [
+                      {
+                        "action": "Redirect",
+                        "enabledState": "Enabled",
+                        "exclusions": [],
+                        "ruleId": "942100"
+                      },
+                      {
+                        "enabledState": "Disabled",
+                        "ruleId": "942110"
+                      }
+                    ]
+                  }
+                ],
+                "ruleSetAction": "Block",
+                "ruleSetType": "DefaultRuleSet",
+                "ruleSetVersion": "1.0"
+              },
+              {
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "action": "Block",
+                        "enabledState": "Enabled",
+                        "ruleId": "500100",
+                        "sensitivity": "High"
+                      }
+                    ]
+                  }
+                ],
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0"
+              }
+            ]
+          },
+          "policySettings": {
+            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+            "customBlockResponseStatusCode": 499,
+            "enabledState": "Enabled",
+            "logScrubbing": null,
+            "mode": "Prevention",
+            "redirectUrl": "http://www.bing.com",
+            "requestBodyCheck": "Disabled"
+          },
+          "provisioningState": "Succeeded",
+          "resourceState": "Enabled",
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": "Classic_AzureFrontDoor"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Policies_Get",
+  "title": "Get Policy"
+}

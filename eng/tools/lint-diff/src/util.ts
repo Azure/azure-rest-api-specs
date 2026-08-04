@@ -31,7 +31,9 @@ export async function pathExists(path: string): Promise<boolean> {
 /* v8 ignore start */
 export async function getDependencyVersion(dependenciesDir: string): Promise<string> {
   const packageJsonPath = join(dependenciesDir, "package.json");
-  const packageJson = JSON.parse(await readFile(packageJsonPath, { encoding: "utf-8" }));
+  const packageJson = JSON.parse(await readFile(packageJsonPath, { encoding: "utf-8" })) as {
+    version?: string;
+  };
   const version = packageJson.version;
   if (!version) {
     throw new Error(`Version not found in package.json at ${packageJsonPath}`);

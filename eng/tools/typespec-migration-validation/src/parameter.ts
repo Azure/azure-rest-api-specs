@@ -1,3 +1,6 @@
+import { type OpenAPI2Document, type OpenAPI2Parameter } from "@azure-tools/typespec-autorest";
+import { getOriginalDocument } from "./document.ts";
+
 const apiVersionAlias: string[] = ["api-version", "apiVersion", "apiVersionParameter"];
 
 export function isApiVersionParameter(obj: Record<string, any>) {
@@ -10,6 +13,14 @@ export function isApiVersionParameter(obj: Record<string, any>) {
       apiVersionAlias
         .map((a) => `#/parameters/${a}`.toLowerCase())
         .filter((a) => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0
+    )
+      return true;
+
+    const originalParameter = getOriginalParameter(obj["$ref"]);
+    if (
+      originalParameter?.name === "api-version" &&
+      originalParameter?.in === "query" &&
+      originalParameter?.required === true
     )
       return true;
   } else if (obj["name"] !== undefined) {
@@ -36,6 +47,14 @@ export function isSubscriptionIdParameter(obj: Record<string, any>) {
       subscriptionIdAlias
         .map((a) => `#/parameters/${a}`.toLowerCase())
         .filter((a) => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0
+    )
+      return true;
+
+    const originalParameter = getOriginalParameter(obj["$ref"]);
+    if (
+      originalParameter?.name === "subscriptionId" &&
+      originalParameter?.in === "path" &&
+      originalParameter?.required === true
     )
       return true;
   } else if (obj["name"] !== undefined) {
@@ -67,10 +86,34 @@ export function isResourceGroupNameParameter(obj: Record<string, any>) {
         .filter((a) => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0
     )
       return true;
+
+    const originalParameter = getOriginalParameter(obj["$ref"]);
+    if (
+      originalParameter?.name === "resourceGroupName" &&
+      originalParameter?.in === "path" &&
+      originalParameter?.required === true
+    )
+      return true;
   } else if (obj["name"] !== undefined) {
     if (resourceGroupNameAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
       return true;
   }
 
   return false;
+}
+
+export function getOriginalParameter(
+  refPath: string,
+  originalDocument?: OpenAPI2Document,
+): OpenAPI2Parameter | undefined {
+  originalDocument ??= getOriginalDocument();
+  // get the part after '#/parameters/'
+  if (refPath.includes("#/parameters/")) {
+    const parameterName = refPath.substring(
+      refPath.indexOf("#/parameters/") + "#/parameters/".length,
+    );
+    return originalDocument?.parameters?.[parameterName];
+  } else {
+    return undefined;
+  }
 }

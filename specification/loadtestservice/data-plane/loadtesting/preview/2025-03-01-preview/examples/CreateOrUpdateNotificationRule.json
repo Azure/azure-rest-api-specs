@@ -1,0 +1,126 @@
+{
+  "operationId": "NotificationRuleAdministration_CreateOrUpdateNotificationRule",
+  "title": "Create or update a notification rule for tests.",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "notificationRuleId": "12345678-1234-1234-1234-123456789012",
+    "body": {
+      "displayName": "Sample_Notification_Rule",
+      "actionGroupIds": [
+        "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup"
+      ],
+      "scope": "Tests",
+      "testIds": [
+        "12345678-1234-1234-1234-123456789012"
+      ],
+      "eventFilters": {
+        "eventfilter1": {
+          "kind": "TestRunEnded",
+          "condition": {
+            "testRunStatuses": [
+              "FAILED",
+              "DONE"
+            ],
+            "testRunResults": [
+              "PASSED",
+              "FAILED"
+            ]
+          }
+        },
+        "eventfilter2": {
+          "kind": "TestRunStarted"
+        },
+        "eventfilter3": {
+          "kind": "TriggerCompleted"
+        },
+        "eventfilter4": {
+          "kind": "TriggerDisabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "notificationRuleId": "12345678-1234-1234-1234-123456789012",
+        "displayName": "Sample_Notification_Rule",
+        "actionGroupIds": [
+          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup"
+        ],
+        "scope": "Tests",
+        "testIds": [
+          "12345678-1234-1234-1234-123456789012"
+        ],
+        "eventFilters": {
+          "eventfilter1": {
+            "kind": "TestRunEnded",
+            "condition": {
+              "testRunStatuses": [
+                "FAILED",
+                "DONE"
+              ],
+              "testRunResults": [
+                "PASSED",
+                "FAILED"
+              ]
+            }
+          },
+          "eventfilter2": {
+            "kind": "TestRunStarted"
+          },
+          "eventfilter3": {
+            "kind": "TriggerCompleted"
+          },
+          "eventfilter4": {
+            "kind": "TriggerDisabled"
+          }
+        },
+        "createdDateTime": "2024-05-01T16:43:46.072Z",
+        "createdBy": "user@contoso.com",
+        "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+        "lastModifiedBy": "user@contoso.com"
+      }
+    },
+    "201": {
+      "body": {
+        "notificationRuleId": "12345678-1234-1234-1234-123456789012",
+        "displayName": "Sample_Notification_Rule",
+        "actionGroupIds": [
+          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup"
+        ],
+        "scope": "Tests",
+        "testIds": [
+          "12345678-1234-1234-1234-123456789012"
+        ],
+        "eventFilters": {
+          "eventfilter1": {
+            "kind": "TestRunEnded",
+            "condition": {
+              "testRunStatuses": [
+                "FAILED",
+                "DONE"
+              ],
+              "testRunResults": [
+                "PASSED",
+                "FAILED"
+              ]
+            }
+          },
+          "eventfilter2": {
+            "kind": "TestRunStarted"
+          },
+          "eventfilter3": {
+            "kind": "TriggerCompleted"
+          },
+          "eventfilter4": {
+            "kind": "TriggerDisabled"
+          }
+        },
+        "createdDateTime": "2024-05-01T16:43:46.072Z",
+        "createdBy": "user@contoso.com",
+        "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+        "lastModifiedBy": "user@contoso.com"
+      }
+    }
+  }
+}

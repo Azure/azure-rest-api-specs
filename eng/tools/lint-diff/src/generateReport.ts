@@ -1,16 +1,21 @@
+import { kebabCase } from "change-case";
 import { writeFile } from "node:fs/promises";
 import { relative } from "node:path";
-import { kebabCase } from "change-case";
-import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
-import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
-import { getViolations } from "./correlateResults.js";
-import { isFailure, isWarning } from "./util.js";
+import { getViolations } from "./correlateResults.ts";
 import {
-  AutorestRunResult,
-  AutoRestMessage,
-  BeforeAfter,
-  LintDiffViolation,
-} from "./lintdiff-types.js";
+  type AutoRestMessage,
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+} from "./lintdiff-types.ts";
+import { getRelatedArmRpcFromDoc } from "./markdown-utils.ts";
+import {
+  getDependencyVersion,
+  getPathToDependency,
+  isFailure,
+  isWarning,
+  relativizePath,
+} from "./util.ts";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 
@@ -44,10 +49,17 @@ export async function generateLintDiffReport(
     const afterPath = getPath(after);
     const beforePath = before ? getPath(before) : "";
 
-    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseBranch, beforePath)}) |\n`;
+    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseBranch, beforePath)}) ${getAutoRestFailedMessage(before)}|\n`;
   }
 
   outputMarkdown += `\n\n`;
+
+  for (const [, { before }] of runCorrelations.entries()) {
+    if (before && before.error) {
+      outputMarkdown += `> [!WARNING]\n`;
+      outputMarkdown += `> Autorest failed checking before state of ${relative(before.rootPath, before.readme.path)} ${before.tag}\n\n`;
+    }
+  }
 
   const [newViolations, existingViolations] = getViolations(runCorrelations, affectedSwaggers);
 
@@ -61,7 +73,7 @@ export async function generateLintDiffReport(
 
   console.log(`New violations: ${newViolations.length}`);
   if (newViolations.length > 0) {
-    outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
+    outputMarkdown += "**[must fix]The following errors/warnings are introduced by current PR:**\n";
     if (newViolations.length > 50) {
       outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
     }
@@ -136,7 +148,7 @@ export async function generateAutoRestErrorReport(
   console.error("LintDiff detected AutoRest errors");
   outputMarkdown += "**AutoRest errors:**\n\n";
   for (const { result, errors } of autoRestErrors) {
-    console.log(`AutoRest errors for ${result.readme} (${result.tag})`);
+    console.log(`AutoRest errors for ${result.readme.toString()} (${result.tag})`);
 
     const readmePath = relative(result.rootPath, result.readme.path);
 
@@ -277,4 +289,11 @@ export function getPath(result: AutorestRunResult) {
   const { rootPath, readme, tag } = result;
   const readmePathRelative = relative(rootPath, readme.path);
   return tag ? `${readmePathRelative}#tag-${tag}` : readmePathRelative;
+}
+
+export function getAutoRestFailedMessage(result: AutorestRunResult | null): string {
+  if (result?.error) {
+    return "Autorest Failed";
+  }
+  return "";
 }

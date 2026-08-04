@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Foundry Project endpoint in the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}\".\nIf you only have one Project in your Foundry Hub, or to target the default Project\nin your Hub, use the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project\"",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -377,7 +377,7 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_GetVersion",
-        "description": "Get the specific version of the DatasetVersion",
+        "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -497,7 +497,7 @@
       },
       "delete": {
         "operationId": "Datasets_DeleteVersion",
-        "description": "Delete the specific version of the DatasetVersion",
+        "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -890,7 +890,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_GetVersion",
-        "description": "Get the specific version of the Index",
+        "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1010,7 +1010,7 @@
       },
       "delete": {
         "operationId": "Indexes_DeleteVersion",
-        "description": "Delete the specific version of the Index",
+        "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1138,7 +1138,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1208,7 +1208,7 @@
       "properties": {
         "blobUri": {
           "type": "string",
-          "description": "Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path"
+          "description": "Blob URI path for client to upload data. Example: `https://blob.windows.core.net/Container/Path`"
         },
         "storageAccountArmId": {
           "type": "string",
@@ -1443,19 +1443,9 @@
     "CustomCredential": {
       "type": "object",
       "description": "Custom credential definition",
-      "properties": {
-        "keys": {
-          "type": "object",
-          "description": "The credential type",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
+      "additionalProperties": {
+        "type": "string"
       },
-      "required": [
-        "keys"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseCredentials"
@@ -1493,7 +1483,7 @@
       "properties": {
         "dataUri": {
           "type": "string",
-          "description": "URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
+          "description": "URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "x-ms-mutability": [
@@ -1959,24 +1949,6 @@
         "value"
       ]
     },
-    "PendingUploadCredentialType": {
-      "type": "string",
-      "description": "The type of credential used to access the storage account.",
-      "enum": [
-        "SAS"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadCredentialType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sas",
-            "value": "SAS",
-            "description": "SAS credential type."
-          }
-        ]
-      }
-    },
     "PendingUploadRequest": {
       "type": "object",
       "description": "Represents a request for a pending upload.",
@@ -2036,30 +2008,6 @@
         "pendingUploadId",
         "pendingUploadType"
       ]
-    },
-    "PendingUploadType": {
-      "type": "string",
-      "description": "The type of pending upload.",
-      "enum": [
-        "None",
-        "BlobReference"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "none",
-            "value": "None",
-            "description": "No pending upload."
-          },
-          {
-            "name": "BlobReference",
-            "value": "BlobReference",
-            "description": "Blob Reference is the only supported type."
-          }
-        ]
-      }
     },
     "SASCredentials": {
       "type": "object",

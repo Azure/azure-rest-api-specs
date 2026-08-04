@@ -6,8 +6,7 @@ import { dirname, join, resolve, sep } from "path";
 import { sep as posixSep } from "path/posix";
 import vm from "vm";
 import { parse as yamlParse } from "yaml";
-import { z } from "zod";
-import { fromError } from "zod-validation-error";
+import * as z from "zod";
 
 export interface Suppression {
   tool: string;
@@ -37,7 +36,7 @@ const suppressionSchema = z.array(
       path: ["path", "paths"],
     })
     .transform((s) => {
-      let paths: string[] = Array.from(s.paths || []);
+      const paths: string[] = Array.from(s.paths || []);
       if (s.path) {
         // if "path" is defined, it is inserted at the start of "paths".
         paths.unshift(s.path);
@@ -49,7 +48,7 @@ const suppressionSchema = z.array(
         rules: s.rules,
         subRules: s["sub-rules"],
         reason: s.reason,
-      } as Suppression;
+      };
     }),
 );
 
@@ -79,17 +78,17 @@ const suppressionSchema = z.array(
 export async function getSuppressions(
   tool: string,
   path: string,
-  context: Record<string, any> = {},
+  context: Record<string, unknown> = {},
 ): Promise<Suppression[]> {
   path = resolve(path);
 
   // If path doesn't exist, throw instead of returning "[]" to prevent confusion
   await access(path, constants.R_OK);
 
-  let suppressionsFiles: string[] = await findSuppressionsFiles(path);
+  const suppressionsFiles: string[] = await findSuppressionsFiles(path);
   let suppressions: Suppression[] = [];
 
-  for (let suppressionsFile of suppressionsFiles) {
+  for (const suppressionsFile of suppressionsFiles) {
     suppressions = suppressions.concat(
       getSuppressionsFromYaml(
         tool,
@@ -136,20 +135,24 @@ export function getSuppressionsFromYaml(
   path: string,
   suppressionsFile: string,
   suppressionsYaml: string,
-  context: Record<string, any> = {},
+  context: Record<string, unknown> = {},
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
 
   // Treat empty yaml as empty array
-  const parsedYaml: any = yamlParse(suppressionsYaml) ?? [];
+  const parsedYaml: unknown = yamlParse(suppressionsYaml) ?? [];
 
   let suppressions: Suppression[];
   try {
     // Throws if parsedYaml doesn't match schema
     suppressions = suppressionSchema.parse(parsedYaml);
   } catch (err) {
-    throw fromError(err);
+    let finalErr = err;
+    if (err instanceof z.ZodError) {
+      finalErr = new Error(z.prettifyError(err), { cause: err });
+    }
+    throw finalErr;
   }
 
   // Make "require" available inside sandbox for CJS imports

@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2023-09-15-preview",
+    "channelName": "EmailChannel",
+    "parameters": {
+      "location": "global",
+      "properties": {
+        "channelName": "EmailChannel",
+        "properties": {
+          "authMethod": 1,
+          "emailAddress": "a@b.com",
+          "isEnabled": true,
+          "magicCode": "000000"
+        }
+      }
+    },
+    "resourceGroupName": "OneResourceGroupName",
+    "resourceName": "samplebotname",
+    "subscriptionId": "subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscription-id/providers/Microsoft.BotService/botServices",
+        "location": "global",
+        "properties": {
+          "channelName": "EmailChannel",
+          "properties": {
+            "authMethod": 1,
+            "emailAddress": "a@b.com",
+            "isEnabled": true
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subscription-id/providers/Microsoft.BotService/botServices",
+        "location": "global",
+        "properties": {
+          "channelName": "EmailChannel",
+          "properties": {
+            "authMethod": 1,
+            "emailAddress": "a@b.com",
+            "isEnabled": true
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Channels_Create",
+  "title": "Create Email Channel"
+}

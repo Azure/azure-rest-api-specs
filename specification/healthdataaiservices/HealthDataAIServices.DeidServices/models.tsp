@@ -1,3 +1,7 @@
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
 
@@ -12,9 +16,14 @@ union DeidentificationOperationType {
   @doc("Tag Operation will detect all entities of PHI, their type, and return their locations in the document.")
   Tag: "Tag",
 
+  @doc("SurrogateOnly Operation will replace only specified entities of PHI with surrogate values.")
+  @added(Versions.v2025_07_15_preview)
+  SurrogateOnly: "SurrogateOnly",
+
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Customizations options to override default service behaviors.")
 model SharedCustomizationOptions {
   @maxLength(16)
@@ -27,4 +36,8 @@ model SharedCustomizationOptions {
 
   @doc("Locale in which the output surrogates are written.")
   surrogateLocale?: string = "en-US";
+
+  @doc("Locale of the input text. Used for better PHI detection. Defaults to 'en-US'.")
+  @added(Versions.v2025_07_15_preview)
+  inputLocale?: string = "en-US";
 }

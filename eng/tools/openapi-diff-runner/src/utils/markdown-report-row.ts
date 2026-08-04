@@ -1,4 +1,4 @@
-import { BrChMsgRecord, JsonPath, ResultMessageRecord } from "../types/message.js";
+import { type BrChMsgRecord, type JsonPath, type ResultMessageRecord } from "../types/message.ts";
 
 /**
  * Represents a single row in the markdown table for GitHub check pane
@@ -133,5 +133,5 @@ function getExtra(msg: BrChMsgRecord): string {
  * Sorts breaking change markdown rows by description
  */
 function sortBreakingChangeMdRows(rows: BreakingChangeMdRow[]): BreakingChangeMdRow[] {
-  return rows.sort((row1, row2) => row1.description.localeCompare(row2.description));
+  return rows.sort((row1, row2) => row1.index - row2.index);
 }

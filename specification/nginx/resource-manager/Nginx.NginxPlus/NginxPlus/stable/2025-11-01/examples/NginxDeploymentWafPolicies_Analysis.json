@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "configurationName": "default",
+    "deploymentName": "myDeployment",
+    "wafPolicyName": "myWafPolicy",
+    "requestBody": {
+      "content": "ABCDEF==",
+      "filePath": "/etc/nginx/nginx.conf"
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Failed",
+        "data": {
+          "errors": [
+            {
+              "code": "InvalidWafRule",
+              "field": "MyWafRulefield",
+              "message": "The WAF rule is invalid"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "NginxDeploymentWafPolicies_Analysis",
+  "title": "NginxDeploymentWafPolicies_Analysis"
+}

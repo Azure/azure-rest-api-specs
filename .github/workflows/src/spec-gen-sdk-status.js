@@ -1,16 +1,17 @@
-// @ts-check
-import { extractInputs } from "./context.js";
+import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
+import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
-import { CheckStatus, CommitStatusState, PER_PAGE_MAX, writeToActionsSummary } from "./github.js";
+import { extractInputs } from "./context.js";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
 export default async function setSpecGenSdkStatus({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
   const details_url = inputs.details_url;
+  const issue_number = inputs.issue_number;
   if (!details_url || !head_sha) {
     throw new Error(
       `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
@@ -30,6 +31,7 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
     target_url,
     github,
     core,
+    issue_number,
   });
 }
 
@@ -39,18 +41,30 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
  * @param {string} params.repo
  * @param {string} params.head_sha
  * @param {string} params.target_url
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {number} params.issue_number
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<void>}
  */
-export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_url, github, core }) {
+export async function setSpecGenSdkStatusImpl({
+  owner,
+  repo,
+  head_sha,
+  target_url,
+  github,
+  core,
+  issue_number,
+}) {
   const statusName = "SDK Validation Status";
+  core.setOutput("head_sha", head_sha);
+  core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
     repo,
     ref: head_sha,
     per_page: PER_PAGE_MAX,
   });
+
   // Filter sdk generation check runs
   const specGenSdkChecks = checks.filter(
     (check) => check.app?.name === "Azure Pipelines" && check.name.includes("SDK Validation"),
@@ -59,6 +73,14 @@ export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_ur
   core.info(`Found ${specGenSdkChecks.length} check runs from Azure Pipelines:`);
   for (const check of specGenSdkChecks) {
     core.info(`- ${check.name}: ${check.status} (${check.conclusion})`);
+  }
+
+  // No SDK Validation check runs exist for this commit (e.g. a PR without SDK-relevant changes that
+  // was reopened). Skip setting a status, to avoid creating a spurious "pending" status that would
+  // never be resolved, since the Azure DevOps pipelines won't run for such PRs.
+  if (specGenSdkChecks.length === 0) {
+    core.info("No SDK Validation check runs found. Skipping status update.");
+    return;
   }
 
   // Check if all SDK generation checks have completed
@@ -108,12 +130,12 @@ export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_ur
 
 /**
  * @param {Object} params
- * @param {Array<any>} params.checkRuns
+ * @param {import("./github.js").CheckRuns} params.checkRuns
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<{state: import("./github.js").CommitStatusState, description: string}>}
+ * @returns {Promise<{state: CommitStatusState, description: string}>}
  */
 async function processResult({ checkRuns, core }) {
-  /** @type {import("./github.js").CommitStatusState} */
+  /** @type {CommitStatusState} */
   let state = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
   let description = "SDK Validation CI checks succeeded";
@@ -125,6 +147,9 @@ async function processResult({ checkRuns, core }) {
 
   for (const checkRun of checkRuns) {
     core.info(`Processing check run: ${checkRun.name} (${checkRun.conclusion})`);
+    if (checkRun.details_url === null) {
+      throw new Error(`'details_url' is null in Check Run '${checkRun.name}'`);
+    }
     const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
     const ado_project_url = buildInfo.projectUrl;
     const ado_build_id = buildInfo.buildId;
@@ -145,7 +170,8 @@ async function processResult({ checkRuns, core }) {
         `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`,
       );
     }
-    const artifactJsonObj = JSON.parse(result.artifactData);
+
+    const artifactJsonObj = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(result.artifactData));
     const language = artifactJsonObj.language;
     const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;
@@ -186,11 +212,13 @@ async function processResult({ checkRuns, core }) {
   if (state === CommitStatusState.FAILURE) {
     summaryContent +=
       "\n### Next Steps\n\n" +
-      `Please fix any issues in the the SDK Validation CI checks for languages: ${specGenSdkFailedRequiredLanguages}.`;
+      `Address the issues reported in the the SDK Validation CI checks for language(s): ${specGenSdkFailedRequiredLanguages}.` +
+      `\n### More Information\n\n` +
+      `Refer to the [SDK Validation Wiki](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Validation).`;
   }
 
   // Write to the summary page
-  await writeToActionsSummary(summaryContent, core);
+  await core.summary.addRaw(summaryContent).write();
 
   return {
     state,

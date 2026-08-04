@@ -10,8 +10,6 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
-    # TODO: Does anything need this set, if it's not used in output-file?
-    azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/widgets.json"
@@ -22,10 +20,10 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Widget"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: Azure.Widget
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "widget-rest"

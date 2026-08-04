@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2023-09-15-preview",
+    "resourceGroupName": "rgName",
+    "resourceName": "botId",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000.associationName",
+            "type": "Microsoft.BotService/botServices/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.BotService/botServices/botId/networkSecurityPerimeterConfigurations/00000000-0000-0000-0000-000000000000.associationName",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Network/networkSecurityPerimeters/nspName",
+                "location": "westcentralus",
+                "perimeterGuid": "00000000-0000-0000-0000-000000000000"
+              },
+              "profile": {
+                "name": "defaultProfile",
+                "accessRules": [
+                  {
+                    "name": "Inbound1",
+                    "properties": {
+                      "addressPrefixes": [
+                        "10.0.0.0/16"
+                      ],
+                      "direction": "Inbound",
+                      "emailAddresses": [],
+                      "fullyQualifiedDomainNames": [],
+                      "networkSecurityPerimeters": [],
+                      "phoneNumbers": [],
+                      "subscriptions": []
+                    }
+                  },
+                  {
+                    "name": "Outbound1",
+                    "properties": {
+                      "addressPrefixes": [],
+                      "direction": "Outbound",
+                      "emailAddresses": [],
+                      "fullyQualifiedDomainNames": [
+                        "*"
+                      ],
+                      "networkSecurityPerimeters": [],
+                      "phoneNumbers": [],
+                      "subscriptions": []
+                    }
+                  }
+                ],
+                "accessRulesVersion": 2,
+                "diagnosticSettingsVersion": 0,
+                "enabledLogCategories": []
+              },
+              "provisioningIssues": [],
+              "provisioningState": "Succeeded",
+              "resourceAssociation": {
+                "name": "associationName",
+                "accessMode": "Learning"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_List",
+  "title": "List Network Security Perimeter Configurations"
+}

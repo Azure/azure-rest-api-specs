@@ -11,8 +11,8 @@ and followed the instructions by checking all the boxes:
 
 - [ ] I confirm this PR is modifying only SDK configurations, and not API related specifications.
 - [ ] I have reviewed and used the respective `tspconfig.yaml` templates:
-  - [ARM tspconfig template](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml)
-  - [Data plane tspconfig template](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml)
+  - [ARM tspconfig template](https://aka.ms/azsdk/tspconfig-sample-mpg)
+  - [Data plane tspconfig template](https://aka.ms/azsdk/tspconfig-sample-dpg)
 
 ## Getting help
 

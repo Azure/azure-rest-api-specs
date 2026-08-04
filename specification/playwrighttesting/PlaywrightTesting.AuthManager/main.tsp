@@ -53,7 +53,6 @@ namespace Microsoft.PlaywrightTesting.AuthManager;
 @doc("The PlaywrightTesting Auth Manager service version.")
 enum Versions {
   @doc("Version 2024-12-01")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Microsoft.PlaywrightTesting.Shared.Versions.v1_0)
   `2024-12-01`,
 }
@@ -149,6 +148,7 @@ alias GetBrowsersParams = {
   @doc("The run id provided by client for corresponding remote test run.")
   runId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @query
   @doc("The os provided by client for remote test runs.")
   os?: OS = OS.Linux;

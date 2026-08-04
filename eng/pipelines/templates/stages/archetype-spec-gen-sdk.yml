@@ -3,9 +3,9 @@ parameters:
     type: string
   - name: SdkRepoUrl
     type: string
-  - name: SdkRepoCommit
+  - name: SdkRepoBranch
     type: string
-    default: 'HEAD'
+    default: 'main'
   - name: ConfigType
     type: string
     default: ''
@@ -22,16 +22,27 @@ parameters:
     type: string
     default: ''
     displayName: 'SDK release type'
-  - name: SkipPullRequestCreation
+  - name: CreatePullRequest
+    type: boolean
+    default: false
+  - name: ForceCreateEvenWithFailures
     type: boolean
     default: false
   - name: SpecBatchTypes
     type: string
     default: ''
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+  - name: TriggerSource
+    type: string
+    default: 'unspecified'
 
 stages:
-- stage: Build
-  displayName: 'SDK Generation'
+- stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
+  displayName: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'SDK Generation', format('Batch SDK Generation for ({0})', parameters.SpecBatchTypes)) }}
+  # Explicitly set to no dependencies so multiple instances of this template can run in parallel when called in a loop
+  dependsOn: []
   jobs:
   - job:
     timeoutInMinutes: 2400
@@ -39,7 +50,7 @@ stages:
     variables:
       - template: /eng/pipelines/templates/variables/image.yml
       - name: NodeVersion
-        value: '22.13.x'
+        value: '24.x'
       - name: PythonVersion
         value: '3.13'
       - name: PipelineArtifactsName
@@ -53,8 +64,6 @@ stages:
       os: linux
 
     steps:
-      - checkout: none
-
       - pwsh: |
           $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
           $readmePathPattern = '^specification\/([^\/]+\/){2,}readme\.md$'
@@ -110,7 +119,78 @@ stages:
             Exit 1
           }
 
+          $checkoutCommitish = '${{ parameters.SdkRepoBranch }}'
+          Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
+          Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+          $prStatus = 'draft'
+          Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+          $releasePlanInfo = ''
+          Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+          $prUrl = ""
+          Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
         displayName: "Create Run Time Variables"
+
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - pwsh: |
+            $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
+            $sdkRepoUrl = '${{ parameters.SdkRepoUrl }}'
+            Write-Host "Validating SDK repo branch: '$SdkRepoBranch'"
+
+            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
+
+              # GitHub's limit is around 250 characters
+              if ($sdkRepoBranch.Length -gt 250) {
+                Write-Host "##vso[task.logissue type=error]The provided SDK branch name exceeds 250 characters."
+                Exit 1
+              }
+
+              # Validate branch name
+              if ($sdkRepoBranch -notmatch '^(?!refs/)(?!/)(?!.*//)(?!.*\.\.)(?!.*\.lock$)(?!@$)(?!.*\.$)(?!.*\/$)(?!.*\\)(?!.*[~^:?*\[\]\s])[\u0020-\u007E]+$') {
+                  Write-Host "##vso[task.logissue type=error]The provided SDK branch name '$sdkRepoBranch' is invalid."
+                  Exit 1
+              }
+
+              # Check if branch exists remotely
+              Write-Host "Checking if branch '$SdkRepoBranch' exists in remote repository '$sdkRepoUrl'..."
+              $branchExists = git ls-remote --heads $sdkRepoUrl "refs/heads/$SdkRepoBranch"
+              $gitExitCode = $LASTEXITCODE
+
+              if ($gitExitCode -ne 0) {
+                Write-Host "##vso[task.logissue type=error]Failed to validate branch remotely (git exit code: $gitExitCode)"
+                Exit $gitExitCode
+              }
+
+              if ([string]::IsNullOrEmpty($branchExists)) {
+                Write-Host "Branch '$SdkRepoBranch' does not exist in remote repository"
+                $checkoutCommitish = 'main'
+              } else {
+                Write-Host "Branch '$SdkRepoBranch' exists in remote repository"
+                $checkoutCommitish = $SdkRepoBranch
+              }
+            } else {
+              Write-Host "Using commitish as-is: '$SdkRepoBranch' (main branch)"
+              $checkoutCommitish = $SdkRepoBranch
+            }
+
+            Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
+            Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+          displayName: "Validate and update SDK repository commitish"
+
+      # In the internal '-pr' flow the spec/SDK repos are private, so the sparse-checkout below
+      # needs a GitHub App token (GH_TOKEN) minted by login-to-github. That login script lives in
+      # this repo, so it must be available first. Use 'checkout: self' (authenticated by the
+      # pipeline's GitHub service connection) at the default path so System.DefaultWorkingDirectory
+      # stays at $(Pipeline.Workspace)/s; sparse-checkout keeps the footprint to eng/common/scripts.
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+        - checkout: self
+          displayName: 'Checkout eng/common/scripts for GitHub login'
+          sparseCheckoutDirectories: eng/common/scripts
+          fetchDepth: 1
+        - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+          parameters:
+            ScriptDirectory: $(System.DefaultWorkingDirectory)/eng/common/scripts
+      - ${{ else }}:
+        - checkout: none
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
@@ -125,23 +205,33 @@ stages:
               Commitish: $(SpecRepoCommit)
               WorkingDirectory: $(SpecRepoDirectory)
             - Name: $(SdkRepoOwner)/$(SdkRepoName)
-              Commitish: ${{ parameters.SdkRepoCommit }}
+              Commitish: $(CheckoutCommitish)
               WorkingDirectory: $(SdkRepoDirectory)
           SkipCheckoutNone: true
           ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-            TokenToUseForAuth: $(azuresdk-github-pat)
+            TokenToUseForAuth: $(GH_TOKEN)
             PreserveAuthToken: true
 
-      - task: NodeTool@0
+      - task: UseNode@1
         inputs:
-          versionSpec: $(NodeVersion)
+          version: $(NodeVersion)
         displayName: 'Install Node.js'
+
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+        parameters:
+          npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
 
       - task: UsePythonVersion@0
         inputs:
           versionSpec: $(PythonVersion)
 
+      - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+        parameters:
+          SourceRootPath: $(SpecRepoDirectory)
+          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+
       - script: |
+          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -166,11 +256,20 @@ stages:
             sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
           fi
 
-          if [ "${{ parameters.ApiVersion }}" != "" ]; then
-            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
+          if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
+            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"
+            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"
+          fi
+          if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
+            optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
+            sdk_gen_info="$sdk_gen_info SDK Release Type: ${{ parameters.SdkReleaseType }},"
           fi
           sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
+
+          if [ "$(Build.Reason)" = "Manual" ]; then
+            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release."
+          fi
           echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
           echo "$sdk_gen_info"
 
@@ -187,6 +286,10 @@ stages:
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
         displayName: 'Generate SDK'
+        ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          continueOnError: true
+        env:
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
@@ -200,17 +303,56 @@ stages:
           ArtifactPath: $(StagedArtifactsFolder)
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
-      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+          parameters:
+            ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
+        - pwsh: |
+            $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
+            $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
+            # use the user provided branch name
+            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
+              $sdkPrBranchName = $sdkRepoBranch
+            }
+            Write-Host "Branch name is set to: $sdkPrBranchName"
+            Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
+          workingDirectory: $(SdkRepoDirectory)
+          displayName: "Create SDK PR branch variable"
+
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - task: AzureCLI@2
+            displayName: "Get Release Plan details"
+            condition: succeeded()
+            continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
+                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+                Write-Host "Release Plan Info: $releasePlanInfo"
+
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
-            BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
-            BaseRepoOwner: azure-sdk
+            BaseRepoBranch: $(SdkPullRequestSourceBranch)
+            BaseRepoOwner: $(SdkRepoOwner)
             CommitMsg: $(GeneratedSDKInformation)
-            TargetRepoOwner: $(SdkRepoOwner)
+            TargetRepoOwner: azure
             TargetRepoName: $(SdkRepoName)
-            PushArgs: "--force"
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+            AuthToken: $(GH_TOKEN)
+
+        - ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          - pwsh: |
+              $currentTitle = "$(PrTitle)"
+              $updatedTitle = "Failed-$currentTitle"
+              Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
+              Write-Host "Updated PR Title to: '$updatedTitle'"
+            displayName: "Set PR title prefix on failures"
+            condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
         - task: PowerShell@2
           displayName: Create pull request
@@ -220,15 +362,64 @@ stages:
             workingDirectory: $(SdkRepoDirectory)
             filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
             arguments: >
-              -RepoOwner "$(SdkRepoOwner)"
+              -RepoOwner "azure"
               -RepoName "$(SdkRepoName)"
               -BaseBranch "main"
-              -PROwner "azure-sdk"
-              -PRBranch "$(PrBranch)-$(Build.BuildId)"
-              -AuthToken "$(azuresdk-github-pat)"
+              -PROwner "$(SdkRepoOwner)"
+              -PRBranch "$(SdkPullRequestSourceBranch)"
+              -AuthToken "$(GH_TOKEN)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)"
-              -OpenAsDraft $true
+              -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
+              -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
+              -UpdateExistingPullRequest $true
+
+        - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
+          - task: PowerShell@2
+            displayName: Add auto-release label
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            inputs:
+              pwsh: true
+              workingDirectory: $(SdkRepoDirectory)
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
+              arguments: >
+                -RepoOwner "azure"
+                -RepoName "$(SdkRepoName)"
+                -IssueNumber "$(Submitted.PullRequest.Number)"
+                -Labels "auto-release"
+                -AuthToken "$(GH_TOKEN)"
+
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - pwsh: |
+              $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+              Write-Host "Pull request created: $prUrl"
+              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+              $prStatus = "${{ iif(endsWith(parameters.TriggerSource, '-release'), 'ready for review', 'draft') }}"
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            displayName: "Set pull request URL variable"
+
+          - pwsh: |
+              $prUrl = ""
+              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+              $prStatus = "Failed to generate SDK."
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+            condition: failed()
+            displayName: "Set pull request generation failed status variable"
+
+          - task: AzureCLI@2
+            displayName: Link pull request to release plan
+            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
+            continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: scriptPath
+              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
+              arguments: >
+                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                -PullRequestUrl "$(PullRequestUrl)"
+                -Status "$(SdkPrStatus)"
+                -SdkRepoName "$(SdkRepoName)"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |

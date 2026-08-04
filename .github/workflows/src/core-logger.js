@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {import('../../shared/src/logger.js').ILogger} ILogger
  */
@@ -8,11 +6,11 @@
  * @implements {ILogger}
  */
 export class CoreLogger {
-  /** @type {import('github-script').AsyncFunctionArguments['core']} */
+  /** @type {import('@actions/github-script').AsyncFunctionArguments['core']} */
   #core;
 
   /**
-   * @param {import('github-script').AsyncFunctionArguments['core']} core
+   * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
    */
   constructor(core) {
     this.#core = core;
@@ -44,5 +42,12 @@ export class CoreLogger {
    */
   isDebug() {
     return this.#core.isDebug();
+  }
+
+  /**
+   * @param {string} message
+   */
+  warning(message) {
+    this.#core.warning(message);
   }
 }

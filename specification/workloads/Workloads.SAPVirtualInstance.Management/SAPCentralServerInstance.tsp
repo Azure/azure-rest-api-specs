@@ -1,4 +1,3 @@
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./SAPVirtualInstance.tsp";
@@ -6,7 +5,6 @@ import "./SAPVirtualInstance.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Workloads;
 /**
@@ -74,18 +72,23 @@ interface SAPCentralServerInstances {
   >;
 }
 
-@@doc(SAPCentralServerInstance.name,
+@@doc(
+  SAPCentralServerInstance.name,
   "Central Services Instance resource name string modeled as parameter for auto generation to work correctly."
 );
-@@doc(SAPCentralServerInstances.create::parameters.resource,
+@@doc(
+  SAPCentralServerInstances.create::parameters.resource,
   "The SAP Central Services Instance request body."
 );
-@@doc(SAPCentralServerInstances.update::parameters.properties,
+@@doc(
+  SAPCentralServerInstances.update::parameters.properties,
   "The SAP Central Services Instance resource request body."
 );
-@@doc(SAPCentralServerInstances.start::parameters.body,
+@@doc(
+  SAPCentralServerInstances.start::parameters.body,
   "SAP Central Services instance start request body."
 );
-@@doc(SAPCentralServerInstances.stop::parameters.body,
+@@doc(
+  SAPCentralServerInstances.stop::parameters.body,
   "SAP Central Services instance stop request body."
 );

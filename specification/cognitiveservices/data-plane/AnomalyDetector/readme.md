@@ -21,34 +21,6 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: stable/v1.0/AnomalyDetector.json
 ```
 
-### Release 1.1-preview
-These settings apply only when `--tag=release_1_1_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_1_1_preview'
-input-file: 
-  - preview/v1.1-preview/AnomalyDetector.json
-  - preview/v1.1-preview/MultivariateAnomalyDetector.json
-```
-
-### Release 1.1-preview.1
-These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
-
-``` yaml $(tag) == 'release_1_1_preview.1'
-input-file: 
-  - preview/v1.1-preview.1/AnomalyDetector.json
-  - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
-```
-
-### Release 1.1-preview.2
-These settings apply only when `--tag=release_1_1_preview.2` is specified on the command line.
-
-```yaml $(tag) == 'release_1_1_preview.2'
-input-file:
-  - preview/v1.1-preview.2/AnomalyDetector.json
-  - preview/v1.1-preview.2/MultivariateAnomalyDetector.json
-  - preview/v1.1-preview.2/RootCauseAnalysis.json
-```
-
 ### Release 1.1
 These settings apply only when `--tag=release_1_1` is specified on the command line.
 
@@ -106,11 +78,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
   - $(this-folder)/stable/v1.1/openapi.json
-  - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview.2/AnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview.2/MultivariateAnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview.2/RootCauseAnalysis.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

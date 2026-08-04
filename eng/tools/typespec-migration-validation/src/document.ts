@@ -1,24 +1,32 @@
 import {
-  OpenAPI2Document,
-  OpenAPI2PathItem,
-  HttpMethod,
-  OpenAPI2Operation,
-  OpenAPI2Schema,
-  OpenAPI2Parameter,
-  Ref,
-  Refable,
-  OpenAPI2Response,
-  OpenAPI2SchemaProperty,
-  OpenAPI2SchemaRefProperty,
+  type HttpMethod,
+  type OpenAPI2Document,
+  type OpenAPI2Operation,
+  type OpenAPI2Parameter,
+  type OpenAPI2PathItem,
+  type OpenAPI2Response,
+  type OpenAPI2Schema,
+  type OpenAPI2SchemaProperty,
+  type OpenAPI2SchemaRefProperty,
+  type Ref,
+  type Refable,
 } from "@azure-tools/typespec-autorest";
+import { configuration } from "./configuration.ts";
 import {
+  getOriginalParameter,
   isApiVersionParameter,
   isResourceGroupNameParameter,
   isSubscriptionIdParameter,
-} from "./parameter.js";
-import { configuration } from "./configuration.js";
+} from "./parameter.ts";
 
 let originalDocument: OpenAPI2Document | undefined = undefined;
+
+export function getOriginalDocument(): OpenAPI2Document {
+  if (originalDocument === undefined) {
+    throw new Error("Original document is not set. Please call processDocument first.");
+  }
+  return originalDocument;
+}
 
 export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   originalDocument = deepCopy(document);
@@ -49,7 +57,13 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
     if (configuration.ignorePathCase) {
       const normalizedRoute = route
         .replace(/\/resourcegroups\//i, "/resourceGroups/")
-        .replace(/\/subscriptions\//i, "/subscriptions/");
+        .replace(/\/subscriptions\//i, "/subscriptions/")
+        .split("/")
+        .map((segment) => {
+          if (segment.length === 0) return segment;
+          return segment.charAt(0).toLowerCase() + segment.slice(1);
+        })
+        .join("/");
       delete newDocument.paths[route];
       newDocument.paths[normalizedRoute] = processedPath;
     } else {
@@ -101,6 +115,7 @@ function processPath(path: OpenAPI2PathItem): OpenAPI2PathItem {
 
 function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   const newOperation = deepCopy(operation);
+  newOperation.parameters ??= [];
   let index = newOperation.parameters.findIndex((p) => isApiVersionParameter(p));
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
@@ -154,10 +169,6 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
     delete newOperation.consumes;
   }
 
-  if (newOperation.tags) {
-    delete newOperation.tags;
-  }
-
   if (newOperation.deprecated === false) {
     delete newOperation.deprecated;
   }
@@ -174,7 +185,7 @@ function processResponse(response: OpenAPI2Response): OpenAPI2Response {
   newResponse.description = "ignore";
   if (newResponse.headers) {
     for (const header in newResponse.headers) {
-      if (header === "Location" || header === "Retry-After" || header === "Azure-AsyncOperation") {
+      if (header === "Retry-After") {
         delete newResponse.headers[header];
       }
     }
@@ -189,13 +200,8 @@ function processParameter(parameter: Refable<OpenAPI2Parameter>): Refable<OpenAP
   const newParameter: Refable<OpenAPI2Parameter> = deepCopy(parameter);
   if ((parameter as Ref<OpenAPI2Parameter>).$ref) {
     const refPath = (parameter as Ref<OpenAPI2Parameter>).$ref;
-    if (refPath.startsWith("#/parameters/")) {
-      const parameterName = refPath.substring("#/parameters/".length);
-      const originalParameter = originalDocument?.parameters?.[parameterName];
-      if (originalParameter) {
-        return processParameter(originalParameter);
-      }
-    }
+    const originalParameter = getOriginalParameter(refPath);
+    if (originalParameter) return processParameter(originalParameter);
   } else {
     const inlineParameter = parameter as OpenAPI2Parameter;
     if ((parameter as any).enum && (newParameter as any)["x-ms-enum"]?.["values"]) {

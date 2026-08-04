@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
+import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Http;
 
 namespace Microsoft.OnlineExperimentation;
 
@@ -87,6 +89,8 @@ interface OnlineExperimentationWorkspaces {
   /**
    * Patch an online experimentation workspace.
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OnlineExperimentationWorkspace,
     OnlineExperimentationWorkspacePatch

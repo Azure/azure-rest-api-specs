@@ -1,23 +1,22 @@
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import {
-  AutorestRunResult,
-  LintDiffViolation,
-  Source,
-  BeforeAfter,
-} from "../src/lintdiff-types.js";
-import {
-  correlateRuns,
-  getViolations,
-  getLintDiffViolations,
-  arrayIsEqual,
-  getNewItems,
-  isSameSources,
-} from "../src/correlateResults.js";
-import { relativizePath } from "../src/util.js";
-import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { resolve } from "path";
+import {
+  correlateRuns,
+  getLintDiffViolations,
+  getNewItems,
+  getViolations,
+  isSameSources,
+} from "../src/correlateResults.ts";
+import {
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+  type Source,
+} from "../src/lintdiff-types.ts";
+import { relativizePath } from "../src/util.ts";
+import { isWindows } from "./test-util.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -117,6 +116,92 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
       before: null,
       after: afterChecks[0],
+    });
+  });
+
+  test("correlates before and after runs with matching readme and empty string tag", async () => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
+        ),
+        tag: "",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+  });
+
+  test("correlates before and multiple after runs with matching readme and empty string tag", async () => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
+        ),
+        tag: "",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag3",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(2);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+    expect(result.get("specification/service1/resource-manager/readme.md#tag3")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[1],
     });
   });
 
@@ -297,7 +382,7 @@ describe("isSameSources", () => {
   });
 });
 
-describe("getLintDiffViolations", async () => {
+describe("getLintDiffViolations", () => {
   function createRunResult(stdout: string, stderr: string = ""): AutorestRunResult {
     return {
       rootPath: "string",
@@ -358,48 +443,6 @@ describe("getLintDiffViolations", async () => {
   });
 });
 
-describe("arrayIsEqual", () => {
-  test("returns true for equal arrays", async () => {
-    const a = ["a", "b", "c"];
-    const b = ["a", "b", "c"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(true);
-  });
-
-  test("returns false for different arrays", async () => {
-    const a = ["a", "b", "c"];
-    const b = ["a", "b", "d"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(false);
-  });
-
-  test("returns false for different lengths", async () => {
-    const a = ["a", "b", "c"];
-    const b = ["a", "b"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(false);
-  });
-
-  test("returns true for empty arrays", async () => {
-    const a: string[] = [];
-    const b: string[] = [];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(true);
-  });
-
-  test("returns true for equal arrays with different types", async () => {
-    const a = ["a", 1, "c"];
-    const b = ["a", 1, "c"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(true);
-  });
-});
-
 describe("getNewItems", () => {
   test("returns empty array when no before or after", () => {
     const before: LintDiffViolation[] = [];
@@ -415,9 +458,7 @@ describe("getNewItems", () => {
         level: "fatal",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
     ];
@@ -426,9 +467,7 @@ describe("getNewItems", () => {
         level: "fatal",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
     ];
@@ -444,18 +483,14 @@ describe("getNewItems", () => {
         level: "error",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
       {
         level: "error",
         code: "SomeCode2",
         message: "Some Message",
-        source: [
-          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
     ];
@@ -470,22 +505,18 @@ describe("getNewItems", () => {
         level: "error",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {
           jsonpath: ["some", "path"],
         },
-      } as LintDiffViolation,
+      },
     ];
     const after = [
       {
         level: "error",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {
           jsonpath: ["some", "path"],
         },
@@ -494,9 +525,7 @@ describe("getNewItems", () => {
         level: "error",
         code: "SomeCode2",
         message: "Some Message",
-        source: [
-          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
         details: {
           jsonpath: ["some", "path"],
         },

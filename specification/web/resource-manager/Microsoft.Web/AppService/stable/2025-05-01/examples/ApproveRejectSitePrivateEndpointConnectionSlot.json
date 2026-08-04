@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "name": "testSite",
+    "api-version": "2025-05-01",
+    "privateEndpointConnectionName": "connection",
+    "privateEndpointWrapper": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by admin.",
+          "actionsRequired": "",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "rg",
+    "slot": "stage",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connection",
+        "type": "Microsoft.Web/sites/privateEndpointConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slots/stage/privateEndpointConnections/connection",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by admin.",
+            "actionsRequired": "",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "name": "connection",
+        "type": "Microsoft.Web/sites/privateEndpointConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slots/stage/privateEndpointConnections/connection",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by admin.",
+            "actionsRequired": "",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/westus2/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2019-01-01"
+      }
+    }
+  },
+  "operationId": "WebApps_ApproveOrRejectPrivateEndpointConnectionSlot",
+  "title": "Approves or rejects a private endpoint connection for a site."
+}

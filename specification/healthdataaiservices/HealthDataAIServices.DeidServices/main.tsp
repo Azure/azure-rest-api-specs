@@ -1,5 +1,6 @@
 import "@typespec/versioning";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -23,7 +24,9 @@ model AadToken
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.authorizationCode;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       tokenUrl: "https://login.microsoftonline.com/common/oauth2/token";
       scopes: ["https://deid.azure.com/.default"];
     }
@@ -31,6 +34,6 @@ model AadToken
 
 @doc("Azure Health Data Services de-identification service versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15: "2024-11-15",
+  v2025_07_15_preview: "2025-07-15-preview",
 }

@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "./univariate/routes.tsp";
 import "./multivariate/routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -19,7 +20,7 @@ using TypeSpec.Versioning;
       Supported Azure Cognitive Services endpoints (protocol and host name, such as
       https://westus2.api.cognitive.microsoft.com).
       """)
-    Endpoint: string,
+    Endpoint: url,
 
     @doc("Api Version")
     @path
@@ -47,10 +48,11 @@ using TypeSpec.Versioning;
 namespace AnomalyDetector;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
-model AnomalyDetectorApiKeyAuth
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AnomalyDetectorApiKeyAuth is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "Ocp-Apim-Subscription-Key"
+>;
 
 enum APIVersion {
-  @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_1: "v1.1",
 }

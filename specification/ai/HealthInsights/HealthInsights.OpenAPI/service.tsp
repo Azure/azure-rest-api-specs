@@ -18,8 +18,10 @@ using TypeSpec.Versioning;
 namespace AzureHealthInsights;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
-model AzureKey
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AzureKey is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "Ocp-Apim-Subscription-Key"
+>;
 
 @doc("The Microsoft Entra Id Flow")
 model EntraIdToken
@@ -27,12 +29,7 @@ model EntraIdToken
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_04_01: "2024-04-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_08_01_preview: "2024-08-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_10_01: "2024-10-01",
 }

@@ -1,13 +1,8 @@
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
-title: DeploymentStacksManagementClient
-java:
-  service-name: Deployment Stacks
-  client-flattened-annotation-target: disabled
-  uuid-as-string: true
-  output-model-immutable: true
+``` yaml $(tag) == 'package-2024-03-java'
+input-file:
+- https://github.com/Azure/azure-rest-api-specs/tree/edacc3b43f9603efa119eabb6013d952d1dbe7d6/specification/resources/resource-manager/Microsoft.Resources/deploymentStacks/stable/2024-03-01/deploymentStacks.json
 ```

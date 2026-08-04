@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "name": "scoped-resource-name",
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "MyResourceGroup",
+    "scopeName": "MyPrivateLinkScope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopeOperationStatuses/{asyncOperationId}"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "PrivateLinkScopedResources_Delete",
+  "title": "Deletes a scoped resource with a given name."
+}

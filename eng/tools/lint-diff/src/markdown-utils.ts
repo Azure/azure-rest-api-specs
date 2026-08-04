@@ -1,13 +1,14 @@
-import { marked } from "marked";
-import { kebabCase } from "change-case";
-import axios from "axios";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { kebabCase } from "change-case";
+import { marked, type Tokens } from "marked";
+import { inspect } from "util";
 
-export enum MarkdownType {
-  Arm = "arm",
-  DataPlane = "data-plane",
-  Default = "default",
-}
+export const MarkdownType = {
+  Arm: "arm",
+  DataPlane: "data-plane",
+  Default: "default",
+} as const;
+export type MarkdownType = (typeof MarkdownType)[keyof typeof MarkdownType];
 
 /**
  *
@@ -85,27 +86,35 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   const rpcRules: string[] = [];
   let response;
   try {
-    response = await axios.get(docUrl);
-  } catch (e: any) {
+    response = await fetch(docUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+  } catch (e) {
     // TODO: Retry? Fail ungracefully?
-    console.log(`GET ${docUrl} failed with ${e.message} .`);
+    console.log(`GET ${docUrl} failed with ${inspect(e)}.`);
     rpcInfoCache.set(ruleName, rpcRules);
     return rpcRules;
   }
 
   // Use marked to parse the markdown and extract the related ARM guideline codes
-  const tokens = marked.lexer(response.data);
+  const tokens = marked.lexer(await response.text());
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
     if (
       token.type === "heading" &&
-      token.depth >= 1 &&
-      token.text.trim().toLowerCase() === "related arm guideline code"
+      (token as Tokens.Heading).depth >= 1 &&
+      (token as Tokens.Heading).text.trim().toLowerCase() === "related arm guideline code"
     ) {
-      // The next token should be a list
-      const next = tokens[i + 1];
-      if (next && next.type === "list" && Array.isArray(next.items)) {
-        for (const item of next.items) {
+      // The next non-space token should be a list (marked may emit "space"
+      // tokens between block elements).
+      let j = i + 1;
+      while (tokens[j] && tokens[j].type === "space") {
+        j++;
+      }
+      const next = tokens[j];
+      if (next && next.type === "list") {
+        for (const item of (next as Tokens.List).items) {
           // item.text may contain comma-separated codes
           if (typeof item.text === "string") {
             rpcRules.push(...item.text.split(",").map((c: string) => c.trim()));

@@ -2,6 +2,9 @@ parameters:
   - name: NodeVersion
     type: string
     default: $(NodeVersion)
+  - name: WorkingDirectory
+    type: string
+    default: $(Build.SourcesDirectory)
 
 steps:
   - template: /eng/pipelines/templates/steps/use-node-version.yml
@@ -10,7 +13,9 @@ steps:
 
   - script: npm ci
     displayName: npm ci
+    workingDirectory: ${{ parameters.WorkingDirectory }}
 
   - script: npm ls -a || true
     displayName: npm ls -a
     condition: succeededOrFailed()
+    workingDirectory: ${{ parameters.WorkingDirectory }}

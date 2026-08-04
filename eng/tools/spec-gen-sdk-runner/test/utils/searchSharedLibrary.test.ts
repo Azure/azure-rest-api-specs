@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
-import { searchSharedLibrary } from "../../src/utils.js";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { typespecProjectSharedLibraryRegex } from "../../src/spec-helpers.js";
+import { fileURLToPath } from "node:url";
+import { describe, expect, test } from "vitest";
+import { typespecProjectSharedLibraryRegex } from "../../src/spec-helpers.ts";
+import { searchSharedLibrary } from "../../src/utils.ts";
 
 describe("searchSharedLibrary", () => {
   // Get the absolute path to the repo root

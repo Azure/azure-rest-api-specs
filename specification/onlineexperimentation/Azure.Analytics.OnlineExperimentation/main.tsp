@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -23,7 +24,6 @@ namespace Azure.Analytics.OnlineExperimentation;
 
 @doc("The Azure Online Experimentation service versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-05-31-preview version of the Azure Online Experimentation service.")
   `2025-05-31-preview`,
 }

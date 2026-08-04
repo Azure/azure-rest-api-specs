@@ -1,7 +1,7 @@
-import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { readTspConfig } from "../utils.ts";
 
 export class FlavorAzureRule implements Rule {
   readonly name = "FlavorAzure";
@@ -14,7 +14,7 @@ export class FlavorAzureRule implements Rule {
     let errorOutput = "";
 
     const configText = await readTspConfig(folder);
-    const config = yamlParse(configText);
+    const config = parse(configText);
 
     const options = config?.options;
     for (const emitter in options) {

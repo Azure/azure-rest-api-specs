@@ -207,7 +207,6 @@ model AsAsset extends InventoryAsset {
 }
 
 @doc("The page of assets that match the provided metric.")
-@pagedResult
 model AssetPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -220,7 +219,7 @@ model AssetPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @items
+  @pageItems
   value?: AssetResource[];
 }
 
@@ -708,7 +707,6 @@ model DiscoGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@pagedResult
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -718,7 +716,7 @@ model DiscoRunPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @items
+  @pageItems
   value?: DiscoRunResult[];
 }
 
@@ -862,6 +860,7 @@ model GuidPair {
 model HostAsset extends InventoryAsset {
   host?: string;
   domain?: string;
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: ObservedString[];
   webComponents?: WebComponent[];
   headers?: ObservedHeader[];
@@ -880,6 +879,7 @@ model HostAsset extends InventoryAsset {
   resourceUrls?: ResourceUrl[];
   scanMetadata?: ScanMetadata[];
   asns?: ObservedLong[];
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipBlocks?: IpBlock[];
   responseBodies?: ObservedString[];
   domainAsset?: DomainAsset;
@@ -951,7 +951,9 @@ model InnerError {
 model InventoryAsset {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpAddressAsset extends InventoryAsset {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
   asns?: ObservedLong[];
   reputations?: Reputation[];
@@ -962,6 +964,7 @@ model IpAddressAsset extends InventoryAsset {
   cookies?: Cookie[];
   sslCerts?: SslCertAsset[];
   services?: Service[];
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipBlocks?: IpBlock[];
   sources?: Source[];
   firstSeen?: utcDateTime;
@@ -981,7 +984,9 @@ model IpAddressAsset extends InventoryAsset {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Overwritten in client.tsp, but tsp pipelines run from main.tsp as well"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpBlock {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipBlock?: string;
   sources?: Source[];
   firstSeen?: utcDateTime;
@@ -991,7 +996,9 @@ model IpBlock {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpBlockAsset extends InventoryAsset {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipBlock?: string;
   asns?: ObservedLong[];
   bgpPrefixes?: ObservedString[];
@@ -1003,7 +1010,9 @@ model IpBlockAsset extends InventoryAsset {
   registrarCreatedAt?: ObservedLong[];
   registrarUpdatedAt?: ObservedLong[];
   netRanges?: ObservedString[];
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   startIp?: string;
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   endIp?: string;
   reputations?: Reputation[];
   detailedFromWhoisAt?: utcDateTime;
@@ -1102,6 +1111,7 @@ model PageAsset extends InventoryAsset {
   url?: url;
   httpMethod?: string;
   service?: string;
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: ObservedString[];
   successful?: ObservedBoolean[];
   httpResponseCodes?: ObservedInteger[];
@@ -1140,14 +1150,19 @@ model PageAsset extends InventoryAsset {
   parkedPage?: ObservedBoolean[];
   resourceUrls?: ResourceUrl[];
   guids?: GuidPair[];
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   finalIpAddresses?: ObservedString[];
   asns?: ObservedLong[];
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipBlocks?: IpBlock[];
   finalAsns?: ObservedLong[];
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   finalIpBlocks?: IpBlock[];
   responseBodies?: ObservedString[];
   domainAsset?: DomainAsset;
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   rootUrl?: ObservedBoolean;
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   isRootUrl?: boolean;
   location?: ObservedLocation[];
   services?: Service[];
@@ -1430,6 +1445,7 @@ model SubResourceIntegrityCheck {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   causePageUrl?: string;
   crawlGuid?: string;
   pageGuid?: string;
@@ -1521,7 +1537,6 @@ model DeltaResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-@pagedResult
 model DeltaPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -1531,7 +1546,7 @@ model DeltaPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @items
+  @pageItems
   value?: DeltaResult[];
 }
 
@@ -2062,6 +2077,7 @@ model HostAssetResource extends AssetResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpAddressAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "ipAddress";
@@ -2071,6 +2087,7 @@ model IpAddressAssetResource extends AssetResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpBlockAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "ipBlock";
@@ -2139,6 +2156,7 @@ model MarkParameter {
 @doc("Specify the response type.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ResponseTypeParameter {
+  @Versioning.added(Versions.v2024_03_01_preview)
   @doc("Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED")
   @query("responseType")
   responseType?: AssetResponseType;

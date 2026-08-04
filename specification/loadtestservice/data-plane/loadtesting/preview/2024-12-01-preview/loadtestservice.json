@@ -21,7 +21,9 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -76,7 +78,8 @@
         "tags": [
           "NotificationRule"
         ],
-        "description": "Resource list operation template.",
+        "summary": "Get all notification rules for the given filters.",
+        "description": "Get all notification rules for the given filters.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -133,7 +136,8 @@
         "tags": [
           "NotificationRule"
         ],
-        "description": "Resource read operation template.",
+        "summary": "Get notification rule details by notification rule Id.",
+        "description": "Get notification rule details by notification rule Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -180,7 +184,8 @@
         "tags": [
           "NotificationRule"
         ],
-        "description": "Create or update operation template.",
+        "summary": "Create a new notification rule or update an existing notification rule.",
+        "description": "Create a new notification rule or update an existing notification rule by providing the notification rule Id.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -246,7 +251,8 @@
         "tags": [
           "NotificationRule"
         ],
-        "description": "Resource delete operation template.",
+        "summary": "Delete a notification rule by its notification rule Id.",
+        "description": "Delete a notification rule by its notification rule Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1089,14 +1095,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           }
         ],
         "responses": {
@@ -1140,14 +1139,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           },
           {
             "name": "body",
@@ -1262,14 +1254,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           },
           {
             "name": "metricNamespace",
@@ -1319,14 +1304,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           },
           {
             "name": "name",
@@ -1391,14 +1369,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           }
         ],
         "responses": {
@@ -1441,14 +1412,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           },
           {
             "name": "aggregation",
@@ -1522,14 +1486,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           }
         ],
         "responses": {
@@ -1573,14 +1530,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9_-]*$"
+            "$ref": "#/parameters/TestRunIdParam"
           },
           {
             "name": "body",
@@ -2364,7 +2314,8 @@
         "tags": [
           "Trigger"
         ],
-        "description": "Resource list operation template.",
+        "summary": "Get all triggers for the given filters.",
+        "description": "Get all triggers for the given filters.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2421,7 +2372,8 @@
         "tags": [
           "Trigger"
         ],
-        "description": "Resource read operation template.",
+        "summary": "Get trigger details by trigger Id.",
+        "description": "Get trigger details by trigger Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2468,7 +2420,8 @@
         "tags": [
           "Trigger"
         ],
-        "description": "Create or update operation template.",
+        "summary": "Create a new trigger or update an existing trigger.",
+        "description": "Create a new trigger or update an existing trigger by providing the trigger Id.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -2534,7 +2487,8 @@
         "tags": [
           "Trigger"
         ],
-        "description": "Resource delete operation template.",
+        "summary": "Delete a trigger by its trigger Id.",
+        "description": "Delete a trigger by its trigger Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2818,7 +2772,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -4620,6 +4574,7 @@
         },
         "recurrenceStatus": {
           "$ref": "#/definitions/RecurrenceStatus",
+          "description": "The current recurrence status of the trigger, including remaining occurrences and next scheduled execution times.",
           "readOnly": true
         },
         "recurrence": {
@@ -5617,7 +5572,7 @@
         "executedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Test run initiated time.",
+          "description": "Test run initiated time. This is legacy, new developments should use createdDateTime.",
           "readOnly": true
         },
         "portalUrl": {
@@ -7075,7 +7030,7 @@
     "ListTestRunQueryParams.orderby": {
       "name": "orderby",
       "in": "query",
-      "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime\nasc. Supported fields - executedDateTime",
+      "description": "Sort on the supported fields in (field asc/desc) format. eg: createdDateTime asc.\nSupported fields - createdDateTime, executedDateTime (legacy)",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -7257,6 +7212,17 @@
       "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the JMX file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TestRunIdParam": {
+      "name": "testRunId",
+      "in": "path",
+      "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9_-]*$",
       "x-ms-parameter-location": "method"
     }
   }

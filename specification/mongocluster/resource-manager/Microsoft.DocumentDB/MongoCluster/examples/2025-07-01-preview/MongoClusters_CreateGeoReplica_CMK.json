@@ -1,0 +1,190 @@
+{
+  "operationId": "MongoClusters_CreateOrUpdate",
+  "title": "Creates a replica Mongo Cluster resource with Customer Managed Key encryption from a source resource.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myReplicaMongoCluster",
+    "api-version": "2025-07-01-preview",
+    "resource": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {}
+        }
+      },
+      "location": "centralus",
+      "properties": {
+        "createMode": "GeoReplica",
+        "replicaParameters": {
+          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
+          "sourceLocation": "eastus"
+        },
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "UserAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+            },
+            "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster",
+        "name": "myReplicaMongoCluster",
+        "type": "Microsoft.DocumentDB/mongoClusters",
+        "tags": {},
+        "location": "centralus",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2025-06-08T10:00:00Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-06-08T12:00:00Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterStatus": "Ready",
+          "createMode": "GeoReplica",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "7.0",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2025-06-08T12:30:00Z"
+          },
+          "previewFeatures": [
+            "GeoReplicas"
+          ],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myReplicaMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "role": "GeoAsyncReplica",
+            "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
+            "replicationState": "Provisioning"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          },
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "UserAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster"
+              },
+              "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "11111111-1111-1111-1111-111111111111"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster",
+        "name": "myReplicaMongoCluster",
+        "type": "Microsoft.DocumentDB/mongoClusters",
+        "tags": {},
+        "location": "centralus",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2025-06-08T10:00:00Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-06-08T10:00:00Z"
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "clusterStatus": "Provisioning",
+          "createMode": "GeoReplica",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "7.0",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {},
+          "previewFeatures": [
+            "GeoReplicas"
+          ],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myReplicaMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "role": "GeoAsyncReplica",
+            "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
+            "replicationState": "Provisioning"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          },
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "UserAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster"
+              },
+              "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster": {}
+          }
+        }
+      }
+    }
+  }
+}
