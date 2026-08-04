@@ -71,21 +71,15 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Compute creation is a long-running operation that returns 202 Accepted in addition to 200/201; the additional async response is intentional."
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The operation is tracked via the Azure-AsyncOperation header; the service does not return a Location header for this LRO."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Compute creation is an async long-running operation: the service returns 200 (update) and 202 Accepted (create), and does not return 201. The response set intentionally omits 201 to match the service contract."
   @tag("Computes")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Compute,
     Response =
       | ArmResourceUpdatedResponse<Compute>
-      | ArmResourceCreatedResponse<
-          Compute,
-          ArmAsyncOperationHeader<FinalResult = Compute> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
       | ArmAcceptedLroResponse<
           "Resource creation accepted.",
-          ArmAsyncOperationHeader<FinalResult = Compute> &
+          ArmCombinedLroHeaders<FinalResult = Compute> &
             Azure.Core.Foundations.RetryAfterHeader
         >
   >;
