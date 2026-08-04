@@ -20,12 +20,12 @@ jobs:
     name: Analyze Code
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 2
 
       - name: Checkout base branch for comparison
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: base-ref
@@ -45,7 +45,7 @@ jobs:
         with:
           script: |
             const { default: detectNamespaces } =
-              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/detect-namespaces.js');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/detect-namespaces.js');
             await detectNamespaces({ github, context, core });
 
       - name: Upload package name results
