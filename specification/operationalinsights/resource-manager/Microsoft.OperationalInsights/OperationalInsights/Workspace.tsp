@@ -382,13 +382,9 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @autoRoute
-  @returnTypeChangedFrom(
-    Versions.v2026_03_01,
-    ArmResponse<WorkspacePurgeStatusResponse> | ErrorResponse
-  )
   getPurgeStatus is PurgeOps.Read<
     Workspace,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    Response = ArmResponse<WorkspacePurgeStatusResponse>
   >;
 
   /**
@@ -396,6 +392,8 @@ interface Workspaces {
    *
    * This operation deletes data lake data (Auxiliary tables, or Analytics tables mirrored to the data lake) for the specified table within the given time range. The operation is long-running; poll the URL returned in the Azure-AsyncOperation response header to track its status.
    */
+  // The 204 is required by openapi-validator PostResponseCodes (RPC-Async-V1-11/14) for a no-content async POST, which this TypeSpec rule flags.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Final 204 is required by ARM RPC PostResponseCodes for a no-content LRO POST."
   @added(Versions.v2026_03_01)
   @tag("Workspaces")
   @autoRoute
@@ -403,7 +401,7 @@ interface Workspaces {
     Workspace,
     WorkspacePurgeLakeDataBody,
     ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
   >;
 

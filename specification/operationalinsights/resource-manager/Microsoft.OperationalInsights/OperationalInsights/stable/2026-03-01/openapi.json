@@ -3379,7 +3379,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
             }
           },
           "default": {
@@ -3390,11 +3390,11 @@
           }
         },
         "x-ms-examples": {
-          "WorkspacePurgeOperation": {
-            "$ref": "./examples/WorkspacesPurgeOperation.json"
-          },
           "WorkspacePurgeLakeDataOperation": {
             "$ref": "./examples/WorkspacesPurgeLakeDataOperation.json"
+          },
+          "WorkspacePurgeOperation": {
+            "$ref": "./examples/WorkspacesPurgeOperation.json"
           }
         }
       }
@@ -3522,6 +3522,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -6988,6 +6991,30 @@
         ]
       }
     },
+    "PurgeState": {
+      "type": "string",
+      "description": "Status of the operation represented by the requested Id.",
+      "enum": [
+        "pending",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "PurgeState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pending",
+            "value": "pending",
+            "description": "pending"
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "completed"
+          }
+        ]
+      }
+    },
     "RestoredLogs": {
       "type": "object",
       "description": "Restore parameters.",
@@ -8795,6 +8822,19 @@
       },
       "required": [
         "operationId"
+      ]
+    },
+    "WorkspacePurgeStatusResponse": {
+      "type": "object",
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PurgeState",
+          "description": "Status of the operation represented by the requested Id."
+        }
+      },
+      "required": [
+        "status"
       ]
     },
     "WorkspaceReplicationProperties": {
