@@ -70,6 +70,7 @@ model SubvolumeProperties {
  */
 #suppress "deprecated" "Suppress this warning until the property is removed."
 #deprecated "Deprecated. This model will be removed in a future API version."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SubvolumePatchRequest {
   /**
    * Subvolume Properties

@@ -625,6 +625,7 @@ model FeatureFlagProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Arm Configuration Diff Response.")
 @added(Versions.v2024_06_15_preview)
 model ArmConfigurationDiffResponse extends CommonErrorResponse {
@@ -650,6 +651,7 @@ model ArmConfigurationDiffResponseProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("View Device Configuration Response.")
 @added(Versions.v2024_06_15_preview)
 model ViewDeviceConfigurationResponse extends CommonErrorResponse {
@@ -711,6 +713,7 @@ model CommitBatchStatusRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2024_06_15_preview)
 model CommitBatchStatusResponse extends CommonErrorResponse {
@@ -754,6 +757,7 @@ model DiscardCommitBatchRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2024_06_15_preview)
 model DiscardCommitBatchResponse extends CommonErrorResponse {
