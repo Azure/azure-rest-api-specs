@@ -177,25 +177,7 @@ model VoiceAgentSessionMcpToolProperties {
 model VoiceAgentSessionMcpTool {
   type: "mcp";
   ...VoiceAgentSessionMcpToolProperties;
-  response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.silent;
-}
-
-@doc("A Foundry toolbox exposed through its MCP endpoint.")
-model VoiceAgentSessionFoundryToolboxTool {
-  type: "foundry_toolbox";
-  ...VoiceAgentSessionMcpToolProperties;
   response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.when_idle;
-}
-
-@doc("A service-managed voice-agent session tool kind.")
-union VoiceAgentSessionSystemToolType {
-  language_detection: "language_detection",
-}
-
-@doc("A service-managed system tool available to a voice-agent session.")
-model VoiceAgentSessionSystemTool {
-  type: VoiceAgentSessionSystemToolType;
-  description?: string;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Session tools are selected by their `type` property."
@@ -204,36 +186,8 @@ model VoiceAgentSessionSystemTool {
 union VoiceAgentSessionTool {
   function: OpenAI.RealtimeFunctionTool,
   mcp: VoiceAgentSessionMcpTool,
-  foundry_toolbox: VoiceAgentSessionFoundryToolboxTool,
-  system: VoiceAgentSessionSystemTool,
-}
-
-@doc("How a Foundry agent tool receives conversation context.")
-union VoiceAgentFoundryAgentContextType {
-  no_context: "no_context",
-  agent_context: "agent_context",
-  full_history: "full_history",
-}
-
-@doc("A resolved Foundry agent tool returned in effective session state.")
-model VoiceAgentSessionFoundryAgentTool {
-  type: "foundry_agent";
-  agent_name: string;
-  agent_version?: string | null;
-  project_name: string;
-  client_id?: string | null;
-  description?: string | null;
-  foundry_resource_override?: string | null;
-  agent_context_type?: VoiceAgentFoundryAgentContextType = VoiceAgentFoundryAgentContextType.agent_context;
-  return_agent_response_directly?: boolean = true;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Effective session state may additionally contain a service-resolved Foundry agent tool."
-@doc("A tool returned in effective stable voice-agent session state.")
-@oneOf
-union VoiceAgentSessionResponseTool {
-  client_configurable: VoiceAgentSessionTool,
-  foundry_agent: VoiceAgentSessionFoundryAgentTool,
+  toolbox: VoiceToolboxTool,
+  system: VoiceSystemTool,
 }
 
 @doc("The maximum output-token count or the literal `inf`.")
@@ -262,30 +216,6 @@ union VoiceAgentHandoffReasoningEffort {
   medium: "medium",
   high: "high",
   xhigh: "xhigh",
-}
-
-@doc("An output-audio timestamp kind supported by a voice-agent session.")
-union VoiceAgentAudioTimestampType {
-  word: "word",
-}
-
-@doc("An input-audio transcription model supported by the public v1 contract.")
-union VoiceAgentInputTranscriptionModel {
-  whisper_1: "whisper-1",
-  gpt_4o_transcribe: "gpt-4o-transcribe",
-  gpt_4o_mini_transcribe: "gpt-4o-mini-transcribe",
-  gpt_4o_transcribe_diarize: "gpt-4o-transcribe-diarize",
-  gpt_transcribe: "gpt-transcribe",
-  gpt_live_transcribe: "gpt-live-transcribe",
-  gpt_realtime_whisper: "gpt-realtime-whisper",
-  azure_speech: "azure-speech",
-  mai_transcribe: "mai-transcribe",
-}
-
-@doc("Asynchronous input-audio transcription settings.")
-model VoiceAgentInputTranscription {
-  ...OmitProperties<VoiceInputTranscription, "model">;
-  `model`: VoiceAgentInputTranscriptionModel;
 }
 
 @doc("An end-of-utterance detector model.")
@@ -319,11 +249,6 @@ model VoiceAgentEndOfUtteranceDetection {
 
   @minValue(0)
   timeout_ms?: int32 | null;
-}
-
-@doc("Explicitly disables server-side turn detection.")
-model VoiceAgentNoTurnDetection {
-  type: "none";
 }
 
 @doc("Server VAD turn-detection settings.")
@@ -373,8 +298,6 @@ model VoiceAgentAzureSemanticVadTurnDetection {
     | "languages"
     | "remove_filler_words"
     | "auto_truncate"
-    | "create_response"
-    | "interrupt_response"
   >;
   type: VoiceAgentAzureSemanticVadType;
 
@@ -384,8 +307,6 @@ model VoiceAgentAzureSemanticVadTurnDetection {
 
   prefix_padding_ms?: int32 | null;
   silence_duration_ms?: int32 | null;
-  create_response?: boolean = true;
-  interrupt_response?: boolean = true;
   idle_timeout_ms?: int32 | null;
 
   @minValue(0)
@@ -408,8 +329,6 @@ model VoiceAgentAzureMultilingualSemanticVadTurnDetection {
     | "end_of_utterance_detection"
     | "speech_duration_ms"
     | "languages"
-    | "create_response"
-    | "interrupt_response"
   >;
   type: VoiceTurnDetectionType.azure_semantic_vad_multilingual;
 
@@ -419,8 +338,6 @@ model VoiceAgentAzureMultilingualSemanticVadTurnDetection {
 
   prefix_padding_ms?: int32 | null;
   silence_duration_ms?: int32 | null;
-  create_response?: boolean = true;
-  interrupt_response?: boolean = true;
   idle_timeout_ms?: int32 | null;
 
   @minValue(0)
@@ -434,7 +351,6 @@ model VoiceAgentAzureMultilingualSemanticVadTurnDetection {
 @doc("Turn-detection settings accepted by a stable voice-agent session.")
 @oneOf
 union VoiceAgentTurnDetection {
-  none: VoiceAgentNoTurnDetection,
   server_vad: VoiceAgentServerVadTurnDetection,
   semantic_vad: VoiceAgentSemanticVadTurnDetection,
   azure_semantic_vad: VoiceAgentAzureSemanticVadTurnDetection,
@@ -464,46 +380,27 @@ model VoiceAgentEchoCancellation {
 @doc("Input-audio settings accepted in a stable voice-agent session.")
 @usage(VoiceAgentClientEventUsage)
 model VoiceAgentSessionUpdateAudioInput {
-  ...OmitProperties<
-    VoiceAudioInputConfig,
-    "format" | "transcription" | "turn_detection"
-  >;
+  ...OmitProperties<VoiceAudioInputConfig, "format" | "turn_detection">;
 
   @doc("The structured input audio format.")
   format?: VoiceAudioFormat | null;
-
-  @doc("Optional asynchronous input-audio transcription settings.")
-  transcription?: VoiceAgentInputTranscription | null;
 
   @doc("Turn-detection settings. Set to null to disable server-side turn detection.")
   turn_detection?: VoiceAgentTurnDetection | null;
 
   @doc("Optional server-side echo cancellation settings.")
   echo_cancellation?: VoiceAgentEchoCancellation | null;
-
-  @doc("The number of interleaved input-audio channels.")
-  @minValue(1)
-  channels?: int32;
-
-  @doc("A template describing the semantic context carried by each input channel.")
-  multichannel_audio_context_template?: string;
 }
 
 @doc("Output-audio settings accepted in a stable voice-agent session.")
 @usage(VoiceAgentClientEventUsage)
 model VoiceAgentSessionUpdateAudioOutput {
-  ...OmitProperties<VoiceAudioOutputConfig, "format" | "speed">;
-
-  @doc("The structured output audio format.")
-  format?: VoiceAudioFormat | null;
+  ...OmitProperties<VoiceAudioOutputConfig, "speed">;
 
   @doc("The speaking-speed multiplier.")
   @minValue(0.25)
   @maxValue(1.5)
   speed?: float32 | null;
-
-  @doc("Timestamp kinds to include with output audio.")
-  output_audio_timestamp_types?: VoiceAgentAudioTimestampType[] | null;
 }
 
 @doc("Input- and output-audio settings accepted in a `session.update` client event.")
@@ -608,8 +505,8 @@ model VoiceAgentAvatarScene {
 
 @doc("The avatar implementation.")
 union VoiceAgentAvatarType {
-  video_avatar: "video-avatar",
-  photo_avatar: "photo-avatar",
+  video_avatar: "video_avatar",
+  photo_avatar: "photo_avatar",
 }
 
 @doc("The transport used to deliver avatar media.")
@@ -937,7 +834,7 @@ model VoiceAgentSessionResponseAudio {
 model VoiceAgentSessionResponseConfig {
   ...OmitProperties<
     VoiceAgentSessionUpdateConfig,
-    "output_modalities" | "audio" | "tools" | "handoff" | "include" | "metadata"
+    "output_modalities" | "audio" | "handoff" | "include" | "metadata"
   >;
 
   @doc("The object type. Always `realtime.session`.")
@@ -958,9 +855,6 @@ model VoiceAgentSessionResponseConfig {
 
   @doc("The effective input- and output-audio settings for the session.")
   audio?: VoiceAgentSessionResponseAudio | null;
-
-  @doc("Tools available to the session.")
-  tools?: VoiceAgentSessionResponseTool[] | null;
 
   @doc("The effective handoff state.")
   handoff?: VoiceAgentHandoffState | null;
