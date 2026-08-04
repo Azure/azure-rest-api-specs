@@ -817,7 +817,8 @@ interface ScheduledActionOperationStatus {
 // ------------------ Occurrence operations ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("ScheduledActions")
 interface Occurrences {
   get is ArmResourceRead<Occurrence>;
   listByScheduledAction is ArmResourceListByParent<Occurrence>;
