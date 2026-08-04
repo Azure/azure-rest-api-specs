@@ -6,6 +6,14 @@ description: |
   @pattern decorators. Verifies correct severity assignment: Blocking for
   new properties/parameters, Warning for existing ones (OAPI-PATTERN-ALLOWLIST).
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -22,8 +30,6 @@ stimuli:
   # 170001 — New spec with denylist patterns on path parameter and body properties (blocking)
   - name: detect-denylist-pattern-new-spec
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/denylist-pattern-new.json"
           dest: "specification/patternsvc/resource-manager/Microsoft.PatternTest/stable/2025-01-01/patternsvc.json"
@@ -63,8 +69,6 @@ stimuli:
   #           with denylist (blocking)
   - name: detect-denylist-pattern-existing-vs-new
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/version-pairs/denylist-pattern/stable-2024-01-01.json"
           dest: "specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2024-01-01/policysvc.json"
@@ -103,8 +107,6 @@ stimuli:
   # 170003 — TypeSpec fixture with denylist @pattern on resource key and body property (blocking)
   - name: detect-denylist-pattern-typespec
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec/denylist-pattern-violations.tsp"
           dest: "specification/policysvc/resource-manager/Microsoft.PolicyService/stable/2025-01-01/main.tsp"

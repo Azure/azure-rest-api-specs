@@ -4,6 +4,14 @@ description: |
   Validates that the reviewer does NOT flag blocking violations on clean,
   fully compliant specs and examples.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -20,8 +28,6 @@ stimuli:
   # 090001 — Clean ARM spec (no blocking issues expected)
   - name: clean-arm-spec-no-blocking-issues
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
@@ -52,8 +58,6 @@ stimuli:
   # 090002 — Clean example file (no issues expected)
   - name: clean-example-no-issues
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/examples/example-clean.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
@@ -76,8 +80,6 @@ stimuli:
   # 090003 — Clean proxy resource (no location/tags/move required)
   - name: clean-proxy-resource-no-blocking-issues
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/clean-proxy-resource.json"
           dest: "specification/proxysvc/resource-manager/Microsoft.ProxyTest/stable/2025-01-01/proxysvc.json"

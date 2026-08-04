@@ -15,6 +15,14 @@ description: |
        (same content, count, severity, rule IDs, links, code blocks,
        fix snippets, and posted-by marker).
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -31,8 +39,6 @@ stimuli:
   # 130001 -- Rule IDs cited as markdown hyperlinks
   - name: rule-ids-cited-as-markdown-hyperlinks
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/citesvc/resource-manager/Microsoft.CiteService/stable/2025-01-01/citesvc.json"
@@ -125,8 +131,6 @@ stimuli:
   # 130002 -- Reviewer-posted parity: chat output contains complete canonical bodies
   - name: reviewer-posted-parity-canonical-bodies
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/paritysvc/resource-manager/Microsoft.ParityService/stable/2025-01-01/paritysvc.json"
@@ -221,8 +225,6 @@ stimuli:
   # 130003 -- Negative case: shortened/consolidated post is forbidden
   - name: reviewer-posted-parity-rejects-shortening
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/shortsvc/resource-manager/Microsoft.ShortService/stable/2025-01-01/shortsvc.json"

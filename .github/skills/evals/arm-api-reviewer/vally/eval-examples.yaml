@@ -4,6 +4,14 @@ description: |
   Validates detection of invalid resource IDs and realistic secrets
   in example JSON files.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -20,8 +28,6 @@ stimuli:
   # 060001 — Invalid resource ID in example
   - name: detect-example-bad-resource-id
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/examples/example-bad-resource-id.json"
           dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json"
@@ -46,8 +52,6 @@ stimuli:
   # 060002 — Realistic secrets in example
   - name: detect-example-realistic-secret
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/examples/example-realistic-secret.json"
           dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"

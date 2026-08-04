@@ -8,6 +8,14 @@ description: |
   touch schema content perform the full review with version comparison.
   The critic gate (Step 7) is never skipped regardless of track.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -24,8 +32,6 @@ stimuli:
   # 150001 — Examples-only PR elects fast path
   - name: examples-only-pr-elects-fast-path
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/examples/example-clean.json"
           dest: "specification/fastsvc/resource-manager/Microsoft.FastService/stable/2025-01-01/examples/Widgets_Get.json"
@@ -72,8 +78,6 @@ stimuli:
   # 150002 — Schema change forces full review (no fast path)
   - name: schema-change-forces-full-review
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/fpsvc/resource-manager/Microsoft.FpService/stable/2025-01-01/fpsvc.json"
@@ -124,8 +128,6 @@ stimuli:
   # 150003 — Uncertain qualification defaults to full review
   - name: uncertain-qualification-defaults-to-full-review
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/missing-descriptions.json"
           dest: "specification/descsvc/resource-manager/Microsoft.DescService/stable/2025-01-01/descsvc.json"

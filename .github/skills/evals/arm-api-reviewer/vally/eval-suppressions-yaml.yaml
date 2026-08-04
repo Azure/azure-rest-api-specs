@@ -8,6 +8,14 @@ description: |
   field are flagged, and new entries that suppress security-related
   rules with vague or absent justification are treated as Blocking.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -24,8 +32,6 @@ stimuli:
   # 140001 — New suppressions.yaml entry without a reason field
   - name: detect-suppressions-yaml-no-reason
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/suppressions-yaml/suppressions-no-reason.yaml"
           dest: "specification/suppressions.yaml"
@@ -76,8 +82,6 @@ stimuli:
   # 140002 — New suppressions.yaml entry for a security-related rule
   - name: detect-suppressions-yaml-security-rule
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/suppressions-yaml/suppressions-security-rule.yaml"
           dest: "specification/suppressions.yaml"

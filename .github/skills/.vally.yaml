@@ -9,8 +9,9 @@ paths:
   # on the command line -- `paths.skills` alone does not load anything. Neither the local runner
   # (evals/arm-api-reviewer/run-evals.ps1) nor the CI shard runner
   # (eng/common/scripts/eval/invoke-eval-shard.ts) passes `--skill-dir`, so every eval file here
-  # declares the skill it exercises via `environment.skills` (fail-loud: vally aborts when a
-  # declared skill directory has no SKILL.md).
+  # declares the skill it exercises via `environment.skills` -- once at the file root, which vally
+  # merges into each of its stimuli (fail-loud: vally aborts when a declared skill directory has
+  # no SKILL.md).
   skills: "."
   evals:
     - azsdk-common-apiview-feedback-resolution/evals/

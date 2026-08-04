@@ -5,6 +5,14 @@ description: |
   PATCH naming, @operationId overrides, enum-vs-union, secret detection,
   type constraints, and common anti-patterns.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -21,8 +29,6 @@ stimuli:
   # 070001 -- @segment casing and ARM TypeSpec conventions
   - name: detect-typespec-segment-and-naming-violations
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec/segment-casing-violations.tsp"
           dest: "specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp"
@@ -58,8 +64,6 @@ stimuli:
   # 070002 -- Secret detection and type violations in TypeSpec
   - name: detect-typespec-secret-and-type-violations
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec/secret-and-type-violations.tsp"
           dest: "specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp"
@@ -95,8 +99,6 @@ stimuli:
   # 070003 -- TypeSpec anti-patterns
   - name: detect-typespec-anti-patterns
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec/anti-patterns.tsp"
           dest: "specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp"
@@ -129,8 +131,6 @@ stimuli:
   # 070004 -- x-ms-identifiers violations (TSP-ARRAY-IDENTIFIERS)
   - name: detect-typespec-x-ms-identifiers-violations
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/typespec/x-ms-identifiers-violations.tsp"
           dest: "specification/identifierdemo/resource-manager/Microsoft.IdentifierDemo/main.tsp"

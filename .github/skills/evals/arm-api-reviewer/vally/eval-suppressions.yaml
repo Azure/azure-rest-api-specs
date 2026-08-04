@@ -4,6 +4,14 @@ description: |
   Validates detection of suppressions without justification and
   suppressions of security-related rules with vague reasons.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -20,8 +28,6 @@ stimuli:
   # 050001 — Suppressions without reason
   - name: detect-suppression-no-reason
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
           dest: "specification/nosupprsvc/resource-manager/readme.md"
@@ -51,8 +57,6 @@ stimuli:
   # 050002 — Security rule suppressions
   - name: detect-suppression-security-rule
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/readme/readme-security-suppression.md"
           dest: "specification/secsupprsvc/resource-manager/readme.md"

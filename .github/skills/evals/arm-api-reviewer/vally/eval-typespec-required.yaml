@@ -7,6 +7,14 @@ description: |
   as Blocking. Updates to handwritten swagger inside pre-existing API version
   directories MUST NOT be flagged.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -23,8 +31,6 @@ stimuli:
   # 120001 — Violation: new API version with handwritten swagger only
   - name: new-api-version-handwritten-swagger-flagged
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
           dest: "specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json"
@@ -67,8 +73,6 @@ stimuli:
   # 120002 — True negative: new API version with TypeSpec-generated swagger
   - name: new-api-version-typespec-generated-not-flagged
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/typespec-generated-spec.json"
           dest: "specification/tspgenservice/TspGenService.Management/stable/2026-05-01/tspgenservice.json"
@@ -109,8 +113,6 @@ stimuli:
   # 120003 — True negative: maintenance edit to existing API version
   - name: maintenance-edit-existing-handwritten-version-not-flagged
     environment:
-      skills:
-        - "../../../azure-api-review"
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
           dest: "specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/legacysvc.json"
