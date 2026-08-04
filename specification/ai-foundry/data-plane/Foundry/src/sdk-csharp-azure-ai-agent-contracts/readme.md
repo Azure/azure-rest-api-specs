@@ -6,6 +6,6 @@ This folder contains C# SDK customization files for the Foundry data-plane Agent
 
 For SDK generation configuration, refer to `../../tspconfig.yaml`.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 ```
