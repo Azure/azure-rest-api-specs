@@ -21656,6 +21656,7 @@ model GatewayRoute {
  * List of virtual network gateway effective routes.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
+@added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayEffectiveRouteListResult {
   /**
@@ -21670,6 +21671,7 @@ model GatewayEffectiveRouteListResult {
  * Gateway effective routing details.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
+@added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayEffectiveRoute {
   /**
@@ -21700,21 +21702,22 @@ model GatewayEffectiveRoute {
 /**
  * The next hop type of a gateway effective route.
  */
+@added(Versions.v2025_09_01)
 union GatewayEffectiveRouteNextHopType {
   string,
 
   /**
-   * Tunnel
+   * The next hop is a VPN tunnel.
    */
   Tunnel: "Tunnel",
 
   /**
-   * VirtualNetwork
+   * The next hop is within the local virtual network.
    */
   VirtualNetwork: "VirtualNetwork",
 
   /**
-   * Unknown
+   * The next hop type could not be determined.
    */
   Unknown: "Unknown",
 }

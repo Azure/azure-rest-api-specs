@@ -138,7 +138,6 @@ import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
-import "./FirstPartyServiceTag.tsp";
 import "./AddressPrefixSet.tsp";
 import "../Common/main.tsp";
 
