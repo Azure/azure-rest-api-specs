@@ -367,8 +367,8 @@ interface AlertOperationGroup {
   /**
    * Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
    */
-  @action("changestate")
   #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant variant uses same C# name; resolved by separate resource class"
+  @action("changestate")
   changeState is AlertOperationGroupOps.ActionSync<
     Alert,
     Comments,
@@ -387,9 +387,9 @@ interface AlertOperationGroup {
   /**
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant variant uses same C# name; resolved by separate resource class"
   @get
   @action("history")
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant variant uses same C# name; resolved by separate resource class"
   getHistory is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
@@ -412,11 +412,9 @@ interface AlertOperationGroup {
 
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@doc(Alert.properties, "Alert property bag");
-@@doc(
-  Alerts.changeStateTenant::parameters.body,
+@@doc(Alerts.changeStateTenant::parameters.body,
   "reason of change alert state"
 );
-@@doc(
-  AlertOperationGroup.changeState::parameters.body,
+@@doc(AlertOperationGroup.changeState::parameters.body,
   "reason of change alert state"
 );

@@ -4,13 +4,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
-@@clientName(
-  Microsoft.AlertsManagement,
+@@clientName(Microsoft.AlertsManagement,
   "TenantActivityLogAlertsMgmtClient",
   "python"
 );
-@@clientName(
-  Microsoft.AlertsManagement,
+@@clientName(Microsoft.AlertsManagement,
   "TenantActivityLogAlertsManagementClient",
   "javascript"
 );
@@ -19,38 +17,31 @@ using Microsoft.AlertsManagement;
 // "TenantActivityLogAlerts" operation group from back-compatible.tsp does not collide
 // with the C# namespace (which would otherwise cause the generator to emit
 // `Azure.ResourceManager.TenantActivityLogAlerts._TenantActivityLogAlerts`).
-@@clientLocation(
-  TenantActivityLogAlertResources.get,
+@@clientLocation(TenantActivityLogAlertResources.get,
   TenantActivityLogAlertResources,
   "csharp"
 );
-@@clientLocation(
-  TenantActivityLogAlertResources.createOrUpdate,
+@@clientLocation(TenantActivityLogAlertResources.createOrUpdate,
   TenantActivityLogAlertResources,
   "csharp"
 );
-@@clientLocation(
-  TenantActivityLogAlertResources.update,
+@@clientLocation(TenantActivityLogAlertResources.update,
   TenantActivityLogAlertResources,
   "csharp"
 );
-@@clientLocation(
-  TenantActivityLogAlertResources.delete,
+@@clientLocation(TenantActivityLogAlertResources.delete,
   TenantActivityLogAlertResources,
   "csharp"
 );
-@@clientLocation(
-  TenantActivityLogAlertResources.listByManagementGroup,
+@@clientLocation(TenantActivityLogAlertResources.listByManagementGroup,
   TenantActivityLogAlertResources,
   "csharp"
 );
-@@clientLocation(
-  TenantActivityLogAlertResources.listByTenant,
+@@clientLocation(TenantActivityLogAlertResources.listByTenant,
   TenantActivityLogAlertResources,
   "csharp"
 );
-@@clientName(
-  TenantActivityLogAlertResources.listByTenant,
+@@clientName(TenantActivityLogAlertResources.listByTenant,
   "GetTenantActivityLogAlerts",
   "csharp"
 );
@@ -62,8 +53,7 @@ using Microsoft.AlertsManagement;
 // TenantActivityLogAlertCollection while the ArmResource class is auto-suffixed back to
 // TenantActivityLogAlertResource. Aligns with sibling Azure.ResourceManager.AlertsManagement
 // naming (AlertProcessingRuleData / AlertProcessingRuleCollection / AlertProcessingRuleResource).
-@@clientName(
-  TenantActivityLogAlertResource,
+@@clientName(TenantActivityLogAlertResource,
   "TenantActivityLogAlert",
   "csharp"
 );
@@ -72,13 +62,11 @@ using Microsoft.AlertsManagement;
 // Aligns with sibling Azure.ResourceManager.Monitor models
 // (ActivityLogAlertActionGroup / ActivityLogAlertAnyOfOrLeafCondition / ActivityLogAlertLeafCondition).
 @@clientName(ActionGroup, "TenantActivityLogAlertActionGroup", "csharp");
-@@clientName(
-  AlertRuleLeafCondition,
+@@clientName(AlertRuleLeafCondition,
   "TenantActivityLogAlertLeafCondition",
   "csharp"
 );
-@@clientName(
-  AlertRuleAnyOfOrLeafCondition,
+@@clientName(AlertRuleAnyOfOrLeafCondition,
   "TenantActivityLogAlertAnyOfOrLeafCondition",
   "csharp"
 );
@@ -90,14 +78,12 @@ using Microsoft.AlertsManagement;
 
 // Strongly-type ARM-shaped properties for the C# surface.
 // TYPE003: Location should be Azure.Core.AzureLocation, not string.
-@@alternateType(
-  TenantActivityLogAlertResource.location,
+@@alternateType(TenantActivityLogAlertResource.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 // TYPE001: ActionGroupId carries an ARM resource id; expose as ResourceIdentifier.
-@@alternateType(
-  ActionGroup.actionGroupId,
+@@alternateType(ActionGroup.actionGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

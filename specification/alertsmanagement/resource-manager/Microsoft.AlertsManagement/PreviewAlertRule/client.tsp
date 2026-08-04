@@ -5,13 +5,11 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
-@@clientName(
-  Microsoft.AlertsManagement,
+@@clientName(Microsoft.AlertsManagement,
   "PreviewAlertRuleMgmtClient",
   "python"
 );
-@@clientName(
-  Microsoft.AlertsManagement,
+@@clientName(Microsoft.AlertsManagement,
   "PreviewAlertRuleManagementClient",
   "javascript"
 );
@@ -63,8 +61,7 @@ using Microsoft.AlertsManagement;
 @@clientName(PreviewAlertRuleResponse, "PreviewAlertRuleResult", "csharp");
 @@clientName(Evaluation.thresholdMet, "IsThresholdMet", "csharp");
 @@clientName(EvaluatedPeriod.thresholdMet, "IsThresholdMet", "csharp");
-@@clientName(
-  DimensionNameAndValue,
+@@clientName(DimensionNameAndValue,
   "RulePreviewDimensionNameAndValue",
   "csharp"
 );
@@ -87,8 +84,7 @@ using Microsoft.AlertsManagement;
 // C# customizations: scopes are ARM resource ids per the spec doc
 // ("The list of resource id's that this scheduled query rule is scoped to.").
 // Project them to the strongly-typed `ResourceIdentifier` element type.
-@@alternateType(
-  LogAlertRuleProperties.scopes,
+@@alternateType(LogAlertRuleProperties.scopes,
   armResourceIdentifier[],
   "csharp"
 );
