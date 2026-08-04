@@ -370,11 +370,6 @@ namespace Azure.AI.Projects {
   @@alternateType(BrowserAutomationToolCall, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(BrowserAutomationToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(CaptureStructuredOutputsTool, { identity: "Azure.AI.Extensions.OpenAI.CaptureStructuredOutputsTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.CustomToolParam, { identity: "Azure.AI.Extensions.OpenAI.ResponsesCustomToolParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
-  @@alternateType(OpenAI.CustomToolParamFormat, { identity: "Azure.AI.Extensions.OpenAI.ResponsesCustomToolParamFormat", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
-  @@alternateType(OpenAI.CustomTextFormatParam, { identity: "Azure.AI.Extensions.OpenAI.ResponsesCustomTextFormatParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
-  @@alternateType(OpenAI.CustomGrammarFormatParam, { identity: "Azure.AI.Extensions.OpenAI.CustomGrammarFormatParam", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
-  @@alternateType(OpenAI.GrammarSyntax1, { identity: "Azure.AI.Extensions.OpenAI.ResponsesGrammarSyntax", package: "Azure.AI.Extensions.OpenAI", minVersion: "2.1.0-beta.4" }, "csharp");
   @@alternateType(FabricDataAgentToolCall, { identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(FabricDataAgentToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(FabricIQPreviewTool, { identity: "Azure.AI.Extensions.OpenAI.FabricIQPreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
@@ -398,6 +393,12 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.Error, Usage.output | Usage.json);
   @@usage(StructuredOutputsOutputItem, Usage.output | Usage.json);
   @@usage(WorkflowActionOutputItem, Usage.output | Usage.json);
+  @@usage(OpenAI.CustomToolCallResource, Usage.output | Usage.json);
+  @@access(OpenAI.CustomToolCallResource, Access.public);
+  @@clientName(OpenAI.CustomToolCallResource, "OutputItemCustomToolCall");
+  @@usage(OpenAI.CustomToolCallOutputResource, Usage.output | Usage.json);
+  @@access(OpenAI.CustomToolCallOutputResource, Access.public);
+  @@clientName(OpenAI.CustomToolCallOutputResource, "OutputItemCustomToolCallOutput");
   @@alternateType(OpenAI.OutputItemLocalShellToolCall, { identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(OpenAI.OutputItemLocalShellToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.OutputItemLocalShellToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(OpenAI.OutputItemFunctionShellCall, { identity: "Azure.AI.Extensions.OpenAI.OutputItemFunctionShellCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
@@ -439,5 +440,4 @@ namespace Azure.AI.Projects {
   @@access(UpdateAgentRequest, Access.public);
   @@usage(UpdateAgentRequest, Usage.input);
 
-  @@alternateType(OpenAI.ItemCustomToolCallOutput, { identity: "OpenAI.Responses.FunctionCallOutputResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
 }
