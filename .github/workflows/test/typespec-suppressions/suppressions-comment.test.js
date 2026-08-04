@@ -81,7 +81,13 @@ describe("renderSuppressionsCommentBody", () => {
 
     expect(body).toContain("## TypeSpec suppressions requiring review");
     expect(body).toContain("Suppressions are strongly discouraged");
-    expect(body).toContain("❌ Approval required — 1 suppression");
+    expect(body).toContain(
+      "❌ Approval required (currently under testing, review NOT enforced) — 1 suppression",
+    );
+    // Source link text is the file name + line only (full path stays in the href).
+    expect(body).toContain(
+      '<a href="https://github.com/test-owner/test-repo/blob/abc123/specification/demo/main.tsp#L12">main.tsp#L12</a>',
+    );
   });
 
   it("reflects approval status in the heading and status cells", () => {
@@ -106,7 +112,9 @@ describe("renderSuppressionsCommentBody", () => {
       ...options,
       isApproved: false,
     });
-    expect(pending).toContain("❌ Approval required");
+    expect(pending).toContain(
+      "❌ Approval required (currently under testing, review NOT enforced)",
+    );
     expect(pending).toContain('<td align="center">❌</td>');
 
     const approved = renderSuppressionsCommentBody(report, {
@@ -201,7 +209,9 @@ describe("buildSuppressionsComment", async () => {
       );
       expect(body).toContain("Suppressions are strongly discouraged");
       expect(body).toContain("https://aka.ms/tsp-suppress/feedback");
-      expect(body).toContain("❌ Approval required — 2 suppressions");
+      expect(body).toContain(
+        "❌ Approval required (currently under testing, review NOT enforced) — 2 suppressions",
+      );
     },
   );
 
@@ -275,7 +285,9 @@ describe("buildSuppressionsComment", async () => {
         "abc123",
         [],
       );
-      expect(pending).toContain("❌ Approval required");
+      expect(pending).toContain(
+        "❌ Approval required (currently under testing, review NOT enforced)",
+      );
       expect(pending).toContain('<td align="center">❌</td>');
 
       const approved = await buildSuppressionsComment(
