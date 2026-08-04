@@ -4,17 +4,20 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
-@@clientName(Microsoft.AlertsManagement,
+@@clientName(
+  Microsoft.AlertsManagement,
   "AlertProcessingRulesMgmtClient",
   "python"
 );
-@@clientName(Microsoft.AlertsManagement,
+@@clientName(
+  Microsoft.AlertsManagement,
   "AlertProcessingRulesManagementClient",
   "javascript"
 );
 
 // C# customizations: avoid name collisions with namespace and System.Object.Equals.
-@@clientName(AlertProcessingRules,
+@@clientName(
+  AlertProcessingRules,
   "AlertProcessingRulesOperationGroup",
   "csharp"
 );
@@ -24,7 +27,8 @@ using Microsoft.AlertsManagement;
 // readability and to preserve the original Azure.ResourceManager.AlertsManagement names.
 @@clientName(Action, "AlertProcessingRuleAction", "csharp");
 @@clientName(AddActionGroups, "AlertProcessingRuleAddGroupsAction", "csharp");
-@@clientName(RemoveAllActionGroups,
+@@clientName(
+  RemoveAllActionGroups,
   "AlertProcessingRuleRemoveAllGroupsAction",
   "csharp"
 );
@@ -32,7 +36,8 @@ using Microsoft.AlertsManagement;
 @@clientName(Schedule, "AlertProcessingRuleSchedule", "csharp");
 @@clientName(Recurrence, "AlertProcessingRuleRecurrence", "csharp");
 @@clientName(WeeklyRecurrence, "AlertProcessingRuleWeeklyRecurrence", "csharp");
-@@clientName(MonthlyRecurrence,
+@@clientName(
+  MonthlyRecurrence,
   "AlertProcessingRuleMonthlyRecurrence",
   "csharp"
 );
@@ -47,11 +52,13 @@ using Microsoft.AlertsManagement;
 
 // common-types v3 types Resource.id as `string`; map to armResourceIdentifier so the C#
 // generator emits ResourceIdentifier compatible with TrackedResourceData.
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AddActionGroups.actionGroupIds,
+@@alternateType(
+  AddActionGroups.actionGroupIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
