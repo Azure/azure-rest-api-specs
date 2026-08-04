@@ -400,8 +400,9 @@ interface Workspaces {
   purgeLakeData is ArmResourceActionAsyncBase<
     Workspace,
     WorkspacePurgeLakeDataBody,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse,
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmNoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
   >;
 
