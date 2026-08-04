@@ -595,6 +595,11 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledAction>;
 }
 
+@@doc(
+  ScheduledAction.name,
+  "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens."
+);
+
 @added(Versions.`2026-07-06-preview`)
 @doc("The scheduled action extension")
 model ScheduledActionResources
@@ -656,6 +661,8 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
     NamePattern = "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
   >;
 }
+
+@@doc(Occurrence.name, "The occurrence ID in UUID format.");
 
 @added(Versions.`2026-07-06-preview`)
 @parentResource(Occurrence)
