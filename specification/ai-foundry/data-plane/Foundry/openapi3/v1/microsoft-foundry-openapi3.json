@@ -73615,9 +73615,9 @@
             "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
-            "function": "#/components/schemas/OpenAI.FunctionTool",
             "mcp": "#/components/schemas/OpenAI.MCPTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
+            "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
             "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
             "web_search": "#/components/schemas/OpenAI.WebSearchTool",
@@ -73979,9 +73979,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "allowed_tools": "#/components/schemas/OpenAI.ToolChoiceAllowed",
             "function": "#/components/schemas/OpenAI.ToolChoiceFunction",
             "mcp": "#/components/schemas/OpenAI.ToolChoiceMCP",
+            "allowed_tools": "#/components/schemas/OpenAI.ToolChoiceAllowed",
             "custom": "#/components/schemas/OpenAI.ToolChoiceCustom",
             "programmatic_tool_calling": "#/components/schemas/OpenAI.SpecificProgrammaticToolCallingParam",
             "apply_patch": "#/components/schemas/OpenAI.SpecificApplyPatchParam",
@@ -81341,7 +81341,7 @@
       "VoiceAgentTool": {
         "anyOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.FunctionTool"
+            "$ref": "#/components/schemas/OpenAI.RealtimeFunctionTool"
           },
           {
             "$ref": "#/components/schemas/VoiceAgentMcpTool"
@@ -81746,6 +81746,13 @@
             "maximum": 1.5,
             "description": "The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.\nFor Azure synthesized voices, use `voice.rate` instead.",
             "default": 1
+          },
+          "output_audio_timestamp_types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAudioTimestampType"
+            },
+            "description": "Timestamp kinds to include with output audio."
           }
         },
         "description": "Output audio configuration for a voice agent.",
@@ -81769,6 +81776,18 @@
           }
         ],
         "description": "A voice-audio participant role. Additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioTimestampType": {
+        "type": "string",
+        "enum": [
+          "word"
+        ],
+        "description": "An output-audio timestamp kind supported by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -81995,12 +82014,12 @@
           "create_response": {
             "type": "boolean",
             "description": "Whether a response is created automatically when speech stops.",
-            "default": false
+            "default": true
           },
           "interrupt_response": {
             "type": "boolean",
             "description": "Whether user speech may interrupt the agent's response.",
-            "default": false
+            "default": true
           }
         },
         "allOf": [
@@ -82069,12 +82088,12 @@
           "create_response": {
             "type": "boolean",
             "description": "Whether a response is created automatically when speech stops.",
-            "default": false
+            "default": true
           },
           "interrupt_response": {
             "type": "boolean",
             "description": "Whether user speech may interrupt the agent's response.",
-            "default": false
+            "default": true
           },
           "languages": {
             "type": "array",
@@ -82150,12 +82169,12 @@
           "create_response": {
             "type": "boolean",
             "description": "Whether a response is created automatically when speech stops.",
-            "default": false
+            "default": true
           },
           "interrupt_response": {
             "type": "boolean",
             "description": "Whether user speech may interrupt the agent's response.",
-            "default": false
+            "default": true
           },
           "languages": {
             "type": "array",
@@ -82546,6 +82565,9 @@
       },
       "VoiceInputTranscription": {
         "type": "object",
+        "required": [
+          "model"
+        ],
         "properties": {
           "language": {
             "type": "string",
@@ -82605,6 +82627,8 @@
               "gpt-4o-transcribe",
               "gpt-4o-mini-transcribe",
               "gpt-4o-transcribe-diarize",
+              "gpt-transcribe",
+              "gpt-live-transcribe",
               "mai-transcribe",
               "azure-speech"
             ]

@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
+import "@azure-tools/openai-typespec/models/realtime";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";
@@ -156,7 +157,7 @@ union VoiceModelType {
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceAgentTool {
   @doc("A native function tool, executed by the client.")
-  function: OpenAI.FunctionTool,
+  function: OpenAI.RealtimeFunctionTool,
 
   @doc("An MCP tool executed by the service. The agent resolves authentication, for example through a Foundry connection.")
   mcp: VoiceAgentMcpTool,
@@ -280,6 +281,16 @@ model VoiceAudioOutputConfig {
   @minValue(0.25)
   @maxValue(1.5)
   speed?: float32 = 1;
+
+  @doc("Timestamp kinds to include with output audio.")
+  output_audio_timestamp_types?: VoiceAudioTimestampType[];
+}
+
+@doc("An output-audio timestamp kind supported by a voice agent.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceAudioTimestampType {
+  @doc("Word-level timestamps.")
+  word: "word",
 }
 
 @doc("An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.")
@@ -467,10 +478,10 @@ alias VoiceAzureSemanticVadOptions = {
   auto_truncate?: boolean = false;
 
   @doc("Whether a response is created automatically when speech stops.")
-  create_response?: boolean = false;
+  create_response?: boolean = true;
 
   @doc("Whether user speech may interrupt the agent's response.")
-  interrupt_response?: boolean = false;
+  interrupt_response?: boolean = true;
 };
 
 @doc("Azure semantic voice activity detection.")
@@ -525,6 +536,12 @@ union VoiceInputTranscriptionModel {
   @doc("OpenAI GPT-4o transcribe with speaker diarization.")
   gpt_4o_transcribe_diarize: "gpt-4o-transcribe-diarize",
 
+  @doc("OpenAI GPT Transcribe.")
+  gpt_transcribe: "gpt-transcribe",
+
+  @doc("OpenAI GPT Live Transcribe.")
+  gpt_live_transcribe: "gpt-live-transcribe",
+
   @doc("MAI transcription.")
   mai_transcribe: "mai-transcribe",
 
@@ -541,7 +558,7 @@ model VoiceInputTranscription {
   ...OmitProperties<OpenAI.AudioTranscription, "model">;
 
   @doc("The transcription model to use.")
-  `model`?: VoiceInputTranscriptionModel;
+  `model`: VoiceInputTranscriptionModel;
 
   @doc("Optional custom speech model configuration, keyed by locale.")
   custom_speech?: Record<string>;
