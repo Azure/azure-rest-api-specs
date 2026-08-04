@@ -320,6 +320,18 @@ interface SingleDocumentTranslationClient {
 );
 
 @@clientName(
+  DocumentTranslation.DocumentStatus.imageCharged,
+  "imagesCharged",
+  "csharp"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "imageCharactersDetected",
+  "csharp"
+);
+
+@@clientName(
   DocumentTranslation.StatusSummary.totalCharacterCharged,
   "total_characters_charged",
   "python"
