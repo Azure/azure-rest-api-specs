@@ -16,6 +16,7 @@ alias ResponseUsage =
 alias DualUsage = RequestUsage | ResponseUsage;
 
 /** Standard error response envelope. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 @usage(ResponseUsage)
 model ErrorResponse {
@@ -197,6 +198,7 @@ model ConversationItemBase {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentionally extending the OpenAI GA response to migrate VoiceLive from the Realtime beta shape to GA."
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(ResponseUsage)
 model Response extends OpenAI.RealtimeResponse {
   /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. (Azure extension) */

@@ -298,6 +298,7 @@ model VoiceAdaptation {
 
 /** VoiceLive v1 realtime session configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(DualUsage)
 model RequestSession {
   /** The session type. VoiceLive v1 supports realtime sessions only. */
@@ -372,6 +373,7 @@ union SessionUpdateConfig {
 
 /** Base for session configuration in the response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(ResponseUsage)
 model ResponseSession is RequestSession {
   ...SessionBase;
@@ -899,6 +901,7 @@ union AudioInputTranscriptionModel {
 
 /** Configuration for input audio transcription. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model AudioInputTranscriptionOptions {
   /**
@@ -1235,6 +1238,7 @@ union AnimationOutputType {
 
 /** Configuration for animation outputs including blendshapes and visemes metadata. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model Animation {
   /** The name of the animation model to use. */
@@ -1350,6 +1354,7 @@ model IceServer {
 
 /** Configuration for the agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model AgentConfig {
   /** The type of agent to use. */
