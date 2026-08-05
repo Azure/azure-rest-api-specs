@@ -2285,6 +2285,7 @@ model PrepareDataMoveRequest {
 /**
  * Operation result response for Vault Storage Config
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("objectType")
 model VaultStorageConfigOperationResultResponse {
   /**
@@ -2660,6 +2661,7 @@ model OperationResultInfoBase {
 /**
  * This is the base class for operation result responses.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationWorkerResponse {
   /**
    * HTTP Status Code of the operation.
@@ -2703,6 +2705,7 @@ model ValidateOperationRequestResource {
 /**
  * Base class for validate operation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("objectType")
 model ValidateOperationRequest {
   /**
@@ -2713,6 +2716,7 @@ model ValidateOperationRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateOperationsResponse {
   /**
    * Base class for validate operation response.
@@ -2723,6 +2727,7 @@ model ValidateOperationsResponse {
 /**
  * Base class for validate operation response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateOperationResponse {
   /**
    * Gets the validation result
@@ -3287,6 +3292,7 @@ model UnlockDeleteResponse {
 /**
  * Patch Request content to update recovery point for given RecoveryPointId
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
 @added(Versions.v2026_03_31_preview)
@@ -6821,6 +6827,7 @@ model OperationResultInfo extends OperationResultInfoBase {
 /**
  * Prepare DataMove Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrepareDataMoveResponse
   extends VaultStorageConfigOperationResultResponse {
   /**
@@ -6994,6 +7001,7 @@ model SimpleSchedulePolicyV2 extends SchedulePolicy {
  * AzureRestoreValidation request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateIaasVMRestoreOperationRequest extends ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -7013,6 +7021,7 @@ alias ValidateRestoreOperationRequestProperties = {
 /**
  * AzureRestoreValidation request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateRestoreOperationRequest extends ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -8294,6 +8303,7 @@ model ClientScriptForConnect {
   /**
    * OS type - Windows, Linux etc. for which this file / folder restore client script works.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -8867,6 +8877,7 @@ model FetchTieringCostSavingsInfoForVaultRequest
 /**
  * Operations List response which contains list of available APIs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientDiscoveryResponse {
   /**
    * List of available operations.
@@ -8962,6 +8973,7 @@ model CrossTenantVaultMappingProperties {
 /**
  * Request to remove a cross-tenant vault mapping for cross-tenant restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -8992,6 +9004,7 @@ union VaultMappingState {
  * Response for CheckVaultMappingStatus API.
  * Contains information about whether a source vault is mapped to a target vault.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -9010,6 +9023,7 @@ model CrossTenantVaultMappingStatusResponse {
 /**
  * Request to generate a vault credential certificate for cross-tenant restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -9023,6 +9037,7 @@ model VaultCredentialCertificateRequest {
 /**
  * Options for self-signed certificate generation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
@@ -9037,6 +9052,7 @@ model VaultCredentialCertificateCreateOptions {
  * Response containing the generated vault credential certificate
  * and associated AAD identity details for MARS agent registration.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
