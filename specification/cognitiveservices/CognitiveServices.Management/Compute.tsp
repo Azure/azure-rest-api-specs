@@ -73,17 +73,14 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Compute creation is an async long-running operation: the service returns 200 (update) and 202 Accepted (create), and does not return 201. The response set intentionally omits 201 to match the service contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Compute create/scale is an async long-running operation: the service returns 202 Accepted on success and 4xx on failure. It never returns 200 or 201, so the response set intentionally includes only 202 to match the service contract."
   @tag("Computes")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Compute,
-    Response =
-      | ArmResourceUpdatedResponse<Compute>
-      | ArmAcceptedLroResponse<
-          "Resource creation accepted.",
-          ArmCombinedLroHeaders<FinalResult = Compute> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = ArmAcceptedLroResponse<
+      "Resource creation accepted.",
+      ArmCombinedLroHeaders
+    >
   >;
 
   /**
