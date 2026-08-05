@@ -47,6 +47,9 @@ model VoiceAgentDefinition {
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
 
+  @doc("Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.")
+  greeting?: VoiceGreetingConfig;
+
   @doc("""
     The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
     transcription. These values are session defaults; a client may override supported fields when connecting.
@@ -69,6 +72,13 @@ model VoiceAgentDefinition {
     """)
   tools?: VoiceAgentTool[];
 
+  @doc("""
+    How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+    `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+    Defaults to `auto`.
+    """)
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.auto;
+
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
@@ -81,6 +91,37 @@ model VoiceAgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Session-start greeting configuration for a voice agent.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceGreetingConfig {
+  @doc("The greeting mode.")
+  type: string;
+}
+
+@doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TemplateVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "template";
+
+  @doc("The Handlebars text template spoken at session start.")
+  @minLength(1)
+  text: string;
+}
+
+@doc("A greeting authored by the session model from a scoped opening-turn prompt.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "llm_generated";
+
+  @doc("The Handlebars prompt that guides the opening turn.")
+  @minLength(1)
+  prompt: string;
+
+  @doc("The tool-selection policy for the opening response. Defaults to `none`.")
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.none;
 }
 
 @doc("""
@@ -118,6 +159,34 @@ union VoiceAgentTool {
   toolbox: VoiceToolboxTool,
 }
 
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+@doc("Tool-selection behavior for a voice agent.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolChoice {
+  mode: OpenAI.ToolChoiceOptions,
+  function: OpenAI.ToolChoiceFunction,
+  mcp: OpenAI.ToolChoiceMCP,
+}
+
+@doc("When an MCP invocation creates a follow-up response. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentMcpResponseScheduling {
+  string,
+
+  @doc("Do not create a follow-up response after the MCP invocation completes.")
+  silent: "silent",
+
+  @doc("Create a follow-up response when the conversation is idle.")
+  when_idle: "when_idle",
+
+  @doc("Interrupt the active response and create a follow-up response.")
+  interrupt: "interrupt",
+
+  @doc("Create a follow-up response only when no response is active.")
+  skip_if_busy: "skip_if_busy",
+}
+
 @doc("An MCP tool available to a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool {
@@ -128,6 +197,9 @@ model VoiceAgentMcpTool {
 
   @doc("The URL for the MCP server.")
   server_url?: url;
+
+  @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle` so the agent continues after the tool call completes.")
+  response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.when_idle;
 }
 
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")

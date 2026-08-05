@@ -49861,6 +49861,30 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    LlmGeneratedVoiceGreetingConfig:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        type:
+          type: string
+          enum:
+            - llm_generated
+        prompt:
+          type: string
+          minLength: 1
+          description: The Handlebars prompt that guides the opening turn.
+        tool_choice:
+          $ref: '#/components/schemas/VoiceAgentToolChoice'
+          description: The tool-selection policy for the opening response. Defaults to `none`.
+          default: none
+      allOf:
+        - $ref: '#/components/schemas/VoiceGreetingConfig'
+      description: A greeting authored by the session model from a scoped opening-turn prompt.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     LoraConfig:
       type: object
       properties:
@@ -80531,6 +80555,26 @@ components:
             - Http
             - Grpc
       description: The transport protocol for telemetry export.
+    TemplateVoiceGreetingConfig:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - template
+        text:
+          type: string
+          minLength: 1
+          description: The Handlebars text template spoken at session start.
+      allOf:
+        - $ref: '#/components/schemas/VoiceGreetingConfig'
+      description: A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -81373,6 +81417,9 @@ components:
         instructions:
           type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
+        greeting:
+          $ref: '#/components/schemas/VoiceGreetingConfig'
+          description: Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.
         audio:
           $ref: '#/components/schemas/VoiceAudioConfig'
           description: |-
@@ -81398,6 +81445,13 @@ components:
             The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,
             `system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,
             `azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly.
+        tool_choice:
+          $ref: '#/components/schemas/VoiceAgentToolChoice'
+          description: |-
+            How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+            `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+            Defaults to `auto`.
+          default: auto
         structured_inputs:
           type: object
           unevaluatedProperties:
@@ -81417,6 +81471,19 @@ components:
         The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
         managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
         that is not defined in this specification. Every create or update produces a new immutable version.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentMcpResponseScheduling:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - silent
+            - when_idle
+            - interrupt
+            - skip_if_busy
+      description: When an MCP invocation creates a follow-up response. Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -81482,6 +81549,10 @@ components:
           type: string
           format: uri
           description: The URL for the MCP server.
+        response_scheduling:
+          $ref: '#/components/schemas/VoiceAgentMcpResponseScheduling'
+          description: When the MCP invocation creates a follow-up response. Defaults to `when_idle` so the agent continues after the tool call completes.
+          default: when_idle
       description: An MCP tool available to a voice agent.
       x-ms-foundry-meta:
         required_previews:
@@ -81554,6 +81625,15 @@ components:
         A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,
         service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
         `azure_ai_search` are provided through a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentToolChoice:
+      oneOf:
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceFunction'
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceMCP'
+      description: Tool-selection behavior for a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -82283,6 +82363,23 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceConversationItem'
       description: A function call output item.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceGreetingConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The greeting mode.
+      discriminator:
+        propertyName: type
+        mapping:
+          template: '#/components/schemas/TemplateVoiceGreetingConfig'
+          llm_generated: '#/components/schemas/LlmGeneratedVoiceGreetingConfig'
+      description: Session-start greeting configuration for a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
