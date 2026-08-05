@@ -1,5 +1,5 @@
 id: pr.stale
-name: GitOps.PullRequestIssueManagement
+name: Stale PR
 description: Mark and close stale pull requests
 owner:
 resource: repository
@@ -10,9 +10,8 @@ configuration:
     scheduledSearches:
       - description: Mark PRs with no activity for 14 days as stale
         frequencies:
-          - weekday:
-              day: Monday
-              time: 13:0
+          - daily:
+              time: 13:00
         filters:
           - isPullRequest
           - isOpen
@@ -31,9 +30,8 @@ configuration:
 
       - description: Close PRs that have been stale for 14 more days (28 days total)
         frequencies:
-          - weekday:
-              day: Monday
-              time: 13:0
+          - daily:
+              time: 13:00
         filters:
           - isPullRequest
           - isOpen

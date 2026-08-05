@@ -406,7 +406,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements including terminal states, transition rules, invalid values, and format-specific guidance.
 
 - A resource with async PUT or PATCH **MUST** have a `provisioningState` property (readOnly) with terminal states `Succeeded`, `Failed`, and `Canceled` (single 'l'). It represents only the latest LRO status, not resource health. POST actions do **not** affect it.
-  (Also enforced by: `ProvisioningStateMustBeReadOnly` linter rule — but only checks readOnly, not terminal state completeness)
+  (Also enforced by: `ProvisioningStateMustBeReadOnly` linter rule — but only checks readOnly, not terminal state completeness). When this rule is suppressed or fails LintDiff on a TypeSpec project, recommend the emitter option `use-read-only-status-schema: true` in `tspconfig.yaml` — see [`provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md), section "`ProvisioningStateMustBeReadOnly` -- Emitter Workaround".
 - If a user includes `provisioningState` in a PUT request body, the RP **MUST** ignore it if the value matches, or reject with `400 Bad Request` if it does not.
 
 ### 6.6 `202` Response and Polling Headers (RPC-Async-V1-07, RPC-Async-V1-06, RPC-Async-V1-14)
@@ -909,6 +909,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - The `name` property in the `checkNameAvailability` request **MUST** have `pattern` and `maxLength` constraints matching the target resource type's name validation rules.
 - At minimum, the `name` field **SHOULD** be constrained to valid ARM resource name characters (alphanumeric, hyphens, underscores, periods). Example: `"pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,259}$"`, `"maxLength": 260`.
+- The `pattern` constraint **MUST** use allowlist (positive character class) syntax. Denylist (negated character class `[^...]`) syntax **MUST NOT** be used as the primary character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A denylist such as `^[^<>%&:\\?/]+$` permits emoji, control characters, and non-Latin scripts that the service almost certainly rejects. Severity: **Blocking** for new properties/parameters; **Warning** for existing ones. See [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md) for detection guidance, the severity matrix, and fix examples.
 - If a spec defines a custom `checkNameAvailability` request model with a bare `string` `name` field (no `pattern`, no `maxLength`), flag it as a **security concern** and instruct the author to add constraints.
 - **Why:** Unconstrained string inputs to backend queries are a SQL/NoSQL injection risk. Input validation in the spec provides client-side SDK validation and signals to implementers that the field requires server-side sanitization.
 
@@ -1151,6 +1152,8 @@ When reviewing ARM resource-manager swagger files, verify:
 
 - ✅ `checkNameAvailability` uses common-types `CheckNameAvailabilityRequest` / `CheckNameAvailabilityResponse` — not custom request/response models (CNA-003)
 - ✅ `name` field has `pattern` and `maxLength` constraints — not a bare unconstrained string (CNA-004)
+- ✅ `name` field `pattern` uses allowlist syntax (positive character class) — not denylist (`[^...]`) (OAPI-PATTERN-ALLOWLIST, CNA-004)
+- ✅ All `pattern` constraints across path parameters, query parameters, and body properties use allowlist syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new, Warning for existing
 
 ### Tenant-Level APIs
 

@@ -2,7 +2,7 @@
  * User could choose to ignore certain difference report
  */
 
-import { OpenAPI2Document } from "@azure-tools/typespec-autorest";
+import { type OpenAPI2Document } from "@azure-tools/typespec-autorest";
 
 const ignoreList: Set<string> = new Set();
 
