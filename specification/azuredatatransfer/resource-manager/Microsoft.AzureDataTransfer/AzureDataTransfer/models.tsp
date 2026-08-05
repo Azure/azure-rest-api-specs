@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.flowprofile.tsp";
+import "./main.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -846,49 +847,6 @@ model PipelineProperties {
    * Status of the current pipeline
    */
   status?: PipelineStatus;
-}
-
-/**
- * Connection body inside a pipeline
- */
-model PipelineConnection {
-  ...Record<unknown>;
-
-  /**
-   * Connection id inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /**
-   * Connection name inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Connection type inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Connection location inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Connection etag inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**
