@@ -68,6 +68,7 @@ model RecoveryPlanListResult is ResourceListResult<RecoveryPlan>;
 @armResourceOperations
 @doc("Actions for managing Recovery Orchestration Plans.")
 interface RecoveryPlanActions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action finalizes the recovery orchestration plan, ensuring all necessary configurations are in place.")
@@ -88,6 +89,7 @@ interface RecoveryPlanActions {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for operations like failover and reprotect, ensuring it meets the necessary criteria.")
@@ -265,6 +267,7 @@ interface RecoveryJobs {
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<RecoveryJob, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
@@ -278,6 +281,7 @@ interface RecoveryJobs {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
@@ -290,6 +294,7 @@ interface RecoveryJobs {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
@@ -303,6 +308,7 @@ interface RecoveryJobs {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
@@ -315,6 +321,7 @@ interface RecoveryJobs {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "FIXME: The action encodes ArmResponse<ErrorResponse> as the final result; determine the intended success payload before replacing the response envelope."
   @route(ServiceGroupRoute)
   @post
   @doc("This action retries the ongoing recovery orchestration job for resources that failed in previous attempts.")
