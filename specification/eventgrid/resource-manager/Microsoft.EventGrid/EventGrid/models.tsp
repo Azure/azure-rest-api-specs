@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -614,6 +615,24 @@ union PublicNetworkAccess {
    * SecuredByPerimeter
    */
   SecuredByPerimeter: "SecuredByPerimeter",
+}
+
+/**
+ * Specifies the IP address type for the namespace.
+ */
+@added(Versions.v2026_06_15_preview)
+union IpAddressType {
+  string,
+
+  /**
+   * The namespace supports IPv4 only. This is the default.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The namespace supports both IPv4 and IPv6 (dual-stack).
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -3568,6 +3587,12 @@ model NamespaceProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   /**
+   * This property specifies the IP address type for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
   @identifiers(#[])
@@ -4012,6 +4037,12 @@ model NamespaceUpdateParameterProperties {
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PubSub.NamespaceUpdateParameterProperties.InboundIpRules" />
    */
   publicNetworkAccess?: PublicNetworkAccess;
+
+  /**
+   * This property specifies the IP address type for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.

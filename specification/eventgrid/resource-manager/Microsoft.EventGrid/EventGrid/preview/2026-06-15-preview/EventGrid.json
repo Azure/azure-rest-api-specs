@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-11-15-preview",
+    "version": "2026-06-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -14967,6 +14967,30 @@
         ]
       }
     },
+    "IpAddressType": {
+      "type": "string",
+      "description": "Specifies the IP address type for the namespace.",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The namespace supports IPv4 only. This is the default."
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "The namespace supports both IPv4 and IPv6 (dual-stack)."
+          }
+        ]
+      }
+    },
     "IsNotNullAdvancedFilter": {
       "type": "object",
       "description": "IsNotNull Advanced Filter.",
@@ -15328,6 +15352,10 @@
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "This determines if traffic is allowed over public network. By default it is enabled.\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PubSub.NamespaceProperties.InboundIpRules\" />"
         },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "This property specifies the IP address type for the namespace."
+        },
         "inboundIpRules": {
           "type": "array",
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -15684,6 +15712,10 @@
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "This determines if traffic is allowed over public network. By default it is enabled.\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PubSub.NamespaceUpdateParameterProperties.InboundIpRules\" />"
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "This property specifies the IP address type for the namespace."
         },
         "inboundIpRules": {
           "type": "array",
