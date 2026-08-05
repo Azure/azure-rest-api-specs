@@ -856,7 +856,7 @@ model AgentPoolNetworkProfile {
   nodePublicIPTags?: IPTag[];
 
   /**
-   * The resource IDs of public IP prefixes for node public IPs. At most one IPv4 and one IPv6 prefix may be specified. Order does not matter; the RP determines IP version from the referenced resource's publicIPAddressVersion. Requires enableNodePublicIP to be true on the agent pool. Mutually exclusive with the top-level nodePublicIPPrefixID property. Immutable after node pool creation. To change prefixes, delete and recreate the node pool. For more information, see https://aka.ms/aks/ipv6-ilpip
+   * Resource IDs of public IP prefixes (Microsoft.Network/publicIPPrefixes) used to assign instance-level public IPs to nodes. At most two entries: one IPv4 prefix and one IPv6 prefix. The IPv6 prefix requires a dual-stack cluster (ipFamilies contains IPv6). Immutable after node-pool creation. For more information, see https://aka.ms/aks/ipv6-ilpip
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2026_07_01)
