@@ -493,8 +493,8 @@ model OptimizationJobResult {
   @doc("Candidate ID of the highest-scoring candidate found during optimization.")
   best?: string;
 
-  @doc("All evaluated candidates including baseline. Excludes mutation payloads; fetch full detail via GET /candidates/{id}.")
-  candidates?: CandidateSummary[];
+  @doc("All candidate IDs produced by this job, in evaluation order. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.")
+  candidate_ids?: string[];
 
   @doc("Aggregate token usage per layer × model.")
   token_usage?: TokenUsageEntry[];
