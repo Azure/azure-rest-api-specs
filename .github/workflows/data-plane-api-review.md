@@ -1,5 +1,5 @@
 ---
-description: "Data-Plane API Review: agentic review of data-plane TypeSpec against the Azure REST API Guidelines"
+description: "Data-Plane API Review: agentic review of TypeSpec data-plane APIs against the Azure REST API Guidelines"
 on:
   pull_request_target:
     types: [labeled]
@@ -121,17 +121,28 @@ run-specific context and the constraints particular to running unattended.
    determines what you may report at all. Anything marked 🔒 Linted or
    🚫 Runtime is off-limits regardless of how obviously wrong it looks.
 
-2. **Scope gate.** Review only changed files matching
-   `specification/**/data-plane/**/*.tsp`. If the PR changes none, your entire
-   output is:
+2. **Scope gate.** First identify changed TypeSpec data-plane projects under
+   `specification/`. Do not require a `data-plane` path segment: newer projects
+   commonly use `specification/<area>/<service>/`, while older projects use
+   `specification/<service>/data-plane/`. Exclude projects under
+   `resource-manager/`.
+
+   For each project with `.tsp` source, review the changed `.tsp` files plus its
+   `tspconfig.yaml` and other related TypeSpec project files needed to understand
+   the change. Do not review any `.json` Swagger/OpenAPI files from that project;
+   they are generated output and would duplicate review of the TypeSpec source.
+
+   If the PR changes no TypeSpec data-plane project, your entire output is:
 
    > _Automated review by Copilot (data-plane API reviewer)._ No data-plane
    > TypeSpec changes in this pull request; nothing to review.
 
-   Do not review ARM specs, hand-written OpenAPI JSON, generated swagger,
-   `client.tsp`, or `tspconfig.yaml` emitter configuration.
+   Stop here. Do not dispatch the critic. Do not review ARM specs, hand-written
+   OpenAPI JSON, or generated Swagger.
 
-3. **Run the critic.** Dispatch the `Data-Plane API Review Critic` subagent per
+3. **Run the critic after the scope gate.** Only when the scope gate found a
+   TypeSpec data-plane project, dispatch the `Data-Plane API Review Critic`
+   subagent per
    [`.github/agents/protocols/data-plane-api-review-critic.protocol.md`](../agents/protocols/data-plane-api-review-critic.protocol.md)
    before producing your final output. Drop every finding it returns `FAIL` on
    -- there is no override path here. If the critic cannot be dispatched, say so
@@ -175,10 +186,10 @@ gate exists because the previous one produced evidence.
 | 3     | `[opened, synchronize]` + path filter + new-version-only guard       | Same as phase 2                      | --                                                                                                                                                                                             |
 | 4     | Paired `DataPlaneAPIReviewRequired` / `DataPlaneAPISignedOff` labels | Sign-off gate                        | Separate workstream; needs `.github/protected-labels.yml` and `labelling.js` integration.                                                                                                      |
 
-Phase 3 requires **two** guards, not one: a path filter on
-`specification/**/data-plane/**/*.tsp`, and a first-step check that the PR
-introduces a new API version directory. Commenting on a two-line fix to a
-shipped version is pure noise.
+Phase 3 requires **two** guards, not one: a path filter for TypeSpec data-plane
+projects under `specification/` (excluding `resource-manager/`), and a first-step
+check that the PR introduces a new API version directory. Commenting on a
+two-line fix to a shipped version is pure noise.
 
 ### Phase 0 qualifies the eval suite, not just the reviewer
 
