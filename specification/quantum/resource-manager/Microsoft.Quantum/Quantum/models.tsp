@@ -255,7 +255,7 @@ model TargetDescription {
   /**
    * The qubit number
    */
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   @minValue(1)
   @maxValue(100000)
@@ -264,7 +264,7 @@ model TargetDescription {
   /**
    * Target QIR profile
    */
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   targetProfile?: string;
 
@@ -272,7 +272,7 @@ model TargetDescription {
    * The metadata of this target.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved by ARM API review for metadata property."
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   metadata?: Record<unknown>;
 }
@@ -427,13 +427,13 @@ model WorkspaceResourceProperties {
   /**
    * ARM Resource Id of the storage account associated with this workspace.
    */
-  @typeChangedFrom(Versions.v2025_01_01_preview, string)
+  @typeChangedFrom(Versions.v2025_12_15_preview, string)
   storageAccount?: StorageAccountResourceId;
 
   /**
    * Whether this workspace is V1 or V2.
    */
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.v2025_12_15_preview)
   workspaceKind?: WorkspaceKind;
 
   /**
@@ -450,14 +450,14 @@ model WorkspaceResourceProperties {
   /**
    * Managed On Behalf Of configuration.
    */
-  @added(Versions.v2025_01_01_preview)
+  @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   /**
    * ARM Resource Id of the managed storage account associated with this workspace.
    */
-  @added(Versions.v2025_01_01_preview)
+  @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   managedStorageAccount?: StorageAccountResourceId;
 
@@ -465,14 +465,13 @@ model WorkspaceResourceProperties {
    * DEPRECATED: This field is deprecated and will be removed in future versions. Please use the quotas under providers instead.
    */
   @removed(Versions.v2025_12_15_preview)
-  @added(Versions.v2025_08_11_preview)
   quotas?: QuotaAllocations;
 }
 
 /**
  * Quota allocations with each field representing different quota type.
  */
-@added(Versions.v2025_08_11_preview)
+@added(Versions.v2025_12_15_preview)
 model QuotaAllocations {
   /**
    * Lifetime limit for standard priority jobs execution in minutes.
@@ -510,7 +509,7 @@ model TargetQuotaAllocations {
 /**
  * ARM Resource Id of a storage account.
  */
-@added(Versions.v2025_01_01_preview)
+@added(Versions.v2025_12_15_preview)
 scalar StorageAccountResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -626,7 +625,7 @@ model ApiKeys {
 }
 
 /** A Quantum Suite Offer that is available to a subscription. */
-@added(Versions.v2025_08_11_preview)
+@added(Versions.v2025_12_15_preview)
 model QuantumSuiteOffer
   is Azure.ResourceManager.ProxyResource<QuantumSuiteOfferProperties> {
   ...ResourceNameParameter<
@@ -638,7 +637,7 @@ model QuantumSuiteOffer
 
 /** Properties of a Quantum Suite Offer */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Only offers that are fully provisioned as available to subscriptions."
-@added(Versions.v2025_08_11_preview)
+@added(Versions.v2025_12_15_preview)
 model QuantumSuiteOfferProperties {
   /** The provider ID of the offer. */
   providerId: string;

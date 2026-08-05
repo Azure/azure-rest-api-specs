@@ -77,19 +77,19 @@ model TargetStatus {
   statusPage?: string;
 
   /** The qubit number. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   @minValue(1)
   @maxValue(100000)
   numQubits?: int32;
 
   /** Target QIR profile. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   targetProfile?: string;
 
   /** The metadata of this target. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   metadata?: {};
 }

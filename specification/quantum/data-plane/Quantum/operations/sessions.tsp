@@ -31,8 +31,8 @@ namespace Quantum.Workspace.Services {
 
     /** List all Sessions. */
     @sharedRoute
-    @added(QuantumWorkspaceAPIVersion.v2024_03_01_preview)
-    @removed(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+    @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
+    @removed(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
     list is ListOperation<SessionDetails>;
 
     /** List all Sessions. */
@@ -41,7 +41,7 @@ namespace Quantum.Workspace.Services {
       See https://github.com/Azure/typespec-azure/issues/494
       """
     @sharedRoute
-    @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+    @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
     listv2 is CustomListOperation<
       Resource = SessionDetails,
       Response = PagedSessionDetails,

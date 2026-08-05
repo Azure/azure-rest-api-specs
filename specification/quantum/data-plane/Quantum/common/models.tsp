@@ -22,7 +22,7 @@ model CustomFilterQueryParameter {
   /**
    * Filter the result list using the given expression
    */
-  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @query("filter")
   filter?: string;
 }
@@ -34,7 +34,7 @@ model CustomSkipQueryParameter {
   /**
    * The number of result items to skip.
    */
-  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @query("skip")
   skip?: int32;
 }
@@ -46,7 +46,7 @@ model CustomTopQueryParameter {
   /**
    * The number of jobs taken.
    */
-  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @query("top")
   top?: int32;
 }
@@ -58,7 +58,7 @@ model CustomOrderByQueryParameter {
   /**
    * The order of returned items.
    */
-  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @query("orderby")
   orderby?: string;
 }

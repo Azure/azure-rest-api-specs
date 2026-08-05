@@ -24,7 +24,7 @@ union ItemType {
 }
 
 /** Job priority levels. */
-@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+@added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
 union Priority {
   string,
 
@@ -36,7 +36,7 @@ union Priority {
 }
 
 /** The type of identity that created the item. */
-@added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+@added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
 union CreatedByType {
   string,
 
@@ -89,32 +89,32 @@ model ItemDetails {
   creationTime?: utcDateTime;
 
   /** The identity that created the item. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /** The type of identity that created the item. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   createdByType?: CreatedByType;
 
   /** The timestamp of the item last modification initiated by the customer. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   lastModifiedTime?: utcDateTime;
 
   /** The identity that last modified the item. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 
   /** The type of identity that last modified the item. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   lastModifiedByType?: CreatedByType;
 
   /** The last time the item was updated by the system. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   lastUpdatedTime?: utcDateTime;
 
@@ -135,21 +135,21 @@ model ItemDetails {
   errorData?: Errors.WorkspaceItemError;
 
   /** Priority of job or session. */
-  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   priority?: Priority;
 
   /** List of user-supplied tags associated with the job. */
-  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
 
   /** Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc. */
-  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   usage?: Usage;
 }
 
 /** Resource usage metrics represented as key-value pairs. Keys are provider-defined metric names (e.g. "standardMinutes", "shots") and values are the corresponding consumption amounts. The specific metrics available depend on the quantum provider and target used. */
-@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+@added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
 model Usage is Record<float64>;
