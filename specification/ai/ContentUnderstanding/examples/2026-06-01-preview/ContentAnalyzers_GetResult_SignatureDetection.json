@@ -11,14 +11,14 @@
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "status": "Succeeded",
         "result": {
-          "analyzerId": "signatureDetector",
+          "analyzerId": "prebuilt-layout",
           "apiVersion": "2026-06-01-preview",
           "createdAt": "2026-07-01T10:05:00.000Z",
           "contents": [
             {
               "kind": "document",
               "mimeType": "application/pdf",
-              "markdown": "# Contract Agreement\n\nThis agreement is entered into by...\n\n**Signature:** [signature-1]\n\n**Name:** John Smith\n**Date:** 2026-06-15",
+              "markdown": "# Contract Agreement\n\nSigned by John Smith.\n\nSignature:\n\nParticipant Signature\n\n\n![John Smith](signatures/1.1)\n\n\nPrinted Name: John Smith\n",
               "startPageNumber": 1,
               "endPageNumber": 1,
               "unit": "inch",
@@ -27,8 +27,7 @@
                 "pageCount": "1",
                 "author": "Legal Department",
                 "title": "Contract Agreement",
-                "createdAt": "2026-06-01T12:00:00Z",
-                "language": "en-US"
+                "language": "en"
               },
               "pages": [
                 {
@@ -39,21 +38,19 @@
               ],
               "signatures": [
                 {
-                  "id": "signature-1",
-                  "source": "D(1,2.5,8,5.5,8,5.5,9,2.5,9)",
+                  "id": "1.1",
+                  "source": "D(1,1.0718,2.5962,3.3784,2.592,3.3846,3.099,1.0781,3.1018)",
                   "span": {
-                    "offset": 72,
-                    "length": 13
-                  },
-                  "role": "pageFooter"
+                    "offset": 81,
+                    "length": 29
+                  }
                 }
               ]
             }
           ]
         },
         "usage": {
-          "documentPagesStandard": 1,
-          "contextualizationTokens": 850
+          "documentPagesStandard": 1
         }
       }
     }

@@ -606,7 +606,7 @@ model AnalysisContent {
   fields?: Record<ContentField>;
 
   @added(Versions.v2026_06_01_preview)
-  @doc("Document metadata extracted from the input, such as author, creation date, and title. Keys and values are strings. Only keys with extracted values are present.")
+  @doc("Metadata extracted from the input as string key/value pairs, such as author, title, creation date, or media properties. Keys and values are strings. Only keys with extracted values are present.")
   metadata?: Record<string>;
 }
 
