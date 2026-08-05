@@ -317,6 +317,9 @@
         "x-ms-examples": {
           "BenefitRecommendationsBillingAccountList": {
             "$ref": "./examples/BenefitRecommendationsByBillingAccount.json"
+          },
+          "BenefitRecommendationsBillingAccountForFSPList": {
+            "$ref": "./examples/BenefitRecommendationsByBillingAccountForFSP.json"
           }
         },
         "x-ms-pageable": {
@@ -3823,6 +3826,9 @@
         "x-ms-examples": {
           "SavingsPlanUtilizationSummaries-BillingAccount": {
             "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-BillingAccount.json"
+          },
+          "FlexSpendPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/BenefitUtilizationSummaries/FlexSpendPlan-BillingAccount.json"
           }
         },
         "x-ms-pageable": {
@@ -10419,13 +10425,15 @@
           "type": "number",
           "format": "decimal",
           "description": "The lower bound of the tier range for which recommendations are provided. Applicable only if recommendation is for 'FlexSpendPlan'.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "tierMax": {
           "type": "number",
           "format": "decimal",
           "description": "The upper bound of the tier range for which recommendations are provided. Applicable only if recommendation is for 'FlexSpendPlan'.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
