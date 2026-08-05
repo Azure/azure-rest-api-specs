@@ -1630,18 +1630,21 @@ model BlobStorageTokenStore {
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   managedIdentityResourceId?: string;
 }
 
@@ -2244,6 +2247,7 @@ model CertificateProperties {
    * The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   certificateType?: CertificateType;
 }
 
@@ -2313,6 +2317,7 @@ model DaprComponentProperties {
    * List of container app services that are bound to the Dapr component
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @identifiers(#["name"])
   serviceComponentBind?: DaprComponentServiceBinding[];
 
@@ -2450,6 +2455,7 @@ model ConnectedEnvironmentStorageProperties {
    * SMB storage properties
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   smb?: SmbStorage;
 }
 
@@ -2586,6 +2592,7 @@ model ManagedEnvironmentProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   privateLinkDefaultDomain?: string;
 
   /**
@@ -2603,12 +2610,14 @@ model ManagedEnvironmentProperties {
    * Environment level Application Insights configuration
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
@@ -2621,6 +2630,7 @@ model ManagedEnvironmentProperties {
    * The list of availability zones to use for managed environment
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   availabilityZones?: string[];
 
   /**
@@ -2686,6 +2696,7 @@ model ManagedEnvironmentProperties {
    * Disk encryption configuration for the Managed Environment.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 }
 
@@ -2760,6 +2771,7 @@ model LogAnalyticsConfiguration {
    * Boolean indicating whether to parse json string log into dynamic json columns
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   dynamicJsonColumns?: boolean;
 }
 
@@ -2925,6 +2937,7 @@ model WorkloadProfile {
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   enableFips?: boolean = false;
 
   /**
@@ -3591,6 +3604,7 @@ model HttpRouteTarget {
    * Weighted routing
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @minValue(0)
   @maxValue(100)
   weight?: int32;
@@ -3757,6 +3771,7 @@ model JobProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   runningState?: JobRunningState;
 
   /**
@@ -4111,6 +4126,7 @@ model JobPatchProperties {
    * The complex type of the extended location.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   extendedLocation?: ExtendedLocation;
 
   /**
@@ -4263,6 +4279,7 @@ model JobExecutionProperties {
    * Detailed status of the job execution.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   detailedStatus?: ExecutionStatus;
 
   /**
@@ -4270,6 +4287,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   reason?: string;
 
   /**
@@ -4277,6 +4295,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   message?: string;
 }
 
@@ -4734,12 +4753,14 @@ union ContainerType {
    * Shell
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Shell: "Shell",
 
   /**
    * NodeLTS
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   NodeLTS: "NodeLTS",
 }
 
@@ -5094,6 +5115,7 @@ union ActiveRevisionsMode {
    * Labels
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Labels: "Labels",
 }
 
@@ -5369,6 +5391,7 @@ union StorageType {
    * Smb
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Smb: "Smb",
 }
 
@@ -5769,12 +5792,14 @@ union JavaComponentType {
    * SpringCloudGateway
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   SpringCloudGateway: "SpringCloudGateway",
 
   /**
    * Nacos
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Nacos: "Nacos",
 }
 
@@ -5996,6 +6021,7 @@ model SessionPoolProperties {
    * The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   templateUpdateStatus?: TemplateUpdateStatus;
 
@@ -6021,6 +6047,7 @@ model SessionPoolProperties {
    * The MCP (Model Context Protocol) server settings of the session pool.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   mcpServerSettings?: McpServerSettings;
 }
 
@@ -6172,6 +6199,7 @@ model SessionContainer {
    */
   @identifiers(#["type"])
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   probes?: SessionProbe[];
 }
 
@@ -6580,6 +6608,7 @@ model GithubActionConfiguration {
    * Dockerfile path
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   dockerfilePath?: string;
 
   /**
@@ -6618,6 +6647,7 @@ model GithubActionConfiguration {
    * List of environment variables to be passed to the build.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @identifiers(#["name"])
   buildEnvironmentVariables?: EnvironmentVariable[];
 }
@@ -6816,6 +6846,7 @@ model ContainerAppProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   deploymentErrors?: string;
 
   /**
@@ -6839,6 +6870,7 @@ model ContainerAppProperties {
    * Container App auto patch configuration.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   patchingConfiguration?: ContainerAppPropertiesPatchingConfiguration;
 
   /**
@@ -6918,6 +6950,7 @@ model Configuration {
    * Required in labels revisions mode. Label to apply to newly created revision.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   targetLabel?: string;
 
   /**
@@ -6950,6 +6983,7 @@ model Configuration {
    * Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given. Value must be greater than 0 and less than or equal to 100.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @maxValue(100)
   @minValue(1)
   revisionTransitionThreshold?: int32;
@@ -7071,6 +7105,7 @@ model Ingress {
    * Whether an http app listens on http or https
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   targetPortHttpScheme?: IngressTargetPortHttpScheme;
 }
 
@@ -7310,6 +7345,7 @@ model Runtime {
    * .NET app configuration
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   dotnet?: RuntimeDotnet;
 }
 
@@ -7326,6 +7362,7 @@ model RuntimeJava {
    * Diagnostic capabilities achieved by java agent
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   javaAgent?: RuntimeJavaJavaAgent;
 }
 
@@ -7425,6 +7462,7 @@ model BaseContainer {
    * The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   imageType?: ImageType;
 
   /**
@@ -7484,6 +7522,7 @@ model ContainerResources {
    * Required GPU in cores for GPU based app, e.g. 1.0
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   gpu?: float64;
 }
 
@@ -7696,6 +7735,7 @@ model ServiceBind {
    * Type of the client to be used to connect to the service
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   clientType?: string;
 
   /**
@@ -7703,6 +7743,7 @@ model ServiceBind {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   customizedKeys?: Record<string>;
 }
 
@@ -8339,6 +8380,7 @@ model RevisionProperties {
    * List of labels assigned to this revision.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   labels?: string[];
 
@@ -8462,6 +8504,7 @@ model ReplicaContainer {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   debugEndpoint?: string;
 }
 
@@ -8806,6 +8849,7 @@ model WorkflowArtifacts {
  * Spring Cloud Gateway route definition
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model ScgRoute {
   /**
    * Id of the route
@@ -8848,6 +8892,7 @@ model JavaComponentIngress {
  * Spring Cloud Gateway properties.
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model SpringCloudGatewayComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.
@@ -8885,6 +8930,7 @@ model SpringBootAdminComponent extends JavaComponentProperties {
  * Nacos properties.
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model NacosComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.
