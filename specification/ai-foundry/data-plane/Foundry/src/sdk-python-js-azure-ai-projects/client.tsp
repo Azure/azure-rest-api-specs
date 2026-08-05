@@ -489,7 +489,7 @@ using Azure.AI.Projects;
 @@clientName(StateStores.deleteStateStore, "delete");
 @@clientName(StateStores.createStateStoreItem, "createItem");
 @@clientName(StateStores.listStateStoreItemKeys, "listKeys");
-@@clientName(StateStores.putStateStoreItem, "putItem");
+@@clientName(StateStores.putStateStoreItem, "setItem");
 @@clientName(StateStores.getStateStoreItem, "getItem");
 @@clientName(StateStores.deleteStateStoreItem, "deleteItem");
 
