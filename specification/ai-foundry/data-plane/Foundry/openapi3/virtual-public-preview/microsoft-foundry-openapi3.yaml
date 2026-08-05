@@ -44139,7 +44139,7 @@ components:
             - xiaoxiao
             - ximena
             - yunxi
-      description: A known Azure realtime-native voice name. This union is extensible, so additional service-supported names do not require an SDK update.
+      description: An Azure realtime-native voice name. Use one of the known names or another realtime-native voice supported by the selected model.
     AzureStandardVoice:
       type: object
       required:
@@ -81975,12 +81975,10 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -81988,7 +81986,6 @@ components:
         speech_duration_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -82030,12 +82027,10 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -82043,7 +82038,6 @@ components:
         speech_duration_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -82090,12 +82084,10 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -82103,7 +82095,6 @@ components:
         speech_duration_ms:
           type: integer
           format: int32
-          minimum: 0
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -82245,7 +82236,6 @@ components:
         timeout_ms:
           type: integer
           format: int32
-          minimum: 0
           description: The detection timeout in milliseconds.
       description: Semantic end-of-utterance detection configuration.
       x-ms-foundry-meta:

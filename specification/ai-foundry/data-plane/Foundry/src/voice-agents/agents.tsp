@@ -417,9 +417,11 @@ model VoiceEndOfUtteranceDetection {
   @doc("The sensitivity threshold.")
   threshold_level?: VoiceEndOfUtteranceThresholdLevel;
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The Voice Live wire contract encodes this duration as integer milliseconds."
   @doc("The detection timeout in milliseconds.")
-  @minValue(0)
-  timeout_ms?: int32;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  timeout_ms?: duration;
 }
 
 /** Options shared by Azure semantic voice activity detection configurations. */
@@ -429,20 +431,26 @@ alias VoiceAzureSemanticVadOptions = {
   @maxValue(1)
   threshold?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The Voice Live wire contract encodes this duration as integer milliseconds."
   @doc("Audio to include before detected speech, in milliseconds.")
-  @minValue(0)
-  prefix_padding_ms?: int32;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  prefix_padding_ms?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The Voice Live wire contract encodes this duration as integer milliseconds."
   @doc("Silence required to end speech detection, in milliseconds.")
-  @minValue(0)
-  silence_duration_ms?: int32;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  silence_duration_ms?: duration;
 
   @doc("Semantic end-of-utterance detection configuration.")
   end_of_utterance_detection?: VoiceEndOfUtteranceDetection;
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The Voice Live wire contract encodes this duration as integer milliseconds."
   @doc("Minimum speech duration required to trigger detection, in milliseconds.")
-  @minValue(0)
-  speech_duration_ms?: int32;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  speech_duration_ms?: duration;
 
   @doc("Whether filler words are removed from transcription.")
   remove_filler_words?: boolean = false;
@@ -680,7 +688,7 @@ model AzureRealtimeNativeVoice {
   name: AzureRealtimeNativeVoiceName;
 }
 
-@doc("A known Azure realtime-native voice name. This union is extensible, so additional service-supported names do not require an SDK update.")
+@doc("An Azure realtime-native voice name. Use one of the known names or another realtime-native voice supported by the selected model.")
 union AzureRealtimeNativeVoiceName {
   string,
 
