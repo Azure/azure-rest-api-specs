@@ -113,10 +113,6 @@ model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
   @minLength(1)
   prompt: string;
 
-  @doc("The optional Handlebars text template synthesized when generation fails before any greeting output.")
-  @minLength(1)
-  fallback_text?: string;
-
   @doc("The tool-selection policy for the opening response. Defaults to `none`.")
   tool_choice?: VoiceGreetingToolChoice = VoiceGreetingToolChoice.none;
 }
