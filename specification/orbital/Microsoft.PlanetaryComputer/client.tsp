@@ -1452,9 +1452,6 @@ model GetItemFeatureStatisticsOptions {
   @pattern(".*")
   itemId: string;
 
-  /** Request GeoJson body. */
-  @body body: Feature;
-
   ...AssetQueryParameters;
 
   /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
@@ -1718,6 +1715,9 @@ op getItemAssetStatisticsOverride(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemFeatureStatisticsOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** Request GeoJson body. */
+  @body body: Feature,
 
   /** The options for the item feature statistics query. */
   options: GetItemFeatureStatisticsOptions,
@@ -2019,3 +2019,3368 @@ op getSearchTilesetMetadataOverride(
 
 // Collection Thumbnail
 @@convenientAPI(Stac.getCollectionThumbnail, false, "csharp");
+
+// ============================================================================
+// Grouped-parameter overrides for protocol-only operations (microsoft/typespec#11214)
+// ============================================================================
+
+/** Options for the `getTile` operation. */
+model GetTileOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileByFormat` operation. */
+model GetTileByFormatOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileByScale` operation. */
+model GetTileByScaleOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileByScaleAndFormat` operation. */
+model GetTileByScaleAndFormatOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileNoTms` operation. */
+model GetTileNoTmsOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileNoTmsByFormat` operation. */
+model GetTileNoTmsByFormatOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileNoTmsByScale` operation. */
+model GetTileNoTmsByScaleOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getTileNoTmsByScaleAndFormat` operation. */
+model GetTileNoTmsByScaleAndFormatOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getItemPreview` operation. */
+model GetItemPreviewOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp).
+   */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  dstCrs?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 1024;
+
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getItemPreviewWithFormat` operation. */
+model GetItemPreviewWithFormatOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  dstCrs?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 1024;
+
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getItemBboxCrop` operation. */
+model GetItemBboxCropOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  destinationCrs?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getItemBboxCropWithDimensions` operation. */
+model GetItemBboxCropWithDimensionsOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Force output image width
+   */
+  @path
+  width: int32;
+
+  /**
+   * Force output image height
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  destinationCrs?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...MiscTileQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `cropFeature` operation. */
+model CropFeatureOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+  ...SubDatasetQueryParameters;
+
+  /**
+   * Output image format.
+   */
+  @query("format")
+  format?: TilerImageFormat;
+}
+
+/** Options for the `cropFeatureByFormat` operation. */
+model CropFeatureByFormatOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `cropFeatureWidthByHeight` operation. */
+model CropFeatureWidthByHeightOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: int32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getItemWmtsCapabilities` operation. */
+model GetItemWmtsCapabilitiesOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  ...ZoomQueryParameters;
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getItemWmtsCapabilitiesByTms` operation. */
+model GetItemWmtsCapabilitiesByTmsOptions {
+  ...AssetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  ...ZoomQueryParameters;
+  ...TileMatrixSetQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getCollectionTile` operation. */
+model GetCollectionTileOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileByFormat` operation. */
+model GetCollectionTileByFormatOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileByScale` operation. */
+model GetCollectionTileByScaleOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileByScaleAndFormat` operation. */
+model GetCollectionTileByScaleAndFormatOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileNoTms` operation. */
+model GetCollectionTileNoTmsOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileNoTmsByFormat` operation. */
+model GetCollectionTileNoTmsByFormatOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileNoTmsByScale` operation. */
+model GetCollectionTileNoTmsByScaleOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionTileNoTmsByScaleAndFormat` operation. */
+model GetCollectionTileNoTmsByScaleAndFormatOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getCollectionBboxCrop` operation. */
+model GetCollectionBboxCropOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  destinationCrs?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+}
+
+/** Options for the `getCollectionBboxCropWithDimensions` operation. */
+model GetCollectionBboxCropWithDimensionsOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Force output image width
+   */
+  @path
+  width: int32;
+
+  /**
+   * Force output image height
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  destinationCrs?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+}
+
+/** Options for the `cropCollectionFeature` operation. */
+model CropCollectionFeatureOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+
+  /**
+   * Output image format.
+   */
+  @query("format")
+  format?: TilerImageFormat;
+}
+
+/** Options for the `cropCollectionFeatureByFormat` operation. */
+model CropCollectionFeatureByFormatOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+}
+
+/** Options for the `cropCollectionFeatureWidthByHeight` operation. */
+model CropCollectionFeatureWidthByHeightOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: int32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+}
+
+/** Options for the `getCollectionWmtsCapabilities` operation. */
+model GetCollectionWmtsCapabilitiesOptions {
+  ...CollectionMosaicFilterQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  ...ZoomQueryParameters;
+  ...AssetQueryParameters;
+}
+
+/** Options for the `getCollectionWmtsCapabilitiesByTms` operation. */
+model GetCollectionWmtsCapabilitiesByTmsOptions {
+  ...CollectionMosaicFilterQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  ...ZoomQueryParameters;
+  ...AssetQueryParameters;
+}
+
+/** Options for the `getSearchTile` operation. */
+model GetSearchTileOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileByFormat` operation. */
+model GetSearchTileByFormatOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileByScale` operation. */
+model GetSearchTileByScaleOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileByScaleAndFormat` operation. */
+model GetSearchTileByScaleAndFormatOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileNoTms` operation. */
+model GetSearchTileNoTmsOptions {
+  /** Search Id (pgSTAC Search Hash) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileNoTmsByFormat` operation. */
+model GetSearchTileNoTmsByFormatOptions {
+  /** Search Id (pgSTAC Search Hash) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @query("scale")
+  scale?: int32;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileNoTmsByScale` operation. */
+model GetSearchTileNoTmsByScaleOptions {
+  /** Search Id (pgSTAC Search Hash) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @path scale: float32;
+
+  /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @query("format")
+  format?: TilerImageFormat;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchTileNoTmsByScaleAndFormat` operation. */
+model GetSearchTileNoTmsByScaleAndFormatOptions {
+  /** Search Id (pgSTAC Search Hash) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+  ...ZxyPathParameters;
+
+  /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /** Numeric scale factor for the tile. Higher values produce larger tiles */
+  @path scale: float32;
+
+  /** Output format for the tile or image (e.g., png, jpeg, webp) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  ...MosaicTileQueryParameters;
+  ...MiscTileQueryParameters;
+  ...TilePaddingQueryParameters;
+}
+
+/** Options for the `getSearchBboxCrop` operation. */
+model GetSearchBboxCropOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  destinationCrs?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+}
+
+/** Options for the `getSearchBboxCropWithDimensions` operation. */
+model GetSearchBboxCropWithDimensionsOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Force output image width
+   */
+  @path
+  width: int32;
+
+  /**
+   * Force output image height
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst_crs")
+  destinationCrs?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+}
+
+/** Options for the `cropSearchFeature` operation. */
+model CropSearchFeatureOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+
+  /**
+   * Output image format.
+   */
+  @query("format")
+  format?: TilerImageFormat;
+}
+
+/** Options for the `cropSearchFeatureByFormat` operation. */
+model CropSearchFeatureByFormatOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...DimensionsQueryParameters;
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+}
+
+/** Options for the `cropSearchFeatureWidthByHeight` operation. */
+model CropSearchFeatureWidthByHeightOptions {
+  ...AssetQueryParameters;
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: int32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @maxValue(2048)
+  @query("max_size")
+  maxSize?: int32 = 2048;
+
+  ...MosaicCropQueryParameters;
+  ...MiscTileQueryParameters;
+  ...DstCrsQueryParameter;
+}
+
+/** Options for the `getSearchWmtsCapabilities` operation. */
+model GetSearchWmtsCapabilitiesOptions {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @maxValueExclusive(4)
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  ...ZoomQueryParameters;
+  ...AssetQueryParameters;
+}
+
+/** Options for the `getSearchWmtsCapabilitiesByTms` operation. */
+model GetSearchWmtsCapabilitiesByTmsOptions {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @maxValueExclusive(4)
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  ...ZoomQueryParameters;
+  ...AssetQueryParameters;
+}
+
+/** Options for the `getLegend` operation. */
+model GetLegendOptions {
+  /**
+   * The name of the registered colormap to generate a legend for
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  colorMapName: string;
+
+  /**
+   * The output height of the legend image
+   */
+  @query("height")
+  height?: float32 = 0.15;
+
+  /**
+   * The output width of the legend image
+   */
+  @query("width")
+  width?: float32 = 5;
+
+  /**
+   * Number of items to trim from the start of the cmap
+   */
+  @query("trim_start")
+  trimStart?: int32;
+
+  /**
+   * Number of items to trim from the end of the cmap
+   */
+  @query("trim_end")
+  trimEnd?: int32;
+}
+
+/** Options for the `getCollectionThumbnail` operation. */
+model GetCollectionThumbnailOptions {
+  /**
+   * STAC Collection ID
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+}
+
+/** Options for the `getItemAvailableAssets` operation. */
+model GetItemAvailableAssetsOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...SubDatasetQueryParameters;
+}
+
+/** Options for the `getCollectionAssetsForTile` operation. */
+model GetCollectionAssetsForTileOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+}
+
+/** Options for the `getCollectionAssetsForTileNoTms` operation. */
+model GetCollectionAssetsForTileNoTmsOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...ZxyPathParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported (default:
+   * 'WebMercatorQuad')
+   */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+}
+
+/** Options for the `getCollectionAssetsForBbox` operation. */
+model GetCollectionAssetsForBboxOptions {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+}
+
+/** Options for the `getCollectionPointAssets` operation. */
+model GetCollectionPointAssetsOptions {
+  ...MosaicSearchQueryParameters;
+  ...CollectionMosaicFilterQueryParameters;
+  ...CollectionSubDatasetQueryParameters;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * Longitude
+   */
+  @path
+  longitude: float32;
+
+  /**
+   * Latitude
+   */
+  @path
+  latitude: float32;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+}
+
+/** Options for the `getSearchAssetsForTile` operation. */
+model GetSearchAssetsForTileOptions {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  /**
+   * STAC Collection Identifier
+   */
+  @query("collection")
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  ...ZxyPathParameters;
+}
+
+/** Options for the `getSearchBboxAssets` operation. */
+model GetSearchBboxAssetsOptions {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+}
+
+/** Options for the `getSearchAssetsForTileNoTms` operation. */
+model GetSearchAssetsForTileNoTmsOptions {
+  /** Search Id (pgSTAC Search Hash) */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+  ...ZxyPathParameters;
+
+  /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
+  @query("TileMatrixSetId")
+  tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+}
+
+/** Options for the `getSearchPointWithAssets` operation. */
+model GetSearchPointWithAssetsOptions {
+  ...MosaicSearchQueryParameters;
+  ...SubDatasetQueryParameters;
+
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Longitude
+   */
+  @path
+  longitude: float32;
+
+  /**
+   * Latitude
+   */
+  @path
+  latitude: float32;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord_crs")
+  coordinateReferenceSystem?: string;
+}
+
+/** Grouped-parameter override for `getTile`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTile request. */
+  options: GetTileOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileByFormat request. */
+  options: GetTileByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileByScale`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileByScaleOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileByScale request. */
+  options: GetTileByScaleOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileByScaleAndFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileByScaleAndFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileByScaleAndFormat request. */
+  options: GetTileByScaleAndFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileNoTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileNoTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileNoTms request. */
+  options: GetTileNoTmsOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileNoTmsByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileNoTmsByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileNoTmsByFormat request. */
+  options: GetTileNoTmsByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileNoTmsByScale`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileNoTmsByScaleOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileNoTmsByScale request. */
+  options: GetTileNoTmsByScaleOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getTileNoTmsByScaleAndFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileNoTmsByScaleAndFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getTileNoTmsByScaleAndFormat request. */
+  options: GetTileNoTmsByScaleAndFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getItemPreview`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemPreviewOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemPreview request. */
+  options: GetItemPreviewOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getItemPreviewWithFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemPreviewWithFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemPreviewWithFormat request. */
+  options: GetItemPreviewWithFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getItemBboxCrop`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemBboxCropOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemBboxCrop request. */
+  options: GetItemBboxCropOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getItemBboxCropWithDimensions`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemBboxCropWithDimensionsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemBboxCropWithDimensions request. */
+  options: GetItemBboxCropWithDimensionsOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropFeature`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropFeatureOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropFeature request. */
+  options: CropFeatureOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropFeatureByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropFeatureByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropFeatureByFormat request. */
+  options: CropFeatureByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropFeatureWidthByHeight`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropFeatureWidthByHeightOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropFeatureWidthByHeight request. */
+  options: CropFeatureWidthByHeightOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getItemWmtsCapabilities`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemWmtsCapabilitiesOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemWmtsCapabilities request. */
+  options: GetItemWmtsCapabilitiesOptions,
+): WmtsCapabilitiesXmlResponse;
+
+/** Grouped-parameter override for `getItemWmtsCapabilitiesByTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemWmtsCapabilitiesByTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemWmtsCapabilitiesByTms request. */
+  options: GetItemWmtsCapabilitiesByTmsOptions,
+): WmtsCapabilitiesXmlResponse;
+
+/** Grouped-parameter override for `getCollectionTile`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTile request. */
+  options: GetCollectionTileOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileByFormat request. */
+  options: GetCollectionTileByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileByScale`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileByScaleOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileByScale request. */
+  options: GetCollectionTileByScaleOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileByScaleAndFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileByScaleAndFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileByScaleAndFormat request. */
+  options: GetCollectionTileByScaleAndFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileNoTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileNoTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileNoTms request. */
+  options: GetCollectionTileNoTmsOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileNoTmsByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileNoTmsByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileNoTmsByFormat request. */
+  options: GetCollectionTileNoTmsByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileNoTmsByScale`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileNoTmsByScaleOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileNoTmsByScale request. */
+  options: GetCollectionTileNoTmsByScaleOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionTileNoTmsByScaleAndFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionTileNoTmsByScaleAndFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionTileNoTmsByScaleAndFormat request. */
+  options: GetCollectionTileNoTmsByScaleAndFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionBboxCrop`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionBboxCropOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionBboxCrop request. */
+  options: GetCollectionBboxCropOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionBboxCropWithDimensions`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionBboxCropWithDimensionsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionBboxCropWithDimensions request. */
+  options: GetCollectionBboxCropWithDimensionsOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropCollectionFeature`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropCollectionFeatureOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropCollectionFeature request. */
+  options: CropCollectionFeatureOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropCollectionFeatureByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropCollectionFeatureByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropCollectionFeatureByFormat request. */
+  options: CropCollectionFeatureByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropCollectionFeatureWidthByHeight`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropCollectionFeatureWidthByHeightOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropCollectionFeatureWidthByHeight request. */
+  options: CropCollectionFeatureWidthByHeightOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getCollectionWmtsCapabilities`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionWmtsCapabilitiesOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionWmtsCapabilities request. */
+  options: GetCollectionWmtsCapabilitiesOptions,
+): WmtsCapabilitiesXmlResponse;
+
+/** Grouped-parameter override for `getCollectionWmtsCapabilitiesByTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionWmtsCapabilitiesByTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionWmtsCapabilitiesByTms request. */
+  options: GetCollectionWmtsCapabilitiesByTmsOptions,
+): WmtsCapabilitiesXmlResponse;
+
+/** Grouped-parameter override for `getSearchTile`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTile request. */
+  options: GetSearchTileOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileByFormat request. */
+  options: GetSearchTileByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileByScale`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileByScaleOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileByScale request. */
+  options: GetSearchTileByScaleOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileByScaleAndFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileByScaleAndFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileByScaleAndFormat request. */
+  options: GetSearchTileByScaleAndFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileNoTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileNoTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileNoTms request. */
+  options: GetSearchTileNoTmsOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileNoTmsByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileNoTmsByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileNoTmsByFormat request. */
+  options: GetSearchTileNoTmsByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileNoTmsByScale`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileNoTmsByScaleOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileNoTmsByScale request. */
+  options: GetSearchTileNoTmsByScaleOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchTileNoTmsByScaleAndFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchTileNoTmsByScaleAndFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchTileNoTmsByScaleAndFormat request. */
+  options: GetSearchTileNoTmsByScaleAndFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchBboxCrop`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchBboxCropOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchBboxCrop request. */
+  options: GetSearchBboxCropOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchBboxCropWithDimensions`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchBboxCropWithDimensionsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchBboxCropWithDimensions request. */
+  options: GetSearchBboxCropWithDimensionsOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropSearchFeature`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropSearchFeatureOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropSearchFeature request. */
+  options: CropSearchFeatureOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropSearchFeatureByFormat`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropSearchFeatureByFormatOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropSearchFeatureByFormat request. */
+  options: CropSearchFeatureByFormatOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `cropSearchFeatureWidthByHeight`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropSearchFeatureWidthByHeightOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: Feature,
+
+  /** The options for the cropSearchFeatureWidthByHeight request. */
+  options: CropSearchFeatureWidthByHeightOptions,
+): TileResponse;
+
+/** Grouped-parameter override for `getSearchWmtsCapabilities`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchWmtsCapabilitiesOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchWmtsCapabilities request. */
+  options: GetSearchWmtsCapabilitiesOptions,
+): WmtsCapabilitiesXmlResponse;
+
+/** Grouped-parameter override for `getSearchWmtsCapabilitiesByTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchWmtsCapabilitiesByTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchWmtsCapabilitiesByTms request. */
+  options: GetSearchWmtsCapabilitiesByTmsOptions,
+): WmtsCapabilitiesXmlResponse;
+
+/** Grouped-parameter override for `getLegend`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getLegendOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getLegend request. */
+  options: GetLegendOptions,
+): ImagePngResponse;
+
+/** Grouped-parameter override for `getCollectionThumbnail`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionThumbnailOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionThumbnail request. */
+  options: GetCollectionThumbnailOptions,
+):
+  | ImagePngResponse
+  | ImageJpegResponse
+  | ImageJpgResponse
+  | ImageWebpResponse
+  | ImageJp2Response
+  | ImageTiffResponse
+  | ApplicationXbinaryResponse;
+
+/** Body-shaped override for `registerMosaicsSearch`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op registerMosaicsSearchOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The request body for the registerMosaicsSearch request. */
+  @body body: RegisterMosaic,
+): TilerMosaicSearchRegistrationResponse;
+
+/** Grouped-parameter override for `getItemAvailableAssets`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getItemAvailableAssetsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemAvailableAssets request. */
+  options: GetItemAvailableAssetsOptions,
+): AvailableAssets;
+
+/** Grouped-parameter override for `getCollectionAssetsForTile`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionAssetsForTileOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionAssetsForTile request. */
+  options: GetCollectionAssetsForTileOptions,
+): TilerAssetGeoJson[];
+
+/** Grouped-parameter override for `getCollectionAssetsForTileNoTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionAssetsForTileNoTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionAssetsForTileNoTms request. */
+  options: GetCollectionAssetsForTileNoTmsOptions,
+): ApplicationJsonResponse;
+
+/** Grouped-parameter override for `getCollectionAssetsForBbox`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionAssetsForBboxOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionAssetsForBbox request. */
+  options: GetCollectionAssetsForBboxOptions,
+): ApplicationJsonResponse;
+
+/** Grouped-parameter override for `getCollectionPointAssets`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getCollectionPointAssetsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getCollectionPointAssets request. */
+  options: GetCollectionPointAssetsOptions,
+): StacItemPointAsset[];
+
+/** Grouped-parameter override for `getSearchAssetsForTile`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchAssetsForTileOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchAssetsForTile request. */
+  options: GetSearchAssetsForTileOptions,
+): TilerAssetGeoJson[];
+
+/** Grouped-parameter override for `getSearchBboxAssets`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchBboxAssetsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchBboxAssets request. */
+  options: GetSearchBboxAssetsOptions,
+): ApplicationJsonResponse;
+
+/** Grouped-parameter override for `getSearchAssetsForTileNoTms`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchAssetsForTileNoTmsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchAssetsForTileNoTms request. */
+  options: GetSearchAssetsForTileNoTmsOptions,
+): ApplicationJsonResponse;
+
+/** Grouped-parameter override for `getSearchPointWithAssets`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getSearchPointWithAssetsOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getSearchPointWithAssets request. */
+  options: GetSearchPointWithAssetsOptions,
+): StacItemPointAsset[];
+
+@@override(Data.getTile, getTileOverride, "csharp");
+@@override(Data.getTileByFormat, getTileByFormatOverride, "csharp");
+@@override(Data.getTileByScale, getTileByScaleOverride, "csharp");
+@@override(
+  Data.getTileByScaleAndFormat,
+  getTileByScaleAndFormatOverride,
+  "csharp"
+);
+@@override(Data.getTileNoTms, getTileNoTmsOverride, "csharp");
+@@override(Data.getTileNoTmsByFormat, getTileNoTmsByFormatOverride, "csharp");
+@@override(Data.getTileNoTmsByScale, getTileNoTmsByScaleOverride, "csharp");
+@@override(
+  Data.getTileNoTmsByScaleAndFormat,
+  getTileNoTmsByScaleAndFormatOverride,
+  "csharp"
+);
+@@override(Data.getItemPreview, getItemPreviewOverride, "csharp");
+@@override(
+  Data.getItemPreviewWithFormat,
+  getItemPreviewWithFormatOverride,
+  "csharp"
+);
+@@override(Data.getItemBboxCrop, getItemBboxCropOverride, "csharp");
+@@override(
+  Data.getItemBboxCropWithDimensions,
+  getItemBboxCropWithDimensionsOverride,
+  "csharp"
+);
+@@override(Data.cropFeature, cropFeatureOverride, "csharp");
+@@override(Data.cropFeatureByFormat, cropFeatureByFormatOverride, "csharp");
+@@override(
+  Data.cropFeatureWidthByHeight,
+  cropFeatureWidthByHeightOverride,
+  "csharp"
+);
+@@override(
+  Data.getItemWmtsCapabilities,
+  getItemWmtsCapabilitiesOverride,
+  "csharp"
+);
+@@override(
+  Data.getItemWmtsCapabilitiesByTms,
+  getItemWmtsCapabilitiesByTmsOverride,
+  "csharp"
+);
+@@override(Data.getCollectionTile, getCollectionTileOverride, "csharp");
+@@override(
+  Data.getCollectionTileByFormat,
+  getCollectionTileByFormatOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionTileByScale,
+  getCollectionTileByScaleOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionTileByScaleAndFormat,
+  getCollectionTileByScaleAndFormatOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionTileNoTms,
+  getCollectionTileNoTmsOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionTileNoTmsByFormat,
+  getCollectionTileNoTmsByFormatOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionTileNoTmsByScale,
+  getCollectionTileNoTmsByScaleOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionTileNoTmsByScaleAndFormat,
+  getCollectionTileNoTmsByScaleAndFormatOverride,
+  "csharp"
+);
+@@override(Data.getCollectionBboxCrop, getCollectionBboxCropOverride, "csharp");
+@@override(
+  Data.getCollectionBboxCropWithDimensions,
+  getCollectionBboxCropWithDimensionsOverride,
+  "csharp"
+);
+@@override(Data.cropCollectionFeature, cropCollectionFeatureOverride, "csharp");
+@@override(
+  Data.cropCollectionFeatureByFormat,
+  cropCollectionFeatureByFormatOverride,
+  "csharp"
+);
+@@override(
+  Data.cropCollectionFeatureWidthByHeight,
+  cropCollectionFeatureWidthByHeightOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionWmtsCapabilities,
+  getCollectionWmtsCapabilitiesOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionWmtsCapabilitiesByTms,
+  getCollectionWmtsCapabilitiesByTmsOverride,
+  "csharp"
+);
+@@override(Data.getSearchTile, getSearchTileOverride, "csharp");
+@@override(Data.getSearchTileByFormat, getSearchTileByFormatOverride, "csharp");
+@@override(Data.getSearchTileByScale, getSearchTileByScaleOverride, "csharp");
+@@override(
+  Data.getSearchTileByScaleAndFormat,
+  getSearchTileByScaleAndFormatOverride,
+  "csharp"
+);
+@@override(Data.getSearchTileNoTms, getSearchTileNoTmsOverride, "csharp");
+@@override(
+  Data.getSearchTileNoTmsByFormat,
+  getSearchTileNoTmsByFormatOverride,
+  "csharp"
+);
+@@override(
+  Data.getSearchTileNoTmsByScale,
+  getSearchTileNoTmsByScaleOverride,
+  "csharp"
+);
+@@override(
+  Data.getSearchTileNoTmsByScaleAndFormat,
+  getSearchTileNoTmsByScaleAndFormatOverride,
+  "csharp"
+);
+@@override(Data.getSearchBboxCrop, getSearchBboxCropOverride, "csharp");
+@@override(
+  Data.getSearchBboxCropWithDimensions,
+  getSearchBboxCropWithDimensionsOverride,
+  "csharp"
+);
+@@override(Data.cropSearchFeature, cropSearchFeatureOverride, "csharp");
+@@override(
+  Data.cropSearchFeatureByFormat,
+  cropSearchFeatureByFormatOverride,
+  "csharp"
+);
+@@override(
+  Data.cropSearchFeatureWidthByHeight,
+  cropSearchFeatureWidthByHeightOverride,
+  "csharp"
+);
+@@override(
+  Data.getSearchWmtsCapabilities,
+  getSearchWmtsCapabilitiesOverride,
+  "csharp"
+);
+@@override(
+  Data.getSearchWmtsCapabilitiesByTms,
+  getSearchWmtsCapabilitiesByTmsOverride,
+  "csharp"
+);
+@@override(Data.getLegend, getLegendOverride, "csharp");
+@@override(
+  Stac.getCollectionThumbnail,
+  getCollectionThumbnailOverride,
+  "csharp"
+);
+@@override(Data.registerMosaicsSearch, registerMosaicsSearchOverride, "csharp");
+@@override(
+  Data.getItemAvailableAssets,
+  getItemAvailableAssetsOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionAssetsForTile,
+  getCollectionAssetsForTileOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionAssetsForTileNoTms,
+  getCollectionAssetsForTileNoTmsOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionAssetsForBbox,
+  getCollectionAssetsForBboxOverride,
+  "csharp"
+);
+@@override(
+  Data.getCollectionPointAssets,
+  getCollectionPointAssetsOverride,
+  "csharp"
+);
+@@override(
+  Data.getSearchAssetsForTile,
+  getSearchAssetsForTileOverride,
+  "csharp"
+);
+@@override(Data.getSearchBboxAssets, getSearchBboxAssetsOverride, "csharp");
+@@override(
+  Data.getSearchAssetsForTileNoTms,
+  getSearchAssetsForTileNoTmsOverride,
+  "csharp"
+);
+@@override(
+  Data.getSearchPointWithAssets,
+  getSearchPointWithAssetsOverride,
+  "csharp"
+);
+
+/** Options for the `getItemCollection` operation. */
+model GetItemCollectionOptions {
+  @doc("Catalog collection id")
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * The optional limit parameter recommends the number of items that should be present in the response document.
+   *
+   *  Minimum = 1. Maximum = 10000. Default = 10.
+   */
+  @query
+  limit?: int32;
+
+  /** Only features that have a geometry that intersects the bounding box are selected. */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("bbox")
+  @query(#{ explode: true })
+  boundingBox?: string[];
+
+  /** Either a date-time or an interval, open or closed. */
+  @query
+  datetime?: string;
+
+  /** Whether to sign the asset urls. */
+  @added(Versions.v2026_04_15)
+  @query("sign")
+  sign?: StacAssetUrlSigningMode;
+
+  /** The duration in minutes for which the signed url is valid. */
+  @added(Versions.v2026_04_15)
+  @query("duration")
+  durationInMinutes?: int32;
+
+  /** The token to use for signing the asset urls. */
+  @added(Versions.v2026_04_15)
+  @query("token")
+  token?: string;
+}
+
+/** Grouped-parameter override for `getItemCollection`. */
+op getItemCollectionOverride(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /** The options for the getItemCollection request. */
+  options: GetItemCollectionOptions,
+): StacItemCollection | Azure.Core.Foundations.ErrorResponse;
+
+@@override(Stac.getItemCollection, getItemCollectionOverride, "csharp");
+
+// === Mark options bags as input so they get public constructors ===
+@@usage(GetTileOptions, Usage.input, "csharp");
+@@usage(GetTileByFormatOptions, Usage.input, "csharp");
+@@usage(GetTileByScaleOptions, Usage.input, "csharp");
+@@usage(GetTileByScaleAndFormatOptions, Usage.input, "csharp");
+@@usage(GetTileNoTmsOptions, Usage.input, "csharp");
+@@usage(GetTileNoTmsByFormatOptions, Usage.input, "csharp");
+@@usage(GetTileNoTmsByScaleOptions, Usage.input, "csharp");
+@@usage(GetTileNoTmsByScaleAndFormatOptions, Usage.input, "csharp");
+@@usage(GetItemPreviewOptions, Usage.input, "csharp");
+@@usage(GetItemPreviewWithFormatOptions, Usage.input, "csharp");
+@@usage(GetItemBboxCropOptions, Usage.input, "csharp");
+@@usage(GetItemBboxCropWithDimensionsOptions, Usage.input, "csharp");
+@@usage(CropFeatureOptions, Usage.input, "csharp");
+@@usage(CropFeatureByFormatOptions, Usage.input, "csharp");
+@@usage(CropFeatureWidthByHeightOptions, Usage.input, "csharp");
+@@usage(GetItemWmtsCapabilitiesOptions, Usage.input, "csharp");
+@@usage(GetItemWmtsCapabilitiesByTmsOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileByFormatOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileByScaleOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileByScaleAndFormatOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileNoTmsOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileNoTmsByFormatOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileNoTmsByScaleOptions, Usage.input, "csharp");
+@@usage(GetCollectionTileNoTmsByScaleAndFormatOptions, Usage.input, "csharp");
+@@usage(GetCollectionBboxCropOptions, Usage.input, "csharp");
+@@usage(GetCollectionBboxCropWithDimensionsOptions, Usage.input, "csharp");
+@@usage(CropCollectionFeatureOptions, Usage.input, "csharp");
+@@usage(CropCollectionFeatureByFormatOptions, Usage.input, "csharp");
+@@usage(CropCollectionFeatureWidthByHeightOptions, Usage.input, "csharp");
+@@usage(GetCollectionWmtsCapabilitiesOptions, Usage.input, "csharp");
+@@usage(GetCollectionWmtsCapabilitiesByTmsOptions, Usage.input, "csharp");
+@@usage(GetSearchTileOptions, Usage.input, "csharp");
+@@usage(GetSearchTileByFormatOptions, Usage.input, "csharp");
+@@usage(GetSearchTileByScaleOptions, Usage.input, "csharp");
+@@usage(GetSearchTileByScaleAndFormatOptions, Usage.input, "csharp");
+@@usage(GetSearchTileNoTmsOptions, Usage.input, "csharp");
+@@usage(GetSearchTileNoTmsByFormatOptions, Usage.input, "csharp");
+@@usage(GetSearchTileNoTmsByScaleOptions, Usage.input, "csharp");
+@@usage(GetSearchTileNoTmsByScaleAndFormatOptions, Usage.input, "csharp");
+@@usage(GetSearchBboxCropOptions, Usage.input, "csharp");
+@@usage(GetSearchBboxCropWithDimensionsOptions, Usage.input, "csharp");
+@@usage(CropSearchFeatureOptions, Usage.input, "csharp");
+@@usage(CropSearchFeatureByFormatOptions, Usage.input, "csharp");
+@@usage(CropSearchFeatureWidthByHeightOptions, Usage.input, "csharp");
+@@usage(GetSearchWmtsCapabilitiesOptions, Usage.input, "csharp");
+@@usage(GetSearchWmtsCapabilitiesByTmsOptions, Usage.input, "csharp");
+@@usage(GetLegendOptions, Usage.input, "csharp");
+@@usage(GetCollectionThumbnailOptions, Usage.input, "csharp");
+@@usage(GetItemAvailableAssetsOptions, Usage.input, "csharp");
+@@usage(GetCollectionAssetsForTileOptions, Usage.input, "csharp");
+@@usage(GetCollectionAssetsForTileNoTmsOptions, Usage.input, "csharp");
+@@usage(GetCollectionAssetsForBboxOptions, Usage.input, "csharp");
+@@usage(GetCollectionPointAssetsOptions, Usage.input, "csharp");
+@@usage(GetSearchAssetsForTileOptions, Usage.input, "csharp");
+@@usage(GetSearchBboxAssetsOptions, Usage.input, "csharp");
+@@usage(GetSearchAssetsForTileNoTmsOptions, Usage.input, "csharp");
+@@usage(GetSearchPointWithAssetsOptions, Usage.input, "csharp");
+@@usage(GetItemCollectionOptions, Usage.input, "csharp");
