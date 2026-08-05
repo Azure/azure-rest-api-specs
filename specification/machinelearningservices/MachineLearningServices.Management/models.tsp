@@ -15447,6 +15447,12 @@ model Ray extends DistributionConfiguration {
   workerNodeAdditionalArgs?: string | null;
 
   /**
+   * Whether to expose the Ray Client server through the AML proxy on the default port 10001.
+   */
+  @added(Versions.v2026_07_15_preview)
+  enableRemoteAccessClientServer?: boolean;
+
+  /**
    * [Required] Specifies the type of distribution framework.
    */
   distributionType: "Ray";
