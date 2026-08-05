@@ -188,6 +188,7 @@ union ManagedPrivateEndpointConnectionStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedGrafanaListResponse is Azure.Core.Page<ManagedGrafana>;
 
 /**
@@ -790,6 +791,7 @@ model GrafanaAvailablePlugin {
 /**
  * The list of managed private endpoints of a grafana resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedPrivateEndpointModelListResponse
   is Azure.Core.Page<ManagedPrivateEndpointModel>;
 
@@ -836,6 +838,7 @@ model ManagedPrivateEndpointModelProperties {
   /**
    * The URL of the data store behind the private link service. It would be the URL in the Grafana data source configuration page without the protocol and port.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   privateLinkServiceUrl?: string;
 
@@ -876,6 +879,7 @@ model ManagedPrivateEndpointUpdateParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationFabricListResponse is Azure.Core.Page<IntegrationFabric>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -927,6 +931,7 @@ model IntegrationFabricPropertiesUpdateParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ManagedDashboardListResponse is Azure.Core.Page<ManagedDashboard>;
 
 /**
@@ -969,6 +974,7 @@ model ResourceSku {
 /**
  * The list response for dashboard definitions.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 model DashboardDefinitionListResponse is Azure.Core.Page<DashboardDefinition>;
 

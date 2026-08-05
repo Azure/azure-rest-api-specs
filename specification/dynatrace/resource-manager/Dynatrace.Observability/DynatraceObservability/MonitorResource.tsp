@@ -13,8 +13,10 @@ namespace Dynatrace.Observability;
 /**
  * Dynatrace Monitor Resource
  */
-model MonitorResource
-  is Azure.ResourceManager.TrackedResource<MonitorProperties, false> {
+model MonitorResource is Azure.ResourceManager.TrackedResource<
+  MonitorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MonitorResource,
     KeyName = "monitorName",
