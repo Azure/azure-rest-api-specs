@@ -7,6 +7,17 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
+
+/**
+ * A service group target for service group scoped recommendation operations.
+ */
+alias ServiceGroup = Extension.ExternalResource<
+  "Microsoft.Management",
+  "serviceGroups",
+  "serviceGroupName",
+  Description = "The name of the service group.",
+  ParentType = "Tenant"
+>;
 /**
  * Advisor Recommendation.
  */
@@ -56,6 +67,17 @@ interface ResourceRecommendationBases {
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.Subscription,
+    ResourceRecommendationBase,
+    RecommendationPatchPayload
+  >;
+
+  /**
+   * Update the state of a Recommendation in a service group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @patch(#{ implicitOptionality: false })
+  updateByServiceGroup is Extension.CustomPatchSync<
+    ServiceGroup,
     ResourceRecommendationBase,
     RecommendationPatchPayload
   >;
@@ -118,6 +140,13 @@ interface ResourceRecommendationBases {
        */
       @query("$skipToken")
       $skipToken?: string;
+
+      /**
+       * Controls whether all recommendations or only contextually prioritized recommendations are returned. The default is all.
+       */
+      @added(Versions.v2026_08_01_preview)
+      @query
+      mode?: RecommendationMode = RecommendationMode.All;
     },
     Error = ArmDefaultErrorResponse
   >;
