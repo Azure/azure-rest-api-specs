@@ -317,6 +317,9 @@
         "x-ms-examples": {
           "BenefitRecommendationsBillingAccountList": {
             "$ref": "./examples/BenefitRecommendationsByBillingAccount.json"
+          },
+          "BenefitRecommendationsBillingAccountForFSPList": {
+            "$ref": "./examples/BenefitRecommendationsByBillingAccountForFSP.json"
           }
         },
         "x-ms-pageable": {
@@ -3445,7 +3448,7 @@
     "/providers/microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
       "get": {
         "operationId": "BenefitUtilizationSummaries_ListByBillingProfileId",
-        "description": "Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.",
+        "description": "Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily', 'Monthly', 'FullTerm'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -3476,7 +3479,8 @@
             "enum": [
               "Hourly",
               "Daily",
-              "Monthly"
+              "Monthly",
+              "FullTerm"
             ],
             "x-ms-enum": {
               "name": "GrainParameter",
@@ -3490,12 +3494,17 @@
                 {
                   "name": "Daily",
                   "value": "Daily",
-                  "description": "Hourly grain corresponds to value per day."
+                  "description": "Daily grain corresponds to value per day."
                 },
                 {
                   "name": "Monthly",
                   "value": "Monthly",
-                  "description": "Hourly grain corresponds to value per month."
+                  "description": "Monthly grain corresponds to value per month."
+                },
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the full term."
                 }
               ]
             }
@@ -3503,7 +3512,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate. Filtering by properties/usageDate not applicable if utilization is for 'FlexSpendPlan' benefit as this benefit is applied at the full term level.",
             "required": false,
             "type": "string"
           }
@@ -3744,7 +3753,7 @@
     "/providers/microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
       "get": {
         "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
-        "description": "Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "description": "Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily', 'Monthly', 'FullTerm'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -3768,7 +3777,8 @@
             "enum": [
               "Hourly",
               "Daily",
-              "Monthly"
+              "Monthly",
+              "FullTerm"
             ],
             "x-ms-enum": {
               "name": "GrainParameter",
@@ -3782,12 +3792,17 @@
                 {
                   "name": "Daily",
                   "value": "Daily",
-                  "description": "Hourly grain corresponds to value per day."
+                  "description": "Daily grain corresponds to value per day."
                 },
                 {
                   "name": "Monthly",
                   "value": "Monthly",
-                  "description": "Hourly grain corresponds to value per month."
+                  "description": "Monthly grain corresponds to value per month."
+                },
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the entire term."
                 }
               ]
             }
@@ -3795,7 +3810,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate. Filtering by properties/usageDate not applicable if utilization is for 'FlexSpendPlan' benefit as this benefit is applied at the full term level.",
             "required": false,
             "type": "string"
           }
@@ -3817,6 +3832,9 @@
         "x-ms-examples": {
           "SavingsPlanUtilizationSummaries-BillingAccount": {
             "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-BillingAccount.json"
+          },
+          "FlexSpendPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/BenefitUtilizationSummaries/FlexSpendPlan-BillingAccount.json"
           }
         },
         "x-ms-pageable": {
@@ -4640,6 +4658,312 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "operationId": "BenefitUtilizationSummaries_ListBySpendPlanOrder",
+        "description": "Lists the spend plan utilization summaries for daily, monthly, and fullterm grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/usageDate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "grainParameter",
+            "in": "query",
+            "description": "Grain.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FullTerm",
+              "Daily",
+              "Monthly"
+            ],
+            "x-ms-enum": {
+              "name": "GrainParameter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the full term."
+                },
+                {
+                  "name": "Daily",
+                  "value": "Daily",
+                  "description": "Daily grain corresponds to value per day."
+                },
+                {
+                  "name": "Monthly",
+                  "value": "Monthly",
+                  "description": "Monthly grain corresponds to value per month."
+                }
+              ]
+            }
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend plan order ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FlexSpendPlanUtilizationSummaries": {
+            "$ref": "./examples/BenefitUtilizationSummaries/FlexSpendPlan-SpendPlanOrderId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/terms/{spendPlanId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "operationId": "BenefitUtilizationSummaries_ListBySpendPlanOrderAndSpendPlan",
+        "description": "Lists the spend plan utilization summaries for daily, monthly, and fullterm grain. grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/usageDate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "grainParameter",
+            "in": "query",
+            "description": "Grain.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Daily",
+              "Monthly",
+              "FullTerm"
+            ],
+            "x-ms-enum": {
+              "name": "GrainParameter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the full term."
+                },
+                {
+                  "name": "Daily",
+                  "value": "Daily",
+                  "description": "Daily grain corresponds to value per day."
+                },
+                {
+                  "name": "Monthly",
+                  "value": "Monthly",
+                  "description": "Monthly grain corresponds to value per month."
+                }
+              ]
+            }
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend plan order ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spendPlanId",
+            "in": "path",
+            "description": "Spend plan ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FlexSpendPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/FlexSpendPlan-SpendPlanOrderId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "operationId": "GenerateBenefitUtilizationSummariesReport_GenerateBySpendPlanOrderId",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided spend plan order.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend Plan Order ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "in": "body",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportBySpendPlanOrder": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportBySpendPlanOrder.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/terms/{spendPlanId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "operationId": "GenerateBenefitUtilizationSummariesReport_GenerateBySpendPlanId",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided spend plan.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend Plan Order ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spendPlanId",
+            "in": "path",
+            "description": "Spend Plan ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "in": "body",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportBySpendPlan": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportBySpendPlan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -5240,7 +5564,8 @@
       "enum": [
         "IncludedQuantity",
         "Reservation",
-        "SavingsPlan"
+        "SavingsPlan",
+        "FlexSpendPlan"
       ],
       "x-ms-enum": {
         "name": "BenefitKind",
@@ -5260,6 +5585,11 @@
             "name": "SavingsPlan",
             "value": "SavingsPlan",
             "description": "Benefit is SavingsPlan."
+          },
+          {
+            "name": "FlexSpendPlan",
+            "value": "FlexSpendPlan",
+            "description": "Benefit is Flexible Spend Plan."
           }
         ]
       }
@@ -5270,7 +5600,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/BenefitKind",
-          "description": "Reservation or SavingsPlan."
+          "description": "Reservation, SavingsPlan or FlexSpendPlan."
         }
       },
       "allOf": [
@@ -5412,7 +5742,7 @@
     },
     "BenefitUtilizationSummaryReportSchema": {
       "type": "string",
-      "description": "The CSV file from the reportUrl and secondaryReportUrl blob link will consist of the following columns of benefit utilization data. UtilizedPercentage will be 0 for savings plans reports and non data bricks reservations. Utilization percentages will be 0 for data bricks reservations.",
+      "description": "The CSV file from the reportUrl and secondaryReportUrl blob link will consist of the following columns of benefit utilization data. UtilizedPercentage will be 0 for savings plans reports and non data bricks reservations. Utilization percentages will be 0 for data bricks reservations. UtilizationPercentageByHour will be present for versions > 2023-06-01. UsedQuantity will be present for benefit type 'FlexSpendPlan'",
       "enum": [
         "Kind",
         "AvgUtilizationPercentage",
@@ -5422,7 +5752,9 @@
         "MaxUtilizationPercentage",
         "MinUtilizationPercentage",
         "UsageDate",
-        "UtilizedPercentage"
+        "UtilizedPercentage",
+        "UtilizationPercentageByHour",
+        "UsedQuantity"
       ],
       "x-ms-enum": {
         "name": "BenefitUtilizationSummaryReportSchema",
@@ -5463,6 +5795,14 @@
           {
             "name": "UtilizedPercentage",
             "value": "UtilizedPercentage"
+          },
+          {
+            "name": "UtilizationPercentageByHour",
+            "value": "UtilizationPercentageByHour"
+          },
+          {
+            "name": "UsedQuantity",
+            "value": "UsedQuantity"
           }
         ]
       }
@@ -7996,7 +8336,8 @@
       "enum": [
         "Hourly",
         "Daily",
-        "Monthly"
+        "Monthly",
+        "FullTerm"
       ],
       "x-ms-enum": {
         "name": "Grain",
@@ -8010,12 +8351,17 @@
           {
             "name": "Daily",
             "value": "Daily",
-            "description": "Hourly grain corresponds to value per day."
+            "description": "Daily grain corresponds to value per day."
           },
           {
             "name": "Monthly",
             "value": "Monthly",
-            "description": "Hourly grain corresponds to value per month."
+            "description": "Monthly grain corresponds to value per month."
+          },
+          {
+            "name": "FullTerm",
+            "value": "FullTerm",
+            "description": "FullTerm grain corresponds to value for the full term."
           }
         ]
       }
@@ -9529,19 +9875,53 @@
         "avgUtilizationPercentage": {
           "type": "number",
           "format": "decimal",
-          "description": "This is the average hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2026-08-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the avgUtilizationPercentage value will be equal to the average of the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day.",
+          "description": "This is the average hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2026-08-01 and usageDate < 2026-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the avgUtilizationPercentage value will be equal to the average of the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day.",
           "readOnly": true
         },
         "minUtilizationPercentage": {
           "type": "number",
           "format": "decimal",
-          "description": "This is the minimum hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2026-08-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the minUtilizationPercentage value will be equal to the smallest in the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day. If on the day 2022-10-18, the lowest utilization percentage was 10% at hour 4, then the value for the minUtilizationPercentage in the response will be 10%.",
+          "description": "This is the minimum hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2026-08-01 and usageDate < 2026-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the minUtilizationPercentage value will be equal to the smallest in the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day. If on the day 2022-10-18, the lowest utilization percentage was 10% at hour 4, then the value for the minUtilizationPercentage in the response will be 10%.",
           "readOnly": true
         },
         "maxUtilizationPercentage": {
           "type": "number",
           "format": "decimal",
-          "description": "This is the maximum hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2026-08-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the maxUtilizationPercentage value will be equal to the largest in the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day. If on the day 2022-10-18, the largest utilization percentage was 90% at hour 5, then the value for the maxUtilizationPercentage in the response will be 90%.",
+          "description": "This is the maximum hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2026-08-01 and usageDate < 2026-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the maxUtilizationPercentage value will be equal to the largest in the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day. If on the day 2022-10-18, the largest utilization percentage was 90% at hour 5, then the value for the maxUtilizationPercentage in the response will be 90%.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitUtilizationSummaryProperties"
+        }
+      ]
+    },
+    "FlexSpendPlanUtilizationSummary": {
+      "type": "object",
+      "description": "Flex spend plan utilization summary resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FlexSpendPlanUtilizationSummaryProperties",
+          "description": "Flex spend plan utilization summary properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitUtilizationSummary"
+        }
+      ],
+      "x-ms-discriminator-value": "FlexSpendPlan"
+    },
+    "FlexSpendPlanUtilizationSummaryProperties": {
+      "type": "object",
+      "description": "Flex spend plan utilization summary properties.",
+      "properties": {
+        "usedQuantity": {
+          "type": "number",
+          "format": "double",
+          "description": "This is the used quantity for the benefit ID.",
           "readOnly": true
         }
       },
@@ -10356,6 +10736,20 @@
           "format": "decimal",
           "description": "Estimated unused portion of the 'benefitCost'.",
           "readOnly": true
+        },
+        "tierMin": {
+          "type": "number",
+          "format": "double",
+          "description": "The lower bound of the tier range for which recommendations are provided. Applicable only if recommendation is for 'FlexSpendPlan'.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "tierMax": {
+          "type": "number",
+          "format": "double",
+          "description": "The upper bound of the tier range for which recommendations are provided. Applicable only if recommendation is for 'FlexSpendPlan'.",
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
@@ -10492,11 +10886,11 @@
       "properties": {
         "usageGrain": {
           "$ref": "#/definitions/Grain",
-          "description": "The grain of the usage. Supported values: 'Hourly'"
+          "description": "The grain of the usage. Supported values: 'Hourly' and 'FullTerm'."
         },
         "charges": {
           "type": "array",
-          "description": "On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.",
+          "description": "On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations for 'Hourly' usageGrain. For 'FullTerm' usageGrain, this will contain a single value which is the total projected on-demand charges for the entire term.",
           "items": {
             "type": "number",
             "format": "decimal"
