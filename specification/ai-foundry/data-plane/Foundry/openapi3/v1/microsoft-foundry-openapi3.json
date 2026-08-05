@@ -82147,6 +82147,10 @@
             "description": "How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,\n`required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.\nDefaults to `auto`.",
             "default": "auto"
           },
+          "handoff": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffGraphConfig",
+            "description": "A customer-authored handoff graph. The voice agent definition is the implicit `$entrypoint`; configured nodes\nprovide specialist behavior, and directed edges declare the server-managed transfer routes."
+          },
           "structured_inputs": {
             "type": "object",
             "unevaluatedProperties": {
@@ -82161,6 +82165,386 @@
           }
         },
         "description": "The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a\nmanaged speech-to-speech experience. The realtime voice session is established through a separate connect operation\nthat is not defined in this specification. Every create or update produces a new immutable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffEdgeConfig": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "target",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The edge identifier."
+          },
+          "source": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffEndpointId",
+            "description": "The source node identifier."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffEndpointId",
+            "description": "The target node identifier."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "A non-empty description used by the model to select this transition."
+          },
+          "cancel_on_interruption": {
+            "type": "boolean",
+            "description": "Whether user interruption cancels the transition.",
+            "default": false
+          },
+          "delay_ms": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10000,
+            "description": "The delay before the target behavior is committed, in milliseconds.",
+            "default": 0
+          },
+          "transfer_message": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional text synthesized while transferring."
+          },
+          "target_response": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffTargetResponse",
+            "description": "Whether the target automatically creates a response after transfer.",
+            "default": "auto"
+          }
+        },
+        "description": "A directed transition between handoff nodes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffEndpointId": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "$entrypoint"
+            ]
+          }
+        ],
+        "description": "A source or target in the handoff graph.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffGraphConfig": {
+        "type": "object",
+        "required": [
+          "nodes",
+          "edges"
+        ],
+        "properties": {
+          "max_transfers": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "The maximum number of successful transfers in the session.",
+            "default": 16
+          },
+          "max_attempts": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "The maximum number of transfer attempts in the session. When omitted, the service uses `max_transfers`; when provided, it must be greater than or equal to `max_transfers`."
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffNodeConfig"
+            },
+            "maxItems": 31,
+            "description": "The explicitly configured handoff targets. The implicit `$entrypoint` is not repeated here."
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffEdgeConfig"
+            },
+            "minItems": 1,
+            "maxItems": 128,
+            "description": "The directed transitions between handoff nodes."
+          }
+        },
+        "description": "A customer-supplied handoff graph.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffId": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+        "description": "A case-sensitive identifier for a configured handoff node or edge."
+      },
+      "VoiceAgentHandoffNodeConfig": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "config"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffId",
+            "description": "The node identifier."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A non-empty description used to select this target."
+          },
+          "config": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeSessionConfig",
+            "description": "Session behavior applied after transferring to this node."
+          }
+        },
+        "description": "A configured handoff target and its node-scoped behavior.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffNodeSessionConfig": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The target model, when different from the current node."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions applied at the target node."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "Tools available at the target node."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/VoiceAgentToolChoice",
+            "description": "Tool-selection behavior at the target node."
+          },
+          "voice": {
+            "$ref": "#/components/schemas/VoiceAgentVoice",
+            "description": "The target node's voice."
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 2,
+            "description": "The target node's sampling temperature."
+          },
+          "max_response_output_tokens": {
+            "$ref": "#/components/schemas/VoiceAgentMaxOutputTokens",
+            "description": "The target node's maximum output-token count."
+          },
+          "reasoning_effort": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffReasoningEffort",
+            "description": "The reasoning effort used at the target node."
+          },
+          "voice_adaptation": {
+            "$ref": "#/components/schemas/VoiceAgentVoiceAdaptation",
+            "description": "Voice adaptation applied at the target node."
+          },
+          "interim_response": {
+            "$ref": "#/components/schemas/VoiceAgentInterimResponse",
+            "description": "Interim-response settings applied at the target node."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether the target model may call multiple tools in parallel."
+          }
+        },
+        "description": "Session behavior applied at a handoff target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffReasoningEffort": {
+        "type": "string",
+        "enum": [
+          "none",
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "description": "Reasoning effort accepted by a handoff target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentHandoffTargetResponse": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "none"
+        ],
+        "description": "Whether a handoff target automatically creates a response after transfer.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInterimResponse": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentStaticInterimResponseConfig"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentLlmInterimResponseConfig"
+          }
+        ],
+        "description": "Interim-response settings for latency and tool execution.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInterimResponseConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The interim-response implementation."
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentInterimResponseTrigger"
+            },
+            "description": "Conditions that may trigger one interim response.",
+            "default": [
+              "latency"
+            ]
+          },
+          "latency_threshold_ms": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "The latency threshold in milliseconds.",
+            "default": 2000
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "llm_interim_response": "#/components/schemas/VoiceAgentLlmInterimResponseConfig",
+            "static_interim_response": "#/components/schemas/VoiceAgentStaticInterimResponseConfig"
+          }
+        },
+        "description": "Fields shared by interim-response configurations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInterimResponseTrigger": {
+        "type": "string",
+        "enum": [
+          "latency",
+          "tool"
+        ],
+        "description": "A condition that may trigger an interim response.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLlmInterimResponseConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "llm_interim_response"
+            ]
+          },
+          "model": {
+            "type": "string",
+            "description": "The model used to generate interim responses.",
+            "default": "gpt-4.1-mini"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Optional instructions for generating interim responses."
+          },
+          "max_completion_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The maximum completion-token count for an interim response.",
+            "default": 50
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
+          }
+        ],
+        "description": "An interim response generated by a language model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentMaxOutputTokens": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentPositiveOutputTokenCount"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "inf"
+            ]
+          }
+        ],
+        "description": "The maximum output-token count for a handoff target.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -82384,6 +82768,44 @@
           ]
         }
       },
+      "VoiceAgentPositiveOutputTokenCount": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "description": "A positive maximum output-token count."
+      },
+      "VoiceAgentStaticInterimResponseConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "static_interim_response"
+            ]
+          },
+          "texts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Candidate text values for the interim response."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
+          }
+        ],
+        "description": "A static interim response selected from configured text.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentTool": {
         "anyOf": [
           {
@@ -82587,6 +83009,27 @@
           }
         ],
         "description": "A typed voice configuration accepted by a voice agent."
+      },
+      "VoiceAgentVoiceAdaptation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "auto"
+            ],
+            "description": "The adaptation strategy. Always `auto`."
+          }
+        },
+        "description": "Voice-optimized instruction adaptation settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAssistantMessageItem": {
         "type": "object",
