@@ -295,6 +295,7 @@ using Microsoft.ScVmm;
   "csharp"
 );
 
+// csharp Update_Tags methods use the same class ScVmmResourcePatch as parameter for all resources.
 /**
  * Object containing tags updates for patch operations.
  */
@@ -325,5 +326,41 @@ model ScVmmResourcePatch
 @@alternateType(
   VirtualNetworks.update::parameters.properties,
   ScVmmResourcePatch,
+  "csharp"
+);
+
+/** C#-specific create-checkpoint operation with an optional convenience parameter. */
+op virtualMachineInstancesCreateCheckpointForCsharp is Azure.ResourceManager.ArmResourceActionNoResponseContentAsync<
+  VirtualMachineInstance,
+  VirtualMachineCreateCheckpoint,
+  OptionalRequestBody = true
+>;
+@@override(
+  VirtualMachineInstances.createCheckpoint,
+  virtualMachineInstancesCreateCheckpointForCsharp,
+  "csharp"
+);
+
+/** C#-specific delete-checkpoint operation with an optional convenience parameter. */
+op virtualMachineInstancesDeleteCheckpointForCsharp is Azure.ResourceManager.ArmResourceActionNoResponseContentAsync<
+  VirtualMachineInstance,
+  VirtualMachineDeleteCheckpoint,
+  OptionalRequestBody = true
+>;
+@@override(
+  VirtualMachineInstances.deleteCheckpoint,
+  virtualMachineInstancesDeleteCheckpointForCsharp,
+  "csharp"
+);
+
+/** C#-specific restore-checkpoint operation with an optional convenience parameter. */
+op virtualMachineInstancesRestoreCheckpointForCsharp is Azure.ResourceManager.ArmResourceActionNoResponseContentAsync<
+  VirtualMachineInstance,
+  VirtualMachineRestoreCheckpoint,
+  OptionalRequestBody = true
+>;
+@@override(
+  VirtualMachineInstances.restoreCheckpoint,
+  virtualMachineInstancesRestoreCheckpointForCsharp,
   "csharp"
 );
