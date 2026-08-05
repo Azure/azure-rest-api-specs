@@ -163,7 +163,7 @@ suppressions:
   - code: PathForResourceAction
     reason: Inherited GA contract. RegistryDataReferences_GetBlobReferenceSAS is a read-style POST that returns a blob-reference SAS for an existing datareference version; the shipped route ends in a resource id, and changing it would be a breaking change. Scoped to the single offending path per ARM reviewer request.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"]
   - code: CollectionObjectPropertiesNaming
     reason: Pre-existing API behavior.
     where:
