@@ -1,0 +1,29 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+emit:
+  - "@azure-tools/typespec-python"
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-finetuning-sessions"
+    package-name: azure-ai-finetuning-sessions
+    api-version: "v1"
+    namespace: azure.ai.finetuning_sessions
+    flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/ai-foundry/data-plane/Foundry/src/session-finetuning/"
+      - "specification/ai-foundry/data-plane/Foundry/src/common/"
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-azure-core/experimental"
+  - "@typespec/openapi"
+  - "@azure-tools/openai-typespec/models/responses"
+  - "@azure-tools/typespec-client-generator-core"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Fine-tuning session API uses snake_case field names matching the wire format"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "OperationResult discriminator uses a plain string union"
+    "@azure-tools/typespec-azure-core/use-standard-names": "Fine-tuning session mutating ops follow a custom per-session LRO convention"
