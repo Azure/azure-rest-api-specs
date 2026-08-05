@@ -36,13 +36,13 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 
 ### When reviews run automatically
 
-| Trigger                            | Condition                                                                                                                                            |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR opened                          | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
-| PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                              |
-| `WaitForARMFeedback` label added   | Applying the label triggers a review directly (no push needed), subject to the same conditions                                                      |
-| `/arm-review` comment              | On-demand: posted by a user with write access or above; runs even on draft PRs and without `WaitForARMFeedback`                                     |
-| `workflow_dispatch`                | On-demand: repository maintainer triggers manually with a PR number                                                                                |
+| Trigger                          | Condition                                                                                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PR opened                        | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
+| PR synchronized (new push)       | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                                             |
+| `WaitForARMFeedback` label added | Applying the label triggers a review directly (no push needed), subject to the same conditions                                                                     |
+| `/arm-review` comment            | On-demand: posted by a user with write access or above; runs even on draft PRs and without `WaitForARMFeedback`                                                    |
+| `workflow_dispatch`              | On-demand: repository maintainer triggers manually with a PR number                                                                                                |
 
 > **Automated vs. on-demand:** The automated triggers (`opened` /
 > `synchronize` / `labeled`) only run when the PR carries the
@@ -52,11 +52,16 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 > (`/arm-review`, `workflow_dispatch`) have no such restriction and run
 > regardless of the label or draft state.
 
-> **Fork PRs and permissions:** The workflow does not run on PRs from forks, and
-> gh-aw's built-in role check only lets users with **write access or above**
-> trigger it. Together these keep the automated review from running on
-> externally-authored PRs. The GitHub MCP toolset additionally runs at
-> `approved` integrity for defense in depth.
+> **Fork PRs and permissions:** The workflow **supports PRs from forks**
+> (`forks: ["*"]`), matching the other PR workflows in this repo. gh-aw's
+> built-in role check only lets users with **write access or above** trigger it,
+> so an externally-authored fork PR is reviewed only after a maintainer applies
+> the `WaitForARMFeedback` label or runs `/arm-review` — it is not auto-reviewed
+> on the strength of its author alone. Fork PRs are handled safely because the
+> agent never checks out untrusted PR head code (`checkout: false`), reads spec
+> files only through the read-only GitHub MCP toolset (which additionally runs at
+> `approved` integrity for defense in depth), and writes only through gh-aw
+> `safe-outputs`.
 
 > **Draft PRs converted to ready:** The `ready_for_review` event is not
 > supported by the workflow engine. If you open a PR as a draft and later mark
@@ -78,11 +83,11 @@ sufficient permissions is silently ignored.
 
 ### Labels
 
-| Label                  | Effect                                                   |
-| ---------------------- | -------------------------------------------------------- |
-| `skip-arm-review`      | Opts out of automated ARM API review for this PR         |
-| `ARMChangesRequested`  | Added by the workflow when blocking findings are found   |
-| `WaitForARMFeedback`   | Gates automated reviews: `opened` / `synchronize` / `labeled` runs only fire while this label is present, and applying it triggers a review. Removed by the workflow when blocking findings are found |
+| Label                 | Effect                                                                                                                                                                                                |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                                                                      |
+| `ARMChangesRequested` | Added by the workflow when blocking findings are found                                                                                                                                                |
+| `WaitForARMFeedback`  | Gates automated reviews: `opened` / `synchronize` / `labeled` runs only fire while this label is present, and applying it triggers a review. Removed by the workflow when blocking findings are found |
 
 ### Opting out
 

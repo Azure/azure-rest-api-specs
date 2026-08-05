@@ -6,12 +6,17 @@ description: >
   /arm-review comment command.
 timeout-minutes: 30
 on:
-  # Fork PRs are intentionally NOT allowed (no `forks:` filter → gh-aw defaults
-  # to disallowing forks). Together with gh-aw's built-in role check
-  # (`admin`/`maintainer`/`write`, see `roles` below) this keeps the workflow
-  # from auto-running on externally-authored PRs.
+  # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
+  # this repo (see data-plane-api-review.md). This is safe because the agent
+  # never checks out untrusted PR head code (`checkout: false` below) and reads
+  # spec files only through the read-only GitHub MCP toolset; its only write
+  # channel is gh-aw `safe-outputs`. The `roles` gate below still restricts who
+  # can *trigger* the workflow to write-access users, so externally-authored
+  # fork PRs are reviewed only after a maintainer applies the label or runs
+  # `/arm-review`.
   pull_request_target:
     types: [opened, synchronize, labeled]
+    forks: ["*"]
   issue_comment:
     types: [created]
   workflow_dispatch:
@@ -20,10 +25,12 @@ on:
         description: "PR number to review"
         required: true
         type: string
-  # Only users with write access (or above) may trigger the workflow. This is
-  # the gh-aw default; it is stated explicitly here because it is the primary
-  # guard against externally-authored PRs and `/arm-review` abuse, replacing
-  # the former hand-rolled collaborator check.
+  # Only users with write access (or above) may trigger the workflow. With
+  # `forks: ["*"]` enabled above, this `roles` gate is the primary guard that
+  # keeps externally-authored fork PRs from auto-triggering a review and blocks
+  # `/arm-review` abuse — a fork contributor without write access cannot start
+  # the workflow; a maintainer must apply the `WaitForARMFeedback` label or run
+  # `/arm-review`. This replaces the former hand-rolled collaborator check.
   roles: [admin, maintainer, write]
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
@@ -45,15 +52,38 @@ if: >
    contains(github.event.comment.body, '/arm-review'))
 permissions:
   contents: read
-  issues: read
+  # Token-based inference for the Copilot engine: gh-aw mints the agent's
+  # Copilot credential from the auto-provisioned Actions token, so no
+  # COPILOT_GITHUB_TOKEN personal access token secret is required. (Requires
+  # centralized Copilot billing on the org — see gh-aw billing reference.)
+  copilot-requests: write
   pull-requests: read
+# The agent reads PR files through the GitHub MCP toolsets, never from disk, so
+# no checkout is needed — and pull_request_target must NOT check out untrusted
+# fork head code (the classic "pwn request" vector). gh-aw still sparse-checks-
+# out `.github`, where this agent's own instruction/skill imports live, so they
+# remain readable. This is the primary guardrail that makes `forks: ["*"]` above
+# safe.
+checkout: false
+# Pin the engine to Copilot explicitly (also the repo default) so the compiled
+# workflow uses GitHub Actions token-based inference. The model is intentionally
+# left unpinned: it resolves to `vars.GH_AW_MODEL_AGENT_COPILOT`, matching the
+# repo default. (A future model pin would need to be co-managed with the ARM
+# eval suite under .github/skills/evals/arm-api-reviewer/, as data-plane does.)
+engine:
+  id: copilot
 tools:
   github:
-    toolsets: [context, repos, pull_requests, issues]
+    # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
+    # `issues` is deliberately omitted — the review body reads PRs solely via the
+    # `pull_requests` toolset (get_pull_request, list_pull_request_files), and
+    # all issue/label writes go through gh-aw safe-outputs, so a read `issues`
+    # scope is unnecessary attack surface. Do not add mutating toolsets here.
+    toolsets: [context, repos, pull_requests]
     # Raise the GitHub MCP guard from `unapproved` to `approved` so the agent's
     # GitHub tool calls only run against content of approved integrity — a
-    # defense-in-depth layer against externally-authored / unapproved PRs, on
-    # top of the fork-disallow default and the write-role trigger gate.
+    # defense-in-depth layer against externally-authored / unapproved fork PRs,
+    # on top of the write-role trigger gate.
     min-integrity: approved
 imports:
   - ../instructions/arm-api-review.instructions.md
@@ -138,19 +168,15 @@ confirmation.
 
 ## Required Secrets
 
-The following repository secrets must be configured for the workflow to run:
+This workflow uses **GitHub Actions token-based inference** (`permissions.copilot-requests: write` with the Copilot engine), so it does **not** require a `COPILOT_GITHUB_TOKEN` personal access token secret — gh-aw mints the agent's Copilot credential from the auto-provisioned `GITHUB_TOKEN`. (Token-based inference requires centralized Copilot billing on the org; see the gh-aw billing reference.)
 
-- **`COPILOT_GITHUB_TOKEN`** — GitHub token used by the Copilot agent engine.
-- **`GH_AW_GITHUB_TOKEN`** — Token used by the gh-aw runtime to authenticate
-  GitHub API calls made by the agent.
-- **`GH_AW_GITHUB_MCP_SERVER_TOKEN`** — Token used by the GitHub MCP server
-  toolset embedded in the agent.
-- **`GITHUB_TOKEN`** — Standard Actions token (auto-provisioned); used by the
-  gh-aw runtime (role/permission check and safe-output publishing).
+No repository secrets are strictly required. The following are **optional identity overrides**:
 
-All secrets are consumed only by the gh-aw runtime and are never exposed to PR
-content. The model is hosted by GitHub Copilot infrastructure; no additional
-model endpoint or key configuration is required.
+- **`GH_AW_GITHUB_TOKEN`** — optional. Overrides the identity gh-aw uses for GitHub API calls and safe-output publishing. Falls back to `GH_AW_GITHUB_MCP_SERVER_TOKEN`, then to the auto-provisioned `GITHUB_TOKEN`.
+- **`GH_AW_GITHUB_MCP_SERVER_TOKEN`** — optional. Overrides the identity the embedded GitHub MCP server toolset uses. Falls back to `GH_AW_GITHUB_TOKEN`, then to `GITHUB_TOKEN`.
+- **`GITHUB_TOKEN`** — the standard Actions token, auto-provisioned by GitHub; used by the gh-aw runtime (role/permission check and safe-output publishing) whenever the optional overrides above are unset.
+
+Set the optional overrides only if you need the agent to act under a different identity or a broader scope than the default Actions token (for example, to post as a bot account or reach across repositories). All secrets are consumed only by the gh-aw runtime and are never exposed to PR content. The model is hosted by GitHub Copilot infrastructure; no additional model endpoint or key configuration is required.
 
 ## Trigger Context
 
@@ -172,7 +198,13 @@ already guaranteed, before this agent starts, that:
   `labeled` run only fires when that exact label is added; an `issue_comment`
   run only fires for a PR comment containing `/arm-review`; `workflow_dispatch`
   is always eligible.
-- Fork PRs are excluded (no `forks:` filter → gh-aw disallows forks).
+- Fork PRs **are** supported (`forks: ["*"]`). They are reviewed safely because
+  the agent never checks out untrusted PR head code (`checkout: false`), reads
+  spec files only through the read-only GitHub MCP toolset
+  (`min-integrity: approved`), and writes only through gh-aw `safe-outputs`. The
+  `roles` gate still requires a write-access user to trigger the review (via the
+  `WaitForARMFeedback` label or `/arm-review`), so a fork PR is not
+  auto-reviewed on the strength of its author alone.
 
 ## Trigger Validation
 
