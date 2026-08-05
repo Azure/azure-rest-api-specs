@@ -9,32 +9,28 @@ import { createMockGithub } from "./mocks.js";
 
 const changedPath =
   "specification/contoso/resource-manager/Microsoft.Contoso/stable/2025-01-01/foo.json";
+const suppression = {
+  paths: ["contoso/**"],
+  reason: "Swagger checks are not applicable",
+};
 
 describe("resolveSwaggerCheckSuppression", () => {
   it.each(Object.keys(SWAGGER_SUPPRESSION_TOOLS))(
     "supports SwaggerAll for %s",
     async (checkName) => {
-      const loadSuppressionsFile = vi.fn((path) =>
-        Promise.resolve(
-          path === "specification/suppressions.yaml"
-            ? `
-- tool: ${SWAGGER_ALL_SUPPRESSION_TOOL}
-  path: contoso/**
-  reason: Swagger checks are not applicable
-`
-            : undefined,
-        ),
+      const getSuppressionsForPath = vi.fn((tool) =>
+        Promise.resolve(tool === SWAGGER_ALL_SUPPRESSION_TOOL ? [suppression] : []),
       );
 
       await expect(
         resolveSwaggerCheckSuppression({
           changedPaths: [changedPath],
           checkName,
-          loadSuppressionsFile,
+          getSuppressionsForPath,
         }),
       ).resolves.toEqual({
         skip: true,
-        reason: "Swagger checks are not applicable",
+        reason: suppression.reason,
       });
     },
   );
@@ -44,74 +40,13 @@ describe("resolveSwaggerCheckSuppression", () => {
       resolveSwaggerCheckSuppression({
         changedPaths: [changedPath],
         checkName: "Swagger LintDiff",
-        loadSuppressionsFile: (path) =>
-          Promise.resolve(
-            path === "specification/contoso/suppressions.yaml"
-              ? `
-- tool: SwaggerLintDiff
-  path: resource-manager/**
-  reason: LintDiff is not applicable
-`
-              : undefined,
-          ),
+        getSuppressionsForPath: (tool) =>
+          Promise.resolve(tool === "SwaggerLintDiff" ? [suppression] : []),
       }),
     ).resolves.toEqual({
       skip: true,
-      reason: "LintDiff is not applicable",
+      reason: suppression.reason,
     });
-  });
-
-  it("falls back to specification/suppressions.yaml when no nearer file exists", async () => {
-    const loadSuppressionsFile = vi.fn((path) =>
-      Promise.resolve(
-        path === "specification/suppressions.yaml"
-          ? `
-- tool: SwaggerAll
-  path: contoso/**
-  reason: Central exemption
-`
-          : undefined,
-      ),
-    );
-
-    await expect(
-      resolveSwaggerCheckSuppression({
-        changedPaths: [changedPath],
-        checkName: "Swagger Avocado",
-        loadSuppressionsFile,
-      }),
-    ).resolves.toEqual({ skip: true, reason: "Central exemption" });
-    expect(loadSuppressionsFile).toHaveBeenCalledWith("specification/contoso/suppressions.yaml");
-    expect(loadSuppressionsFile).toHaveBeenCalledWith("specification/suppressions.yaml");
-  });
-
-  it("uses a nearer project suppression before the central file", async () => {
-    const loadSuppressionsFile = vi.fn((path) => {
-      if (path === "specification/contoso/suppressions.yaml") {
-        return Promise.resolve(`
-- tool: SwaggerAll
-  path: resource-manager/**
-  reason: Project exemption
-`);
-      }
-      if (path === "specification/suppressions.yaml") {
-        return Promise.resolve(`
-- tool: SwaggerAll
-  path: contoso/**
-  reason: Central exemption
-`);
-      }
-      return Promise.resolve(undefined);
-    });
-
-    await expect(
-      resolveSwaggerCheckSuppression({
-        changedPaths: [changedPath],
-        checkName: "Swagger Avocado",
-        loadSuppressionsFile,
-      }),
-    ).resolves.toEqual({ skip: true, reason: "Project exemption" });
-    expect(loadSuppressionsFile).not.toHaveBeenCalledWith("specification/suppressions.yaml");
   });
 
   it("does not skip unless all changed specification paths are suppressed", async () => {
@@ -122,101 +57,51 @@ describe("resolveSwaggerCheckSuppression", () => {
           "specification/fabrikam/resource-manager/Microsoft.Fabrikam/foo.json",
         ],
         checkName: "Swagger Avocado",
-        loadSuppressionsFile: (path) =>
-          Promise.resolve(
-            path === "specification/suppressions.yaml"
-              ? `
-- tool: SwaggerAll
-  path: contoso/**
-  reason: Contoso exemption
-`
-              : undefined,
-          ),
+        getSuppressionsForPath: (_tool, path) =>
+          Promise.resolve(path === changedPath ? [suppression] : []),
       }),
     ).resolves.toEqual({ skip: false });
   });
 
-  it("ignores rule-scoped and conditional suppressions", async () => {
+  it("ignores rule-scoped suppressions", async () => {
     await expect(
       resolveSwaggerCheckSuppression({
         changedPaths: [changedPath],
         checkName: "Swagger Avocado",
-        loadSuppressionsFile: (path) =>
-          Promise.resolve(
-            path === "specification/suppressions.yaml"
-              ? `
-- tool: SwaggerAll
-  path: contoso/**
-  rules: [SomeRule]
-  reason: Rule only
-- tool: SwaggerAll
-  path: contoso/**
-  if: "true"
-  reason: Conditional
-`
-              : undefined,
-          ),
+        getSuppressionsForPath: () => Promise.resolve([{ ...suppression, rules: ["SomeRule"] }]),
       }),
     ).resolves.toEqual({ skip: false });
   });
 
   it("does not skip non-Swagger checks or PRs without specification changes", async () => {
-    const loadSuppressionsFile = vi.fn();
+    const getSuppressionsForPath = vi.fn();
 
     await expect(
       resolveSwaggerCheckSuppression({
         changedPaths: [changedPath],
         checkName: "TypeSpec Suppressions",
-        loadSuppressionsFile,
+        getSuppressionsForPath,
       }),
     ).resolves.toEqual({ skip: false });
     await expect(
       resolveSwaggerCheckSuppression({
         changedPaths: [".github/workflows/avocado-code.yaml"],
         checkName: "Swagger Avocado",
-        loadSuppressionsFile,
+        getSuppressionsForPath,
       }),
     ).resolves.toEqual({ skip: false });
-    expect(loadSuppressionsFile).not.toHaveBeenCalled();
+    expect(getSuppressionsForPath).not.toHaveBeenCalled();
   });
 });
 
 describe("getSwaggerCheckSuppression", () => {
-  it("loads suppression files from the pull request base commit", async () => {
+  it("uses getSuppressions for current and previous paths", async () => {
     const github = createMockGithub();
-    github.rest.pulls.get.mockResolvedValue({
-      data: {
-        base: {
-          sha: "b".repeat(40),
-          repo: {
-            name: "azure-rest-api-specs",
-            owner: { login: "Azure" },
-          },
-        },
-      },
-    });
+    const previousPath = changedPath.replace("foo.json", "old.json");
     github.rest.pulls.listFiles.mockResolvedValue({
-      data: [{ filename: changedPath }],
+      data: [{ filename: changedPath, previous_filename: previousPath }],
     });
-    github.rest.repos.getContent.mockImplementation(({ path }) => {
-      if (path !== "specification/suppressions.yaml") {
-        const error = new Error("Not Found");
-        Object.assign(error, { status: 404 });
-        return Promise.reject(error);
-      }
-      return Promise.resolve({
-        data: {
-          type: "file",
-          content: Buffer.from(
-            `
-- tool: SwaggerAll
-  path: contoso/**
-  reason: Central exemption
-`,
-          ).toString("base64"),
-        },
-      });
-    });
+    const getSuppressionsImpl = vi.fn(() => Promise.resolve([suppression]));
 
     await expect(
       getSwaggerCheckSuppression({
@@ -225,20 +110,30 @@ describe("getSwaggerCheckSuppression", () => {
         repo: "azure-rest-api-specs",
         pullNumber: 123,
         checkName: "Swagger Avocado",
+        getSuppressionsImpl,
       }),
-    ).resolves.toEqual({ skip: true, reason: "Central exemption" });
-
-    expect(github.rest.repos.getContent).toHaveBeenCalledWith({
-      owner: "Azure",
-      repo: "azure-rest-api-specs",
-      path: "specification/suppressions.yaml",
-      ref: "b".repeat(40),
+    ).resolves.toEqual({
+      skip: true,
+      reason: suppression.reason,
     });
+
     expect(github.rest.pulls.listFiles).toHaveBeenCalledWith({
       owner: "Azure",
       repo: "azure-rest-api-specs",
       pull_number: 123,
       per_page: 100,
     });
+    expect(getSuppressionsImpl).toHaveBeenCalledWith(
+      "SwaggerAvocado",
+      expect.stringMatching(/pull-request-head[\\/]specification[\\/]contoso[\\/]resource-manager/),
+      {},
+      { allowMissingPath: true, evaluateIf: false },
+    );
+    expect(getSuppressionsImpl).toHaveBeenCalledWith(
+      "SwaggerAll",
+      expect.stringContaining("old.json"),
+      {},
+      { allowMissingPath: true, evaluateIf: false },
+    );
   });
 });

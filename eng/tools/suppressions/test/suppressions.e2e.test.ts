@@ -21,6 +21,30 @@ test.concurrent("no suppressions.yaml", async () => {
   expect(suppressions).toEqual([]);
 });
 
+test.concurrent("missing path allowed", async () => {
+  const path = join(__dirname, "e2e", "merge", "foo", "missing.json");
+  const suppressions = await getSuppressions("TestTool", path, {}, { allowMissingPath: true });
+
+  expect(suppressions.map(({ paths, reason }) => ({ paths, reason }))).toEqual([
+    {
+      paths: ["**"],
+      reason: "foo-globstar",
+    },
+    {
+      paths: ["*"],
+      reason: "foo-star",
+    },
+    {
+      paths: ["foo/**"],
+      reason: "root-foo-globstar",
+    },
+    {
+      paths: ["foo/*"],
+      reason: "root-foo-star",
+    },
+  ]);
+});
+
 test.concurrent("empty suppressions.yaml", async () => {
   const suppressions: Suppression[] = await getTestSuppressions("emptySuppressionsYaml");
   expect(suppressions).toEqual([]);

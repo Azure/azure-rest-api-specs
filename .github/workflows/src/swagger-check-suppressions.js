@@ -1,5 +1,7 @@
-import { dirname } from "node:path/posix";
+import { resolve } from "node:path";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
+
+const PR_HEAD_ROOT = "pull-request-head";
 
 export const SWAGGER_ALL_SUPPRESSION_TOOL = "SwaggerAll";
 
@@ -24,22 +26,18 @@ export function isSwaggerCheck(checkName) {
 }
 
 /**
- * Resolve a Swagger check exemption using the same ancestor-file semantics as
- * `@azure-tools/suppressions`.
- *
- * Conditional entries are deliberately ignored because this resolver runs in a privileged
- * workflow without the tool-specific context needed to evaluate them.
+ * Determine whether every changed specification path has a whole-check suppression.
  *
  * @param {Object} params
  * @param {string[]} params.changedPaths
  * @param {string} params.checkName
- * @param {(path: string) => Promise<string | undefined>} params.loadSuppressionsFile
+ * @param {(tool: string, path: string) => Promise<SwaggerSuppression[]>} params.getSuppressionsForPath
  * @returns {Promise<{skip: false} | {skip: true, reason: string}>}
  */
 export async function resolveSwaggerCheckSuppression({
   changedPaths,
   checkName,
-  loadSuppressionsFile,
+  getSuppressionsForPath,
 }) {
   if (!isSwaggerCheck(checkName)) {
     return { skip: false };
@@ -50,65 +48,25 @@ export async function resolveSwaggerCheckSuppression({
       changedPaths.map(normalizeRepoPath).filter((path) => path.startsWith("specification/")),
     ),
   ];
-
   if (specificationPaths.length === 0) {
     return { skip: false };
   }
 
-  const suppressionTools = [SWAGGER_SUPPRESSION_TOOLS[checkName], SWAGGER_ALL_SUPPRESSION_TOOL];
-  const { getSuppressionsFromYaml } =
-    await import("../../../eng/tools/suppressions/src/suppressions.ts");
-  /** @type {Map<string, Promise<string | undefined>>} */
-  const contentCache = new Map();
-  /** @type {Set<string>} */
   const reasons = new Set();
+  for (const path of specificationPaths) {
+    const toolSuppressions = await getSuppressionsForPath(
+      SWAGGER_SUPPRESSION_TOOLS[checkName],
+      path,
+    );
+    const allSuppressions = await getSuppressionsForPath(SWAGGER_ALL_SUPPRESSION_TOOL, path);
+    const suppression = [...toolSuppressions, ...allSuppressions].find(
+      (item) => !item.rules?.length && !item.subRules?.length,
+    );
 
-  for (const changedPath of specificationPaths) {
-    /** @type {SwaggerSuppression | undefined} */
-    let matchedSuppression;
-
-    for (const suppressionsFile of getAncestorSuppressionsFiles(changedPath)) {
-      let contentPromise = contentCache.get(suppressionsFile);
-      if (!contentPromise) {
-        contentPromise = loadSuppressionsFile(suppressionsFile);
-        contentCache.set(suppressionsFile, contentPromise);
-      }
-
-      const content = await contentPromise;
-      if (content === undefined) {
-        continue;
-      }
-
-      for (const tool of suppressionTools) {
-        const suppressions = /** @type {SwaggerSuppression[]} */ (
-          getSuppressionsFromYaml(
-            tool,
-            changedPath,
-            suppressionsFile,
-            content,
-            {},
-            { evaluateIf: false },
-          )
-        );
-        matchedSuppression = suppressions.find(
-          (suppression) => !suppression.rules?.length && !suppression.subRules?.length,
-        );
-
-        if (matchedSuppression) {
-          break;
-        }
-      }
-
-      if (matchedSuppression) {
-        break;
-      }
-    }
-
-    if (!matchedSuppression) {
+    if (!suppression) {
       return { skip: false };
     }
-
-    reasons.add(matchedSuppression.reason);
+    reasons.add(suppression.reason);
   }
 
   return {
@@ -119,9 +77,7 @@ export async function resolveSwaggerCheckSuppression({
 }
 
 /**
- * Resolve a Swagger check exemption from `suppressions.yaml` files in the pull request base.
- *
- * Reading the reviewed base policy prevents an untrusted pull request from exempting itself.
+ * Resolve a Swagger check suppression from the sparse PR-head checkout.
  *
  * @param {Object} params
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} params.github
@@ -129,11 +85,17 @@ export async function resolveSwaggerCheckSuppression({
  * @param {string} params.repo
  * @param {number} params.pullNumber
  * @param {string} params.checkName
+ * @param {(tool: string, path: string, context?: Record<string, unknown>, options?: {allowMissingPath?: boolean, evaluateIf?: boolean}) => Promise<SwaggerSuppression[]>} [params.getSuppressionsImpl]
  * @returns {Promise<{skip: false} | {skip: true, reason: string}>}
  */
-export async function getSwaggerCheckSuppression({ github, owner, repo, pullNumber, checkName }) {
-  /** @type {Promise<{baseOwner: string, baseRepo: string, baseSha: string}> | undefined} */
-  let pullRequestBasePromise;
+export async function getSwaggerCheckSuppression({
+  github,
+  owner,
+  repo,
+  pullNumber,
+  checkName,
+  getSuppressionsImpl,
+}) {
   const changedFiles = await github.paginate(github.rest.pulls.listFiles, {
     owner,
     repo,
@@ -144,58 +106,23 @@ export async function getSwaggerCheckSuppression({ github, owner, repo, pullNumb
     file.previous_filename ? [file.filename, file.previous_filename] : [file.filename],
   );
 
+  getSuppressionsImpl ??= (await import("../../../eng/tools/suppressions/src/suppressions.ts"))
+    .getSuppressions;
+
   return await resolveSwaggerCheckSuppression({
     changedPaths,
     checkName,
-    loadSuppressionsFile: async (path) => {
-      pullRequestBasePromise ??= getPullRequestBase(github, owner, repo, pullNumber);
-      const { baseOwner, baseRepo, baseSha } = await pullRequestBasePromise;
-
-      try {
-        const { data } = await github.rest.repos.getContent({
-          owner: baseOwner,
-          repo: baseRepo,
-          path,
-          ref: baseSha,
-        });
-
-        if (Array.isArray(data) || data.type !== "file" || !("content" in data)) {
-          throw new Error(`Expected '${path}' to be a file`);
-        }
-
-        return Buffer.from(data.content, "base64").toString("utf8");
-      } catch (error) {
-        if (error instanceof Error && "status" in error && error.status === 404) {
-          return undefined;
-        }
-        throw error;
-      }
-    },
+    getSuppressionsForPath: async (tool, path) =>
+      await getSuppressionsImpl(
+        tool,
+        resolve(PR_HEAD_ROOT, path),
+        {},
+        {
+          allowMissingPath: true,
+          evaluateIf: false,
+        },
+      ),
   });
-}
-
-/**
- * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github
- * @param {string} owner
- * @param {string} repo
- * @param {number} pullNumber
- * @returns {Promise<{baseOwner: string, baseRepo: string, baseSha: string}>}
- */
-async function getPullRequestBase(github, owner, repo, pullNumber) {
-  const { data: pullRequest } = await github.rest.pulls.get({
-    owner,
-    repo,
-    pull_number: pullNumber,
-  });
-  const baseOwner = pullRequest.base.repo.owner.login;
-  const baseRepo = pullRequest.base.repo.name;
-  const baseSha = pullRequest.base.sha;
-
-  if (!baseOwner || !baseRepo || !baseSha) {
-    throw new Error(`Pull request ${pullNumber} has no accessible base repository`);
-  }
-
-  return { baseOwner, baseRepo, baseSha };
 }
 
 /**
@@ -204,23 +131,4 @@ async function getPullRequestBase(github, owner, repo, pullNumber) {
  */
 function normalizeRepoPath(path) {
   return path.replaceAll("\\", "/").replace(/^\.\/+/, "");
-}
-
-/**
- * @param {string} changedPath
- * @returns {string[]}
- */
-function getAncestorSuppressionsFiles(changedPath) {
-  const files = [];
-  let directory = dirname(changedPath);
-
-  while (directory === "specification" || directory.startsWith("specification/")) {
-    files.push(`${directory}/suppressions.yaml`);
-    if (directory === "specification") {
-      break;
-    }
-    directory = dirname(directory);
-  }
-
-  return files;
 }

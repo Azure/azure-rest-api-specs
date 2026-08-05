@@ -55,6 +55,21 @@ jobs:
             .github
             eng/tools/suppressions
 
+      - name: Checkout PR suppression files
+        if: |
+          startsWith(inputs.required_check_name, 'Swagger ') ||
+          inputs.required_check_name == 'Breaking Change(Cross-Version)'
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name }}
+          ref: ${{ github.event.pull_request.head.sha || github.event.workflow_run.head_sha }}
+          path: pull-request-head
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            specification/suppressions.yaml
+            specification/**/suppressions.yaml
+
       - name: Install suppressions dependencies
         if: |
           startsWith(inputs.required_check_name, 'Swagger ') ||

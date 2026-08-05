@@ -110,8 +110,10 @@ For example, an entry in `specification/suppressions.yaml` can cover a specifica
 
 The status gate walks from every changed specification path up to
 `specification/suppressions.yaml`, matching the existing closest-file-first behavior. Every changed
-specification path must have a matching suppression or the check runs normally. The gate reads
-suppression policy from the pull request base commit, so new exemptions become active after merge.
+specification path must have a matching suppression or the check runs normally. It reads
+`suppressions.yaml` from a sparse checkout of the pull request head, consistent with other
+suppression consumers. Conditional `if` entries are not evaluated by the privileged status
+workflow.
 
 ## Folder structure & contributing
 

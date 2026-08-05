@@ -79,13 +79,16 @@ export async function getSuppressions(
   tool: string,
   path: string,
   context: Record<string, unknown> = {},
+  options: { allowMissingPath?: boolean; evaluateIf?: boolean } = {},
 ): Promise<Suppression[]> {
   path = resolve(path);
 
   // If path doesn't exist, throw instead of returning "[]" to prevent confusion
-  await access(path, constants.R_OK);
+  if (!options.allowMissingPath) {
+    await access(path, constants.R_OK);
+  }
 
-  const suppressionsFiles: string[] = await findSuppressionsFiles(path);
+  const suppressionsFiles: string[] = await findSuppressionsFiles(path, options.allowMissingPath);
   let suppressions: Suppression[] = [];
 
   for (const suppressionsFile of suppressionsFiles) {
@@ -96,6 +99,7 @@ export async function getSuppressions(
         suppressionsFile,
         await readFile(suppressionsFile, { encoding: "utf8" }),
         context,
+        { evaluateIf: options.evaluateIf },
       ),
     );
   }
@@ -184,13 +188,18 @@ export function getSuppressionsFromYaml(
  * ));
  * ```
  */
-async function findSuppressionsFiles(path: string): Promise<string[]> {
+async function findSuppressionsFiles(path: string, assumeFile: boolean = false): Promise<string[]> {
   const suppressionsFiles: string[] = [];
 
   path = resolve(path);
 
-  const stats: Stats = await lstat(path);
-  let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
+  let currentDirectory: string;
+  if (assumeFile) {
+    currentDirectory = dirname(path);
+  } else {
+    const stats: Stats = await lstat(path);
+    currentDirectory = stats.isDirectory() ? path : dirname(path);
+  }
 
   while (true) {
     const suppressionsFile: string = join(currentDirectory, "suppressions.yaml");
