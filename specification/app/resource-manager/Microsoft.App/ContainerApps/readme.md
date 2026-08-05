@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01-01
+tag: package-2026-07-01
 ```
 
 ### Suppression
@@ -48,6 +48,36 @@ directive:
       - $.definitions.ServiceBind.properties.customizedKeys
     reason: |
       Do not introduce breaking changes in GA services
+```
+
+### Tag: package-2026-07-01
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01'
+input-file:
+  - stable/2026-07-01/openapi.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: openapi.json
+    reason: |
+      Pre-existing. Java Component and Session Pool use discriminator/identity type as required property.
+      Managed Service Identity requires type for patching.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    reason: |
+      Pre-existing. Scale rule metadata and service bind customized keys use additionalProperties.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    reason: |
+      Pre-existing. Do not introduce breaking changes in GA services.
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    reason: |
+      Pre-existing. Do not introduce breaking changes in GA services.
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: |
+      Pre-existing. Using the same error response as other APIs.
 ```
 
 ### Tag: package-preview-2025-10-02-preview
