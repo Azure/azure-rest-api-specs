@@ -17,7 +17,7 @@ namespace Azure.AI.Projects;
 // ============================================================================
 
 @doc("The lifecycle status of a persisted voice conversation.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationStatus {
   string,
 
@@ -33,7 +33,7 @@ union VoiceConversationStatus {
   transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
   deleting it cascades to its responses, items, metrics, and audio.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversation {
   @doc("The unique id of the conversation.")
   id: string;
@@ -74,7 +74,7 @@ model VoiceConversation {
 // realtime models.tsp. See VoiceResponse.usage below.
 
 @doc("The status of a voice response.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceResponseStatus {
   string,
   in_progress: "in_progress",
@@ -92,7 +92,7 @@ union VoiceResponseVoice {
 }
 
 @doc("The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudioOutput {
   @doc("The voice used for the response's audio output.")
   voice?: VoiceResponseVoice;
@@ -102,7 +102,7 @@ model VoiceResponseAudioOutput {
 }
 
 @doc("Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudio {
   @doc("The audio output configuration used for the response.")
   output?: VoiceResponseAudioOutput;
@@ -115,7 +115,7 @@ model VoiceResponseAudio {
   (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
   durable ordering extensions.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponse {
   @doc("The unique id of the response.")
   id: string;
@@ -174,7 +174,7 @@ model VoiceResponse {
 // ---------------------------------------------------------------------------
 
 @doc("The type of a persisted voice conversation item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationItemType {
   string,
 
@@ -202,7 +202,7 @@ union VoiceConversationItemType {
 
 @doc("A persisted item in a voice conversation.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversationItem {
   @doc("The type of the conversation item.")
   type: VoiceConversationItemType;
@@ -216,7 +216,7 @@ model VoiceConversationItem {
 
 @doc("A persisted message item in a voice conversation.")
 @discriminator("role")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceMessageItem extends VoiceConversationItem {
   type: VoiceConversationItemType.message;
 
@@ -225,7 +225,7 @@ model VoiceMessageItem extends VoiceConversationItem {
 }
 
 @doc("A system message item. Only `input_text` content is valid for system messages.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceSystemMessageItem extends VoiceMessageItem {
   ...OmitProperties<
     OpenAI.RealtimeConversationItemMessageSystem,
@@ -235,7 +235,7 @@ model VoiceSystemMessageItem extends VoiceMessageItem {
 }
 
 @doc("A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceUserMessageItem extends VoiceMessageItem {
   ...OmitProperties<
     OpenAI.RealtimeConversationItemMessageUser,
@@ -245,7 +245,7 @@ model VoiceUserMessageItem extends VoiceMessageItem {
 }
 
 @doc("An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAssistantMessageItem extends VoiceMessageItem {
   ...OmitProperties<
     OpenAI.RealtimeConversationItemMessageAssistant,
@@ -255,14 +255,14 @@ model VoiceAssistantMessageItem extends VoiceMessageItem {
 }
 
 @doc("A function call request item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceFunctionCallItem extends VoiceConversationItem {
   ...OmitProperties<OpenAI.RealtimeConversationItemFunctionCall, "type">;
   type: VoiceConversationItemType.function_call;
 }
 
 @doc("A function call output item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceFunctionCallOutputItem extends VoiceConversationItem {
   ...OmitProperties<OpenAI.RealtimeConversationItemFunctionCallOutput, "type">;
   type: VoiceConversationItemType.function_call_output;
@@ -272,28 +272,28 @@ model VoiceFunctionCallOutputItem extends VoiceConversationItem {
 }
 
 @doc("An MCP list-tools item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceMcpListToolsItem extends VoiceConversationItem {
   ...OmitProperties<OpenAI.RealtimeMCPListTools, "type">;
   type: VoiceConversationItemType.mcp_list_tools;
 }
 
 @doc("An MCP call item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceMcpCallItem extends VoiceConversationItem {
   ...OmitProperties<OpenAI.RealtimeMCPToolCall, "type">;
   type: VoiceConversationItemType.mcp_call;
 }
 
 @doc("An MCP approval request item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceMcpApprovalRequestItem extends VoiceConversationItem {
   ...OmitProperties<OpenAI.RealtimeMCPApprovalRequest, "type">;
   type: VoiceConversationItemType.mcp_approval_request;
 }
 
 @doc("An MCP approval response item (client-created).")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceMcpApprovalResponseItem extends VoiceConversationItem {
   ...OmitProperties<OpenAI.RealtimeMCPApprovalResponse, "type">;
   type: VoiceConversationItemType.mcp_approval_response;
@@ -304,7 +304,7 @@ model VoiceMcpApprovalResponseItem extends VoiceConversationItem {
 // ---------------------------------------------------------------------------
 
 @doc("A voice-audio participant role. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioRole {
   string,
 
@@ -316,7 +316,7 @@ union VoiceAudioRole {
 }
 
 @doc("An audio container format. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioContainerFormat {
   string,
 
@@ -325,7 +325,7 @@ union VoiceAudioContainerFormat {
 }
 
 @doc("An audio codec. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioCodec {
   string,
 
@@ -350,7 +350,7 @@ scalar VoiceDurationMilliseconds extends duration;
   credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
   `/audio/content` route.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceItemAudioResponse {
   @doc("The id of the conversation the item belongs to.")
   conversation_id: string;
@@ -384,7 +384,7 @@ model VoiceItemAudioResponse {
 }
 
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioStreamResponse {
   @doc("The content type of the streamed audio.")
   @header("Content-Type")
@@ -396,7 +396,7 @@ model VoiceAudioStreamResponse {
 }
 
 @doc("The role assigned to each channel of a merged stereo voice recording.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingChannelLayout {
   @doc("The role carried on the left channel. Always `user`.")
   left: "user";
@@ -414,7 +414,7 @@ model VoiceRecordingChannelLayout {
   own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
   `/audio/content` route instead.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingResponse {
   @doc("The id of the conversation this recording belongs to.")
   conversation_id: string;
