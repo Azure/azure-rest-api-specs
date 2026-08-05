@@ -3,7 +3,7 @@
 # containerservicepreparedimgspec).
 parameters:
   "service-dir":
-    default: "sdk/containerserviceaimanagerx"
+    default: "sdk/containerserviceaimanager"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -20,23 +20,23 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerservice"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerserviceaimanagerx"
-    namespace: "azure.mgmt.containerserviceaimanagerx"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerserviceaimanager"
+    namespace: "azure.mgmt.containerserviceaimanager"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.ContainerServiceAIManagerX"
+    namespace: "Azure.ResourceManager.ContainerServiceAIManager"
     emitter-output-dir: "{output-dir}/sdk/aimanager/{namespace}"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerserviceaimanagerx"
-    namespace: "com.azure.resourcemanager.containerserviceaimanagerx"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerserviceaimanager"
+    namespace: "com.azure.resourcemanager.containerserviceaimanager"
     service-name: "Container Service AI Manager"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/containerserviceaimanagerx"
-    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerserviceaimanagerx"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerserviceaimanagerx"
+    service-dir: "sdk/resourcemanager/containerserviceaimanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerserviceaimanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerserviceaimanager"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -47,6 +47,6 @@ options:
     service-dir: "sdk/containerservice"
     flavor: azure
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerserviceaimanagerx"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerserviceaimanager"
     package-details:
-      name: "@azure/arm-containerserviceaimanagerx"
+      name: "@azure/arm-containerserviceaimanager"
