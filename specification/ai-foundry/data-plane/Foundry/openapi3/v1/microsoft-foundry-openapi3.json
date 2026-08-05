@@ -29206,6 +29206,50 @@
         "type": "object",
         "description": "Configuration specific to the A2A protocol."
       },
+      "A2ATool": {
+        "type": "object",
+        "required": [
+          "type",
+          "a2a_version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "a2a"
+            ],
+            "description": "The type of the tool. Always `\"a2a\"`."
+          },
+          "base_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Base URL of the agent."
+          },
+          "agent_card_path": {
+            "type": "string",
+            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "send_credentials_for_agent_card": {
+            "type": "boolean",
+            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
+            "default": false
+          },
+          "a2a_version": {
+            "$ref": "#/components/schemas/A2AVersion",
+            "description": "The A2A protocol version supported by the agent."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "An agent implementing the A2A protocol."
+      },
       "A2AToolCall": {
         "type": "object",
         "required": [
@@ -29294,6 +29338,57 @@
             "preview_tool"
           ]
         }
+      },
+      "A2AToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "a2a_version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "a2a"
+            ]
+          },
+          "base_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Base URL of the agent."
+          },
+          "agent_card_path": {
+            "type": "string",
+            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "send_credentials_for_agent_card": {
+            "type": "boolean",
+            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
+            "default": false
+          },
+          "a2a_version": {
+            "$ref": "#/components/schemas/A2AVersion",
+            "description": "The A2A protocol version supported by the agent."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "An A2A tool stored in a toolbox."
+      },
+      "A2AVersion": {
+        "type": "string",
+        "enum": [
+          "0.3",
+          "1.0"
+        ],
+        "description": "The supported A2A protocol version."
       },
       "AISearchIndexResource": {
         "type": "object",
@@ -75189,6 +75284,7 @@
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
+            "a2a": "#/components/schemas/A2ATool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
@@ -75729,6 +75825,7 @@
               "work_iq_preview",
               "fabric_iq_preview",
               "toolbox_search_preview",
+              "a2a",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -81921,6 +82018,7 @@
             "mcp": "#/components/schemas/MCPToolboxTool",
             "azure_ai_search": "#/components/schemas/AzureAISearchToolboxTool",
             "openapi": "#/components/schemas/OpenApiToolboxTool",
+            "a2a": "#/components/schemas/A2AToolboxTool",
             "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewToolboxTool",
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
@@ -81941,6 +82039,7 @@
           "mcp",
           "azure_ai_search",
           "openapi",
+          "a2a",
           "a2a_preview",
           "browser_automation_preview",
           "reminder_preview",
