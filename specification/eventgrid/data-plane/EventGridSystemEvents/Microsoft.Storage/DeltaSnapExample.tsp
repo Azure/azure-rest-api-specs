@@ -4,7 +4,7 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 const MicrosoftStorageDeltaSnapSnapshotGenerationSucceededExample: StorageDeltaSnapSnapshotGenerationSucceededEventData = #{
   jobId: "",
-  accountName: "p0uxscnsat12pe01gx",
+  accountName: "deltasnapstorageaccount",
   status: "Succeeded",
   dataRecordCount: "81",
   totalSizeBytes: "27459",
