@@ -64,7 +64,7 @@ interface CustomDomains {
     CustomDomain,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
           @bodyRoot
           _: CustomDomain;
         })
