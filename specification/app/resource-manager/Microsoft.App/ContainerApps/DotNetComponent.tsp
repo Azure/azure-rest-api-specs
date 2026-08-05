@@ -15,6 +15,7 @@ namespace Microsoft.App;
  * .NET Component.
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @parentResource(ManagedEnvironment)
 model DotNetComponent
   is Azure.ResourceManager.ProxyResource<DotNetComponentProperties> {
@@ -51,6 +52,7 @@ alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface DotNetComponents {
   /**

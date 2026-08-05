@@ -15,6 +15,7 @@ namespace Microsoft.App;
  * Configuration to setup App Resiliency
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model AppResiliency
   is Azure.ResourceManager.ProxyResource<AppResiliencyProperties> {
   ...ResourceNameParameter<
@@ -51,6 +52,7 @@ alias AppResiliencyOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 @tag("AppResiliency")
 interface AppResiliencies {

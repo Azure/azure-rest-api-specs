@@ -16,6 +16,7 @@ namespace Microsoft.App;
  * Container App Function.
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @parentResource(Revision)
 model ContainerAppsFunction
   is Azure.ResourceManager.ProxyResource<ContainerAppsFunctionProperties> {
@@ -85,6 +86,7 @@ alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.Lega
 >;
 
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 @tag("AzureFunctionsOnContainerApps")
 interface ContainerAppsFunctions {

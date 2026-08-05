@@ -16,6 +16,7 @@ namespace Microsoft.App;
  * Container App Patch
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model ContainerAppsPatchResource
   is Azure.ResourceManager.ProxyResource<PatchProperties> {
@@ -54,6 +55,7 @@ alias ContainerAppsPatchesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsPatches {
   /**
