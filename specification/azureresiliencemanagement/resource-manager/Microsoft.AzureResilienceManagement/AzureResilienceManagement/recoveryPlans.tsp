@@ -173,7 +173,7 @@ interface RecoveryPlanActions {
     RecoveryPlanActionBaseResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = RecoveryPlanActionBaseResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
