@@ -6,6 +6,7 @@ tags:
   - name: Agent Conversations
   - name: Voice Agents
   - name: Voice Agent Versions
+  - name: AgentServer Task Storage
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -38056,6 +38057,433 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
+  /tasks:
+    post:
+      operationId: createAgentServerTask
+      summary: Create a task
+      description: Creates a durable task record.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - name: lease_owner
+          in: query
+          required: false
+          description: |-
+            Stable lease owner. Must be supplied together with `lease_instance_id` and
+            `lease_duration_seconds`. Lease parameters are query parameters, never body fields.
+          schema:
+            type: string
+          explode: false
+        - name: lease_instance_id
+          in: query
+          required: false
+          description: |-
+            Ephemeral worker instance id. Must be supplied together with `lease_owner`
+            and `lease_duration_seconds`.
+          schema:
+            type: string
+          explode: false
+        - name: lease_duration_seconds
+          in: query
+          required: false
+          description: |-
+            Lease duration in seconds. `0` force-expires the current lease; otherwise
+            values are bounded by the task-storage service.
+          schema:
+            type: integer
+            format: int32
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentServerTaskRecord'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentServer Task Storage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentServerTaskCreateRequest'
+        description: Task creation body.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+        required_previews:
+          - Routines=V1Preview
+    get:
+      operationId: listAgentServerTasks
+      summary: List tasks
+      description: Lists durable task records that match the supplied filters.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter by agent name.
+          schema:
+            type: string
+          explode: false
+        - name: session_id
+          in: query
+          required: false
+          description: Filter by session id.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter by task status.
+          schema:
+            $ref: '#/components/schemas/AgentServerTaskStatus'
+          explode: false
+        - name: has_error
+          in: query
+          required: false
+          description: Filter by whether the task has a recorded error.
+          schema:
+            type: boolean
+          explode: false
+        - name: lease_expired
+          in: query
+          required: false
+          description: Filter by whether the current lease is expired.
+          schema:
+            type: boolean
+          explode: false
+        - name: lease_owner
+          in: query
+          required: false
+          description: Filter by lease owner.
+          schema:
+            type: string
+          explode: false
+        - name: tag
+          in: query
+          required: false
+          description: Tag equality filters in `key:value` form. Repeat for AND filtering.
+          schema:
+            type: array
+            items:
+              type: string
+          explode: false
+        - name: source_type
+          in: query
+          required: false
+          description: Filter by source type, for example `routine_action_delivery`.
+          schema:
+            type: string
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: Cursor for the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of records to return. Default 20, maximum 100.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order.
+          schema:
+            $ref: '#/components/schemas/AgentServerTaskListOrder'
+            default: desc
+          explode: false
+        - name: omit_attachment_values
+          in: query
+          required: false
+          description: When true, omit attachment values from returned task records.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentServerTaskListResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentServer Task Storage
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+        required_previews:
+          - Routines=V1Preview
+  /tasks/{task_id}:
+    get:
+      operationId: getAgentServerTask
+      summary: Get a task
+      description: Retrieves a durable task record by id.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - name: task_id
+          in: path
+          required: true
+          description: The task id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentServerTaskRecord'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentServer Task Storage
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+        required_previews:
+          - Routines=V1Preview
+    patch:
+      operationId: patchAgentServerTask
+      summary: Patch a task
+      description: Patches a durable task record, including status, payload, tags, attachments, and lease operations.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - name: task_id
+          in: path
+          required: true
+          description: The task id.
+          schema:
+            type: string
+        - name: lease_owner
+          in: query
+          required: false
+          description: |-
+            Stable lease owner. Must be supplied together with `lease_instance_id` and
+            `lease_duration_seconds`. Lease parameters are query parameters, never body fields.
+          schema:
+            type: string
+          explode: false
+        - name: lease_instance_id
+          in: query
+          required: false
+          description: |-
+            Ephemeral worker instance id. Must be supplied together with `lease_owner`
+            and `lease_duration_seconds`.
+          schema:
+            type: string
+          explode: false
+        - name: lease_duration_seconds
+          in: query
+          required: false
+          description: |-
+            Lease duration in seconds. `0` force-expires the current lease; otherwise
+            values are bounded by the task-storage service.
+          schema:
+            type: integer
+            format: int32
+          explode: false
+        - name: If-Match
+          in: header
+          required: false
+          description: Optimistic-concurrency precondition for patch/delete operations.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentServerTaskRecord'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentServer Task Storage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {}
+        description: |-
+          Arbitrary JSON patch document. Supported top-level fields include status,
+          payload, tags, attachments, error, and suspension_reason.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+        required_previews:
+          - Routines=V1Preview
+    delete:
+      operationId: deleteAgentServerTask
+      summary: Delete a task
+      description: Deletes a durable task record.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - name: task_id
+          in: path
+          required: true
+          description: The task id.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: false
+          description: Optimistic-concurrency precondition for patch/delete operations.
+          schema:
+            type: string
+        - name: force
+          in: query
+          required: false
+          description: Force deletion of a non-terminal task and release any active lease. Defaults to false.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentServer Task Storage
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+        required_previews:
+          - Routines=V1Preview
   /toolboxes:
     get:
       operationId: listToolboxes
@@ -40021,6 +40449,298 @@ components:
         version:
           type: string
           description: The version identifier of the agent.
+    AgentServerTaskCreateRequest:
+      type: object
+      required:
+        - agent_name
+        - session_id
+        - title
+      properties:
+        id:
+          type: string
+          description: Optional caller-supplied task identifier. If omitted, the provider generates one.
+        agent_name:
+          type: string
+          description: Agent scope that owns this task.
+        session_id:
+          type: string
+          description: Session scope that owns this task.
+        title:
+          type: string
+          maxLength: 256
+          description: Human-readable title.
+        description:
+          type: string
+          maxLength: 1024
+          description: Optional human-readable description.
+        status:
+          $ref: '#/components/schemas/AgentServerTaskStatus'
+          description: Initial task status. Defaults to `pending`.
+          default: pending
+        payload:
+          description: Initial arbitrary JSON task payload.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Initial string tags.
+        source:
+          $ref: '#/components/schemas/AgentServerTaskSource'
+          description: Source/provenance metadata that identifies the task producer.
+        attachments:
+          type: object
+          unevaluatedProperties: {}
+          description: Initial JSON-serializable attachment values keyed by attachment name.
+      description: Request body for creating an AgentServer durable task record.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+    AgentServerTaskError:
+      type: object
+      required:
+        - type
+        - message
+      properties:
+        type:
+          type: string
+          description: Error type discriminator, such as `timeout` or `retries_exhausted`.
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Optional machine-readable error code. Defaults to `error` when omitted by the caller.
+          default: error
+      unevaluatedProperties: {}
+      description: Structured error persisted on a task record.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+    AgentServerTaskLease:
+      type: object
+      required:
+        - owner
+        - instance_id
+        - generation
+        - expires_at
+        - expiry_count
+      properties:
+        owner:
+          type: string
+          description: Stable lease owner, typically scoped to the agent and session.
+        instance_id:
+          type: string
+          description: Ephemeral worker instance identifier.
+        generation:
+          type: integer
+          format: int32
+          description: Fencing generation. Increments whenever a different instance re-acquires the lease.
+          default: 0
+        expires_at:
+          type: string
+          description: ISO 8601 UTC instant after which the lease is expired.
+        expiry_count:
+          type: integer
+          format: int32
+          description: Number of times ownership changed via expiry.
+          default: 0
+      description: |-
+        Lease details on an AgentServer durable task record.
+        The lease is the optimistic ownership/fencing token for a single worker instance.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+    AgentServerTaskListOrder:
+      type: string
+      enum:
+        - asc
+        - desc
+    AgentServerTaskListResponse:
+      type: object
+      required:
+        - object
+        - data
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: Object discriminator. Always `list`.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentServerTaskRecord'
+          description: Page of matching task records.
+        first_id:
+          type: string
+          description: First task id represented in this page.
+        has_more:
+          type: boolean
+          description: Whether more records are available.
+        last_id:
+          type: string
+          description: Cursor to pass as `after` for the next page when `has_more` is true.
+      description: Cursor-paged list response for AgentServer durable task records.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+    AgentServerTaskRecord:
+      type: object
+      required:
+        - object
+        - id
+        - agent_name
+        - session_id
+        - status
+        - title
+        - description
+        - lease
+        - payload
+        - tags
+        - source
+        - attachments
+        - error
+        - suspension_reason
+        - created_at
+        - updated_at
+        - started_at
+        - completed_at
+        - etag
+      properties:
+        object:
+          type: string
+          enum:
+            - task
+          description: Envelope discriminator. Always `task`.
+        id:
+          type: string
+          description: Stable task identifier.
+        agent_name:
+          type: string
+          description: Agent scope that owns this task.
+        session_id:
+          type: string
+          description: Session scope that owns this task.
+        status:
+          $ref: '#/components/schemas/AgentServerTaskStatus'
+          description: Current task status.
+        title:
+          type: string
+          maxLength: 256
+          description: Human-readable title.
+        description:
+          anyOf:
+            - type: string
+            - type: 'null'
+          maxLength: 1024
+          description: Optional human-readable description.
+        lease:
+          anyOf:
+            - $ref: '#/components/schemas/AgentServerTaskLease'
+            - type: 'null'
+          description: Active lease details, or null when no lease is held.
+        payload:
+          anyOf:
+            - {}
+            - type: 'null'
+          description: Arbitrary JSON payload used by the agent as task input or mutable task state.
+        tags:
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
+          description: String tags associated with this task.
+        source:
+          anyOf:
+            - $ref: '#/components/schemas/AgentServerTaskSource'
+            - type: 'null'
+          description: Source/provenance metadata that identifies the task producer.
+        attachments:
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
+          description: JSON-serializable attachment values keyed by attachment name.
+        error:
+          anyOf:
+            - $ref: '#/components/schemas/AgentServerTaskError'
+            - type: 'null'
+          description: Structured terminal error details.
+        suspension_reason:
+          anyOf:
+            - type: string
+            - type: 'null'
+          maxLength: 256
+          description: Reason the task was suspended.
+        created_at:
+          type: string
+          description: ISO 8601 UTC creation timestamp.
+        updated_at:
+          type: string
+          description: ISO 8601 UTC last-update timestamp.
+        started_at:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: ISO 8601 UTC timestamp of the first transition to `in_progress`, or null.
+        completed_at:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: ISO 8601 UTC completion timestamp, or null.
+        etag:
+          type: string
+          description: Optimistic-concurrency token.
+      description: Client-facing representation of an AgentServer durable task record.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+    AgentServerTaskSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Source system or producer type.
+        routine_name:
+          type: string
+          description: Routine name that produced the task, when applicable.
+        routine_run_id:
+          type: string
+          description: Routine run identifier that produced the task, when available.
+        dispatch_id:
+          type: string
+          description: Dispatch identifier associated with the source event.
+        action_correlation_id:
+          type: string
+          description: Correlation identifier for the source action that created the task.
+        created_at:
+          type: string
+          description: ISO 8601 UTC instant when the source object was created.
+        updated_at:
+          type: string
+          description: ISO 8601 UTC instant when the source object was last updated.
+      unevaluatedProperties: {}
+      description: Provenance and recovery-routing metadata for an AgentServer durable task record.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
+    AgentServerTaskStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - pending
+            - in_progress
+            - suspended
+            - completed
+      description: Status values persisted on an AgentServer durable task record.
+      x-ms-foundry-meta:
+        contract: agentserver-persistence
+        usage: cross-language-sdk-persistence
     AgentSessionResource:
       type: object
       required:
@@ -40449,7 +41169,7 @@ components:
             - benchmark_preview
           description: Data schema scenario, always `benchmark` for benchmark evaluations.
         benchmark_name:
-          type: string
+          $ref: '#/components/schemas/BenchmarkName'
           description: The name of the benchmark specification.
         benchmark_version:
           type: string
@@ -41364,6 +42084,23 @@ components:
           None: '#/components/schemas/NoAuthenticationCredentials'
           AgenticIdentityToken_Preview: '#/components/schemas/AgenticIdentityPreviewCredentials'
       description: A base class for connection credentials
+    BenchmarkName:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - builtin.gpqa_diamond
+            - builtin.bbeh
+            - builtin.bigbenchhard
+            - builtin.frontierscience
+            - builtin.ifeval
+            - builtin.musr
+            - builtin.truthful_qa
+            - builtin.inspect_ai.aime2025
+            - builtin.inspect_ai.browse_comp
+            - builtin.inspect_ai.chembench
+            - builtin.inspect_ai.tau2_telecom
+      description: The set of available benchmark specifications.
     BingCustomSearchConfiguration:
       type: object
       required:
@@ -42477,6 +43214,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+              - $ref: '#/components/schemas/EvalGraderInspectAI'
           description: A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
         properties:
           type: object
@@ -43529,6 +44267,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+              - $ref: '#/components/schemas/EvalGraderInspectAI'
           description: A list of testing criteria.
         created_at:
           type: integer
@@ -43624,6 +44363,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a CSV data source for evaluation runs.
+    EvalGraderInspectAI:
+      type: object
+      required:
+        - type
+        - name
+        - task_name
+      properties:
+        type:
+          type: string
+          enum:
+            - inspect_ai
+          description: The object type, which is always `inspect_ai`.
+        name:
+          type: string
+          description: The display name of the benchmark.
+        task_name:
+          type: string
+          description: The inspect_ai task module path (e.g., `inspect_evals/aime2025`).
+      description: Grader inspect_ai definition for inspect_ai benchmark evaluators.
     EvalResult:
       type: object
       required:
