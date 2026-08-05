@@ -163,15 +163,6 @@ using Microsoft.ScVmm;
   Access.internal,
   "csharp"
 );
-@@access(Microsoft.ScVmm.Clouds.update, Access.internal, "csharp");
-@@access(Microsoft.ScVmm.VmmServers.update, Access.internal, "csharp");
-@@access(
-  Microsoft.ScVmm.VirtualMachineTemplates.update,
-  Access.internal,
-  "csharp"
-);
-@@access(Microsoft.ScVmm.VirtualNetworks.update, Access.internal, "csharp");
-
 // Properties: preserve the AutoRest acronym mapping (Os/Ip/Ipv4/Ipv6 ->
 // OS/IP/IPv4/IPv6) for the shipped 1.0.0 C# public API.
 @@clientName(
@@ -313,6 +304,26 @@ model ScVmmResourcePatch
 
 @@alternateType(
   AvailabilitySets.update::parameters.properties,
+  ScVmmResourcePatch,
+  "csharp"
+);
+@@alternateType(
+  Clouds.update::parameters.properties,
+  ScVmmResourcePatch,
+  "csharp"
+);
+@@alternateType(
+  VmmServers.update::parameters.properties,
+  ScVmmResourcePatch,
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineTemplates.update::parameters.properties,
+  ScVmmResourcePatch,
+  "csharp"
+);
+@@alternateType(
+  VirtualNetworks.update::parameters.properties,
   ScVmmResourcePatch,
   "csharp"
 );
