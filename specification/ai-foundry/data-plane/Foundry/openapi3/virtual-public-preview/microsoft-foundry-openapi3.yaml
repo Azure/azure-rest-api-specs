@@ -49876,7 +49876,7 @@ components:
           minLength: 1
           description: The Handlebars prompt that guides the opening turn.
         tool_choice:
-          $ref: '#/components/schemas/VoiceGreetingToolChoice'
+          $ref: '#/components/schemas/VoiceAgentToolChoice'
           description: The tool-selection policy for the opening response. Defaults to `none`.
           default: none
       allOf:
@@ -81445,6 +81445,13 @@ components:
             The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,
             `system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,
             `azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly.
+        tool_choice:
+          $ref: '#/components/schemas/VoiceAgentToolChoice'
+          description: |-
+            How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+            `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+            Defaults to `auto`.
+          default: auto
         structured_inputs:
           type: object
           unevaluatedProperties:
@@ -81618,6 +81625,15 @@ components:
         A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,
         service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
         `azure_ai_search` are provided through a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentToolChoice:
+      oneOf:
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceFunction'
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceMCP'
+      description: Tool-selection behavior for a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -82364,16 +82380,6 @@ components:
           template: '#/components/schemas/TemplateVoiceGreetingConfig'
           llm_generated: '#/components/schemas/LlmGeneratedVoiceGreetingConfig'
       description: Session-start greeting configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceGreetingToolChoice:
-      type: string
-      enum:
-        - none
-        - auto
-        - required
-      description: The tool-selection policy for an LLM-generated greeting.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
