@@ -1,5 +1,4 @@
-// Models for the AgentsOptimization data-plane surface.
-// Aligned with in-tree C# DTOs (Contracts/V2Preview/Models/).
+// Models for the AgentsOptimization data-plane surface (V3Preview).
 //
 // Uses shared Foundry job infrastructure from servicepatterns.tsp:
 //   JobLike<TResult, TInputs> — base job shape (id, status, inputs, result, error)
@@ -18,7 +17,7 @@ namespace Azure.AI.Projects;
 
 const AgentOptimizationRequiredPreviews = #{
   conditional_previews: #[
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview
   ],
 };
 
@@ -34,7 +33,7 @@ union TargetAttribute {
   @doc("Instruction-tuning — rewrites agent system prompts.")
   instruction: "instruction",
 
-  @doc("Model-selection — evaluates alternative LLM deployments.")
+  @doc("Model-selection — evaluates alternative LLM deployments (uses options.model_search_space).")
   `model`: "model",
 
   @doc("Skill-tuning — generates or modifies agent skill descriptions.")
@@ -44,13 +43,34 @@ union TargetAttribute {
   tool: "tool",
 }
 
-/** Run mode for an optimization job. */
+/** Terminal completion classification for a successful optimization job. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-union OptimizationMode {
+union OptimizationCompletionStatus {
   string,
 
-  @doc("Full optimization: baseline + mutation target attributes.")
-  optimize: "optimize",
+  @doc("Best candidate exceeded the baseline score.")
+  improved: "improved",
+
+  @doc("Optimization completed but no candidate outperformed the baseline.")
+  no_improvement: "no_improvement",
+
+  @doc("Optimization halted early because max_stalls was reached.")
+  stopped_early: "stopped_early",
+}
+
+/** Which layer of the optimization loop generated a token/latency usage entry. */
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+union OptimizationLayer {
+  string,
+
+  @doc("Agent inference calls (the agent being optimized).")
+  agent: "agent",
+
+  @doc("Judge / evaluator model calls.")
+  judge: "judge",
+
+  @doc("Reflection / optimization strategy model calls.")
+  reflection: "reflection",
 }
 
 // ---------------------------------------------------------------------------
@@ -140,13 +160,16 @@ model OptimizationEvaluatorRef {
 
   @doc("Evaluator version. If not specified, the latest version is used.")
   version?: string;
+
+  @doc("Optional parameters passed to the evaluator at initialization. Shape is evaluator-specific.")
+  initialization_parameters?: Record<unknown>;
 }
 
 // ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
+@doc("Identifies the registered Foundry agent to optimize. Baseline configuration is resolved automatically, or overridden with skills, tools, or system prompt specified in options.optimization_config.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model OptimizationAgentIdentifier {
   @doc("Registered Foundry agent name (required).")
@@ -156,20 +179,14 @@ model OptimizationAgentIdentifier {
   agent_version?: string;
 }
 
-@doc("Agent definition returned in response payloads (includes resolved config).")
+@doc("Structured baseline configuration for the agent being optimized.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationAgentDefinition {
-  @doc("Agent name.")
-  agent_name?: string;
-
-  @doc("Agent version.")
-  agent_version?: string;
+model OptimizationConfig {
+  @doc("System prompt / instructions.")
+  system_prompt?: string;
 
   @doc("Model deployment name.")
   `model`?: string;
-
-  @doc("System prompt / instructions.")
-  system_prompt?: string;
 
   @doc("Agent skills.")
   skills?: Record<unknown>[];
@@ -179,15 +196,13 @@ model OptimizationAgentDefinition {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Tuning knobs and run-mode for an optimization job.")
+@doc("Tuning knobs for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model OptimizationOptions {
-  @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
+  @doc("Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. Default: 2.")
   @minValue(1)
-  max_candidates?: int32 = 5;
-
-  @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
-  optimization_config?: Record<unknown>;
+  @maxValue(20)
+  max_candidates?: int32 = 2;
 
   @doc("Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').")
   eval_model?: string;
@@ -198,9 +213,32 @@ model OptimizationOptions {
   @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
 
-  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.")
+  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Server default when unset: 5.")
   @minValue(1)
-  max_stalls?: int32 = 5;
+  @maxValue(50)
+  max_stalls?: int32;
+
+  @doc("Number of items sampled per reflective minibatch. Server default when unset.")
+  @minValue(1)
+  @maxValue(100)
+  reflection_minibatch_size?: int32;
+
+  @doc("Maximum number of concurrent agent runs during evaluation. Server default when unset.")
+  @minValue(1)
+  @maxValue(100)
+  max_concurrent_agent_runs?: int32;
+
+  @doc("Which agent attributes to optimize. Omit or leave empty to auto-select based on baseline configuration.")
+  target_attributes?: TargetAttribute[];
+
+  @doc("Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.")
+  model_search_space?: string[];
+
+  @doc("Optimization strategy identifier. Currently only 'gepa' is a documented value; additional strategies may be enabled server-side.")
+  strategy?: string;
+
+  @doc("Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.")
+  optimization_config?: OptimizationConfig;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
@@ -216,46 +254,152 @@ model OptimizationJobInputs {
   validation_dataset?: OptimizationDatasetInput;
 
   @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
+  @minItems(1)
   evaluators: OptimizationEvaluatorRef[];
 
-  @doc("Tuning knobs and run-mode.")
+  @doc("Tuning knobs.")
   options?: OptimizationOptions;
+}
+
+// ---------------------------------------------------------------------------
+// Estimate models
+// ---------------------------------------------------------------------------
+
+@doc("Options for :estimate. Extends OptimizationOptions with estimate-only fields.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model EstimateOptions extends OptimizationOptions {
+  @doc("Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present.")
+  @minValue(1)
+  validation_dataset_row_count?: int32;
+}
+
+@doc("Inputs for :estimate. Same shape as OptimizationJobInputs but the options field is EstimateOptions.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model EstimateJobInputs {
+  @doc("The agent (and pinned version) being optimized.")
+  agent: OptimizationAgentIdentifier;
+
+  @doc("Training dataset.")
+  train_dataset: OptimizationDatasetInput;
+
+  @doc("Optional held-out validation dataset.")
+  validation_dataset?: OptimizationDatasetInput;
+
+  @doc("Evaluators.")
+  @minItems(1)
+  evaluators: OptimizationEvaluatorRef[];
+
+  @doc("Estimate-specific tuning knobs.")
+  options?: EstimateOptions;
+}
+
+@doc("A low/typical/ceiling range for an estimated quantity.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model EstimateBand {
+  @doc("Lower bound.")
+  low: float64;
+
+  @doc("Central estimate.")
+  typical: float64;
+
+  @doc("Upper bound.")
+  ceiling: float64;
+}
+
+@doc("Estimated cost breakdown. Present only when at least one contributing model has pricing data available.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model EstimateDollars {
+  @doc("Whether the dollar figures are modeled (projected from call counts + per-model prices) vs. measured. Currently always true; may become false when measured billing data is available. Do not branch exhaustively on this value.")
+  modeled: boolean;
+
+  @doc("ISO 4217 currency code (e.g., 'USD'). Read as data — do not assume USD; the price source stamps the currency and this may change without a contract change.")
+  currency: string;
+
+  @doc("Where the pricing values came from. Open set — currently emitted values are 'config' (server pricing table) and 'request' (caller-supplied override). Additional sources (e.g. subscription/billing) may be added; treat unknown values as opaque, do not switch exhaustively.")
+  pricing_source?: string;
+
+  @doc("Total dollar estimate across all priced layers. Null when no layer could be priced.")
+  total?: EstimateBand;
+
+  @doc("Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only priced layers are present.")
+  per_layer?: Record<EstimateBand>;
+
+  @doc("Cost layers excluded from total because no pricing data was available for their model.")
+  unpriced_layers?: string[];
+}
+
+@doc("Response body for :estimate.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model EstimateResponse {
+  @doc("Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_dataset was passed as a registered reference.")
+  dataset_rows: int32;
+
+  @doc("Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only layers that will run are present.")
+  call_counts?: Record<EstimateBand>;
+
+  @doc("Modeled dollar estimate. Present only when pricing data is available for at least one contributing model.")
+  dollars?: EstimateDollars;
+
+  @doc("The pricing snapshot date used for cost estimation, formatted YYYY-MM-DD.")
+  prices_as_of?: string;
 }
 
 // ---------------------------------------------------------------------------
 // Progress / result models
 // ---------------------------------------------------------------------------
 
-@doc("In-flight progress; only populated while status is queued or in_progress.")
+@doc("Metadata for the candidate currently under evaluation. Present only during in_progress with progressive-update visibility.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model InProgressCandidateInfo {
+  @doc("Timestamp when the current candidate began evaluation, represented in Unix time.")
+  created_at?: FoundryTimestamp;
+
+  @doc("Whether the candidate configuration has been fully generated (vs. still being reflected on).")
+  candidate_generated: boolean;
+}
+
+@doc("In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model OptimizationJobProgress {
   @doc("Number of candidates whose evaluation has completed so far.")
   candidates_completed: int32;
 
+  @doc("Score of the baseline (un-optimized) evaluation. Null until the baseline eval completes.")
+  baseline_score?: float64;
+
   @doc("Best score observed so far across all candidates.")
-  best_score: float64;
+  best_score?: float64;
 
   @doc("Wall-clock time elapsed in seconds since the job began executing.")
   elapsed_seconds: float64;
+
+  @doc("Metadata for the candidate currently under evaluation. Dropped on terminal states.")
+  in_progress_candidate?: InProgressCandidateInfo;
+
+  @doc("Populated once any candidate from this job has been promoted to an agent version.")
+  promotion?: PromotionInfo;
 }
 
-@doc("Aggregated evaluation result for a single candidate agent configuration across all tasks.")
+@doc("Slim candidate view returned in bulk-read contexts (job GET result.candidates[], candidate LIST). Excludes mutations to keep customer-supplied prompt content off bulk-read paths. Fetch full detail via GET /agent_optimization_jobs/{jobId}/candidates/{candidateId}.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationCandidate {
+model CandidateSummary {
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
-  candidate_id?: string;
+  candidate_id: string;
 
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
 
-  @doc("What was mutated from the baseline (e.g., {system_prompt: 'new prompt'}).")
-  mutations?: Record<unknown>;
+  @doc("Timestamp when the candidate was created, represented in Unix time. Populated on candidate detail; may be omitted from list contexts.")
+  created_at?: FoundryTimestamp;
 
-  @doc("Average composite score across all tasks.")
-  avg_score: float64;
+  @doc("Average composite score across all evaluated tasks.")
+  avg_score?: float64;
 
-  @doc("Average token usage across all tasks.")
-  avg_tokens: float64;
+  @doc("Average total tokens consumed per task.")
+  avg_tokens?: float64;
+
+  @doc("Average end-to-end latency per task in milliseconds.")
+  avg_latency_ms?: float64;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   eval_id?: string;
@@ -263,49 +407,84 @@ model OptimizationCandidate {
   @doc("Foundry evaluation run identifier for this candidate's scoring run.")
   eval_run_id?: string;
 
-  @doc("Promotion metadata. Null if the candidate has not been promoted.")
+  @doc("Promotion metadata. Null if this candidate has not been promoted.")
   promotion?: PromotionInfo;
 }
 
-@doc("Per-task evaluation result for a single candidate.")
+@doc("A single candidate file artifact stored in the job's output blob.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationTaskResult {
-  @doc("Task name (from the dataset).")
-  task_name: string;
+model CandidateFileInfo {
+  @doc("Relative path of the file within the candidate's output folder.")
+  path: string;
 
-  @doc("The user query / input for the task.")
-  query?: string;
+  @doc("File type / role (e.g., 'config', 'results', 'diagnostics').")
+  type: string;
 
-  @doc("Per-evaluator scores keyed by evaluator name.")
-  scores: Record<float64>;
-
-  @doc("Composite score combining all evaluator scores.")
-  composite_score: float64;
-
-  @doc("Total tokens consumed during the agent run for this task.")
-  tokens: int64;
-
-  @doc("Wall-clock seconds for this task's agent execution.")
-  @encode(DurationKnownEncoding.seconds, float64)
-  duration_seconds: duration;
-
-  @doc("Whether the task met the pass threshold.")
-  passed: boolean;
-
-  @doc("Error message if the task failed during execution.")
-  error_message?: string;
-
-  @doc("Per-evaluator reasoning keyed by evaluator name.")
-  rationales?: Record<string>;
-
-  @doc("Raw agent response text.")
-  response?: string;
-
-  @doc("Identifier of the agent run that produced this result.")
-  run_id?: string;
+  @doc("File size in bytes.")
+  size_bytes: int64;
 }
 
-@doc("Terminal-state result body. Populated when status is succeeded or failed.")
+@doc("Full candidate view returned by GET /candidates/{id}. Extends CandidateSummary with the mutation payload and file manifest.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model CandidateDetail extends CandidateSummary {
+  @doc("Identifier of the parent optimization job.")
+  job_id: string;
+
+  @doc("The mutation payload applied to the baseline to produce this candidate (e.g., {system_prompt: 'new prompt'}). May contain customer-supplied prompt content.")
+  mutations?: Record<unknown>;
+
+  @doc("Manifest of artifact files stored for this candidate.")
+  files?: CandidateFileInfo[];
+}
+
+@doc("Aggregated token usage attributable to a single layer of the optimization loop.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model TokenUsageEntry {
+  @doc("Which layer of the optimization loop generated these calls.")
+  layer: OptimizationLayer;
+
+  @doc("Model deployment name that served the calls. Null when unattributed.")
+  `model`?: string;
+
+  @doc("Total input tokens. Null when unmeasured.")
+  input_tokens?: int64;
+
+  @doc("Total output tokens. Null when unmeasured.")
+  output_tokens?: int64;
+
+  @doc("Sum of input_tokens + output_tokens. Null when unmeasured.")
+  total_tokens?: int64;
+
+  @doc("Input tokens served from the model's cache. Included in input_tokens (not additive). Null when the model did not report this metric.")
+  cached_tokens?: int64;
+
+  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Null when the model did not report this metric.")
+  reasoning_tokens?: int64;
+}
+
+@doc("Aggregated wall-clock latency attributable to a single layer of the optimization loop.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model LatencyUsageEntry {
+  @doc("Which layer of the optimization loop generated these calls.")
+  layer: OptimizationLayer;
+
+  @doc("Model deployment name that served the calls.")
+  `model`: string;
+
+  @doc("Average per-call latency in milliseconds.")
+  avg_latency_ms: float64;
+
+  @doc("p50 (median) per-call latency in milliseconds.")
+  p50_latency_ms?: float64;
+
+  @doc("p95 per-call latency in milliseconds.")
+  p95_latency_ms?: float64;
+
+  @doc("Total number of calls contributing to this entry.")
+  call_count: int64;
+}
+
+@doc("Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed).")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model OptimizationJobResult {
   @doc("Candidate ID of the original (un-optimized) baseline evaluation.")
@@ -314,8 +493,14 @@ model OptimizationJobResult {
   @doc("Candidate ID of the highest-scoring candidate found during optimization.")
   best?: string;
 
-  @doc("All evaluated candidates including baseline.")
-  candidates?: OptimizationCandidate[];
+  @doc("All evaluated candidates including baseline. Excludes mutation payloads; fetch full detail via GET /candidates/{id}.")
+  candidates?: CandidateSummary[];
+
+  @doc("Aggregate token usage per layer × model.")
+  token_usage?: TokenUsageEntry[];
+
+  @doc("Aggregate latency per layer × model.")
+  latency_usage?: LatencyUsageEntry[];
 }
 
 // ---------------------------------------------------------------------------
@@ -333,9 +518,13 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
 
-  @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
+  @doc("Progress snapshot. Preserved on terminal states (with in_progress_candidate omitted).")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
+
+  @doc("Terminal completion classification. Present only on succeeded.")
+  @visibility(Lifecycle.Read)
+  completion_status?: OptimizationCompletionStatus;
 
   @doc("Non-fatal warnings emitted at any point during optimization.")
   @visibility(Lifecycle.Read)
@@ -343,27 +532,15 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 }
 
 // ---------------------------------------------------------------------------
-// Slim list item — returned by LIST
-// ---------------------------------------------------------------------------
-
-@doc("Slim job representation returned by the LIST endpoint.")
-@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJobListItem is OmitProperties<
-  OptimizationJob,
-  "inputs" | "result" | "warnings"
-> {
-  @doc("The agent targeted by this optimization job.")
-  @visibility(Lifecycle.Read)
-  agent?: OptimizationAgentIdentifier;
-}
-
-// ---------------------------------------------------------------------------
 // Promotion models
 // ---------------------------------------------------------------------------
 
-@doc("Promotion metadata recorded when a candidate is deployed to a Foundry agent.")
+@doc("Promotion metadata recorded when a candidate is deployed to a Foundry agent version.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model PromotionInfo {
+  @doc("Server-assigned candidate identifier that was promoted.")
+  candidate_id: string;
+
   @doc("Timestamp when promotion occurred, represented in Unix time.")
   promoted_at: FoundryTimestamp;
 
@@ -372,4 +549,36 @@ model PromotionInfo {
 
   @doc("Version of the Foundry agent this candidate was promoted to.")
   agent_version: string;
+}
+
+@doc("Request body for POST /candidates/{id}:promote. For prompt agents these fields are ignored; the target agent is resolved from the job's stored baseline configuration.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model PromoteCandidateRequest {
+  @doc("Target Foundry agent name to promote onto. For prompt agents this is ignored.")
+  agent_name?: string;
+
+  @doc("Target agent version. When omitted, a new version is created.")
+  agent_version?: string;
+}
+
+@doc("Response body for POST /candidates/{id}:promote.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model PromoteCandidateResponse {
+  @doc("Server-assigned candidate identifier that was promoted.")
+  candidate_id: string;
+
+  @doc("Post-promotion candidate status.")
+  status: string;
+
+  @doc("Timestamp when promotion occurred, represented in Unix time.")
+  promoted_at: FoundryTimestamp;
+
+  @doc("Name of the Foundry agent this candidate was promoted to.")
+  agent_name: string;
+
+  @doc("Version of the Foundry agent this candidate was promoted to. May be null when a caller omitted a target version and no server default resolved.")
+  agent_version?: string;
+
+  @doc("Whether a new agent version was created during promotion.")
+  created_new_version: boolean;
 }
