@@ -19,142 +19,66 @@ using Microsoft.ScVmm;
 // historical VMMServer -> ScVmmServer / VmInstanceHybridIdentityMetadata ->
 // ScVmmHybridIdentityMetadata renames) so the generated *Resource/*Data/
 // *Collection types match the shipped names.
-@@clientName(Microsoft.ScVmm.VmmServer, "ScVmmServer", "csharp");
-@@clientName(Microsoft.ScVmm.Cloud, "ScVmmCloud", "csharp");
-@@clientName(Microsoft.ScVmm.AvailabilitySet, "ScVmmAvailabilitySet", "csharp");
-@@clientName(Microsoft.ScVmm.VirtualNetwork, "ScVmmVirtualNetwork", "csharp");
+@@clientName(VmmServer, "ScVmmServer", "csharp");
+@@clientName(Cloud, "ScVmmCloud", "csharp");
+@@clientName(AvailabilitySet, "ScVmmAvailabilitySet", "csharp");
+@@clientName(VirtualNetwork, "ScVmmVirtualNetwork", "csharp");
+@@clientName(VirtualMachineTemplate, "ScVmmVirtualMachineTemplate", "csharp");
+@@clientName(VirtualMachineInstance, "ScVmmVirtualMachineInstance", "csharp");
+@@clientName(InventoryItem, "ScVmmInventoryItem", "csharp");
+@@clientName(GuestAgent, "ScVmmGuestAgent", "csharp");
 @@clientName(
-  Microsoft.ScVmm.VirtualMachineTemplate,
-  "ScVmmVirtualMachineTemplate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineInstance,
-  "ScVmmVirtualMachineInstance",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.InventoryItem, "ScVmmInventoryItem", "csharp");
-@@clientName(Microsoft.ScVmm.GuestAgent, "ScVmmGuestAgent", "csharp");
-@@clientName(
-  Microsoft.ScVmm.VmInstanceHybridIdentityMetadata,
+  VmInstanceHybridIdentityMetadata,
   "ScVmmHybridIdentityMetadata",
   "csharp"
 );
 
 // Models and enums: prepend the "ScVmm" prefix / apply acronym casing so the
 // generated names match the shipped 1.0.0 surface.
+@@clientName(AvailabilitySetListItem, "ScVmmAvailabilitySetItem", "csharp");
+@@clientName(Checkpoint, "ScVmmCheckpoint", "csharp");
+@@clientName(CloudCapacity, "ScVmmCloudCapacity", "csharp");
+@@clientName(GuestCredential, "ScVmmGuestCredential", "csharp");
+@@clientName(HardwareProfile, "ScVmmHardwareProfile", "csharp");
+@@clientName(HardwareProfileUpdate, "ScVmmHardwareProfileUpdate", "csharp");
+@@clientName(HttpProxyConfiguration, "ScVmmHttpProxyConfiguration", "csharp");
+@@clientName(InfrastructureProfile, "ScVmmInfrastructureProfile", "csharp");
 @@clientName(
-  Microsoft.ScVmm.AvailabilitySetListItem,
-  "ScVmmAvailabilitySetItem",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.Checkpoint, "ScVmmCheckpoint", "csharp");
-@@clientName(Microsoft.ScVmm.CloudCapacity, "ScVmmCloudCapacity", "csharp");
-@@clientName(Microsoft.ScVmm.GuestCredential, "ScVmmGuestCredential", "csharp");
-@@clientName(Microsoft.ScVmm.HardwareProfile, "ScVmmHardwareProfile", "csharp");
-@@clientName(
-  Microsoft.ScVmm.HardwareProfileUpdate,
-  "ScVmmHardwareProfileUpdate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.HttpProxyConfiguration,
-  "ScVmmHttpProxyConfiguration",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.InfrastructureProfile,
-  "ScVmmInfrastructureProfile",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.InfrastructureProfileUpdate,
+  InfrastructureProfileUpdate,
   "ScVmmInfrastructureProfileUpdate",
   "csharp"
 );
+@@clientName(InventoryItemDetails, "ScVmmInventoryItemDetails", "csharp");
+@@clientName(InventoryItemProperties, "ScVmmInventoryItemProperties", "csharp");
+@@clientName(InventoryType, "ScVmmInventoryType", "csharp");
+@@clientName(NetworkInterface, "ScVmmNetworkInterface", "csharp");
+@@clientName(NetworkInterfaceUpdate, "ScVmmNetworkInterfaceUpdate", "csharp");
+@@clientName(NetworkProfile, "ScVmmNetworkProfile", "csharp");
+@@clientName(NetworkProfileUpdate, "ScVmmNetworkProfileUpdate", "csharp");
+@@clientName(OsType, "ScVmmOSType", "csharp");
+@@clientName(ProvisioningAction, "ScVmmProvisioningAction", "csharp");
+@@clientName(ProvisioningState, "ScVmmProvisioningState", "csharp");
+@@clientName(StorageProfile, "ScVmmStorageProfile", "csharp");
+@@clientName(StorageProfileUpdate, "ScVmmStorageProfileUpdate", "csharp");
+@@clientName(StorageQosPolicy, "ScVmmStorageQosPolicy", "csharp");
+@@clientName(StorageQosPolicyDetails, "ScVmmStorageQosPolicyDetails", "csharp");
+@@clientName(VirtualDisk, "ScVmmVirtualDisk", "csharp");
+@@clientName(VirtualDiskUpdate, "ScVmmVirtualDiskUpdate", "csharp");
+@@clientName(ForceDelete, "ScVmmForceDeletion", "csharp");
+@@clientName(OsProfileForVmInstance, "OSProfileForVmInstance", "csharp");
+@@clientName(StopVirtualMachineOptions, "StopVirtualMachineContent", "csharp");
 @@clientName(
-  Microsoft.ScVmm.InventoryItemDetails,
-  "ScVmmInventoryItemDetails",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.InventoryItemProperties,
-  "ScVmmInventoryItemProperties",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.InventoryType, "ScVmmInventoryType", "csharp");
-@@clientName(
-  Microsoft.ScVmm.NetworkInterface,
-  "ScVmmNetworkInterface",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.NetworkInterfaceUpdate,
-  "ScVmmNetworkInterfaceUpdate",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.NetworkProfile, "ScVmmNetworkProfile", "csharp");
-@@clientName(
-  Microsoft.ScVmm.NetworkProfileUpdate,
-  "ScVmmNetworkProfileUpdate",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.OsType, "ScVmmOSType", "csharp");
-@@clientName(
-  Microsoft.ScVmm.ProvisioningAction,
-  "ScVmmProvisioningAction",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.ProvisioningState,
-  "ScVmmProvisioningState",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.StorageProfile, "ScVmmStorageProfile", "csharp");
-@@clientName(
-  Microsoft.ScVmm.StorageProfileUpdate,
-  "ScVmmStorageProfileUpdate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.StorageQosPolicy,
-  "ScVmmStorageQosPolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.StorageQosPolicyDetails,
-  "ScVmmStorageQosPolicyDetails",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.VirtualDisk, "ScVmmVirtualDisk", "csharp");
-@@clientName(
-  Microsoft.ScVmm.VirtualDiskUpdate,
-  "ScVmmVirtualDiskUpdate",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.ForceDelete, "ScVmmForceDeletion", "csharp");
-@@clientName(
-  Microsoft.ScVmm.OsProfileForVmInstance,
-  "OSProfileForVmInstance",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.StopVirtualMachineOptions,
-  "StopVirtualMachineContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineCreateCheckpoint,
+  VirtualMachineCreateCheckpoint,
   "VirtualMachineCreateCheckpointContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ScVmm.VirtualMachineDeleteCheckpoint,
+  VirtualMachineDeleteCheckpoint,
   "VirtualMachineDeleteCheckpointContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ScVmm.VirtualMachineRestoreCheckpoint,
+  VirtualMachineRestoreCheckpoint,
   "VirtualMachineRestoreCheckpointContent",
   "csharp"
 );
@@ -165,99 +89,39 @@ using Microsoft.ScVmm;
 );
 // Properties: preserve the AutoRest acronym mapping (Os/Ip/Ipv4/Ipv6 ->
 // OS/IP/IPv4/IPv6) for the shipped 1.0.0 C# public API.
+@@clientName(VirtualMachineTemplateProperties.osType, "OSType", "csharp");
+@@clientName(VirtualMachineTemplateProperties.osName, "OSName", "csharp");
+@@clientName(VirtualMachineInstanceProperties.osProfile, "OSProfile", "csharp");
+@@clientName(NetworkInterface.ipv4Addresses, "IPv4Addresses", "csharp");
+@@clientName(NetworkInterface.ipv6Addresses, "IPv6Addresses", "csharp");
+@@clientName(NetworkInterface.ipv4AddressType, "IPv4AddressType", "csharp");
+@@clientName(NetworkInterface.ipv6AddressType, "IPv6AddressType", "csharp");
 @@clientName(
-  Microsoft.ScVmm.VirtualMachineTemplateProperties.osType,
-  "OSType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineTemplateProperties.osName,
-  "OSName",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineInstanceProperties.osProfile,
-  "OSProfile",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.NetworkInterface.ipv4Addresses,
-  "IPv4Addresses",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.NetworkInterface.ipv6Addresses,
-  "IPv6Addresses",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.NetworkInterface.ipv4AddressType,
+  NetworkInterfaceUpdate.ipv4AddressType,
   "IPv4AddressType",
   "csharp"
 );
 @@clientName(
-  Microsoft.ScVmm.NetworkInterface.ipv6AddressType,
+  NetworkInterfaceUpdate.ipv6AddressType,
   "IPv6AddressType",
   "csharp"
 );
-@@clientName(
-  Microsoft.ScVmm.NetworkInterfaceUpdate.ipv4AddressType,
-  "IPv4AddressType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.NetworkInterfaceUpdate.ipv6AddressType,
-  "IPv6AddressType",
-  "csharp"
-);
-@@clientName(Microsoft.ScVmm.OsProfileForVmInstance.osType, "OSType", "csharp");
-@@clientName(Microsoft.ScVmm.OsProfileForVmInstance.osSku, "OSSku", "csharp");
-@@clientName(
-  Microsoft.ScVmm.OsProfileForVmInstance.osVersion,
-  "OSVersion",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineTemplateInventoryItem.osType,
-  "OSType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineTemplateInventoryItem.osName,
-  "OSName",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineInventoryItem.osType,
-  "OSType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineInventoryItem.osName,
-  "OSName",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineInventoryItem.osVersion,
-  "OSVersion",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ScVmm.VirtualMachineInventoryItem.ipAddresses,
-  "IPAddresses",
-  "csharp"
-);
+@@clientName(OsProfileForVmInstance.osType, "OSType", "csharp");
+@@clientName(OsProfileForVmInstance.osSku, "OSSku", "csharp");
+@@clientName(OsProfileForVmInstance.osVersion, "OSVersion", "csharp");
+@@clientName(VirtualMachineTemplateInventoryItem.osType, "OSType", "csharp");
+@@clientName(VirtualMachineTemplateInventoryItem.osName, "OSName", "csharp");
+@@clientName(VirtualMachineInventoryItem.osType, "OSType", "csharp");
+@@clientName(VirtualMachineInventoryItem.osName, "OSName", "csharp");
+@@clientName(VirtualMachineInventoryItem.osVersion, "OSVersion", "csharp");
+@@clientName(VirtualMachineInventoryItem.ipAddresses, "IPAddresses", "csharp");
 
 // Model usage: these models were public input/output types in the AutoRest
 // SDK even though the TypeSpec shapes are currently only reached through
 // read-only operations/properties. Add the missing input usage so constructors,
 // setters, and JsonModelWriteCore remain on the C# surface.
-@@usage(Microsoft.ScVmm.Checkpoint, Usage.input, "csharp");
-@@usage(
-  Microsoft.ScVmm.VmInstanceHybridIdentityMetadataProperties,
-  Usage.input,
-  "csharp"
-);
+@@usage(Checkpoint, Usage.input, "csharp");
+@@usage(VmInstanceHybridIdentityMetadataProperties, Usage.input, "csharp");
 
 // ExtendedLocation: AutoRest mapped this resource envelope property to the
 // shared ARM common C# type Azure.ResourceManager.Resources.Models.ExtendedLocation.
@@ -265,32 +129,32 @@ using Microsoft.ScVmm;
 // to that shared type without emitting a package-local model, so redirect each
 // resource envelope's extendedLocation property to it for csharp.
 @@alternateType(
-  Microsoft.ScVmm.AvailabilitySet.extendedLocation,
+  AvailabilitySet.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 @@alternateType(
-  Microsoft.ScVmm.Cloud.extendedLocation,
+  Cloud.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 @@alternateType(
-  Microsoft.ScVmm.VmmServer.extendedLocation,
+  VmmServer.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 @@alternateType(
-  Microsoft.ScVmm.VirtualMachineInstance.extendedLocation,
+  VirtualMachineInstance.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 @@alternateType(
-  Microsoft.ScVmm.VirtualMachineTemplate.extendedLocation,
+  VirtualMachineTemplate.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 @@alternateType(
-  Microsoft.ScVmm.VirtualNetwork.extendedLocation,
+  VirtualNetwork.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
