@@ -28,6 +28,7 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   extendedLocation?: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -178,6 +179,7 @@ interface Jobs {
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
@@ -195,6 +197,7 @@ interface Jobs {
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
