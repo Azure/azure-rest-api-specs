@@ -72,6 +72,13 @@ model VoiceAgentDefinition {
     """)
   tools?: VoiceAgentTool[];
 
+  @doc("""
+    How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+    `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+    Defaults to `auto`.
+    """)
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.auto;
+
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
@@ -114,20 +121,7 @@ model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
   prompt: string;
 
   @doc("The tool-selection policy for the opening response. Defaults to `none`.")
-  tool_choice?: VoiceGreetingToolChoice = VoiceGreetingToolChoice.none;
-}
-
-@doc("The tool-selection policy for an LLM-generated greeting.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceGreetingToolChoice {
-  @doc("Do not use tools for the opening response.")
-  none: "none",
-
-  @doc("Allow the model to select configured tools for the opening response.")
-  auto: "auto",
-
-  @doc("Require the opening response to use a configured tool.")
-  required: "required",
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.none;
 }
 
 @doc("""
@@ -163,6 +157,16 @@ union VoiceAgentTool {
 
   @doc("A reference to a Foundry toolbox executed through its MCP endpoint.")
   toolbox: VoiceToolboxTool,
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+@doc("Tool-selection behavior for a voice agent.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolChoice {
+  mode: OpenAI.ToolChoiceOptions,
+  function: OpenAI.ToolChoiceFunction,
+  mcp: OpenAI.ToolChoiceMCP,
 }
 
 @doc("When an MCP invocation creates a follow-up response. Additional values may be added over time.")
