@@ -320,13 +320,10 @@ union NetworkInterfaceAuxiliarySku {
 @added(Versions.v2026_04_01)
 union DiskApiVersion {
   string,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
   `2025-01-02`: "2025-01-02",
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
   `2026-03-02`: "2026-03-02",
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
   `2026-07-02`: "2026-07-02",
 }
