@@ -1,0 +1,52 @@
+{
+  "title": "Generate a group best-updates compliance report",
+  "description": "Generate a GroupBestUpdates compliance report for a namespace.",
+  "operationId": "Namespaces_GenerateReport",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "body": {
+      "reportTarget": "my-group-1",
+      "reportType": "GroupBestUpdatesComplianceReport"
+    },
+    "namespaceName": "my-namespace-1",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "bestUpdates": [
+          {
+            "devicesNotOnBestUpdateCount": 8,
+            "targetDevices": {
+              "agentProfile": 1,
+              "compatProperties": {
+                "manufacturer": "Contoso",
+                "model": "Sensor-X"
+              }
+            },
+            "updateResourceId": "updates/providers/contoso/names/windowsApp/versions/1.0"
+          }
+        ],
+        "expiresAt": "2026-05-28T20:59:51Z",
+        "generatedAt": "2026-04-28T20:59:51Z",
+        "reportTarget": "my-group-1",
+        "reportType": "GroupBestUpdatesComplianceReport",
+        "updateCompliance": {
+          "bestUpdateAvailableDeviceCount": 8,
+          "devicesInProgressOnBestUpdate": 2,
+          "onBestUpdateDeviceCount": 40,
+          "totalNotUpdateableDeviceCount": 3,
+          "totalUpdateableDeviceCount": 50
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://contoso.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/westus/asyncOperationStatuses/op-8bc4?api-version=2026-11-02-preview",
+        "location": "https://contoso.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/westus/asyncOperationStatuses/op-8bc4?api-version=2026-11-02-preview",
+        "retry-after": "30"
+      }
+    }
+  }
+}

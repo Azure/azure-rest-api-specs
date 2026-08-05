@@ -1,0 +1,37 @@
+{
+  "title": "Get an External Intermediate Certificate Authority",
+  "operationId": "CertificateAuthorities_Get",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "certificateAuthorityName": "myexternalica"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myexternalica",
+        "name": "myexternalica",
+        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities",
+        "location": "East US 2",
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificateAuthorityType": "ICA",
+          "keyType": "ECC",
+          "issuer": {
+            "issuerType": "External",
+            "certificateSigningRequest": "-----BEGIN CERTIFICATE REQUEST-----\\nMIID...\\n-----END CERTIFICATE REQUEST-----",
+            "thumbprint": "A1B2C3D4E5F6",
+            "status": "PendingActivation"
+          },
+          "subject": "CN=myexternalica"
+        }
+      }
+    }
+  }
+}

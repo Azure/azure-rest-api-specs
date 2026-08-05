@@ -70,12 +70,14 @@ model NamespaceDeviceProperties {
 
   @added(Versions.v2025_11_01_preview)
   @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_11_01_preview)
   @doc("Policy used to issue device certificates.")
   policy?: DeviceCredentialPolicy;
 }
 
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
+@added(Versions.v2026_11_01_preview)
 @doc("Defines the Policy used to issue device certificates if any.")
 model DeviceCredentialPolicy {
   @doc("Resource Id of the Policy.")

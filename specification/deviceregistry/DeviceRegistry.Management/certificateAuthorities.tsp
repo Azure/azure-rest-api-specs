@@ -1,0 +1,212 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+
+namespace Microsoft.DeviceRegistry;
+
+@added(Versions.v2026_11_01_preview)
+@doc("A Certificate Authority resource.")
+@parentResource(Namespace)
+model CertificateAuthority
+  is Azure.ResourceManager.TrackedResource<CertificateAuthorityProperties> {
+  @doc("The name of the Certificate Authority resource.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  @key("certificateAuthorityName")
+  @segment("certificateAuthorities")
+  @path
+  name: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Details of the Certificate Authority resource.")
+@discriminator("certificateAuthorityType")
+model CertificateAuthorityProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @visibility(Lifecycle.Read)
+  @doc("Globally unique, immutable, non-reusable identifier of the Certificate Authority resource.")
+  uuid?: string;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The Certificate Authority type. Use Root for a self-signed, service-managed root CA, and ICA for an intermediate CA.")
+  certificateAuthorityType: CertificateAuthorityType;
+
+  @doc("Crypto type: ECC.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  keyType: CertificateAuthorityKeyType;
+
+  @visibility(Lifecycle.Read)
+  @doc("Certificate subject.")
+  subject?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Certificate is valid not before this date. Format ISO8601.")
+  validityNotBefore?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("Certificate is valid not after this date. Format ISO8601.")
+  validityNotAfter?: utcDateTime;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Properties for a self-signed, service-managed root Certificate Authority.")
+model RootCertificateAuthorityProperties
+  extends CertificateAuthorityProperties {
+  @doc("The self-signed, service-managed root Certificate Authority type.")
+  certificateAuthorityType: CertificateAuthorityType.Root;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Properties for an intermediate Certificate Authority signed by another same-namespace Certificate Authority.")
+model IntermediateCertificateAuthorityProperties
+  extends CertificateAuthorityProperties {
+  @doc("The intermediate Certificate Authority type.")
+  certificateAuthorityType: CertificateAuthorityType.ICA;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The issuer for the intermediate Certificate Authority.")
+  issuer: CertificateAuthorityIssuer;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Supported Certificate Authority key types.")
+union CertificateAuthorityKeyType {
+  string,
+
+  @doc("Indicate the ECC key type.")
+  ECC: "ECC",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Supported Certificate Authority types.")
+union CertificateAuthorityType {
+  string,
+
+  @doc("Self-signed, service-managed root Certificate Authority.")
+  Root: "Root",
+
+  @doc("Intermediate Certificate Authority signed by another Certificate Authority.")
+  ICA: "ICA",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The issuer type for an intermediate Certificate Authority.")
+union CertificateAuthorityIssuerType {
+  string,
+
+  @doc("The intermediate Certificate Authority is issued by Microsoft.")
+  Microsoft: "Microsoft",
+
+  @doc("The intermediate Certificate Authority is issued by an external Certificate Authority.")
+  External: "External",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The issuer for an intermediate Certificate Authority.")
+@discriminator("issuerType")
+model CertificateAuthorityIssuer {
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The Certificate Authority issuer type.")
+  issuerType: CertificateAuthorityIssuerType;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("A Microsoft issuer for an intermediate Certificate Authority.")
+model MicrosoftCertificateAuthorityIssuer extends CertificateAuthorityIssuer {
+  @doc("The Microsoft issuer type.")
+  issuerType: CertificateAuthorityIssuerType.Microsoft;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The resource ID of the root issuer Certificate Authority in the same namespace.")
+  certificateAuthorityResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/certificateAuthorities";
+    }
+  ]>;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("An external issuer for an intermediate Certificate Authority.")
+model ExternalCertificateAuthorityIssuer extends CertificateAuthorityIssuer {
+  @doc("The external issuer type.")
+  issuerType: CertificateAuthorityIssuerType.External;
+
+  @visibility(Lifecycle.Read)
+  @doc("Certificate Signing Request (CSR) in PEM format, generated by the service.")
+  certificateSigningRequest?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Thumbprint of the Certificate Authority certificate signed by the external issuer.")
+  thumbprint?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The status of the external issuer certificate lifecycle.")
+  status?: CertificateAuthorityStatus;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Status of the Certificate Authority certificate lifecycle.")
+union CertificateAuthorityStatus {
+  string,
+
+  @doc("The CSR has been generated and is waiting for activation.")
+  PendingActivation: "PendingActivation",
+
+  @doc("The Certificate Authority is active.")
+  Active: "Active",
+
+  @doc("The Certificate Authority is active but requires renewal.")
+  ActiveButPendingRenewal: "ActiveButPendingRenewal",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Request payload for activating a Certificate Authority with a signed certificate.")
+model ActivateCertificateAuthorityRequest {
+  @doc("Certificate chain in PEM format for activating an externally issued intermediate Certificate Authority, including the signed certificate. The first certificate must be the signed certificate matching the CSR generated by the service, followed by any intermediate CAs, and optionally the root CA. Certificates must be ordered from leaf to root and concatenated in PEM format.")
+  certificateChain: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Update model for Certificate Authority.")
+model CertificateAuthorityUpdate {
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<CertificateAuthority>;
+}
+
+@added(Versions.v2026_11_01_preview)
+@armResourceOperations
+interface CertificateAuthorities {
+  get is ArmResourceRead<CertificateAuthority>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CertificateAuthority>;
+  delete is ArmResourceDeleteWithoutOkAsync<CertificateAuthority>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    CertificateAuthority,
+    CertificateAuthorityUpdate
+  >;
+  listByNamespace is ArmResourceListByParent<CertificateAuthority>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
+  @doc("Activates a Certificate Authority of type `ICA` and issuer type `External`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.")
+  activate is ArmResourceActionNoContentAsync<
+    CertificateAuthority,
+    ActivateCertificateAuthorityRequest
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
+  @doc("Revokes a Certificate Authority of type `ICA` and issuer type `Internal`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.")
+  revokeAndRotate is ArmResourceActionNoContentAsync<
+    CertificateAuthority,
+    void
+  >;
+}

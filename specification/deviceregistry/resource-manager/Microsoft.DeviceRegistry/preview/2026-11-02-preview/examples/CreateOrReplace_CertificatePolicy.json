@@ -1,0 +1,58 @@
+{
+  "title": "Create or Update a Certificate Policy",
+  "operationId": "CertificatePolicies_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "certificateAuthorityName": "myrootca",
+    "certificatePolicyName": "mycertificatepolicy",
+    "resource": {
+      "properties": {
+        "certificate": {
+          "validityPeriodInDays": 30
+        }
+      },
+      "location": "East US 2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myrootca/certificatePolicies/mycertificatepolicy",
+        "name": "mycertificatepolicy",
+        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities/certificatePolicies",
+        "location": "East US 2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificate": {
+            "validityPeriodInDays": 30
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myrootca/certificatePolicies/mycertificatepolicy",
+        "name": "mycertificatepolicy",
+        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities/certificatePolicies",
+        "location": "East US 2",
+        "tags": {
+          "key5535": "soggdtfwzvheyqvinbwdcowcjvxe"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificate": {
+            "validityPeriodInDays": 30
+          }
+        }
+      }
+    }
+  }
+}

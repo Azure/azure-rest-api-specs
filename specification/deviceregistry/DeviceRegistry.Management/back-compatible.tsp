@@ -66,6 +66,14 @@ using Microsoft.DeviceRegistry;
   Policy.properties,
   "autorest"
 );
+// The 2026-03 proxy Policy was renamed to PolicyProxyV2 during the 2026-11
+// revival; keep flattening it so the published 2026-03-01-preview swagger is
+// unchanged.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PolicyProxyV2.properties,
+  "autorest"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Schema.properties,
