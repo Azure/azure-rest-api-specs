@@ -4,16 +4,23 @@
 
 Configuration for generating Content Understanding SDK.
 
-The current release is `2025-11-01`.
+The current release is `2026-06-01-preview`.
 
 ``` yaml
 
-tag: 2025-11-01
+tag: 2026-06-01-preview
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
+
+### Release 2026-06-01-preview
+These settings apply only when `--tag=2026-06-01-preview` is specified on the command line.
+``` yaml $(tag) == '2026-06-01-preview'
+input-file:
+  - preview/2026-06-01-preview/ContentUnderstanding.json
+```
 
 ### Release 2025-11-01
 These settings apply only when `--tag=2025-11-01` is specified on the command line.

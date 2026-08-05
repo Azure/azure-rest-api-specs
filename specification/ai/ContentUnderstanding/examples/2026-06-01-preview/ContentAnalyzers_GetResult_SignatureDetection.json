@@ -1,0 +1,61 @@
+{
+  "title": "Get Analysis Result with Signature Detection",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "signatureDetector",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T10:05:00.000Z",
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# Contract Agreement\n\nThis agreement is entered into by...\n\n**Signature:** [signature-1]\n\n**Name:** John Smith\n**Date:** 2026-06-15",
+              "startPageNumber": 1,
+              "endPageNumber": 1,
+              "unit": "inch",
+              "metadata": {
+                "contentType": "application/pdf",
+                "pageCount": "1",
+                "author": "Legal Department",
+                "title": "Contract Agreement",
+                "createdAt": "2026-06-01T12:00:00Z",
+                "language": "en-US"
+              },
+              "pages": [
+                {
+                  "pageNumber": 1,
+                  "width": 8.5,
+                  "height": 11
+                }
+              ],
+              "signatures": [
+                {
+                  "id": "signature-1",
+                  "source": "D(1,2.5,8,5.5,8,5.5,9,2.5,9)",
+                  "span": {
+                    "offset": 72,
+                    "length": 13
+                  },
+                  "role": "pageFooter"
+                }
+              ]
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandard": 1,
+          "contextualizationTokens": 850
+        }
+      }
+    }
+  }
+}
