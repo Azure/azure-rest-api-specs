@@ -87575,96 +87575,6 @@
           ]
         }
       },
-      "VoiceAzureSemanticDetection": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "enum": [
-              "semantic_detection_v1"
-            ]
-          },
-          "threshold_level": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceThresholdLevel",
-            "description": "The sensitivity threshold."
-          },
-          "timeout_ms": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "description": "The detection timeout in milliseconds."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-          }
-        ],
-        "description": "Default Azure semantic end-of-utterance detection."
-      },
-      "VoiceAzureSemanticDetectionEn": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "enum": [
-              "semantic_detection_v1_en"
-            ]
-          },
-          "threshold_level": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceThresholdLevel",
-            "description": "The sensitivity threshold."
-          },
-          "timeout_ms": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "description": "The detection timeout in milliseconds."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-          }
-        ],
-        "description": "English-optimized Azure semantic end-of-utterance detection."
-      },
-      "VoiceAzureSemanticDetectionMultilingual": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "enum": [
-              "semantic_detection_v1_multilingual"
-            ]
-          },
-          "threshold_level": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceThresholdLevel",
-            "description": "The sensitivity threshold."
-          },
-          "timeout_ms": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "description": "The detection timeout in milliseconds."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-          }
-        ],
-        "description": "Multilingual Azure semantic end-of-utterance detection."
-      },
       "VoiceAzureSemanticVadEnTurnDetection": {
         "type": "object",
         "required": [
@@ -88049,14 +87959,16 @@
           "model": {
             "$ref": "#/components/schemas/VoiceEndOfUtteranceDetectionModel",
             "description": "The semantic detection model."
-          }
-        },
-        "discriminator": {
-          "propertyName": "model",
-          "mapping": {
-            "semantic_detection_v1": "#/components/schemas/VoiceAzureSemanticDetection",
-            "semantic_detection_v1_en": "#/components/schemas/VoiceAzureSemanticDetectionEn",
-            "semantic_detection_v1_multilingual": "#/components/schemas/VoiceAzureSemanticDetectionMultilingual"
+          },
+          "threshold_level": {
+            "$ref": "#/components/schemas/VoiceEndOfUtteranceThresholdLevel",
+            "description": "The sensitivity threshold."
+          },
+          "timeout_ms": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "The detection timeout in milliseconds."
           }
         },
         "description": "Semantic end-of-utterance detection configuration.",

@@ -413,40 +413,17 @@ union VoiceEndOfUtteranceThresholdLevel {
 }
 
 @doc("Semantic end-of-utterance detection configuration.")
-@discriminator("model")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceEndOfUtteranceDetection {
   @doc("The semantic detection model.")
   `model`: VoiceEndOfUtteranceDetectionModel;
-}
 
-/** Options shared by Azure semantic end-of-utterance detection configurations. */
-alias VoiceAzureSemanticDetectionOptions = {
   @doc("The sensitivity threshold.")
   threshold_level?: VoiceEndOfUtteranceThresholdLevel;
 
   @doc("The detection timeout in milliseconds.")
   @minValue(0)
   timeout_ms?: int32;
-};
-
-@doc("Default Azure semantic end-of-utterance detection.")
-model VoiceAzureSemanticDetection extends VoiceEndOfUtteranceDetection {
-  `model`: VoiceEndOfUtteranceDetectionModel.semantic_detection_v1;
-  ...VoiceAzureSemanticDetectionOptions;
-}
-
-@doc("English-optimized Azure semantic end-of-utterance detection.")
-model VoiceAzureSemanticDetectionEn extends VoiceEndOfUtteranceDetection {
-  `model`: VoiceEndOfUtteranceDetectionModel.semantic_detection_v1_en;
-  ...VoiceAzureSemanticDetectionOptions;
-}
-
-@doc("Multilingual Azure semantic end-of-utterance detection.")
-model VoiceAzureSemanticDetectionMultilingual
-  extends VoiceEndOfUtteranceDetection {
-  `model`: VoiceEndOfUtteranceDetectionModel.semantic_detection_v1_multilingual;
-  ...VoiceAzureSemanticDetectionOptions;
 }
 
 /** Options shared by Azure semantic voice activity detection configurations. */
