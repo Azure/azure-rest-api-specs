@@ -116,7 +116,7 @@ interface NamespaceAssets {
     NamespaceAssetExecuteActionRequest,
     NamespaceAssetExecuteActionResponse,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = NamespaceAssetExecuteActionResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }

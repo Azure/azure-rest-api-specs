@@ -173,7 +173,7 @@ interface Namespaces {
     NamespaceMigrateRequest,
     NamespaceMigrateResponse,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = NamespaceMigrateResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
