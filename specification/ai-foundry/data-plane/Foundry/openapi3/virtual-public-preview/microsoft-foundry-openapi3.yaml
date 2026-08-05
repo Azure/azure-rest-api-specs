@@ -81911,10 +81911,12 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -81922,6 +81924,7 @@ components:
         speech_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -81963,10 +81966,12 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -81974,6 +81979,7 @@ components:
         speech_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -82020,10 +82026,12 @@ components:
         prefix_padding_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Silence required to end speech detection, in milliseconds.
         end_of_utterance_detection:
           $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
@@ -82031,6 +82039,7 @@ components:
         speech_duration_ms:
           type: integer
           format: int32
+          minimum: 0
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -82154,10 +82163,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceDurationMilliseconds:
-      type: integer
-      format: int32
-      description: A duration encoded as an integer number of milliseconds.
     VoiceEndOfUtteranceDetection:
       type: object
       required:
@@ -82172,6 +82177,7 @@ components:
         timeout_ms:
           type: integer
           format: int32
+          minimum: 0
           description: The detection timeout in milliseconds.
       description: Semantic end-of-utterance detection configuration.
       x-ms-foundry-meta:
@@ -82387,11 +82393,13 @@ components:
           format: int32
           description: The number of audio channels.
         start_offset_ms:
-          $ref: '#/components/schemas/VoiceDurationMilliseconds'
-          description: The offset from the session start at which this segment begins.
+          type: integer
+          format: int32
+          description: The offset from the session start at which this segment begins, in milliseconds.
         duration_ms:
-          $ref: '#/components/schemas/VoiceDurationMilliseconds'
-          description: The duration of the audio segment.
+          type: integer
+          format: int32
+          description: The duration of the audio segment, in milliseconds.
         blob_uri:
           type: string
           format: uri
@@ -82658,8 +82666,9 @@ components:
           $ref: '#/components/schemas/VoiceRecordingChannelLayout'
           description: The role assigned to each stereo channel.
         duration_ms:
-          $ref: '#/components/schemas/VoiceDurationMilliseconds'
-          description: The total duration of the recording.
+          type: integer
+          format: int32
+          description: The total duration of the recording in milliseconds.
         blob_uri:
           type: string
           format: uri
