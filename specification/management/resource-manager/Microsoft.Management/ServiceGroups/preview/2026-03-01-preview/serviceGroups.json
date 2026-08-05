@@ -382,7 +382,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "List all members of the serviceGroup, including service groups, containers, and resources.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listMembers\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
+        "description": "List the members of the serviceGroup. Members are entities linked to the\nservice group via a Microsoft.Relationships resource\n(Microsoft.Relationships/serviceGroupMember for direct members, or\nMicrosoft.Relationships/contains for members included transitively via a\ncontainer). Descendant service groups are not returned by this action;\nuse listDescendants to enumerate nested service groups.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listMembers\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -488,10 +488,36 @@
         "value"
       ]
     },
+    "ListMembersExpand": {
+      "type": "string",
+      "description": "Controls which members are returned by the listMembers action. Currently\nonly \"allMembers\" is supported. If omitted, the service behaves as if\n\"allMembers\" was specified.",
+      "enum": [
+        "allMembers"
+      ],
+      "x-ms-enum": {
+        "name": "ListMembersExpand",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllMembers",
+            "value": "allMembers",
+            "description": "Return all members of the service group."
+          }
+        ]
+      }
+    },
     "ListMembersRequest": {
       "type": "object",
       "description": "Request body for the listMembers action.",
       "properties": {
+        "expand": {
+          "$ref": "#/definitions/ListMembersExpand",
+          "description": "Controls which members are returned. Only \"allMembers\" is supported today;\nif omitted, the service defaults to \"allMembers\"."
+        },
+        "filter": {
+          "type": "string",
+          "description": "A filter expression to narrow the returned members. Reserved for a future\nAPI version; not implemented in this version. Any value provided today is\naccepted but ignored."
+        },
         "skipToken": {
           "type": "string",
           "description": "An opaque pagination token returned in the previous response's skipToken field.\nInclude this value in the request body to fetch the next page of results."
@@ -578,30 +604,6 @@
         ]
       }
     },
-    "RelationshipType": {
-      "type": "string",
-      "description": "The type of relationship between a service group and its member.",
-      "enum": [
-        "Microsoft.Relationships/serviceGroupMember",
-        "Microsoft.Relationships/contains"
-      ],
-      "x-ms-enum": {
-        "name": "RelationshipType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServiceGroupMember",
-            "value": "Microsoft.Relationships/serviceGroupMember",
-            "description": "The member was explicitly added to the service group."
-          },
-          {
-            "name": "Contains",
-            "value": "Microsoft.Relationships/contains",
-            "description": "The member is included transitively because its container (for example, a\nresource group or subscription) is a direct member of the service group."
-          }
-        ]
-      }
-    },
     "ServiceGroup": {
       "type": "object",
       "description": "The serviceGroup details.",
@@ -634,51 +636,12 @@
     },
     "ServiceGroupMember": {
       "type": "object",
-      "description": "A member of a service group. Members can be service groups, containers\n(subscriptions, resource groups), or individual resources.",
+      "description": "A member of a service group. Members are entities linked to the service\ngroup via a Microsoft.Relationships resource (serviceGroupMember or\ncontains). Descendant service groups are not returned as members; use\nlistDescendants for those.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The fully qualified ID of the member. For example,\n/providers/Microsoft.Management/serviceGroups/child-sg,\n/subscriptions/{subId}/resourceGroups/{rgName}, or\n/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the member. For example,\nMicrosoft.Management/serviceGroups, Microsoft.Resources/resourceGroups, or\nMicrosoft.KeyVault/vaults.",
-          "readOnly": true
-        },
-        "serviceGroupParent": {
-          "type": "string",
           "format": "arm-id",
-          "description": "The fully qualified ID of the parent service group of this entry. For\nexample, /providers/Microsoft.Management/serviceGroups/root-sg.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Management/serviceGroups"
-              }
-            ]
-          }
-        },
-        "relationshipProperties": {
-          "$ref": "#/definitions/ServiceGroupMemberRelationshipProperties",
-          "description": "Properties describing the relationship between this member and the queried\nservice group. Populated only when this entry represents a member linked\nvia a Microsoft.Relationships resource (a container such as a subscription\nor resource group, or an individual resource). Not populated when this\nentry is a descendant service group.",
-          "readOnly": true
-        }
-      }
-    },
-    "ServiceGroupMemberRelationshipProperties": {
-      "type": "object",
-      "description": "Properties describing the relationship between a service group and one of its members.",
-      "properties": {
-        "relationshipId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified ID of the relationship resource itself\n(Microsoft.Relationships/serviceGroupMember or Microsoft.Relationships/contains)\nthat links this member to the service group. Callers can use this ID with\nthe Microsoft.Relationships RP to inspect or manage the relationship.",
-          "readOnly": true
-        },
-        "relationshipType": {
-          "$ref": "#/definitions/RelationshipType",
-          "description": "The relationship type between the service group and this member.",
+          "description": "The fully qualified ARM ID of the member. For example,\n/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.",
           "readOnly": true
         }
       }

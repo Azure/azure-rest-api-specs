@@ -2,52 +2,25 @@
   "parameters": {
     "api-version": "2026-03-01-preview",
     "serviceGroupName": "root-sg",
-    "body": {}
+    "body": {
+      "expand": "allMembers"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/sub-a/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myVault",
-            "type": "Microsoft.KeyVault/vaults",
-            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg",
-            "relationshipProperties": {
-              "relationshipId": "/subscriptions/sub-a/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myVault/providers/Microsoft.Relationships/serviceGroupMember/root-sg-myVault",
-              "relationshipType": "Microsoft.Relationships/serviceGroupMember"
-            }
+            "id": "/subscriptions/sub-a/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myVault"
           },
           {
-            "id": "/subscriptions/sub-a/resourceGroups/rg2",
-            "type": "Microsoft.Resources/resourceGroups",
-            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg",
-            "relationshipProperties": {
-              "relationshipId": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Relationships/serviceGroupMember/root-sg-rg2",
-              "relationshipType": "Microsoft.Relationships/serviceGroupMember"
-            }
+            "id": "/subscriptions/sub-a/resourceGroups/rg2"
           },
           {
-            "id": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/myStorage",
-            "type": "Microsoft.Storage/storageAccounts",
-            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg",
-            "relationshipProperties": {
-              "relationshipId": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Relationships/contains/root-sg-rg2",
-              "relationshipType": "Microsoft.Relationships/contains"
-            }
+            "id": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/myStorage"
           },
           {
-            "id": "/providers/Microsoft.Management/serviceGroups/child-sg",
-            "type": "Microsoft.Management/serviceGroups",
-            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/root-sg"
-          },
-          {
-            "id": "/subscriptions/sub-b/resourceGroups/rg3/providers/Microsoft.Sql/servers/sqlServer1",
-            "type": "Microsoft.Sql/servers",
-            "serviceGroupParent": "/providers/Microsoft.Management/serviceGroups/child-sg",
-            "relationshipProperties": {
-              "relationshipId": "/subscriptions/sub-b/resourceGroups/rg3/providers/Microsoft.Sql/servers/sqlServer1/providers/Microsoft.Relationships/serviceGroupMember/child-sg-sqlServer1",
-              "relationshipType": "Microsoft.Relationships/serviceGroupMember"
-            }
+            "id": "/subscriptions/sub-b/resourceGroups/rg3/providers/Microsoft.Sql/servers/sqlServer1"
           }
         ],
         "skipToken": "eyJsYXN0TGVmdEluZGV4Ijo0LjAsInJpZ2h0SW5kZXgiOjguMH0="

@@ -127,7 +127,12 @@ interface ServiceGroups {
   >;
 
   /**
-   * List all members of the serviceGroup, including service groups, containers, and resources.
+   * List the members of the serviceGroup. Members are entities linked to the
+   * service group via a Microsoft.Relationships resource
+   * (Microsoft.Relationships/serviceGroupMember for direct members, or
+   * Microsoft.Relationships/contains for members included transitively via a
+   * container). Descendant service groups are not returned by this action;
+   * use listDescendants to enumerate nested service groups.
    *
    * This is a paginated POST action. When the response contains a skipToken,
    * more results are available; callers must re-POST to the same listMembers

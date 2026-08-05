@@ -183,10 +183,38 @@ model ListDescendantsResponse {
 }
 
 /**
+ * Controls which members are returned by the listMembers action. Currently
+ * only "allMembers" is supported. If omitted, the service behaves as if
+ * "allMembers" was specified.
+ */
+@added(Versions.v2026_03_01_preview)
+union ListMembersExpand {
+  string,
+
+  /**
+   * Return all members of the service group.
+   */
+  AllMembers: "allMembers",
+}
+
+/**
  * Request body for the listMembers action.
  */
 @added(Versions.v2026_03_01_preview)
 model ListMembersRequest {
+  /**
+   * Controls which members are returned. Only "allMembers" is supported today;
+   * if omitted, the service defaults to "allMembers".
+   */
+  expand?: ListMembersExpand;
+
+  /**
+   * A filter expression to narrow the returned members. Reserved for a future
+   * API version; not implemented in this version. Any value provided today is
+   * accepted but ignored.
+   */
+  filter?: string;
+
   /**
    * An opaque pagination token returned in the previous response's skipToken field.
    * Include this value in the request body to fetch the next page of results.
@@ -215,86 +243,17 @@ model ListMembersResponse {
 }
 
 /**
- * The type of relationship between a service group and its member.
- */
-@added(Versions.v2026_03_01_preview)
-union RelationshipType {
-  string,
-
-  /**
-   * The member was explicitly added to the service group.
-   */
-  ServiceGroupMember: "Microsoft.Relationships/serviceGroupMember",
-
-  /**
-   * The member is included transitively because its container (for example, a
-   * resource group or subscription) is a direct member of the service group.
-   */
-  Contains: "Microsoft.Relationships/contains",
-}
-
-/**
- * A member of a service group. Members can be service groups, containers
- * (subscriptions, resource groups), or individual resources.
+ * A member of a service group. Members are entities linked to the service
+ * group via a Microsoft.Relationships resource (serviceGroupMember or
+ * contains). Descendant service groups are not returned as members; use
+ * listDescendants for those.
  */
 @added(Versions.v2026_03_01_preview)
 model ServiceGroupMember {
   /**
-   * The fully qualified ID of the member. For example,
-   * /providers/Microsoft.Management/serviceGroups/child-sg,
-   * /subscriptions/{subId}/resourceGroups/{rgName}, or
+   * The fully qualified ARM ID of the member. For example,
    * /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.
    */
   @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The resource type of the member. For example,
-   * Microsoft.Management/serviceGroups, Microsoft.Resources/resourceGroups, or
-   * Microsoft.KeyVault/vaults.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The fully qualified ID of the parent service group of this entry. For
-   * example, /providers/Microsoft.Management/serviceGroups/root-sg.
-   */
-  @visibility(Lifecycle.Read)
-  serviceGroupParent?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Management/serviceGroups";
-    }
-  ]>;
-
-  /**
-   * Properties describing the relationship between this member and the queried
-   * service group. Populated only when this entry represents a member linked
-   * via a Microsoft.Relationships resource (a container such as a subscription
-   * or resource group, or an individual resource). Not populated when this
-   * entry is a descendant service group.
-   */
-  @visibility(Lifecycle.Read)
-  relationshipProperties?: ServiceGroupMemberRelationshipProperties;
-}
-
-/**
- * Properties describing the relationship between a service group and one of its members.
- */
-@added(Versions.v2026_03_01_preview)
-model ServiceGroupMemberRelationshipProperties {
-  /**
-   * The fully qualified ID of the relationship resource itself
-   * (Microsoft.Relationships/serviceGroupMember or Microsoft.Relationships/contains)
-   * that links this member to the service group. Callers can use this ID with
-   * the Microsoft.Relationships RP to inspect or manage the relationship.
-   */
-  @visibility(Lifecycle.Read)
-  relationshipId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The relationship type between the service group and this member.
-   */
-  @visibility(Lifecycle.Read)
-  relationshipType?: RelationshipType;
+  id?: Azure.Core.armResourceIdentifier;
 }
