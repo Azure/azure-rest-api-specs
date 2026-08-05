@@ -39,13 +39,11 @@ interface Offerings {
        */
       @path
       @segment("locations")
-      @typeChangedFrom(Versions.v2025_12_15_preview, string)
       locationName: AzureLocationParameter;
 
       /**
        * The filter to apply to the operation. Example: '$filter=kind eq 'v1'
        */
-      @added(Versions.v2025_12_15_preview)
       @query("filter")
       filter?: string;
     }
