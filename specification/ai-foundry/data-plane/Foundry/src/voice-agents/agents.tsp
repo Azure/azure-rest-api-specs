@@ -340,7 +340,7 @@ union VoiceEndOfUtteranceThresholdLevel {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing Voice Live wire contract requires integer-millisecond durations."
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
 @doc("Semantic end-of-utterance detection configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceEndOfUtteranceDetection {
@@ -357,7 +357,7 @@ model VoiceEndOfUtteranceDetection {
 }
 
 /** Options shared by Azure semantic voice activity detection configurations. */
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing Voice Live wire contract requires integer-millisecond durations."
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
 alias VoiceAzureSemanticVadOptions = {
   @doc("Activation threshold for voice activity detection, from 0 to 1.")
   @minValue(0)
