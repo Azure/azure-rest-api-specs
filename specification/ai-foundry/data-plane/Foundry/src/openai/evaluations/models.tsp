@@ -696,8 +696,8 @@ model EvalRun is OpenAI.EvalRun {
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 
-  /** Duration of the evaluation run in seconds. */
-  duration_seconds?: duration;
+  /** The duration of the evaluation run in ISO 8601 format. */
+  duration?: duration;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
