@@ -62,7 +62,7 @@ interface KeyGroups {
     Response =
       | ArmResourceUpdatedResponse<KeyGroup>
       | ArmResourceCreatedResponse<KeyGroup>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = KeyGroup>> &
           KeyGroupAcceptedBody)
   >;
 
@@ -76,7 +76,7 @@ interface KeyGroups {
     PatchModel = KeyGroupUpdatePropertiesParameters,
     Response =
       | ArmResponse<KeyGroup>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = KeyGroup>> &
           KeyGroupAcceptedBody)
   >;
 
