@@ -84,13 +84,6 @@ interface Computes {
   >;
 
   /**
-   * Updates a compute associated with the Cognitive Services account.
-   */
-  @tag("Computes")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Compute, PatchModel = Compute>;
-
-  /**
    * Deletes the specified compute associated with the Cognitive Services account.
    */
   @tag("Computes")
@@ -141,7 +134,3 @@ interface Computes {
   "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
 );
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
-@@doc(
-  Computes.update::parameters.properties,
-  "The compute properties to update."
-);
