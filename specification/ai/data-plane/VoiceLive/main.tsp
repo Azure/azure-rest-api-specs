@@ -1,11 +1,14 @@
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core/experimental";
 
 import "./models.tsp";
 import "./client.tsp";
 
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/auth-required" "No routes defined, so no auth to define."
 @service(#{ title: "VoiceLive" })
@@ -14,18 +17,14 @@ namespace VoiceLive;
 
 /** API versioning. */
 enum Versions {
-  /** Version 2025-10-01. */
-  v2025_10_01: "2025-10-01",
+  /**
+   * Public preview version of the VoiceLive API. This is the base (default) version and
+   * contains the full preview surface, including preview-only features that are fenced out
+   * of the stable `v1` contract with `@removed(Versions.v1)`. Clients never send this as an
+   * `api-version`; preview behavior is opted into on `v1` via the `VoiceLive-Features` header.
+   */
+  PuPr: "virtual-public-preview",
 
-  /** Version 2026-01-01-preview. */
-  v2026_01_01_preview: "2026-01-01-preview",
-
-  /** Version 2026-04-10. */
-  v2026_04_10: "2026-04-10",
-
-  /** Version 2026-06-01-preview. */
-  v2026_06_01_preview: "2026-06-01-preview",
-
-  /** Version 2026-07-15. */
-  v2026_07_15: "2026-07-15",
+  /** VoiceLive API version v1. The evergreen, backward-compatible GA contract. */
+  v1: "v1",
 }

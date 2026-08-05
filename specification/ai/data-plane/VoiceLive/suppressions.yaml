@@ -1,0 +1,14 @@
+# Area-specific suppressions to be removed at the earliest available opportunity.
+# VoiceLive follows the Azure AI Foundry pattern: it emits OpenAPI 3.x only
+# (via @typespec/openapi3) because it consumes the OpenAI Realtime TypeSpec, whose
+# oneOf unions and bare integer/numeric scalars cannot be represented by the
+# Swagger 2.0 @azure-tools/typespec-autorest emitter without emitting warnings that
+# fail `tsp compile --warn-as-error`. Mirrors specification/ai-foundry/data-plane/Foundry.
+- tool: TypeSpecValidation
+  reason: >
+    VoiceLive does not emit autorest; emitting OpenAPI 2 yields a very incomplete
+    representation of the spec.
+  rules: [EmitAutorest, FolderStructure]
+  paths:
+    - "."
+    - "**"
