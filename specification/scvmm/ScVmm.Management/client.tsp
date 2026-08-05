@@ -121,7 +121,7 @@ using Microsoft.ScVmm;
 // read-only operations/properties. Add the missing input usage so constructors,
 // setters, and JsonModelWriteCore remain on the C# surface.
 @@usage(Checkpoint, Usage.input, "csharp");
-@@usage(VmInstanceHybridIdentityMetadataProperties, Usage.input, "csharp");
+@@usage(VmInstanceHybridIdentityMetadata, Usage.input, "csharp");
 
 // ExtendedLocation: AutoRest mapped this resource envelope property to the
 // shared ARM common C# type Azure.ResourceManager.Resources.Models.ExtendedLocation.
