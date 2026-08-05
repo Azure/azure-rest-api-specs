@@ -8,13 +8,20 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 
+/** The name of a service group. */
+@minLength(1)
+@maxLength(90)
+scalar ServiceGroupName extends string;
+
 /**
  * A service group target for service group scoped recommendation operations.
  */
 alias ServiceGroup = Extension.ExternalResource<
-  "Microsoft.Management",
-  "serviceGroups",
-  "serviceGroupName",
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "serviceGroupName",
+  NamePattern = "^[a-zA-Z0-9\\-_().]{1,90}$",
+  NameType = ServiceGroupName,
   Description = "The name of the service group.",
   ParentType = "Tenant"
 >;
