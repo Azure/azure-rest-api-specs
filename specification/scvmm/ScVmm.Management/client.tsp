@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
+using Microsoft.ScVmm;
 
 @@clientName(Microsoft.ScVmm, "ScVmmMgmtClient", "python");
 
@@ -162,7 +163,6 @@ using Azure.Core;
   Access.internal,
   "csharp"
 );
-@@access(Microsoft.ScVmm.AvailabilitySets.update, Access.internal, "csharp");
 @@access(Microsoft.ScVmm.Clouds.update, Access.internal, "csharp");
 @@access(Microsoft.ScVmm.VmmServers.update, Access.internal, "csharp");
 @@access(
@@ -301,5 +301,18 @@ using Azure.Core;
 @@alternateType(
   Microsoft.ScVmm.VirtualNetwork.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+
+/**
+ * Object containing tags updates for patch operations.
+ */
+model ScVmmResourcePatch
+  is Azure.ResourceManager.Foundations.TagsUpdateModel<AvailabilitySet>;
+@@clientName(ScVmmResourcePatch, exact("ScVmmResourcePatch"), "csharp");
+
+@@alternateType(
+  AvailabilitySets.update::parameters.properties,
+  ScVmmResourcePatch,
   "csharp"
 );
