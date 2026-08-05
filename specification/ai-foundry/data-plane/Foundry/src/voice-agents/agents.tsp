@@ -276,7 +276,7 @@ model VoiceAudioOutputConfig {
 
   @doc("""
     The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
-    For Azure synthesized voices, use `voice.rate` instead.
+    For Azure synthesized voices, use `audio.output.voice.rate` instead.
     """)
   @minValue(0.25)
   @maxValue(1.5)
