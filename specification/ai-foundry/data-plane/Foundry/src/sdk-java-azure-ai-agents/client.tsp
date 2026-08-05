@@ -129,7 +129,6 @@ using Azure.AI.Projects;
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
-@@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters");
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");

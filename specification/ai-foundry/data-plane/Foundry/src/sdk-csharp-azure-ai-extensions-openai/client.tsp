@@ -529,6 +529,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.RankingOptions,
+    {
+      identity: "OpenAI.Responses.FileSearchToolRankingOptions",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
@@ -561,13 +570,6 @@ namespace Azure.AI.Projects {
   );
   @@alternateType(
     OpenAI.CompoundFilter,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.RankingOptions,
     {
       identity: "System.Object",
     },
@@ -837,7 +839,7 @@ namespace Azure.AI.Projects {
     "OpenAPIAnonymousAuthenticationDetails",
     "!autorest"
   );
-
+  
   @@usage(OpenApiManagedSecurityScheme, Usage.input | Usage.output);
   @@usage(OpenApiProjectConnectionAuthDetails, Usage.input | Usage.output);
 
