@@ -380,7 +380,7 @@ model OptimizationJobProgress {
   promotion?: PromotionInfo;
 }
 
-@doc("Slim candidate view returned in bulk-read contexts (job GET result.candidates[], candidate LIST). Excludes mutations to keep customer-supplied prompt content off bulk-read paths. Fetch full detail via GET /agent_optimization_jobs/{jobId}/candidates/{candidateId}.")
+@doc("Slim candidate view returned in bulk-read contexts (candidate LIST). Excludes mutations to keep customer-supplied prompt content off bulk-read paths. Fetch full detail via GET /agent_optimization_jobs/{jobId}/candidates/{candidateId}.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model CandidateSummary {
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
@@ -388,6 +388,12 @@ model CandidateSummary {
 
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
+
+  @doc("Which agent attributes were mutated on this candidate relative to the baseline. Empty for the baseline candidate itself.")
+  optimizations?: TargetAttribute[];
+
+  @doc("Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.")
+  agent_version?: string;
 
   @doc("Timestamp when the candidate was created, represented in Unix time. Populated on candidate detail; may be omitted from list contexts.")
   created_at?: FoundryTimestamp;
