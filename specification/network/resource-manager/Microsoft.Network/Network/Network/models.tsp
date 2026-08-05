@@ -27734,13 +27734,6 @@ model ConnectionAnalyzerProperties {
 
 /**
  * Defines a connection analyzer resource.
- *
- * NOTE: `type` and `systemData` are intentionally omitted from this envelope
- * to remain consistent with the sibling NetworkWatcher child resources
- * (e.g. `ConnectionMonitor`, `PacketCapture`) which follow the legacy
- * `Azure.ResourceManager.Legacy` custom-resource pattern. Adding `systemData`
- * here would diverge from those siblings; the omission is the deliberate
- * legacy pattern and is acknowledged.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "ConnectionAnalyzer is exposed via the legacy NetworkWatcher action pattern; its key is supplied by the routed operation, not modeled on the resource."
@@ -27762,6 +27755,12 @@ model ConnectionAnalyzer {
   id?: string;
 
   /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
    * A unique read-only string that changes whenever the resource is updated.
    */
   @visibility(Lifecycle.Read)
@@ -27778,6 +27777,12 @@ model ConnectionAnalyzer {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags must be modeled as Record<string> per the ARM resource contract."
   tags?: Record<string>;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
 
   /**
    * Properties of the connection analyzer.

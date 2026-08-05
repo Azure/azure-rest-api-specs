@@ -2981,7 +2981,7 @@
     },
     "ConnectionAnalyzer": {
       "type": "object",
-      "description": "Defines a connection analyzer resource.\n\nNOTE: `type` and `systemData` are intentionally omitted from this envelope\nto remain consistent with the sibling NetworkWatcher child resources\n(e.g. `ConnectionMonitor`, `PacketCapture`) which follow the legacy\n`Azure.ResourceManager.Legacy` custom-resource pattern. Adding `systemData`\nhere would diverge from those siblings; the omission is the deliberate\nlegacy pattern and is acknowledged.",
+      "description": "Defines a connection analyzer resource.",
       "properties": {
         "name": {
           "type": "string",
@@ -2991,6 +2991,11 @@
         "id": {
           "type": "string",
           "description": "Resource ID of the connection analyzer.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
           "readOnly": true
         },
         "etag": {
@@ -3012,6 +3017,11 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/ConnectionAnalyzerProperties",
