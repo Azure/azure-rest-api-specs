@@ -110,7 +110,9 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: Pre-existing API behavior, pagination is handled by the framework.
   - code: PathForResourceAction
-    reason: Pre-existing API behavior for action endpoints.
+    reason: Inherited GA contract. RegistryDataReferences_GetBlobReferenceSAS is a read-style POST that returns a blob-reference SAS for an existing datareference version; the shipped route ends in a resource id, and changing it would be a breaking change. Scoped to the single offending path per ARM reviewer request.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
   - code: CollectionObjectPropertiesNaming
     reason: Pre-existing API behavior.
   - code: PatchResponseCodes
@@ -135,6 +137,7 @@ suppressions:
     where:
       - $.definitions.PrivateEndpointConnection
 ```
+
 ### Tag: package-preview-2026-05-15-preview
 
 These settings apply only when `--tag=package-preview-2026-05-15-preview` is specified on the command line.
