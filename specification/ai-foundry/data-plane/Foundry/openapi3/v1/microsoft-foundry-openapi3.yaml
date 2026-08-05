@@ -39975,7 +39975,7 @@ components:
             specified by the caller (anonymous fetch).
           default: false
         a2a_version:
-          $ref: '#/components/schemas/A2AVersion'
+          type: string
           description: The A2A protocol version supported by the agent.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -40073,17 +40073,11 @@ components:
             specified by the caller (anonymous fetch).
           default: false
         a2a_version:
-          $ref: '#/components/schemas/A2AVersion'
+          type: string
           description: The A2A protocol version supported by the agent.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
-    A2AVersion:
-      type: string
-      enum:
-        - '0.3'
-        - '1.0'
-      description: The supported A2A protocol version.
     AISearchIndexResource:
       type: object
       properties:
