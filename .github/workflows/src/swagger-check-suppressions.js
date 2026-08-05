@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 
-const PR_HEAD_ROOT = "pull-request-head";
+const PR_BASE_ROOT = "pull-request-base";
 
 export const SWAGGER_ALL_SUPPRESSION_TOOL = "SwaggerAll";
 
@@ -52,6 +52,7 @@ export async function resolveSwaggerCheckSuppression({
     return { skip: false };
   }
 
+  /** @type {Set<string>} */
   const reasons = new Set();
   for (const path of specificationPaths) {
     const toolSuppressions = await getSuppressionsForPath(
@@ -77,7 +78,7 @@ export async function resolveSwaggerCheckSuppression({
 }
 
 /**
- * Resolve a Swagger check suppression from the sparse PR-head checkout.
+ * Resolve a Swagger check suppression from the sparse PR-base checkout.
  *
  * @param {Object} params
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} params.github
@@ -85,7 +86,7 @@ export async function resolveSwaggerCheckSuppression({
  * @param {string} params.repo
  * @param {number} params.pullNumber
  * @param {string} params.checkName
- * @param {(tool: string, path: string, context?: Record<string, unknown>, options?: {allowMissingPath?: boolean, evaluateIf?: boolean}) => Promise<SwaggerSuppression[]>} [params.getSuppressionsImpl]
+ * @param {(tool: string, path: string, context?: Record<string, unknown>, options?: {allowMissingPath?: boolean}) => Promise<SwaggerSuppression[]>} [params.getSuppressionsImpl]
  * @returns {Promise<{skip: false} | {skip: true, reason: string}>}
  */
 export async function getSwaggerCheckSuppression({
@@ -115,11 +116,10 @@ export async function getSwaggerCheckSuppression({
     getSuppressionsForPath: async (tool, path) =>
       await getSuppressionsImpl(
         tool,
-        resolve(PR_HEAD_ROOT, path),
+        resolve(PR_BASE_ROOT, path),
         {},
         {
           allowMissingPath: true,
-          evaluateIf: false,
         },
       ),
   });

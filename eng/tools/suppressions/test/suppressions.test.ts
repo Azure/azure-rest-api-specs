@@ -210,18 +210,6 @@ test("tool matching", () => {
   ]);
 });
 
-test("conditional suppression evaluation can be disabled", () => {
-  const suppressions: Suppression[] = getSuppressionsFromYaml(
-    "TestTool",
-    "foo.json",
-    "suppressions.yaml",
-    '- tool: TestTool\n  path: "foo.json"\n  if: "true"\n  reason: test',
-    {},
-    { evaluateIf: false },
-  );
-  expect(suppressions).toEqual([]);
-});
-
 test("suppression path relative to suppressions file", () => {
   let suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",

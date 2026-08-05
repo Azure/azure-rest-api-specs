@@ -125,15 +125,15 @@ describe("getSwaggerCheckSuppression", () => {
     });
     expect(getSuppressionsImpl).toHaveBeenCalledWith(
       "SwaggerAvocado",
-      expect.stringMatching(/pull-request-head[\\/]specification[\\/]contoso[\\/]resource-manager/),
+      expect.stringMatching(/pull-request-base[\\/]specification[\\/]contoso[\\/]resource-manager/),
       {},
-      { allowMissingPath: true, evaluateIf: false },
+      { allowMissingPath: true },
     );
     expect(getSuppressionsImpl).toHaveBeenCalledWith(
       "SwaggerAll",
       expect.stringContaining("old.json"),
       {},
-      { allowMissingPath: true, evaluateIf: false },
+      { allowMissingPath: true },
     );
   });
 });

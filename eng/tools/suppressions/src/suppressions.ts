@@ -79,7 +79,7 @@ export async function getSuppressions(
   tool: string,
   path: string,
   context: Record<string, unknown> = {},
-  options: { allowMissingPath?: boolean; evaluateIf?: boolean } = {},
+  options: { allowMissingPath?: boolean } = {},
 ): Promise<Suppression[]> {
   path = resolve(path);
 
@@ -99,7 +99,6 @@ export async function getSuppressions(
         suppressionsFile,
         await readFile(suppressionsFile, { encoding: "utf8" }),
         context,
-        { evaluateIf: options.evaluateIf },
       ),
     );
   }
@@ -116,7 +115,6 @@ export async function getSuppressions(
  * @param suppressionsFile Path to suppressions.yaml file.
  * @param suppressionsYaml Content of suppressions.yaml file.
  * @param context Values available to conditional suppressions.
- * @param options Matching options.
  * @returns Array of suppressions matching tool and path (may be empty).
  */
 export function getSuppressionsFromYaml(
@@ -125,7 +123,6 @@ export function getSuppressionsFromYaml(
   suppressionsFile: string,
   suppressionsYaml: string,
   context: Record<string, unknown> = {},
-  options: { evaluateIf?: boolean } = {},
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
@@ -145,7 +142,6 @@ export function getSuppressionsFromYaml(
     throw finalErr;
   }
 
-  const evaluateIf = options.evaluateIf ?? true;
   // Make "require" available inside sandbox for CJS imports
   const sandbox = { ...context, require: createRequire(import.meta.url) };
 
@@ -166,9 +162,7 @@ export function getSuppressionsFromYaml(
         });
       })
       // If
-      .filter(
-        (s) => s.if === undefined || (evaluateIf && Boolean(vm.runInNewContext(s.if, sandbox))),
-      )
+      .filter((s) => s.if === undefined || vm.runInNewContext(s.if, sandbox))
   );
 }
 
