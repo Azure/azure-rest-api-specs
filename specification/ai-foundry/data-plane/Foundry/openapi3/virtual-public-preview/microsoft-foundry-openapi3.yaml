@@ -41800,6 +41800,14 @@ components:
     A2AProtocolConfiguration:
       type: object
       description: Configuration specific to the A2A protocol.
+    A2AProtocolVersion:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - '0.3'
+            - '1.0'
+      description: Known A2A protocol versions. Open union preserves forward compatibility.
     A2ATool:
       type: object
       required:
@@ -41833,7 +41841,7 @@ components:
             specified by the caller (anonymous fetch).
           default: false
         a2a_version:
-          type: string
+          $ref: '#/components/schemas/A2AProtocolVersion'
           description: The A2A protocol version supported by the agent.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -41931,7 +41939,7 @@ components:
             specified by the caller (anonymous fetch).
           default: false
         a2a_version:
-          type: string
+          $ref: '#/components/schemas/A2AProtocolVersion'
           description: The A2A protocol version supported by the agent.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'

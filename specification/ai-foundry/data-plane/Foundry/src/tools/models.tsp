@@ -781,6 +781,17 @@ namespace Azure.AI.Projects {
     outputs: StructuredOutputDefinition;
   }
 
+  /** Known A2A protocol versions. Open union preserves forward compatibility. */
+  union A2AProtocolVersion {
+    string,
+
+    /** A2A protocol version 0.3. */
+    v0_3: "0.3",
+
+    /** A2A protocol version 1.0. */
+    v1_0: "1.0",
+  }
+
   /** Common configuration for an agent implementing the A2A protocol. */
   model A2AToolBase {
     /**
@@ -835,7 +846,7 @@ namespace Azure.AI.Projects {
     /**
      * The A2A protocol version supported by the agent.
      */
-    a2a_version: string;
+    a2a_version: A2AProtocolVersion;
   }
 
   /**
