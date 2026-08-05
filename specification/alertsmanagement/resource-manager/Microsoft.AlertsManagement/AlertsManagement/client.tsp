@@ -71,6 +71,7 @@ model AlertsClientOptions {
 // Rename Alert -> ServiceAlert (GA 1.1.2 name). Tenant-scope ops use a
 // separate "ServiceAlertTenant" template arg in Alert.tsp to avoid collision.
 @@clientName(Alert, "ServiceAlert", "csharp");
+@@clientName(AlertCollection, "ServiceAlertCollection", "csharp");
 
 // Drop redundant "Tenant" suffix on tenant-scope methods (class name already conveys it).
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant resource methods drop the redundant Tenant suffix in C#"
