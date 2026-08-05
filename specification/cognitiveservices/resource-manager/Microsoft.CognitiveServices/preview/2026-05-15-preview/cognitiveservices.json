@@ -17399,7 +17399,6 @@
       },
       "required": [
         "name",
-        "vmPriority",
         "instanceType",
         "nodeCount"
       ]
@@ -20347,7 +20346,7 @@
       "description": "VM priority for a compute pool.",
       "enum": [
         "Regular",
-        "LowPriority"
+        "Spot"
       ],
       "x-ms-enum": {
         "name": "VmPriority",
@@ -20359,9 +20358,9 @@
             "description": "Regular VM priority."
           },
           {
-            "name": "LowPriority",
-            "value": "LowPriority",
-            "description": "Low-priority VM."
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Spot VM priority."
           }
         ]
       }
