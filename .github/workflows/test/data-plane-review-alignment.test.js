@@ -156,12 +156,18 @@ describe("getVerifiedVersion", () => {
 
 describe("data-plane review workflow scope", () => {
   it("supports modern TypeSpec project layouts and excludes generated Swagger", async () => {
-    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+    const [workflow, agent] = await Promise.all([
+      readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8"),
+      readFile(join(REAL_ROOT, AGENT_FILE), "utf8"),
+    ]);
 
-    expect(content).toContain("Do not require a `data-plane` path segment");
-    expect(content).toContain("Exclude projects under\n   `resource-manager/`");
-    expect(content).toContain("review the changed `.tsp` files plus its\n   `tspconfig.yaml`");
-    expect(content).toContain("Do not review any `.json` Swagger/OpenAPI files");
+    for (const content of [workflow, agent]) {
+      expect(content).toMatch(/Do not require a\s+`data-plane` path segment/);
+    }
+    expect(workflow).toContain("Exclude projects under\n   `resource-manager/`");
+    expect(agent).toContain("Exclude every project under\n`resource-manager/`");
+    expect(workflow).toContain("review the changed `.tsp` files plus its\n   `tspconfig.yaml`");
+    expect(workflow).toContain("Do not review any `.json` Swagger/OpenAPI files");
   });
 
   it("does not dispatch the critic when no TypeSpec data-plane project changed", async () => {
@@ -173,6 +179,20 @@ describe("data-plane review workflow scope", () => {
     expect(emptyScope).toBeGreaterThan(-1);
     expect(stop).toBeGreaterThan(emptyScope);
     expect(critic).toBeGreaterThan(stop);
+  });
+
+  it("keeps trusted guidance local without checking out untrusted PR content", async () => {
+    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+
+    expect(content).not.toContain("checkout: false");
+    expect(content).toContain("checkout:\n  ref: ${{ github.event.pull_request.base.sha }}");
+    expect(content).toContain(".github/agents");
+    expect(content).toContain(".github/skills/azure-api-review");
+    expect(content).toContain("allowed: [get_file_contents, pull_request_read, search_code]");
+    expect(content).toContain('"jq"');
+    expect(content).toContain('"nl"');
+    expect(content).toContain("Read PR metadata and PR-authored files only through the");
+    expect(content).toContain("Do not emulate it with a general-purpose");
   });
 });
 

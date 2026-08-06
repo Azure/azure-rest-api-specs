@@ -75,8 +75,12 @@ file's workflow only.
 
 ## Scope
 
-**In scope:** `specification/**/data-plane/**/*.tsp` and the `tspconfig.yaml` in
-the same TypeSpec project.
+**In scope:** changed `.tsp` files in TypeSpec data-plane projects under
+`specification/`, plus the `tspconfig.yaml` in the same project. Do not require a
+`data-plane` path segment: newer projects commonly use
+`specification/<area>/<service>/`, while older projects use
+`specification/<service>/data-plane/`. Exclude every project under
+`resource-manager/`.
 
 **Evidence only, never itself reviewed:** emitted swagger under
 `stable/<version>/` and `preview/<version>/`. Read it to confirm wire shape --
@@ -143,12 +147,14 @@ next step's input.
 
 1. Fetch the PR and pin the **head SHA**; every later file read uses it. Record
    the **base SHA** for previous-version reads.
-2. List changed files; keep only `specification/**/data-plane/**/*.tsp`.
+2. List changed files; keep `.tsp` files in TypeSpec data-plane projects under
+   `specification/`, excluding projects under `resource-manager/`. Do not require
+   a `data-plane` path segment.
 3. **If no in-scope files changed, stop.** Emit "No data-plane TypeSpec changes
    in this PR." and end -- no ARM review, no JSON review, no general commentary.
 4. Classify:
-   - **New service** (a `data-plane` directory absent on base) -- full review,
-     Blocking permitted.
+   - **New service** (the TypeSpec data-plane project directory is absent on
+     base) -- full review, Blocking permitted.
    - **New API version** -- full review plus the versioning pass against the
      previous stable version. Blocking permitted.
    - **Maintenance edit** (changes inside an already-shipped version) --
@@ -165,11 +171,19 @@ next step's input.
 Read the interlock **first**; it determines what is reportable. Then read only
 the rule references the diff actually needs.
 
-Fetch the root `package.json` with `github/get_file_contents` to get the pinned
-`@azure-tools/typespec-azure-core` version. **It is not on disk** -- the workflow
-declares `checkout: false`, so only `.github/` instructions are local. If it
-differs from the interlock header, say so and treat every ⏳/🔒 boundary as
-uncertain for that run, preferring questions to assertions.
+In the unattended workflow, the local sparse checkout contains trusted
+workflow/base-commit copies of `.github/agents`,
+`.github/skills/azure-api-review`, and root package metadata. Read those files
+locally. It deliberately does **not** contain PR-head specification files: fetch
+PR metadata once, fetch changed files once per page with `perPage: 100`, and read
+every PR-authored file through the GitHub tools at the full pinned head SHA.
+Reuse tool results. If a large result is saved under `/tmp`, inspect it with the
+allowlisted `jq` and `nl`; do not attempt Python or Git as a fallback.
+
+Read the root `package.json` locally to get the pinned
+`@azure-tools/typespec-azure-core` version. If it differs from the interlock
+header, say so and treat every ⏳/🔒 boundary as uncertain for that run,
+preferring questions to assertions.
 
 ### Step 3 -- Graph pass
 
@@ -264,12 +278,13 @@ finding; it does not soften it.
 
 ### Step 7 -- Critic
 
-Dispatch the **Data-Plane API Review Critic** subagent per
+Dispatch the named **Data-Plane API Review Critic** custom agent directly per
 [`protocols/data-plane-api-review-critic.protocol.md`](protocols/data-plane-api-review-critic.protocol.md).
-It is scoped to **false-positive defense only** and does not hunt for missed
-violations. Apply its verdicts: `FAIL` **drops** the finding (interactive, you
-may put the disagreement to the human); `DOWNGRADE` lowers severity as directed;
-`PASS` keeps.
+Do not emulate it with a general-purpose subagent. It is scoped to
+**false-positive defense only** and does not hunt for missed violations. Apply
+its verdicts: `FAIL` **drops** the finding (interactive, you may put the
+disagreement to the human); `DOWNGRADE` lowers severity as directed; `PASS`
+keeps.
 
 If dispatch fails, say so in the report and **drop every Blocking finding to
 Warning**. An unverified Blocking finding from an unattended bot is the failure

@@ -33,11 +33,14 @@ permissions:
   contents: read
   copilot-requests: write
   pull-requests: read
-# The agent reads PR files through the GitHub MCP toolsets, never from disk,
-# so no checkout is needed — and pull_request_target must not check out fork code.
-# gh-aw still sparse-checks-out `.github`, which is where this agent's own
-# instruction and skill files live, so they remain readable.
-checkout: false
+# Keep trusted reviewer instructions and root package metadata local, while PR
+# head content remains available only through the GitHub MCP tools. Cone-mode
+# sparse checkout includes root files such as package.json.
+checkout:
+  ref: ${{ github.event.pull_request.base.sha }}
+  sparse-checkout: |
+    .github/agents
+    .github/skills/azure-api-review
 # Pinned deliberately, and pinned to the SAME value as `model:` in
 # .github/skills/evals/data-plane-api-reviewer/vally/eval-true-negatives.yaml --
 # that file defines the phase-2 promotion gate, so if production runs a
@@ -63,9 +66,10 @@ tools:
     # Read-only toolsets only. This workflow reads untrusted fork content, and
     # `safe-outputs` below is the ONLY write channel. Do not add `issues`,
     # `labels`, or any mutating toolset here.
-    toolsets: [context, repos, pull_requests]
+    toolsets: [repos, pull_requests]
+    allowed: [get_file_contents, pull_request_read, search_code]
     min-integrity: approved
-  bash: ["cat", "echo", "grep", "head", "ls", "pwd", "sed", "sort", "tail", "wc"]
+  bash: ["cat", "echo", "grep", "head", "jq", "ls", "nl", "pwd", "sed", "sort", "tail", "wc"]
   cache-memory:
 safe-outputs:
   # PHASE 1: one summary comment. No inline review comments, no labels.
@@ -111,6 +115,10 @@ run-specific context and the constraints particular to running unattended.
 - Pull request: `#${{ github.event.pull_request.number }}`
 - You are running **unattended**. There is no human to answer questions
   mid-run and no human to override a critic verdict.
+- The local sparse checkout contains trusted guidance from the workflow/base
+  commit, not the PR head. Read `.github/agents`, `.github/skills`, and root package
+  metadata locally. Read PR metadata and PR-authored files only through the
+  GitHub tools at the full pinned head SHA.
 
 ## Constraints for this run
 
@@ -130,6 +138,12 @@ run-specific context and the constraints particular to running unattended.
    the change. Do not review any `.json` Swagger/OpenAPI files from that project;
    they are generated output and would duplicate review of the TypeSpec source.
 
+   Fetch PR metadata once. Fetch changed files once per page with `perPage: 100`
+   and reuse the result. When a large tool result is saved under `/tmp`, use the
+   allowlisted `jq` and `nl` commands to inspect it. Python and Git are not
+   available for PR-data processing; do not attempt them or retry a denied
+   command with another runtime.
+
    If the PR changes no TypeSpec data-plane project, your entire output is:
 
    > _Automated review by Copilot (data-plane API reviewer)._ No data-plane
@@ -139,12 +153,13 @@ run-specific context and the constraints particular to running unattended.
    OpenAPI JSON, or generated Swagger.
 
 3. **Run the critic after the scope gate.** Only when the scope gate found a
-   TypeSpec data-plane project, dispatch the `Data-Plane API Review Critic`
-   subagent per
+   TypeSpec data-plane project, dispatch the named
+   `Data-Plane API Review Critic` custom agent directly per
    [`.github/agents/protocols/data-plane-api-review-critic.protocol.md`](../agents/protocols/data-plane-api-review-critic.protocol.md)
-   before producing your final output. Drop every finding it returns `FAIL` on
-   -- there is no override path here. If the critic cannot be dispatched, say so
-   and downgrade every Blocking finding to Warning.
+   before producing your final output. Do not emulate it with a general-purpose
+   subagent. Drop every finding it returns `FAIL` on -- there is no override path
+   here. If the critic cannot be dispatched, say so and downgrade every Blocking
+   finding to Warning.
 
 4. **Silence is success.** If nothing survives the interlock filter,
    self-verification, and the critic, post the "no findings" form. Do not pad
