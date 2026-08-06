@@ -885,6 +885,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(DatabaseAccountGetProperties.ipRules, "IPRules", "csharp");
 @@clientName(
+  DatabaseAccountGetProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
+@@clientName(
   DatabaseAccountCreateUpdateProperties.enableAnalyticalStorage,
   "IsAnalyticalStorageEnabled",
   "csharp"
@@ -899,6 +904,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "IPRules",
   "csharp"
 );
+@@clientName(
+  DatabaseAccountCreateUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
 @@clientName(DatabaseAccountKind, "CosmosDBAccountKind", "csharp");
 @@clientName(
   DatabaseAccountUpdateProperties.enableAnalyticalStorage,
@@ -911,6 +921,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(DatabaseAccountUpdateProperties.ipRules, "IPRules", "csharp");
+@@clientName(
+  DatabaseAccountUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
 @@clientName(DataCenterResource, "CassandraDataCenter", "csharp");
 @@clientName(
   DataCenterResourceProperties,
@@ -1683,8 +1698,13 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraViewConfig",
   "csharp"
 );
-@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
+@@clientName(ARMProxyResource, "CosmosDBProxyResource", "csharp");
 @@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
+@@clientName(
+  ScheduledEventStrategy,
+  "CassandraScheduledEventStrategy",
+  "csharp"
+);
 @@clientName(
   MaterializedViewDefinition,
   "CosmosDBMaterializedViewDefinition",

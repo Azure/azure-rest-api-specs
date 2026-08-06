@@ -39,6 +39,14 @@ using Http;
   "java"
 );
 
+// Preserve backward-compatible Java surface (free-form Object) for device twin
+// free-form maps. These properties are `Record<unknown>` in the spec, which the
+// Java emitter maps to `Map`; prior releases generated `Object`. Keep `Object`
+// for Java only to avoid a breaking change, while other languages keep `Map`.
+@@alternateType(RoutingTwin.tags, unknown, "java");
+@@alternateType(RoutingTwinProperties.desired, unknown, "java");
+@@alternateType(RoutingTwinProperties.reported, unknown, "java");
+
 @@scope(GroupIdInformations.get, "!csharp");
 @@scope(GroupIdInformations.list, "!csharp");
 @@usage(GroupIdInformation, Usage.output, "csharp");
