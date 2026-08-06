@@ -172,14 +172,10 @@ interface AuthenticationPolicies {
   /**
    * Deletes the specified authentication policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Network RP delete operations use the 200+202+204 pattern, matching existing Network RP resource delete conventions"
   @tag("AuthenticationPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     AuthenticationPolicy,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
