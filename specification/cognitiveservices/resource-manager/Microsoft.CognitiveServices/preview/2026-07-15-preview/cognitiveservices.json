@@ -12108,6 +12108,10 @@
           },
           "x-ms-identifiers": [
             "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
           ]
         }
       }
@@ -12488,7 +12492,7 @@
     },
     "AgentHostingConfiguration": {
       "type": "object",
-      "description": "Configuration for hosting Foundry agents on an Azure Kubernetes Service managed cluster.",
+      "description": "Base configuration for hosting Foundry agents.",
       "properties": {
         "name": {
           "type": "string",
@@ -12499,69 +12503,12 @@
         "hostingType": {
           "$ref": "#/definitions/AgentHostingType",
           "description": "Type of infrastructure used to host Foundry agents."
-        },
-        "hostingManagementIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the user-assigned managed identity used by the Foundry resource provider to manage the hosting configuration. The identity must be assigned to the Foundry account in identity.userAssignedIdentities.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        },
-        "workloadIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        },
-        "clusterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the customer-owned AKS managed cluster that runs the hosted agent workloads.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ContainerService/managedClusters"
-              }
-            ]
-          }
-        },
-        "clusterAgentPoolName": {
-          "type": "string",
-          "description": "Name of the agent pool within the AKS managed cluster that runs the hosted agent workloads.",
-          "minLength": 1
-        },
-        "storageAccountResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the customer-owned storage account used by the hosted agents. The storage account must be in the same subscription and region as the AKS cluster, and its data-plane endpoint must be reachable from the workload network.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-          }
         }
       },
+      "discriminator": "hostingType",
       "required": [
         "name",
-        "hostingType",
-        "hostingManagementIdentityResourceId",
-        "workloadIdentityResourceId",
-        "clusterResourceId",
-        "clusterAgentPoolName",
-        "storageAccountResourceId"
+        "hostingType"
       ]
     },
     "AgentHostingType": {
@@ -16892,6 +16839,78 @@
         }
       ],
       "x-ms-discriminator-value": "Managed"
+    },
+    "ManagedClusterAgentHostingConfiguration": {
+      "type": "object",
+      "description": "Configuration for hosting Foundry agents on an Azure Kubernetes Service managed cluster.",
+      "properties": {
+        "hostingManagementIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the user-assigned managed identity used by the Foundry resource provider to manage the hosting configuration. The identity must be assigned to the Foundry account in identity.userAssignedIdentities.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "workloadIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the customer-owned AKS managed cluster that runs the hosted agent workloads.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/managedClusters"
+              }
+            ]
+          }
+        },
+        "clusterAgentPoolName": {
+          "type": "string",
+          "description": "Name of the agent pool within the AKS managed cluster that runs the hosted agent workloads.",
+          "minLength": 1
+        },
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the customer-owned storage account used by the hosted agents. The storage account must be in the same subscription and region as the AKS cluster, and its data-plane endpoint must be reachable from the workload network.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "hostingManagementIdentityResourceId",
+        "workloadIdentityResourceId",
+        "clusterResourceId",
+        "clusterAgentPoolName",
+        "storageAccountResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentHostingConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedCluster"
     },
     "ManagedComputeCapacity": {
       "type": "object",

@@ -1682,6 +1682,7 @@ model AccountProperties {
    * Customer-owned AKS hosting configurations for Foundry agents. This API version supports exactly one configuration. Once set, the configuration is immutable; subsequent requests may only repeat the same value.
    */
   @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(1)
   @identifiers(#["name"])
@@ -1722,9 +1723,10 @@ model CapabilitySettings {
 }
 
 /**
- * Configuration for hosting Foundry agents on an Azure Kubernetes Service managed cluster.
+ * Base configuration for hosting Foundry agents.
  */
 @added(Versions.v2026_07_15_preview)
+@discriminator("hostingType")
 model AgentHostingConfiguration {
   /**
    * Unique name of the hosting configuration within the Foundry account.
@@ -1737,6 +1739,18 @@ model AgentHostingConfiguration {
    * Type of infrastructure used to host Foundry agents.
    */
   hostingType: AgentHostingType;
+}
+
+/**
+ * Configuration for hosting Foundry agents on an Azure Kubernetes Service managed cluster.
+ */
+@added(Versions.v2026_07_15_preview)
+model ManagedClusterAgentHostingConfiguration
+  extends AgentHostingConfiguration {
+  /**
+   * Type of infrastructure used to host Foundry agents.
+   */
+  hostingType: "ManagedCluster";
 
   /**
    * Azure resource ID of the user-assigned managed identity used by the Foundry resource provider to manage the hosting configuration. The identity must be assigned to the Foundry account in identity.userAssignedIdentities.
