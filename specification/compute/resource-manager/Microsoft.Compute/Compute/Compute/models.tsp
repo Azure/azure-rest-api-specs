@@ -5788,7 +5788,7 @@ model ManagedDiskProperties {
   availabilityPolicy?: DiskAvailabilityPolicy;
 
   /**
-   * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
+   * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time. Applies to data disks only.
    */
   @minValue(1)
   maxShares?: int32;
