@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, writeFile } from "fs/promises";
+import { mkdir, mkdtemp, readFile, writeFile } from "fs/promises";
 import { tmpdir } from "os";
 import { dirname, join } from "path";
 import { describe, expect, it } from "vitest";
@@ -151,6 +151,28 @@ describe("getVerifiedVersion", () => {
 
   it("throws when the header does not name the package", () => {
     expect(() => getVerifiedVersion("# No header here")).toThrow(/Could not find/);
+  });
+});
+
+describe("data-plane review workflow scope", () => {
+  it("supports modern TypeSpec project layouts and excludes generated Swagger", async () => {
+    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+
+    expect(content).toContain("Do not require a `data-plane` path segment");
+    expect(content).toContain("Exclude projects under\n   `resource-manager/`");
+    expect(content).toContain("review the changed `.tsp` files plus its\n   `tspconfig.yaml`");
+    expect(content).toContain("Do not review any `.json` Swagger/OpenAPI files");
+  });
+
+  it("does not dispatch the critic when no TypeSpec data-plane project changed", async () => {
+    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+    const emptyScope = content.indexOf("If the PR changes no TypeSpec data-plane project");
+    const stop = content.indexOf("Stop here. Do not dispatch the critic.");
+    const critic = content.indexOf("**Run the critic after the scope gate.**");
+
+    expect(emptyScope).toBeGreaterThan(-1);
+    expect(stop).toBeGreaterThan(emptyScope);
+    expect(critic).toBeGreaterThan(stop);
   });
 });
 
