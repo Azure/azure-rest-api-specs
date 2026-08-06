@@ -4126,14 +4126,14 @@
           {
             "name": "metadata",
             "in": "formData",
-            "description": "The JSON metadata part describing the file.",
+            "description": "The JSON metadata describing the file.",
             "required": true,
             "type": "string"
           },
           {
             "name": "content",
             "in": "formData",
-            "description": "The raw file content part.",
+            "description": "The raw file content.",
             "required": true,
             "type": "file"
           }
@@ -5318,9 +5318,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Server-sent events response for streaming knowledge base retrieval.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/KnowledgeBaseRetrievalResponse"
             }
           },
           "default": {
@@ -5362,14 +5362,14 @@
           {
             "name": "metadata",
             "in": "formData",
-            "description": "The JSON metadata part describing the file.",
+            "description": "The JSON metadata describing the file.",
             "required": true,
             "type": "string"
           },
           {
             "name": "content",
             "in": "formData",
-            "description": "The raw file content part.",
+            "description": "The raw file content.",
             "required": true,
             "type": "file"
           }
@@ -12238,11 +12238,11 @@
     },
     "KnowledgeBaseRetrievalEventStreamResponse": {
       "type": "object",
-      "description": "Server-sent events response for streaming knowledge base retrieval, added in version\n2026-08-01-preview. Each server-sent event's data payload uses this shape; the connection stays\nopen and multiple events may be sent before the stream ends.",
+      "description": "Server-sent events response for streaming knowledge base retrieval.",
       "properties": {
         "body": {
           "$ref": "#/definitions/KnowledgeBaseRetrievalResponse",
-          "description": "The retrieval response body."
+          "description": "The authoritative retrieval response carried by the terminal `response.completed` event."
         }
       },
       "required": [

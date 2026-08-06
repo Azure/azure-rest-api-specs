@@ -66,15 +66,7 @@ interface KnowledgeRetrieval {
       @body
       retrievalRequest: KnowledgeBaseRetrievalRequest;
     } & ClientRequestIdHeader,
-    // NOTE: SSEStream<T> is the spec-correct construct for this response, but C# SSE codegen is not
-    // implemented upstream as of this writing (tracked: github.com/Azure/typespec-azure#614,
-    // github.com/Azure/azure-sdk-for-net#47660, closed as not_planned/stale without being built). As a
-    // result the OpenAPI 2.0 output for this 200 response is currently just `{"type": "string"}` --
-    // no $ref to KnowledgeBaseRetrievalStreamEvents or its variants, and no Content-Type header -- and
-    // the generated C# protocol method is a plain buffered Task<Response> with no typed per-event
-    // parsing. This is acceptable for preview; revisit before GA once upstream codegen support lands
-    // (or hand-roll a documented response alias again, as this operation used before this change).
-    SSEStream<KnowledgeBaseRetrievalStreamEvents>,
+    KnowledgeBaseRetrievalEventStreamResponse,
     {},
     ErrorResponse
   >;

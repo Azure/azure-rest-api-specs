@@ -360,6 +360,18 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@access(ListingSearchType, Access.public);
 @@usage(ListingSearchType, Usage.input);
+@@access(KnowledgeBaseRetrievalStartedEvent, Access.public);
+@@usage(KnowledgeBaseRetrievalStartedEvent, Usage.output | Usage.json);
+@@access(KnowledgeBaseActivityStartedEvent, Access.public);
+@@usage(KnowledgeBaseActivityStartedEvent, Usage.output | Usage.json);
+@@access(KnowledgeBaseAnswerCompletedEvent, Access.public);
+@@usage(KnowledgeBaseAnswerCompletedEvent, Usage.output | Usage.json);
+@@access(KnowledgeBaseStreamErrorEvent, Access.public);
+@@usage(KnowledgeBaseStreamErrorEvent, Usage.output | Usage.json);
+@@access(KnowledgeBaseResponseCompletedEvent, Access.public);
+@@usage(KnowledgeBaseResponseCompletedEvent, Usage.output | Usage.json);
+@@access(KnowledgeBaseRetrievalStatusCode, Access.public);
+@@usage(KnowledgeBaseRetrievalStatusCode, Usage.output | Usage.json);
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
@@ -4684,6 +4696,60 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientNamespace(
   Search.KnowledgeBaseRetrievalResponse,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStartedEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStartedEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityStartedEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityStartedEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseAnswerCompletedEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseAnswerCompletedEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseStreamErrorEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseStreamErrorEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseResponseCompletedEvent,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseResponseCompletedEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStatusCode,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStatusCode,
   "com.azure.search.documents.knowledgebases",
   "java"
 );

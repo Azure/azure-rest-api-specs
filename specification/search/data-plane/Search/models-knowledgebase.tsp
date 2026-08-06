@@ -1350,11 +1350,7 @@ model KnowledgeBaseRetrievalPartialResponse {
   body: KnowledgeBaseRetrievalResponse;
 }
 
-/**
- * Server-sent events response for streaming knowledge base retrieval, added in version
- * 2026-08-01-preview. Each server-sent event's data payload uses this shape; the connection stays
- * open and multiple events may be sent before the stream ends.
- */
+/** Server-sent events response for streaming knowledge base retrieval. */
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseRetrievalEventStreamResponse {
   /** The retrieval response is successfully returned. */
@@ -1365,7 +1361,7 @@ model KnowledgeBaseRetrievalEventStreamResponse {
   @header("Content-Type")
   contentType: "text/event-stream";
 
-  /** The retrieval response body. */
+  /** The authoritative retrieval response carried by the terminal `response.completed` event. */
   @body
   body: KnowledgeBaseRetrievalResponse;
 }
