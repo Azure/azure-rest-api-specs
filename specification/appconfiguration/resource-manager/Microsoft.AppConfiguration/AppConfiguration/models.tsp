@@ -326,6 +326,7 @@ model ConfigurationStoreProperties {
    * Managed On Behalf Of Configuration.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_09_01_preview)
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   /**
