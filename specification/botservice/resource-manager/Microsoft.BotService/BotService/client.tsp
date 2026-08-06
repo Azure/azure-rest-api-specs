@@ -362,8 +362,8 @@ namespace Microsoft.BotService {
 namespace Customizations {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotChannelsUpdate(
     ...ApiVersionParameter,
@@ -410,8 +410,8 @@ namespace Customizations {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotsUpdate(
     ...ApiVersionParameter,

@@ -154,8 +154,8 @@ namespace SplitIO.Experimentation {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/dataPlaneApplications/{applicationId}")
   interface DataPlaneApplications {
     #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Need to remove autoroute"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Need to remove autoroute"
     @doc("The action to exchange Split.IO data plane authentication token.")
     @route("exchangeToken")
     @post

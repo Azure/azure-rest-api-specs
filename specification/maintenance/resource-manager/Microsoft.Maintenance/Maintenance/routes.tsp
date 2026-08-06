@@ -20,8 +20,8 @@ interface ScheduledEventOperationGroup {
    * Post ScheduledEvents Acknowledgement
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom action POST that acknowledges a ScheduledEvent; not a standard ARM resource lifecycle operation."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom action POST that acknowledges a ScheduledEvent; not a standard ARM resource lifecycle operation."
   @summary("Post ScheduledEvents Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge")
   @post
@@ -53,8 +53,8 @@ interface ScheduledEventOperationGroup {
    * Post List of ScheduledEvents Acknowledgement
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom action POST that acknowledges a list of ScheduledEvents; not a standard ARM resource lifecycle operation."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom action POST that acknowledges a list of ScheduledEvents; not a standard ARM resource lifecycle operation."
   @added(Versions.v2025_10_01_preview)
   @summary("Post ScheduledEvents List Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents")
@@ -174,8 +174,8 @@ interface ApplyUpdateForResourceGroupOperationGroup {
    * Get Configuration records within a subscription and resource group
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Configuration records within a subscription and resource group")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates")
   @get
