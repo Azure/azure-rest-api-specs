@@ -5185,6 +5185,26 @@ model FileUploadMetadata {
   metadata?: Record<string>;
 }
 
+/** Multipart request for uploading a file to a File knowledge source. */
+@added(Versions.v2026_08_01_preview)
+model UploadKnowledgeSourceFileMultipartRequest {
+  /** The JSON metadata describing the file. */
+  metadata: HttpPart<FileUploadMetadata>;
+
+  /** The raw file content. */
+  content: HttpPart<File>;
+}
+
+/** Multipart request for updating a file in a File knowledge source. */
+@added(Versions.v2026_08_01_preview)
+model UpdateKnowledgeSourceFileRequest {
+  /** The JSON metadata describing the file. */
+  metadata: HttpPart<FileUploadMetadata>;
+
+  /** The raw file content. */
+  content: HttpPart<File>;
+}
+
 /** Metadata for a file uploaded to a File knowledge source. */
 @added(Versions.v2026_05_01_preview)
 model KnowledgeSourceFile {

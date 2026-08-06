@@ -2313,6 +2313,24 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(
+  Search.UploadKnowledgeSourceFileMultipartRequest,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.UploadKnowledgeSourceFileMultipartRequest,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.UpdateKnowledgeSourceFileRequest,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.UpdateKnowledgeSourceFileRequest,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.KnowledgeSourceFile, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.KnowledgeSourceFile,
