@@ -61,17 +61,14 @@ model VoiceConversation {
 // Voice response
 // ---------------------------------------------------------------------------
 //
-// VoiceResponse cannot `extends OpenAI.RealtimeResponse`: overriding `audio` to the Foundry
-// `{type, name}` voice shape fails TypeSpec's override-property-mismatch check (the override type must
-// be a subtype of the inherited `OpenAI.RealtimeResponseAudio`, whose `voice` is the flat `VoiceIdsShared`
-// string enum). So VoiceResponse remains a standalone model, but its other fields still match OpenAI's
-// wire names/shapes 1:1 (output_modalities, max_output_tokens, status_details reusing
-// OpenAI.RealtimeResponseStatusDetails) wherever no such conflict exists.
-
-// Token usage statistics reuse OpenAI.RealtimeResponseUsage (total/input/output tokens plus
-// input/output token detail breakdowns, including image_tokens and cached_tokens_details), already
-// available in this program via ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's
-// realtime models.tsp. See VoiceResponse.usage below.
+// Extending OpenAI.RealtimeResponse while preserving this wire contract produces
+// override-property-mismatch errors for three properties:
+// - status: VoiceResponseStatus is extensible, while the upstream union is closed.
+// - audio: Foundry uses typed voice objects, while upstream uses a flat VoiceIdsShared string.
+// - max_output_tokens: this contract uses int32, while upstream uses OpenAI.integer.
+// VoiceResponse therefore remains standalone, omits upstream metadata, adds persistence fields, and
+// directly reuses compatible upstream types such as RealtimeResponseStatusDetails and
+// RealtimeResponseUsage.
 
 @doc("The status of a voice response.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
