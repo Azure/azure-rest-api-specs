@@ -1,0 +1,490 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthenticationPolicyManagement",
+    "version": "2025-09-01",
+    "description": "APIs to manage authentication policies for identity integration."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AuthenticationPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/authenticationPolicies": {
+      "get": {
+        "operationId": "AuthenticationPolicies_ListAll",
+        "tags": [
+          "AuthenticationPolicies"
+        ],
+        "description": "Gets all the authentication policies in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all authentication policies in a subscription": {
+            "$ref": "./examples/AuthenticationPolicyListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies": {
+      "get": {
+        "operationId": "AuthenticationPolicies_List",
+        "tags": [
+          "AuthenticationPolicies"
+        ],
+        "description": "Lists all of the authentication policies within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all authentication policies in a resource group": {
+            "$ref": "./examples/AuthenticationPolicyList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}": {
+      "get": {
+        "operationId": "AuthenticationPolicies_Get",
+        "tags": [
+          "AuthenticationPolicies"
+        ],
+        "description": "Retrieve the authentication policy with specified name within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "authenticationPolicyName",
+            "in": "path",
+            "description": "The name of the authentication policy.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an authentication policy within a resource group": {
+            "$ref": "./examples/AuthenticationPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AuthenticationPolicies_CreateOrUpdate",
+        "tags": [
+          "AuthenticationPolicies"
+        ],
+        "description": "Creates or updates an authentication policy with the specified name within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "authenticationPolicyName",
+            "in": "path",
+            "description": "The name of the authentication policy.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Authentication policy to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AuthenticationPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'AuthenticationPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an authentication policy within a resource group": {
+            "$ref": "./examples/AuthenticationPolicyCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AuthenticationPolicies_Delete",
+        "tags": [
+          "AuthenticationPolicies"
+        ],
+        "description": "Deletes the specified authentication policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "authenticationPolicyName",
+            "in": "path",
+            "description": "The name of the authentication policy.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an authentication policy within a resource group": {
+            "$ref": "./examples/AuthenticationPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AuthenticationPolicy": {
+      "type": "object",
+      "description": "Authentication policy resource for identity integration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AuthenticationPolicyPropertiesFormat",
+          "description": "Properties of the authentication policy.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AuthenticationPolicyListResult": {
+      "type": "object",
+      "description": "Paged collection of AuthenticationPolicy items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AuthenticationPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/AuthenticationPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AuthenticationPolicyPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the authentication policy.",
+      "properties": {
+        "userTrustProviderType": {
+          "$ref": "#/definitions/UserTrustProviderType",
+          "description": "The type of the user trust provider."
+        },
+        "onUnauthenticatedRequest": {
+          "$ref": "#/definitions/OnUnauthenticatedRequest",
+          "description": "The action to take when a request is unauthenticated."
+        },
+        "authenticationProperties": {
+          "$ref": "#/definitions/AuthenticationProviderProperties",
+          "description": "The authentication provider configuration for the policy."
+        },
+        "associatedResources": {
+          "type": "array",
+          "description": "A collection of resource IDs that reference this authentication policy.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the authentication policy resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the authentication policy resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "authenticationProperties"
+      ]
+    },
+    "AuthenticationProviderProperties": {
+      "type": "object",
+      "description": "Properties for authentication provider configuration.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/"
+        },
+        "authEndpoint": {
+          "type": "string",
+          "description": "The OIDC Authorization Endpoint. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/oauth2/v2.0/authorize"
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "The OIDC Token Endpoint. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/oauth2/v2.0/token"
+        },
+        "userInfoEndpoint": {
+          "type": "string",
+          "description": "The OIDC User Info Endpoint. Example: https://graph.microsoft.com/oidc/userinfo"
+        },
+        "jwksUri": {
+          "type": "string",
+          "description": "The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys"
+        },
+        "audience": {
+          "type": "string",
+          "description": "The intended audience for the JWT. Only a single audience value is supported in this API version. Example: https://audience.com/{application-id}"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Application (client) ID for the related application registered in Microsoft Entra ID."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The Key Vault secret URL containing the client secret for authentication. Example: https://myvault.vault.azure.net/secrets/mysecret"
+        },
+        "scope": {
+          "type": "array",
+          "description": "The scopes used by an application during authentication to authorize access to a user's details.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sessionTimeout": {
+          "type": "string",
+          "description": "The timeout of the session cookie used for user authentication, in seconds. Applicable to the Application Gateway post-OIDC workflow."
+        },
+        "sessionCookieName": {
+          "type": "string",
+          "description": "The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow."
+        }
+      },
+      "required": [
+        "issuer",
+        "clientId"
+      ]
+    },
+    "UserTrustProviderType": {
+      "type": "string",
+      "description": "Type of the user trust provider.",
+      "enum": [
+        "oidc",
+        "entra"
+      ],
+      "x-ms-enum": {
+        "name": "UserTrustProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Oidc",
+            "value": "oidc",
+            "description": "OpenID Connect (OIDC) trust provider type."
+          },
+          {
+            "name": "Entra",
+            "value": "entra",
+            "description": "Microsoft Entra trust provider type."
+          }
+        ]
+      }
+    },
+    "OnUnauthenticatedRequest": {
+      "type": "string",
+      "description": "Action to take when a request is unauthenticated.",
+      "enum": [
+        "allow",
+        "authenticate",
+        "deny"
+      ],
+      "x-ms-enum": {
+        "name": "OnUnauthenticatedRequest",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Allow the request to pass through without authentication."
+          },
+          {
+            "name": "Authenticate",
+            "value": "authenticate",
+            "description": "Redirect the request to the authentication provider. Only valid for the user authentication capability."
+          },
+          {
+            "name": "Deny",
+            "value": "deny",
+            "description": "Deny the request when no credential is presented."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
