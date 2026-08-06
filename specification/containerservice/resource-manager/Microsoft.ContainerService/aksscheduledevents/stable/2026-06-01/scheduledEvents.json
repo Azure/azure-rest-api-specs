@@ -83,37 +83,13 @@
         ]
       }
     },
-    "ResourceType": {
-      "type": "string",
-      "description": "The resource type of the event.",
-      "enum": [
-        "ManagedCluster",
-        "AgentPool"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ManagedCluster",
-            "value": "ManagedCluster",
-            "description": "The event applies to a managed cluster."
-          },
-          {
-            "name": "AgentPool",
-            "value": "AgentPool",
-            "description": "The event applies to an agent pool."
-          }
-        ]
-      }
-    },
     "ScheduledEvent": {
       "type": "object",
-      "description": "Scheduled event.",
+      "description": "Scheduled event for a managed cluster. ARM resource type: Microsoft.ContainerService/managedClusters/scheduledEvents.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ScheduledEventProperties",
-          "description": "Properties for the event."
+          "description": "Properties for the scheduled event."
         }
       },
       "allOf": [
@@ -124,27 +100,27 @@
     },
     "ScheduledEventProperties": {
       "type": "object",
-      "description": "Properties for a scheduled event.",
+      "description": "Properties for a scheduled event.\n\nTimestamp property names intentionally preserve the existing wire contract; all timestamp values are UTC date-time values.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the event."
+          "description": "Human-readable summary of the scheduled event."
         },
         "eventId": {
           "type": "string",
-          "description": "The event id of the event."
+          "description": "Unique ID of the scheduled event, represented as a GUID string."
         },
         "eventSource": {
           "type": "string",
-          "description": "The source of the event."
+          "description": "AKS component or workflow that raised the scheduled event."
         },
         "eventStatus": {
           "$ref": "#/definitions/EventStatus",
-          "description": "The status of the event."
+          "description": "Current lifecycle state of the scheduled event."
         },
         "eventDetails": {
           "type": "string",
-          "description": "The details of the event."
+          "description": "Free-form human-readable details about why the event was raised or what it represents."
         },
         "scheduledTime": {
           "type": "string",
@@ -181,9 +157,33 @@
           }
         },
         "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The resource type of the event."
+          "$ref": "#/definitions/ScheduledEventResourceType",
+          "description": "Whether the event applies to the managed cluster itself or to one of its agent pools."
         }
+      }
+    },
+    "ScheduledEventResourceType": {
+      "type": "string",
+      "description": "The kind of resource impacted by the scheduled event.",
+      "enum": [
+        "ManagedCluster",
+        "AgentPool"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledEventResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedCluster",
+            "value": "ManagedCluster",
+            "description": "The event applies to a managed cluster."
+          },
+          {
+            "name": "AgentPool",
+            "value": "AgentPool",
+            "description": "The event applies to an agent pool."
+          }
+        ]
       }
     }
   },
