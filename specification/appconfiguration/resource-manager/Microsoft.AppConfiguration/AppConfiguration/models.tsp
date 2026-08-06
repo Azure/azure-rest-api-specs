@@ -302,7 +302,7 @@ model ConfigurationStoreProperties {
   defaultKeyValueRevisionRetentionPeriodInSeconds?: int64;
 
   /**
-   * The duration in seconds to retain new feature flag revisions.
+   * The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores.
    */
   @added(Versions.v2026_09_01_preview)
   defaultFeatureFlagRevisionRetentionPeriodInSeconds?: int64;
@@ -556,7 +556,7 @@ model ConfigurationStorePropertiesUpdateParameters {
   defaultKeyValueRevisionRetentionPeriodInSeconds?: int64;
 
   /**
-   * The duration in seconds to retain new feature flag revisions.
+   * The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores.
    */
   @added(Versions.v2026_09_01_preview)
   defaultFeatureFlagRevisionRetentionPeriodInSeconds?: int64;
