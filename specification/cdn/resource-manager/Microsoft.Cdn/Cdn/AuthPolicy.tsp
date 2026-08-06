@@ -61,10 +61,8 @@ interface AuthPolicies {
     PatchModel = AuthPolicyUpdateParameters,
     Response =
       | ArmResponse<AuthPolicy>
-      | ArmAcceptedLroResponse<
-          LroHeaders = ArmCombinedLroHeaders<FinalResult = AuthPolicy> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AuthPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -74,9 +72,8 @@ interface AuthPolicies {
   delete is ArmResourceDeleteWithoutOkAsync<
     AuthPolicy,
     Response =
-      | ArmDeleteAcceptedLroResponse<
-          ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-        >
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse
   >;
 
@@ -90,6 +87,15 @@ interface AuthPolicies {
 @@doc(AuthPolicy.name, "Name of the authorization policy under the profile.");
 @@minLength(AuthPolicy.name, 1);
 @@maxLength(AuthPolicy.name, 260);
-@@doc(AuthPolicy.properties, "Properties required to create an authorization policy.");
-@@doc(AuthPolicies.create::parameters.resource, "The authorization policy properties.");
-@@doc(AuthPolicies.update::parameters.properties, "Authorization policy update properties.");
+@@doc(
+  AuthPolicy.properties,
+  "Properties required to create an authorization policy."
+);
+@@doc(
+  AuthPolicies.create::parameters.resource,
+  "The authorization policy properties."
+);
+@@doc(
+  AuthPolicies.update::parameters.properties,
+  "Authorization policy update properties."
+);
