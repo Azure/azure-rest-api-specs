@@ -154,6 +154,13 @@ using Microsoft.IoTOperations;
   "csharp"
 );
 @@clientName(StateStoreResourceKeyTypes, "StateStoreResourceKeyType", "csharp");
+@@clientName(AkriServiceResource, "AkriService", "csharp");
+@@clientName(AkriServiceProperties, "AkriServiceProperties", "csharp");
+@@clientName(
+  ResourceHealthStatus,
+  "IotOperationsResourceHealthStatus",
+  "csharp"
+);
 
 @@clientName(
   Versions.`2024-11-01`,
