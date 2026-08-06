@@ -11263,7 +11263,7 @@ model VirtualMachineSshCredentials {
   /**
    * Password of admin account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   password?: string;
 
   /**
@@ -11335,7 +11335,7 @@ model DatabricksProperties {
   /**
    * Databricks access token
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   databricksAccessToken?: string;
 
   /**
@@ -11536,7 +11536,7 @@ model DatabricksComputeSecretsProperties {
   /**
    * access token for databricks account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   databricksAccessToken?: string;
 }
 
@@ -16285,7 +16285,7 @@ model WorkspaceConnectionAccessKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   accessKeyId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   secretAccessKey?: string;
 }
 
@@ -16310,7 +16310,7 @@ model AccountKeyAuthTypeWorkspaceConnectionProperties
  */
 model WorkspaceConnectionAccountKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   key?: string;
 }
 
@@ -16352,7 +16352,7 @@ model ApiKeyAuthWorkspaceConnectionProperties
  */
 model WorkspaceConnectionApiKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   key?: string;
 }
 
@@ -16478,6 +16478,7 @@ model ContentSafetyEndpointResourceProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  @secret
   keys?: Record<string>;
 }
 
@@ -16689,6 +16690,7 @@ model PATAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionPersonalAccessToken {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  @secret
   pat?: string;
 }
 
@@ -16743,6 +16745,7 @@ model SASAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionSharedAccessSignature {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  @secret
   sas?: string;
 }
 
