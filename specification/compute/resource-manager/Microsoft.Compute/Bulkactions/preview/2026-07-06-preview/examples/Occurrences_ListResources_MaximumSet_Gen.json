@@ -1,19 +1,19 @@
 {
-  "title": "Occurrences_ListResources_MaximumSet",
+  "title": "List resources in a scheduled action occurrence",
   "operationId": "Occurrences_ListResources",
   "parameters": {
     "api-version": "2026-07-06-preview",
     "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
     "resourceGroupName": "rgcompute",
     "scheduledActionName": "myScheduledAction",
-    "occurrenceId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245"
+    "occurrenceId": "67b5bada-4772-43fc-8dbb-402476d98a45"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
             "notificationSettings": [
               {
                 "destination": "admin@contoso.com",
@@ -22,8 +22,8 @@
                 "disabled": true
               }
             ],
-            "scheduledTime": "2025-04-17T00:23:59.751Z",
-            "provisioningState": "Succeeded",
+            "scheduledTime": "2026-08-05T00:30:00Z",
+            "provisioningState": "Failed",
             "errorDetails": {
               "code": "InternalServerError",
               "message": "An internal error occurred.",
@@ -33,12 +33,12 @@
                 "code": "InnerErrorCode"
               }
             },
-            "id": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "id": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
             "name": "myVm",
             "type": "Microsoft.Compute/virtualMachines"
           }
         ],
-        "nextLink": "https://microsoft.com/as"
+        "nextLink": "https://management.azure.com/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/scheduledActions/myScheduledAction/occurrences/67b5bada-4772-43fc-8dbb-402476d98a45/resources?api-version=2026-07-06-preview&$skiptoken=page2"
       }
     }
   }
