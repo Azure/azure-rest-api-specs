@@ -664,6 +664,35 @@ interface Container {
     "application/vnd.apache.arrow.stream" | "application/xml"
   >;
 
+  /** Returns a list of the blobs as raw data, to be deserialized by the client. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @added(Versions.v2026_12_06)
+  @get
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  ListBlobsRawResponse is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the requested response media type. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
+  >;
+
   /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
