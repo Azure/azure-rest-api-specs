@@ -1428,6 +1428,7 @@ model CostAllocationProportion {
 /**
  * The cost allocation rule check name availability request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityRequest {
   /**
    * Rule name
@@ -1443,6 +1444,7 @@ model CostAllocationRuleCheckNameAvailabilityRequest {
 /**
  * The cost allocation rule check name availability response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityResponse {
   /**
    * Whether this rule name is available
@@ -1752,12 +1754,14 @@ model AsyncOperationStatusProperties {
   /**
    * Sas url to the async benefit utilization summaries report. Will be empty if the report is in Running or Failed state.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   reportUrl?: BenefitUtilizationSummaryReportSchema;
 
   /**
    * Sas url to async benefit utilization summaries report in secondary storage in case of primary outage. Will be empty if the report is in Running or Failed state.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   secondaryReportUrl?: BenefitUtilizationSummaryReportSchema;
 
@@ -2643,6 +2647,7 @@ model BlobInfo {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model GenerateCostDetailsReportErrorResponse {
   /**
@@ -2718,6 +2723,7 @@ model DownloadURL {
   /**
    * The URL to download the generated report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   downloadUrl?: string;
 }
@@ -2733,6 +2739,7 @@ model DownloadURL {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model GenerateDetailedCostReportErrorResponse {
   /**
@@ -3853,6 +3860,7 @@ model ReportURL {
   /**
    * The CSV file from the reportUrl blob link consists of reservation usage data with the following schema at daily granularity
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reportUrl?: ReservationReportSchema;
 
@@ -3877,6 +3885,7 @@ model PricesheetDownloadProperties {
   /**
    * The URL to download the generated report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   downloadUrl?: string;
 
   /**
@@ -4074,6 +4083,7 @@ model EAPricesheetDownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 
@@ -4709,6 +4719,7 @@ model ViewListResult {
 /**
  * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

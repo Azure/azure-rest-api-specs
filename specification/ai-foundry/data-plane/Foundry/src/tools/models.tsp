@@ -21,6 +21,9 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
+
+    @removed(Versions.v1)
+    web_iq_preview: "web_iq_preview",
   }
 
   // General availability tools:
@@ -34,10 +37,8 @@ namespace Azure.AI.Projects {
     @removed(Versions.v1)
     memory_search: "memory_search",
   }
-  
-  const PreviewTool = #{
-    required_previews: #["preview_tool"],
-  };
+
+  const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
@@ -828,7 +829,6 @@ namespace Azure.AI.Projects {
      * The ID of the WorkIQ project connection.
      */
     project_connection_id: string;
-
   }
 
   /**
@@ -862,7 +862,35 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
+  }
 
+  /**
+   * A WebIQ server-side tool.
+   */
+  @removed(Versions.v1)
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model WebIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'web_iq_preview'.
+     */
+    type: "web_iq_preview";
+
+    /**
+     * The ID of the WebIQ project connection.
+     */
+    project_connection_id: string;
+
+    /**
+     * The label of the WebIQ MCP server to connect to.
+     */
+    server_label?: string;
+
+    /**
+     * Whether the agent requires approval before executing actions. Default is always.
+     */
+    #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
   /**
