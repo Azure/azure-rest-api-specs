@@ -417,6 +417,7 @@ model RawCertificateData {
 /**
  * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultCertificateResponse {
   /**
    * Resource name associated with the resource.
@@ -1722,6 +1723,7 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
   authType: "AccessControlService";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientDiscoveryResponse
   is Azure.Core.Page<ClientDiscoveryValueForSingleApi>;
 
