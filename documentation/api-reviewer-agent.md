@@ -32,7 +32,8 @@ review comments from tens of thousands of PRs across both repos.
 
 The ARM API Reviewer also runs automatically as a GitHub Actions workflow
 (`.github/workflows/arm-api-review.md`) so that authors get feedback the
-moment they open a PR — no human reviewer needs to trigger it manually.
+moment an eligible PR event occurs -- no human reviewer needs to invoke the
+VS Code agent manually.
 
 ### When reviews run automatically
 
@@ -40,33 +41,30 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | PR opened                        | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
 | PR synchronized (new push)       | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                                             |
+| PR marked ready for review       | Same conditions as opened; no additional push is needed                                                                                                            |
 | `WaitForARMFeedback` label added | Applying the label triggers a review directly (no push needed), subject to the same conditions                                                                     |
-| `/arm-review` comment            | On-demand: posted by a user with write access or above; runs even on draft PRs and without `WaitForARMFeedback`                                                    |
-| `workflow_dispatch`              | On-demand: repository maintainer triggers manually with a PR number                                                                                                |
+| `/arm-review` comment            | On-demand: posted by a user with write access or above; runs on drafts and without `WaitForARMFeedback`, unless `skip-arm-review` is present                       |
+| `workflow_dispatch`              | On-demand: repository maintainer triggers manually with a PR number; skipped when `skip-arm-review` is present                                                     |
 
 > **Automated vs. on-demand:** The automated triggers (`opened` /
-> `synchronize` / `labeled`) only run when the PR carries the
-> `WaitForARMFeedback` label — this keeps automated reviews scoped to PRs that
-> are actually awaiting ARM feedback. Adding the label is itself a trigger, so a
-> review starts as soon as a maintainer applies it. The on-demand triggers
-> (`/arm-review`, `workflow_dispatch`) have no such restriction and run
-> regardless of the label or draft state.
+> `synchronize` / `labeled` / `ready_for_review`) only run when the PR is not a
+> draft and carries the `WaitForARMFeedback` label -- this keeps automated
+> reviews scoped to PRs that are actually awaiting ARM feedback. Adding the
+> label is itself a trigger, so a review starts as soon as a maintainer applies
+> it to a non-draft PR. The on-demand triggers (`/arm-review`,
+> `workflow_dispatch`) do not require `WaitForARMFeedback` and can run on drafts,
+> but all GitHub Actions triggers honor `skip-arm-review`.
 
-> **Fork PRs and permissions:** The workflow **supports PRs from forks**
-> (`forks: ["*"]`), matching the other PR workflows in this repo. gh-aw's
-> built-in role check only lets users with **write access or above** trigger it,
-> so an externally-authored fork PR is reviewed only after a maintainer applies
-> the `WaitForARMFeedback` label or runs `/arm-review` — it is not auto-reviewed
-> on the strength of its author alone. Fork PRs are handled safely because the
-> agent never checks out untrusted PR head code (`checkout: false`), reads spec
-> files only through the read-only GitHub MCP toolset (which additionally runs at
-> `approved` integrity for defense in depth), and writes only through gh-aw
-> `safe-outputs`.
-
-> **Draft PRs converted to ready:** The `ready_for_review` event is not
-> supported by the workflow engine. If you open a PR as a draft and later mark
-> it ready for review without pushing a new commit, use `/arm-review` to
-> trigger a review.
+**Fork PRs and permissions:** The workflow **supports PRs from forks**
+(`forks: ["*"]`), matching the other PR workflows in this repo. gh-aw's
+built-in role check only lets users with **write access or above** trigger it,
+so an externally-authored fork PR is reviewed only after a maintainer applies
+the `WaitForARMFeedback` label or runs `/arm-review` — it is not auto-reviewed
+on the strength of its author alone. Fork PRs are handled safely because the
+agent never checks out untrusted PR head code (`checkout: false`), reads spec
+files only through the read-only GitHub MCP toolset (which additionally runs at
+`approved` integrity for defense in depth), and writes only through gh-aw
+`safe-outputs`.
 
 ### On-demand review with `/arm-review`
 
@@ -87,15 +85,16 @@ sufficient permissions is silently ignored.
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                                                                      |
 | `ARMChangesRequested` | Added by the workflow when blocking findings are found                                                                                                                                                |
-| `WaitForARMFeedback`  | Gates automated reviews: `opened` / `synchronize` / `labeled` runs only fire while this label is present, and applying it triggers a review. Removed by the workflow when blocking findings are found |
+| `WaitForARMFeedback`  | Gates automated reviews: `opened` / `synchronize` / `labeled` / `ready_for_review` runs only fire while this label is present, and applying it triggers a review. Removed when the workflow completes |
 
 ### Opting out
 
 Add the `skip-arm-review` label to a PR to permanently disable automated ARM
 API review for that PR. The label can be removed later to re-enable it.
 
-> **Note:** `skip-arm-review` does not prevent repository collaborators from
-> running a manual review via VS Code or `/arm-review`.
+> **Note:** `skip-arm-review` prevents all GitHub Actions review triggers,
+> including `/arm-review` and `workflow_dispatch`. It does not prevent a
+> repository collaborator from running a manual review via VS Code.
 
 ### Large pull requests
 
@@ -126,8 +125,23 @@ The automated workflow posts review comments under a stable bot identity.
 Every comment ends with the same hidden telemetry marker as the interactive
 agent (`posted-by: arm-api-reviewer-agent`), so the
 [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) logic
-(Scenarios A–E) works end-to-end for both trigger paths. Repeat runs do not
+(Scenarios A–F) works end-to-end for both trigger paths. Repeat runs do not
 duplicate comments.
+
+### Approval-label awareness
+
+Every review records the exact API-review approval labels observed on the PR
+next to the reviewed commit. The recognized labels are
+`BreakingChange-Approved-*`, `Versioning-Approved-*`,
+`Approved-Suppression`, and `Approved-TypeSpecSuppression`; the review states
+`none` when no matching label is present.
+
+Breaking-change and suppression findings are still posted when a matching
+PR-level label exists because the label may cover only some changes. Each such
+comment names the matching label and asks the author to confirm that the
+approval covers that specific finding. If it does, the only remaining action
+for that comment is to resolve the conversation. Otherwise, the author must
+obtain the appropriate approval or address the finding.
 
 ## Reviewing a PR (VS Code — Interactive)
 
@@ -402,10 +416,11 @@ according to these scenarios:
   - the **rollback cost**: a thread auto-resolved in error can be reopened
     manually on github.com, but the agent will not re-post the original
     violation -- you must re-flag it yourself.
-
-  Human-origin fixed threads remain in Scenario F and are surfaced
-  separately for explicit per-thread consent before any reply or
-  resolution.
+- **F -- Human-origin violation fixed:** an existing unresolved human-authored
+  comment flags a violation that is no longer present. The interactive agent
+  surfaces the thread for explicit per-thread consent before replying or
+  resolving; the automated workflow may reply that the fix is present but
+  never resolves a human-owned thread.
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 

@@ -2,9 +2,12 @@
 description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
-  automatically on PR open and synchronize; on demand via the
-  /arm-review comment command.
+  automatically on PR open, synchronize, label, and ready-for-review events;
+  on demand via the /arm-review comment command.
 timeout-minutes: 30
+concurrency:
+  group: "gh-aw-${{ github.workflow }}-${{ github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
+  cancel-in-progress: true
 on:
   # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
   # this repo (see data-plane-api-review.md). This is safe because the agent
@@ -15,7 +18,7 @@ on:
   # fork PRs are reviewed only after a maintainer applies the label or runs
   # `/arm-review`.
   pull_request_target:
-    types: [opened, synchronize, labeled]
+    types: [opened, synchronize, labeled, ready_for_review]
     forks: ["*"]
   issue_comment:
     types: [created]
@@ -41,10 +44,13 @@ if: >
   github.event_name == 'workflow_dispatch' ||
   (github.event_name == 'pull_request_target' &&
    (github.event.action == 'opened' ||
-    github.event.action == 'synchronize') &&
+    github.event.action == 'synchronize' ||
+    github.event.action == 'ready_for_review') &&
+   github.event.pull_request.draft == false &&
    contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback')) ||
   (github.event_name == 'pull_request_target' &&
    github.event.action == 'labeled' &&
+   github.event.pull_request.draft == false &&
    github.event.label.name == 'WaitForARMFeedback') ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
@@ -88,6 +94,7 @@ tools:
 imports:
   - ../instructions/arm-api-review.instructions.md
   - ../instructions/openapi-review.instructions.md
+  - ../instructions/typespec-project.instructions.md
   - ../instructions/typespec-review.instructions.md
   - ../skills/azure-api-review/SKILL.md
 safe-outputs:
@@ -142,7 +149,8 @@ safe-outputs:
 You are an automated ARM API reviewer running in GitHub Actions. Follow the
 complete review workflow below. **Post findings immediately without waiting for
 human confirmation.** The comment format and reconciliation marker from
-`.github/copilot-review-instructions.md` apply throughout.
+The imported review instructions and the ARM Reviewer/Critic protocol govern
+comment formatting and reconciliation throughout.
 
 **Review mode: autonomous.** Because this workflow runs headless in GitHub
 Actions, it operates in the **autonomous** review mode defined in the
@@ -168,15 +176,31 @@ confirmation.
 
 ## Required Secrets
 
-This workflow uses **GitHub Actions token-based inference** (`permissions.copilot-requests: write` with the Copilot engine), so it does **not** require a `COPILOT_GITHUB_TOKEN` personal access token secret — gh-aw mints the agent's Copilot credential from the auto-provisioned `GITHUB_TOKEN`. (Token-based inference requires centralized Copilot billing on the org; see the gh-aw billing reference.)
+This workflow uses **GitHub Actions token-based inference**
+(`permissions.copilot-requests: write` with the Copilot engine), so it does
+**not** require a `COPILOT_GITHUB_TOKEN` personal access token secret. gh-aw
+mints the agent's Copilot credential from the auto-provisioned `GITHUB_TOKEN`.
+Token-based inference requires centralized Copilot billing on the organization;
+see the gh-aw billing reference.
 
 No repository secrets are strictly required. The following are **optional identity overrides**:
 
-- **`GH_AW_GITHUB_TOKEN`** — optional. Overrides the identity gh-aw uses for GitHub API calls and safe-output publishing. Falls back to `GH_AW_GITHUB_MCP_SERVER_TOKEN`, then to the auto-provisioned `GITHUB_TOKEN`.
-- **`GH_AW_GITHUB_MCP_SERVER_TOKEN`** — optional. Overrides the identity the embedded GitHub MCP server toolset uses. Falls back to `GH_AW_GITHUB_TOKEN`, then to `GITHUB_TOKEN`.
-- **`GITHUB_TOKEN`** — the standard Actions token, auto-provisioned by GitHub; used by the gh-aw runtime (role/permission check and safe-output publishing) whenever the optional overrides above are unset.
+- **`GH_AW_GITHUB_TOKEN`** — optional. Overrides the identity gh-aw uses for
+  GitHub API calls and safe-output publishing. Falls back to
+  `GH_AW_GITHUB_MCP_SERVER_TOKEN`, then to the auto-provisioned `GITHUB_TOKEN`.
+- **`GH_AW_GITHUB_MCP_SERVER_TOKEN`** — optional. Overrides the identity the
+  embedded GitHub MCP server toolset uses. Falls back to
+  `GH_AW_GITHUB_TOKEN`, then to `GITHUB_TOKEN`.
+- **`GITHUB_TOKEN`** — the standard Actions token, auto-provisioned by GitHub;
+  used by the gh-aw runtime for role checks, permission checks, and safe-output
+  publishing whenever the optional overrides above are unset.
 
-Set the optional overrides only if you need the agent to act under a different identity or a broader scope than the default Actions token (for example, to post as a bot account or reach across repositories). All secrets are consumed only by the gh-aw runtime and are never exposed to PR content. The model is hosted by GitHub Copilot infrastructure; no additional model endpoint or key configuration is required.
+Set the optional overrides only if you need the agent to act under a different
+identity or a broader scope than the default Actions token, for example to post
+as a bot account or reach across repositories. All secrets are consumed only by
+the gh-aw runtime and are never exposed to PR content. The model is hosted by
+GitHub Copilot infrastructure; no additional model endpoint or key
+configuration is required.
 
 ## Trigger Context
 
@@ -194,10 +218,11 @@ already guaranteed, before this agent starts, that:
 - The triggering user has `write` access or above (gh-aw `roles` gate). This
   replaces any manual collaborator check — do **not** re-verify permissions.
 - The event is eligible: an automated `opened` / `synchronize` run only reaches
-  the agent when the PR already carries the `WaitForARMFeedback` label; a
-  `labeled` run only fires when that exact label is added; an `issue_comment`
-  run only fires for a PR comment containing `/arm-review`; `workflow_dispatch`
-  is always eligible.
+  the agent when the PR is not a draft and already carries the
+  `WaitForARMFeedback` label; `ready_for_review` follows the same label gate; a
+  `labeled` run only fires when that exact label is added to a non-draft PR; an
+  `issue_comment` run only fires for a PR comment containing `/arm-review`;
+  `workflow_dispatch` is always eligible.
 - Fork PRs **are** supported (`forks: ["*"]`). They are reviewed safely because
   the agent never checks out untrusted PR head code (`checkout: false`), reads
   spec files only through the read-only GitHub MCP toolset
@@ -215,6 +240,10 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    cannot be resolved, call `noop` and stop.
 2. **`skip-arm-review` label** — call `get_pull_request` and inspect the labels.
    If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
+   From the same response, capture the exact label names matching
+   `BreakingChange-Approved-*`, `Versioning-Approved-*`,
+   `Approved-Suppression`, or `Approved-TypeSpecSuppression`. This is the
+   approval-label inventory for the review; record `none` when it is empty.
 3. **`specification/` scope** — call `list_pull_request_files`. If **no** changed
    file path starts with `specification/`, call `noop` and stop (nothing to
    review). Paginate the file list so busy PRs are counted reliably.
@@ -246,7 +275,9 @@ Check 4 sets the review scope; it never stops the review.
 
 1. Call `get_pull_request` to fetch PR metadata (title, base, head SHA, labels,
    draft status). **Pin the session SHA** (`head.sha`) immediately — use it for
-   every subsequent file fetch.
+   every subsequent file fetch. Retain the approval-label inventory captured
+   during Trigger Validation. Do not include SDK-language, package-name, or
+   namespace approval labels.
 2. Call `list_pull_request_files` to list changed files.
 3. Filter to `specification/**` files only. If none remain (e.g., all changes
    are outside the spec folder), call `noop` and stop.
@@ -291,6 +322,26 @@ Compare modified specs against the previous API version:
 - Also check `TSP-REQUIRED-V1`: new API version directories with handwritten
   OpenAPI and no TypeSpec project require a Blocking finding.
 
+### Step 3.5: API Graph and Data-Flow Analysis (full review only)
+
+For every full-review PR touching `.tsp` or resource-manager `.json`, apply
+[`think-in-graphs.md`](../skills/azure-api-review/references/think-in-graphs.md)
+and derive the four canonical graph artifacts: resource, operation,
+sensitive-data-flow, and (when a previous version exists) version-delta. Keep
+the artifacts in the Critic input; do not add them to the public summary.
+
+- Set Critic Input #9 to `Graphs: true` when the graphs are rendered within the
+  canonical thresholds.
+- When a graph exceeds the canonical rendering threshold, retain its node/edge
+  inventory and all structural findings, set `Graphs: false`, and require the
+  Critic to re-derive the sensitive-data-flow view in summary form.
+- If derivation fails, retry once with a smaller, per-namespace scope. If the
+  retry also fails, set `Graphs: false`, disclose the failure and omitted risk
+  classes in the review summary, and do not represent the structural review as
+  complete.
+- On the fast path, set `Graphs: false` without a failure disclosure because
+  graph derivation was intentionally out of scope.
+
 ### Step 4: Systematic Review
 
 For each changed spec file, apply the **full review checklist** from the loaded
@@ -307,7 +358,19 @@ Run **three** review passes:
 3. **Security pass** — authentication, secrets, authorization, x-ms-secret.
 
 Classify every finding as `[NEW]` (introduced in this PR) or `[EXISTING]`
-(also present in the previous version). When uncertain, default to `[EXISTING]`.
+(also present in the previous version). For a new service with no previous
+version, classify findings as `[NEW]`; otherwise, when uncertain, default to
+`[EXISTING]`.
+
+### Step 4.5: Downstream-CI Impact Check
+
+Before retaining any finding whose proposed fix adds or tightens a type,
+format, decorator, `x-ms-*` extension, or schema constraint, apply
+[`downstream-ci-impact.md`](../skills/azure-api-review/references/downstream-ci-impact.md)
+and the applicable linter-rule coverage reference. Do not recommend a fix that
+would violate a required LintDiff, breaking-change, or SDK check. When a
+conflict exists, present the allowed options instead of a single directive and
+include `downstream-rule: <RULE-ID>` in the finding's telemetry marker.
 
 ### Step 5: Cross-File Consistency (full review only)
 
@@ -349,10 +412,63 @@ workflow runs in **autonomous mode**, so apply the Action column below
   identity (see Required Secrets) and do **not** count against the
   50-inline comment budget in Step 6.
 
+### Step 5.6: Mandatory Critic Review
+
+Before posting or resolving anything, dispatch the **ARM API Review Critic**
+subagent and follow the contract in
+[`arm-api-review-critic.protocol.md`](../agents/protocols/arm-api-review-critic.protocol.md).
+First apply the Step 6 output budgets to the candidate findings. The canonical
+finding set passed to the Critic is the **agreed posting set**: only findings
+selected for individual posting after reconciliation and deterministic budget
+selection. Keep excluded candidates in a separate overflow inventory for the
+summary; they are not entries in the agreed posting set. Pass the PR URL,
+pinned session SHA, agreed posting set, reviewed files, previous-version source,
+reconciliation plan, prior failures, considered-and-declined candidates, graph
+flag, and iteration number.
+
+- Treat an empty response or tool error as a failed dispatch and retry up to
+  three total attempts.
+- Start at iteration 1. On iterations 2 and 3, pass the prior FAIL set and a
+  considered-and-declined list containing each missed-violation candidate that
+  was evaluated but not promoted, with a one-line rationale.
+- Apply line, rule, severity, classification, downstream-CI, and
+  reconciliation corrections before posting. Require the Critic to compare the
+  report's approval-label inventory and every applicable `Approval context`
+  paragraph with current PR metadata. Re-dispatch after corrections.
+- Post a Blocking finding only when the Critic confirms it with High or Medium
+  confidence. In autonomous mode there is no human override path: drop any
+  finding that still FAILs after the third iteration.
+- If the Critic is unavailable after all retries, disclose that in the summary,
+  downgrade Blocking findings to Warning, and use `critic: unknown` in their
+  telemetry markers.
+- If the Critic reports that the session SHA moved or is unreachable, do not
+  post findings or mutate threads. Restart once against the new head SHA; if it
+  moves again, call `noop` and stop.
+
 ### Step 6: Post Findings
 
-Post each finding as a `create-pull-request-review-comment` (inline) or
-`add-comment` (PR-level for summary). Then call `submit-pull-request-review`.
+Immediately before queuing the first safe output, call `get_pull_request` and
+verify that `head.sha` still equals the pinned session SHA. If it changed, do
+not post or mutate threads; follow the Step 5.6 restart path. Then post each
+finding as a `create-pull-request-review-comment` (inline) or `add-comment`
+(PR-level for summary), and call `submit-pull-request-review`.
+
+Use this body for `submit-pull-request-review`:
+
+<!-- markdownlint-disable MD013 -->
+
+```text
+## ARM API Review
+
+Posting findings from the ARM API Reviewer agent (critic-verified, N iteration(s), <outcome>) against commit `<full-40-char-session-sha>`. See inline comments for findings <range-or-list>.
+
+Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
+```
+
+<!-- markdownlint-enable MD013 -->
+
+When the inventory is empty, use `Approval labels observed: none.` The line is
+required even when no breaking changes or suppressions were found.
 
 **Hard limits per category:**
 
@@ -371,32 +487,62 @@ Key themes: [list]."_ Replies (`reply-to-pull-request-review-comment`) and
 thread resolutions (`resolve-pull-request-review-thread`) from Step 5.5 have
 their own budgets and do **not** consume this 50-inline budget.
 
-If more findings exist beyond a per-category cap, include that count in the
-summary comment: _"N additional warnings/suggestions were identified but not
-posted. Key themes: [list]. Review the full checklist in
+The agreed posting set is selected after these limits are applied. Exact
+one-to-one parity applies to every individually posted entry in that set.
+Excluded candidates are disclosed only as an overflow count and themes; do not
+render them as canonical finding bodies or imply that the Critic verified them.
+
+If more candidates exist beyond a per-category cap, include that count in the
+summary comment: _"N additional warning/suggestion candidates were identified
+but not individually verified or posted. Key themes: [list]. Review the full checklist in
 `arm-api-review.instructions.md`."_
 
-**Comment format** (every comment MUST follow this template):
+**Comment format** (every comment MUST use the canonical text validated by the
+Critic and follow this template):
+
+<!-- markdownlint-disable MD013 -->
 
 ```text
-**[NEW|EXISTING] 🔴|🟡|💡 [SEVERITY]** **[RULE-ID]** `path/to/file.json` - line N
+**[NEW] 🔴 Blocking** **[[RULE-ID](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `path/to/file.json` - line N - Description of the violation.
+
+**Classification reasoning:** Introduced in this PR because <evidence from the pinned base SHA>.
+
+**Approval context:** <for breaking-change and suppression findings only: name the matching approval label, or state that no label in the applicable family was observed>. If this finding is already covered by an approval, ensure the appropriate label is applied and resolve this conversation; otherwise obtain approval or address the finding.
+
 JSON path: `$.path.to.element` (for OpenAPI files)
 
-Description of the violation.
+**Suggested fix:** Concrete code, JSON, or TypeSpec change.
 
-**Fix:** Concrete code or JSON change.
-
-<!-- posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing -->
+<!-- posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
 ```
+
+<!-- markdownlint-enable MD013 -->
+
+For `[NEW]` findings, use `🔴 Blocking`, `🟠 Warning`, or `🔵 Suggestion`.
+For `[EXISTING]` findings, use `**[EXISTING]**` without a severity badge, but
+retain the finding's calibrated severity in its telemetry marker and summary
+count. Every rule ID must link to its authoritative instruction or reference
+anchor. Add `downstream-rule` when Step 4.5 requires it. The telemetry marker
+must be the literal last line; if it cannot be assembled, use the protocol's
+explicit `telemetry: degraded` fallback rather than omitting the marker.
+
+For breaking-change findings, use `BreakingChange-Approved-*` for cross-version
+breaks and `Versioning-Approved-*` for same-version or published-version
+exceptions. For suppression findings, use `Approved-Suppression` for OpenAPI
+suppression flows and `Approved-TypeSpecSuppression` for TypeSpec suppression
+flows. The `Approval context` paragraph must name an observed matching label or
+state that no matching label was observed. A label does not remove or downgrade
+the finding; it changes the remaining author action when the approval covers
+that specific finding.
 
 **Severity guidance:**
 
 - `🔴 Blocking` — MUST fix; only for violations the rule file marks as MUST and
   whose violation is unambiguous (security, breaking changes, incorrect response
   codes, missing required operations).
-- `🟡 Warning` — SHOULD fix; rules marked SHOULD or clear design impacts
+- `🟠 Warning` — SHOULD fix; rules marked SHOULD or clear design impacts
   (missing descriptions, additionalProperties on service-owned models, etc.).
-- `💡 Suggestion` — design trade-offs and best-practice recommendations.
+- `🔵 Suggestion` — design trade-offs and best-practice recommendations.
 
 ### Step 7: Update Labels
 
@@ -411,18 +557,20 @@ Use the `add-labels` and `remove-labels` safe outputs for label changes.
 
 ### Step 8: Summary Comment
 
-Post a final `add-comment` summarising the review:
+Post a final `add-comment` summarizing the review:
 
-```
+```text
 ## ARM API Review Summary
 
 Reviewed PR #N at head SHA `<sha>` | Triggered by: <event>
 
+Approval labels observed: `<exact-label-1>`, `<exact-label-2>` (or `none`).
+
 | Category | Count |
 |---|---|
 | 🔴 Blocking | N |
-| 🟡 Warning | N |
-| 💡 Suggestion | N |
+| 🟠 Warning | N |
+| 🔵 Suggestion | N |
 
 <one-sentence summary of key themes, or "No issues found.">
 ```
@@ -431,14 +579,19 @@ If the PR was over the size cap and you ran a **scoped review** (Trigger
 Validation step 4), add this line directly below the "Reviewed PR" line so the
 human reviewer knows recall is intentionally partial:
 
-```
+```text
 **Scoped review:** M of N changed `specification/` files reviewed (PR exceeds the
 automated-review size cap). Not reviewed: <short description of the excluded
 files>.
 ```
 
 Always end the summary with the standard footer marker:
-`<!-- posted-by: arm-api-reviewer-agent | rule: summary | severity: summary | classification: summary -->`
+
+<!-- markdownlint-disable MD013 -->
+
+`<!-- posted-by: arm-api-reviewer-agent | rule: summary | severity: suggestion | classification: new | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->`
+
+<!-- markdownlint-enable MD013 -->
 
 If no reviewable issues were found, post a brief "No issues found" summary
 rather than calling `noop` — this confirms the review ran and found the PR

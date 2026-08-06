@@ -10,13 +10,16 @@
 
 **REQUIRED -- no divergence.**
 
-Parity is expressed against the **agreed finding set** -- the reconciled
-set of findings the reviewer and critic have agreed on. Whatever is
-posted to the GitHub PR **MUST** be **byte-for-byte identical** to the
-corresponding entries in that agreed finding set. There **MUST** be no
-discrepancy in content, count, ordering, severity, rule IDs, links, code
-blocks, examples, fix snippets, or the trailing per-comment telemetry
-marker (the comment body's last line containing
+Parity is expressed against the **agreed finding set** -- the reconciled and,
+where a host enforces output limits, deterministically budgeted set of findings
+the reviewer and critic have agreed to post individually. Candidates excluded
+by a documented output budget are not entries in this set; the run must
+disclose their count and themes without rendering them as canonical finding
+bodies. Whatever is posted to the GitHub PR **MUST** be **byte-for-byte
+identical** to the corresponding entries in that agreed finding set. There
+**MUST** be no discrepancy in content, count, ordering, severity, rule IDs,
+links, code blocks, examples, fix snippets, or the trailing per-comment
+telemetry marker (the comment body's last line containing
 `posted-by: arm-api-reviewer-agent` plus the required fields defined in
 the [protocol per-comment marker schema](../../../agents/protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting)).
 
@@ -77,10 +80,10 @@ the run as autonomous; otherwise treat it as interactive.
    or N+1 (something added). Severity tags (`🔴 Blocking`,
    `🟠 Warning`, `🔵 Suggestion`) and `[NEW]` / `[EXISTING]`
    classifications **MUST** match.
-5. **Post-post verification (REQUIRED).** Immediately after posting the
-   review, the agent **MUST** fetch the live comment bodies
-   (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for each created
-   comment) and verify, for every comment:
+5. **Post-post verification (REQUIRED when the posting host permits it).**
+   When the agent posts comments directly, it **MUST** immediately fetch the
+   live comment bodies (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for
+   each created comment) and verify, for every comment:
    - body length matches the canonical text length (within normalisation
      tolerance for line endings only),
    - the rule ID hyperlinks are present,
@@ -88,17 +91,25 @@ the run as autonomous; otherwise treat it as interactive.
      present in the posted body,
    - the telemetry marker containing `posted-by: arm-api-reviewer-agent`
      and the required marker fields is present.
+     Posting-mode handling:
+   - **Direct posting:** On any mismatch the agent **MUST** PATCH the affected
+     comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore
+     the canonical text and re-verify before reporting completion to the user.
+   - **Deferred safe-output posting:** A gh-aw autonomous run publishes through
+     deferred `safe-outputs` after the agent has exited, so the agent cannot
+     fetch the resulting comment in the same execution. In that mode it
+     **MUST** submit the canonical body once as the safe-output body, without
+     rebuilding or re-authoring it. Live-body verification belongs to the
+     safe-output publisher or a post-publish integration check; if the host
+     exposes such a hook, the same fetch and comparison above are required
+     there.
 
-   On any mismatch the agent **MUST** PATCH the affected comment(s)
-   (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the
-   canonical text and re-verify -- before reporting completion to the
-   user.
-
-6. **Failure handling.** If a finding cannot be posted as-is (e.g.,
-   GitHub API rejects the body, a line anchor cannot be resolved), the
-   agent **MUST** report the discrepancy explicitly (to the reviewer in
-   interactive mode, or in the run/summary output in autonomous mode)
-   rather than silently posting a shortened or altered variant.
+6. **Failure handling.** If a finding cannot be posted or queued as-is (e.g.,
+   GitHub API rejects the body, a line anchor cannot be resolved, or a safe
+   output is rejected), the agent **MUST** report the discrepancy explicitly
+   (to the reviewer in interactive mode, or in the run/summary output in
+   autonomous mode) rather than silently posting a shortened or altered
+   variant.
 7. **Resolving addressed findings (autonomous mode).** When a
    previously **agent-posted** finding's violation has been fixed in the
    current head SHA, the agent **MUST** reply to the thread noting the
