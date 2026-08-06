@@ -148,8 +148,9 @@ which hunts false positives only.
 
 The unattended entry point is the gh-aw workflow
 [`.github/workflows/data-plane-api-review.md`](../workflows/data-plane-api-review.md),
-which is label-gated and rolls out in phases. It grants the agent **no**
-mutating GitHub tools; `safe-outputs` is the only write channel.
+which is label-gated and [rolls out in phases](evals/data-plane-api-reviewer/ROLLOUT.md).
+It grants the agent **no** mutating GitHub tools; `safe-outputs` is the only
+write channel.
 
 ### Evaluation suite
 

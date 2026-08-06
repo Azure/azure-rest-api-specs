@@ -27,6 +27,7 @@ So the true-negative file is not an afterthought here. It is the gate.
 ```
 data-plane-api-reviewer/
   .vally.yaml                    # suite definitions: `all` and `true-negatives`
+  ROLLOUT.md                     # production rollout phases and promotion gates
   vally/
     eval-resource-modeling.yaml
     eval-error-design.yaml
@@ -148,7 +149,7 @@ silently stops measuring anything.
 
 ### Promotion gate
 
-Rollout phase 2 -- switching on inline review comments in
+[Rollout phase 2](ROLLOUT.md) -- switching on inline review comments in
 [`data-plane-api-review.md`](../../../workflows/data-plane-api-review.md) --
 requires **zero blocking false positives across three runs of the full
 true-negative suite**:
@@ -1052,8 +1053,7 @@ padding were the higher-risk measurement failures.
 Because of these gaps, and because the new stimuli have not yet had an
 authorized vally run, the synthetic suite cannot bound a production
 false-positive rate or qualify the reviewer for phase 2 by itself. It can catch
-specific regressions. See the phase 0 dark launch in
-[`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md):
+specific regressions. See the [phase 0 dark launch](ROLLOUT.md#phase-0-qualifies-the-eval-suite-not-just-the-reviewer):
 real merged data-plane pull requests provide the distribution the synthetic
 corpus cannot.
 
