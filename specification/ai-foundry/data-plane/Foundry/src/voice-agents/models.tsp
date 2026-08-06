@@ -101,9 +101,6 @@ model VoiceResponse extends OmitProperties<OpenAI.RealtimeResponse, "audio"> {
   @doc("The unique id of the response.")
   id: string;
 
-  @doc("The object type. Always `realtime.response`.")
-  object: "realtime.response";
-
   @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
   output?: VoiceConversationItem[];
 
