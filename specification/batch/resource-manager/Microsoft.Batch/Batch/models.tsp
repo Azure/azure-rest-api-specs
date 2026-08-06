@@ -2137,12 +2137,6 @@ model PoolProperties {
   vmSkuProfile?: VirtualMachineSkuProfile;
 
   /**
-   * Specifies the hardware settings for the compute nodes.
-   */
-  @added(Versions.v2026_08_01)
-  hardwareProfile?: HardwareProfile;
-
-  /**
    * Deployment configuration properties.
    */
   @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
@@ -2381,6 +2375,12 @@ model VirtualMachineConfiguration {
    */
   @summary("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.")
   serviceArtifactReference?: ServiceArtifactReference;
+
+  /**
+   * Specifies the hardware settings for the compute nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context.
+   */
+  @added(Versions.v2026_08_01)
+  hardwareProfile?: HardwareProfile;
 }
 
 /**

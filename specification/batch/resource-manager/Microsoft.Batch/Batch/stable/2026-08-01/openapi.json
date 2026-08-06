@@ -5717,10 +5717,6 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be \"Mix\". This property can only be changed while the pool has no compute nodes."
         },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the compute nodes."
-        },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
           "title": "This property describes the virtual machines that the pool nodes will be deployed on.",
@@ -7089,6 +7085,10 @@
           "$ref": "#/definitions/ServiceArtifactReference",
           "title": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.",
           "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the compute nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context."
         }
       },
       "required": [
