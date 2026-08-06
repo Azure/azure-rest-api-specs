@@ -1455,7 +1455,7 @@ model ReservationRecommendationDetailsProperties {
    */
   @added(Versions.v2026_06_01)
   @visibility(Lifecycle.Read)
-  projectedUsage?: ReservationRecommendationDetailsProjectedUsage;
+  projectedUsage?: ReservationRecommendationDetailsProjectedUsageProperties;
 }
 
 /**
@@ -1625,7 +1625,7 @@ model ReservationRecommendationDetailsUsageProperties {
  * Details about projected usage data that has been used for computing the recommendation.
  */
 @added(Versions.v2026_06_01)
-model ReservationRecommendationDetailsProjectedUsage {
+model ReservationRecommendationDetailsProjectedUsageProperties {
   /**
    * Total projected retail usage in commitment units (CUs).
    */
@@ -3794,13 +3794,13 @@ model LegacyManagementGroupScopeReservationRecommendationProperties
    * Management group id associated with management group scoped recommendation.
    */
   @visibility(Lifecycle.Read)
-  managementGroupId?: string;
+  managementGroupId: string;
 
   /**
-   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   * The tenant ID associated with the management group.
    */
   @visibility(Lifecycle.Read)
-  tenantId?: string;
+  tenantId: string;
 
   /**
    * Shared or single recommendation.
@@ -3989,13 +3989,13 @@ model ModernManagementGroupScopeReservationRecommendationProperties
    * Management group id associated with management group scoped recommendation.
    */
   @visibility(Lifecycle.Read)
-  managementGroupId?: string;
+  managementGroupId: string;
 
   /**
-   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   * The tenant ID associated with the management group.
    */
   @visibility(Lifecycle.Read)
-  tenantId?: string;
+  tenantId: string;
 
   /**
    * Shared or single recommendation.

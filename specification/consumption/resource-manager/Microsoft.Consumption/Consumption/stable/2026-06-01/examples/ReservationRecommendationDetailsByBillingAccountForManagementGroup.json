@@ -4,19 +4,21 @@
     "lookBackPeriod": "Last30Days",
     "product": "Standard_DS13_v2",
     "region": "westus",
-    "resourceScope": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000",
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/00000000",
     "scope": "ManagementGroup",
-    "term": "P3Y"
+    "term": "P3Y",
+    "$filter": "properties/managementGroupId eq '/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000'"
   },
   "responses": {
     "200": {
       "body": {
         "name": "reservationRecommendationDetails",
         "type": "Microsoft.Consumption/ReservationRecommendationDetails",
-        "id": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/microsoft.consumption/reservationrecommendationdetails",
+        "id": "providers/Microsoft.Billing/billingAccounts/00000000/providers/microsoft.consumption/reservationrecommendationdetails",
         "properties": {
           "currency": "USD",
           "managementGroupId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
           "resource": {
             "appliedScopes": [
               "00000000-0000-0000-0000-000000000000"
@@ -74,5 +76,5 @@
     "204": {}
   },
   "operationId": "ReservationRecommendationDetails_Get",
-  "title": "ReservationRecommendationDetailsByManagementGroup"
+  "title": "ReservationRecommendationDetailsByBillingAccountForManagementGroup"
 }

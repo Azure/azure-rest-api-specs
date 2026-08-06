@@ -1,17 +1,18 @@
 {
   "parameters": {
     "api-version": "2026-06-01",
-    "resourceScope": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/00000000",
+    "$filter": "properties/managementGroupId eq '/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000'"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2026-06-01&$skiptoken=AQAAAA%3D%3D&",
+        "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2026-06-01&$filter=properties/managementGroupId+eq+'/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000'&$skiptoken=AQAAAA%3D%3D&",
         "value": [
           {
             "name": "reservationRecommendations1",
             "type": "Microsoft.Consumption/reservationRecommendations",
-            "id": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations1",
+            "id": "providers/Microsoft.Billing/billingAccounts/00000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations1",
             "kind": "legacy",
             "location": "northeurope",
             "properties": {
@@ -20,6 +21,7 @@
               "lastUsageDate": "2026-03-10T00:00:00Z",
               "lookBackPeriod": "Last7Days",
               "managementGroupId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
               "meterId": "00000000-0000-0000-0000-000000000000",
               "netSavings": 4.634521202630137,
               "recommendedQuantity": 1,
@@ -33,7 +35,7 @@
           {
             "name": "reservationRecommendations2",
             "type": "Microsoft.Consumption/reservationRecommendations",
-            "id": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations2",
+            "id": "providers/Microsoft.Billing/billingAccounts/00000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations2",
             "kind": "modern",
             "location": "northeurope",
             "properties": {
@@ -45,6 +47,7 @@
               "lastUsageDate": "2026-03-15T00:00:00Z",
               "lookBackPeriod": 7,
               "managementGroupId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
               "meterId": "00000000-0000-0000-0000-000000000000",
               "netSavings": {
                 "currency": "USD",
@@ -68,5 +71,5 @@
     "204": {}
   },
   "operationId": "ReservationRecommendations_List",
-  "title": "ReservationRecommendationsByManagementGroup"
+  "title": "ReservationRecommendationsByBillingAccountForManagementGroup"
 }

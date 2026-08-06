@@ -708,8 +708,8 @@
           }
         },
         "x-ms-examples": {
-          "ReservationRecommendationDetailsByManagementGroup": {
-            "$ref": "./examples/ReservationRecommendationDetailsByManagementGroup.json"
+          "ReservationRecommendationDetailsByBillingAccountForManagementGroup": {
+            "$ref": "./examples/ReservationRecommendationDetailsByBillingAccountForManagementGroup.json"
           },
           "ReservationRecommendationsByBillingAccount-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsByBillingAccount.json"
@@ -777,11 +777,11 @@
           "ReservationRecommendationsByBillingAccountFilterForScope": {
             "$ref": "./examples/ReservationRecommendationsByBillingAccountFilterByScope.json"
           },
+          "ReservationRecommendationsByBillingAccountForManagementGroup": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccountForManagementGroup.json"
+          },
           "ReservationRecommendationsByBillingProfile-Modern": {
             "$ref": "./examples/ReservationRecommendationsByBillingProfile.json"
-          },
-          "ReservationRecommendationsByManagementGroup": {
-            "$ref": "./examples/ReservationRecommendationsByManagementGroup.json"
           },
           "ReservationRecommendationsByResourceGroup-Legacy": {
             "$ref": "./examples/ReservationRecommendationsByResourceGroup.json"
@@ -3403,10 +3403,14 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenant ID associated with the management group. Populated only when managementGroupId is populated.",
+          "description": "The tenant ID associated with the management group.",
           "readOnly": true
         }
       },
+      "required": [
+        "managementGroupId",
+        "tenantId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/LegacyReservationRecommendationProperties"
@@ -4669,10 +4673,14 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenant ID associated with the management group. Populated only when managementGroupId is populated.",
+          "description": "The tenant ID associated with the management group.",
           "readOnly": true
         }
       },
+      "required": [
+        "managementGroupId",
+        "tenantId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ModernReservationRecommendationProperties"
@@ -6075,7 +6083,7 @@
         }
       ]
     },
-    "ReservationRecommendationDetailsProjectedUsage": {
+    "ReservationRecommendationDetailsProjectedUsageProperties": {
       "type": "object",
       "description": "Details about projected usage data that has been used for computing the recommendation.",
       "properties": {
@@ -6132,7 +6140,7 @@
           "readOnly": true
         },
         "projectedUsage": {
-          "$ref": "#/definitions/ReservationRecommendationDetailsProjectedUsage",
+          "$ref": "#/definitions/ReservationRecommendationDetailsProjectedUsageProperties",
           "description": "Projected usage details used for generating the recommendation.",
           "readOnly": true
         }
