@@ -207,6 +207,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+@@access(
+  Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
+  Access.internal,
+  "rust"
+);
 @@clientName(
   Storage.Blob.Container.ListBlobsRawResponse,
   "ListBlobsInternal",
@@ -844,6 +849,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   Storage.Blob.Container.ListBlobsRawResponse,
   "!(python,javascript,go,java,csharp)"
 );
+@@scope(Storage.Blob.Container.listBlobs, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
 @@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
