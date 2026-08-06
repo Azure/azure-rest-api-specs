@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 /**
  * The Container Service Scheduled Events data model.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This project intentionally emits a schema-only proxy resource contract for Azure Resource Notifications with no customer-callable ARM operations."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This sibling project intentionally emits the schema-only Azure Resource Notifications / Azure Resource Graph / Event Grid contract for Microsoft.ContainerService/managedClusters/scheduledEvents. The contract is consumed as notification and resource graph payload schema and has no customer-callable ARM operations."
 @armProviderNamespace
 @service(#{ title: "ContainerServiceClient" })
 @versioned(Versions)
@@ -27,7 +27,7 @@ enum Versions {
 }
 
 /**
- * Scheduled event.
+ * Scheduled event for a managed cluster. ARM resource type: Microsoft.ContainerService/managedClusters/scheduledEvents.
  */
 model ScheduledEvent
   is Azure.ResourceManager.ProxyResource<ScheduledEventProperties> {
@@ -39,7 +39,7 @@ model ScheduledEvent
   >;
 }
 
-@@doc(ScheduledEvent.properties, "Properties for the event.");
+@@doc(ScheduledEvent.properties, "Properties for the scheduled event.");
 
 /**
  * The status of the event.
@@ -74,9 +74,9 @@ union EventStatus {
 }
 
 /**
- * The resource type of the event.
+ * The kind of resource impacted by the scheduled event.
  */
-union ResourceType {
+union ScheduledEventResourceType {
   string,
 
   /**
@@ -92,31 +92,33 @@ union ResourceType {
 
 /**
  * Properties for a scheduled event.
+ *
+ * Timestamp property names intentionally preserve the existing wire contract; all timestamp values are UTC date-time values.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserves the existing scheduledEvents notification contract; this materialized notification data model does not include provisioningState."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This type is a read-only notification payload with no ARM create or update operations, so it has no provisioning lifecycle and no provisioningState to report."
 model ScheduledEventProperties {
   /**
-   * The description of the event.
+   * Human-readable summary of the scheduled event.
    */
   description?: string;
 
   /**
-   * The event id of the event.
+   * Unique ID of the scheduled event, represented as a GUID string.
    */
   eventId?: string;
 
   /**
-   * The source of the event.
+   * AKS component or workflow that raised the scheduled event.
    */
   eventSource?: string;
 
   /**
-   * The status of the event.
+   * Current lifecycle state of the scheduled event.
    */
   eventStatus?: EventStatus;
 
   /**
-   * The details of the event.
+   * Free-form human-readable details about why the event was raised or what it represents.
    */
   eventDetails?: string;
 
@@ -148,7 +150,7 @@ model ScheduledEventProperties {
   ]>[];
 
   /**
-   * The resource type of the event.
+   * Whether the event applies to the managed cluster itself or to one of its agent pools.
    */
-  resourceType?: ResourceType;
+  resourceType?: ScheduledEventResourceType;
 }
