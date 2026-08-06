@@ -453,7 +453,7 @@
         "True"
       ],
       "x-ms-enum": {
-        "name": "Enforce",
+        "name": "enforce",
         "modelAsString": true,
         "values": [
           {
@@ -477,7 +477,7 @@
         "False"
       ],
       "x-ms-enum": {
-        "name": "Inherited",
+        "name": "inherited",
         "modelAsString": true,
         "values": [
           {
@@ -501,7 +501,7 @@
         "False"
       ],
       "x-ms-enum": {
-        "name": "IsEnabled",
+        "name": "isEnabled",
         "modelAsString": true,
         "values": [
           {
@@ -525,7 +525,7 @@
         "Standard"
       ],
       "x-ms-enum": {
-        "name": "PricingTier",
+        "name": "pricingTier",
         "modelAsString": true,
         "values": [
           {
@@ -550,7 +550,7 @@
         "NotCovered"
       ],
       "x-ms-enum": {
-        "name": "ResourcesCoverageStatus",
+        "name": "resourcesCoverageStatus",
         "modelAsString": true,
         "values": [
           {
@@ -577,7 +577,25 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The operation status code."
+          "description": "The operation status code.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "Extension was created/updated successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "Extension was not created/updated successfully. See operation status message for more details."
+              }
+            ]
+          }
         },
         "message": {
           "type": "string",
