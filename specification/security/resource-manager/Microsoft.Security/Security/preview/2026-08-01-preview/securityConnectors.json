@@ -395,6 +395,86 @@
         ]
       }
     },
+    "AwsCloudTrailConfiguration": {
+      "type": "object",
+      "description": "The configuration for AWS CloudTrail audit log ingestion",
+      "properties": {
+        "provisioningType": {
+          "$ref": "#/definitions/AwsCloudTrailProvisioningType",
+          "description": "The provisioning type for the CloudTrail resources"
+        },
+        "cloudTrailResourceSets": {
+          "type": "array",
+          "description": "The existing CloudTrail resource sets. Required when provisioningType is BringYourOwn.",
+          "items": {
+            "$ref": "#/definitions/AwsCloudTrailResourceSet"
+          },
+          "x-ms-identifiers": [
+            "s3BucketArn"
+          ]
+        },
+        "resourceNamePrefix": {
+          "type": "string",
+          "description": "The resource name prefix used when provisioning the CloudTrail resources"
+        },
+        "deploymentRegion": {
+          "type": "string",
+          "description": "The AWS region in which the CloudTrail resources are provisioned. Required when\nprovisioningType is ManualProvisioning or AutoProvisioning."
+        }
+      }
+    },
+    "AwsCloudTrailProvisioningType": {
+      "type": "string",
+      "description": "The provisioning type for AWS CloudTrail resources",
+      "enum": [
+        "BringYourOwn",
+        "ManualProvisioning",
+        "AutoProvisioning"
+      ],
+      "x-ms-enum": {
+        "name": "AwsCloudTrailProvisioningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BringYourOwn",
+            "value": "BringYourOwn",
+            "description": "The customer provides their own CloudTrail resources"
+          },
+          {
+            "name": "ManualProvisioning",
+            "value": "ManualProvisioning",
+            "description": "Resources are provisioned on the customer's side"
+          },
+          {
+            "name": "AutoProvisioning",
+            "value": "AutoProvisioning",
+            "description": "Resources are provisioned on Microsoft's side"
+          }
+        ]
+      }
+    },
+    "AwsCloudTrailResourceSet": {
+      "type": "object",
+      "description": "A resource set describing existing AWS CloudTrail audit log resources",
+      "properties": {
+        "resourceRegion": {
+          "type": "string",
+          "description": "The AWS region of the resources in this set"
+        },
+        "s3BucketArn": {
+          "type": "string",
+          "description": "The S3 bucket ARN in which the CloudTrail logs are stored"
+        },
+        "sqsQueueArn": {
+          "type": "string",
+          "description": "The SQS queue ARN used for CloudTrail log notifications"
+        },
+        "kmsKeyArn": {
+          "type": "string",
+          "description": "The KMS key ARN used for CloudTrail log encryption"
+        }
+      }
+    },
     "AwsEnvironmentData": {
       "type": "object",
       "description": "The AWS connector environment data",
@@ -627,27 +707,35 @@
         }
       }
     },
+    "DefenderCspmAwsOfferingAgentlessServerlessPosture": {
+      "type": "object",
+      "description": "The Microsoft Defender agentless serverless posture configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Is agentless serverless posture enabled"
+        },
+        "cloudRoleArn": {
+          "type": "string",
+          "description": "The cloud role ARN in AWS for this feature"
+        }
+      }
+    },
     "DefenderCspmAwsOfferingCiem": {
       "type": "object",
       "description": "Defenders CSPM Permissions Management offering configurations",
       "properties": {
-        "ciemDiscovery": {
-          "$ref": "#/definitions/DefenderCspmAwsOfferingCiemCiemDiscovery",
-          "description": "Defender CSPM Permissions Management discovery configuration"
-        },
         "ciemOidc": {
           "$ref": "#/definitions/DefenderCspmAwsOfferingCiemCiemOidc",
           "description": "AWS Defender CSPM Permissions Management OIDC (open id connect) connection configurations"
-        }
-      }
-    },
-    "DefenderCspmAwsOfferingCiemCiemDiscovery": {
-      "type": "object",
-      "description": "Defender CSPM Permissions Management discovery configuration",
-      "properties": {
-        "cloudRoleArn": {
-          "type": "string",
-          "description": "The cloud role ARN in AWS for Permissions Management discovery"
+        },
+        "logCollectionOidc": {
+          "$ref": "#/definitions/DefenderCspmAwsOfferingCiemLogCollectionOidc",
+          "description": "The AWS log collection OIDC (open id connect) connection configuration"
+        },
+        "cloudTrailAuditLogIngestion": {
+          "$ref": "#/definitions/AwsCloudTrailConfiguration",
+          "description": "The CloudTrail audit log ingestion configuration"
         }
       }
     },
@@ -662,6 +750,16 @@
         "azureActiveDirectoryAppName": {
           "type": "string",
           "description": "the azure active directory app name used of authenticating against AWS"
+        }
+      }
+    },
+    "DefenderCspmAwsOfferingCiemLogCollectionOidc": {
+      "type": "object",
+      "description": "The AWS log collection OIDC (open id connect) connection configuration",
+      "properties": {
+        "cloudRoleArn": {
+          "type": "string",
+          "description": "The cloud role ARN in AWS used for the log collection oidc connection"
         }
       }
     },
@@ -718,6 +816,10 @@
         "cloudRoleArn": {
           "type": "string",
           "description": "The cloud role ARN in AWS for this feature"
+        },
+        "securityFindingsEnabled": {
+          "type": "boolean",
+          "description": "Is security findings enabled for container image assessment"
         }
       }
     },
@@ -728,6 +830,24 @@
         "enabled": {
           "type": "boolean",
           "description": "Is serverless containers scanning enabled"
+        }
+      }
+    },
+    "DefenderCspmGcpOfferingCiem": {
+      "type": "object",
+      "description": "The GCP Defender CSPM Permissions Management configurations",
+      "properties": {
+        "ciemOidc": {
+          "$ref": "#/definitions/DefenderCspmGcpOfferingCiemOidc",
+          "description": "The GCP Permissions Management OIDC (open id connect) connection configuration"
+        },
+        "logCollectionOidc": {
+          "$ref": "#/definitions/DefenderCspmGcpOfferingCiemOidc",
+          "description": "The GCP log collection OIDC (open id connect) connection configuration"
+        },
+        "gcpAuditLogIngestion": {
+          "$ref": "#/definitions/GcpAuditLogConfiguration",
+          "description": "The GCP audit log ingestion configuration"
         }
       }
     },
@@ -746,6 +866,24 @@
         "azureActiveDirectoryAppName": {
           "type": "string",
           "description": "the azure active directory app name used of authenticating against GCP workload identity federation"
+        },
+        "enableAuditLogIngestion": {
+          "type": "boolean",
+          "description": "Is audit log ingestion enabled for the Permissions Management offering"
+        }
+      }
+    },
+    "DefenderCspmGcpOfferingCiemOidc": {
+      "type": "object",
+      "description": "A GCP OIDC (open id connect) connection configuration",
+      "properties": {
+        "workloadIdentityProviderId": {
+          "type": "string",
+          "description": "The GCP workload identity provider id for this feature"
+        },
+        "serviceAccountEmailAddress": {
+          "type": "string",
+          "description": "The service account email address in GCP for this feature"
         }
       }
     },
@@ -800,6 +938,10 @@
         "serviceAccountEmailAddress": {
           "type": "string",
           "description": "The service account email address in GCP for this feature"
+        },
+        "securityFindingsEnabled": {
+          "type": "boolean",
+          "description": "Is security findings enabled for container image assessment"
         }
       }
     },
@@ -915,6 +1057,10 @@
         "cloudRoleArn": {
           "type": "string",
           "description": "The cloud role ARN in AWS for this feature"
+        },
+        "securityFindingsEnabled": {
+          "type": "boolean",
+          "description": "Is security findings enabled for container image assessment"
         }
       }
     },
@@ -965,6 +1111,10 @@
         "serviceAccountEmailAddress": {
           "type": "string",
           "description": "The service account email address in GCP for this feature"
+        },
+        "securityFindingsEnabled": {
+          "type": "boolean",
+          "description": "Is security findings enabled for container image assessment"
         }
       }
     },
@@ -1228,6 +1378,70 @@
             "description": "JFrogArtifactory"
           }
         ]
+      }
+    },
+    "GcpAuditLogConfiguration": {
+      "type": "object",
+      "description": "The configuration for GCP audit log ingestion",
+      "properties": {
+        "provisioningType": {
+          "$ref": "#/definitions/GcpLoggingProvisioningType",
+          "description": "The provisioning type for the GCP logging resources"
+        },
+        "resourceSets": {
+          "type": "array",
+          "description": "The existing GCP logging resource sets. Required when provisioningType is BringYourOwn.",
+          "items": {
+            "$ref": "#/definitions/GcpLoggingResourceSet"
+          },
+          "x-ms-identifiers": [
+            "pubSubSubscriptionName"
+          ]
+        },
+        "resourceNamePrefix": {
+          "type": "string",
+          "description": "The resource name prefix used when provisioning the GCP logging resources. Required when\nprovisioningType is ManualProvisioning or AutoProvisioning."
+        }
+      }
+    },
+    "GcpLoggingProvisioningType": {
+      "type": "string",
+      "description": "The provisioning type for GCP logging resources",
+      "enum": [
+        "BringYourOwn",
+        "ManualProvisioning",
+        "AutoProvisioning"
+      ],
+      "x-ms-enum": {
+        "name": "GcpLoggingProvisioningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BringYourOwn",
+            "value": "BringYourOwn",
+            "description": "The customer provides their own GCP logging resources"
+          },
+          {
+            "name": "ManualProvisioning",
+            "value": "ManualProvisioning",
+            "description": "Resources are provisioned on the customer's side"
+          },
+          {
+            "name": "AutoProvisioning",
+            "value": "AutoProvisioning",
+            "description": "Resources are provisioned on Microsoft's side"
+          }
+        ]
+      }
+    },
+    "GcpLoggingResourceSet": {
+      "type": "object",
+      "description": "A resource set describing existing GCP logging resources",
+      "properties": {
+        "pubSubSubscriptionName": {
+          "type": "string",
+          "description": "The Pub/Sub subscription name in which the GCP logs are stored"
+        }
       }
     },
     "GcpOrganizationalData": {
@@ -1904,6 +2118,10 @@
         "serverlessContainers": {
           "$ref": "#/definitions/DefenderCspmAwsOfferingServerlessContainers",
           "description": "The Microsoft Defender serverless containers configuration"
+        },
+        "agentlessServerlessPosture": {
+          "$ref": "#/definitions/DefenderCspmAwsOfferingAgentlessServerlessPosture",
+          "description": "The Microsoft Defender agentless serverless posture configuration"
         }
       },
       "allOf": [
@@ -1939,6 +2157,10 @@
         "ciemDiscovery": {
           "$ref": "#/definitions/DefenderCspmGcpOfferingCiemDiscovery",
           "description": "GCP Defenders CSPM Permissions Management OIDC (Open ID connect) connection configurations"
+        },
+        "ciem": {
+          "$ref": "#/definitions/DefenderCspmGcpOfferingCiem",
+          "description": "The GCP Defender CSPM Permissions Management configurations"
         },
         "vmScanners": {
           "$ref": "#/definitions/defenderCspmGcpOfferingVmScanners",
