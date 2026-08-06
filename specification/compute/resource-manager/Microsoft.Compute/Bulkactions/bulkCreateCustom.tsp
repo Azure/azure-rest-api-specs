@@ -43,6 +43,16 @@ alias BulkCreateCustomId = {
   name: string;
 };
 
+alias BulkCreateCustomOperationStatusId = {
+  /** The identifier of the BulkCreateCustom operation. */
+  @path
+  @minLength(1)
+  @segment("bulkCreateCustom")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  bulkOperationId: string;
+};
+
 alias BulkCreateCustomDeleteInstancesParameter = {
   /** When true, deletes all virtual machines created by this BulkAction Operation. */
   @query
@@ -334,6 +344,15 @@ interface BulkCreateCustom {
     Resource = LocationBasedBulkCreateCustom,
     Request = void,
     Parameters = BulkCreateCustomId
+  >;
+
+  @added(Versions.`2026-08-06-preview`)
+  @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
+  virtualMachinesGetOperationStatus is ArmResourceActionSync<
+    Resource = LocationBasedBulkCreateCustom,
+    Request = void,
+    Response = ArmResponse<GetOperationStatusResponse>,
+    Parameters = BulkCreateCustomOperationStatusId
   >;
 
   @doc("List BulkCreateCustom resources by resource group.")

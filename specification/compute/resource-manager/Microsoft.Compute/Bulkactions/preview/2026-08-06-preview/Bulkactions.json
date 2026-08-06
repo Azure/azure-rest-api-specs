@@ -48,6 +48,9 @@
       "name": "BulkCreateCustom"
     },
     {
+      "name": "BulkCreateUniform"
+    },
+    {
       "name": "ScheduledActions"
     },
     {
@@ -864,6 +867,118 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{bulkOperationId}/virtualMachinesGetOperationStatus": {
+      "post": {
+        "operationId": "BulkCreateCustom_VirtualMachinesGetOperationStatus",
+        "tags": [
+          "BulkCreateCustom"
+        ],
+        "description": "Gets the operation status for virtual machines in a BulkCreateCustom operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "bulkOperationId",
+            "in": "path",
+            "description": "The identifier of the BulkCreateCustom operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetOperationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet": {
+            "$ref": "./examples/BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateUniform/{bulkOperationId}/virtualMachinesGetOperationStatus": {
+      "post": {
+        "operationId": "BulkCreateUniform_VirtualMachinesGetOperationStatus",
+        "tags": [
+          "BulkCreateUniform"
+        ],
+        "description": "Gets the operation status for virtual machines in a BulkCreateUniform operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "bulkOperationId",
+            "in": "path",
+            "description": "The identifier of the BulkCreateUniform operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetOperationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkCreateUniform_VirtualMachinesGetOperationStatus_MaximumSet": {
+            "$ref": "./examples/BulkCreateUniform_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations": {
