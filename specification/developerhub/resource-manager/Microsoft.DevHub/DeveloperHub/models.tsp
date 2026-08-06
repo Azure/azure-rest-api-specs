@@ -1519,6 +1519,7 @@ model ADOOAuth {
 /**
  * The response from List ADOOAuth operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AdooAuthListResponse is Azure.Core.Page<AdooAuthResponse>;
 
 /**

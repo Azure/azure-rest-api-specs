@@ -56,8 +56,10 @@ alias EndpointResourceListParameters = {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
 @parentResource(Workspace)
-model EndpointResourcePropertiesBasicResource
-  is Azure.ResourceManager.ProxyResource<EndpointResourceProperties, false> {
+model EndpointResourcePropertiesBasicResource is Azure.ResourceManager.ProxyResource<
+  EndpointResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = EndpointResourcePropertiesBasicResource,
     KeyName = "endpointName",

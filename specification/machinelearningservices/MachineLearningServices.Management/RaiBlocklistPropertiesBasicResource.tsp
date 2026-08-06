@@ -24,8 +24,10 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
-model RaiBlocklistPropertiesBasicResource
-  is Azure.ResourceManager.ProxyResource<RaiBlocklistProperties, false> {
+model RaiBlocklistPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
+  RaiBlocklistProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = RaiBlocklistPropertiesBasicResource,
     KeyName = "raiBlocklistName",

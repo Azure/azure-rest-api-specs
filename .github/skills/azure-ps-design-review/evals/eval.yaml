@@ -1,0 +1,133 @@
+name: azure-ps-design-review-eval
+description: Routing and capability tests for the azure-ps-design-review skill
+type: capability
+
+environment: azsdk-mcp-mock
+
+tags:
+  area: azure-ps-design-review
+  type: ci-gate
+
+config:
+  runs: 1
+  timeout: "120s"
+  model: claude-opus-4.6
+  executor: copilot-sdk
+
+scoring:
+  threshold: 0.8
+
+stimuli:
+  # --- Triggers: requests that should route to this skill ----------------
+  - name: trigger-create-ps-design
+    prompt: "Help me create a PowerShell design for my new Compute feature."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-ps-design-review"]
+
+  - name: trigger-ps-design-review
+    prompt: "I need to submit a PS design review for my new cmdlets."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-ps-design-review"]
+
+  - name: trigger-cmdlet-design
+    prompt: "Create a cmdlet design spec from my TypeSpec PR https://github.com/Azure/azure-rest-api-specs/pull/12345 and file it for review."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-ps-design-review"]
+
+  - name: trigger-powershell-cmdlet-review
+    prompt: "Start a PowerShell cmdlet review for the new snapshot operations in Az.Compute."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-ps-design-review"]
+
+  # --- Capability: correct first-move behavior of the interview ----------
+  # The skill must ask for the TypeSpec PR link before anything else and must
+  # not fabricate/file a design without ingesting the PR first.
+  - name: capability-pr-link-first
+    prompt: "Help me create a PowerShell design for my new Compute feature."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-ps-design-review"]
+      - type: output-contains
+        config:
+          substring: "PR"
+      - type: output-not-contains
+        config:
+          substring: "I've created the issue"
+
+  - name: capability-telemetry-and-title
+    prompt: "I've already given you my PR and answered your questions. Show me exactly how you'll format the review issue title and the required footer line before you file it. My module is Az.Compute and the feature is ManagedDisk Snapshot."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: output-contains
+        config:
+          substring: "Az.Compute - ManagedDisk Snapshot"
+      - type: output-contains
+        config:
+          substring: "Created with help from PS design skill"
+
+  # --- Anti-triggers: requests that must NOT route to this skill ---------
+  - name: anti-trigger-sdk-generation
+    prompt: "Generate the Python SDK from my TypeSpec project locally."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["azure-ps-design-review"]
+
+  - name: anti-trigger-typespec-authoring
+    prompt: "Add a new stable API version to my TypeSpec definition."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["azure-ps-design-review"]
+
+  - name: anti-trigger-release-package
+    prompt: "Release the azure-mgmt-compute Python package to PyPI."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["azure-ps-design-review"]
+
+  - name: anti-trigger-api-review
+    prompt: "Review my ARM API specification for breaking changes."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["azure-ps-design-review"]

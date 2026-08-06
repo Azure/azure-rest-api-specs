@@ -372,7 +372,21 @@ stages:
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
               -UpdateExistingPullRequest $true
-        
+
+        - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
+          - task: PowerShell@2
+            displayName: Add auto-release label
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            inputs:
+              pwsh: true
+              workingDirectory: $(SdkRepoDirectory)
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
+              arguments: >
+                -RepoOwner "azure"
+                -RepoName "$(SdkRepoName)"
+                -IssueNumber "$(Submitted.PullRequest.Number)"
+                -Labels "auto-release"
+                -AuthToken "$(GH_TOKEN)"
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - pwsh: |
