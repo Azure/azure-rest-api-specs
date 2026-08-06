@@ -206,7 +206,7 @@ model Eval is OpenAI.Eval {
   /** the name of the person who created the run. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  created_by?: FoundryTimestamp;
+  created_by?: string;
 
   /**
     Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -753,7 +753,7 @@ model EvalRun is OpenAI.EvalRun {
   /** the name of the person who created the run. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  created_by?: FoundryTimestamp;
+  created_by?: string;
 
   /**
     Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
