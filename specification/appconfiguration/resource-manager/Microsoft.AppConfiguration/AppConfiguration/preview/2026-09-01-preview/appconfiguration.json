@@ -58,6 +58,9 @@
       "name": "KeyValues"
     },
     {
+      "name": "FeatureFlags"
+    },
+    {
       "name": "Replicas"
     },
     {
@@ -745,6 +748,188 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/featureFlags/{featureFlagName}": {
+      "get": {
+        "operationId": "FeatureFlags_Get",
+        "tags": [
+          "FeatureFlags"
+        ],
+        "description": "Gets the properties of the specified feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configStoreName",
+            "in": "path",
+            "description": "The name of the configuration store.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "featureFlagName",
+            "in": "path",
+            "description": "Identifier of feature flag name and label combination. The name and label are joined by the $ character. The label is optional.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\s\\S]{1,10000}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FeatureFlag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FeatureFlags_Get": {
+            "$ref": "./examples/ConfigurationStoresGetFeatureFlag.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FeatureFlags_CreateOrUpdate",
+        "tags": [
+          "FeatureFlags"
+        ],
+        "description": "Creates or updates a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configStoreName",
+            "in": "path",
+            "description": "The name of the configuration store.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "featureFlagName",
+            "in": "path",
+            "description": "Identifier of feature flag name and label combination. The name and label are joined by the $ character. The label is optional.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\s\\S]{1,10000}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The parameters for creating or updating a feature flag.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeatureFlag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FeatureFlag' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FeatureFlag"
+            }
+          },
+          "201": {
+            "description": "Resource 'FeatureFlag' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FeatureFlag"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FeatureFlags_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationStoresCreateFeatureFlag.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FeatureFlags_Delete",
+        "tags": [
+          "FeatureFlags"
+        ],
+        "description": "Deletes a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configStoreName",
+            "in": "path",
+            "description": "The name of the configuration store.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "featureFlagName",
+            "in": "path",
+            "description": "Identifier of feature flag name and label combination. The name and label are joined by the $ character. The label is optional.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\s\\S]{1,10000}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FeatureFlags_Delete": {
+            "$ref": "./examples/ConfigurationStoresDeleteFeatureFlag.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues/{keyValueName}": {
@@ -2138,6 +2323,10 @@
         ]
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "AzureFrontDoorProperties": {
       "type": "object",
       "description": "Azure Front Door settings",
@@ -2306,6 +2495,11 @@
           "format": "int64",
           "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
         },
+        "defaultFeatureFlagRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
+        },
         "enablePurgeProtection": {
           "type": "boolean",
           "description": "Property specifying whether protection against purge is enabled for this configuration store.",
@@ -2365,6 +2559,11 @@
           "type": "integer",
           "format": "int64",
           "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
+        },
+        "defaultFeatureFlagRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
         },
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
@@ -2548,6 +2747,341 @@
         }
       }
     },
+    "FeatureFlag": {
+      "type": "object",
+      "description": "The feature flag resource along with all resource properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FeatureFlagProperties",
+          "description": "All feature flag properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FeatureFlagAllocation": {
+      "type": "object",
+      "description": "The allocation of feature flag variants.",
+      "properties": {
+        "defaultWhenDisabled": {
+          "type": "string",
+          "description": "The default variant to use when the feature flag is disabled."
+        },
+        "defaultWhenEnabled": {
+          "type": "string",
+          "description": "The default variant to use when the feature flag is enabled but not allocated."
+        },
+        "percentile": {
+          "type": "array",
+          "description": "The percentile allocations for variants.",
+          "items": {
+            "$ref": "#/definitions/FeatureFlagPercentileAllocation"
+          },
+          "x-ms-identifiers": [
+            "variant"
+          ]
+        },
+        "user": {
+          "type": "array",
+          "description": "The user allocations for variants.",
+          "items": {
+            "$ref": "#/definitions/FeatureFlagUserAllocation"
+          },
+          "x-ms-identifiers": [
+            "variant"
+          ]
+        },
+        "group": {
+          "type": "array",
+          "description": "The group allocations for variants.",
+          "items": {
+            "$ref": "#/definitions/FeatureFlagGroupAllocation"
+          },
+          "x-ms-identifiers": [
+            "variant"
+          ]
+        },
+        "seed": {
+          "type": "string",
+          "description": "The seed used for random allocation."
+        }
+      }
+    },
+    "FeatureFlagConditions": {
+      "type": "object",
+      "description": "The conditions that must be met for a feature flag to be enabled.",
+      "properties": {
+        "requirementType": {
+          "$ref": "#/definitions/FeatureFlagRequirementType",
+          "description": "The requirement type for the conditions."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filters that conditionally enable or disable the feature flag.",
+          "items": {
+            "$ref": "#/definitions/FeatureFlagFilter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "FeatureFlagFilter": {
+      "type": "object",
+      "description": "A filter that conditionally enables or disables a feature flag.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the filter."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters used by the filter.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "FeatureFlagGroupAllocation": {
+      "type": "object",
+      "description": "A group allocation for a feature flag variant.",
+      "properties": {
+        "variant": {
+          "type": "string",
+          "description": "The variant to allocate to the groups."
+        },
+        "groups": {
+          "type": "array",
+          "description": "The groups that receive the variant.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "variant",
+        "groups"
+      ]
+    },
+    "FeatureFlagPercentileAllocation": {
+      "type": "object",
+      "description": "A percentile allocation for a feature flag variant.",
+      "properties": {
+        "variant": {
+          "type": "string",
+          "description": "The variant to allocate the percentile range to."
+        },
+        "from": {
+          "type": "number",
+          "format": "double",
+          "description": "The inclusive lower bound of the percentile range.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "to": {
+          "type": "number",
+          "format": "double",
+          "description": "The exclusive upper bound of the percentile range.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "variant",
+        "from",
+        "to"
+      ]
+    },
+    "FeatureFlagProperties": {
+      "type": "object",
+      "description": "All feature flag properties.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "The enabled state of the feature flag."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label the feature flag belongs to.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the feature flag."
+        },
+        "conditions": {
+          "$ref": "#/definitions/FeatureFlagConditions",
+          "description": "The conditions that must be met for the feature flag to be enabled."
+        },
+        "variants": {
+          "type": "array",
+          "description": "The variants of the feature flag.",
+          "items": {
+            "$ref": "#/definitions/FeatureFlagVariantDefinition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "allocation": {
+          "$ref": "#/definitions/FeatureFlagAllocation",
+          "description": "The allocation of the feature flag."
+        },
+        "telemetry": {
+          "$ref": "#/definitions/FeatureFlagTelemetryConfiguration",
+          "description": "The telemetry settings of the feature flag."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the feature flag.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the feature flag was modified.",
+          "readOnly": true
+        },
+        "eTag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "An ETag indicating the state of the feature flag.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "FeatureFlagRequirementType": {
+      "type": "string",
+      "description": "The requirement type for feature flag conditions.",
+      "enum": [
+        "Any",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureFlagRequirementType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Any",
+            "value": "Any",
+            "description": "Any condition can enable the feature flag."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All conditions must enable the feature flag."
+          }
+        ]
+      }
+    },
+    "FeatureFlagStatusOverride": {
+      "type": "string",
+      "description": "The status override for a feature flag variant.",
+      "enum": [
+        "None",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureFlagStatusOverride",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The variant does not override the feature flag status."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The variant enables the feature flag."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The variant disables the feature flag."
+          }
+        ]
+      }
+    },
+    "FeatureFlagTelemetryConfiguration": {
+      "type": "object",
+      "description": "The telemetry configuration for a feature flag.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether telemetry is enabled."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata included on outbound telemetry.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "FeatureFlagUserAllocation": {
+      "type": "object",
+      "description": "A user allocation for a feature flag variant.",
+      "properties": {
+        "variant": {
+          "type": "string",
+          "description": "The variant to allocate to the users."
+        },
+        "users": {
+          "type": "array",
+          "description": "The users that receive the variant.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "variant",
+        "users"
+      ]
+    },
+    "FeatureFlagVariantDefinition": {
+      "type": "object",
+      "description": "A feature flag variant.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the variant."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the variant."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The content type of the variant value."
+        },
+        "statusOverride": {
+          "$ref": "#/definitions/FeatureFlagStatusOverride",
+          "description": "The status override for the variant."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "IdentityType": {
       "type": "string",
       "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
@@ -2634,6 +3168,10 @@
         "contentType": {
           "type": "string",
           "description": "The content type of the key-value's value.\nProviding a proper content-type can enable transformations of values when they are retrieved by applications."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the key-value."
         },
         "eTag": {
           "type": "string",
@@ -3412,6 +3950,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the snapshot."
         },
         "etag": {
           "type": "string",
