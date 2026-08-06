@@ -247,7 +247,7 @@ union AgentKind {
 union AgentHarness {
   string,
 
-  @doc("GHCP-SDK based managed runtime.")
+  @doc("Github Copilot based managed runtime.")
   GithubCopilot: "github-copilot",
 }
 
