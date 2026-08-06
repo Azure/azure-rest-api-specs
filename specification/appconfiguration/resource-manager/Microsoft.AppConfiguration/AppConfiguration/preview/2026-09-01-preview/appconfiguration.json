@@ -756,7 +756,7 @@
         "tags": [
           "FeatureFlags"
         ],
-        "description": "Gets the properties of the specified feature flag through the data plane proxy.",
+        "description": "Gets the properties of the specified feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -811,7 +811,7 @@
         "tags": [
           "FeatureFlags"
         ],
-        "description": "Creates or updates a feature flag through the data plane proxy.",
+        "description": "Creates or updates a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -881,7 +881,7 @@
         "tags": [
           "FeatureFlags"
         ],
-        "description": "Deletes a feature flag through the data plane proxy.",
+        "description": "Deletes a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -912,19 +912,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "Resource does not exist."
@@ -940,11 +929,7 @@
           "FeatureFlags_Delete": {
             "$ref": "./examples/ConfigurationStoresDeleteFeatureFlag.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues/{keyValueName}": {
@@ -2338,6 +2323,10 @@
         ]
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "AzureFrontDoorProperties": {
       "type": "object",
       "description": "Azure Front Door settings",
@@ -2509,7 +2498,7 @@
         "defaultFeatureFlagRevisionRetentionPeriodInSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The duration in seconds to retain new feature flag revisions."
+          "description": "The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
         },
         "enablePurgeProtection": {
           "type": "boolean",
@@ -2574,7 +2563,7 @@
         "defaultFeatureFlagRevisionRetentionPeriodInSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The duration in seconds to retain new feature flag revisions."
+          "description": "The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
         },
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
@@ -2964,7 +2953,7 @@
           "readOnly": true
         },
         "eTag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "An ETag indicating the state of the feature flag.",
           "readOnly": true
         }

@@ -176,6 +176,76 @@
           "enabled": true,
           "label": "Production",
           "description": "Enables the updated checkout experience.",
+          "conditions": {
+            "requirementType": "All",
+            "filters": [
+              {
+                "name": "Microsoft.TimeWindow",
+                "parameters": {
+                  "Start": "2026-09-01T00:00:00Z",
+                  "End": "2026-12-31T23:59:59Z"
+                }
+              }
+            ]
+          },
+          "variants": [
+            {
+              "name": "On",
+              "value": "true",
+              "contentType": "application/json",
+              "statusOverride": "None"
+            },
+            {
+              "name": "Off",
+              "value": "false",
+              "contentType": "application/json",
+              "statusOverride": "Disabled"
+            }
+          ],
+          "allocation": {
+            "defaultWhenDisabled": "Off",
+            "defaultWhenEnabled": "On",
+            "percentile": [
+              {
+                "variant": "On",
+                "from": 0,
+                "to": 80
+              },
+              {
+                "variant": "Off",
+                "from": 80,
+                "to": 100
+              }
+            ],
+            "user": [
+              {
+                "variant": "On",
+                "users": [
+                  "alice",
+                  "bob"
+                ]
+              }
+            ],
+            "group": [
+              {
+                "variant": "On",
+                "groups": [
+                  "beta-testers"
+                ]
+              }
+            ],
+            "seed": "checkoutV2"
+          },
+          "telemetry": {
+            "enabled": true,
+            "metadata": {
+              "Tags.Environment": "production"
+            }
+          },
+          "tags": {
+            "team": "checkout",
+            "environment": "production"
+          },
           "lastModified": "2026-09-01T16:52:32+00:00",
           "eTag": "7XpB48ET4VAlB9068ft6fKMyA3m"
         }

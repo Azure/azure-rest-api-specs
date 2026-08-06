@@ -48,7 +48,7 @@ interface FeatureFlags {
   /**
    * Deletes a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<FeatureFlag>;
+  delete is ArmResourceDeleteSync<FeatureFlag>;
 }
 
 /**
@@ -110,7 +110,7 @@ model FeatureFlagProperties {
    * An ETag indicating the state of the feature flag.
    */
   @visibility(Lifecycle.Read)
-  eTag?: string;
+  eTag?: Azure.Core.eTag;
 }
 
 /**
