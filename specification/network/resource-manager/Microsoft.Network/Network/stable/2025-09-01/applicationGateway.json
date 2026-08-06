@@ -1583,6 +1583,27 @@
         }
       ]
     },
+    "ApplicationGatewayAuthConfig": {
+      "type": "object",
+      "description": "An authentication and authorization configuration binding for a request routing rule. Links a named configuration to an authentication policy and/or an authorization policy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the auth configuration."
+        },
+        "authenticationPolicy": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource."
+        },
+        "authorizationPolicy": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the authorization policy resource."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "ApplicationGatewayAuthenticationCertificate": {
       "type": "object",
       "description": "Authentication certificates of an application gateway.",
@@ -3745,7 +3766,7 @@
         },
         "authConfigs": {
           "type": "array",
-          "description": "Authentication and authorization configuration bindings of the request routing rule. Each binding links a named configuration to an authentication policy and/or an authorization policy.",
+          "description": "Authentication and authorization configuration bindings of the request routing rule.",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayAuthConfig"
           }
@@ -3756,27 +3777,6 @@
           "readOnly": true
         }
       }
-    },
-    "ApplicationGatewayAuthConfig": {
-      "type": "object",
-      "description": "An authentication and authorization configuration binding for a request routing rule. Links a named configuration to an authentication policy and/or an authorization policy.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the auth configuration."
-        },
-        "authenticationPolicy": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource."
-        },
-        "authorizationPolicy": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "Reference to the authorization policy resource."
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "ApplicationGatewayRewriteRule": {
       "type": "object",

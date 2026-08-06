@@ -108,6 +108,10 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2025_09_01)
   firstPartyServiceTag,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2025_09_01)
+  authenticationPolicy,
 }
 
 /**

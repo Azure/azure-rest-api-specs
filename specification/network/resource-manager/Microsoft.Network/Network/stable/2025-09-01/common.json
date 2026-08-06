@@ -6311,6 +6311,36 @@
         ]
       }
     },
+    "OnUnauthenticatedRequest": {
+      "type": "string",
+      "description": "Action to take when a request is unauthenticated.",
+      "enum": [
+        "allow",
+        "authenticate",
+        "deny"
+      ],
+      "x-ms-enum": {
+        "name": "OnUnauthenticatedRequest",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Allow the request to pass through without authentication."
+          },
+          {
+            "name": "Authenticate",
+            "value": "authenticate",
+            "description": "Redirect the request to the authentication provider. Only valid for the user authentication capability."
+          },
+          {
+            "name": "Deny",
+            "value": "deny",
+            "description": "Deny the request when no credential is presented."
+          }
+        ]
+      }
+    },
     "Origin": {
       "type": "string",
       "description": "The origin of the issue.",
@@ -8610,6 +8640,30 @@
             "name": "True",
             "value": "True",
             "description": "True"
+          }
+        ]
+      }
+    },
+    "UserTrustProviderType": {
+      "type": "string",
+      "description": "Type of the user trust provider.",
+      "enum": [
+        "oidc",
+        "entra"
+      ],
+      "x-ms-enum": {
+        "name": "UserTrustProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Oidc",
+            "value": "oidc",
+            "description": "OpenID Connect (OIDC) trust provider type."
+          },
+          {
+            "name": "Entra",
+            "value": "entra",
+            "description": "Microsoft Entra trust provider type."
           }
         ]
       }
