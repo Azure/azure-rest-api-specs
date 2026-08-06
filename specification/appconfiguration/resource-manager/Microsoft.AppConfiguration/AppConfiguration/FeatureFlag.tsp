@@ -36,17 +36,17 @@ model FeatureFlag
 @armResourceOperations
 interface FeatureFlags {
   /**
-   * Gets the properties of the specified feature flag through the data plane proxy.
+   * Gets the properties of the specified feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
    */
   get is ArmResourceRead<FeatureFlag>;
 
   /**
-   * Creates or updates a feature flag through the data plane proxy.
+   * Creates or updates a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<FeatureFlag>;
 
   /**
-   * Deletes a feature flag through the data plane proxy.
+   * Deletes a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
    */
   delete is ArmResourceDeleteWithoutOkAsync<FeatureFlag>;
 }
