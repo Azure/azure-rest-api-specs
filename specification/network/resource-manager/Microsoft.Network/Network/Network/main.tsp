@@ -17,6 +17,7 @@ import "./ApplicationGateway.tsp";
 import "./ApplicationGatewayAvailableSslOptions.tsp";
 import "./ApplicationGatewayPrivateEndpointConnection.tsp";
 import "./ApplicationGatewayWafDynamicManifestResult.tsp";
+import "./AuthenticationPolicy.tsp";
 import "./ApplicationSecurityGroup.tsp";
 import "./AzureFirewall.tsp";
 import "./AzureWebCategory.tsp";

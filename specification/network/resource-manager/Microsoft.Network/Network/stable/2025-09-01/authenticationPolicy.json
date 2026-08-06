@@ -1,9 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AuthenticationPolicyManagement",
+    "title": "WebApplicationFirewallManagement",
     "version": "2025-09-01",
-    "description": "APIs to manage authentication policies for identity integration."
+    "description": "APIs to manage Microsoft Azure network resources.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -56,7 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AuthenticationPolicyListResult"
             }
@@ -98,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AuthenticationPolicyListResult"
             }
@@ -191,7 +196,7 @@
             "maxLength": 80
           },
           {
-            "name": "parameters",
+            "name": "resource",
             "in": "body",
             "description": "Authentication policy to be created or updated.",
             "required": true,
@@ -298,8 +303,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AuthenticationPolicyPropertiesFormat",
-          "description": "Properties of the authentication policy.",
-          "x-ms-client-flatten": true
+          "description": "Properties of the authentication policy."
         },
         "etag": {
           "type": "string",
@@ -315,15 +319,14 @@
     },
     "AuthenticationPolicyListResult": {
       "type": "object",
-      "description": "Paged collection of AuthenticationPolicy items",
+      "description": "The response of a AuthenticationPolicy list operation.",
       "properties": {
         "value": {
           "type": "array",
           "description": "The AuthenticationPolicy items on this page",
           "items": {
             "$ref": "#/definitions/AuthenticationPolicy"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
@@ -340,11 +343,11 @@
       "description": "Properties of the authentication policy.",
       "properties": {
         "userTrustProviderType": {
-          "$ref": "#/definitions/UserTrustProviderType",
+          "$ref": "./common.json#/definitions/UserTrustProviderType",
           "description": "The type of the user trust provider."
         },
         "onUnauthenticatedRequest": {
-          "$ref": "#/definitions/OnUnauthenticatedRequest",
+          "$ref": "./common.json#/definitions/OnUnauthenticatedRequest",
           "description": "The action to take when a request is unauthenticated."
         },
         "authenticationProperties": {
@@ -430,60 +433,6 @@
         "issuer",
         "clientId"
       ]
-    },
-    "UserTrustProviderType": {
-      "type": "string",
-      "description": "Type of the user trust provider.",
-      "enum": [
-        "oidc",
-        "entra"
-      ],
-      "x-ms-enum": {
-        "name": "UserTrustProviderType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Oidc",
-            "value": "oidc",
-            "description": "OpenID Connect (OIDC) trust provider type."
-          },
-          {
-            "name": "Entra",
-            "value": "entra",
-            "description": "Microsoft Entra trust provider type."
-          }
-        ]
-      }
-    },
-    "OnUnauthenticatedRequest": {
-      "type": "string",
-      "description": "Action to take when a request is unauthenticated.",
-      "enum": [
-        "allow",
-        "authenticate",
-        "deny"
-      ],
-      "x-ms-enum": {
-        "name": "OnUnauthenticatedRequest",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "allow",
-            "description": "Allow the request to pass through without authentication."
-          },
-          {
-            "name": "Authenticate",
-            "value": "authenticate",
-            "description": "Redirect the request to the authentication provider. Only valid for the user authentication capability."
-          },
-          {
-            "name": "Deny",
-            "value": "deny",
-            "description": "Deny the request when no credential is presented."
-          }
-        ]
-      }
     }
   },
   "parameters": {}
