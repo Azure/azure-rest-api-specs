@@ -82920,7 +82920,6 @@ components:
       required:
         - id
         - object
-        - status
         - conversation_id
       properties:
         id:
@@ -82931,9 +82930,6 @@ components:
           enum:
             - realtime.response
           description: The object type. Always `realtime.response`.
-        status:
-          $ref: '#/components/schemas/VoiceResponseStatus'
-          description: The status of the response.
         status_details:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
           description: Additional detail about a terminal status.
@@ -82989,6 +82985,17 @@ components:
                 - realtime.response
               description: The object type, must be `realtime.response`.
               x-stainless-const: true
+            status:
+              type: string
+              enum:
+                - completed
+                - cancelled
+                - failed
+                - incomplete
+                - in_progress
+              description: |-
+                The final status of the response (`completed`, `cancelled`, `failed`, or
+                  `incomplete`, `in_progress`).
             status_details:
               $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
               description: Additional details about the status.
@@ -83054,20 +83061,6 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format used for the response's audio output.
       description: The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceResponseStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - in_progress
-            - completed
-            - cancelled
-            - incomplete
-            - failed
-      description: The status of a voice response.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

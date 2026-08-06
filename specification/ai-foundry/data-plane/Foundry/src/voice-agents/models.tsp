@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/openapi";
+import "@azure-tools/openai-typespec/models/realtime";
 import "../agents/models.tsp";
 import "./agents.tsp";
 
@@ -61,20 +62,9 @@ model VoiceConversation {
 // Voice response
 // ---------------------------------------------------------------------------
 //
-// The projected base omits the three properties whose Foundry wire types are not assignable to the
-// upstream types: status, audio, and max_output_tokens. It also omits upstream metadata, which is not
-// part of the persisted response contract.
-
-@doc("The status of a voice response.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceResponseStatus {
-  string,
-  in_progress: "in_progress",
-  completed: "completed",
-  cancelled: "cancelled",
-  incomplete: "incomplete",
-  failed: "failed",
-}
+// The projected base omits the two properties whose Foundry wire types are not assignable to the
+// upstream types: audio and max_output_tokens. It also omits upstream metadata, which is not part of
+// the persisted response contract.
 
 @doc("The complete typed voice configuration used for a response.")
 union VoiceResponseVoice {
@@ -111,16 +101,13 @@ model VoiceResponseAudio {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponse extends OmitProperties<
   OpenAI.RealtimeResponse,
-  "status" | "audio" | "max_output_tokens" | "metadata"
+  "audio" | "max_output_tokens" | "metadata"
 > {
   @doc("The unique id of the response.")
   id: string;
 
   @doc("The object type. Always `realtime.response`.")
   object: "realtime.response";
-
-  @doc("The status of the response.")
-  status: VoiceResponseStatus;
 
   @doc("Additional detail about a terminal status.")
   status_details?: OpenAI.RealtimeResponseStatusDetails;
