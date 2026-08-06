@@ -24,102 +24,102 @@ namespace Microsoft.Compute;
 // ------------------ Shared enums ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The type of resource being targeted")
+@doc("The type of compute resource targeted by the scheduled action.")
 union ResourceType {
-  @doc("Resources defined are Virtual Machines")
+  @doc("Azure virtual machines.")
   VirtualMachine: "VirtualMachine",
 
-  @doc("Resources defined are Virtual Machines Scale Sets")
+  @doc("Azure Virtual Machine Scale Sets.")
   VirtualMachineScaleSet: "VirtualMachineScaleSet",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Specify which action user wants to be performed on the resources")
+@doc("The operation performed by the scheduled action.")
 union ScheduledActionType {
-  @doc("Perform a start action on the specified resources")
+  @doc("Starts the targeted resources.")
   Start: "Start",
 
-  @doc("Perform a deallocate action on the specified resources")
+  @doc("Deallocates the targeted resources.")
   Deallocate: "Deallocate",
 
-  @doc("Perform hibernate and deallocate on the specified resources")
+  @doc("Hibernates and deallocates the targeted resources.")
   Hibernate: "Hibernate",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Representation of the possible selection of days in a week in a gregorian calendar")
+@doc("A day of the week on which the scheduled action can run.")
 union WeekDay {
-  @doc("Monday weekday.")
+  @doc("Monday.")
   Monday: "Monday",
 
-  @doc("Tuesday weekday.")
+  @doc("Tuesday.")
   Tuesday: "Tuesday",
 
-  @doc("Wednesday weekday.")
+  @doc("Wednesday.")
   Wednesday: "Wednesday",
 
-  @doc("Thursday weekday.")
+  @doc("Thursday.")
   Thursday: "Thursday",
 
-  @doc("Friday weekday.")
+  @doc("Friday.")
   Friday: "Friday",
 
-  @doc("Saturday weekday.")
+  @doc("Saturday.")
   Saturday: "Saturday",
 
-  @doc("Sunday weekday.")
+  @doc("Sunday.")
   Sunday: "Sunday",
 
-  @doc("All week days")
+  @doc("Every day of the week.")
   All: "All",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Representation of the months available selection in a gregorian calendar")
+@doc("A month in which the scheduled action can run.")
 union Month {
-  @doc("The January month.")
+  @doc("January.")
   January: "January",
 
-  @doc("The February month.")
+  @doc("February.")
   February: "February",
 
-  @doc("The March month.")
+  @doc("March.")
   March: "March",
 
-  @doc("The April month.")
+  @doc("April.")
   April: "April",
 
-  @doc("The May month.")
+  @doc("May.")
   May: "May",
 
-  @doc("The June month.")
+  @doc("June.")
   June: "June",
 
-  @doc("The July month.")
+  @doc("July.")
   July: "July",
 
-  @doc("The August month.")
+  @doc("August.")
   August: "August",
 
-  @doc("The September month.")
+  @doc("September.")
   September: "September",
 
-  @doc("The October month.")
+  @doc("October.")
   October: "October",
 
-  @doc("The November month.")
+  @doc("November.")
   November: "November",
 
-  @doc("The December month.")
+  @doc("December.")
   December: "December",
 
-  @doc("All months")
+  @doc("Every month.")
   All: "All",
 
   string,
@@ -128,61 +128,61 @@ union Month {
 @added(Versions.`2026-07-06-preview`)
 @minValue(1)
 @maxValue(31)
-@doc("Represents the possible days in a month")
+@doc("A calendar day of the month, from 1 through 31.")
 scalar DayOfTheMonth extends int32;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The state the occurrence is at a given time")
+@doc("The current state of a scheduled action occurrence.")
 union OccurrenceState {
-  @doc("The occurrence was created")
+  @doc("The occurrence has been created.")
   Created: "Created",
 
-  @doc("The occurrence is being rescheduled")
+  @doc("The scheduled time for the occurrence is being updated.")
   Rescheduling: "Rescheduling",
 
-  @doc("The occurrence has been scheduled")
+  @doc("The occurrence is waiting for its scheduled time.")
   Scheduled: "Scheduled",
 
-  @doc("The occurrence has successfully ran")
+  @doc("The occurrence completed successfully.")
   Succeeded: "Succeeded",
 
-  @doc("The occurrence has failed during its scheduling")
+  @doc("The occurrence failed.")
   Failed: "Failed",
 
-  @doc("The occurrence is going through cancellation")
+  @doc("Cancellation of the occurrence is in progress.")
   Cancelling: "Cancelling",
 
-  @doc("The occurrence has been canceled")
+  @doc("The occurrence was canceled.")
   Canceled: "Canceled",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The type of notification supported")
+@doc("The delivery method for scheduled action notifications.")
 union NotificationType {
-  @doc("Notify through e-mail")
+  @doc("Sends notifications by email.")
   Email: "Email",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The notification languages currently supported")
+@doc("The language used for scheduled action notifications.")
 union Language {
-  @doc("American english language")
+  @doc("English (United States).")
   EnUs: "en-us",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The state the resource is on after the resource operation is applied")
+@doc("Current status of a scheduled action operation for a targeted resource.")
 union ResourceOperationStatus {
-  @doc("The resource operation was successful")
+  @doc("The operation completed successfully for the resource.")
   Succeeded: "Succeeded",
 
-  @doc("The resource operation has failed.")
+  @doc("The operation failed for the resource.")
   Failed: "Failed",
 
   string,
@@ -192,27 +192,27 @@ union ResourceOperationStatus {
 // BulkActions LaunchBulkInstancesOperation `ProvisioningState`; takes the
 // `RecurringScheduledActions*` identity (see file header).
 @added(Versions.`2026-07-06-preview`)
-@doc("Provisioning state of the scheduled action resource.")
+@doc("The provisioning state of the scheduled action.")
 @lroStatus
 union RecurringScheduledActionsProvisioningState {
   ResourceProvisioningState,
 
-  @doc("Resource is being deleted.")
+  @doc("The scheduled action is being deleted.")
   Deleting: "Deleting",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The preferences customers can select to optimize their requests to ScheduledActions")
+@doc("The preferred optimization goal for scheduled action operations.")
 union OptimizationPreference {
-  @doc("Optimize while considering cost savings")
+  @doc("Prioritizes cost savings.")
   Cost: "Cost",
 
-  @doc("Optimize while considering availability of resources")
+  @doc("Prioritizes resource availability.")
   Availability: "Availability",
 
-  @doc("Optimize while considering a balance of cost and availability")
+  @doc("Balances cost savings and resource availability.")
   CostAvailabilityBalanced: "CostAvailabilityBalanced",
 
   string,
@@ -221,18 +221,18 @@ union OptimizationPreference {
 // ------------------ Shared models ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The information about notifications to be send to about upcoming operations.")
+@doc("Settings for notifications about upcoming scheduled action operations.")
 model NotificationProperties {
-  @doc("Where the notification should be sent. For email, it should follow email format.")
+  @doc("The notification destination. For email notifications, specify a valid email address.")
   destination: string;
 
-  @doc("Type of notification to be sent.")
+  @doc("The notification delivery method.")
   type: NotificationType;
 
-  @doc("The language the notification should be sent on.")
+  @doc("The language used for the notification.")
   language: Language;
 
-  @doc("Tells if the notification is enabled or not.")
+  @doc("If true, notifications to this destination are disabled.")
   disabled?: boolean;
 }
 
@@ -247,100 +247,101 @@ model NotificationProperties {
 // the `Microsoft.Compute` namespace with the BulkActions originals.
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The type of deadline the scheduled action follows for its schedule.")
+@doc("How the scheduled time is interpreted for the resource operation.")
 union RecurringScheduledActionsDeadlineType {
-  @doc("Default value of Unknown.")
+  @doc("The deadline type is not specified.")
   Unknown: "Unknown",
 
-  @doc("Initiate the operation at the given deadline.")
+  @doc("Starts the operation at the scheduled time.")
   InitiateAt: "InitiateAt",
 
-  @doc("Complete the operation by the given deadline.")
+  @doc("Completes the operation by the scheduled time.")
   CompleteBy: "CompleteBy",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The resource operation to take on a scheduled-action failure.")
+@doc("The operation to retry when a scheduled action fails.")
 union RecurringScheduledActionsResourceOperationType {
-  @doc("The default value for this enum type")
+  @doc("The operation is not specified.")
   Unknown: "Unknown",
 
-  @doc("Start operations on the resources")
+  @doc("Starts the resources.")
   Start: "Start",
 
-  @doc("Deallocate operations on the resources")
+  @doc("Deallocates the resources.")
   Deallocate: "Deallocate",
 
-  @doc("Hibernate operations on the resources")
+  @doc("Hibernates the resources.")
   Hibernate: "Hibernate",
 
-  @doc("Create operations on the resources")
+  @doc("Creates the resources.")
   Create: "Create",
 
-  @doc("Delete operations on the resources")
+  @doc("Deletes the resources.")
   Delete: "Delete",
 
   string,
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Retry policy the scheduled action can pass")
+@doc("Retry settings for a scheduled action operation.")
 model RecurringScheduledActionsRetryPolicy {
-  @doc("Retry count for the request")
+  @doc("The maximum number of retry attempts.")
   retryCount?: int32;
 
-  @doc("Retry window in minutes for the request")
+  @doc("The time window, in minutes, during which retries can occur.")
   retryWindowInMinutes?: int32;
 
-  @doc("Action to take on failure")
+  @doc("The resource operation to retry after a failure.")
   onFailureAction?: RecurringScheduledActionsResourceOperationType;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The execution parameters the scheduled action is supposed to follow")
+@doc("Settings that control how the scheduled action operation is executed.")
 model RecurringScheduledActionsExecutionParameters {
-  @doc("Details that could optimize the user's request")
+  @doc("The preferred optimization goal.")
   optimizationPreference?: OptimizationPreference;
 
-  @doc("Retry policy the user can pass")
+  @doc("The retry settings for failed resource operations.")
   retryPolicy?: RecurringScheduledActionsRetryPolicy;
 }
 
 // ------------------ ScheduledAction resource + models ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Specify the schedule in which the scheduled action is supposed to follow")
+@doc("The recurring schedule for a scheduled action.")
 model ScheduledActionsSchedule {
-  @doc("The time the scheduled action is supposed to run on")
+  @doc("The local time of day when the scheduled action runs.")
   scheduledTime: plainTime;
 
-  @doc("The timezone the scheduled time is specified on")
+  @doc("The time zone used to interpret the scheduled time.")
   timeZone: string;
 
-  @doc("The week days the scheduled action is supposed to run on. If empty, it means it will run on every week day.")
+  @doc("The days of the week when the action runs. An empty array means every day of the week.")
   requestedWeekDays?: WeekDay[];
 
-  @doc("The months the scheduled action is supposed to run on. If empty, it means it will run on every month.")
+  @doc("The months when the action runs. An empty array means every month.")
   requestedMonths?: Month[];
 
-  @doc("The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.")
+  @doc("The calendar days when the action runs. An empty array means every day of the month.")
   requestedDaysOfTheMonth?: DayOfTheMonth[];
 
-  @doc("The execution parameters the scheduled action is supposed to follow")
+  @doc("Settings that control execution and retries.")
   executionParameters?: RecurringScheduledActionsExecutionParameters;
 
-  @doc("The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt.")
+  @doc("How the scheduled time is interpreted. The default is `InitiateAt`.")
   deadlineType?: RecurringScheduledActionsDeadlineType;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Schedule properties for update (PATCH). All properties are optional so individual fields can be patched (merge semantics); omitting a property preserves the current value.")
+@doc("Schedule changes for a scheduled action. Omitted properties keep their current values.")
 model ScheduledActionsScheduleUpdate
   is OptionalProperties<ScheduledActionsSchedule>;
 
 @added(Versions.`2026-07-06-preview`)
+@doc("The Azure resource ID of a virtual machine attached to a scheduled action.")
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
     {
@@ -354,29 +355,24 @@ scalar ValidScheduledActionResourceId
 @added(Versions.`2026-07-06-preview`)
 @parentResource(ScheduledAction)
 @segment("resources")
-@doc("Represents an scheduled action resource metadata.")
+@doc("A compute resource associated with a scheduled action.")
 model ScheduledActionResource {
-  @doc("The name of the resource")
+  @doc("Read-only. The name of the association resource.")
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("""
-    The compute RP resource id of the resource in the scheduled actions scope. 
-    """)
+  @doc("Read-only. The Azure resource ID of the association resource.")
   @visibility(Lifecycle.Read)
   id: armResourceIdentifier;
 
-  @doc("The type of resource")
+  @doc("Read-only. The Azure resource type of the association resource.")
   @visibility(Lifecycle.Read)
   type?: string;
 
-  @doc("""
-    The ARM Id of the resource.
-    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-    """)
+  @doc("The Azure resource ID of the targeted virtual machine.")
   resourceId: ValidScheduledActionResourceId;
 
-  @doc("The desired notification settings for the specified resource.")
+  @doc("Notification settings that apply only to this resource.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings?: Array<NotificationProperties>;
 }
@@ -385,146 +381,144 @@ model ScheduledActionResource {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
+@doc("A paged list of compute resources associated with a scheduled action.")
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Represents the writable fields of a scheduled action resource used in attach and patch requests.")
+@doc("A compute resource to add to or update in a scheduled action.")
 model ScheduledActionResourceInput {
-  @doc("""
-    The ARM Id of the resource.
-    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-    """)
+  @doc("The Azure resource ID of the targeted virtual machine.")
   resourceId: ValidScheduledActionResourceId;
 
-  @doc("The desired notification settings for the specified resource.")
+  @doc("Notification settings that apply only to this resource.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings?: Array<NotificationProperties>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Request model to attach a list of scheduled action resources.")
+@doc("Resources to add to a scheduled action.")
 model ResourceAttachRequest {
-  @doc("List of resources to be attached/patched")
+  @doc("The resources (VMs) to add.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resources: Array<ScheduledActionResourceInput>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Request model to detach a list of scheduled action resources.")
+@doc("Resources to remove from a scheduled action.")
 model ResourceDetachRequest {
-  @doc("List of resources to be detached")
+  @doc("The Azure resource IDs of the resources to remove.")
   resources: Array<ValidScheduledActionResourceId>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Request model perform a resource operation in a list of resources")
+@doc("Resource-specific settings to update in a scheduled action.")
 model ResourcePatchRequest {
-  @doc("The list of resources we watch to patch")
+  @doc("The resources and notification settings to update.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resources: Array<ScheduledActionResourceInput>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The request to cancel an occurrence.")
+@doc("Request body for canceling a scheduled action occurrence.")
 model CancelOccurrenceRequest {
-  @doc("The resources the cancellation should act on. If no resource is passed in the list, Scheduled Action will cancel the occurrence for all resources.")
+  @doc("The resources to cancel. An empty array cancels the occurrence for all resources.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The status of a resource after a resource level operation was performed")
+@doc("Current status for a targeted resource in a scheduled action occurrence.")
 model ResourceStatus {
-  @doc("The arm identifier of the resource")
+  @doc("The Azure resource ID of the targeted resource.")
   resourceId: ValidScheduledActionResourceId;
 
-  @doc("The state the resource is currently on")
+  @doc("The result of the operation for the resource.")
   status: ResourceOperationStatus;
 
-  @doc("Errors encountered while trying to perform")
+  @doc("Error details when the operation fails for the resource.")
   error?: Azure.Core.Foundations.Error;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The response from scheduled action resource requests, which contains the status of each resource")
+@doc("Results of a scheduled action operation for targeted resources.")
 model ResourceOperationResponse {
-  @doc("The total number of resources operated on")
+  @doc("The number of resources included in the operation.")
   totalResources: int32;
 
-  @doc("The resource status of for each resource")
+  @doc("The operation result for each resource.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Scheduled action properties")
+@doc("Configuration and status of a scheduled action.")
 model ScheduledActionProperties {
-  @doc("The type of resource the scheduled action is targeting")
+  @doc("The type of compute resource targeted by the action.")
   resourceType: ResourceType;
 
-  @doc("The action the scheduled action should perform in the resources")
+  @doc("The operation performed on the targeted resources.")
   actionType: ScheduledActionType;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
-  @doc("The time which the scheduled action is supposed to start running")
+  @doc("The date and time, including UTC offset, when the schedule becomes active.")
   startTime: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
-  @doc("The time when the scheduled action is supposed to stop scheduling")
+  @doc("The date and time, including UTC offset, after which no new occurrences are scheduled.")
   endTime?: offsetDateTime;
 
-  @doc("The schedule the scheduled action is supposed to follow")
+  @doc("The recurring schedule.")
   schedule: ScheduledActionsSchedule;
 
-  @doc("The notification settings for the scheduled action")
+  @doc("Notification settings that apply to the scheduled action.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
-  @doc("Tell if the scheduled action is disabled or not")
+  @doc("Indicates whether new occurrences are disabled.")
   disabled?: boolean;
 
-  @doc("The status of the last provisioning operation performed on the resource.")
+  @doc("Read-only. The provisioning state of the scheduled action.")
   @visibility(Lifecycle.Read)
   provisioningState?: RecurringScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Scheduled action properties for update (PATCH). Mirrors ScheduledActionProperties but the schedule uses an all-optional model so individual schedule fields can be patched (merge semantics); omitting a field preserves the current value.")
+@doc("Changes to a scheduled action. Omitted schedule properties keep their current values.")
 model ScheduledActionPropertiesUpdate {
-  @doc("The type of resource the scheduled action is targeting")
+  @doc("The type of compute resource targeted by the action.")
   resourceType: ResourceType;
 
-  @doc("The action the scheduled action should perform in the resources")
+  @doc("The operation performed on the targeted resources.")
   actionType: ScheduledActionType;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
-  @doc("The time which the scheduled action is supposed to start running")
+  @doc("The date and time, including UTC offset, when the schedule becomes active.")
   startTime: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
-  @doc("The time when the scheduled action is supposed to stop scheduling")
+  @doc("The date and time, including UTC offset, after which no new occurrences are scheduled.")
   endTime?: offsetDateTime;
 
-  @doc("The schedule the scheduled action is supposed to follow")
+  @doc("Changes to the recurring schedule.")
   schedule?: ScheduledActionsScheduleUpdate;
 
-  @doc("The notification settings for the scheduled action")
+  @doc("Notification settings that apply to the scheduled action.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
-  @doc("Tell if the scheduled action is disabled or not")
+  @doc("Indicates whether new occurrences are disabled.")
   disabled?: boolean;
 
-  @doc("The status of the last provisioning operation performed on the resource.")
+  @doc("Read-only. The provisioning state of the scheduled action.")
   @visibility(Lifecycle.Read)
   provisioningState?: RecurringScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Scheduled action extension properties")
+@doc("A scheduled action associated with a specific compute resource.")
 model ScheduledActionsExtensionProperties {
   ...ScheduledActionProperties;
 
-  @doc("The notification settings for the scheduled action at a resource level. Resource level notification settings are scope to specific resources only and submitted through attach requests.")
+  @doc("Read-only. Notification settings that apply only to the specified compute resource.")
   @Azure.ResourceManager.identifiers(#["destination"])
   @visibility(Lifecycle.Read)
   resourceNotificationSettings?: Array<NotificationProperties>;
@@ -532,18 +526,18 @@ model ScheduledActionsExtensionProperties {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("The response from scheduled action resource requests, which contains the status of each resource")
+@doc("Results of a scheduled action resource operation.")
 model ScheduledActionResourceOperationResponse {
-  @doc("The total number of resources operated on")
+  @doc("The number of resources included in the operation.")
   totalResources: int32;
 
-  @doc("The resource status of for each resource")
+  @doc("The operation result for each resource.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The scheduled action resource")
+@doc("A recurring action that operates on specified compute resources.")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledAction>;
 }
@@ -554,7 +548,7 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
 );
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The scheduled action extension")
+@doc("A scheduled action associated with a specific compute resource.")
 model ScheduledActionResources
   is ExtensionResource<ScheduledActionsExtensionProperties> {
   ...ResourceNameParameter<
@@ -566,46 +560,47 @@ model ScheduledActionResources
 // ------------------ Occurrence resource + models ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The status of the resources")
+@doc("Summary of operation results across targeted resources.")
 model ResourceResultSummary {
-  @doc("The error code for those resources. In case of success, code is populated with Success.")
+  @doc("The result code shared by the resources in this group. A successful result uses `Success`.")
   code: string;
 
-  @doc("The number of resources that the code applies to.")
+  @doc("The number of resources with this result code.")
   count: int32;
 
-  @doc("The error details for the resources. Not populated on success cases.")
+  @doc("Error details for failed resources. This property is omitted for successful results.")
   errorDetails?: Azure.Core.Foundations.Error;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The summarized provisioning result of an occurrence")
+@doc("Summary of results for a scheduled action occurrence.")
 model OccurrenceResultSummary {
-  @doc("The total number of resources that the occurrence was supposed to act on.")
+  @doc("The number of resources targeted by the occurrence.")
   total: int32;
 
-  @doc("The summarized status of the resources.")
+  @doc("Resource counts grouped by result code.")
   @Azure.ResourceManager.identifiers(#["code"])
   statuses: ResourceResultSummary[];
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Properties for an occurrence")
+@doc("Properties of a scheduled action occurrence.")
 model OccurrenceProperties {
-  @doc("The time the occurrence is scheduled for. This value can be changed by calling the delay API")
+  @doc("Read-only. The UTC date and time when the occurrence is scheduled to run.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
-  @doc("The result for occurrences that achieved a terminal state")
+  @doc("Read-only. The result summary after the occurrence reaches a final state.")
   @visibility(Lifecycle.Read)
   resultSummary: OccurrenceResultSummary;
 
-  @doc("The aggregated provisioning state of the occurrence")
+  @doc("Read-only. The current state of the occurrence.")
   @visibility(Lifecycle.Read)
   provisioningState?: OccurrenceState;
 }
 
 @added(Versions.`2026-07-06-preview`)
+@doc("One scheduled execution of a scheduled action.")
 @parentResource(ScheduledAction)
 model Occurrence is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
@@ -618,17 +613,18 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 @@doc(Occurrence.name, "The occurrence ID in UUID format.");
 
 @added(Versions.`2026-07-06-preview`)
+@doc("Scheduling and status details for a resource included in a scheduled action occurrence.")
 @parentResource(Occurrence)
 model OccurrenceResource is ScheduledActionResource {
-  @doc("The time the occurrence is scheduled for the resource.")
+  @doc("Read-only. The UTC date and time when the operation is scheduled for this resource.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
-  @doc("The current state of the resource")
+  @doc("Read-only. The current state of the operation for this resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Error details for the resource. Only populated if resource is in failed state.")
+  @doc("Read-only. Error details when the operation fails for this resource.")
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.Core.Foundations.Error;
 }
@@ -637,20 +633,36 @@ model OccurrenceResource is ScheduledActionResource {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
+@doc("Paged list of resources included in a scheduled action occurrence.")
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Request to ask for a delay in an occurrence, delay should be set to client local time eg (PST) 2025-05-30T06:35:00-07:00")
+@doc("Request body for delaying a scheduled action occurrence.")
 model DelayRequest {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
-  @doc("The exact time to delay the operations to")
+  @doc("The new date and time for the occurrence, including the UTC offset.")
   delay: offsetDateTime;
 
-  @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence.")
+  @doc("The resources to delay. An empty array delays all resources in the occurrence.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
 
 @added(Versions.`2026-07-06-preview`)
+@doc("The occurrence was retrieved successfully.")
+model OccurrenceGetResponse is ArmResponse<Occurrence>;
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The occurrences were retrieved successfully.")
+model OccurrenceListByScheduledActionResponse
+  is ArmResponse<ResourceListResult<Occurrence>>;
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The occurrence resources were retrieved successfully.")
+model OccurrenceResourcesListResponse
+  is ArmResponse<OccurrenceResourceListResponse>;
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The Azure resource ID of a scheduled action.")
 scalar ScheduledActionsId
   extends armResourceIdentifier<[
     {
@@ -659,36 +671,33 @@ scalar ScheduledActionsId
   ]>;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The properties of the occurrence extension")
+@doc("An occurrence associated with a specific compute resource.")
 model OccurrenceExtensionProperties {
-  @doc("""
-    The ARM Id of the resource.
-    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-    """)
+  @doc("The Azure resource ID of the targeted virtual machine.")
   resourceId: ValidScheduledActionResourceId;
 
-  @doc("The desired notification settings for the specified resource.")
+  @doc("Notification settings that apply only to this resource.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings?: Array<NotificationProperties>;
 
-  @doc("The time the occurrence is scheduled for the resource. Specified in UTC.")
+  @doc("Read-only. The UTC date and time when the operation is scheduled for this resource.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
-  @doc("The current state of the resource")
+  @doc("Read-only. The current state of the operation for this resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Error details for the resource. Only populated if resource is in failed state.")
+  @doc("Read-only. Error details when the operation fails for this resource.")
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.Core.Foundations.Error;
 
-  @doc("The arm identifier of the scheduled action the occurrence belongs to")
+  @doc("The Azure resource ID of the scheduled action that owns the occurrence.")
   scheduledActionId: ScheduledActionsId;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The scheduled action extension")
+@doc("A scheduled action occurrence associated with a specific compute resource.")
 model OccurrenceExtensionResource
   is ExtensionResource<OccurrenceExtensionProperties> {
   ...ResourceNameParameter<
@@ -699,141 +708,328 @@ model OccurrenceExtensionResource
 
 // ------------------ ScheduledAction operations ------------------
 
+@doc("The scheduled action was retrieved successfully.")
+model ScheduledActionGetResponse is ArmResponse<ScheduledAction>;
+
+@doc("The scheduled action was updated successfully.")
+model ScheduledActionUpdatedResponse
+  is ArmResourceUpdatedResponse<ScheduledAction>;
+
+@doc("The scheduled action was created successfully.")
+model ScheduledActionCreatedResponse
+  is ArmResourceCreatedResponse<
+    ScheduledAction,
+    ArmAsyncOperationHeader<FinalResult = ScheduledAction> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+@doc("The scheduled action was updated successfully.")
+model ScheduledActionPatchResponse is ArmResponse<ScheduledAction>;
+
+@doc("The scheduled actions were retrieved successfully.")
+model ScheduledActionListResponse
+  is ArmResponse<ResourceListResult<ScheduledAction>>;
+
+@doc("The associated resources were retrieved successfully.")
+model ScheduledActionResourcesListResponse is ArmResponse<ResourceListResponse>;
+
+@doc("The scheduled actions were retrieved successfully.")
+model ScheduledActionExtensionListResponse
+  is ArmResponse<ResourceListResult<ScheduledActionResources>>;
+
+@doc("The operation status was retrieved successfully.")
+model ScheduledActionOperationStatusResponse
+  is ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>;
+
+@doc("The associated occurrences were retrieved successfully.")
+model OccurrenceExtensionListResponse
+  is ArmResponse<ResourceListResult<OccurrenceExtensionResource>>;
+
+op ResourceActionNoResponseAsyncWithAcceptedDoc<
+  Resource extends Azure.ResourceManager.Foundations.SimpleResource,
+  Request,
+  AcceptedDescription extends valueof string,
+  BaseParameters extends TypeSpec.Reflection.Model =
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    void,
+    string
+  > &
+    Azure.Core.Foundations.RetryAfterHeader,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse,
+  OptionalRequestBody extends valueof boolean = false,
+  Provider extends {} = ProviderNamespace<Resource>
+> is ArmResourceActionAsyncBase<
+  Resource,
+  Request,
+  ArmAcceptedLroResponse<AcceptedDescription, LroHeaders>,
+  BaseParameters,
+  Parameters,
+  Error,
+  OptionalRequestBody,
+  Provider
+>;
+
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations
 interface ScheduledActions {
-  get is ArmResourceRead<ScheduledAction>;
+  @doc("Gets the specified scheduled action.")
+  @errorsDoc("The request failed. The response contains error details.")
+  get is ArmResourceRead<ScheduledAction, Response = ScheduledActionGetResponse>;
 
-  @doc("Create a Recurring Bulk Action")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
+  @doc("Creates or updates a scheduled action.")
+  @errorsDoc("The request failed. The response contains error details.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ScheduledAction,
+    Response = ScheduledActionUpdatedResponse | ScheduledActionCreatedResponse
+  >;
 
+  @doc("Updates the specified scheduled action.")
+  @errorsDoc("The request failed. The response contains error details.")
   update is ArmCustomPatchAsync<
     ScheduledAction,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ScheduledAction,
       ScheduledActionPropertiesUpdate
     >,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader,
+    Response = ScheduledActionPatchResponse |
+      ArmAcceptedLroResponse<
+        "The update request was accepted and is being processed.",
+        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+      >
   >;
 
+  @doc("Deletes the specified scheduled action.")
+  @errorsDoc("The request failed. The response contains error details.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ScheduledAction,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmAcceptedLroResponse<
+      "The delete request was accepted and is being processed.",
+      ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmNoContentResponse<"The scheduled action was deleted or did not exist.">
   >;
 
-  listByResourceGroup is ArmResourceListByParent<ScheduledAction>;
+  @doc("Lists scheduled actions in the specified resource group.")
+  @errorsDoc("The request failed. The response contains error details.")
+  listByResourceGroup is ArmResourceListByParent<
+    ScheduledAction,
+    Response = ScheduledActionListResponse
+  >;
 
-  listBySubscription is ArmListBySubscription<ScheduledAction>;
+  @doc("Lists scheduled actions in the specified subscription.")
+  @errorsDoc("The request failed. The response contains error details.")
+  listBySubscription is ArmListBySubscription<
+    ScheduledAction,
+    Response = ScheduledActionListResponse
+  >;
 
   @autoRoute
   @listsResource(ScheduledActionResource)
   @armResourceList(ScheduledActionResource)
   @list
   @get
-  @doc("List resources attached to Scheduled Actions")
+  @doc("Lists resources associated with the specified scheduled action.")
+  @errorsDoc("The request failed. The response contains error details.")
   listResources(
     ...ResourceInstanceParameters<ScheduledActionResource>,
-  ): ArmResponse<ResourceListResponse> | ErrorResponse;
+  ): ScheduledActionResourcesListResponse | ErrorResponse;
 
-  /** Attach resources to the scheduled action so they are included in future occurrences. */
-  attachResources is ArmResourceActionAsync<
+  @doc("Adds resources to the specified scheduled action.")
+  @returnsDoc("The resources were added successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
+  attachResources is OccurrenceActionAsyncWithAcceptedDoc<
     ScheduledAction,
     ResourceAttachRequest,
     ResourceOperationResponse,
+    "The request to add resources was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ResourceOperationResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Detach resources from the scheduled action so they are excluded from future occurrences. */
-  detachResources is ArmResourceActionAsync<
+  @doc("Removes resources from the specified scheduled action.")
+  @returnsDoc("The resources were removed successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
+  detachResources is OccurrenceActionAsyncWithAcceptedDoc<
     ScheduledAction,
     ResourceDetachRequest,
     ResourceOperationResponse,
+    "The request to remove resources was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ResourceOperationResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @doc("Updates resource-specific settings for the specified scheduled action.")
+  @returnsDoc("The resource settings were updated successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
   patchResources is ArmResourceActionSync<
     ScheduledAction,
     ResourcePatchRequest,
     ResourceOperationResponse
   >;
 
-  /** Disable the scheduled action so its future occurrences do not run. */
-  disable is ArmResourceActionNoResponseContentAsync<
+  @doc("Disables the specified scheduled action so future occurrences do not run.")
+  @errorsDoc("The request failed. The response contains error details.")
+  disable is ResourceActionNoResponseAsyncWithAcceptedDoc<
     ScheduledAction,
     void,
+    "The disable request was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Enable a previously disabled scheduled action so its future occurrences run. */
-  enable is ArmResourceActionNoResponseContentAsync<
+  @doc("Enables the specified scheduled action so new occurrences run.")
+  @errorsDoc("The request failed. The response contains error details.")
+  enable is ResourceActionNoResponseAsyncWithAcceptedDoc<
     ScheduledAction,
     void,
+    "The enable request was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Cancel the next scheduled occurrence of the scheduled action. */
-  cancelNextOccurrence is ArmResourceActionAsync<
+  @doc("Cancels the next occurrence of the specified scheduled action.")
+  @returnsDoc("The next occurrence was canceled successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
+  cancelNextOccurrence is OccurrenceActionAsyncWithAcceptedDoc<
     ScheduledAction,
     CancelOccurrenceRequest,
     ResourceOperationResponse,
+    "The cancellation request was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ResourceOperationResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Trigger a manual occurrence of the scheduled action immediately, outside its normal schedule. */
-  triggerManualOccurrence is ArmResourceActionAsync<
+  @doc("Runs the specified scheduled action immediately.")
+  @returnsDoc("The manual occurrence was started successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
+  triggerManualOccurrence is OccurrenceActionAsyncWithAcceptedDoc<
     ScheduledAction,
     void,
     Occurrence,
+    "The request to run the scheduled action was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Occurrence> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
+@@doc(
+  ScheduledActions.createOrUpdate::parameters.resource,
+  "The scheduled action to create or update."
+);
+
+@@doc(
+  ScheduledActions.update::parameters.properties,
+  "The scheduled action properties to update. Omitted properties keep their current values."
+);
+
+@@doc(
+  ScheduledActions.attachResources::parameters.body,
+  "The resources to add to the scheduled action."
+);
+
+@@doc(
+  ScheduledActions.detachResources::parameters.body,
+  "The resources to remove from the scheduled action."
+);
+
+@@doc(
+  ScheduledActions.patchResources::parameters.body,
+  "The resource-specific settings to update."
+);
+
+@@doc(
+  ScheduledActions.cancelNextOccurrence::parameters.body,
+  "The resources to cancel in the next occurrence. If no resource IDs are provided, the occurrence is canceled for all resources."
+);
+
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ omitTags: true })
 @tag("ScheduledActions")
 interface ScheduledActionExtension {
-  listByVms is ArmResourceListByParent<ScheduledActionResources>;
+  @doc("Lists scheduled actions associated with the specified VM.")
+  @errorsDoc("The request failed. The response contains error details.")
+  listByVms is ArmResourceListByParent<
+    ScheduledActionResources,
+    Response = ScheduledActionExtensionListResponse
+  >;
 }
+
+@@doc(
+  Azure.ResourceManager.ResourceUriParameter.resourceUri,
+  "The fully qualified Azure resource ID of the compute resource."
+);
 
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 @tag("ScheduledActions")
 interface ScheduledActionOperationStatus {
-  @doc("Get the status of a ScheduledActions asynchronous operation. Both the `Azure-AsyncOperation` and `Location` headers returned by long-running operations point at this endpoint.")
+  @doc("Gets the status of the specified scheduled action operation.")
+  @errorsDoc("The request failed. The response contains error details.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
-    @doc("The location name.")
+    @doc("The Azure region where the operation is running.")
     @path
     @minLength(1)
     location: azureLocation,
 
-    @doc("The operation id.")
+    @doc("The operation ID in UUID format.")
     @path
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     operationId: string,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
+  ): ScheduledActionOperationStatusResponse | ErrorResponse;
 }
 
 // ------------------ Occurrence operations ------------------
+
+op OccurrenceActionAsyncWithAcceptedDoc<
+  Resource extends Azure.ResourceManager.Foundations.SimpleResource,
+  Request,
+  Response extends TypeSpec.Reflection.Model | unknown | void,
+  AcceptedDescription extends valueof string,
+  BaseParameters extends TypeSpec.Reflection.Model =
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    Response,
+    string
+  > &
+    Azure.Core.Foundations.RetryAfterHeader,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse,
+  OptionalRequestBody extends valueof boolean = false,
+  Provider extends {} = ProviderNamespace<Resource>
+> is ArmResourceActionAsyncBase<
+  Resource,
+  Request,
+  ArmAcceptedLroResponse<AcceptedDescription, LroHeaders> | Response,
+  BaseParameters,
+  Parameters,
+  Error,
+  OptionalRequestBody,
+  Provider
+>;
 
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ omitTags: true })
 @tag("Scheduled Actions - Occurrence")
 interface Occurrences {
   @doc("Gets the specified occurrence.")
-  get is ArmResourceRead<Occurrence>;
+  @errorsDoc("The request failed. The response contains error details.")
+  get is ArmResourceRead<Occurrence, Response = OccurrenceGetResponse>;
 
   @doc("Lists occurrences for the specified scheduled action.")
-  listByScheduledAction is ArmResourceListByParent<Occurrence>;
+  @errorsDoc("The request failed. The response contains error details.")
+  listByScheduledAction is ArmResourceListByParent<
+    Occurrence,
+    Response = OccurrenceListByScheduledActionResponse
+  >;
 
   @autoRoute
   @listsResource(OccurrenceResource)
@@ -841,32 +1037,54 @@ interface Occurrences {
   @list
   @get
   @doc("Lists resources for the specified occurrence.")
+  @errorsDoc("The request failed. The response contains error details.")
   listResources(
     ...ResourceInstanceParameters<OccurrenceResource>,
-  ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
+  ): OccurrenceResourcesListResponse | ErrorResponse;
 
   @doc("Cancels the specified occurrence for the specified resource IDs.")
-  cancel is ArmResourceActionAsync<
+  @returnsDoc("The occurrence cancellation completed successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
+  cancel is OccurrenceActionAsyncWithAcceptedDoc<
     Occurrence,
     CancelOccurrenceRequest,
     ResourceOperationResponse,
+    "The cancellation request was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ResourceOperationResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Delays the specified occurrence for the specified resource IDs.")
-  delay is ArmResourceActionAsync<
+  @returnsDoc("The occurrence delay completed successfully.")
+  @errorsDoc("The request failed. The response contains error details.")
+  delay is OccurrenceActionAsyncWithAcceptedDoc<
     Occurrence,
     DelayRequest,
     ResourceOperationResponse,
+    "The delay request was accepted and is being processed.",
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ResourceOperationResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
+@@doc(
+  Occurrences.cancel::parameters.body,
+  "The resources to cancel in the occurrence. If no resource IDs are provided, the occurrence is canceled for all resources."
+);
+
+@@doc(
+  Occurrences.delay::parameters.body,
+  "The new scheduled time and resources to delay in the occurrence. If no resource IDs are provided, all resources are delayed."
+);
+
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations
 @tag("ScheduledActions")
 interface OccurrenceExtension {
-  listOccurrenceByVms is ArmResourceListByParent<OccurrenceExtensionResource>;
+  @doc("Lists scheduled action occurrences associated with the specified VM.")
+  @errorsDoc("The request failed. The response contains error details.")
+  listOccurrenceByVms is ArmResourceListByParent<
+    OccurrenceExtensionResource,
+    Response = OccurrenceExtensionListResponse
+  >;
 }
