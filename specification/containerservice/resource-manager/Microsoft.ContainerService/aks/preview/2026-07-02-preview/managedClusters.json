@@ -7578,7 +7578,7 @@
         },
         "nodePublicIPPrefixIDs": {
           "type": "array",
-          "description": "The resource IDs of public IP prefixes for node public IPs. At most one IPv4 and one IPv6 prefix may be specified. Order does not matter; the RP determines IP version from the referenced resource's publicIPAddressVersion. Requires enableNodePublicIP to be true on the agent pool. Mutually exclusive with the top-level nodePublicIPPrefixID property. Immutable after node pool creation. To change prefixes, delete and recreate the node pool. For more information, see https://aka.ms/aks/ipv6-ilpip",
+          "description": "Resource IDs of public IP prefixes (Microsoft.Network/publicIPPrefixes) used to assign instance-level public IPs to nodes. At most two entries: one IPv4 prefix and one IPv6 prefix. The IPv6 prefix requires a dual-stack cluster (ipFamilies contains IPv6). For more information, see https://aka.ms/aks/ipv6-ilpip",
           "maxItems": 2,
           "items": {
             "type": "string",
@@ -11734,7 +11734,7 @@
         "nodePublicIPPrefixID": {
           "type": "string",
           "format": "arm-id",
-          "description": "The public IP prefix ID which VM nodes should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}",
+          "description": "The resource ID of a public IP prefix for node public IPs (IPv4 only). Retained for backward compatibility. Use nodePublicIPPrefixIDs via API version 2026-07-01 or newer instead. This field cannot be updated once set. If both nodePublicIPPrefixID and nodePublicIPPrefixIDs are set, nodePublicIPPrefixIDs wins.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
