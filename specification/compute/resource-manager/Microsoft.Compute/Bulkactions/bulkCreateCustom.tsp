@@ -101,7 +101,7 @@ model BulkCreateCustomEnvelope {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The synchronous BulkCreateCustom PUT response returns resolved per-VM allocation metadata at the top level."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The deployed BulkCreateCustom response contract returns resolved per-VM allocation metadata at the top level."
   @added(Versions.`2026-08-06-preview`)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
