@@ -127,7 +127,7 @@ model AlertsClientOptions {
   "ServiceAlertPropertyChangeDetails",
   "csharp"
 );
-@@clientName(AlertEnrichmentResponse, "AlertEnrichmentResult", "csharp");
+@@clientName(AlertEnrichmentResponse, "AlertEnrichmentData", "csharp");
 @@clientName(AlertsMetaData, "ServiceAlertMetadata", "csharp");
 @@clientName(
   AlertsMetaDataProperties,
