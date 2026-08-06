@@ -97,7 +97,9 @@ interface AzureLargeInstances {
  * @template TResponse The response type for the action
  * @template TBaseParameters Optional. Allows overriding the parameters for the operation
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template for optional body"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template for optional body"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
 @autoRoute
 @OpenAPI.extension("x-ms-long-running-operation", true)
