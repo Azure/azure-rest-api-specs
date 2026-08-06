@@ -67,6 +67,7 @@ interface L3Networks {
   /**
    * Delete the provided layer 3 (L3) network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     L3Network,
     Parameters = {

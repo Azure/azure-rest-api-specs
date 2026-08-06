@@ -74,6 +74,7 @@ interface DeletedVaults {
   get is DeletedVaultOps.Read<DeletedVault, OverrideErrorType = CloudError>;
 
   /** Start undelete of a deleted vault. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @action("undelete")
   undelete is DeletedVaultOps.ActionAsync<
     DeletedVault,

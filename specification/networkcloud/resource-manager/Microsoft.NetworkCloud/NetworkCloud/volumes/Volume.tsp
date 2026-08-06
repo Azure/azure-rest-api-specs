@@ -64,6 +64,7 @@ interface Volumes {
   /**
    * Delete the provided volume.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     Volume,
     Parameters = {

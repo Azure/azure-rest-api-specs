@@ -55,6 +55,7 @@ interface KeyGroups {
   /**
    * Creates or updates a new KeyGroup within the specified profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createUpdate is ArmResourceCreateOrReplaceAsync<
@@ -69,6 +70,7 @@ interface KeyGroups {
   /**
    * Updates an existing KeyGroup within the specified profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

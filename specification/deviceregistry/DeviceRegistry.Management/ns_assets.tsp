@@ -109,6 +109,7 @@ interface NamespaceAssets {
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAsset>;
   listByResourceGroup is ArmResourceListByParent<NamespaceAsset>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @doc("A long-running resource action.")
   @added(Versions.v2026_04_01)
   executeAction is ArmResourceActionAsync<

@@ -43,6 +43,7 @@ interface Connections {
    * Updates the connection resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Connection,
@@ -73,6 +74,7 @@ interface Connections {
   /**
    * Links the connection to its pending connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   link is ArmResourceActionAsync<
     Connection,
     ResourceBody,

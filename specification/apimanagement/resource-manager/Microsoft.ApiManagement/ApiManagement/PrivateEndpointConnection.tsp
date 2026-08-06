@@ -25,6 +25,7 @@ interface PrivateEndpointConnections {
   /**
    * Creates a new Private Endpoint Connection or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ApiManagementServiceResource,

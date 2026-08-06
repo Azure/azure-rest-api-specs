@@ -70,6 +70,7 @@ interface KubernetesClusterFeatures {
   /**
    * Delete the provided Kubernetes cluster feature.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     KubernetesClusterFeature,
     Parameters = {

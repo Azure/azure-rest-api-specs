@@ -48,6 +48,7 @@ interface Pipelines {
    * Applies partial updates to an existing Pipeline resource. This operation supports patch semantics and returns the updated Pipeline.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Pipeline,
@@ -78,6 +79,7 @@ interface Pipelines {
   /**
    * Approves a pending connection request associated with the specified Pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   approveConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
@@ -87,6 +89,7 @@ interface Pipelines {
   /**
    * Executes a privileged or administrative action on the specified Pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   executeAction is ArmResourceActionAsync<
     Pipeline,
     Action,
@@ -126,6 +129,7 @@ interface Pipelines {
   /**
    * Rejects a pending connection request associated with the specified Pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   rejectConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,

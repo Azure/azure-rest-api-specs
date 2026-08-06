@@ -45,6 +45,7 @@ interface Flows {
    * Updates the flow resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Flow,
@@ -70,16 +71,19 @@ interface Flows {
   /**
    * Disables the specified flow
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   disable is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
 
   /**
    * Enables the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   enable is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
 
   /**
    * Generate a compliant passphrase for the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   generatePassphrase is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
 
   /**
@@ -121,11 +125,13 @@ interface Flows {
   /**
    * Links the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   link is ArmResourceActionAsync<Flow, ResourceBody, ArmFlowResponse>;
 
   /**
    * Set the destination endpoint ports for the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   setDestinationEndpointPorts is ArmResourceActionAsync<
     Flow,
     SetDestinationEndpointPorts,
@@ -135,6 +141,7 @@ interface Flows {
   /**
    * Set the destination endpoints for the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   setDestinationEndpoints is ArmResourceActionAsync<
     Flow,
     SetDestinationEndpoints,
@@ -144,6 +151,7 @@ interface Flows {
   /**
    * Sets the passphrase of the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   setPassphrase is ArmResourceActionAsync<
     Flow,
     SetStreamPassphrase,
@@ -153,6 +161,7 @@ interface Flows {
   /**
    * Set the source addresses for the specified flow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   setSourceAddresses is ArmResourceActionAsync<
     Flow,
     SetSourceAddresses,

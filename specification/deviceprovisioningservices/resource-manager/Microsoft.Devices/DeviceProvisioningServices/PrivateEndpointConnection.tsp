@@ -71,6 +71,7 @@ interface PrivateEndpointConnections {
   /**
    * Delete private endpoint connection with the specified name
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The existing API returns 200, 202, and 204 for delete which differs from the standard ARM delete response codes. Keeping for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing API returns the PrivateEndpointConnection resource in the 200 and 202 delete response bodies. Keeping for backward compatibility."
   deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<

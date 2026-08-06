@@ -147,6 +147,7 @@ interface Watchers {
   listBySubscription is ArmListBySubscription<Watcher>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
@@ -160,6 +161,7 @@ interface Watchers {
     | ArmResponse<Watcher>
     | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action

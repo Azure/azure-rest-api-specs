@@ -22,6 +22,7 @@ interface GoalAssignments {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<GoalAssignment, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GoalAssignment,
@@ -31,6 +32,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   update is ArmResourcePatchAsync<
     GoalAssignment,
@@ -41,6 +43,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @doc("Action to exclude a resource from goal assignment.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("updateGoalResources")
@@ -55,6 +58,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @doc("Refreshes the goal resources under a goal assignment. This operation scans for new resources under the scope of the assignment.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("refreshGoalResources")
@@ -78,6 +82,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @added(Versions.v2026_03_01_preview)
   @doc("Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.")
   @route(ServiceGroupRoute)
@@ -108,6 +113,7 @@ interface GoalTemplates {
     ServiceGroupParameters
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   update is ArmResourcePatchAsync<
     GoalTemplate,

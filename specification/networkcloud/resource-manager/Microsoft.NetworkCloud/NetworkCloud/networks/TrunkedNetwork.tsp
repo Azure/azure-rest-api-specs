@@ -67,6 +67,7 @@ interface TrunkedNetworks {
   /**
    * Delete the provided trunked network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     TrunkedNetwork,
     Parameters = {

@@ -73,6 +73,7 @@ interface AgentPools {
   /**
    * Delete the provided Kubernetes cluster agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     AgentPool,
     Parameters = {
