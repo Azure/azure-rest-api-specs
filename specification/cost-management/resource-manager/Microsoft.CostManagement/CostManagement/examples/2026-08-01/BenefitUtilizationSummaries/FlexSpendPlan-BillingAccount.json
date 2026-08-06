@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01",
+    "billingAccountId": "12345",
+    "filter": "properties/usageDate ge 2026-10-15 and properties/usageDate le 2026-10-18",
+    "grain": "Daily"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "66cccc66-6ccc-6c66-666c-66cc6c6c66c6_222d22dd-d2d2-2dd2-222d-2dd2222ddddd_20261015",
+            "type": "Microsoft.CostManagement/benefitUtilizationSummaries",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/benefitUtilizationSummaries/66cccc66-6ccc-6c66-666c-66cc6c6c66c6_222d22dd-d2d2-2dd2-222d-2dd2222ddddd_20261015",
+            "kind": "FlexSpendPlan",
+            "properties": {
+              "armSkuName": "Synapse_FCP",
+              "benefitId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/66cccc66-6ccc-6c66-666c-66cc6c6c66c6/savingsPlans/222d22dd-d2d2-2dd2-222d-2dd2222ddddd",
+              "benefitOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/66cccc66-6ccc-6c66-666c-66cc6c6c66c6",
+              "benefitType": "SavingsPlan",
+              "usageDate": "2026-10-15T00:00:00Z",
+              "utilizationPercentage": 66.66,
+              "usedQuantity": 100
+            }
+          },
+          {
+            "name": "88cccc88-8ccc-8c88-888c-88cc8c8c88c8_444d44dd-d4d4-4dd4-444d-4dd4444ddddd_20261016",
+            "type": "Microsoft.CostManagement/benefitUtilizationSummaries",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/benefitUtilizationSummaries/88cccc88-8ccc-8c88-888c-88cc8c8c88c8_444d44dd-d4d4-4dd4-444d-4dd4444ddddd_20261016",
+            "kind": "FlexSpendPlan",
+            "properties": {
+              "armSkuName": "Synapse_FCP",
+              "benefitId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/88cccc88-8ccc-8c88-888c-88cc8c8c88c8/savingsPlans/444d44dd-d4d4-4dd4-444d-4dd4444ddddd",
+              "benefitOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/88cccc88-8ccc-8c88-888c-88cc8c8c88c8",
+              "benefitType": "SavingsPlan",
+              "usageDate": "2026-10-16T00:00:00Z",
+              "utilizationPercentage": 100,
+              "usedQuantity": 150
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
+  "title": "FlexSpendPlanUtilizationSummaries-BillingAccount"
+}
