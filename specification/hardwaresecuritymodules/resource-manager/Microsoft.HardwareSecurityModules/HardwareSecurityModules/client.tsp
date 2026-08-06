@@ -141,6 +141,11 @@ using Azure.Core;
   "csharp"
 );
 @@alternateType(PrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(
+  PaymentHsmClusterPrivateEndpointConnection.etag,
+  eTag,
+  "csharp"
+);
 @@usage(Azure.ResourceManager.PrivateLinkResource, Usage.input, "csharp");
 @@clientName(
   Azure.ResourceManager.PrivateLinkResource,
