@@ -61,14 +61,9 @@ model VoiceConversation {
 // Voice response
 // ---------------------------------------------------------------------------
 //
-// Extending OpenAI.RealtimeResponse while preserving this wire contract produces
-// override-property-mismatch errors for three properties:
-// - status: VoiceResponseStatus is extensible, while the upstream union is closed.
-// - audio: Foundry uses typed voice objects, while upstream uses a flat VoiceIdsShared string.
-// - max_output_tokens: this contract uses int32, while upstream uses OpenAI.integer.
-// VoiceResponse therefore remains standalone, omits upstream metadata, adds persistence fields, and
-// directly reuses compatible upstream types such as RealtimeResponseStatusDetails and
-// RealtimeResponseUsage.
+// The projected base omits the three properties whose Foundry wire types are not assignable to the
+// upstream types: status, audio, and max_output_tokens. It also omits upstream metadata, which is not
+// part of the persisted response contract.
 
 @doc("The status of a voice response.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -105,6 +100,7 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the projection removes the four intentionally different properties."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
   `output` projection may be omitted; retrieve the
@@ -113,7 +109,10 @@ model VoiceResponseAudio {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse {
+model VoiceResponse extends OmitProperties<
+  OpenAI.RealtimeResponse,
+  "status" | "audio" | "max_output_tokens" | "metadata"
+> {
   @doc("The unique id of the response.")
   id: string;
 
