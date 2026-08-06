@@ -35,7 +35,7 @@ on:
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
 # custom github-script step is expressed here declaratively; the remaining
-# per-PR checks (skip-arm-review label, specification/ scope, 50-file cap) are
+# per-PR checks (skip-arm-review label, specification/ scope, size cap) are
 # done by the agent in natural language (see "Trigger Validation" below).
 if: >
   github.event_name == 'workflow_dispatch' ||
@@ -218,15 +218,27 @@ read-only `github` toolset. If any check fails, act as directed and stop.
 3. **`specification/` scope** — call `list_pull_request_files`. If **no** changed
    file path starts with `specification/`, call `noop` and stop (nothing to
    review). Paginate the file list so busy PRs are counted reliably.
-4. **50-file cap** — count the changed files whose path starts with
-   `specification/`. If that count is greater than **50**, do **not** review.
-   Instead post a single `add-comment` notice (idempotent: include the hidden
-   marker `<!-- arm-api-reviewer-agent: automated-review-skipped-size -->` and
-   skip posting if a comment with that marker already exists) explaining that
-   the PR exceeds the automated-review size limit and that the assigned human
-   API reviewer will handle it, then call `noop` and stop.
+4. **Size cap → scoped review** — count the changed files whose path starts with
+   `specification/`, and their added+deleted lines. If the PR is over the cap
+   (more than **50** spec files, or more than **5,000** changed spec lines),
+   **default to a scoped review** rather than skipping the PR or taking the
+   full-scope `Size-cap override`: review the highest-risk subset that fits
+   within the cap, and disclose the scope. This check never stops the run.
 
-Only when all four checks pass should you proceed to the Review Workflow below.
+   Select the subset in this priority order, stopping once the cap is reached:
+   1. Files in API version directories added by this PR (new `stable/**` or
+      `preview/**` folders).
+   2. Changed `resource-manager/**/*.json` and `**/*.tsp` files.
+   3. Changed `**/readme.md` and `**/tspconfig.yaml` configuration files.
+   4. Changed `**/examples/**/*.json` files (lowest risk; drop these first).
+
+   Review the selected files exactly as a normal run would, and disclose the
+   scoping in the Step 8 summary so the assigned human API reviewer knows which
+   files the automated review did not cover. Do not post a separate
+   "review skipped" notice.
+
+Only when checks 1–3 pass should you proceed to the Review Workflow below.
+Check 4 sets the review scope; it never stops the review.
 
 ## Review Workflow
 
@@ -415,6 +427,16 @@ Reviewed PR #N at head SHA `<sha>` | Triggered by: <event>
 <one-sentence summary of key themes, or "No issues found.">
 ```
 
+If the PR was over the size cap and you ran a **scoped review** (Trigger
+Validation step 4), add this line directly below the "Reviewed PR" line so the
+human reviewer knows recall is intentionally partial:
+
+```
+**Scoped review:** M of N changed `specification/` files reviewed (PR exceeds the
+automated-review size cap). Not reviewed: <short description of the excluded
+files>.
+```
+
 Always end the summary with the standard footer marker:
 `<!-- posted-by: arm-api-reviewer-agent | rule: summary | severity: summary | classification: summary -->`
 
@@ -432,8 +454,10 @@ compliant.
 
 - PRs with `skip-arm-review` label (already handled by Trigger Validation).
 - PRs with no `specification/` changes (already handled by Trigger Validation).
-- PRs above the 50-file limit (already handled by Trigger Validation).
 - Files outside `specification/` — do not review; note in summary.
+
+PRs over the size cap are **not** skipped: they get a scoped review of the
+highest-risk files (Trigger Validation step 4).
 
 ## Constraints
 

@@ -99,14 +99,15 @@ API review for that PR. The label can be removed later to re-enable it.
 
 ### Large pull requests
 
-To keep automated reviews accurate and timely, the workflow does not run on
-very large changes. If a PR changes more than **50** files under
-`specification/`, the automated review is skipped and the agent posts a short
-notice on the PR explaining that it was skipped due to the size limit. **No
-action is required from the author** — the assigned Azure API reviewer reviews
-these changes as part of the standard review process. The notice is posted
-once (guarded by a hidden marker) rather than repeated as the PR changes, so it
-does not add noise on busy PRs.
+Very large PRs are reviewed with a reduced scope rather than skipped. If a PR
+changes more than **50** files or more than **5,000** lines under
+`specification/`, the workflow defaults to a **scoped review**: it reviews the
+highest-risk subset of the changed files (new API version directories first,
+then `resource-manager` JSON and TypeSpec sources, then configuration files,
+with example files dropped first) and states in the review summary how many
+files were covered and what was left out. **No action is required from the
+author** — the assigned Azure API reviewer covers the remaining files as part of
+the standard review process.
 
 ### What the automated review covers
 
