@@ -117,7 +117,10 @@ interface Groups {
   // since otherwise it extends the ARM TrackedResource type.
   update is ArmCustomPatchSync<
     Group,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<Group, GroupProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Group,
+      GroupProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Group>;
   listByNamespace is ArmResourceListByParent<Group>;

@@ -48,7 +48,10 @@ model RegistryDeviceAuthenticationProfile
   CertificateAuthorityAuthenticationProfileProperties,
   Versions.v2026_11_02_preview
 );
-@@added(SelfSignedX509CertificateAuthenticationProfileProperties, Versions.v2026_11_02_preview);
+@@added(
+  SelfSignedX509CertificateAuthenticationProfileProperties,
+  Versions.v2026_11_02_preview
+);
 @@added(SymmetricKeyCredentials, Versions.v2026_11_02_preview);
 @@added(SelfSignedThumbprints, Versions.v2026_11_02_preview);
 @@added(CertificateAuthorityCredentials, Versions.v2026_11_02_preview);

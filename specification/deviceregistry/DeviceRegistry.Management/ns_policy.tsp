@@ -257,7 +257,10 @@ interface Policies {
   @sharedRoute
   update is ArmCustomPatchAsync<
     Policy,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<Policy, PolicyProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Policy,
+      PolicyProperties
+    >
   >;
   @sharedRoute
   listByCredential is ArmResourceListByParent<Policy>;

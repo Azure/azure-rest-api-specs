@@ -126,6 +126,7 @@ interface AsyncOperationStatus {
   ): ArmResponse<OperationStatusResult> | ErrorResponse;
 }
 
-@@segment(AsyncOperationStatus.get::parameters.operationId,
+@@segment(
+  AsyncOperationStatus.get::parameters.operationId,
   "asyncOperationStatuses"
 );
