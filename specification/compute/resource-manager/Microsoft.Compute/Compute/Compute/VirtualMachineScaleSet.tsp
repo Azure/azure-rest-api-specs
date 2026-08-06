@@ -274,6 +274,7 @@ interface VirtualMachineScaleSets {
   @tag("VirtualMachineScaleSets")
   @get
   @action("instanceView")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -301,6 +302,7 @@ interface VirtualMachineScaleSets {
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @action("osUpgradeHistory")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   getOSUpgradeHistory is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -423,6 +425,7 @@ interface VirtualMachineScaleSets {
   @get
   @action("skus")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listSkus is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,

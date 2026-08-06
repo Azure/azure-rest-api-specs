@@ -99,6 +99,7 @@ interface DiskEncryptionSets {
   @get
   @action("associatedResources")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listAssociatedResources is ComputeResourceActionSync<
     DiskEncryptionSet,
     void,

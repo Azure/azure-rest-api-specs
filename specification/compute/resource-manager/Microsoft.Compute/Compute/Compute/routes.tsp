@@ -101,6 +101,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @autoRoute
   @get
   @action("publishers")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listPublishers is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -123,6 +124,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listOffers is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -152,6 +154,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @autoRoute
   @get
   @action("skus")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listSkus is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -195,6 +198,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @autoRoute
   @get
   @action("versions")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   list is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -262,6 +266,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @operationId("VirtualMachineImagesEdgeZone_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
@@ -311,6 +316,7 @@ interface VirtualMachineImagesOperationGroup {
   @autoRoute
   @get
   @action("vmimages")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listByEdgeZone is ComputeProviderActionSync<
     Response = VmImagesInEdgeZoneListResult,
     Scope = SubscriptionActionScope,
@@ -346,6 +352,7 @@ interface VirtualMachineImagesOperationGroup {
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listOffers is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -368,6 +375,7 @@ interface VirtualMachineImagesOperationGroup {
   @autoRoute
   @get
   @action("skus")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listSkus is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -404,6 +412,7 @@ interface VirtualMachineImagesOperationGroup {
   @autoRoute
   @get
   @action("versions")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   list is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
@@ -506,6 +515,7 @@ interface VirtualMachineImagesOperationGroup {
   @operationId("VirtualMachineImages_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
@@ -588,6 +598,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @get
   @action("runCommands")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   list is ComputeProviderActionSync<
     Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
@@ -600,6 +611,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @operationId("VirtualMachineRunCommands_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,

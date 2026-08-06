@@ -227,6 +227,7 @@ interface VirtualMachineScaleSetVMS {
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSetVM,
     void,

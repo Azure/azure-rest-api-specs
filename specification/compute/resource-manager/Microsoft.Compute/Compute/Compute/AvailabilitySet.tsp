@@ -87,6 +87,7 @@ interface AvailabilitySets {
   @get
   @action("vmSizes")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listAvailableSizes is ComputeResourceActionSync<
     AvailabilitySet,
     void,

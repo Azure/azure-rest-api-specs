@@ -97,6 +97,7 @@ interface DedicatedHosts {
   @get
   @action("hostSizes")
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listAvailableSizes is ComputeResourceActionSync<
     DedicatedHost,
     void,

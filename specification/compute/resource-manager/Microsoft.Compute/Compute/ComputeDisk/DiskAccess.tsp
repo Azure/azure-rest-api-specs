@@ -94,6 +94,7 @@ interface DiskAccesses {
    */
   @get
   @action("privatelinkresources")
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   getPrivateLinkResources is ComputeResourceActionSync<
     DiskAccess,
     void,

@@ -87,6 +87,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
     | ArmResponse<Azure.ResourceManager.Foundations.OperationListResult>
     | Common.CloudError;
