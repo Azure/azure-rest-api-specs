@@ -2824,7 +2824,7 @@ model VirtualMachineScaleSetManagedDiskParameters {
   securityProfile?: VMDiskSecurityProfile;
 
   /**
-   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk.
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured in or returned for restore points.
    */
   @added(Versions.v2026_04_01)
   additionalDiskProperties?: AdditionalDiskProperties;
@@ -5735,7 +5735,7 @@ model ManagedDiskParameters extends SubResource {
   securityProfile?: VMDiskSecurityProfile;
 
   /**
-   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk.
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured in or returned from restore-point snapshots.
    */
   @added(Versions.v2026_04_01)
   additionalDiskProperties?: AdditionalDiskProperties;
