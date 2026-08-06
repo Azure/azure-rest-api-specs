@@ -6711,7 +6711,7 @@
         "nodePublicIPPrefixID": {
           "type": "string",
           "format": "arm-id",
-          "description": "The public IP prefix ID which VM nodes should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}",
+          "description": "The resource ID of a public IP prefix for node public IPs (IPv4 only). Retained for backward compatibility. Use nodePublicIPPrefixIDs via API version 2026-07-01 or newer instead. This field cannot be updated once set. If both nodePublicIPPrefixID and nodePublicIPPrefixIDs are set, nodePublicIPPrefixIDs wins.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {

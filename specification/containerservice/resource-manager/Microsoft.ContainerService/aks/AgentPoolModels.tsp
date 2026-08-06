@@ -231,7 +231,7 @@ model ManagedClusterAgentPoolProfileProperties {
   enableNodePublicIP?: boolean;
 
   /**
-   * The public IP prefix ID which VM nodes should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}
+   * The resource ID of a public IP prefix for node public IPs (IPv4 only). Retained for backward compatibility. Use nodePublicIPPrefixIDs via API version 2026-07-01 or newer instead. This field cannot be updated once set. If both nodePublicIPPrefixID and nodePublicIPPrefixIDs are set, nodePublicIPPrefixIDs wins.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   nodePublicIPPrefixID?: Azure.Core.armResourceIdentifier<[
