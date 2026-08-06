@@ -21,6 +21,7 @@ import "./Route.tsp";
 import "./RuleSet.tsp";
 import "./Rule.tsp";
 import "./SecurityPolicy.tsp";
+import "./AuthPolicy.tsp";
 import "./Secret.tsp";
 import "./KeyGroup.tsp";
 import "./DeploymentVersion.tsp";
