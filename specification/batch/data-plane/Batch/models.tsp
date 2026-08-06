@@ -1917,6 +1917,10 @@ model VirtualMachineConfiguration {
 
   @doc("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
   serviceArtifactReference?: ServiceArtifactReference;
+
+  @doc("Specifies the hardware settings for the Compute Nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context.")
+  @added(Versions.v2026_08_01)
+  hardwareProfile?: HardwareProfile;
 }
 
 @added(Versions.v2026_08_01)
@@ -3002,11 +3006,6 @@ model BatchPool {
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
-  @doc("Specifies the hardware settings for the Compute Nodes.")
-  @visibility(Lifecycle.Read)
-  @added(Versions.v2026_08_01)
-  hardwareProfile?: HardwareProfile;
-
   @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   resizeTimeout?: duration;
@@ -3113,10 +3112,6 @@ model BatchPoolCreateOptions {
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
-  @doc("Specifies the hardware settings for the Compute Nodes.")
-  @added(Versions.v2026_08_01)
-  hardwareProfile?: HardwareProfile;
-
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
@@ -3204,10 +3199,6 @@ model BatchPoolUpdateOptions {
   @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty.")
   @added(Versions.v2026_08_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
-
-  @doc("Specifies the hardware settings for the Compute Nodes.<br /><br />This field can be updated only when the pool is empty.")
-  @added(Versions.v2026_08_01)
-  hardwareProfile?: HardwareProfile;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
   taskSlotsPerNode?: int32;

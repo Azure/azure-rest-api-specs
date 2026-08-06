@@ -12411,11 +12411,6 @@
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.",
           "readOnly": true
         },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the Compute Nodes.",
-          "readOnly": true
-        },
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
@@ -12584,10 +12579,6 @@
         "vmSkuProfile": {
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes."
-        },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the Compute Nodes."
         },
         "resizeTimeout": {
           "type": "string",
@@ -13356,10 +13347,6 @@
         "vmSkuProfile": {
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty."
-        },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the Compute Nodes.<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -16653,6 +16640,10 @@
         "serviceArtifactReference": {
           "$ref": "#/definitions/ServiceArtifactReference",
           "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context."
         }
       },
       "required": [
@@ -16719,6 +16710,10 @@
         "serviceArtifactReference": {
           "$ref": "#/definitions/ServiceArtifactReferenceUpdate",
           "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the Compute Nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context."
         }
       }
     },
