@@ -9358,6 +9358,10 @@
         ]
       }
     },
+    "BringYourOwnRootUpdate": {
+      "type": "object",
+      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA."
+    },
     "BrokerStateStoreDestinationConfiguration": {
       "type": "object",
       "description": "The configuration for a MQTT broker state store destination.",
@@ -9503,6 +9507,16 @@
       "required": [
         "keyType"
       ]
+    },
+    "CertificateAuthorityConfigurationUpdate": {
+      "type": "object",
+      "description": "The configuration to set up an ICA.",
+      "properties": {
+        "bringYourOwnRoot": {
+          "$ref": "#/definitions/BringYourOwnRootUpdate",
+          "description": "Configuration for Bring Your Own Root."
+        }
+      }
     },
     "CertificateAuthorityCredentials": {
       "type": "object",
@@ -9744,6 +9758,20 @@
         "certificateAuthorityConfiguration",
         "leafCertificateConfiguration"
       ]
+    },
+    "CertificateConfigurationUpdate": {
+      "type": "object",
+      "description": "The certificate configuration.",
+      "properties": {
+        "certificateAuthorityConfiguration": {
+          "$ref": "#/definitions/CertificateAuthorityConfigurationUpdate",
+          "description": "The configuration to set up an ICA."
+        },
+        "leafCertificateConfiguration": {
+          "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
+          "description": "The leaf certificate configuration."
+        }
+      }
     },
     "CertificatePolicy": {
       "type": "object",
@@ -12162,6 +12190,19 @@
       "required": [
         "validityPeriodInDays"
       ]
+    },
+    "LeafCertificateConfigurationUpdate": {
+      "type": "object",
+      "description": "The leaf certificate configuration.",
+      "properties": {
+        "validityPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The validity period in days.",
+          "minimum": 7,
+          "maximum": 30
+        }
+      }
     },
     "Management": {
       "type": "object",
@@ -15114,7 +15155,7 @@
       "description": "The updatable properties of the Policy.",
       "properties": {
         "certificate": {
-          "$ref": "#/definitions/CertificateConfiguration",
+          "$ref": "#/definitions/CertificateConfigurationUpdate",
           "description": "The certificate configuration."
         }
       }
