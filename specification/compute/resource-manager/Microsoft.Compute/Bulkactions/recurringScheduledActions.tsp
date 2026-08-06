@@ -425,6 +425,10 @@ model ScheduledActionResource {
 }
 
 @@identifiers(ResourceListResponse.value, #[]);
+@@doc(
+  ResourceListResponse.value,
+  "The compute resources associated with the scheduled action."
+);
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
