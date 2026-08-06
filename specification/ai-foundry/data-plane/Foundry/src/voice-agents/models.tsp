@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/realtime";
 import "../agents/models.tsp";
 import "./agents.tsp";
 
@@ -62,9 +61,8 @@ model VoiceConversation {
 // Voice response
 // ---------------------------------------------------------------------------
 //
-// The projected base omits the two properties whose Foundry wire types are not assignable to the
-// upstream types: audio and max_output_tokens. It also omits upstream metadata, which is not part of
-// the persisted response contract.
+// The projected base omits audio because Foundry's typed voice objects are not assignable to the
+// upstream flat VoiceIdsShared string.
 
 @doc("The complete typed voice configuration used for a response.")
 union VoiceResponseVoice {
@@ -99,24 +97,15 @@ model VoiceResponseAudio {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends OmitProperties<
-  OpenAI.RealtimeResponse,
-  "audio" | "max_output_tokens" | "metadata"
-> {
+model VoiceResponse extends OmitProperties<OpenAI.RealtimeResponse, "audio"> {
   @doc("The unique id of the response.")
   id: string;
 
   @doc("The object type. Always `realtime.response`.")
   object: "realtime.response";
 
-  @doc("Additional detail about a terminal status.")
-  status_details?: OpenAI.RealtimeResponseStatusDetails;
-
   @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
   output?: VoiceConversationItem[];
-
-  @doc("Token usage statistics for the response.")
-  usage?: OpenAI.RealtimeResponseUsage;
 
   @doc("The id of the conversation this response belongs to.")
   conversation_id: string;
@@ -124,16 +113,8 @@ model VoiceResponse extends OmitProperties<
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches OpenAI.RealtimeResponse.output_modalities: an inline literal array, not exported as a named union upstream."
-  @doc("The output modalities used for the response, e.g. `[\"text\", \"audio\"]`. Audio output always includes a text transcript.")
-  output_modalities?: ("text" | "audio")[];
-
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The contract represents this as an integer token count or the literal string 'inf'."
-  @doc("The maximum number of output tokens allowed for the response; an integer or the literal `inf`.")
-  max_output_tokens?: int32 | "inf";
 
   @doc("The Unix timestamp (in seconds) for when the response was created.")
   created_at?: FoundryTimestamp;
