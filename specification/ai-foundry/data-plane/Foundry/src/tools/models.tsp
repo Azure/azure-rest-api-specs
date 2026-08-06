@@ -781,12 +781,9 @@ namespace Azure.AI.Projects {
     outputs: StructuredOutputDefinition;
   }
 
-  /** Known A2A protocol versions. Open union preserves forward compatibility. */
+  /** Supported A2A protocol versions. */
   union A2AProtocolVersion {
     string,
-
-    /** A2A protocol version 0.3. */
-    v0_3: "0.3",
 
     /** A2A protocol version 1.0. */
     v1_0: "1.0",
