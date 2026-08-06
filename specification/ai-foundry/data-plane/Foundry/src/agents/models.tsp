@@ -248,7 +248,7 @@ union AgentHarness {
   string,
 
   @doc("GHCP-SDK based managed runtime.")
-  ghcp: "ghcp",
+  GithubCopilot: "github-copilot",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
