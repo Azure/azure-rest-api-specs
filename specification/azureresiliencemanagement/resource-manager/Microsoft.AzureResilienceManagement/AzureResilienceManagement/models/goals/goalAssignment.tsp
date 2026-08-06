@@ -20,7 +20,8 @@ model ServiceLevelResource {
   serviceLevelIndicatorResourceId: armResourceIdentifier;
 
   @doc("The arm id of the service level object resource")
-  serviceLevelObjectiveResourceId: armResourceIdentifier;
+  @madeOptional(Versions.v2026_03_01_preview)
+  serviceLevelObjectiveResourceId?: armResourceIdentifier;
 }
 
 // Define the main model
