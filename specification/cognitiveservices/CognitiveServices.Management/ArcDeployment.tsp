@@ -19,8 +19,10 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_07_15_preview)
 @parentResource(Account)
-model ArcDeployment
-  is Azure.ResourceManager.ProxyResource<ArcDeploymentProperties, false> {
+model ArcDeployment is Azure.ResourceManager.ProxyResource<
+  ArcDeploymentProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ArcDeployment,
     KeyName = "deploymentName",

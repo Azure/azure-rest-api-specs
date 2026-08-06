@@ -162,6 +162,20 @@ suppressions:
     reason: EvaluateDeploymentPoliciesResponse.results is a dictionary keyed by deployment name, mapping each hypothetical deployment to its policy evaluation result. Keys are user-provided deployment names from the request.
     where:
       - $.definitions.EvaluateDeploymentPoliciesResponse.properties.results
+  - code: AvoidAdditionalProperties
+    reason: nodeSelector and capabilities are dynamic string maps with keys that are not predefined by the service. nodeSelector holds user-defined Kubernetes node label keys used for pod scheduling; capabilities is a read-only map of model/runtime capability flags resolved at runtime. Both are backed by a Dictionary of string, matching the existing ManagedComputeDeploymentProperties.capabilities pattern and the arm-no-record suppressions in the TypeSpec source.
+    where:
+      - $.definitions.ArcDeploymentProperties.properties.nodeSelector
+      - $.definitions.ArcDeploymentProperties.properties.capabilities
+      - $.definitions.ArcDeploymentUpdateProperties.properties.nodeSelector
+  - code: PutResponseCodes
+    reason: The Arc deployment PUT is create-only; updates are supported through PATCH, so the operation intentionally returns 201 + default without 200. This matches the arm-put-operation-response-codes suppression in the TypeSpec source.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: The Arc deployment PUT is a create-only long-running operation that returns 201. provisioningState is present in ArcDeploymentProperties (read-only) and returned in the GET and final LRO result. This matches the create-only PUT design and the arm-put-operation-response-codes suppression in the TypeSpec source.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
 ```
 
 ### Tag: package-2026-07-01
