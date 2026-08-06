@@ -2326,11 +2326,6 @@
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry for this configuration store"
         },
-        "managedOnBehalfOfConfiguration": {
-          "$ref": "../../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed On Behalf Of Configuration.",
-          "readOnly": true
-        },
         "azureFrontDoor": {
           "$ref": "#/definitions/AzureFrontDoorProperties",
           "description": "Property specifying the configuration of Azure Front Door for this configuration store"
@@ -2545,7 +2540,90 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Key vault properties."
+        },
+        "status": {
+          "$ref": "#/definitions/EncryptionStatus",
+          "description": "The status of customer-managed key encryption for the configuration store.",
+          "readOnly": true
         }
+      }
+    },
+    "EncryptionStatus": {
+      "type": "string",
+      "description": "The status of customer-managed key encryption for a configuration store.",
+      "enum": [
+        "Succeeded",
+        "IdentityNotFound",
+        "InvalidKeyState",
+        "InvalidKeyLength",
+        "KeyDisabled",
+        "KeyExpired",
+        "KeyNotFound",
+        "UnsupportedKeyAlgorithm",
+        "Unauthorized",
+        "KeyNotValidYet",
+        "ForbiddenByNetworkSecurityPerimeter"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The customer-managed key is accessible and encryption is functioning as expected."
+          },
+          {
+            "name": "IdentityNotFound",
+            "value": "IdentityNotFound",
+            "description": "The managed identity configured to access the customer-managed key could not be found."
+          },
+          {
+            "name": "InvalidKeyState",
+            "value": "InvalidKeyState",
+            "description": "The customer-managed key is in a state that does not permit encryption operations."
+          },
+          {
+            "name": "InvalidKeyLength",
+            "value": "InvalidKeyLength",
+            "description": "The length of the customer-managed key is not supported for encryption."
+          },
+          {
+            "name": "KeyDisabled",
+            "value": "KeyDisabled",
+            "description": "The customer-managed key is disabled in the key vault."
+          },
+          {
+            "name": "KeyExpired",
+            "value": "KeyExpired",
+            "description": "The customer-managed key has passed its expiration date."
+          },
+          {
+            "name": "KeyNotFound",
+            "value": "KeyNotFound",
+            "description": "The customer-managed key could not be found at the configured key identifier."
+          },
+          {
+            "name": "UnsupportedKeyAlgorithm",
+            "value": "UnsupportedKeyAlgorithm",
+            "description": "The algorithm of the customer-managed key is not supported for encryption."
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "The configured identity is not authorized to perform encryption operations with the customer-managed key."
+          },
+          {
+            "name": "KeyNotValidYet",
+            "value": "KeyNotValidYet",
+            "description": "The customer-managed key is not yet valid because its activation date is in the future."
+          },
+          {
+            "name": "ForbiddenByNetworkSecurityPerimeter",
+            "value": "ForbiddenByNetworkSecurityPerimeter",
+            "description": "Access to the customer-managed key is blocked by a network security perimeter configuration."
+          }
+        ]
       }
     },
     "IdentityType": {
