@@ -176,6 +176,62 @@
   path: ./stable/2026-07-01/*.json
   reason: Brownfield service not ready to migrate
 
+- tool: BreakingChange
+  path: ./stable/2026-07-01/common/v1/types.json
+  breaking-change: 1026
+  reason: >
+    Adding type: object to ErrorAdditionalInfo — models relocated, shape unchanged.
+    Local common types file aligns with ARM common-types v5 definition.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1034
+  reason: >
+    ReferenceRedirection — error models relocated from ARM common-types to local
+    common/v1/types.json. Shape is unchanged.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1011
+  reason: >
+    RemovedPath — POST /pricings/default/batch intentionally renamed to
+    PUT /pricings/global per ARM team guidance (Evan Hissey).
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1005
+  reason: >
+    RemovedDefinition — BatchPricingUpdateRequest/Response renamed to
+    GlobalPricingUpdateRequest/Response as part of batch-to-global rename.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1039
+  reason: >
+    RemovedRequiredParameter — batch parameter removed as part of
+    batch-to-global endpoint rename per ARM guidance.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/common/v1/types.json
+  breaking-change: 1026
+  reason: >
+    TypeFormatChanged — id property missing format: arm-id. Local common types
+    file does not include arm-id format annotation.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1023
+  reason: >
+    DifferentAllOf — switched from local Resource/TrackedResource to ARM
+    common-types v5 ProxyResource for ARM compliance.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1005
+  reason: >
+    RemovedProperty — kind/etag removed. These came from local TrackedResource
+    which was replaced by ARM common-types v5 ProxyResource.
+
 - tool: TypeSpecValidation
   reason: >
     Not ready to split as independent services.
