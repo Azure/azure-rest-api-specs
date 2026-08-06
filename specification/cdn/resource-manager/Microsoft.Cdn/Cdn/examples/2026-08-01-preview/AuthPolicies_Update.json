@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "authPolicyName": "authPolicy1",
+    "profileName": "profile1",
+    "properties": {
+      "properties": {
+        "action": "Log"
+      }
+    },
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/authPolicies/authPolicy1",
+        "name": "authPolicy1",
+        "properties": {
+          "action": "Log",
+          "associations": {
+            "domains": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+              }
+            ],
+            "isProfileLevel": false,
+            "routes": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdEndpoints/endpoint1/routes/route1"
+              }
+            ]
+          },
+          "authConfigs": [
+            {
+              "audiences": [
+                "11111111-1111-1111-1111-111111111111"
+              ],
+              "authLocation": "Header",
+              "authLocationSelector": "Authorization",
+              "identityProvider": "EntraID",
+              "issuer": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
+            }
+          ],
+          "deploymentStatus": "NotStarted",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.Cdn/profiles/authPolicies"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/RG/providers/Microsoft.Cdn/operationResults/operationId?api-version=2026-08-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/RG/providers/Microsoft.Cdn/operationResults/operationId?api-version=2026-08-01-preview",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "AuthPolicies_Update",
+  "title": "AuthPolicies_Update"
+}

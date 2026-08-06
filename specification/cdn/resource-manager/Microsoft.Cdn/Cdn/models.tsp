@@ -3420,6 +3420,187 @@ model ActivatedResourceReference {
 }
 
 /**
+ * Properties of the authorization policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The service contract composes writable authorization policy properties with Azure Front Door state properties."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing Azure Front Door state model defines the service's provisioning state contract."
+@added(Versions.v2026_08_01_preview)
+model AuthPolicyProperties extends AFDStateProperties {
+  /**
+   * Authorization configurations for the policy.
+   */
+  @identifiers(#[])
+  @minItems(1)
+  authConfigs: AuthPolicyConfig[];
+
+  /**
+   * Resource associations for the authorization policy.
+   */
+  associations: AuthPolicyAssociation;
+
+  /**
+   * Action to apply when authorization fails.
+   */
+  action?: AuthPolicyAction = AuthPolicyAction.Block;
+}
+
+/**
+ * Parameters for updating an authorization policy.
+ */
+@added(Versions.v2026_08_01_preview)
+model AuthPolicyUpdateParameters {
+  /**
+   * Properties to update on the authorization policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The existing Swagger contract flattens the properties payload for SDK compatibility."
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: AuthPolicyUpdatePropertiesParameters;
+}
+
+/**
+ * Writable properties of an authorization policy.
+ */
+@added(Versions.v2026_08_01_preview)
+model AuthPolicyUpdatePropertiesParameters {
+  /**
+   * Authorization configurations for the policy.
+   */
+  @identifiers(#[])
+  @minItems(1)
+  authConfigs?: AuthPolicyConfig[];
+
+  /**
+   * Resource associations for the authorization policy.
+   */
+  associations?: AuthPolicyAssociation;
+
+  /**
+   * Action to apply when authorization fails.
+   */
+  action?: AuthPolicyAction;
+}
+
+/**
+ * Resource associations for an authorization policy.
+ */
+@added(Versions.v2026_08_01_preview)
+model AuthPolicyAssociation {
+  /**
+   * Indicates whether the policy is associated at the profile level.
+   */
+  isProfileLevel?: boolean = false;
+
+  /**
+   * Domains associated with the authorization policy.
+   */
+  domains?: ActivatedResourceReference[];
+
+  /**
+   * Routes associated with the authorization policy.
+   */
+  routes?: ResourceReference[];
+}
+
+/**
+ * Authorization configuration parameters.
+ */
+@added(Versions.v2026_08_01_preview)
+@discriminator("identityProvider")
+model AuthPolicyConfig {
+  /**
+   * Identity provider used by the authorization configuration.
+   */
+  identityProvider: AuthPolicyConfigIdentityProvider;
+}
+
+/**
+ * Identity provider used by an authorization configuration.
+ */
+@added(Versions.v2026_08_01_preview)
+union AuthPolicyConfigIdentityProvider {
+  string,
+
+  /**
+   * Microsoft Entra ID.
+   */
+  EntraID: "EntraID",
+}
+
+/**
+ * Microsoft Entra ID authorization policy configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the established API and SDK spelling of Entra ID."
+@added(Versions.v2026_08_01_preview)
+model AuthPolicyEntraIDConfig extends AuthPolicyConfig {
+  /**
+   * Identity provider used by the authorization configuration.
+   */
+  identityProvider: "EntraID";
+
+  /**
+   * Issuer or authority for the identity provider to validate.
+   */
+  issuer: string;
+
+  /**
+   * Audiences to validate.
+   */
+  @minItems(1)
+  audiences: string[];
+
+  /**
+   * Location of the authorization value in the HTTP request.
+   */
+  authLocation?: AuthLocation = AuthLocation.Header;
+
+  /**
+   * Selector within the authorization location used to find the identity.
+   */
+  authLocationSelector?: string;
+}
+
+/**
+ * Location of the authorization value in an HTTP request.
+ */
+@added(Versions.v2026_08_01_preview)
+union AuthLocation {
+  string,
+
+  /**
+   * The authorization value is in an HTTP request header.
+   */
+  Header: "Header",
+
+  /**
+   * The authorization value is in the request query string.
+   */
+  Query: "Query",
+
+  /**
+   * The authorization value is in an HTTP cookie.
+   */
+  Cookie: "Cookie",
+}
+
+/**
+ * Action applied when authorization fails.
+ */
+@added(Versions.v2026_08_01_preview)
+union AuthPolicyAction {
+  string,
+
+  /**
+   * Block the request.
+   */
+  Block: "Block",
+
+  /**
+   * Log the authorization failure and allow the request to continue.
+   */
+  Log: "Log",
+}
+
+/**
  * Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.
  */
 model AfdRouteCacheConfiguration {
