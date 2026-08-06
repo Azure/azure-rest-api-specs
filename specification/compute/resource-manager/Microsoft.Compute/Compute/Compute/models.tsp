@@ -321,14 +321,11 @@ union NetworkInterfaceAuxiliarySku {
 union DiskApiVersion {
   string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
+  /** The 2025-01-02 Disk RP API version. */
   `2025-01-02`: "2025-01-02",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
+  /** The 2026-03-02 Disk RP API version. */
   `2026-03-02`: "2026-03-02",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version string values"
-  `2026-07-02`: "2026-07-02",
 }
 
 /**

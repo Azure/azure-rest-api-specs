@@ -2167,6 +2167,7 @@ union ComputeUsageUnit {
 );
 @@clientName(DiskProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
 @@clientName(DiskProperties.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(ManagedDiskProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
 @@clientName(
   DiskUpdateProperties.diskIOPSReadOnly,
   "DiskIopsReadOnly",
@@ -2411,8 +2412,8 @@ union ComputeUsageUnit {
 // Since Compute and ComputeDisk are both aggregated into the same flattened
 // SDK client, these names collide and fail
 // @azure-tools/typespec-client-generator-core/duplicate-client-name across
-// java/csharp/python/go. Rename the newer Compute-side names in every
-// language scope to preserve the already-shipped ComputeDisk SDK API surface.
+// java/csharp/python/go/javascript. Rename the newer Compute-side names in
+// every language scope to preserve the already-shipped ComputeDisk SDK API surface.
 // ════════════════════════════════════════════════════════════════════════════
 
 @@clientName(
@@ -2435,6 +2436,11 @@ union ComputeUsageUnit {
   "VirtualMachineDiskNetworkAccessPolicy",
   "go"
 );
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "javascript"
+);
 
 @@clientName(
   Compute.AvailabilityPolicyDiskDelay,
@@ -2455,6 +2461,37 @@ union ComputeUsageUnit {
   Compute.AvailabilityPolicyDiskDelay,
   "VirtualMachineDiskDelayAction",
   "go"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "javascript"
+);
+
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "csharp"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "java"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "python"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "go"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "javascript"
 );
 
 // ════════════════════════════════════════════════════════════════════════════
