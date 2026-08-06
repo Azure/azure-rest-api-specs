@@ -47,6 +47,9 @@ model VoiceAgentDefinition {
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
 
+  @doc("Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.")
+  greeting?: VoiceGreetingConfig;
+
   @doc("""
     The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
     transcription. These values are session defaults; a client may override supported fields when connecting.
@@ -69,6 +72,19 @@ model VoiceAgentDefinition {
     """)
   tools?: VoiceAgentTool[];
 
+  @doc("""
+    How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+    `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+    Defaults to `auto`.
+    """)
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.auto;
+
+  @doc("""
+    A customer-authored handoff graph. The voice agent definition is the implicit `$entrypoint`; configured nodes
+    provide specialist behavior, and directed edges declare the server-managed transfer routes.
+    """)
+  handoff?: VoiceAgentHandoffGraphConfig;
+
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
@@ -81,6 +97,37 @@ model VoiceAgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Session-start greeting configuration for a voice agent.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceGreetingConfig {
+  @doc("The greeting mode.")
+  type: string;
+}
+
+@doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TemplateVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "template";
+
+  @doc("The Handlebars text template spoken at session start.")
+  @minLength(1)
+  text: string;
+}
+
+@doc("A greeting authored by the session model from a scoped opening-turn prompt.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "llm_generated";
+
+  @doc("The Handlebars prompt that guides the opening turn.")
+  @minLength(1)
+  prompt: string;
+
+  @doc("The tool-selection policy for the opening response. Defaults to `none`.")
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.none;
 }
 
 @doc("""
@@ -118,6 +165,277 @@ union VoiceAgentTool {
   toolbox: VoiceToolboxTool,
 }
 
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+@doc("Tool-selection behavior for a voice agent.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolChoice {
+  mode: OpenAI.ToolChoiceOptions,
+  function: OpenAI.ToolChoiceFunction,
+  mcp: OpenAI.ToolChoiceMCP,
+}
+
+/** A case-sensitive identifier for a configured handoff node or edge. */
+@pattern("^[a-z][a-z0-9_-]{0,63}$")
+scalar VoiceAgentHandoffId extends string;
+
+@doc("A source or target in the handoff graph.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentHandoffEndpointId {
+  @doc("A configured specialist node.")
+  node: VoiceAgentHandoffId,
+
+  @doc("The implicit node represented by the voice agent definition.")
+  entrypoint: "$entrypoint",
+}
+
+/** A positive maximum output-token count. */
+@minValue(1)
+scalar VoiceAgentPositiveOutputTokenCount extends int32;
+
+@doc("The maximum output-token count for a handoff target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentMaxOutputTokens {
+  @doc("A positive maximum output-token count.")
+  count: VoiceAgentPositiveOutputTokenCount,
+
+  @doc("No finite output-token limit.")
+  unlimited: "inf",
+}
+
+@doc("Whether a handoff target automatically creates a response after transfer.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentHandoffTargetResponse {
+  @doc("Create a response after activating the target.")
+  auto: "auto",
+
+  @doc("Do not create a response after activating the target.")
+  none: "none",
+}
+
+@doc("Reasoning effort accepted by a handoff target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentHandoffReasoningEffort {
+  @doc("Disable reasoning effort.")
+  none: "none",
+
+  @doc("Use minimal reasoning effort.")
+  minimal: "minimal",
+
+  @doc("Use low reasoning effort.")
+  low: "low",
+
+  @doc("Use medium reasoning effort.")
+  medium: "medium",
+
+  @doc("Use high reasoning effort.")
+  high: "high",
+
+  @doc("Use extra-high reasoning effort.")
+  xhigh: "xhigh",
+}
+
+@doc("Voice-optimized instruction adaptation settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentVoiceAdaptation {
+  @doc("The adaptation strategy. Always `auto`.")
+  type: "auto";
+}
+
+@doc("A condition that may trigger an interim response.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentInterimResponseTrigger {
+  @doc("Trigger when response latency reaches the configured threshold.")
+  latency: "latency",
+
+  @doc("Trigger while a tool is executing.")
+  tool: "tool",
+}
+
+@doc("Fields shared by interim-response configurations.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentInterimResponseConfig {
+  @doc("The interim-response implementation.")
+  type: string;
+
+  @doc("Conditions that may trigger one interim response.")
+  triggers?: VoiceAgentInterimResponseTrigger[] = #[
+    VoiceAgentInterimResponseTrigger.latency
+  ];
+
+  @doc("The latency threshold in milliseconds.")
+  @minValue(0)
+  latency_threshold_ms?: int32 = 2000;
+}
+
+@doc("A static interim response selected from configured text.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentStaticInterimResponseConfig
+  extends VoiceAgentInterimResponseConfig {
+  type: "static_interim_response";
+
+  @doc("Candidate text values for the interim response.")
+  texts?: string[];
+}
+
+@doc("An interim response generated by a language model.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLlmInterimResponseConfig
+  extends VoiceAgentInterimResponseConfig {
+  type: "llm_interim_response";
+
+  @doc("The model used to generate interim responses.")
+  `model`?: string = "gpt-4.1-mini";
+
+  @doc("Optional instructions for generating interim responses.")
+  instructions?: string;
+
+  @doc("The maximum completion-token count for an interim response.")
+  @minValue(1)
+  max_completion_tokens?: int32 = 50;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Interim response settings are selected by their `type` property."
+@doc("Interim-response settings for latency and tool execution.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentInterimResponse {
+  static: VoiceAgentStaticInterimResponseConfig,
+  llm: VoiceAgentLlmInterimResponseConfig,
+}
+
+@doc("A configured handoff target and its node-scoped behavior.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentHandoffNodeConfig {
+  @doc("The node identifier.")
+  @key
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  id: VoiceAgentHandoffId;
+
+  @doc("A non-empty description used to select this target.")
+  @minLength(1)
+  description: string;
+
+  @doc("Session behavior applied after transferring to this node.")
+  config: VoiceAgentHandoffNodeSessionConfig;
+}
+
+@doc("Session behavior applied at a handoff target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentHandoffNodeSessionConfig {
+  @doc("The target model, when different from the current node.")
+  `model`?: string;
+
+  @doc("Instructions applied at the target node.")
+  instructions?: string;
+
+  @doc("Tools available at the target node.")
+  tools?: VoiceAgentTool[];
+
+  @doc("Tool-selection behavior at the target node.")
+  tool_choice?: VoiceAgentToolChoice;
+
+  @doc("The target node's voice.")
+  voice?: VoiceAgentVoice;
+
+  @doc("The target node's sampling temperature.")
+  @minValue(0)
+  @maxValue(2)
+  temperature?: float32;
+
+  @doc("The target node's maximum output-token count.")
+  max_response_output_tokens?: VoiceAgentMaxOutputTokens;
+
+  @doc("The reasoning effort used at the target node.")
+  reasoning_effort?: VoiceAgentHandoffReasoningEffort;
+
+  @doc("Voice adaptation applied at the target node.")
+  voice_adaptation?: VoiceAgentVoiceAdaptation;
+
+  @doc("Interim-response settings applied at the target node.")
+  interim_response?: VoiceAgentInterimResponse;
+
+  @doc("Whether the target model may call multiple tools in parallel.")
+  parallel_tool_calls?: boolean;
+}
+
+@doc("A directed transition between handoff nodes.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentHandoffEdgeConfig {
+  @doc("The edge identifier.")
+  @key
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  id: VoiceAgentHandoffId;
+
+  @doc("The source node identifier.")
+  source: VoiceAgentHandoffEndpointId;
+
+  @doc("The target node identifier.")
+  target: VoiceAgentHandoffEndpointId;
+
+  @doc("A non-empty description used by the model to select this transition.")
+  @minLength(1)
+  @maxLength(500)
+  description: string;
+
+  @doc("Whether user interruption cancels the transition.")
+  cancel_on_interruption?: boolean = false;
+
+  @doc("The delay before the target behavior is committed, in milliseconds.")
+  @minValue(0)
+  @maxValue(10000)
+  delay_ms?: int32 = 0;
+
+  @doc("Optional text synthesized while transferring.")
+  @maxLength(500)
+  transfer_message?: string;
+
+  @doc("Whether the target automatically creates a response after transfer.")
+  target_response?: VoiceAgentHandoffTargetResponse = VoiceAgentHandoffTargetResponse.auto;
+}
+
+@doc("A customer-supplied handoff graph.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentHandoffGraphConfig {
+  @doc("The maximum number of successful transfers in the session.")
+  @minValue(1)
+  @maxValue(100)
+  max_transfers?: int32 = 16;
+
+  @doc("The maximum number of transfer attempts in the session. When omitted, the service uses `max_transfers`; when provided, it must be greater than or equal to `max_transfers`.")
+  @minValue(1)
+  @maxValue(100)
+  max_attempts?: int32;
+
+  @doc("The explicitly configured handoff targets. The implicit `$entrypoint` is not repeated here.")
+  @maxItems(31)
+  nodes: VoiceAgentHandoffNodeConfig[];
+
+  @doc("The directed transitions between handoff nodes.")
+  @minItems(1)
+  @maxItems(128)
+  edges: VoiceAgentHandoffEdgeConfig[];
+}
+
+@doc("When an MCP invocation creates a follow-up response. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentMcpResponseScheduling {
+  string,
+
+  @doc("Do not create a follow-up response after the MCP invocation completes.")
+  silent: "silent",
+
+  @doc("Create a follow-up response when the conversation is idle.")
+  when_idle: "when_idle",
+
+  @doc("Interrupt the active response and create a follow-up response.")
+  interrupt: "interrupt",
+
+  @doc("Create a follow-up response only when no response is active.")
+  skip_if_busy: "skip_if_busy",
+}
+
 @doc("An MCP tool available to a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool {
@@ -128,6 +446,9 @@ model VoiceAgentMcpTool {
 
   @doc("The URL for the MCP server.")
   server_url?: url;
+
+  @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle` so the agent continues after the tool call completes.")
+  response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.when_idle;
 }
 
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
