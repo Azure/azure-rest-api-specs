@@ -119,8 +119,5 @@ using Microsoft.Relay;
 // NamespacesOperationGroup operations
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.Resource,
-  "ArmResource",
-  "python"
-);
+// ClustersOperationGroup operations
+@@clientLocation(ClustersOperationGroup.listAvailableClusterRegion, Clusters);
