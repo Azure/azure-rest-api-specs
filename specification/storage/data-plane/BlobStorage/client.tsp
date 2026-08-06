@@ -209,18 +209,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
-@@clientName(
-  Storage.Blob.Container.listBlobHierarchySegment,
-  "ListBlobsHierarchical",
-  "rust"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
-@@clientOption(
-  Storage.Blob.Container.listBlobHierarchySegment,
-  "forcePageIterator",
-  true,
-  "rust"
-);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" ""
 @@clientOption(
   Storage.Blob.PageBlob.getPageRanges,
@@ -837,11 +825,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
-@@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
-@@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
+@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
