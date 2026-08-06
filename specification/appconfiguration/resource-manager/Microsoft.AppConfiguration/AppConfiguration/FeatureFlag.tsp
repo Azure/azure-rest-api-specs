@@ -30,23 +30,23 @@ model FeatureFlag
 }
 
 /**
- * Operations for managing feature flags through the data plane proxy.
+ * Operations for managing feature flags.
  */
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface FeatureFlags {
   /**
-   * Gets the properties of the specified feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
+   * Gets the properties of the specified feature flag. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
    */
   get is ArmResourceRead<FeatureFlag>;
 
   /**
-   * Creates or updates a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
+   * Creates a feature flag. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<FeatureFlag>;
 
   /**
-   * Deletes a feature flag through the data plane proxy. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration enhanced feature flags the data plane API should be used instead.
+   * Deletes a feature flag. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
    */
   delete is ArmResourceDeleteSync<FeatureFlag>;
 }
@@ -54,7 +54,7 @@ interface FeatureFlags {
 /**
  * All feature flag properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Feature flags are data plane proxy resources and do not have a provisioning state."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Feature flags do not have a provisioning state."
 @added(Versions.v2026_09_01_preview)
 model FeatureFlagProperties {
   /**
