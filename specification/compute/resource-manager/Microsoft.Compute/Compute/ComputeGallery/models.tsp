@@ -1942,6 +1942,20 @@ model GallerySoftDeletedResourceProperties {
    * The timestamp for when the resource is soft-deleted. In dateTime offset format.
    */
   softDeletedTime?: string;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The timestamp at which a soft-deleted gallery image version is permanently (hard) deleted and can no longer be recovered. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  hardDeletionTargetTime?: utcDateTime;
 }
 
 /**
@@ -2534,6 +2548,24 @@ model SharedGalleryImageVersionList
 @@identifiers(SharedGalleryImageVersionList.value, #[]);
 
 /**
+ * The state of a gallery image version, derived from its soft-delete status.
+ */
+@added(Versions.v2026_03_03)
+union GalleryImageVersionState {
+  string,
+
+  /**
+   * The gallery image version is active and available for use.
+   */
+  Active: "Active",
+
+  /**
+   * The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be resolved as the latest version.
+   */
+  SoftDeleted: "SoftDeleted",
+}
+
+/**
  * Describes the properties of a gallery image version.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2565,6 +2597,20 @@ model SharedGalleryImageVersionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The state of the gallery image version, derived from its soft-delete status.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  imageState?: GalleryImageVersionState;
 }
 
 /**
@@ -2845,6 +2891,20 @@ model CommunityGalleryImageVersionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The state of the gallery image version, derived from its soft-delete status.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  imageState?: GalleryImageVersionState;
 }
 
 /**
