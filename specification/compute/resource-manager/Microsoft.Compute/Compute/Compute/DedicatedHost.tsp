@@ -93,11 +93,11 @@ interface DedicatedHosts {
   /**
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("DedicatedHost")
   @get
   @action("hostSizes")
   @list
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listAvailableSizes is ComputeResourceActionSync<
     DedicatedHost,
     void,

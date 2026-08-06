@@ -280,8 +280,8 @@ interface VirtualMachines {
   /**
    * Retrieves information about the run-time state of a virtual machine.
    */
-  @get
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  @get
   instanceView is ComputeResourceActionSync<
     VirtualMachine,
     void,
@@ -395,10 +395,10 @@ interface VirtualMachines {
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("vmSizes")
   @list
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listAvailableSizes is ComputeResourceActionSync<
     VirtualMachine,
     void,

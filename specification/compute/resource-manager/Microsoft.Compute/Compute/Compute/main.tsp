@@ -81,13 +81,13 @@ enum Versions {
 
 // Fix https://github.com/Azure/typespec-azure/issues/4518 to use template
 interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("ComputeOperations")
   @autoRoute
   @doc("List the operations for the provider")
   @segment("operations")
   @get
   @list
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
     | ArmResponse<Azure.ResourceManager.Foundations.OperationListResult>
     | Common.CloudError;

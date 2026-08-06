@@ -96,10 +96,10 @@ interface DiskEncryptionSets {
    * Lists all resources that are encrypted with this disk encryption set.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("associatedResources")
   @list
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   listAssociatedResources is ComputeResourceActionSync<
     DiskEncryptionSet,
     void,
