@@ -108,7 +108,8 @@ model AgentOptimizationDatasetInput {
 
 /** Inline dataset — items supplied directly in the request body. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationInlineDatasetInput extends AgentOptimizationDatasetInput {
+model AgentOptimizationInlineDatasetInput
+  extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: AgentOptimizationDatasetInputType.inline;
 
@@ -118,7 +119,8 @@ model AgentOptimizationInlineDatasetInput extends AgentOptimizationDatasetInput 
 
 /** Reference to a registered Foundry dataset. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationReferenceDatasetInput extends AgentOptimizationDatasetInput {
+model AgentOptimizationReferenceDatasetInput
+  extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: AgentOptimizationDatasetInputType.reference;
 
@@ -440,7 +442,8 @@ model AgentOptimizationCandidateFileInfo {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "AgentOptimizationCandidateDetail is a response-body superset of AgentOptimizationCandidateSummary; the summary/detail split is deliberate and not a discriminated union."
 @doc("Full candidate view returned by GET /candidates/{id}. Extends AgentOptimizationCandidateSummary with the mutation payload and file manifest.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationCandidateDetail extends AgentOptimizationCandidateSummary {
+model AgentOptimizationCandidateDetail
+  extends AgentOptimizationCandidateSummary {
   @doc("Identifier of the parent optimization job.")
   job_id: string;
 
@@ -523,7 +526,10 @@ model AgentOptimizationJobResult {
 
 @doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, AgentOptimizationJobInputs> {
+model AgentOptimizationJob is JobLike<
+  AgentOptimizationJobResult,
+  AgentOptimizationJobInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
