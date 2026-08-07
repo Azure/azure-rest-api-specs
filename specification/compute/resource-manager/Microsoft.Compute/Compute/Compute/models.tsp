@@ -5770,7 +5770,7 @@ model ManagedDiskProperties {
   burstingEnabled?: boolean;
 
   /**
-   * Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled.
+   * Set this flag to true to get a boost on the performance target of the disk deployed. This flag can only be set on disk creation time and cannot be disabled after enabled.
    */
   performancePlus?: boolean;
 
