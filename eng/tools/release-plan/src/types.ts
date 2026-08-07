@@ -23,7 +23,7 @@ export interface ReleasePlanCommandContext {
   prUrl?: string;
   tspProjectPath: string;
   apiReleaseType: ApiReleaseType;
-  sdkReleaseType: "preview" | "stable";
+  sdkReleaseType: "beta" | "stable";
   targetMonth: string;
   apiVersion: string;
   testReleasePlan: boolean;
@@ -32,6 +32,61 @@ export interface ReleasePlanCommandContext {
 export interface ReleasePlanData extends Record<string, unknown> {
   release_plan_link?: string;
   ReleasePlanId?: string | number;
+  release_plan_details?: ReleasePlanDetails;
+}
+
+export interface SdkInfo {
+  Language?: string;
+  GenerationPipelineUrl?: string;
+  SdkPullRequestUrl?: string;
+  PackageName?: string;
+  GenerationStatus?: string;
+  ReleaseStatus?: string;
+  PullRequestStatus?: string;
+  ReleaseExclusionStatus?: string;
+}
+
+export interface ReleasePlanDetails extends Record<string, unknown> {
+  ServiceTreeId?: string;
+  ProductTreeId?: string;
+  ProductName?: string;
+  SpecPullRequests?: string[];
+  SDKReleaseMonth?: string;
+  ReleasePlanId?: string | number;
+  IsManagementPlane?: boolean;
+  IsDataPlane?: boolean;
+  SpecAPIVersion?: string;
+  SpecType?: string;
+  ProductType?: string;
+  ProductLifecycle?: string;
+  ReleasePlanLink?: string;
+  IsTestReleasePlan?: boolean;
+  SDKReleaseType?: "beta" | "stable";
+  SDKInfo?: SdkInfo[];
+  ReleasePlanSubmittedByEmail?: string;
+  ActiveSpecPullRequest?: string;
+  SDKLanguages?: string;
+  IsSpecApproved?: boolean;
+  ApiSpecWorkItemId?: string | number;
+  LanguageExclusionRequesterNote?: string;
+  LanguageExclusionApproverNote?: string;
+  APISpecProjectPath?: string;
+  AttestationStatus?: string;
+  ReleasePlanType?: string;
+  ApiReleaseType?: string | number;
+  WorkItemId?: string | number;
+  WorkItemUrl?: string;
+  WorkItemHtmlUrl?: string;
+  CreatedDate?: string;
+  ChangedDate?: string;
+  IsCreatedByAgent?: boolean;
+  AssignedTo?: string;
+  Tag?: string;
+  Title?: string;
+  ParentId?: string | number;
+  Description?: string;
+  Status?: string;
+  Owner?: string;
 }
 
 export interface EnsureReleasePlanResult {
@@ -42,7 +97,7 @@ export interface EnsureReleasePlanResult {
     tspProjectPath: string;
     apiVersion: string;
     apiReleaseType: ApiReleaseType;
-    sdkReleaseType: "preview" | "stable";
+    sdkReleaseType: "beta" | "stable";
     targetReleaseMonth: string;
   };
 }
@@ -59,7 +114,6 @@ export interface CliArguments {
   owner: string;
   repo: string;
   workspace: string;
-  azsdkPath?: string;
   outputFile?: string;
   testReleasePlan: boolean;
 }
@@ -69,6 +123,8 @@ export interface OctokitLike {
     pulls: {
       get: (params: { owner: string; repo: string; pull_number: number }) => Promise<{
         data: {
+          state?: string;
+          merged_at?: string | null;
           labels?: Array<{ name: string }>;
         };
       }>;
