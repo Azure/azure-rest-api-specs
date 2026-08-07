@@ -400,9 +400,8 @@ model UpdateCheckRequest {
    */
   tpm?: TpmAttestation;
 
-  /** Currently installed update, or null if none. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Mirrors the ADU onboarding contract wire shape: installedUpdateId is always present and is null when no update is installed (transparent pass-through)."
-  installedUpdateId: InstalledUpdateId | null;
+  /** Currently installed update. Omitted when no update is installed. */
+  installedUpdateId?: InstalledUpdateId;
 
   /**
    * ETag from a prior response; lets the service skip re-processing agentInfo.
@@ -430,19 +429,16 @@ model UpdateCheckRequest {
 @added(Versions.v2026_11_02_preview)
 model AgentInfo {
   /** Agent SDK version. Diagnostic only; not used for targeting. */
-  @minLength(1)
-  @maxLength(64)
-  agentSdkVersion: string;
+  agentSdkVersion?: string;
 
   /**
    * Opaque capability identifier; the service maps it to supported manifest versions
    * and installability constraints. The device must not infer meaning from the value.
    */
-  @minValue(1)
-  agentProfile: int32;
+  agentProfile?: int32;
 
   /** Device compatibility attributes; combined with agentProfile to compute the device class. */
-  compatibilityProperties: Record<string>;
+  compatibilityProperties?: Record<string>;
 }
 
 /**
@@ -450,20 +446,13 @@ model AgentInfo {
  */
 @added(Versions.v2026_11_02_preview)
 model InstalledUpdateId {
-  /** Update provider. Alphanumeric plus '.' and '-'. */
-  @minLength(1)
-  @maxLength(64)
-  @pattern("^[a-zA-Z0-9.\\-]+$")
+  /** Update provider. */
   provider: string;
 
-  /** Update name. Alphanumeric plus '.' and '-'. */
-  @minLength(1)
-  @maxLength(64)
-  @pattern("^[a-zA-Z0-9.\\-]+$")
+  /** Update name. */
   name: string;
 
-  /** 2 to 4-part numeric version, e.g. 1.2, 1.2.3, 1.2.3.4. */
-  @pattern("^\\d+(\\.\\d+){1,3}$")
+  /** Numeric version, e.g. 1.2, 1.2.3, 1.2.3.4. */
   version: string;
 }
 
@@ -536,12 +525,11 @@ model ReportStatusRequest {
    */
   tpm?: TpmAttestation;
 
-  /** The update now installed, or null. Communicates current device state; not a failure signal. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Mirrors the ADU onboarding contract wire shape: installedUpdateId is always present and is null when no update is installed (transparent pass-through)."
-  installedUpdateId: InstalledUpdateId | null;
+  /** The update now installed. Communicates current device state; not a failure signal. Omitted when none. */
+  installedUpdateId?: InstalledUpdateId;
 
   /** The terminal result of the installation. */
-  lastInstallResult: InstallResult;
+  installResult: InstallResult;
 }
 
 /**
@@ -551,6 +539,9 @@ model ReportStatusRequest {
 @added(Versions.v2026_11_02_preview)
 union Outcome {
   string,
+
+  /** The attempt is in progress. */
+  InProgress: "IN_PROGRESS",
 
   /** The attempt succeeded. */
   Succeeded: "SUCCEEDED",

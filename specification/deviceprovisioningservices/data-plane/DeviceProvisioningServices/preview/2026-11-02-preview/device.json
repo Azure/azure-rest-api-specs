@@ -434,15 +434,12 @@
       "properties": {
         "agentSdkVersion": {
           "type": "string",
-          "description": "Agent SDK version. Diagnostic only; not used for targeting.",
-          "minLength": 1,
-          "maxLength": 64
+          "description": "Agent SDK version. Diagnostic only; not used for targeting."
         },
         "agentProfile": {
           "type": "integer",
           "format": "int32",
-          "description": "Opaque capability identifier; the service maps it to supported manifest versions\nand installability constraints. The device must not infer meaning from the value.",
-          "minimum": 1
+          "description": "Opaque capability identifier; the service maps it to supported manifest versions\nand installability constraints. The device must not infer meaning from the value."
         },
         "compatibilityProperties": {
           "type": "object",
@@ -451,12 +448,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "agentSdkVersion",
-        "agentProfile",
-        "compatibilityProperties"
-      ]
+      }
     },
     "AssignedDeviceSubstatus": {
       "type": "string",
@@ -782,22 +774,15 @@
       "properties": {
         "provider": {
           "type": "string",
-          "description": "Update provider. Alphanumeric plus '.' and '-'.",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9.\\-]+$"
+          "description": "Update provider."
         },
         "name": {
           "type": "string",
-          "description": "Update name. Alphanumeric plus '.' and '-'.",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9.\\-]+$"
+          "description": "Update name."
         },
         "version": {
           "type": "string",
-          "description": "2 to 4-part numeric version, e.g. 1.2, 1.2.3, 1.2.3.4.",
-          "pattern": "^\\d+(\\.\\d+){1,3}$"
+          "description": "Numeric version, e.g. 1.2, 1.2.3, 1.2.3.4."
         }
       },
       "required": [
@@ -810,6 +795,7 @@
       "type": "string",
       "description": "Terminal outcome of an update attempt or step. Mirrors the ADU `Outcome` enum;\nmodeled as an extensible union so ADU can add outcomes without a breaking change.",
       "enum": [
+        "IN_PROGRESS",
         "SUCCEEDED",
         "FAILED",
         "CANCELED",
@@ -819,6 +805,11 @@
         "name": "Outcome",
         "modelAsString": true,
         "values": [
+          {
+            "name": "InProgress",
+            "value": "IN_PROGRESS",
+            "description": "The attempt is in progress."
+          },
           {
             "name": "Succeeded",
             "value": "SUCCEEDED",
@@ -911,18 +902,16 @@
         },
         "installedUpdateId": {
           "$ref": "#/definitions/InstalledUpdateId",
-          "description": "The update now installed, or null. Communicates current device state; not a failure signal.",
-          "x-nullable": true
+          "description": "The update now installed. Communicates current device state; not a failure signal. Omitted when none."
         },
-        "lastInstallResult": {
+        "installResult": {
           "$ref": "#/definitions/InstallResult",
           "description": "The terminal result of the installation."
         }
       },
       "required": [
         "workflowId",
-        "installedUpdateId",
-        "lastInstallResult"
+        "installResult"
       ]
     },
     "ReportUpdateStatusResult": {
@@ -1029,8 +1018,7 @@
         },
         "installedUpdateId": {
           "$ref": "#/definitions/InstalledUpdateId",
-          "description": "Currently installed update, or null if none.",
-          "x-nullable": true
+          "description": "Currently installed update. Omitted when no update is installed."
         },
         "agentInfoETag": {
           "type": "string",
@@ -1046,10 +1034,7 @@
           "maxLength": 128,
           "x-ms-client-name": "serviceConfigEtag"
         }
-      },
-      "required": [
-        "installedUpdateId"
-      ]
+      }
     },
     "UpdateCheckResponse": {
       "type": "object",
