@@ -77,6 +77,12 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-07-02 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_07_02: "2026-07-02",
 }
 
 // Fix https://github.com/Azure/typespec-azure/issues/4518 to use template

@@ -3033,6 +3033,12 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length, in bits, used to allocate a contiguous block of private IP addresses.
+   */
+  @added(Versions.v2026_07_02)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -4324,6 +4330,12 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersion;
+
+  /**
+   * The private IP address prefix length, in bits, used to allocate a contiguous block of private IP addresses.
+   */
+  @added(Versions.v2026_07_02)
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * The application gateway backend address pools.
@@ -5970,6 +5982,12 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersions;
+
+  /**
+   * The private IP address prefix length, in bits, used to allocate a contiguous block of private IP addresses.
+   */
+  @added(Versions.v2026_07_02)
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * Specifies an array of references to application security group.

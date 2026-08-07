@@ -875,7 +875,7 @@ These settings apply only when `--tag=package-2026-07-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2026-07-02'
 input-file:
-  - stable/2026-03-01/ComputeRP.json
+  - stable/2026-07-02/ComputeRP.json
   - stable/2026-07-02/DiskRP.json
   - stable/2021-07-01/skus.json
   - stable/2025-12-03/GalleryRP.json
@@ -887,6 +887,7 @@ These settings apply only when `--tag=package-2026-07-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2026-07-02-only'
 input-file:
+  - stable/2026-07-02/ComputeRP.json
   - stable/2026-07-02/DiskRP.json
 ```
 
