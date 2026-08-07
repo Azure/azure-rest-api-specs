@@ -288,6 +288,11 @@ document shape unchanged.
   with multiple line references.
 - **Every finding** carries a bracketed rule ID, a `file:line`, a quoted source
   excerpt, a reason, and a concrete fix. No fix, no finding.
+- **Link both layers of authority.** Link the local rule for its reviewer-specific
+  interpretation and, when that rule lists an authoritative upstream source,
+  also link the most specific upstream Guidelines or TypeSpec anchor. The local
+  reference explains the check; the upstream link lets authors verify the
+  original contract.
 - **No praise sections, no summary of what the PR does, no restating the diff.**
   The author knows what they wrote.
 - **Never** claim CI status you have not read, and never duplicate a finding CI

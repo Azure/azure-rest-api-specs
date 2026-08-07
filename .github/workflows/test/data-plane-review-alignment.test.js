@@ -685,6 +685,34 @@ describe("checkGraderSoundness", () => {
   });
 });
 
+describe("data-plane upstream references", () => {
+  it("renders authoritative source links in every reviewer rule family", async () => {
+    const referenceFiles = [
+      "data-plane-resource-modeling.md",
+      "data-plane-lro-and-paging.md",
+      "data-plane-error-design.md",
+      "data-plane-naming-and-docs.md",
+      "data-plane-visibility-and-secrets.md",
+      "data-plane-design-decisions.md",
+    ];
+    const referenceDir = join(REAL_ROOT, ".github/skills/azure-api-review/references");
+    const contents = await Promise.all(
+      referenceFiles.map(async (file) => [file, await readFile(join(referenceDir, file), "utf8")]),
+    );
+
+    for (const [file, content] of contents) {
+      expect(content, file).toMatch(/\*\*Authoritative upstream(?: context)?:\*\*/);
+      expect(content, file).toMatch(
+        /https:\/\/github\.com\/microsoft\/api-guidelines\/blob\/vNext\/azure\/Guidelines\.md#[a-z0-9-]+/,
+      );
+    }
+
+    const secretDetection = await readFile(join(referenceDir, "secret-detection.md"), "utf8");
+    expect(secretDetection).toContain("Guidelines.md#rest-no-secrets-in-get-response");
+    expect(secretDetection).toContain("Guidelines.md#rest-secrets-allowed-in-post-response");
+  });
+});
+
 describe("checkReportFormatContract", () => {
   it("passes on the real repository", async () => {
     const core = createMockCore();
