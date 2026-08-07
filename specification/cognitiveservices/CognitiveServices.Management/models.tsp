@@ -1780,12 +1780,6 @@ model ManagedClusterAgentHostingConfiguration
   ]>;
 
   /**
-   * Name of the agent pool within the AKS managed cluster that runs the hosted agent workloads.
-   */
-  @minLength(1)
-  clusterAgentPoolName: string;
-
-  /**
    * Azure resource ID of the customer-owned storage account used by the hosted agents. The storage account must be in the same subscription and region as the AKS cluster, and its data-plane endpoint must be reachable from the workload network.
    */
   storageAccountResourceId: Azure.Core.armResourceIdentifier<[
