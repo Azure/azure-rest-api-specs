@@ -17,6 +17,16 @@ global-approvers:
   - samvaity
   - praveenkuttappan
 
+# Data-plane REST stewardship reviewers. Gated here as the only users who may apply the
+# sign-off label — the approval that clears the merge gate (protected-labels exists to stop
+# teams self-signing-off). This same list is the pool auto-requested/assigned when the
+# intake workflow applies `APIStewardshipBoard-ReviewRequested` (that label is a
+# machine-applied signal, not a human-gated action, so it is intentionally not protected;
+# see .github/workflows/src/data-plane-review/assign-reviewers.js). Add a login to grow it.
+APIStewardshipBoard-SignedOff:
+  - heaths
+  - weidongxu-microsoft
+
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:
   management-plane:
