@@ -66,7 +66,7 @@ suppressions:
       in the top-level resources property. Moving this field into the properties bag would make
       the public specification inconsistent with the service wire response.
     from: Bulkactions.json
-    where: $.definitions.LocationBasedBulkCreateCustom.properties.resources
+    where: $.definitions.LocationBasedBulkCreateCustom
 ```
 
 ### Tag: package-2026-07-06-preview
