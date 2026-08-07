@@ -292,7 +292,8 @@ model RaiConfig {
   @doc("""
     Author-declared map telling the platform where user/agent text lives in the agent-defined
     invocations request/response bodies, so content-safety guardrails can extract and moderate it.
-    Optional; a rai_config without it leaves the invocations path unmoderated (fail-open).
+    Optional; a rai_config without it leaves the invocations path without content-safety
+    moderation (fail-open).
     """)
   invocations_text_map?: InvocationsTextMap;
 }
