@@ -258,6 +258,24 @@ accountKey: string;
 behavior, which are not observable in a specification.
 ````
 
+### Unattended inline projection
+
+The document above is the **canonical report** used by interactive sessions and
+the eval suite. An unattended workflow may project that report across validated
+safe-output channels without inventing a second finding format:
+
+- An inline comment contains one complete canonical finding body, without its
+  severity heading, attached to the finding's verified changed line.
+- The summary indexes inline findings with **bare** rule IDs so it does not
+  duplicate them as bracketed findings.
+- Findings beyond the configured inline cap, findings without a valid diff
+  anchor, and all Questions remain in the summary.
+- The inline cap is a ceiling, not a quota. Never create weak findings to fill
+  it.
+
+Unless a workflow explicitly provides this projection, emit the canonical
+document shape unchanged.
+
 ## Rules for the report
 
 - **Identify yourself as an agent in the first line.** The report may be posted

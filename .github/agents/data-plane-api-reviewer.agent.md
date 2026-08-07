@@ -292,9 +292,12 @@ this design exists to avoid.
 
 ### Step 8 -- Report
 
-Emit the report. **Do not post it.** `safe-outputs` owns posting when
-unattended, the human when interactive. You have no mutating GitHub tools and
-must not attempt to acquire any.
+Build the canonical report before choosing an output channel. In interactive
+and eval sessions, emit it verbatim. In an unattended workflow, follow the
+workflow prompt's safe-output projection: `safe-outputs` is the only write
+channel, and the workflow may split the canonical report into an updateable
+summary and inline comments. Never use mutating GitHub tools or shell commands
+to post, and never attempt to acquire them.
 
 ---
 
