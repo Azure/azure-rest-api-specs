@@ -62,6 +62,18 @@ union ApplicationGatewaySkuName {
    * Basic
    */
   Basic: "Basic",
+
+  /**
+   * Basic_WAF_v2
+   */
+  @added(Versions.v2025_09_01)
+  Basic_WAF_v2: "Basic_WAF_v2",
+
+  /**
+   * Standard_WAF_v2
+   */
+  @added(Versions.v2025_09_01)
+  Standard_WAF_v2: "Standard_WAF_v2",
 }
 
 /**
@@ -25548,6 +25560,26 @@ model ConnectionPolicyProperties {
 model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
 
 /**
+ * Tier of a web application firewall policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_09_01)
+union WebApplicationFirewallPolicyTier {
+  string,
+
+  /**
+   * Basic
+   */
+  Basic: "Basic",
+
+  /**
+   * Standard
+   */
+  Standard: "Standard",
+}
+
+/**
  * Defines web application firewall policy properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -25604,6 +25636,12 @@ model WebApplicationFirewallPolicyPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   applicationGatewayForContainers?: ApplicationGatewayForContainersReferenceDefinition[];
+
+  /**
+   * Tier of a web application firewall policy.
+   */
+  @added(Versions.v2025_09_01)
+  tier?: WebApplicationFirewallPolicyTier;
 }
 
 /**
