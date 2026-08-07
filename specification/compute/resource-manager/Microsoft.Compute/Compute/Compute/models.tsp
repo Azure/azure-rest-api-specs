@@ -5803,13 +5803,11 @@ model ManagedDiskProperties {
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name follows existing disk API naming convention"
   diskIOPSReadOnly?: int64;
 
   /**
    * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   diskMBpsReadOnly?: int64;
 
   /**
