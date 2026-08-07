@@ -15,13 +15,13 @@ import checkDataPlaneReviewAlignment, {
   EVAL_DIR,
   findFixtureLeakage,
   FROZEN_JUDGE_MODEL,
-  GATE_EVAL_FILE,
   getEngineModel,
   getEvalModels,
   getPinnedVersion,
   getVerifiedVersion,
   REAL_FINDINGS_PROBE,
   REPORT_FORMAT_FILE,
+  TRUE_NEGATIVE_EVAL_FILE,
   WORKFLOW_FILE,
 } from "../src/data-plane-review-alignment.js";
 import { createMockCore } from "./mocks.js";
@@ -54,7 +54,10 @@ async function createFixtureRepo({
   verifiedVersion = "0.70.0",
   engineModel = "claude-opus-4.6",
   evals = {
-    [GATE_EVAL_FILE]: { model: "claude-opus-4.6", judgeModel: FROZEN_JUDGE_MODEL },
+    [TRUE_NEGATIVE_EVAL_FILE]: {
+      model: "claude-opus-4.6",
+      judgeModel: FROZEN_JUDGE_MODEL,
+    },
   },
 } = {}) {
   const root = await mkdtemp(join(tmpdir(), "dp-review-align-"));
@@ -156,12 +159,18 @@ describe("getVerifiedVersion", () => {
 
 describe("data-plane review workflow scope", () => {
   it("supports modern TypeSpec project layouts and excludes generated Swagger", async () => {
-    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+    const [workflow, agent] = await Promise.all([
+      readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8"),
+      readFile(join(REAL_ROOT, AGENT_FILE), "utf8"),
+    ]);
 
-    expect(content).toContain("Do not require a `data-plane` path segment");
-    expect(content).toContain("Exclude projects under\n   `resource-manager/`");
-    expect(content).toContain("review the changed `.tsp` files plus its\n   `tspconfig.yaml`");
-    expect(content).toContain("Do not review any `.json` Swagger/OpenAPI files");
+    for (const content of [workflow, agent]) {
+      expect(content).toMatch(/Do not require a\s+`data-plane` path segment/);
+    }
+    expect(workflow).toContain("Exclude projects under\n   `resource-manager/`");
+    expect(agent).toContain("Exclude every project under\n`resource-manager/`");
+    expect(workflow).toContain("review the changed `.tsp` files plus its\n   `tspconfig.yaml`");
+    expect(workflow).toContain("Do not review any `.json` Swagger/OpenAPI files");
   });
 
   it("does not dispatch the critic when no TypeSpec data-plane project changed", async () => {
@@ -173,6 +182,46 @@ describe("data-plane review workflow scope", () => {
     expect(emptyScope).toBeGreaterThan(-1);
     expect(stop).toBeGreaterThan(emptyScope);
     expect(critic).toBeGreaterThan(stop);
+  });
+
+  it("keeps trusted guidance local without checking out untrusted PR content", async () => {
+    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+
+    expect(content).not.toContain("checkout: false");
+    expect(content).toContain("checkout:\n  ref: ${{ github.event.pull_request.base.sha }}");
+    expect(content).toContain(".github/agents");
+    expect(content).toContain(".github/skills/azure-api-review");
+    expect(content).toContain("allowed: [get_file_contents, pull_request_read, search_code]");
+    expect(content).toContain('"jq"');
+    expect(content).toContain('"nl"');
+    expect(content).toContain("Read PR metadata and PR-authored files only through the");
+    expect(content).toContain("Do not emulate it with a general-purpose");
+  });
+
+  it("keeps Phase 2 manually gated, non-blocking, and capped at five inline findings", async () => {
+    const [workflow, rollout] = await Promise.all([
+      readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8"),
+      readFile(join(REAL_ROOT, ".github/skills/evals/data-plane-api-reviewer/ROLLOUT.md"), "utf8"),
+    ]);
+
+    expect(workflow).toContain("create-pull-request-review-comment:\n    max: 5");
+    expect(workflow).toContain('side: "RIGHT"');
+    expect(workflow).toContain("submit-pull-request-review:");
+    expect(workflow).toContain("allowed-events: [COMMENT]");
+    expect(workflow).toContain("Always call `add_comment` exactly once");
+    expect(workflow).toContain("Questions are not findings and always remain in the summary");
+    expect(rollout).toContain("The workflow is at **Phase 2**");
+    expect(rollout).toContain("The manually applied label is the safety control");
+    expect(rollout).toContain("not a hard rollout gate");
+  });
+
+  it("uses the manual dispatch PR number throughout the runtime contract", async () => {
+    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+    const effectivePrNumber = "${{ github.event.pull_request.number || inputs.item_number }}";
+
+    expect(content).toContain("item_number:\n        description: PR number to review");
+    expect(content.split(effectivePrNumber)).toHaveLength(6);
+    expect(content).not.toContain('target: "${{ github.event.pull_request.number }}"');
   });
 });
 
@@ -285,7 +334,10 @@ describe("checkModelAlignment", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo({
       evals: {
-        [GATE_EVAL_FILE]: { model: "claude-opus-4.6", judgeModel: FROZEN_JUDGE_MODEL },
+        [TRUE_NEGATIVE_EVAL_FILE]: {
+          model: "claude-opus-4.6",
+          judgeModel: FROZEN_JUDGE_MODEL,
+        },
         "eval-error-design.yaml": {
           model: "claude-opus-4.6",
           judgeModel: FROZEN_JUDGE_MODEL,
@@ -298,21 +350,24 @@ describe("checkModelAlignment", () => {
     expect(core.setFailed).not.toBeCalled();
   });
 
-  it("fails when production drifts from the eval that defines the gate", async () => {
+  it("fails when production drifts from the false-positive regression eval", async () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo({ engineModel: "claude-opus-5" });
 
     await expect(checkModelAlignment({ core, rootDir })).resolves.toBe(false);
 
     expect(core.setFailed).toBeCalledWith(expect.stringContaining("claude-opus-5"));
-    expect(core.setFailed).toBeCalledWith(expect.stringContaining("certifies a configuration"));
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining("never shipped"));
   });
 
   it("fails when a single eval file drifts while the rest agree", async () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo({
       evals: {
-        [GATE_EVAL_FILE]: { model: "claude-opus-4.6", judgeModel: FROZEN_JUDGE_MODEL },
+        [TRUE_NEGATIVE_EVAL_FILE]: {
+          model: "claude-opus-4.6",
+          judgeModel: FROZEN_JUDGE_MODEL,
+        },
         "eval-versioning.yaml": {
           model: "claude-sonnet-4.6",
           judgeModel: FROZEN_JUDGE_MODEL,
@@ -329,7 +384,10 @@ describe("checkModelAlignment", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo({
       evals: {
-        [GATE_EVAL_FILE]: { model: "claude-opus-4.6", judgeModel: "claude-opus-4.6" },
+        [TRUE_NEGATIVE_EVAL_FILE]: {
+          model: "claude-opus-4.6",
+          judgeModel: "claude-opus-4.6",
+        },
       },
     });
 
@@ -339,7 +397,7 @@ describe("checkModelAlignment", () => {
     expect(core.setFailed).toBeCalledWith(expect.stringContaining("historical run"));
   });
 
-  it("fails when the gate eval file is missing", async () => {
+  it("fails when the true-negative regression eval file is missing", async () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo({
       evals: {
@@ -352,7 +410,7 @@ describe("checkModelAlignment", () => {
 
     await expect(checkModelAlignment({ core, rootDir })).resolves.toBe(false);
 
-    expect(core.setFailed).toBeCalledWith(expect.stringContaining(GATE_EVAL_FILE));
+    expect(core.setFailed).toBeCalledWith(expect.stringContaining(TRUE_NEGATIVE_EVAL_FILE));
   });
 
   it("reports every problem at once rather than the first", async () => {
@@ -360,7 +418,10 @@ describe("checkModelAlignment", () => {
     const rootDir = await createFixtureRepo({
       engineModel: "claude-opus-5",
       evals: {
-        [GATE_EVAL_FILE]: { model: "claude-opus-4.6", judgeModel: "gpt-5.4" },
+        [TRUE_NEGATIVE_EVAL_FILE]: {
+          model: "claude-opus-4.6",
+          judgeModel: "gpt-5.4",
+        },
       },
     });
 
@@ -509,7 +570,7 @@ describe("checkGraderSoundness", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();
     await writeNested(
-      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      join(rootDir, EVAL_DIR, TRUE_NEGATIVE_EVAL_FILE),
       [
         "name: gate",
         "defaults:",
@@ -536,7 +597,7 @@ describe("checkGraderSoundness", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();
     await writeNested(
-      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      join(rootDir, EVAL_DIR, TRUE_NEGATIVE_EVAL_FILE),
       [
         "name: gate",
         "defaults:",
@@ -561,7 +622,7 @@ describe("checkGraderSoundness", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();
     await writeNested(
-      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      join(rootDir, EVAL_DIR, TRUE_NEGATIVE_EVAL_FILE),
       [
         "name: gate",
         "defaults:",
@@ -586,7 +647,7 @@ describe("checkGraderSoundness", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();
     await writeNested(
-      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      join(rootDir, EVAL_DIR, TRUE_NEGATIVE_EVAL_FILE),
       [
         "name: gate",
         "defaults:",
@@ -611,7 +672,7 @@ describe("checkGraderSoundness", () => {
     const core = createMockCore();
     const rootDir = await createFixtureRepo();
     await writeNested(
-      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      join(rootDir, EVAL_DIR, TRUE_NEGATIVE_EVAL_FILE),
       [
         "name: gate",
         "defaults:",
@@ -630,6 +691,34 @@ describe("checkGraderSoundness", () => {
     await expect(checkGraderSoundness({ core, rootDir })).resolves.toBe(false);
 
     expect(core.setFailed).toBeCalledWith(expect.stringContaining("inert"));
+  });
+});
+
+describe("data-plane upstream references", () => {
+  it("renders authoritative source links in every reviewer rule family", async () => {
+    const referenceFiles = [
+      "data-plane-resource-modeling.md",
+      "data-plane-lro-and-paging.md",
+      "data-plane-error-design.md",
+      "data-plane-naming-and-docs.md",
+      "data-plane-visibility-and-secrets.md",
+      "data-plane-design-decisions.md",
+    ];
+    const referenceDir = join(REAL_ROOT, ".github/skills/azure-api-review/references");
+    const contents = await Promise.all(
+      referenceFiles.map(async (file) => [file, await readFile(join(referenceDir, file), "utf8")]),
+    );
+
+    for (const [file, content] of contents) {
+      expect(content, file).toMatch(/\*\*Authoritative upstream(?: context)?:\*\*/);
+      expect(content, file).toMatch(
+        /https:\/\/github\.com\/microsoft\/api-guidelines\/blob\/vNext\/azure\/Guidelines\.md#[a-z0-9-]+/,
+      );
+    }
+
+    const secretDetection = await readFile(join(referenceDir, "secret-detection.md"), "utf8");
+    expect(secretDetection).toContain("Guidelines.md#rest-no-secrets-in-get-response");
+    expect(secretDetection).toContain("Guidelines.md#rest-secrets-allowed-in-post-response");
   });
 });
 
@@ -747,7 +836,7 @@ describe("checkReportFormatContract", () => {
     );
     await writeNested(join(rootDir, AGENT_FILE), "See data-plane-report-format.md.\n");
     await writeNested(
-      join(rootDir, EVAL_DIR, GATE_EVAL_FILE),
+      join(rootDir, EVAL_DIR, TRUE_NEGATIVE_EVAL_FILE),
       [
         "name: gate",
         "defaults:",
