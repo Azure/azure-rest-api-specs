@@ -43407,9 +43407,87 @@
           ]
         }
       },
+      "InvocationContentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "json",
+              "text"
+            ]
+          }
+        ],
+        "description": "How an invocations request/response body is parsed to locate text for content-safety moderation."
+      },
+      "InvocationResponseMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "non_streaming",
+              "streaming",
+              "both"
+            ]
+          }
+        ],
+        "description": "Author-declared response shape for the invocations protocol."
+      },
       "InvocationsProtocolConfiguration": {
         "type": "object",
         "description": "Configuration specific to the invocations protocol."
+      },
+      "InvocationsTextMap": {
+        "type": "object",
+        "required": [
+          "response_mode"
+        ],
+        "properties": {
+          "input_content_type": {
+            "$ref": "#/components/schemas/InvocationContentType",
+            "description": "How the REQUEST body is parsed. Defaults to `json`."
+          },
+          "output_content_type": {
+            "$ref": "#/components/schemas/InvocationContentType",
+            "description": "How the RESPONSE body is parsed. Defaults to `json`."
+          },
+          "response_mode": {
+            "$ref": "#/components/schemas/InvocationResponseMode",
+            "description": "Author-declared response shape; drives which output gate runs and which fields are required."
+          },
+          "input_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Path(s) to user text in the REQUEST body. Required when input_content_type is `json`."
+          },
+          "output_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`."
+          },
+          "stream_selectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SseTextSelector"
+            },
+            "description": "SSE event->field selectors for STREAMING output. Required when response_mode is streaming/both and output_content_type is `json`."
+          },
+          "allow_empty": {
+            "type": "boolean",
+            "description": "When true, suppress the zero-yield content-safety alert for agents that legitimately have frequent text-free turns.",
+            "default": false
+          }
+        },
+        "description": "Declares where request/response text lives so content-safety guardrails can extract it."
       },
       "InvocationsWsProtocolConfiguration": {
         "type": "object",
@@ -83809,6 +83887,10 @@
           "rai_policy_name": {
             "type": "string",
             "description": "The name of the RAI policy to apply."
+          },
+          "invocations_text_map": {
+            "$ref": "#/components/schemas/InvocationsTextMap",
+            "description": "Author-declared map telling the platform where user/agent text lives in the agent-defined\ninvocations request/response bodies, so content-safety guardrails can extract and moderate it.\nOptional; a rai_config without it leaves the invocations path without content-safety\nmoderation (fail-open)."
           }
         },
         "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
@@ -85642,6 +85724,26 @@
           }
         },
         "description": "Sku information"
+      },
+      "SseTextSelector": {
+        "type": "object",
+        "required": [
+          "event_types"
+        ],
+        "properties": {
+          "event_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "SSE event `type` values that carry text."
+          },
+          "text_field": {
+            "type": "string",
+            "description": "The field on a matched event holding the text delta (defaults to `delta`)."
+          }
+        },
+        "description": "An SSE event-type to text-field selector for streaming invocation output."
       },
       "StructuredInputDefinition": {
         "type": "object",
