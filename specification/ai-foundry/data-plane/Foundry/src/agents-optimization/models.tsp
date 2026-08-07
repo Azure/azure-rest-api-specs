@@ -141,7 +141,7 @@ model AgentOptimizationEvaluatorRef {
 
 @doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationAgentIdentifier {
+model OptimizedAgentIdentifier {
   @doc("Registered Foundry agent name (required).")
   agent_name: string;
 
@@ -178,7 +178,7 @@ model AgentOptimizationOptions {
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model AgentOptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: AgentOptimizationAgentIdentifier;
+  agent: OptimizedAgentIdentifier;
 
   @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
   train_dataset: AgentOptimizationDatasetInput;
@@ -290,7 +290,7 @@ model AgentOptimizationJobListItem is OmitProperties<
 > {
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
-  agent?: AgentOptimizationAgentIdentifier;
+  agent?: OptimizedAgentIdentifier;
 }
 
 // ---------------------------------------------------------------------------

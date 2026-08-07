@@ -42600,21 +42600,6 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-    AgentOptimizationAgentIdentifier:
-      type: object
-      required:
-        - agent_name
-      properties:
-        agent_name:
-          type: string
-          description: Registered Foundry agent name (required).
-        agent_version:
-          type: string
-          description: Pinned agent version. Defaults to latest if omitted.
-      description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
     AgentOptimizationCandidate:
       type: object
       required:
@@ -42815,7 +42800,7 @@ components:
         - evaluators
       properties:
         agent:
-          $ref: '#/components/schemas/AgentOptimizationAgentIdentifier'
+          $ref: '#/components/schemas/OptimizedAgentIdentifier'
           description: The agent (and pinned version) being optimized.
         train_dataset:
           $ref: '#/components/schemas/AgentOptimizationDatasetInput'
@@ -42868,7 +42853,7 @@ components:
           description: Progress snapshot. May be present in terminal states reflecting last-known progress.
           readOnly: true
         agent:
-          $ref: '#/components/schemas/AgentOptimizationAgentIdentifier'
+          $ref: '#/components/schemas/OptimizedAgentIdentifier'
           description: The agent targeted by this optimization job.
           readOnly: true
       description: Slim job representation returned by the LIST endpoint.
@@ -78793,6 +78778,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An OpenAPI tool stored in a toolbox.
+    OptimizedAgentIdentifier:
+      type: object
+      required:
+        - agent_name
+      properties:
+        agent_name:
+          type: string
+          description: Registered Foundry agent name (required).
+        agent_version:
+          type: string
+          description: Pinned agent version. Defaults to latest if omitted.
+      description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OtlpTelemetryEndpoint:
       type: object
       required:

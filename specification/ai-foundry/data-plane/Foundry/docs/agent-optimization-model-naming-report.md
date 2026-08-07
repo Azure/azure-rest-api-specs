@@ -32,7 +32,7 @@ The implemented names apply the mechanical rule `OptimizationX` to `AgentOptimiz
 | Model | `OptimizationJobResult` | `AgentOptimizationJobResult` | `OptimizationJob` result type through `JobLike` |
 | Model | `OptimizationJobProgress` | `AgentOptimizationJobProgress` | `OptimizationJob.progress` |
 | Model | `OptimizationCandidate` | `AgentOptimizationCandidate` | Element of `OptimizationJobResult.candidates` |
-| Model | `OptimizationAgentIdentifier` | `AgentOptimizationAgentIdentifier` | `OptimizationJobInputs.agent` and `OptimizationJobListItem.agent` |
+| Model | `OptimizationAgentIdentifier` | `OptimizedAgentIdentifier` | `OptimizationJobInputs.agent` and `OptimizationJobListItem.agent` |
 | Model | `OptimizationOptions` | `AgentOptimizationOptions` | `OptimizationJobInputs.options` |
 | Model | `OptimizationEvaluatorRef` | `AgentOptimizationEvaluatorRef` | Element of `OptimizationJobInputs.evaluators` |
 | Model | `OptimizationDatasetInput` | `AgentOptimizationDatasetInput` | Base type of the training and validation datasets |
@@ -55,7 +55,7 @@ AgentOptimizationJobResult
    `- PromotionInfo
 
 AgentOptimizationJobInputs
-|- AgentOptimizationAgentIdentifier
+|- OptimizedAgentIdentifier
 |- AgentOptimizationDatasetInput
 |  |- AgentOptimizationDatasetInputType
 |  |- AgentOptimizationInlineDatasetInput
@@ -94,8 +94,6 @@ The rename changes generated schema names and therefore SDK public type names un
 
 The fifteen operation-reachable declarations were renamed atomically to singular `AgentOptimization*`, matching the existing `AgentOptimizationJobs` interface and `AgentOptimizationRequiredPreviews` constant.
 
-The operation-reachable mechanically awkward name was retained for consistency with the requested rule:
-
-- `OptimizationAgentIdentifier` became `AgentOptimizationAgentIdentifier`. A future API design pass could consider `AgentOptimizationTargetAgent` or `AgentOptimizationAgentReference`.
+`OptimizationAgentIdentifier` became `OptimizedAgentIdentifier` to avoid the mechanically awkward repeated `Agent` in `AgentOptimizationAgentIdentifier`.
 
 The three unused declarations were removed so the feature no longer carries dead or future-only schema.
