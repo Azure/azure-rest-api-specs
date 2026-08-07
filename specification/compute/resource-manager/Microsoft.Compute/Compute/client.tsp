@@ -2167,7 +2167,11 @@ union ComputeUsageUnit {
 );
 @@clientName(DiskProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
 @@clientName(DiskProperties.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
-@@clientName(ManagedDiskProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
+@@clientName(
+  ManagedDiskProperties.diskIOPSReadOnly,
+  "DiskIopsReadOnly",
+  "csharp"
+);
 @@clientName(
   DiskUpdateProperties.diskIOPSReadOnly,
   "DiskIopsReadOnly",
