@@ -1,0 +1,636 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Evaluation Data Plane Service",
+    "version": "2024-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/evaluation/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Azure-AI Evaluation endpoints.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The ID of the target subscription.",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "resourceGroupName",
+        "in": "path",
+        "description": "The name of the Resource Group.",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "workspaceName",
+        "in": "path",
+        "description": "The name of the AI project.",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://ml.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://ml.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/evalations/{id}": {
+      "get": {
+        "operationId": "Evaluations_Get",
+        "description": "Get an evalution.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/evaluations": {
+      "get": {
+        "operationId": "Evaluations_List",
+        "description": "List evaluations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Evaluations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
+          },
+          "Evaluations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/evaluations/{id}": {
+      "patch": {
+        "operationId": "Evaluations_Update",
+        "description": "Update an evaluation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update evaluation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateEvaluationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Update_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/evaluations/create": {
+      "post": {
+        "operationId": "Evaluations_Create",
+        "description": "Creates an evaluation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Properties of Evaluation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
+          },
+          "Evaluations_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppInsight": {
+      "type": "object",
+      "description": "Data Source for Application Insight.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "Application Insight connection string."
+        },
+        "query": {
+          "type": "string",
+          "description": "Query to fetch data."
+        }
+      },
+      "required": [
+        "connectionString",
+        "query"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Data"
+        }
+      ],
+      "x-ms-discriminator-value": "app_insights"
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BaseModel": {
+      "type": "object",
+      "description": "Base Model and prompt for evaluation.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Base model for evaluation."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "System prompt to be used with base model."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "parameters for evaluation.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "endpoint",
+        "prompt",
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "base_model"
+    },
+    "Data": {
+      "type": "object",
+      "description": "Abstract data class.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for Data."
+        },
+        "id": {
+          "type": "string",
+          "description": "Data identifier."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "Dataset as source for evaluation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Data"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
+    },
+    "Evaluation": {
+      "type": "object",
+      "description": "Evaluation Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation."
+        },
+        "data": {
+          "$ref": "#/definitions/Data",
+          "description": "Data for evaluation."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluation. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "outputLocation": {
+          "type": "string",
+          "description": "Output location for the evaluation."
+        },
+        "evaluationTarget": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Evaluation Target."
+        }
+      },
+      "required": [
+        "data",
+        "evaluators"
+      ]
+    },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Evaluation Target.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for EvaluationTarget."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluation target."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluatorConfiguration": {
+      "type": "object",
+      "description": "Evaluator Configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluator."
+        },
+        "initParams": {
+          "type": "object",
+          "description": "Initialization parameters of the evaluator.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dataMapping": {
+          "type": "object",
+          "description": "Data parameters of the evaluator.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PagedEvaluation": {
+      "type": "object",
+      "description": "Paged evaluation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Evaluations.",
+          "items": {
+            "$ref": "#/definitions/Evaluation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp the resource was created at.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The identity type that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateEvaluationRequest": {
+      "type": "object",
+      "description": "Update Evaluation Request",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Tags to be updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
