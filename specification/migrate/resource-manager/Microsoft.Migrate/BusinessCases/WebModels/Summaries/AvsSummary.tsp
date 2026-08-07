@@ -86,6 +86,7 @@ model AvsNodeSummary {
   @visibility(Lifecycle.Read)
   estimatedCost?: float32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS licensing cost.")
   @visibility(Lifecycle.Read)
   osLicensingCost?: float32;

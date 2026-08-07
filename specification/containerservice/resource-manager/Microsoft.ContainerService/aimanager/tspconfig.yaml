@@ -1,3 +1,6 @@
+# SDK package names use the flat "containerserviceaimanager" form, matching the sibling
+# Microsoft.ContainerService sub-service SDKs (containerservicefleet, containerservicesafeguards,
+# containerservicepreparedimgspec).
 parameters:
   "service-dir":
     default: "sdk/containerserviceaimanager"
@@ -6,6 +9,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     emit-common-types-schema: "never"

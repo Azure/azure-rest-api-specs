@@ -142,7 +142,8 @@ interface ProductContractOps
         @minLength(1)
         @maxLength(256)
         productId: string,
-      }
+      },
+      ResourceName = "ApiManagementProduct"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -518,7 +519,8 @@ interface WorkspaceProductOps
         @minLength(1)
         @maxLength(256)
         productId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProduct"
     > {}
 
 @armResourceOperations

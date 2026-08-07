@@ -2245,6 +2245,7 @@ model DataBoxEdgeDeviceExtendedInfoProperties {
   /**
    * The url to access the Client Key Vault
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   clientSecretStoreUrl?: string;
 
   /**
@@ -2930,6 +2931,7 @@ model TrackingInfo {
   /**
    * Tracking URL of the shipment.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   trackingUrl?: string;
 }
 
@@ -3443,6 +3445,7 @@ model DataBoxEdgeDeviceExtendedInfoPatch {
   /**
    * The url to access the Client Key Vault
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   clientSecretStoreUrl?: string;
 
   /**
@@ -3699,6 +3702,7 @@ model RawCertificateData {
 /**
  * The upload registration certificate response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UploadCertificateResponse {
   /**
    * Specifies authentication type.
@@ -3964,6 +3968,7 @@ model ComputeResource {
 /**
  * Resource Move details
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataBoxEdgeMoveRequest {
   /**
    * Target resource group ARMId
@@ -4057,6 +4062,7 @@ model ImageRepositoryCredential {
   /**
    * Image repository url (e.g.: mcr.microsoft.com).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   imageRepositoryUrl: string;
 
   /**
@@ -4487,6 +4493,7 @@ model LoadBalancerConfig {
   /**
    * Load balancer ipconfig
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRange?: string[];
 }
 

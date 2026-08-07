@@ -228,6 +228,7 @@ model IncidentManagementConfiguration {
   connectionName?: string;
 
   /** The URL of the connection */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   connectionUrl?: string;
 
   /** The key for the connection */

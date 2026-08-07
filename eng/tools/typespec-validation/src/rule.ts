@@ -1,4 +1,4 @@
-import { RuleResult } from "./rule-result.js";
+import { type RuleResult } from "./rule-result.ts";
 
 export interface Rule {
   readonly name: string;

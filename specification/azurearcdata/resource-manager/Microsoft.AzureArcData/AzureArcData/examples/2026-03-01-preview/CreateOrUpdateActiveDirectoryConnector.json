@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "activeDirectoryConnectorName": "testADConnector",
+    "activeDirectoryConnectorResource": {
+      "properties": {
+        "spec": {
+          "activeDirectory": {
+            "domainControllers": {
+              "primaryDomainController": {
+                "hostname": "dc1.contoso.local"
+              },
+              "secondaryDomainControllers": [
+                {
+                  "hostname": "dc2.contoso.local"
+                },
+                {
+                  "hostname": "dc3.contoso.local"
+                }
+              ]
+            },
+            "realm": "CONTOSO.LOCAL",
+            "serviceAccountProvisioning": "manual"
+          },
+          "dns": {
+            "nameserverIPAddresses": [
+              "11.11.111.111",
+              "22.22.222.222"
+            ],
+            "preferK8sDnsForPtrLookups": false,
+            "replicas": 1
+          }
+        }
+      }
+    },
+    "api-version": "2026-03-01-preview",
+    "dataControllerName": "testdataController",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testADConnector",
+        "type": "Microsoft.AzureArcData/dataControllers/activeDirectoryConnectors",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController/activeDirectoryConnectors/testADConnector",
+        "properties": {
+          "spec": {
+            "activeDirectory": {
+              "domainControllers": {
+                "primaryDomainController": {
+                  "hostname": "dc1.contoso.local"
+                },
+                "secondaryDomainControllers": [
+                  {
+                    "hostname": "dc2.contoso.local"
+                  },
+                  {
+                    "hostname": "dc3.contoso.local"
+                  }
+                ]
+              },
+              "netbiosDomainName": "CONTOSO",
+              "realm": "CONTOSO.LOCAL",
+              "serviceAccountProvisioning": "manual"
+            },
+            "dns": {
+              "domainName": "contoso.local",
+              "nameserverIPAddresses": [
+                "11.11.111.111",
+                "22.22.222.222"
+              ],
+              "preferK8sDnsForPtrLookups": false,
+              "replicas": 1
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testADConnector",
+        "type": "Microsoft.AzureArcData/dataControllers/activeDirectoryConnectors",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController/activeDirectoryConnectors/testADConnector",
+        "properties": {
+          "spec": {
+            "activeDirectory": {
+              "domainControllers": {
+                "primaryDomainController": {
+                  "hostname": "dc1.contoso.local"
+                },
+                "secondaryDomainControllers": [
+                  {
+                    "hostname": "dc2.contoso.local"
+                  },
+                  {
+                    "hostname": "dc3.contoso.local"
+                  }
+                ]
+              },
+              "netbiosDomainName": "CONTOSO",
+              "realm": "CONTOSO.LOCAL",
+              "serviceAccountProvisioning": "manual"
+            },
+            "dns": {
+              "domainName": "contoso.local",
+              "nameserverIPAddresses": [
+                "11.11.111.111",
+                "22.22.222.222"
+              ],
+              "preferK8sDnsForPtrLookups": false,
+              "replicas": 1
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ActiveDirectoryConnectors_Create",
+  "title": "Create or update an Active Directory connector instance."
+}

@@ -22,6 +22,13 @@
   Prefix for the exported variable name (default: GH_TOKEN).
   With a single owner, exports as GH_TOKEN. With multiple owners, exports as GH_TOKEN_<Owner>.
 
+.PARAMETER AlwaysUseOwnerSuffix
+  Export tokens as <VariableNamePrefix>_<Owner> even when only one owner is requested.
+
+.PARAMETER ExportAsOutputVariable
+  When set in Azure DevOps, also exports the variable as an output variable
+  (##vso[task.setvariable ...;isOutput=true]) for downstream jobs/stages.
+
 .OUTPUTS
   Sets environment variables in the current process and exports them to the CI system:
   - Azure DevOps: sets secret pipeline variables via ##vso logging commands
@@ -34,7 +41,9 @@ param(
   [string] $KeyName = "azure-sdk-automation",
   [string] $GitHubAppId = '1086291', # Azure SDK Automation App ID
   [string[]] $InstallationTokenOwners = @("Azure"),
-  [string] $VariableNamePrefix = "GH_TOKEN"
+  [string] $VariableNamePrefix = "GH_TOKEN",
+  [switch] $AlwaysUseOwnerSuffix,
+  [switch] $ExportAsOutputVariable
 )
 
 $ErrorActionPreference = 'Stop'
@@ -226,7 +235,7 @@ function Invoke-LoginToGitHub {
     $installationToken = New-GitHubInstallationToken -Jwt $jwt -InstallationId $installationId -ApiBase $GitHubApiBaseUrl -ApiVersion $GitHubApiVersion
 
     $variableName = $VariableNamePrefix
-    if ($InstallationTokenOwners.Count -gt 1) {
+    if ($AlwaysUseOwnerSuffix -or $InstallationTokenOwners.Count -gt 1) {
       $variableName = $VariableNamePrefix + "_" + $normalizedOwner
     }
 
@@ -239,6 +248,11 @@ function Invoke-LoginToGitHub {
     if ($null -ne $env:SYSTEM_TEAMPROJECTID) {
       Write-Host "##vso[task.setvariable variable=$variableName;issecret=true]$installationToken"
       Write-Host "Azure DevOps variable '$variableName' has been set (secret)."
+
+      if ($ExportAsOutputVariable) {
+        Write-Host "##vso[task.setvariable variable=$variableName;issecret=true;isOutput=true]$installationToken"
+        Write-Host "Azure DevOps output variable '$variableName' has been set (secret)."
+      }
     }
 
     # GitHub Actions: mask the token and export to GITHUB_ENV
