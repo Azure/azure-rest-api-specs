@@ -2,15 +2,6 @@
   "parameters": {
     "api-version": "2026-05-15",
     "privateEndpointConnectionName": "sample-pec",
-    "properties": {
-      "etag": "",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "description": "My name is Joe and I'm approving this.",
-          "status": "Approved"
-        }
-      }
-    },
     "resourceGroupName": "sample-group",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "vaultName": "sample-vault"
@@ -27,15 +18,18 @@
             "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe"
           },
           "privateLinkServiceConnectionState": {
-            "description": "My name is Joe and I'm approving this.",
+            "description": "This was automatically approved by user1234@contoso.com",
             "actionsRequired": "None",
             "status": "Approved"
           },
           "provisioningState": "Succeeded"
         }
       }
+    },
+    "204": {
+      "headers": {}
     }
   },
-  "operationId": "PrivateEndpointConnections_Put",
-  "title": "KeyVaultPutPrivateEndpointConnection"
+  "operationId": "PrivateEndpointConnections_Get",
+  "title": "KeyVaultGetPrivateEndpointConnection"
 }

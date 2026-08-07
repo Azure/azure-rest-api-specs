@@ -1,22 +1,18 @@
 {
   "parameters": {
-    "name": "sample-managedhsm-name",
     "api-version": "2026-05-15",
     "keyName": "sample-key-name",
-    "parameters": {
-      "properties": {
-        "kty": "RSA"
-      }
-    },
     "resourceGroupName": "sample-group",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault-name"
   },
   "responses": {
     "200": {
       "body": {
         "name": "sample-key-name",
-        "type": "Microsoft.KeyVault/managedHSMs/keys",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-managedhsm-name/keys/sample-key-name",
+        "type": "Microsoft.KeyVault/vaults/keys",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault-name/keys/sample-key-name",
+        "location": "westus",
         "properties": {
           "attributes": {
             "created": 1598533051,
@@ -33,8 +29,8 @@
             "unwrapKey"
           ],
           "keySize": 2048,
-          "keyUri": "https://sample-managedhsm-name.managedhsm.azure.net:443/keys/sample-key-name",
-          "keyUriWithVersion": "https://sample-managedhsm-name.managedhsm.azure.net:443/keys/sample-key-name/fd618d9519b74f9aae94ade66b876acc",
+          "keyUri": "https://sample-vault-name.vault.azure.net:443/keys/sample-key-name",
+          "keyUriWithVersion": "https://sample-vault-name.vault.azure.net:443/keys/sample-key-name/fd618d9519b74f9aae94ade66b876acc",
           "kty": "RSA"
         }
       }
@@ -49,6 +45,6 @@
       "headers": {}
     }
   },
-  "operationId": "ManagedHsmKeys_CreateIfNotExist",
-  "title": "Create a key"
+  "operationId": "Keys_Get",
+  "title": "Get a key"
 }

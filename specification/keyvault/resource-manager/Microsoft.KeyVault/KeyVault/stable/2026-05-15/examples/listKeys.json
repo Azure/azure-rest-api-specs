@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "name": "sample-managedhsm-name",
     "api-version": "2026-05-15",
     "resourceGroupName": "sample-group",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault-name"
   },
   "responses": {
     "200": {
@@ -11,8 +11,9 @@
         "value": [
           {
             "name": "sample-key-name-1",
-            "type": "Microsoft.KeyVault/managedHSMs/keys",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-managedhsm-name/keys/sample-key-name-1",
+            "type": "Microsoft.KeyVault/vaults/keys",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault-name/keys/sample-key-name-1",
+            "location": "westus",
             "properties": {
               "attributes": {
                 "created": 1596493796,
@@ -20,13 +21,14 @@
                 "recoveryLevel": "Purgeable",
                 "updated": 1596493796
               },
-              "keyUri": "https://sample-managedhsm-name.managedhsm.azure.net:443/keys/sample-key-name-1"
+              "keyUri": "https://sample-vault-name.vault.azure.net:443/keys/sample-key-name-1"
             }
           },
           {
             "name": "sample-key-name-2",
-            "type": "Microsoft.KeyVault/managedHSMs/keys",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-managedhsm-name/keys/sample-key-name-2",
+            "type": "Microsoft.KeyVault/vaults/keys",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault-name/keys/sample-key-name-2",
+            "location": "westus",
             "properties": {
               "attributes": {
                 "created": 1596493797,
@@ -34,7 +36,7 @@
                 "recoveryLevel": "Purgeable",
                 "updated": 1596493797
               },
-              "keyUri": "https://sample-managedhsm-name.managedhsm.azure.net:443/keys/sample-key-name-2"
+              "keyUri": "https://sample-vault-name.vault.azure.net:443/keys/sample-key-name-2"
             }
           }
         ]
@@ -50,6 +52,6 @@
       "headers": {}
     }
   },
-  "operationId": "ManagedHsmKeys_List",
-  "title": "List keys in the managed HSM"
+  "operationId": "Keys_List",
+  "title": "List keys in the vault"
 }

@@ -2,18 +2,16 @@
   "parameters": {
     "name": "hsm1",
     "api-version": "2026-05-15",
-    "resourceGroupName": "hsm-group",
+    "location": "westus",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
-    "200": {},
     "202": {
       "headers": {
         "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/managedHsmOperationResults/00000000-0000-0000-0000-000000000000"
       }
-    },
-    "204": {}
+    }
   },
-  "operationId": "ManagedHsms_Delete",
-  "title": "Delete a managed HSM Pool"
+  "operationId": "ManagedHsms_PurgeDeleted",
+  "title": "Purge a managed HSM Pool"
 }
