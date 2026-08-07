@@ -6315,6 +6315,230 @@
         ]
       }
     },
+    "/evaluators/{name}/diagnostics": {
+      "get": {
+        "operationId": "Evaluators_listDiagnostics",
+        "summary": "List evaluator diagnostics",
+        "description": "Returns append-only diagnostic events for the specified evaluator.\n\nTime, version, dimension, content-hash, and event-type filters are intersected.\nTime and version bounds are inclusive. Version bounds use evaluator-version\nordering rather than lexical ordering. Repeat `event_type` to select multiple\nevent categories.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The evaluator name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by `occurred_at` and then event ID. The default is `desc` so an unbounded request returns the newest events first.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder",
+              "default": "desc"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive lower bound for the event occurrence time.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive upper bound for the event occurrence time.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "from_version",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive lower evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "to_version",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive upper evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "dimension_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter events for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "content_hash",
+            "in": "query",
+            "required": false,
+            "description": "Filter events that apply to one canonical functional evaluator state.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "explode": false
+          },
+          {
+            "name": "event_type",
+            "in": "query",
+            "required": false,
+            "description": "Filter by one or more event categories by repeating the query parameter.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EvaluatorDiagnosticEventType"
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvaluatorDiagnosticEvent"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
     "/evaluators/{name}/versions": {
       "get": {
         "operationId": "Evaluators_listVersions",
@@ -29385,6 +29609,60 @@
           ]
         }
       },
+      "CodeBasedEvaluatorDefinitionUpdate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "code"
+            ]
+          },
+          "code_text": {
+            "type": "string",
+            "description": "Inline code text for the evaluator"
+          },
+          "entry_point": {
+            "type": "string",
+            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          "image_tag": {
+            "type": "string",
+            "description": "The container image tag to use for evaluator code execution",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          "blob_uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The blob URI for the evaluator storage",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinitionUpdate"
+          }
+        ],
+        "description": "Code-based evaluator definition using python code",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "CodeConfiguration": {
         "type": "object",
         "required": [
@@ -31006,6 +31284,82 @@
           ]
         }
       },
+      "DefinitionUpdatedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "definition_updated"
+            ],
+            "description": "The event category."
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorFieldChange"
+            },
+            "minItems": 1,
+            "description": "The functional field changes applied by the event."
+          }
+        },
+        "description": "An event recording functional evaluator changes outside individual dimensions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "DeleteAgentResponse": {
         "type": "object",
         "required": [
@@ -31335,6 +31689,263 @@
           ]
         }
       },
+      "DimensionAddedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type",
+          "dimension_id",
+          "after"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dimension_added"
+            ],
+            "description": "The event category."
+          },
+          "dimension_id": {
+            "type": "string",
+            "description": "The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier."
+          },
+          "after": {
+            "$ref": "#/components/schemas/Dimension",
+            "description": "The resulting complete dimension snapshot."
+          },
+          "changed_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The public dimension fields changed by the event, when reported."
+          }
+        },
+        "description": "An event recording the addition of a rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "DimensionRemovedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type",
+          "dimension_id",
+          "before"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dimension_removed"
+            ],
+            "description": "The event category."
+          },
+          "dimension_id": {
+            "type": "string",
+            "description": "The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier."
+          },
+          "before": {
+            "$ref": "#/components/schemas/Dimension",
+            "description": "The complete dimension snapshot before removal."
+          },
+          "changed_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The public dimension fields changed by the event, when reported."
+          }
+        },
+        "description": "An event recording the removal of a rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "DimensionUpdatedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type",
+          "dimension_id",
+          "before",
+          "after"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dimension_updated"
+            ],
+            "description": "The event category."
+          },
+          "dimension_id": {
+            "type": "string",
+            "description": "The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier."
+          },
+          "before": {
+            "$ref": "#/components/schemas/Dimension",
+            "description": "The complete dimension snapshot before the update."
+          },
+          "after": {
+            "$ref": "#/components/schemas/Dimension",
+            "description": "The complete dimension snapshot after the update."
+          },
+          "changed_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The public dimension fields changed by the event, when reported."
+          }
+        },
+        "description": "An event recording an update to a rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "DispatchRoutineRequest": {
         "type": "object",
         "properties": {
@@ -31395,6 +32006,28 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EvaluatorDefinition"
+          }
+        ],
+        "description": "Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row."
+      },
+      "EndpointBasedEvaluatorDefinitionUpdate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "endpoint"
+            ]
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinitionUpdate"
           }
         ],
         "description": "Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row."
@@ -32783,6 +33416,297 @@
           ]
         }
       },
+      "EvaluatorDefinitionUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvaluatorDefinitionType",
+            "description": "The type of evaluator definition"
+          },
+          "init_parameters": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required."
+          },
+          "data_schema": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required."
+          },
+          "metrics": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/EvaluatorMetric"
+            },
+            "description": "List of output metrics produced by this evaluator"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "code": "#/components/schemas/CodeBasedEvaluatorDefinitionUpdate",
+            "prompt": "#/components/schemas/PromptBasedEvaluatorDefinitionUpdate",
+            "rubric": "#/components/schemas/RubricBasedEvaluatorDefinitionUpdate",
+            "endpoint": "#/components/schemas/EndpointBasedEvaluatorDefinitionUpdate"
+          }
+        },
+        "description": "Base evaluator configuration with discriminator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticActor": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActorType",
+            "description": "The type of actor."
+          },
+          "id": {
+            "type": "string",
+            "description": "A stable opaque principal or service identifier, when available."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A presentation name for the actor, when available."
+          }
+        },
+        "description": "The actor responsible for an evaluator diagnostic event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticActorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "user",
+              "service"
+            ]
+          }
+        ],
+        "description": "The type of actor responsible for an evaluator diagnostic event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticChangeType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "human_created",
+              "human_added",
+              "human_edited",
+              "human_removed",
+              "generated",
+              "regenerated",
+              "not_present_in_generated_rubric",
+              "generation_completed",
+              "manual_definition_changed",
+              "history_imported"
+            ]
+          }
+        ],
+        "description": "Known machine-readable classifications for evaluator diagnostic changes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticEvent": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VersionCreatedDiagnosticEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionAddedDiagnosticEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionUpdatedDiagnosticEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionRemovedDiagnosticEvent"
+          },
+          {
+            "$ref": "#/components/schemas/DefinitionUpdatedDiagnosticEvent"
+          },
+          {
+            "$ref": "#/components/schemas/HealthComputedDiagnosticEvent"
+          },
+          {
+            "$ref": "#/components/schemas/HealthInvalidatedDiagnosticEvent"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "version_created": "#/components/schemas/VersionCreatedDiagnosticEvent",
+            "dimension_added": "#/components/schemas/DimensionAddedDiagnosticEvent",
+            "dimension_updated": "#/components/schemas/DimensionUpdatedDiagnosticEvent",
+            "dimension_removed": "#/components/schemas/DimensionRemovedDiagnosticEvent",
+            "definition_updated": "#/components/schemas/DefinitionUpdatedDiagnosticEvent",
+            "health_computed": "#/components/schemas/HealthComputedDiagnosticEvent",
+            "health_invalidated": "#/components/schemas/HealthInvalidatedDiagnosticEvent"
+          }
+        },
+        "description": "An append-only evaluator version, dimension, definition, or rubric health diagnostic event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticEventType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "version_created",
+              "dimension_added",
+              "dimension_updated",
+              "dimension_removed",
+              "definition_updated",
+              "health_computed",
+              "health_invalidated"
+            ]
+          }
+        ],
+        "description": "The supported evaluator diagnostic event categories.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticMessage": {
+        "type": "object",
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticMessageCode",
+            "description": "A stable searchable message code."
+          },
+          "severity": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticMessageSeverity",
+            "description": "The message severity."
+          },
+          "component": {
+            "type": "string",
+            "description": "The health component associated with the message, when applicable."
+          },
+          "message": {
+            "type": "string",
+            "description": "Bounded deterministic display text that does not contain raw evaluator evidence."
+          }
+        },
+        "description": "A deterministic detail associated with an evaluator diagnostic event.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticMessageCode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "low_diversity",
+              "low_coverage",
+              "low_failure_path_coverage",
+              "low_confidence_no_evaluation_evidence",
+              "low_confidence_no_human_evidence",
+              "health_improved",
+              "health_decreased",
+              "health_invalidated_after_manual_edit"
+            ]
+          }
+        ],
+        "description": "Stable searchable codes for evaluator diagnostic messages.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticMessageSeverity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "info",
+              "warning"
+            ]
+          }
+        ],
+        "description": "The severity of an evaluator diagnostic message.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorFieldChange": {
+        "type": "object",
+        "required": [
+          "field",
+          "before",
+          "after"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "A stable path identifying the changed field."
+          },
+          "before": {
+            "description": "The field's prior JSON value."
+          },
+          "after": {
+            "description": "The field's resulting JSON value."
+          }
+        },
+        "description": "A change to one functional evaluator field.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluatorGenerationArtifacts": {
         "type": "object",
         "required": [
@@ -33115,6 +34039,7 @@
           "evaluator_type",
           "categories",
           "definition",
+          "content_hash",
           "created_by",
           "created_at",
           "modified_at",
@@ -33174,6 +34099,12 @@
               "$ref": "#/components/schemas/GenerationWarningType"
             },
             "description": "Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.",
+            "readOnly": true
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content projection. Equal values indicate canonical functional-content equality, not semantic equivalence. This value is not an HTTP ETag and does not provide concurrency control.",
             "readOnly": true
           },
           "created_by": {
@@ -33307,6 +34238,10 @@
             "default": [
               "turn"
             ]
+          },
+          "definition": {
+            "$ref": "#/components/schemas/EvaluatorDefinitionUpdate",
+            "description": "Definition of the evaluator"
           },
           "description": {
             "type": "string",
@@ -34081,6 +35016,167 @@
           }
         ],
         "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header."
+      },
+      "HealthComputedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type",
+          "health"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "health_computed"
+            ],
+            "description": "The event category."
+          },
+          "health": {
+            "$ref": "#/components/schemas/RubricHealth",
+            "description": "The computed rubric health snapshot."
+          },
+          "previous_health": {
+            "$ref": "#/components/schemas/RubricHealth",
+            "description": "The preceding comparable rubric health snapshot, when available."
+          },
+          "delta": {
+            "$ref": "#/components/schemas/RubricHealthDelta",
+            "description": "Numeric changes from the previous comparable health snapshot."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorDiagnosticMessage"
+            },
+            "description": "Component-level diagnostic details associated with the computation."
+          }
+        },
+        "description": "An event recording a rubric health computation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "HealthInvalidatedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "health_invalidated"
+            ],
+            "description": "The event category."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorDiagnosticMessage"
+            },
+            "description": "Component-level diagnostic details associated with the invalidation."
+          }
+        },
+        "description": "An event recording that a prior rubric health snapshot no longer applies.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "HostedAgentDefinition": {
         "type": "object",
@@ -74417,6 +75513,32 @@
           ]
         }
       },
+      "PromptBasedEvaluatorDefinitionUpdate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ]
+          },
+          "prompt_text": {
+            "type": "string",
+            "description": "The prompt text used for evaluation"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinitionUpdate"
+          }
+        ],
+        "description": "Prompt-based evaluator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "PromptDataGenerationJobSource": {
         "type": "object",
         "required": [
@@ -75420,6 +76542,43 @@
           ]
         }
       },
+      "RubricBasedEvaluatorDefinitionUpdate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "rubric"
+            ]
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dimension"
+            },
+            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+          },
+          "pass_threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.",
+            "default": 0.5
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinitionUpdate"
+          }
+        ],
+        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "RubricGenerationInputQualityWarning": {
         "type": "object",
         "required": [
@@ -75520,6 +76679,156 @@
           }
         ],
         "description": "Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricHealth": {
+        "type": "object",
+        "properties": {
+          "diversity": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Normalized non-redundancy among rubric dimensions. Higher values indicate greater diversity."
+          },
+          "coverage": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Normalized coverage of concepts found in the evaluator-generation sources."
+          },
+          "negative_vs_positive": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Failure-path coverage normalized against the service's configured target fraction. A value of 1.0 means the target was met or exceeded."
+          },
+          "overall": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Normalized aggregate health score. Omitted when required component signals are unavailable."
+          },
+          "confidence": {
+            "$ref": "#/components/schemas/RubricHealthConfidence",
+            "description": "The completeness of the evidence used to compute the health signals."
+          },
+          "computation": {
+            "$ref": "#/components/schemas/RubricHealthComputationMetadata",
+            "description": "Information identifying the algorithm and vectorizer used to compute the health signals."
+          }
+        },
+        "description": "Service-generated health signals for a rubric evaluator.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricHealthComputationMetadata": {
+        "type": "object",
+        "required": [
+          "algorithm_version",
+          "vectorizer",
+          "similarity_metric"
+        ],
+        "properties": {
+          "algorithm_version": {
+            "type": "string",
+            "description": "The version of the rubric-health component definitions, normalization, and aggregate coefficients."
+          },
+          "vectorizer": {
+            "type": "string",
+            "description": "A stable identifier for the vectorizer or embedding model used to compute diversity and coverage."
+          },
+          "vectorizer_version": {
+            "type": "string",
+            "description": "The model snapshot or implementation revision of the vectorizer, when available independently from the vectorizer identifier."
+          },
+          "similarity_metric": {
+            "$ref": "#/components/schemas/RubricHealthSimilarityMetric",
+            "description": "The similarity metric used with the generated vectors."
+          }
+        },
+        "description": "Service-generated information about how rubric health was computed.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricHealthConfidence": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "low",
+              "med",
+              "high"
+            ]
+          }
+        ],
+        "description": "The completeness of the evidence used to compute rubric health.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricHealthDelta": {
+        "type": "object",
+        "properties": {
+          "diversity": {
+            "type": "number",
+            "format": "float",
+            "description": "The change in dimension diversity."
+          },
+          "coverage": {
+            "type": "number",
+            "format": "float",
+            "description": "The change in source coverage."
+          },
+          "negative_vs_positive": {
+            "type": "number",
+            "format": "float",
+            "description": "The change in normalized failure-path coverage."
+          },
+          "overall": {
+            "type": "number",
+            "format": "float",
+            "description": "The change in aggregate rubric health."
+          }
+        },
+        "description": "Numeric rubric health changes computed as current minus previous.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricHealthSimilarityMetric": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "cosine"
+            ]
+          }
+        ],
+        "description": "Similarity metrics used to compute rubric health.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -77721,6 +79030,81 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "VersionCreatedDiagnosticEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "change_id",
+          "evaluator_name",
+          "evaluator_version",
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A stable lexicographically sortable event identifier that can be used as a pagination cursor."
+          },
+          "change_id": {
+            "type": "string",
+            "description": "An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The evaluator name associated with the event."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The project-local evaluator version associated with the event."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the event occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the event."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the event occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the event."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "version_created"
+            ],
+            "description": "The event category."
+          },
+          "prior_version": {
+            "type": "string",
+            "description": "The preceding evaluator version, when one exists."
+          },
+          "generation_job_id": {
+            "type": "string",
+            "description": "The evaluator generation job that created the version, when applicable."
+          }
+        },
+        "description": "An event recording the creation of an evaluator version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
           ]
         }
       },

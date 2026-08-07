@@ -147,6 +147,76 @@ model Dimension {
   always_applicable?: boolean = false;
 }
 
+@doc("The completeness of the evidence used to compute rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricHealthConfidence {
+  string,
+
+  @doc("The health signals contain structural evidence only or are otherwise insufficiently supported.")
+  low: "low",
+
+  @doc("The health signals contain structural evidence and sufficient evaluation evidence.")
+  med: "med",
+
+  @doc("The health signals contain structural evidence, sufficient evaluation evidence, and sufficient human annotation evidence.")
+  high: "high",
+}
+
+@doc("Similarity metrics used to compute rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricHealthSimilarityMetric {
+  string,
+
+  @doc("Cosine similarity.")
+  cosine: "cosine",
+}
+
+@doc("Service-generated information about how rubric health was computed.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealthComputationMetadata {
+  @doc("The version of the rubric-health component definitions, normalization, and aggregate coefficients.")
+  algorithm_version: string;
+
+  @doc("A stable identifier for the vectorizer or embedding model used to compute diversity and coverage.")
+  vectorizer: string;
+
+  @doc("The model snapshot or implementation revision of the vectorizer, when available independently from the vectorizer identifier.")
+  vectorizer_version?: string;
+
+  @doc("The similarity metric used with the generated vectors.")
+  similarity_metric: RubricHealthSimilarityMetric;
+}
+
+@doc("Service-generated health signals for a rubric evaluator.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealth {
+  @doc("Normalized non-redundancy among rubric dimensions. Higher values indicate greater diversity.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  diversity?: float32;
+
+  @doc("Normalized coverage of concepts found in the evaluator-generation sources.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  coverage?: float32;
+
+  @doc("Failure-path coverage normalized against the service's configured target fraction. A value of 1.0 means the target was met or exceeded.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  negative_vs_positive?: float32;
+
+  @doc("Normalized aggregate health score. Omitted when required component signals are unavailable.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  overall?: float32;
+
+  @doc("The completeness of the evidence used to compute the health signals.")
+  confidence?: RubricHealthConfidence;
+
+  @doc("Information identifying the algorithm and vectorizer used to compute the health signals.")
+  computation?: RubricHealthComputationMetadata;
+}
+
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
@@ -159,6 +229,360 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold?: float32 = 0.5;
+}
+
+// ============================================================================
+// Evaluator diagnostics
+// ============================================================================
+
+@doc("The type of actor responsible for an evaluator diagnostic event.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticActorType {
+  string,
+
+  @doc("An authenticated user initiated the change.")
+  user: "user",
+
+  @doc("A Foundry service component initiated the change or computation.")
+  service: "service",
+}
+
+@doc("The actor responsible for an evaluator diagnostic event.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnosticActor {
+  @doc("The type of actor.")
+  type: EvaluatorDiagnosticActorType;
+
+  @doc("A stable opaque principal or service identifier, when available.")
+  id?: string;
+
+  @doc("A presentation name for the actor, when available.")
+  display_name?: string;
+}
+
+@doc("The severity of an evaluator diagnostic message.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticMessageSeverity {
+  string,
+
+  @doc("Informational diagnostic detail.")
+  info: "info",
+
+  @doc("A diagnostic condition that may require attention.")
+  warning: "warning",
+}
+
+@doc("Stable searchable codes for evaluator diagnostic messages.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticMessageCode {
+  string,
+
+  @doc("Rubric dimensions have low measured diversity.")
+  low_diversity: "low_diversity",
+
+  @doc("The rubric has low measured source coverage.")
+  low_coverage: "low_coverage",
+
+  @doc("The rubric has low measured failure-path coverage.")
+  low_failure_path_coverage: "low_failure_path_coverage",
+
+  @doc("Health confidence is low because evaluation evidence is unavailable.")
+  low_confidence_no_evaluation_evidence: "low_confidence_no_evaluation_evidence",
+
+  @doc("Health confidence is low because human evidence is unavailable.")
+  low_confidence_no_human_evidence: "low_confidence_no_human_evidence",
+
+  @doc("Rubric health improved compared with the previous comparable computation.")
+  health_improved: "health_improved",
+
+  @doc("Rubric health decreased compared with the previous comparable computation.")
+  health_decreased: "health_decreased",
+
+  @doc("A manual evaluator definition change invalidated the prior health snapshot.")
+  health_invalidated_after_manual_edit: "health_invalidated_after_manual_edit",
+}
+
+@doc("A deterministic detail associated with an evaluator diagnostic event.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnosticMessage {
+  @doc("A stable searchable message code.")
+  code: EvaluatorDiagnosticMessageCode;
+
+  @doc("The message severity.")
+  severity: EvaluatorDiagnosticMessageSeverity;
+
+  @doc("The health component associated with the message, when applicable.")
+  component?: string;
+
+  @doc("Bounded deterministic display text that does not contain raw evaluator evidence.")
+  message: string;
+}
+
+@doc("Known machine-readable classifications for evaluator diagnostic changes.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticChangeType {
+  string,
+
+  @doc("A user created an evaluator version.")
+  human_created: "human_created",
+
+  @doc("A user added a rubric dimension.")
+  human_added: "human_added",
+
+  @doc("A user changed evaluator functional content.")
+  human_edited: "human_edited",
+
+  @doc("A user removed a rubric dimension.")
+  human_removed: "human_removed",
+
+  @doc("Evaluator generation created the resulting content.")
+  generated: "generated",
+
+  @doc("Evaluator generation changed an existing dimension.")
+  regenerated: "regenerated",
+
+  @doc("The generated rubric no longer contained an existing dimension.")
+  not_present_in_generated_rubric: "not_present_in_generated_rubric",
+
+  @doc("Rubric health was computed after evaluator generation completed.")
+  generation_completed: "generation_completed",
+
+  @doc("A manual functional definition change invalidated prior rubric health.")
+  manual_definition_changed: "manual_definition_changed",
+
+  @doc("The event is a baseline imported from legacy evaluator history.")
+  history_imported: "history_imported",
+}
+
+@doc("The supported evaluator diagnostic event categories.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticEventType {
+  string,
+
+  @doc("An evaluator version was created.")
+  version_created: "version_created",
+
+  @doc("A rubric dimension was added.")
+  dimension_added: "dimension_added",
+
+  @doc("A rubric dimension was updated.")
+  dimension_updated: "dimension_updated",
+
+  @doc("A rubric dimension was removed.")
+  dimension_removed: "dimension_removed",
+
+  @doc("Functional evaluator fields outside individual dimensions were updated.")
+  definition_updated: "definition_updated",
+
+  @doc("Rubric health was computed.")
+  health_computed: "health_computed",
+
+  @doc("A prior rubric health snapshot was invalidated.")
+  health_invalidated: "health_invalidated",
+}
+
+/** Fields shared by every evaluator diagnostic event. */
+alias EvaluatorDiagnosticEventProperties = {
+  @doc("A stable lexicographically sortable event identifier that can be used as a pagination cursor.")
+  id: string;
+
+  @doc("An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.")
+  change_id: string;
+
+  @doc("The evaluator name associated with the event.")
+  evaluator_name: string;
+
+  @doc("The project-local evaluator version associated with the event.")
+  evaluator_version: string;
+
+  @doc("The server-recorded time when the event occurred.")
+  occurred_at: utcDateTime;
+
+  @doc("The user or service responsible for the event.")
+  actor: EvaluatorDiagnosticActor;
+
+  @doc("A stable machine-readable classification describing why the event occurred.")
+  change_type: EvaluatorDiagnosticChangeType;
+
+  @doc("A bounded deterministic summary of the event.")
+  explanation?: string;
+
+  @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.")
+  @pattern("^[0-9a-f]{64}$")
+  content_hash: string;
+};
+
+@doc("A change to one functional evaluator field.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorFieldChange {
+  @doc("A stable path identifying the changed field.")
+  field: string;
+
+  @doc("The field's prior JSON value.")
+  before: unknown;
+
+  @doc("The field's resulting JSON value.")
+  after: unknown;
+}
+
+@doc("Numeric rubric health changes computed as current minus previous.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealthDelta {
+  @doc("The change in dimension diversity.")
+  diversity?: float32;
+
+  @doc("The change in source coverage.")
+  coverage?: float32;
+
+  @doc("The change in normalized failure-path coverage.")
+  negative_vs_positive?: float32;
+
+  @doc("The change in aggregate rubric health.")
+  overall?: float32;
+}
+
+@doc("An event recording the creation of an evaluator version.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model VersionCreatedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "version_created";
+
+  @doc("The preceding evaluator version, when one exists.")
+  prior_version?: string;
+
+  @doc("The evaluator generation job that created the version, when applicable.")
+  generation_job_id?: string;
+}
+
+@doc("An event recording the addition of a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionAddedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "dimension_added";
+
+  @doc("The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.")
+  dimension_id: string;
+
+  @doc("The resulting complete dimension snapshot.")
+  after: Dimension;
+
+  @doc("The public dimension fields changed by the event, when reported.")
+  changed_fields?: string[];
+}
+
+@doc("An event recording an update to a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionUpdatedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "dimension_updated";
+
+  @doc("The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.")
+  dimension_id: string;
+
+  @doc("The complete dimension snapshot before the update.")
+  before: Dimension;
+
+  @doc("The complete dimension snapshot after the update.")
+  after: Dimension;
+
+  @doc("The public dimension fields changed by the event, when reported.")
+  changed_fields?: string[];
+}
+
+@doc("An event recording the removal of a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionRemovedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "dimension_removed";
+
+  @doc("The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.")
+  dimension_id: string;
+
+  @doc("The complete dimension snapshot before removal.")
+  before: Dimension;
+
+  @doc("The public dimension fields changed by the event, when reported.")
+  changed_fields?: string[];
+}
+
+@doc("An event recording functional evaluator changes outside individual dimensions.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DefinitionUpdatedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "definition_updated";
+
+  @doc("The functional field changes applied by the event.")
+  @minItems(1)
+  changes: EvaluatorFieldChange[];
+}
+
+@doc("An event recording a rubric health computation.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model HealthComputedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "health_computed";
+
+  @doc("The computed rubric health snapshot.")
+  health: RubricHealth;
+
+  @doc("The preceding comparable rubric health snapshot, when available.")
+  previous_health?: RubricHealth;
+
+  @doc("Numeric changes from the previous comparable health snapshot.")
+  delta?: RubricHealthDelta;
+
+  @doc("Component-level diagnostic details associated with the computation.")
+  messages?: EvaluatorDiagnosticMessage[];
+}
+
+@doc("An event recording that a prior rubric health snapshot no longer applies.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model HealthInvalidatedDiagnosticEvent {
+  ...EvaluatorDiagnosticEventProperties;
+
+  @doc("The event category.")
+  type: "health_invalidated";
+
+  @doc("Component-level diagnostic details associated with the invalidation.")
+  messages?: EvaluatorDiagnosticMessage[];
+}
+
+@doc("An append-only evaluator version, dimension, definition, or rubric health diagnostic event.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticEvent {
+  @doc("An evaluator version creation event.")
+  version_created: VersionCreatedDiagnosticEvent,
+
+  @doc("A rubric dimension addition event.")
+  dimension_added: DimensionAddedDiagnosticEvent,
+
+  @doc("A rubric dimension update event.")
+  dimension_updated: DimensionUpdatedDiagnosticEvent,
+
+  @doc("A rubric dimension removal event.")
+  dimension_removed: DimensionRemovedDiagnosticEvent,
+
+  @doc("A functional evaluator definition update event.")
+  definition_updated: DefinitionUpdatedDiagnosticEvent,
+
+  @doc("A rubric health computation event.")
+  health_computed: HealthComputedDiagnosticEvent,
+
+  @doc("A rubric health invalidation event.")
+  health_invalidated: HealthInvalidatedDiagnosticEvent,
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -429,7 +853,7 @@ model EvaluatorVersion {
   supported_evaluation_levels?: EvaluationLevel[] = #[EvaluationLevel.turn];
 
   @doc("Definition of the evaluator")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   definition: EvaluatorDefinition;
 
   @doc("Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.")
@@ -443,6 +867,11 @@ model EvaluatorVersion {
   @doc("Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
   @visibility(Lifecycle.Read)
   warnings?: GenerationWarningType[];
+
+  @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content projection. Equal values indicate canonical functional-content equality, not semantic equivalence. This value is not an HTTP ETag and does not provide concurrency control.")
+  @visibility(Lifecycle.Read)
+  @pattern("^[0-9a-f]{64}$")
+  content_hash: string;
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")

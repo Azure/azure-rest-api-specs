@@ -3,8 +3,39 @@
   "operationId": "Evaluators_UpdateEvaluatorVersion",
   "parameters": {
     "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
     "name": "olgmppv",
-    "version": "rwvwbaneomtfpbhnwqqesyr"
+    "version": "rwvwbaneomtfpbhnwqqesyr",
+    "evaluator": {
+      "definition": {
+        "type": "prompt",
+        "prompt_text": "Rate the response on a scale from 1 to 10 and explain the rationale.",
+        "data_schema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "response": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "query",
+            "response"
+          ]
+        },
+        "metrics": {
+          "key2527": {
+            "type": "ordinal",
+            "desirable_direction": "increase",
+            "min_value": 19,
+            "max_value": 23,
+            "is_primary": true
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -13,13 +44,14 @@
         "metadata": {
           "key8046": "nvatafccfjdslevuxmcmhsg"
         },
+        "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
         "evaluator_type": "custom",
         "categories": [
           "quality"
         ],
         "definition": {
           "type": "prompt",
-          "prompt_text": "Rate the response on a scale from 1 to 10.",
+          "prompt_text": "Rate the response on a scale from 1 to 10 and explain the rationale.",
           "data_schema": {
             "type": "object",
             "properties": {
