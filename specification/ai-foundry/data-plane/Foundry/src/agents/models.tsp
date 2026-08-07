@@ -270,7 +270,7 @@ model AgentDefinition {
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
-  @doc("The execution harness for the agent. When omitted (the default), the request is served by the existing prompt agent runtime. When set to `ghcp`, the agent runs on the GHCP-SDK based managed runtime.")
+  @doc("The execution harness for the agent. When omitted (the default), the request is served by the existing prompt agent runtime.")
   harness?: AgentHarness;
 
   @doc("The model deployment to use for this agent.")
