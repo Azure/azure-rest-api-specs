@@ -2006,12 +2006,12 @@ model MonitorLogV2 {
   /**
    * ARM resource ID of the Data Collection Rule (DCR) that governs how these logs are transformed and routed.
    */
-  dcrId: string;
+  dcrId: Azure.Core.armResourceIdentifier;
 
   /**
    * HTTPS logs ingestion endpoint that receives the data (the DCR's logs ingestion endpoint or its Data Collection Endpoint).
    */
-  logIngestionEndpoint: string;
+  logIngestionEndpoint: url;
 
   /**
    * Immutable ID of the Data Collection Rule (the value that begins with `dcr-`).
