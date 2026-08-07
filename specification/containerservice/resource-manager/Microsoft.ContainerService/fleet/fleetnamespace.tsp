@@ -220,7 +220,24 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 
+  @sharedRoute
+  @removed(Versions.v2026_06_02_preview)
   update is ArmCustomPatchAsync<
+    FleetManagedNamespace,
+    FleetManagedNamespacePatch,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify final-state-via for LRO polling"
+  @sharedRoute
+  @added(Versions.v2026_06_02_preview)
+  @operationId("FleetManagedNamespaces_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "original-uri" }
+  )
+  updateAsync is ArmCustomPatchAsync<
     FleetManagedNamespace,
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
@@ -233,4 +250,24 @@ interface FleetManagedNamespaces {
 model FleetManagedNamespacePatch {
   /* The ARM tags of the fleet managed namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @added(Versions.v2026_06_02_preview)
+  @doc("The updatable properties of the fleet managed namespace.")
+  properties?: FleetManagedNamespacePropertiesPatch;
+}
+
+@added(Versions.v2026_06_02_preview)
+@doc("The properties of a fleet managed namespace that can be patched.")
+model FleetManagedNamespacePropertiesPatch {
+  @doc("The namespace properties for the fleet managed namespace.")
+  managedNamespaceProperties?: ManagedNamespaceProperties;
+
+  @doc("Action if the managed namespace with the same name already exists.")
+  adoptionPolicy?: AdoptionPolicy;
+
+  @doc("Delete options of a fleet managed namespace.")
+  deletePolicy?: DeletePolicy;
+
+  @doc("The profile of the propagation to create the namespace.")
+  propagationPolicy?: PropagationPolicy;
 }
