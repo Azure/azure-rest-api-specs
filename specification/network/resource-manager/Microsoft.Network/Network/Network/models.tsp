@@ -6399,6 +6399,12 @@ model ApplicationGatewayPropertiesFormat {
   autoscaleConfiguration?: ApplicationGatewayAutoscaleConfiguration;
 
   /**
+   * The reserved capacity of the application gateway resource. Applicable to the Basic_v2 and Basic_WAF_v2 SKU tiers.
+   */
+  @added(Versions.v2025_09_01)
+  reservedCapacity?: int32;
+
+  /**
    * PrivateLink configurations on application gateway.
    */
   privateLinkConfigurations?: ApplicationGatewayPrivateLinkConfiguration[];
