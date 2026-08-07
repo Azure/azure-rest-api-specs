@@ -5315,6 +5315,7 @@ model GetItemCollectionOptions {
 }
 
 /** Grouped-parameter override for `getItemCollection`. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getItemCollectionOverride(
   ...Azure.Core.Foundations.ApiVersionParameter,
 
