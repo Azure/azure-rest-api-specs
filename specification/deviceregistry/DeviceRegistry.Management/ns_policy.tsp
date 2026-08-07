@@ -12,14 +12,6 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
-//
-// Old (public) Policy lineage — preserved exactly for published versions.
-// Divergent-shape types are renamed to *V1 with @renamedFrom so their emitted
-// swagger names remain unchanged, freeing the clean identifiers for the
-// 2026-11 revival (base type ProxyResource -> TrackedResource, +uuid, leaf
-// certificate validity max 90 -> 30).
-//
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.TrackedResourceWithOptionalLocation to make location property optional for backward compatibility"
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_03_01_preview)
@@ -28,7 +20,7 @@ namespace Microsoft.DeviceRegistry;
 @doc("A Credential Policy")
 @parentResource(Credential)
 model PolicyV1
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PolicyPropertiesV1> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PolicyProperties> {
   @doc("The name of the Policy tracked resource.")
   @minLength(3)
   @maxLength(63)
@@ -41,10 +33,9 @@ model PolicyV1
 
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
-@renamedFrom(Versions.v2026_04_01, "Policy")
 @doc("A Credential Policy")
 @parentResource(Credential)
-model PolicyProxyV2 is ProxyResource<PolicyPropertiesV1> {
+model Policy is ProxyResource<PolicyProperties> {
   @doc("The name of the Policy proxy resource.")
   @minLength(3)
   @maxLength(63)
@@ -57,49 +48,29 @@ model PolicyProxyV2 is ProxyResource<PolicyPropertiesV1> {
 
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
-@renamedFrom(Versions.v2026_04_01, "PolicyProperties")
 @doc("Details of the Credential Policy.")
-model PolicyPropertiesV1 {
+model PolicyProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("The certificate configuration.")
-  certificate?: CertificateConfigurationV1;
+  certificate?: CertificateConfiguration;
 }
 
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
-@renamedFrom(Versions.v2026_04_01, "CertificateConfiguration")
 @doc("The certificate configuration.")
-model CertificateConfigurationV1 {
+model CertificateConfiguration {
   @doc("The configuration to set up an ICA.")
   certificateAuthorityConfiguration: CertificateAuthorityConfiguration;
 
   @doc("The leaf certificate configuration.")
-  leafCertificateConfiguration: LeafCertificateConfigurationV1;
+  leafCertificateConfiguration: LeafCertificateConfiguration;
 }
 
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
-@renamedFrom(Versions.v2026_04_01, "LeafCertificateConfiguration")
-@doc("The leaf certificate configuration.")
-model LeafCertificateConfigurationV1 {
-  @doc("The validity period in days.")
-  @minValue(7)
-  @maxValue(90)
-  validityPeriodInDays: int32;
-}
-
-//
-// Shared property models — identical (or doc-only different) shapes across the
-// old lineage and the 2026-11 revival, so a single multi-window declaration is
-// used (removed at 2026-04, re-added at 2026-11).
-//
-
-@added(Versions.v2025_11_01_preview)
-@removed(Versions.v2026_04_01)
-@added(Versions.v2026_11_01_preview)
 @doc("The configuration to set up an ICA.")
 model CertificateAuthorityConfiguration {
   @doc("Crypto type: ECC.")
@@ -125,7 +96,6 @@ model CertificateAuthorityConfiguration {
 
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
-@added(Versions.v2026_11_01_preview)
 @doc("Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
 model BringYourOwnRoot {
   @doc("Indicates whether Bring Your Own Root is enabled. This can only be set at creation time and cannot be changed afterward.")
@@ -147,7 +117,6 @@ model BringYourOwnRoot {
 
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_04_01)
-@added(Versions.v2026_11_01_preview)
 @doc("Supported key types.")
 union SupportedKeyType {
   string,
@@ -156,9 +125,18 @@ union SupportedKeyType {
   ECC: "ECC",
 }
 
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("The leaf certificate configuration.")
+model LeafCertificateConfiguration {
+  @doc("The validity period in days.")
+  @minValue(7)
+  @maxValue(90)
+  validityPeriodInDays: int32;
+}
+
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
-@added(Versions.v2026_11_01_preview)
 @doc("Status of the Bring Your Own Root configuration.")
 union BringYourOwnRootStatus {
   string,
@@ -176,73 +154,14 @@ union BringYourOwnRootStatus {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
-@added(Versions.v2026_11_01_preview)
 @doc("Request payload for activating a Bring Your Own Root policy with a customer-provided signed certificate.")
 model ActivateBringYourOwnRootRequest {
   @doc("Certificate chain in PEM format, including the signed certificate. The first certificate must be the signed certificate (matching the CSR generated by the service), followed by any intermediate CAs, and optionally the root CA. Certificates must be ordered from leaf to root and concatenated in PEM format.")
   certificateChain: string;
 }
 
-//
-// 2026-11 Policy revival — TrackedResource (was ProxyResource), +uuid,
-// leaf certificate validity max 30 (was 90). Distinct declarations reusing the
-// clean identifiers; they emit the same swagger names in the 2026-11 window.
-//
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing pattern kept for backward compatibility"
-@added(Versions.v2026_11_01_preview)
-@doc("A Credential Policy")
-@parentResource(Credential)
-model Policy is Azure.ResourceManager.TrackedResource<PolicyProperties> {
-  @doc("The name of the Policy tracked resource.")
-  @minLength(3)
-  @maxLength(63)
-  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
-  @key("policyName")
-  @segment("policies")
-  @path
-  name: string;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("Details of the Credential Policy.")
-model PolicyProperties {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
-
-  @doc("The certificate configuration.")
-  certificate?: CertificateConfiguration;
-
-  @visibility(Lifecycle.Read)
-  @doc("Globally unique, immutable, non-reusable identifier of the Policy resource.")
-  uuid?: string;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("The certificate configuration.")
-model CertificateConfiguration {
-  @doc("The configuration to set up an ICA.")
-  certificateAuthorityConfiguration: CertificateAuthorityConfiguration;
-
-  @doc("The leaf certificate configuration.")
-  leafCertificateConfiguration: LeafCertificateConfiguration;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("The leaf certificate configuration.")
-model LeafCertificateConfiguration {
-  @doc("The validity period in days.")
-  @minValue(7)
-  @maxValue(30)
-  validityPeriodInDays: int32;
-}
-
-//
-// Operations.
-//
-
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_03_01_preview)
+@removed(Versions.v2026_04_01)
 @armResourceOperations(Policy)
 interface Policies {
   @sharedRoute
@@ -251,9 +170,6 @@ interface Policies {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
   #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @sharedRoute
   @patch(#{ implicitOptionality: true })
@@ -265,54 +181,14 @@ interface Policies {
     >
   >;
   @sharedRoute
-  listByCredential is ArmResourceListByParent<Policy>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @sharedRoute
-  @doc("Activates a Bring Your Own Root (BYOR) certificate authority on a Credential Policy by merging a customer-supplied certificate chain into the policy's ICA.")
-  activateBringYourOwnRoot is ArmResourceActionNoContentAsync<
-    Policy,
-    ActivateBringYourOwnRootRequest
-  >;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @sharedRoute
-  @doc("Revokes the current issuing certificate authority for a Credential Policy.")
-  revokeIssuer is ArmResourceActionNoContentAsync<Policy, void>;
-}
-
-@added(Versions.v2026_03_01_preview)
-@removed(Versions.v2026_04_01)
-@renamedFrom(Versions.v2026_04_01, "Policies")
-@armResourceOperations(PolicyProxyV2)
-interface PoliciesProxyV2 {
-  @sharedRoute
-  get is ArmResourceRead<PolicyProxyV2>;
-  @sharedRoute
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<PolicyProxyV2>;
-  @sharedRoute
-  delete is ArmResourceDeleteWithoutOkAsync<PolicyProxyV2>;
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
-  @sharedRoute
-  @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    PolicyProxyV2,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      PolicyProxyV2,
-      PolicyPropertiesV1
-    >
-  >;
-  @sharedRoute
-  listByResourceGroup is ArmResourceListByParent<PolicyProxyV2>;
+  listByResourceGroup is ArmResourceListByParent<Policy>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
-  @sharedRoute
   @doc("A long-running resource action.")
-  revokeIssuer is ArmResourceActionNoContentAsync<PolicyProxyV2, void>;
+  revokeIssuer is ArmResourceActionNoContentAsync<Policy, void>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
-  @sharedRoute
   @doc("Activates or renews a Bring Your Own Root policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.")
   activateBringYourOwnRoot is ArmResourceActionNoContentAsync<
-    PolicyProxyV2,
+    Policy,
     ActivateBringYourOwnRootRequest
   >;
 }
@@ -339,7 +215,7 @@ interface PoliciesV1 {
     PolicyV1,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       PolicyV1,
-      PolicyPropertiesV1
+      PolicyProperties
     >
   >;
   @sharedRoute
