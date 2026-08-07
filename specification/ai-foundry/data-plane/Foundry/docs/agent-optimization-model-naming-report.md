@@ -1,13 +1,13 @@
 # Agent Optimization Model Naming Report
 
-This report records the rename of the `Optimization*` unions and models associated with the Agent Optimization operations in [`src/agents-optimization/routes.tsp`](../src/agents-optimization/routes.tsp). It distinguishes types that are transitively reachable from an operation schema from similarly named declarations that remain unchanged because they are currently unused.
+This report records the rename of the `Optimization*` unions and models associated with the Agent Optimization operations in [`src/agents-optimization/routes.tsp`](../src/agents-optimization/routes.tsp). It distinguishes types that are transitively reachable from an operation schema from similarly named declarations that were removed because they were unused.
 
 ## Summary
 
 - The interface defines five operations: `create`, `get`, `list`, `cancel`, and `delete`.
 - Four operations reference an Agent Optimization schema directly. `delete` has no Agent Optimization model in its signature.
 - Fifteen operation-reachable `Optimization*` declarations were renamed to `AgentOptimization*`: one union and fourteen models.
-- Three additional `Optimization*` declarations are defined in the feature's model file but are not referenced by an operation or another model.
+- Three additional unreferenced `Optimization*` declarations were removed from the feature's model file.
 - The singular `AgentOptimization*` prefix matches the existing `AgentOptimizationJobs` interface and `AgentOptimizationRequiredPreviews` constant.
 
 ## Operation Entry Points
@@ -68,17 +68,15 @@ AgentOptimizationJobInputs
 
 `PromotionInfo` is shown for completeness but is not a rename candidate because it does not start with `Optimization`.
 
-## Same-Folder Types Not Associated with Operations
+## Removed Unreferenced Types
 
-These declarations match the naming pattern, but no route or model references them. They are excluded from the fifteen operation-reachable candidates.
+These declarations matched the naming pattern, but no route or model referenced them. They were removed instead of renamed and are excluded from the fifteen operation-reachable renames.
 
-| Kind | Current name | Mechanical proposed name | Current references |
-| --- | --- | --- | --- |
-| Union | `OptimizationMode` | `AgentOptimizationMode` | Declaration only |
-| Model | `OptimizationAgentDefinition` | `AgentOptimizationAgentDefinition` | Declaration only |
-| Model | `OptimizationTaskResult` | `AgentOptimizationTaskResult` | Declaration only |
-
-These three were not renamed. Before changing them, confirm whether they are intentionally reserved for future API expansion or should instead be removed. A mechanical prefix would produce a repeated `Agent` in `AgentOptimizationAgentDefinition`; a domain-specific alternative may read better.
+| Kind | Removed name | Previous references |
+| --- | --- | --- |
+| Union | `OptimizationMode` | Declaration only |
+| Model | `OptimizationAgentDefinition` | Declaration only |
+| Model | `OptimizationTaskResult` | Declaration only |
 
 ## Rename Impact
 
@@ -100,4 +98,4 @@ The operation-reachable mechanically awkward name was retained for consistency w
 
 - `OptimizationAgentIdentifier` became `AgentOptimizationAgentIdentifier`. A future API design pass could consider `AgentOptimizationTargetAgent` or `AgentOptimizationAgentReference`.
 
-The three unused declarations remain unchanged so this consistency change does not implicitly endorse dead or future-only schema. If `OptimizationAgentDefinition` is retained later, consider `AgentOptimizationResolvedAgent` or another name that reflects its response-only role.
+The three unused declarations were removed so the feature no longer carries dead or future-only schema.

@@ -44,15 +44,6 @@ union TargetAttribute {
   tool: "tool",
 }
 
-/** Run mode for an optimization job. */
-@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-union OptimizationMode {
-  string,
-
-  @doc("Full optimization: baseline + mutation target attributes.")
-  optimize: "optimize",
-}
-
 // ---------------------------------------------------------------------------
 // Dataset input — discriminated union (inline items or registered reference)
 // ---------------------------------------------------------------------------
@@ -158,28 +149,6 @@ model AgentOptimizationAgentIdentifier {
   agent_version?: string;
 }
 
-@doc("Agent definition returned in response payloads (includes resolved config).")
-@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationAgentDefinition {
-  @doc("Agent name.")
-  agent_name?: string;
-
-  @doc("Agent version.")
-  agent_version?: string;
-
-  @doc("Model deployment name.")
-  `model`?: string;
-
-  @doc("System prompt / instructions.")
-  system_prompt?: string;
-
-  @doc("Agent skills.")
-  skills?: Record<unknown>[];
-
-  @doc("Agent tools.")
-  tools?: Record<unknown>[];
-}
-
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Tuning knobs and run-mode for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
@@ -267,44 +236,6 @@ model AgentOptimizationCandidate {
 
   @doc("Promotion metadata. Null if the candidate has not been promoted.")
   promotion?: PromotionInfo;
-}
-
-@doc("Per-task evaluation result for a single candidate.")
-@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationTaskResult {
-  @doc("Task name (from the dataset).")
-  task_name: string;
-
-  @doc("The user query / input for the task.")
-  query?: string;
-
-  @doc("Per-evaluator scores keyed by evaluator name.")
-  scores: Record<float64>;
-
-  @doc("Composite score combining all evaluator scores.")
-  composite_score: float64;
-
-  @doc("Total tokens consumed during the agent run for this task.")
-  tokens: int64;
-
-  @doc("Wall-clock seconds for this task's agent execution.")
-  @encode(DurationKnownEncoding.seconds, float64)
-  duration_seconds: duration;
-
-  @doc("Whether the task met the pass threshold.")
-  passed: boolean;
-
-  @doc("Error message if the task failed during execution.")
-  error_message?: string;
-
-  @doc("Per-evaluator reasoning keyed by evaluator name.")
-  rationales?: Record<string>;
-
-  @doc("Raw agent response text.")
-  response?: string;
-
-  @doc("Identifier of the agent run that produced this result.")
-  run_id?: string;
 }
 
 @doc("Terminal-state result body. Populated when status is succeeded or failed.")
