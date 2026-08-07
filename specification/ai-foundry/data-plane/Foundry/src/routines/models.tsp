@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const RoutineRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.routines_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.routines_v2_preview],
 };
 
 @doc("The discriminator values supported for routine triggers.")
