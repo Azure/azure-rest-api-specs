@@ -1350,7 +1350,12 @@ model KnowledgeBaseRetrievalPartialResponse {
   body: KnowledgeBaseRetrievalResponse;
 }
 
-/** Server-sent events response for streaming knowledge base retrieval. */
+/**
+ * Server-sent events response for streaming knowledge base retrieval, added in version
+ * 2026-08-01-preview. The response schema documents the aggregate retrieval response carried by
+ * the terminal `response.completed` event; the connection stays open and emits other event types
+ * before the stream ends.
+ */
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseRetrievalEventStreamResponse {
   /** The retrieval response is successfully returned. */
@@ -1361,7 +1366,7 @@ model KnowledgeBaseRetrievalEventStreamResponse {
   @header("Content-Type")
   contentType: "text/event-stream";
 
-  /** The authoritative retrieval response carried by the terminal `response.completed` event. */
+  /** The aggregate retrieval response carried by the terminal `response.completed` event. */
   @body
   body: KnowledgeBaseRetrievalResponse;
 }

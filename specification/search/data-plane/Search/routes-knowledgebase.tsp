@@ -39,9 +39,14 @@ interface KnowledgeRetrieval {
   >;
 
   /**
-   * KnowledgeBase retrieves relevant data from backing stores, streaming progress and results as
-   * server-sent events on the same connection as they become available, instead of waiting for the
-   * full retrieval to complete.
+   * Retrieves relevant data from backing stores and streams progress and results as server-sent
+   * events.
+   *
+   * Process the response incrementally using server-sent event framing. Each event contains an
+   * event name and a JSON-encoded data payload. The stream ends with either a `response.completed`
+   * event or an `error` event. OpenAPI 2.0 represents the response body as a string, so generated
+   * clients may expose the raw response without typed event parsing. Do not deserialize the
+   * complete response body as a single JSON document.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @added(Versions.v2026_08_01_preview)
@@ -66,7 +71,15 @@ interface KnowledgeRetrieval {
       @body
       retrievalRequest: KnowledgeBaseRetrievalRequest;
     } & ClientRequestIdHeader,
-    KnowledgeBaseRetrievalEventStreamResponse,
+    // NOTE: SSEStream<T> is the spec-correct construct for this response, but C# SSE codegen is not
+    // implemented upstream as of this writing (tracked: github.com/Azure/typespec-azure#614,
+    // github.com/Azure/azure-sdk-for-net#47660, closed as not_planned/stale without being built). As a
+    // result the OpenAPI 2.0 output for this 200 response is currently just `{"type": "string"}` --
+    // no $ref to KnowledgeBaseRetrievalStreamEvents or its variants, and no Content-Type header -- and
+    // the generated C# protocol method is a plain buffered Task<Response> with no typed per-event
+    // parsing. Revisit before GA once upstream codegen support lands (or use a documented response
+    // alias if a supported representation is agreed upon).
+    SSEStream<KnowledgeBaseRetrievalStreamEvents>,
     {},
     ErrorResponse
   >;
