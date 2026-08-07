@@ -7893,6 +7893,12 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   entraJWTValidationConfig?: SubResource;
 
   /**
+   * Authentication and authorization configuration bindings of the request routing rule.
+   */
+  @added(Versions.v2025_09_01)
+  authConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
    * The provisioning state of the request routing rule resource.
    */
   @visibility(Lifecycle.Read)
@@ -8657,6 +8663,29 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * An authentication and authorization configuration binding for a request routing rule. Links a named configuration to an authentication policy and/or an authorization policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other application gateway models"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+model ApplicationGatewayAuthConfig {
+  /**
+   * The name of the auth configuration.
+   */
+  name: string;
+
+  /**
+   * Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource.
+   */
+  authenticationPolicy?: SubResource;
+
+  /**
+   * Reference to the authorization policy resource.
+   */
+  authorizationPolicy?: SubResource;
 }
 
 /**
