@@ -14,20 +14,21 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{endpoint}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "name": "endpoint",
         "in": "path",
-        "description": "The Device Update for IoT Hub account endpoint (hostname only, no protocol).",
+        "description": "The Device Update for IoT Hub account endpoint, including protocol and hostname.",
         "required": true,
         "type": "string",
-        "format": "url",
+        "format": "uri",
         "x-ms-parameter-grouping": {
           "name": "account-options"
         },
-        "x-ms-parameter-location": "client"
+        "x-ms-parameter-location": "client",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
