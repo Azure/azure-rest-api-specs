@@ -290,12 +290,12 @@ model RaiConfig {
   rai_policy_name: string;
 
   @doc("""
-    Author-declared map telling the platform where user/agent text lives in the agent-defined
-    invocations request/response bodies, so content-safety guardrails can extract and moderate it.
-    Optional; a rai_config without it leaves the invocations path without content-safety
-    moderation (fail-open).
+    Author-declared configuration telling the platform where user/agent text lives in the
+    agent-defined invocations request/response bodies, so content-safety guardrails can extract
+    and moderate it. Optional; a rai_config without it leaves the invocations path without
+    content-safety moderation (fail-open).
     """)
-  invocations_text_map?: InvocationsTextMap;
+  invocations_text?: InvocationsText;
 }
 
 @doc("How an invocations request/response body is parsed to locate text for content-safety moderation.")
@@ -310,7 +310,7 @@ union InvocationContentType {
 }
 
 @doc("Author-declared response shape for the invocations protocol.")
-union InvocationResponseMode {
+union InvocationMode {
   string,
 
   @doc("Non-streaming response body.")
@@ -333,7 +333,7 @@ model SseTextSelector {
 }
 
 @doc("Declares where request/response text lives so content-safety guardrails can extract it.")
-model InvocationsTextMap {
+model InvocationsText {
   @doc("How the REQUEST body is parsed. Defaults to `json`.")
   input_content_type?: InvocationContentType;
 
@@ -341,7 +341,7 @@ model InvocationsTextMap {
   output_content_type?: InvocationContentType;
 
   @doc("Author-declared response shape; drives which output gate runs and which fields are required.")
-  response_mode: InvocationResponseMode;
+  response_mode: InvocationMode;
 
   @doc("Path(s) to user text in the REQUEST body. Required when input_content_type is `json`.")
   input_paths?: string[];

@@ -46750,7 +46750,7 @@ components:
             - json
             - text
       description: How an invocations request/response body is parsed to locate text for content-safety moderation.
-    InvocationResponseMode:
+    InvocationMode:
       anyOf:
         - type: string
         - type: string
@@ -46762,7 +46762,7 @@ components:
     InvocationsProtocolConfiguration:
       type: object
       description: Configuration specific to the invocations protocol.
-    InvocationsTextMap:
+    InvocationsText:
       type: object
       required:
         - response_mode
@@ -46774,7 +46774,7 @@ components:
           $ref: '#/components/schemas/InvocationContentType'
           description: How the RESPONSE body is parsed. Defaults to `json`.
         response_mode:
-          $ref: '#/components/schemas/InvocationResponseMode'
+          $ref: '#/components/schemas/InvocationMode'
           description: Author-declared response shape; drives which output gate runs and which fields are required.
         input_paths:
           type: array
@@ -76264,13 +76264,13 @@ components:
         rai_policy_name:
           type: string
           description: The name of the RAI policy to apply.
-        invocations_text_map:
-          $ref: '#/components/schemas/InvocationsTextMap'
+        invocations_text:
+          $ref: '#/components/schemas/InvocationsText'
           description: |-
-            Author-declared map telling the platform where user/agent text lives in the agent-defined
-            invocations request/response bodies, so content-safety guardrails can extract and moderate it.
-            Optional; a rai_config without it leaves the invocations path without content-safety
-            moderation (fail-open).
+            Author-declared configuration telling the platform where user/agent text lives in the
+            agent-defined invocations request/response bodies, so content-safety guardrails can extract
+            and moderate it. Optional; a rai_config without it leaves the invocations path without
+            content-safety moderation (fail-open).
       description: Configuration for Responsible AI (RAI) content filtering and safety features.
     RecurrenceSchedule:
       type: object
