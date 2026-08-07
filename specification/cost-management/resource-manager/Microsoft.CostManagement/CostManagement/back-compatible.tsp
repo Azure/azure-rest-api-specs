@@ -41,6 +41,11 @@ using Microsoft.CostManagement;
   SavingsPlanUtilizationSummary.properties
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for compatibility with the existing utilization summary hierarchy."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  FlexSpendPlanUtilizationSummary.properties
+);
+
 @@clientLocation(CostAllocationRuleDefinitions.get, "CostAllocationRules");
 @@clientLocation(
   CostAllocationRuleDefinitions.createOrUpdate,
