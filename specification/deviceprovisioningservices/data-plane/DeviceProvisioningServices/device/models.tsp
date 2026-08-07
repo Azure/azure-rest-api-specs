@@ -389,7 +389,7 @@ model TpmAttestation {
  */
 @added(Versions.v2026_11_02_preview)
 model UpdateCheckRequest {
-  /** Device agent information. Required unless a still-current agentInfoETag is supplied. */
+  /** Device agent information. Required unless a still-current agentInfoEtag is supplied. */
   agentInfo?: AgentInfo;
 
   /**
@@ -409,7 +409,6 @@ model UpdateCheckRequest {
    */
   @minLength(1)
   @maxLength(128)
-  @encodedName("application/json", "agentInfoETag")
   agentInfoEtag?: string;
 
   /**
@@ -418,7 +417,6 @@ model UpdateCheckRequest {
    */
   @minLength(1)
   @maxLength(128)
-  @encodedName("application/json", "serviceConfigETag")
   serviceConfigEtag?: string;
 }
 
@@ -462,15 +460,13 @@ model InstalledUpdateId {
  */
 @added(Versions.v2026_11_02_preview)
 model UpdateCheckResponse {
-  /** Device service configuration. Omitted only when a matching serviceConfigETag was supplied. */
+  /** Device service configuration. Omitted only when a matching serviceConfigEtag was supplied. */
   serviceConfiguration?: ServiceConfiguration;
 
   /** Current ETag of serviceConfiguration. */
-  @encodedName("application/json", "serviceConfigETag")
   serviceConfigEtag: string;
 
   /** Current ETag of the processed agentInfo. */
-  @encodedName("application/json", "agentInfoETag")
   agentInfoEtag: string;
 
   /** Present only when an update applies to the device; omitted otherwise. */
