@@ -997,13 +997,8 @@ interface KnowledgeSources {
   uploadFileMultipart is SearchSourceOperation<
     {
       /** The multipart/form-data body containing the metadata and content parts. */
-      @multipartBody body: {
-        /** The JSON metadata part describing the file. */
-        metadata: HttpPart<FileUploadMetadata>;
-
-        /** The raw file content part. */
-        content: HttpPart<File>;
-      };
+      @multipartBody
+      body: UploadKnowledgeSourceFileMultipartRequest;
     },
     KnowledgeSourceFile & {
       @statusCode
@@ -1064,13 +1059,8 @@ interface KnowledgeSources {
       @path fileId: string;
 
       /** The multipart/form-data body containing the metadata and content parts. */
-      @multipartBody body: {
-        /** The JSON metadata part describing the file. */
-        metadata: HttpPart<FileUploadMetadata>;
-
-        /** The raw file content part. */
-        content: HttpPart<File>;
-      };
+      @multipartBody
+      body: UpdateKnowledgeSourceFileRequest;
     },
     KnowledgeSourceFile
   >;
