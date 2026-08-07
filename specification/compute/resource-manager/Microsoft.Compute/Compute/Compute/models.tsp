@@ -4587,6 +4587,7 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
 /**
  * Response after calling a manual recovery walk
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RecoveryWalkResponse {
   /**
    * Whether the recovery walk was performed
@@ -6574,6 +6575,7 @@ model VirtualMachineExtensionUpdateProperties {
 /**
  * Specifies the input for attaching and detaching a list of managed data disks.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttachDetachDataDisksRequest {
   /**
    * The list of managed data disks to be attached.
