@@ -20,6 +20,47 @@ alias ListEvaluatorVersionsParameters = {
   limit?: int32 = 20;
 };
 
+/** Query parameters for listing evaluator diagnostic events. */
+alias ListEvaluatorDiagnosticsParameters = {
+  ...PageLimitQueryParameter;
+
+  @doc("Sort order by `occurred_at` and then event ID. The default is `desc` so an unbounded request returns the newest events first.")
+  @Http.query
+  order?: PageOrder = "desc";
+
+  ...PageAfterQueryParameter;
+  ...PageBeforeQueryParameter;
+
+  @doc("Inclusive lower bound for the event occurrence time.")
+  @Http.query
+  start_time?: utcDateTime;
+
+  @doc("Inclusive upper bound for the event occurrence time.")
+  @Http.query
+  end_time?: utcDateTime;
+
+  @doc("Inclusive lower evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
+  @Http.query
+  from_version?: string;
+
+  @doc("Inclusive upper evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
+  @Http.query
+  to_version?: string;
+
+  @doc("Filter events for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.")
+  @Http.query
+  dimension_id?: string;
+
+  @doc("Filter events that apply to one canonical functional evaluator state.")
+  @Http.query
+  @pattern("^[0-9a-f]{64}$")
+  content_hash?: string;
+
+  @doc("Filter by one or more event categories by repeating the query parameter.")
+  @Http.query(#{ explode: true })
+  event_type?: EvaluatorDiagnosticEventType[];
+};
+
 @tag("Evaluators")
 interface Evaluators {
   // GET /evaluators/{name}/versions
@@ -45,6 +86,32 @@ interface Evaluators {
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
     Azure.Core.Page<EvaluatorVersion>
+  >;
+
+  /**
+   * Returns append-only diagnostic events for the specified evaluator.
+   *
+   * Time, version, dimension, content-hash, and event-type filters are intersected.
+   * Time and version bounds are inclusive. Version bounds use evaluator-version
+   * ordering rather than lexical ordering. Repeat `event_type` to select multiple
+   * event categories.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are an append-only event collection rather than a standard resource collection."
+  @summary("List evaluator diagnostics")
+  @route("/evaluators/{name}/diagnostics")
+  @get
+  @list
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  listDiagnostics is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("The evaluator name.")
+      @path
+      name: string;
+
+      ...ListEvaluatorDiagnosticsParameters;
+    },
+    AgentsPagedResult<EvaluatorDiagnosticEvent>
   >;
 
   // GET /evaluators/{name}/versions/{version}
