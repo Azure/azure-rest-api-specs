@@ -62,6 +62,18 @@ union ApplicationGatewaySkuName {
    * Basic
    */
   Basic: "Basic",
+
+  /**
+   * Basic tier Application Gateway with WAF enabled.
+   */
+  @added(Versions.v2025_09_01)
+  Basic_WAF_v2: "Basic_WAF_v2",
+
+  /**
+   * Standard tier Application Gateway with WAF enabled.
+   */
+  @added(Versions.v2025_09_01)
+  Standard_WAF_v2: "Standard_WAF_v2",
 }
 
 /**
@@ -6385,6 +6397,12 @@ model ApplicationGatewayPropertiesFormat {
    * Autoscale Configuration.
    */
   autoscaleConfiguration?: ApplicationGatewayAutoscaleConfiguration;
+
+  /**
+   * The reserved capacity of the application gateway resource. Applicable to the Basic_v2 and Basic_WAF_v2 SKU tiers.
+   */
+  @added(Versions.v2025_09_01)
+  reservedCapacity?: int32;
 
   /**
    * PrivateLink configurations on application gateway.
@@ -25548,6 +25566,26 @@ model ConnectionPolicyProperties {
 model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
 
 /**
+ * Tier of a web application firewall policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_09_01)
+union WebApplicationFirewallPolicyTier {
+  string,
+
+  /**
+   * Basic tier web application firewall policy.
+   */
+  Basic: "Basic",
+
+  /**
+   * Standard tier web application firewall policy.
+   */
+  Standard: "Standard",
+}
+
+/**
  * Defines web application firewall policy properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -25604,6 +25642,12 @@ model WebApplicationFirewallPolicyPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   applicationGatewayForContainers?: ApplicationGatewayForContainersReferenceDefinition[];
+
+  /**
+   * Tier of a web application firewall policy.
+   */
+  @added(Versions.v2025_09_01)
+  tier?: WebApplicationFirewallPolicyTier;
 }
 
 /**
