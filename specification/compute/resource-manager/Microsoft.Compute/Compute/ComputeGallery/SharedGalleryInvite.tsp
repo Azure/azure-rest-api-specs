@@ -43,11 +43,12 @@ interface SharedGalleryInvites {
   gallerySharingAccept is ComputeResourceActionAsyncBase<
     SharedGalleryInvite,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | (ArmNoContentResponse<"Action completed successfully."> & {})
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmNoContentResponse<"Action completed successfully."> & {})
   >;
 
   /**
@@ -61,10 +62,11 @@ interface SharedGalleryInvites {
   gallerySharingReject is ComputeResourceActionAsyncBase<
     SharedGalleryInvite,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | (ArmNoContentResponse<"Action completed successfully."> & {})
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmNoContentResponse<"Action completed successfully."> & {})
   >;
 }
