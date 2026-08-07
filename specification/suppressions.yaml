@@ -134,6 +134,18 @@
     - ai/Azure.AI.Agents/tspconfig.yaml
 
 - tool: TypeSpecValidation
+  reason: Voice Agents SDK projects predate cross-emitter SDK configuration validation
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths:
+    - ai-foundry/data-plane/Foundry/src/sdk-csharp-azure-ai-voice-agents/tspconfig.yaml
+    - ai-foundry/data-plane/Foundry/src/sdk-js-azure-ai-voice-agents/tspconfig.yaml
+    - ai-foundry/data-plane/Foundry/src/sdk-python-azure-ai-voice-agents/tspconfig.yaml
+
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
