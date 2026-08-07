@@ -1010,7 +1010,7 @@
       "properties": {
         "agentInfo": {
           "$ref": "#/definitions/AgentInfo",
-          "description": "Device agent information. Required unless a still-current agentInfoETag is supplied."
+          "description": "Device agent information. Required unless a still-current agentInfoEtag is supplied."
         },
         "tpm": {
           "$ref": "#/definitions/TpmAttestation",
@@ -1020,19 +1020,17 @@
           "$ref": "#/definitions/InstalledUpdateId",
           "description": "Currently installed update. Omitted when no update is installed."
         },
-        "agentInfoETag": {
+        "agentInfoEtag": {
           "type": "string",
           "description": "ETag from a prior response; lets the service skip re-processing agentInfo.\nOptional.",
           "minLength": 1,
-          "maxLength": 128,
-          "x-ms-client-name": "agentInfoEtag"
+          "maxLength": 128
         },
-        "serviceConfigETag": {
+        "serviceConfigEtag": {
           "type": "string",
           "description": "ETag from a prior response; lets the service omit unchanged serviceConfiguration.\nOptional.",
           "minLength": 1,
-          "maxLength": 128,
-          "x-ms-client-name": "serviceConfigEtag"
+          "maxLength": 128
         }
       }
     },
@@ -1042,17 +1040,15 @@
       "properties": {
         "serviceConfiguration": {
           "$ref": "#/definitions/ServiceConfiguration",
-          "description": "Device service configuration. Omitted only when a matching serviceConfigETag was supplied."
+          "description": "Device service configuration. Omitted only when a matching serviceConfigEtag was supplied."
         },
-        "serviceConfigETag": {
+        "serviceConfigEtag": {
           "type": "string",
-          "description": "Current ETag of serviceConfiguration.",
-          "x-ms-client-name": "serviceConfigEtag"
+          "description": "Current ETag of serviceConfiguration."
         },
-        "agentInfoETag": {
+        "agentInfoEtag": {
           "type": "string",
-          "description": "Current ETag of the processed agentInfo.",
-          "x-ms-client-name": "agentInfoEtag"
+          "description": "Current ETag of the processed agentInfo."
         },
         "updateMetadata": {
           "$ref": "#/definitions/UpdateMetadata",
@@ -1060,8 +1056,8 @@
         }
       },
       "required": [
-        "serviceConfigETag",
-        "agentInfoETag"
+        "serviceConfigEtag",
+        "agentInfoEtag"
       ]
     },
     "UpdateMetadata": {
