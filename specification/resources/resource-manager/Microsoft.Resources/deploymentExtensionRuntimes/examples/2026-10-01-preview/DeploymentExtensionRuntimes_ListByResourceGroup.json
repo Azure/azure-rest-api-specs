@@ -1,0 +1,68 @@
+{
+  "operationId": "DeploymentExtensionRuntimes_ListByResourceGroup",
+  "title": "List deployment extension runtimes in a resource group",
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "ext-rg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.Resources/deploymentExtensionRuntimes/github-ext",
+            "name": "github-ext",
+            "type": "Microsoft.Resources/deploymentExtensionRuntimes",
+            "location": "eastus",
+            "tags": {
+              "team": "platform"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "abc12345-6789-0abc-def0-123456789abc",
+              "tenantId": "def12345-6789-0abc-def0-123456789abc"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hosting": {
+                "runtimeKind": "ContainerApps",
+                "tenantId": "def12345-6789-0abc-def0-123456789abc",
+                "artifactUri": "myacr.azurecr.io/extensions/github:1.0",
+                "audienceAppId": "11111111-1111-1111-1111-111111111111",
+                "scaling": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "concurrentRequestsPerReplica": 10
+                },
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "fqdn": "github-ext-app.happyocean-abc12345.eastus.azurecontainerapps.io"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.Resources/deploymentExtensionRuntimes/keyvault-ext",
+            "name": "keyvault-ext",
+            "type": "Microsoft.Resources/deploymentExtensionRuntimes",
+            "location": "eastus",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "aaa12345-6789-0abc-def0-123456789abc",
+              "tenantId": "def12345-6789-0abc-def0-123456789abc"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hosting": {
+                "runtimeKind": "BuiltIn"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.Resources/deploymentExtensionRuntimes?api-version=2026-10-01-preview&$skipToken=examplecontinuationtoken"
+      }
+    }
+  }
+}
