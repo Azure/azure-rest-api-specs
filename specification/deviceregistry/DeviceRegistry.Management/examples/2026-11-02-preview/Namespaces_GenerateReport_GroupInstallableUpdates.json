@@ -1,0 +1,51 @@
+{
+  "title": "Generate a group installable-updates report",
+  "operationId": "Namespaces_GenerateReport",
+  "description": "Generate a GroupInstallableUpdates report for a namespace.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "body": {
+      "reportType": "GroupInstallableUpdatesReport",
+      "reportTarget": "my-group-1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "reportType": "GroupInstallableUpdatesReport",
+        "reportTarget": "my-group-1",
+        "generatedAt": "2026-04-28T20:59:51Z",
+        "expiresAt": "2026-05-28T20:59:51Z",
+        "installableUpdatesAndTargetDevices": [
+          {
+            "targetDevices": {
+              "compatProperties": {
+                "manufacturer": "Contoso",
+                "model": "Sensor-X"
+              },
+              "agentProfile": 1
+            },
+            "installableUpdates": [
+              {
+                "updateResourceId": "updates/providers/contoso/names/windowsApp/versions/2.1.0"
+              },
+              {
+                "updateResourceId": "updates/providers/contoso/names/windowsApp/versions/2.0.0"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://contoso.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/westus/asyncOperationStatuses/op-9cd5?api-version=2026-11-02-preview",
+        "location": "https://contoso.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/westus/asyncOperationStatuses/op-9cd5?api-version=2026-11-02-preview",
+        "retry-after": "30"
+      }
+    }
+  }
+}

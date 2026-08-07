@@ -55,6 +55,10 @@ model SchemaRegistryProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountContainerUrl: string;
 
+  @added(Versions.v2026_11_01_preview)
+  @doc("The identity used for outbound calls from the ADR schema registry. If not specified and the schema registry has a system-assigned identity enabled, the system-assigned identity is used by default.")
+  outboundIdentity?: OutboundIdentity;
+
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
