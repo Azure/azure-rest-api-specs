@@ -908,9 +908,9 @@ These settings apply only when `--tag=package-2026-09-01` is specified on the co
 ``` yaml $(tag) == 'package-2026-09-01'
 input-file:
   - stable/2026-09-01/ComputeRP.json
-  - stable/2025-01-02/DiskRP.json
+  - stable/2026-03-02/DiskRP.json
   - stable/2021-07-01/skus.json
-  - stable/2024-03-03/GalleryRP.json
+  - stable/2025-12-03/GalleryRP.json
 ```
 
 ### Tag: package-2026-09-01-only
