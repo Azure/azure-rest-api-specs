@@ -1,0 +1,44 @@
+# Data-Plane API Review - Assign Reviewers
+#
+# When the `APIStewardshipBoard-ReviewRequested` label is applied to a data-plane PR,
+# request review from (and assign, for notification) the data-plane stewardship review
+# pool. The pool is the `APIStewardshipBoard-SignedOff` authorized-users list in
+# `.github/protected-labels.yml` (single source of truth). Removing the label removes
+# the pool from the PR.
+name: "Data-Plane API Review - Assign Reviewers"
+
+on:
+  pull_request_target:
+    types:
+      - labeled
+      - unlabeled
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  assign-reviewers:
+    name: Assign Data-Plane Review Pool
+    runs-on: ubuntu-24.04
+    steps:
+      # IMPORTANT: This workflow uses pull_request_target, which runs with repo write
+      # permissions. Only base-branch code is checked out below, and no PR-head code is
+      # ever executed - the job only calls the GitHub REST API via github-script.
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Assign data-plane review pool
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: assignReviewers } =
+              await import('${{ github.workspace }}/.github/workflows/src/data-plane-review/assign-reviewers.js');
+            await assignReviewers({ github, context, core });
