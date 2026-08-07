@@ -104,6 +104,16 @@ using Microsoft.HybridContainerService;
   "csharp"
 );
 @@Azure.ClientGenerator.Core.clientName(
+  KeyRotationState,
+  "ProvisionedClusterKeyRotationState",
+  "csharp"
+);
+@@Azure.ClientGenerator.Core.clientName(
+  KeyRotationStatus,
+  "ProvisionedClusterKeyRotationStatus",
+  "csharp"
+);
+@@Azure.ClientGenerator.Core.clientName(
   ListCredentialResponse,
   "HybridContainerServiceCredentialListResult",
   "csharp"
@@ -151,6 +161,11 @@ using Microsoft.HybridContainerService;
 @@Azure.ClientGenerator.Core.clientName(
   ProvisioningState,
   "HybridContainerServiceResourceProvisioningState",
+  "csharp"
+);
+@@Azure.ClientGenerator.Core.clientName(
+  SecurityProfile,
+  "ProvisionedClusterSecurityProfile",
   "csharp"
 );
 @@Azure.ClientGenerator.Core.clientName(
