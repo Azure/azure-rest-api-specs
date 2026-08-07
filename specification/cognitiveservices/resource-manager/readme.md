@@ -132,6 +132,18 @@ These settings apply only when `--tag=package-2026-05-15-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2026-05-15-preview/cognitiveservices.json
 suppressions:
+  - code: PutResponseCodes
+    reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated) and is consistent with the ManagedNetwork PUT in this RP, whose backend is shared with Machine Learning Services. Preview-only bug fix correcting the contract before GA.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Compute create returns 202 Accepted for long-running provisioning. provisioningState is present in ComputeProperties and returned in the final LRO result retrieved via GET. Same pattern as the ManagedNetwork PUT (shared Machine Learning Services backend). Preview-only bug fix.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
+  - code: PutGetPatchResponseSchema
+    reason: Compute create PUT is 202-only with no response body, so its response schema intentionally differs from GET, which returns the Compute resource once the LRO completes. This is inherent to the async 202-only contract. Preview-only bug fix.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"]
   - code: NestedResourcesMustHaveListOperation
     reason: ComputeOperationStatus is an async operation status polling resource, listing all operations is not applicable.
     where:
@@ -355,6 +367,18 @@ These settings apply only when `--tag=package-2026-03-15-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2026-03-15-preview/cognitiveservices.json
 suppressions:
+  - code: PutResponseCodes
+    reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated) and is consistent with the ManagedNetwork PUT in this RP, whose backend is shared with Machine Learning Services. Preview-only bug fix correcting the contract before GA.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Compute create returns 202 Accepted for long-running provisioning. provisioningState is present in ComputeProperties and returned in the final LRO result retrieved via GET. Same pattern as the ManagedNetwork PUT (shared Machine Learning Services backend). Preview-only bug fix.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
+  - code: PutGetPatchResponseSchema
+    reason: Compute create PUT is 202-only with no response body, so its response schema intentionally differs from GET, which returns the Compute resource once the LRO completes. This is inherent to the async 202-only contract. Preview-only bug fix.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"]
   - code: NestedResourcesMustHaveListOperation
     reason: ComputeOperationStatus is an async operation status polling resource, listing all operations is not applicable.
     where:
