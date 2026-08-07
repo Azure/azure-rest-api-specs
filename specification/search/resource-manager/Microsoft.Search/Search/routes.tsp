@@ -87,7 +87,9 @@ interface UsagesOperationGroup {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Pre-existing API contract: provider action group, not a resource interface."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Pre-existing API contract: provider-level action."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Pre-existing API contract: provider-level action."
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}")
 @get
 @externalDocs("https://aka.ms/search-manage")

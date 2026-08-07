@@ -271,6 +271,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets the status of a VM scale set instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
   @action("instanceView")
@@ -296,6 +297,7 @@ interface VirtualMachineScaleSets {
    * Gets list of OS upgrades on a VM scale set instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
@@ -419,6 +421,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
   @action("skus")
