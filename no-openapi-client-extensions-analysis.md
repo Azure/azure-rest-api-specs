@@ -64,14 +64,14 @@ The `@typespec/openapi` `@extension` decorator writes a raw property into the em
 
 ## Per-service summary (migration priority)
 
-Priority is derived from the date embedded in the service's latest api-version, relative to 2026-08-06: **0** = within 6 months, **1** = within 1 year, **2** = 1–2 years, **3** = more than 2 years.
+Priority is derived from the date embedded in the service's latest api-version, relative to 2026-08-06: **0** = within 6 months, **1** = within 1 year, **2** = 1–2 years, **3** = more than 2 years. Services are split by plane: management-plane (ARM / `resource-manager`) and data-plane.
+
+### Management plane (resource-manager)
 
 | Priority | Service | Diagnostics | Unique locations | Latest api-version |
 | --- | --- | --- | --- | --- |
-| 0 | `deviceupdate/data-plane/duiothub` | 631 | 9 | `2026-06-01` |
 | 0 | `search/resource-manager/Microsoft.Search/Search` | 60 | 24 | `2026-09-01-preview` |
 | 0 | `resources/resource-manager/Microsoft.Authorization/policy` | 22 | 2 | `2026-07-01` |
-| 0 | `keyvault/data-plane/Administration/Settings` | 17 | 2 | `2026-05-01-preview` |
 | 0 | `azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM` | 15 | 15 | `2026-04-01-preview` |
 | 0 | `servicefabricmanagedclusters/resource-manager/Microsoft.ServiceFabric/ServiceFabricManagedClusters` | 14 | 14 | `2026-05-01-preview` |
 | 0 | `recoveryservicesdatareplication/resource-manager/Microsoft.DataReplication/DataReplication` | 11 | 11 | `2026-05-01` |
@@ -84,14 +84,12 @@ Priority is derived from the date embedded in the service's latest api-version, 
 | 0 | `chaos/resource-manager/Microsoft.Chaos/Chaos` | 1 | 1 | `2026-08-01-preview` |
 | 0 | `azurefleet/resource-manager/Microsoft.AzureFleet/AzureFleet` | 1 | 1 | `2026-06-01-preview` |
 | 1 | `oracle/resource-manager/Oracle.Database/OracleDatabase` | 12 | 2 | `2025-09-01` |
-| 1 | `purviewdatagovernace/Azure.Analaytics.Purview.DataQuality` | 9 | 9 | `2026-01-12-preview` |
 | 1 | `cdn/resource-manager/Microsoft.Cdn/EdgeActions` | 3 | 3 | `2025-12-01-preview` |
 | 1 | `mysql/resource-manager/Microsoft.DBforMySQL/FlexibleServers` | 1 | 1 | `2025-12-01-preview` |
 | 1 | `informatica/resource-manager/Informatica.DataManagement/Informatica` | 1 | 1 | `2025-11-27` |
 | 2 | `scvmm/ScVmm.Management` | 11 | 11 | `2025-03-13` |
 | 2 | `support/resource-manager/Microsoft.Support/Support` | 6 | 4 | `2025-06-01-preview` |
 | 2 | `network/resource-manager/Microsoft.Network/Network/Network` | 4 | 2 | `2025-07-01` |
-| 2 | `deviceprovisioningservices/data-plane/DeviceProvisioningServices/device` | 3 | 3 | `2025-07-01-preview` |
 | 2 | `databasewatcher/resource-manager/Microsoft.DatabaseWatcher/DatabaseWatcher` | 3 | 3 | `2025-01-02` |
 | 2 | `dell/resource-manager/Dell.Storage/DellStorage` | 1 | 1 | `2025-03-21` |
 | 3 | `azurelargeinstance/resource-manager/Microsoft.AzureLargeInstance/AzureLargeInstance` | 4 | 2 | `2024-08-01-preview` |
@@ -99,7 +97,20 @@ Priority is derived from the date embedded in the service's latest api-version, 
 | 3 | `containerstorage/resource-manager/Microsoft.ContainerStorage/ContainerStorage` | 3 | 3 | `2023-07-01-preview` |
 | 3 | `resources/resource-manager/Microsoft.Resources/deploymentScripts` | 2 | 2 | `2023-08-01` |
 
-Priority distribution: P0=15, P1=5, P2=6, P3=4.
+Management-plane priority distribution: P0=13, P1=4, P2=5, P3=4 (26 services).
+
+### Data plane
+
+| Priority | Service | Diagnostics | Unique locations | Latest api-version |
+| --- | --- | --- | --- | --- |
+| 0 | `deviceupdate/data-plane/duiothub` | 631 | 9 | `2026-06-01` |
+| 0 | `keyvault/data-plane/Administration/Settings` | 17 | 2 | `2026-05-01-preview` |
+| 1 | `purviewdatagovernace/Azure.Analaytics.Purview.DataQuality` | 9 | 9 | `2026-01-12-preview` |
+| 2 | `deviceprovisioningservices/data-plane/DeviceProvisioningServices/device` | 3 | 3 | `2025-07-01-preview` |
+
+Data-plane priority distribution: P0=2, P1=1, P2=1 (4 services).
+
+Overall priority distribution: P0=15, P1=5, P2=6, P3=4.
 
 ## Per-location detail
 
