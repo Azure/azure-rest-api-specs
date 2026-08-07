@@ -1,0 +1,46 @@
+{
+  "operationId": "CustomAIModels_List",
+  "title": "List CustomAIModel resources by AIManager",
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "aiManagerName": "aimanager1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/customAIModels/custom-model1",
+            "name": "custom-model1",
+            "type": "Microsoft.ContainerService/aiManagers/customAIModels",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2024-01-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+            },
+            "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "modelId": "meta-llama/Llama-2-7b-chat",
+              "baseModel": {
+                "id": "meta-llama/Llama-2-7b-chat"
+              },
+              "modelSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/foundry-private-source",
+              "description": "Custom Llama 2 7B model for our organization",
+              "spec": {
+                "license": "llama2",
+                "isRestricted": false,
+                "maxContextLength": 4096
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

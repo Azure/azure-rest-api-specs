@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerServiceAIManagerClient",
-    "version": "2026-05-02-preview",
+    "version": "2026-08-02-preview",
     "description": "Azure Kubernetes AI Manager api client.",
     "x-typespec-generated": [
       {
@@ -56,6 +56,9 @@
     },
     {
       "name": "ModelDeployments"
+    },
+    {
+      "name": "CustomAIModels"
     }
   ],
   "paths": {
@@ -599,6 +602,368 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/customAIModels": {
+      "get": {
+        "operationId": "CustomAIModels_List",
+        "tags": [
+          "CustomAIModels"
+        ],
+        "description": "List CustomAIModel resources by AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomAIModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List CustomAIModel resources by AIManager": {
+            "$ref": "./examples/CustomAIModels_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/customAIModels/{customAIModelName}": {
+      "get": {
+        "operationId": "CustomAIModels_Get",
+        "tags": [
+          "CustomAIModels"
+        ],
+        "description": "Get a CustomAIModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "customAIModelName",
+            "in": "path",
+            "description": "The name of the custom AI model resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomAIModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a CustomAIModel": {
+            "$ref": "./examples/CustomAIModels_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CustomAIModels_CreateOrUpdate",
+        "tags": [
+          "CustomAIModels"
+        ],
+        "description": "Create or update a `CustomAIModel`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields (e.g. `description`), perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header. A PUT that changes the immutable `modelId` or `modelSourceResourceId` is rejected.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "customAIModelName",
+            "in": "path",
+            "description": "The name of the custom AI model resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomAIModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CustomAIModel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomAIModel"
+            }
+          },
+          "201": {
+            "description": "Resource 'CustomAIModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomAIModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a CustomAIModel": {
+            "$ref": "./examples/CustomAIModels_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CustomAIModels_Delete",
+        "tags": [
+          "CustomAIModels"
+        ],
+        "description": "Delete a CustomAIModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "customAIModelName",
+            "in": "path",
+            "description": "The name of the custom AI model resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a CustomAIModel": {
+            "$ref": "./examples/CustomAIModels_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/customAIModels/{customAIModelName}/calculateCost": {
+      "post": {
+        "operationId": "CustomAIModels_CalculateCost",
+        "tags": [
+          "CustomAIModels"
+        ],
+        "description": "Returns a ranked list of GPU SKU pricing plans for deploying this custom model in the target region, each annotated with feasibility and per-replica hourly cost. Feasibility is determined by region availability, GPU quota, and model architecture fit (verified at registration time). `servingPerformanceEstimation` is omitted for custom models. No Azure or Kubernetes resources are provisioned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "customAIModelName",
+            "in": "path",
+            "description": "The name of the custom AI model resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalculateCostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CalculateCostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomAIModels_CalculateCost": {
+            "$ref": "./examples/CustomAIModels_CalculateCost.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listCredential": {
@@ -2068,18 +2433,6 @@
         "spec"
       ]
     },
-    "AIModelResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "The ARM resource id of an AIModel.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.ContainerService/aiModels"
-          }
-        ]
-      }
-    },
     "AutoscaleProfile": {
       "type": "object",
       "description": "Autoscaling configuration: scale replica count between a minimum and maximum.",
@@ -2131,6 +2484,40 @@
         ]
       },
       "readOnly": true
+    },
+    "BaseModelReference": {
+      "type": "object",
+      "description": "The base model a custom model was trained from. Supplied by the customer because the platform may lack access to private source repositories (e.g. private Foundry projects); consumed by the dataplane for GPU sizing and vLLM configuration.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "totalWeightSize": {
+          "type": "string",
+          "description": "The total size of the model weights. eg `28.7Gi`.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "config": {
+          "type": "object",
+          "description": "The verbatim `config.json` of the base model, supplied by the customer. Stored by the platform and projected into the dataplane (ConfigMap) to determine GPU node count and vLLM configuration.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "CalculateCostPlan": {
       "type": "object",
@@ -2274,8 +2661,177 @@
         "inline": {
           "$ref": "#/definitions/InlineCredential",
           "description": "An inline credential containing a secret value supplied in the request payload."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/ManagedIdentityCredential",
+          "description": "A user-assigned managed identity the platform authenticates as. Required for `MicrosoftFoundry` sources. No secret is stored; the platform federates this identity to an in-cluster puller ServiceAccount (Workload Identity) at deployment time."
         }
       }
+    },
+    "CustomAIModel": {
+      "type": "object",
+      "description": "A custom AI model registered by the customer and scoped to a specific\nAIManager.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomAIModelProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CustomAIModelListResult": {
+      "type": "object",
+      "description": "The response of a CustomAIModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CustomAIModel items on this page",
+          "items": {
+            "$ref": "#/definitions/CustomAIModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CustomAIModelProperties": {
+      "type": "object",
+      "description": "Custom AI model properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/CustomAIModelProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model identifier, interpreted per the referenced ModelSource type.\nFor `HuggingFace` sources this is the upstream `<org>/<repo>` id, e.g.\n`meta-llama/Llama-2-7b-chat`. For `MicrosoftFoundry` sources this is\n`modelName/version`, e.g. `private-llama/1` (the platform splits model and\nversion on the final `/`). Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "baseModel": {
+          "$ref": "#/definitions/BaseModelReference",
+          "description": "The base model this custom model was trained from (id + config.json). Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "modelSourceResourceId": {
+          "$ref": "#/definitions/ModelSourceResourceId",
+          "description": "Azure resource id of the ModelSource to use when pulling artifacts. Required for `MicrosoftFoundry` sources and for gated/private `HuggingFace` repositories; omitted for public models. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional. Free-form description of the model. Mutable via a full-replace PUT.",
+          "maxLength": 250
+        },
+        "spec": {
+          "$ref": "#/definitions/CustomAIModelSpec",
+          "description": "Read-only. Platform-resolved specification of the model.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "modelId",
+        "baseModel"
+      ]
+    },
+    "CustomAIModelProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of a CustomAIModel resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "CustomAIModelProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CustomAIModelSpec": {
+      "type": "object",
+      "description": "Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.",
+      "properties": {
+        "license": {
+          "type": "string",
+          "description": "The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.",
+          "readOnly": true
+        },
+        "isRestricted": {
+          "type": "boolean",
+          "description": "Whether access to the model is restricted and requires credential.",
+          "readOnly": true
+        },
+        "maxContextLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum context length supported by the model, in tokens.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isRestricted",
+        "maxContextLength"
+      ]
     },
     "DeletePolicy": {
       "type": "string",
@@ -2297,6 +2853,33 @@
             "name": "Delete",
             "value": "Delete",
             "description": "Delete both the underlying cluster resources and the AIManager resource together."
+          }
+        ]
+      }
+    },
+    "DeployableModelResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource id of an AIModel or CustomAIModel.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/aiModels"
+          },
+          {
+            "type": "Microsoft.ContainerService/aiManagers/customAIModels"
+          }
+        ]
+      }
+    },
+    "FoundryProjectResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource id of a Microsoft Foundry project. The account is the parent of this resource and is derived from it.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.CognitiveServices/accounts/projects"
           }
         ]
       }
@@ -2370,6 +2953,29 @@
         "value"
       ]
     },
+    "ManagedIdentityCredential": {
+      "type": "object",
+      "description": "A credential backed by a customer-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored. Because the platform generally has no read access to a customer's identity, the `clientId` is supplied by the caller rather than resolved by the service.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/UserAssignedIdentityResourceId",
+          "description": "The ARM resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported. The RP first-party application must be granted `Managed Identity Operator` on this identity so it can be federated for Workload Identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client (application) id of the identity, supplied by the caller. Used by the platform to annotate the in-cluster puller ServiceAccount for Workload Identity. Must match `resourceId`."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The home tenant id of the identity, supplied by the caller. Used to annotate the in-cluster puller ServiceAccount (`azure.workload.identity/tenant-id`) for the Workload Identity token exchange. Must match `resourceId`."
+        }
+      },
+      "required": [
+        "resourceId",
+        "clientId",
+        "tenantId"
+      ]
+    },
     "ManualScalingProfile": {
       "type": "object",
       "description": "Manual scaling configuration: fixed replica count.",
@@ -2383,6 +2989,23 @@
       },
       "required": [
         "replicas"
+      ]
+    },
+    "MicrosoftFoundrySource": {
+      "type": "object",
+      "description": "Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`\nModelSource. Only the project ARM id is required; the Foundry account and its\ndata-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform\nfrom the project (the account is the project's parent resource).\n\nAuthentication uses the user-assigned managed identity referenced in the\nModelSource `credential.managedIdentity`, which the customer must grant the\n`Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)\non this project. No secret is stored by the platform; access to model\nartifacts is brokered by Foundry at pull time.",
+      "properties": {
+        "projectResourceId": {
+          "$ref": "#/definitions/FoundryProjectResourceId",
+          "description": "The ARM resource id of the Foundry project. The scope on which the referenced managed identity must hold the `Foundry User` role. The account and endpoint host are derived from this id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "projectResourceId"
       ]
     },
     "ModelDeployment": {
@@ -2479,7 +3102,7 @@
           "readOnly": true
         },
         "modelResourceId": {
-          "$ref": "#/definitions/AIModelResourceId",
+          "$ref": "#/definitions/DeployableModelResourceId",
           "description": "Full ARM resource id of the model to deploy. Accepts either a catalog\n`AIModel` id or a customer-registered `CustomAIModel` id (including\nMicrosoftFoundry-backed models). When a `CustomAIModel` is referenced and\n`modelSourceResourceId` is omitted, the deployment inherits the\n`modelSourceResourceId` recorded on the `CustomAIModel`. Immutable after\ncreation.",
           "x-ms-mutability": [
             "read",
@@ -2700,6 +3323,14 @@
             "update",
             "create"
           ]
+        },
+        "microsoftFoundry": {
+          "$ref": "#/definitions/MicrosoftFoundrySource",
+          "description": "Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation. Enforced at request-validation time with error code `InvalidModelSourceConfiguration`.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2722,7 +3353,8 @@
       "type": "string",
       "description": "The type of a model source.",
       "enum": [
-        "HuggingFace"
+        "HuggingFace",
+        "MicrosoftFoundry"
       ],
       "x-ms-enum": {
         "name": "ModelSourceType",
@@ -2732,6 +3364,11 @@
             "name": "HuggingFace",
             "value": "HuggingFace",
             "description": "A Hugging Face model registry."
+          },
+          {
+            "name": "MicrosoftFoundry",
+            "value": "MicrosoftFoundry",
+            "description": "A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a customer user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project)."
           }
         ]
       }
@@ -2838,6 +3475,18 @@
         "relativeLatencyScore",
         "relativeThroughputScore"
       ]
+    },
+    "UserAssignedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource id of a user-assigned managed identity.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
