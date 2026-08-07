@@ -107,6 +107,7 @@ interface StorageDiscoveryWorkspaces {
   listByResourceGroup is ArmResourceListByParent<StorageDiscoveryWorkspace>;
   listBySubscription is ArmListBySubscription<StorageDiscoveryWorkspace>;
 
+  @doc("A long-running resource action.")
   @autoRoute
   @post
   report is ArmResourceActionAsync<
