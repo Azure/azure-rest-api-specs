@@ -64,13 +64,13 @@ union ApplicationGatewaySkuName {
   Basic: "Basic",
 
   /**
-   * Basic_WAF_v2
+   * Basic tier Application Gateway with WAF enabled.
    */
   @added(Versions.v2025_09_01)
   Basic_WAF_v2: "Basic_WAF_v2",
 
   /**
-   * Standard_WAF_v2
+   * Standard tier Application Gateway with WAF enabled.
    */
   @added(Versions.v2025_09_01)
   Standard_WAF_v2: "Standard_WAF_v2",
@@ -25569,12 +25569,12 @@ union WebApplicationFirewallPolicyTier {
   string,
 
   /**
-   * Basic
+   * Basic tier web application firewall policy.
    */
   Basic: "Basic",
 
   /**
-   * Standard
+   * Standard tier web application firewall policy.
    */
   Standard: "Standard",
 }
