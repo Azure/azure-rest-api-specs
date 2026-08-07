@@ -112,6 +112,32 @@ suppressions:
       - $.definitions.JobRunResultListResponse.properties.skipToken
       - $.definitions.JobRunResultsRequest.properties.skipToken
     reason: skipToken is an opaque pagination continuation token used to page group members, not a credential or secret.
+  - code: PatchBodyParametersSchema
+    from:
+      - deviceregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}"].patch.parameters[4].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}"].patch.parameters[4].schema
+    reason: The flagged required property is OutboundIdentity.type. outboundIdentity is replaced as a whole in a PATCH (it is not merged into the existing value), so when the object is supplied type is required to disambiguate SystemAssigned vs UserAssigned. Omitting outboundIdentity preserves the current value, so PATCH remains a valid partial update.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from:
+      - deviceregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/asyncOperationStatuses/{operationId}"].get.parameters[2].$ref
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}"].get.parameters[2].$ref
+    reason: The only remaining v5 common-types reference is LocationParameter on the operation-status routes emitted by the shared TypeSpec ARM library; all service-defined types use v6. This matches the parameter used by prior shipped versions.
+  - code: AvoidNestedProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.CertificatePolicyUpdateProperties.properties.certificate
+    reason: The nested certificate configuration object is an intentional grouping of related settings; current ARM guidance discourages x-ms-client-flatten, so the nested shape is preferred.
+  - code: EnumInsteadOfBoolean
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.NamespaceObservability.properties.enabled
+    reason: enabled is a genuine boolean toggle for namespace observability with documented tri-state PATCH semantics (omitted preserves the current value; true and false explicitly set it). An enum would not improve clarity.
 ```
 
 ### Tag: package-preview-2026-11-01
@@ -163,6 +189,26 @@ suppressions:
     reason: An existing resource type is called 'schemas'
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
+  - code: PatchBodyParametersSchema
+    from:
+      - deviceregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}"].patch.parameters[4].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}"].patch.parameters[4].schema
+    reason: The flagged required property is OutboundIdentity.type. outboundIdentity is replaced as a whole in a PATCH (it is not merged into the existing value), so when the object is supplied type is required to disambiguate SystemAssigned vs UserAssigned. Omitting outboundIdentity preserves the current value, so PATCH remains a valid partial update.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from:
+      - deviceregistry.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/asyncOperationStatuses/{operationId}"].get.parameters[2].$ref
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}"].get.parameters[2].$ref
+    reason: The only remaining v5 common-types reference is LocationParameter on the operation-status routes emitted by the shared TypeSpec ARM library; all service-defined types use v6. This matches the parameter used by prior shipped versions.
+  - code: AvoidNestedProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.CertificatePolicyUpdateProperties.properties.certificate
+    reason: The nested certificate configuration object is an intentional grouping of related settings; current ARM guidance discourages x-ms-client-flatten, so the nested shape is preferred.
 ```
 
 ### Tag: package-2026-04
