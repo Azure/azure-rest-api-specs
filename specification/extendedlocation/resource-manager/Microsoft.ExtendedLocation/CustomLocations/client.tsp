@@ -100,77 +100,61 @@ using TypeSpec.Rest;
 @@usage(EnabledResourceType, Usage.input, "csharp");
 @@usage(EnabledResourceTypePropertiesTypesMetadataItem, Usage.input, "csharp");
 
-namespace Microsoft.ExtendedLocation {
-  @@scope(CustomLocations.update, "!javascript");
-  @@scope(ResourceSyncRules.update, "!javascript");
+@@override(CustomLocations.update, customLocationsUpdate, "javascript");
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op customLocationsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  provider: "Microsoft.ExtendedLocation",
 
-  @armResourceOperations
-  interface CustomLocationsScope {
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-    update(
-      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<customLocation>,
-      ...Azure.ResourceManager.ProviderNamespace<customLocation>,
+  @path
+  resourceName: string,
 
-      @path
-      @segment("customLocations")
-      resourceName: string,
+  /**
+   * Identity for the resource.
+   */
+  identity?: Identity,
 
-      /**
-       * Identity for the resource.
-       */
-      identity?: Identity,
+  properties?: customLocationProperties,
 
-      ...customLocationProperties,
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.ExtendedLocation.customLocation>
+  | Azure.ResourceManager.CommonTypes.ErrorResponse;
+@@override(ResourceSyncRules.update, resourceSyncRulesUpdate, "javascript");
 
-      /**
-       * Resource tags
-       */
-      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      tags?: Record<string>,
-    ):
-      | Azure.ResourceManager.ArmResponse<Microsoft.ExtendedLocation.customLocation>
-      | Azure.ResourceManager.CommonTypes.ErrorResponse;
-  }
-  @armResourceOperations
-  interface ResourceSyncRulesScope {
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-    update(
-      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<resourceSyncRule>,
-      ...Azure.ResourceManager.ProviderNamespace<resourceSyncRule>,
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceSyncRulesUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  provider: "Microsoft.ExtendedLocation",
 
-      @path
-      @segment("customLocations")
-      resourceName: string,
+  @path
+  resourceName: string,
 
-      @path
-      @segment("resourceSyncRules")
-      childResourceName: string,
+  @path
+  childResourceName: string,
 
-      ...resourceSyncRuleProperties,
+  properties?: resourceSyncRuleProperties,
 
-      /**
-       * Resource tags
-       */
-      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      tags?: Record<string>,
-    ):
-      | (ArmResponse<resourceSyncRule> &
-          ArmAsyncOperationHeader<FinalResult = resourceSyncRule> &
-          Azure.Core.Foundations.RetryAfterHeader)
-      | Azure.ResourceManager.CommonTypes.ErrorResponse;
-  }
-
-  @@scope(CustomLocationsScope.update, "javascript");
-  @@scope(ResourceSyncRulesScope.update, "javascript");
-  @@clientLocation(
-    CustomLocationsScope.update,
-    "CustomLocations",
-    "javascript"
-  );
-  @@clientLocation(
-    ResourceSyncRulesScope.update,
-    "ResourceSyncRules",
-    "javascript"
-  );
-}
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+):
+  | {
+      statusCode: 200;
+      body: Microsoft.ExtendedLocation.resourceSyncRule;
+      azureAsyncOperation: string;
+      retryAfter: int32;
+    }
+  | Azure.ResourceManager.CommonTypes.ErrorResponse;

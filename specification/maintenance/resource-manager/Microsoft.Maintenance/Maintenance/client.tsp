@@ -80,6 +80,11 @@ using Microsoft.Maintenance;
   "MaintenanceScheduledEventApproveResult",
   "csharp"
 );
+@@clientName(
+  ScheduledEventsIdList,
+  "MaintenanceScheduledEventIdList",
+  "csharp"
+);
 @@clientName(RebootOptions, "MaintenanceRebootOption", "csharp");
 @@clientName(
   InputWindowsParameters.kbNumbersToExclude,

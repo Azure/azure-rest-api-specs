@@ -103,6 +103,26 @@ namespace Customizations;
 @@clientName(ServerVersion.Five0, "FIVE_ZERO", "java");
 @@clientName(ServerVersion.Six0, "SIX_ZERO", "java");
 @@clientName(ServerVersion.Seven0, "SEVEN_ZERO", "java");
+@@clientName(
+  ServerVersion.Three2,
+  Azure.ClientGenerator.Core.exact("V3_2"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.Three6,
+  Azure.ClientGenerator.Core.exact("V3_6"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.Four0,
+  Azure.ClientGenerator.Core.exact("V4_0"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.Four2,
+  Azure.ClientGenerator.Core.exact("V4_2"),
+  "csharp"
+);
 
 /**
  *  The subscription resource ID for an access rule.
@@ -841,6 +861,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(DatabaseAccountGetProperties.ipRules, "IPRules", "csharp");
 @@clientName(
+  DatabaseAccountGetProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
+@@clientName(
   DatabaseAccountCreateUpdateProperties.enableAnalyticalStorage,
   "IsAnalyticalStorageEnabled",
   "csharp"
@@ -855,6 +880,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "IPRules",
   "csharp"
 );
+@@clientName(
+  DatabaseAccountCreateUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
 @@clientName(DatabaseAccountKind, "CosmosDBAccountKind", "csharp");
 @@clientName(
   DatabaseAccountUpdateProperties.enableAnalyticalStorage,
@@ -867,6 +897,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(DatabaseAccountUpdateProperties.ipRules, "IPRules", "csharp");
+@@clientName(
+  DatabaseAccountUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
 @@clientName(DataCenterResource, "CassandraDataCenter", "csharp");
 @@clientName(
   DataCenterResourceProperties,
@@ -1639,8 +1674,13 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraViewConfig",
   "csharp"
 );
-@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
+@@clientName(ARMProxyResource, "CosmosDBProxyResource", "csharp");
 @@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
+@@clientName(
+  ScheduledEventStrategy,
+  "CassandraScheduledEventStrategy",
+  "csharp"
+);
 @@clientName(
   MaterializedViewDefinition,
   "CosmosDBMaterializedViewDefinition",
@@ -2478,7 +2518,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MongoIndex.key, "!autorest");
+@@Legacy.flattenProperty(MongoIndex.key, "!autorest,!javascript,!java");
 
 // Restorable* "GetResult" models declare id/name/type inline rather than
 // extending CommonTypes.Resource, so the generator cannot infer them as ARM

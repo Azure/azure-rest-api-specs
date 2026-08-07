@@ -5,6 +5,8 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.StorageSync;
 
+@@clientName(Microsoft.StorageSync, "StorageSyncMgmtClient", "python");
+
 @@scope(locationOperationStatusGet, "!csharp");
 @@scope(OperationStatusOperationGroup.get, "!csharp");
 @@scope(Operations.list, "!csharp");
