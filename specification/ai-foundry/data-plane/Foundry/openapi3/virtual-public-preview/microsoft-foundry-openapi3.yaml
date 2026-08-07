@@ -38483,10 +38483,9 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/ListRoutinesParameters.limit'
         - $ref: '#/components/parameters/ListRoutinesParameters.after'
-        - $ref: '#/components/parameters/ListRoutinesParameters.before'
         - $ref: '#/components/parameters/ListRoutinesParameters.order'
         - name: api-version
           in: query
@@ -38501,26 +38500,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Routine'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/PagedRoutine'
         4XX:
           description: Client error
           content:
@@ -38537,7 +38517,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:
     put:
       operationId: createOrUpdateRoutine
@@ -38551,7 +38531,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/CreateOrUpdateRoutineParameters.routine_name'
         - name: api-version
           in: query
@@ -38589,7 +38569,7 @@ paths:
               $ref: '#/components/schemas/RoutineCreateOrUpdateRequest'
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     get:
       operationId: getRoutine
       summary: Get a routine
@@ -38602,7 +38582,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/GetRoutineParameters'
         - name: api-version
           in: query
@@ -38634,7 +38614,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     delete:
       operationId: deleteRoutine
       summary: Delete a routine
@@ -38647,7 +38627,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/DeleteRoutineParameters'
         - name: api-version
           in: query
@@ -38675,7 +38655,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}/runs:
     get:
       operationId: listRoutineRuns
@@ -38689,12 +38669,11 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/ListRoutineRunsParameters.routine_name'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.limit'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.after'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.before'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.order'
         - name: api-version
           in: query
@@ -38709,26 +38688,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/RoutineRun'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/PagedRoutineRun'
         4XX:
           description: Client error
           content:
@@ -38745,7 +38705,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:disable:
     post:
       operationId: disableRoutine
@@ -38759,7 +38719,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/DisableRoutineParameters'
         - name: api-version
           in: query
@@ -38791,7 +38751,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:dispatch_async:
     post:
       operationId: dispatchRoutineAsync
@@ -38805,7 +38765,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/DispatchRoutineAsyncParameters.routine_name'
         - name: api-version
           in: query
@@ -38843,7 +38803,7 @@ paths:
               $ref: '#/components/schemas/DispatchRoutineRequest'
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:enable:
     post:
       operationId: enableRoutine
@@ -38857,7 +38817,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/EnableRoutineParameters'
         - name: api-version
           in: query
@@ -38889,7 +38849,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /schedules:
     get:
       operationId: Schedules_list
@@ -41638,15 +41598,7 @@ components:
       name: after
       in: query
       required: false
-      description: An opaque cursor returned as last_id by the previous list-runs response.
-      schema:
-        type: string
-      explode: false
-    ListRoutineRunsParameters.before:
-      name: before
-      in: query
-      required: false
-      description: Unsupported. Reserved for future backward pagination support.
+      description: An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.
       schema:
         type: string
       explode: false
@@ -41687,15 +41639,7 @@ components:
       name: after
       in: query
       required: false
-      description: An opaque cursor returned as last_id by the previous list response.
-      schema:
-        type: string
-      explode: false
-    ListRoutinesParameters.before:
-      name: before
-      in: query
-      required: false
-      description: Unsupported. Reserved for future backward pagination support.
+      description: An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.
       schema:
         type: string
       explode: false
@@ -46116,7 +46060,7 @@ components:
       description: A custom event routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     DailyRecurrenceSchedule:
       type: object
       required:
@@ -46877,7 +46821,7 @@ components:
       description: Request body for the public dispatch_async route.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     DispatchRoutineResponse:
       type: object
       properties:
@@ -46893,7 +46837,7 @@ components:
       description: Identifiers returned after a routine dispatch is queued.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     EndpointBasedEvaluatorDefinition:
       type: object
       required:
@@ -49591,7 +49535,7 @@ components:
       description: Known GitHub issue events that can fire a routine.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     GitHubIssueRoutineTrigger:
       type: object
       required:
@@ -49626,7 +49570,7 @@ components:
       description: A GitHub issue routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -50107,7 +50051,7 @@ components:
       description: A manual payload used to test an invocations API routine dispatch.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     InvokeAgentInvocationsApiRoutineAction:
       type: object
       required:
@@ -50137,7 +50081,7 @@ components:
       description: Dispatches a routine through the raw invocations API. Exactly one of agent_name or agent_endpoint_id must be provided.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     InvokeAgentResponsesApiDispatchPayload:
       type: object
       required:
@@ -50156,7 +50100,7 @@ components:
       description: A manual payload used to test a responses API routine dispatch.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     InvokeAgentResponsesApiRoutineAction:
       type: object
       required:
@@ -50186,7 +50130,7 @@ components:
       description: Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     ItemGenerationParams:
       type: object
       required:
@@ -79018,6 +78962,36 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of RedTeam items
+    PagedRoutine:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Routine'
+          description: The Routine items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of Routine items
+    PagedRoutineRun:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutineRun'
+          description: The RoutineRun items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of RoutineRun items
     PagedSchedule:
       type: object
       required:
@@ -79693,7 +79667,7 @@ components:
       description: A routine definition returned by the service.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineAction:
       type: object
       required:
@@ -79710,7 +79684,7 @@ components:
       description: Base model for a routine action.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineActionType:
       anyOf:
         - type: string
@@ -79721,7 +79695,7 @@ components:
       description: The discriminator values supported for routine actions.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineAttemptSource:
       anyOf:
         - type: string
@@ -79735,7 +79709,7 @@ components:
       description: Known source paths that can produce a routine run.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineCreateOrUpdateRequest:
       type: object
       properties:
@@ -79757,7 +79731,7 @@ components:
       description: The request body used to create or update a routine.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineDispatchPayload:
       type: object
       required:
@@ -79774,7 +79748,7 @@ components:
       description: Base model for a manual dispatch payload.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineDispatchPayloadType:
       anyOf:
         - type: string
@@ -79785,7 +79759,7 @@ components:
       description: The discriminator values supported for manual routine dispatch payloads.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineRun:
       type: object
       required:
@@ -79866,7 +79840,7 @@ components:
       description: A single routine run returned from the run history API.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineRunPhase:
       anyOf:
         - type: string
@@ -79879,13 +79853,13 @@ components:
       description: Known lifecycle phases recorded for a routine run.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineRunStatus:
       type: string
       description: The status of a routine run.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineTrigger:
       type: object
       required:
@@ -79904,7 +79878,7 @@ components:
       description: Base model for a routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineTriggerType:
       anyOf:
         - type: string
@@ -79917,7 +79891,7 @@ components:
       description: The discriminator values supported for routine triggers.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RubricBasedEvaluatorDefinition:
       type: object
       required:
@@ -80149,7 +80123,7 @@ components:
       description: A recurring cron-based routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     ScheduleRun:
       type: object
       required:
@@ -81049,7 +81023,7 @@ components:
       description: A one-shot timer routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     ToolCallOutputContent:
       anyOf:
         - type: object
