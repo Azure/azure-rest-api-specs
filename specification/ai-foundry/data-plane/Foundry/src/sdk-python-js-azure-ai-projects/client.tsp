@@ -32,7 +32,6 @@ import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
-import "../sdk-common/ops-relocation-state-stores.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -488,7 +487,7 @@ using Azure.AI.Projects;
 @@clientName(StateStores.updateStateStore, "update");
 @@clientName(StateStores.deleteStateStore, "delete");
 @@clientName(StateStores.createStateStoreItem, "createItem");
-@@clientName(StateStores.listStateStoreItemKeys, "listKeys");
+@@clientName(StateStores.listStateStoreItemKeys, "listItemKeys");
 @@clientName(StateStores.putStateStoreItem, "setItem");
 @@clientName(StateStores.getStateStoreItem, "getItem");
 @@clientName(StateStores.deleteStateStoreItem, "deleteItem");
