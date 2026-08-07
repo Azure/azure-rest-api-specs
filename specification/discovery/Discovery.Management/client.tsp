@@ -83,6 +83,8 @@ using TypeSpec.Versioning;
 @@clientName(ToolProperties, "DiscoveryToolProperties", "csharp");
 @@clientName(VmSize, "DiscoveryVmSize", "csharp");
 @@clientName(WorkspaceProperties, "DiscoveryWorkspaceProperties", "csharp");
+@@clientName(BlobStorageMountProtocol.NFS, "Nfs", "csharp");
+@@clientName(NetAppMountProtocol.NFS, "Nfs", "csharp");
 
 // Rename DiscoveryStorage to ManagedStorage for Go SDK to avoid collision with Storage type
 // after the Go emitter removes the "Discovery" prefix
