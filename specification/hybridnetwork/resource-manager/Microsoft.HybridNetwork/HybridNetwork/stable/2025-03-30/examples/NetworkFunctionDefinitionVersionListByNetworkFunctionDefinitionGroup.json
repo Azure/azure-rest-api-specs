@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "networkFunctionDefinitionGroupName": "TestNetworkFunctionDefinitionGroupNameName",
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "networkFunctionDefinitionVersionName",
+            "type": "Microsoft.HybridNetwork/publishers/publisherskugroups/publisherskuversions",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/publisherskuGroups/networkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/TestVersion",
+            "location": "eastus",
+            "properties": {
+              "deployParameters": "{\"releaseName\":{\"type\":\"string\"},\"namespace\":{\"type\":\"string\"}}",
+              "networkFunctionTemplate": {
+                "networkFunctionApplications": [
+                  {
+                    "name": "fedrbac",
+                    "artifactProfile": {
+                      "artifactStore": {
+                        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/testArtifactStore"
+                      },
+                      "helmArtifactProfile": {
+                        "helmPackageName": "fed-rbac",
+                        "helmPackageVersionRange": "~2.1.3",
+                        "imagePullSecretsValuesPaths": [
+                          "global.imagePullSecrets"
+                        ],
+                        "registryValuesPaths": [
+                          "global.registry.docker.repoPath"
+                        ]
+                      }
+                    },
+                    "artifactType": "HelmPackage",
+                    "dependsOnProfile": {
+                      "installDependsOn": [],
+                      "uninstallDependsOn": [],
+                      "updateDependsOn": []
+                    },
+                    "deployParametersMappingRuleProfile": {
+                      "applicationEnablement": "Enabled",
+                      "helmMappingRuleProfile": {
+                        "helmPackageVersion": "2.1.3",
+                        "options": {
+                          "installOptions": {
+                            "atomic": "true",
+                            "timeout": "30",
+                            "wait": "waitValue"
+                          },
+                          "upgradeOptions": {
+                            "atomic": "true",
+                            "timeout": "30",
+                            "wait": "waitValue"
+                          }
+                        },
+                        "releaseName": "{deployParameters.releaseName}",
+                        "releaseNamespace": "{deployParameters.namesapce}",
+                        "values": ""
+                      }
+                    }
+                  }
+                ],
+                "nfviType": "AzureArcKubernetes"
+              },
+              "networkFunctionType": "ContainerizedNetworkFunction",
+              "versionState": "Active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkFunctionDefinitionVersions_ListByNetworkFunctionDefinitionGroup",
+  "title": "Get Publisher resource"
+}

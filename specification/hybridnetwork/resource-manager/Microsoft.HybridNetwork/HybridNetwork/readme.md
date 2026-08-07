@@ -25,7 +25,20 @@ These are the global settings for the hybridnetwork.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04-15
+tag: package-2025-03-30
+```
+
+### Tag: package-2025-03-30
+
+These settings apply only when `--tag=package-2025-03-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-30'
+input-file:
+  - stable/2025-03-30/openapi.json
+suppressions:
+  - code: PatchSkuProperty
+    from: openapi.json
+    reason: sku cannot be patched
 ```
 
 ### Tag: package-2024-04-15

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactStoreName": "TestArtifactStore",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "location": "eastus",
+        "properties": {
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureContainerRegistry"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "ArtifactStores_Update",
+  "title": "Update artifact store resource tags"
+}

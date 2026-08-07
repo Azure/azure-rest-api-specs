@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "networkFunctionDefinitionGroupName": "TestNetworkFunctionDefinitionGroupName",
+    "networkFunctionDefinitionVersionName": "1.0.0",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestVersion",
+        "type": "Microsoft.HybridNetwork/publishers/networkFunctionDefinitionGroups/networkFunctionDefinitionVersions",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkFunctionDefinitionGroups/TestNetworkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/1.0.0",
+        "location": "eastus",
+        "properties": {
+          "deployParameters": "{\"releaseName\":{\"type\":\"string\"},\"namespace\":{\"type\":\"string\"}}",
+          "networkFunctionTemplate": {
+            "networkFunctionApplications": [
+              {
+                "name": "fedrbac",
+                "artifactProfile": {
+                  "artifactStore": {
+                    "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/testArtifactStore"
+                  },
+                  "helmArtifactProfile": {
+                    "helmPackageName": "fed-rbac",
+                    "helmPackageVersionRange": "~2.1.3",
+                    "imagePullSecretsValuesPaths": [
+                      "global.imagePullSecrets"
+                    ],
+                    "registryValuesPaths": [
+                      "global.registry.docker.repoPath"
+                    ]
+                  }
+                },
+                "artifactType": "HelmPackage",
+                "dependsOnProfile": {
+                  "installDependsOn": [],
+                  "uninstallDependsOn": [],
+                  "updateDependsOn": []
+                },
+                "deployParametersMappingRuleProfile": {
+                  "applicationEnablement": "Enabled",
+                  "helmMappingRuleProfile": {
+                    "helmPackageVersion": "2.1.3",
+                    "releaseName": "{deployParameters.releaseName}",
+                    "releaseNamespace": "{deployParameters.namesapce}",
+                    "values": ""
+                  }
+                }
+              }
+            ],
+            "nfviType": "AzureArcKubernetes"
+          },
+          "networkFunctionType": "ContainerizedNetworkFunction",
+          "versionState": "Active"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkFunctionDefinitionVersions_Update",
+  "title": "Update the network function definition version tags"
+}

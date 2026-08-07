@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactName": "fedrbac",
+    "artifactStoreName": "TestArtifactStoreName",
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://microsoft.com/a",
+        "value": [
+          {
+            "name": "fedrbac",
+            "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifactVersions",
+            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions",
+            "properties": {
+              "artifactState": "Deprecated",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "1.0.0"
+            }
+          },
+          {
+            "name": "fedrbac",
+            "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifactVersions",
+            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions",
+            "properties": {
+              "artifactState": "Active",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "2.0.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProxyArtifact_Get",
+  "title": "Get an artifact overview"
+}
