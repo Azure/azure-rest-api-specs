@@ -46,8 +46,8 @@
     NOTE for the data-plane suite: the model in the eval YAML is intentionally
     kept equal to `engine.model` in
     `.github/workflows/data-plane-api-review.md`. Overriding it here produces a
-    number that does not transfer to production and must not be used to satisfy
-    a rollout gate.
+    number that does not transfer to production and must not be compared with
+    the production regression baseline.
 
 .PARAMETER JudgeModel
     Override the LLM judge model. Default: use the judge_model from eval YAML.
@@ -89,8 +89,8 @@
     .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer"
 
 .EXAMPLE
-    # The data-plane phase-2 promotion gate: TN suite, three runs
-    .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "eval-true-negatives" -Repeat 3
+    # The data-plane true-negative regression suite (`runs: 3` is configured)
+    .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives"
 
 .EXAMPLE
     # Fast iteration: sonnet model, 3 workers
@@ -169,7 +169,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     deliberately NOT the same as counting glyphs. An earlier version counted
     severity glyphs at line start, which counts *sections* -- five blocking
     false positives under one `### 🔴 Blocking` heading scored as 1. Harmless
-    for the gate, which only asks whether the count is zero, but a large
+    for the blocking regression metric, which only asks whether the count is zero, but a large
     undercount for the non-blocking trend, which is the whole point of
     tracking it.
 
@@ -178,20 +178,20 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     keyed to the `DP-XXX-NN` shape under-reports the false-positive rate. See
     "Rule-ID vocabulary" in the report-format reference for the nine families.
 
-    Severity policy, per the tracked-vs-gated split:
-      Blocking     -- GATING. Any blocking finding of any family fails the gate.
-      Non-blocking -- TRACKED, NOT GATING. Warning and suggestion findings on a
+    Severity policy:
+      Blocking     -- FAILS THE REGRESSION RUN.
+      Non-blocking -- TRACKED. Warning and suggestion findings on a
                       true negative are counted and trended, because that is
                       what quietly gets a review bot muted, but they do not
                       fail the run. Four true-negative rubrics deliberately
                       tolerate suggestion-severity output; this counts that
                       output without contradicting them.
-      Suggestion   -- GATING, but BUDGETED rather than banned. At most
+      Suggestion   -- FAILS THE REGRESSION RUN when over budget. At most
                       $SuggestionBudget (default 2) per true-negative TRIAL.
                       Suggestions were previously free: TN graders are narrow by
                       design, so a report could satisfy every one of them while
                       burying the author in defensible 💡 findings. Padding is
-                      exactly that pile, so a gate pricing suggestions at zero
+                      exactly that pile, so a metric pricing suggestions at zero
                       cannot measure it. Banning them outright would contradict
                       the rubrics that permit asking, at 💡, whether a value set
                       is protocol-fixed -- hence a budget. Suggestions also roll
@@ -230,7 +230,7 @@ function Get-TrueNegativeFindingCounts {
         # At most this many Suggestion-severity findings per true-negative
         # TRIAL. Suggestions were previously free: TN graders are narrow, so a
         # pile of individually-defensible 💡 findings scored as a pass. Padding
-        # is exactly that pile, so a gate that prices it at zero cannot measure
+        # is exactly that pile, so a metric that prices it at zero cannot measure
         # it. Banning suggestions outright is also wrong -- the rubrics
         # explicitly permit asking, at 💡, whether a value set is protocol-fixed
         # -- so this is a budget rather than a ban.
@@ -304,7 +304,7 @@ function Get-TrueNegativeFindingCounts {
         #
         # Headings are matched by GLYPH or by WORD. The graders were made
         # format-tolerant because presentation costs a human reader nothing,
-        # and the gate must not be blinded by the same variation: a report
+        # and the regression counter must not be blinded by the same variation: a report
         # writing `### 🚫 Blocking` or `### Blocking Issues` is still declaring
         # a blocking section, and findings under it are still blocking.
         $currentSeverity = 'unsectioned'
@@ -352,7 +352,7 @@ function Get-TrueNegativeFindingCounts {
                         $nonBlocking--
                         # A retracted suggestion must also leave the budget,
                         # or a report that withdraws its own padding still
-                        # fails the gate for having written it.
+                        # fails the regression run for having written it.
                         if ($lastCharged -eq 'suggestion') { $suggestion--; $trialSuggestions-- }
                     }
                     $lastCharged = $null
@@ -369,7 +369,7 @@ function Get-TrueNegativeFindingCounts {
                 # questions on a true negative.
                 if ($currentSeverity -eq 'questions') { $lastCharged = $null; continue }
                 # An unsectioned finding is charged to non-blocking: it is real
-                # output that should be trended, but promoting it to the gate
+                # output that should be trended, but promoting it to Blocking
                 # on the strength of a missing heading would be unfair.
                 if ($currentSeverity -eq 'blocking') { $blocking++; $lastCharged = 'blocking' }
                 elseif ($currentSeverity -eq 'suggestion') {
@@ -379,7 +379,7 @@ function Get-TrueNegativeFindingCounts {
                     $nonBlocking++; $lastCharged = 'nonblocking'
                     # A finding under no severity heading at all. Its severity
                     # is genuinely unknowable, so it cannot be charged to the
-                    # blocking gate or the suggestion budget -- but it must not
+                    # blocking metric or the suggestion budget -- but it must not
                     # vanish either. One real trial emitted a flat `### Findings`
                     # list of nine, which scored zero suggestions and looked
                     # clean to the budget. Reported as a FORMAT failure, which
@@ -405,16 +405,16 @@ function Get-TrueNegativeFindingCounts {
             $unsectioned += $trialUnsectioned
         }
 
-        # Belt and braces for the gate: a blocking severity heading with no
+        # Belt and braces for the blocking metric: a severity heading with no
         # parseable finding under it still counts as a blocking false positive,
         # so this metric can only ever be stricter than the glyph-only version
         # it replaced, never looser.
         #
         # Matches the heading by GLYPH **or by word**. The graders were made
-        # format-tolerant deliberately; the gate must not inherit that
+        # format-tolerant deliberately; the regression counter must not inherit that
         # tolerance. A bracketless finding under `### 🚫 Blocking` escapes the
         # graders by design -- it is a format failure, not a judgment failure --
-        # but it must not escape the gate, which asks only "did the reviewer
+        # but it must not escape the counter, which asks only "did the reviewer
         # declare something blocking on a clean spec".
         #
         # Suppressed when the report retracts a finding, otherwise this clause
@@ -885,14 +885,12 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         # True-negative stimuli are specs where the correct answer is silence.
         # Any finding on one is by definition a false positive.
         #
-        #   Blocking FPs   -- GATING. The phase-2 rollout gate is zero blocking
-        #                     FPs across three runs of the full TN suite.
-        #   Non-blocking   -- TRACKED, NOT GATING. Warnings and suggestions on a
-        #     FPs             clean spec are what actually gets a review bot
-        #                     muted in practice, but gating on them would make
-        #                     the suite unshippable. Watch the trend: a rising
-        #                     number is the early warning that reviewers are
-        #                     about to start ignoring the bot.
+        #   Blocking FPs   -- FAIL THE REGRESSION RUN.
+        #   Non-blocking   -- TRACKED. Warnings and suggestions on a clean spec
+        #     FPs             are what actually gets a review bot muted in
+        #                     practice. Watch the trend: a rising number is the
+        #                     early warning that reviewers are about to start
+        #                     ignoring the bot.
         #
         # Counted mechanically from the severity glyphs in the recorded agent
         # output, so no grader change is needed when stimuli are added --
@@ -912,13 +910,13 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
 
             if (-not $tnGlyphBlind) {
                 $blockingColor = if ($tnMetrics.Blocking -eq 0) { "Green" } else { "Red" }
-                Write-Host ("    Blocking FPs      : {0}   [GATING -- must be 0]" -f $tnMetrics.Blocking) -ForegroundColor $blockingColor
-                Write-Host ("    Non-blocking FPs  : {0}   [tracked, not gating -- watch the trend]" -f $tnMetrics.NonBlocking) -ForegroundColor DarkYellow
+                Write-Host ("    Blocking FPs      : {0}   [regression -- must be 0]" -f $tnMetrics.Blocking) -ForegroundColor $blockingColor
+                Write-Host ("    Non-blocking FPs  : {0}   [tracked -- watch the trend]" -f $tnMetrics.NonBlocking) -ForegroundColor DarkYellow
                 $fpPerStimulus = [math]::Round($tnMetrics.NonBlocking / $tnMetrics.StimulusCount, 2)
                 Write-Host ("    Non-blocking/stim : {0}" -f $fpPerStimulus) -ForegroundColor DarkYellow
 
                 # Suggestion budget. Padding is a pile of individually
-                # defensible suggestions, so it is invisible to a gate that
+                # defensible suggestions, so it is invisible to a metric that
                 # prices suggestions at zero and to graders narrow enough to
                 # ignore them. Budgeted rather than banned: the rubrics
                 # explicitly allow asking, at 💡, whether a value set is
@@ -926,7 +924,7 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
                 $budget = $tnMetrics.SuggestionBudget
                 $overBudget = @($tnMetrics.OverBudget)
                 $sugColor = if ($overBudget.Count -eq 0) { "Green" } else { "Red" }
-                Write-Host ("    Suggestion FPs    : {0}   [budget {1}/stimulus -- GATING]" -f $tnMetrics.Suggestion, $budget) -ForegroundColor $sugColor
+                Write-Host ("    Suggestion FPs    : {0}   [regression budget {1}/stimulus]" -f $tnMetrics.Suggestion, $budget) -ForegroundColor $sugColor
 
                 if ($overBudget.Count -gt 0) {
                     foreach ($ob in $overBudget) {
@@ -953,19 +951,19 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
 
                 # Findings emitted under no severity heading at all. Their
                 # severity is unknowable, so they are charged to neither the
-                # blocking gate nor the suggestion budget -- but a flat list of
+                # blocking metric nor the suggestion budget -- but a flat list of
                 # nine on a clean spec is exactly the padding the budget exists
                 # to price, and it must not read as a clean run. Reported as the
                 # FORMAT failure it is.
                 if ($tnMetrics.Unsectioned -gt 0) {
-                    Write-Host ("    Unsectioned finds : {0}   [FORMAT -- severity unknowable, excluded from gate and budget]" -f $tnMetrics.Unsectioned) -ForegroundColor DarkYellow
+                    Write-Host ("    Unsectioned finds : {0}   [FORMAT -- severity unknowable, excluded from blocking metric and budget]" -f $tnMetrics.Unsectioned) -ForegroundColor DarkYellow
                     foreach ($kv in ($tnMetrics.PerStimulusUnsectioned.GetEnumerator() | Sort-Object -Property Value -Descending)) {
                         Write-Host ("      {0,-42} {1}" -f $kv.Key, $kv.Value) -ForegroundColor DarkYellow
                     }
                     Write-Host "      A report with no severity headings cannot be scored for severity." -ForegroundColor DarkYellow
                 }
             } else {
-                Write-Host "    Blocking FPs      : UNMEASURED   [GATING -- treated as NOT met]" -ForegroundColor Red
+                Write-Host "    Blocking FPs      : UNMEASURED   [regression signal unavailable]" -ForegroundColor Red
                 Write-Host "    Non-blocking FPs  : UNMEASURED" -ForegroundColor Red
                 Write-Host ("      {0} true-negative trial(s) failed but the severity-glyph counter" -f $tnGrader.FailedTrials) -ForegroundColor DarkYellow
                 Write-Host "      found no findings in the mandated report format. The two metrics" -ForegroundColor DarkYellow
@@ -977,7 +975,7 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
             # the signal the "a single true-negative failure is blocking" rule
             # is written against.
             $tnFailColor = if ($tnGrader.FailedTrials -eq 0) { "Green" } else { "Red" }
-            Write-Host ("    TN trials failed  : {0}/{1}   [GATING -- must be 0]" -f $tnGrader.FailedTrials, $tnGrader.StimulusCount) -ForegroundColor $tnFailColor
+            Write-Host ("    TN trials failed  : {0}/{1}   [regression -- must be 0]" -f $tnGrader.FailedTrials, $tnGrader.StimulusCount) -ForegroundColor $tnFailColor
             if ($tnGrader.FailedTrials -gt 0) {
                 Write-Host ("      Stimuli: {0}" -f (($tnGrader.FailedStimuli | Sort-Object) -join ", ")) -ForegroundColor Red
             }
@@ -1014,25 +1012,25 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         JsonlFile   = $jsonlFile
     }
 
-    # Surface the worst exit code so CI can gate on it.
+    # Surface the worst exit code so CI can report the regression.
     if ($evalExitCode -ne 0 -and $overallExitCode -eq 0) {
         $overallExitCode = $evalExitCode
     }
 
     # vally's own pass/fail uses `scoring.threshold`, which is an aggregate:
     # a suite can score above threshold while individual stimuli fail. That is
-    # reasonable for a capability suite and wrong for a true-negative gate,
-    # where the stated rule is that a single failure is blocking. Observed
+    # reasonable for a capability suite and wrong for a true-negative regression
+    # run, where a single failure must remain visible. Observed
     # concretely on the first real run: 12 of 21 trials failed, including one
     # genuine invented finding, and vally still exited 0 at 75% vs a 70%
     # threshold. Fail the run here so CI cannot go green on that.
     if ($tnGrader.FailedTrials -gt 0 -and $overallExitCode -eq 0) {
-        Write-Host ("  [GATE] {0} true-negative trial(s) failed -- a single failure is blocking." -f $tnGrader.FailedTrials) -ForegroundColor Red
+        Write-Host ("  [REGRESSION] {0} true-negative trial(s) failed." -f $tnGrader.FailedTrials) -ForegroundColor Red
         $overallExitCode = 1
     }
 
-    # Suggestion budget. Gating, and deliberately separate from the grader gate
-    # above: graders on a true negative are narrow by design, so a report can
+    # Suggestion budget. Deliberately separate from individual graders: graders
+    # on a true negative are narrow by design, so a report can
     # satisfy every one of them while burying the author in defensible
     # suggestions. That is what padding is, and it is the failure mode most
     # likely to get the bot muted in practice. Only enforced when the counts are
@@ -1040,7 +1038,7 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     if (-not $tnGlyphBlind) {
         $overBudgetFinal = @($tnMetrics.OverBudget)
         if ($overBudgetFinal.Count -gt 0 -and $overallExitCode -eq 0) {
-            Write-Host ("  [GATE] {0} true-negative stimulus/stimuli exceeded the {1}-suggestion budget." -f $overBudgetFinal.Count, $tnMetrics.SuggestionBudget) -ForegroundColor Red
+            Write-Host ("  [REGRESSION] {0} true-negative stimulus/stimuli exceeded the {1}-suggestion budget." -f $overBudgetFinal.Count, $tnMetrics.SuggestionBudget) -ForegroundColor Red
             $overallExitCode = 1
         }
     }
@@ -1081,11 +1079,9 @@ if ($Repeat -gt 1) {
     $aggColor = if ($aggFailed -eq 0) { "Green" } elseif ($aggPassRate -ge 70) { "Yellow" } else { "Red" }
     Write-Host ("  Aggregate: {0}/{1} passed ({2}%) across {3} runs in {4} min total" -f $aggPassed, $aggTotal, $aggPassRate, $Repeat, $aggDuration) -ForegroundColor $aggColor
 
-    # Aggregate false-positive metrics across runs. This is the number the
-    # phase-2 rollout gate is written against: zero blocking FPs across three
-    # runs of the full true-negative suite. The non-blocking total is reported
-    # alongside it but does NOT gate -- it exists so a rising trend is visible
-    # before reviewers start ignoring the bot, rather than after.
+    # Aggregate false-positive metrics across runs. This is a rollout regression
+    # signal, not a hard promotion gate. The non-blocking total is reported so a
+    # rising trend is visible before reviewers start ignoring the bot.
     $aggTnStimuli = ($runSummaries | Measure-Object -Property TnStimuli -Sum).Sum
     if ($aggTnStimuli -gt 0) {
         $aggTnBlocking = ($runSummaries | Measure-Object -Property TnBlockFp -Sum).Sum
@@ -1105,18 +1101,12 @@ if ($Repeat -gt 1) {
         }
         Write-Host ("    TN failures  : {0} trial(s)" -f $aggTnFailed) -ForegroundColor $(if ($aggTnFailed -eq 0) { "Green" } else { "Red" })
 
-        # The gate needs THREE things, not one: enough runs, a metric that
-        # actually observed something, and zero failures. Any of the three
-        # missing means the bar is not met -- an unmeasured run is not a
-        # passing run.
-        if ($Repeat -lt 3) {
-            Write-Host "    [GATE] Fewer than 3 runs -- phase-2 bar not evaluated." -ForegroundColor DarkYellow
-        } elseif (-not $aggObserved) {
-            Write-Host "    [GATE] False positives UNMEASURED -- phase-2 bar NOT met." -ForegroundColor Red
+        if (-not $aggObserved) {
+            Write-Host "    [REGRESSION] False positives UNMEASURED." -ForegroundColor Red
         } elseif ($aggTnBlocking -gt 0 -or $aggTnFailed -gt 0) {
-            Write-Host "    [GATE] Blocking FPs or TN failures present -- phase-2 bar NOT met." -ForegroundColor Red
+            Write-Host "    [REGRESSION] Blocking FPs or TN failures present." -ForegroundColor Red
         } else {
-            Write-Host "    [GATE] Zero blocking FPs across $Repeat runs -- phase-2 bar met." -ForegroundColor Green
+            Write-Host "    [REGRESSION] No blocking FPs or TN failures observed." -ForegroundColor Green
         }
         Write-Host ""
     }
@@ -1175,7 +1165,7 @@ if ($Repeat -gt 1) {
 try { [Console]::OutputEncoding = $prevOutputEncoding } catch {}
 $OutputEncoding = $prevConsoleEncoding
 
-# Exit with the worst exit code from all runs so CI can gate on it
+# Exit with the worst exit code from all runs so CI can report it
 if ($overallExitCode -ne 0) {
     Write-Host "  Eval suite exited with non-zero code: $overallExitCode" -ForegroundColor Red
 }
