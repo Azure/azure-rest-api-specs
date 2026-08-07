@@ -1,0 +1,401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Teams Phone System Client",
+    "description": "The phone numbers client uses Azure Communication Services to manage authorization in Teams Phone System ",
+    "version": "2024-04-01-preview"
+  },
+  "paths": {
+    "/phoneSystem/teamsTenant/{teamsTenantId}": {
+      "put": {
+        "tags": [
+          "(CCaaS) Allow Teams tenant to make calls to ACS resource using ACS resource identity"
+        ],
+        "summary": "Add Teams tenant to ACS resource.",
+        "operationId": "TeamsPhoneSystem_SetTeamsTenant",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+          {
+            "in": "path",
+            "name": "teamsTenantId",
+            "description": "Teams tenant ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "(CCaaS) Allow Teams tenant to make calls to ACS resource using ACS resource identity"
+        ],
+        "summary": "Remove Teams tenants from ACS resource.",
+        "operationId": "TeamsPhoneSystem_DeleteTeamsTenant",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+          {
+            "in": "path",
+            "name": "teamsTenantId",
+            "description": "Teams tenant ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      }
+    },
+    "/phoneSystem/acsAuthorization/{acsResourceId}": {
+      "put": {
+        "tags": [
+          "(TAC) Allow ACS resource to access Teams Resource account info using Teams Tenant identity"
+        ],
+        "summary": "Allow Teams tenant make calls to ACS resource.",
+        "operationId": "TeamsPhoneSystem_AllowTeansTenantToCallAcsResource",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          
+          {
+            "in": "path",
+            "name": "acsResourceId",
+            "description": "ACS resource ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "(TAC) Allow ACS resource to access Teams Resource account info using Teams Tenant identity"
+        ],
+        "summary": "Assign ACS resource to Teams tenant.",
+        "operationId": "TeamsPhoneSystem_AssociateResourceToTeamsTenant",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          
+          {
+            "in": "path",
+            "name": "acsResourceId",
+            "description": "ACS resource ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      }
+    },
+    "/phoneSystem/teamsResourceAccounts/{teamsResourceAccountId}": {
+      "patch": {
+        "tags": [
+          "(TAC) Associate Teams tenant with ACS resource ID, resource account ID"
+        ],
+        "summary": "Update ACS resource association with Teams resource account. i.e. Can link or delink an ACS resource with the given Teams resource account.",
+        "operationId": "TeamsPhoneSystem_AllowTeansTenantToCallAcsResource",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "teamsResourceAccountId",
+            "description": "Teams resource account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "updateTeamsResourceAccount",
+            "description": "Teams resource account update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTeamsResourceAccountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      }
+    },
+    "/phoneSystem/teamsResourceAccounts": {
+      "get": {
+        "tags": [
+          "(TAC) Associate Teams tenant with ACS resource ID, resource account ID"
+        ],
+        "summary": "Get list of resource accounts and their details.",
+        "operationId": "TeamsPhoneSystem_AllowTeansTenantToCallAcsResource",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsResourceAccounts"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      }
+    },
+    "/phoneSystem/voiceChannels/{voiceChannelId}": {
+      "get": {
+        "tags": [
+          "(TAC) Voice Channel management"
+        ],
+        "summary": "Gets voice channel details by the voice channel ID.",
+        "operationId": "TeamsPhoneSystem_GetVoiceChannel",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          
+          {
+            "in": "path",
+            "name": "voiceChannelId",
+            "description": "Voice Channel ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VoiceChannelResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assign Teams tenant to ACS resource": {
+            "$ref": "./examples/AssignTeamsTenantToResource.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateTeamsResourceAccountRequest": {
+      "description": "Details to update teams resource account.",
+      "type": "object",
+      "properties": {
+        "acsResourceId": {
+          "description": "ACS resource id",
+          "type": "string"
+        }
+      }
+    },
+    "TeamsResourceAccount": {
+      "description": "Details to update teams resource account.",
+      "type": "object",
+      "properties": {
+        "acsResourceId": {
+          "description": "ACS resource id",
+          "type": "string"
+        }
+      }
+    },
+    "TeamsResourceAccounts": {
+      "description": "List of team resource accounts.",
+      "required": [
+        "teamsResourceAccounts"
+      ],
+      "type": "object",
+      "properties": {
+        "teamsResourceAccounts": {
+          "description": "ACS resource id",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TeamsResourceAccount"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page of team resource accounts",
+          "type": "string"
+        }
+      }
+    },
+    "VoiceChannelResponse": {
+      "description": "Details to assign Teams tenant to ACS resource",
+      "type": "object",
+      "properties": {
+        "voiceChannelId": {
+          "description": "Voice channel ID",
+          "type": "string"
+        },
+        "voiceChannelName": {
+          "description": "Voice channel name",
+          "type": "string"
+        },
+        "acsResourceId": {
+          "description": "ACS Resource ID associated with voice channel",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "The phone number id in E.164 format. The leading plus can be either + or encoded as %2B, e.g. +11234567890",
+          "type": "string"
+        },
+        "phoneNumberType": {
+          "description": "(TODO) Rename this, as this is ambiguous with the existing phone number type. Can have value callingPlan, directRouting, operatorConnect",
+          "type": "string",
+          "enum": [
+            "callingPlan",
+            "directRouting",
+            "operatorConnect"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}
