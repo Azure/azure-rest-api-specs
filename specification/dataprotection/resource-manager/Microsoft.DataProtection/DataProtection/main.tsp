@@ -22,6 +22,7 @@ import "./DeletedBackupInstanceResource.tsp";
 import "./ResourceGuardResource.tsp";
 import "./DppBaseResource.tsp";
 import "./ResourceGuardProxyBaseResource.tsp";
+import "./CrossTenantVaultMappingResource.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 

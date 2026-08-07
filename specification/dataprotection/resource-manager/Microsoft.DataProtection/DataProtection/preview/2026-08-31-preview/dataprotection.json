@@ -80,6 +80,45 @@
     },
     {
       "name": "ResourceGuardProxyBaseResources"
+    },
+    {
+      "name": "CrossTenantVaultMappings"
+    },
+    {
+      "name": "CrossTenantVaultMappingStatus"
+    },
+    {
+      "name": "BackupInstancesFromCrossTenantVault"
+    },
+    {
+      "name": "BackupInstanceFromCrossTenantVault"
+    },
+    {
+      "name": "RestoresFromCrossTenantVault"
+    },
+    {
+      "name": "ValidateRestoreFromCrossTenantVault"
+    },
+    {
+      "name": "RestorableTimeRangesFromCrossTenantVault"
+    },
+    {
+      "name": "RecoveryPointsFromCrossTenantVault"
+    },
+    {
+      "name": "RecoveryPointFromCrossTenantVault"
+    },
+    {
+      "name": "BackupJobsFromCrossTenantVault"
+    },
+    {
+      "name": "JobFromCrossTenantVault"
+    },
+    {
+      "name": "BackupInstanceOperationStatusFromCrossTenantVault"
+    },
+    {
+      "name": "BackupInstanceOperationResultFromCrossTenantVault"
     }
   ],
   "paths": {
@@ -2865,6 +2904,1028 @@
         "x-ms-examples": {
           "UnlockDelete ResourceGuardProxy": {
             "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappingStatus": {
+      "post": {
+        "operationId": "CrossTenantVaultMappingStatus_Check",
+        "tags": [
+          "CrossTenantVaultMappingStatus"
+        ],
+        "description": "Gets the status (Active/Inactive) of a cross-tenant vault mapping from the source vault side.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the backup vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cross-tenant vault mapping status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappingStatus_Check.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings": {
+      "get": {
+        "operationId": "CrossTenantVaultMappings_List",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Lists the cross-tenant vault mappings under the target vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the backup vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cross-tenant vault mappings in a vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}": {
+      "get": {
+        "operationId": "CrossTenantVaultMappings_Get",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Gets a cross-tenant vault mapping by name from the target vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the backup vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the cross-tenant vault mapping.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMapping"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a cross-tenant vault mapping": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CrossTenantVaultMappings_CreateOrUpdate",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Creates or updates a cross-tenant vault mapping under the target vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the backup vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the cross-tenant vault mapping.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMapping"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CrossTenantVaultMapping' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMapping"
+            }
+          },
+          "201": {
+            "description": "Resource 'CrossTenantVaultMapping' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMapping"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a cross-tenant vault mapping": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances": {
+      "get": {
+        "operationId": "BackupInstancesFromCrossTenantVault_List",
+        "tags": [
+          "BackupInstancesFromCrossTenantVault"
+        ],
+        "description": "Lists the backup instances of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List backup instances from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstancesFromCrossTenantVault_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}": {
+      "get": {
+        "operationId": "BackupInstanceFromCrossTenantVault_Get",
+        "tags": [
+          "BackupInstanceFromCrossTenantVault"
+        ],
+        "description": "Gets a backup instance of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a backup instance from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceFromCrossTenantVault_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/findRestorableTimeRanges": {
+      "post": {
+        "operationId": "RestorableTimeRangesFromCrossTenantVault_Find",
+        "tags": [
+          "RestorableTimeRangesFromCrossTenantVault"
+        ],
+        "description": "Finds the restorable time ranges for a backup instance of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponseResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find restorable time ranges from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RestorableTimeRangesFromCrossTenantVault_Find.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "BackupInstanceOperationResultFromCrossTenantVault_Get",
+        "tags": [
+          "BackupInstanceOperationResultFromCrossTenantVault"
+        ],
+        "description": "Fetches the result of a cross-tenant operation (e.g. a cross-tenant restore) for a backup instance of the\nmapped source vault - the leg the restore's Location header points at. Returns 202 with Location/Retry-After\nwhile pending, and 200 with the operation result body when complete.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cross-tenant operation result": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceOperationResultFromCrossTenantVault_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/operationStatus/{operationId}": {
+      "get": {
+        "operationId": "BackupInstanceOperationStatusFromCrossTenantVault_Get",
+        "tags": [
+          "BackupInstanceOperationStatusFromCrossTenantVault"
+        ],
+        "description": "Gets the status of a cross-tenant operation (e.g. a cross-tenant restore) for a backup instance of the mapped source vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cross-tenant operation status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceOperationStatusFromCrossTenantVault_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/recoveryPoints": {
+      "get": {
+        "operationId": "RecoveryPointsFromCrossTenantVault_List",
+        "tags": [
+          "RecoveryPointsFromCrossTenantVault"
+        ],
+        "description": "Lists the vault-tier recovery points for a backup instance of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupRecoveryPointResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List recovery points from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RecoveryPointsFromCrossTenantVault_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/recoveryPoints/{recoveryPointId}": {
+      "get": {
+        "operationId": "RecoveryPointFromCrossTenantVault_Get",
+        "tags": [
+          "RecoveryPointFromCrossTenantVault"
+        ],
+        "description": "Gets a vault-tier recovery point for a backup instance of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recoveryPointId",
+            "in": "path",
+            "description": "The name of the AzureBackupRecoveryPointResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupRecoveryPointResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a recovery point from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RecoveryPointFromCrossTenantVault_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/restore": {
+      "post": {
+        "operationId": "RestoresFromCrossTenantVault_Trigger",
+        "tags": [
+          "RestoresFromCrossTenantVault"
+        ],
+        "description": "Triggers restore for a backup instance of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBackupRestoreRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger restore from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RestoresFromCrossTenantVault_Trigger.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OperationJobExtendedInfo"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/validateRestore": {
+      "post": {
+        "operationId": "ValidateRestoreFromCrossTenantVault_Trigger",
+        "tags": [
+          "ValidateRestoreFromCrossTenantVault"
+        ],
+        "description": "Validates whether restore can be triggered for a backup instance of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "description": "The name of the BackupInstanceResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateRestoreRequestObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate restore from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ValidateRestoreFromCrossTenantVault_Trigger.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OperationJobExtendedInfo"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupJobs": {
+      "get": {
+        "operationId": "BackupJobsFromCrossTenantVault_List",
+        "tags": [
+          "BackupJobsFromCrossTenantVault"
+        ],
+        "description": "Lists the jobs of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List jobs from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupJobsFromCrossTenantVault_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupJobs/{jobId}": {
+      "get": {
+        "operationId": "JobFromCrossTenantVault_Get",
+        "tags": [
+          "JobFromCrossTenantVault"
+        ],
+        "description": "Gets a job of the mapped source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the BackupVaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the CrossTenantVaultMapping",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The name of the AzureBackupJobResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a job from a cross-tenant vault": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/JobFromCrossTenantVault_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/remove": {
+      "post": {
+        "operationId": "CrossTenantVaultMappings_Remove",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Removes a cross-tenant vault mapping from the target vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the backup vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "The name of the cross-tenant vault mapping.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove a cross-tenant vault mapping": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_Remove.json"
           }
         }
       }
@@ -6121,6 +7182,102 @@
             "value": "Enabled"
           }
         ]
+      }
+    },
+    "CrossTenantVaultMapping": {
+      "type": "object",
+      "description": "Cross-tenant vault mapping resource for cross-tenant restore.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrossTenantVaultMappingProperties",
+          "description": "CrossTenantVaultMapping properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CrossTenantVaultMappingList": {
+      "type": "object",
+      "description": "List of cross-tenant vault mapping resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of resources.",
+          "items": {
+            "$ref": "#/definitions/CrossTenantVaultMapping"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ]
+    },
+    "CrossTenantVaultMappingProperties": {
+      "type": "object",
+      "description": "Cross-tenant vault mapping properties for cross-tenant restore.",
+      "properties": {
+        "sourceVaultId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the source backup vault whose data can be restored across tenants.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DataProtection/backupVaults"
+              }
+            ]
+          }
+        },
+        "mappingName": {
+          "type": "string",
+          "description": "Name of the cross-tenant vault mapping.",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cross-tenant vault mapping was created.",
+          "readOnly": true
+        },
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which the MUA (LAC) check will be performed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceTenantId": {
+          "type": "string",
+          "description": "Tenant ID of the source vault in the cross-tenant vault mapping.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the cross-tenant vault mapping.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceVaultId"
+      ]
+    },
+    "CrossTenantVaultMappingStatusResponse": {
+      "type": "object",
+      "description": "Response for the cross-tenant vault mapping status check, from the source vault side.",
+      "properties": {
+        "mappingName": {
+          "type": "string",
+          "description": "Name of the cross-tenant vault mapping, if the source vault is mapped."
+        },
+        "mappingState": {
+          "$ref": "#/definitions/VaultMappingState",
+          "description": "Current state of the cross-tenant vault mapping."
+        }
       }
     },
     "CurrentProtectionState": {
@@ -9403,6 +10560,30 @@
           {
             "name": "DeepValidation",
             "value": "DeepValidation"
+          }
+        ]
+      }
+    },
+    "VaultMappingState": {
+      "type": "string",
+      "description": "State of a cross-tenant vault mapping.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "VaultMappingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The cross-tenant vault mapping is active."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The cross-tenant vault mapping is inactive."
           }
         ]
       }
