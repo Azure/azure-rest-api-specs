@@ -27,7 +27,7 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-06-02-preview
+tag: package-2026-06-01
 ```
 
 ### Tag: package-2026-06-02-preview

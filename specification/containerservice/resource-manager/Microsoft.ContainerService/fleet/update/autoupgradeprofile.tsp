@@ -9,6 +9,7 @@ import "./run.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -206,8 +207,11 @@ union AutoUpgradeLastTriggerStatus {
 @armResourceOperations
 interface AutoUpgradeProfileOperations {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding 204 response in new version"
   @useFinalStateVia("azure-async-operation")
   @doc("Generates an update run for a given auto upgrade profile.")
+  @sharedRoute
+  @removed(Versions.v2026_06_02_preview)
   generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
     AutoUpgradeProfile,
     void,
@@ -216,6 +220,27 @@ interface AutoUpgradeProfileOperations {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
       ArmLroLocationHeader<FinalResult = GenerateResponse> &
       IfMatchParameters<AutoUpgradeProfile>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "204 response when no update run is generated"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keep same operation ID across versions"
+  @useFinalStateVia("azure-async-operation")
+  @doc("Generates an update run for a given auto upgrade profile.")
+  @sharedRoute
+  @added(Versions.v2026_06_02_preview)
+  @operationId("AutoUpgradeProfileOperations_GenerateUpdateRun")
+  @action("generateUpdateRun")
+  generateUpdateRunWithNoContent is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    AutoUpgradeProfile,
+    void,
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
+        ArmLroLocationHeader<FinalResult = GenerateResponse> &
+        IfMatchParameters<AutoUpgradeProfile>
+    > | GenerateResponse | ArmNoContentResponse<"No update run was generated.">,
+    BaseParameters<AutoUpgradeProfile>
   >;
 }
 
