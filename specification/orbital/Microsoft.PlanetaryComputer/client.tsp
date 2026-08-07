@@ -20,6 +20,7 @@ namespace Customizations;
 // === Client name conflicts ===
 @@clientName(IngestionOperations, "IngestionOperationsManagement", "csharp");
 @@clientName(TilerInfoOperations, "TilerInfoManagement", "csharp");
+@@clientName(TerrainAlgorithm.terrainrgb, "TerrainRgb", "csharp");
 @@clientName(StacItemProperties.datetime, "date_time", "python");
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
