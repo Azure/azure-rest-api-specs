@@ -84315,8 +84315,7 @@
         "type": "object",
         "required": [
           "type",
-          "name",
-          "description"
+          "name"
         ],
         "properties": {
           "type": {
@@ -84330,10 +84329,6 @@
             "type": "string",
             "minLength": 1,
             "description": "The unique name of this shell tool within the toolbox version."
-          },
-          "description": {
-            "type": "string",
-            "description": "The description of this shell tool for use by the model."
           },
           "allowed_callers": {
             "anyOf": [
@@ -85395,16 +85390,16 @@
               }
             ]
           },
+          "network_policy": {
+            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParam"
+          },
           "skills": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OpenAI.ContainerSkill"
+              "$ref": "#/components/schemas/ToolboxShellSkill"
             },
             "maxItems": 200,
-            "description": "An optional list of skills referenced by id or inline data."
-          },
-          "network_policy": {
-            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParam"
+            "description": "An optional list of skills referenced by ID or inline data."
           }
         },
         "allOf": [
@@ -85459,6 +85454,56 @@
           }
         },
         "description": "An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract."
+      },
+      "ToolboxShellSkill": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxShellSkillReference"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.InlineSkillParam"
+          }
+        ],
+        "description": "A skill used by a shell tool stored in a toolbox."
+      },
+      "ToolboxShellSkillReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "skill_id",
+          "name",
+          "description"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "skill_reference"
+            ],
+            "description": "References a skill created with the /v1/skills endpoint.",
+            "x-stainless-const": true
+          },
+          "skill_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The ID of the referenced skill."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional skill version. Use a positive integer or 'latest'. Omit for default."
+          },
+          "name": {
+            "$ref": "#/components/schemas/SkillName",
+            "description": "The name of the referenced skill."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the referenced skill."
+          }
+        },
+        "description": "A reference to an existing skill used by a shell tool stored in a toolbox."
       },
       "ToolboxSkill": {
         "type": "object",
