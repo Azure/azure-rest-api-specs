@@ -12,6 +12,15 @@
 Structured frameworks for data-plane design trade-offs that do **not** have a
 single correct answer.
 
+> **Authoritative upstream context:** [performing an action](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions),
+> [collections](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections),
+> [query options](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-query-options),
+> and
+> [long-running operation response time](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#lro-response-time)
+> in the Azure REST API Guidelines. The matrices below are reviewer synthesis
+> for choices where upstream intentionally does not prescribe one answer; they
+> must not be presented as new upstream requirements.
+
 **How the agent must use this file:**
 
 - When a pattern triggers one of these trade-offs, produce a `💡 Suggestion`
