@@ -115,10 +115,7 @@ suppressions:
   - code: PatchBodyParametersSchema
     from:
       - deviceregistry.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}"].patch.parameters[4].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}"].patch.parameters[4].schema
-    reason: The flagged required property is OutboundIdentity.type. outboundIdentity is replaced as a whole in a PATCH (it is not merged into the existing value), so when the object is supplied type is required to disambiguate SystemAssigned vs UserAssigned. Omitting outboundIdentity preserves the current value, so PATCH remains a valid partial update.
+    reason: PatchBodyParametersSchema is suppressed for deviceregistry.json in this tag. The blocking finding is the required property OutboundIdentity.type. outboundIdentity is replaced as a whole in a PATCH (it is not merged into the existing value), so when the object is supplied type is required to disambiguate SystemAssigned vs UserAssigned. Omitting outboundIdentity preserves the current value, so PATCH remains a valid partial update. A where selector is not used because the rule reports this through a resolved $ref path that a where clause cannot reliably match. The remaining PATCH-body findings (method and retain default values) are inherited unchanged from prior GA versions.
   - code: LatestVersionOfCommonTypesMustBeUsed
     from:
       - deviceregistry.json
@@ -192,10 +189,7 @@ suppressions:
   - code: PatchBodyParametersSchema
     from:
       - deviceregistry.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}"].patch.parameters[4].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}"].patch.parameters[4].schema
-    reason: The flagged required property is OutboundIdentity.type. outboundIdentity is replaced as a whole in a PATCH (it is not merged into the existing value), so when the object is supplied type is required to disambiguate SystemAssigned vs UserAssigned. Omitting outboundIdentity preserves the current value, so PATCH remains a valid partial update.
+    reason: PatchBodyParametersSchema is suppressed for deviceregistry.json in this tag. The blocking finding is the required property OutboundIdentity.type. outboundIdentity is replaced as a whole in a PATCH (it is not merged into the existing value), so when the object is supplied type is required to disambiguate SystemAssigned vs UserAssigned. Omitting outboundIdentity preserves the current value, so PATCH remains a valid partial update. A where selector is not used because the rule reports this through a resolved $ref path that a where clause cannot reliably match. The remaining PATCH-body findings (method and retain default values) are inherited unchanged from prior GA versions.
   - code: LatestVersionOfCommonTypesMustBeUsed
     from:
       - deviceregistry.json
