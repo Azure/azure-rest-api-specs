@@ -9,6 +9,7 @@ import "./run.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -73,7 +74,7 @@ model AutoUpgradeProfileProperties {
       This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, "1.30".
       By default, this is empty.
       If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
-      If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
+      If upgrade channel is not TargetKubernetesVersion, this field must be empty.
     """)
   @added(Versions.v2025_04_01_preview)
   targetKubernetesVersion?: string;
@@ -112,6 +113,14 @@ union UpgradeChannel {
     """)
   @added(Versions.v2025_04_01_preview)
   TargetKubernetesVersion: "TargetKubernetesVersion",
+
+  @doc("""
+      Applies security patches to the nodes of the target clusters.
+      For information on the behavior of update run for security patch upgrade,
+      see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
+    """)
+  @added(Versions.v2026_06_02_preview)
+  SecurityPatch: "SecurityPatch",
 }
 
 @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
@@ -175,6 +184,11 @@ model AutoUpgradeProfileStatus {
   @doc("The target Kubernetes version or node image versions of the last trigger.")
   @visibility(Lifecycle.Read)
   lastTriggerUpgradeVersions?: string[];
+
+  @doc("Additional information about the last trigger attempt.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_02_preview)
+  lastTriggerMessage?: string;
 }
 
 @doc("AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.")
@@ -193,8 +207,11 @@ union AutoUpgradeLastTriggerStatus {
 @armResourceOperations
 interface AutoUpgradeProfileOperations {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding 204 response in new version"
   @useFinalStateVia("azure-async-operation")
   @doc("Generates an update run for a given auto upgrade profile.")
+  @sharedRoute
+  @removed(Versions.v2026_06_02_preview)
   generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
     AutoUpgradeProfile,
     void,
@@ -203,6 +220,27 @@ interface AutoUpgradeProfileOperations {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
       ArmLroLocationHeader<FinalResult = GenerateResponse> &
       IfMatchParameters<AutoUpgradeProfile>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "204 response when no update run is generated"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keep same operation ID across versions"
+  @useFinalStateVia("azure-async-operation")
+  @doc("Generates an update run for a given auto upgrade profile.")
+  @sharedRoute
+  @added(Versions.v2026_06_02_preview)
+  @operationId("AutoUpgradeProfileOperations_GenerateUpdateRun")
+  @action("generateUpdateRun")
+  generateUpdateRunWithNoContent is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    AutoUpgradeProfile,
+    void,
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
+        ArmLroLocationHeader<FinalResult = GenerateResponse> &
+        IfMatchParameters<AutoUpgradeProfile>
+    > | GenerateResponse | ArmNoContentResponse<"No update run was generated.">,
+    BaseParameters<AutoUpgradeProfile>
   >;
 }
 
