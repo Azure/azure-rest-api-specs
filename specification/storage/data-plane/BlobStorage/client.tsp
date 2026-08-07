@@ -212,16 +212,9 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "ListBlobsInternal",
   "rust"
 );
-@@clientName(Storage.Blob.Container.listBlobs, "listBlobsPaged", "rust");
+@@clientName(Storage.Blob.Container.listBlobs, "listBlobsXml", "rust");
 @@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
 @@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
-#suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(
-  Storage.Blob.Container.listBlobs,
-  "responseEnvelopeName",
-  "ListBlobsResponse",
-  "rust"
-);
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(
