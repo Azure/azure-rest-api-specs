@@ -3448,7 +3448,7 @@
     "/providers/microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
       "get": {
         "operationId": "BenefitUtilizationSummaries_ListByBillingProfileId",
-        "description": "Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.",
+        "description": "Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily', 'Monthly', 'FullTerm'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -3480,7 +3480,7 @@
               "Hourly",
               "Daily",
               "Monthly",
-              "Annual"
+              "FullTerm"
             ],
             "x-ms-enum": {
               "name": "GrainParameter",
@@ -3494,17 +3494,17 @@
                 {
                   "name": "Daily",
                   "value": "Daily",
-                  "description": "Hourly grain corresponds to value per day."
+                  "description": "Daily grain corresponds to value per day."
                 },
                 {
                   "name": "Monthly",
                   "value": "Monthly",
-                  "description": "Hourly grain corresponds to value per month."
+                  "description": "Monthly grain corresponds to value per month."
                 },
                 {
-                  "name": "Annual",
-                  "value": "Annual",
-                  "description": "Hourly grain corresponds to value per year."
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the full term."
                 }
               ]
             }
@@ -3512,7 +3512,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate. Filtering by properties/usageDate not applicable if utilization is for 'FlexSpendPlan' benefit as this benefit is applied at the full term level.",
             "required": false,
             "type": "string"
           }
@@ -3753,7 +3753,7 @@
     "/providers/microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
       "get": {
         "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
-        "description": "Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "description": "Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily', 'Monthly', 'FullTerm'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -3777,7 +3777,8 @@
             "enum": [
               "Hourly",
               "Daily",
-              "Monthly"
+              "Monthly",
+              "FullTerm"
             ],
             "x-ms-enum": {
               "name": "GrainParameter",
@@ -3791,12 +3792,17 @@
                 {
                   "name": "Daily",
                   "value": "Daily",
-                  "description": "Hourly grain corresponds to value per day."
+                  "description": "Daily grain corresponds to value per day."
                 },
                 {
                   "name": "Monthly",
                   "value": "Monthly",
-                  "description": "Hourly grain corresponds to value per month."
+                  "description": "Monthly grain corresponds to value per month."
+                },
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the entire term."
                 }
               ]
             }
@@ -3804,7 +3810,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate. Filtering by properties/usageDate not applicable if utilization is for 'FlexSpendPlan' benefit as this benefit is applied at the full term level.",
             "required": false,
             "type": "string"
           }
@@ -5277,7 +5283,7 @@
           {
             "name": "FlexSpendPlan",
             "value": "FlexSpendPlan",
-            "description": "Benefit is Flex Spend Plan."
+            "description": "Benefit is Flexible Spend Plan."
           }
         ]
       }
@@ -8015,7 +8021,7 @@
         "Hourly",
         "Daily",
         "Monthly",
-        "Annual"
+        "FullTerm"
       ],
       "x-ms-enum": {
         "name": "Grain",
@@ -8029,17 +8035,17 @@
           {
             "name": "Daily",
             "value": "Daily",
-            "description": "Hourly grain corresponds to value per day."
+            "description": "Daily grain corresponds to value per day."
           },
           {
             "name": "Monthly",
             "value": "Monthly",
-            "description": "Hourly grain corresponds to value per month."
+            "description": "Monthly grain corresponds to value per month."
           },
           {
-            "name": "Annual",
-            "value": "Annual",
-            "description": "Annual grain corresponds to value per year."
+            "name": "FullTerm",
+            "value": "FullTerm",
+            "description": "FullTerm grain corresponds to value for the full term."
           }
         ]
       }
@@ -10570,11 +10576,11 @@
       "properties": {
         "usageGrain": {
           "$ref": "#/definitions/Grain",
-          "description": "The grain of the usage. Supported values: 'Hourly'"
+          "description": "The grain of the usage. Supported values: 'Hourly' and 'FullTerm'."
         },
         "charges": {
           "type": "array",
-          "description": "On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.",
+          "description": "On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations for 'Hourly' usageGrain. For 'FullTerm' usageGrain, this will contain a single value which is the total projected on-demand charges for the entire term.",
           "items": {
             "type": "number",
             "format": "decimal"
