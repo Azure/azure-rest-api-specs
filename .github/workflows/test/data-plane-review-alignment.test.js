@@ -214,6 +214,15 @@ describe("data-plane review workflow scope", () => {
     expect(rollout).toContain("The manually applied label is the safety control");
     expect(rollout).toContain("not a hard rollout gate");
   });
+
+  it("uses the manual dispatch PR number throughout the runtime contract", async () => {
+    const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
+    const effectivePrNumber = "${{ github.event.pull_request.number || inputs.item_number }}";
+
+    expect(content).toContain("item_number:\n        description: PR number to review");
+    expect(content.split(effectivePrNumber)).toHaveLength(6);
+    expect(content).not.toContain('target: "${{ github.event.pull_request.number }}"');
+  });
 });
 
 describe("getEngineModel", () => {

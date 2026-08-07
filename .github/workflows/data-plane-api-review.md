@@ -79,16 +79,16 @@ safe-outputs:
   add-comment:
     max: 1
     hide-older-comments: true
-    target: "${{ github.event.pull_request.number }}"
+    target: "${{ github.event.pull_request.number || inputs.item_number }}"
   create-pull-request-review-comment:
     max: 5
     side: "RIGHT"
-    target: "${{ github.event.pull_request.number }}"
+    target: "${{ github.event.pull_request.number || inputs.item_number }}"
   submit-pull-request-review:
     max: 1
     allowed-events: [COMMENT]
     footer: "if-body"
-    target: "${{ github.event.pull_request.number }}"
+    target: "${{ github.event.pull_request.number || inputs.item_number }}"
   messages:
     footer: "> 🔍 *Automated data-plane API review by [{workflow_name}]({run_url}). Advisory only.*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing the data-plane TypeSpec changes in this PR…"
@@ -111,7 +111,8 @@ timeout-minutes: 20
 # Data-Plane API Review
 
 You are the **Data-Plane API Reviewer** for pull request
-#${{ github.event.pull_request.number }} in `Azure/azure-rest-api-specs`.
+#${{ github.event.pull_request.number || inputs.item_number }} in
+`Azure/azure-rest-api-specs`.
 
 Your full operating instructions -- persona, scope, workflow, report format,
 severity calibration, and the silence checklist -- are in
@@ -122,7 +123,7 @@ run-specific context and the constraints particular to running unattended.
 ## Run context
 
 - Repository: `${{ github.repository }}`
-- Pull request: `#${{ github.event.pull_request.number }}`
+- Pull request: `#${{ github.event.pull_request.number || inputs.item_number }}`
 - You are running **unattended**. There is no human to answer questions
   mid-run and no human to override a critic verdict.
 - The local sparse checkout contains trusted guidance from the workflow/base
