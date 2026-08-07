@@ -842,7 +842,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(Storage.Blob.Container.listBlobs, "!rust");
 @@scope(Storage.Blob.Container.listBlobFlatSegmentApacheArrow, "!rust");
 @@scope(Storage.Blob.Container.listBlobHierarchySegmentApacheArrow, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
