@@ -252,7 +252,11 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
 
 // All emitted Python classes already have "items" in the base class, so we need to pick another name
-@@clientName(AgentOptimizationInlineDatasetInput.items, "dataset_items", "python");
+@@clientName(
+  AgentOptimizationInlineDatasetInput.items,
+  "dataset_items",
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
