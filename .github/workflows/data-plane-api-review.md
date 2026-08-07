@@ -33,11 +33,39 @@ permissions:
   contents: read
   copilot-requests: write
   pull-requests: read
+pre-steps:
+  - name: Resolve target pull request base
+    id: resolve_pr_base
+    uses: actions/github-script@v9
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number || inputs.item_number }}
+    with:
+      script: |
+        const value = process.env.PR_NUMBER ?? "";
+        if (!/^[1-9]\d*$/.test(value)) {
+          throw new Error(`Invalid or missing pull request number: ${JSON.stringify(value)}`);
+        }
+
+        const pullNumber = Number(value);
+        if (!Number.isSafeInteger(pullNumber)) {
+          throw new Error(`Pull request number is outside the safe integer range: ${value}`);
+        }
+
+        const { data: pull } = await github.rest.pulls.get({
+          ...context.repo,
+          pull_number: pullNumber
+        });
+        const baseSha = pull.base.sha;
+        if (!/^[0-9a-f]{40}$/.test(baseSha)) {
+          throw new Error(`GitHub returned an invalid base SHA for pull request #${pullNumber}`);
+        }
+
+        core.setOutput("base_sha", baseSha);
 # Keep trusted reviewer instructions and root package metadata local, while PR
 # head content remains available only through the GitHub MCP tools. Cone-mode
 # sparse checkout includes root files such as package.json.
 checkout:
-  ref: ${{ github.event.pull_request.base.sha }}
+  ref: ${{ steps.resolve_pr_base.outputs.base_sha }}
   sparse-checkout: |
     .github/agents
     .github/skills/azure-api-review
