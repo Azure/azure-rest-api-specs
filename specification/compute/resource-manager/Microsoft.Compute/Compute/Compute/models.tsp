@@ -5735,7 +5735,7 @@ model ManagedDiskParameters extends SubResource {
   securityProfile?: VMDiskSecurityProfile;
 
   /**
-   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured in or returned from restore-point snapshots.
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured for Restore Points.
    */
   @added(Versions.v2026_04_01)
   additionalDiskProperties?: AdditionalDiskProperties;
@@ -5749,7 +5749,7 @@ model ManagedDiskParameters extends SubResource {
 // sibling property categories alongside managedDiskProperties without a breaking API change.
 model AdditionalDiskProperties {
   /**
-   * Specifies the managed disk properties that can be set on the disk at the time of implicit creation of the disk.
+   * Specifies the managed disk properties that can be set at the time of implicit creation of the disk.
    */
   managedDiskProperties?: ManagedDiskProperties;
 }
