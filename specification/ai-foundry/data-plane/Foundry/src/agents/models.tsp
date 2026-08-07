@@ -295,7 +295,7 @@ model RaiConfig {
     and moderate it. Optional; a rai_config without it leaves the invocations path without
     content-safety moderation (fail-open).
     """)
-  invocations_text?: InvocationsText;
+  invocations_moderation?: InvocationModeration;
 }
 
 @doc("How an invocations request/response body is parsed to locate text for content-safety moderation.")
@@ -325,15 +325,15 @@ union InvocationMode {
 
 @doc("An SSE event-type to text-field selector for streaming invocation output.")
 model SseTextSelector {
-  @doc("SSE event `type` values that carry text.")
-  event_types: string[];
+  @doc("The SSE event `type` value that carries text.")
+  event_type: string;
 
   @doc("The field on a matched event holding the text delta (defaults to `delta`).")
   text_field?: string;
 }
 
 @doc("Declares where request/response text lives so content-safety guardrails can extract it.")
-model InvocationsText {
+model InvocationModeration {
   @doc("How the REQUEST body is parsed. Defaults to `json`.")
   input_content_type?: InvocationContentType;
 
@@ -349,7 +349,7 @@ model InvocationsText {
   @doc("Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`.")
   output_paths?: string[];
 
-  @doc("SSE event->field selectors for STREAMING output. Required when response_mode is streaming/both and output_content_type is `json`.")
+  @doc("One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.")
   stream_selectors?: SseTextSelector[];
 
   @doc("When true, suppress the zero-yield content-safety alert for agents that legitimately have frequent text-free turns.")

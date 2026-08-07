@@ -38596,11 +38596,7 @@
         ],
         "description": "Author-declared response shape for the invocations protocol."
       },
-      "InvocationsProtocolConfiguration": {
-        "type": "object",
-        "description": "Configuration specific to the invocations protocol."
-      },
-      "InvocationsText": {
+      "InvocationModeration": {
         "type": "object",
         "required": [
           "response_mode"
@@ -38637,7 +38633,7 @@
             "items": {
               "$ref": "#/components/schemas/SseTextSelector"
             },
-            "description": "SSE event->field selectors for STREAMING output. Required when response_mode is streaming/both and output_content_type is `json`."
+            "description": "One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`."
           },
           "allow_empty": {
             "type": "boolean",
@@ -38646,6 +38642,10 @@
           }
         },
         "description": "Declares where request/response text lives so content-safety guardrails can extract it."
+      },
+      "InvocationsProtocolConfiguration": {
+        "type": "object",
+        "description": "Configuration specific to the invocations protocol."
       },
       "InvocationsWsProtocolConfiguration": {
         "type": "object",
@@ -79334,8 +79334,8 @@
             "type": "string",
             "description": "The name of the RAI policy to apply."
           },
-          "invocations_text": {
-            "$ref": "#/components/schemas/InvocationsText",
+          "invocations_moderation": {
+            "$ref": "#/components/schemas/InvocationModeration",
             "description": "Author-declared configuration telling the platform where user/agent text lives in the\nagent-defined invocations request/response bodies, so content-safety guardrails can extract\nand moderate it. Optional; a rai_config without it leaves the invocations path without\ncontent-safety moderation (fail-open)."
           }
         },
@@ -81174,15 +81174,12 @@
       "SseTextSelector": {
         "type": "object",
         "required": [
-          "event_types"
+          "event_type"
         ],
         "properties": {
-          "event_types": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "SSE event `type` values that carry text."
+          "event_type": {
+            "type": "string",
+            "description": "The SSE event `type` value that carries text."
           },
           "text_field": {
             "type": "string",
