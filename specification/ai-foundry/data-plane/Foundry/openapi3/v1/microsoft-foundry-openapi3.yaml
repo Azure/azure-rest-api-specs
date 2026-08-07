@@ -40718,8 +40718,48 @@ components:
     AgentOptimizationCandidateDetail:
       type: object
       required:
+        - candidate_id
+        - name
         - job_id
       properties:
+        candidate_id:
+          type: string
+          description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
+        name:
+          type: string
+          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        optimizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAttribute'
+          description: Which agent attributes were mutated on this candidate relative to the baseline. Empty for the baseline candidate itself.
+        agent_version:
+          type: string
+          description: Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when the candidate was created, represented in Unix time. Populated on candidate detail; may be omitted from list contexts.
+        avg_score:
+          type: number
+          format: double
+          description: Average composite score across all evaluated tasks.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average total tokens consumed per task.
+        avg_latency_ms:
+          type: number
+          format: double
+          description: Average end-to-end latency per task in milliseconds.
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier for this candidate's scoring run.
+        promotion:
+          $ref: '#/components/schemas/PromotionInfo'
+          description: Promotion metadata. Null if this candidate has not been promoted.
         job_id:
           type: string
           description: Identifier of the parent optimization job.
@@ -40732,9 +40772,7 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationCandidateFileInfo'
           description: Manifest of artifact files stored for this candidate.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationCandidateSummary'
-      description: Full candidate view returned by GET /candidates/{id}. Extends AgentOptimizationCandidateSummary with the mutation payload and file manifest.
+      description: Full candidate view returned by GET /candidates/{id}. Includes all AgentOptimizationCandidateSummary fields plus the mutation payload and file manifest.
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V3Preview
@@ -40996,13 +41034,61 @@ components:
     AgentOptimizationEstimateOptions:
       type: object
       properties:
+        max_candidates:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 20
+          description: 'Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. Default: 2.'
+          default: 2
+        eval_model:
+          type: string
+          description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
+        optimization_model:
+          type: string
+          description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
+        evaluation_level:
+          $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
+        max_stalls:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 50
+          description: "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Server default when unset: 5."
+        reflection_minibatch_size:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: Number of items sampled per reflective minibatch. Server default when unset.
+        max_concurrent_agent_runs:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: Maximum number of concurrent agent runs during evaluation. Server default when unset.
+        target_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAttribute'
+          description: Which agent attributes to optimize. Omit or leave empty to auto-select based on baseline configuration.
+        model_search_space:
+          type: array
+          items:
+            type: string
+          description: Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.
+        strategy:
+          $ref: '#/components/schemas/AgentOptimizationStrategy'
+          description: Optimization strategy identifier. Defaults to the service default when omitted.
+        optimization_config:
+          $ref: '#/components/schemas/AgentOptimizationConfig'
+          description: Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.
         validation_dataset_row_count:
           type: integer
           format: int32
           minimum: 1
           description: Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationOptions'
       description: Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields.
       x-ms-foundry-meta:
         conditional_previews:

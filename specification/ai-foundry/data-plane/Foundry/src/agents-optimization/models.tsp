@@ -276,10 +276,11 @@ model AgentOptimizationJobInputs {
 // Estimate models
 // ---------------------------------------------------------------------------
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "AgentOptimizationEstimateOptions is a request-body superset of AgentOptimizationOptions with a single estimate-only field; a discriminated union would misrepresent the shape."
 @doc("Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationEstimateOptions extends AgentOptimizationOptions {
+model AgentOptimizationEstimateOptions {
+  ...AgentOptimizationOptions;
+
   @doc("Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present.")
   @minValue(1)
   validation_dataset_row_count?: int32;
@@ -439,11 +440,11 @@ model AgentOptimizationCandidateFileInfo {
   size_bytes: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "AgentOptimizationCandidateDetail is a response-body superset of AgentOptimizationCandidateSummary; the summary/detail split is deliberate and not a discriminated union."
-@doc("Full candidate view returned by GET /candidates/{id}. Extends AgentOptimizationCandidateSummary with the mutation payload and file manifest.")
+@doc("Full candidate view returned by GET /candidates/{id}. Includes all AgentOptimizationCandidateSummary fields plus the mutation payload and file manifest.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationCandidateDetail
-  extends AgentOptimizationCandidateSummary {
+model AgentOptimizationCandidateDetail {
+  ...AgentOptimizationCandidateSummary;
+
   @doc("Identifier of the parent optimization job.")
   job_id: string;
 
