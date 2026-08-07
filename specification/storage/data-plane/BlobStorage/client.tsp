@@ -1266,9 +1266,11 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
 
 @@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
 
-/** Hide listBlobs for Rust but we still need it to generate ListBlobsResponse as a Page. */
+/** Hide and rename listBlobs for Rust but we still need it to generate ListBlobsResponse as a Page. */
 @@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@clientName(Storage.Blob.Container.listBlobs, "listBlobsXml", "rust");
 @@access(ListBlobsResponse, Access.public, "rust");
+@@access(Storage.Blob.Container.listBlobsRaw, Access.internal, "rust");
 
 /** Hide other Arrow functions from Rust since listBlobsRaw does everything we need. */
 @@scope(Storage.Blob.Container.listBlobFlatSegmentApacheArrow, "!rust");
