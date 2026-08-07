@@ -6,7 +6,7 @@ This report records the rename of the `Optimization*` unions and models associat
 
 - The interface defines five operations: `create`, `get`, `list`, `cancel`, and `delete`.
 - Four operations reference an Agent Optimization schema directly. `delete` has no Agent Optimization model in its signature.
-- Fifteen operation-reachable `Optimization*` declarations were renamed to `AgentOptimization*`: one union and fourteen models.
+- Fifteen operation-reachable `Optimization*` declarations were renamed: fourteen to `AgentOptimization*` and `OptimizationAgentIdentifier` to `OptimizedAgentIdentifier`.
 - Three additional unreferenced `Optimization*` declarations were removed from the feature's model file.
 - The singular `AgentOptimization*` prefix matches the existing `AgentOptimizationJobs` interface and `AgentOptimizationRequiredPreviews` constant.
 
@@ -22,7 +22,7 @@ This report records the rename of the `Optimization*` unions and models associat
 
 ## Operation-Reachable Renames
 
-The implemented names apply the mechanical rule `OptimizationX` to `AgentOptimizationX`.
+The implemented names generally apply the rule `OptimizationX` to `AgentOptimizationX`; `OptimizationAgentIdentifier` uses `OptimizedAgentIdentifier` to avoid a repeated `Agent`.
 
 | Kind | Previous name | Current name | How it is associated |
 | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ The rename changes generated schema names and therefore SDK public type names un
 
 ## Implementation Notes
 
-The fifteen operation-reachable declarations were renamed atomically to singular `AgentOptimization*`, matching the existing `AgentOptimizationJobs` interface and `AgentOptimizationRequiredPreviews` constant.
+Fourteen operation-reachable declarations use singular `AgentOptimization*`, matching the existing `AgentOptimizationJobs` interface and `AgentOptimizationRequiredPreviews` constant.
 
 `OptimizationAgentIdentifier` became `OptimizedAgentIdentifier` to avoid the mechanically awkward repeated `Agent` in `AgentOptimizationAgentIdentifier`.
 
