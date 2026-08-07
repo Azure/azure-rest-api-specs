@@ -669,6 +669,7 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
   @added(Versions.v2026_12_06)
+  @scope("rust")
   @get
   @sharedRoute
   @route("?restype=container&comp=list")

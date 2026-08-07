@@ -212,6 +212,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "ListBlobsInternal",
   "rust"
 );
+@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(
@@ -840,10 +842,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(
-  Storage.Blob.Container.ListBlobsRawResponse,
-  "!(python,javascript,go,java,csharp)"
-);
 @@scope(Storage.Blob.Container.listBlobs, "!rust");
 @@scope(Storage.Blob.Container.listBlobFlatSegmentApacheArrow, "!rust");
 @@scope(Storage.Blob.Container.listBlobHierarchySegmentApacheArrow, "!rust");
