@@ -73,6 +73,15 @@ union AgentOptimizationLayer {
   reflection: "reflection",
 }
 
+/** Optimization strategy identifier. Open string so the SDK stays usable when new strategies ship server-side; known values are enumerated as members. */
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+union AgentOptimizationStrategy {
+  string,
+
+  @doc("Genetic Evolutionary Prompt Architecture — reflective mutation with Pareto-optimal candidate selection.")
+  gepa: "gepa",
+}
+
 // ---------------------------------------------------------------------------
 // Dataset input — discriminated union (inline items or registered reference)
 // ---------------------------------------------------------------------------
@@ -234,8 +243,8 @@ model AgentOptimizationOptions {
   @doc("Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.")
   model_search_space?: string[];
 
-  @doc("Optimization strategy identifier. Currently only 'gepa' is a documented value; additional strategies may be enabled server-side.")
-  strategy?: string;
+  @doc("Optimization strategy identifier. Defaults to the service default when omitted.")
+  strategy?: AgentOptimizationStrategy;
 
   @doc("Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.")
   optimization_config?: AgentOptimizationConfig;
@@ -316,9 +325,6 @@ model AgentOptimizationEstimateDollars {
   @doc("ISO 4217 currency code (e.g., 'USD'). Read as data — do not assume USD; the price source stamps the currency and this may change without a contract change.")
   currency: string;
 
-  @doc("Where the pricing values came from. Open set — currently emitted values are 'config' (server pricing table) and 'request' (caller-supplied override). Additional sources (e.g. subscription/billing) may be added; treat unknown values as opaque, do not switch exhaustively.")
-  pricing_source?: string;
-
   @doc("Total dollar estimate across all priced layers. Null when no layer could be priced.")
   total?: AgentOptimizationEstimateBand;
 
@@ -341,8 +347,8 @@ model AgentOptimizationEstimateResponse {
   @doc("Modeled dollar estimate. Present only when pricing data is available for at least one contributing model.")
   dollars?: AgentOptimizationEstimateDollars;
 
-  @doc("The pricing snapshot date used for cost estimation, formatted YYYY-MM-DD.")
-  prices_as_of?: string;
+  @doc("The pricing snapshot date used for cost estimation.")
+  prices_as_of?: plainDate;
 }
 
 // ---------------------------------------------------------------------------
@@ -574,9 +580,6 @@ model PromoteAgentOptimizationCandidateRequest {
 model PromoteAgentOptimizationCandidateResponse {
   @doc("Server-assigned candidate identifier that was promoted.")
   candidate_id: string;
-
-  @doc("Post-promotion candidate status.")
-  status: string;
 
   @doc("Timestamp when promotion occurred, represented in Unix time.")
   promoted_at: FoundryTimestamp;

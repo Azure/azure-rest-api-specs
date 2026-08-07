@@ -33897,10 +33897,6 @@
             "type": "string",
             "description": "ISO 4217 currency code (e.g., 'USD'). Read as data — do not assume USD; the price source stamps the currency and this may change without a contract change."
           },
-          "pricing_source": {
-            "type": "string",
-            "description": "Where the pricing values came from. Open set — currently emitted values are 'config' (server pricing table) and 'request' (caller-supplied override). Additional sources (e.g. subscription/billing) may be added; treat unknown values as opaque, do not switch exhaustively."
-          },
           "total": {
             "$ref": "#/components/schemas/AgentOptimizationEstimateBand",
             "description": "Total dollar estimate across all priced layers. Null when no layer could be priced."
@@ -34013,7 +34009,8 @@
           },
           "prices_as_of": {
             "type": "string",
-            "description": "The pricing snapshot date used for cost estimation, formatted YYYY-MM-DD."
+            "format": "date",
+            "description": "The pricing snapshot date used for cost estimation."
           }
         },
         "description": "Response body for :estimate.",
@@ -34423,8 +34420,8 @@
             "description": "Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise."
           },
           "strategy": {
-            "type": "string",
-            "description": "Optimization strategy identifier. Currently only 'gepa' is a documented value; additional strategies may be enabled server-side."
+            "$ref": "#/components/schemas/AgentOptimizationStrategy",
+            "description": "Optimization strategy identifier. Defaults to the service default when omitted."
           },
           "optimization_config": {
             "$ref": "#/components/schemas/AgentOptimizationConfig",
@@ -34467,6 +34464,25 @@
           }
         ],
         "description": "Reference to a registered Foundry dataset.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V3Preview"
+          ]
+        }
+      },
+      "AgentOptimizationStrategy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "gepa"
+            ]
+          }
+        ],
+        "description": "Optimization strategy identifier. Open string so the SDK stays usable when new strategies ship server-side; known values are enumerated as members.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "AgentsOptimization=V3Preview"
@@ -84373,7 +84389,6 @@
         "type": "object",
         "required": [
           "candidate_id",
-          "status",
           "promoted_at",
           "agent_name",
           "created_new_version"
@@ -84382,10 +84397,6 @@
           "candidate_id": {
             "type": "string",
             "description": "Server-assigned candidate identifier that was promoted."
-          },
-          "status": {
-            "type": "string",
-            "description": "Post-promotion candidate status."
           },
           "promoted_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
