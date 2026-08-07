@@ -1,8 +1,8 @@
 {
-  "operationId": "EduEnrollments_ListBySubscription",
-  "title": "List edu enrollments by subscription",
+  "operationId": "EduEnrollments_List",
+  "title": "List edu enrollments",
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/12345678",
     "api-version": "2026-03-01-preview"
   },
   "responses": {
@@ -10,10 +10,9 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345678/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
             "name": "default",
             "type": "Microsoft.ProgramEnrollment/eduEnrollments",
-            "location": "eastus",
             "properties": {
               "provisioningState": "Succeeded",
               "domains": [
