@@ -16,6 +16,16 @@ control-plane resource rules, see
 [`tracked-resource-lifecycle.md`](tracked-resource-lifecycle.md) instead --
 none of it applies here.
 
+> **Authoritative upstream:** [performing an action](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions),
+> [do not use actions for CRUD](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions-no-actions-for-crud),
+> [collections](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections),
+> [API versioning](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#versioning),
+> [no breaking changes](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#versioning-no-breaking-changes),
+> and
+> [no versions in paths](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#versioning-no-version-in-path)
+> in the Azure REST API Guidelines. This file translates those requirements into
+> reviewer checks; the upstream Guidelines take precedence.
+
 `@azure-tools/typespec-azure-core/use-standard-operations` forces operations
 through `Azure.Core` templates, which makes the mechanical half of the
 Guidelines' resource rules true by construction. It does **not** decide whether
