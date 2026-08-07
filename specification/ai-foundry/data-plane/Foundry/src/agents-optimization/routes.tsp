@@ -15,6 +15,8 @@ namespace Azure.AI.Projects;
 // Job CRUD operations (shared job templates from servicepatterns.tsp)
 // ---------------------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
   /**
@@ -26,7 +28,7 @@ interface AgentOptimizationJobs {
   @pollingOperation(AgentOptimizationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -39,9 +41,9 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
     {
       /** The inputs to estimate against. */
-      @body inputs: EstimateJobInputs;
+      @body inputs: AgentOptimizationEstimateJobInputs;
     },
-    EstimateResponse
+    AgentOptimizationEstimateResponse
   >;
 
   /**
@@ -52,7 +54,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   get is queryJobStatusPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -63,7 +65,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    OptimizationJob,
+    AgentOptimizationJob,
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
@@ -83,7 +85,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -99,10 +101,12 @@ interface AgentOptimizationJobs {
 // Candidate sub-resource operations
 // ---------------------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination. Each item is a CandidateSummary — mutation payloads and per-task results are excluded from bulk-read paths; fetch them via GET /candidates/{candidateId}.
+   * Lists candidates for the given optimization job with cursor pagination. Each item is a AgentOptimizationCandidateSummary — mutation payloads and per-task results are excluded from bulk-read paths; fetch them via GET /candidates/{candidateId}.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
@@ -115,7 +119,7 @@ interface AgentOptimizationJobCandidates {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<CandidateSummary>
+    AgentsPagedResult<AgentOptimizationCandidateSummary>
   >;
 
   /**
@@ -133,7 +137,7 @@ interface AgentOptimizationJobCandidates {
       /** The candidate identifier. */
       @path candidateId: string;
     },
-    CandidateDetail
+    AgentOptimizationCandidateDetail
   >;
 
   /**
@@ -152,8 +156,8 @@ interface AgentOptimizationJobCandidates {
       @path candidateId: string;
 
       /** Target agent information for the promotion. */
-      @body promotion: PromoteCandidateRequest;
+      @body promotion: PromoteAgentOptimizationCandidateRequest;
     },
-    PromoteCandidateResponse
+    PromoteAgentOptimizationCandidateResponse
   >;
 }

@@ -45,7 +45,7 @@ union TargetAttribute {
 
 /** Terminal completion classification for a successful optimization job. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-union OptimizationCompletionStatus {
+union AgentOptimizationCompletionStatus {
   string,
 
   @doc("Best candidate exceeded the baseline score.")
@@ -60,7 +60,7 @@ union OptimizationCompletionStatus {
 
 /** Which layer of the optimization loop generated a token/latency usage entry. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-union OptimizationLayer {
+union AgentOptimizationLayer {
   string,
 
   @doc("Agent inference calls (the agent being optimized).")
@@ -79,7 +79,7 @@ union OptimizationLayer {
 
 /** Discriminator values for the dataset input union. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-union OptimizationDatasetInputType {
+union AgentOptimizationDatasetInputType {
   string,
 
   @doc("Inline dataset — items are provided directly in the request body.")
@@ -92,26 +92,26 @@ union OptimizationDatasetInputType {
 /** Base discriminated model for dataset input. Either inline items or a registered reference. */
 @discriminator("type")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationDatasetInput {
+model AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: OptimizationDatasetInputType;
+  type: AgentOptimizationDatasetInputType;
 }
 
 /** Inline dataset — items supplied directly in the request body. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationInlineDatasetInput extends OptimizationDatasetInput {
+model AgentOptimizationInlineDatasetInput extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: OptimizationDatasetInputType.inline;
+  type: AgentOptimizationDatasetInputType.inline;
 
   @doc("Dataset items.")
-  items: OptimizationDatasetItem[];
+  items: AgentOptimizationDatasetItem[];
 }
 
 /** Reference to a registered Foundry dataset. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
+model AgentOptimizationReferenceDatasetInput extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: OptimizationDatasetInputType.reference;
+  type: AgentOptimizationDatasetInputType.reference;
 
   @doc("Registered dataset name.")
   name: string;
@@ -122,7 +122,7 @@ model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
 
 /** A single item in an inline dataset. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationDatasetItem {
+model AgentOptimizationDatasetItem {
   @doc("The user query / prompt.")
   query?: string;
 
@@ -135,12 +135,12 @@ model OptimizationDatasetItem {
   desired_num_turns?: int32;
 
   @doc("Per-item evaluation criteria.")
-  criteria?: OptimizationDatasetCriterion[];
+  criteria?: AgentOptimizationDatasetCriterion[];
 }
 
 /** Evaluation criterion: a name + instruction pair used for per-item scoring. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationDatasetCriterion {
+model AgentOptimizationDatasetCriterion {
   @doc("Criterion name.")
   name: string;
 
@@ -154,7 +154,7 @@ model OptimizationDatasetCriterion {
 
 /** Reference to a named evaluator, optionally pinned to a version. */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationEvaluatorRef {
+model AgentOptimizationEvaluatorRef {
   @doc("Evaluator name.")
   name: string;
 
@@ -171,7 +171,7 @@ model OptimizationEvaluatorRef {
 
 @doc("Identifies the registered Foundry agent to optimize. Baseline configuration is resolved automatically, or overridden with skills, tools, or system prompt specified in options.optimization_config.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationAgentIdentifier {
+model OptimizedAgentIdentifier {
   @doc("Registered Foundry agent name (required).")
   agent_name: string;
 
@@ -181,7 +181,7 @@ model OptimizationAgentIdentifier {
 
 @doc("Structured baseline configuration for the agent being optimized.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationConfig {
+model AgentOptimizationConfig {
   @doc("System prompt / instructions.")
   system_prompt?: string;
 
@@ -198,7 +198,7 @@ model OptimizationConfig {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Tuning knobs for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationOptions {
+model AgentOptimizationOptions {
   @doc("Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. Default: 2.")
   @minValue(1)
   @maxValue(20)
@@ -238,64 +238,65 @@ model OptimizationOptions {
   strategy?: string;
 
   @doc("Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.")
-  optimization_config?: OptimizationConfig;
+  optimization_config?: AgentOptimizationConfig;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJobInputs {
+model AgentOptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: OptimizationAgentIdentifier;
+  agent: OptimizedAgentIdentifier;
 
   @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
-  train_dataset: OptimizationDatasetInput;
+  train_dataset: AgentOptimizationDatasetInput;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset?: OptimizationDatasetInput;
+  validation_dataset?: AgentOptimizationDatasetInput;
 
   @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
   @minItems(1)
-  evaluators: OptimizationEvaluatorRef[];
+  evaluators: AgentOptimizationEvaluatorRef[];
 
   @doc("Tuning knobs.")
-  options?: OptimizationOptions;
+  options?: AgentOptimizationOptions;
 }
 
 // ---------------------------------------------------------------------------
 // Estimate models
 // ---------------------------------------------------------------------------
 
-@doc("Options for :estimate. Extends OptimizationOptions with estimate-only fields.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "AgentOptimizationEstimateOptions is a request-body superset of AgentOptimizationOptions with a single estimate-only field; a discriminated union would misrepresent the shape."
+@doc("Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model EstimateOptions extends OptimizationOptions {
+model AgentOptimizationEstimateOptions extends AgentOptimizationOptions {
   @doc("Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present.")
   @minValue(1)
   validation_dataset_row_count?: int32;
 }
 
-@doc("Inputs for :estimate. Same shape as OptimizationJobInputs but the options field is EstimateOptions.")
+@doc("Inputs for :estimate. Same shape as AgentOptimizationJobInputs but the options field is AgentOptimizationEstimateOptions.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model EstimateJobInputs {
+model AgentOptimizationEstimateJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: OptimizationAgentIdentifier;
+  agent: OptimizedAgentIdentifier;
 
   @doc("Training dataset.")
-  train_dataset: OptimizationDatasetInput;
+  train_dataset: AgentOptimizationDatasetInput;
 
   @doc("Optional held-out validation dataset.")
-  validation_dataset?: OptimizationDatasetInput;
+  validation_dataset?: AgentOptimizationDatasetInput;
 
   @doc("Evaluators.")
   @minItems(1)
-  evaluators: OptimizationEvaluatorRef[];
+  evaluators: AgentOptimizationEvaluatorRef[];
 
   @doc("Estimate-specific tuning knobs.")
-  options?: EstimateOptions;
+  options?: AgentOptimizationEstimateOptions;
 }
 
 @doc("A low/typical/ceiling range for an estimated quantity.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model EstimateBand {
+model AgentOptimizationEstimateBand {
   @doc("Lower bound.")
   low: float64;
 
@@ -308,7 +309,7 @@ model EstimateBand {
 
 @doc("Estimated cost breakdown. Present only when at least one contributing model has pricing data available.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model EstimateDollars {
+model AgentOptimizationEstimateDollars {
   @doc("Whether the dollar figures are modeled (projected from call counts + per-model prices) vs. measured. Currently always true; may become false when measured billing data is available. Do not branch exhaustively on this value.")
   modeled: boolean;
 
@@ -319,10 +320,10 @@ model EstimateDollars {
   pricing_source?: string;
 
   @doc("Total dollar estimate across all priced layers. Null when no layer could be priced.")
-  total?: EstimateBand;
+  total?: AgentOptimizationEstimateBand;
 
   @doc("Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only priced layers are present.")
-  per_layer?: Record<EstimateBand>;
+  per_layer?: Record<AgentOptimizationEstimateBand>;
 
   @doc("Cost layers excluded from total because no pricing data was available for their model.")
   unpriced_layers?: string[];
@@ -330,15 +331,15 @@ model EstimateDollars {
 
 @doc("Response body for :estimate.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model EstimateResponse {
+model AgentOptimizationEstimateResponse {
   @doc("Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_dataset was passed as a registered reference.")
   dataset_rows: int32;
 
   @doc("Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only layers that will run are present.")
-  call_counts?: Record<EstimateBand>;
+  call_counts?: Record<AgentOptimizationEstimateBand>;
 
   @doc("Modeled dollar estimate. Present only when pricing data is available for at least one contributing model.")
-  dollars?: EstimateDollars;
+  dollars?: AgentOptimizationEstimateDollars;
 
   @doc("The pricing snapshot date used for cost estimation, formatted YYYY-MM-DD.")
   prices_as_of?: string;
@@ -350,7 +351,7 @@ model EstimateResponse {
 
 @doc("Metadata for the candidate currently under evaluation. Present only during in_progress with progressive-update visibility.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model InProgressCandidateInfo {
+model AgentOptimizationInProgressCandidateInfo {
   @doc("Timestamp when the current candidate began evaluation, represented in Unix time.")
   created_at?: FoundryTimestamp;
 
@@ -360,7 +361,7 @@ model InProgressCandidateInfo {
 
 @doc("In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJobProgress {
+model AgentOptimizationJobProgress {
   @doc("Number of candidates whose evaluation has completed so far.")
   candidates_completed: int32;
 
@@ -374,7 +375,7 @@ model OptimizationJobProgress {
   elapsed_seconds: float64;
 
   @doc("Metadata for the candidate currently under evaluation. Dropped on terminal states.")
-  in_progress_candidate?: InProgressCandidateInfo;
+  in_progress_candidate?: AgentOptimizationInProgressCandidateInfo;
 
   @doc("Populated once any candidate from this job has been promoted to an agent version.")
   promotion?: PromotionInfo;
@@ -382,7 +383,7 @@ model OptimizationJobProgress {
 
 @doc("Slim candidate view returned in bulk-read contexts (candidate LIST). Excludes mutations to keep customer-supplied prompt content off bulk-read paths. Fetch full detail via GET /agent_optimization_jobs/{jobId}/candidates/{candidateId}.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model CandidateSummary {
+model AgentOptimizationCandidateSummary {
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
   candidate_id: string;
 
@@ -419,7 +420,7 @@ model CandidateSummary {
 
 @doc("A single candidate file artifact stored in the job's output blob.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model CandidateFileInfo {
+model AgentOptimizationCandidateFileInfo {
   @doc("Relative path of the file within the candidate's output folder.")
   path: string;
 
@@ -430,9 +431,10 @@ model CandidateFileInfo {
   size_bytes: int64;
 }
 
-@doc("Full candidate view returned by GET /candidates/{id}. Extends CandidateSummary with the mutation payload and file manifest.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "AgentOptimizationCandidateDetail is a response-body superset of AgentOptimizationCandidateSummary; the summary/detail split is deliberate and not a discriminated union."
+@doc("Full candidate view returned by GET /candidates/{id}. Extends AgentOptimizationCandidateSummary with the mutation payload and file manifest.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model CandidateDetail extends CandidateSummary {
+model AgentOptimizationCandidateDetail extends AgentOptimizationCandidateSummary {
   @doc("Identifier of the parent optimization job.")
   job_id: string;
 
@@ -440,14 +442,14 @@ model CandidateDetail extends CandidateSummary {
   mutations?: Record<unknown>;
 
   @doc("Manifest of artifact files stored for this candidate.")
-  files?: CandidateFileInfo[];
+  files?: AgentOptimizationCandidateFileInfo[];
 }
 
 @doc("Aggregated token usage attributable to a single layer of the optimization loop.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model TokenUsageEntry {
+model AgentOptimizationTokenUsageEntry {
   @doc("Which layer of the optimization loop generated these calls.")
-  layer: OptimizationLayer;
+  layer: AgentOptimizationLayer;
 
   @doc("Model deployment name that served the calls. Null when unattributed.")
   `model`?: string;
@@ -470,9 +472,9 @@ model TokenUsageEntry {
 
 @doc("Aggregated wall-clock latency attributable to a single layer of the optimization loop.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model LatencyUsageEntry {
+model AgentOptimizationLatencyUsageEntry {
   @doc("Which layer of the optimization loop generated these calls.")
-  layer: OptimizationLayer;
+  layer: AgentOptimizationLayer;
 
   @doc("Model deployment name that served the calls.")
   `model`: string;
@@ -492,7 +494,7 @@ model LatencyUsageEntry {
 
 @doc("Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed).")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJobResult {
+model AgentOptimizationJobResult {
   @doc("Candidate ID of the original (un-optimized) baseline evaluation.")
   baseline?: string;
 
@@ -503,10 +505,10 @@ model OptimizationJobResult {
   candidate_ids?: string[];
 
   @doc("Aggregate token usage per layer × model.")
-  token_usage?: TokenUsageEntry[];
+  token_usage?: AgentOptimizationTokenUsageEntry[];
 
   @doc("Aggregate latency per layer × model.")
-  latency_usage?: LatencyUsageEntry[];
+  latency_usage?: AgentOptimizationLatencyUsageEntry[];
 }
 
 // ---------------------------------------------------------------------------
@@ -515,7 +517,7 @@ model OptimizationJobResult {
 
 @doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
+model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, AgentOptimizationJobInputs> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -526,11 +528,11 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 
   @doc("Progress snapshot. Preserved on terminal states (with in_progress_candidate omitted).")
   @visibility(Lifecycle.Read)
-  progress?: OptimizationJobProgress;
+  progress?: AgentOptimizationJobProgress;
 
   @doc("Terminal completion classification. Present only on succeeded.")
   @visibility(Lifecycle.Read)
-  completion_status?: OptimizationCompletionStatus;
+  completion_status?: AgentOptimizationCompletionStatus;
 
   @doc("Non-fatal warnings emitted at any point during optimization.")
   @visibility(Lifecycle.Read)
@@ -559,7 +561,7 @@ model PromotionInfo {
 
 @doc("Request body for POST /candidates/{id}:promote. For prompt agents these fields are ignored; the target agent is resolved from the job's stored baseline configuration.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model PromoteCandidateRequest {
+model PromoteAgentOptimizationCandidateRequest {
   @doc("Target Foundry agent name to promote onto. For prompt agents this is ignored.")
   agent_name?: string;
 
@@ -569,7 +571,7 @@ model PromoteCandidateRequest {
 
 @doc("Response body for POST /candidates/{id}:promote.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model PromoteCandidateResponse {
+model PromoteAgentOptimizationCandidateResponse {
   @doc("Server-assigned candidate identifier that was promoted.")
   candidate_id: string;
 
