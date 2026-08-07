@@ -16,11 +16,10 @@ namespace Microsoft.DataBoxEdge;
  */
 @singleton("default")
 @parentResource(Role)
-model MonitoringMetricConfiguration
-  is Azure.ResourceManager.ProxyResource<
-    MonitoringMetricConfigurationProperties,
-    false
-  > {
+model MonitoringMetricConfiguration is Azure.ResourceManager.ProxyResource<
+  MonitoringMetricConfigurationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MonitoringMetricConfiguration,
     KeyName = "monitoringConfig",

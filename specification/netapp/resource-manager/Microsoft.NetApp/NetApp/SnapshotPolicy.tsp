@@ -14,8 +14,10 @@ namespace Microsoft.NetApp;
  * Snapshot policy information
  */
 @parentResource(NetAppAccount)
-model SnapshotPolicy
-  is Azure.ResourceManager.TrackedResource<SnapshotPolicyProperties, false> {
+model SnapshotPolicy is Azure.ResourceManager.TrackedResource<
+  SnapshotPolicyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SnapshotPolicy,
     KeyName = "snapshotPolicyName",
