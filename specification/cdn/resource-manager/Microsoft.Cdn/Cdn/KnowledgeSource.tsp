@@ -70,6 +70,7 @@ interface KnowledgeSources {
   /**
    * Updates an existing knowledge source with the specified name within a web agent.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

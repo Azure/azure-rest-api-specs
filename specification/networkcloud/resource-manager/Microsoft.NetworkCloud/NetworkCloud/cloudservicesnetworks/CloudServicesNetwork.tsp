@@ -68,6 +68,7 @@ interface CloudServicesNetworks {
   /**
    * Delete the provided cloud services network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudServicesNetwork,
     Parameters = {

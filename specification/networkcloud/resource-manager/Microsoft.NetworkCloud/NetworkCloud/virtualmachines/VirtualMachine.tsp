@@ -71,6 +71,7 @@ interface VirtualMachines {
   /**
    * Delete the provided virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachine,
     Parameters = {

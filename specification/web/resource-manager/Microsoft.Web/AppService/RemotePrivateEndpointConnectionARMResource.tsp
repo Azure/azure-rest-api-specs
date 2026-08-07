@@ -91,6 +91,7 @@ interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Deletes a private endpoint connection
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.DeleteWithoutOkAsync<
@@ -177,6 +178,7 @@ interface StaticSites {
   /**
    * Description for Deletes a private endpoint connection
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
@@ -265,6 +267,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Deletes a private endpoint connection
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.DeleteWithoutOkAsync<
@@ -358,6 +361,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Deletes a private endpoint connection
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a private endpoint connection")

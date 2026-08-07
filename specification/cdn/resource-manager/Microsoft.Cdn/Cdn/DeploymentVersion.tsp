@@ -55,6 +55,7 @@ interface DeploymentVersions {
   /**
    * Approve the deployment of the version
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   approve is ArmResourceActionAsync<
     DeploymentVersion,
     void,

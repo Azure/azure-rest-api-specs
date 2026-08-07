@@ -74,6 +74,7 @@ interface KubernetesVersions {
   /**
    * Delete the specified Kubernetes version resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     KubernetesVersion,
     Parameters = {

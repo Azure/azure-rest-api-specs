@@ -30,6 +30,7 @@ interface DrillRuns {
   /**
   POST Actions
   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_06_01_preview)
   @renamedFrom(Versions.v2026_06_01_preview, "failOver")
@@ -47,6 +48,7 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @added(Versions.v2026_06_01_preview)
   @sharedRoute
@@ -64,6 +66,7 @@ interface DrillRuns {
     OptionalRequestBody = true
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @armResourceAction(DrillRun)
@@ -79,6 +82,7 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @armResourceAction(DrillRun)
@@ -94,6 +98,7 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_06_01_preview)
   @renamedFrom(Versions.v2026_06_01_preview, "reprotect")
@@ -111,6 +116,7 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @added(Versions.v2026_06_01_preview)
   @sharedRoute
@@ -128,6 +134,7 @@ interface DrillRuns {
     OptionalRequestBody = true
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @armResourceAction(DrillRun)
   @post
@@ -142,6 +149,7 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @armResourceAction(DrillRun)
   @post
@@ -156,6 +164,7 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @armResourceAction(DrillRun)
   @post

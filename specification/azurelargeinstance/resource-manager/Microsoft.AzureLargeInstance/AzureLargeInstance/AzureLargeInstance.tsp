@@ -72,6 +72,7 @@ interface AzureLargeInstances {
     Foundations.OperationStatusResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @doc("The operation to restart an Azure Large Instance (only for compute instances)")
   restart is ArmResourceActionNoBody<
     AzureLargeInstance,

@@ -76,6 +76,7 @@ interface PrivateEndpointConnections {
   /**
    * Delete private endpoint connection with the specified name
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match the published API contract and are retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published API returns the deleted private endpoint connection in the body of the synchronous (200) delete response; retained to preserve backward compatibility."
   @summary("Delete private endpoint connection")

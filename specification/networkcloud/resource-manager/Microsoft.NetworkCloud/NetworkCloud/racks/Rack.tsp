@@ -67,6 +67,7 @@ interface Racks {
   /**
    * Delete the provided rack. All customer initiated requests will be rejected as the life cycle of this resource is managed by the system.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     Rack,
     Parameters = {

@@ -67,6 +67,7 @@ interface L2Networks {
   /**
    * Delete the provided layer 2 (L2) network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     L2Network,
     Parameters = {

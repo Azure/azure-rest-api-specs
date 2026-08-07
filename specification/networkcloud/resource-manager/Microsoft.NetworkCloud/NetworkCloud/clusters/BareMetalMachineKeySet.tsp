@@ -73,6 +73,7 @@ interface BareMetalMachineKeySets {
   /**
    * Delete the bare metal machine key set of the provided cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     BareMetalMachineKeySet,
     Parameters = {

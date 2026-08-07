@@ -49,6 +49,7 @@ interface Watchlists {
   /**
    * Delete a watchlist.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is Extension.DeleteWithoutOkAsync<

@@ -70,6 +70,7 @@ interface AccessBridges {
   /**
    * Delete the specified access bridge.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   delete is ArmResourceDeleteWithoutOkAsync<
     AccessBridge,
     Parameters = {

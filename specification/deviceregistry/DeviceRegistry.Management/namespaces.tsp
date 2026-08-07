@@ -166,6 +166,7 @@ interface Namespaces {
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @doc("Migrate the resources into Namespace")
   @added(Versions.v2025_07_01_preview)
   migrate is ArmResourceActionAsync<

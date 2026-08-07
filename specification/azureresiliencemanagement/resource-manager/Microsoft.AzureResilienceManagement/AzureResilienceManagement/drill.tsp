@@ -25,6 +25,7 @@ interface Drills {
   @route(ServiceGroupRoute)
   create is ArmResourceCreateOrReplaceAsync<Drill, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route(ServiceGroupRoute)
   @patch(#{ implicitOptionality: true })
@@ -49,6 +50,7 @@ interface Drills {
   /**
   POST Actions
   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
@@ -67,6 +69,7 @@ interface Drills {
   /**
   POST Actions
   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @armResourceAction(Drill)
   @post
@@ -81,6 +84,7 @@ interface Drills {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @armResourceAction(Drill)
   @post
@@ -95,6 +99,7 @@ interface Drills {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @renamedFrom(Versions.v2026_04_01_preview, "addOrUpdateResources")

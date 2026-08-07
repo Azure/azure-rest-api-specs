@@ -91,6 +91,7 @@ interface DatabaseMigrationSqlVms {
   /**
    * Delete Database Migration resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-response-mismatch" "fixme-invalid-lro-result"
   @tag("DatabaseMigrationsSqlVm")
   delete is DatabaseMigrationSqlVmOps.DeleteWithoutOkAsync<
     DatabaseMigrationSqlVm,
