@@ -1,0 +1,34 @@
+{
+  "title": "AgentSessions_ListBySubscription",
+  "operationId": "AgentSessions_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "api-version": "2026-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSessions/session1",
+            "name": "session1",
+            "type": "Microsoft.App/agentSessions",
+            "location": "eastus",
+            "eTag": "\"00000000-0000-0000-0000-000000000001\"",
+            "properties": {
+              "resourceIds": [
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/app1"
+              ],
+              "provisioningState": "Succeeded",
+              "sandbox": {
+                "endpoint": "wss://session1.sreagent.example.com/",
+                "expiresAt": "2026-07-16T20:35:00Z"
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
