@@ -188,28 +188,15 @@ directive:
       - DefinitionsPropertiesNamesCamelCase
   - where:
       - $.definitions.DiskProperties.properties.diskIOPSReadWrite
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.DiskUpdateProperties.properties.diskIOPSReadWrite
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.DiskProperties.properties.diskIOPSReadOnly
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
+      - $.definitions.ManagedDiskProperties.properties.diskIOPSReadOnly
       - $.definitions.DataDisk.properties.diskIOPSReadWrite
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
+    reason: Property name uses 'IOPS' acronym in all-caps following the established Azure Disk API naming convention used across all disk-related properties
   - where:
       - $.definitions.ContainerService
     suppress:
