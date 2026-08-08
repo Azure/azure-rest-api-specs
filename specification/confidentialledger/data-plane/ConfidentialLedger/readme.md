@@ -21,7 +21,7 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-02-23
+tag: package-2026-07-31-preview
 ```
 
 ### Tag: package-2022-05-13-ledger
@@ -43,6 +43,18 @@ These settings apply only when `--tag=package-2026-02-23` is specified on the co
 ```yaml $(tag) == 'package-2026-02-23'
 input-file:
   - stable/2026-02-23/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
+### Tag: package-2026-07-31-preview
+
+These settings apply only when `--tag=package-2026-07-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-31-preview'
+input-file:
+  - preview/2026-07-31-preview/confidentialledger.json
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
