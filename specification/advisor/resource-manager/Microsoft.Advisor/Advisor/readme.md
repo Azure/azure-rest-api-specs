@@ -50,6 +50,7 @@ suppressions:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
 ```
+
 ### Tag: package-2026-02-preview
 These settings apply only when `--tag=package-2026-02-preview` is specified on the command line.
 
@@ -70,6 +71,40 @@ suppressions:
     where:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
+```
+
+### Tag: package-2026-01-preview
+These settings apply only when `--tag=package-2026-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-preview'
+input-file:
+  - preview/2026-01-01-preview/openapi.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentResult"]
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentTypeListResult"]
+      - $.definitions["WorkloadListResult"]
+  - code: PostResponseCodes
+    reason: Pre-existing pattern from Triage operations; not related to Advisor Score changes.
+    from:
+      - openapi.json
+  - code: GuidUsage
+    reason: Pre-existing pattern; GUID is required for this service.
+    from:
+      - openapi.json
+  - code: DescriptionMustNotBeNodeName
+    reason: Pre-existing enum value descriptions from existing APIs.
+    from:
+      - openapi.json
 ```
 
 ### Tag: package-2025-05-preview
