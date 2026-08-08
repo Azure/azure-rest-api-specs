@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -83,6 +85,12 @@ model ServiceGroupProperties {
    * The display name of the serviceGroup. For example, ServiceGroupTest1
    */
   displayName?: string;
+
+  /**
+   * The criticality designation of the service group.
+   */
+  @added(Versions.v2026_03_01_preview)
+  criticality?: float64;
 
   /**
    * The details of the parent serviceGroup.
