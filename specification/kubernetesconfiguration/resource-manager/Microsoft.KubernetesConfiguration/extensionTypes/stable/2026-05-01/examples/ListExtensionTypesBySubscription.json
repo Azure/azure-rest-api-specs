@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01",
+    "subscriptionId": "subId1",
+    "releaseTrain": "stable"
+  },
+  "responses": {
+    "200": {
+      "description": "List of extension types",
+      "body": {
+        "value": [
+          {
+            "name": "microsoft.flux",
+            "type": "Microsoft.KubernetesConfiguration/extensionTypes",
+            "id": "/subscriptions/subId1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.flux",
+            "properties": {
+              "description": "Flux Extension for controllers and CRs from the Weaveworks team",
+              "publisher": "Microsoft",
+              "supportedClusterTypes": [
+                "connectedClusters",
+                "managedClusters",
+                "provisionedClusters",
+                "fleets"
+              ],
+              "supportedScopes": {
+                "defaultScope": "cluster",
+                "clusterScopeSettings": {
+                  "id": "/subscriptions/subId1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.flux/clusterScopeSettings/default",
+                  "name": "default",
+                  "type": "Microsoft.KubernetesConfiguration/extensionTypes/clusterScopeSettings",
+                  "properties": {
+                    "allowMultipleInstances": false,
+                    "defaultReleaseNamespace": "flux-system"
+                  }
+                }
+              },
+              "supportedRegions": [
+                "centraluseuap",
+                "eastus2euap",
+                "westcentralus",
+                "francecentral",
+                "uksouth",
+                "westeurope",
+                "westus2",
+                "centralus",
+                "southeastasia",
+                "southcentralus",
+                "australiaeast",
+                "japaneast",
+                "koreacentral",
+                "eastus2",
+                "northeurope",
+                "westus",
+                "eastasia",
+                "westus3",
+                "northcentralus",
+                "eastus",
+                "canadacentral",
+                "centralindia",
+                "canadaeast",
+                "norwayeast",
+                "germanywestcentral",
+                "australiasoutheast",
+                "switzerlandnorth",
+                "francesouth",
+                "swedencentral",
+                "germanynorth",
+                "southindia",
+                "ukwest",
+                "southafricanorth",
+                "japanwest",
+                "koreasouth",
+                "brazilsouth",
+                "uaenorth",
+                "jioindiawest",
+                "norwaywest",
+                "italynorth",
+                "israelcentral",
+                "polandcentral",
+                "australiacentral",
+                "australiacentral2",
+                "southafricawest",
+                "westindia",
+                "switzerlandwest",
+                "spaincentral",
+                "mexicocentral",
+                "chilecentral",
+                "taiwannorth",
+                "malaysiawest",
+                "newzealandnorth",
+                "indonesiacentral",
+                "brazilsoutheast",
+                "local"
+              ],
+              "planInfo": null,
+              "additionalDetails": null
+            }
+          },
+          {
+            "name": "microsoft.policyinsights",
+            "type": "Microsoft.KubernetesConfiguration/extensionTypes",
+            "id": "/subscriptions/subId1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.policyinsights",
+            "properties": {
+              "description": "Azure Policy Insights extension",
+              "publisher": "Microsoft",
+              "supportedClusterTypes": [
+                "connectedClusters"
+              ],
+              "supportedScopes": {},
+              "supportedRegions": [],
+              "planInfo": null,
+              "additionalDetails": null
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "SubscriptionExtensionTypes_List",
+  "title": "List Extension Types"
+}
