@@ -40,9 +40,9 @@ VS Code agent manually.
 | Trigger                          | Condition                                                                                                                                                          |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | PR opened                        | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
-| PR synchronized (new push)       | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                                             |
+| PR synchronized (new push)       | Same conditions as opened; prior in-progress run is cancelled automatically (debounce). External-author pushes require a maintainer to run `/arm-review` again     |
 | PR marked ready for review       | Same conditions as opened; no additional push is needed                                                                                                            |
-| `WaitForARMFeedback` label added | Applying the label triggers a review directly (no push needed), subject to the same conditions                                                                     |
+| `WaitForARMFeedback` label added | Applying the label triggers a review directly when added by a write-access user or the trusted `github-actions[bot]` repository automation                         |
 | `/arm-review` comment            | On-demand: posted by a user with write access or above; runs on drafts and without `WaitForARMFeedback`, unless `skip-arm-review` is present                       |
 | `workflow_dispatch`              | On-demand: repository maintainer triggers manually with a PR number; skipped when `skip-arm-review` is present                                                     |
 
@@ -58,13 +58,15 @@ VS Code agent manually.
 **Fork PRs and permissions:** The workflow **supports PRs from forks**
 (`forks: ["*"]`), matching the other PR workflows in this repo. gh-aw's
 built-in role check only lets users with **write access or above** trigger it,
-so an externally-authored fork PR is reviewed only after a maintainer applies
-the `WaitForARMFeedback` label or runs `/arm-review` — it is not auto-reviewed
-on the strength of its author alone. Fork PRs are handled safely because the
-agent never checks out untrusted PR head code (`checkout: false`), reads spec
-files only through the read-only GitHub MCP toolset (which additionally runs at
-`approved` integrity for defense in depth), and writes only through gh-aw
-`safe-outputs`.
+with one explicit exception for `github-actions[bot]`, which lets the trusted
+summarize-checks automation trigger the review when it applies
+`WaitForARMFeedback`. An externally-authored fork PR is reviewed only after a
+maintainer applies the label or runs `/arm-review`; later pushes by the external
+author require another maintainer-triggered review. Fork PRs are handled safely
+because the agent never checks out untrusted PR head code (`checkout: false`),
+reads spec files only through the read-only GitHub MCP toolset (which
+additionally runs at `approved` integrity for defense in depth), and writes only
+through gh-aw `safe-outputs`.
 
 ### On-demand review with `/arm-review`
 
@@ -79,13 +81,18 @@ useful after pushing fixes to address earlier findings:
 (enforced by gh-aw's built-in role check). Posting `/arm-review` without
 sufficient permissions is silently ignored.
 
+The command body must be exactly `/arm-review`. Eligible runs create one
+updateable status comment on the PR with a link to the Actions run. This is the
+authoritative progress signal for comment-triggered runs, which execute against
+the default branch and may not appear in the PR Checks tab.
+
 ### Labels
 
-| Label                 | Effect                                                                                                                                                                                                |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                                                                      |
-| `ARMChangesRequested` | Added by the workflow when blocking findings are found                                                                                                                                                |
-| `WaitForARMFeedback`  | Gates automated reviews: `opened` / `synchronize` / `labeled` / `ready_for_review` runs only fire while this label is present, and applying it triggers a review. Removed when the workflow completes |
+| Label                 | Effect                                                                                                                                               |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                     |
+| `ARMChangesRequested` | Added by the workflow when blocking findings are found; `WaitForARMFeedback` is removed at the same time                                             |
+| `WaitForARMFeedback`  | Gates automated reviews. A clean automated review leaves it unchanged because only a human ARM reviewer can advance or sign off the ARM review queue |
 
 ### Opting out
 
@@ -105,7 +112,7 @@ highest-risk subset of the changed files (new API version directories first,
 then `resource-manager` JSON and TypeSpec sources, then configuration files,
 with example files dropped first) and states in the review summary how many
 files were covered and what was left out. **No action is required from the
-author** — the assigned Azure API reviewer covers the remaining files as part of
+author**. The assigned Azure API reviewer covers the remaining files as part of
 the standard review process.
 
 ### What the automated review covers
@@ -143,7 +150,7 @@ approval covers that specific finding. If it does, the only remaining action
 for that comment is to resolve the conversation. Otherwise, the author must
 obtain the appropriate approval or address the finding.
 
-## Reviewing a PR (VS Code — Interactive)
+## Reviewing a PR (VS Code, Interactive)
 
 In the agent chat, type your request directly:
 
