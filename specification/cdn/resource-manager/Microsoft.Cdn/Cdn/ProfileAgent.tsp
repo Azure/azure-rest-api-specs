@@ -77,7 +77,7 @@ interface ProfileAgents {
     PatchModel = ProfileAgentUpdateParameters,
     Response =
       | ArmResponse<ProfileAgent>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProfileAgent>> &
           ProfileAgentAcceptedBody)
   >;
 
