@@ -28,6 +28,7 @@ union IsolationScope {
  * Object for defining the allowed identifiers of external identities. Introduced in 2025-01-31-preview.
  */
 @added(Versions.v2025_05_31_preview)
+@removed(Versions.v2026_05_31)
 model ClaimsMatchingExpression {
   /**
    * Wildcard-based expression for matching incoming subject claims.
@@ -224,6 +225,7 @@ model FederatedIdentityCredentialProperties {
    * Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both. Introduced in 2025-01-31-preview.
    */
   @added(Versions.v2025_05_31_preview)
+  @removed(Versions.v2026_05_31)
   claimsMatchingExpression?: ClaimsMatchingExpression;
 }
 
