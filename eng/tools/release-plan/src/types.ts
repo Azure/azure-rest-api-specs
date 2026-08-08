@@ -11,6 +11,12 @@ export interface TypeSpecProjectInfo {
   isPreview: boolean;
 }
 
+export interface TypeSpecMetadataResult {
+  apiVersion: string;
+  sdkType: "stable" | "preview";
+  message: string;
+}
+
 export interface CommandResult {
   exitCode: number;
   stdout: string;
