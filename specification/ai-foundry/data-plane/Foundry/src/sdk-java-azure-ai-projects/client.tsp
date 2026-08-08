@@ -16,6 +16,7 @@ import "../schedules/routes.tsp";
 import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
+import "../experiments/routes.tsp";
 
 import "../sdk-common/ops-relocation-projects.tsp";
 
@@ -321,6 +322,16 @@ union GrammarSyntaxExpandable {
 @@alternateType(CronTrigger.startTime, utcDateTime, "java");
 @@alternateType(CronTrigger.endTime, utcDateTime, "java");
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "java");
+
+// Experiment carries unixTimestamp-encoded (FoundryTimestamp) datetime fields on
+// the discriminated base model, which are inherited by AgentsSafeRolloutExperiment.
+// The Java emitter mis-generates the subclass deserialization (reads the numeric
+// timestamp as long but the base field is OffsetDateTime), causing a compile error.
+// Expose these as int64 (Unix seconds) for Java only, matching the numeric wire
+// format and keeping base/subclass consistent. Python/JS are unaffected.
+@@alternateType(Experiment.created_at, int64, "java");
+@@alternateType(Experiment.started_at, int64, "java");
+@@alternateType(Experiment.end_at, int64, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
