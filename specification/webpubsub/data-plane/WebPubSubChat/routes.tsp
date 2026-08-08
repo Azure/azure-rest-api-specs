@@ -5,24 +5,54 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
-
 using Azure.Core.Traits;
 
 namespace WebPubSubChat;
 
-alias Operations = Azure.Core.ResourceOperations<Azure.Core.Traits.NoConditionalRequests &
-  Azure.Core.Traits.NoRepeatableRequests &
-  Azure.Core.Traits.NoClientRequestId>;
+/** Conditional request headers supported by the service. */
+model EtagConditionalRequestHeaders {
+  /** The request should only proceed if an entity matches this string. */
+  @header("If-Match")
+  ifMatch?: string;
 
-alias ConditionalOperations = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsConditionalRequests &
-  Azure.Core.Traits.NoRepeatableRequests &
-  Azure.Core.Traits.NoClientRequestId>;
+  /** The request should only proceed if no entity matches this string. */
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+}
 
-/**
- * Chat operations.
- */
+/** Provides ETag conditional request headers and ETag response headers. */
+@trait("ConditionalRequests")
+model SupportsEtagConditionalRequests {
+  /** ETag conditional request and response headers. */
+  conditionalRequests: {
+    /** ETag conditional request headers. */
+    @traitContext(
+
+        | TraitContext.Read
+        | TraitContext.Update
+        | TraitContext.Delete
+        | TraitContext.Create
+    )
+    @traitLocation(TraitLocation.Parameters)
+    parameters: EtagConditionalRequestHeaders;
+
+    /** ETag response headers. */
+    @traitContext(TraitContext.Read | TraitContext.Create | TraitContext.Update)
+    @traitLocation(TraitLocation.Response)
+    response: Azure.Core.EtagResponseEnvelope;
+  };
+}
+
+alias Operations = Azure.Core.ResourceOperations<NoConditionalRequests &
+  NoRepeatableRequests &
+  NoClientRequestId>;
+
+alias ConditionalOperations = Azure.Core.ResourceOperations<SupportsEtagConditionalRequests &
+  NoRepeatableRequests &
+  NoClientRequestId>;
+
 @tag("chat")
-interface Chat {
+interface WebPubSubChatServiceClient {
   // --- Conversations ---
 
   /** Get conversation information. */
