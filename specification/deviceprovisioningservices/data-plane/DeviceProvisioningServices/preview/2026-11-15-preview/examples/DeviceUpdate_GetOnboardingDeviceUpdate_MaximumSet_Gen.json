@@ -1,0 +1,49 @@
+{
+  "title": "DeviceUpdate_GetOnboardingDeviceUpdate_MaximumSet_Gen",
+  "operationId": "DeviceUpdate_GetOnboardingDeviceUpdate",
+  "parameters": {
+    "idScope": "0ne00000000",
+    "registrationId": "my-device-01",
+    "api-version": "2026-11-15-preview",
+    "body": {
+      "agentInfo": {
+        "agentSdkVersion": "1.1.0",
+        "agentProfile": 1,
+        "compatibilityProperties": {
+          "manufacturer": "contoso",
+          "model": "vacuum-100"
+        }
+      },
+      "tpm": {
+        "endorsementKey": "eyJlbmRvcnNlbWVudCI6ICJrZXkifQ==",
+        "storageRootKey": "eyJzcmsiOiAia2V5In0="
+      },
+      "installedUpdateId": {
+        "provider": "Contoso",
+        "name": "SensorFirmware",
+        "version": "1.2.3"
+      },
+      "agentInfoETag": "\"a0\"",
+      "serviceConfigETag": "\"c0\""
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "serviceConfiguration": {
+          "rootKeyDownloadUrl": "https://contoso.blob.core.windows.net/adu/rootkeys"
+        },
+        "serviceConfigETag": "\"c1\"",
+        "agentInfoETag": "\"a1\"",
+        "updateMetadata": {
+          "workflowId": "5a3f2b10-8c7d-4e6f-9a1b-2c3d4e5f6a7b",
+          "updateManifest": "eyJtYW5pZmVzdCI6ICJvcGFxdWUifQ==",
+          "updateManifestSignature": "eyJhbGciOiJSUzI1NiJ9.c2lnbmF0dXJl",
+          "fileUrls": {
+            "file_0": "https://contoso.blob.core.windows.net/adu/baseline-1.1.0.bin"
+          }
+        }
+      }
+    }
+  }
+}

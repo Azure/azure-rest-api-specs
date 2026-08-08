@@ -243,3 +243,121 @@ interface RuntimeRegistration {
     ProvisioningServiceErrorDetails
   >;
 }
+
+/**
+ * Device-facing ADU (Azure Device Update) integration operations. Added in
+ * 2026-11-15-preview. The device selects the endpoint by its own provisioning
+ * state: the onboarding/bootstrap fetch before it is provisioned, the
+ * regular/operational fetch afterwards. DPS is a thin pass-through to ADR (which
+ * forwards to ADU) and does not branch on the update family or parse the manifest.
+ *
+ * Errors from ADU are surfaced verbatim: ADU's machine-readable `error.code`
+ * string (for example `UPDATE_ACCOUNT_NOT_LINKED`, `UNKNOWN_WORKFLOW_ID`,
+ * `UNSUPPORTED_API_VERSION`) is returned in the `x-ms-error-code` response
+ * header, and is also mirrored in the error body `info` dictionary under the key
+ * `aduErrorCode` (plus `aduErrorTarget` when ADU identifies a specific request
+ * element). The device should drive its behavior from that code, not the HTTP
+ * status, since a single status can map to several ADU codes.
+ */
+@added(Versions.v2026_11_15_preview)
+interface DeviceUpdate {
+  /**
+   * Checks for an available device update on the regular / operational path. The
+   * device selects this endpoint once it is provisioned.
+   *
+   * On failure, ADU's `error.code` string is returned verbatim in the
+   * `x-ms-error-code` header and mirrored in the error body `info` dictionary
+   * under `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should
+   * branch on that code rather than the HTTP status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Checks for an available device update (regular / operational path).")
+  @route("/{idScope}/registrations/{registrationId}/getDeviceUpdate")
+  @post
+  getDeviceUpdate is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** Update check request. */
+      @bodyRoot
+      body: UpdateCheckRequest;
+    },
+    UpdateCheckResponse,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Checks for an available device update on the onboarding / bootstrap path. The
+   * device selects this endpoint before it is provisioned; only the external device
+   * identifier is available (no ADR device UUID yet).
+   *
+   * On failure, ADU's `error.code` string is returned verbatim in the
+   * `x-ms-error-code` header and mirrored in the error body `info` dictionary
+   * under `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should
+   * branch on that code rather than the HTTP status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Checks for an available device update (onboarding / bootstrap path).")
+  @route("/{idScope}/registrations/{registrationId}/onboarding/getDeviceUpdate")
+  @post
+  getOnboardingDeviceUpdate is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** Update check request. */
+      @bodyRoot
+      body: UpdateCheckRequest;
+    },
+    UpdateCheckResponse,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Reports the terminal result of a device update installation. Idempotent on
+   * workflowId; ADU routes the report to the correct update family.
+   *
+   * On failure, ADU's `error.code` string is returned verbatim in the
+   * `x-ms-error-code` header and mirrored in the error body `info` dictionary
+   * under `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should
+   * branch on that code rather than the HTTP status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Reports the terminal result of a device update installation.")
+  @route("/{idScope}/registrations/{registrationId}/reportDeviceUpdateStatus")
+  @post
+  reportDeviceUpdateStatus is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** Status report request. */
+      @bodyRoot
+      body: ReportStatusRequest;
+    },
+    ReportDeviceUpdateStatusResult,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+}

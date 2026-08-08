@@ -1,0 +1,47 @@
+{
+  "title": "DeviceUpdate_ReportDeviceUpdateStatus_MaximumSet_Gen",
+  "operationId": "DeviceUpdate_ReportDeviceUpdateStatus",
+  "parameters": {
+    "idScope": "0ne00000000",
+    "registrationId": "my-device-01",
+    "api-version": "2026-11-15-preview",
+    "body": {
+      "workflowId": "5a3f2b10-8c7d-4e6f-9a1b-2c3d4e5f6a7b",
+      "tpm": {
+        "endorsementKey": "eyJlbmRvcnNlbWVudCI6ICJrZXkifQ==",
+        "storageRootKey": "eyJzcmsiOiAia2V5In0="
+      },
+      "installedUpdateId": {
+        "provider": "contoso",
+        "name": "vacuum",
+        "version": "1.1.0"
+      },
+      "lastInstallResult": {
+        "outcome": "FAILED",
+        "failureOrigin": "AGENT_EXTENSION",
+        "resultCode": -1,
+        "extendedResultCodes": "0x80004005,0x8000FFFF",
+        "resultDetails": "Extension handler failed during apply.",
+        "stepResults": {
+          "step_0": {
+            "outcome": "SUCCEEDED",
+            "failureOrigin": "NOT_APPLICABLE",
+            "resultCode": 700,
+            "extendedResultCodes": "00000000",
+            "resultDetails": "Download complete."
+          },
+          "step_1": {
+            "outcome": "FAILED",
+            "failureOrigin": "AGENT_EXTENSION",
+            "resultCode": -1,
+            "extendedResultCodes": "0x80004005",
+            "resultDetails": "Apply failed."
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}
