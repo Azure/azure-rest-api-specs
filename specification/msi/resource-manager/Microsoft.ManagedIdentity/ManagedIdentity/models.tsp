@@ -154,6 +154,22 @@ model UserAssignedIdentityProperties {
   clientId?: Azure.Core.uuid;
 
   /**
+   * Flag indicating whether to block assignment of the identity to Azure resources. Cannot be unset once set to true.
+   */
+  @added(Versions.v2026_04_30)
+  @removed(Versions.v2025_05_31_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  assignmentBlocked?: boolean;
+
+  /**
+   * Flag indicating whether to block Federated Identity Credential (FIC) configuration on the managed identity. Cannot be unset once set to true.
+   */
+  @added(Versions.v2026_04_30)
+  @removed(Versions.v2025_05_31_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  federationBlocked?: boolean;
+
+  /**
    * Enum to configure regional restrictions on identity assignment, as necessary.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
