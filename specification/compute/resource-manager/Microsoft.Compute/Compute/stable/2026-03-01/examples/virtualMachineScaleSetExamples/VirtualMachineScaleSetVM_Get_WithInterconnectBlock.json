@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmScaleSetName": "{vmss-name}",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
     "instanceId": "0",
     "api-version": "2026-03-01"
   },
@@ -10,7 +10,7 @@
     "200": {
       "body": {
         "name": "{vmss-vm-name}",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet/virtualMachines/0",
         "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
         "location": "westus",
         "instanceId": "0",
@@ -34,7 +34,7 @@
             },
             "networkInterfaceConfigurations": [
               {
-                "name": "{vmss-name}-nic",
+                "name": "myVirtualMachineScaleSet-nic",
                 "properties": {
                   "primary": true,
                   "disableTcpStateTracking": false,
@@ -78,12 +78,12 @@
             },
             "osDisk": {
               "osType": "Linux",
-              "name": "{vmss-name}_{vmss-vm-name}_OsDisk_1_e195e35c5b854d3ab60960e773dd2997",
+              "name": "myVirtualMachineScaleSet_{vmss-vm-name}_OsDisk_1_e195e35c5b854d3ab60960e773dd2997",
               "createOption": "FromImage",
               "caching": "ReadWrite",
               "managedDisk": {
                 "storageAccountType": "Premium_LRS",
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/{vmss-name}_{vmss-vm-name}_OsDisk_1_e195e35c5b854d3ab60960e773dd2997"
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVirtualMachineScaleSet_{vmss-vm-name}_OsDisk_1_e195e35c5b854d3ab60960e773dd2997"
               },
               "diskSizeGB": 64
             },
@@ -91,7 +91,7 @@
             "diskControllerType": "NVMe"
           },
           "osProfile": {
-            "computerName": "{vmss-name}000000",
+            "computerName": "myVirtualMachineScaleSet000000",
             "adminUsername": "{your-username}",
             "linuxConfiguration": {
               "disablePasswordAuthentication": false,
@@ -126,7 +126,7 @@
             },
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0/networkInterfaces/{vmss-name}-nic"
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet/virtualMachines/0/networkInterfaces/myVirtualMachineScaleSet-nic"
               }
             ]
           },
