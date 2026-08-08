@@ -2724,6 +2724,13 @@ model HostPoolProperties {
    */
   @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
+
+  /**
+   * The automatic update settings for first-party extensions, keyed by extension name.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved ARM contract requires an open-ended dictionary keyed by first-party extension name."
+  @added(Versions.vLatestPreview)
+  firstPartyExtensionAutoUpdate?: Record<boolean>;
 }
 
 /**
@@ -3827,6 +3834,13 @@ model HostPoolPatchProperties {
    */
   @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
+
+  /**
+   * The automatic update settings for first-party extensions, keyed by extension name.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved ARM contract requires an open-ended dictionary keyed by first-party extension name."
+  @added(Versions.vLatestPreview)
+  firstPartyExtensionAutoUpdate?: Record<boolean>;
 }
 
 /**
