@@ -43,6 +43,16 @@ alias BulkCreateCustomId = {
   name: string;
 };
 
+alias BulkCreateCustomOperationStatusId = {
+  /** The identifier of the BulkCreateCustom operation. */
+  @path
+  @minLength(1)
+  @segment("bulkCreateCustom")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  bulkOperationId: string;
+};
+
 alias BulkCreateCustomDeleteInstancesParameter = {
   /** When true, deletes all virtual machines created by this BulkAction Operation. */
   @query
@@ -59,6 +69,26 @@ alias BulkCreateCustomSubscriptionParams = {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
 };
+
+@added(Versions.`2026-08-06-preview`)
+@doc("Information about a virtual machine resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomVirtualMachineInfo {
+  @doc("The resolved Azure virtual machine name.")
+  name?: string;
+
+  @doc("The virtual machine size selected for the virtual machine.")
+  vmSize?: string;
+
+  @doc("The subscription-relative logical availability zone selected for the virtual machine.")
+  zone?: string;
+}
+
+@added(Versions.`2026-08-06-preview`)
+@doc("A virtual machine resource resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomResource {
+  @doc("Information about the resolved virtual machine.")
+  virtualMachineInfo?: BulkCreateCustomVirtualMachineInfo;
+}
 
 // ============================================================
 // Resource: BulkCreateCustom
@@ -80,6 +110,13 @@ model BulkCreateCustomEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
   @doc("Resource tags.")
   tags?: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The deployed BulkCreateCustom response contract returns resolved per-VM allocation metadata at the top level."
+  @added(Versions.`2026-08-06-preview`)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @doc("The virtual machine resources resolved for the operation. This property is returned only when virtual machine information is enabled for a synchronous create response.")
+  resources?: Array<BulkCreateCustomResource>;
 
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
@@ -213,6 +250,15 @@ model BulkCreateCustomProperties {
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
+  @added(Versions.`2026-08-06-preview`)
+  @doc("Minimum capacity to achieve, expressed in the units given by capacityType. Must be less than capacity; to require the full requested capacity, set partialFulfillmentPolicy.mode to Disabled instead. If the service cannot allocate at least this much capacity, the request fails and no instances are launched. Setting a minimum requires partial fulfillment to remain enabled, so this property cannot be combined with partialFulfillmentPolicy.mode set to Disabled; such a request is rejected with 400 Bad Request.")
+  @minValue(1)
+  minCapacity?: int32;
+
+  @added(Versions.`2026-08-06-preview`)
+  @doc("The partial fulfillment policy for the BulkCreateCustom request. When this property is omitted, partial fulfillment is allowed. To require all-or-nothing behavior, set partialFulfillmentPolicy.mode to Disabled, which cannot be combined with minCapacity; such a request is rejected with 400 Bad Request.")
+  partialFulfillmentPolicy?: PartialFulfillmentPolicy;
+
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
@@ -298,6 +344,15 @@ interface BulkCreateCustom {
     Resource = LocationBasedBulkCreateCustom,
     Request = void,
     Parameters = BulkCreateCustomId
+  >;
+
+  @added(Versions.`2026-08-06-preview`)
+  @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
+  virtualMachinesGetOperationStatus is ArmResourceActionSync<
+    Resource = LocationBasedBulkCreateCustom,
+    Request = void,
+    Response = ArmResponse<GetOperationStatusResponse>,
+    Parameters = BulkCreateCustomOperationStatusId
   >;
 
   @doc("List BulkCreateCustom resources by resource group.")

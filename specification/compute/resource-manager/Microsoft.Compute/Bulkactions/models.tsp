@@ -189,6 +189,48 @@ union DistributionStrategy {
   string,
 }
 
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Whether the service may launch fewer instances than requested when the full capacity cannot be satisfied.")
+union PartialFulfillmentMode {
+  @doc("Default. The service launches as much capacity as possible, up to the requested capacity.")
+  Enabled: "Enabled",
+
+  @doc("The service launches either all of the requested capacity or none of it.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The reason the requested capacity could only be partially fulfilled.")
+union PartialFulfillmentReason {
+  @doc("The requested capacity could not be fully satisfied due to insufficient capacity in the region.")
+  InsufficientCapacity: "InsufficientCapacity",
+
+  @doc("The requested capacity could not be fully satisfied due to insufficient quota in the subscription.")
+  InsufficientQuota: "InsufficientQuota",
+
+  @doc("The requested capacity was successfully satisfied without any partial fulfillment.")
+  None: "None",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Controls partial fulfillment of the VMs or vCPUs requested by a BulkCreateCustom or LaunchBulkInstancesOperation request, and reports the outcome when partial fulfillment occurs.")
+model PartialFulfillmentPolicy {
+  @doc("Whether partial fulfillment is allowed. Defaults to Enabled. When set to Disabled, minCapacity must not be specified; a request that sets Disabled and also specifies minCapacity is rejected with 400 Bad Request.")
+  mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
+
+  @visibility(Lifecycle.Read)
+  @doc("The amount of capacity that was successfully fulfilled, expressed in the units given by capacityType. Returned on the create response only when the request was partially fulfilled; otherwise null.")
+  fulfilledCapacity?: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The reason the requested capacity was only partially fulfilled. Returned on the create response only when the request was partially fulfilled; otherwise null.")
+  reason?: PartialFulfillmentReason;
+}
+
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("A VM size profile with a name and rank for flex VM creation")
 model VmSizeProfile {
@@ -357,6 +399,23 @@ model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
   verifyVmAgentHealth?: boolean;
+
+  @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+  @doc("Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response.")
+  capacityRecommendationParameters?: CapacityRecommendationParameters;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The parameters used to request capacity/placement recommendations for a start operation. Placement recommendations are only computed if the VM fails to start due to an allocation failure.")
+model CapacityRecommendationParameters {
+  @doc("The list of desired Azure regions to be considered for the capacity recommendation")
+  desiredLocations?: string[];
+
+  @doc("The list of desired VM sizes (SKUs) to be considered for the capacity recommendation")
+  desiredSizes?: string[];
+
+  @doc("Whether the capacity recommendation should be computed per availability zone")
+  availabilityZones?: boolean;
 }
 
 @doc("These describe errors that occur at the resource level")
@@ -433,6 +492,92 @@ model ResourceOperationDetails {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("Resource notification details.")
   resourceNotificationDetails?: ResourceNotificationDetails;
+
+  @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+  @doc("The capacity/placement recommendation computed for the operation, if requested")
+  capacityRecommendation?: CapacityRecommendation;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The lifecycle status of the capacity recommendation for an operation")
+union CapacityRecommendationStatus {
+  @doc("The capacity recommendation has not been initiated")
+  NotInitiated: "NotInitiated",
+
+  @doc("The capacity recommendation completed successfully")
+  Succeeded: "Succeeded",
+
+  @doc("The capacity recommendation failed")
+  Failed: "Failed",
+
+  @doc("The capacity recommendation was skipped")
+  Skipped: "Skipped",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("A desired VM size (SKU) considered for the capacity recommendation")
+model CapacityRecommendationSize {
+  @doc("The VM size (SKU) name")
+  sku?: string;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The placement score for a given SKU, region and optionally availability zone")
+model CapacityRecommendationPlacementScore {
+  @doc("The VM size (SKU) name")
+  sku?: string;
+
+  @doc("The Azure region")
+  region?: string;
+
+  @doc("The availability zone identifier, present only when availabilityZones was requested")
+  availabilityZone?: string;
+
+  @doc("The placement score, eg High, Medium or Low")
+  score?: string;
+
+  @doc("Whether quota is available for the SKU, region and zone combination")
+  isQuotaAvailable?: boolean;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The details of a capacity recommendation")
+model CapacityRecommendationDetails {
+  @doc("The list of desired Azure regions from the request")
+  desiredLocations?: string[];
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @doc("The UTC timestamp of when the recommendation was requested")
+  recommendationRequestedAtUtc?: offsetDateTime;
+
+  @doc("The list of desired VM sizes from the request")
+  @identifiers(#[])
+  desiredSizes?: CapacityRecommendationSize[];
+
+  @doc("Whether the response is split by availability zone")
+  availabilityZones?: boolean;
+
+  @doc("The array of placement scores per SKU, region and zone")
+  @identifiers(#[])
+  placementScores?: CapacityRecommendationPlacementScore[];
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The capacity/placement recommendation computed for a resource operation")
+model CapacityRecommendation {
+  @doc("The lifecycle status of the capacity recommendation")
+  status: CapacityRecommendationStatus;
+
+  @doc("The error message if the capacity recommendation failed")
+  error?: string;
+
+  @doc("The detailed error information if the capacity recommendation failed")
+  errorDetails?: string;
+
+  @doc("The details of the capacity recommendation")
+  details?: CapacityRecommendationDetails;
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
