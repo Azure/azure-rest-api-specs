@@ -19,15 +19,19 @@ model BrowserSession {
   @visibility(Lifecycle.Read)
   id: string;
 
+  @doc("The protocol for the browser session.")
+  @added(Versions.v2026_06_01_preview)
+  protocol: BrowserSessionProtocol;
+
   @doc("The browser session display name.")
   @minLength(1)
   @maxLength(200)
-  @visibility(Lifecycle.Read)
   displayName: string;
 
   @doc("The browser session creator's ID.")
   @visibility(Lifecycle.Read)
-  creatorId: string;
+  @madeOptional(Versions.v2026_06_01_preview)
+  creatorId?: string;
 
   @doc("The browser session start time in UTC.")
   @visibility(Lifecycle.Read)
@@ -43,19 +47,37 @@ model BrowserSession {
 
   @doc("The browser session status.")
   @visibility(Lifecycle.Read)
-  status: BrowserSessionStatus;
+  @madeOptional(Versions.v2026_06_01_preview)
+  status?: BrowserSessionStatus;
 
   @doc("The browser session source details.")
   @visibility(Lifecycle.Read)
-  source: BrowserSessionSource;
+  @madeOptional(Versions.v2026_06_01_preview)
+  source?: BrowserSessionSource;
 
   @doc("The browser session browser type.")
   @visibility(Lifecycle.Read)
-  browserType: BrowserType;
+  @madeOptional(Versions.v2026_06_01_preview)
+  browserType?: BrowserType;
 
   @doc("The browser session operating system.")
+  @madeOptional(Versions.v2026_06_01_preview)
+  operatingSystem?: OS;
+
+  @doc("The region where the provisioned browser container is located.")
   @visibility(Lifecycle.Read)
-  operatingSystem: OS;
+  @added(Versions.v2026_06_01_preview)
+  browserRegion?: string;
+
+  @doc("The websocket endpoint that can be used to connect to the browser session. This is only returned when the session is created.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  browserEndpoint?: string;
+
+  @doc("The URL to view the live browser session.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  liveViewUrl?: string;
 }
 
 @doc("The browser session source details.")
@@ -86,6 +108,15 @@ union BrowserSessionStatus {
   Failed: "Failed",
 }
 
+@doc("The protocol for the browser session.")
+@added(Versions.v2026_06_01_preview)
+union BrowserSessionProtocol {
+  string,
+
+  @doc("Chrome DevTools Protocol.")
+  CDP: "cdp",
+}
+
 @doc("The browser session source type.")
 union BrowserSessionSourceType {
   string,
@@ -98,17 +129,4 @@ union BrowserSessionSourceType {
 
   @doc("The browser session source is of other types.")
   Others: "Others",
-}
-
-// Operations ////////////////////
-
-interface BrowserSessions {
-  // BrowserSession Operations
-  @added(Versions.v2026_04_01_preview)
-  @doc("Get a browser session for the specified session and workspace ID. Requires Bearer JWT access token provided by Entra ID.")
-  get is Operations.ResourceRead<BrowserSession>;
-
-  @added(Versions.v2026_04_01_preview)
-  @doc("Lists browser sessions for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
-  list is Operations.ResourceList<BrowserSession>;
 }
