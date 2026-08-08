@@ -867,7 +867,6 @@ namespace Azure.AI.Projects {
   /**
    * A WebIQ server-side tool.
    */
-  @removed(Versions.v1)
   @extension("x-ms-foundry-meta", PreviewTool)
   model WebIQPreviewTool extends OpenAI.Tool {
     /**
