@@ -25,7 +25,6 @@ using Microsoft.ServiceBus;
 
 @@clientName(ErrorAdditionalInfo, "ServiceBusErrorAdditionalInfo", "csharp");
 @@clientName(UnavailableReason, "ServiceBusNameUnavailableReason", "csharp");
-@@clientName(EntityStatus, "ServiceBusMessagingEntityStatus", "csharp");
 @@clientName(FilterType, "ServiceBusFilterType", "csharp");
 @@clientName(SqlFilter, "ServiceBusSqlFilter", "csharp");
 @@clientName(CorrelationFilter, "ServiceBusCorrelationFilter", "csharp");
@@ -168,13 +167,76 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 
+// Preserve the resource name constraints emitted by the reflection-based provisioning generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  SBNamespace,
+  "resource-name-constraint",
+  #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  SBAuthorizationRule,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ArmDisasterRecovery,
+  "resource-name-constraint",
+  #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  SBQueue,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 260, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  SBTopic,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 260, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  SBSubscription,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9._-]+$" },
+  "csharp"
+);
+
+// Preserve the namespace RBAC role helpers emitted by the reflection-based provisioning generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  SBNamespace,
+  "resource-rbac-roles",
+  #{
+    AzureServiceBusDataOwner: "090c5cfd-751d-490a-894a-3ce6f1109419",
+    AzureServiceBusDataReceiver: "4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0",
+    AzureServiceBusDataSender: "69a216fc-b8fb-44d8-bc22-1f3c2cd27a39",
+  },
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   SBNamespaces.privateLinkResourcesGet,
   "csharp"
 );
 @@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
-@@clientName(CorrelationFilter.properties, "ApplicationProperties", "csharp");
 @@clientName(CorrelationFilter.to, "SendTo", "csharp");
 @@clientName(CorrelationFilter.label, "Subject", "csharp");
 @@clientName(SBNamespaceProperties.zoneRedundant, "IsZoneRedundant", "csharp");
@@ -211,11 +273,30 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 
-// Step 6: Fix TLS version member names (MembersMustExist)
-@@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
-@@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
-@@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
-@@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
+// Preserve the exact TLS member names shipped by the reflection-based provisioning generator.
+@@clientName(
+  TlsVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
+
+// The resource-name union is part of the shipped provisioning API.
+@@access(MigrationConfigurationName, Access.public, "csharp");
 
 // Step 6: Avoid Windows filename collision between FailOverProperties.cs and FailoverProperties.cs
 @@clientName(FailOverProperties, "ServiceBusFailOverDetail", "csharp");
@@ -267,6 +348,40 @@ using Microsoft.ServiceBus;
 
 namespace Microsoft.ServiceBus {
   /**
+   * Entity status ordered to preserve the numeric values shipped by the
+   * reflection-based provisioning generator.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "This fixed enum preserves the shipped C# numeric values."
+  enum ServiceBusMessagingEntityStatus {
+    /** Unknown. */
+    Unknown,
+
+    /** Active. */
+    Active,
+
+    /** Disabled. */
+    Disabled,
+
+    /** Restoring. */
+    Restoring,
+
+    /** Send disabled. */
+    SendDisabled,
+
+    /** Receive disabled. */
+    ReceiveDisabled,
+
+    /** Creating. */
+    Creating,
+
+    /** Deleting. */
+    Deleting,
+
+    /** Renaming. */
+    Renaming,
+  }
+
+  /**
    * Parameters supplied to the Patch Namespace operation.
    */
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
@@ -293,6 +408,7 @@ namespace Microsoft.ServiceBus {
   }
 } // namespace Microsoft.ServiceBus
 
+@@alternateType(EntityStatus, ServiceBusMessagingEntityStatus, "csharp");
 @@alternateType(
   SBNamespaceUpdateParameters,
   SBNamespaceUpdateParametersReplacement,
