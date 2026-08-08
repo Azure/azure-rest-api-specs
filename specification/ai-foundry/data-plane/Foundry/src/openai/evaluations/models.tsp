@@ -201,7 +201,7 @@ model Eval is OpenAI.Eval {
   /** Unix timestamp (in seconds) when the evaluation run was last modified. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  modified_at?: integer;
+  modified_at?: FoundryTimestamp;
 
   /** the name of the person who created the run. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
@@ -748,7 +748,7 @@ model EvalRun is OpenAI.EvalRun {
   /** Unix timestamp (in seconds) when the evaluation run was last modified. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  modified_at?: integer;
+  modified_at?: FoundryTimestamp;
 
   /** the name of the person who created the run. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
@@ -763,6 +763,9 @@ model EvalRun is OpenAI.EvalRun {
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
+
+  /** The duration of the evaluation run in ISO 8601 format. */
+  duration?: duration;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."

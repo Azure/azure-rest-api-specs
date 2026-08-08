@@ -39367,7 +39367,7 @@
             ]
           },
           "modified_at": {
-            "$ref": "#/components/schemas/integer",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "Unix timestamp (in seconds) when the evaluation run was last modified."
           },
           "created_by": {
@@ -39604,7 +39604,7 @@
             "$ref": "#/components/schemas/OpenAI.EvalApiError"
           },
           "modified_at": {
-            "$ref": "#/components/schemas/integer",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "Unix timestamp (in seconds) when the evaluation run was last modified."
           },
           "created_by": {
@@ -39622,6 +39622,11 @@
             "$ref": "#/components/schemas/EvaluationLevel",
             "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
             "default": "turn"
+          },
+          "duration": {
+            "type": "string",
+            "format": "duration",
+            "description": "The duration of the evaluation run in ISO 8601 format."
           }
         },
         "description": "A schema representing an evaluation run.",
