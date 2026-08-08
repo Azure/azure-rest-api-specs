@@ -1,0 +1,945 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProfessionalService",
+    "version": "2026-05-01",
+    "description": "Microsoft.ProfessionalService Resource Provider - GA API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ProfessionalServiceSubscriptionLevel"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ProfessionalService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Professional Service operations": {
+            "$ref": "./examples/ProfessionalServiceGetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/checkNameAvailability": {
+      "post": {
+        "operationId": "ProfessionalServiceSubscriptionLevelGlobal_CheckNameAvailability",
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check name availability for a Professional Service resource": {
+            "$ref": "./examples/ProfessionalServiceCheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "ProfessionalServiceOperationStatuses_GetSubscriptionOperationStatus",
+        "description": "Gets the status of a long-running Professional Service operation at the subscription scope. All async operations, including resource-group-scoped ones, poll through this endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Professional Service operation status at subscription scope": {
+            "$ref": "./examples/ProfessionalServiceGetSubscriptionOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/resources": {
+      "get": {
+        "operationId": "ProfessionalServiceSubscriptionLevelGlobal_ListByAzureSubscription",
+        "description": "List ProfessionalServiceResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Professional Service subscription level resources by Azure subscription": {
+            "$ref": "./examples/ProfessionalServiceListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources": {
+      "get": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_ListByResourceGroup",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "List ProfessionalServiceResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Professional Service subscription level resources by resource group": {
+            "$ref": "./examples/ProfessionalServiceListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}": {
+      "get": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_Get",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "Get a ProfessionalServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the ProfessionalServiceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Professional Service subscription level resource": {
+            "$ref": "./examples/ProfessionalServiceGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_CreateOrUpdate",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "Create a ProfessionalServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the ProfessionalServiceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProfessionalServiceResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProfessionalServiceResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Professional Service subscription level resource": {
+            "$ref": "./examples/ProfessionalServicePut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_Update",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "Update a ProfessionalServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the ProfessionalServiceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Professional Service subscription level resource": {
+            "$ref": "./examples/ProfessionalServiceUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_Delete",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "Delete a ProfessionalServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the ProfessionalServiceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Professional Service subscription level resource": {
+            "$ref": "./examples/ProfessionalServiceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}/unsubscribe": {
+      "post": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_Unsubscribe",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "Unsubscribes from a Professional Service subscription, optionally providing a reason and feedback. The resource remains in Azure but the subscription is cancelled.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the ProfessionalServiceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnsubscribeOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsubscribe from a Professional Service subscription level resource": {
+            "$ref": "./examples/ProfessionalServiceUnsubscribe.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DeletionSource": {
+      "type": "string",
+      "description": "The deletion source.",
+      "enum": [
+        "CustomerCancellation",
+        "AzureSubscriptionDeletion"
+      ],
+      "x-ms-enum": {
+        "name": "DeletionSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerCancellation",
+            "value": "CustomerCancellation",
+            "description": "Customer initiated cancellation"
+          },
+          {
+            "name": "AzureSubscriptionDeletion",
+            "value": "AzureSubscriptionDeletion",
+            "description": "Azure subscription deletion"
+          }
+        ]
+      }
+    },
+    "ProfessionalServiceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the Professional Service resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProfessionalServiceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProfessionalServiceResource": {
+      "type": "object",
+      "description": "Professional Service ARM tracked resource for GA API version 2026-05-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProfessionalServiceResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProfessionalServiceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ProfessionalServiceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProfessionalServiceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ProfessionalServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProfessionalServiceResourceProperties": {
+      "type": "object",
+      "description": "Professional Service resource properties for GA API version 2026-05-01.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProfessionalServiceProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The Professional Service asset id. Server-assigned unique identifier for the marketplace subscription.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+        },
+        "status": {
+          "$ref": "#/definitions/ProfessionalServiceResourceStatus",
+          "description": "The Professional Service Subscription Status. Server-assigned.",
+          "readOnly": true
+        },
+        "statusReason": {
+          "$ref": "#/definitions/SubscriptionStatusReason",
+          "description": "The reason for the current status. Server-assigned.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "planName": {
+          "type": "string",
+          "description": "The plan name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "offerName": {
+          "type": "string",
+          "description": "The offer name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "The term unit (ISO 8601 duration, e.g. P1M, P1Y). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period (ISO 8601 duration). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "format": "password",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "termStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the Professional Service subscription will auto renew upon term end."
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a Free Trial term. Server-determined.",
+          "readOnly": true
+        },
+        "storefront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "purchaserEmail": {
+          "type": "string",
+          "format": "password",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        }
+      },
+      "required": [
+        "productCode"
+      ]
+    },
+    "ProfessionalServiceResourceStatus": {
+      "type": "string",
+      "description": "The Professional Service Subscription Status.",
+      "enum": [
+        "NotStarted",
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Unsubscribed",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "ProfessionalServiceResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Subscription has not started"
+          },
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Pending fulfillment start"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "The subscription is active and in use"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "The subscription has been cancelled"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The subscription is suspended"
+          }
+        ]
+      }
+    },
+    "ProfessionalServiceResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ProfessionalServiceResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ProfessionalServiceResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ProfessionalServiceResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ProfessionalServiceResource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "format": "password",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the Professional Service subscription will auto renew upon term end."
+        },
+        "storefront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        }
+      }
+    },
+    "SubscriptionStatusReason": {
+      "type": "string",
+      "description": "The reason for the subscription status.",
+      "enum": [
+        "None",
+        "SuspendedInternal",
+        "AzureSubscriptionDeletion"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionStatusReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No specific reason"
+          },
+          {
+            "name": "SuspendedInternal",
+            "value": "SuspendedInternal",
+            "description": "Suspended internally"
+          },
+          {
+            "name": "AzureSubscriptionDeletion",
+            "value": "AzureSubscriptionDeletion",
+            "description": "Azure subscription deleted"
+          }
+        ]
+      }
+    },
+    "UnsubscribeOptions": {
+      "type": "object",
+      "description": "Unsubscribe options for a Professional Service resource.",
+      "properties": {
+        "unsubscribeOnly": {
+          "type": "boolean",
+          "description": "Whether it is unsubscribe only."
+        },
+        "reasonCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The reason code."
+        },
+        "feedback": {
+          "type": "string",
+          "description": "The feedback."
+        },
+        "deletionSource": {
+          "$ref": "#/definitions/DeletionSource",
+          "description": "The deletion source. Defaults to CustomerCancellation if not specified."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExpandCustomerDataQueryParameter": {
+      "name": "$expandCustomerData",
+      "in": "query",
+      "description": "When `true`, the response includes customer-data (PII) fields such as `purchaserEmail`. Defaults to `false`.",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "expandCustomerData"
+    }
+  }
+}
