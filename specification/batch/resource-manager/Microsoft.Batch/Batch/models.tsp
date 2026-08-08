@@ -2377,7 +2377,7 @@ model VirtualMachineConfiguration {
   serviceArtifactReference?: ServiceArtifactReference;
 
   /**
-   * Specifies the hardware settings for the compute nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context.
+   * Specifies the hardware settings for the compute nodes.
    */
   @added(Versions.v2026_08_01)
   hardwareProfile?: HardwareProfile;
