@@ -160,6 +160,72 @@ interface Query {
   ): BatchResponse | MonitorQueryLogs.ErrorResponse;
 }
 
+interface Search {
+  /** Executes a search query for data in a workspace. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
+  @summary("Execute a search query")
+  @route("/workspaces/{workspaceId}/search")
+  @get
+  get(
+    /**
+     * Primary Workspace ID of the query. This is the Workspace ID from the Properties
+     * blade in the Azure portal.
+     */
+    @path
+    workspaceId: string,
+
+    /** The search query to execute. */
+    @query("query")
+    query: string,
+
+    /**
+     * The timespan over which to query data. This is an ISO8601 time period value.
+     * This timespan is applied in addition to any that are specified in the query expression.
+     */
+    @query("timespan")
+    timespan: duration,
+  ): QueryResults | MonitorQueryLogs.ErrorResponse;
+
+  /** Executes a search query for data in a workspace. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
+  @summary("Execute a search query")
+  @route("/workspaces/{workspaceId}/search")
+  @post
+  execute(
+    /**
+     * Primary Workspace ID of the query. This is the Workspace ID from the Properties
+     * blade in the Azure portal.
+     */
+    @path
+    workspaceId: string,
+
+    /**
+     * Optional. The timespan over which to query data. A timespan must be supplied either
+     * here or in the request body. If both are supplied, the service uses their intersection.
+     */
+    @query("timespan")
+    timespan?: duration,
+
+    /** Optional. The prefer header to set server timeout, query statistics and visualization information. */
+    @header("Prefer")
+    @clientName("options", "go")
+    prefer?: string,
+
+    /** Body Parameter content-type */
+    @header("content-type")
+    contentType: "application/json",
+
+    /**
+     * The search query to execute. A timespan must be supplied either in this body or as
+     * a query parameter. If both are supplied, the service uses their intersection.
+     */
+    @bodyRoot
+    body: QueryBody,
+  ): QueryResults | MonitorQueryLogs.ErrorResponse;
+}
+
 interface Metadata {
   /**
    * Retrieve the metadata information for the workspace, including its schema,
