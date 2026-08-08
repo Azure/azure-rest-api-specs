@@ -291,7 +291,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@usage(BenefitRecommendationModel, Usage.input | Usage.output, "csharp");
 @@usage(BenefitUtilizationSummary, Usage.input | Usage.output, "csharp");
 @@usage(ExportRun, Usage.input | Usage.output, "csharp");
-@@usage(ExportRunReplacement, Usage.input | Usage.output, "csharp");
 @@usage(ErrorDetails, Usage.input | Usage.output, "csharp");
 @@usage(
   IncludedQuantityUtilizationSummary,
@@ -511,16 +510,12 @@ model QueryResultReplacement
 @@clientName(QueryResult, "QueryResultTemp", "csharp");
 @@clientName(QueryResultReplacement, "QueryResult", "csharp");
 
-// @@hierarchyBuilding(ExportRun, CommonTypes.Resource) cannot be used here: `ExportRun`
-// extends `CostManagementProxyResource`, which does not define `systemData`. The replacement model pattern is required to change the C# base type to ResourceData for backward compatibility.
-/** An export run. */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
-model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
-  ...OmitProperties<ExportRun, "id" | "name" | "type">;
-}
-@@alternateType(ExportRun, ExportRunReplacement, "csharp");
-@@clientName(ExportRun, "ExportRunTemp", "csharp");
-@@clientName(ExportRunReplacement, "ExportRun", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the Resource base type for C# backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ExportRun,
+  Azure.ResourceManager.CommonTypes.Resource,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is needed for C# backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
