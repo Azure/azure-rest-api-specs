@@ -158,6 +158,22 @@ model Error {
 
   @doc("The HTTP status code that the error maps to.")
   status?: int32;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The byte offset within the value where the validation error occurs.")
+  bytePos?: int32;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The location of the property that resulted in the validation error.")
+  instanceLocation?: string;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The location in the schema that the property violates.")
+  keywordLocation?: string;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The uri of the schema.")
+  schema?: string;
 }
 
 @doc("The result of a list request.")
@@ -469,4 +485,169 @@ alias NamePathParam<TDoc extends valueof string> = {
   @maxLength(256)
   @path
   name: string;
+};
+
+// --- Schema resource models (added in 2026-08-01-preview) ---
+
+@doc("Schema fields.")
+@added(Versions.v2026_08_01_preview)
+union SchemaFields {
+  @doc("Name field.")
+  name: "name",
+
+  @doc("Description field.")
+  description: "description",
+
+  @doc("Type field.")
+  type: "type",
+
+  @doc("Status field.")
+  status: "status",
+
+  @doc("Target field.")
+  target: "target",
+
+  @doc("Key scope field.")
+  @encodedName("application/json", "key_scope")
+  keyScope: "key_scope",
+
+  @doc("Key label scope field.")
+  @encodedName("application/json", "key_label_scope")
+  keyLabelScope: "key_label_scope",
+
+  @doc("Tags field.")
+  tags: "tags",
+
+  @doc("JSON schema field.")
+  @encodedName("application/json", "json_schema")
+  jsonSchema: "json_schema",
+
+  @doc("Last modified field.")
+  @encodedName("application/json", "last_modified")
+  lastModified: "last_modified",
+
+  @doc("Etag field.")
+  etag: "etag",
+
+  string,
+}
+
+@doc("Schema status.")
+@added(Versions.v2026_08_01_preview)
+union SchemaStatus {
+  @doc("Enabled")
+  enabled: "enabled",
+
+  @doc("Disabled")
+  disabled: "disabled",
+
+  string,
+}
+
+@doc("Schema type.")
+@added(Versions.v2026_08_01_preview)
+union SchemaType {
+  @doc("Custom user-defined schema.")
+  custom: "custom",
+
+  @doc("Built-in system-provided schema.")
+  builtIn: "builtIn",
+
+  string,
+}
+
+@doc("Schema target type.")
+@added(Versions.v2026_08_01_preview)
+union SchemaTarget {
+  @doc("Key-value target.")
+  kv: "kv",
+
+  string,
+}
+
+@doc("A schema scope that targets key-values matching a key pattern.")
+@added(Versions.v2026_08_01_preview)
+model KeyScope {
+  @doc("The key pattern for the schema scope.")
+  key: string;
+}
+
+@doc("A schema scope that targets key-values matching both a key pattern and a label pattern.")
+@added(Versions.v2026_08_01_preview)
+model KeyLabelScope {
+  @doc("The key pattern for the schema scope.")
+  key: string;
+
+  @doc("The label pattern for the schema scope. A null or absent label targets key-values with the null label.")
+  label?: string;
+}
+
+@doc("The result of a schema list request.")
+@added(Versions.v2026_08_01_preview)
+model SchemaListResult {
+  @doc("The collection value.")
+  @pageItems
+  items?: Schema[];
+
+  @doc("The URI that can be used to request the next set of paged results.")
+  @nextLink
+  `@nextLink`?: string;
+}
+
+@doc("A schema resource used for write-time validation of key-values.")
+@resource("schemas")
+@added(Versions.v2026_08_01_preview)
+model Schema {
+  @doc("The unique identifier of the schema.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @key
+  @doc("The name of the schema.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("A description of the schema.")
+  description?: string;
+
+  @doc("The type of the schema.")
+  @visibility(Lifecycle.Read)
+  type?: SchemaType;
+
+  @doc("The status of the schema.")
+  status?: SchemaStatus;
+
+  @doc("The target resource type for the schema. Required when a scope is present.")
+  target?: SchemaTarget;
+
+  @doc("The key scope of the schema. Mutually exclusive with `key_label_scope`.")
+  @encodedName("application/json", "key_scope")
+  keyScope?: KeyScope;
+
+  @doc("The key and label scope of the schema. Mutually exclusive with `key_scope`.")
+  @encodedName("application/json", "key_label_scope")
+  keyLabelScope?: KeyLabelScope;
+
+  @doc("The tags of the schema.")
+  tags?: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "json_schema stores arbitrary JSON Schema documents which require Record<unknown>"
+  @doc("The JSON Schema definition.")
+  @encodedName("application/json", "json_schema")
+  jsonSchema: Record<unknown>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Consistent with other resources in this API."
+  @doc("A date representing the last time the schema was modified.")
+  @encodedName("application/json", "last_modified")
+  @visibility(Lifecycle.Read)
+  lastModified?: offsetDateTime;
+
+  ...Azure.Core.EtagProperty;
+}
+
+alias SchemaNamePathParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @maxLength(256)
+  @path
+  schemaName: string;
 };
