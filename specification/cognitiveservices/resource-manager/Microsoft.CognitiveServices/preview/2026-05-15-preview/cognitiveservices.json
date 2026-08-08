@@ -3855,6 +3855,9 @@
           "PutDeployment": {
             "$ref": "./examples/PutDeployment.json"
           },
+          "PutDeploymentWithModelProviderData": {
+            "$ref": "./examples/PutDeploymentWithModelProviderData.json"
+          },
           "PutDeploymentWithSpeculativeDecoding": {
             "$ref": "./examples/PutDeploymentWithSpeculativeDecoding.json"
           }
@@ -15069,6 +15072,10 @@
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
           "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
+        },
+        "modelProviderData": {
+          "$ref": "#/definitions/ModelProviderData",
+          "description": "Attestation data about the organization deploying the model, forwarded to the model provider. This property is required when deploying partner models whose 'model.format' is 'Anthropic', and is ignored for all other model formats. Omitting it for an Anthropic deployment causes the deployment to fail during provisioning with an 'AnthropicOrganizationCreationFailed' error."
         }
       }
     },
@@ -16795,6 +16802,97 @@
             "/model/version"
           ]
         }
+      }
+    },
+    "ModelProviderData": {
+      "type": "object",
+      "description": "Attestation data about the organization deploying a partner model, forwarded to the model provider when the deployment is created.",
+      "properties": {
+        "organizationName": {
+          "type": "string",
+          "description": "Legal entity name of the organization deploying the model."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Country of the organization deploying the model, as a two-letter ISO 3166-1 alpha-2 code.",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "industry": {
+          "$ref": "#/definitions/ModelProviderIndustry",
+          "description": "Industry of the organization deploying the model."
+        }
+      },
+      "required": [
+        "organizationName",
+        "countryCode",
+        "industry"
+      ]
+    },
+    "ModelProviderIndustry": {
+      "type": "string",
+      "description": "Industry of the organization deploying a partner model. Values are lowercase.",
+      "enum": [
+        "technology",
+        "finance",
+        "healthcare",
+        "education",
+        "retail",
+        "manufacturing",
+        "government",
+        "media",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "ModelProviderIndustry",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Technology",
+            "value": "technology",
+            "description": "Technology sector organization."
+          },
+          {
+            "name": "Finance",
+            "value": "finance",
+            "description": "Financial services sector organization."
+          },
+          {
+            "name": "Healthcare",
+            "value": "healthcare",
+            "description": "Healthcare sector organization."
+          },
+          {
+            "name": "Education",
+            "value": "education",
+            "description": "Education sector organization."
+          },
+          {
+            "name": "Retail",
+            "value": "retail",
+            "description": "Retail sector organization."
+          },
+          {
+            "name": "Manufacturing",
+            "value": "manufacturing",
+            "description": "Manufacturing sector organization."
+          },
+          {
+            "name": "Government",
+            "value": "government",
+            "description": "Government sector organization."
+          },
+          {
+            "name": "Media",
+            "value": "media",
+            "description": "Media sector organization."
+          },
+          {
+            "name": "Other",
+            "value": "other",
+            "description": "An industry not covered by the other values."
+          }
+        ]
       }
     },
     "ModelSku": {
