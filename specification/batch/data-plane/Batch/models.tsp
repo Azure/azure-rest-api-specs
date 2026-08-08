@@ -1918,7 +1918,7 @@ model VirtualMachineConfiguration {
   @doc("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
   serviceArtifactReference?: ServiceArtifactReference;
 
-  @doc("Specifies the hardware settings for the Compute Nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule) and will be ignored if specified in that context.")
+  @doc("Specifies the hardware settings for the Compute Nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule); the request will be rejected if it is specified in that context.")
   @added(Versions.v2026_08_01)
   hardwareProfile?: HardwareProfile;
 }
