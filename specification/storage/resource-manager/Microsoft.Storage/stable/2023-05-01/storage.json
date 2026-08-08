@@ -2315,6 +2315,205 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/premiumMetrics/{ruleName}": {
+        "put": {
+          "tags": [
+            "PremiumMetrics"
+          ],
+          "operationId": "PremiumMetricsRule_Put",
+          "description": "Synchronously creates or updates a premium metrics rule under the specified storage account. If a premium metrics rule already exists and a subsequent request is issued with different properties, the rule properties will be updated as per the request.",
+          "x-ms-examples": {
+            "StorageAccountPutPremiumMetricsRule": {
+              "$ref": "./examples/StorageAccountPutPremiumMetricsRule.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/RuleName"
+            },
+            {
+              "name": "properties",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PremiumMetricsRule"
+              },
+              "description": "Premium metrics rule properties to be used for creation or update."
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created -- Create premium metrics rule operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/PremiumMetricsRule"
+              }
+            },
+            "200": {
+              "description": "OK -- Update premium metrics rule operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/PremiumMetricsRule"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "PremiumMetrics"
+          ],
+          "operationId": "PremiumMetricsRule_Patch",
+          "description": "Updates premium metrics rule properties as specified in the request body. The update fails if the specified premium metrics rule does not already exist.",
+          "x-ms-examples": {
+            "StorageAccountPatchPremiumMetricsRule": {
+              "$ref": "./examples/StorageAccountPatchPremiumMetricsRule.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/RuleName"
+            },
+            {
+              "name": "properties",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PremiumMetricsRule"
+              },
+              "description": "Premium metrics rule properties to be updated."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- Update premium metrics rule operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/PremiumMetricsRule"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "PremiumMetrics"
+          ],
+          "operationId": "PremiumMetricsRule_Get",
+          "description": "Retrieves the properties for the specified premium metrics rule.",
+          "x-ms-examples": {
+            "StorageAccountGetPremiumMetricsRule": {
+              "$ref": "./examples/StorageAccountGetPremiumMetricsRule.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/RuleName"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- Successfully retrieved the premium metrics rule properties.",
+              "schema": {
+                "$ref": "#/definitions/PremiumMetricsRule"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "PremiumMetrics"
+          ],
+          "operationId": "PremiumMetricsRule_Delete",
+          "description": "Deletes the specified premium metrics rule from the storage account.",
+          "x-ms-examples": {
+            "StorageAccountDeletePremiumMetricsRule": {
+              "$ref": "./examples/StorageAccountDeletePremiumMetricsRule.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/RuleName"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- Successfully deleted the premium metrics rule."
+            },
+            "204": {
+              "description": "No Content -- The premium metrics rule does not exist."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes": {
       "get": {
         "tags": [
@@ -5607,6 +5806,80 @@
         }
       },
       "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
+    },
+    "PremiumMetricsRule": {
+      "properties": {
+        "ruleName": {
+          "type": "string",
+          "description": "The name of the premium metrics rule."
+        },
+        "ruleType": {
+          "type": "string",
+          "description": "Type of the premium metrics rule. Valid values are 'containerCapacityMetrics'."
+        },
+        "filterCriteria": {
+          "$ref": "#/definitions/PremiumMetricsFilterCriteria",
+          "description": "An object that defines the filter set for the premium metrics rule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "The frequency of the rule execution. Valid values are 'daily', 'weekly'.",
+          "enum": [
+            "daily",
+            "weekly"
+          ],
+          "x-ms-enum": {
+            "name": "frequency",
+            "modelAsString": true
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the rule is enabled or not."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the premium metrics rule was modified."
+        }
+      },
+      "required": [
+        "ruleName",
+        "ruleType",
+        "filterCriteria",
+        "frequency"
+      ],
+      "description": "An object that defines the premium metrics rule for a storage account."
+    },
+    "PremiumMetricsFilterCriteria": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of filter criteria for premium metrics. Valid value is 'listContainers'."
+        },
+        "targetContainers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of container names to include in the premium metrics rule."
+        },
+        "includedRegex": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of regex patterns to include specific containers in the rule."
+        },
+        "excludedRegex": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of regex patterns to exclude specific containers from the rule."
+        }
+      },
+      "description": "An object that defines the filter conditions for the premium metrics rule. All fields are optional, except for type."
     },
     "BlobInventoryCreationTime": {
       "type": "object",

@@ -1,0 +1,60 @@
+{
+    "parameters": {
+      "subscriptionId": "{subscription-id}",
+      "resourceGroupName": "res9871",
+      "accountName": "sto6217",
+      "ruleName": "premiumMetricsRule123",
+      "api-version": "2023-05-01"
+    },
+    "requestBody": {
+      "ruleType": "containerCapacityMetrics",
+      "filterCriteria": {
+        "type": "listContainers",
+        "targetContainers": [
+          "container3",
+          "container4"
+        ],
+        "includedRegex": [
+          ".*error.*"
+        ]
+      },
+      "frequency": "weekly",
+      "enabled": false
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto6217/premiumMetricsRules/premiumMetricsRule123",
+          "name": "premiumMetricsRule123",
+          "type": "Microsoft.Storage/storageAccounts/premiumMetricsRules",
+          "etag": "\"0x8D592D74CC20EBA\"",
+          "properties": {
+            "ruleName": "premiumMetricsRule123",
+            "ruleType": "containerCapacityMetrics",
+            "filterCriteria": {
+              "type": "listContainers",
+              "targetContainers": [
+                "container3",
+                "container4"
+              ],
+              "includedRegex": [
+                ".*error.*"
+              ],
+              "excludedRegex": [
+                ".*backup.*"
+              ]
+            },
+            "frequency": "weekly",
+            "enabled": false,
+            "lastModifiedTime": "2024-01-01T12:30:00Z"
+          }
+        }
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    }
+  }
