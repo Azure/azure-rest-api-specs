@@ -1,0 +1,2827 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Voice Live",
+    "version": "v1"
+  },
+  "tags": [],
+  "paths": {
+    "/voice-live/realtime": {
+      "get": {
+        "operationId": "RealtimeConnections_connect",
+        "description": "Establishes a realtime WebSocket connection using header-only authentication.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The stable label-based API version.",
+            "schema": {
+              "$ref": "#/components/schemas/Versions"
+            },
+            "explode": false
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": true,
+            "description": "The configured model or deployment alias to use for the session.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "101": {
+            "description": "Informational",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtimeProtocolSchemas"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "AnimationConfig": {
+        "type": "object",
+        "required": [
+          "outputs"
+        ],
+        "properties": {
+          "outputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnimationOutput"
+            },
+            "description": "The animation outputs to return."
+          }
+        },
+        "description": "Animation outputs attached to generated audio."
+      },
+      "AnimationOutput": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "blendshapes",
+              "viseme_id"
+            ]
+          }
+        ],
+        "description": "Animation data returned with generated audio."
+      },
+      "AudioTimestampType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "word"
+            ]
+          }
+        ],
+        "description": "Additional timestamp data returned with generated audio."
+      },
+      "AvatarConfig": {
+        "type": "object",
+        "required": [
+          "character"
+        ],
+        "properties": {
+          "character": {
+            "type": "string",
+            "description": "The avatar character name."
+          },
+          "style": {
+            "type": "string",
+            "description": "The avatar style name."
+          },
+          "customized": {
+            "type": "boolean",
+            "description": "Whether the avatar is a customer-customized avatar.",
+            "default": false
+          }
+        },
+        "description": "Avatar rendering settings attached to a normal Voice Live model session."
+      },
+      "ClientEvent": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ClientEventSessionUpdate"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventResponseCreate"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventConversationItemCreate"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventConversationItemDelete"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventConversationItemRetrieve"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventConversationItemTruncate"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventInputAudioBufferAppend"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventInputAudioBufferClear"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventInputAudioBufferCommit"
+          },
+          {
+            "$ref": "#/components/schemas/ClientEventResponseCancel"
+          }
+        ],
+        "description": "Client-to-service WebSocket messages supported by Voice Live v1."
+      },
+      "ClientEventConversationItemCreate": {
+        "type": "object",
+        "required": [
+          "type",
+          "item"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.create"
+            ],
+            "description": "The event type, must be `conversation.item.create`.",
+            "x-stainless-const": true
+          },
+          "previous_item_id": {
+            "type": "string",
+            "description": "The ID of the preceding item after which the new item will be inserted. If not set, the new item will be appended to the end of the conversation.\n  If set to `root`, the new item will be added to the beginning of the conversation.\n  If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added."
+          },
+          "item": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        },
+        "description": "Creates a conversation item using the OpenAI GA shape."
+      },
+      "ClientEventConversationItemDelete": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_id"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.delete"
+            ],
+            "description": "The event type, must be `conversation.item.delete`.",
+            "x-stainless-const": true
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item to delete."
+          }
+        },
+        "description": "Deletes a conversation item using the OpenAI GA shape."
+      },
+      "ClientEventConversationItemRetrieve": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_id"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.retrieve"
+            ],
+            "description": "The event type, must be `conversation.item.retrieve`.",
+            "x-stainless-const": true
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item to retrieve."
+          }
+        },
+        "description": "Retrieves a conversation item using the OpenAI GA shape."
+      },
+      "ClientEventConversationItemTruncate": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_id",
+          "content_index",
+          "audio_end_ms"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.truncate"
+            ],
+            "description": "The event type, must be `conversation.item.truncate`.",
+            "x-stainless-const": true
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the assistant message item to truncate. Only assistant message\n  items can be truncated."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part to truncate. Set this to `0`."
+          },
+          "audio_end_ms": {
+            "type": "integer",
+            "description": "Inclusive duration up to which audio is truncated, in milliseconds. If\n  the audio_end_ms is greater than the actual audio duration, the server\n  will respond with an error."
+          }
+        },
+        "description": "Truncates a conversation item using the OpenAI GA shape."
+      },
+      "ClientEventInputAudioBufferAppend": {
+        "type": "object",
+        "required": [
+          "type",
+          "audio"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio_buffer.append"
+            ],
+            "description": "The event type, must be `input_audio_buffer.append`.",
+            "x-stainless-const": true
+          },
+          "audio": {
+            "type": "string",
+            "description": "Base64-encoded audio bytes. This must be in the format specified by the\n  `input_audio_format` field in the session configuration."
+          }
+        },
+        "description": "Appends audio to the input buffer using the OpenAI GA shape."
+      },
+      "ClientEventInputAudioBufferClear": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio_buffer.clear"
+            ],
+            "description": "The event type, must be `input_audio_buffer.clear`.",
+            "x-stainless-const": true
+          }
+        },
+        "description": "Clears the input audio buffer using the OpenAI GA shape."
+      },
+      "ClientEventInputAudioBufferCommit": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio_buffer.commit"
+            ],
+            "description": "The event type, must be `input_audio_buffer.commit`.",
+            "x-stainless-const": true
+          }
+        },
+        "description": "Commits the input audio buffer using the OpenAI GA shape."
+      },
+      "ClientEventResponseCancel": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.cancel"
+            ],
+            "description": "The event type, must be `response.cancel`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "A specific response ID to cancel - if not provided, will cancel an\n  in-progress response in the default conversation."
+          }
+        },
+        "description": "Cancels response generation using the OpenAI GA shape."
+      },
+      "ClientEventResponseCreate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The optional client-generated event identifier."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.create"
+            ],
+            "description": "The event type."
+          },
+          "response": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResponseCreateParams"
+              }
+            ],
+            "description": "Optional per-response settings."
+          }
+        },
+        "description": "Requests generation of a Voice Live v1 response."
+      },
+      "ClientEventSessionUpdate": {
+        "type": "object",
+        "required": [
+          "type",
+          "session"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The optional client-generated event identifier."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.update"
+            ],
+            "description": "The event type."
+          },
+          "session": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Session"
+              }
+            ],
+            "description": "The updated Voice Live session configuration."
+          }
+        },
+        "description": "Updates the Voice Live v1 realtime session."
+      },
+      "EchoCancellation": {
+        "type": "object",
+        "properties": {
+          "reference_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EchoReferenceSource"
+              }
+            ],
+            "description": "The echo-reference source.",
+            "default": "server"
+          },
+          "channels": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EchoChannelCount"
+              }
+            ],
+            "description": "The number of interleaved wire channels.",
+            "default": 1
+          }
+        },
+        "description": "Echo-cancellation settings applied to Voice Live input audio."
+      },
+      "EchoChannelCount": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number",
+            "enum": [
+              1,
+              2
+            ]
+          }
+        ],
+        "description": "The supported echo-cancellation wire channel counts."
+      },
+      "EchoReferenceSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "server",
+              "client"
+            ]
+          }
+        ],
+        "description": "The source used as the echo-cancellation reference."
+      },
+      "FunctionTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the function."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the function, including guidance on when and how\n  to call it, and guidance about what to tell the user when calling\n  (if anything)."
+          },
+          "parameters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.RealtimeFunctionToolParameters"
+              }
+            ],
+            "description": "Parameters of the function in JSON Schema."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The function tool discriminator."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionTool"
+          }
+        ],
+        "description": "A caller-defined function tool."
+      },
+      "FunctionToolChoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The selected tool type."
+          },
+          "name": {
+            "type": "string",
+            "description": "The selected function name."
+          }
+        },
+        "description": "Forces a specific function tool."
+      },
+      "InputChannelCount": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number",
+            "enum": [
+              2,
+              3,
+              4
+            ]
+          }
+        ],
+        "description": "The supported multichannel input channel counts."
+      },
+      "McpTool": {
+        "type": "object",
+        "required": [
+          "server_label",
+          "type"
+        ],
+        "properties": {
+          "server_label": {
+            "type": "string",
+            "description": "A label for this MCP server, used to identify it in tool calls."
+          },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
+          },
+          "connector_id": {
+            "type": "string",
+            "enum": [
+              "connector_dropbox",
+              "connector_gmail",
+              "connector_googlecalendar",
+              "connector_googledrive",
+              "connector_microsoftteams",
+              "connector_outlookcalendar",
+              "connector_outlookemail",
+              "connector_sharepoint"
+            ],
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+          },
+          "tunnel_id": {
+            "type": "string",
+            "pattern": "^tunnel_[a-z0-9]{32}$",
+            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
+          },
+          "authorization": {
+            "type": "string",
+            "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
+          },
+          "server_description": {
+            "type": "string",
+            "description": "Optional description of the MCP server, used to provide more context."
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "allowed_tools": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+                  }
+                ],
+                "nullable": true
+              }
+            ]
+          },
+          "require_approval": {
+            "anyOf": [
+              {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
+                  }
+                ],
+                "nullable": true
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "always",
+                  "never"
+                ],
+                "nullable": true
+              }
+            ],
+            "default": "always"
+          },
+          "defer_loading": {
+            "type": "boolean",
+            "description": "Whether this MCP tool is deferred and discovered via tool search."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp"
+            ],
+            "description": "The MCP tool discriminator."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionTool"
+          }
+        ],
+        "description": "A standard MCP tool supported by Voice Live v1."
+      },
+      "McpToolChoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp"
+            ],
+            "description": "The selected tool type."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The selected MCP server label."
+          },
+          "name": {
+            "type": "string",
+            "description": "The optional tool name on the selected server."
+          }
+        },
+        "description": "Forces a specific tool on an MCP server."
+      },
+      "OpenAI.AudioTranscription": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "whisper-1",
+                  "gpt-4o-mini-transcribe",
+                  "gpt-4o-mini-transcribe-2025-12-15",
+                  "gpt-4o-transcribe",
+                  "gpt-4o-transcribe-diarize",
+                  "gpt-realtime-whisper"
+                ]
+              }
+            ],
+            "description": "The model to use for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels."
+          },
+          "language": {
+            "type": "string",
+            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
+          },
+          "delay": {
+            "type": "string",
+            "enum": [
+              "minimal",
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ],
+            "description": "Controls how long the model waits before emitting transcription text.\n  Higher values can improve transcription accuracy at the cost of latency.\n  Only supported with `gpt-realtime-whisper` in GA Realtime sessions."
+          }
+        }
+      },
+      "OpenAI.FileInputDetail": {
+        "type": "string",
+        "enum": [
+          "low",
+          "high"
+        ]
+      },
+      "OpenAI.ImageDetail": {
+        "type": "string",
+        "enum": [
+          "low",
+          "high",
+          "auto",
+          "original"
+        ]
+      },
+      "OpenAI.InputFileContent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_file"
+            ],
+            "description": "The type of the input item. Always `input_file`.",
+            "x-stainless-const": true,
+            "default": "input_file"
+          },
+          "file_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "filename": {
+            "type": "string",
+            "description": "The name of the file to be sent to the model."
+          },
+          "file_data": {
+            "type": "string",
+            "description": "The content of the file to be sent to the model."
+          },
+          "file_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the file to be sent to the model."
+          },
+          "detail": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.FileInputDetail"
+              }
+            ],
+            "description": "The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`."
+          }
+        },
+        "description": "A file input to the model.",
+        "title": "Input file"
+      },
+      "OpenAI.InputImageContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "detail"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_image"
+            ],
+            "description": "The type of the input item. Always `input_image`.",
+            "x-stainless-const": true,
+            "default": "input_image"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "file_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "detail": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ImageDetail"
+              }
+            ],
+            "description": "The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`."
+          }
+        },
+        "description": "An image input to the model. Learn about [image inputs](/docs/guides/vision).",
+        "title": "Input image"
+      },
+      "OpenAI.InputTextContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ],
+            "description": "The type of the input item. Always `input_text`.",
+            "x-stainless-const": true,
+            "default": "input_text"
+          },
+          "text": {
+            "type": "string",
+            "description": "The text input to the model."
+          }
+        },
+        "description": "A text input to the model.",
+        "title": "Input text"
+      },
+      "OpenAI.MCPListToolsTool": {
+        "type": "object",
+        "required": [
+          "name",
+          "input_schema"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the tool."
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "input_schema": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.MCPListToolsToolInputSchema"
+              }
+            ],
+            "description": "The JSON schema describing the tool's input."
+          },
+          "annotations": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.MCPListToolsToolAnnotations"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "description": "A tool available on an MCP server.",
+        "title": "MCP list tools tool"
+      },
+      "OpenAI.MCPListToolsToolAnnotations": {
+        "type": "object"
+      },
+      "OpenAI.MCPListToolsToolInputSchema": {
+        "type": "object"
+      },
+      "OpenAI.MCPToolFilter": {
+        "type": "object",
+        "properties": {
+          "tool_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed tool names.",
+            "title": "MCP allowed tools"
+          },
+          "read_only": {
+            "type": "boolean",
+            "description": "Indicates whether or not a tool modifies data or is read-only. If an\n  MCP server is [annotated with `readOnlyHint`](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations-readonlyhint),\n  it will match this filter."
+          }
+        },
+        "description": "A filter object to specify which tools are allowed.",
+        "title": "MCP tool filter"
+      },
+      "OpenAI.MCPToolRequireApproval": {
+        "type": "object",
+        "properties": {
+          "always": {
+            "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+          },
+          "never": {
+            "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+          }
+        }
+      },
+      "OpenAI.Metadata": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+        "x-oaiTypeLabel": "map"
+      },
+      "OpenAI.NoiseReductionType": {
+        "type": "string",
+        "enum": [
+          "near_field",
+          "far_field"
+        ],
+        "description": "Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones."
+      },
+      "OpenAI.Prompt": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the prompt template to use."
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "variables": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponsePromptVariables"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "description": "Reference to a prompt template and its variables.\n[Learn more](/docs/guides/text?api-mode=responses#reusable-prompts)."
+      },
+      "OpenAI.RealtimeAudioFormats": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormatsType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "audio/pcm": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcm",
+            "audio/pcmu": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcmu",
+            "audio/pcma": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcma"
+          }
+        }
+      },
+      "OpenAI.RealtimeAudioFormatsAudioPcm": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "audio/pcm"
+            ]
+          },
+          "rate": {
+            "type": "number",
+            "enum": [
+              24000
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
+          }
+        ]
+      },
+      "OpenAI.RealtimeAudioFormatsAudioPcma": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "audio/pcma"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
+          }
+        ]
+      },
+      "OpenAI.RealtimeAudioFormatsAudioPcmu": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "audio/pcmu"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
+          }
+        ]
+      },
+      "OpenAI.RealtimeAudioFormatsType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "audio/pcm",
+              "audio/pcmu",
+              "audio/pcma"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeConversationItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "function_call": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall",
+            "function_call_output": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput",
+            "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
+            "mcp_list_tools": "#/components/schemas/OpenAI.RealtimeMCPListTools",
+            "mcp_call": "#/components/schemas/OpenAI.RealtimeMCPToolCall",
+            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
+          }
+        },
+        "description": "A single item within a Realtime conversation."
+      },
+      "OpenAI.RealtimeConversationItemFunctionCall": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call"
+            ],
+            "description": "The type of the item. Always `function_call`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The ID of the function call."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the function being called."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{\"arg1\": \"value1\", \"arg2\": 42}`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A function call item in a Realtime conversation.",
+        "title": "Realtime function call item"
+      },
+      "OpenAI.RealtimeConversationItemFunctionCallOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call_output"
+            ],
+            "description": "The type of the item. Always `function_call_output`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The ID of the function call this output is for."
+          },
+          "output": {
+            "type": "string",
+            "description": "The output of the function call, this is free text and can contain any information or simply be empty."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A function call output item in a Realtime conversation.",
+        "title": "Realtime function call output item"
+      },
+      "OpenAI.RealtimeConversationItemType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "function_call",
+              "function_call_output",
+              "mcp_approval_response",
+              "mcp_list_tools",
+              "mcp_call",
+              "mcp_approval_request"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeFunctionToolParameters": {
+        "type": "object"
+      },
+      "OpenAI.RealtimeMCPApprovalRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "server_label",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_approval_request"
+            ],
+            "description": "The type of the item. Always `mcp_approval_request`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the approval request."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server making the request."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool to run."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "A JSON string of arguments for the tool."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item requesting human approval of a tool invocation.",
+        "title": "Realtime MCP approval request"
+      },
+      "OpenAI.RealtimeMCPApprovalResponse": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "approval_request_id",
+          "approve"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_approval_response"
+            ],
+            "description": "The type of the item. Always `mcp_approval_response`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the approval response."
+          },
+          "approval_request_id": {
+            "type": "string",
+            "description": "The ID of the approval request being answered."
+          },
+          "approve": {
+            "type": "boolean",
+            "description": "Whether the request was approved."
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item responding to an MCP approval request.",
+        "title": "Realtime MCP approval response"
+      },
+      "OpenAI.RealtimeMCPError": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMcpErrorType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "protocol_error": "#/components/schemas/OpenAI.RealtimeMCPProtocolError",
+            "tool_execution_error": "#/components/schemas/OpenAI.RealtimeMCPToolExecutionError",
+            "http_error": "#/components/schemas/OpenAI.RealtimeMCPHTTPError"
+          }
+        }
+      },
+      "OpenAI.RealtimeMCPHTTPError": {
+        "type": "object",
+        "required": [
+          "type",
+          "code",
+          "message"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "http_error"
+            ],
+            "x-stainless-const": true
+          },
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+          }
+        ],
+        "title": "Realtime MCP HTTP error"
+      },
+      "OpenAI.RealtimeMCPListTools": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label",
+          "tools"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_list_tools"
+            ],
+            "description": "The type of the item. Always `mcp_list_tools`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the list."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.MCPListToolsTool"
+            },
+            "description": "The tools available on the server."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item listing tools available on an MCP server.",
+        "title": "Realtime MCP list tools"
+      },
+      "OpenAI.RealtimeMCPProtocolError": {
+        "type": "object",
+        "required": [
+          "type",
+          "code",
+          "message"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "protocol_error"
+            ],
+            "x-stainless-const": true
+          },
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+          }
+        ],
+        "title": "Realtime MCP protocol error"
+      },
+      "OpenAI.RealtimeMCPToolCall": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "server_label",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_call"
+            ],
+            "description": "The type of the item. Always `mcp_call`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the tool call."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "The label of the MCP server running the tool."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool that was run."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "A JSON string of the arguments passed to the tool."
+          },
+          "approval_request_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "output": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ],
+        "description": "A Realtime item representing an invocation of a tool on an MCP server.",
+        "title": "Realtime MCP tool call"
+      },
+      "OpenAI.RealtimeMCPToolExecutionError": {
+        "type": "object",
+        "required": [
+          "type",
+          "message"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "tool_execution_error"
+            ],
+            "x-stainless-const": true
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+          }
+        ],
+        "title": "Realtime MCP tool execution error"
+      },
+      "OpenAI.RealtimeMcpErrorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "protocol_error",
+              "tool_execution_error",
+              "http_error"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeReasoning": {
+        "type": "object",
+        "properties": {
+          "effort": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeReasoningEffort"
+          }
+        },
+        "description": "Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.",
+        "title": "Realtime reasoning configuration"
+      },
+      "OpenAI.RealtimeReasoningEffort": {
+        "type": "string",
+        "enum": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "description": "Constrains effort on reasoning for reasoning-capable Realtime models such as\n`gpt-realtime-2`."
+      },
+      "OpenAI.RealtimeResponseCreateParamsAudio": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseCreateParamsAudioOutput"
+          }
+        }
+      },
+      "OpenAI.RealtimeResponseCreateParamsAudioOutput": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
+          },
+          "voice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.VoiceIdsOrCustomVoice"
+              }
+            ],
+            "default": "alloy"
+          }
+        }
+      },
+      "OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.NoiseReductionType"
+          }
+        }
+      },
+      "OpenAI.RealtimeSessionCreateRequestGATracing": {
+        "type": "object",
+        "properties": {
+          "workflow_name": {
+            "type": "string"
+          },
+          "group_id": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        }
+      },
+      "OpenAI.RealtimeTruncation": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "auto",
+              "disabled"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "retention_ratio"
+                ],
+                "x-stainless-const": true
+              },
+              "retention_ratio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "token_limits": {
+                "$ref": "#/components/schemas/OpenAI.TokenLimits"
+              }
+            },
+            "required": [
+              "type",
+              "retention_ratio"
+            ]
+          }
+        ],
+        "description": "When the number of tokens in a conversation exceeds the model's input token limit, the conversation be truncated, meaning messages (starting from the oldest) will not be included in the model's context. A 32k context model with 4,096 max output tokens can only include 28,224 tokens in the context before truncation occurs.\nClients can configure truncation behavior to truncate with a lower max token limit, which is an effective way to control token usage and cost.\nTruncation will reduce the number of cached tokens on the next turn (busting the cache), since messages are dropped from the beginning of the context. However, clients can also configure truncation to retain messages up to a fraction of the maximum context size, which will reduce the need for future truncations and thus improve the cache rate.\nTruncation can be disabled entirely, which means the server will never truncate but would instead return an error if the conversation exceeds the model's input token limit.",
+        "title": "Realtime Truncation Controls"
+      },
+      "OpenAI.RealtimeTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetectionType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "server_vad": "#/components/schemas/OpenAI.RealtimeTurnDetectionServerVad",
+            "semantic_vad": "#/components/schemas/OpenAI.RealtimeTurnDetectionSemanticVad"
+          }
+        },
+        "description": "Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response.\nServer VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.\nSemantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a timeout based on this probability. For example, if user audio trails off with \"uhhm\", the model will score a low probability of turn end and wait longer for the user to continue speaking. This can be useful for more natural conversations, but may have a higher latency.\nFor `gpt-realtime-whisper` transcription sessions, turn detection must be\nset to `null`; VAD is not supported.",
+        "title": "Realtime Turn Detection"
+      },
+      "OpenAI.RealtimeTurnDetectionSemanticVad": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "semantic_vad"
+            ]
+          },
+          "eagerness": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "auto"
+            ],
+            "default": "auto"
+          },
+          "create_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
+          }
+        ]
+      },
+      "OpenAI.RealtimeTurnDetectionServerVad": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "server_vad"
+            ]
+          },
+          "threshold": {
+            "type": "number"
+          },
+          "prefix_padding_ms": {
+            "type": "integer"
+          },
+          "silence_duration_ms": {
+            "type": "integer"
+          },
+          "create_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "idle_timeout_ms": {
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
+          }
+        ]
+      },
+      "OpenAI.RealtimeTurnDetectionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "server_vad",
+              "semantic_vad"
+            ]
+          }
+        ]
+      },
+      "OpenAI.ResponsePromptVariables": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/components/schemas/OpenAI.InputTextContent"
+            },
+            {
+              "$ref": "#/components/schemas/OpenAI.InputImageContent"
+            },
+            {
+              "$ref": "#/components/schemas/OpenAI.InputFileContent"
+            }
+          ]
+        },
+        "description": "Optional map of values to substitute in for variables in your\nprompt. The substitution values can either be strings, or other\nResponse input types like images or files.",
+        "title": "Prompt Variables",
+        "x-oaiExpandable": true,
+        "x-oaiTypeLabel": "map"
+      },
+      "OpenAI.TokenLimits": {
+        "type": "object",
+        "properties": {
+          "post_instructions": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "OpenAI.VoiceIdsOrCustomVoice": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.VoiceIdsShared"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ],
+        "description": "A built-in voice name or a custom voice reference.",
+        "title": "Voice"
+      },
+      "OpenAI.VoiceIdsShared": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "alloy",
+              "ash",
+              "ballad",
+              "coral",
+              "echo",
+              "sage",
+              "shimmer",
+              "verse",
+              "marin",
+              "cedar"
+            ]
+          }
+        ]
+      },
+      "RealtimeProtocolSchemas": {
+        "type": "object",
+        "required": [
+          "clientEvent",
+          "serverEvent"
+        ],
+        "properties": {
+          "clientEvent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClientEvent"
+              }
+            ],
+            "description": "Client-to-service WebSocket message schemas."
+          },
+          "serverEvent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerEvent"
+              }
+            ],
+            "description": "Service-to-client WebSocket message schemas."
+          }
+        },
+        "description": "Schema roots for the messages exchanged after the WebSocket upgrade."
+      },
+      "ResponseCreateParams": {
+        "type": "object",
+        "properties": {
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text",
+                "audio"
+              ]
+            },
+            "description": "The set of modalities the model used to respond, currently the only possible values are\n  `[\\\"audio\\\"]`, `[\\\"text\\\"]`. Audio output always include a text transcript. Setting the\n  output to mode `text` will disable audio output from the model."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion into your voice\", \"laugh frequently\"). The instructions are not guaranteed to be followed by the model, but they provide guidance to the model on the desired behavior.\n  Note that the server sets default instructions which will be used if this field is not set and are visible in the `session.created` event at the start of the session."
+          },
+          "audio": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.RealtimeResponseCreateParamsAudio"
+              }
+            ],
+            "description": "Configuration for audio input and output."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether the model may call multiple tools in parallel. Only supported by\n  reasoning Realtime models such as `gpt-realtime-2`."
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeReasoning"
+          },
+          "max_output_tokens": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "inf"
+                ]
+              }
+            ],
+            "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls. Provide an integer between 1 and 4096 to\n  limit output tokens, or `inf` for the maximum available tokens for a\n  given model. Defaults to `inf`."
+          },
+          "conversation": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "auto",
+                  "none"
+                ]
+              }
+            ],
+            "description": "Controls which conversation the response is added to. Currently supports\n  `auto` and `none`, with `auto` as the default value. The `auto` value\n  means that the contents of the response will be added to the default\n  conversation. Set this to `none` to create an out-of-band response which\n  will not add items to default conversation.",
+            "default": "auto"
+          },
+          "metadata": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
+          },
+          "prompt": {
+            "$ref": "#/components/schemas/OpenAI.Prompt"
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+            },
+            "description": "Input items to include in the prompt for the model. Using this field\n  creates a new context for this Response instead of using the default\n  conversation. An empty array `[]` will clear the context for this Response.\n  Note that this can include references to items that previously appeared in the session\n  using their id."
+          },
+          "additional_instructions": {
+            "type": "string",
+            "description": "Additional instructions appended only for this response."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionTool"
+            },
+            "description": "Function and standard MCP tools available to this response."
+          },
+          "tool_choice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolChoice"
+              }
+            ],
+            "description": "How the model chooses tools for this response.",
+            "default": "auto"
+          }
+        },
+        "description": "Voice Live v1 response creation parameters."
+      },
+      "ServerEvent": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ServerEventSessionCreated"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventSessionUpdated"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventConversationItemAdded"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventConversationItemDone"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventResponseTextDelta"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventResponseTextDone"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventResponseAudioDelta"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventResponseAudioDone"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventResponseAudioTranscriptDelta"
+          },
+          {
+            "$ref": "#/components/schemas/ServerEventResponseAudioTranscriptDone"
+          }
+        ],
+        "description": "Service-to-client WebSocket messages supported by Voice Live v1."
+      },
+      "ServerEventConversationItemAdded": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "item"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.added"
+            ],
+            "description": "The event type, must be `conversation.item.added`.",
+            "x-stainless-const": true
+          },
+          "previous_item_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "item": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        },
+        "description": "Reports that a conversation item was added."
+      },
+      "ServerEventConversationItemDone": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "item"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.done"
+            ],
+            "description": "The event type, must be `conversation.item.done`.",
+            "x-stainless-const": true
+          },
+          "previous_item_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "item": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        },
+        "description": "Reports that a conversation item is complete."
+      },
+      "ServerEventResponseAudioDelta": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "response_id",
+          "item_id",
+          "output_index",
+          "content_index",
+          "delta"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.output_audio.delta"
+            ],
+            "description": "The event type, must be `response.output_audio.delta`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the response."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item in the response."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part in the item's content array."
+          },
+          "delta": {
+            "type": "string",
+            "format": "base64",
+            "description": "Base64-encoded audio data delta."
+          }
+        },
+        "description": "Streams generated audio using the OpenAI GA shape."
+      },
+      "ServerEventResponseAudioDone": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "response_id",
+          "item_id",
+          "output_index",
+          "content_index"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.output_audio.done"
+            ],
+            "description": "The event type, must be `response.output_audio.done`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the response."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item in the response."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part in the item's content array."
+          }
+        },
+        "description": "Reports completed generated audio using the OpenAI GA shape."
+      },
+      "ServerEventResponseAudioTranscriptDelta": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "response_id",
+          "item_id",
+          "output_index",
+          "content_index",
+          "delta"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.output_audio_transcript.delta"
+            ],
+            "description": "The event type, must be `response.output_audio_transcript.delta`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the response."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item in the response."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part in the item's content array."
+          },
+          "delta": {
+            "type": "string",
+            "description": "The transcript delta."
+          }
+        },
+        "description": "Streams the generated audio transcript using the OpenAI GA shape."
+      },
+      "ServerEventResponseAudioTranscriptDone": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "response_id",
+          "item_id",
+          "output_index",
+          "content_index",
+          "transcript"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.output_audio_transcript.done"
+            ],
+            "description": "The event type, must be `response.output_audio_transcript.done`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the response."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item in the response."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part in the item's content array."
+          },
+          "transcript": {
+            "type": "string",
+            "description": "The final transcript of the audio."
+          }
+        },
+        "description": "Reports the completed generated audio transcript using the OpenAI GA shape."
+      },
+      "ServerEventResponseTextDelta": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "response_id",
+          "item_id",
+          "output_index",
+          "content_index",
+          "delta"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.output_text.delta"
+            ],
+            "description": "The event type, must be `response.output_text.delta`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the response."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item in the response."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part in the item's content array."
+          },
+          "delta": {
+            "type": "string",
+            "description": "The text delta."
+          }
+        },
+        "description": "Streams generated text using the OpenAI GA shape."
+      },
+      "ServerEventResponseTextDone": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "response_id",
+          "item_id",
+          "output_index",
+          "content_index",
+          "text"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the server event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.output_text.done"
+            ],
+            "description": "The event type, must be `response.output_text.done`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The ID of the response."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item in the response."
+          },
+          "content_index": {
+            "type": "integer",
+            "description": "The index of the content part in the item's content array."
+          },
+          "text": {
+            "type": "string",
+            "description": "The final text content."
+          }
+        },
+        "description": "Reports completed generated text using the OpenAI GA shape."
+      },
+      "ServerEventSessionCreated": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "session"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The server-generated event identifier."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.created"
+            ],
+            "description": "The event type."
+          },
+          "session": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Session"
+              }
+            ],
+            "description": "The effective Voice Live session."
+          }
+        },
+        "description": "Reports the effective Voice Live v1 session after connection."
+      },
+      "ServerEventSessionUpdated": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "type",
+          "session"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The server-generated event identifier."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.updated"
+            ],
+            "description": "The event type."
+          },
+          "session": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Session"
+              }
+            ],
+            "description": "The effective Voice Live session."
+          }
+        },
+        "description": "Reports the effective Voice Live v1 session after an update."
+      },
+      "Session": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "realtime"
+            ],
+            "description": "The type of session to create. Always `realtime` for the Realtime API.",
+            "x-stainless-const": true
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text",
+                "audio"
+              ]
+            },
+            "description": "The set of modalities the model can respond with. It defaults to `[\"audio\"]`, indicating\n  that the model will respond with audio plus a transcript. `[\"text\"]` can be used to make\n  the model respond with text only. It is not possible to request both `text` and `audio` at the same time.",
+            "default": [
+              "audio"
+            ]
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "gpt-realtime",
+                  "gpt-realtime-1.5",
+                  "gpt-realtime-2",
+                  "gpt-realtime-2025-08-28",
+                  "gpt-4o-realtime-preview",
+                  "gpt-4o-realtime-preview-2024-10-01",
+                  "gpt-4o-realtime-preview-2024-12-17",
+                  "gpt-4o-realtime-preview-2025-06-03",
+                  "gpt-4o-mini-realtime-preview",
+                  "gpt-4o-mini-realtime-preview-2024-12-17",
+                  "gpt-realtime-mini",
+                  "gpt-realtime-mini-2025-10-06",
+                  "gpt-realtime-mini-2025-12-15",
+                  "gpt-audio-1.5",
+                  "gpt-audio-mini",
+                  "gpt-audio-mini-2025-10-06",
+                  "gpt-audio-mini-2025-12-15"
+                ]
+              }
+            ],
+            "description": "The Realtime model used for this session."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion into your voice\", \"laugh frequently\"). The instructions are not guaranteed to be followed by the model, but they provide guidance to the model on the desired behavior.\n  Note that the server sets default instructions which will be used if this field is not set and are visible in the `session.created` event at the start of the session."
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "item.input_audio_transcription.logprobs"
+              ]
+            },
+            "description": "Additional fields to include in server outputs.\n  `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription."
+          },
+          "tracing": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "auto"
+                ],
+                "nullable": true
+              },
+              {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGATracing"
+                  }
+                ],
+                "nullable": true
+              }
+            ],
+            "description": "Realtime API can write session traces to the [Traces Dashboard](https://platform.openai.com/logs?api=traces). Set to null to disable tracing. Once\n  tracing is enabled for a session, the configuration cannot be modified.\n  `auto` will create a trace for the session with default values for the\n  workflow name, group id, and metadata.",
+            "title": "Tracing Configuration",
+            "default": "auto"
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether the model may call multiple tools in parallel. Only supported by\n  reasoning Realtime models such as `gpt-realtime-2`."
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeReasoning"
+          },
+          "max_output_tokens": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "inf"
+                ]
+              }
+            ],
+            "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls. Provide an integer between 1 and 4096 to\n  limit output tokens, or `inf` for the maximum available tokens for a\n  given model. Defaults to `inf`."
+          },
+          "truncation": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeTruncation"
+          },
+          "prompt": {
+            "$ref": "#/components/schemas/OpenAI.Prompt"
+          },
+          "audio": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionAudio"
+              }
+            ],
+            "description": "Input and output audio settings."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionTool"
+            },
+            "description": "Function and standard MCP tools available to the model."
+          },
+          "tool_choice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolChoice"
+              }
+            ],
+            "description": "How the model chooses tools.",
+            "default": "auto"
+          },
+          "avatar": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AvatarConfig"
+              }
+            ],
+            "description": "Avatar rendering settings."
+          },
+          "animation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnimationConfig"
+              }
+            ],
+            "description": "Animation output settings."
+          },
+          "response_delimiter": {
+            "type": "string",
+            "description": "A delimiter appended between streamed response segments."
+          }
+        },
+        "description": "Voice Live v1 session configuration based on the OpenAI Realtime GA session."
+      },
+      "SessionAudio": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionAudioInput"
+              }
+            ],
+            "description": "Input audio settings."
+          },
+          "output": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionAudioOutput"
+              }
+            ],
+            "description": "Output audio settings."
+          }
+        },
+        "description": "Voice Live audio settings for a realtime session."
+      },
+      "SessionAudioInput": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
+          },
+          "transcription": {
+            "$ref": "#/components/schemas/OpenAI.AudioTranscription"
+          },
+          "noise_reduction": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction"
+          },
+          "turn_detection": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
+          },
+          "echo_cancellation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EchoCancellation"
+              }
+            ],
+            "description": "Echo-cancellation settings."
+          },
+          "channels": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputChannelCount"
+              }
+            ],
+            "description": "The number of input audio channels for multichannel recognition."
+          },
+          "multichannel_audio_context_template": {
+            "type": "string",
+            "description": "The text template used to identify multichannel speakers."
+          }
+        },
+        "description": "Voice Live input audio settings added to the OpenAI GA audio input shape."
+      },
+      "SessionAudioOutput": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
+          },
+          "voice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.VoiceIdsOrCustomVoice"
+              }
+            ],
+            "default": "alloy"
+          },
+          "speed": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 1.5,
+            "default": 1
+          },
+          "voice_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceType"
+              }
+            ],
+            "description": "The Voice Live voice implementation.",
+            "default": "openai"
+          },
+          "voice_temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The Azure voice temperature from 0.0 through 1.0."
+          },
+          "custom_voice_endpoint_id": {
+            "type": "string",
+            "description": "The custom voice endpoint identifier."
+          },
+          "personal_voice_model": {
+            "type": "string",
+            "description": "The Azure personal voice model name."
+          },
+          "custom_lexicon_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The custom pronunciation lexicon URL."
+          },
+          "custom_text_normalization_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The custom text-normalization URL."
+          },
+          "prefer_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Preferred locales used to resolve multilingual Azure voices."
+          },
+          "locale": {
+            "type": "string",
+            "description": "The Azure voice locale."
+          },
+          "style": {
+            "type": "string",
+            "description": "The Azure voice speaking style."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "The Azure voice pitch adjustment."
+          },
+          "volume": {
+            "type": "string",
+            "description": "The Azure voice volume adjustment."
+          },
+          "output_audio_timestamp_types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AudioTimestampType"
+            },
+            "description": "Additional audio timestamp data returned with generated audio."
+          }
+        },
+        "description": "Azure-specific output voice settings added to the OpenAI GA audio output shape."
+      },
+      "SessionTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionToolType"
+              }
+            ],
+            "description": "The tool discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "function": "#/components/schemas/FunctionTool",
+            "mcp": "#/components/schemas/McpTool"
+          }
+        },
+        "description": "A tool supported by the initial Voice Live v1 contract."
+      },
+      "SessionToolType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "function",
+              "mcp"
+            ]
+          }
+        ],
+        "description": "The tool types supported by the initial Voice Live v1 contract."
+      },
+      "ToolChoice": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ToolChoiceMode"
+          },
+          {
+            "$ref": "#/components/schemas/FunctionToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/McpToolChoice"
+          }
+        ],
+        "description": "Tool-selection settings supported by Voice Live v1."
+      },
+      "ToolChoiceMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "auto",
+              "none",
+              "required"
+            ]
+          }
+        ],
+        "description": "The model's automatic tool-selection behavior."
+      },
+      "Versions": {
+        "type": "string",
+        "enum": [
+          "v1"
+        ],
+        "description": "The stable Voice Live API labels."
+      },
+      "VoiceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "openai",
+              "azure-standard",
+              "azure-custom",
+              "azure-personal",
+              "azure-realtime-native",
+              "avatar-voice-sync"
+            ]
+          }
+        ],
+        "description": "The supported Voice Live voice implementations."
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-key"
+      },
+      "OAuth2Auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "scopes": {
+              "https://cognitiveservices.azure.com/.default": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{endpoint}",
+      "description": "Voice Live data-plane endpoint.",
+      "variables": {
+        "endpoint": {
+          "default": "",
+          "description": "The Voice Live resource endpoint, including its scheme and host name."
+        }
+      }
+    }
+  ]
+}

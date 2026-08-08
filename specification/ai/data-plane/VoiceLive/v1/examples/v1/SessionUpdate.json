@@ -1,0 +1,28 @@
+{
+  "type": "session.update",
+  "session": {
+    "type": "realtime",
+    "output_modalities": [
+      "audio"
+    ],
+    "audio": {
+      "input": {
+        "format": {
+          "type": "audio/pcm",
+          "rate": 24000
+        },
+        "turn_detection": {
+          "type": "server_vad"
+        }
+      },
+      "output": {
+        "format": {
+          "type": "audio/pcm",
+          "rate": 24000
+        },
+        "voice": "alloy",
+        "voice_type": "openai"
+      }
+    }
+  }
+}
