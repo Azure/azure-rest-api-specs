@@ -56,14 +56,14 @@ namespace Azure.AI.Projects {
     "!autorest"
   );
   //  @@clientName(CreatedBy, "AgentResponseItemSource", "!autorest");
-  
+
   @@clientName(OpenApiTool, "OpenAPITool", "!autorest");
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
 
   @@clientName(
     OpenApiManagedAuthDetails,
     "OpenAPIManagedAuthenticationDetails",
-    "!autorest"
+    "!csharp"
   );
   @@clientName(
     OpenApiProjectConnectionAuthDetails,
@@ -368,7 +368,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.AzureAISearchTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.AzureAISearchTool",
@@ -413,15 +413,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-//  @@alternateType(
-//    Azure.AI.Projects.AzureFunctionDefinitionFunction,
-//    {
-//      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionDefinitionFunction",
-//      package: "Azure.AI.Extensions.OpenAI",
-//      minVersion: "3.0.0-alpha.20260805.1",
-//    },
-//    "csharp"
-//  );
+  //  @@alternateType(
+  //    Azure.AI.Projects.AzureFunctionDefinitionFunction,
+  //    {
+  //      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionDefinitionFunction",
+  //      package: "Azure.AI.Extensions.OpenAI",
+  //      minVersion: "3.0.0-alpha.20260805.1",
+  //    },
+  //    "csharp"
+  //  );
   @@alternateType(
     Azure.AI.Projects.AzureFunctionStorageQueue,
     {
@@ -467,7 +467,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BingCustomSearchToolParameters,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolOptions",
@@ -476,7 +476,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BingGroundingSearchConfiguration,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchConfiguration",
@@ -485,7 +485,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BingGroundingSearchToolParameters,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchToolOptions",
@@ -494,7 +494,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BrowserAutomationPreviewTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool",
@@ -606,6 +606,26 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.SharepointPreviewTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.SharepointPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-alpha.20260805.1",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    Azure.AI.Projects.OpenApiProjectConnectionAuthDetails,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiProjectConnectionAuthenticationDetails",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-alpha.20260805.1",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    Azure.AI.Projects.OpenApiManagedAuthDetails,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OpenAPIManagedAuthenticationDetails",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260805.1",
     },
@@ -1071,7 +1091,6 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
     OpenAI.InputTextContent,
@@ -1213,6 +1232,4 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-
-
 }

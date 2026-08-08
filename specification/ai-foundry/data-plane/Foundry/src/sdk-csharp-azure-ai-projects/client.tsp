@@ -775,6 +775,16 @@ namespace Azure.AI.Projects;
   "csharp"
 );
 
+@@alternateType(
+  OpenAI.ComputerUsePreviewTool,
+  {
+    identity: "OpenAI.Responses.ComputerUsePreviewTool",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+
 // Message item
 //@@alternateType(OpenAI.MessageRole, {  identity: "OpenAI.Responses.MessageRole",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
 //@@alternateType(OpenAI.MessageStatus, {  identity: "OpenAI.Responses.MessageStatus",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
@@ -1016,8 +1026,47 @@ namespace Azure.AI.Projects;
   },
   "csharp"
 );
-
 // And now drop classes that aren't referenced, and aren't pruned.
+/**
+  
+  @@alternateType(
+    OpenAI.InputItemLocalShellToolCall,
+    {
+      identity: "OpenAI.Responses.InputItemLocalShellToolCall",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  
+  @@alternateType(
+    OpenAI.InputItem,
+    {
+      identity: "OpenAI.Responses.InputItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.InputItemComputerToolCall,
+    {
+      identity: "OpenAI.Responses.InputItemComputerToolCall",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.InputItemToolSearchCallItemParam,
+    {
+      identity: "OpenAI.Responses.InputItemToolSearchCallItemParam",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+*/
 @@alternateType(
   OpenAI.InputTextContent,
   {
