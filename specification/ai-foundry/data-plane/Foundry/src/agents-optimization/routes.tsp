@@ -1,4 +1,4 @@
-// Routes for the AgentsOptimization data-plane surface.
+// Routes for the AgentsOptimization data-plane surface (V3Preview).
 // Follows the Foundry job-lifecycle pattern from servicepatterns.tsp
 // (same pattern as data_generation_jobs, evaluation suites).
 
@@ -15,7 +15,6 @@ namespace Azure.AI.Projects;
 // Job CRUD operations (shared job templates from servicepatterns.tsp)
 // ---------------------------------------------------------------------------
 
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
@@ -27,8 +26,23 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @pollingOperation(AgentOptimizationJobs.get)
   create is postJobPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
     AgentOptimizationJob
+  >;
+
+  /**
+   * Estimates dataset row count, per-layer model call volumes, and (when pricing is available) cost bands for an optimization job with the given inputs, without submitting the job.
+   */
+  @summary("Estimate an agent optimization job")
+  @route("agent_optimization_jobs:estimate")
+  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  estimate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+    {
+      /** The inputs to estimate against. */
+      @body inputs: AgentOptimizationEstimateJobInputs;
+    },
+    AgentOptimizationEstimateResponse
   >;
 
   /**
@@ -38,7 +52,7 @@ interface AgentOptimizationJobs {
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
     AgentOptimizationJob
   >;
 
@@ -49,8 +63,8 @@ interface AgentOptimizationJobs {
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    AgentOptimizationJobListItem,
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+    AgentOptimizationJob,
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
@@ -63,13 +77,13 @@ interface AgentOptimizationJobs {
   >;
 
   /**
-   * Requests cancellation of a running or queued job and returns an error if the job is already in a terminal state.
+   * Requests cancellation of a running or queued job. Returns 409 Conflict if the job is already in a terminal state.
    */
   @summary("Cancel an agent optimization job")
   @route("agent_optimization_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
     AgentOptimizationJob
   >;
 
@@ -79,5 +93,69 @@ interface AgentOptimizationJobs {
   @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.agents_optimization_v2_preview>;
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.agents_optimization_v3_preview>;
+}
+
+// ---------------------------------------------------------------------------
+// Candidate sub-resource operations
+// ---------------------------------------------------------------------------
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+@tag("AgentOptimizationJobs")
+interface AgentOptimizationJobCandidates {
+  /**
+   * Lists candidates for the given optimization job with cursor pagination. Each item is a AgentOptimizationCandidateSummary — mutation payloads and per-task results are excluded from bulk-read paths; fetch them via GET /candidates/{candidateId}.
+   */
+  @summary("List candidates for an agent optimization job")
+  @route("agent_optimization_jobs/{jobId}/candidates")
+  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  listCandidates is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+    {
+      /** The ID of the parent optimization job. */
+      @path jobId: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<AgentOptimizationCandidateSummary>
+  >;
+
+  /**
+   * Retrieves a single candidate including mutation payload and file manifest.
+   */
+  @summary("Get a candidate for an agent optimization job")
+  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
+  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  getCandidate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+    {
+      /** The ID of the parent optimization job. */
+      @path jobId: string;
+
+      /** The candidate identifier. */
+      @path candidateId: string;
+    },
+    AgentOptimizationCandidateDetail
+  >;
+
+  /**
+   * Promotes a candidate onto a Foundry agent version, applying the candidate's mutations to the agent's registered configuration. For prompt agents the target agent is derived from the job's stored baseline configuration and the request body fields are ignored.
+   */
+  @summary("Promote a candidate for an agent optimization job")
+  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
+  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  promoteCandidate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+    {
+      /** The ID of the parent optimization job. */
+      @path jobId: string;
+
+      /** The candidate identifier. */
+      @path candidateId: string;
+
+      /** Target agent information for the promotion. */
+      @body promotion: PromoteAgentOptimizationCandidateRequest;
+    },
+    PromoteAgentOptimizationCandidateResponse
+  >;
 }
