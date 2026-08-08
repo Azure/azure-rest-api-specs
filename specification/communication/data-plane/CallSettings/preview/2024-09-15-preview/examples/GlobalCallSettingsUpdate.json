@@ -1,0 +1,50 @@
+{
+  "title": "Update settings.",
+  "operationId": "GlobalCallSettingsUpdate",
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2024-09-15-preview",
+    "callSettings": {
+      "id": "global",
+      "autoRecordingSettings": {
+        "enabled": true,
+        "content": "audio",
+        "channel": "mixed",
+        "format": "mp3",
+        "pauseOnStart": true,
+        "storageKind": "AzureBlobStorage",
+        "destinationContainerUrl": "https://microsoft.com/a"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "global",
+        "autoRecordingSettings": {
+          "enabled": true,
+          "content": "audio",
+          "channel": "mixed",
+          "format": "mp3",
+          "pauseOnStart": true,
+          "storageKind": "AzureBlobStorage",
+          "destinationContainerUrl": "https://microsoft.com/a"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "global",
+        "autoRecordingSettings": {
+          "enabled": true,
+          "content": "audio",
+          "channel": "mixed",
+          "format": "mp3",
+          "pauseOnStart": true,
+          "storageKind": "AzureBlobStorage",
+          "destinationContainerUrl": "https://microsoft.com/a"
+        }
+      }
+    }
+  }
+}
