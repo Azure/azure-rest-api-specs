@@ -118,6 +118,25 @@ describe("incrementalTypeSpec", () => {
     expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
   });
 
+  it("returns false if readme cannot be parsed", async () => {
+    const readmePath = "specification/contosowidgetmanager/resource-manager/readme.md";
+
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
+
+    const showSpy = vi.mocked(mockShow).mockResolvedValue(`
+\`\`\`yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - foo.json
+from: first.json
+from: second.json
+\`\`\`
+`);
+
+    await expect(incrementalTypeSpec(core)).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
+  });
+
   it("returns false if swagger cannot be parsed as JSON", async () => {
     const swaggerPath =
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";

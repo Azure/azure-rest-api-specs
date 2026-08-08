@@ -94,7 +94,17 @@ export async function incrementalTypeSpec(core) {
       content: readmeText,
       logger: options.logger,
     });
-    const tags = await readme.getTags();
+    let tags;
+    try {
+      tags = await readme.getTags();
+    } catch (e) {
+      core.info(
+        `File "${readmeFile}" could not be parsed while extracting input files: ${
+          e instanceof Error ? e.message : String(e)
+        }`,
+      );
+      return false;
+    }
     const inputFiles = [...tags.values()].flatMap((t) =>
       [...t.inputFiles.keys()].map((p) => relative(dirname(readme.path), p)),
     );
