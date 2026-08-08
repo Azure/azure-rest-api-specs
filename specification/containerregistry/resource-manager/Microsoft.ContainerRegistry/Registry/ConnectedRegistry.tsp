@@ -23,7 +23,17 @@ model ConnectedRegistry
     SegmentName = "connectedRegistries",
     NamePattern = "^[a-zA-Z0-9]*$"
   >;
+
+  /**
+   * The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations.
+   */
+  ...ManagedServiceIdentityProperty;
 }
+@@added(ConnectedRegistry.identity, Versions.vLatestPreview);
+@@doc(
+  ConnectedRegistry.identity,
+  "The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations."
+);
 
 @armResourceOperations
 interface ConnectedRegistries {
