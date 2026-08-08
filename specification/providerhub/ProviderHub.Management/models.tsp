@@ -3527,6 +3527,37 @@ model ResourceTypeRegistrationPropertiesResourceManagementOptionsBatchProvisioni
    * Supported operations.
    */
   supportedOperations?: SupportedOperations;
+
+  /**
+   * The maximum batch size.
+   */
+  @added(Versions.v2025_10_01)
+  maxBatchSize?: int64;
+
+  /**
+   * Batch contract version.
+   */
+  @added(Versions.v2025_10_01)
+  batchContractVersion?: string;
+
+  /**
+   * The maximum nested batch size.
+   */
+  @added(Versions.v2025_10_01)
+  maxNestedBatchSize?: int64;
+
+  /**
+   * The required features.
+   */
+  @added(Versions.v2025_10_01)
+  requiredFeatures?: string[];
+
+  /**
+   * Action Configurations.
+   */
+  @added(Versions.v2025_10_01)
+  @identifiers(#[])
+  actionConfigurations?: ActionConfiguration[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -1452,7 +1452,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "The manifests content properties supplied to the CreateOrUpdate manifests.",
             "required": true,
@@ -9791,6 +9791,35 @@
         "supportedOperations": {
           "$ref": "#/definitions/SupportedOperations",
           "description": "Supported operations."
+        },
+        "maxBatchSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum batch size."
+        },
+        "batchContractVersion": {
+          "type": "string",
+          "description": "Batch contract version."
+        },
+        "maxNestedBatchSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum nested batch size."
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "description": "The required features.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actionConfigurations": {
+          "type": "array",
+          "description": "Action Configurations.",
+          "items": {
+            "$ref": "#/definitions/ActionConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
