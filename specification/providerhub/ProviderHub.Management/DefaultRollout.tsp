@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ProviderRegistration.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -132,6 +134,26 @@ interface NewRegionFrontloadRelease {
     void,
     OkResponse
   >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a tenant-level action at /providers/{providerNamespace} and is not an ARM resource operation."
+@added(Versions.v2025_10_01)
+@removed(Versions.v2026_02_01_preview)
+interface NewRegionFrontloadReleaseManifestValidation {
+  /**
+   * Validates the manifest has been applied in all regions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The operationId must remain NewRegionFrontloadRelease_ValidateManifest to match the existing service contract."
+  @operationId("NewRegionFrontloadRelease_ValidateManifest")
+  @route("/providers/{providerNamespace}/validateManifestAppliedInAllRegions")
+  @post
+  validateManifest(
+    ...ApiVersionParameter,
+
+    /** The name of the resource provider hosted within ProviderHub. */
+    @path
+    providerNamespace: string,
+  ): ArmResponse<string> | ErrorResponse;
 }
 
 @@maxLength(DefaultRollout.name, 260);
