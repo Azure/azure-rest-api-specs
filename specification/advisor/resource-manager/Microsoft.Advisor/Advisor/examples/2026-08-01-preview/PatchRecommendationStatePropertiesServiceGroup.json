@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "serviceGroupName": "serviceGroupXYZ",
+    "recommendationId": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
+    "api-version": "2026-08-01-preview",
+    "properties": {
+      "properties": {
+        "recommendationStatus": "Postponed",
+        "postponedUntilDateTime": "2024-09-01T00:00:00Z",
+        "recommendationDismissReason": "NotRelevant"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
+        "name": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
+        "properties": {
+          "sgId": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ",
+          "sgName": "Checkout & Payments",
+          "criticalityLabel": "Critical",
+          "category": "HighAvailability",
+          "impact": "Medium",
+          "impactedField": "Microsoft.Management/serviceGroups",
+          "impactedValue": "serviceGroupXYZ",
+          "recommendationStatus": "Postponed",
+          "recommendationDismissReason": "NotRelevant",
+          "postponedUntilDateTime": "2024-09-01T00:00:00Z",
+          "lastRefreshed": "2024-08-01T19:05:00Z",
+          "lastUpdated": "2024-09-01T00:00:00Z",
+          "risk": "Warning",
+          "shortDescription": {
+            "problem": "To ensure high availability add one or more virtual machines to this availability set",
+            "solution": "To ensure high availability add one or more virtual machines to this availability set"
+          },
+          "resourceMetadata": {
+            "resourceId": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ",
+            "action": {
+              "additionalProperties": {
+                "actionType": "Document",
+                "link": "https://link3",
+                "caption": "Enable Soft Delete to protect blob data",
+                "description": "Enable Soft Delete to protect blob data"
+              },
+              "metadata": {
+                "id": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ"
+              }
+            },
+            "singular": "Availability set",
+            "plural": "Availability sets"
+          },
+          "actions": [
+            {
+              "additionalProperties": {
+                "actionType": "Document",
+                "link": "https://link1",
+                "caption": "Enable Soft Delete to protect blob data",
+                "description": "Enable Soft Delete to protect blob data"
+              },
+              "metadata": {
+                "id": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ"
+              }
+            }
+          ],
+          "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
+          "label": "Enable Soft Delete",
+          "learnMoreLink": "https://link2",
+          "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted"
+        },
+        "type": "Microsoft.Advisor/recommendations"
+      }
+    }
+  },
+  "operationId": "Recommendations_UpdateByServiceGroup",
+  "title": "PatchRecommendationStatePropertiesServiceGroup"
+}
