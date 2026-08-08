@@ -1,0 +1,4674 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "FoundryLocal.AgenticRAG",
+    "version": "2026-06-01-preview",
+    "description": "Foundry Local Agentic RAG service. Provides agents runtime, collections,\ninference (RAG and model-only chat), ingestion, knowledge base management,\nknowledge source management, and MCP server capabilities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/edgeai/chat/completions": {
+      "post": {
+        "operationId": "ChatCompletionsOperationGroup_RagChatCompletion",
+        "summary": "Chat Completions (RAG)",
+        "description": "Queries a collection using RAG. Searches vector data, retrieves relevant\nchunks, and generates a grounded LLM response.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-user-role",
+            "in": "header",
+            "description": "dev = uses request body parameters directly. user = loads developer-configured\nsettings.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "dev",
+              "user"
+            ],
+            "x-ms-enum": {
+              "name": "UserRole",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "dev",
+                  "value": "dev",
+                  "description": "Developer role with full parameter control."
+                },
+                {
+                  "name": "user",
+                  "value": "user",
+                  "description": "Standard user role with developer-configured settings."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The RAG chat request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RagChatRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/collections": {
+      "get": {
+        "operationId": "CollectionsOperationGroup_ListCollections",
+        "summary": "List Collections",
+        "description": "List Collections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollectionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "CollectionsOperationGroup_CreateCollection",
+        "summary": "Create Collection",
+        "description": "Create Collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/collections/{name}": {
+      "get": {
+        "operationId": "CollectionsOperationGroup_GetCollection",
+        "summary": "Get Collection",
+        "description": "Get Collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Collection name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CollectionsOperationGroup_UpdateCollection",
+        "summary": "Update Collection",
+        "description": "Only the description can be updated. Name is immutable.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the collection to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body containing the updated description.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CollectionsOperationGroup_DeleteCollection",
+        "summary": "Delete Collection",
+        "description": "Deletes collection and all associated Milvus collections, Postgres tables, and\nmetadata.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the collection to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeleteCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs": {
+      "get": {
+        "operationId": "IngestionJobsOperationGroup_ListIngestionJobs",
+        "summary": "List Ingestion Jobs",
+        "description": "List Ingestion Jobs",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IngestionJobList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs/{jobId}": {
+      "post": {
+        "operationId": "IngestionJobsOperationGroup_CreateIngestionJob",
+        "summary": "Create Ingestion Job",
+        "description": "Starts a long-running ingestion job that parses, chunks, embeds, and stores\ndocuments into a collection. Returns an `operation-location` header to poll\nfor run status via `getIngestionRun`.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "User-chosen name for the ingestion job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The ingestion job configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateIngestionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IngestionCreateResponse"
+            },
+            "headers": {
+              "operation-location": {
+                "type": "string",
+                "description": "URI to monitor the run."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs/{jobId}/runs": {
+      "delete": {
+        "operationId": "IngestionRunsOperationGroup_DeleteIngestionRuns",
+        "summary": "Delete Runs for Job",
+        "description": "Delete Runs for Job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The ingestion job identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs/{jobId}/runs/{runId}": {
+      "get": {
+        "operationId": "IngestionRunsOperationGroup_GetIngestionRun",
+        "summary": "Get Ingestion Run",
+        "description": "Get Ingestion Run",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The ingestion job identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IngestionRunDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/knowledgesources": {
+      "get": {
+        "operationId": "KnowledgeSourcesOperationGroup_ListKnowledgeSources",
+        "summary": "List Knowledge Sources",
+        "description": "List Knowledge Sources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by exact name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "Filter by kind.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "remote_mcp",
+              "indexed_sources_mcp"
+            ],
+            "x-ms-enum": {
+              "name": "KnowledgeSourceKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "remote_mcp",
+                  "value": "remote_mcp",
+                  "description": "A remote MCP server knowledge source."
+                },
+                {
+                  "name": "indexed_sources_mcp",
+                  "value": "indexed_sources_mcp",
+                  "description": "An indexed sources MCP knowledge source."
+                }
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of knowledge sources to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of items to skip for pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "KnowledgeSourcesOperationGroup_CreateKnowledgeSource",
+        "summary": "Create Knowledge Source",
+        "description": "Creates a new knowledge source. The MCP server is validated before the record\nis persisted.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateKnowledgeSourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/knowledgesources/{ksId}": {
+      "get": {
+        "operationId": "KnowledgeSourcesOperationGroup_GetKnowledgeSource",
+        "summary": "Get Knowledge Source",
+        "description": "Get Knowledge Source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "ksId",
+            "in": "path",
+            "description": "Knowledge source identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "KnowledgeSourcesOperationGroup_UpdateKnowledgeSource",
+        "summary": "Update Knowledge Source",
+        "description": "Partially updates a knowledge source. If connection parameters or auth_type\nchange, MCP validation is re-run.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "ksId",
+            "in": "path",
+            "description": "The knowledge source identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body containing fields to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateKnowledgeSourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "KnowledgeSourcesOperationGroup_DeleteKnowledgeSource",
+        "summary": "Delete Knowledge Source",
+        "description": "Delete Knowledge Source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "ksId",
+            "in": "path",
+            "description": "The knowledge source identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/knowledgesources/batch-delete": {
+      "post": {
+        "operationId": "KnowledgeSourcesOperationGroup_BatchDeleteKnowledgeSources",
+        "summary": "Batch Delete Knowledge Sources",
+        "description": "Batch Delete Knowledge Sources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteKnowledgeSourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteKnowledgeSourcesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/mcp": {
+      "post": {
+        "operationId": "McpOperationGroup_McpRequest",
+        "summary": "MCP JSON-RPC Endpoint",
+        "description": "Single endpoint for all MCP operations. Uses JSON-RPC 2.0 with methods:\ninitialize, tools/list, tools/call. Tools available: search_hybrid,\nsearch_vector, search_text, search_image, search_multimodal,\nget_available_collections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "mcp-session-id",
+            "in": "header",
+            "description": "Session ID from initialize response. Required for tools/list and tools/call.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Mcp-Session-Id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The JSON-RPC request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonRpcRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JsonRpcResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edgeai/slm/chat/completions": {
+      "post": {
+        "operationId": "ChatCompletionsOperationGroup_ModelOnlyChatCompletion",
+        "summary": "Chat Completions (Model-Only)",
+        "description": "Queries the LLM directly without retrieval. No collection needed, no RBAC, no\napi-version required.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-user-role",
+            "in": "header",
+            "description": "The role of the user making the request.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "dev",
+              "user"
+            ],
+            "x-ms-enum": {
+              "name": "UserRole",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "dev",
+                  "value": "dev",
+                  "description": "Developer role with full parameter control."
+                },
+                {
+                  "name": "user",
+                  "value": "user",
+                  "description": "Standard user role with developer-configured settings."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The model-only chat request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelOnlyChatRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/knowledge-bases": {
+      "get": {
+        "operationId": "KnowledgeBasesOperationGroup_ListKnowledgeBases",
+        "summary": "List Knowledge Bases",
+        "description": "List Knowledge Bases",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of knowledge bases to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by created_at.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "asc",
+                  "value": "asc",
+                  "description": "Ascending sort order."
+                },
+                {
+                  "name": "desc",
+                  "value": "desc",
+                  "description": "Descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Cursor for forward pagination (KB ID).",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Cursor for backward pagination (KB ID).",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/knowledge-bases/{kbId}": {
+      "get": {
+        "operationId": "KnowledgeBasesOperationGroup_GetKnowledgeBase",
+        "summary": "Get Knowledge Base",
+        "description": "Get Knowledge Base",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "kbId",
+            "in": "path",
+            "description": "Knowledge base identifier (typically asst_{uuid}).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseWrapper"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "KnowledgeBasesOperationGroup_ReplaceKnowledgeBase",
+        "summary": "Replace Knowledge Base",
+        "description": "Full replacement. Requires EdgeRAGDeveloper role. Omitted fields reset to\ndefaults.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "kbId",
+            "in": "path",
+            "description": "The knowledge base identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body for the full replacement.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplaceKnowledgeBaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseWrapper"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "KnowledgeBasesOperationGroup_UpdateKnowledgeBase",
+        "summary": "Update Knowledge Base",
+        "description": "Partial update. Requires EdgeRAGDeveloper role. knowledge_source_ids replaces\nthe entire list when provided.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "kbId",
+            "in": "path",
+            "description": "The knowledge base identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body containing fields to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateKnowledgeBaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseWrapper"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads": {
+      "get": {
+        "operationId": "ThreadsOperationGroup_ListThreads",
+        "summary": "List Threads",
+        "description": "Lists all conversation threads with cursor-based pagination. Returns only\nthreads owned by the authenticated user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of threads to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by created_at.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "asc",
+                  "value": "asc",
+                  "description": "Ascending sort order."
+                },
+                {
+                  "name": "desc",
+                  "value": "desc",
+                  "description": "Descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Cursor - return threads after this ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Cursor - return threads before this ID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ThreadList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "ThreadsOperationGroup_CreateThread",
+        "summary": "Create Thread",
+        "description": "Creates a new conversation thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateThreadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}": {
+      "get": {
+        "operationId": "ThreadsOperationGroup_GetThread",
+        "summary": "Get Thread",
+        "description": "Get Thread",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Unique thread identifier (format: thread_{uuid}).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "ThreadsOperationGroup_ModifyThread",
+        "summary": "Modify Thread",
+        "description": "Modify Thread",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Unique thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body containing fields to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModifyThreadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ThreadsOperationGroup_DeleteThread",
+        "summary": "Delete Thread",
+        "description": "Delete Thread",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Unique thread identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages": {
+      "get": {
+        "operationId": "MessagesOperationGroup_ListMessages",
+        "summary": "List Messages",
+        "description": "List Messages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier to list messages from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of messages to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by created_at.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "asc",
+                  "value": "asc",
+                  "description": "Ascending sort order."
+                },
+                {
+                  "name": "desc",
+                  "value": "desc",
+                  "description": "Descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Cursor - return messages after this ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Cursor - return messages before this ID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "MessagesOperationGroup_CreateMessage",
+        "summary": "Create Message",
+        "description": "Create Message",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier to add the message to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body for the new message.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages/{messageId}": {
+      "get": {
+        "operationId": "MessagesOperationGroup_GetMessage",
+        "summary": "Get Message",
+        "description": "Get Message",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Unique message identifier (format: msg_{uuid}).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MessagesOperationGroup_DeleteMessage",
+        "summary": "Delete Message",
+        "description": "Delete Message",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "The message identifier to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs": {
+      "post": {
+        "operationId": "RunsOperationGroup_CreateRun",
+        "summary": "Create Run",
+        "description": "Creates and executes a run against a thread. Supports synchronous and streaming\n(SSE) modes. When `stream=true`, the response is returned as a server-sent events\n(text/event-stream) stream instead of a single JSON object.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier to run against.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream",
+            "in": "query",
+            "description": "When true, returns SSE stream.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body for the new run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRunRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}": {
+      "get": {
+        "operationId": "RunsOperationGroup_GetRun",
+        "summary": "Get Run",
+        "description": "Get Run",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Unique run identifier (format: run_{uuid}).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/cancel": {
+      "post": {
+        "operationId": "RunsOperationGroup_CancelRun",
+        "summary": "Cancel Run",
+        "description": "Cancel Run",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run identifier to cancel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/steps": {
+      "get": {
+        "operationId": "RunStepsOperationGroup_ListRunSteps",
+        "summary": "List Run Steps",
+        "description": "List Run Steps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of steps to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by created_at.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "asc",
+                  "value": "asc",
+                  "description": "Ascending sort order."
+                },
+                {
+                  "name": "desc",
+                  "value": "desc",
+                  "description": "Descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Cursor - return steps after this ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Cursor - return steps before this ID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunStepList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/steps/{stepId}": {
+      "get": {
+        "operationId": "RunStepsOperationGroup_GetRunStep",
+        "summary": "Get Run Step",
+        "description": "Get Run Step",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The thread identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "description": "Unique step identifier (format: step_{uuid}).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunStep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssistantMessage": {
+      "type": "object",
+      "description": "A message generated by the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The text content of the message."
+        },
+        "role": {
+          "$ref": "#/definitions/AssistantRole",
+          "description": "The role of the message author."
+        },
+        "context": {
+          "$ref": "#/definitions/AssistantMessageContext",
+          "description": "Context information including citations."
+        },
+        "search_type": {
+          "type": "string",
+          "description": "The type of search used to retrieve context.",
+          "x-ms-client-name": "searchType"
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of documents retrieved.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "text_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The text strictness level used for retrieval.",
+          "x-ms-client-name": "textStrictness"
+        },
+        "search_results": {
+          "$ref": "#/definitions/AssistantMessageSearchResults",
+          "description": "The search results used to generate the response.",
+          "x-ms-client-name": "searchResults"
+        }
+      }
+    },
+    "AssistantMessageContext": {
+      "type": "object",
+      "description": "Context information attached to an assistant message.",
+      "properties": {
+        "citations": {
+          "type": "array",
+          "description": "The list of citations referenced in the response.",
+          "items": {
+            "$ref": "#/definitions/Citation"
+          }
+        }
+      }
+    },
+    "AssistantMessageSearchResults": {
+      "type": "object",
+      "description": "Search results grouped by retrieval type.",
+      "properties": {
+        "dense": {
+          "type": "array",
+          "description": "Dense vector search results.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "sparse": {
+          "type": "array",
+          "description": "Sparse text search results.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "image": {
+          "type": "array",
+          "description": "Image search results.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "AssistantRole": {
+      "type": "string",
+      "description": "The role for assistant responses.",
+      "enum": [
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "AssistantRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The assistant role."
+          }
+        ]
+      }
+    },
+    "AuthType": {
+      "type": "string",
+      "description": "The authentication type for a knowledge source.",
+      "enum": [
+        "microsoft_entra_id",
+        "unauthenticated"
+      ],
+      "x-ms-enum": {
+        "name": "AuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "microsoft_entra_id",
+            "value": "microsoft_entra_id",
+            "description": "Microsoft Entra ID authentication."
+          },
+          {
+            "name": "unauthenticated",
+            "value": "unauthenticated",
+            "description": "No authentication required."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BatchDeleteKnowledgeSourcesRequest": {
+      "type": "object",
+      "description": "Request body for batch deleting knowledge sources.",
+      "properties": {
+        "ks_ids": {
+          "type": "array",
+          "description": "The list of knowledge source identifiers to delete.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "ksIds"
+        }
+      },
+      "required": [
+        "ks_ids"
+      ]
+    },
+    "BatchDeleteKnowledgeSourcesResponse": {
+      "type": "object",
+      "description": "Response returned after batch deleting knowledge sources.",
+      "properties": {
+        "deleted_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of knowledge sources that were deleted.",
+          "x-ms-client-name": "deletedCount"
+        }
+      }
+    },
+    "ChatCompletionResponse": {
+      "type": "object",
+      "description": "Response from a chat completion request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the completion response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the response was created."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The list of completion choices.",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          }
+        }
+      }
+    },
+    "ChatMessage": {
+      "type": "object",
+      "description": "A single message in a chat conversation.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The role of the message author."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message."
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "The role of a participant in a chat conversation.",
+      "enum": [
+        "system",
+        "user",
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system",
+            "description": "A system message providing instructions."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "A message from the user."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "A message from the assistant."
+          }
+        ]
+      }
+    },
+    "Choice": {
+      "type": "object",
+      "description": "A single completion choice in a chat response.",
+      "properties": {
+        "content_filter_results": {
+          "type": "object",
+          "description": "Content filter results for this choice.",
+          "additionalProperties": {},
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "message": {
+          "$ref": "#/definitions/AssistantMessage",
+          "description": "The assistant message for this choice."
+        }
+      }
+    },
+    "ChunkingConfig": {
+      "type": "object",
+      "description": "Configuration for document chunking during ingestion.",
+      "properties": {
+        "chunkSize": {
+          "type": "string",
+          "description": "Chunk size in characters. Must be a string."
+        },
+        "chunkOverlap": {
+          "type": "string",
+          "description": "Overlap between chunks. Must be a string."
+        }
+      },
+      "required": [
+        "chunkSize",
+        "chunkOverlap"
+      ]
+    },
+    "Citation": {
+      "type": "object",
+      "description": "A citation referencing a source document chunk.",
+      "properties": {
+        "filepath": {
+          "type": "string",
+          "description": "The file path of the cited document."
+        },
+        "chunk_id": {
+          "type": "string",
+          "description": "The identifier of the cited chunk.",
+          "x-ms-client-name": "chunkId"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score of the citation."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the cited chunk."
+        },
+        "page_numbers": {
+          "type": "array",
+          "description": "The page numbers referenced by the citation.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-ms-client-name": "pageNumbers"
+        }
+      }
+    },
+    "Collection": {
+      "type": "object",
+      "description": "Represents a document collection.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the collection."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the collection."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the collection was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "created_by": {
+          "type": "string",
+          "description": "The identifier of the user who created the collection.",
+          "x-ms-client-name": "createdBy"
+        },
+        "status": {
+          "$ref": "#/definitions/CollectionStatus",
+          "description": "The current status of the collection."
+        },
+        "last_ingestion_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last ingestion into this collection.",
+          "x-ms-client-name": "lastIngestionAt"
+        }
+      }
+    },
+    "CollectionList": {
+      "type": "object",
+      "description": "A list of collections with a total count.",
+      "properties": {
+        "collections": {
+          "type": "array",
+          "description": "The list of collections.",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          }
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of collections.",
+          "x-ms-client-name": "totalCount"
+        }
+      }
+    },
+    "CollectionStatus": {
+      "type": "string",
+      "description": "The status of a collection.",
+      "enum": [
+        "active"
+      ],
+      "x-ms-enum": {
+        "name": "CollectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "active",
+            "value": "active",
+            "description": "The collection is active and available."
+          }
+        ]
+      }
+    },
+    "ContentBlock": {
+      "type": "object",
+      "description": "A block of content within a message.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentBlockType",
+          "description": "The type of this content block."
+        },
+        "text": {
+          "$ref": "#/definitions/ContentBlockText",
+          "description": "The text content, present when type is text."
+        },
+        "image_url": {
+          "$ref": "#/definitions/ContentBlockImageUrl",
+          "description": "The image URL content, present when type is image_url.",
+          "x-ms-client-name": "imageUrl"
+        }
+      }
+    },
+    "ContentBlockImageUrl": {
+      "type": "object",
+      "description": "Image URL content within a content block.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the image."
+        },
+        "detail": {
+          "type": "string",
+          "description": "The detail level for the image."
+        }
+      }
+    },
+    "ContentBlockText": {
+      "type": "object",
+      "description": "Text content within a content block.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The text value."
+        },
+        "annotations": {
+          "type": "array",
+          "description": "Annotations on the text content.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ContentBlockType": {
+      "type": "string",
+      "description": "The type of a content block within a message.",
+      "enum": [
+        "text",
+        "image_url"
+      ],
+      "x-ms-enum": {
+        "name": "ContentBlockType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "A text content block."
+          },
+          {
+            "name": "image_url",
+            "value": "image_url",
+            "description": "An image URL content block."
+          }
+        ]
+      }
+    },
+    "CreateCollectionRequest": {
+      "type": "object",
+      "description": "Request body for creating a new collection.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Lowercase letters, digits, hyphens. 2-49 chars.",
+          "minLength": 2,
+          "maxLength": 49,
+          "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the collection.",
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CreateIngestionRequest": {
+      "type": "object",
+      "description": "Request body for creating an ingestion job.",
+      "properties": {
+        "datasource": {
+          "$ref": "#/definitions/IngestionDatasource",
+          "description": "The data source configuration for ingestion."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "Target collection name. Must exist.",
+          "default": "edgeragapp"
+        },
+        "dataRefreshIntervalInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "-1 = one-time, 1/4/24 = recurring.",
+          "default": -1
+        },
+        "parsingMode": {
+          "type": "string",
+          "description": "The parsing mode to use for document processing.",
+          "default": "basic",
+          "enum": [
+            "basic",
+            "advanced"
+          ],
+          "x-ms-enum": {
+            "name": "ParsingMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "basic",
+                "value": "basic",
+                "description": "Basic parsing mode."
+              },
+              {
+                "name": "advanced",
+                "value": "advanced",
+                "description": "Advanced parsing mode with enhanced document understanding."
+              }
+            ]
+          }
+        },
+        "excludeLgrFailureUpdate": {
+          "type": "boolean",
+          "description": "Whether to exclude LGR failure updates."
+        }
+      },
+      "required": [
+        "datasource"
+      ]
+    },
+    "CreateKnowledgeSourceRequest": {
+      "type": "object",
+      "description": "Request body for creating a new knowledge source.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the knowledge source.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "kind": {
+          "$ref": "#/definitions/KnowledgeSourceKind",
+          "description": "The kind of knowledge source."
+        },
+        "auth_type": {
+          "$ref": "#/definitions/AuthType",
+          "description": "The authentication type for the knowledge source.",
+          "x-ms-client-name": "authType"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the knowledge source."
+        },
+        "created_by": {
+          "type": "string",
+          "description": "The identifier of the user creating the knowledge source.",
+          "x-ms-client-name": "createdBy"
+        },
+        "remote_mcp_parameters": {
+          "$ref": "#/definitions/RemoteMcpParameters",
+          "description": "Parameters for a remote MCP server connection.",
+          "x-ms-client-name": "remoteMcpParameters"
+        },
+        "indexed_sources_parameters": {
+          "$ref": "#/definitions/IndexedSourcesParameters",
+          "description": "Parameters for an indexed sources connection.",
+          "x-ms-client-name": "indexedSourcesParameters"
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ]
+    },
+    "CreateMessageRequest": {
+      "type": "object",
+      "description": "Request body for creating a new message in a thread.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "The role of the message author."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the message. Can be a string or content blocks array."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "File or tool attachments for the message.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "CreateRunRequest": {
+      "type": "object",
+      "description": "Request body for creating a run on a thread.",
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "description": "ID of the knowledge base (format: asst_{uuid}).",
+          "x-ms-client-name": "agentId"
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Instructions for the agent to follow during the run."
+        },
+        "additional_messages": {
+          "type": "array",
+          "description": "Additional messages to include in the run.",
+          "items": {
+            "$ref": "#/definitions/CreateRunRequestAdditionalMessagesItem"
+          },
+          "x-ms-client-name": "additionalMessages"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "agent_id"
+      ]
+    },
+    "CreateRunRequestAdditionalMessagesItem": {
+      "type": "object",
+      "description": "An additional message to include when creating a run.",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The role of the message author."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message."
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "CreateThreadRequest": {
+      "type": "object",
+      "description": "Request body for creating a new thread.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the thread."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "description": "A data source configuration for retrieval.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DataSourceType",
+          "description": "The type of the data source."
+        },
+        "parameters": {
+          "$ref": "#/definitions/MilvusDataSourceParameters",
+          "description": "Configuration parameters for the Milvus data source."
+        }
+      }
+    },
+    "DataSourceType": {
+      "type": "string",
+      "description": "The type of data source used for retrieval.",
+      "enum": [
+        "milvus"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "milvus",
+            "value": "milvus",
+            "description": "A Milvus vector database data source."
+          }
+        ]
+      }
+    },
+    "DeleteCollectionResponse": {
+      "type": "object",
+      "description": "Response returned after deleting a collection.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/DeleteStatus",
+          "description": "The deletion status."
+        },
+        "deleted_resources": {
+          "$ref": "#/definitions/DeleteCollectionResponseDeletedResources",
+          "description": "Details of the resources that were deleted.",
+          "x-ms-client-name": "deletedResources"
+        }
+      }
+    },
+    "DeleteCollectionResponseDeletedResources": {
+      "type": "object",
+      "description": "Details of resources deleted as part of a collection deletion.",
+      "properties": {
+        "milvus_collections": {
+          "type": "array",
+          "description": "The names of the Milvus collections that were deleted.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "milvusCollections"
+        },
+        "postgres_tables": {
+          "type": "array",
+          "description": "The names of the Postgres tables that were deleted.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "postgresTables"
+        }
+      }
+    },
+    "DeleteResponse": {
+      "type": "object",
+      "description": "Response returned after a delete operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the deleted resource."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of the deleted resource."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Whether the resource was successfully deleted."
+        }
+      }
+    },
+    "DeleteStatus": {
+      "type": "string",
+      "description": "The status indicating a resource has been deleted.",
+      "enum": [
+        "deleted"
+      ],
+      "x-ms-enum": {
+        "name": "DeleteStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "deleted",
+            "value": "deleted",
+            "description": "The resource has been deleted."
+          }
+        ]
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Represents an error response returned by the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseError",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorResponseError": {
+      "type": "object",
+      "description": "Details of an error returned by the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        }
+      }
+    },
+    "IndexedSourcesParameters": {
+      "type": "object",
+      "description": "Connection parameters for an indexed sources MCP server.",
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "description": "The URL of the indexed sources MCP server.",
+          "x-ms-client-name": "serverUrl"
+        },
+        "indexed_source_ref": {
+          "type": "string",
+          "description": "The name of the indexed source to connect to.",
+          "x-ms-client-name": "indexedSourceRef"
+        },
+        "server_label": {
+          "type": "string",
+          "description": "A human-readable label for the server.",
+          "default": "indexed-sources-mcp-server",
+          "x-ms-client-name": "serverLabel"
+        }
+      },
+      "required": [
+        "server_url",
+        "indexed_source_ref"
+      ]
+    },
+    "IngestionCreateResponse": {
+      "type": "object",
+      "description": "Response returned after creating an ingestion job.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the ingestion job creation."
+        },
+        "message": {
+          "type": "object",
+          "description": "Additional details about the ingestion job creation.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "IngestionDatasource": {
+      "type": "object",
+      "description": "Data source configuration for an ingestion job.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/IngestionDatasourceKind",
+          "description": "The kind of data source."
+        },
+        "connection": {
+          "$ref": "#/definitions/IngestionDatasourceConnection",
+          "description": "Connection details for the data source."
+        },
+        "chunking": {
+          "$ref": "#/definitions/ChunkingConfig",
+          "description": "Chunking configuration for document processing."
+        }
+      },
+      "required": [
+        "kind",
+        "chunking"
+      ]
+    },
+    "IngestionDatasourceConnection": {
+      "type": "object",
+      "description": "Connection details for an ingestion data source.",
+      "properties": {
+        "nfsServerPath": {
+          "type": "string",
+          "description": "NFS server path (server_ip:/path). Required when kind is nfsv3."
+        },
+        "nfsUid": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The NFS user identifier."
+        },
+        "nfsGid": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The NFS group identifier."
+        },
+        "sharePointUrl": {
+          "type": "string",
+          "description": "SharePoint site URL. Required when kind is sharepoint."
+        },
+        "sharePointFolderPath": {
+          "type": "string",
+          "description": "The folder path within the SharePoint site."
+        },
+        "sharePointUsername": {
+          "type": "string",
+          "description": "Format: DOMAIN\\\\username"
+        },
+        "sharePointPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "RSA-encrypted base64-encoded password.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "IngestionDatasourceKind": {
+      "type": "string",
+      "description": "The kind of data source for ingestion.",
+      "enum": [
+        "nfsv3",
+        "sharepoint"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionDatasourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nfsv3",
+            "value": "nfsv3",
+            "description": "An NFS v3 file share data source."
+          },
+          {
+            "name": "sharepoint",
+            "value": "sharepoint",
+            "description": "A SharePoint data source."
+          }
+        ]
+      }
+    },
+    "IngestionJobList": {
+      "type": "object",
+      "description": "A list of ingestion job runs.",
+      "properties": {
+        "jobRuns": {
+          "type": "array",
+          "description": "The list of ingestion job runs.",
+          "items": {
+            "$ref": "#/definitions/IngestionJobRun"
+          }
+        }
+      }
+    },
+    "IngestionJobRun": {
+      "type": "object",
+      "description": "Represents an ingestion job run.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The identifier of the ingestion job."
+        },
+        "runId": {
+          "type": "string",
+          "description": "The identifier of the run."
+        },
+        "status": {
+          "$ref": "#/definitions/IngestionJobStatus",
+          "description": "The current status of the job run."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the run started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the run ended."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identifier of the user who created the job."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the target collection."
+        }
+      }
+    },
+    "IngestionJobStatus": {
+      "type": "string",
+      "description": "The status of an ingestion job.",
+      "enum": [
+        "PENDING",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionJobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PENDING",
+            "value": "PENDING",
+            "description": "The job is pending execution."
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "The job is currently running."
+          },
+          {
+            "name": "COMPLETED",
+            "value": "COMPLETED",
+            "description": "The job completed successfully."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "The job failed."
+          }
+        ]
+      }
+    },
+    "IngestionRunDetail": {
+      "type": "object",
+      "description": "Detailed information about an ingestion run.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The identifier of the ingestion job."
+        },
+        "runId": {
+          "type": "string",
+          "description": "The identifier of the run."
+        },
+        "status": {
+          "$ref": "#/definitions/IngestionJobStatus",
+          "description": "The current status of the run."
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items to process."
+        },
+        "processedItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items that have been processed."
+        },
+        "failedItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items that failed processing."
+        },
+        "errorInfo": {
+          "type": "object",
+          "description": "Error details if the run failed.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "JsonRpcError": {
+      "type": "object",
+      "description": "A JSON-RPC 2.0 error object.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "-32600 Invalid Request, -32601 Method not found, -32602 Invalid params,\n-32603 Internal error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        },
+        "data": {
+          "type": "object",
+          "description": "Any object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JsonRpcRequest": {
+      "type": "object",
+      "description": "A JSON-RPC 2.0 request for the MCP endpoint.",
+      "properties": {
+        "jsonrpc": {
+          "$ref": "#/definitions/JsonRpcVersion",
+          "description": "The JSON-RPC protocol version."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The request identifier."
+        },
+        "method": {
+          "$ref": "#/definitions/McpMethod",
+          "description": "The MCP method to invoke."
+        },
+        "params": {
+          "type": "object",
+          "description": "Method-specific parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "method"
+      ]
+    },
+    "JsonRpcResponse": {
+      "type": "object",
+      "description": "A JSON-RPC 2.0 response from the MCP endpoint.",
+      "properties": {
+        "jsonrpc": {
+          "$ref": "#/definitions/JsonRpcVersion",
+          "description": "The JSON-RPC protocol version."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The request identifier this response corresponds to."
+        },
+        "result": {
+          "type": "object",
+          "description": "Method-specific result.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/JsonRpcError",
+          "description": "The error object, present when the request failed."
+        }
+      }
+    },
+    "JsonRpcVersion": {
+      "type": "string",
+      "description": "The JSON-RPC protocol version.",
+      "enum": [
+        "2.0"
+      ],
+      "x-ms-enum": {
+        "name": "JsonRpcVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2.0",
+            "value": "2.0",
+            "description": "JSON-RPC version 2.0."
+          }
+        ]
+      }
+    },
+    "KnowledgeBase": {
+      "type": "object",
+      "description": "Represents a knowledge base that aggregates knowledge sources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the knowledge base.",
+          "readOnly": true
+        },
+        "object": {
+          "$ref": "#/definitions/KnowledgeBaseObjectType",
+          "description": "The object type of this resource."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the knowledge base was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the knowledge base was last updated.",
+          "x-ms-client-name": "updatedAt"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the knowledge base."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the knowledge base."
+        },
+        "knowledge_source_ids": {
+          "type": "array",
+          "description": "The list of associated knowledge source identifiers.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "knowledgeSourceIds"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "KnowledgeBaseList": {
+      "type": "object",
+      "description": "A paginated list of knowledge bases.",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/ListObjectType",
+          "description": "The object type of this response."
+        },
+        "data": {
+          "type": "array",
+          "description": "The list of knowledge bases.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBase"
+          }
+        },
+        "first_id": {
+          "type": "string",
+          "description": "The identifier of the first knowledge base in the list.",
+          "x-ms-client-name": "firstId"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "The identifier of the last knowledge base in the list.",
+          "x-ms-client-name": "lastId"
+        },
+        "has_more": {
+          "type": "boolean",
+          "description": "Whether there are more knowledge bases available.",
+          "x-ms-client-name": "hasMore"
+        }
+      }
+    },
+    "KnowledgeBaseObjectType": {
+      "type": "string",
+      "description": "The object type for knowledge base resources.",
+      "enum": [
+        "knowledge_base"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "knowledge_base",
+            "value": "knowledge_base",
+            "description": "Indicates a knowledge base object."
+          }
+        ]
+      }
+    },
+    "KnowledgeBaseWrapper": {
+      "type": "object",
+      "description": "Wrapper containing a single knowledge base.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/KnowledgeBase",
+          "description": "The knowledge base data."
+        }
+      }
+    },
+    "KnowledgeSource": {
+      "type": "object",
+      "description": "Represents a knowledge source.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the knowledge source.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the knowledge source."
+        },
+        "kind": {
+          "$ref": "#/definitions/KnowledgeSourceKind",
+          "description": "The kind of knowledge source."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the knowledge source."
+        },
+        "auth_type": {
+          "$ref": "#/definitions/AuthType",
+          "description": "The authentication type for the knowledge source.",
+          "x-ms-client-name": "authType"
+        },
+        "remote_mcp_parameters": {
+          "$ref": "#/definitions/RemoteMcpParameters",
+          "description": "Parameters for a remote MCP server connection.",
+          "x-ms-client-name": "remoteMcpParameters"
+        },
+        "indexed_sources_parameters": {
+          "$ref": "#/definitions/IndexedSourcesParameters",
+          "description": "Parameters for an indexed sources connection.",
+          "x-ms-client-name": "indexedSourcesParameters"
+        },
+        "validation_status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "The current validation status of the knowledge source.",
+          "x-ms-client-name": "validationStatus"
+        },
+        "validation_error": {
+          "type": "string",
+          "description": "The validation error message, if validation failed.",
+          "x-ms-client-name": "validationError"
+        },
+        "validated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the knowledge source was last validated.",
+          "x-ms-client-name": "validatedAt"
+        },
+        "created_by": {
+          "type": "string",
+          "description": "The identifier of the user who created the knowledge source.",
+          "x-ms-client-name": "createdBy"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the knowledge source was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the knowledge source was last updated.",
+          "x-ms-client-name": "updatedAt"
+        }
+      }
+    },
+    "KnowledgeSourceKind": {
+      "type": "string",
+      "description": "The kind of knowledge source.",
+      "enum": [
+        "remote_mcp",
+        "indexed_sources_mcp"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "remote_mcp",
+            "value": "remote_mcp",
+            "description": "A remote MCP server knowledge source."
+          },
+          {
+            "name": "indexed_sources_mcp",
+            "value": "indexed_sources_mcp",
+            "description": "An indexed sources MCP knowledge source."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceList": {
+      "type": "object",
+      "description": "A paginated list of knowledge sources.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of knowledge sources.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSource"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of knowledge sources."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of items returned per page."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items skipped."
+        }
+      }
+    },
+    "ListObjectType": {
+      "type": "string",
+      "description": "The object type for list responses.",
+      "enum": [
+        "list"
+      ],
+      "x-ms-enum": {
+        "name": "ListObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "list",
+            "value": "list",
+            "description": "Indicates a list response."
+          }
+        ]
+      }
+    },
+    "McpCollectionInfo": {
+      "type": "object",
+      "description": "Information about a collection available via MCP.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the collection."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the collection."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the collection."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the collection was created.",
+          "x-ms-client-name": "createdAt"
+        }
+      }
+    },
+    "McpCollectionsResponse": {
+      "type": "object",
+      "description": "Returned by get_available_collections.",
+      "properties": {
+        "collections": {
+          "type": "array",
+          "description": "The list of available collections.",
+          "items": {
+            "$ref": "#/definitions/McpCollectionInfo"
+          }
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of available collections.",
+          "x-ms-client-name": "totalCount"
+        }
+      }
+    },
+    "McpMethod": {
+      "type": "string",
+      "description": "The MCP method to invoke.",
+      "enum": [
+        "initialize",
+        "tools/list",
+        "tools/call"
+      ],
+      "x-ms-enum": {
+        "name": "McpMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "initialize",
+            "value": "initialize",
+            "description": "Initialize the MCP session."
+          },
+          {
+            "name": "tools/list",
+            "value": "tools/list",
+            "description": "List available tools."
+          },
+          {
+            "name": "tools/call",
+            "value": "tools/call",
+            "description": "Call a specific tool."
+          }
+        ]
+      }
+    },
+    "Message": {
+      "type": "object",
+      "description": "Represents a message within a thread.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the message.",
+          "readOnly": true
+        },
+        "object": {
+          "$ref": "#/definitions/MessageObjectType",
+          "description": "The object type of this resource."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the message was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The identifier of the thread this message belongs to.",
+          "x-ms-client-name": "threadId"
+        },
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "The role of the message author."
+        },
+        "content": {
+          "type": "array",
+          "description": "The content blocks of the message.",
+          "items": {
+            "$ref": "#/definitions/ContentBlock"
+          }
+        },
+        "agent_id": {
+          "type": "string",
+          "description": "The identifier of the agent that created the message.",
+          "x-ms-client-name": "agentId"
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The identifier of the run that created the message.",
+          "x-ms-client-name": "runId"
+        },
+        "attachments": {
+          "type": "array",
+          "description": "File or tool attachments for the message.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MessageList": {
+      "type": "object",
+      "description": "A paginated list of messages.",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/ListObjectType",
+          "description": "The object type of this response."
+        },
+        "data": {
+          "type": "array",
+          "description": "The list of messages.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "first_id": {
+          "type": "string",
+          "description": "The identifier of the first message in the list.",
+          "x-ms-client-name": "firstId"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "The identifier of the last message in the list.",
+          "x-ms-client-name": "lastId"
+        },
+        "has_more": {
+          "type": "boolean",
+          "description": "Whether there are more messages available.",
+          "x-ms-client-name": "hasMore"
+        }
+      }
+    },
+    "MessageObjectType": {
+      "type": "string",
+      "description": "The object type for message resources.",
+      "enum": [
+        "thread.message"
+      ],
+      "x-ms-enum": {
+        "name": "MessageObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "thread.message",
+            "value": "thread.message",
+            "description": "Indicates a thread message object."
+          }
+        ]
+      }
+    },
+    "MessageRole": {
+      "type": "string",
+      "description": "The role of a message author.",
+      "enum": [
+        "user",
+        "assistant",
+        "system"
+      ],
+      "x-ms-enum": {
+        "name": "MessageRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user",
+            "description": "A message from the user."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "A message from the assistant."
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "A system message."
+          }
+        ]
+      }
+    },
+    "MilvusDataSourceParameters": {
+      "type": "object",
+      "description": "Configuration parameters for a Milvus data source.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Milvus endpoint. Use empty string.",
+          "default": ""
+        },
+        "index_name": {
+          "type": "string",
+          "description": "Collection to query.",
+          "default": "edgeragapp",
+          "x-ms-client-name": "indexName"
+        },
+        "text_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Text strictness level for filtering results.",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 5,
+          "x-ms-client-name": "textStrictness"
+        },
+        "image_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Image strictness level for filtering results.",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 5,
+          "x-ms-client-name": "imageStrictness"
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of documents to retrieve.",
+          "default": 5,
+          "x-ms-client-name": "topNDocuments"
+        },
+        "query_type": {
+          "type": "string",
+          "description": "The type of query to perform.",
+          "default": "hybrid_search",
+          "enum": [
+            "hybrid_search",
+            "vector_search",
+            "full_text_search",
+            "hybrid_multimodal_search"
+          ],
+          "x-ms-enum": {
+            "name": "QueryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "hybrid_search",
+                "value": "hybrid_search",
+                "description": "A hybrid search combining dense and sparse retrieval."
+              },
+              {
+                "name": "vector_search",
+                "value": "vector_search",
+                "description": "A vector similarity search."
+              },
+              {
+                "name": "full_text_search",
+                "value": "full_text_search",
+                "description": "A full text search."
+              },
+              {
+                "name": "hybrid_multimodal_search",
+                "value": "hybrid_multimodal_search",
+                "description": "A hybrid multimodal search across text and images."
+              }
+            ]
+          },
+          "x-ms-client-name": "queryType"
+        }
+      }
+    },
+    "ModelOnlyChatRequest": {
+      "type": "object",
+      "description": "Request body for a model-only chat completion without retrieval.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The list of chat messages forming the conversation.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Sampling temperature for the model response.",
+          "default": 0.7,
+          "maximum": 1
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "Nucleus sampling probability for the model response.",
+          "default": 0.1,
+          "x-ms-client-name": "topP"
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
+    "ModifyThreadRequest": {
+      "type": "object",
+      "description": "Request body for modifying an existing thread.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The updated title of the thread."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MultimodalSearchRequest": {
+      "type": "object",
+      "description": "Used by search_multimodal.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The search query text."
+        },
+        "collection_names": {
+          "type": "array",
+          "description": "The names of collections to search.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "collectionNames"
+        },
+        "top_n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of results to return.",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 50,
+          "x-ms-client-name": "topN"
+        },
+        "text_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Text strictness level for filtering text results.",
+          "default": 1,
+          "maximum": 5,
+          "x-ms-client-name": "textStrictness"
+        },
+        "image_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Image strictness level for filtering image results.",
+          "default": 1,
+          "maximum": 5,
+          "x-ms-client-name": "imageStrictness"
+        },
+        "filters": {
+          "type": "string",
+          "description": "Milvus boolean filter expression."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "MultimodalSearchResponse": {
+      "type": "object",
+      "description": "Returned by search_multimodal.",
+      "properties": {
+        "text_chunks": {
+          "type": "array",
+          "description": "The text chunk results.",
+          "items": {
+            "$ref": "#/definitions/ToolChunkResult"
+          },
+          "x-ms-client-name": "textChunks"
+        },
+        "image_chunks": {
+          "type": "array",
+          "description": "The image chunk results.",
+          "items": {
+            "$ref": "#/definitions/ToolChunkResult"
+          },
+          "x-ms-client-name": "imageChunks"
+        },
+        "metadata": {
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "Metadata about the search operation."
+        }
+      }
+    },
+    "ParsingMode": {
+      "type": "string",
+      "description": "The document parsing mode for ingestion.",
+      "enum": [
+        "basic",
+        "advanced"
+      ],
+      "x-ms-enum": {
+        "name": "ParsingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "basic",
+            "value": "basic",
+            "description": "Basic parsing mode."
+          },
+          {
+            "name": "advanced",
+            "value": "advanced",
+            "description": "Advanced parsing mode with enhanced document understanding."
+          }
+        ]
+      }
+    },
+    "QueryType": {
+      "type": "string",
+      "description": "The type of search query to perform.",
+      "enum": [
+        "hybrid_search",
+        "vector_search",
+        "full_text_search",
+        "hybrid_multimodal_search"
+      ],
+      "x-ms-enum": {
+        "name": "QueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "hybrid_search",
+            "value": "hybrid_search",
+            "description": "A hybrid search combining dense and sparse retrieval."
+          },
+          {
+            "name": "vector_search",
+            "value": "vector_search",
+            "description": "A vector similarity search."
+          },
+          {
+            "name": "full_text_search",
+            "value": "full_text_search",
+            "description": "A full text search."
+          },
+          {
+            "name": "hybrid_multimodal_search",
+            "value": "hybrid_multimodal_search",
+            "description": "A hybrid multimodal search across text and images."
+          }
+        ]
+      }
+    },
+    "RagChatRequest": {
+      "type": "object",
+      "description": "Request body for a RAG chat completion.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The list of chat messages forming the conversation.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Sampling temperature for the model response.",
+          "default": 0.7,
+          "maximum": 1
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "Nucleus sampling probability for the model response.",
+          "default": 0.1,
+          "x-ms-client-name": "topP"
+        },
+        "isMarkdown": {
+          "type": "boolean",
+          "description": "Whether to format the response as Markdown."
+        },
+        "data_sources": {
+          "type": "array",
+          "description": "Data sources to query for retrieval-augmented generation.",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          },
+          "x-ms-client-name": "dataSources"
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
+    "RemoteMcpParameters": {
+      "type": "object",
+      "description": "Connection parameters for a remote MCP server.",
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "description": "URL of the MCP server endpoint.",
+          "x-ms-client-name": "serverUrl"
+        },
+        "server_label": {
+          "type": "string",
+          "description": "A human-readable label for the MCP server.",
+          "x-ms-client-name": "serverLabel"
+        }
+      },
+      "required": [
+        "server_url"
+      ]
+    },
+    "ReplaceKnowledgeBaseRequest": {
+      "type": "object",
+      "description": "Request body for fully replacing a knowledge base.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the knowledge base.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the knowledge base.",
+          "maxLength": 512
+        },
+        "knowledge_source_ids": {
+          "type": "array",
+          "description": "The list of associated knowledge source identifiers.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "knowledgeSourceIds"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Run": {
+      "type": "object",
+      "description": "Represents an execution run on a thread.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the run.",
+          "readOnly": true
+        },
+        "object": {
+          "$ref": "#/definitions/RunObjectType",
+          "description": "The object type of this resource."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the run was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The identifier of the thread this run belongs to.",
+          "x-ms-client-name": "threadId"
+        },
+        "agent_id": {
+          "type": "string",
+          "description": "The identifier of the agent used for this run.",
+          "x-ms-client-name": "agentId"
+        },
+        "status": {
+          "$ref": "#/definitions/RunStatus",
+          "description": "The current status of the run."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "The instructions used for this run."
+        },
+        "last_error": {
+          "$ref": "#/definitions/RunError",
+          "description": "The last error that occurred during the run, if any.",
+          "x-ms-client-name": "lastError"
+        },
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Token usage statistics for the run."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "started_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the run started.",
+          "x-ms-client-name": "startedAt"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the run completed.",
+          "x-ms-client-name": "completedAt"
+        },
+        "failed_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the run failed.",
+          "x-ms-client-name": "failedAt"
+        },
+        "cancelled_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the run was cancelled.",
+          "x-ms-client-name": "cancelledAt"
+        }
+      }
+    },
+    "RunError": {
+      "type": "object",
+      "description": "Represents an error that occurred during a run.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        }
+      }
+    },
+    "RunObjectType": {
+      "type": "string",
+      "description": "The object type for run resources.",
+      "enum": [
+        "thread.run"
+      ],
+      "x-ms-enum": {
+        "name": "RunObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "thread.run",
+            "value": "thread.run",
+            "description": "Indicates a thread run object."
+          }
+        ]
+      }
+    },
+    "RunStatus": {
+      "type": "string",
+      "description": "The execution status of a run.",
+      "enum": [
+        "queued",
+        "in_progress",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "RunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queued",
+            "value": "queued",
+            "description": "The run is queued for execution."
+          },
+          {
+            "name": "in_progress",
+            "value": "in_progress",
+            "description": "The run is currently in progress."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The run completed successfully."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The run failed."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The run was cancelled."
+          }
+        ]
+      }
+    },
+    "RunStep": {
+      "type": "object",
+      "description": "Represents a single step within a run.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the run step.",
+          "readOnly": true
+        },
+        "object": {
+          "$ref": "#/definitions/RunStepObjectType",
+          "description": "The object type of this resource."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the step was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The identifier of the run this step belongs to.",
+          "x-ms-client-name": "runId"
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The identifier of the thread this step belongs to.",
+          "x-ms-client-name": "threadId"
+        },
+        "type": {
+          "$ref": "#/definitions/RunStepType",
+          "description": "The type of this run step."
+        },
+        "step_details": {
+          "type": "object",
+          "description": "Details vary by step type. Contains step-specific structured data.",
+          "additionalProperties": {},
+          "x-ms-client-name": "stepDetails"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp of when the step completed.",
+          "x-ms-client-name": "completedAt"
+        }
+      }
+    },
+    "RunStepList": {
+      "type": "object",
+      "description": "A paginated list of run steps.",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/ListObjectType",
+          "description": "The object type of this response."
+        },
+        "data": {
+          "type": "array",
+          "description": "The list of run steps.",
+          "items": {
+            "$ref": "#/definitions/RunStep"
+          }
+        },
+        "first_id": {
+          "type": "string",
+          "description": "The identifier of the first run step in the list.",
+          "x-ms-client-name": "firstId"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "The identifier of the last run step in the list.",
+          "x-ms-client-name": "lastId"
+        },
+        "has_more": {
+          "type": "boolean",
+          "description": "Whether there are more run steps available.",
+          "x-ms-client-name": "hasMore"
+        }
+      }
+    },
+    "RunStepObjectType": {
+      "type": "string",
+      "description": "The object type for run step resources.",
+      "enum": [
+        "thread.run.step"
+      ],
+      "x-ms-enum": {
+        "name": "RunStepObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "thread.run.step",
+            "value": "thread.run.step",
+            "description": "Indicates a thread run step object."
+          }
+        ]
+      }
+    },
+    "RunStepType": {
+      "type": "string",
+      "description": "The type of a run step.",
+      "enum": [
+        "message_creation",
+        "tool_calls",
+        "mcp_call"
+      ],
+      "x-ms-enum": {
+        "name": "RunStepType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "message_creation",
+            "value": "message_creation",
+            "description": "A message creation step."
+          },
+          {
+            "name": "tool_calls",
+            "value": "tool_calls",
+            "description": "A tool calls step."
+          },
+          {
+            "name": "mcp_call",
+            "value": "mcp_call",
+            "description": "An MCP call step."
+          }
+        ]
+      }
+    },
+    "SearchChunksResponse": {
+      "type": "object",
+      "description": "Returned by search_hybrid, search_vector, search_text, search_image.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "The list of chunk results.",
+          "items": {
+            "$ref": "#/definitions/ToolChunkResult"
+          }
+        },
+        "metadata": {
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "Metadata about the search operation."
+        }
+      }
+    },
+    "SearchMetadata": {
+      "type": "object",
+      "description": "Metadata about a search operation.",
+      "properties": {
+        "results_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of results returned.",
+          "x-ms-client-name": "resultsNumber"
+        },
+        "search_type": {
+          "$ref": "#/definitions/SearchType",
+          "description": "The type of search that was performed.",
+          "x-ms-client-name": "searchType"
+        },
+        "collection": {
+          "type": "string",
+          "description": "The name of the collection that was searched."
+        }
+      }
+    },
+    "SearchToolRequest": {
+      "type": "object",
+      "description": "Used by search_hybrid, search_vector, search_text, search_image.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The search query text."
+        },
+        "collection_names": {
+          "type": "array",
+          "description": "Default: [\"edgeragapp\"].",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "collectionNames"
+        },
+        "top_n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of results to return.",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 50,
+          "x-ms-client-name": "topN"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Strictness level for filtering results.",
+          "default": 1,
+          "maximum": 5
+        },
+        "filters": {
+          "type": "string",
+          "description": "Milvus boolean filter expression."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "SearchType": {
+      "type": "string",
+      "description": "The type of search performed.",
+      "enum": [
+        "hybrid_search",
+        "vector_search",
+        "full_text_search",
+        "image_search",
+        "multimodal_search"
+      ],
+      "x-ms-enum": {
+        "name": "SearchType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "hybrid_search",
+            "value": "hybrid_search",
+            "description": "A hybrid search combining dense and sparse retrieval."
+          },
+          {
+            "name": "vector_search",
+            "value": "vector_search",
+            "description": "A vector similarity search."
+          },
+          {
+            "name": "full_text_search",
+            "value": "full_text_search",
+            "description": "A full text search."
+          },
+          {
+            "name": "image_search",
+            "value": "image_search",
+            "description": "An image search."
+          },
+          {
+            "name": "multimodal_search",
+            "value": "multimodal_search",
+            "description": "A multimodal search across text and images."
+          }
+        ]
+      }
+    },
+    "SortOrder": {
+      "type": "string",
+      "description": "Specifies the sort order for list operations.",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "SortOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "asc",
+            "value": "asc",
+            "description": "Ascending sort order."
+          },
+          {
+            "name": "desc",
+            "value": "desc",
+            "description": "Descending sort order."
+          }
+        ]
+      }
+    },
+    "Thread": {
+      "type": "object",
+      "description": "Represents a conversation thread.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the thread.",
+          "readOnly": true
+        },
+        "object": {
+          "$ref": "#/definitions/ThreadObjectType",
+          "description": "The object type of this resource."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp.",
+          "x-ms-client-name": "createdAt"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the thread."
+        },
+        "owner_id": {
+          "type": "string",
+          "description": "The identifier of the thread owner.",
+          "x-ms-client-name": "ownerId"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ThreadList": {
+      "type": "object",
+      "description": "A paginated list of threads.",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/ListObjectType",
+          "description": "The object type of this response."
+        },
+        "data": {
+          "type": "array",
+          "description": "The list of threads.",
+          "items": {
+            "$ref": "#/definitions/Thread"
+          }
+        },
+        "first_id": {
+          "type": "string",
+          "description": "The identifier of the first thread in the list.",
+          "x-ms-client-name": "firstId"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "The identifier of the last thread in the list.",
+          "x-ms-client-name": "lastId"
+        },
+        "has_more": {
+          "type": "boolean",
+          "description": "Whether there are more threads available.",
+          "x-ms-client-name": "hasMore"
+        }
+      }
+    },
+    "ThreadObjectType": {
+      "type": "string",
+      "description": "The object type for thread resources.",
+      "enum": [
+        "thread"
+      ],
+      "x-ms-enum": {
+        "name": "ThreadObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "thread",
+            "value": "thread",
+            "description": "Indicates a thread object."
+          }
+        ]
+      }
+    },
+    "ToolChunkResult": {
+      "type": "object",
+      "description": "A single chunk result from a search tool invocation.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The text content of the chunk."
+        },
+        "file_path": {
+          "type": "string",
+          "description": "The file path of the source document.",
+          "x-ms-client-name": "filePath"
+        },
+        "chunk_id": {
+          "type": "string",
+          "description": "The identifier of the chunk.",
+          "x-ms-client-name": "chunkId"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score of the chunk."
+        },
+        "page_numbers": {
+          "type": "array",
+          "description": "The page numbers referenced by the chunk.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-ms-client-name": "pageNumbers"
+        },
+        "vector_type": {
+          "type": "string",
+          "description": "The type of vector used for this result.",
+          "default": "dense",
+          "enum": [
+            "dense",
+            "sparse",
+            "image"
+          ],
+          "x-ms-enum": {
+            "name": "VectorType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "dense",
+                "value": "dense",
+                "description": "A dense vector result."
+              },
+              {
+                "name": "sparse",
+                "value": "sparse",
+                "description": "A sparse vector result."
+              },
+              {
+                "name": "image",
+                "value": "image",
+                "description": "An image vector result."
+              }
+            ]
+          },
+          "x-ms-client-name": "vectorType"
+        }
+      }
+    },
+    "UpdateCollectionRequest": {
+      "type": "object",
+      "description": "Request body for updating a collection.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The updated description of the collection.",
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "UpdateKnowledgeBaseRequest": {
+      "type": "object",
+      "description": "Request body for partially updating a knowledge base.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The updated name of the knowledge base."
+        },
+        "description": {
+          "type": "string",
+          "description": "The updated description of the knowledge base."
+        },
+        "knowledge_source_ids": {
+          "type": "array",
+          "description": "Replaces entire list when provided.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "knowledgeSourceIds"
+        }
+      }
+    },
+    "UpdateKnowledgeSourceRequest": {
+      "type": "object",
+      "description": "Request body for partially updating a knowledge source.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The updated name of the knowledge source.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string",
+          "description": "The updated description of the knowledge source."
+        },
+        "auth_type": {
+          "$ref": "#/definitions/AuthType",
+          "description": "The updated authentication type.",
+          "x-ms-client-name": "authType"
+        },
+        "remote_mcp_parameters": {
+          "$ref": "#/definitions/RemoteMcpParameters",
+          "description": "Updated parameters for a remote MCP server connection.",
+          "x-ms-client-name": "remoteMcpParameters"
+        },
+        "indexed_sources_parameters": {
+          "$ref": "#/definitions/IndexedSourcesParameters",
+          "description": "Updated parameters for an indexed sources connection.",
+          "x-ms-client-name": "indexedSourcesParameters"
+        }
+      }
+    },
+    "Usage": {
+      "type": "object",
+      "description": "Token usage statistics for a run.",
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of prompt tokens used.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of completion tokens generated.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens used.",
+          "x-ms-client-name": "totalTokens"
+        }
+      }
+    },
+    "UserRole": {
+      "type": "string",
+      "description": "The role of the user making an inference request.",
+      "enum": [
+        "dev",
+        "user"
+      ],
+      "x-ms-enum": {
+        "name": "UserRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "dev",
+            "value": "dev",
+            "description": "Developer role with full parameter control."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "Standard user role with developer-configured settings."
+          }
+        ]
+      }
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "description": "The validation status of a knowledge source.",
+      "enum": [
+        "unknown",
+        "active",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Validation status is unknown."
+          },
+          {
+            "name": "active",
+            "value": "active",
+            "description": "The knowledge source is validated and active."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Validation of the knowledge source failed."
+          }
+        ]
+      }
+    },
+    "VectorType": {
+      "type": "string",
+      "description": "The type of vector used in search results.",
+      "enum": [
+        "dense",
+        "sparse",
+        "image"
+      ],
+      "x-ms-enum": {
+        "name": "VectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "dense",
+            "value": "dense",
+            "description": "A dense vector result."
+          },
+          {
+            "name": "sparse",
+            "value": "sparse",
+            "description": "A sparse vector result."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "An image vector result."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
