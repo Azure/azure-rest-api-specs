@@ -28,11 +28,45 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2026-04-01-preview
+tag: package-flexibleserver-2025-08-01
 ```
 
 ```yaml $(package-singleservers)
 tag: package-2020-01-01
+```
+
+### Tag: package-flexibleserver-2026-07-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2026-07-01-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2026-07-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for Microsoft Entra application clientId properties on
+      DataEncryption (primaryFederatedIdentityClientId,
+      geoBackupFederatedIdentityClientId). Both are RFC 4122 UUIDs per ARM
+      identity guidelines. Approved by Azure API review board pull request 43065.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
+    reason: Microsoft Entra application client ID for geo-redundant backups (RFC 4122 UUID) per ARM identity guidelines. Approved by Azure API review board pull request 43065.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.PolicyDetail.properties.passed
+    reason: This is a simple pass/fail indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventResourceProperties.properties.deferrable
+    reason: This is a binary status indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
+    reason: This is a binary status indicator.
 ```
 
 ### Tag: package-flexibleserver-2026-04-01-preview

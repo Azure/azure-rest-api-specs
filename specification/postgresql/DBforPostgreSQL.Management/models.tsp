@@ -868,6 +868,34 @@ union GeographicallyRedundantBackup {
 }
 
 /**
+ * Indicates if the server is configured to create immutable backups.
+ */
+@added(Versions.v2026_07_01)
+union ImmutableBackup {
+  string,
+
+  /** Server is configured to create immutable backups. */
+  Enabled: "Enabled",
+
+  /** Server is not configured to create immutable backups. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server.
+ */
+@added(Versions.v2026_07_01)
+union FipsMode {
+  string,
+
+  /** FIPS mode is enabled on the server. */
+  Enabled: "Enabled",
+
+  /** FIPS mode is disabled on the server. */
+  Disabled: "Disabled",
+}
+
+/**
  * Indicates if public network access is enabled or not.
  */
 union ServerPublicNetworkAccessState {
@@ -3075,6 +3103,10 @@ model ServerProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified on create, it defaults to Disabled.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode = FipsMode.Disabled;
 }
 
 /**
@@ -3201,6 +3233,12 @@ model Backup {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   geoRedundantBackup?: GeographicallyRedundantBackup = GeographicallyRedundantBackup.Disabled;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
@@ -3471,6 +3509,10 @@ model ServerPropertiesForPatch {
    */
   @visibility(Lifecycle.Read, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified, the current value is preserved.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode;
 }
 
 /**
@@ -3487,6 +3529,12 @@ model BackupForPatch {
    */
   @visibility(Lifecycle.Read)
   geoRedundantBackup?: GeographicallyRedundantBackup;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
