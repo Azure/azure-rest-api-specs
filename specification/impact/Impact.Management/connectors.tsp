@@ -92,12 +92,25 @@ union Platform {
   @doc("Type of Azure Monitor")
   AzureMonitor: "AzureMonitor",
 }
+@doc("The type used for update operations of the Connector.")
+model ConnectorUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    Connector,
+    "Name" | "name" | "properties"
+  >>> {
+  /** The resource-specific properties for this resource. */
+  properties?: ConnectorUpdateProperties;
+}
 
+model ConnectorUpdateProperties is Azure.ResourceManager.Foundations.ResourceUpdateModelProperties<
+  Connector,
+  ConnectorProperties
+>;
 @armResourceOperations(Connector)
 interface Connectors {
   get is ArmResourceRead<Connector>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
-  update is ArmResourcePatchSync<Connector, ConnectorProperties>;
+  update is ArmCustomPatchSync<Connector, ConnectorUpdate>;
   delete is ArmResourceDeleteSync<Connector>;
   listBySubscription is ArmListBySubscription<Connector>;
 }
