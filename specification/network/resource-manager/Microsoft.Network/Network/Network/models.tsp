@@ -10936,6 +10936,20 @@ model AuthorizationPropertiesFormat {
 }
 
 /**
+ * The authorization key.
+ */
+@added(Versions.v2025_09_01)
+model ExpressRouteAuthorizationKey {
+  /**
+   * The authorization key.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret must be emitted so ARM's XMSSecretInResponse linter recognizes this response-only key as a secret; there is no first-class TypeSpec decorator that emits x-ms-secret."
+  @secret
+  @TypeSpec.OpenAPI.extension("x-ms-secret", true)
+  authorizationKey?: string;
+}
+
+/**
  * Properties of the express route circuit peering.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
