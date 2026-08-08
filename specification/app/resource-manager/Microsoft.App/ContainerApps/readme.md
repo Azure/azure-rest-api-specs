@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01-01
+tag: package-preview-2026-02-01-preview
 ```
 
 ### Suppression
@@ -48,6 +48,50 @@ directive:
       - $.definitions.ServiceBind.properties.customizedKeys
     reason: |
       Do not introduce breaking changes in GA services
+```
+
+### Tag: package-preview-2026-02-01-preview
+
+These settings apply only when `--tag=package-preview-2026-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-02-01-preview'
+input-file:
+  - preview/2026-02-01-preview/AppResiliency.json
+  - preview/2026-02-01-preview/AuthConfigs.json
+  - preview/2026-02-01-preview/AvailableWorkloadProfiles.json
+  - preview/2026-02-01-preview/BillingMeters.json
+  - preview/2026-02-01-preview/Builders.json
+  - preview/2026-02-01-preview/Builds.json
+  - preview/2026-02-01-preview/CommonDefinitions.json
+  - preview/2026-02-01-preview/ConnectedEnvironments.json
+  - preview/2026-02-01-preview/ConnectedEnvironmentsCertificates.json
+  - preview/2026-02-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - preview/2026-02-01-preview/ConnectedEnvironmentsStorages.json
+  - preview/2026-02-01-preview/ContainerApps.json
+  - preview/2026-02-01-preview/ContainerAppsBuilds.json
+  - preview/2026-02-01-preview/ContainerAppsFunctions.json
+  - preview/2026-02-01-preview/ContainerAppsLabelHistory.json
+  - preview/2026-02-01-preview/ContainerAppsPatches.json
+  - preview/2026-02-01-preview/ContainerAppsRevisions.json
+  - preview/2026-02-01-preview/Diagnostics.json
+  - preview/2026-02-01-preview/DotNetComponents.json
+  - preview/2026-02-01-preview/FunctionsExtension.json
+  - preview/2026-02-01-preview/Global.json
+  - preview/2026-02-01-preview/JavaComponents.json
+  - preview/2026-02-01-preview/Jobs.json
+  - preview/2026-02-01-preview/LogicAppsExtension.json
+  - preview/2026-02-01-preview/ManagedEnvironments.json
+  - preview/2026-02-01-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - preview/2026-02-01-preview/ManagedEnvironmentsDaprComponents.json
+  - preview/2026-02-01-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - preview/2026-02-01-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - preview/2026-02-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - preview/2026-02-01-preview/ManagedEnvironmentsStorages.json
+  - preview/2026-02-01-preview/AgentComputes.json
+  - preview/2026-02-01-preview/SessionPools.json
+  - preview/2026-02-01-preview/SourceControls.json
+  - preview/2026-02-01-preview/Subscriptions.json
+  - preview/2026-02-01-preview/Usages.json
 ```
 
 ### Tag: package-preview-2025-10-02-preview
