@@ -44,6 +44,10 @@ model InterconnectGroup extends Common.Resource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is a standard envelope property on Network RP resources for optimistic concurrency"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /** A list of availability zones denoting the resource needs to come from. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "zones is a standard envelope property on Network RP resources for availability zone support"
+  zones?: string[];
 }
 
 /**
