@@ -84,12 +84,21 @@ async function runGitCommand(repoPath: string, args: string[]): Promise<void> {
 async function sdkBranchExistsOnOrigin(repoPath: string, branch: string): Promise<boolean> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
-    const child = spawn("git", ["ls-remote", "--heads", "origin", `refs/heads/${branch}`], {
-      cwd: repoPath,
-      shell: false,
-      stdio: ["ignore", "pipe", "inherit"],
-      env: process.env,
-    });
+    const child = spawn(
+      "git",
+      [
+        "ls-remote",
+        "--heads",
+        "https://github.com/live1206/azure-sdk-for-net.git",
+        `refs/heads/${branch}`,
+      ],
+      {
+        cwd: repoPath,
+        shell: false,
+        stdio: ["ignore", "pipe", "inherit"],
+        env: process.env,
+      },
+    );
     child.stdout.on("data", (data: Buffer) => chunks.push(data));
     child.on("error", (error) => {
       reject(new Error(`Failed to query SDK branch '${branch}' on origin`, { cause: error }));
@@ -136,7 +145,7 @@ export async function checkoutSdkBranch(repoPath: string, branch: string): Promi
   try {
     await runGitCommand(repoPath, [
       "fetch",
-      "origin",
+      "https://github.com/live1206/azure-sdk-for-net.git",
       `refs/heads/${branch}:refs/remotes/origin/${branch}`,
     ]);
   } catch (error) {

@@ -146,7 +146,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Common;
 /**
- * APIs to manage web application firewall rules.
+ * APIs to manage Azure networking resources.
  */
 @Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
