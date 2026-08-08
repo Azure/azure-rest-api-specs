@@ -54,6 +54,12 @@ namespace Common {
   }
 }
 
+@@clientName(
+  Common.DdosFrontendIpConfigurationSettings,
+  "DdosFrontendIPConfigurationSettings",
+  "csharp"
+);
+
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
