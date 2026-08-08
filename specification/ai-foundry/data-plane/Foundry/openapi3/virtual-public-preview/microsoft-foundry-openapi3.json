@@ -34038,21 +34038,24 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 50,
-            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Server default when unset: 5."
+            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Default: 5.",
+            "default": 5
           },
           "reflection_minibatch_size": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
             "maximum": 100,
-            "description": "Number of items sampled per reflective minibatch. Server default when unset."
+            "description": "Number of items sampled per reflective minibatch. Default: 3.",
+            "default": 3
           },
           "max_concurrent_agent_runs": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 100,
-            "description": "Maximum number of concurrent agent runs during evaluation. Server default when unset."
+            "maximum": 10,
+            "description": "Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). Default: 1 (sequential).",
+            "default": 1
           },
           "target_attributes": {
             "type": "array",
@@ -34494,21 +34497,24 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 50,
-            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Server default when unset: 5."
+            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Default: 5.",
+            "default": 5
           },
           "reflection_minibatch_size": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
             "maximum": 100,
-            "description": "Number of items sampled per reflective minibatch. Server default when unset."
+            "description": "Number of items sampled per reflective minibatch. Default: 3.",
+            "default": 3
           },
           "max_concurrent_agent_runs": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 100,
-            "description": "Maximum number of concurrent agent runs during evaluation. Server default when unset."
+            "maximum": 10,
+            "description": "Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). Default: 1 (sequential).",
+            "default": 1
           },
           "target_attributes": {
             "type": "array",

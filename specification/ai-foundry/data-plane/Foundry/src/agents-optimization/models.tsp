@@ -224,20 +224,20 @@ model AgentOptimizationOptions {
   @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
 
-  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Server default when unset: 5.")
+  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Default: 5.")
   @minValue(1)
   @maxValue(50)
-  max_stalls?: int32;
+  max_stalls?: int32 = 5;
 
-  @doc("Number of items sampled per reflective minibatch. Server default when unset.")
+  @doc("Number of items sampled per reflective minibatch. Default: 3.")
   @minValue(1)
   @maxValue(100)
-  reflection_minibatch_size?: int32;
+  reflection_minibatch_size?: int32 = 3;
 
-  @doc("Maximum number of concurrent agent runs during evaluation. Server default when unset.")
+  @doc("Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). Default: 1 (sequential).")
   @minValue(1)
-  @maxValue(100)
-  max_concurrent_agent_runs?: int32;
+  @maxValue(10)
+  max_concurrent_agent_runs?: int32 = 1;
 
   @doc("Which agent attributes to optimize. Omit or leave empty to auto-select based on baseline configuration.")
   target_attributes?: TargetAttribute[];
