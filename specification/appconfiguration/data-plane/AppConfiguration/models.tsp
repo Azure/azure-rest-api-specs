@@ -182,6 +182,7 @@ model KeyValue {
   @doc("The key of the key-value.")
   key: string;
 
+  @visibility(Lifecycle.Read)
   @doc("The label the key-value belongs to.")
   label?: string;
 
