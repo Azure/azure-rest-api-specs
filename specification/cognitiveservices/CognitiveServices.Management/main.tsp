@@ -34,6 +34,7 @@ import "./CapabilityHost.tsp";
 import "./ProjectCapabilityHost.tsp";
 import "./QuotaTier.tsp";
 import "./OutboundRuleBasicResource.tsp";
+import "./ArcDeployment.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
@@ -104,6 +105,11 @@ enum Versions {
    * The 2026-07-01 API version.
    */
   v2026_07_01: "2026-07-01",
+
+  /**
+   * The 2026-07-15-preview API version.
+   */
+  v2026_07_15_preview: "2026-07-15-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
