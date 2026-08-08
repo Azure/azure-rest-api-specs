@@ -20,22 +20,27 @@
               "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
               "highAvailabilityGoalParticipation": "Excluded",
               "highAvailabilityAttestationStatus": "ManuallyAttested",
+              "zonalResiliency": {
+                "goalParticipation": "Excluded",
+                "attestationStatus": "ManuallyAttested",
+                "exclusionReason": "UserSelectedExclusion",
+                "userConfirmation": [
+                  {
+                    "solutionDisplayName": "ZonePinnedVmWithZrsDisk",
+                    "confirmationStatus": "ApprovedByUser",
+                    "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
+                  },
+                  {
+                    "solutionDisplayName": "VmInMultiZoneVmss",
+                    "confirmationStatus": "ApprovalPending",
+                    "reasonForRequestingConfirmation": "VmInMultiZoneScaleSetStatelessOnly"
+                  }
+                ]
+              },
               "disasterRecoveryGoalParticipation": "Excluded",
               "disasterRecoveryAttestationStatus": "ManuallyAttested",
               "exclusionReasonForHighAvailabilityGoals": "UserSelectedExclusion",
               "exclusionReasonForDisasterRecoveryGoals": "UnsupportedResource",
-              "userConfirmationForHighAvailability": [
-                {
-                  "solutionDisplayName": "ZonePinnedVmWithZrsDisk",
-                  "confirmationStatus": "ApprovedByUser",
-                  "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
-                },
-                {
-                  "solutionDisplayName": "VmInMultiZoneVmss",
-                  "confirmationStatus": "ApprovalPending",
-                  "reasonForRequestingConfirmation": "VmInMultiZoneScaleSetStatelessOnly"
-                }
-              ],
               "serviceGroupMemberships": [
                 {
                   "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sg1",

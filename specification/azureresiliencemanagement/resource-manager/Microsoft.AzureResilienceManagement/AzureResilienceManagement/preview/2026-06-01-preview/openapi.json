@@ -7238,6 +7238,10 @@
           "$ref": "#/definitions/GoalAssignmentType",
           "description": "The type of goal assignment."
         },
+        "requireZonalResiliency": {
+          "$ref": "#/definitions/RequirementSelected",
+          "description": "Whether zonal resiliency is required for this goal assignment."
+        },
         "serviceLevelResources": {
           "type": "array",
           "description": "List of service level resources.",
@@ -7255,33 +7259,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Details of any errors encountered during the operation.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "goalTemplateId",
-        "goalAssignmentType"
-      ]
-    },
-    "GoalAssignmentPropertiesUpdate": {
-      "type": "object",
-      "description": "Definition of goal assignment property.",
-      "properties": {
-        "goalTemplateId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Arm id of the goal template."
-        },
-        "goalAssignmentType": {
-          "$ref": "#/definitions/GoalAssignmentType",
-          "description": "The type of goal assignment."
-        },
-        "serviceLevelResources": {
-          "type": "array",
-          "description": "List of service level resources.",
-          "items": {
-            "$ref": "#/definitions/ServiceLevelResource"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -7308,7 +7285,7 @@
       "description": "Goal assignment a AzureResilienceProviderHub resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GoalAssignmentPropertiesUpdate",
+          "$ref": "#/definitions/GoalAssignmentProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -7371,6 +7348,10 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
+        "zonalResiliency": {
+          "$ref": "#/definitions/ZonalResiliencyProperties",
+          "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
+        },
         "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation."
@@ -7388,16 +7369,6 @@
           "$ref": "#/definitions/ExclusionReason",
           "description": "Reason for exclusion from disaster recovery goals.",
           "readOnly": true
-        },
-        "userConfirmationForHighAvailability": {
-          "type": "array",
-          "description": "List of user confirmations for high availability solutions.",
-          "items": {
-            "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
-          },
-          "x-ms-identifiers": [
-            "solutionDisplayName"
-          ]
         },
         "serviceGroupMemberships": {
           "type": "array",
@@ -7417,9 +7388,7 @@
         }
       },
       "required": [
-        "resourceArmId",
-        "highAvailabilityGoalParticipation",
-        "highAvailabilityAttestationStatus"
+        "resourceArmId"
       ]
     },
     "GoalTemplate": {
@@ -10584,8 +10553,7 @@
         }
       },
       "required": [
-        "serviceLevelIndicatorResourceId",
-        "serviceLevelObjectiveResourceId"
+        "serviceLevelIndicatorResourceId"
       ]
     },
     "SolutionDisplayName": {
@@ -11133,6 +11101,35 @@
         }
       ],
       "x-ms-discriminator-value": "Zonal"
+    },
+    "ZonalResiliencyProperties": {
+      "type": "object",
+      "description": "Zonal resiliency posture for a goal resource.",
+      "properties": {
+        "goalParticipation": {
+          "$ref": "#/definitions/ExclusionState",
+          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
+        },
+        "attestationStatus": {
+          "$ref": "#/definitions/AttestationState",
+          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
+        },
+        "exclusionReason": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from zonal resiliency goals.",
+          "readOnly": true
+        },
+        "userConfirmation": {
+          "type": "array",
+          "description": "List of user confirmations for zonal resiliency solutions.",
+          "items": {
+            "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
+          },
+          "x-ms-identifiers": [
+            "solutionDisplayName"
+          ]
+        }
+      }
     }
   },
   "parameters": {

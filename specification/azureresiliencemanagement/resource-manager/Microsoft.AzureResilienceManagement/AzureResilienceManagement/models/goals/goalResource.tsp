@@ -17,16 +17,40 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureResilienceManagement;
 
 // Define the main model
+@added(Versions.v2026_03_01_preview)
+@doc("Zonal resiliency posture for a goal resource.")
+model ZonalResiliencyProperties {
+  @doc("Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation.")
+  goalParticipation?: ExclusionState;
+
+  @doc("Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation.")
+  attestationStatus?: AttestationState;
+
+  @doc("Reason for exclusion from zonal resiliency goals.")
+  @visibility(Lifecycle.Read)
+  exclusionReason?: ExclusionReason;
+
+  @doc("List of user confirmations for zonal resiliency solutions.")
+  @identifiers(#["solutionDisplayName"])
+  userConfirmation?: UserConfirmationForHighAvailabilityItem[];
+}
+
 @doc("Definition of goal assignment property.")
 model GoalResourceProperties {
   @doc("Arm Id of resource under the SG for which the extension resource is maintained.")
   resourceArmId: armResourceIdentifier;
 
   @doc("Flag which depicts whether the Arm resource is excluded for high availability recommendation.")
-  highAvailabilityGoalParticipation: ExclusionState;
+  @madeOptional(Versions.v2026_03_01_preview)
+  highAvailabilityGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for high availability recommendation.")
-  highAvailabilityAttestationStatus: AttestationState;
+  @madeOptional(Versions.v2026_03_01_preview)
+  highAvailabilityAttestationStatus?: AttestationState;
+
+  @doc("Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.")
+  @added(Versions.v2026_03_01_preview)
+  zonalResiliency?: ZonalResiliencyProperties;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
   disasterRecoveryGoalParticipation?: ExclusionState;
@@ -41,11 +65,6 @@ model GoalResourceProperties {
   @doc("Reason for exclusion from disaster recovery goals.")
   @visibility(Lifecycle.Read)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
-
-  @added(Versions.v2026_03_01_preview)
-  @doc("List of user confirmations for high availability solutions.")
-  @identifiers(#["solutionDisplayName"])
-  userConfirmationForHighAvailability?: UserConfirmationForHighAvailabilityItem[];
 
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)
