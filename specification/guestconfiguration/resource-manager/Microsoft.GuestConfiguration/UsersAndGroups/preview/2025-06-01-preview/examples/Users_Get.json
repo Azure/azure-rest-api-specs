@@ -1,0 +1,34 @@
+{
+  "title": "Users_Get",
+  "operationId": "Users_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroup": "myResourceGroup",
+    "providerName": "Microsoft.HybridCompute",
+    "parentResourceType": "machines",
+    "parentResourceName": "myArcServer",
+    "userName": "testUser"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myArcServer/providers/Microsoft.GuestConfiguration/users/testUser",
+        "kind": "Windows",
+        "name": "testUser",
+        "type": "Microsoft.GuestConfiguration/users",
+        "properties": {
+          "fullName": "Test User",
+          "enabled": true,
+          "homeDirectory": "",
+          "passwordLastSetInUTC": "2024-07-22T21:30:05.206Z",
+          "passwordChangeableDateInUTC": "2024-07-22T21:30:05.206Z",
+          "passwordExpiresInUTC": "2024-07-22T21:30:05.206Z",
+          "accountExpiresInUTC": "2024-07-22T21:30:05.206Z",
+          "sid": "S-1-5-21-1234567890-1234567890-1234567890-0000",
+          "passwordRequired": true,
+          "userPasswordChangePermission": true
+        }
+      }
+    }
+  }
+}
