@@ -79,7 +79,8 @@ interface DeletedVaults {
     DeletedVault,
     DeletedVaultUndeleteInput,
     DeletedVault,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader<FinalResult = DeletedVault>
   >;
 
   /**
