@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "serviceGroupName": "root-sg",
+    "body": {
+      "expand": "allMembers"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/sub-a/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myVault"
+          },
+          {
+            "id": "/subscriptions/sub-a/resourceGroups/rg2"
+          },
+          {
+            "id": "/subscriptions/sub-a/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/myStorage"
+          },
+          {
+            "id": "/subscriptions/sub-b/resourceGroups/rg3/providers/Microsoft.Sql/servers/sqlServer1"
+          }
+        ],
+        "skipToken": "eyJsYXN0TGVmdEluZGV4Ijo0LjAsInJpZ2h0SW5kZXgiOjguMH0="
+      }
+    }
+  },
+  "operationId": "ServiceGroups_ListMembers",
+  "title": "ListServiceGroupMembers"
+}

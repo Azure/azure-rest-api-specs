@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -85,6 +87,12 @@ model ServiceGroupProperties {
   displayName?: string;
 
   /**
+   * The criticality designation of the service group.
+   */
+  @added(Versions.v2026_03_01_preview)
+  criticality?: float64;
+
+  /**
    * The details of the parent serviceGroup.
    */
   parent?: ParentServiceGroupProperties;
@@ -109,3 +117,143 @@ model ParentServiceGroupProperties {
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
+
+/**
+ * Request body for the listAncestors action.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListAncestorsRequest {
+  /**
+   * An opaque pagination token returned in the previous response's skipToken field.
+   * Include this value in the request body to fetch the next page of results.
+   */
+  skipToken?: string;
+}
+
+/**
+ * Response for the listAncestors action. Contains a page of ancestor service
+ * groups plus an opaque skipToken for fetching subsequent pages.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListAncestorsResponse {
+  /**
+   * The page of ancestor service groups.
+   */
+  value: ServiceGroup[];
+
+  /**
+   * Opaque pagination token. When present, more results are available; callers
+   * must re-POST to the same listAncestors URL with this value in the request
+   * body to fetch the next page. When absent, the current page is the last page.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
+  skipToken?: string;
+}
+
+/**
+ * Request body for the listDescendants action.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListDescendantsRequest {
+  /**
+   * An opaque pagination token returned in the previous response's skipToken field.
+   * Include this value in the request body to fetch the next page of results.
+   */
+  skipToken?: string;
+}
+
+/**
+ * Response for the listDescendants action. Contains a page of service groups
+ * plus an opaque skipToken for fetching subsequent pages.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListDescendantsResponse {
+  /**
+   * The page of descendant service groups.
+   */
+  value: ServiceGroup[];
+
+  /**
+   * Opaque pagination token. When present, more results are available; callers
+   * must re-POST to the same listDescendants URL with this value in the request
+   * body to fetch the next page. When absent, the current page is the last page.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
+  skipToken?: string;
+}
+
+/**
+ * Controls which members are returned by the listMembers action. Currently
+ * only "allMembers" is supported. If omitted, the service behaves as if
+ * "allMembers" was specified.
+ */
+@added(Versions.v2026_03_01_preview)
+union ListMembersExpand {
+  string,
+
+  /**
+   * Return all members of the service group.
+   */
+  AllMembers: "allMembers",
+}
+
+/**
+ * Request body for the listMembers action.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListMembersRequest {
+  /**
+   * Controls which members are returned. Only "allMembers" is supported today;
+   * if omitted, the service defaults to "allMembers".
+   */
+  expand?: ListMembersExpand;
+
+  /**
+   * A filter expression to narrow the returned members. Reserved for a future
+   * API version; not implemented in this version. Any value provided today is
+   * accepted but ignored.
+   */
+  filter?: string;
+
+  /**
+   * An opaque pagination token returned in the previous response's skipToken field.
+   * Include this value in the request body to fetch the next page of results.
+   */
+  skipToken?: string;
+}
+
+/**
+ * Response for the listMembers action. Contains a page of service group members
+ * plus an opaque skipToken for fetching subsequent pages.
+ */
+@added(Versions.v2026_03_01_preview)
+model ListMembersResponse {
+  /**
+   * The page of service group members.
+   */
+  value: ServiceGroupMember[];
+
+  /**
+   * Opaque pagination token. When present, more results are available; callers
+   * must re-POST to the same listMembers URL with this value in the request
+   * body to fetch the next page. When absent, the current page is the last page.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
+  skipToken?: string;
+}
+
+/**
+ * A member of a service group. Members are entities linked to the service
+ * group via a Microsoft.Relationships resource (serviceGroupMember or
+ * contains). Descendant service groups are not returned as members; use
+ * listDescendants for those.
+ */
+@added(Versions.v2026_03_01_preview)
+model ServiceGroupMember {
+  /**
+   * The fully qualified ARM ID of the member. For example,
+   * /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.
+   */
+  @visibility(Lifecycle.Read)
+  id?: Azure.Core.armResourceIdentifier;
+}

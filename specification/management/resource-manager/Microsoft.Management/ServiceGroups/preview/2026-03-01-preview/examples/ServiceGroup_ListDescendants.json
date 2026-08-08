@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "serviceGroupName": "root",
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/serviceGroups/child-1",
+            "type": "Microsoft.Management/serviceGroups",
+            "name": "child-1",
+            "kind": "Application",
+            "tags": {
+              "team": "platform",
+              "env": "prod"
+            },
+            "properties": {
+              "displayName": "Child Service Group 1",
+              "parent": {
+                "resourceId": "/providers/Microsoft.Management/serviceGroups/root"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/serviceGroups/grandchild-1",
+            "type": "Microsoft.Management/serviceGroups",
+            "name": "grandchild-1",
+            "kind": "Service",
+            "tags": {
+              "team": "data",
+              "costCenter": "12345"
+            },
+            "properties": {
+              "displayName": "Grandchild Service Group 1",
+              "parent": {
+                "resourceId": "/providers/Microsoft.Management/serviceGroups/child-1"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "skipToken": "eyJsYXN0TGVmdEluZGV4Ijo0LjAsInJpZ2h0SW5kZXgiOjguMH0="
+      }
+    }
+  },
+  "operationId": "ServiceGroups_ListDescendants",
+  "title": "ListServiceGroupDescendants"
+}
