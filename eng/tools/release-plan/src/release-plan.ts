@@ -173,8 +173,6 @@ function runCreateReleasePlan(
     context.targetMonth,
     "--pull-request",
     context.prUrl,
-    "--force",
-    "false",
     "--test-release",
     String(context.testReleasePlan),
     "--output",
