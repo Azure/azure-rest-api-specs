@@ -31,6 +31,28 @@ union DiffBackupIntervalInHours {
   `24`: 24,
 }
 
+/**
+ * The immutability status of the backups governed by this short term retention policy.
+ */
+union ImmutabilityStatus {
+  string,
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Locked
+   */
+  Locked: "Locked",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ShortTermRetentionPolicyName {
   string,
