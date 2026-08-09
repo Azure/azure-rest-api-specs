@@ -21,7 +21,7 @@ model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
     Resource = Vault,
     KeyName = "vaultName",
     SegmentName = "vaults",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
 
   /** Azure location of the key vault resource. */
