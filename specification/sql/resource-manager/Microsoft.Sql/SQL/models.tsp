@@ -4311,6 +4311,18 @@ model BackupShortTermRetentionPolicyProperties {
    * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
    */
   diffBackupIntervalInHours?: DiffBackupIntervalInHours;
+
+  /**
+   * Whether to lock the immutability of the backups governed by this short term retention policy.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  lockImmutability?: boolean;
+
+  /**
+   * The immutability status of the backups governed by this short term retention policy.
+   */
+  @visibility(Lifecycle.Read)
+  immutabilityStatus?: ImmutabilityStatus;
 }
 
 /**
