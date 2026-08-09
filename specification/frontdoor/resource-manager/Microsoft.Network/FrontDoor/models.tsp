@@ -587,7 +587,7 @@ union ManagedRuleSetStatus {
 }
 
 /**
- * OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules.
  */
 @added(Versions.v2026_04_01)
 union ParanoiaLevel {
