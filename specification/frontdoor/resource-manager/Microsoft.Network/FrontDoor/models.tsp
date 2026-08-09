@@ -587,29 +587,29 @@ union ManagedRuleSetStatus {
 }
 
 /**
- * OWASP CRS paranoia level for a web application firewall rule. Higher levels add more aggressive rules that catch more attacks at the cost of increased false positives.
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.
  */
 @added(Versions.v2026_04_01)
 union ParanoiaLevel {
   string,
 
   /**
-   * Paranoia level 1: baseline protection. The default level, tuned for the fewest false positives.
+   * Paranoia level 1.
    */
   PL1: "PL1",
 
   /**
-   * Paranoia level 2: adds rules that catch more attacks, at the cost of more false positives.
+   * Paranoia level 2.
    */
   PL2: "PL2",
 
   /**
-   * Paranoia level 3: even more aggressive rules, for high-security workloads that accept more tuning.
+   * Paranoia level 3.
    */
   PL3: "PL3",
 
   /**
-   * Paranoia level 4: maximum rule coverage, intended for workloads that can absorb significant tuning effort.
+   * Paranoia level 4.
    */
   PL4: "PL4",
 }
@@ -2416,7 +2416,7 @@ model ManagedRuleSetDefinitionProperties {
   ruleGroups?: ManagedRuleGroupDefinition[];
 
   /**
-   * The friendly display name of the web application firewall rule set, for example "Default Ruleset 2.1" or "Core Ruleset 3.2 (Older than DRS)".
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -2489,7 +2489,7 @@ model ManagedRuleDefinition {
   description?: string;
 
   /**
-   * The OWASP CRS paranoia level of the web application firewall rule. Ranges from PL1 (fewest false positives) to PL4 (most aggressive detection). Applicable only to DRS and OWASP rule sets; omitted for Bot Manager, DDoS, and AI rules.
+   * Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)

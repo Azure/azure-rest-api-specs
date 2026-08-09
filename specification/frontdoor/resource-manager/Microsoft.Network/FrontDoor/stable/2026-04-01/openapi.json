@@ -4550,7 +4550,7 @@
         },
         "paranoiaLevel": {
           "$ref": "#/definitions/ParanoiaLevel",
-          "description": "The OWASP CRS paranoia level of the web application firewall rule. Ranges from PL1 (fewest false positives) to PL4 (most aggressive detection). Applicable only to DRS and OWASP rule sets; omitted for Bot Manager, DDoS, and AI rules.",
+          "description": "Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.",
           "readOnly": true
         }
       }
@@ -4908,7 +4908,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The friendly display name of the web application firewall rule set, for example \"Default Ruleset 2.1\" or \"Core Ruleset 3.2 (Older than DRS)\".",
+          "description": "Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').",
           "readOnly": true
         },
         "status": {
@@ -5371,7 +5371,7 @@
     },
     "ParanoiaLevel": {
       "type": "string",
-      "description": "OWASP CRS paranoia level for a web application firewall rule. Higher levels add more aggressive rules that catch more attacks at the cost of increased false positives.",
+      "description": "OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.",
       "enum": [
         "PL1",
         "PL2",
@@ -5385,22 +5385,22 @@
           {
             "name": "PL1",
             "value": "PL1",
-            "description": "Paranoia level 1: baseline protection. The default level, tuned for the fewest false positives."
+            "description": "Paranoia level 1."
           },
           {
             "name": "PL2",
             "value": "PL2",
-            "description": "Paranoia level 2: adds rules that catch more attacks, at the cost of more false positives."
+            "description": "Paranoia level 2."
           },
           {
             "name": "PL3",
             "value": "PL3",
-            "description": "Paranoia level 3: even more aggressive rules, for high-security workloads that accept more tuning."
+            "description": "Paranoia level 3."
           },
           {
             "name": "PL4",
             "value": "PL4",
-            "description": "Paranoia level 4: maximum rule coverage, intended for workloads that can absorb significant tuning effort."
+            "description": "Paranoia level 4."
           }
         ]
       }
