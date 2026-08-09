@@ -43,7 +43,6 @@ namespace Azure.AI.Projects {
        * When provided, the request is routed to the same sandbox. When omitted, auto-derived from
        * conversation_id/prev_response_id or a new UUID is generated.
        */
-      @removed(Versions.v1)
       agent_session_id?: string,
 
       ...AzureCreateResponseOptions,
@@ -52,6 +51,7 @@ namespace Azure.AI.Projects {
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
   /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
   model AzureCreateResponseOptions {
     /** The agent to use for generating the response. */
     agent_reference?: AgentReference;

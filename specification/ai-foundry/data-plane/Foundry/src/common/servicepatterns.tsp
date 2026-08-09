@@ -91,6 +91,7 @@ union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
+  voice_agents_v1_preview: "VoiceAgents=V1Preview",
 
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
@@ -168,6 +169,7 @@ op FoundryDataPlaneRequiredPreviewOperation<
 // Pagination
 // ============================================================================
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response data for a requested list of items.")
 model AgentsPagedResult<T> {
   /** The requested list of items. */
