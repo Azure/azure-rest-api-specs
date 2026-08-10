@@ -4,6 +4,8 @@
  */
 
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
+import { getSuppressionsForTools } from "@azure-tools/suppressions";
 import { existsSync } from "node:fs";
 import * as path from "node:path";
 import {
@@ -56,26 +58,23 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
   const diffs = await getSwaggerDiffs();
 
-  logMessage("Found PR changes:");
-  logMessage(JSON.stringify(diffs, null, 2));
-
-  let swaggersToProcess = diffs.modifications?.concat(diffs.additions || []) as Array<string>;
-
-  logMessage("Processing swaggers:");
-  logMessage(JSON.stringify(swaggersToProcess, null, 2));
-
   // switch pr to base branch
   changeBaseBranch(context);
   await context.prInfo?.checkout(context.prInfo.baseBranch);
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
-  const newSwaggers = diffs.additions || [];
+  const filteredDiffs = await filterSuppressedSwaggerDiffs(context, diffs);
 
-  const changedSwaggers = diffs.modifications || [];
+  logMessage("Found PR changes:");
+  logMessage(JSON.stringify(filteredDiffs, null, 2));
 
-  const deletedSwaggers = diffs.deletions || [];
+  const newSwaggers = filteredDiffs.additions || [];
 
-  const renamedSwaggers = diffs.renames || [];
+  const changedSwaggers = filteredDiffs.modifications || [];
+
+  const deletedSwaggers = filteredDiffs.deletions || [];
+
+  const renamedSwaggers = filteredDiffs.renames || [];
 
   const newExistingVersionDirs: string[] = [];
 
@@ -251,4 +250,82 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   logMessage("RETURN definition validateBreakingChange");
   logMessage(`${LOG_PREFIX}validateBreakingChange: statusCode: ${statusCode}`);
   return statusCode;
+}
+
+type SwaggerDiffs = Awaited<ReturnType<typeof getSwaggerDiffs>>;
+
+export async function filterSuppressedSwaggerDiffs(
+  context: Context,
+  diffs: SwaggerDiffs,
+): Promise<SwaggerDiffs> {
+  const tool =
+    context.runType === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION
+      ? SWAGGER_SUPPRESSION_TOOLS.breakingChange
+      : SWAGGER_SUPPRESSION_TOOLS.breakingChangeCrossVersion;
+
+  const keepHeadPath = async (swaggerPath: string) =>
+    !(await isSwaggerSuppressed(
+      tool,
+      path.resolve(context.localSpecRepoPath, swaggerPath),
+      swaggerPath,
+    ));
+  const keepBasePath = async (swaggerPath: string) =>
+    !(await isSwaggerSuppressed(
+      tool,
+      path.resolve(context.prInfo!.tempRepoFolder, swaggerPath),
+      swaggerPath,
+    ));
+
+  const additions = [];
+  for (const swaggerPath of diffs.additions) {
+    if (await keepHeadPath(swaggerPath)) additions.push(swaggerPath);
+  }
+
+  const modifications = [];
+  for (const swaggerPath of diffs.modifications) {
+    if (await keepHeadPath(swaggerPath)) modifications.push(swaggerPath);
+  }
+
+  const deletions = [];
+  for (const swaggerPath of diffs.deletions) {
+    if (await keepBasePath(swaggerPath)) deletions.push(swaggerPath);
+  }
+
+  const renames = [];
+  for (const rename of diffs.renames) {
+    if (await keepHeadPath(rename.to)) renames.push(rename);
+  }
+
+  return {
+    additions,
+    modifications,
+    deletions,
+    renames,
+    total: additions.length + modifications.length + deletions.length + renames.length,
+  };
+}
+
+async function isSwaggerSuppressed(
+  tool: string,
+  absoluteSwaggerPath: string,
+  displayPath: string,
+): Promise<boolean> {
+  if (!existsSync(absoluteSwaggerPath)) {
+    logMessage(`Suppression path does not exist; checking Swagger normally: ${displayPath}`);
+    return false;
+  }
+
+  const suppressions = await getSuppressionsForTools(
+    [tool, SWAGGER_SUPPRESSION_TOOLS.all],
+    absoluteSwaggerPath,
+  );
+  const isSuppressed = suppressions.some(
+    (suppression) => !suppression.rules?.length && !suppression.subRules?.length,
+  );
+
+  if (isSuppressed) {
+    logMessage(`Skipping suppressed Swagger file: ${displayPath}`);
+  }
+
+  return isSuppressed;
 }
