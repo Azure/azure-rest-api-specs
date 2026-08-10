@@ -293,13 +293,13 @@ model RaiConfig {
     Author-declared configuration telling the platform where user/agent text lives in the
     agent-defined invocations request/response bodies, so content-safety guardrails can extract
     and moderate it. Optional; a rai_config without it leaves the invocations path without
-    content-safety moderation (fail-open).
+    content-safety moderation.
     """)
-  invocations_moderation?: InvocationModeration;
+  invocations_moderation?: RaiInvocationModeration;
 }
 
 @doc("How an invocations request/response body is parsed to locate text for content-safety moderation.")
-union InvocationContentType {
+union RaiInvocationContentType {
   string,
 
   @doc("Parse the body as JSON and evaluate the declared paths/selectors.")
@@ -310,7 +310,7 @@ union InvocationContentType {
 }
 
 @doc("Author-declared response shape for the invocations protocol.")
-union InvocationMode {
+union RaiInvocationMode {
   string,
 
   @doc("Non-streaming response body.")
@@ -324,24 +324,24 @@ union InvocationMode {
 }
 
 @doc("An SSE event-type to text-field selector for streaming invocation output.")
-model SseTextSelector {
+model RaiSseTextSelector {
   @doc("The SSE event `type` value that carries text.")
   event_type: string;
 
-  @doc("The field on a matched event holding the text delta (defaults to `delta`).")
+  @doc("The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.")
   text_field?: string;
 }
 
 @doc("Declares where request/response text lives so content-safety guardrails can extract it.")
-model InvocationModeration {
-  @doc("How the REQUEST body is parsed. Defaults to `json`.")
-  input_content_type?: InvocationContentType;
+model RaiInvocationModeration {
+  @doc("How the REQUEST body is parsed. When omitted, the service defaults to `json`.")
+  input_content_type?: RaiInvocationContentType = RaiInvocationContentType.json;
 
-  @doc("How the RESPONSE body is parsed. Defaults to `json`.")
-  output_content_type?: InvocationContentType;
+  @doc("How the RESPONSE body is parsed. When omitted, the service defaults to `json`.")
+  output_content_type?: RaiInvocationContentType = RaiInvocationContentType.json;
 
   @doc("Author-declared response shape; drives which output gate runs and which fields are required.")
-  response_mode: InvocationMode;
+  response_mode: RaiInvocationMode;
 
   @doc("Path(s) to user text in the REQUEST body. Required when input_content_type is `json`.")
   input_paths?: string[];
@@ -350,7 +350,7 @@ model InvocationModeration {
   output_paths?: string[];
 
   @doc("One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.")
-  stream_selectors?: SseTextSelector[];
+  stream_selectors?: RaiSseTextSelector[];
 
   @doc("When true, suppress the zero-yield content-safety alert for agents that legitimately have frequent text-free turns.")
   allow_empty?: boolean = false;
