@@ -1,6 +1,7 @@
 import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
+import "./protocol.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -11,6 +12,45 @@ namespace Azure.AI.Projects;
 const PromptVoiceConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
+
+/**
+ * Establishes a service-terminated WebSocket for a voice-agent session. The service applies the persisted
+ * agent definition, resolves configured tools, sends the initial session configuration, and then exchanges
+ * OpenAI Realtime GA JSON events and audio frames with the client.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
+@tag("Voice Agent WebSocket")
+interface VoiceAgentWebSocket {
+  /**
+   * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
+   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
+  @summary("Connect to a voice agent")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice")
+  connectVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent. */
+      @path agent_name: string;
+
+      /** An optional identifier used to correlate the voice session. */
+      @query agent_session_id?: string;
+
+      /** Selects a specific version of the voice agent for this session. */
+      @query("x-agent-version-override") agent_version_override?: string;
+
+      /** The requested WebSocket subprotocol. Omit this header or request exactly `realtime`. */
+      @header("Sec-WebSocket-Protocol")
+      websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
+
+      /** A JSON object that maps structured-input names to their values for this session. */
+      @header("x-ms-voice-structured-inputs") structured_inputs?: string;
+    },
+    VoiceAgentWebSocketUpgradeResponse
+  >;
+}
 
 /**
  * Read-only, endpoint-scoped retrieval of the conversations, responses, transcript items, per-turn

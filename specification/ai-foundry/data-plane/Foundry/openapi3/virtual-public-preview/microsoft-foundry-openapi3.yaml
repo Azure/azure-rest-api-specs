@@ -3,6 +3,7 @@ info:
   title: Microsoft Foundry
   version: virtual-public-preview
 tags:
+  - name: Voice Agent WebSocket
   - name: Agent Conversations
   - name: Voice Agents
   - name: Voice Agent Versions
@@ -1204,6 +1205,84 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations WebSocket
+  /agents/{agent_name}/endpoint/protocols/voice:
+    get:
+      operationId: VoiceAgentWebSocket_connectVoiceAgent
+      summary: Connect to a voice agent
+      description: |-
+        Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
+        headers. The optional `realtime` subprotocol is the only accepted subprotocol value.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: query
+          required: false
+          description: An optional identifier used to correlate the voice session.
+          schema:
+            type: string
+          explode: false
+        - name: x-agent-version-override
+          in: query
+          required: false
+          description: Selects a specific version of the voice agent for this session.
+          schema:
+            type: string
+          explode: false
+        - name: Sec-WebSocket-Protocol
+          in: header
+          required: false
+          description: The requested WebSocket subprotocol. Omit this header or request exactly `realtime`.
+          schema:
+            $ref: '#/components/schemas/VoiceAgentWebSocketSubprotocol'
+        - name: x-ms-voice-structured-inputs
+          in: header
+          required: false
+          description: A JSON object that maps structured-input names to their values for this session.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '101':
+          description: The response that switches an HTTP connection to the voice-agent WebSocket protocol.
+          headers:
+            Sec-WebSocket-Protocol:
+              required: false
+              description: The negotiated WebSocket subprotocol. Present only when the client requests `realtime`.
+              schema:
+                $ref: '#/components/schemas/VoiceAgentWebSocketSubprotocol'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Voice Agent WebSocket
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
     get:
       operationId: AgentEndpointConversations_getAgentConversation
@@ -81935,6 +82014,11 @@ components:
         - $ref: '#/components/schemas/AzureVoice'
         - $ref: '#/components/schemas/AzureRealtimeNativeVoice'
       description: A typed voice configuration accepted by a voice agent.
+    VoiceAgentWebSocketSubprotocol:
+      type: string
+      enum:
+        - realtime
+      description: The WebSocket subprotocol supported by a voice-agent connection.
     VoiceAssistantMessageItem:
       type: object
       required:
