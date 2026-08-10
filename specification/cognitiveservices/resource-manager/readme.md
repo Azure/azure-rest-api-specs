@@ -133,11 +133,11 @@ input-file:
   - Microsoft.CognitiveServices/preview/2026-05-15-preview/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
-    reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated) and is consistent with the ManagedNetwork PUT in this RP, whose backend is shared with Machine Learning Services. Preview-only bug fix correcting the contract before GA.
+    reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Compute create returns 202 Accepted for long-running provisioning. provisioningState is present in ComputeProperties and returned in the final LRO result retrieved via GET. Same pattern as the ManagedNetwork PUT (shared Machine Learning Services backend). Preview-only bug fix.
+    reason: Compute create returns 202 Accepted for long-running provisioning. provisioningState is present in ComputeProperties and returned in the final LRO result retrieved via GET. Preview-only bug fix.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
   - code: PutGetPatchResponseSchema
@@ -184,11 +184,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties.properties.computeType
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema      
   - code: PatchBodyParametersSchema
-    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body), consistent with the existing Compute resource pattern. Required properties (targetClusterId, imageLink) are within the optional properties bag.
+    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body). Required properties (targetClusterId, imageLink) are within the optional properties bag.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema
@@ -368,11 +365,11 @@ input-file:
   - Microsoft.CognitiveServices/preview/2026-03-15-preview/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
-    reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated) and is consistent with the ManagedNetwork PUT in this RP, whose backend is shared with Machine Learning Services. Preview-only bug fix correcting the contract before GA.
+    reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Compute create returns 202 Accepted for long-running provisioning. provisioningState is present in ComputeProperties and returned in the final LRO result retrieved via GET. Same pattern as the ManagedNetwork PUT (shared Machine Learning Services backend). Preview-only bug fix.
+    reason: Compute create returns 202 Accepted for long-running provisioning. provisioningState is present in ComputeProperties and returned in the final LRO result retrieved via GET. Preview-only bug fix.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put
   - code: PutGetPatchResponseSchema
@@ -419,11 +416,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties.properties.computeType
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema      
   - code: PatchBodyParametersSchema
-    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body), consistent with the existing Compute resource pattern. Required properties (targetClusterId, imageLink) are within the optional properties bag.
+    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body). Required properties (targetClusterId, imageLink) are within the optional properties bag.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema
