@@ -5,7 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_01_01_preview)
+@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_07_01_preview)
 namespace ClientCustomizations;
 
 //Java customizations
@@ -98,6 +98,17 @@ interface KeyVaultEkmRestClient {
   updateEkmConnection is KeyVault.updateEkmConnection;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteEkmConnection is KeyVault.deleteEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getEkmPrivateEndpoint is KeyVault.getEkmPrivateEndpoint;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  createEkmPrivateEndpoint is KeyVault.createEkmPrivateEndpoint;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteEkmPrivateEndpoint is KeyVault.deleteEkmPrivateEndpoint;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation returns a wrapped collection of EKM private endpoints."
+  listEkmPrivateEndpoints is KeyVault.listEkmPrivateEndpoints;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getEkmPrivateEndpointOperationStatus is KeyVault.getEkmPrivateEndpointOperationStatus;
 }
 
 @@access(KeyVault.fullBackup, Access.internal, "csharp");
@@ -127,6 +138,11 @@ interface KeyVaultEkmRestClient {
 @@access(KeyVault.createEkmConnection, Access.internal, "csharp");
 @@access(KeyVault.updateEkmConnection, Access.internal, "csharp");
 @@access(KeyVault.deleteEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.getEkmPrivateEndpoint, Access.internal, "csharp");
+@@access(KeyVault.createEkmPrivateEndpoint, Access.internal, "csharp");
+@@access(KeyVault.deleteEkmPrivateEndpoint, Access.internal, "csharp");
+@@access(KeyVault.listEkmPrivateEndpoints, Access.internal, "csharp");
+@@access(KeyVault.getEkmPrivateEndpointOperationStatus, Access.internal, "csharp");
 
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
