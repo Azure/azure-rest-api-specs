@@ -769,12 +769,11 @@ model ScheduledActionUpdatedResponse
   is ArmResourceUpdatedResponse<ScheduledAction>;
 
 @doc("The scheduled action was created successfully.")
-model ScheduledActionCreatedResponse
-  is ArmResourceCreatedResponse<
-    ScheduledAction,
-    ArmAsyncOperationHeader<FinalResult = ScheduledAction> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+model ScheduledActionCreatedResponse is ArmResourceCreatedResponse<
+  ScheduledAction,
+  ArmAsyncOperationHeader<FinalResult = ScheduledAction> &
+    Azure.Core.Foundations.RetryAfterHeader
+>;
 
 @doc("The scheduled action was updated successfully.")
 model ScheduledActionPatchResponse is ArmResponse<ScheduledAction>;
@@ -802,8 +801,7 @@ op ResourceActionNoResponseAsyncWithAcceptedDoc<
   Resource extends Azure.ResourceManager.Foundations.SimpleResource,
   Request,
   AcceptedDescription extends valueof string,
-  BaseParameters extends TypeSpec.Reflection.Model =
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  BaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
     Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
     void,
@@ -830,7 +828,10 @@ op ResourceActionNoResponseAsyncWithAcceptedDoc<
 interface ScheduledActions {
   @doc("Gets the specified scheduled action.")
   @errorsDoc("The request failed. The response contains error details.")
-  get is ArmResourceRead<ScheduledAction, Response = ScheduledActionGetResponse>;
+  get is ArmResourceRead<
+    ScheduledAction,
+    Response = ScheduledActionGetResponse
+  >;
 
   @doc("Creates or updates a scheduled action.")
   @errorsDoc("The request failed. The response contains error details.")
@@ -847,23 +848,28 @@ interface ScheduledActions {
       ScheduledAction,
       ScheduledActionPropertiesUpdate
     >,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader,
-    Response = ScheduledActionPatchResponse |
-      ArmAcceptedLroResponse<
-        "The update request was accepted and is being processed.",
-        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-      >
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ScheduledActionPatchResponse
+      | ArmAcceptedLroResponse<
+          "The update request was accepted and is being processed.",
+          ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   @doc("Deletes the specified scheduled action.")
   @errorsDoc("The request failed. The response contains error details.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ScheduledAction,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmAcceptedLroResponse<
-      "The delete request was accepted and is being processed.",
-      ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmNoContentResponse<"The scheduled action was deleted or did not exist.">
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmAcceptedLroResponse<
+          "The delete request was accepted and is being processed.",
+          ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmNoContentResponse<"The scheduled action was deleted or did not exist.">
   >;
 
   @doc("Lists scheduled actions in the specified resource group.")
@@ -887,9 +893,9 @@ interface ScheduledActions {
   @get
   @doc("Lists resources associated with the specified scheduled action.")
   @errorsDoc("The request failed. The response contains error details.")
-  listResources(
-    ...ResourceInstanceParameters<ScheduledActionResource>,
-  ): ScheduledActionResourcesListResponse | ErrorResponse;
+  listResources(...ResourceInstanceParameters<ScheduledActionResource>):
+    | ScheduledActionResourcesListResponse
+    | ErrorResponse;
 
   @doc("Adds resources to the specified scheduled action.")
   @returnsDoc("The resources were added successfully.")
@@ -1046,8 +1052,7 @@ op OccurrenceActionAsyncWithAcceptedDoc<
   Request,
   Response extends TypeSpec.Reflection.Model | unknown | void,
   AcceptedDescription extends valueof string,
-  BaseParameters extends TypeSpec.Reflection.Model =
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  BaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
     Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
     Response,
@@ -1091,9 +1096,9 @@ interface Occurrences {
   @get
   @doc("Lists resources for the specified occurrence.")
   @errorsDoc("The request failed. The response contains error details.")
-  listResources(
-    ...ResourceInstanceParameters<OccurrenceResource>,
-  ): OccurrenceResourcesListResponse | ErrorResponse;
+  listResources(...ResourceInstanceParameters<OccurrenceResource>):
+    | OccurrenceResourcesListResponse
+    | ErrorResponse;
 
   @doc("Cancels the specified occurrence for the specified resource IDs.")
   @returnsDoc("The occurrence cancellation completed successfully.")
