@@ -66,6 +66,11 @@ model GoalResourceProperties {
   @visibility(Lifecycle.Read)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
 
+  @added(Versions.v2026_03_01_preview)
+  @doc("List of user confirmations for high availability solutions.")
+  @identifiers(#["solutionDisplayName"])
+  userConfirmationForHighAvailability?: UserConfirmationItem[];
+
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)
   @identifiers(#["serviceGroupId"])

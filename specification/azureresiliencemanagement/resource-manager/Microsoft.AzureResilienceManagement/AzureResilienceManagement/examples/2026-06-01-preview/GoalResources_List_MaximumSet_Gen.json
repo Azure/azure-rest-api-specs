@@ -44,7 +44,19 @@
                   "membershipType": "ThroughResourceGroup"
                 }
               ],
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "userConfirmationForHighAvailability": [
+                {
+                  "solutionDisplayName": "ZonePinnedVmWithZrsDisk",
+                  "confirmationStatus": "ApprovedByUser",
+                  "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
+                },
+                {
+                  "solutionDisplayName": "VmInMultiZoneVmss",
+                  "confirmationStatus": "ApprovalPending",
+                  "reasonForRequestingConfirmation": "VmInMultiZoneScaleSetStatelessOnly"
+                }
+              ]
             },
             "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
             "name": "gr1",
