@@ -290,10 +290,7 @@ model VoiceAgentEchoCancellation {
 @doc("Input-audio settings accepted in a stable voice-agent session.")
 @usage(VoiceAgentClientEventUsage)
 model VoiceAgentSessionUpdateAudioInput {
-  ...OmitProperties<VoiceAudioInputConfig, "format" | "turn_detection">;
-
-  @doc("The structured input audio format.")
-  format?: VoiceAudioFormat;
+  ...OmitProperties<VoiceAudioInputConfig, "turn_detection">;
 
   @doc("Turn-detection settings. Set to null to disable server-side turn detection.")
   turn_detection?: VoiceAgentTurnDetection | null;
