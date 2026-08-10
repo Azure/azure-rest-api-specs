@@ -200,6 +200,31 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
   });
 
+  it("keeps ineligible comments and label events out of PR-level concurrency", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+
+    for (const workflow of [source, compiled]) {
+      expect(workflow).toContain("github.event.comment.body != '/arm-review'");
+      expect(workflow).toContain("github.event.issue.pull_request == null");
+      expect(workflow).toContain("github.event.label.name != 'WaitForARMFeedback'");
+      expect(workflow).toContain("&& github.run_id || github.event.issue.number");
+    }
+  });
+
+  it("wires the mandatory ARM Critic as an inline runtime subagent", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+
+    expect(source).toContain(
+      "## agent: `arm-api-review-critic-runtime`\n---\ndescription: Independently verifies ARM API Reviewer findings before publication\n---",
+    );
+    expect(source).toContain("dispatch the inline\n`arm-api-review-critic-runtime` subagent");
+    expect(source).toContain("`.github/agents/arm-api-review-critic.agent.md`");
+    expect(source).toContain("Never claim that the review was Critic-verified");
+    expect(compiled).toContain("- name: Restore inline sub-agents from activation artifact");
+    expect(compiled).toContain('GH_AW_SUB_AGENT_DIR: ".github/agents"');
+    expect(compiled).toContain('GH_AW_SUB_AGENT_EXT: ".agent.md"');
+  });
+
   it("keeps the agent read-only and preserves the human queue after a clean review", async () => {
     const [source, compiled] = await readWorkflowFiles();
 

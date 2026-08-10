@@ -203,6 +203,12 @@ In IDEs that don't honor that flag (Claude Code, github.com Copilot), the
 Critic may appear in pickers but is still not intended for direct invocation;
 if you do invoke it directly, it will tell you to switch to the Reviewer.
 
+In GitHub Actions, gh-aw exposes the Critic through the workflow's inline
+`arm-api-review-critic-runtime` subagent. That runtime loads the canonical
+Critic agent and Reviewer-to-Critic protocol from `.github/agents/` before
+verifying findings. Importing the protocol into the Reviewer prompt alone does
+not make the Critic callable.
+
 The agent will:
 
 1. Fetch the PR metadata and changed files from GitHub.
