@@ -21,11 +21,7 @@ using Microsoft.Attestation;
 @@clientOption(
   AttestationProvider,
   "resource-name-constraint",
-  #{
-    minLength: 3,
-    maxLength: 24,
-    pattern: "^[a-zA-Z0-9-]{3,24}$",
-  },
+  #{ minLength: 3, maxLength: 24, pattern: "^[a-zA-Z0-9-]{3,24}$" },
   "csharp"
 );
 @@alternateType(
