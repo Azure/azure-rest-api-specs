@@ -76722,7 +76722,7 @@
           },
           "computation": {
             "$ref": "#/components/schemas/RubricHealthComputationMetadata",
-            "description": "Information identifying the algorithm and vectorizer used to compute the health signals."
+            "description": "Information identifying the algorithm and embedding provider used to compute the health signals."
           }
         },
         "description": "Service-generated health signals for a rubric evaluator.",
@@ -76736,7 +76736,7 @@
         "type": "object",
         "required": [
           "algorithm_version",
-          "vectorizer",
+          "embedding_provider",
           "similarity_metric"
         ],
         "properties": {
@@ -76744,13 +76744,13 @@
             "type": "string",
             "description": "The version of the rubric-health component definitions, normalization, and aggregate coefficients."
           },
-          "vectorizer": {
+          "embedding_provider": {
             "type": "string",
-            "description": "A stable identifier for the vectorizer or embedding model used to compute diversity and coverage."
+            "description": "A stable identifier for the embedding or vectorization provider used to compute diversity and coverage."
           },
-          "vectorizer_version": {
+          "embedding_provider_version": {
             "type": "string",
-            "description": "The model snapshot or implementation revision of the vectorizer, when available independently from the vectorizer identifier."
+            "description": "The model snapshot or implementation revision of the embedding provider, when available independently from the provider identifier."
           },
           "similarity_metric": {
             "$ref": "#/components/schemas/RubricHealthSimilarityMetric",

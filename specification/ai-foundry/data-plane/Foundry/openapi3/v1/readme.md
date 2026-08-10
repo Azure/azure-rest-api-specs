@@ -6,6 +6,10 @@ This folder contains committed OpenAPI 3 output generated from the Foundry TypeS
 
 ``` yaml
 openapi-type: data-plane
+tag: package-v1
+```
+
+``` yaml $(tag) == 'package-v1'
 input-file:
   - microsoft-foundry-openapi3.json
 ```

@@ -177,11 +177,11 @@ model RubricHealthComputationMetadata {
   @doc("The version of the rubric-health component definitions, normalization, and aggregate coefficients.")
   algorithm_version: string;
 
-  @doc("A stable identifier for the vectorizer or embedding model used to compute diversity and coverage.")
-  vectorizer: string;
+  @doc("A stable identifier for the embedding or vectorization provider used to compute diversity and coverage.")
+  embedding_provider: string;
 
-  @doc("The model snapshot or implementation revision of the vectorizer, when available independently from the vectorizer identifier.")
-  vectorizer_version?: string;
+  @doc("The model snapshot or implementation revision of the embedding provider, when available independently from the provider identifier.")
+  embedding_provider_version?: string;
 
   @doc("The similarity metric used with the generated vectors.")
   similarity_metric: RubricHealthSimilarityMetric;
@@ -213,7 +213,7 @@ model RubricHealth {
   @doc("The completeness of the evidence used to compute the health signals.")
   confidence?: RubricHealthConfidence;
 
-  @doc("Information identifying the algorithm and vectorizer used to compute the health signals.")
+  @doc("Information identifying the algorithm and embedding provider used to compute the health signals.")
   computation?: RubricHealthComputationMetadata;
 }
 

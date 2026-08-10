@@ -95,16 +95,6 @@ describe("file processing", () => {
     ).resolves.toMatchInlineSnapshot(`[]`);
   });
 
-  it("should skip committed OpenAPI 3 output", async () => {
-    const changedFiles = [
-      "specification/serviceB/data-plane/service.B/openapi3/v1/serviceBspec.json",
-    ];
-
-    await expect(
-      processFilesToSpecificationList(ROOT, changedFiles),
-    ).resolves.toMatchInlineSnapshot(`[]`);
-  });
-
   it("should handle examples in a subdirectory", async () => {
     const changedFiles = [
       "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/examples/subdir/ListResources.json",

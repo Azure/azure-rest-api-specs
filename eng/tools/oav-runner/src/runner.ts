@@ -156,7 +156,6 @@ export async function processFilesToSpecificationList(
   // though that context is passed into this from cli arguments.
   for (const file of files) {
     const absoluteFilePath = path.join(rootDirectory, file);
-    const isOpenApi3Output = file.split(/[\\/]/).includes("openapi3");
 
     // if the file is an example, under "preview" or "stable" (but not the TypeSpec source folder),
     // we need to find the swagger file that references it
@@ -207,7 +206,7 @@ export async function processFilesToSpecificationList(
     }
 
     // finally handle our base case where the file we're examining is itself a swagger file
-    if (!isOpenApi3Output && swagger(file) && fs.existsSync(absoluteFilePath)) {
+    if (swagger(file) && fs.existsSync(absoluteFilePath)) {
       resultFiles.push(file);
     }
   }
