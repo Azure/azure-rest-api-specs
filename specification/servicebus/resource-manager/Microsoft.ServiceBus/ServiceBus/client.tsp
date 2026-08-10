@@ -274,28 +274,6 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 
-// Preserve the exact TLS member names shipped by the reflection-based provisioning generator.
-@@clientName(
-  TlsVersion.`1.0`,
-  Azure.ClientGenerator.Core.exact("Tls1_0"),
-  "csharp"
-);
-@@clientName(
-  TlsVersion.`1.1`,
-  Azure.ClientGenerator.Core.exact("Tls1_1"),
-  "csharp"
-);
-@@clientName(
-  TlsVersion.`1.2`,
-  Azure.ClientGenerator.Core.exact("Tls1_2"),
-  "csharp"
-);
-@@clientName(
-  TlsVersion.`1.3`,
-  Azure.ClientGenerator.Core.exact("Tls1_3"),
-  "csharp"
-);
-
 // The resource-name union is part of the shipped provisioning API.
 @@access(MigrationConfigurationName, Access.public, "csharp");
 
