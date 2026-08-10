@@ -39,25 +39,4 @@ directive:
       suppression.
 ```
 
-### Tag: package-preview-2026-03-01
-
-These settings apply only when `--tag=package-preview-2026-03-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2026-03-01'
-input-file:
-  - preview/2026-03-01-preview/openapi.json
-
-directive:
-  - suppress: GuidUsage
-    from:
-      - openapi.json
-    where:
-      - $.definitions["Azure.Core.uuid"].format
-    reason: |
-      The tenantId field on DomainGroup references a Microsoft Entra
-      tenant identifier, which is a UUID/GUID by definition. ARM reviewer
-      (Chris Stackhouse) confirmed this change and will approve the
-      suppression.
-```
-
 ---
