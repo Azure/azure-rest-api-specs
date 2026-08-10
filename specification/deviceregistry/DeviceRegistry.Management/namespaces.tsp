@@ -95,8 +95,9 @@ model MessagingEndpoint {
   @doc("Type of connection used for messaging endpoint.")
   endpointType?: string;
 
+  @madeOptional(Versions.v2026_11_01_preview)
   @doc("The endpoint address to connect to.")
-  address: string;
+  address?: string;
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
