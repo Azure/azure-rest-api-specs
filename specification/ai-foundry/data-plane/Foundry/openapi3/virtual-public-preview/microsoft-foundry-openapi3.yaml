@@ -84209,14 +84209,10 @@ components:
       type: object
       properties:
         image_url:
-          anyOf:
-            - type: string
-              format: uri
-            - type: 'null'
+          type: string
+          format: uri
         color:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
       description: The avatar video background.
     VoiceAgentAvatarVideoCrop:
       type: object
@@ -84301,10 +84297,8 @@ components:
           enum:
             - azure_semantic_vad_multilingual
         threshold:
-          anyOf:
-            - type: number
-              format: float
-            - type: 'null'
+          type: number
+          format: float
           minimum: 0
           maximum: 1
         prefix_padding_ms:
@@ -84314,10 +84308,8 @@ components:
           type: integer
           format: int32
         idle_timeout_ms:
-          anyOf:
-            - type: integer
-              format: int32
-            - type: 'null'
+          type: integer
+          format: int32
         speech_duration_ms:
           type: integer
           format: int32
@@ -84327,11 +84319,9 @@ components:
             - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
             - type: 'null'
         languages:
-          anyOf:
-            - type: array
-              items:
-                type: string
-            - type: 'null'
+          type: array
+          items:
+            type: string
       description: Azure multilingual semantic VAD turn-detection settings.
     VoiceAgentAzureSemanticVadTurnDetection:
       type: object
@@ -84349,10 +84339,8 @@ components:
         type:
           $ref: '#/components/schemas/VoiceAgentAzureSemanticVadType'
         threshold:
-          anyOf:
-            - type: number
-              format: float
-            - type: 'null'
+          type: number
+          format: float
           minimum: 0
           maximum: 1
         prefix_padding_ms:
@@ -84694,11 +84682,9 @@ components:
           $ref: '#/components/schemas/VoiceAgentMaxOutputTokens'
           description: The maximum output-token count for one response.
         include:
-          anyOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/VoiceAgentSessionIncludeOption'
-            - type: 'null'
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSessionIncludeOption'
           description: Additional fields to include in service outputs.
         interim_response:
           $ref: '#/components/schemas/VoiceAgentInterimResponse'
@@ -87324,19 +87310,13 @@ components:
           $ref: '#/components/schemas/VoiceAvatarOutputProtocol'
           description: The transport used to deliver the avatar video stream.
         model:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
           description: The avatar model identifier.
         video:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentAvatarVideoParams'
-            - type: 'null'
+          $ref: '#/components/schemas/VoiceAgentAvatarVideoParams'
           description: Avatar video encoder and presentation settings.
         scene:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentAvatarScene'
-            - type: 'null'
+          $ref: '#/components/schemas/VoiceAgentAvatarScene'
           description: Avatar placement and motion settings.
         output_audit_audio:
           type: boolean

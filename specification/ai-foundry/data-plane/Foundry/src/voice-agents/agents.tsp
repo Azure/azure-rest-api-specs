@@ -130,7 +130,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   max_output_tokens?: VoiceAgentMaxOutputTokens;
 
   @doc("Additional fields to include in service outputs.")
-  include?: VoiceAgentSessionIncludeOption[] | null;
+  include?: VoiceAgentSessionIncludeOption[];
 
   @doc("Interim-response settings for latency and tool execution.")
   interim_response?: VoiceAgentInterimResponse;
@@ -704,17 +704,17 @@ model VoiceAgentAzureMultilingualSemanticVadTurnDetection {
 
   @minValue(0)
   @maxValue(1)
-  threshold?: float32 | null;
+  threshold?: float32;
 
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
-  idle_timeout_ms?: int32 | null;
+  idle_timeout_ms?: int32;
 
   @minValue(0)
   speech_duration_ms?: int32;
 
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
-  languages?: string[] | null;
+  languages?: string[];
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Turn-detection settings are selected by their `type` property."
@@ -821,8 +821,8 @@ model VoiceAgentAvatarVideoCrop {
 
 @doc("The avatar video background.")
 model VoiceAgentAvatarVideoBackground {
-  image_url?: url | null;
-  color?: string | null;
+  image_url?: url;
+  color?: string;
 }
 
 @doc("Avatar video encoder and presentation settings.")
@@ -889,13 +889,13 @@ model VoiceAvatarConfig {
   output_protocol?: VoiceAvatarOutputProtocol;
 
   @doc("The avatar model identifier.")
-  `model`?: string | null;
+  `model`?: string;
 
   @doc("Avatar video encoder and presentation settings.")
-  video?: VoiceAgentAvatarVideoParams | null;
+  video?: VoiceAgentAvatarVideoParams;
 
   @doc("Avatar placement and motion settings.")
-  scene?: VoiceAgentAvatarScene | null;
+  scene?: VoiceAgentAvatarScene;
 
   @doc("Whether audit audio is emitted with avatar output. Defaults to false.")
   output_audit_audio?: boolean = false;
