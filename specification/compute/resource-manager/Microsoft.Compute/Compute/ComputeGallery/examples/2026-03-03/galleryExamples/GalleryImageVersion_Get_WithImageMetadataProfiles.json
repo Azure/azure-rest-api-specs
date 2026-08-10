@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-03-03",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2024-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "sizeInGB": 30,
+              "hostCaching": "ReadOnly",
+              "source": {
+                "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Linux-VM-2024.vhd"
+              }
+            }
+          },
+          "securityProfile": {
+            "secretsProvisioningSettings": {
+              "isSupported": true,
+              "osName": "mariner",
+              "components": [
+                {
+                  "name": "AzureGuestAgent",
+                  "version": "2.7.0"
+                },
+                {
+                  "name": "SecretsProvisioningLibrary",
+                  "version": "1.0.0"
+                }
+              ]
+            }
+          },
+          "imageMetadataProfiles": [
+            {
+              "type": "UserProvidedSecretsProvisioningMetadata",
+              "publicMetadataList": [
+                {
+                  "metadataKey": "Linux.AzureSecretsProvisioning.Enabled",
+                  "metadataValue": "true"
+                },
+                {
+                  "metadataKey": "OS.Name",
+                  "metadataValue": "mariner"
+                },
+                {
+                  "metadataKey": "AzureGuestAgent.Version",
+                  "metadataValue": "2.7.0"
+                },
+                {
+                  "metadataKey": "SecretsProvisioningLibrary.Version",
+                  "metadataValue": "1.0.0"
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  }
+,
+  "operationId": "GalleryImageVersions_Get",
+  "title": "Get a gallery image version with image metadata profiles."
+}

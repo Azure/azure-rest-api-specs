@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using OpenAPI;
 using Versioning;
 using Azure.ResourceManager;
 using Common;
@@ -884,11 +882,6 @@ union MetadataType {
    * Metadata related to user-provided secrets provisioning for the image.
    */
   UserProvidedSecretsProvisioningMetadata: "UserProvidedSecretsProvisioningMetadata",
-
-  /**
-   * Unknown metadata type.
-   */
-  Unknown: "Unknown",
 }
 
 /**
@@ -897,15 +890,12 @@ union MetadataType {
 @added(Versions.v2026_03_03)
 model MetadataKeyValue {
   /**
-   * The metadata key.
+   * The metadata key. Known keys emitted by the service include 'Linux.AzureSecretsProvisioning.Enabled', 'OS.Name', and '{componentName}.Version' (e.g., 'AzureGuestAgent.Version'). All values are non-sensitive configuration; no secrets, credentials, or cryptographic material transit this field.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "metadataKey is not sensitive, it is a key name for metadata"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret annotation required by Swagger linter to mark non-secret properties containing 'key' in name"
-  @extension("x-ms-secret", false)
-  metadataKey?: string;
+  metadataKey: string;
 
   /**
-   * The metadata value.
+   * The metadata value. Contains non-sensitive configuration such as capability flags ('true'/'false'), OS names ('Linux', 'Windows'), and version strings (e.g., '1.0.0').
    */
   metadataValue?: string;
 }
@@ -918,19 +908,39 @@ model ImageMetadataProfile {
   /**
    * The type of metadata.
    */
-  type?: MetadataType;
+  type: MetadataType;
 
   /**
-   * The list of public metadata key-value pairs.
+   * The list of public metadata key-value pairs. Contains non-sensitive image capability metadata such as supported OS, component names, and versions. No secret material is emitted in this list.
    */
-  @identifiers(#[])
+  @identifiers(#["metadataKey"])
   publicMetadataList?: MetadataKeyValue[];
 
   /**
-   * The list of internal metadata key-value pairs.
+   * The list of internal metadata key-value pairs. Contains non-sensitive service-internal metadata for diagnostics and tracking. No secret material is emitted in this list.
    */
-  @identifiers(#[])
+  @identifiers(#["metadataKey"])
   internalMetadataList?: MetadataKeyValue[];
+}
+
+/**
+ * The name of a component involved in secrets provisioning.
+ */
+@added(Versions.v2026_03_03)
+union SecretsProvisioningComponentName {
+  string,
+
+  /** The guest operating system. */
+  OS: "OS",
+
+  /** The cloud-init provisioning agent. */
+  CloudInit: "CloudInit",
+
+  /** The Azure guest agent. */
+  AzureGuestAgent: "AzureGuestAgent",
+
+  /** The secrets provisioning library. */
+  SecretsProvisioningLibrary: "SecretsProvisioningLibrary",
 }
 
 /**
@@ -939,14 +949,14 @@ model ImageMetadataProfile {
 @added(Versions.v2026_03_03)
 model SecretsProvisioningComponent {
   /**
-   * The name of the component (e.g., "OS", "CloudInit", "AzureGuestAgent", "SecretsProvisioningLibrary").
+   * The name of the component.
    */
-  name: string;
+  name?: SecretsProvisioningComponentName;
 
   /**
    * The version of the component.
    */
-  version: string;
+  version?: string;
 }
 
 /**
@@ -955,7 +965,7 @@ model SecretsProvisioningComponent {
 @added(Versions.v2026_03_03)
 model SecretsProvisioningSettings {
   /**
-   * Specifies whether secrets provisioning is enabled.
+   * Specifies whether the image version supports secrets provisioning.
    */
   isSupported: boolean;
 
@@ -967,7 +977,7 @@ model SecretsProvisioningSettings {
   /**
    * The list of component versions involved in secrets provisioning.
    */
-  @identifiers(#[])
+  @identifiers(#["name"])
   components?: SecretsProvisioningComponent[];
 }
 
@@ -1023,7 +1033,7 @@ model GalleryImageVersionProperties {
    */
   @added(Versions.v2026_03_03)
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @identifiers(#["type"])
   imageMetadataProfiles?: ImageMetadataProfile[];
 }
 
@@ -1479,7 +1489,6 @@ model ImageVersionSecurityProfile {
    * Specifies the secrets provisioning settings for the gallery image version. Used on create or update to configure secrets provisioning.
    */
   @added(Versions.v2026_03_03)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   secretsProvisioningSettings?: SecretsProvisioningSettings;
 }
 

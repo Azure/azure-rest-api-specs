@@ -2676,6 +2676,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a gallery image version with image metadata profiles.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithImageMetadataProfiles.json"
+          },
           "Get a gallery image version with replication status.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithReplicationStatus.json"
           },
@@ -2825,6 +2828,9 @@
           },
           "Create or update a simple Gallery Image Version with StorageAccountStrategy and regional StorageAccountType override.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithStorageAccountStrategy.json"
+          },
+          "Create or update a simple Gallery Image Version with secrets provisioning settings.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSecretsProvisioningSettings.json"
           },
           "Create or update a simple gallery image version with target extended locations specified.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithTargetExtendedLocations.json"
@@ -6285,7 +6291,9 @@
             "$ref": "#/definitions/ImageMetadataProfile"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       },
       "required": [
@@ -7183,21 +7191,28 @@
         },
         "publicMetadataList": {
           "type": "array",
-          "description": "The list of public metadata key-value pairs.",
+          "description": "The list of public metadata key-value pairs. Contains non-sensitive image capability metadata such as supported OS, component names, and versions. No secret material is emitted in this list.",
           "items": {
             "$ref": "#/definitions/MetadataKeyValue"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "metadataKey"
+          ]
         },
         "internalMetadataList": {
           "type": "array",
-          "description": "The list of internal metadata key-value pairs.",
+          "description": "The list of internal metadata key-value pairs. Contains non-sensitive service-internal metadata for diagnostics and tracking. No secret material is emitted in this list.",
           "items": {
             "$ref": "#/definitions/MetadataKeyValue"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "metadataKey"
+          ]
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "ImagePurchasePlan": {
       "type": "object",
@@ -7227,11 +7242,7 @@
         },
         "secretsProvisioningSettings": {
           "$ref": "#/definitions/SecretsProvisioningSettings",
-          "description": "Specifies the secrets provisioning settings for the gallery image version. Used on create or update to configure secrets provisioning.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "Specifies the secrets provisioning settings for the gallery image version. Used on create or update to configure secrets provisioning."
         }
       }
     },
@@ -7241,22 +7252,23 @@
       "properties": {
         "metadataKey": {
           "type": "string",
-          "description": "The metadata key.",
-          "x-ms-secret": false
+          "description": "The metadata key. Known keys emitted by the service include 'Linux.AzureSecretsProvisioning.Enabled', 'OS.Name', and '{componentName}.Version' (e.g., 'AzureGuestAgent.Version'). All values are non-sensitive configuration; no secrets, credentials, or cryptographic material transit this field."
         },
         "metadataValue": {
           "type": "string",
-          "description": "The metadata value."
+          "description": "The metadata value. Contains non-sensitive configuration such as capability flags ('true'/'false'), OS names ('Linux', 'Windows'), and version strings (e.g., '1.0.0')."
         }
-      }
+      },
+      "required": [
+        "metadataKey"
+      ]
     },
     "MetadataType": {
       "type": "string",
       "description": "The type of metadata associated with the image.",
       "enum": [
         "SecretsProvisioningImageMetadata",
-        "UserProvidedSecretsProvisioningMetadata",
-        "Unknown"
+        "UserProvidedSecretsProvisioningMetadata"
       ],
       "x-ms-enum": {
         "name": "MetadataType",
@@ -7271,11 +7283,6 @@
             "name": "UserProvidedSecretsProvisioningMetadata",
             "value": "UserProvidedSecretsProvisioningMetadata",
             "description": "Metadata related to user-provided secrets provisioning for the image."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown metadata type."
           }
         ]
       }
@@ -7606,18 +7613,50 @@
       "description": "Describes a component involved in secrets provisioning.",
       "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the component (e.g., \"OS\", \"CloudInit\", \"AzureGuestAgent\", \"SecretsProvisioningLibrary\")."
+          "$ref": "#/definitions/SecretsProvisioningComponentName",
+          "description": "The name of the component."
         },
         "version": {
           "type": "string",
           "description": "The version of the component."
         }
-      },
-      "required": [
-        "name",
-        "version"
-      ]
+      }
+    },
+    "SecretsProvisioningComponentName": {
+      "type": "string",
+      "description": "The name of a component involved in secrets provisioning.",
+      "enum": [
+        "OS",
+        "CloudInit",
+        "AzureGuestAgent",
+        "SecretsProvisioningLibrary"
+      ],
+      "x-ms-enum": {
+        "name": "SecretsProvisioningComponentName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OS",
+            "value": "OS",
+            "description": "The guest operating system."
+          },
+          {
+            "name": "CloudInit",
+            "value": "CloudInit",
+            "description": "The cloud-init provisioning agent."
+          },
+          {
+            "name": "AzureGuestAgent",
+            "value": "AzureGuestAgent",
+            "description": "The Azure guest agent."
+          },
+          {
+            "name": "SecretsProvisioningLibrary",
+            "value": "SecretsProvisioningLibrary",
+            "description": "The secrets provisioning library."
+          }
+        ]
+      }
     },
     "SecretsProvisioningSettings": {
       "type": "object",
@@ -7625,7 +7664,7 @@
       "properties": {
         "isSupported": {
           "type": "boolean",
-          "description": "Specifies whether secrets provisioning is enabled."
+          "description": "Specifies whether the image version supports secrets provisioning."
         },
         "osName": {
           "type": "string",
@@ -7637,7 +7676,9 @@
           "items": {
             "$ref": "#/definitions/SecretsProvisioningComponent"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [

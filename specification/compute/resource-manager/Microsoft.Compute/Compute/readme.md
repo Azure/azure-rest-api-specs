@@ -385,7 +385,7 @@ suppressions:
     reason: Existing secret fields maintained for backward compatibility.
     from: ComputeRP.json
   - code: XMSSecretInResponse
-    reason: metadataKey is a metadata field name identifier, not a cryptographic secret or API key.
+    reason: metadataKey is a metadata field name, not a cryptographic key. Wire-format name is fixed by existing CAPS backend serialization.
     from: GalleryRP.json
     where: $.definitions.MetadataKeyValue.properties.metadataKey
   - code: LroLocationHeader
