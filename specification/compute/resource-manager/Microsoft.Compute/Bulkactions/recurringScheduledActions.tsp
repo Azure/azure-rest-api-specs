@@ -56,25 +56,25 @@ union ScheduledActionType {
 @added(Versions.`2026-07-06-preview`)
 @doc("A day of the week on which the scheduled action can run.")
 union WeekDay {
-  @doc("Monday.")
+  @doc("The scheduled action can run on Monday.")
   Monday: "Monday",
 
-  @doc("Tuesday.")
+  @doc("The scheduled action can run on Tuesday.")
   Tuesday: "Tuesday",
 
-  @doc("Wednesday.")
+  @doc("The scheduled action can run on Wednesday.")
   Wednesday: "Wednesday",
 
-  @doc("Thursday.")
+  @doc("The scheduled action can run on Thursday.")
   Thursday: "Thursday",
 
-  @doc("Friday.")
+  @doc("The scheduled action can run on Friday.")
   Friday: "Friday",
 
-  @doc("Saturday.")
+  @doc("The scheduled action can run on Saturday.")
   Saturday: "Saturday",
 
-  @doc("Sunday.")
+  @doc("The scheduled action can run on Sunday.")
   Sunday: "Sunday",
 
   @doc("Every day of the week.")
@@ -86,40 +86,40 @@ union WeekDay {
 @added(Versions.`2026-07-06-preview`)
 @doc("A month in which the scheduled action can run.")
 union Month {
-  @doc("January.")
+  @doc("The scheduled action can run in January.")
   January: "January",
 
-  @doc("February.")
+  @doc("The scheduled action can run in February.")
   February: "February",
 
-  @doc("March.")
+  @doc("The scheduled action can run in March.")
   March: "March",
 
-  @doc("April.")
+  @doc("The scheduled action can run in April.")
   April: "April",
 
-  @doc("May.")
+  @doc("The scheduled action can run in May.")
   May: "May",
 
-  @doc("June.")
+  @doc("The scheduled action can run in June.")
   June: "June",
 
-  @doc("July.")
+  @doc("The scheduled action can run in July.")
   July: "July",
 
-  @doc("August.")
+  @doc("The scheduled action can run in August.")
   August: "August",
 
-  @doc("September.")
+  @doc("The scheduled action can run in September.")
   September: "September",
 
-  @doc("October.")
+  @doc("The scheduled action can run in October.")
   October: "October",
 
-  @doc("November.")
+  @doc("The scheduled action can run in November.")
   November: "November",
 
-  @doc("December.")
+  @doc("The scheduled action can run in December.")
   December: "December",
 
   @doc("Every month.")
