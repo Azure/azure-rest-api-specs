@@ -4,6 +4,8 @@ import { join } from "path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { runInNewContext } from "vm";
 
+// cspell:ignore REPOST
+
 /** Repo root, from .github/workflows/test. */
 const ROOT = join(import.meta.dirname, "..", "..", "..");
 const SOURCE_FILE = ".github/workflows/arm-api-review.md";
