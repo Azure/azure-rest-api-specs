@@ -94,7 +94,7 @@ union VoiceAgentServerEvent {
   response_output_text_done: VoiceAgentServerEventResponseTextDone,
   session_created: VoiceAgentServerEventSessionCreated,
   session_updated: VoiceAgentServerEventSessionUpdated,
-  error: VoiceAgentServerEventError,
+  error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
   session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
   session_avatar_switch_to_speaking: VoiceAgentServerEventSessionAvatarSwitchToSpeaking,
@@ -810,30 +810,6 @@ model VoiceAgentClientEventSessionAvatarConnect {
 
   @doc("The client's SDP offer for avatar media negotiation.")
   client_sdp: string;
-}
-
-@doc("The `error` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventError {
-  @doc("The unique identifier of the event.")
-  event_id: string;
-
-  type: "error";
-
-  @doc("Details of the error.")
-  error: VoiceAgentServerEventErrorDetails;
-}
-
-@doc("Details of a voice-agent WebSocket error.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventErrorDetails {
-  ...OpenAI.RealtimeServerEventErrorError;
-
-  @doc("The configured label of a tool that could not be resolved.")
-  tool_label?: string;
-
-  @doc("The configured type of a tool that could not be resolved.")
-  tool_type?: string;
 }
 
 @doc("Details of a non-fatal warning.")
