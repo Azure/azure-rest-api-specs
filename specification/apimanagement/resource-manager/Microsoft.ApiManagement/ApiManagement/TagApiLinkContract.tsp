@@ -61,7 +61,8 @@ interface TagApiLinkContractOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceTagApiLink"
     > {}
 
 @armResourceOperations
@@ -164,7 +165,8 @@ interface WorkspaceTagApiLinkOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTagApiLink"
     > {}
 
 @armResourceOperations

@@ -1364,6 +1364,7 @@ model KeyVaultKeyReference {
   /**
    * The URL referencing a key encryption key in key vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 
   /**
@@ -2359,6 +2360,7 @@ model AmlFilesystemCheckSubnetError {
   filesystemSubnet?: AmlFilesystemCheckSubnetErrorFilesystemSubnet;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BadRequestResponse is AmlFilesystemCheckSubnetError {
   ...Response<400>;
 }
@@ -3367,6 +3369,7 @@ model PrimingJob {
   /**
    * The URL for the priming manifest file to download. This file must be readable from the HPC Cache. When the file is in Azure blob storage the URL should include a Shared Access Signature (SAS) granting read permissions on the blob.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   @visibility(Lifecycle.Create)
   primingManifestUrl: string;

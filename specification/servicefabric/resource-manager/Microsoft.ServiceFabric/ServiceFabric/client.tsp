@@ -257,19 +257,6 @@ using Microsoft.ServiceFabric;
 );
 
 // Access modifiers - types that were public in old API but generated as internal
-@@access(Microsoft.ServiceFabric.AzureActiveDirectory, Access.public, "csharp");
-@@access(
-  Microsoft.ServiceFabric.ClusterVersionDetails,
-  Access.public,
-  "csharp"
-);
-@@access(
-  Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig,
-  Access.public,
-  "csharp"
-);
-@@access(Microsoft.ServiceFabric.ClusterState, Access.public, "csharp");
-@@access(Microsoft.ServiceFabric.ProvisioningState, Access.public, "csharp");
 
 // Property renames on ClusterProperties (and ClusterPropertiesUpdateParameters)
 @@clientName(

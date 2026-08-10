@@ -66,6 +66,7 @@ model MessageInputImageUrlBlock extends MessageInputContentBlock {
   @doc("Must be 'image_url' for an externally hosted image block.")
   type: "image_url";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Information about the external image URL, including the URL and optional detail level.")
   @encodedName("application/json", "image_url")
   imageUrl: MessageImageUrlParam;
@@ -111,6 +112,7 @@ model MessageImageUrlParam {
  * A single message within an agent thread,
  * as provided during that thread's creation for its initial state.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model ThreadMessageOptions {
   /**

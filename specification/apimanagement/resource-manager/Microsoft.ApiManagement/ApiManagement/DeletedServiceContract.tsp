@@ -52,7 +52,7 @@ interface DeletedServiceContracts {
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DeletedServiceContract>> & {
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void>> & {
           @bodyRoot
           _: DeletedServiceContract;
         })

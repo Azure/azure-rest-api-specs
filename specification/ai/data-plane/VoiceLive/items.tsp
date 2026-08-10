@@ -59,11 +59,12 @@ model InputAudioContentPart extends MessageContentPart {
 }
 
 /** Input image content part. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model RequestImageContentPart extends ContentPart {
   type: ContentPartType.input_image;
-  url?: string;
+  image_url?: url;
   detail?: RequestImageContentPartDetail;
 }
 
@@ -529,9 +530,6 @@ model ResponseWebSearchCallItem extends ResponseItem {
   /** The type of the item. Always 'web_search_call'. */
   type: ItemType.web_search_call;
 
-  /** The unique ID of the web search tool call. */
-  id?: string;
-
   /** The status of the web search tool call. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to match source."
   status: "in_progress" | "searching" | "completed" | "failed" | string;
@@ -565,9 +563,6 @@ model FileSearchResult {
 model ResponseFileSearchCallItem extends ResponseItem {
   /** The type of the item. Always 'file_search_call'. */
   type: ItemType.file_search_call;
-
-  /** The unique ID of the file search tool call. */
-  id?: string;
 
   /** The queries used for the file search. */
   queries?: string[];

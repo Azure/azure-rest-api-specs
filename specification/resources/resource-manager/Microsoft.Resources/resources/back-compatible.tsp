@@ -29,15 +29,15 @@ using Microsoft.Resources;
 );
 @@clientName(SpecificResources.update::parameters.properties, "parameters");
 
-@@clientLocation(TagsResources.getAtScope, "Tags");
-@@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");
+@@clientLocation(TagsResources.getAtScope, "Tags", "!javascript");
+@@clientLocation(TagsResources.createOrUpdateAtScope, "Tags", "!javascript");
 @@clientName(
   TagsResources.createOrUpdateAtScope::parameters.resource,
   "parameters"
 );
-@@clientLocation(TagsResources.updateAtScope, "Tags");
+@@clientLocation(TagsResources.updateAtScope, "Tags", "!javascript");
 @@clientName(TagsResources.updateAtScope::parameters.properties, "parameters");
-@@clientLocation(TagsResources.deleteAtScope, "Tags");
+@@clientLocation(TagsResources.deleteAtScope, "Tags", "!javascript");
 
 @@clientLocation(ProvidersOperationGroup.listAtTenantScope, "Providers");
 @@clientLocation(ProvidersOperationGroup.unregister, "Providers");
@@ -58,8 +58,33 @@ using Microsoft.Resources;
 
 @@clientLocation(ResourcesOperationGroup.list, "Resources");
 
-@@clientLocation(TagsOperationGroup.deleteValue, "Tags");
-@@clientLocation(TagsOperationGroup.createOrUpdateValue, "Tags");
-@@clientLocation(TagsOperationGroup.createOrUpdate, "Tags");
-@@clientLocation(TagsOperationGroup.delete, "Tags");
-@@clientLocation(TagsOperationGroup.list, "Tags");
+@@clientLocation(TagsOperationGroup.deleteValue, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.createOrUpdateValue, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.createOrUpdate, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.delete, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.list, "Tags", "!javascript");
+@@clientLocation(TagsResources.getAtScope, "TagsOperations", "javascript");
+@@clientLocation(
+  TagsResources.createOrUpdateAtScope,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(TagsResources.updateAtScope, "TagsOperations", "javascript");
+@@clientLocation(TagsResources.deleteAtScope, "TagsOperations", "javascript");
+@@clientLocation(
+  TagsOperationGroup.deleteValue,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdateValue,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdate,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(TagsOperationGroup.delete, "TagsOperations", "javascript");
+@@clientLocation(TagsOperationGroup.list, "TagsOperations", "javascript");

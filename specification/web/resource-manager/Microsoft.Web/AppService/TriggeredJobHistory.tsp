@@ -64,7 +64,8 @@ interface TriggeredJobHistoryOps
         @segment("history")
         @key
         id: string,
-      }
+      },
+      ResourceName = "WebSiteSlotTriggeredWebJobHistory"
     > {}
 
 @tag("WebApps")
@@ -119,7 +120,8 @@ interface TriggeredJobHistoryOperationGroupOps
         @segment("history")
         @key
         id: string,
-      }
+      },
+      ResourceName = "WebSiteTriggeredWebJobHistory"
     > {}
 
 @tag("WebApps")

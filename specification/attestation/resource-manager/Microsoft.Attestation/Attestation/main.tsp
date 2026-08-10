@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./AttestationProvider.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

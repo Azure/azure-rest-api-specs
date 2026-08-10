@@ -47,7 +47,7 @@ interface ServicesOperationGroup {
     Request = NameAvailabilityRequest,
     Response = NameAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ApiError
   >;
 }
@@ -68,7 +68,7 @@ interface UsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = QuotaList,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ApiError
   >;
 }

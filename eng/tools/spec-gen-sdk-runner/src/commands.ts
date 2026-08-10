@@ -1,19 +1,19 @@
-import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
+import { type APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
 import {
-  AzsdkBuildResponse,
-  AzsdkGenerateResponse,
-  AzsdkPackResponse,
+  type AzsdkBuildResponse,
+  type AzsdkGenerateResponse,
+  type AzsdkPackResponse,
   buildExecutionReport,
   parseAzsdkResponse,
-} from "./azsdk-adapter.js";
+} from "./azsdk-adapter.ts";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
-  getServiceFolderPath,
   getSpecPaths,
   installLanguageToolchain,
   logIssuesToPipeline,
@@ -24,19 +24,72 @@ import {
   prepareSpecGenSdkCommand,
   resolvePackagePath,
   selectGenerationTool,
+  setBuildFailedLabelVariable,
   setPipelineVariables,
-} from "./command-helpers.js";
-import { checkEmitterEnabled, EmitterCheckResult } from "./emitter-check.js";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
+} from "./command-helpers.ts";
+import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
+import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
+import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
+import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
+  checkoutMainBranch,
+  checkoutSdkBranch,
   execAsync,
+  getServiceFolderPath,
+  isPrivateSpecRepo,
   resetGitRepo,
   runCommandWithOutput,
   runSpecGenSdkCommand,
-  SpecConfigs,
-} from "./utils.js";
+  type SpecConfigs,
+} from "./utils.ts";
+
+/**
+ * Apply an SDK repo branch pin for a single spec in the public spec-PR flow.
+ *
+ * Resolves the `repo-branch` pin from `sdk-validation.yaml` (project, API plane,
+ * then service level) for the current SDK language and checks it out. Normalizes
+ * back to `main` when there is no pin, an invalid/missing branch, or the flow is
+ * not applicable but a previous spec had switched away.
+ *
+ * The feature is dormant unless the run is a public spec PR (a PR number is set
+ * and the spec repo is not a private `-pr` mirror).
+ *
+ * @returns whether the SDK repo is now on a non-`main` branch.
+ */
+async function applySdkRepoBranchForSpec(
+  commandInput: SpecGenSdkCmdInput,
+  specConfigRelativePath: string | undefined,
+  currentlyOnNonMainBranch: boolean,
+): Promise<boolean> {
+  // Only applies to the public spec-PR flow.
+  if (!commandInput.prNumber || isPrivateSpecRepo(commandInput.specRepoHttpsUrl)) {
+    return false;
+  }
+
+  const target = specConfigRelativePath
+    ? resolveSdkRepoBranch(
+        specConfigRelativePath,
+        commandInput.sdkLanguage,
+        commandInput.localSpecRepoPath,
+      )
+    : undefined;
+
+  if (target) {
+    const switched = await checkoutSdkBranch(commandInput.localSdkRepoPath, target);
+    if (switched) {
+      return true;
+    }
+    // A confirmed missing branch falls back to `main`. Operational git failures throw.
+  }
+
+  // No pin (or fallback): return to `main` only if a previous spec switched away.
+  if (currentlyOnNonMainBranch) {
+    await checkoutMainBranch(commandInput.localSdkRepoPath);
+  }
+  return false;
+}
 
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:
@@ -188,10 +241,18 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   }
 
   await installLanguageToolchain(commandInput);
-
-  if (tool === "azsdk-cli" && commandInput.tspConfigPath) {
+  logMessage(`Generating SDK from ${specConfigPathText}`, LogLevel.Group);
+  if (tool === "skipped") {
+    logMessage(
+      `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
+      LogLevel.Info,
+    );
+    executionReport = {
+      packages: [],
+      executionResult: "succeeded",
+    };
+  } else if (tool === "azsdk-cli" && commandInput.tspConfigPath) {
     // azsdk-cli path for TypeSpec specs
-    logMessage(`Generating SDK (azsdk-cli) from ${specConfigPathText}`, LogLevel.Group);
     const result = await runAzsdkGeneration(commandInput, commandInput.tspConfigPath);
     executionReport = result.executionReport;
     statusCode = result.statusCode;
@@ -199,7 +260,6 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   } else {
     // Existing spec-gen-sdk path
     const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-    logMessage(`Generating SDK from ${specConfigPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
     try {
       await runSpecGenSdkCommand(specGenSdkCommand);
@@ -243,6 +303,13 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
     installationInstructions,
   );
 
+  // Flag the generated SDK pull request for automated build-failure repair when the
+  // build failed (generation succeeded with a warning). This only runs in the PR-creation
+  // flow, never in plain spec-PR CI validation.
+  if (executionReport) {
+    setBuildFailedLabelVariable(commandInput, executionReport);
+  }
+
   logMessage("ending group logging", LogLevel.EndGroup);
   if (executionReport?.vsoLogPath) {
     logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
@@ -273,6 +340,9 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+  // Tracks whether the SDK repo is currently checked out on a non-`main` branch
+  // due to a `sdk-validation.yaml` pin from a previous spec in this run.
+  let sdkRepoBranchSwitched = false;
 
   if (changedSpecs.length === 0) {
     sdkGenerationExecuted = false;
@@ -321,11 +391,26 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     }
 
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
+    let pipelineErrorsToLogAfterGroup: string[] = [];
 
-    if (tool === "azsdk-cli" && changedSpec.typespecProject) {
+    if (tool === "skipped") {
+      logMessage(
+        `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
+        LogLevel.Info,
+      );
+      executionReport = {
+        packages: [],
+        executionResult: "succeeded",
+      };
+    } else if (tool === "azsdk-cli" && changedSpec.typespecProject) {
       // azsdk-cli path for TypeSpec specs
       try {
         await resetGitRepo(commandInput.localSdkRepoPath);
+        sdkRepoBranchSwitched = await applySdkRepoBranchForSpec(
+          commandInput,
+          changedSpec.typespecProject ?? changedSpec.readmeMd,
+          sdkRepoBranchSwitched,
+        );
         const result = await runAzsdkGeneration(commandInput, changedSpec.typespecProject);
         executionReport = result.executionReport;
         if (result.statusCode !== 0) {
@@ -350,6 +435,11 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         await resetGitRepo(commandInput.localSdkRepoPath);
+        sdkRepoBranchSwitched = await applySdkRepoBranchForSpec(
+          commandInput,
+          changedSpec.typespecProject ?? changedSpec.readmeMd,
+          sdkRepoBranchSwitched,
+        );
         await runSpecGenSdkCommand(specGenSdkCommand);
         logMessage("Runner command executed successfully");
       } catch (error) {
@@ -363,6 +453,27 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         executionReport = getExecutionReport(commandInput);
+        if (
+          commandInput.sdkLanguage === "azure-sdk-for-python" &&
+          !isPrivateSpecRepo(commandInput.specRepoHttpsUrl)
+        ) {
+          const pythonPackageValidation = await validatePythonPackagesOnPyPI(
+            executionReport.packages,
+          );
+          if (!pythonPackageValidation.succeeded) {
+            statusCode = 1;
+            executionReport.executionResult = "failed";
+            if (executionReport.vsoLogPath) {
+              appendErrorsToVsoLog(
+                executionReport.vsoLogPath,
+                "Python package namespace validation",
+                pythonPackageValidation.errors,
+              );
+            } else {
+              pipelineErrorsToLogAfterGroup = pythonPackageValidation.errors;
+            }
+          }
+        }
       } catch (error) {
         logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
@@ -410,6 +521,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     logMessage("ending group logging", LogLevel.EndGroup);
     if (executionReport?.vsoLogPath) {
       logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    } else {
+      for (const error of pipelineErrorsToLogAfterGroup) {
+        vsoLogIssue(error);
+      }
     }
   }
   // Process the spec-gen-sdk artifacts
@@ -499,7 +614,17 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       continue;
     }
 
-    if (tool === "azsdk-cli" && specConfigs.tspconfigPath) {
+    if (tool === "skipped") {
+      specConfigPath = specConfigs.readmePath ?? "";
+      logMessage(
+        `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
+        LogLevel.Info,
+      );
+      executionReport = {
+        packages: [],
+        executionResult: "succeeded",
+      };
+    } else if (tool === "azsdk-cli" && specConfigs.tspconfigPath) {
       // azsdk-cli path for TypeSpec specs
       specConfigPath = specConfigs.tspconfigPath;
       logMessage(`Using azsdk-cli for ${specConfigPath}`, LogLevel.Info);

@@ -17,6 +17,7 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @subscriptionResource
 model Variable
   is Azure.ResourceManager.ProxyResource<PolicyVariableProperties> {
@@ -24,7 +25,7 @@ model Variable
     Resource = Variable,
     KeyName = "variableName",
     SegmentName = "variables",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -45,7 +46,7 @@ alias VariableOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   }
 >;
@@ -76,12 +77,13 @@ alias VariableManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   }
 >;
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface Variables {
   /**

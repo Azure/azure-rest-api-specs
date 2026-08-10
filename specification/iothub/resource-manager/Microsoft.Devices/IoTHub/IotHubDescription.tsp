@@ -25,19 +25,19 @@ model IotHubDescription
   /**
    * The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is exposed at the resource envelope root in the published API; retained at this position to preserve backward compatibility."
   etag?: string;
 
   /**
    * IotHub SKU info
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "sku is exposed at the resource envelope root in the published API; retained at this position to preserve backward compatibility."
   sku: IotHubSkuInfo;
 
   /**
    * The managed identities for the IotHub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "identity uses the published API's ArmIdentity shape at the resource envelope root; retained at this position to preserve backward compatibility."
   identity?: ArmIdentity;
 }
 
@@ -49,7 +49,7 @@ alias IotHubDescriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ProviderNamespace<IotHubDescription>;
   },
   {
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Key parameter mirrors the published API path segment; description retained as in the original specification."
     @path
     @key
     @segment("IotHubs")
@@ -69,7 +69,7 @@ interface IotHubDescriptions {
   /**
    * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Final-state-via location is retained to match the published LRO behavior of this create-or-update operation."
   @summary("Create or update the metadata of an IoT hub.")
   @tag("PUT")
   @Azure.Core.useFinalStateVia("location")
@@ -79,7 +79,7 @@ interface IotHubDescriptions {
       /**
        * ETag of the IoT Hub. Do not specify for creating a brand new IoT Hub. Required to update an existing IoT Hub.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "'If-Match' is a standard HTTP header name (RFC 9110) and must retain its canonical casing."
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -91,7 +91,7 @@ interface IotHubDescriptions {
   /**
    * Update an existing IoT Hub tags. to update other fields use the CreateOrUpdate method
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Final-state-via location is retained to match the published LRO behavior of this tags update operation."
   @summary("Update an existing IoT Hubs tags.")
   @tag("PATCH")
   @patch(#{ implicitOptionality: false })
@@ -108,8 +108,8 @@ interface IotHubDescriptions {
   /**
    * Delete an IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published API returns the deleted resource in the body of the synchronous (200) delete response; retained to preserve backward compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match the published API contract and are retained for backward compatibility."
   @summary("Delete an IoT hub")
   @tag("DELETE")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -324,12 +324,12 @@ interface IotHubDescriptions {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface groups a non-standard sub-path action (IotHubStats) from the published API and is not a standard ARM resource operation set."
 interface IotHubDescriptionOperationGroup {
   /**
    * Get the statistics from an IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-standard ARM action (IotHubStats) on the IoT hub resource, retained to match the published API routing."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats")
   @get
   @summary("Get the statistics from an IoT hub")
@@ -339,7 +339,7 @@ interface IotHubDescriptionOperationGroup {
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Key parameter mirrors the published API path segment; description retained as in the original specification."
     @path
     @key
     @segment("IotHubs")

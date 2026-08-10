@@ -1,10 +1,10 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MaintenanceConfigurationProperties.maintenanceWindow
 );
@@ -21,7 +21,6 @@ using Microsoft.Maintenance;
   "configuration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MaintenanceConfiguration.properties
 );
@@ -31,7 +30,6 @@ using Microsoft.Maintenance;
   "applyUpdate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplyUpdate.properties);
 
 @@clientName(
@@ -59,12 +57,10 @@ using Microsoft.Maintenance;
   "configurationAssignment"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ConfigurationAssignment.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Microsoft.Maintenance.Update.properties
 );
@@ -129,7 +125,11 @@ using Microsoft.Maintenance;
   ConfigurationAssignmentsForSubscriptions.list,
   "ConfigurationAssignmentsWithinSubscription"
 );
-@@clientLocation(ScheduledEventOperationGroup.acknowledge, "ScheduledEvent");
+@@clientLocation(ScheduledEventOperationGroup.acknowledge, "ScheduledEvents");
+@@clientLocation(
+  ScheduledEventOperationGroup.acknowledgeList,
+  "ScheduledEvents"
+);
 @@clientLocation(ApplyUpdatesOperationGroup.createOrUpdateParent, ApplyUpdates);
 @@clientLocation(ApplyUpdatesOperationGroup.createOrUpdate, ApplyUpdates);
 @@clientLocation(
@@ -142,3 +142,9 @@ using Microsoft.Maintenance;
 );
 @@clientLocation(UpdatesOperationGroup.listParent, "Updates");
 @@clientLocation(UpdatesOperationGroup.list, "Updates");
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.OperationDisplay,
+  "OperationInfo",
+  "python"
+);

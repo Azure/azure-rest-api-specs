@@ -126,6 +126,19 @@ union PublicNetworkAccess {
 }
 
 /**
+ * The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack).
+ */
+union IpAddressType {
+  string,
+
+  /** The namespace supports IPv4 addresses only. */
+  IPv4: "IPv4",
+
+  /** The namespace supports both IPv4 and IPv6 addresses (dual stack). */
+  DualStack: "DualStack",
+}
+
+/**
  * Status of the connection.
  */
 union PrivateLinkConnectionStatus {
@@ -457,6 +470,7 @@ model AvailableCluster {
 /**
  * Error response indicates Event Hub service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -871,10 +885,10 @@ model EHNamespaceProperties {
   geoDataReplication?: GeoDataReplicationProperties;
 
   /**
-   * Value that indicates whether IPv6 is enabled for public network access.
+   * The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack).
    */
   @added(Versions.v2026_01_01)
-  ipV6Enabled?: boolean;
+  ipAddressType?: IpAddressType;
 }
 
 /**

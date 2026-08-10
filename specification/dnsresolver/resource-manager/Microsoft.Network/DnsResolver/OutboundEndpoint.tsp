@@ -15,8 +15,10 @@ namespace Microsoft.Network;
  * Describes an outbound endpoint for a DNS resolver.
  */
 @parentResource(DnsResolver)
-model OutboundEndpoint
-  is Azure.ResourceManager.TrackedResource<OutboundEndpointProperties, false> {
+model OutboundEndpoint is Azure.ResourceManager.TrackedResource<
+  OutboundEndpointProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OutboundEndpoint,
     KeyName = "outboundEndpointName",

@@ -10,6 +10,7 @@ import "./run_steps/main.tsp";
 import "./files/main.tsp";
 import "./streaming/events.tsp";
 import "./vector_stores/main.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

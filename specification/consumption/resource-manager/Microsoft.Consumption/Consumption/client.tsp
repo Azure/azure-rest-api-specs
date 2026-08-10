@@ -14,12 +14,12 @@ using Azure.Core;
 // Fix property name changes from lowercase to uppercase (etag -> eTag)
 @@clientName(LotSummary.eTag, "etag", "java");
 @@clientName(ModernChargeSummary.eTag, "etag", "java");
-@@clientName(ChargeSummary.eTag, "etag", "java");
+@@clientName(ChargeSummary.eTag, "etag", "java,python");
 @@clientName(LegacyChargeSummary.eTag, "etag", "java");
 @@clientName(EventSummary.eTag, "etag", "java");
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
-@@clientName(CreditSummary.eTag, "etag", "java,go");
+@@clientName(CreditSummary.eTag, "etag", "java,go,python");
 @@clientName(EventProperties.eTag, "etag", "java");
 @@clientName(LotProperties.eTag, "etag", "java");
 @@clientName(CreditSummaryProperties.eTag, "etag", "java");
