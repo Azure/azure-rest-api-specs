@@ -89630,29 +89630,21 @@
         "properties": {
           "bottom_right": {
             "type": "array",
-            "prefixItems": [
-              {
-                "type": "integer",
-                "format": "uint32"
-              },
-              {
-                "type": "integer",
-                "format": "uint32"
-              }
-            ]
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "minItems": 2,
+            "maxItems": 2
           },
           "top_left": {
             "type": "array",
-            "prefixItems": [
-              {
-                "type": "integer",
-                "format": "uint32"
-              },
-              {
-                "type": "integer",
-                "format": "uint32"
-              }
-            ]
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "minItems": 2,
+            "maxItems": 2
           }
         },
         "description": "The rectangular crop applied to avatar video."

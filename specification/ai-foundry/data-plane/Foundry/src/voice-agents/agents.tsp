@@ -732,12 +732,15 @@ model VoiceAgentAvatarVideoResolution {
   height: int32;
 }
 
-alias VoiceAgentAvatarVideoCoordinate = [uint32, uint32];
-
 @doc("The rectangular crop applied to avatar video.")
 model VoiceAgentAvatarVideoCrop {
-  bottom_right: VoiceAgentAvatarVideoCoordinate;
-  top_left: VoiceAgentAvatarVideoCoordinate;
+  @minItems(2)
+  @maxItems(2)
+  bottom_right: uint32[];
+
+  @minItems(2)
+  @maxItems(2)
+  top_left: uint32[];
 }
 
 @doc("The avatar video background.")
