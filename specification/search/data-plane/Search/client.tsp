@@ -360,6 +360,8 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@access(ListingSearchType, Access.public);
 @@usage(ListingSearchType, Usage.input);
+@@access(KnowledgeBaseRetrieveDefaults, Access.public);
+@@usage(KnowledgeBaseRetrieveDefaults, Usage.input);
 @@access(KnowledgeBaseRetrievalStartedEvent, Access.public);
 @@usage(KnowledgeBaseRetrievalStartedEvent, Usage.output | Usage.json);
 @@access(KnowledgeBaseActivityStartedEvent, Access.public);
@@ -430,16 +432,26 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
 @@access(WorkIQKnowledgeSource, Access.public);
 @@usage(WorkIQKnowledgeSource, Usage.input);
+@@access(WorkIQKnowledgeSourceParameters, Access.public);
+@@usage(WorkIQKnowledgeSourceParameters, Usage.input);
+@@access(EntraAppAuthentication, Access.public);
+@@usage(EntraAppAuthentication, Usage.input);
 @@access(McpServerKnowledgeSource, Access.public);
 @@usage(McpServerKnowledgeSource, Usage.input);
 @@access(IndexedSqlKnowledgeSource, Access.public);
 @@usage(IndexedSqlKnowledgeSource, Usage.input);
 @@access(FileKnowledgeSource, Access.public);
 @@usage(FileKnowledgeSource, Usage.input);
+@@access(FileKnowledgeSourceExtractionMode, Access.public);
+@@usage(FileKnowledgeSourceExtractionMode, Usage.output);
+@@access(FileUploadMetadata, Access.public);
+@@usage(FileUploadMetadata, Usage.input);
 @@access(FabricDataAgentKnowledgeSource, Access.public);
 @@usage(FabricDataAgentKnowledgeSource, Usage.input);
 @@access(FabricOntologyKnowledgeSource, Access.public);
 @@usage(FabricOntologyKnowledgeSource, Usage.input);
+@@access(KnowledgeSourceNetworkAccessMode, Access.public);
+@@usage(KnowledgeSourceNetworkAccessMode, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
@@ -992,6 +1004,12 @@ namespace KnowledgeBaseRetrievalClient {
 );
 
 // Search index types
+@@clientNamespace(Search.ListingSearchType, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.ListingSearchType,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(
   Search.SearchIndexerDataSourceType,
   "Azure.Search.Documents.Indexes"
@@ -1860,6 +1878,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeBaseRetrieveDefaults,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrieveDefaults,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeSourceReference,
   "Azure.Search.Documents.Indexes"
 );
@@ -2146,6 +2173,24 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.WorkIQKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.WorkIQKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.EntraAppAuthentication,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.EntraAppAuthentication,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.McpServerKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
@@ -2313,6 +2358,21 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.FileKnowledgeSource, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.FileKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceExtractionMode,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceExtractionMode,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.FileUploadMetadata, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.FileUploadMetadata,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -4903,6 +4963,15 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.KnowledgeSourceIngestionParameters,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceNetworkAccessMode,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceNetworkAccessMode,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
