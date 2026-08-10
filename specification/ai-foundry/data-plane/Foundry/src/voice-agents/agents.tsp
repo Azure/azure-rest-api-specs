@@ -656,7 +656,7 @@ model GenerateVoiceAgentRequest extends GenerateAgentRequest {
   @maxLength(256)
   `model`?: string;
 
-  @doc("The authoring use case. Stage 1 accepts any non-empty string rather than a fixed scenario whitelist.")
+  @doc("A non-empty authoring use case.")
   @minLength(1)
   @maxLength(128)
   use_case: string;
