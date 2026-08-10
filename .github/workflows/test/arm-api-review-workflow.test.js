@@ -225,6 +225,48 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain('GH_AW_SUB_AGENT_EXT: ".agent.md"');
   });
 
+  it("reconciles duplicates and contradictions across every review entry point", async () => {
+    const [[source, compiled], reviewer, critic, protocol, parity] = await Promise.all([
+      readWorkflowFiles(),
+      readFile(join(ROOT, ".github/agents/arm-api-reviewer.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/reviewer-posted-parity.md"),
+        "utf8",
+      ),
+    ]);
+
+    expect(parity).toContain("A human invokes the ARM API Reviewer in chat");
+    expect(parity).toContain("The automated workflow runs when a PR is ready");
+    expect(parity).toContain("posts `/arm-review`");
+    expect(parity).toContain("top-level PR conversation comments");
+    expect(parity).toContain("pull request review bodies");
+    expect(parity).toContain("Match findings by semantic identity");
+    expect(parity).toContain("Contradictions MUST use `CLARIFY-CONFLICT`");
+
+    expect(reviewer).toContain("Fetch the complete existing discussion inventory");
+    expect(reviewer).toContain("**CLARIFY-CONFLICT.**");
+    expect(reviewer).toContain("`reconciliation: clarification` marker");
+    expect(critic).toContain("`FAIL: duplicate-missed`");
+    expect(critic).toContain("`FAIL: conflict-unclarified`");
+    expect(critic).toContain("inventory-incomplete");
+    expect(protocol).toContain("**10 non-overridable reasons**");
+    expect(protocol).toMatch(/`duplicate-missed`[^\n]+\*\*Yes\*\*/);
+    expect(protocol).toMatch(/`conflict-unclarified`[^\n]+\*\*Yes\*\*/);
+    expect(reviewer).toContain("at least one Blocking POST-NEW");
+    expect(reviewer).toContain("clarification-only plans");
+
+    expect(source).toContain("`get_review_comments` for inline threads/comments");
+    expect(source).toContain("`get_comments` for top-level");
+    expect(source).toContain("`get_reviews` for pull request review bodies");
+    expect(source).toContain("Match by semantic finding identity");
+    expect(source).toContain("call `report_incomplete` and stop");
+    expect(compiled).toContain("reply_to_pull_request_review_comment");
+    expect(compiled).toContain("resolve_pull_request_review_thread");
+    expect(compiled).toContain('"add_comment"');
+  });
+
   it("keeps the agent read-only and preserves the human queue after a clean review", async () => {
     const [source, compiled] = await readWorkflowFiles();
 

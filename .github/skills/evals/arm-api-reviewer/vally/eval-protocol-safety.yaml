@@ -751,3 +751,118 @@ stimuli:
       - The first GitHub read is `get_pull_request` for PR 44499 so its current head SHA can be pinned
       - "The issue-shaped `issue_comment` payload and `pull-request-number: false` convenience field do not cause a no-op"
       - The response does not begin reviewing files or rendering findings
+
+  # 160013 -- An actionable top-level comment suppresses a duplicate inline finding
+  - name: top-level-comment-suppresses-duplicate
+    environment:
+      files:
+        - src: "../../../../agents/arm-api-reviewer.agent.md"
+          dest: ".github/agents/arm-api-reviewer.agent.md"
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      You are building the Step 5.5 Reconciliation Plan for an ARM API
+      review. The complete paginated discussion inventory succeeded:
+
+      - inline review threads: 0
+      - top-level PR conversation comments: 1
+      - pull request review bodies: 0
+
+      Your current candidate cites rule `OAPI027` on
+      `Widget.properties.secretValue` in `widget.json` line 180 and says the
+      response-only secret must be read-only.
+
+      A human-authored top-level PR comment already says:
+
+      > OAPI027 applies to `Widget.properties.secretValue` in widget.json.
+      > This response-only secret needs `readOnly: true`; please update the
+      > schema before merge.
+
+      The top-level comment has no agent marker and mentions the model element
+      rather than the current line number. It is actionable and has the same
+      rule, affected API element, and corrective outcome.
+
+      Apply the loaded skill's machine-readable reconciliation vocabulary.
+      Emit only one concise reconciliation row. Its action cell must use the
+      literal canonical action token (prose synonyms are invalid), and its
+      rationale must explicitly state whether the line-number difference and
+      missing agent marker make the finding new. Do not render the finding
+      body, post a comment, or discuss unrelated steps.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "duplicate is covered"
+        config:
+          substring: "SKIP-COVERED"
+      - type: output-not-matches
+        name: "duplicate is not posted"
+        config:
+          pattern: "(?i)POST-NEW|post (?:a )?(?:new|duplicate)|CLARIFY-CONFLICT"
+      - type: output-matches
+        name: "top-level semantic coverage recognized"
+        config:
+          pattern: "(?i)top-level|semantic|same (?:rule|finding|API element)|already cover"
+      - type: prompt
+    rubric:
+      - The only action is `SKIP-COVERED`; no new inline or top-level finding is proposed
+      - The rationale recognizes the human-authored top-level comment as actionable prior coverage
+      - Line-number differences and the missing agent marker do not make the finding new
+
+  # 160014 -- Contradictory guidance receives a clarification, not another finding
+  - name: contradictory-thread-requires-clarification
+    environment:
+      files:
+        - src: "../../../../agents/arm-api-reviewer.agent.md"
+          dest: ".github/agents/arm-api-reviewer.agent.md"
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      You are building the Step 5.5 Reconciliation Plan for an ARM API
+      review at pinned session SHA
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. The complete discussion
+      inventory contains one unresolved human-authored inline thread on
+      `Widget.properties.status`.
+
+      Prior thread position:
+
+      > `status` must be required because every resource response includes it.
+
+      Current evidence at the pinned SHA shows that `status` is
+      service-populated and has `readOnly: true`. The applicable mutability
+      rule means it must not be required in request bodies. Your new review
+      conclusion would therefore tell the author to keep it optional, which is
+      materially incompatible with the existing thread.
+
+      Emit only the reconciliation action and the exact clarification reply
+      you would plan. The reply must state the prior position, current
+      evidence, current guidance, and why the conclusion changed. The thread
+      is human-origin, so it must remain unresolved. Do not render or propose a
+      separate standalone finding.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "conflict action selected"
+        config:
+          substring: "CLARIFY-CONFLICT"
+      - type: output-not-matches
+        name: "no competing finding or resolution"
+        config:
+          pattern: "(?i)POST-NEW|new standalone finding|(?:will|should|plan to) resolve|RESOLVE-AND-REPOST"
+      - type: output-matches
+        name: "prior and current positions stated"
+        config:
+          pattern: "(?is)(?:prior|previous).*required.*(?:readOnly|read-only).*(?:optional|must not be required)"
+      - type: output-matches
+        name: "reason for changed guidance stated"
+        config:
+          pattern: "(?i)because|therefore|changed|supersed"
+      - type: prompt
+    rubric:
+      - The action is `CLARIFY-CONFLICT`, not POST-NEW or SKIP-COVERED
+      - The planned reply states the prior required-property position and the current read-only/optional guidance
+      - The reply anchors the changed conclusion to evidence at the pinned SHA and explains why guidance changed
+      - The human-origin thread remains unresolved and no duplicate standalone finding is proposed

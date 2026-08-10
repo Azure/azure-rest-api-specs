@@ -129,11 +129,34 @@ Files outside `specification/**` are skipped.
 ### Bot identity and comment deduplication
 
 The automated workflow posts review comments under a stable bot identity.
-Every comment ends with the same hidden telemetry marker as the interactive
-agent (`posted-by: arm-api-reviewer-agent`), so the
+Every standalone finding, review summary, and consolidated top-level
+clarification carries a hidden `posted-by: arm-api-reviewer-agent` marker, so the
 [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) logic
-(Scenarios A–F) works end-to-end for both trigger paths. Repeat runs do not
-duplicate comments.
+(Scenarios A–F plus conflict clarification) works end-to-end for all three entry
+points. Reply-only reconciliation messages stay inside their existing thread
+and do not need a finding marker. Repeat runs do not duplicate comments.
+
+### Cross-session reconciliation
+
+The same reconciliation rules apply regardless of how a review starts:
+
+1. A human runs the ARM API Reviewer from Copilot Chat and approves posting.
+2. The GitHub Actions workflow runs when the PR is ready for ARM review.
+3. An authorized collaborator posts `/arm-review`.
+
+Before posting, each session inventories inline review threads, top-level PR
+conversation comments, and pull request review bodies. Feedback from humans and
+all prior agent sessions participates in matching, including resolved,
+outdated, and marker-free comments. The agent marker controls whether the agent
+may resolve a thread; it does not determine whether prior feedback counts.
+
+Findings are matched by rule or topic, affected API element, and corrective
+outcome rather than exact wording or line number. When an actionable comment
+already covers a finding, no duplicate finding is posted. When the new session
+would contradict existing guidance, it replies in the existing inline thread
+or posts one consolidated top-level clarification. That clarification states
+the prior position, current evidence, current guidance, and why the conclusion
+changed. Human-authored threads are never resolved automatically.
 
 ### Approval-label awareness
 
@@ -391,17 +414,20 @@ Then iterate over the returned PR numbers with the per-PR query above.
 
 ## Comment Reconciliation on Repeat Reviews
 
-When the agent reviews a PR that already has review comments (from a prior run
-of the agent, another ARM reviewer, or automated checks), it reconciles its
-findings against the existing comments before posting anything. This prevents
-duplicate noise and keeps the PR thread clean.
+When the agent reviews a PR that already has comments or review bodies (from a
+prior run of the agent, another ARM reviewer, or automated checks), it
+reconciles its findings before posting anything. This prevents duplicate or
+contradictory noise and keeps the PR discussion useful.
 
-The agent builds an inventory of **all** existing review comment threads --
-including resolved, outdated, and collapsed ones -- and handles each finding
-according to these scenarios:
+The agent builds a paginated inventory of inline review threads, top-level PR
+conversation comments, and pull request review bodies. It includes resolved,
+outdated, and collapsed threads and handles each finding according to these
+scenarios:
 
-- **A -- Already covered:** same rule, same file, same line. The finding is
-  skipped and no new comment is posted.
+- **A -- Already covered:** the same semantic finding (rule or topic, affected
+  API element, and corrective outcome) is already actionable on any discussion
+  surface. The finding is skipped and no new comment is posted. Exact wording,
+  line number, author, or marker presence does not make it new.
 - **B -- Line shifted (agent-origin):** same rule, code moved, and the old
   comment contains `posted-by: arm-api-reviewer-agent`. The outdated agent
   comment is resolved and a replacement comment is posted at the correct line,
@@ -410,9 +436,11 @@ according to these scenarios:
   comment does not contain the agent marker. The agent does not resolve the
   human reviewer's comment or post a duplicate; it plans a reply to the
   existing thread noting the new line number.
-- **D -- No new or replacement comments:** all findings are SKIP-COVERED or
-  REPLY-LINE-SHIFT. No new top-level or replacement inline comments are posted.
-  The agent lists each matching existing thread with its clickable comment URL.
+- **D -- No standalone new findings:** all findings are SKIP-COVERED,
+  REPLY-LINE-SHIFT, or CLARIFY-CONFLICT. No duplicate standalone finding is
+  posted. The agent lists each matching existing item with its clickable URL
+  and executes only the planned replies, consolidated clarifications, or
+  fix-verified resolutions.
 - **E -- Agent-origin violation fixed:** an existing unresolved agent comment
   flags a violation that no longer exists in the latest code. The agent plans
   to thank the author and resolve its own thread. **Important:** approval of
@@ -427,13 +455,20 @@ according to these scenarios:
     Scenario E rows unresolved, or **Cancel** to leave every existing
     thread untouched,
   - the **rollback cost**: a thread auto-resolved in error can be reopened
-    manually on github.com, but the agent will not re-post the original
-    violation -- you must re-flag it yourself.
+    manually on github.com. Later sessions treat the resolved thread as prior
+    coverage and do not duplicate it elsewhere, so reopen that thread to
+    restore its unresolved state.
 - **F -- Human-origin violation fixed:** an existing unresolved human-authored
   comment flags a violation that is no longer present. The interactive agent
   surfaces the thread for explicit per-thread consent before replying or
   resolving; the automated workflow may reply that the fix is present but
   never resolves a human-owned thread.
+- **Conflict clarification:** when the new session would give materially
+  incompatible guidance for the same semantic finding, it does not post a
+  competing finding. It replies in the existing inline thread or posts one
+  consolidated top-level clarification linking the conflicting top-level
+  comments/review bodies. The clarification states the prior position, current
+  evidence, current guidance, and why the conclusion changed.
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 
@@ -454,7 +489,8 @@ You confirm the plan before any comments are posted, resolved, or replied to.
 
 After posting review comments, the agent can also propose label changes on the PR:
 
-- **Add** `ARMChangesRequested` to signal the PR author needs to address feedback.
+- **Add** `ARMChangesRequested` only when at least one Blocking finding was
+  posted. Warning/suggestion-only and clarification-only reviews do not add it.
 - **Remove** `WaitForARMFeedback` (if present) since ARM feedback has been provided.
 
 The agent will propose these changes and wait for your explicit approval
