@@ -127,8 +127,10 @@ model VoiceAgentAnimationConfig {
 
 @doc("An ICE server used for avatar WebRTC negotiation.")
 model VoiceAgentAvatarIceServer {
-  urls: string[];
+  urls: url[];
   username?: string | null;
+
+  @secret
   credential?: string | null;
 }
 

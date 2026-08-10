@@ -94,8 +94,8 @@ union VoiceAgentInterimResponse {
 
 @doc("""
   The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
-  managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
-  that is not defined in this specification. Every create or update produces a new immutable version.
+  managed speech-to-speech experience. Establish realtime voice sessions through
+  `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDefinition extends AgentDefinition {
@@ -628,10 +628,10 @@ union VoiceAgentEndOfUtteranceThresholdLevel {
 @doc("End-of-utterance detection settings.")
 model VoiceAgentEndOfUtteranceDetection {
   `model`: VoiceAgentEndOfUtteranceModel;
-  threshold_level?: VoiceAgentEndOfUtteranceThresholdLevel | null;
+  threshold_level?: VoiceAgentEndOfUtteranceThresholdLevel;
 
   @minValue(0)
-  timeout_ms?: int32 | null;
+  timeout_ms?: int32;
 }
 
 @doc("Server VAD turn-detection settings.")
@@ -674,18 +674,18 @@ model VoiceAgentAzureSemanticVadTurnDetection {
 
   @minValue(0)
   @maxValue(1)
-  threshold?: float32 | null;
+  threshold?: float32;
 
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
-  idle_timeout_ms?: int32 | null;
+  idle_timeout_ms?: int32;
 
   @minValue(0)
   speech_duration_ms?: int32;
 
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
   remove_filler_words?: boolean = false;
-  languages?: string[] | null;
+  languages?: string[];
 }
 
 @doc("Azure multilingual semantic VAD turn-detection settings.")
@@ -821,7 +821,7 @@ model VoiceAgentAvatarVideoCrop {
 
 @doc("The avatar video background.")
 model VoiceAgentAvatarVideoBackground {
-  image_url?: string | null;
+  image_url?: url | null;
   color?: string | null;
 }
 
@@ -829,9 +829,9 @@ model VoiceAgentAvatarVideoBackground {
 model VoiceAgentAvatarVideoParams {
   bitrate?: int32 = 2000000;
   codec?: "h264" = "h264";
-  crop?: VoiceAgentAvatarVideoCrop | null;
-  resolution?: VoiceAgentAvatarVideoResolution | null;
-  background?: VoiceAgentAvatarVideoBackground | null;
+  crop?: VoiceAgentAvatarVideoCrop;
+  resolution?: VoiceAgentAvatarVideoResolution;
+  background?: VoiceAgentAvatarVideoBackground;
 
   @minValue(1)
   @maxValue(2000)

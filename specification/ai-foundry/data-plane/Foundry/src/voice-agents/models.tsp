@@ -87,7 +87,7 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the projection removes the four intentionally different properties."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the projection removes the two intentionally retyped properties."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
   `output` projection may be omitted; retrieve the
@@ -96,9 +96,21 @@ model VoiceResponseAudio {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends OmitProperties<OpenAI.RealtimeResponse, "audio"> {
+model VoiceResponse extends OmitProperties<
+  OpenAI.RealtimeResponse,
+  "audio" | "output"
+> {
   @doc("The unique id of the response.")
   id: string;
+
+  @doc("The object type. Always `realtime.response`.")
+  @extension("x-stainless-const", true)
+  object: "realtime.response";
+
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The persisted response status matches the closed OpenAI Realtime response status set."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The persisted response status matches the inline OpenAI Realtime response status type."
+  @doc("The status of the response.")
+  status: "completed" | "cancelled" | "failed" | "incomplete" | "in_progress";
 
   @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
   output?: VoiceConversationItem[];
