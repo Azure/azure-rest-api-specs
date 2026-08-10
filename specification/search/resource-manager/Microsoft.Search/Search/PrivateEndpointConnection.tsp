@@ -39,7 +39,7 @@ interface PrivateEndpointConnections {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
-      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-grouping' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a parameter model / spread."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -65,7 +65,7 @@ interface PrivateEndpointConnections {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
-      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-grouping' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a parameter model / spread."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -94,7 +94,7 @@ interface PrivateEndpointConnections {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
-      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-grouping' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a parameter model / spread."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -120,7 +120,7 @@ interface PrivateEndpointConnections {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
-      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-grouping' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a parameter model / spread."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(

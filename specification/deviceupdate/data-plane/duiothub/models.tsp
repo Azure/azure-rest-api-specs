@@ -1355,7 +1355,7 @@ model LogCollection {
   /**
    * The log collection id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
   @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 
@@ -1416,7 +1416,7 @@ model LogCollectionOperationDetailedStatus {
   /**
    * The device diagnostics operation id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
   @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 
