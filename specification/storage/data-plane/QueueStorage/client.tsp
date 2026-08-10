@@ -418,3 +418,9 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientLocation(QueueClient.clear, QueueClient, "java");
 @@clientLocation(QueueClient.updateMessage, QueueClient, "java");
 @@clientLocation(QueueClient.deleteMessage, QueueClient, "java");
+
+// Return response headers as a strongly-typed model for the header-only (no body) operations whose
+// results the hand-written clients build from response headers, so header model classes are generated
+// instead of reading HttpHeaders directly (typespec#11420, typespec-java >= 0.45.11).
+@@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
+@@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
