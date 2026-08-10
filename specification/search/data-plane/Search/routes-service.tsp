@@ -965,6 +965,8 @@ interface KnowledgeSources {
   @sharedRoute
   @route("/knowledgesources('{sourceName}')/files")
   @post
+  @Azure.ClientGenerator.Core.convenientAPI(false)
+  @Azure.ClientGenerator.Core.protocolAPI(false)
   uploadFile is SearchSourceOperation<
     {
       /** The content type of the request body. Must be application/octet-stream. */
