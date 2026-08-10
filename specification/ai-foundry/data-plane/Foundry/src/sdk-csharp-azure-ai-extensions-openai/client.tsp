@@ -839,7 +839,7 @@ namespace Azure.AI.Projects {
     "OpenAPIAnonymousAuthenticationDetails",
     "!autorest"
   );
-  
+
   @@usage(OpenApiManagedSecurityScheme, Usage.input | Usage.output);
   @@usage(OpenApiProjectConnectionAuthDetails, Usage.input | Usage.output);
 
@@ -871,6 +871,7 @@ namespace Azure.AI.Projects {
   @@clientName(BingGroundingSearchConfiguration.set_lang, "Language");
 
   @@clientName(MemorySearchPreviewTool.update_delay, "UpdateDelayInSeconds");
+  @@clientName(MemorySearchOptions, "MemorySearchResultOptions");
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@usage(OpenApiFunctionDefinition, Usage.input | Usage.output);
 

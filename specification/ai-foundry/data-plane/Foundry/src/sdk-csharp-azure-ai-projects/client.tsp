@@ -38,8 +38,6 @@ namespace Azure.AI.Projects;
 
 @@clientName(JobStatus, "ProjectsJobStatus");
 
-@@clientName(MemorySearchOptions, "MemorySearchResultOptions");
-
 // Shorter method names for SDK datasets operations
 @@clientName(Datasets.listLatest, "list");
 @@clientName(Datasets.getVersion, "get");
@@ -501,7 +499,7 @@ namespace Azure.AI.Projects;
 @@alternateType(
   Azure.AI.Projects.MemorySearchOptions,
   {
-    identity: "Azure.AI.Extensions.OpenAI.MemorySearchOptions",
+    identity: "Azure.AI.Extensions.OpenAI.MemorySearchResultOptions",
     package: "Azure.AI.Extensions.OpenAI",
     minVersion: "3.0.0-alpha.20260805.1",
   },
@@ -1028,7 +1026,6 @@ namespace Azure.AI.Projects;
 );
 // And now drop classes that aren't referenced, and aren't pruned.
 /**
-  
   @@alternateType(
     OpenAI.InputItemLocalShellToolCall,
     {
@@ -1048,15 +1045,17 @@ namespace Azure.AI.Projects;
     },
     "csharp"
   );
+  
   @@alternateType(
-    OpenAI.InputItemComputerToolCall,
-    {
+  OpenAI.InputItemComputerToolCall,
+  {
       identity: "OpenAI.Responses.InputItemComputerToolCall",
       package: "OpenAI",
       minVersion: "2.12.0",
-    },
-    "csharp"
+  },
+  "csharp"
   );
+  
   @@alternateType(
     OpenAI.InputItemToolSearchCallItemParam,
     {
@@ -1066,6 +1065,16 @@ namespace Azure.AI.Projects;
     },
     "csharp"
   );
+  
+  @@alternateType(
+  OpenAI.InputItemComputerCallOutputItemParam,
+  {
+    identity: "OpenAI.Responses.InputItemComputerCallOutputItemParam",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
 */
 @@alternateType(
   OpenAI.InputTextContent,
