@@ -58,9 +58,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
   const diffs = await getSwaggerDiffs();
 
-  logMessage("Found PR changes:");
-  logMessage(JSON.stringify(diffs, null, 2));
-
   // switch pr to base branch
   changeBaseBranch(context);
   await context.prInfo?.checkout(context.prInfo.baseBranch);
@@ -90,6 +87,25 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   );
   const renamedSwaggers = (diffs.renames || []).filter((rename) =>
     unsuppressedRenameDestinations.has(rename.to),
+  );
+
+  logMessage("Found PR changes:");
+  logMessage(
+    JSON.stringify(
+      {
+        additions: newSwaggers,
+        modifications: changedSwaggers,
+        deletions: deletedSwaggers,
+        renames: renamedSwaggers,
+        total:
+          newSwaggers.length +
+          changedSwaggers.length +
+          deletedSwaggers.length +
+          renamedSwaggers.length,
+      },
+      null,
+      2,
+    ),
   );
 
   const newExistingVersionDirs: string[] = [];
