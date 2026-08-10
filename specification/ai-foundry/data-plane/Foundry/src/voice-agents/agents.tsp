@@ -13,12 +13,9 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 // ============================================================================
-// Voice agent definition, configuration, resource, and request
-// models. These are split out from the text `/agents` surface so that
-// `/agents` carries only text agent kinds and `/voice_agents` carries only
-// voice agents. Shared agent shapes (AgentObject,
-// AgentVersionObject, request/response envelopes) are reused from
-// `../agents/models.tsp` via property spreads to avoid drift.
+// Voice agent definition and configuration models. Voice agents are a
+// first-class `kind` on the shared `/agents` resource and reuse the standard
+// agent lifecycle, versioning, identity, and SDK surface.
 // ============================================================================
 
 const VoiceAgentRequiredPreview = #{
@@ -31,12 +28,9 @@ const VoiceAgentRequiredPreview = #{
   that is not defined in this specification. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentDefinition {
+model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
-  kind: "voice";
-
-  @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
-  rai_config?: RaiConfig;
+  kind: AgentKind.voice;
 
   @doc("How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type: VoiceModelType;
@@ -46,6 +40,9 @@ model VoiceAgentDefinition {
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
+
+  @doc("Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.")
+  greeting?: VoiceGreetingConfig;
 
   @doc("""
     The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
@@ -69,6 +66,13 @@ model VoiceAgentDefinition {
     """)
   tools?: VoiceAgentTool[];
 
+  @doc("""
+    How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+    `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+    Defaults to `auto`.
+    """)
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.auto;
+
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
@@ -81,6 +85,37 @@ model VoiceAgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Session-start greeting configuration for a voice agent.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceGreetingConfig {
+  @doc("The greeting mode.")
+  type: string;
+}
+
+@doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TemplateVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "template";
+
+  @doc("The Handlebars text template spoken at session start.")
+  @minLength(1)
+  text: string;
+}
+
+@doc("A greeting authored by the session model from a scoped opening-turn prompt.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
+  type: "llm_generated";
+
+  @doc("The Handlebars prompt that guides the opening turn.")
+  @minLength(1)
+  prompt: string;
+
+  @doc("The tool-selection policy for the opening response. Defaults to `none`.")
+  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.none;
 }
 
 @doc("""
@@ -98,33 +133,68 @@ union VoiceModelType {
   self_deployed: "self_deployed",
 }
 
-@doc("""
-  A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,
-  service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
-  `azure_ai_search` are provided through a toolbox.
-  """)
+@doc("A tool usable by a voice agent.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentTool {
-  @doc("A native function tool, executed by the client.")
-  function: OpenAI.RealtimeFunctionTool,
+model VoiceAgentTool {
+  @doc("The tool kind.")
+  type: string;
 
-  @doc("An MCP tool executed by the service. The agent resolves authentication, for example through a Foundry connection.")
-  mcp: VoiceAgentMcpTool,
+  @doc("When the tool invocation creates a follow-up response. Defaults to `when_idle`.")
+  response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
+}
 
-  @doc("A service-managed control that acts on the active voice session.")
-  system: VoiceSystemTool,
+@doc("A native function tool executed by the client.")
+model VoiceAgentFunctionTool extends VoiceAgentTool {
+  ...OmitProperties<OpenAI.RealtimeFunctionTool, "type" | "name">;
+  type: "function";
 
-  @doc("A reference to a Foundry toolbox executed through its MCP endpoint.")
-  toolbox: VoiceToolboxTool,
+  @doc("The function name.")
+  @minLength(1)
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+@doc("Tool-selection behavior for a voice agent.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolChoice {
+  mode: OpenAI.ToolChoiceOptions,
+  function: OpenAI.ToolChoiceFunction,
+  mcp: OpenAI.ToolChoiceMCP,
+}
+
+@doc("When a tool invocation creates a follow-up response. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentToolResponseScheduling {
+  string,
+
+  @doc("Do not create a follow-up response after the MCP invocation completes.")
+  silent: "silent",
+
+  @doc("Create a follow-up response when the conversation is idle.")
+  when_idle: "when_idle",
+
+  @doc("Interrupt the active response and create a follow-up response.")
+  interrupt: "interrupt",
+
+  @doc("Create a follow-up response only when no response is active.")
+  skip_if_busy: "skip_if_busy",
 }
 
 @doc("An MCP tool available to a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentMcpTool {
+model VoiceAgentMcpTool extends VoiceAgentTool {
   ...OmitProperties<
     OpenAI.MCPTool,
-    "authorization" | "connector_id" | "tunnel_id" | "server_url"
+    | "type"
+    | "authorization"
+    | "connector_id"
+    | "tunnel_id"
+    | "server_url"
+    | "headers"
   >;
+  type: "mcp";
 
   @doc("The URL for the MCP server.")
   server_url?: url;
@@ -132,7 +202,7 @@ model VoiceAgentMcpTool {
 
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceSystemTool {
+model VoiceSystemTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `system`.")
   type: "system";
 
@@ -154,7 +224,7 @@ union VoiceSystemToolName {
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceToolboxTool {
+model VoiceToolboxTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `toolbox`.")
   type: "toolbox";
 
@@ -199,8 +269,14 @@ model VoiceAudioOutputConfig {
   @doc("The output audio format.")
   format?: VoiceAudioFormat;
 
-  @doc("The typed voice configuration.")
-  voice?: VoiceAgentVoice;
+  @doc("The voice name, for example `alloy`. The value is extensible and interpreted with `voice_type`.")
+  voice?: string;
+
+  @doc("The voice provider/type, for example `azure-standard`. Additional values may be added without changing this model.")
+  voice_type?: string;
+
+  @doc("The optional BCP-47 locale for the selected voice, for example `en-US`.")
+  voice_locale?: string;
 
   @doc("""
     The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
@@ -478,253 +554,6 @@ model VoiceInputTranscription {
   phrase_list?: string[];
 }
 
-@doc("A typed voice configuration accepted by a voice agent.")
-union VoiceAgentVoice {
-  OpenAIVoice,
-  AzureVoice,
-  AzureRealtimeNativeVoice,
-}
-
-@doc("An OpenAI built-in voice configuration with an explicit type discriminator.")
-model OpenAIVoice {
-  @doc("The voice kind. Always `openai`.")
-  type: "openai";
-
-  @doc("The OpenAI built-in voice name.")
-  name: OpenAI.VoiceIdsShared;
-}
-
-@doc("Base configuration shared by Azure synthesized voices.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model AzureVoice {
-  @doc("The Azure voice kind.")
-  type: AzureVoiceType;
-
-  @doc("The synthesis temperature, from 0 to 1.")
-  @minValue(0)
-  @maxValue(1)
-  temperature?: float32;
-
-  @doc("The URL of a custom pronunciation lexicon.")
-  custom_lexicon_url?: url;
-
-  @doc("The URL of a custom text-normalization service.")
-  custom_text_normalization_url?: url;
-
-  @doc("Preferred BCP-47 locales that influence language accents.")
-  prefer_locales?: string[];
-
-  @doc("The enforced BCP-47 locale. When omitted, the language is detected from the text.")
-  locale?: string;
-
-  @doc("The speaking style, such as `cheerful` or `sad`.")
-  style?: string;
-
-  @doc("The SSML-compatible pitch adjustment, such as `+5%`.")
-  pitch?: string;
-
-  @doc("The SSML-compatible speaking-rate adjustment, such as `+10%`.")
-  rate?: string;
-
-  @doc("The SSML-compatible volume adjustment, such as `+10` or `-6dB`.")
-  volume?: string;
-}
-
-@doc("The Azure synthesized voice kind. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union AzureVoiceType {
-  string,
-
-  @doc("An Azure standard neural voice.")
-  azure_standard: "azure-standard",
-
-  @doc("An Azure custom neural voice.")
-  azure_custom: "azure-custom",
-
-  @doc("An Azure personal voice.")
-  azure_personal: "azure-personal",
-
-  @doc("An Azure avatar voice-synchronization voice.")
-  avatar_voice_sync: "avatar-voice-sync",
-}
-
-@doc("An Azure standard neural voice configuration.")
-model AzureStandardVoice extends AzureVoice {
-  type: AzureVoiceType.azure_standard;
-
-  @doc("The Azure neural voice name.")
-  @minLength(1)
-  name: string;
-
-  @doc("The speaker name used by a multi-talker voice.")
-  multi_talker_speaker_name?: string;
-}
-
-@doc("An Azure custom neural voice configuration.")
-model AzureCustomVoice extends AzureVoice {
-  type: AzureVoiceType.azure_custom;
-
-  @doc("The custom voice name.")
-  @minLength(1)
-  name: string;
-
-  @doc("The Azure Speech custom voice deployment endpoint ID.")
-  @minLength(1)
-  endpoint_id: string;
-}
-
-@doc("An Azure personal voice configuration.")
-model AzurePersonalVoice extends AzureVoice {
-  type: AzureVoiceType.azure_personal;
-
-  @doc("The personal voice name.")
-  @minLength(1)
-  name: string;
-
-  @doc("The neural model used by the personal voice.")
-  `model`: PersonalVoiceModel;
-}
-
-@doc("An Azure avatar voice-synchronization configuration. The runtime derives its voice name from the avatar character and style.")
-model AzureAvatarVoiceSyncVoice extends AzureVoice {
-  type: AzureVoiceType.avatar_voice_sync;
-
-  @doc("The neural model used to synthesize the avatar voice.")
-  `model`: PersonalVoiceModel;
-}
-
-@doc("A known neural model for an Azure personal or avatar voice. Additional values may be added over time.")
-union PersonalVoiceModel {
-  string,
-
-  @doc("The latest Dragon model.")
-  dragon_latest_neural: "DragonLatestNeural",
-
-  @doc("The latest Dragon HD Omni model.")
-  dragon_hd_omni_latest_neural: "DragonHDOmniLatestNeural",
-
-  @doc("The MAI-Voice model.")
-  mai_voice: "MAI-Voice",
-}
-
-@doc("An Azure realtime-native voice configuration.")
-model AzureRealtimeNativeVoice {
-  @doc("The voice kind. Always `azure-realtime-native`.")
-  type: "azure-realtime-native";
-
-  @doc("The Azure realtime-native voice name.")
-  @minLength(1)
-  name: AzureRealtimeNativeVoiceName;
-}
-
-@doc("An Azure realtime-native voice name. Use one of the known names or another realtime-native voice supported by the selected model.")
-union AzureRealtimeNativeVoiceName {
-  string,
-
-  @doc("The Aarti voice.")
-  aarti: "aarti",
-
-  @doc("The Alvaro voice.")
-  alvaro: "alvaro",
-
-  @doc("The Andrew voice.")
-  andrew: "andrew",
-
-  @doc("The Antonio voice.")
-  antonio: "antonio",
-
-  @doc("The Ava voice.")
-  ava: "ava",
-
-  @doc("The Clara voice.")
-  clara: "clara",
-
-  @doc("The Dalia voice.")
-  dalia: "dalia",
-
-  @doc("The Denise voice.")
-  denise: "denise",
-
-  @doc("The Diego voice.")
-  diego: "diego",
-
-  @doc("The Diya voice.")
-  diya: "diya",
-
-  @doc("The Elsa voice.")
-  elsa: "elsa",
-
-  @doc("The Emma voice.")
-  emma: "emma",
-
-  @doc("The Florian voice.")
-  florian: "florian",
-
-  @doc("The Francisca voice.")
-  francisca: "francisca",
-
-  @doc("The Hyunsu voice.")
-  hyunsu: "hyunsu",
-
-  @doc("The Jorge voice.")
-  jorge: "jorge",
-
-  @doc("The Keita voice.")
-  keita: "keita",
-
-  @doc("The Liam voice.")
-  liam: "liam",
-
-  @doc("The Meera voice.")
-  meera: "meera",
-
-  @doc("The Nanami voice.")
-  nanami: "nanami",
-
-  @doc("The Natasha voice.")
-  natasha: "natasha",
-
-  @doc("The Niwat voice.")
-  niwat: "niwat",
-
-  @doc("The Premwadee voice.")
-  premwadee: "premwadee",
-
-  @doc("The Remy voice.")
-  remy: "remy",
-
-  @doc("The Ryan voice.")
-  ryan: "ryan",
-
-  @doc("The Seraphina voice.")
-  seraphina: "seraphina",
-
-  @doc("The Sonia voice.")
-  sonia: "sonia",
-
-  @doc("The Sunhi voice.")
-  sunhi: "sunhi",
-
-  @doc("The Sylvie voice.")
-  sylvie: "sylvie",
-
-  @doc("The Thierry voice.")
-  thierry: "thierry",
-
-  @doc("The William voice.")
-  william: "william",
-
-  @doc("The Xiaoxiao voice.")
-  xiaoxiao: "xiaoxiao",
-
-  @doc("The Ximena voice.")
-  ximena: "ximena",
-
-  @doc("The Yunxi voice.")
-  yunxi: "yunxi",
-}
-
 @doc("""
   Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
@@ -802,79 +631,11 @@ union VoiceAgentUseCase {
   in_car: "in_car",
 }
 
-// ============================================================================
-// Voice agent resources and request/response envelopes.
-//
-// The persisted voice agent and its immutable versions mirror the shared
-// AgentObject / AgentVersionObject shapes, but their `definition` is always a
-// VoiceAgentDefinition. Shared fields are reused via OmitProperties so
-// the voice surface stays in sync with the text surface.
-// ============================================================================
-
-@doc("A voice agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `VoiceAgentDefinition`.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentVersionObject {
-  ...OmitProperties<AgentVersionObject, "definition" | "error">;
-
-  @doc("The voice agent definition for this version.")
-  definition: VoiceAgentDefinition;
-}
-
-@doc("A voice agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentObject {
-  ...OmitProperties<AgentObject, "versions">;
-
-  @doc("The latest version of the voice agent.")
-  versions: {
-    latest: VoiceAgentVersionObject;
-  };
-}
-
-@doc("The request to create a new version of a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model CreateVoiceAgentVersionRequest {
-  ...OmitProperties<CreateAgentVersionRequest, "definition">;
-
-  @doc("The voice agent definition.")
-  definition: VoiceAgentDefinition;
-}
-
-@doc("The request to create a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model CreateVoiceAgentRequest {
-  @doc("""
-    The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
-    - Must start and end with alphanumeric characters,
-    - Can contain hyphens in the middle
-    - Must not exceed 63 characters.
-    """)
-  @maxLength(63)
-  name: string;
-
-  @doc("The initial operational state of the agent. Defaults to 'enabled' if not specified.")
-  state?: AgentState = AgentState.enabled;
-
-  ...CreateVoiceAgentVersionRequest;
-
-  @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
-  agent_endpoint?: AgentEndpointConfig;
-
-  @doc("Optional agent card for the agent")
-  agent_card?: AgentCard;
-}
-
-@doc("The request to update a voice agent by adding a new version.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model UpdateVoiceAgentRequest {
-  ...OmitProperties<CreateVoiceAgentVersionRequest, "draft">;
-}
-
 @doc("""
   The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`
-  are expanded into a full, editable `VoiceAgentDefinition`, which is then created via the standard voice
-  agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
-  resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
+  are expanded into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
+  The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
+  definition, so the caller can edit or override any of them afterward via standard agent versioning.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model GenerateVoiceAgentRequest {

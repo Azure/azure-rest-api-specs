@@ -35,14 +35,13 @@ service event extensions. Internal Voice Live exchanges remain excluded.
 | P0       | Fixed  | Session input/output formats reused permissive OpenAI/REST shapes                     | Reused the structured PR #45185 format limited to `audio/pcm`, `audio/pcma`, and `audio/pcmu`; only the input override remains nullable                                  |
 | P0       | Fixed  | Nested audio fields differed from the runtime                                         | Aligned input/output format, transcription, noise reduction, turn detection, echo cancellation, voice, speed, and timestamps                                             |
 | P0       | Fixed  | Session VAD, transcription, modality, and audio models drifted from the control plane | Reused PR #45185 models and retained WebSocket-only wrappers only for nullable input overrides, echo cancellation, and runtime EOU options                               |
-| P0       | Fixed  | Session voice choices did not match stable v1                                         | Reused the PR #45185 typed OpenAI and Azure voice union; the runtime-only OpenAI string compatibility form is intentionally not advertised                               |
-| P0       | Fixed  | Azure voice families shared one permissive property bag                               | Reused the discriminator-specific PR #45185 shapes so each family exposes only its supported identifiers and synthesis controls                                          |
+| P0       | Fixed  | Session voice choices did not match stable v1                                         | Uses the extensible `voice`, `voice_type`, and `voice_locale` string fields without changing the `voice` property type                                                     |
 | P0       | Fixed  | WebSocket tools drifted from persisted-agent tools                                    | Reused Realtime function, control-plane toolbox/system, and scheduling models; retained only MCP runtime authorization fields                                            |
 | P0       | Fixed  | Forced function selection referenced the generic Responses API model                  | Added and referenced the Realtime-specific `OpenAI.RealtimeToolChoiceFunction` wire model                                                                                |
 | P0       | Fixed  | `session.update`, response-create, and service session state were raw OpenAI models   | Added direction-specific models with the exact stable-v1 field names                                                                                                     |
 | P0       | Fixed  | Response and item models lost service fields                                          | Added cost estimates, structured content formats, Foundry/web/file/workflow output items, truncated items, and transcription phrases                                     |
 | P0       | Fixed  | Response items and content-part events shared incompatible content discriminators     | Split item content (`output_text`/`output_audio`) from `response.content_part.*` event content (`text`/`audio`) to match OpenAI Realtime and the service wire projection |
-| P0       | Fixed  | Public service events were missing or too optional                                    | Added animation, rate-limit, web/file-search events and aligned handoff/event requiredness                                                                               |
+| P0       | Fixed  | Public service events were missing or too optional                                    | Added animation, rate-limit, and web/file-search events and aligned event requiredness                                                                                   |
 | P0       | Fixed  | Stable v1 added `gpt-transcribe` and `gpt-live-transcribe` after the initial review   | Added both public literals to the shared control-plane transcription model and made model selection required                                                             |
 | P0       | Fixed  | The transcription union advertised internal or legacy Azure/MAI model names           | Kept `azure-speech` and the canonical `mai-transcribe`; removed `azure-mrs`, `mai-transcribe-1`, and `mai-transcribe-1.5`                                                |
 | P0       | Fixed  | The browser-compatible agent-version query alias was missing                          | Added the public `x-agent-version-override` query parameter implemented by the Voice Agent service                                                                       |
@@ -89,31 +88,23 @@ excluded.
 
 ### Stable voice shape
 
-The WebSocket contract reuses the control-plane `VoiceAgentVoice` union from PR #45185. OpenAI built-in
-voices use the typed `{ "type": "openai", "name": "..." }` object. The service may still
-accept the legacy string form for backward compatibility, but that form is intentionally excluded from the
-customer-facing TypeSpec. Azure voices use canonical typed objects:
+The control-plane and WebSocket contracts preserve `voice` as an extensible string and add optional
+`voice_type` and `voice_locale` strings. This avoids changing the existing property type while allowing new
+providers and voice families without revising the model. For example:
 
-| Voice family          | Discriminator           | Type-specific identifier |
-| --------------------- | ----------------------- | ------------------------ |
-| Azure standard        | `azure-standard`        | `name`                   |
-| Azure custom          | `azure-custom`          | `name` and `endpoint_id` |
-| Azure personal        | `azure-personal`        | `name`, optional `model` |
-| Avatar voice sync     | `avatar-voice-sync`     | `model`                  |
-| Azure realtime native | `azure-realtime-native` | `name`                   |
-
-The Azure objects also preserve the runtime fields `temperature`, `custom_lexicon_url`,
-`custom_text_normalization_url`, `prefer_locales`, `locale`, `style`, `pitch`, `rate`, `volume`, and
-`multi_talker_speaker_name` where applicable. Standard voices alone expose `multi_talker_speaker_name`;
-custom voices alone expose `endpoint_id`; personal and avatar voice-sync voices expose `model`; and
-realtime-native voices expose only `type` and `name`. The shared synthesis controls are limited to the first
-four Azure synthesis families and are not accepted for realtime-native voices.
+```json
+{
+  "voice": "alloy",
+  "voice_type": "azure-standard",
+  "voice_locale": "en-US"
+}
+```
 
 ### Session and response payloads
 
 `VoiceAgentSessionUpdateConfig` now matches the stable runtime request fields, while
 `VoiceAgentSessionResponseConfig` composes its common fields from that request model and separately overrides
-server-authoritative state. Both directions reuse the control-plane voice, audio format, noise reduction,
+server-authoritative state. Both directions reuse the control-plane voice fields, audio format, noise reduction,
 transcription, VAD, greeting, MCP scheduling, and modality models. This avoids accepting response fields in
 `session.update`, avoids dropping effective session fields from `session.created` or `session.updated`, and
 prevents the persisted and runtime contracts from drifting independently.
@@ -138,11 +129,9 @@ The event surface now includes:
 - web-search and file-search lifecycle events;
 - enriched `conversation.item.truncated.item`;
 - transcription `phrases` with word timing; and
-- the existing warning, avatar, audio-timestamp, video, MCP, and handoff families.
+- the existing warning, avatar, audio-timestamp, video, and MCP families.
 
-All custom models derived from the runtime server-message base now require `event_id`. Handoff lifecycle
-identifiers are required, completed durations are required, and aborted handoffs use the closed
-`user_interruption | error` reason union with optional error details.
+All custom models derived from the runtime server-message base now require `event_id`.
 
 ### Connection route
 
@@ -182,7 +171,7 @@ customer contract:
 - [x] The request and response session models are direction-specific.
 - [x] Common session fields reuse the PR #45185 control-plane models where the wire shapes match.
 - [x] Audio and voice models match the canonical v1 runtime schema.
-- [x] Public VAD, transcription, animation, avatar, tool, greeting, and handoff fields match the runtime.
+- [x] Public VAD, transcription, animation, avatar, tool, and greeting fields match the runtime.
 - [x] Response/item properties are retyped instead of only renaming event wrappers.
 - [x] Internal session finalization, BYOM credential, emotion, and override fields are absent.
 - [x] The HTTP `101` response has no entity body.

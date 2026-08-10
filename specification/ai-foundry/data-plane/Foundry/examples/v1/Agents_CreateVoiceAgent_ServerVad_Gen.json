@@ -1,11 +1,11 @@
 {
-  "title": "VoiceAgents_UpdateVoiceAgent_ServerVad",
-  "operationId": "VoiceAgents_updateVoiceAgent",
+  "title": "Agents_CreateVoiceAgent_ServerVad",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
   "parameters": {
     "api-version": "v1",
     "Foundry-Features": "VoiceAgents=V1Preview",
-    "agent_name": "server-vad-agent",
-    "description": "Updates the agent to use server-side voice activity detection.",
+    "name": "server-vad-agent",
+    "description": "A voice agent that uses server-side voice activity detection.",
     "definition": {
       "kind": "voice",
       "model_type": "managed",
@@ -14,13 +14,18 @@
         "input": {
           "turn_detection": {
             "type": "server_vad",
-            "threshold": 0.6,
-            "prefix_padding_ms": 250,
-            "silence_duration_ms": 450
+            "threshold": 0.5,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 500
           },
           "transcription": {
             "model": "gpt-realtime-whisper"
           }
+        },
+        "output": {
+          "voice": "alloy",
+          "voice_type": "azure-standard",
+          "voice_locale": "en-US"
         }
       }
     }
@@ -36,10 +41,10 @@
           "latest": {
             "metadata": null,
             "object": "agent.version",
-            "id": "agent_server_vad:2",
+            "id": "agent_server_vad:1",
             "name": "server-vad-agent",
-            "version": "2",
-            "created_at": 1785776400,
+            "version": "1",
+            "created_at": 1785772800,
             "definition": {
               "kind": "voice",
               "model_type": "managed",
@@ -48,13 +53,18 @@
                 "input": {
                   "turn_detection": {
                     "type": "server_vad",
-                    "threshold": 0.6,
-                    "prefix_padding_ms": 250,
-                    "silence_duration_ms": 450
+                    "threshold": 0.5,
+                    "prefix_padding_ms": 300,
+                    "silence_duration_ms": 500
                   },
                   "transcription": {
                     "model": "gpt-realtime-whisper"
                   }
+                },
+                "output": {
+                  "voice": "alloy",
+                  "voice_type": "azure-standard",
+                  "voice_locale": "en-US"
                 }
               }
             }

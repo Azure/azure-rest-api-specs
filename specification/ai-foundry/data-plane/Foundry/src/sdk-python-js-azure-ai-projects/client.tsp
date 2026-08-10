@@ -5,6 +5,7 @@
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
+import "../voice-agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features

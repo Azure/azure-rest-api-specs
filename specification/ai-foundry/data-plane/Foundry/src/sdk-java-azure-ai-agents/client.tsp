@@ -4,6 +4,7 @@ import "../sdk-common/error.default.tsp";
 import "../sdk-common/ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
+import "../voice-agents/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../agents-session-files/routes.tsp";

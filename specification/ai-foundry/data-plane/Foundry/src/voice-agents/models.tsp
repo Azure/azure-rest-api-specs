@@ -61,21 +61,20 @@ model VoiceConversation {
 // Voice response
 // ---------------------------------------------------------------------------
 //
-// The projected base omits audio because Foundry's typed voice objects are not assignable to the
-// upstream flat VoiceIdsShared string.
-
-@doc("The complete typed voice configuration used for a response.")
-union VoiceResponseVoice {
-  OpenAIVoice,
-  AzureVoice,
-  AzureRealtimeNativeVoice,
-}
+// The projected base omits audio because Foundry adds extensible voice provider and locale fields
+// alongside the OpenAI-compatible flat voice string.
 
 @doc("The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudioOutput {
-  @doc("The voice used for the response's audio output.")
-  voice?: VoiceResponseVoice;
+  @doc("The voice name used for the response's audio output.")
+  voice?: string;
+
+  @doc("The extensible provider/type of the voice used for the response's audio output.")
+  voice_type?: string;
+
+  @doc("The BCP-47 locale of the voice used for the response's audio output.")
+  voice_locale?: string;
 
   @doc("The audio format used for the response's audio output.")
   format?: OpenAI.RealtimeAudioFormats;
@@ -309,7 +308,7 @@ scalar VoiceDurationMilliseconds extends duration;
   Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
   credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
-  `/audio/content` route.
+  `/audio_content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceItemAudioResponse {
@@ -340,7 +339,7 @@ model VoiceItemAudioResponse {
   @doc("The duration of the audio segment.")
   duration_ms?: VoiceDurationMilliseconds;
 
-  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio_content` route instead.")
   blob_uri?: url;
 }
 
@@ -373,7 +372,7 @@ model VoiceRecordingChannelLayout {
   Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,
   the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
   own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
-  `/audio/content` route instead.
+  `/audio_content` route instead.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingResponse {
@@ -395,6 +394,6 @@ model VoiceRecordingResponse {
   @doc("The total duration of the recording.")
   duration_ms: VoiceDurationMilliseconds;
 
-  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio_content` route instead.")
   blob_uri?: url;
 }

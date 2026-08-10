@@ -102,9 +102,6 @@ union VoiceAgentServerEvent {
   session_updated: VoiceAgentServerEventSessionUpdated,
   conversation_created: VoiceAgentServerEventConversationCreated,
   error: VoiceAgentServerEventError,
-  session_handoff_started: VoiceAgentServerEventSessionHandoffStarted,
-  session_handoff_completed: VoiceAgentServerEventSessionHandoffCompleted,
-  session_handoff_aborted: VoiceAgentServerEventSessionHandoffAborted,
   warning: VoiceAgentServerEventWarning,
   session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
   session_avatar_switch_to_speaking: VoiceAgentServerEventSessionAvatarSwitchToSpeaking,
@@ -123,14 +120,6 @@ union VoiceAgentSessionIncludeOption {
   input_audio_transcription_logprobs: "item.input_audio_transcription.logprobs",
   input_audio_transcription_phrases: "item.input_audio_transcription.phrases",
   file_search_call_results: "file_search_call.results",
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode or a forced function."
-@doc("Tool-selection behavior for a voice-agent session or response.")
-@oneOf
-union VoiceAgentToolChoice {
-  mode: OpenAI.ToolChoiceOptions,
-  function: OpenAI.RealtimeToolChoiceFunction,
 }
 
 @doc("A managed identity used to authorize a voice-agent MCP connection.")
@@ -175,16 +164,16 @@ model VoiceAgentSessionMcpToolProperties {
 
 @doc("A remote MCP server available to a voice-agent session.")
 model VoiceAgentSessionMcpTool {
+  ...OmitProperties<VoiceAgentTool, "type">;
   type: "mcp";
   ...VoiceAgentSessionMcpToolProperties;
-  response_scheduling?: VoiceAgentMcpResponseScheduling = VoiceAgentMcpResponseScheduling.when_idle;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Session tools are selected by their `type` property."
 @doc("A tool accepted by a stable voice-agent WebSocket session.")
 @oneOf
 union VoiceAgentSessionTool {
-  function: OpenAI.RealtimeFunctionTool,
+  function: VoiceAgentFunctionTool,
   mcp: VoiceAgentSessionMcpTool,
   toolbox: VoiceToolboxTool,
   system: VoiceSystemTool,
@@ -194,28 +183,6 @@ union VoiceAgentSessionTool {
 union VoiceAgentMaxOutputTokens {
   count: int32,
   unlimited: "inf",
-}
-
-@doc("Whether a handoff target creates a response after transfer.")
-union VoiceAgentHandoffTargetResponse {
-  auto: "auto",
-  none: "none",
-}
-
-@doc("The runtime pipeline family used by an effective handoff graph.")
-union VoiceAgentPipelineFamily {
-  cascaded: "cascaded",
-  realtime: "realtime",
-}
-
-@doc("Reasoning effort accepted by a handoff target.")
-union VoiceAgentHandoffReasoningEffort {
-  none: "none",
-  minimal: "minimal",
-  low: "low",
-  medium: "medium",
-  high: "high",
-  xhigh: "xhigh",
 }
 
 @doc("An end-of-utterance detector model.")
@@ -591,158 +558,6 @@ union VoiceAgentInterimResponse {
   llm: VoiceAgentLlmInterimResponseConfig,
 }
 
-@doc("A configured handoff target and its node-scoped behavior.")
-model VoiceAgentHandoffNodeConfig {
-  @doc("The node identifier.")
-  id: string;
-
-  @doc("A non-empty description used to select this target.")
-  @minLength(1)
-  description: string;
-
-  @doc("Session behavior applied after transferring to this node.")
-  config: VoiceAgentHandoffNodeSessionConfig;
-}
-
-@doc("Session behavior applied at a handoff target.")
-model VoiceAgentHandoffNodeSessionConfig {
-  @doc("The target model, when different from the current node.")
-  `model`?: string | null;
-
-  @doc("Instructions applied at the target node.")
-  instructions?: string | null;
-
-  @doc("Tools available at the target node.")
-  tools?: VoiceAgentSessionTool[] | null;
-
-  @doc("Tool-selection behavior at the target node.")
-  tool_choice?: VoiceAgentToolChoice | null;
-
-  @doc("The target node's voice.")
-  voice?: VoiceAgentVoice | null;
-
-  @doc("The target node's sampling temperature.")
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null;
-
-  @doc("The target node's maximum output-token count.")
-  max_response_output_tokens?: VoiceAgentMaxOutputTokens | null;
-
-  @doc("The reasoning effort used at the target node.")
-  reasoning_effort?: VoiceAgentHandoffReasoningEffort | null;
-
-  @doc("Voice adaptation applied at the target node.")
-  voice_adaptation?: VoiceAgentVoiceAdaptation | null;
-
-  @doc("Interim-response settings applied at the target node.")
-  interim_response?: VoiceAgentInterimResponse | null;
-
-  @doc("Whether the target model may call multiple tools in parallel.")
-  parallel_tool_calls?: boolean;
-}
-
-@doc("A directed transition between handoff nodes.")
-model VoiceAgentHandoffEdgeConfig {
-  @doc("The edge identifier.")
-  id: string;
-
-  @doc("The source node identifier.")
-  source: string;
-
-  @doc("The target node identifier.")
-  target: string;
-
-  @doc("A non-empty description used by the model to select this transition.")
-  @minLength(1)
-  @maxLength(500)
-  description: string;
-
-  @doc("Whether user interruption cancels the transition.")
-  cancel_on_interruption?: boolean = false;
-
-  @doc("The delay before the target behavior is committed, in milliseconds.")
-  @minValue(0)
-  @maxValue(10000)
-  delay_ms?: int32 = 0;
-
-  @doc("Optional text synthesized while transferring.")
-  @maxLength(500)
-  transfer_message?: string | null;
-
-  @doc("Whether the target automatically creates a response after transfer.")
-  target_response?: VoiceAgentHandoffTargetResponse = VoiceAgentHandoffTargetResponse.auto;
-}
-
-@doc("A customer-supplied handoff graph.")
-model VoiceAgentHandoffGraphConfig {
-  @doc("The maximum number of successful transfers in the session.")
-  @minValue(1)
-  @maxValue(100)
-  max_transfers?: int32 = 16;
-
-  @doc("The maximum number of transfer attempts in the session.")
-  @minValue(1)
-  @maxValue(100)
-  max_attempts?: int32 | null;
-
-  @doc("The explicitly configured handoff targets.")
-  @maxItems(31)
-  nodes: VoiceAgentHandoffNodeConfig[];
-
-  @doc("The directed transitions between handoff nodes.")
-  @minItems(1)
-  @maxItems(128)
-  edges: VoiceAgentHandoffEdgeConfig[];
-}
-
-@doc("Non-sensitive metadata for an effective handoff node.")
-model VoiceAgentHandoffNodeState {
-  @doc("The node identifier.")
-  id: string;
-
-  @doc("The node description.")
-  description: string;
-
-  @doc("Whether the service implicitly created this node.")
-  implicit?: boolean = false;
-}
-
-@doc("Non-sensitive metadata for an effective handoff edge.")
-model VoiceAgentHandoffEdgeState {
-  ...OmitProperties<VoiceAgentHandoffEdgeConfig, "description">;
-}
-
-@doc("The effective handoff state returned by the service.")
-model VoiceAgentHandoffState {
-  @doc("The runtime pipeline family.")
-  pipeline_family: VoiceAgentPipelineFamily;
-
-  @doc("The active node identifier.")
-  active_node_id: string;
-
-  @doc("The active node generation.")
-  node_generation: int32;
-
-  @doc("The number of completed transfers.")
-  transfer_count: int32;
-
-  @doc("The number of transfer attempts.")
-  attempt_count: int32;
-
-  @doc("The edge identifiers currently available to the model.")
-  available_edge_ids: string[];
-
-  @doc("The function tool exposed to initiate transfers.")
-  transfer_tool: OpenAI.RealtimeFunctionTool | null;
-
-  @doc("The compiled handoff nodes.")
-  nodes: VoiceAgentHandoffNodeState[];
-
-  @doc("The compiled handoff edges.")
-  edges: VoiceAgentHandoffEdgeState[];
-}
-
 @doc("The stable realtime session settings accepted in a `session.update` client event.")
 @usage(VoiceAgentClientEventUsage)
 model VoiceAgentSessionUpdateConfig {
@@ -802,9 +617,6 @@ model VoiceAgentSessionUpdateConfig {
 
   @doc("A proactive assistant greeting started after session configuration.")
   greeting?: VoiceGreetingConfig | null;
-
-  @doc("The customer-supplied handoff graph.")
-  handoff?: VoiceAgentHandoffGraphConfig | null;
 }
 
 @doc("Input-audio settings returned in a stable voice-agent session event.")
@@ -834,7 +646,7 @@ model VoiceAgentSessionResponseAudio {
 model VoiceAgentSessionResponseConfig {
   ...OmitProperties<
     VoiceAgentSessionUpdateConfig,
-    "output_modalities" | "audio" | "handoff" | "include" | "metadata"
+    "output_modalities" | "audio" | "include" | "metadata"
   >;
 
   @doc("The object type. Always `realtime.session`.")
@@ -855,9 +667,6 @@ model VoiceAgentSessionResponseConfig {
 
   @doc("The effective input- and output-audio settings for the session.")
   audio?: VoiceAgentSessionResponseAudio | null;
-
-  @doc("The effective handoff state.")
-  handoff?: VoiceAgentHandoffState | null;
 
   @doc("The idle timeout reported by the service, in milliseconds.")
   idle_timeout?: int32 | null;
@@ -1147,8 +956,14 @@ model VoiceAgentRealtimeResponse {
   @doc("The modalities used by the response.")
   modalities?: VoiceOutputModality[] | null;
 
-  @doc("The voice used by the response.")
-  voice?: VoiceAgentVoice | null;
+  @doc("The voice name used by the response.")
+  voice?: string | null;
+
+  @doc("The extensible provider/type of the voice used by the response.")
+  voice_type?: string | null;
+
+  @doc("The BCP-47 locale of the voice used by the response.")
+  voice_locale?: string | null;
 
   @doc("The output-audio format used by the response.")
   output_audio_format?: VoiceAgentResponseAudioFormat | null;
@@ -1659,58 +1474,6 @@ model VoiceAgentServerEventErrorDetails {
 
   @doc("The configured type of a tool that could not be resolved.")
   tool_type?: string;
-}
-
-@doc("Fields shared by handoff lifecycle events.")
-model VoiceAgentHandoffEventProperties {
-  event_id: string;
-  handoff_id: string;
-  edge_id: string;
-  from_node_id: string;
-  to_node_id: string;
-  from_model: string;
-  to_model: string;
-  tool_call_id: string;
-  node_generation: int32;
-}
-
-@doc("The `session.handoff.started` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventSessionHandoffStarted {
-  type: "session.handoff.started";
-  ...VoiceAgentHandoffEventProperties;
-}
-
-@doc("The `session.handoff.completed` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventSessionHandoffCompleted {
-  type: "session.handoff.completed";
-  ...VoiceAgentHandoffEventProperties;
-
-  @doc("The time spent preparing the target behavior, in milliseconds.")
-  prepare_duration_ms: int32;
-
-  @doc("The total duration of the handoff, in milliseconds.")
-  duration_ms: int32;
-}
-
-@doc("Why a handoff ended before the target behavior committed.")
-union VoiceAgentHandoffAbortReason {
-  user_interruption: "user_interruption",
-  error: "error",
-}
-
-@doc("The `session.handoff.aborted` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventSessionHandoffAborted {
-  type: "session.handoff.aborted";
-  ...VoiceAgentHandoffEventProperties;
-
-  @doc("The reason the handoff was aborted.")
-  reason: VoiceAgentHandoffAbortReason;
-
-  @doc("The error that aborted the handoff, when `reason` is `error`.")
-  error?: VoiceAgentServerEventErrorDetails;
 }
 
 @doc("Details of a non-fatal warning.")

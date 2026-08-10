@@ -15,7 +15,6 @@
     - "./sdk-csharp-azure-ai-extensions-openai/tspconfig.yaml"
     - "./sdk-csharp-azure-ai-projects/tspconfig.yaml"
     - "./sdk-csharp-azure-ai-projects-agents/tspconfig.yaml"
-    - "./sdk-csharp-azure-ai-voice-agents/tspconfig.yaml"
 - tool: TypeSpecValidation
   reason: >
      Java Client library config does not include TS/Python config.
@@ -34,21 +33,3 @@
     - "options.@azure-tools/typespec-java.emitter-output-dir"
   paths:
     - "./sdk-python-js-azure-ai-projects/tspconfig.yaml"
-- tool: TypeSpecValidation
-  reason: >
-     TypeScript Client library config does not include Java/Python config.
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - "options.@azure-tools/typespec-java.emitter-output-dir"
-    - "options.@azure-tools/typespec-python.emitter-output-dir"
-  paths:
-    - "./sdk-js-azure-ai-voice-agents/tspconfig.yaml"
-- tool: TypeSpecValidation
-  reason: >
-     Python Client library config does not include Java/TS config.
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - "options.@azure-tools/typespec-java.emitter-output-dir"
-    - "options.@azure-tools/typespec-ts.package-details.name"
-  paths:
-    - "./sdk-python-azure-ai-voice-agents/tspconfig.yaml"

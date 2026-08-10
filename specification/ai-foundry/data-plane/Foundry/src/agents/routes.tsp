@@ -1,5 +1,6 @@
 import "../common/models.tsp";
 import "./models.tsp";
+import "../voice-agents/agents.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -41,6 +42,21 @@ interface Agents {
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
+    AgentObject
+  >;
+
+  /**
+   * Generates and creates a voice agent from high-level inputs plus a natural-language goal.
+   * The generated definition remains fully editable through the standard agent versioning operations.
+   */
+  @summary("Generate a voice agent")
+  @post
+  @route("/agents:generate")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @tag("Agents")
+  generateVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    GenerateVoiceAgentRequest,
     AgentObject
   >;
 

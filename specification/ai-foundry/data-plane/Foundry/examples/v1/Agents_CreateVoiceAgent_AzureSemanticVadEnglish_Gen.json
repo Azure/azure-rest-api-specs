@@ -1,11 +1,11 @@
 {
-  "title": "VoiceAgents_CreateVoiceAgent_AzureSemanticVad",
-  "operationId": "VoiceAgents_createVoiceAgent",
+  "title": "Agents_CreateVoiceAgent_AzureSemanticVadEnglish",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
   "parameters": {
     "api-version": "v1",
     "Foundry-Features": "VoiceAgents=V1Preview",
-    "name": "azure-semantic-vad-agent",
-    "description": "A voice agent that uses Azure semantic voice activity detection.",
+    "name": "english-semantic-vad-agent",
+    "description": "A voice agent that uses English-optimized Azure semantic voice activity detection.",
     "definition": {
       "kind": "voice",
       "model_type": "managed",
@@ -13,12 +13,12 @@
       "audio": {
         "input": {
           "turn_detection": {
-            "type": "azure_semantic_vad",
+            "type": "azure_semantic_vad_en",
             "threshold": 0.5,
             "prefix_padding_ms": 300,
             "silence_duration_ms": 500,
             "end_of_utterance_detection": {
-              "model": "semantic_detection_v1",
+              "model": "semantic_detection_v1_en",
               "threshold_level": "medium",
               "timeout_ms": 2000
             },
@@ -26,28 +26,25 @@
             "remove_filler_words": true,
             "auto_truncate": true,
             "create_response": true,
-            "interrupt_response": true,
-            "languages": [
-              "en-US"
-            ]
+            "interrupt_response": true
           }
         }
       }
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "object": "agent",
-        "id": "agent_azure_semantic_vad",
-        "name": "azure-semantic-vad-agent",
+        "id": "agent_azure_semantic_vad_en",
+        "name": "english-semantic-vad-agent",
         "state": "enabled",
         "versions": {
           "latest": {
             "metadata": null,
             "object": "agent.version",
-            "id": "agent_azure_semantic_vad:1",
-            "name": "azure-semantic-vad-agent",
+            "id": "agent_azure_semantic_vad_en:1",
+            "name": "english-semantic-vad-agent",
             "version": "1",
             "created_at": 1785772800,
             "definition": {
@@ -57,12 +54,12 @@
               "audio": {
                 "input": {
                   "turn_detection": {
-                    "type": "azure_semantic_vad",
+                    "type": "azure_semantic_vad_en",
                     "threshold": 0.5,
                     "prefix_padding_ms": 300,
                     "silence_duration_ms": 500,
                     "end_of_utterance_detection": {
-                      "model": "semantic_detection_v1",
+                      "model": "semantic_detection_v1_en",
                       "threshold_level": "medium",
                       "timeout_ms": 2000
                     },
@@ -70,10 +67,7 @@
                     "remove_filler_words": true,
                     "auto_truncate": true,
                     "create_response": true,
-                    "interrupt_response": true,
-                    "languages": [
-                      "en-US"
-                    ]
+                    "interrupt_response": true
                   }
                 }
               }

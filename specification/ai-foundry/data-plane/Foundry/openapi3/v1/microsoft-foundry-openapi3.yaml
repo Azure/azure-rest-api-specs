@@ -5,8 +5,6 @@ info:
 tags:
   - name: Voice Agent WebSocket
   - name: Agent Conversations
-  - name: Voice Agents
-  - name: Voice Agent Versions
   - name: AgentServer Task Storage
   - name: Responses Root
     description: Responses
@@ -520,6 +518,7 @@ paths:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
       tags:
         - Agents
@@ -1282,6 +1281,118 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Voice Agent WebSocket
+  /agents/{agent_name}/endpoint/protocols/voice/conversations:
+    get:
+      operationId: AgentEndpointConversations_listAgentConversations
+      summary: List voice agent conversations
+      description: |-
+        Returns the conversations persisted for the specified voice agent endpoint.
+        Conversations are present only when the agent definition has `store = true`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VoiceConversation'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Conversations
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
     get:
       operationId: AgentEndpointConversations_getAgentConversation
@@ -1459,7 +1570,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content:
+  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio_content:
     get:
       operationId: AgentEndpointConversations_getAgentConversationAudioContent
       summary: Stream a voice agent conversation's merged recording
@@ -1649,7 +1760,7 @@ paths:
         Retrieves a single item from the specified conversation by its id, including its transcript. An
         `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
         audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
-        `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
+        `/items/{item_id}/audio_content`. Returns `404` when the conversation or item was not persisted
         (`store = false`).
       parameters:
         - name: Foundry-Features
@@ -1778,7 +1889,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content:
+  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio_content:
     get:
       operationId: AgentEndpointConversations_getAgentConversationItemAudioContent
       summary: Stream a voice agent conversation item's audio
@@ -2816,6 +2927,7 @@ paths:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
       tags:
         - Agent Versions
@@ -3260,6 +3372,59 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents:generate:
+    post:
+      operationId: Agents_generateVoiceAgent
+      summary: Generate a voice agent
+      description: |-
+        Generates and creates a voice agent from high-level inputs plus a natural-language goal.
+        The generated definition remains fully editable through the standard agent versioning operations.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentObject'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVoiceAgentRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
@@ -39024,756 +39189,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-  /voice_agents:
-    post:
-      operationId: VoiceAgents_createVoiceAgent
-      summary: Create a voice agent
-      description: Creates a new voice agent, or a new version of an existing one.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceAgentObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateVoiceAgentRequest'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    get:
-      operationId: VoiceAgents_listVoiceAgents
-      summary: List voice agents
-      description: Returns a paged collection of voice agents.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceAgentObject'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /voice_agents/{agent_name}:
-    get:
-      operationId: VoiceAgents_getVoiceAgent
-      summary: Get a voice agent
-      description: Retrieves a voice agent by its unique name.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceAgentObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    post:
-      operationId: VoiceAgents_updateVoiceAgent
-      summary: Update a voice agent
-      description: |-
-        Updates a voice agent by adding a new version if there are any changes to the agent definition.
-        If no changes, returns the existing agent version.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to update.
-          schema:
-            type: string
-            maxLength: 63
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceAgentObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateVoiceAgentRequest'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    delete:
-      operationId: VoiceAgents_deleteVoiceAgent
-      summary: Delete a voice agent
-      description: Deletes a voice agent and all of its versions.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /voice_agents/{agent_name}/versions:
-    post:
-      operationId: VoiceAgents_createVoiceAgentVersion
-      summary: Create a voice agent version
-      description: Creates a new version for the specified voice agent and returns the created version resource.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent.
-          schema:
-            type: string
-            maxLength: 63
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceAgentVersionObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agent Versions
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateVoiceAgentVersionRequest'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    get:
-      operationId: VoiceAgents_listVoiceAgentVersions
-      summary: List voice agent versions
-      description: Returns a paged collection of versions for the specified voice agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to retrieve versions for.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: include_drafts
-          in: query
-          required: false
-          description: (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).
-          schema:
-            type: boolean
-            default: false
-          x-ms-foundry-meta:
-            conditional_previews:
-              - DraftAgents=V1Preview
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceAgentVersionObject'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agent Versions
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /voice_agents/{agent_name}/versions/{agent_version}:
-    get:
-      operationId: VoiceAgents_getVoiceAgentVersion
-      summary: Get a voice agent version
-      description: Retrieves the specified version of a voice agent by its agent name and version identifier.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to retrieve.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the voice agent to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceAgentVersionObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agent Versions
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    delete:
-      operationId: VoiceAgents_deleteVoiceAgentVersion
-      summary: Delete a voice agent version
-      description: Deletes a specific version of a voice agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to delete.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the voice agent to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agent Versions
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /voice_agents/{agent_name}:disable:
-    post:
-      operationId: VoiceAgents_disableVoiceAgent
-      summary: Disable a voice agent
-      description: |-
-        Disables the specified voice agent, preventing it from accepting new requests.
-        This operation is idempotent — disabling an already-disabled voice agent returns success with no side effects.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to disable.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /voice_agents/{agent_name}:enable:
-    post:
-      operationId: VoiceAgents_enableVoiceAgent
-      summary: Enable a voice agent
-      description: |-
-        Enables the specified voice agent, allowing it to accept new requests.
-        This operation is idempotent — enabling an already-enabled voice agent returns success with no side effects.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent to enable.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /voice_agents:generate:
-    post:
-      operationId: VoiceAgents_generateVoiceAgent
-      summary: Generate a voice agent
-      description: |-
-        Generates and creates a voice agent from high-level inputs plus a natural-language goal.
-        The operation expands the goal into a full, editable definition, creates the agent through the standard
-        voice create path, and returns the created `VoiceAgentObject`. The caller can edit or override the
-        generated fields afterward through normal versioning.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceAgentObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agents
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerateVoiceAgentRequest'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
@@ -40282,6 +39697,7 @@ components:
           prompt: '#/components/schemas/PromptAgentDefinition'
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           external: '#/components/schemas/ExternalAgentDefinition'
+          voice: '#/components/schemas/VoiceAgentDefinition'
     AgentDefinitionOptInKeys:
       type: string
       enum:
@@ -40351,6 +39767,7 @@ components:
             - a2a
             - mcp
             - invocations
+            - voice
             - invocations_ws
     AgentEvaluatorGenerationJobSource:
       type: object
@@ -40445,6 +39862,7 @@ components:
             - hosted
             - workflow
             - external
+            - voice
     AgentObject:
       type: object
       required:
@@ -41878,22 +41296,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation.
-    AzureAvatarVoiceSyncVoice:
-      type: object
-      required:
-        - type
-        - model
-      properties:
-        type:
-          type: string
-          enum:
-            - avatar-voice-sync
-        model:
-          $ref: '#/components/schemas/PersonalVoiceModel'
-          description: The neural model used to synthesize the avatar voice.
-      allOf:
-        - $ref: '#/components/schemas/AzureVoice'
-      description: An Azure avatar voice-synchronization configuration. The runtime derives its voice name from the avatar character and style.
     AzureContentFilterBlocklistIdResult:
       type: object
       required:
@@ -42129,28 +41531,6 @@ components:
           $ref: '#/components/schemas/AzureContentFilterSeverity'
           description: The severity level of the content.
       description: A content filter result indicating severity level and whether content was filtered.
-    AzureCustomVoice:
-      type: object
-      required:
-        - type
-        - name
-        - endpoint_id
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-custom
-        name:
-          type: string
-          minLength: 1
-          description: The custom voice name.
-        endpoint_id:
-          type: string
-          minLength: 1
-          description: The Azure Speech custom voice deployment endpoint ID.
-      allOf:
-        - $ref: '#/components/schemas/AzureVoice'
-      description: An Azure custom neural voice configuration.
     AzureFunctionBinding:
       type: object
       required:
@@ -42310,103 +41690,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
-    AzurePersonalVoice:
-      type: object
-      required:
-        - type
-        - name
-        - model
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-personal
-        name:
-          type: string
-          minLength: 1
-          description: The personal voice name.
-        model:
-          $ref: '#/components/schemas/PersonalVoiceModel'
-          description: The neural model used by the personal voice.
-      allOf:
-        - $ref: '#/components/schemas/AzureVoice'
-      description: An Azure personal voice configuration.
-    AzureRealtimeNativeVoice:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-realtime-native
-          description: The voice kind. Always `azure-realtime-native`.
-        name:
-          $ref: '#/components/schemas/AzureRealtimeNativeVoiceName'
-          minLength: 1
-          description: The Azure realtime-native voice name.
-      description: An Azure realtime-native voice configuration.
-    AzureRealtimeNativeVoiceName:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - aarti
-            - alvaro
-            - andrew
-            - antonio
-            - ava
-            - clara
-            - dalia
-            - denise
-            - diego
-            - diya
-            - elsa
-            - emma
-            - florian
-            - francisca
-            - hyunsu
-            - jorge
-            - keita
-            - liam
-            - meera
-            - nanami
-            - natasha
-            - niwat
-            - premwadee
-            - remy
-            - ryan
-            - seraphina
-            - sonia
-            - sunhi
-            - sylvie
-            - thierry
-            - william
-            - xiaoxiao
-            - ximena
-            - yunxi
-      description: An Azure realtime-native voice name. Use one of the known names or another realtime-native voice supported by the selected model.
-    AzureStandardVoice:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-standard
-        name:
-          type: string
-          minLength: 1
-          description: The Azure neural voice name.
-        multi_talker_speaker_name:
-          type: string
-          description: The speaker name used by a multi-talker voice.
-      allOf:
-        - $ref: '#/components/schemas/AzureVoice'
-      description: An Azure standard neural voice configuration.
     AzureUserSecurityContext:
       type: object
       properties:
@@ -42423,72 +41706,6 @@ components:
           type: string
           description: Captures the original client's IP address.
       description: User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
-    AzureVoice:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/AzureVoiceType'
-          description: The Azure voice kind.
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The synthesis temperature, from 0 to 1.
-        custom_lexicon_url:
-          type: string
-          format: uri
-          description: The URL of a custom pronunciation lexicon.
-        custom_text_normalization_url:
-          type: string
-          format: uri
-          description: The URL of a custom text-normalization service.
-        prefer_locales:
-          type: array
-          items:
-            type: string
-          description: Preferred BCP-47 locales that influence language accents.
-        locale:
-          type: string
-          description: The enforced BCP-47 locale. When omitted, the language is detected from the text.
-        style:
-          type: string
-          description: The speaking style, such as `cheerful` or `sad`.
-        pitch:
-          type: string
-          description: The SSML-compatible pitch adjustment, such as `+5%`.
-        rate:
-          type: string
-          description: The SSML-compatible speaking-rate adjustment, such as `+10%`.
-        volume:
-          type: string
-          description: The SSML-compatible volume adjustment, such as `+10` or `-6dB`.
-      discriminator:
-        propertyName: type
-        mapping:
-          azure-standard: '#/components/schemas/AzureStandardVoice'
-          azure-custom: '#/components/schemas/AzureCustomVoice'
-          azure-personal: '#/components/schemas/AzurePersonalVoice'
-          avatar-voice-sync: '#/components/schemas/AzureAvatarVoiceSyncVoice'
-      description: Base configuration shared by Azure synthesized voices.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    AzureVoiceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - azure-standard
-            - azure-custom
-            - azure-personal
-            - avatar-voice-sync
-      description: The Azure synthesized voice kind. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     BaseCredentials:
       type: object
       required:
@@ -43459,11 +42676,12 @@ components:
           description: A human-readable description of the agent.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
-          description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
+          description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
+              - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
@@ -43485,6 +42703,7 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
     CreateAgentSessionRequest:
       type: object
@@ -43591,11 +42810,12 @@ components:
           description: A human-readable description of the agent.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
-          description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
+          description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
+              - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
@@ -43691,101 +42911,6 @@ components:
           description: Whether to set this version as the default. Defaults to false.
       required:
         - files
-    CreateVoiceAgentRequest:
-      type: object
-      required:
-        - name
-        - definition
-      properties:
-        name:
-          type: string
-          maxLength: 63
-          description: |-
-            The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
-            - Must start and end with alphanumeric characters,
-            - Can contain hyphens in the middle
-            - Must not exceed 63 characters.
-        state:
-          $ref: '#/components/schemas/AgentState'
-          description: The initial operational state of the agent. Defaults to 'enabled' if not specified.
-          default: enabled
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be
-            useful for storing additional information about the object in a structured
-            format, and querying for objects via API or the dashboard.
-
-            Keys are strings with a maximum length of 64 characters. Values are strings
-            with a maximum length of 512 characters.
-          x-oaiTypeLabel: map
-        description:
-          type: string
-          maxLength: 512
-          description: A human-readable description of the agent.
-        blueprint_reference:
-          $ref: '#/components/schemas/AgentBlueprintReference'
-          description: The blueprint reference for the agent.
-        draft:
-          type: boolean
-          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - DraftAgents=V1Preview
-          default: false
-        definition:
-          $ref: '#/components/schemas/VoiceAgentDefinition'
-          description: The voice agent definition.
-        agent_endpoint:
-          $ref: '#/components/schemas/AgentEndpointConfig'
-          description: An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent
-        agent_card:
-          $ref: '#/components/schemas/AgentCard'
-          description: Optional agent card for the agent
-      description: The request to create a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    CreateVoiceAgentVersionRequest:
-      type: object
-      required:
-        - definition
-      properties:
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be
-            useful for storing additional information about the object in a structured
-            format, and querying for objects via API or the dashboard.
-
-            Keys are strings with a maximum length of 64 characters. Values are strings
-            with a maximum length of 512 characters.
-          x-oaiTypeLabel: map
-        description:
-          type: string
-          maxLength: 512
-          description: A human-readable description of the agent.
-        blueprint_reference:
-          $ref: '#/components/schemas/AgentBlueprintReference'
-          description: The blueprint reference for the agent.
-        draft:
-          type: boolean
-          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - DraftAgents=V1Preview
-          default: false
-        definition:
-          $ref: '#/components/schemas/VoiceAgentDefinition'
-          description: The voice agent definition.
-      description: The request to create a new version of a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     CredentialType:
       anyOf:
         - type: string
@@ -46693,9 +45818,9 @@ components:
           default: false
       description: |-
         The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`
-        are expanded into a full, editable `VoiceAgentDefinition`, which is then created via the standard voice
-        agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
-        resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
+        are expanded into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
+        The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
+        definition, so the caller can edit or override any of them afterward via standard agent versioning.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -47313,6 +46438,30 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    LlmGeneratedVoiceGreetingConfig:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        type:
+          type: string
+          enum:
+            - llm_generated
+        prompt:
+          type: string
+          minLength: 1
+          description: The Handlebars prompt that guides the opening turn.
+        tool_choice:
+          $ref: '#/components/schemas/VoiceAgentToolChoice'
+          description: The tool-selection policy for the opening response. Defaults to `none`.
+          default: none
+      allOf:
+        - $ref: '#/components/schemas/VoiceGreetingConfig'
+      description: A greeting authored by the session model from a scoped opening-turn prompt.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     LoraConfig:
       type: object
       properties:
@@ -67580,10 +66729,10 @@ components:
         mapping:
           function_call: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall'
           function_call_output: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput'
+          mcp_approval_response: '#/components/schemas/OpenAI.RealtimeMCPApprovalResponse'
           mcp_list_tools: '#/components/schemas/OpenAI.RealtimeMCPListTools'
           mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
-          mcp_approval_response: '#/components/schemas/OpenAI.RealtimeMCPApprovalResponse'
       description: A single item within a Realtime conversation.
     OpenAI.RealtimeConversationItemFunctionCall:
       type: object
@@ -75384,21 +74533,6 @@ components:
     OpenAI.numeric:
       type: number
       format: double
-    OpenAIVoice:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - openai
-          description: The voice kind. Always `openai`.
-        name:
-          $ref: '#/components/schemas/OpenAI.VoiceIdsShared'
-          description: The OpenAI built-in voice name.
-      description: An OpenAI built-in voice configuration with an explicit type discriminator.
     OpenApiAnonymousAuthDetails:
       type: object
       required:
@@ -75905,15 +75039,6 @@ components:
             - BlobReference
           description: The type of pending upload.
       description: Represents the response for a pending upload request
-    PersonalVoiceModel:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - DragonLatestNeural
-            - DragonHDOmniLatestNeural
-            - MAI-Voice
-      description: A known neural model for an Azure personal or avatar voice. Additional values may be added over time.
     ProceduralMemoryItem:
       type: object
       required:
@@ -77717,6 +76842,26 @@ components:
             - Http
             - Grpc
       description: The transport protocol for telemetry export.
+    TemplateVoiceGreetingConfig:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - template
+        text:
+          type: string
+          minLength: 1
+          description: The Handlebars text template spoken at session start.
+      allOf:
+        - $ref: '#/components/schemas/VoiceGreetingConfig'
+      description: A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -78307,11 +77452,12 @@ components:
           description: A human-readable description of the agent.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
-          description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
+          description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
+              - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
@@ -78320,6 +77466,7 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
@@ -78360,37 +77507,6 @@ components:
         default_version:
           type: string
           description: The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest.
-    UpdateVoiceAgentRequest:
-      type: object
-      required:
-        - definition
-      properties:
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be
-            useful for storing additional information about the object in a structured
-            format, and querying for objects via API or the dashboard.
-
-            Keys are strings with a maximum length of 64 characters. Values are strings
-            with a maximum length of 512 characters.
-          x-oaiTypeLabel: map
-        description:
-          type: string
-          maxLength: 512
-          description: A human-readable description of the agent.
-        blueprint_reference:
-          $ref: '#/components/schemas/AgentBlueprintReference'
-          description: The blueprint reference for the agent.
-        definition:
-          $ref: '#/components/schemas/VoiceAgentDefinition'
-          description: The voice agent definition.
-      description: The request to update a voice agent by adding a new version.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     UserProfileMemoryItem:
       type: object
       required:
@@ -78493,9 +77609,6 @@ components:
           enum:
             - voice
           description: The kind discriminator for a voice agent definition. Always `voice`.
-        rai_config:
-          $ref: '#/components/schemas/RaiConfig'
-          description: Configuration for Responsible AI (RAI) content filtering and safety features.
         model_type:
           $ref: '#/components/schemas/VoiceModelType'
           description: How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
@@ -78505,6 +77618,9 @@ components:
         instructions:
           type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
+        greeting:
+          $ref: '#/components/schemas/VoiceGreetingConfig'
+          description: Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.
         audio:
           $ref: '#/components/schemas/VoiceAudioConfig'
           description: |-
@@ -78530,6 +77646,13 @@ components:
             The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,
             `system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,
             `azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly.
+        tool_choice:
+          $ref: '#/components/schemas/VoiceAgentToolChoice'
+          description: |-
+            How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
+            `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
+            Defaults to `auto`.
+          default: auto
         structured_inputs:
           type: object
           unevaluatedProperties:
@@ -78545,6 +77668,8 @@ components:
             time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
             is not part of the persisted conversation content.
           default: false
+      allOf:
+        - $ref: '#/components/schemas/AgentDefinition'
       description: |-
         The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
         managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
@@ -78552,30 +77677,44 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentMcpTool:
+    VoiceAgentFunctionTool:
       type: object
       required:
         - type
-        - server_label
+        - name
       properties:
+        description:
+          type: string
+          description: |-
+            The description of the function, including guidance on when and how
+              to call it, and guidance about what to tell the user when calling
+              (if anything).
+        parameters:
+          $ref: '#/components/schemas/OpenAI.RealtimeFunctionToolParameters'
+          description: Parameters of the function in JSON Schema.
         type:
           type: string
           enum:
-            - mcp
-          description: The type of the MCP tool. Always `mcp`.
-          x-stainless-const: true
+            - function
+        name:
+          type: string
+          minLength: 1
+          description: The function name.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentTool'
+      description: A native function tool executed by the client.
+    VoiceAgentMcpTool:
+      type: object
+      required:
+        - server_label
+        - type
+      properties:
         server_label:
           type: string
           description: A label for this MCP server, used to identify it in tool calls.
         server_description:
           type: string
           description: Optional description of the MCP server, used to provide more context.
-        headers:
-          anyOf:
-            - type: object
-              unevaluatedProperties:
-                type: string
-            - type: 'null'
         allowed_tools:
           anyOf:
             - type: array
@@ -78610,82 +77749,62 @@ components:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
+        type:
+          type: string
+          enum:
+            - mcp
         server_url:
           type: string
           format: uri
           description: The URL for the MCP server.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentTool'
       description: An MCP tool available to a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentObject:
+    VoiceAgentTool:
       type: object
       required:
-        - object
-        - id
-        - name
-        - state
-        - versions
+        - type
       properties:
-        object:
+        type:
           type: string
-          enum:
-            - agent
-          description: The object type, which is always 'agent'.
-        id:
-          type: string
-          description: The unique identifier of the agent.
-        name:
-          type: string
-          maxLength: 63
-          description: The name of the agent.
-        state:
-          $ref: '#/components/schemas/AgentState'
-          description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
-          readOnly: true
-        state_source:
-          $ref: '#/components/schemas/AgentStateSource'
-          description: The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.
-          readOnly: true
-        agent_endpoint:
-          $ref: '#/components/schemas/AgentEndpointConfig'
-          description: The endpoint configuration for the agent
-        instance_identity:
-          $ref: '#/components/schemas/AgentIdentity'
-          description: The instance identity of the agent
-          readOnly: true
-        blueprint:
-          $ref: '#/components/schemas/AgentIdentity'
-          description: The blueprint for the agent
-          readOnly: true
-        blueprint_reference:
-          $ref: '#/components/schemas/AgentBlueprintReference'
-          description: The blueprint for the agent
-          readOnly: true
-        agent_card:
-          $ref: '#/components/schemas/AgentCard'
-        versions:
-          type: object
-          properties:
-            latest:
-              $ref: '#/components/schemas/VoiceAgentVersionObject'
-          required:
-            - latest
-          description: The latest version of the voice agent.
-      description: A voice agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.
+          description: The tool kind.
+        response_scheduling:
+          $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
+          description: When the tool invocation creates a follow-up response. Defaults to `when_idle`.
+          default: when_idle
+      discriminator:
+        propertyName: type
+        mapping:
+          function: '#/components/schemas/VoiceAgentFunctionTool'
+          mcp: '#/components/schemas/VoiceAgentMcpTool'
+          system: '#/components/schemas/VoiceSystemTool'
+          toolbox: '#/components/schemas/VoiceToolboxTool'
+      description: A tool usable by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentTool:
+    VoiceAgentToolChoice:
+      oneOf:
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceFunction'
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceMCP'
+      description: Tool-selection behavior for a voice agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentToolResponseScheduling:
       anyOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeFunctionTool'
-        - $ref: '#/components/schemas/VoiceAgentMcpTool'
-        - $ref: '#/components/schemas/VoiceSystemTool'
-        - $ref: '#/components/schemas/VoiceToolboxTool'
-      description: |-
-        A tool usable by a voice agent. Supported kinds are native `function` tools (executed by the client), `mcp`,
-        service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
-        `azure_ai_search` are provided through a toolbox.
+        - type: string
+        - type: string
+          enum:
+            - silent
+            - when_idle
+            - interrupt
+            - skip_if_busy
+      description: When a tool invocation creates a follow-up response. Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -78720,92 +77839,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentVersionObject:
-      type: object
-      required:
-        - metadata
-        - object
-        - id
-        - name
-        - version
-        - created_at
-        - definition
-      properties:
-        metadata:
-          anyOf:
-            - type: object
-              unevaluatedProperties:
-                type: string
-            - type: 'null'
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be
-            useful for storing additional information about the object in a structured
-            format, and querying for objects via API or the dashboard.
-
-            Keys are strings with a maximum length of 64 characters. Values are strings
-            with a maximum length of 512 characters.
-          x-oaiTypeLabel: map
-        object:
-          type: string
-          enum:
-            - agent.version
-          description: The object type, which is always 'agent.version'.
-        id:
-          type: string
-          description: The unique identifier of the agent version.
-        name:
-          type: string
-          maxLength: 256
-          description: The name of the agent. Name can be used to retrieve/update/delete the agent.
-        version:
-          type: string
-          description: The version identifier of the agent. Agents are immutable and every update creates a new version while keeping the name same.
-        description:
-          type: string
-          maxLength: 512
-          description: A human-readable description of the agent.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (seconds) when the agent was created.
-        draft:
-          type: boolean
-          description: Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - DraftAgents=V1Preview
-          default: false
-        status:
-          $ref: '#/components/schemas/AgentVersionStatus'
-          description: The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.
-        instance_identity:
-          $ref: '#/components/schemas/AgentIdentity'
-          description: The instance identity of the agent
-          readOnly: true
-        blueprint:
-          $ref: '#/components/schemas/AgentIdentity'
-          description: The blueprint for the agent
-          readOnly: true
-        blueprint_reference:
-          $ref: '#/components/schemas/AgentBlueprintReference'
-          description: The blueprint for the agent
-          readOnly: true
-        agent_guid:
-          type: string
-          description: The unique GUID identifier of the agent.
-          readOnly: true
-        definition:
-          $ref: '#/components/schemas/VoiceAgentDefinition'
-          description: The voice agent definition for this version.
-      description: A voice agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `VoiceAgentDefinition`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentVoice:
-      anyOf:
-        - $ref: '#/components/schemas/OpenAIVoice'
-        - $ref: '#/components/schemas/AzureVoice'
-        - $ref: '#/components/schemas/AzureRealtimeNativeVoice'
-      description: A typed voice configuration accepted by a voice agent.
     VoiceAgentWebSocketSubprotocol:
       type: string
       enum:
@@ -78943,8 +77976,14 @@ components:
           $ref: '#/components/schemas/VoiceAudioFormat'
           description: The output audio format.
         voice:
-          $ref: '#/components/schemas/VoiceAgentVoice'
-          description: The typed voice configuration.
+          type: string
+          description: The voice name, for example `alloy`. The value is extensible and interpreted with `voice_type`.
+        voice_type:
+          type: string
+          description: The voice provider/type, for example `azure-standard`. Additional values may be added without changing this model.
+        voice_locale:
+          type: string
+          description: The optional BCP-47 locale for the selected voice, for example `en-US`.
         speed:
           type: number
           format: float
@@ -79423,6 +78462,23 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceGreetingConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The greeting mode.
+      discriminator:
+        propertyName: type
+        mapping:
+          template: '#/components/schemas/TemplateVoiceGreetingConfig'
+          llm_generated: '#/components/schemas/LlmGeneratedVoiceGreetingConfig'
+      description: Session-start greeting configuration for a voice agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceInputTranscription:
       type: object
       required:
@@ -79532,12 +78588,12 @@ components:
         blob_uri:
           type: string
           format: uri
-          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
+          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio_content` route instead."
       description: |-
         Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
         `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
         credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
-        `/audio/content` route.
+        `/audio_content` route.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -79800,7 +78856,7 @@ components:
         blob_uri:
           type: string
           format: uri
-          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
+          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio_content` route instead."
       description: |-
         Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
         agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
@@ -79808,7 +78864,7 @@ components:
         Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,
         the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
         own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
-        `/audio/content` route instead.
+        `/audio_content` route instead.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -79937,8 +78993,14 @@ components:
       type: object
       properties:
         voice:
-          $ref: '#/components/schemas/VoiceResponseVoice'
-          description: The voice used for the response's audio output.
+          type: string
+          description: The voice name used for the response's audio output.
+        voice_type:
+          type: string
+          description: The extensible provider/type of the voice used for the response's audio output.
+        voice_locale:
+          type: string
+          description: The BCP-47 locale of the voice used for the response's audio output.
         format:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format used for the response's audio output.
@@ -79946,12 +79008,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceResponseVoice:
-      anyOf:
-        - $ref: '#/components/schemas/OpenAIVoice'
-        - $ref: '#/components/schemas/AzureVoice'
-        - $ref: '#/components/schemas/AzureRealtimeNativeVoice'
-      description: The complete typed voice configuration used for a response.
     VoiceSemanticVadTurnDetection:
       type: object
       required:
@@ -80066,6 +79122,8 @@ components:
         description:
           type: string
           description: An optional description of the system tool.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentTool'
       description: A service-managed control that acts on the active voice session without customer code or external authentication.
       x-ms-foundry-meta:
         required_previews:
@@ -80098,6 +79156,8 @@ components:
         toolbox_version:
           type: string
           description: The immutable version of the toolbox to attach.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentTool'
       description: A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.
       x-ms-foundry-meta:
         required_previews:
