@@ -88,12 +88,6 @@ union VoiceAgentServerEvent {
   response_mcp_call_completed: VoiceAgentServerEventResponseMcpCallCompleted,
   response_mcp_call_failed: VoiceAgentServerEventResponseMcpCallFailed,
   response_mcp_call_in_progress: VoiceAgentServerEventResponseMcpCallInProgress,
-  response_web_search_call_in_progress: VoiceAgentServerEventWebSearchCallInProgress,
-  response_web_search_call_searching: VoiceAgentServerEventWebSearchCallSearching,
-  response_web_search_call_completed: VoiceAgentServerEventWebSearchCallCompleted,
-  response_file_search_call_in_progress: VoiceAgentServerEventFileSearchCallInProgress,
-  response_file_search_call_searching: VoiceAgentServerEventFileSearchCallSearching,
-  response_file_search_call_completed: VoiceAgentServerEventFileSearchCallCompleted,
   response_output_item_added: VoiceAgentServerEventResponseOutputItemAdded,
   response_output_item_done: VoiceAgentServerEventResponseOutputItemDone,
   response_output_text_delta: VoiceAgentServerEventResponseTextDelta,
@@ -810,66 +804,6 @@ model VoiceAgentServerEventResponseMcpCallFailed {
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentServerEventResponseMcpCallInProgress {
   ...OpenAI.RealtimeServerEventResponseMCPCallInProgress;
-}
-
-@doc("Fields shared by web-search lifecycle server events.")
-model VoiceAgentWebSearchLifecycleEventProperties {
-  event_id?: string;
-  response_id?: string = "";
-  item_id: string;
-  output_index: int32;
-  sequence_number: int32;
-}
-
-@doc("The `response.web_search_call.in_progress` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventWebSearchCallInProgress {
-  type: "response.web_search_call.in_progress";
-  ...VoiceAgentWebSearchLifecycleEventProperties;
-}
-
-@doc("The `response.web_search_call.searching` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventWebSearchCallSearching {
-  type: "response.web_search_call.searching";
-  ...VoiceAgentWebSearchLifecycleEventProperties;
-}
-
-@doc("The `response.web_search_call.completed` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventWebSearchCallCompleted {
-  type: "response.web_search_call.completed";
-  ...VoiceAgentWebSearchLifecycleEventProperties;
-}
-
-@doc("Fields shared by file-search lifecycle server events.")
-model VoiceAgentFileSearchLifecycleEventProperties {
-  event_id?: string;
-  response_id?: string = "";
-  item_id: string;
-  output_index: int32;
-  sequence_number: int32;
-}
-
-@doc("The `response.file_search_call.in_progress` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventFileSearchCallInProgress {
-  type: "response.file_search_call.in_progress";
-  ...VoiceAgentFileSearchLifecycleEventProperties;
-}
-
-@doc("The `response.file_search_call.searching` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventFileSearchCallSearching {
-  type: "response.file_search_call.searching";
-  ...VoiceAgentFileSearchLifecycleEventProperties;
-}
-
-@doc("The `response.file_search_call.completed` server event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventFileSearchCallCompleted {
-  type: "response.file_search_call.completed";
-  ...VoiceAgentFileSearchLifecycleEventProperties;
 }
 
 @doc("The `response.output_item.added` server event.")
