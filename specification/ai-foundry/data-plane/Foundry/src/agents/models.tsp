@@ -329,7 +329,7 @@ model RaiSseTextSelector {
   event_type: string;
 
   @doc("The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.")
-  text_field?: string;
+  text_field?: string = "delta";
 }
 
 @doc("Declares where request/response text lives so content-safety guardrails can extract it.")
