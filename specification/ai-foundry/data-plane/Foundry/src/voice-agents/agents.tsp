@@ -257,6 +257,9 @@ model VoiceAudioInputConfig {
   @doc("Optional server-side echo cancellation settings.")
   echo_cancellation?: VoiceAgentEchoCancellation | null;
 
+  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
+  auto_truncate?: boolean = false;
+
   @doc("Asynchronous input-audio transcription. Set to null to disable transcription.")
   transcription?: VoiceInputTranscription | null;
 }
@@ -489,9 +492,6 @@ alias VoiceAzureSemanticVadOptions = {
   @doc("Whether filler words are removed from transcription.")
   remove_filler_words?: boolean = false;
 
-  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
-  auto_truncate?: boolean = false;
-
   @doc("Whether a response is created automatically when speech stops.")
   create_response?: boolean = true;
 
@@ -561,14 +561,12 @@ model VoiceAgentServerVadTurnDetection {
   speech_duration_ms?: int32;
 
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
-  auto_truncate?: boolean = false;
 }
 
 @doc("OpenAI semantic VAD turn-detection settings.")
 model VoiceAgentSemanticVadTurnDetection {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
   type: VoiceTurnDetectionType.semantic_vad;
-  auto_truncate?: boolean = false;
 }
 
 @doc("The discriminator for an Azure semantic VAD configuration.")
@@ -589,7 +587,6 @@ model VoiceAgentAzureSemanticVadTurnDetection {
     | "speech_duration_ms"
     | "languages"
     | "remove_filler_words"
-    | "auto_truncate"
   >;
   type: VoiceAgentAzureSemanticVadType;
 
@@ -607,7 +604,6 @@ model VoiceAgentAzureSemanticVadTurnDetection {
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
   remove_filler_words?: boolean = false;
   languages?: string[] | null;
-  auto_truncate?: boolean = false;
 }
 
 @doc("Azure multilingual semantic VAD turn-detection settings.")

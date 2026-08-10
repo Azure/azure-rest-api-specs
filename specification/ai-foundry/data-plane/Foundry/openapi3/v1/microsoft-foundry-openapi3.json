@@ -81284,11 +81284,6 @@
             "description": "Whether filler words are removed from transcription.",
             "default": false
           },
-          "auto_truncate": {
-            "type": "boolean",
-            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
-            "default": false
-          },
           "create_response": {
             "type": "boolean",
             "description": "Whether a response is created automatically when speech stops.",
@@ -81450,10 +81445,6 @@
                 "type": "null"
               }
             ]
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "default": false
           }
         },
         "description": "Azure semantic VAD turn-detection settings."
@@ -81825,10 +81816,6 @@
             "enum": [
               "semantic_vad"
             ]
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "default": false
           }
         },
         "description": "OpenAI semantic VAD turn-detection settings."
@@ -81886,10 +81873,6 @@
                 "type": "null"
               }
             ]
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "default": false
           }
         },
         "description": "Server VAD turn-detection settings."
@@ -82187,6 +82170,11 @@
               }
             ],
             "description": "Optional server-side echo cancellation settings."
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
           },
           "transcription": {
             "anyOf": [

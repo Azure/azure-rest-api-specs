@@ -80832,10 +80832,6 @@ components:
           type: boolean
           description: Whether filler words are removed from transcription.
           default: false
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
         create_response:
           type: boolean
           description: Whether a response is created automatically when speech stops.
@@ -80931,9 +80927,6 @@ components:
               items:
                 type: string
             - type: 'null'
-        auto_truncate:
-          type: boolean
-          default: false
       description: Azure semantic VAD turn-detection settings.
     VoiceAgentAzureSemanticVadType:
       type: string
@@ -81204,9 +81197,6 @@ components:
           type: string
           enum:
             - semantic_vad
-        auto_truncate:
-          type: boolean
-          default: false
       description: OpenAI semantic VAD turn-detection settings.
     VoiceAgentServerVadTurnDetection:
       type: object
@@ -81241,9 +81231,6 @@ components:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
             - type: 'null'
-        auto_truncate:
-          type: boolean
-          default: false
       description: Server VAD turn-detection settings.
     VoiceAgentTool:
       type: object
@@ -81423,6 +81410,10 @@ components:
             - $ref: '#/components/schemas/VoiceAgentEchoCancellation'
             - type: 'null'
           description: Optional server-side echo cancellation settings.
+        auto_truncate:
+          type: boolean
+          description: Whether the input audio buffer is truncated automatically when speech stops.
+          default: false
         transcription:
           anyOf:
             - $ref: '#/components/schemas/VoiceInputTranscription'
