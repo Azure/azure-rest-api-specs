@@ -115,13 +115,6 @@ union VoiceAgentServerEvent {
   response_video_delta: VoiceAgentServerEventResponseVideoDelta,
 }
 
-@doc("Additional server-output fields that a voice-agent session may request.")
-union VoiceAgentSessionIncludeOption {
-  input_audio_transcription_logprobs: "item.input_audio_transcription.logprobs",
-  input_audio_transcription_phrases: "item.input_audio_transcription.phrases",
-  file_search_call_results: "file_search_call.results",
-}
-
 @doc("The maximum output-token count or the literal `inf`.")
 union VoiceAgentMaxOutputTokens {
   count: int32,

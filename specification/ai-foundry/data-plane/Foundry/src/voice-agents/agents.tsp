@@ -22,6 +22,14 @@ const VoiceAgentRequiredPreview = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
+@doc("Additional fields that a voice-agent session may include in service outputs.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSessionIncludeOption {
+  input_audio_transcription_logprobs: "item.input_audio_transcription.logprobs",
+  input_audio_transcription_phrases: "item.input_audio_transcription.phrases",
+  file_search_call_results: "file_search_call.results",
+}
+
 @doc("""
   The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
   managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
@@ -55,6 +63,9 @@ model VoiceAgentDefinition extends AgentDefinition {
     when an avatar is configured.
     """)
   output_modalities?: VoiceOutputModality[] = #[VoiceOutputModality.audio];
+
+  @doc("Additional fields to include in service outputs.")
+  include?: VoiceAgentSessionIncludeOption[] | null;
 
   @doc("Optional avatar configuration. These values are session defaults and may be overridden when connecting.")
   avatar?: VoiceAvatarConfig;

@@ -81502,6 +81502,20 @@
               "audio"
             ]
           },
+          "include": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/VoiceAgentSessionIncludeOption"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Additional fields to include in service outputs."
+          },
           "avatar": {
             "$ref": "#/components/schemas/VoiceAvatarConfig",
             "description": "Optional avatar configuration. These values are session defaults and may be overridden when connecting."
@@ -81876,6 +81890,20 @@
           }
         },
         "description": "Server VAD turn-detection settings."
+      },
+      "VoiceAgentSessionIncludeOption": {
+        "type": "string",
+        "enum": [
+          "item.input_audio_transcription.logprobs",
+          "item.input_audio_transcription.phrases",
+          "file_search_call.results"
+        ],
+        "description": "Additional fields that a voice-agent session may include in service outputs.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentTool": {
         "type": "object",
