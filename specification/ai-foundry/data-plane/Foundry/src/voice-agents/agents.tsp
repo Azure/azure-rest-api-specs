@@ -563,14 +563,9 @@ model VoiceAgentEndOfUtteranceDetection {
 model VoiceAgentServerVadTurnDetection {
   ...OmitProperties<
     VoiceServerVadTurnDetection,
-    "type" | "threshold" | "prefix_padding_ms" | "silence_duration_ms"
+    "type" | "prefix_padding_ms" | "silence_duration_ms"
   >;
   type: VoiceTurnDetectionType.server_vad;
-
-  @minValue(0)
-  @maxValue(1)
-  threshold?: float32 | null;
-
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
 

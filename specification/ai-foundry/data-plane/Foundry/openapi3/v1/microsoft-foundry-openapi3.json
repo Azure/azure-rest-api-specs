@@ -81839,6 +81839,9 @@
           "type"
         ],
         "properties": {
+          "threshold": {
+            "$ref": "#/components/schemas/OpenAI.numeric"
+          },
           "create_response": {
             "type": "boolean",
             "default": true
@@ -81862,19 +81865,6 @@
             "enum": [
               "server_vad"
             ]
-          },
-          "threshold": {
-            "anyOf": [
-              {
-                "type": "number",
-                "format": "float"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "minimum": 0,
-            "maximum": 1
           },
           "prefix_padding_ms": {
             "type": "integer",
