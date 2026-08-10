@@ -541,6 +541,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.AutoCodeInterpreterToolParam,
+    {
+      identity: "OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
@@ -599,20 +608,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-  // GAP (FD-2): The Foundry service accepts `memory_limit` and `network_policy` on the code-interpreter
-  // "auto" container config (see AutoCodeInterpreterToolParam in the compiled openapi3), but OpenAI's
-  // .NET type `OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration` (2.12.0) models only
-  // `file_ids`. This is an upstream source-of-truth lag: openai-dotnet/specification's CodeInterpreterToolAuto
-  // omits these fields while openai-openapi-pr defines them, so no richer OpenAI type exists to map to.
-  // Dropping to System.Object intentionally leaves the gap unfilled (file_ids and container-id selection are
-  // unaffected). Revisit once the OpenAI .NET SDK models memory_limit/network_policy. See CHANGELOG 3.0.0-beta.1.
-  @@alternateType(
-    OpenAI.AutoCodeInterpreterToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
+
   @@alternateType(
     OpenAI.ToolChoiceOptions,
     {
