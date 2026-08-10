@@ -77906,6 +77906,9 @@ components:
             when an avatar is configured.
           default:
             - audio
+        max_output_tokens:
+          $ref: '#/components/schemas/VoiceAgentMaxOutputTokens'
+          description: The maximum output-token count for one response.
         include:
           anyOf:
             - type: array
@@ -78043,6 +78046,17 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A native function tool executed by the client.
+    VoiceAgentMaxOutputTokens:
+      anyOf:
+        - type: integer
+          format: int32
+        - type: string
+          enum:
+            - inf
+      description: The maximum output-token count or the literal `inf`.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentMcpTool:
       type: object
       required:

@@ -115,12 +115,6 @@ union VoiceAgentServerEvent {
   response_video_delta: VoiceAgentServerEventResponseVideoDelta,
 }
 
-@doc("The maximum output-token count or the literal `inf`.")
-union VoiceAgentMaxOutputTokens {
-  count: int32,
-  unlimited: "inf",
-}
-
 @doc("An animation output produced by a voice-agent session.")
 union VoiceAgentAnimationOutputType {
   blendshapes: "blendshapes",

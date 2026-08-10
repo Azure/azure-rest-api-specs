@@ -30,6 +30,13 @@ union VoiceAgentSessionIncludeOption {
   file_search_call_results: "file_search_call.results",
 }
 
+@doc("The maximum output-token count or the literal `inf`.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentMaxOutputTokens {
+  count: int32,
+  unlimited: "inf",
+}
+
 @doc("""
   The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
   managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
@@ -63,6 +70,9 @@ model VoiceAgentDefinition extends AgentDefinition {
     when an avatar is configured.
     """)
   output_modalities?: VoiceOutputModality[] = #[VoiceOutputModality.audio];
+
+  @doc("The maximum output-token count for one response.")
+  max_output_tokens?: VoiceAgentMaxOutputTokens;
 
   @doc("Additional fields to include in service outputs.")
   include?: VoiceAgentSessionIncludeOption[] | null;
