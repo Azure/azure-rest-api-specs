@@ -76,25 +76,25 @@ union ExclusionReason {
 }
 
 @added(Versions.v2026_03_01_preview)
-@doc("Enum for the confirmation status of a high availability solution.")
+@doc("Enum for the confirmation status of a zonal resiliency solution.")
 union ConfirmationStatus {
   string,
 
-  @doc("The high availability solution has been approved by the user.")
+  @doc("The zonal resiliency solution has been approved by the user.")
   ApprovedByUser: "ApprovedByUser",
 
-  @doc("The high availability solution is pending approval from the user.")
+  @doc("The zonal resiliency solution is pending approval from the user.")
   ApprovalPending: "ApprovalPending",
 
-  @doc("The high availability solution does not require user approval.")
+  @doc("The zonal resiliency solution does not require user approval.")
   ApprovalNotNeeded: "ApprovalNotNeeded",
 
-  @doc("The high availability solution has been rejected by the user.")
+  @doc("The zonal resiliency solution has been rejected by the user.")
   RejectedByUser: "RejectedByUser",
 }
 
 @added(Versions.v2026_03_01_preview)
-@doc("Identifies a high-availability solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).")
+@doc("Identifies a zonal resiliency solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).")
 union SolutionDisplayName {
   string,
 
@@ -106,7 +106,7 @@ union SolutionDisplayName {
 }
 
 @added(Versions.v2026_03_01_preview)
-@doc("Enum for the reason for requesting user confirmation for a high availability solution.")
+@doc("Enum for the reason for requesting user confirmation for a zonal resiliency solution.")
 union ReasonForRequestingConfirmation {
   string,
 
@@ -118,15 +118,15 @@ union ReasonForRequestingConfirmation {
 }
 
 @added(Versions.v2026_03_01_preview)
-@doc("Represents a user confirmation for a high availability solution.")
-model UserConfirmationForHighAvailabilityItem {
-  @doc("The solution display name of the high availability solution.")
+@doc("Represents a user confirmation for a zonal resiliency solution.")
+model UserConfirmationItem {
+  @doc("The solution display name of the zonal resiliency solution.")
   solutionDisplayName: SolutionDisplayName;
 
-  @doc("The confirmation status of the high availability solution.")
+  @doc("The confirmation status of the zonal resiliency solution.")
   confirmationStatus: ConfirmationStatus;
 
-  @doc("The reason for requesting user confirmation for the high availability solution.")
+  @doc("The reason for requesting user confirmation for the zonal resiliency solution.")
   reasonForRequestingConfirmation?: ReasonForRequestingConfirmation;
 }
 

@@ -37,7 +37,7 @@ model GoalAssignmentProperties {
 
   @doc("Whether zonal resiliency is required for this goal assignment.")
   @added(Versions.v2026_03_01_preview)
-  requireZonalResiliency?: RequirementSelected;
+  requireZonalResiliency?: boolean;
 
   @doc("List of service level resources.")
   @identifiers(#[])

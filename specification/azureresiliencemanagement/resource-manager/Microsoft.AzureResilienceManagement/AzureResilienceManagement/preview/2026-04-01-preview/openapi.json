@@ -5512,7 +5512,7 @@
     },
     "ConfirmationStatus": {
       "type": "string",
-      "description": "Enum for the confirmation status of a high availability solution.",
+      "description": "Enum for the confirmation status of a zonal resiliency solution.",
       "enum": [
         "ApprovedByUser",
         "ApprovalPending",
@@ -5526,22 +5526,22 @@
           {
             "name": "ApprovedByUser",
             "value": "ApprovedByUser",
-            "description": "The high availability solution has been approved by the user."
+            "description": "The zonal resiliency solution has been approved by the user."
           },
           {
             "name": "ApprovalPending",
             "value": "ApprovalPending",
-            "description": "The high availability solution is pending approval from the user."
+            "description": "The zonal resiliency solution is pending approval from the user."
           },
           {
             "name": "ApprovalNotNeeded",
             "value": "ApprovalNotNeeded",
-            "description": "The high availability solution does not require user approval."
+            "description": "The zonal resiliency solution does not require user approval."
           },
           {
             "name": "RejectedByUser",
             "value": "RejectedByUser",
-            "description": "The high availability solution has been rejected by the user."
+            "description": "The zonal resiliency solution has been rejected by the user."
           }
         ]
       }
@@ -7222,7 +7222,7 @@
           "description": "The type of goal assignment."
         },
         "requireZonalResiliency": {
-          "$ref": "#/definitions/RequirementSelected",
+          "type": "boolean",
           "description": "Whether zonal resiliency is required for this goal assignment."
         },
         "serviceLevelResources": {
@@ -7332,7 +7332,7 @@
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
         "zonalResiliency": {
-          "$ref": "#/definitions/ZonalResiliencyProperties",
+          "$ref": "#/definitions/ResiliencyProperties",
           "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
         },
         "disasterRecoveryGoalParticipation": {
@@ -8650,7 +8650,7 @@
     },
     "ReasonForRequestingConfirmation": {
       "type": "string",
-      "description": "Enum for the reason for requesting user confirmation for a high availability solution.",
+      "description": "Enum for the reason for requesting user confirmation for a zonal resiliency solution.",
       "enum": [
         "ZonePinnedZrsDataDisksConditional",
         "VmInMultiZoneScaleSetStatelessOnly"
@@ -10001,6 +10001,35 @@
         ]
       }
     },
+    "ResiliencyProperties": {
+      "type": "object",
+      "description": "Zonal resiliency posture for a goal resource.",
+      "properties": {
+        "goalParticipation": {
+          "$ref": "#/definitions/ExclusionState",
+          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
+        },
+        "attestationStatus": {
+          "$ref": "#/definitions/AttestationState",
+          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
+        },
+        "exclusionReason": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from zonal resiliency goals.",
+          "readOnly": true
+        },
+        "userConfirmation": {
+          "type": "array",
+          "description": "List of user confirmations for zonal resiliency solutions.",
+          "items": {
+            "$ref": "#/definitions/UserConfirmationItem"
+          },
+          "x-ms-identifiers": [
+            "solutionDisplayName"
+          ]
+        }
+      }
+    },
     "ResourceBaseProtectionSolutionSetting": {
       "type": "object",
       "description": "Definition of recovery orchestration resource protection solution setting with recovery orchestration plan.",
@@ -10566,7 +10595,7 @@
     },
     "SolutionDisplayName": {
       "type": "string",
-      "description": "Identifies a high-availability solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).",
+      "description": "Identifies a zonal resiliency solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).",
       "enum": [
         "ZonePinnedVmWithZrsDisk",
         "VmInMultiZoneVmss"
@@ -10929,21 +10958,21 @@
         ]
       }
     },
-    "UserConfirmationForHighAvailabilityItem": {
+    "UserConfirmationItem": {
       "type": "object",
-      "description": "Represents a user confirmation for a high availability solution.",
+      "description": "Represents a user confirmation for a zonal resiliency solution.",
       "properties": {
         "solutionDisplayName": {
           "$ref": "#/definitions/SolutionDisplayName",
-          "description": "The solution display name of the high availability solution."
+          "description": "The solution display name of the zonal resiliency solution."
         },
         "confirmationStatus": {
           "$ref": "#/definitions/ConfirmationStatus",
-          "description": "The confirmation status of the high availability solution."
+          "description": "The confirmation status of the zonal resiliency solution."
         },
         "reasonForRequestingConfirmation": {
           "$ref": "#/definitions/ReasonForRequestingConfirmation",
-          "description": "The reason for requesting user confirmation for the high availability solution."
+          "description": "The reason for requesting user confirmation for the zonal resiliency solution."
         }
       },
       "required": [
@@ -11108,35 +11137,6 @@
         }
       ],
       "x-ms-discriminator-value": "Zonal"
-    },
-    "ZonalResiliencyProperties": {
-      "type": "object",
-      "description": "Zonal resiliency posture for a goal resource.",
-      "properties": {
-        "goalParticipation": {
-          "$ref": "#/definitions/ExclusionState",
-          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
-        },
-        "attestationStatus": {
-          "$ref": "#/definitions/AttestationState",
-          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
-        },
-        "exclusionReason": {
-          "$ref": "#/definitions/ExclusionReason",
-          "description": "Reason for exclusion from zonal resiliency goals.",
-          "readOnly": true
-        },
-        "userConfirmation": {
-          "type": "array",
-          "description": "List of user confirmations for zonal resiliency solutions.",
-          "items": {
-            "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
-          },
-          "x-ms-identifiers": [
-            "solutionDisplayName"
-          ]
-        }
-      }
     }
   },
   "parameters": {

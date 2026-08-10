@@ -19,7 +19,7 @@ namespace Microsoft.AzureResilienceManagement;
 // Define the main model
 @added(Versions.v2026_03_01_preview)
 @doc("Zonal resiliency posture for a goal resource.")
-model ZonalResiliencyProperties {
+model ResiliencyProperties {
   @doc("Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation.")
   goalParticipation?: ExclusionState;
 
@@ -32,7 +32,7 @@ model ZonalResiliencyProperties {
 
   @doc("List of user confirmations for zonal resiliency solutions.")
   @identifiers(#["solutionDisplayName"])
-  userConfirmation?: UserConfirmationForHighAvailabilityItem[];
+  userConfirmation?: UserConfirmationItem[];
 }
 
 @doc("Definition of goal assignment property.")
@@ -50,7 +50,7 @@ model GoalResourceProperties {
 
   @doc("Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.")
   @added(Versions.v2026_03_01_preview)
-  zonalResiliency?: ZonalResiliencyProperties;
+  zonalResiliency?: ResiliencyProperties;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
   disasterRecoveryGoalParticipation?: ExclusionState;
