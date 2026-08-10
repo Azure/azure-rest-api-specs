@@ -152,6 +152,9 @@ model VoiceAgentDefinition extends AgentDefinition {
     """)
   tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.auto;
 
+  @doc("Whether the model may call multiple tools in parallel.")
+  parallel_tool_calls?: boolean;
+
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
