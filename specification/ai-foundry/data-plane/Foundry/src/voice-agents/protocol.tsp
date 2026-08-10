@@ -100,7 +100,6 @@ union VoiceAgentServerEvent {
   response_output_text_done: VoiceAgentServerEventResponseTextDone,
   session_created: VoiceAgentServerEventSessionCreated,
   session_updated: VoiceAgentServerEventSessionUpdated,
-  conversation_created: VoiceAgentServerEventConversationCreated,
   error: VoiceAgentServerEventError,
   warning: VoiceAgentServerEventWarning,
   session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
@@ -932,15 +931,6 @@ model VoiceAgentClientEventSessionAvatarConnect {
 
   @doc("The client's SDP offer for avatar media negotiation.")
   client_sdp: string;
-}
-
-@doc("The `conversation.created` server event emitted when a voice-agent connection starts.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventConversationCreated {
-  type: "conversation.created";
-
-  @doc("The identifier of the created conversation.")
-  conversation_id: string;
 }
 
 @doc("The `error` server event.")
