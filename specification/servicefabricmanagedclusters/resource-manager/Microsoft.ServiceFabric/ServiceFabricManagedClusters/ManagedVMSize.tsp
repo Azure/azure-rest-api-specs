@@ -61,6 +61,7 @@ interface ManagedUnsupportedVMSizes {
      * The location for the unsupported VM sizes. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
@@ -69,6 +70,7 @@ interface ManagedUnsupportedVMSizes {
      * VM Size name.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     vmSize: string,
@@ -94,6 +96,7 @@ interface ManagedUnsupportedVMSizes {
      * The location for the unsupported VM sizes. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
