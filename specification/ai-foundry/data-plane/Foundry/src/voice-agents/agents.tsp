@@ -263,30 +263,67 @@ model VoiceAudioInputConfig {
   transcription?: VoiceInputTranscription | null;
 }
 
-@doc("Output audio configuration for a voice agent.")
+@doc("""
+  Output audio configuration for a voice agent.
+  Provider-specific fields are selected by `voice_type`:
+  - `openai`: `voice` and `speed`.
+  - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
+    `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
+  - `azure-custom`: all `azure-standard` fields plus `custom_voice_endpoint_id`.
+  - `azure-personal`: all `azure-standard` fields plus `personal_voice_model`.
+  - `avatar-voice-sync`: the Azure synthesis fields plus `personal_voice_model`; the voice is derived from the avatar.
+  - `azure-realtime-native`: `voice` and `speed`.
+  `format` and `output_audio_timestamp_types` apply to every voice type.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioOutputConfig {
-  @doc("The output audio format.")
+  @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
   format?: VoiceAudioFormat;
 
-  @doc("The voice name, for example `alloy`. The value is extensible and interpreted with `voice_type`.")
-  voice?: string;
+  @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`; `avatar-voice-sync` derives it from the avatar. Defaults to `alloy`.")
+  voice?: string = "alloy";
 
-  @doc("The voice provider/type, for example `azure-standard`. Additional values may be added without changing this model.")
-  voice_type?: string;
+  @doc("The voice implementation. Known values are `openai`, `azure-standard`, `azure-custom`, `azure-personal`, `avatar-voice-sync`, and `azure-realtime-native`. The string is extensible so future values do not require SDK type changes. Defaults to `openai`.")
+  voice_type?: string = "openai";
 
-  @doc("The optional BCP-47 locale for the selected voice, for example `en-US`.")
+  @doc("The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   voice_locale?: string;
 
-  @doc("""
-    The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
-    For Azure synthesized voices, use `audio.output.voice.rate` instead.
-    """)
+  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.")
   @minValue(0.25)
   @maxValue(1.5)
   speed?: float32 = 1;
 
-  @doc("Timestamp kinds to include with output audio.")
+  @doc("The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  @minValue(0)
+  @maxValue(1)
+  voice_temperature?: float32;
+
+  @doc("The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  custom_lexicon_url?: url;
+
+  @doc("The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  custom_text_normalization_url?: url;
+
+  @doc("Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  prefer_locales?: string[];
+
+  @doc("The voice speaking style. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  style?: string;
+
+  @doc("The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  pitch?: string;
+
+  @doc("The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  volume?: string;
+
+  @doc("The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`.")
+  custom_voice_endpoint_id?: string;
+
+  @doc("The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.")
+  personal_voice_model?: string;
+
+  @doc("Timestamp kinds to include with output audio. Applies to every `voice_type`.")
   output_audio_timestamp_types?: VoiceAudioTimestampType[];
 }
 

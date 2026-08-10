@@ -77974,31 +77974,75 @@ components:
       properties:
         format:
           $ref: '#/components/schemas/VoiceAudioFormat'
-          description: The output audio format.
+          description: The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.
         voice:
           type: string
-          description: The voice name, for example `alloy`. The value is extensible and interpreted with `voice_type`.
+          description: The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`; `avatar-voice-sync` derives it from the avatar. Defaults to `alloy`.
+          default: alloy
         voice_type:
           type: string
-          description: The voice provider/type, for example `azure-standard`. Additional values may be added without changing this model.
+          description: The voice implementation. Known values are `openai`, `azure-standard`, `azure-custom`, `azure-personal`, `avatar-voice-sync`, and `azure-realtime-native`. The string is extensible so future values do not require SDK type changes. Defaults to `openai`.
+          default: openai
         voice_locale:
           type: string
-          description: The optional BCP-47 locale for the selected voice, for example `en-US`.
+          description: The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
         speed:
           type: number
           format: float
           minimum: 0.25
           maximum: 1.5
-          description: |-
-            The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
-            For Azure synthesized voices, use `audio.output.voice.rate` instead.
+          description: The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.
           default: 1
+        voice_temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        custom_lexicon_url:
+          type: string
+          format: uri
+          description: The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        custom_text_normalization_url:
+          type: string
+          format: uri
+          description: The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        prefer_locales:
+          type: array
+          items:
+            type: string
+          description: Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        style:
+          type: string
+          description: The voice speaking style. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        pitch:
+          type: string
+          description: The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        volume:
+          type: string
+          description: The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        custom_voice_endpoint_id:
+          type: string
+          description: The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`.
+        personal_voice_model:
+          type: string
+          description: The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.
         output_audio_timestamp_types:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAudioTimestampType'
-          description: Timestamp kinds to include with output audio.
-      description: Output audio configuration for a voice agent.
+          description: Timestamp kinds to include with output audio. Applies to every `voice_type`.
+      description: |-
+        Output audio configuration for a voice agent.
+        Provider-specific fields are selected by `voice_type`:
+        - `openai`: `voice` and `speed`.
+        - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
+          `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
+        - `azure-custom`: all `azure-standard` fields plus `custom_voice_endpoint_id`.
+        - `azure-personal`: all `azure-standard` fields plus `personal_voice_model`.
+        - `avatar-voice-sync`: the Azure synthesis fields plus `personal_voice_model`; the voice is derived from the avatar.
+        - `azure-realtime-native`: `voice` and `speed`.
+        `format` and `output_audio_timestamp_types` apply to every voice type.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
