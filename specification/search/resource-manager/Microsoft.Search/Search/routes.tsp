@@ -91,7 +91,6 @@ interface UsagesOperationGroup {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Pre-existing API contract: provider-level action."
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}")
 @get
