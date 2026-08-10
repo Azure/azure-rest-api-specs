@@ -78007,6 +78007,10 @@ components:
       properties:
         threshold:
           $ref: '#/components/schemas/OpenAI.numeric'
+        prefix_padding_ms:
+          $ref: '#/components/schemas/OpenAI.integer'
+        silence_duration_ms:
+          $ref: '#/components/schemas/OpenAI.integer'
         create_response:
           type: boolean
           default: true
@@ -78021,12 +78025,6 @@ components:
           type: string
           enum:
             - server_vad
-        prefix_padding_ms:
-          type: integer
-          format: int32
-        silence_duration_ms:
-          type: integer
-          format: int32
         speech_duration_ms:
           type: integer
           format: int32

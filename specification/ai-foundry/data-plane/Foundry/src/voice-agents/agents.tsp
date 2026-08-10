@@ -561,13 +561,8 @@ model VoiceAgentEndOfUtteranceDetection {
 
 @doc("Server VAD turn-detection settings.")
 model VoiceAgentServerVadTurnDetection {
-  ...OmitProperties<
-    VoiceServerVadTurnDetection,
-    "type" | "prefix_padding_ms" | "silence_duration_ms"
-  >;
+  ...OmitProperties<VoiceServerVadTurnDetection, "type">;
   type: VoiceTurnDetectionType.server_vad;
-  prefix_padding_ms?: int32;
-  silence_duration_ms?: int32;
 
   @minValue(0)
   speech_duration_ms?: int32;
