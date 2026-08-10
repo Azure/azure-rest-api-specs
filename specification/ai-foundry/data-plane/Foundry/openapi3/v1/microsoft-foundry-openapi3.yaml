@@ -41083,7 +41083,8 @@ components:
           description: Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.
         strategy:
           $ref: '#/components/schemas/AgentOptimizationStrategy'
-          description: Optimization strategy identifier. Defaults to the service default when omitted.
+          description: Optimization strategy identifier.
+          default: gepa
         optimization_config:
           $ref: '#/components/schemas/AgentOptimizationConfig'
           description: Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.
@@ -41417,7 +41418,8 @@ components:
           description: Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.
         strategy:
           $ref: '#/components/schemas/AgentOptimizationStrategy'
-          description: Optimization strategy identifier. Defaults to the service default when omitted.
+          description: Optimization strategy identifier.
+          default: gepa
         optimization_config:
           $ref: '#/components/schemas/AgentOptimizationConfig'
           description: Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.

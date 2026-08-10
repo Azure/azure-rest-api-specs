@@ -250,6 +250,19 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
+@@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob");
+@@clientName(
+  AgentOptimizationJobCandidates.listCandidates,
+  "listOptimizationCandidates"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
+  "getOptimizationCandidate"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
+  "promoteOptimizationCandidate"
+);
 
 // All emitted Python classes already have "items" in the base class, so we need to pick another name
 @@clientName(

@@ -66,4 +66,17 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.estimate, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobCandidates.listCandidates,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobCandidates.getCandidate,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobCandidates.promoteCandidate,
+    Agents
+  );
 }

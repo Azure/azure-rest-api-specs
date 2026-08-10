@@ -245,8 +245,8 @@ model AgentOptimizationOptions {
   @doc("Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.")
   model_search_space?: string[];
 
-  @doc("Optimization strategy identifier. Defaults to the service default when omitted.")
-  strategy?: AgentOptimizationStrategy;
+  @doc("Optimization strategy identifier.")
+  strategy?: AgentOptimizationStrategy = AgentOptimizationStrategy.gepa;
 
   @doc("Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.")
   optimization_config?: AgentOptimizationConfig;
