@@ -15,7 +15,28 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2026-03-01
+tag: package-preview-2026-08-10
+```
+
+### Tag: package-preview-2026-08-10
+
+These settings apply only when `--tag=package-preview-2026-08-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08-10'
+input-file:
+  - preview/2026-08-10-preview/openapi.json
+
+directive:
+  - suppress: GuidUsage
+    from:
+      - openapi.json
+    where:
+      - $.definitions["Azure.Core.uuid"].format
+    reason: |
+      The tenantId field on DomainGroup references a Microsoft Entra
+      tenant identifier, which is a UUID/GUID by definition. ARM reviewer
+      (Chris Stackhouse) confirmed this change and will approve the
+      suppression.
 ```
 
 ### Tag: package-preview-2026-03-01
