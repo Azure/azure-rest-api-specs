@@ -540,6 +540,15 @@ model ChatCompletions {
     Usage information for tokens processed and generated as part of this completions operation.
     """)
   usage?: CompletionsUsage;
+
+  @doc("""
+    Model selection metadata providing visibility into routing decisions. Present when the request
+    was handled by Model Router. For streaming responses, included in the first chunk when
+    `stream_options.include_usage` is set.
+    """)
+  @added(ServiceApiVersions.v2025_01_01_Preview)
+  @encodedName("application/json", "model_selection_details")
+  modelSelectionDetails?: ModelSelectionDetails;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)

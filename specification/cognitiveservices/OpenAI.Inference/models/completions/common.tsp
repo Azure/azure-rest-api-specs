@@ -127,3 +127,74 @@ union ChatRole {
   @added(ServiceApiVersions.v2025_01_01_Preview)
   developer: "developer",
 }
+
+@doc("The routing mode used by Model Router for the request.")
+@added(ServiceApiVersions.v2025_01_01_Preview)
+union ModelRouterMode {
+  string,
+
+  @doc("Default routing strategy balancing cost and accuracy across eligible models.")
+  balanced: "balanced",
+
+  @doc("Prioritizes cost.")
+  cost: "cost",
+
+  @doc("Prioritizes accuracy.")
+  quality: "quality",
+}
+
+@doc("The result of a single routing step, describing how the step concluded.")
+@added(ServiceApiVersions.v2025_01_01_Preview)
+union ModelRouterStepResult {
+  string,
+
+  @doc("The model served the request successfully.")
+  success: "success",
+
+  @doc("The model returned 429 (rate limited).")
+  @encodedName("application/json", "too_many_requests")
+  tooManyRequests: "too_many_requests",
+
+  @doc("The model returned a transient server error.")
+  @encodedName("application/json", "internal_server_error")
+  internalServerError: "internal_server_error",
+
+  @doc("The model timed out.")
+  timeout: "timeout",
+
+  @doc("The model rejected the request payload.")
+  @encodedName("application/json", "invalid_request")
+  invalidRequest: "invalid_request",
+}
+
+@doc("A single step in the Model Router routing decision chain.")
+@added(ServiceApiVersions.v2025_01_01_Preview)
+model ModelRouterStep {
+  @doc("The model targeted in this step.")
+  `model`: string;
+
+  @doc("How this step concluded — whether the model served the request successfully or encountered an error.")
+  result: ModelRouterStepResult;
+}
+
+@doc("Routing decision metadata from Model Router.")
+@added(ServiceApiVersions.v2025_01_01_Preview)
+model ModelRouterDetails {
+  @doc("Time in milliseconds spent in the routing decision.")
+  @encodedName("application/json", "latency_ms")
+  latencyMs: int32;
+
+  @doc("The routing mode for the request.")
+  mode: ModelRouterMode;
+
+  @doc("Ordered list of routing steps. First element is the initial selection; subsequent elements are fallback attempts.")
+  steps: ModelRouterStep[];
+}
+
+@doc("Model selection metadata providing visibility into routing decisions.")
+@added(ServiceApiVersions.v2025_01_01_Preview)
+model ModelSelectionDetails {
+  @doc("Routing decision metadata from Model Router. Present when the request was handled by Model Router.")
+  @encodedName("application/json", "model_router_details")
+  modelRouterDetails: ModelRouterDetails;
+}

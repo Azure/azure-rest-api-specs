@@ -93,6 +93,70 @@ namespace Azure.AI.Projects {
   model AzureCreateResponseDetails {
     /** The agent used for this response */
     agent_reference: AgentReference | null;
+
+    /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+    model_selection_details?: ModelSelectionDetails;
+  }
+
+  /** The routing mode used by Model Router for the request. */
+  union ModelRouterMode {
+    string,
+
+    /** Default routing strategy balancing cost and accuracy across eligible models. */
+    balanced: "balanced",
+
+    /** Prioritizes cost. */
+    cost: "cost",
+
+    /** Prioritizes accuracy. */
+    quality: "quality",
+  }
+
+  /** The result of a single routing step, describing how the step concluded. */
+  union ModelRouterStepResult {
+    string,
+
+    /** The model served the request successfully. */
+    success: "success",
+
+    /** The model returned 429 (rate limited). */
+    too_many_requests: "too_many_requests",
+
+    /** The model returned a transient server error. */
+    internal_server_error: "internal_server_error",
+
+    /** The model timed out. */
+    timeout: "timeout",
+
+    /** The model rejected the request payload. */
+    invalid_request: "invalid_request",
+  }
+
+  /** A single step in the Model Router routing decision chain. */
+  model ModelRouterStep {
+    /** The model targeted in this step. */
+    `model`: string;
+
+    /** How this step concluded — whether the model served the request successfully or encountered an error. */
+    result: ModelRouterStepResult;
+  }
+
+  /** Routing decision metadata from Model Router. */
+  model ModelRouterDetails {
+    /** Time in milliseconds spent in the routing decision. */
+    latency_ms: int32;
+
+    /** The routing mode for the request. */
+    mode: ModelRouterMode;
+
+    /** Ordered list of routing steps. First element is the initial selection; subsequent elements are fallback attempts. */
+    steps: ModelRouterStep[];
+  }
+
+  /** Model selection metadata providing visibility into routing decisions. */
+  model ModelSelectionDetails {
+    /** Routing decision metadata from Model Router. Present when the request was handled by Model Router. */
+    model_router_details: ModelRouterDetails;
   }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
