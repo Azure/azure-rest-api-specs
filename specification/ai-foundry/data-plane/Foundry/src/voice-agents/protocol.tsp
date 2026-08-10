@@ -251,26 +251,12 @@ model VoiceAgentResponseCreateParams {
   interim_response?: VoiceAgentInterimResponse | null;
 }
 
-@doc("A text part in a `response.content_part.*` server event.")
-model VoiceAgentResponseEventTextContentPart {
-  type: "text";
-  text: string;
-}
-
-@doc("An audio part in a `response.content_part.*` server event.")
-model VoiceAgentResponseEventAudioContentPart {
-  type: "audio";
-  transcript: string | null;
-  audio?: string;
-  format?: VoiceAudioFormat;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Response event content parts are selected by their `type` property."
 @doc("A content part carried by a `response.content_part.*` server event.")
-@oneOf
-union VoiceAgentResponseEventContentPart {
-  text: VoiceAgentResponseEventTextContentPart,
-  audio: VoiceAgentResponseEventAudioContentPart,
+model VoiceAgentResponseEventContentPart {
+  ...OpenAI.RealtimeServerEventResponseContentPartDonePart;
+
+  @doc("The audio format, when this is an audio content part.")
+  format?: VoiceAudioFormat;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Message items are selected by their `role` property."
