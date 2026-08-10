@@ -377,20 +377,8 @@ model VoiceAgentFileSearchResult {
 
 @doc("A file-search output item.")
 model VoiceAgentFileSearchCallItem {
-  id: string;
-  type: "file_search_call";
-  status: VoiceAgentFileSearchCallStatus;
-  queries?: string[] | null;
+  ...OmitProperties<OpenAI.FileSearchToolCall, "results">;
   results?: VoiceAgentFileSearchResult[] | null;
-}
-
-@doc("The status of a file-search call.")
-union VoiceAgentFileSearchCallStatus {
-  in_progress: "in_progress",
-  searching: "searching",
-  completed: "completed",
-  incomplete: "incomplete",
-  failed: "failed",
 }
 
 @doc("A workflow action output item.")
