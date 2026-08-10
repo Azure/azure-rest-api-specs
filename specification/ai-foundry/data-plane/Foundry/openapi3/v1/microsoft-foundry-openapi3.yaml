@@ -81770,113 +81770,6 @@ components:
           format: int32
           minimum: 1
       description: The avatar video resolution.
-    VoiceAgentAzureMultilingualSemanticVadTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        remove_filler_words:
-          type: boolean
-          description: Whether filler words are removed from transcription.
-          default: false
-        create_response:
-          type: boolean
-          description: Whether a response is created automatically when speech stops.
-          default: true
-        interrupt_response:
-          type: boolean
-          description: Whether user speech may interrupt the agent's response.
-          default: true
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
-        type:
-          type: string
-          enum:
-            - azure_semantic_vad_multilingual
-        threshold:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-        prefix_padding_ms:
-          type: integer
-          format: int32
-        silence_duration_ms:
-          type: integer
-          format: int32
-        idle_timeout_ms:
-          type: integer
-          format: int32
-        speech_duration_ms:
-          type: integer
-          format: int32
-          minimum: 0
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
-            - type: 'null'
-        languages:
-          type: array
-          items:
-            type: string
-      description: Azure multilingual semantic VAD turn-detection settings.
-    VoiceAgentAzureSemanticVadTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        create_response:
-          type: boolean
-          description: Whether a response is created automatically when speech stops.
-          default: true
-        interrupt_response:
-          type: boolean
-          description: Whether user speech may interrupt the agent's response.
-          default: true
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
-        type:
-          $ref: '#/components/schemas/VoiceAgentAzureSemanticVadType'
-        threshold:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-        prefix_padding_ms:
-          type: integer
-          format: int32
-        silence_duration_ms:
-          type: integer
-          format: int32
-        idle_timeout_ms:
-          type: integer
-          format: int32
-        speech_duration_ms:
-          type: integer
-          format: int32
-          minimum: 0
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
-            - type: 'null'
-        remove_filler_words:
-          type: boolean
-          default: false
-        languages:
-          type: array
-          items:
-            type: string
-      description: Azure semantic VAD turn-detection settings.
-    VoiceAgentAzureSemanticVadType:
-      type: string
-      enum:
-        - azure_semantic_vad
-        - azure_semantic_vad_en
-      description: The discriminator for an Azure semantic VAD configuration.
     VoiceAgentClientEvent:
       oneOf:
         - $ref: '#/components/schemas/VoiceAgentClientEventConversationItemCreate'
@@ -82265,36 +82158,6 @@ components:
         - server
         - client
       description: The source of reference audio used for echo cancellation.
-    VoiceAgentEndOfUtteranceDetection:
-      type: object
-      required:
-        - model
-      properties:
-        model:
-          $ref: '#/components/schemas/VoiceAgentEndOfUtteranceModel'
-        threshold_level:
-          $ref: '#/components/schemas/VoiceAgentEndOfUtteranceThresholdLevel'
-        timeout_ms:
-          type: integer
-          format: int32
-          minimum: 0
-      description: End-of-utterance detection settings.
-    VoiceAgentEndOfUtteranceModel:
-      type: string
-      enum:
-        - semantic_detection_v1
-        - semantic_detection_v1_en
-        - semantic_detection_v1_multilingual
-        - smart_end_of_turn_detection
-      description: An end-of-utterance detector model.
-    VoiceAgentEndOfUtteranceThresholdLevel:
-      type: string
-      enum:
-        - low
-        - medium
-        - high
-        - default
-      description: A threshold preset for end-of-utterance detection.
     VoiceAgentFunctionTool:
       type: object
       required:
@@ -84254,7 +84117,7 @@ components:
           minimum: 0
         end_of_utterance_detection:
           anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
+            - $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
             - type: 'null'
       description: Server VAD turn-detection settings.
     VoiceAgentSessionAvatarConfig:
@@ -84557,8 +84420,9 @@ components:
       oneOf:
         - $ref: '#/components/schemas/VoiceAgentServerVadTurnDetection'
         - $ref: '#/components/schemas/VoiceAgentSemanticVadTurnDetection'
-        - $ref: '#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection'
-        - $ref: '#/components/schemas/VoiceAgentAzureMultilingualSemanticVadTurnDetection'
+        - $ref: '#/components/schemas/VoiceAzureSemanticVadTurnDetection'
+        - $ref: '#/components/schemas/VoiceAzureSemanticVadEnTurnDetection'
+        - $ref: '#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection'
       description: Turn-detection settings accepted by a stable voice-agent session.
     VoiceAgentWebSocketMessage:
       oneOf:
@@ -84879,9 +84743,15 @@ components:
           type: integer
           format: int32
           description: Silence required to end speech detection, in milliseconds.
+        idle_timeout_ms:
+          type: integer
+          format: int32
+          description: Maximum idle time before the detector ends the turn, in milliseconds.
         end_of_utterance_detection:
-          $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
-          description: Semantic end-of-utterance detection configuration.
+          anyOf:
+            - $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
+            - type: 'null'
+          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_duration_ms:
           type: integer
           format: int32
@@ -84927,9 +84797,15 @@ components:
           type: integer
           format: int32
           description: Silence required to end speech detection, in milliseconds.
+        idle_timeout_ms:
+          type: integer
+          format: int32
+          description: Maximum idle time before the detector ends the turn, in milliseconds.
         end_of_utterance_detection:
-          $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
-          description: Semantic end-of-utterance detection configuration.
+          anyOf:
+            - $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
+            - type: 'null'
+          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_duration_ms:
           type: integer
           format: int32
@@ -84980,9 +84856,15 @@ components:
           type: integer
           format: int32
           description: Silence required to end speech detection, in milliseconds.
+        idle_timeout_ms:
+          type: integer
+          format: int32
+          description: Maximum idle time before the detector ends the turn, in milliseconds.
         end_of_utterance_detection:
-          $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
-          description: Semantic end-of-utterance detection configuration.
+          anyOf:
+            - $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
+            - type: 'null'
+          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_duration_ms:
           type: integer
           format: int32
@@ -85136,6 +85018,7 @@ components:
             - semantic_detection_v1
             - semantic_detection_v1_en
             - semantic_detection_v1_multilingual
+            - smart_end_of_turn_detection
       description: The semantic end-of-utterance detection model.
       x-ms-foundry-meta:
         required_previews:
@@ -85919,9 +85802,9 @@ components:
         propertyName: type
         mapping:
           server_vad: '#/components/schemas/VoiceServerVadTurnDetection'
-          azure_semantic_vad: '#/components/schemas/VoiceAzureSemanticVadTurnDetection'
-          azure_semantic_vad_multilingual: '#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection'
           azure_semantic_vad_en: '#/components/schemas/VoiceAzureSemanticVadEnTurnDetection'
+          azure_semantic_vad_multilingual: '#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection'
+          azure_semantic_vad: '#/components/schemas/VoiceAzureSemanticVadTurnDetection'
       description: Turn-detection configuration for a voice agent.
       x-ms-foundry-meta:
         required_previews:
