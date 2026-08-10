@@ -1,0 +1,552 @@
+name: data-plane-api-reviewer-eval-true-negatives
+description: |
+  True-negative (false-positive resistance) tests for the data-plane API
+  reviewer.
+
+  This is the load-bearing regression suite. False positives are the reviewer's
+  main failure mode -- a bot that cries wolf gets muted permanently, and a muted
+  bot has zero value regardless of how good its true positives are. Every
+  stimulus here asserts that the reviewer stays SILENT, or at most asks a
+  question, on input that looks wrong and is not.
+
+  Five true-negative classes are covered:
+    1. Clean spec              -- tn-clean-service
+    2. Legitimate deviation    -- tn-legitimate-action-not-crud,
+                                  tn-bounded-list-and-singleton,
+                                  tn-closed-union-justified
+    3. Linter-owned            -- tn-linter-owned-violations-silent
+    4. Runtime-behavioral      -- tn-runtime-behavioral-not-static
+    5. Additive stable version -- tn-stable-additive-version-allowed
+  plus the preview-versioning carve-out -- tn-preview-breaking-change-allowed.
+
+  DO NOT relax this file. Specifically, do not lower `runs`, and do not add
+  "safe to re-run on failure" guidance to the README. A true-negative failure
+  is a regression until proven otherwise. See
+  .github/skills/evals/data-plane-api-reviewer/README.md.
+
+tags:
+  area: data-plane-api-reviewer
+
+defaults:
+  # runs: 3 (not 1) so that an intermittent false positive is visible as a
+  # 2/3 rather than being indistinguishable from a flake.
+  runs: 3
+  timeout: "420s"
+  # `model` MUST stay equal to the top-level `model:` in
+  # .github/workflows/data-plane-api-review.md. Measuring the false-positive
+  # rate on one model and shipping another transfers nothing. `judge_model`
+  # remains frozen separately; see the eval README.
+  model: gpt-5.6-sol
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # TN-01 -- Clean, fully compliant Azure.Core service.
+  - name: tn-clean-service-no-blocking-findings
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-clean-service.tsp"
+          dest: "specification/contosonotebook/data-plane/Contoso.Notebook/stable/2026-01-01/notebook.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. This is a new service introducing its first
+      stable API version. Report findings with rule IDs, line numbers, and fix
+      suggestions. If the specification is compliant, say so and report nothing
+      further.
+
+      File: specification/contosonotebook/data-plane/Contoso.Notebook/stable/2026-01-01/notebook.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no false-positive blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no finding raised on a clean specification"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - The specification is compliant. It uses Azure.Core standard operations, an extensible union with documented members, @key with @visibility(Lifecycle.Read), descriptive @doc on every model, property, operation, and union member, a parent/child resource relationship, and paged list operations via ResourceList.
+      - The agent MUST NOT report any Blocking (🔴) finding. There is no secret exposure, no breaking change, and no CRUD-in-disguise action. Any blocking finding is a false positive and constitutes a test failure.
+      - The agent MUST NOT report Warning (🟡) findings for resource modeling, naming clarity, or documentation quality. The names are clear, the docs are substantive, and the modeling is conventional.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+      - At most one or two 💡 Suggestion-severity observations are tolerable and do not affect the grade.
+
+  # TN-02 -- Legitimate deviation: a POST action that is genuinely not CRUD.
+  - name: tn-legitimate-action-not-crud
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-legitimate-deviation.tsp"
+          dest: "specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to resource
+      modeling and to whether any POST action is a CRUD operation in disguise.
+      Report findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no CRUD-in-disguise false positive"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-01\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - "`POST /text:analyze` is a genuine computation, not a CRUD operation in disguise. It creates no addressable resource, retains nothing, and its result cannot be fetched by identity later. The @doc says so explicitly."
+      - The agent MUST NOT report DP-MODEL-01 (CRUD in disguise) or recommend converting the analyze action into a resource with PUT/GET/DELETE. That is the specific trap this stimulus exists to catch, and any such finding is a test failure.
+      - The agent MUST NOT report any Blocking (🔴) finding.
+      - Recognising in prose that the action is legitimate, or asking a clarifying question at 💡 Suggestion severity, is acceptable and does not affect the grade.
+
+  # TN-03 -- Legitimate deviation: documented bounded unpaged list, and a
+  # singleton with no collection and no delete.
+  - name: tn-bounded-list-and-singleton
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-legitimate-deviation.tsp"
+          dest: "specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to pagination
+      and to operation completeness and symmetry. Report findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no pagination false positive"
+        config:
+          pattern: "\\*\\*\\[DP-PAGE-0[0-9]\\]"
+      - type: output-not-matches
+        name: "DP-MODEL-04 not raised as a finding"
+        config:
+          # DP-MODEL-04's declared severity is Question, so it belongs in the
+          # Questions section as a bullet and must never appear in bracketed
+          # finding form. This grader catches the agent raising the asymmetry
+          # as a finding instead of asking it -- which is what it did 12 times
+          # in 31 trials on 2026-07-27, when the rule's Severity field still
+          # said Warning.
+          pattern: "\\*\\*\\[DP-MODEL-04\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - "`listSupportedLanguages` is unpaged, and that is correct: the @doc states the collection is service-fixed, currently 42 entries, and documented never to exceed 200. Pagination is required for collections that can grow without bound, which this one cannot."
+      - "`Configuration` is a singleton with exactly one instance per account. It correctly has no collection and no delete; the @doc explains that it cannot be absent and that `:reset` is the delete-equivalent. Demanding a collection, a delete, or a list operation is a false positive."
+      - The agent MUST NOT report a missing nextLink, a missing @pagedResult, a missing delete, or a missing collection. Each is a test failure.
+      - The agent MUST NOT report any Blocking (🔴) finding.
+      - Asking whether the 200-entry bound is contractual, at 💡 Suggestion severity, is acceptable.
+
+  # TN-04 -- Legitimate deviation: a genuinely closed union.
+  - name: tn-closed-union-justified
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-legitimate-deviation.tsp"
+          dest: "specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to
+      extensibility and to enum and union design. Report findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/textanalyzer/data-plane/Contoso.TextAnalyzer/stable/2026-01-01/analyzer.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no extensible-union false positive"
+        config:
+          pattern: "(?i)\\b(must|should)\\W{1,4}be\\W{1,4}(an\\W{1,4})?extensible\\b"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - "`AnalysisMode` is a closed union of exactly two values, and the @doc states explicitly that the wire protocol admits exactly these two and that a third would require a new request shape rather than a new member. The Guidelines' extensible-enum preference does not apply to a value set that is genuinely fixed by the protocol."
+      - The agent MUST NOT report the closed union as a violation, and MUST NOT recommend adding `string` to it. That is the trap this stimulus exists to catch.
+      - "The agent MUST NOT report the azure-core linter rules `no-enum` or `use-extensible-enum`: those are the linter's job, and in any case the declaration is already a union."
+      - The agent MUST NOT report any Blocking (🔴) finding.
+      - Asking whether the value set is truly protocol-fixed, at 💡 Suggestion severity, is acceptable.
+
+  # TN-05 -- Interlock regression test: violations the shipped azure-core
+  # linter rules already catch. The agent must stay silent on all of them.
+  - name: tn-linter-owned-violations-silent
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-linter-owned.tsp"
+          dest: "specification/inventory/data-plane/Contoso.Inventory/stable/2026-01-01/inventory.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. Report findings with rule IDs, line
+      numbers, and fix suggestions.
+
+      File: specification/inventory/data-plane/Contoso.Inventory/stable/2026-01-01/inventory.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding raised on a linter-owned file"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no linter-owned rule raised as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\b(no-enum|no-nullable|no-format|no-unknown|no-generic-numeric|documentation-required|casing-style|request-body-problem|no-explicit-routes-resource-ops)\\b"
+      - type: output-not-matches
+        name: "no retracted findings"
+        config:
+          # A finding emitted and then withdrawn in the same report. The
+          # conclusion is correct, so the finding counter does not charge it as
+          # a false positive -- but the report contract says revise before you
+          # emit, so it fails here on format grounds. Observed 2026-07-28: the
+          # reviewer raised **[DP-VIS-02] Secret readable in response**, then
+          # wrote "(Retracted -- supplierEmail is contact info, not a secret.)
+          # No Blocking findings." and left both in.
+          #
+          # Matches ONLY the explicit retraction marker. "No Blocking findings"
+          # is deliberately excluded: it is also what a correctly silent report
+          # says, so banning it would punish the ideal output -- the same
+          # mention-vs-assertion trap as every other grader defect found here.
+          # The finding counter can use that phrase because it only acts when a
+          # finding was just counted; a regex has no such position awareness.
+          pattern: "(?i)\\(\\s*Retracted\\b"
+      - type: output-not-matches
+        name: "no restatement of linted defects in prose"
+        config:
+          pattern: "(?i)\\b(must|should)\\W{1,4}(be|use)\\W{1,4}an?\\W{1,4}(extensible\\W{1,4})?union\\b|\\buse\\W{1,4}`?union`?\\W{1,4}instead\\W{1,4}of\\W{1,4}`?enum`?\\b|\\b(must|should)\\W{1,4}not\\W{1,4}be\\W{1,4}nullable\\b|\\bavoid\\W{1,4}@format\\b|\\bmissing\\W{1,4}@doc\\b"
+      - type: prompt
+    rubric:
+      - "Every defect in this file is already caught mechanically by a shipped @azure-tools/typespec-azure-core rule listed at 🔒 Linted in references/data-plane-linter-rule-coverage.md: no-enum, no-nullable, no-format, no-unknown, no-generic-numeric, documentation-required, casing-style, request-body-problem, and no-explicit-routes-resource-ops."
+      - The agent MUST NOT report any of them, by rule name or in prose. CI already reports them; a second report is duplicate noise and is exactly what the linter interlock exists to prevent. Any such finding is a test failure.
+      - "The agent MAY state that it deferred to the linter for mechanically enforced rules, and MAY add at most one line of `why it matters` context for a rule CI has already failed on. It MUST NOT turn that into a numbered finding."
+      - An output that reports nothing at all is the ideal result and scores full marks.
+
+  # TN-06 -- Runtime-behavioral statements are not statically checkable.
+  - name: tn-runtime-behavioral-not-static
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-runtime-behavioral.tsp"
+          dest: "specification/auditlog/data-plane/Contoso.AuditLog/stable/2026-01-01/auditlog.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. Report findings with rule IDs, line
+      numbers, and fix suggestions.
+
+      File: specification/auditlog/data-plane/Contoso.AuditLog/stable/2026-01-01/auditlog.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding raised on a runtime-behavioral file"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no runtime behavior raised as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\b(sort order|sort ordering|ordering guarantee|retention (window|period|policy)|page size|throttl|rate limit|Retry-After|idempotenc|value preservation)\\b"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - Every notable statement in this file is service runtime behavior described in prose - sort ordering and its stability, a 90-day retention window, page-size behavior, deduplication and idempotency, validation ordering relative to authorization, conditional 404-instead-of-403, Retry-After computation, throttling, and annotation value preservation.
+      - None of it is statically checkable from a .tsp file. All of it is 🚫 Runtime in references/data-plane-linter-rule-coverage.md and explicitly out of scope.
+      - The agent MUST NOT convert any of this prose into a finding, and MUST NOT assert that the service does or does not behave correctly. Any such finding is a test failure.
+      - The agent MUST NOT report any Blocking (🔴) finding.
+      - "The documentation here is unusually good: it states behavior a caller cannot otherwise discover. Praising it, or saying nothing, both score full marks."
+
+  # TN-07 -- Preview-to-preview breaking change is permitted.
+  - name: tn-preview-breaking-change-allowed
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/preview-narrowed-union/preview-2026-01-01-preview.tsp"
+          dest: "specification/experimentrunner/data-plane/Contoso.ExperimentRunner/preview/2026-01-01-preview/experiments.tsp"
+        - src: "../fixtures/version-pairs/preview-narrowed-union/preview-2026-02-01-preview.tsp"
+          dest: "specification/experimentrunner/data-plane/Contoso.ExperimentRunner/preview/2026-02-01-preview/experiments.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the
+      2026-02-01-preview API version; 2026-01-01-preview is the previously
+      published version and is shown for comparison. Pay particular attention to
+      versioning and backward compatibility. Report findings with rule IDs, line
+      numbers, and fix suggestions.
+
+      New version: specification/experimentrunner/data-plane/Contoso.ExperimentRunner/preview/2026-02-01-preview/experiments.tsp
+      Previous version: specification/experimentrunner/data-plane/Contoso.ExperimentRunner/preview/2026-01-01-preview/experiments.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no blocking breaking-change finding on a preview version"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no stable-version breaking-change claim"
+        config:
+          # Narrowed from the whole DP-VERSION- family to DP-VERSION-01, which
+          # is the rule the rubric actually forbids ("breaking changes in a
+          # stable version"). DP-VERSION-02 is the preview rule and is
+          # legitimately raisable at Suggestion severity -- the rubric itself
+          # permits noting that preview consumers must migrate. DP-VERSION-03
+          # (decorator correctness) is a different rule again; the fixture
+          # annotates both removals with @removed, so raising it would be a
+          # genuine false positive, but it is caught by the general
+          # "no finding" graders rather than by banning the family here.
+          pattern: "\\*\\*\\[DP-VERSION-01\\]"
+      - type: output-not-matches
+        name: "no incorrect decorator finding on a correctly annotated pair"
+        config:
+          # Both removals carry @removed(Versions.v2026_02_01_preview), so a
+          # DP-VERSION-03 finding here is a false positive. Added when the
+          # grader above was narrowed, so the narrowing does not leave the
+          # stimulus trivially passable.
+          pattern: "\\*\\*\\[DP-VERSION-03\\]"
+      - type: output-not-matches
+        name: "no doc-retroactivity finding"
+        config:
+          # The one confirmed case of the reviewer being genuinely too noisy,
+          # and the likely cause of this stimulus failing 0/3. The Adaptive
+          # member's @doc changes between the two versions, and because @doc is
+          # not versioned the new text also appears on the already-published
+          # 2026-01-01-preview. That is mechanically true and completely
+          # unactionable: @typespec/versioning 0.84.0 has no doc-versioning
+          # decorator at all (versioned, useDependency, added, removed,
+          # renamedFrom, madeOptional, madeRequired, typeChangedFrom,
+          # returnTypeChangedFrom -- and nothing else). It is also non-breaking,
+          # and here an improvement for the very consumers it supposedly harms:
+          # "Withdrawn after preview evaluation" tells them more than "Under
+          # evaluation during the preview" did.
+          #
+          # Matches a bracketed finding whose title pairs a documentation word
+          # with a retroactivity word, in either order.
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Z0-9-]*\\][^*\\n]*(?:(?:doc|description)[^*\\n]*(?:retroactiv|already[- ]published|previously[- ]published|prior version|previous version|published version)|(?:retroactiv|already[- ]published|previously[- ]published|prior version|previous version|published version)[^*\\n]*(?:doc|description))"
+      - type: prompt
+    rubric:
+      - Both API versions are preview. Preview versions carry no backward-compatibility guarantee, so removing `armOverrides` and dropping the `Adaptive` union member is permitted - trialling a shape and then withdrawing it is precisely what preview exists for.
+      - Both removals are correctly annotated with @removed(Versions.v2026_02_01_preview), so the versioning decorators are also correct.
+      - The agent MUST NOT report a breaking-change violation, and MUST NOT report any Blocking (🔴) finding. This is the single most likely versioning false positive and any such finding is a test failure.
+      - Noting at 💡 Suggestion severity that existing preview consumers will need to migrate, or that the withdrawal should be called out in release notes, is acceptable and does not affect the grade.
+      - The `Adaptive` member's `@doc` text also changes between the two versions. Because `@doc` is not versioned, the new text appears on the already-published 2026-01-01-preview as well. Reporting this as a defect is a test failure. It is unactionable - `@typespec/versioning` has no doc-versioning decorator, so there is no fix to recommend - it is non-breaking, and here the new wording is strictly more informative for the consumers it supposedly harms.
+
+  # TN-08 -- A stable version that is purely additive and correctly decorated.
+  - name: tn-stable-additive-version-allowed
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/stable-additive-property/stable-2025-01-01.tsp"
+          dest: "specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2025-01-01/documents.tsp"
+        - src: "../fixtures/version-pairs/stable-additive-property/stable-2026-01-01.tsp"
+          dest: "specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2026-01-01/documents.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the 2026-01-01 stable
+      API version; 2025-01-01 is the previously shipped stable version and is
+      shown for comparison. Pay particular attention to versioning and backward
+      compatibility. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      New version: specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2026-01-01/documents.tsp
+      Previous version: specification/documentcatalog/data-plane/Contoso.DocumentCatalog/stable/2025-01-01/documents.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding raised on a purely additive stable version"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - The 2026-01-01 stable API is purely additive. It adds an optional `summary` property and an `Archived` member to an already open string union; no existing property, operation, route, type, requiredness, or union member changes.
+      - Both additions are correctly annotated with @added(Versions.v2026_01_01), so they do not leak into the emitted 2025-01-01 surface.
+      - The agent MUST NOT report DP-VERSION-01, DP-VERSION-03, or any other finding. Additive stable evolution with correct decorators is the expected versioning pattern.
+      - The specifications are intentionally terse but substantive. Short one-line documentation is not evidence of a defect and must not be padded into documentation-quality findings.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+
+  # TN-09 -- A version segment in a route that is pre-existing AND mandated by an
+  # external protocol. This stimulus is the direct test of the linter -> agent
+  # handoff premise for DP-VERSION-04: the lint rule was withdrawn because all
+  # 254 corpus sites were unfixable, and the agent's claim to the guideline
+  # rests entirely on being able to tell a NEW route from a pre-existing one.
+  # Nothing has tested that claim before this stimulus. See the caveat in
+  # data-plane-resource-modeling.md (DP-VERSION-04).
+  - name: tn-standard-mandated-route-segment
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/tn-standard-mandated-route/stable-2025-01-01.tsp"
+          dest: "specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2025-01-01/registry.tsp"
+        - src: "../fixtures/version-pairs/tn-standard-mandated-route/stable-2026-01-01.tsp"
+          dest: "specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2026-01-01/registry.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the 2026-01-01 stable
+      API version; 2025-01-01 is the previously shipped stable version and is
+      shown for comparison. Pay particular attention to routing and versioning.
+      Report findings with rule IDs, line numbers, and fix suggestions.
+
+      New version: specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2026-01-01/registry.tsp
+      Previous version: specification/artifactregistry/data-plane/Contoso.ArtifactRegistry/stable/2025-01-01/registry.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding raised on a pre-existing standard-mandated route"
+        config:
+          pattern: "\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          # DP-VERSION-04 permits Blocking for a genuinely NEW route. Nothing
+          # here is new, so any Blocking finding means the new/pre-existing
+          # distinction was not made -- the precise failure this stimulus exists
+          # to detect.
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - The `/v2` prefix appears on every route because it is applied at the namespace level. It is present identically in BOTH API versions, so this pull request does not introduce it.
+      - The namespace documentation states that `/v2/` is fixed by the OCI Distribution Specification, which defines the registry endpoint and requires clients to probe it. That is an external protocol conformance requirement, not a design choice the service is free to make.
+      - Reporting the version segment in the route is a test failure, at ANY severity, including as a question or a suggestion. Two independent reasons each suffice - the route is pre-existing, so renaming it would be a breaking change and the finding would be unactionable; and an external standard mandates the shape, which the documented rationale makes plain.
+      - The 2026-01-01 version is otherwise purely additive - an optional `platforms` property and a new `Platform` model, both correctly annotated with @added - so no versioning finding is warranted either.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+
+  # TN-10 -- Regression guard for a CONFIRMED reviewer false positive.
+  #
+  # Independent adjudication found the reviewer wrong and the fixture right on
+  # `enabled: boolean`, and identified the mechanism: two of our own files
+  # disagreed on the same token. `data-plane-naming-and-docs.md` blessed
+  # `enabled` by name; `enum-best-practices.md` used `enabled` as its worked
+  # example of a boolean to replace, inheriting an ARM posture unscoped. The
+  # reviewer raised it in 2 of 3 trials on identical input -- the signature of
+  # being genuinely torn, not of misreading.
+  #
+  # This stimulus exists so the false positive is TRACKED rather than designed
+  # around. Under the 2-Suggestion budget one suggestion here is in budget: a
+  # false positive on a correct fixture is a measurement worth keeping, not a
+  # failure to engineer away.
+  - name: tn-genuine-booleans-not-modes
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-genuine-booleans.tsp"
+          dest: "specification/feedingestion/data-plane/Contoso.FeedIngestion/stable/2026-01-01/feeds.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. Pay particular attention to property
+      typing, extensibility, and to enum and union design. Report findings with
+      rule IDs, line numbers, and fix suggestions.
+
+      specification/feedingestion/data-plane/Contoso.FeedIngestion/stable/2026-01-01/feeds.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no boolean-should-be-enum false positive"
+        config:
+          pattern: "\\*\\*\\[DP-NAME-03\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - "`enabled` and `retainOnDisable` are genuine two-state properties, not modes. `DP-NAME-03` names `enabled` explicitly as a boolean that is fine, and instructs the reviewer not to flag every boolean because that is a noise generator."
+      - Reporting either boolean as needing an extensible enum is a test failure. The `@doc` states the binary semantics directly - when `enabled` is false the service accepts no documents and skips scheduled polls - so there is no unstated third state.
+      - "`enum-best-practices.md` carries a stronger, ARM-derived preference against booleans. It is scoped to ARM and does not apply here; on the data plane `DP-NAME-03` wins. Applying the ARM posture to this spec is the specific error this stimulus guards against."
+      - Azure ships this shape. No customer-writable data-plane configuration property uses a multi-state enum in place of `enabled: boolean`; every multi-member enablement union in the corpus is read-only, and where both exist Azure splits writable intent from read-only status.
+      - Silence, or a short statement that no issues were found, is the ideal output and scores full marks.
+
+  # TN-11 -- Regression guard for a PROVOCATION THAT WAS REMOVED FROM A FIXTURE.
+  #
+  # tn-runtime-behavioral once documented distinct failure conditions in prose
+  # ("rejects unknown verbs with 400", "unauthorized caller receives 403") with
+  # no enumerated error codes. The reviewer raised DP-ERR-01 on it 3/3, the rule
+  # was found mis-scoped, and the paragraph was deleted from that fixture.
+  #
+  # Deleting it made the fixture pass. It did NOT demonstrate that the reviewer
+  # would stay silent if the paragraph returned -- and since the rule was
+  # re-scoped at the same time, that is a testable claim that was left untested.
+  # This stimulus restores the provocation in a fresh fixture, which is the only
+  # way to tell a fixed reviewer from an avoided input.
+  #
+  # Note what is asserted: DP-ERR-01 trigger 3 is capped at QUESTION severity,
+  # so a Questions bullet here is CORRECT and permitted. Only a bracketed
+  # finding is a failure.
+  - name: tn-error-prose-without-codes
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/tn-error-prose-no-codes.tsp"
+          dest: "specification/taskqueue/data-plane/Contoso.TaskQueue/stable/2026-01-01/tasks.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. Pay particular attention to error design
+      and to the documentation of failure conditions. Report findings with rule
+      IDs, line numbers, and fix suggestions.
+
+      specification/taskqueue/data-plane/Contoso.TaskQueue/stable/2026-01-01/tasks.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no bracketed DP-ERR-01 finding on an Azure.Core error envelope"
+        config:
+          pattern: "\\*\\*\\[DP-ERR-01\\]"
+      - type: output-not-matches
+        name: "no blocking findings"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - 'The spec uses the standard `Azure.Core` operation templates, so its error envelope is `Azure.Core.Foundations.Error`, whose `code` field is declared `code: string` and documented as "One of a server-defined set of error codes". An unenumerated `code` is therefore present BY CONSTRUCTION, on this and on roughly 20 of 23 shipped data-plane service groups.'
+      - "`DP-ERR-01`'s enumeration trigger is deliberately narrow and capped at Question severity. A bracketed finding for it is a test failure."
+      - A Questions bullet asking whether the documented failure conditions are meant to be distinguishable programmatically is CORRECT and scores full marks. The rule is a question, not an assertion, precisely because the author knows whether those conditions are distinct to a caller and the reviewer is inferring it from prose.
+      - "The Guidelines point the other way on venue - `rest-error-use-default-response` says YOU SHOULD NOT document specific error status codes in the spec unless the `default` response cannot describe them. Documenting codes in prose and returning a single `default` response is conformant, not a defect."
+      - Reporting the absence of a typed `union ErrorCode`, or a bare `code: string`, is a test failure at any severity.
