@@ -252,7 +252,10 @@ model VoiceAudioInputConfig {
   noise_reduction?: VoiceNoiseReduction | null;
 
   @doc("Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually.")
-  turn_detection?: VoiceTurnDetection | null;
+  turn_detection?: VoiceAgentTurnDetection | null;
+
+  @doc("Optional server-side echo cancellation settings.")
+  echo_cancellation?: VoiceAgentEchoCancellation | null;
 
   @doc("Asynchronous input-audio transcription. Set to null to disable transcription.")
   transcription?: VoiceInputTranscription | null;
@@ -529,6 +532,165 @@ model VoiceAzureSemanticVadMultilingualTurnDetection
 
   @doc("BCP-47 language codes used for speech detection.")
   languages?: string[];
+}
+
+@doc("An end-of-utterance detector model.")
+union VoiceAgentEndOfUtteranceModel {
+  semantic_detection_v1: "semantic_detection_v1",
+  semantic_detection_v1_en: "semantic_detection_v1_en",
+  semantic_detection_v1_multilingual: "semantic_detection_v1_multilingual",
+  smart_end_of_turn_detection: "smart_end_of_turn_detection",
+}
+
+@doc("A threshold preset for end-of-utterance detection.")
+union VoiceAgentEndOfUtteranceThresholdLevel {
+  low: "low",
+  medium: "medium",
+  high: "high",
+  default: "default",
+}
+
+@doc("End-of-utterance detection settings.")
+model VoiceAgentEndOfUtteranceDetection {
+  `model`: VoiceAgentEndOfUtteranceModel;
+
+  @minValue(0)
+  @maxValue(1)
+  threshold?: float32 | null;
+
+  threshold_level?: VoiceAgentEndOfUtteranceThresholdLevel | null;
+
+  @minValue(0)
+  timeout?: float32 | null;
+
+  @minValue(0)
+  timeout_ms?: int32 | null;
+}
+
+@doc("Server VAD turn-detection settings.")
+model VoiceAgentServerVadTurnDetection {
+  ...OmitProperties<
+    VoiceServerVadTurnDetection,
+    "type" | "threshold" | "prefix_padding_ms" | "silence_duration_ms"
+  >;
+  type: VoiceTurnDetectionType.server_vad;
+
+  @minValue(0)
+  @maxValue(1)
+  threshold?: float32 | null;
+
+  prefix_padding_ms?: int32 | null;
+  silence_duration_ms?: int32 | null;
+
+  @minValue(0)
+  speech_duration_ms?: int32 | null;
+
+  end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
+  auto_truncate?: boolean = false;
+}
+
+@doc("OpenAI semantic VAD turn-detection settings.")
+model VoiceAgentSemanticVadTurnDetection {
+  ...VoiceSemanticVadTurnDetection;
+  auto_truncate?: boolean = false;
+}
+
+@doc("The discriminator for an Azure semantic VAD configuration.")
+union VoiceAgentAzureSemanticVadType {
+  default: "azure_semantic_vad",
+  english: "azure_semantic_vad_en",
+}
+
+@doc("Azure semantic VAD turn-detection settings.")
+model VoiceAgentAzureSemanticVadTurnDetection {
+  ...OmitProperties<
+    VoiceAzureSemanticVadTurnDetection,
+    | "type"
+    | "threshold"
+    | "prefix_padding_ms"
+    | "silence_duration_ms"
+    | "end_of_utterance_detection"
+    | "speech_duration_ms"
+    | "languages"
+    | "remove_filler_words"
+    | "auto_truncate"
+  >;
+  type: VoiceAgentAzureSemanticVadType;
+
+  @minValue(0)
+  @maxValue(1)
+  threshold?: float32 | null;
+
+  prefix_padding_ms?: int32 | null;
+  silence_duration_ms?: int32 | null;
+  idle_timeout_ms?: int32 | null;
+
+  @minValue(0)
+  speech_duration_ms?: int32 | null;
+
+  end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
+  remove_filler_words?: boolean = false;
+  languages?: string[] | null;
+  auto_truncate?: boolean = false;
+}
+
+@doc("Azure multilingual semantic VAD turn-detection settings.")
+model VoiceAgentAzureMultilingualSemanticVadTurnDetection {
+  ...OmitProperties<
+    VoiceAzureSemanticVadMultilingualTurnDetection,
+    | "type"
+    | "threshold"
+    | "prefix_padding_ms"
+    | "silence_duration_ms"
+    | "end_of_utterance_detection"
+    | "speech_duration_ms"
+    | "languages"
+  >;
+  type: VoiceTurnDetectionType.azure_semantic_vad_multilingual;
+
+  @minValue(0)
+  @maxValue(1)
+  threshold?: float32 | null;
+
+  prefix_padding_ms?: int32 | null;
+  silence_duration_ms?: int32 | null;
+  idle_timeout_ms?: int32 | null;
+
+  @minValue(0)
+  speech_duration_ms?: int32 | null;
+
+  end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
+  languages?: string[] | null;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Turn-detection settings are selected by their `type` property."
+@doc("Turn-detection settings accepted by a stable voice-agent session.")
+@oneOf
+union VoiceAgentTurnDetection {
+  server_vad: VoiceAgentServerVadTurnDetection,
+  semantic_vad: VoiceAgentSemanticVadTurnDetection,
+  azure_semantic_vad: VoiceAgentAzureSemanticVadTurnDetection,
+  azure_semantic_vad_multilingual: VoiceAgentAzureMultilingualSemanticVadTurnDetection,
+}
+
+@doc("The source of reference audio used for echo cancellation.")
+union VoiceAgentEchoCancellationReferenceSource {
+  server: "server",
+  client: "client",
+}
+
+@doc("Server-side echo cancellation settings for input audio.")
+model VoiceAgentEchoCancellation {
+  @doc("The echo cancellation implementation. Always `server_echo_cancellation`.")
+  type: "server_echo_cancellation";
+
+  @doc("Whether reference audio comes from server playback or a client-provided channel.")
+  reference_source?: VoiceAgentEchoCancellationReferenceSource = VoiceAgentEchoCancellationReferenceSource.server;
+
+  @doc("The number of input channels. Use two interleaved channels when `reference_source` is `client`.")
+  @minValue(1)
+  @maxValue(2)
+  channels?: int32 = 1;
 }
 
 @doc("""

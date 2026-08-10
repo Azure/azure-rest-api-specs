@@ -85932,6 +85932,241 @@
           }
         }
       },
+      "VoiceAgentAzureMultilingualSemanticVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "remove_filler_words": {
+            "type": "boolean",
+            "description": "Whether filler words are removed from transcription.",
+            "default": false
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
+          },
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether a response is created automatically when speech stops.",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "description": "Whether user speech may interrupt the agent's response.",
+            "default": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_semantic_vad_multilingual"
+            ]
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "prefix_padding_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "silence_duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "idle_timeout_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "speech_duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "languages": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Azure multilingual semantic VAD turn-detection settings."
+      },
+      "VoiceAgentAzureSemanticVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether a response is created automatically when speech stops.",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "description": "Whether user speech may interrupt the agent's response.",
+            "default": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadType"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "prefix_padding_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "silence_duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "idle_timeout_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "speech_duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "remove_filler_words": {
+            "type": "boolean",
+            "default": false
+          },
+          "languages": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "Azure semantic VAD turn-detection settings."
+      },
+      "VoiceAgentAzureSemanticVadType": {
+        "type": "string",
+        "enum": [
+          "azure_semantic_vad",
+          "azure_semantic_vad_en"
+        ],
+        "description": "The discriminator for an Azure semantic VAD configuration."
+      },
       "VoiceAgentDefinition": {
         "type": "object",
         "required": [
@@ -86017,6 +86252,122 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      },
+      "VoiceAgentEchoCancellation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "server_echo_cancellation"
+            ],
+            "description": "The echo cancellation implementation. Always `server_echo_cancellation`."
+          },
+          "reference_source": {
+            "$ref": "#/components/schemas/VoiceAgentEchoCancellationReferenceSource",
+            "description": "Whether reference audio comes from server playback or a client-provided channel.",
+            "default": "server"
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2,
+            "description": "The number of input channels. Use two interleaved channels when `reference_source` is `client`.",
+            "default": 1
+          }
+        },
+        "description": "Server-side echo cancellation settings for input audio."
+      },
+      "VoiceAgentEchoCancellationReferenceSource": {
+        "type": "string",
+        "enum": [
+          "server",
+          "client"
+        ],
+        "description": "The source of reference audio used for echo cancellation."
+      },
+      "VoiceAgentEndOfUtteranceDetection": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceModel"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "threshold_level": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceThresholdLevel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timeout": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0
+          },
+          "timeout_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0
+          }
+        },
+        "description": "End-of-utterance detection settings."
+      },
+      "VoiceAgentEndOfUtteranceModel": {
+        "type": "string",
+        "enum": [
+          "semantic_detection_v1",
+          "semantic_detection_v1_en",
+          "semantic_detection_v1_multilingual",
+          "smart_end_of_turn_detection"
+        ],
+        "description": "An end-of-utterance detector model."
+      },
+      "VoiceAgentEndOfUtteranceThresholdLevel": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high",
+          "default"
+        ],
+        "description": "A threshold preset for end-of-utterance detection."
       },
       "VoiceAgentFunctionTool": {
         "type": "object",
@@ -86171,6 +86522,137 @@
           ]
         }
       },
+      "VoiceAgentSemanticVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "eagerness": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "auto"
+            ],
+            "default": "auto"
+          },
+          "create_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "semantic_vad"
+            ]
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "OpenAI semantic VAD turn-detection settings."
+      },
+      "VoiceAgentServerVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "create_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "idle_timeout_ms": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "server_vad"
+            ]
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "prefix_padding_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "silence_duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "speech_duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "Server VAD turn-detection settings."
+      },
       "VoiceAgentTool": {
         "type": "object",
         "required": [
@@ -86243,6 +86725,23 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      },
+      "VoiceAgentTurnDetection": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerVadTurnDetection"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentSemanticVadTurnDetection"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentAzureMultilingualSemanticVadTurnDetection"
+          }
+        ],
+        "description": "Turn-detection settings accepted by a stable voice-agent session."
       },
       "VoiceAgentWebSocketSubprotocol": {
         "type": "string",
@@ -86429,13 +86928,24 @@
           "turn_detection": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/VoiceTurnDetection"
+                "$ref": "#/components/schemas/VoiceAgentTurnDetection"
               },
               {
                 "type": "null"
               }
             ],
             "description": "Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually."
+          },
+          "echo_cancellation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEchoCancellation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional server-side echo cancellation settings."
           },
           "transcription": {
             "anyOf": [
@@ -86650,233 +87160,6 @@
           ]
         }
       },
-      "VoiceAzureSemanticVadEnTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_semantic_vad_en"
-            ]
-          },
-          "threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Activation threshold for voice activity detection, from 0 to 1."
-          },
-          "prefix_padding_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Audio to include before detected speech, in milliseconds."
-          },
-          "silence_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Silence required to end speech detection, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection",
-            "description": "Semantic end-of-utterance detection configuration."
-          },
-          "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "remove_filler_words": {
-            "type": "boolean",
-            "description": "Whether filler words are removed from transcription.",
-            "default": false
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
-            "default": false
-          },
-          "create_response": {
-            "type": "boolean",
-            "description": "Whether a response is created automatically when speech stops.",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "description": "Whether user speech may interrupt the agent's response.",
-            "default": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "English-optimized Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAzureSemanticVadMultilingualTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_semantic_vad_multilingual"
-            ]
-          },
-          "threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Activation threshold for voice activity detection, from 0 to 1."
-          },
-          "prefix_padding_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Audio to include before detected speech, in milliseconds."
-          },
-          "silence_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Silence required to end speech detection, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection",
-            "description": "Semantic end-of-utterance detection configuration."
-          },
-          "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "remove_filler_words": {
-            "type": "boolean",
-            "description": "Whether filler words are removed from transcription.",
-            "default": false
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
-            "default": false
-          },
-          "create_response": {
-            "type": "boolean",
-            "description": "Whether a response is created automatically when speech stops.",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "description": "Whether user speech may interrupt the agent's response.",
-            "default": true
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "BCP-47 language codes used for speech detection."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Multilingual Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAzureSemanticVadTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_semantic_vad"
-            ]
-          },
-          "threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Activation threshold for voice activity detection, from 0 to 1."
-          },
-          "prefix_padding_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Audio to include before detected speech, in milliseconds."
-          },
-          "silence_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Silence required to end speech detection, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection",
-            "description": "Semantic end-of-utterance detection configuration."
-          },
-          "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "remove_filler_words": {
-            "type": "boolean",
-            "description": "Whether filler words are removed from transcription.",
-            "default": false
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
-            "default": false
-          },
-          "create_response": {
-            "type": "boolean",
-            "description": "Whether a response is created automatically when speech stops.",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "description": "Whether user speech may interrupt the agent's response.",
-            "default": true
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "BCP-47 language codes used for speech detection."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceConversation": {
         "type": "object",
         "required": [
@@ -87015,76 +87298,6 @@
         "type": "integer",
         "format": "int32",
         "description": "A duration encoded as an integer number of milliseconds."
-      },
-      "VoiceEndOfUtteranceDetection": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetectionModel",
-            "description": "The semantic detection model."
-          },
-          "threshold_level": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceThresholdLevel",
-            "description": "The sensitivity threshold."
-          },
-          "timeout_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The detection timeout in milliseconds."
-          }
-        },
-        "description": "Semantic end-of-utterance detection configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceEndOfUtteranceDetectionModel": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "semantic_detection_v1",
-              "semantic_detection_v1_en",
-              "semantic_detection_v1_multilingual"
-            ]
-          }
-        ],
-        "description": "The semantic end-of-utterance detection model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceEndOfUtteranceThresholdLevel": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high",
-              "default"
-            ]
-          }
-        ],
-        "description": "The sensitivity threshold for semantic end-of-utterance detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
       },
       "VoiceFunctionCallItem": {
         "type": "object",
@@ -87944,101 +88157,6 @@
           ]
         }
       },
-      "VoiceSemanticVadTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "eagerness": {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high",
-              "auto"
-            ],
-            "default": "auto"
-          },
-          "create_response": {
-            "type": "boolean",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "default": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "semantic_vad"
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceServerVadTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "threshold": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
-          },
-          "prefix_padding_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          },
-          "silence_duration_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          },
-          "create_response": {
-            "type": "boolean",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "default": true
-          },
-          "idle_timeout_ms": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "server_vad"
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Server-side voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceSystemMessageItem": {
         "type": "object",
         "required": [
@@ -88177,57 +88295,6 @@
           }
         ],
         "description": "A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceTurnDetectionType",
-            "description": "The turn-detection strategy."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "server_vad": "#/components/schemas/VoiceServerVadTurnDetection",
-            "semantic_vad": "#/components/schemas/VoiceSemanticVadTurnDetection",
-            "azure_semantic_vad": "#/components/schemas/VoiceAzureSemanticVadTurnDetection",
-            "azure_semantic_vad_en": "#/components/schemas/VoiceAzureSemanticVadEnTurnDetection",
-            "azure_semantic_vad_multilingual": "#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection"
-          }
-        },
-        "description": "Turn-detection configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceTurnDetectionType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "server_vad",
-              "semantic_vad",
-              "azure_semantic_vad",
-              "azure_semantic_vad_en",
-              "azure_semantic_vad_multilingual"
-            ]
-          }
-        ],
-        "description": "The turn-detection strategy. Additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
