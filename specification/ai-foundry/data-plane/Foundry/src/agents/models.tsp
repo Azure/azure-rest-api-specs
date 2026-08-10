@@ -589,65 +589,70 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("""
+    The Entra application audiences this scheme accepts inbound tokens for. When omitted, the scheme
+    behaves as if set to `["foundry"]`. GET preserves omission rather than materializing the default.
+    An explicitly empty array is invalid; an Entra scheme must accept at least one audience type.
+    Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of the
+    Foundry path.
+    """)
+  audience_types?: EntraAudienceType[];
+
+  @doc("""
+    Optional agent-blueprint-specific configuration for the Entra scheme. Only meaningful when
+    `agent_blueprint` is present in `audience_types`. When omitted or explicitly null, the service uses
+    the backing blueprint's system-determined audience, tenant, and default `access_agent` scope for
+    the agent-blueprint token path.
+    """)
+  agent_blueprint?: AgentBlueprintConfiguration;
 }
 
-@doc("The Entra sign-in type governing which Entra application the agent endpoint validates inbound tokens against.")
-union EntraSignInType {
+@doc("The Entra application audience an inbound token targets and the authorization model the agent endpoint applies to it.")
+union EntraAudienceType {
   string,
 
-  @doc("Sign-in using the Foundry application (ai.azure.com). Inbound tokens are validated against the Foundry application audience. This is the default when a sign-in configuration is not specified.")
+  @doc("Foundry-audience (ai.azure.com) tokens, authorized through the existing Foundry/Azure RBAC path.")
   foundry: "foundry",
 
-  @doc("Agent-blueprint sign-in. The agent endpoint validates inbound tokens against the agent's blueprint application.")
+  @doc("Backing agent-blueprint-audience tokens, authorized through agent-blueprint token validation.")
   agent_blueprint: "agent_blueprint",
 }
 
-@doc("""
-  Entra sign-in configuration for the agent endpoint. The `entra_sign_in_type` property discriminates the
-  concrete configuration type; type-specific inputs (such as token validation) are carried only by the
-  types that support them. Defaults to Foundry sign-in when not specified.
-  """)
-@discriminator("entra_sign_in_type")
-model EntraSignInConfig {
-  @doc("The Entra sign-in type.")
-  entra_sign_in_type: EntraSignInType;
-}
-
-@doc("Foundry Entra sign-in configuration. The agent endpoint validates inbound tokens against the Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
-model FoundryEntraSignInConfig extends EntraSignInConfig {
-  @doc("The Entra sign-in type. Always 'foundry'.")
-  entra_sign_in_type: EntraSignInType.foundry;
-}
-
-@doc("Agent-blueprint Entra sign-in configuration. The agent endpoint validates inbound tokens against the agent's blueprint application.")
-model AgentBlueprintEntraSignInConfig extends EntraSignInConfig {
-  @doc("The Entra sign-in type. Always 'agent_blueprint'.")
-  entra_sign_in_type: EntraSignInType.agent_blueprint;
-
-  @doc("The validation applied to inbound bearer tokens presented to the agent endpoint in agent-blueprint sign-in mode.")
-  validation?: EntraValidationConfiguration;
+@doc("Agent-blueprint-specific configuration for the Entra authorization scheme.")
+model AgentBlueprintConfiguration {
+  @doc("""
+    The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
+    omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
+    blueprint resource URI, tenant = subscription tenant, required scope = `access_agent`).
+    """)
+  token_validation_rules?: TokenValidationRules;
 }
 
 @doc("""
-  Validation applied to an inbound bearer token addressed to the agent's blueprint audience. Each
-  list is defaulted to a single value when the agent is switched to the 'agent_blueprint' sign-in
-  mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
-  scope declared on the blueprint).
+  Validation applied to an inbound bearer token addressed to the backing blueprint audience. Each list
+  accepts at most 10 values. A null or omitted list applies the documented default for that rule; an
+  empty list (except `required_scopes`) blocks all requests.
   """)
-model EntraValidationConfiguration {
-  @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
+model TokenValidationRules {
+  @doc("The accepted token audiences (the `aud` claim). Null/omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests.")
+  @maxItems(10)
   allowed_audiences?: string[];
 
-  @doc("The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.")
+  @doc("The accepted token tenants (the `tid` claim). Null/omitted defaults to the backing blueprint tenant. Empty blocks all requests.")
+  @maxItems(10)
   allowed_tenants?: string[];
 
-  @doc("The set of accepted client applications (the `azp`/`appid` claim) that may present tokens to the agent endpoint.")
+  @doc("The accepted client applications (the `azp`/`appid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
+  @maxItems(10)
   allowed_clients?: string[];
 
-  @doc("The set of accepted principals (the `oid` claim) on whose behalf inbound tokens may be issued.")
+  @doc("The accepted principals (the `oid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
+  @maxItems(10)
   allowed_principals?: string[];
 
-  @doc("The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.")
+  @doc("The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `[\"access_agent\"]`. An empty list is invalid.")
+  @maxItems(10)
   required_scopes?: string[];
 }
 
@@ -728,9 +733,6 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint.")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
-
-  @doc("The Entra sign-in configuration governing which Entra application the agent endpoint validates inbound tokens against (and represents the calling user as for downstream on-behalf-of access). The service defaults 'foundry' behavior if a value is not specified by the caller.")
-  entra_sign_in_config?: EntraSignInConfig;
 }
 
 model AgentIdentity {
