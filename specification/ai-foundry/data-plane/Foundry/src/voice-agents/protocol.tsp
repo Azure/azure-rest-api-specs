@@ -381,18 +381,6 @@ model VoiceAgentFileSearchCallItem {
   results?: VoiceAgentFileSearchResult[] | null;
 }
 
-@doc("A workflow action output item.")
-model VoiceAgentWorkflowActionItem {
-  id: string | null;
-  object?: "realtime.item" = "realtime.item";
-  type: "workflow_action";
-  action_id: string;
-  status: string;
-  kind?: string | null;
-  parent_action_id?: string | null;
-  previous_action_id?: string | null;
-}
-
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The runtime response spans the OpenAI item roots plus Foundry tool output kinds."
 @doc("An item returned in a voice-agent response or item event.")
 union VoiceAgentResponseItem {
@@ -403,7 +391,6 @@ union VoiceAgentResponseItem {
   VoiceMcpCallItem,
   VoiceMcpApprovalRequestItem,
   VoiceMcpApprovalResponseItem,
-  VoiceAgentWorkflowActionItem,
   VoiceAgentWebSearchCallItem,
   VoiceAgentFileSearchCallItem,
 }
