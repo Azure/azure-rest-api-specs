@@ -268,43 +268,6 @@ union VoiceAgentResponseMessageItem {
   assistant: OpenAI.RealtimeConversationItemMessageAssistant,
 }
 
-@doc("A web-search output item.")
-model VoiceAgentWebSearchCallItem {
-  id: string;
-  type: "web_search_call";
-  status: VoiceAgentWebSearchCallStatus;
-}
-
-@doc("The status of a web-search call.")
-union VoiceAgentWebSearchCallStatus {
-  in_progress: "in_progress",
-  searching: "searching",
-  completed: "completed",
-  failed: "failed",
-}
-
-@doc("A scalar metadata value returned with a file-search result.")
-union VoiceAgentFileSearchAttributeValue {
-  string_value: string,
-  number_value: float64,
-  boolean_value: boolean,
-}
-
-@doc("One result returned by a file-search call.")
-model VoiceAgentFileSearchResult {
-  attributes?: Record<VoiceAgentFileSearchAttributeValue> | null;
-  file_id?: string | null;
-  filename?: string | null;
-  score?: float64 | null;
-  text?: string | null;
-}
-
-@doc("A file-search output item.")
-model VoiceAgentFileSearchCallItem {
-  ...OmitProperties<OpenAI.FileSearchToolCall, "results">;
-  results?: VoiceAgentFileSearchResult[] | null;
-}
-
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The runtime response spans the OpenAI item roots plus Foundry tool output kinds."
 @doc("An item returned in a voice-agent response or item event.")
 union VoiceAgentResponseItem {
@@ -315,8 +278,6 @@ union VoiceAgentResponseItem {
   VoiceMcpCallItem,
   VoiceMcpApprovalRequestItem,
   VoiceMcpApprovalResponseItem,
-  VoiceAgentWebSearchCallItem,
-  VoiceAgentFileSearchCallItem,
 }
 
 @doc("An audio format reported on a voice-agent response resource.")
