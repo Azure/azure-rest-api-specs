@@ -187,12 +187,7 @@ union VoiceAgentToolResponseScheduling {
 model VoiceAgentMcpTool extends VoiceAgentTool {
   ...OmitProperties<
     OpenAI.MCPTool,
-    | "type"
-    | "authorization"
-    | "connector_id"
-    | "tunnel_id"
-    | "server_url"
-    | "headers"
+    "type" | "connector_id" | "tunnel_id" | "server_url"
   >;
   type: "mcp";
 

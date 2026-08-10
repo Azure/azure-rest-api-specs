@@ -86065,9 +86065,26 @@
             "type": "string",
             "description": "A label for this MCP server, used to identify it in tool calls."
           },
+          "authorization": {
+            "type": "string",
+            "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
+          },
           "server_description": {
             "type": "string",
             "description": "Optional description of the MCP server, used to provide more context."
+          },
+          "headers": {
+            "anyOf": [
+              {
+                "type": "object",
+                "unevaluatedProperties": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "allowed_tools": {
             "anyOf": [

@@ -122,63 +122,6 @@ union VoiceAgentSessionIncludeOption {
   file_search_call_results: "file_search_call.results",
 }
 
-@doc("A managed identity used to authorize a voice-agent MCP connection.")
-model VoiceAgentMcpAssignedManagedIdentity {
-  type: "assigned_managed_identity";
-  audience: string;
-  client_id?: string;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "MCP authorization may be a bearer value, managed identity settings, or null."
-@doc("Authorization supplied to an MCP server.")
-@oneOf
-union VoiceAgentMcpAuthorization {
-  bearer: string,
-  assigned_managed_identity: VoiceAgentMcpAssignedManagedIdentity,
-  none: null,
-}
-
-@doc("An MCP approval mode.")
-union VoiceAgentMcpApprovalMode {
-  never_require: "never",
-  always: "always",
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "MCP approval may use one mode or per-mode tool lists."
-@doc("Approval policy for MCP tool calls.")
-@oneOf
-union VoiceAgentMcpApprovalPolicy {
-  mode: VoiceAgentMcpApprovalMode,
-  tool_filters: Record<string[]>,
-}
-
-@doc("Fields shared by MCP-backed tools in a voice-agent session.")
-model VoiceAgentSessionMcpToolProperties {
-  ...PickProperties<VoiceAgentMcpTool, "server_label">;
-  server_url: url;
-  authorization?: VoiceAgentMcpAuthorization;
-  headers?: Record<string>;
-  allowed_tools?: string[];
-  require_approval?: VoiceAgentMcpApprovalPolicy;
-}
-
-@doc("A remote MCP server available to a voice-agent session.")
-model VoiceAgentSessionMcpTool {
-  ...OmitProperties<VoiceAgentTool, "type">;
-  type: "mcp";
-  ...VoiceAgentSessionMcpToolProperties;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Session tools are selected by their `type` property."
-@doc("A tool accepted by a stable voice-agent WebSocket session.")
-@oneOf
-union VoiceAgentSessionTool {
-  function: VoiceAgentFunctionTool,
-  mcp: VoiceAgentSessionMcpTool,
-  toolbox: VoiceToolboxTool,
-  system: VoiceSystemTool,
-}
-
 @doc("The maximum output-token count or the literal `inf`.")
 union VoiceAgentMaxOutputTokens {
   count: int32,
@@ -589,7 +532,7 @@ model VoiceAgentSessionUpdateConfig {
   animation?: VoiceAgentAnimationConfig | null;
 
   @doc("Tools available to the session.")
-  tools?: VoiceAgentSessionTool[] | null;
+  tools?: VoiceAgentTool[] | null;
 
   @doc("Tool-selection behavior for the session.")
   tool_choice?: VoiceAgentToolChoice | null;
