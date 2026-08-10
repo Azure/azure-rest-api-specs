@@ -2547,6 +2547,26 @@ model SmbStorage {
 model ManagedEnvironmentsCollection is Azure.Core.Page<ManagedEnvironment>;
 
 /**
+ * Mode of the managed environment.
+ */
+@added(Versions.v2026_07_01)
+union ManagedEnvironmentMode {
+  string,
+
+  /** The environment supports consumption-only workloads. */
+  ConsumptionOnly: "ConsumptionOnly",
+
+  /** The environment supports workload profiles. */
+  WorkloadProfiles: "WorkloadProfiles",
+
+  /** The environment uses the Express mode. */
+  Express: "Express",
+
+  /** The environment is archived. */
+  Archived: "Archived",
+}
+
+/**
  * Managed environment resource specific properties
  */
 model ManagedEnvironmentProperties {
@@ -2680,6 +2700,12 @@ model ManagedEnvironmentProperties {
    * Ingress configuration for the Managed Environment.
    */
   ingressConfiguration?: IngressConfiguration;
+
+  /**
+   * Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'.
+   */
+  @added(Versions.v2026_07_01)
+  environmentMode?: ManagedEnvironmentMode;
 
   /**
    * Private endpoint connections to the resource.
