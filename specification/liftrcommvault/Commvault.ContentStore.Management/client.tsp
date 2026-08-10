@@ -89,11 +89,7 @@ using Commvault.ContentStore;
   "ShouldPowerOnVmAfterRestore",
   "csharp"
 );
-@@clientName(
-  VmInfo.attachAndSwapOsDisk,
-  "ShouldAttachAndSwapOsDisk",
-  "csharp"
-);
+@@clientName(VmInfo.attachAndSwapOsDisk, "ShouldAttachAndSwapOsDisk", "csharp");
 
 // [CSPELL] "vmtags" is flagged as an unknown word; use the compound "VmTags"
 // so the generated .NET name splits into known words.
