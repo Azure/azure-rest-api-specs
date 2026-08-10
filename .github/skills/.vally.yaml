@@ -5,10 +5,13 @@
 # environments), pared down to the skill folders that exist in this repo.
 
 paths:
-  # "." so skill auto-discovery finds every `<name>/SKILL.md` directly under this directory --
-  # needed by the ARM API Reviewer suite below, which relies on auto-discovery rather than
-  # declaring `environment.skills` per eval file (see evals/arm-api-reviewer/.vally.yaml, which
-  # points back here via "../../../skills/" for its own standalone/local runs).
+  # "." is the root for skill *discovery*, which vally only performs when `--skill-dir` is passed
+  # on the command line -- `paths.skills` alone does not load anything. Neither the local runner
+  # (evals/arm-api-reviewer/run-evals.ps1) nor the CI shard runner
+  # (eng/common/scripts/eval/invoke-eval-shard.ts) passes `--skill-dir`, so every eval file here
+  # declares the skill it exercises via `environment.skills` -- once at the file root, which vally
+  # merges into each of its stimuli (fail-loud: vally aborts when a declared skill directory has
+  # no SKILL.md).
   skills: "."
   evals:
     - azsdk-common-apiview-feedback-resolution/evals/
