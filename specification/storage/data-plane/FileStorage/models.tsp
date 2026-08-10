@@ -284,22 +284,6 @@ union NfsFileType {
 
   /** SymLink */
   SymLink: "SymLink",
-
-  /** BlockDevice */
-  @added(Versions.v2026_12_06)
-  BlockDevice: "BlockDevice",
-
-  /** CharacterDevice */
-  @added(Versions.v2026_12_06)
-  CharacterDevice: "CharacterDevice",
-
-  /** Socket */
-  @added(Versions.v2026_12_06)
-  Socket: "Socket",
-
-  /** Fifo */
-  @added(Versions.v2026_12_06)
-  Fifo: "Fifo",
 }
 
 /** The file property semantics. */
@@ -405,22 +389,6 @@ enum ListFilesIncludeType {
 
   /** PermissionKey */
   PermissionKey,
-
-  /** Permissions */
-  @added(Versions.v2026_12_06)
-  Permissions,
-
-  /** LinkCount */
-  @added(Versions.v2026_12_06)
-  LinkCount,
-
-  /** NfsAttributes */
-  @added(Versions.v2026_12_06)
-  NfsAttributes,
-
-  /** All */
-  @added(Versions.v2026_12_06)
-  All,
 }
 
 /** The type of share information to include in the listing. */
@@ -557,36 +525,6 @@ model FilesAndDirectoriesListSegment {
   @Xml.unwrapped
   @Xml.name("File")
   fileItems: FileItem[];
-
-  /** The symbolic link items. */
-  @added(Versions.v2026_12_06)
-  @Xml.unwrapped
-  @Xml.name("SymLink")
-  symLinkItems?: SymLinkItem[];
-
-  /** The block device items. */
-  @added(Versions.v2026_12_06)
-  @Xml.unwrapped
-  @Xml.name("BlockDevice")
-  blockDeviceItems?: BlockDeviceItem[];
-
-  /** The character device items. */
-  @added(Versions.v2026_12_06)
-  @Xml.unwrapped
-  @Xml.name("CharDevice")
-  charDeviceItems?: CharDeviceItem[];
-
-  /** The FIFO items. */
-  @added(Versions.v2026_12_06)
-  @Xml.unwrapped
-  @Xml.name("Fifo")
-  fifoItems?: FifoItem[];
-
-  /** The socket items. */
-  @added(Versions.v2026_12_06)
-  @Xml.unwrapped
-  @Xml.name("Socket")
-  socketItems?: SocketItem[];
 }
 
 /** A listed directory item. */
@@ -606,11 +544,6 @@ model DirectoryItem {
 
   /** The permission key. */
   @Xml.name("PermissionKey") permissionKey?: string;
-
-  /** NFS only. The link count of the directory. */
-  @added(Versions.v2026_12_06)
-  @Xml.name("LinkCount")
-  linkCount?: int64;
 }
 
 /** An encoded string value. */
@@ -657,21 +590,6 @@ model FileProperty {
 
   /** The ETag of the file. */
   @Xml.name("Etag") eTag?: Azure.Core.eTag;
-
-  /** NFS only. The owner user identifier (UID) of the file. */
-  @added(Versions.v2026_12_06)
-  @Xml.name("Uid")
-  owner?: string;
-
-  /** NFS only. The owner group identifier (GID) of the file. */
-  @added(Versions.v2026_12_06)
-  @Xml.name("Gid")
-  group?: string;
-
-  /** NFS only. The file mode of the file. */
-  @added(Versions.v2026_12_06)
-  @Xml.name("Mode")
-  fileMode?: string;
 }
 
 /** A listed file item. */
@@ -691,116 +609,6 @@ model FileItem {
 
   /** The permission key. */
   @Xml.name("PermissionKey") permissionKey?: string;
-
-  /** NFS only. The link count of the file. */
-  @added(Versions.v2026_12_06)
-  @Xml.name("LinkCount")
-  linkCount?: int64;
-
-  /** NFS only. The type of the file. */
-  @added(Versions.v2026_12_06)
-  @Xml.name("FileType")
-  fileType?: NfsFileType;
-}
-
-/** A listed symbolic link item. */
-@added(Versions.v2026_12_06)
-@Xml.name("SymLink")
-model SymLinkItem {
-  /** The symbolic link name. */
-  @Xml.name("Name") name: StringEncoded;
-
-  /** The file ID. */
-  @Xml.name("FileId") fileId?: string;
-
-  /** File properties. */
-  @Xml.name("Properties") properties: FileProperty;
-
-  /** NFS only. The link count of the symbolic link. */
-  @Xml.name("LinkCount") linkCount?: int64;
-
-  /** NFS only. The path to the original file, the symbolic link is pointing to. */
-  @Xml.name("LinkText") linkText?: string;
-}
-
-/** A listed block device item. */
-@added(Versions.v2026_12_06)
-@Xml.name("BlockDevice")
-model BlockDeviceItem {
-  /** The block device name. */
-  @Xml.name("Name") name: StringEncoded;
-
-  /** The file ID. */
-  @Xml.name("FileId") fileId?: string;
-
-  /** File properties. */
-  @Xml.name("Properties") properties: FileProperty;
-
-  /** NFS only. The link count of the block device. */
-  @Xml.name("LinkCount") linkCount?: int64;
-
-  /** NFS only. The major device number of the block device. */
-  @Xml.name("DeviceMajor") deviceMajor?: int64;
-
-  /** NFS only. The minor device number of the block device. */
-  @Xml.name("DeviceMinor") deviceMinor?: int64;
-}
-
-/** A listed character device item. */
-@added(Versions.v2026_12_06)
-@Xml.name("CharDevice")
-model CharDeviceItem {
-  /** The character device name. */
-  @Xml.name("Name") name: StringEncoded;
-
-  /** The file ID. */
-  @Xml.name("FileId") fileId?: string;
-
-  /** File properties. */
-  @Xml.name("Properties") properties: FileProperty;
-
-  /** NFS only. The link count of the character device. */
-  @Xml.name("LinkCount") linkCount?: int64;
-
-  /** NFS only. The major device number of the character device. */
-  @Xml.name("DeviceMajor") deviceMajor?: int64;
-
-  /** NFS only. The minor device number of the character device. */
-  @Xml.name("DeviceMinor") deviceMinor?: int64;
-}
-
-/** A listed FIFO item. */
-@added(Versions.v2026_12_06)
-@Xml.name("Fifo")
-model FifoItem {
-  /** The FIFO name. */
-  @Xml.name("Name") name: StringEncoded;
-
-  /** The file ID. */
-  @Xml.name("FileId") fileId?: string;
-
-  /** File properties. */
-  @Xml.name("Properties") properties: FileProperty;
-
-  /** NFS only. The link count of the FIFO. */
-  @Xml.name("LinkCount") linkCount?: int64;
-}
-
-/** A listed socket item. */
-@added(Versions.v2026_12_06)
-@Xml.name("Socket")
-model SocketItem {
-  /** The socket name. */
-  @Xml.name("Name") name: StringEncoded;
-
-  /** The file ID. */
-  @Xml.name("FileId") fileId?: string;
-
-  /** File properties. */
-  @Xml.name("Properties") properties: FileProperty;
-
-  /** NFS only. The link count of the socket. */
-  @Xml.name("LinkCount") linkCount?: int64;
 }
 
 /** A listed Azure Storage handle item. */
@@ -822,6 +630,7 @@ model HandleItem {
   @Xml.name("SessionId") sessionId: string;
 
   /** Client IP that opened the handle */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @Xml.name("ClientIp") clientIp: string;
 
   /** Name of the client machine where the share is being mounted */
@@ -845,6 +654,7 @@ model HandleItem {
 }
 
 /** An enumeration of directories and files. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListFilesAndDirectoriesSegmentResponse {
   /** The service endpoint. */
@@ -895,6 +705,7 @@ model ListFilesAndDirectoriesSegmentResponse {
 }
 
 /** An enumeration of handles. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListHandlesResponse {
   /** The handle list. */
@@ -909,6 +720,7 @@ model ListHandlesResponse {
 }
 
 /** An enumeration of shares. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListSharesResponse {
   /** The service endpoint. */
@@ -1152,7 +964,7 @@ model ShareSmbSettingsEncryptionInTransit {
   @Xml.name("Required") required?: boolean;
 }
 
-/** Settings for SMB protocol. */
+/** Settings for NFS protocol. */
 @Xml.name("NFS")
 model ShareNfsSettings {
   /** Enable or disable encryption in transit. */

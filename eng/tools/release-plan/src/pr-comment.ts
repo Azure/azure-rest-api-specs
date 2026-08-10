@@ -112,5 +112,8 @@ export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
   body += `| **API Version** | \`${apiVersion}\` |\n`;
   body += `| **TypeSpec Project** | \`${tspProjectPath}\` |\n`;
 
+  body += `\n> **Note:** The SDK will be generated based on API version \`${apiVersion}\`. `;
+  body += `This is the final API version detected from the changes in this pull request.\n`;
+
   return body;
 }
