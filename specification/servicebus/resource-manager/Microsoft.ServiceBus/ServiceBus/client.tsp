@@ -348,40 +348,6 @@ using Microsoft.ServiceBus;
 
 namespace Microsoft.ServiceBus {
   /**
-   * Entity status ordered to preserve the numeric values shipped by the
-   * reflection-based provisioning generator.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "This fixed enum preserves the shipped C# numeric values."
-  enum ServiceBusMessagingEntityStatus {
-    /** Unknown. */
-    Unknown,
-
-    /** Active. */
-    Active,
-
-    /** Disabled. */
-    Disabled,
-
-    /** Restoring. */
-    Restoring,
-
-    /** Send disabled. */
-    SendDisabled,
-
-    /** Receive disabled. */
-    ReceiveDisabled,
-
-    /** Creating. */
-    Creating,
-
-    /** Deleting. */
-    Deleting,
-
-    /** Renaming. */
-    Renaming,
-  }
-
-  /**
    * Parameters supplied to the Patch Namespace operation.
    */
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
@@ -408,7 +374,6 @@ namespace Microsoft.ServiceBus {
   }
 } // namespace Microsoft.ServiceBus
 
-@@alternateType(EntityStatus, ServiceBusMessagingEntityStatus, "csharp");
 @@alternateType(
   SBNamespaceUpdateParameters,
   SBNamespaceUpdateParametersReplacement,
