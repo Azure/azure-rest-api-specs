@@ -270,8 +270,8 @@ model VoiceAudioInputConfig {
   - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
     `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
   - `azure-custom`: all `azure-standard` fields plus `custom_voice_endpoint_id`.
-  - `azure-personal`: all `azure-standard` fields plus `personal_voice_model`.
-  - `avatar-voice-sync`: the Azure synthesis fields plus `personal_voice_model`; the voice is derived from the avatar.
+  - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
+  - `avatar-voice-sync`: the Azure synthesis fields plus `personal_voice_model`, but not `voice`; the voice name is derived from the avatar.
   - `azure-realtime-native`: `voice` and `speed`.
   `format` and `output_audio_timestamp_types` apply to every voice type.
   """)
@@ -280,7 +280,7 @@ model VoiceAudioOutputConfig {
   @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
   format?: VoiceAudioFormat;
 
-  @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`; `avatar-voice-sync` derives it from the avatar. Defaults to `alloy`.")
+  @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar. Defaults to `alloy`.")
   voice?: string = "alloy";
 
   @doc("The voice implementation. Known values are `openai`, `azure-standard`, `azure-custom`, `azure-personal`, `avatar-voice-sync`, and `azure-realtime-native`. The string is extensible so future values do not require SDK type changes. Defaults to `openai`.")
@@ -308,7 +308,7 @@ model VoiceAudioOutputConfig {
   @doc("Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   prefer_locales?: string[];
 
-  @doc("The voice speaking style. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  @doc("The voice speaking style. Applies to `azure-standard`, `azure-custom`, and `avatar-voice-sync`; it does not apply to `azure-personal`.")
   style?: string;
 
   @doc("The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")

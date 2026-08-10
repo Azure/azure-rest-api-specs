@@ -86467,7 +86467,7 @@
           },
           "voice": {
             "type": "string",
-            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`; `avatar-voice-sync` derives it from the avatar. Defaults to `alloy`.",
+            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar. Defaults to `alloy`.",
             "default": "alloy"
           },
           "voice_type": {
@@ -86513,7 +86513,7 @@
           },
           "style": {
             "type": "string",
-            "description": "The voice speaking style. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+            "description": "The voice speaking style. Applies to `azure-standard`, `azure-custom`, and `avatar-voice-sync`; it does not apply to `azure-personal`."
           },
           "pitch": {
             "type": "string",
@@ -86539,7 +86539,7 @@
             "description": "Timestamp kinds to include with output audio. Applies to every `voice_type`."
           }
         },
-        "description": "Output audio configuration for a voice agent.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields plus `personal_voice_model`.\n- `avatar-voice-sync`: the Azure synthesis fields plus `personal_voice_model`; the voice is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.\n`format` and `output_audio_timestamp_types` apply to every voice type.",
+        "description": "Output audio configuration for a voice agent.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: the Azure synthesis fields plus `personal_voice_model`, but not `voice`; the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.\n`format` and `output_audio_timestamp_types` apply to every voice type.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
