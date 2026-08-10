@@ -339,9 +339,6 @@ model VoiceAudioInputConfig {
   @doc("Optional server-side echo cancellation settings.")
   echo_cancellation?: VoiceAgentEchoCancellation | null;
 
-  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
-  auto_truncate?: boolean = false;
-
   @doc("Asynchronous input-audio transcription. Set to null to disable transcription.")
   transcription?: VoiceInputTranscription | null;
 }
@@ -487,6 +484,9 @@ union VoiceTurnDetectionType {
 model VoiceTurnDetection {
   @doc("The turn-detection strategy.")
   type: VoiceTurnDetectionType;
+
+  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
+  auto_truncate?: boolean = false;
 }
 
 @doc("Server-side voice activity detection.")
@@ -649,6 +649,9 @@ model VoiceAgentServerVadTurnDetection {
 model VoiceAgentSemanticVadTurnDetection {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
   type: VoiceTurnDetectionType.semantic_vad;
+
+  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
+  auto_truncate?: boolean = false;
 }
 
 @doc("The discriminator for an Azure semantic VAD configuration.")

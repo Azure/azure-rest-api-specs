@@ -84292,6 +84292,10 @@ components:
           type: boolean
           description: Whether user speech may interrupt the agent's response.
           default: true
+        auto_truncate:
+          type: boolean
+          description: Whether the input audio buffer is truncated automatically when speech stops.
+          default: false
         type:
           type: string
           enum:
@@ -84336,6 +84340,10 @@ components:
           type: boolean
           description: Whether user speech may interrupt the agent's response.
           default: true
+        auto_truncate:
+          type: boolean
+          description: Whether the input audio buffer is truncated automatically when speech stops.
+          default: false
         type:
           $ref: '#/components/schemas/VoiceAgentAzureSemanticVadType'
         threshold:
@@ -85234,6 +85242,10 @@ components:
           type: string
           enum:
             - semantic_vad
+        auto_truncate:
+          type: boolean
+          description: Whether the input audio buffer is truncated automatically when speech stops.
+          default: false
       description: OpenAI semantic VAD turn-detection settings.
     VoiceAgentServerEvent:
       oneOf:
@@ -86733,6 +86745,10 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
+        auto_truncate:
+          type: boolean
+          description: Whether the input audio buffer is truncated automatically when speech stops.
+          default: false
         type:
           type: string
           enum:
@@ -87180,10 +87196,6 @@ components:
             - $ref: '#/components/schemas/VoiceAgentEchoCancellation'
             - type: 'null'
           description: Optional server-side echo cancellation settings.
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
         transcription:
           anyOf:
             - $ref: '#/components/schemas/VoiceInputTranscription'
@@ -88421,6 +88433,10 @@ components:
         type:
           $ref: '#/components/schemas/VoiceTurnDetectionType'
           description: The turn-detection strategy.
+        auto_truncate:
+          type: boolean
+          description: Whether the input audio buffer is truncated automatically when speech stops.
+          default: false
       discriminator:
         propertyName: type
         mapping:

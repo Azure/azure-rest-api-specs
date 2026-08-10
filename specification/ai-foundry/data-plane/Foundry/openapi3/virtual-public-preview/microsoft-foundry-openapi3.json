@@ -89732,6 +89732,11 @@
             "description": "Whether user speech may interrupt the agent's response.",
             "default": true
           },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -89795,6 +89800,11 @@
             "type": "boolean",
             "description": "Whether user speech may interrupt the agent's response.",
             "default": true
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
           },
           "type": {
             "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadType"
@@ -91105,6 +91115,11 @@
             "enum": [
               "semantic_vad"
             ]
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
           }
         },
         "description": "OpenAI semantic VAD turn-detection settings."
@@ -93234,6 +93249,11 @@
               }
             ]
           },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -93928,11 +93948,6 @@
               }
             ],
             "description": "Optional server-side echo cancellation settings."
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
-            "default": false
           },
           "transcription": {
             "anyOf": [
@@ -95663,6 +95678,11 @@
           "type": {
             "$ref": "#/components/schemas/VoiceTurnDetectionType",
             "description": "The turn-detection strategy."
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
           }
         },
         "discriminator": {
