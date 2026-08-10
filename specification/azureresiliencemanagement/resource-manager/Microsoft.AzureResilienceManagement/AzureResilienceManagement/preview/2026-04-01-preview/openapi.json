@@ -5512,7 +5512,7 @@
     },
     "ConfirmationStatus": {
       "type": "string",
-      "description": "Enum for the confirmation status of a zonal resiliency solution.",
+      "description": "Enum for the confirmation status of a resiliency solution.",
       "enum": [
         "ApprovedByUser",
         "ApprovalPending",
@@ -5526,22 +5526,22 @@
           {
             "name": "ApprovedByUser",
             "value": "ApprovedByUser",
-            "description": "The zonal resiliency solution has been approved by the user."
+            "description": "The resiliency solution has been approved by the user."
           },
           {
             "name": "ApprovalPending",
             "value": "ApprovalPending",
-            "description": "The zonal resiliency solution is pending approval from the user."
+            "description": "The resiliency solution is pending approval from the user."
           },
           {
             "name": "ApprovalNotNeeded",
             "value": "ApprovalNotNeeded",
-            "description": "The zonal resiliency solution does not require user approval."
+            "description": "The resiliency solution does not require user approval."
           },
           {
             "name": "RejectedByUser",
             "value": "RejectedByUser",
-            "description": "The zonal resiliency solution has been rejected by the user."
+            "description": "The resiliency solution has been rejected by the user."
           }
         ]
       }
@@ -8650,7 +8650,7 @@
     },
     "ReasonForRequestingConfirmation": {
       "type": "string",
-      "description": "Enum for the reason for requesting user confirmation for a zonal resiliency solution.",
+      "description": "Enum for the reason for requesting user confirmation for a resiliency solution.",
       "enum": [
         "ZonePinnedZrsDataDisksConditional",
         "VmInMultiZoneScaleSetStatelessOnly"
@@ -10003,24 +10003,24 @@
     },
     "ResiliencyProperties": {
       "type": "object",
-      "description": "Zonal resiliency posture for a goal resource.",
+      "description": "Resiliency posture for a goal resource.",
       "properties": {
         "goalParticipation": {
           "$ref": "#/definitions/ExclusionState",
-          "description": "Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation."
+          "description": "Flag which depicts whether the Arm resource is excluded for resiliency recommendation."
         },
         "attestationStatus": {
           "$ref": "#/definitions/AttestationState",
-          "description": "Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation."
+          "description": "Flag which depicts whether the Arm resource is manually attested for resiliency recommendation."
         },
         "exclusionReason": {
           "$ref": "#/definitions/ExclusionReason",
-          "description": "Reason for exclusion from zonal resiliency goals.",
+          "description": "Reason for exclusion from resiliency goals.",
           "readOnly": true
         },
         "userConfirmation": {
           "type": "array",
-          "description": "List of user confirmations for zonal resiliency solutions.",
+          "description": "List of user confirmations for resiliency solutions.",
           "items": {
             "$ref": "#/definitions/UserConfirmationItem"
           },
@@ -10595,7 +10595,7 @@
     },
     "SolutionDisplayName": {
       "type": "string",
-      "description": "Identifies a zonal resiliency solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).",
+      "description": "Identifies a resiliency solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).",
       "enum": [
         "ZonePinnedVmWithZrsDisk",
         "VmInMultiZoneVmss"
@@ -10960,19 +10960,19 @@
     },
     "UserConfirmationItem": {
       "type": "object",
-      "description": "Represents a user confirmation for a zonal resiliency solution.",
+      "description": "Represents a user confirmation for a resiliency solution.",
       "properties": {
         "solutionDisplayName": {
           "$ref": "#/definitions/SolutionDisplayName",
-          "description": "The solution display name of the zonal resiliency solution."
+          "description": "The solution display name of the resiliency solution."
         },
         "confirmationStatus": {
           "$ref": "#/definitions/ConfirmationStatus",
-          "description": "The confirmation status of the zonal resiliency solution."
+          "description": "The confirmation status of the resiliency solution."
         },
         "reasonForRequestingConfirmation": {
           "$ref": "#/definitions/ReasonForRequestingConfirmation",
-          "description": "The reason for requesting user confirmation for the zonal resiliency solution."
+          "description": "The reason for requesting user confirmation for the resiliency solution."
         }
       },
       "required": [

@@ -18,19 +18,19 @@ namespace Microsoft.AzureResilienceManagement;
 
 // Define the main model
 @added(Versions.v2026_03_01_preview)
-@doc("Zonal resiliency posture for a goal resource.")
+@doc("Resiliency posture for a goal resource.")
 model ResiliencyProperties {
-  @doc("Flag which depicts whether the Arm resource is excluded for zonal resiliency recommendation.")
+  @doc("Flag which depicts whether the Arm resource is excluded for resiliency recommendation.")
   goalParticipation?: ExclusionState;
 
-  @doc("Flag which depicts whether the Arm resource is manually attested for zonal resiliency recommendation.")
+  @doc("Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.")
   attestationStatus?: AttestationState;
 
-  @doc("Reason for exclusion from zonal resiliency goals.")
+  @doc("Reason for exclusion from resiliency goals.")
   @visibility(Lifecycle.Read)
   exclusionReason?: ExclusionReason;
 
-  @doc("List of user confirmations for zonal resiliency solutions.")
+  @doc("List of user confirmations for resiliency solutions.")
   @identifiers(#["solutionDisplayName"])
   userConfirmation?: UserConfirmationItem[];
 }
