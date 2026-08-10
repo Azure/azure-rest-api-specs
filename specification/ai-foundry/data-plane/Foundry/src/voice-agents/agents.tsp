@@ -571,11 +571,11 @@ model VoiceAgentServerVadTurnDetection {
   @maxValue(1)
   threshold?: float32 | null;
 
-  prefix_padding_ms?: int32 | null;
-  silence_duration_ms?: int32 | null;
+  prefix_padding_ms?: int32;
+  silence_duration_ms?: int32;
 
   @minValue(0)
-  speech_duration_ms?: int32 | null;
+  speech_duration_ms?: int32;
 
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
   auto_truncate?: boolean = false;
@@ -613,12 +613,12 @@ model VoiceAgentAzureSemanticVadTurnDetection {
   @maxValue(1)
   threshold?: float32 | null;
 
-  prefix_padding_ms?: int32 | null;
-  silence_duration_ms?: int32 | null;
+  prefix_padding_ms?: int32;
+  silence_duration_ms?: int32;
   idle_timeout_ms?: int32 | null;
 
   @minValue(0)
-  speech_duration_ms?: int32 | null;
+  speech_duration_ms?: int32;
 
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
   remove_filler_words?: boolean = false;
@@ -644,12 +644,12 @@ model VoiceAgentAzureMultilingualSemanticVadTurnDetection {
   @maxValue(1)
   threshold?: float32 | null;
 
-  prefix_padding_ms?: int32 | null;
-  silence_duration_ms?: int32 | null;
+  prefix_padding_ms?: int32;
+  silence_duration_ms?: int32;
   idle_timeout_ms?: int32 | null;
 
   @minValue(0)
-  speech_duration_ms?: int32 | null;
+  speech_duration_ms?: int32;
 
   end_of_utterance_detection?: VoiceAgentEndOfUtteranceDetection | null;
   languages?: string[] | null;
