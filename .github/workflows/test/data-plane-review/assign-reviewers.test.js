@@ -134,6 +134,18 @@ describe("assign-reviewers", () => {
     expect(/** @type {any} */ (github.rest.issues).addAssignees).not.toHaveBeenCalled();
   });
 
+  it("warns and stops when the reviewer pool is empty", async () => {
+    /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue({});
+    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
+
+    await assignReviewers(args());
+
+    expect(core.warning).toHaveBeenCalledWith(
+      expect.stringContaining("APIStewardshipBoard-SignedOff"),
+    );
+    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+  });
+
   it("requests and assigns the full pool on labeled", async () => {
     context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
     await assignReviewers(args());
@@ -293,6 +305,19 @@ describe("assign-reviewers", () => {
       );
       // Sign-off syncs labels silently, matching the ARM sign-off flows — no comment.
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    });
+
+    it("reads the shared config only once while authorizing a sign-off", async () => {
+      context.payload = createPayload({
+        action: "labeled",
+        labelName: SIGNOFF_LABEL,
+        sender: "username1",
+        labels: [{ name: TRIGGER_LABEL }],
+      });
+
+      await assignReviewers(args());
+
+      expect(readFile).toHaveBeenCalledTimes(1);
     });
 
     it("does not unassign reviewers when signing off (lingering reviewer is acceptable)", async () => {

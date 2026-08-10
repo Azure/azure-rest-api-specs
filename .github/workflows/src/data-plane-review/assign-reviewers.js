@@ -26,21 +26,25 @@ export const SIGNOFF_LABEL = "APIStewardshipBoard-SignedOff";
 const POOL_LABEL = SIGNOFF_LABEL;
 
 /**
- * Load the review pool from the shared `protected-labels.yml` config.
- *
- * The pool is the authorized-users list of {@link POOL_LABEL}. That value is either a flat
- * array of logins or an object keyed by plane (`{ "management-plane": [...], "data-plane":
- * [...] }`); both shapes are flattened here.
+ * Read and parse the shared `protected-labels.yml` config once.
  *
  * @param {string} [path]
- * @param {string} [label]
- * @returns {Promise<string[]>} Deduplicated list of reviewer logins.
+ * @returns {Promise<Record<string, unknown>>}
  */
-export async function loadReviewerPool(path = REVIEWERS_CONFIG_PATH, label = POOL_LABEL) {
+async function loadConfig(path = REVIEWERS_CONFIG_PATH) {
   const content = await readFile(path, "utf8");
-  const config = /** @type {Record<string, unknown>} */ (yaml.load(content) ?? {});
-  const entry = config[label];
+  return /** @type {Record<string, unknown>} */ (yaml.load(content) ?? {});
+}
 
+/**
+ * Flatten a config entry into a deduplicated, trimmed list of logins. An entry is either a
+ * flat array of logins or an object keyed by plane (`{ "management-plane": [...],
+ * "data-plane": [...] }`); both shapes are supported.
+ *
+ * @param {unknown} entry
+ * @returns {string[]}
+ */
+function extractLogins(entry) {
   /** @type {unknown[]} */
   let logins = [];
   if (Array.isArray(entry)) {
@@ -58,6 +62,20 @@ export async function loadReviewerPool(path = REVIEWERS_CONFIG_PATH, label = POO
         .map((r) => /** @type {string} */ (r).trim()),
     ),
   ];
+}
+
+/**
+ * Load the review pool from the shared `protected-labels.yml` config.
+ *
+ * The pool is the authorized-users list of {@link POOL_LABEL}.
+ *
+ * @param {string} [path]
+ * @param {string} [label]
+ * @returns {Promise<string[]>} Deduplicated list of reviewer logins.
+ */
+export async function loadReviewerPool(path = REVIEWERS_CONFIG_PATH, label = POOL_LABEL) {
+  const config = await loadConfig(path);
+  return extractLogins(config[label]);
 }
 
 /**
@@ -80,16 +98,10 @@ function includesLogin(list, login) {
  * @returns {Promise<string[]>}
  */
 async function loadAuthorizedSigners(path = REVIEWERS_CONFIG_PATH) {
-  const pool = await loadReviewerPool(path);
-  const content = await readFile(path, "utf8");
-  const config = /** @type {Record<string, unknown>} */ (yaml.load(content) ?? {});
-  const globals = Array.isArray(config["global-approvers"])
-    ? /** @type {unknown[]} */ (config["global-approvers"])
-    : [];
-  const globalLogins = globals
-    .filter((/** @type {unknown} */ g) => typeof g === "string" && g.trim().length > 0)
-    .map((g) => /** @type {string} */ (g).trim());
-  return [...new Set([...pool, ...globalLogins])];
+  const config = await loadConfig(path);
+  const pool = extractLogins(config[POOL_LABEL]);
+  const globals = extractLogins(config["global-approvers"]);
+  return [...new Set([...pool, ...globals])];
 }
 
 /**
@@ -137,7 +149,10 @@ export default async function assignReviewers({ github, context, core }) {
 
   const pool = await loadReviewerPool();
   if (pool.length === 0) {
-    core.warning("Data-plane review pool is empty; nothing to assign.");
+    core.warning(
+      `No data-plane API reviewers found: '${POOL_LABEL}' is empty or missing in ` +
+        `'${REVIEWERS_CONFIG_PATH}'. Add at least one reviewer login under that key.`,
+    );
     return;
   }
 
