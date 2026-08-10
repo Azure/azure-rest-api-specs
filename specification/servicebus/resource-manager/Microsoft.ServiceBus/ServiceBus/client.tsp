@@ -25,6 +25,7 @@ using Microsoft.ServiceBus;
 
 @@clientName(ErrorAdditionalInfo, "ServiceBusErrorAdditionalInfo", "csharp");
 @@clientName(UnavailableReason, "ServiceBusNameUnavailableReason", "csharp");
+@@clientName(EntityStatus, "ServiceBusMessagingEntityStatus", "csharp");
 @@clientName(FilterType, "ServiceBusFilterType", "csharp");
 @@clientName(SqlFilter, "ServiceBusSqlFilter", "csharp");
 @@clientName(CorrelationFilter, "ServiceBusCorrelationFilter", "csharp");
