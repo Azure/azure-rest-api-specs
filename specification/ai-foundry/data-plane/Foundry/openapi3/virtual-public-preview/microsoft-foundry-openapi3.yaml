@@ -81404,21 +81404,6 @@ components:
               items:
                 $ref: '#/components/schemas/VoiceAgentAvatarIceServer'
             - type: 'null'
-        model:
-          anyOf:
-            - type: string
-            - type: 'null'
-        video:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentAvatarVideoParams'
-            - type: 'null'
-        scene:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentAvatarScene'
-            - type: 'null'
-        output_audit_audio:
-          type: boolean
-          default: false
       allOf:
         - $ref: '#/components/schemas/VoiceAvatarConfig'
       description: Avatar settings accepted by the stable voice-agent WebSocket contract.
@@ -81739,6 +81724,25 @@ components:
         output_protocol:
           $ref: '#/components/schemas/VoiceAvatarOutputProtocol'
           description: The transport used to deliver the avatar video stream.
+        model:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: The avatar model identifier.
+        video:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentAvatarVideoParams'
+            - type: 'null'
+          description: Avatar video encoder and presentation settings.
+        scene:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentAvatarScene'
+            - type: 'null'
+          description: Avatar placement and motion settings.
+        output_audit_audio:
+          type: boolean
+          description: Whether audit audio is emitted with avatar output. Defaults to false.
+          default: false
       description: Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
       x-ms-foundry-meta:
         required_previews:

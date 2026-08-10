@@ -741,6 +741,72 @@ model VoiceInputTranscription {
   phrase_list?: string[];
 }
 
+@doc("The avatar video resolution.")
+model VoiceAgentAvatarVideoResolution {
+  @minValue(1)
+  width: int32;
+
+  @minValue(1)
+  height: int32;
+}
+
+alias VoiceAgentAvatarVideoCoordinate = [uint32, uint32];
+
+@doc("The rectangular crop applied to avatar video.")
+model VoiceAgentAvatarVideoCrop {
+  bottom_right: VoiceAgentAvatarVideoCoordinate;
+  top_left: VoiceAgentAvatarVideoCoordinate;
+}
+
+@doc("The avatar video background.")
+model VoiceAgentAvatarVideoBackground {
+  image_url?: string | null;
+  color?: string | null;
+}
+
+@doc("Avatar video encoder and presentation settings.")
+model VoiceAgentAvatarVideoParams {
+  bitrate?: int32 = 2000000;
+  codec?: "h264" = "h264";
+  crop?: VoiceAgentAvatarVideoCrop | null;
+  resolution?: VoiceAgentAvatarVideoResolution | null;
+  background?: VoiceAgentAvatarVideoBackground | null;
+
+  @minValue(1)
+  @maxValue(2000)
+  gop_size?: int32 = 10;
+}
+
+@doc("Avatar placement and motion settings.")
+model VoiceAgentAvatarScene {
+  @minValueExclusive(0)
+  zoom?: float32 = 1;
+
+  @minValue(-1)
+  @maxValue(1)
+  position_x?: float32 = 0;
+
+  @minValue(-1)
+  @maxValue(1)
+  position_y?: float32 = 0;
+
+  @minValue(-3.141592653589793)
+  @maxValue(3.141592653589793)
+  rotation_x?: float32 = 0;
+
+  @minValue(-3.141592653589793)
+  @maxValue(3.141592653589793)
+  rotation_y?: float32 = 0;
+
+  @minValue(-3.141592653589793)
+  @maxValue(3.141592653589793)
+  rotation_z?: float32 = 0;
+
+  @minValueExclusive(0)
+  @maxValue(1)
+  amplitude?: float32 = 1;
+}
+
 @doc("""
   Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
@@ -760,6 +826,18 @@ model VoiceAvatarConfig {
 
   @doc("The transport used to deliver the avatar video stream.")
   output_protocol?: VoiceAvatarOutputProtocol;
+
+  @doc("The avatar model identifier.")
+  `model`?: string | null;
+
+  @doc("Avatar video encoder and presentation settings.")
+  video?: VoiceAgentAvatarVideoParams | null;
+
+  @doc("Avatar placement and motion settings.")
+  scene?: VoiceAgentAvatarScene | null;
+
+  @doc("Whether audit audio is emitted with avatar output. Defaults to false.")
+  output_audit_audio?: boolean = false;
 }
 
 @doc("The avatar type.")
