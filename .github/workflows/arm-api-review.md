@@ -471,16 +471,16 @@ For each finding you are about to post, check the complete inventory. This
 workflow runs in **autonomous mode**, so apply the Action column below (the
 reconciliation acts directly, without human confirmation):
 
-| Scenario                                                     | Action                                                                                                                           |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| Same semantic finding, actionable coverage on any surface    | Skip; already reported. Record the existing URL                                                                                  |
-| Same finding, line shifted, agent-posted inline thread       | Resolve old thread, post new one at correct line                                                                                 |
-| Same finding, line shifted, human-posted inline thread       | Reply to thread noting line shift; do NOT resolve                                                                                |
-| New guidance contradicts an existing inline thread           | Reply with prior position, current evidence, current guidance, and why it changed; resolve only superseded agent-origin guidance |
-| New guidance contradicts top-level comment(s) or review body | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings           |
-| Violation already fixed, agent-posted inline thread          | `reply-to-pull-request-review-comment` noting the fix **AND** `resolve-pull-request-review-thread`                               |
-| Violation already fixed, human-posted inline thread          | Reply noting the fix; do NOT resolve (human owns the thread)                                                                     |
-| No actionable prior coverage or contradiction on any surface | Post the new finding                                                                                                             |
+| Scenario                                                     | Action token            | Behavior                                                                                                               |
+| ------------------------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Same semantic finding, actionable coverage on any surface    | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
+| Same finding, line shifted, agent-posted inline thread       | `RESOLVE-AND-REPOST`    | Resolve the stale agent thread and post one replacement at the current line                                            |
+| Same finding, line shifted, human-posted inline thread       | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the human thread                                                           |
+| New guidance contradicts an existing inline thread           | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
+| New guidance contradicts top-level comment(s) or review body | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
+| Violation already fixed, agent-posted inline thread          | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
+| Violation already fixed, human-posted inline thread          | `PROPOSE-HUMAN-RESOLVE` | Reply only when permitted by the mode; never auto-resolve the human thread                                             |
+| No actionable prior coverage or contradiction on any surface | `POST-NEW`              | Post one new finding                                                                                                   |
 
 **Resolution rules (autonomous mode):**
 
@@ -560,7 +560,7 @@ Use this body for `submit-pull-request-review`:
 ```text
 ## ARM API Review
 
-Posting findings from the ARM API Reviewer agent (critic-verified, N iteration(s), <outcome>) against commit `<full-40-char-session-sha>`. See inline comments for findings <range-or-list>.
+Posting findings from the ARM API Reviewer agent (<verification-status>, N iteration(s), <outcome>) against commit `<full-40-char-session-sha>`. See inline comments for findings <range-or-list>.
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 ```
@@ -569,6 +569,11 @@ Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 
 When the inventory is empty, use `Approval labels observed: none.` The line is
 required even when no breaking changes or suppressions were found.
+
+Set `<verification-status>` to `critic-verified` only when the Critic actually
+returned a verdict that was folded into the posting set. When all Critic
+dispatch attempts failed, use `Critic unavailable; reviewer self-check only`.
+Never describe an unavailable-Critic review as verified.
 
 **Hard limits per category:**
 
@@ -646,11 +651,14 @@ that specific finding.
 
 ### Step 7: Update Labels
 
-After posting, apply label changes based on the findings:
+After queuing the reconciled posting set, apply label changes based on outputs
+that will actually be published:
 
-- **Blocking findings found** → add `ARMChangesRequested`, remove
-  `WaitForARMFeedback` (if present).
-- **No blocking findings** → leave `WaitForARMFeedback`,
+- **At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued**
+  → add `ARMChangesRequested`, remove `WaitForARMFeedback` (if present).
+- **No Blocking finding queued for publication** (clean, covered,
+  clarification-only, Critic-dropped, or overflow-only Blocking candidate) →
+  leave `WaitForARMFeedback`,
   `ARMChangesRequested`, and `ARMSignedOff` unchanged. The automated review is
   advisory and must not advance or sign off the human ARM review queue.
 

@@ -44,7 +44,7 @@ wins**. File bugs against the agent that drifted.
 Pass all ten on every Critic invocation. The Critic uses **tolerant prose
 parsing**: it reads labeled fields in any order from the dispatch prompt
 and applies the documented default for any optional field that is absent.
-A required field (PR URL, Session SHA, Iteration) that is absent or
+A required field (PR URL, Session SHA, or Step 6 findings report) that is absent or
 malformed causes the Critic to return `Finding accuracy = FAIL` with
 reason `missing-inputs`.
 
@@ -183,34 +183,34 @@ session SHA (e.g., out-of-scope-repo decline messages).
 
 <!-- cspell:ignore REPOST -->
 
-Hidden HTML comment as the **last line** of every posted PR comment
-(POST-NEW and RESOLVE-AND-REPOST). To satisfy Reviewer-Posted Parity, the
-Reviewer also renders this exact marker in any Step 6 canonical comment body
-that is shown to the human and later posted. Not on reply-only comments
+Hidden HTML comment as the **last line** of every standalone finding
+(POST-NEW and RESOLVE-AND-REPOST) and summary. To satisfy Reviewer-Posted
+Parity, the Reviewer also renders this exact marker in any Step 6 canonical
+comment body that is shown to the human and later posted. Not on reply-only comments
 (REPLY-LINE-SHIFT, inline CLARIFY-CONFLICT, THANK-AND-RESOLVE,
 PROPOSE-HUMAN-RESOLVE replies).
 
 <!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <full-40-char-sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID-or-summary> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <full-40-char-sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-| Field             | Values                                | Notes                                                                                                                                                                                                                                                                                       |
-| ----------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `posted-by`       | `arm-api-reviewer-agent`              | Used by Step 5.5 to identify agent-origin comments via substring match. **Do not rename** without a backward-compat plan.                                                                                                                                                                   |
-| `rule`            | Rule ID from instruction files        | e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`.                                                                                                                                                                                                                                      |
-| `severity`        | `blocking` / `warning` / `suggestion` | Lowercase.                                                                                                                                                                                                                                                                                  |
-| `classification`  | `new` / `existing`                    | From Step 4a.                                                                                                                                                                                                                                                                               |
-| `critic`          | `pass`                                | Default -- Critic returned PASS at High confidence.                                                                                                                                                                                                                                         |
-|                   | `warn`                                | Critic returned PASS at Medium/Low confidence, human accepted as-is.                                                                                                                                                                                                                        |
-|                   | `override`                            | Human explicitly overrode an eligible Critic FAIL. **REQUIRES `override-reason`.** Non-overridable reasons, including reconciliation noise-safety failures, are never `override`; see the [Non-overridable FAIL catalog](#non-overridable-fail-catalog) for the authoritative list.         |
-|                   | `unknown`                             | Fallback value emitted only when the per-finding verdict cannot be looked up (e.g., response-scope `critic-mode` is `unavailable` and no per-finding verdict was produced). See [Telemetry fallback policy](#telemetry-fallback-policy-load-bearing); do not fabricate `pass` in this case. |
-| `head-sha`        | Full 40-char session SHA              | Short SHAs forbidden in this marker.                                                                                                                                                                                                                                                        |
-| `downstream-rule` | Linter rule ID                        | REQUIRED when a finding's fix adds or tightens a type, format, decorator, `x-ms-*` extension, or schema constraint in a conflict-aware area from `linter-rule-coverage.md` (for example, `R3017`). Optional otherwise.                                                                      |
-| `override-reason` | Structured justification              | REQUIRED iff `critic: override`. Must satisfy the canonical Override-reason validator defined below.                                                                                                                                                                                        |
+| Field             | Values                                      | Notes                                                                                                                                                                                                                                                                                       |
+| ----------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `posted-by`       | `arm-api-reviewer-agent`                    | Used by Step 5.5 to identify agent-origin comments via substring match. **Do not rename** without a backward-compat plan.                                                                                                                                                                   |
+| `rule`            | Rule ID from instruction files or `summary` | e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`; use `summary` only for the review summary.                                                                                                                                                                                           |
+| `severity`        | `blocking` / `warning` / `suggestion`       | Lowercase.                                                                                                                                                                                                                                                                                  |
+| `classification`  | `new` / `existing`                          | From Step 4a.                                                                                                                                                                                                                                                                               |
+| `critic`          | `pass`                                      | Default -- Critic returned PASS at High confidence.                                                                                                                                                                                                                                         |
+|                   | `warn`                                      | Critic returned PASS at Medium/Low confidence, human accepted as-is.                                                                                                                                                                                                                        |
+|                   | `override`                                  | Human explicitly overrode an eligible Critic FAIL. **REQUIRES `override-reason`.** Non-overridable reasons, including reconciliation noise-safety failures, are never `override`; see the [Non-overridable FAIL catalog](#non-overridable-fail-catalog) for the authoritative list.         |
+|                   | `unknown`                                   | Fallback value emitted only when the per-finding verdict cannot be looked up (e.g., response-scope `critic-mode` is `unavailable` and no per-finding verdict was produced). See [Telemetry fallback policy](#telemetry-fallback-policy-load-bearing); do not fabricate `pass` in this case. |
+| `head-sha`        | Full 40-char session SHA                    | Short SHAs forbidden in this marker.                                                                                                                                                                                                                                                        |
+| `downstream-rule` | Linter rule ID                              | REQUIRED when a finding's fix adds or tightens a type, format, decorator, `x-ms-*` extension, or schema constraint in a conflict-aware area from `linter-rule-coverage.md` (for example, `R3017`). Optional otherwise.                                                                      |
+| `override-reason` | Structured justification                    | REQUIRED iff `critic: override`. Must satisfy the canonical Override-reason validator defined below.                                                                                                                                                                                        |
 
 ### Top-level reconciliation clarification marker
 

@@ -285,9 +285,9 @@ follows a three-step fallback:
    plus a one-line cause, and proceeds with the remaining steps. The
    review is **not** mistaken for complete -- the banner makes the
    gap explicit so you can decide whether to merge as-is, ask for a
-   human structural spot-check, or hold the PR. Internally the agent
-   sets `graphs-produced: degraded` so telemetry and the critic can
-   distinguish "attempted and failed" from "fast-path-by-design."
+   human structural spot-check, or hold the PR. The Critic input uses
+   `Graphs: false`; the caution banner distinguishes "attempted and failed"
+   from a fast path where graph derivation was skipped by design.
 3. **Abort** only if you explicitly direct the agent to stop, usually
    when the PR touches secret-bearing properties or LIST operations
    where Step 3.5 is the primary detection mechanism.
@@ -338,15 +338,17 @@ Post the approved review comments on PR #41405
 The agent will always present findings in chat first and wait for your
 explicit approval before posting anything to the PR.
 
-## Comment Tracking Marker
+## Comment Tracking Markers
 
-Every comment posted by the agent includes a hidden HTML marker at the end
-of the comment body. The marker carries per-finding metadata:
+Standalone findings and summaries carry the per-finding marker below.
+Consolidated top-level conflict clarifications use the reconciliation marker
+shown afterward. Reply-only reconciliation messages remain inside an existing
+thread and do not need a marker.
 
 <!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -359,14 +361,27 @@ of the comment body. The marker carries per-finding metadata:
 - `classification` -- `new` (introduced in this PR) or `existing` (pre-existing technical debt).
 - `critic` -- the Critic's per-finding verdict (`pass`, `warn`, or `override`).
   `override` means a Critic `FAIL` was overridden by a human reviewer.
-- `head-sha` -- the PR head commit SHA the Critic re-fetched against;
-  an auditable anchor for later debugging.
+  `unknown` means the Critic was unavailable and no independent per-finding
+  verdict exists.
+- `head-sha` -- the Reviewer-pinned session SHA used for the review. When the
+  Critic runs, it independently re-fetches against this same SHA; when
+  `critic: unknown`, the value still anchors the Reviewer session.
 - `downstream-rule` -- present when the finding's suggested fix interacts
   with a conflict-aware required CI rule (for example, `R3017 GuidUsage`).
 - `override-reason` -- required only when `critic: override`;
   must be a non-empty, specific justification of at least 20 characters and
   include either an instruction-file line anchor or a verbatim counter-quote
   from the cited rule.
+
+Consolidated top-level conflict clarifications end with:
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- posted-by: arm-api-reviewer-agent | reconciliation: clarification | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
+```
+
+<!-- markdownlint-enable MD013 -->
 
 The marker is invisible in the rendered PR view but is present in the raw
 comment body returned by the GitHub API. It serves two purposes:
@@ -587,17 +602,17 @@ The agent **does not**:
 
 ### Agent Files (under `.github/`)
 
-| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                                       |
-| `instructions/arm-api-review.instructions.md`   | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                                   |
-| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                                       |
-| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                              |
-| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                          |
-| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                              |
-| `skills/azure-api-review/references/*.md`       | 18 cross-cutting rule references covering secret detection, property mutability, provisioning state, naming, enums, examples, tracked-resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight, LRO final-state-via, suppression criteria, linter coverage, design decisions, GUID/UUID on ARM, and "think in graphs" |
-| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                                     |
-| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                                                                                                                                                                                                                                     |
+| File                                            | Purpose                                                                                                                                                                                 |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                            |
+| `instructions/arm-api-review.instructions.md`   | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                        |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                            |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                   |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                               |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                   |
+| `skills/azure-api-review/references/*.md`       | 29 shared references covering cross-cutting, ARM control-plane, and data-plane review areas. The ARM reviewer loads only the cross-cutting and ARM references applicable to its review. |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                          |
+| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                                          |
 
 ### Evaluation Suite
 

@@ -198,6 +198,13 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain("- name: Add comment with workflow run link");
     expect(compiled).toContain("- name: Update reaction comment with completion status");
     expect(compiled).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
+
+    const statusCommentStart = compiled.indexOf("- name: Add comment with workflow run link");
+    const statusCommentEnd = compiled.indexOf("\n      - name:", statusCommentStart + 1);
+    const statusCommentStep = compiled.slice(statusCommentStart, statusCommentEnd);
+    expect(statusCommentStep).toContain("github.event_name == 'issue_comment'");
+    expect(statusCommentStep).not.toContain("pull_request_target");
+    expect(statusCommentStep).not.toContain("workflow_dispatch");
   });
 
   it("keeps ineligible comments and label events out of PR-level concurrency", async () => {
@@ -226,16 +233,21 @@ describe("ARM API review workflow", () => {
   });
 
   it("reconciles duplicates and contradictions across every review entry point", async () => {
-    const [[source, compiled], reviewer, critic, protocol, parity] = await Promise.all([
-      readWorkflowFiles(),
-      readFile(join(ROOT, ".github/agents/arm-api-reviewer.agent.md"), "utf8"),
-      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
-      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
-      readFile(
-        join(ROOT, ".github/skills/azure-api-review/references/reviewer-posted-parity.md"),
-        "utf8",
-      ),
-    ]);
+    const [[source, compiled], reviewer, critic, protocol, inputTemplate, parity] =
+      await Promise.all([
+        readWorkflowFiles(),
+        readFile(join(ROOT, ".github/agents/arm-api-reviewer.agent.md"), "utf8"),
+        readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+        readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+        readFile(
+          join(ROOT, ".github/agents/protocols/arm-api-review-critic-inputs.template.md"),
+          "utf8",
+        ),
+        readFile(
+          join(ROOT, ".github/skills/azure-api-review/references/reviewer-posted-parity.md"),
+          "utf8",
+        ),
+      ]);
 
     expect(parity).toContain("A human invokes the ARM API Reviewer in chat");
     expect(parity).toContain("The automated workflow runs when a PR is ready");
@@ -248,10 +260,23 @@ describe("ARM API review workflow", () => {
     expect(reviewer).toContain("Fetch the complete existing discussion inventory");
     expect(reviewer).toContain("**CLARIFY-CONFLICT.**");
     expect(reviewer).toContain("`reconciliation: clarification` marker");
+    expect(reviewer).toContain("(<verification-status>, <N> iteration(s), <outcome>)");
+    expect(reviewer).toMatch(/Critic unavailable;\s+reviewer self-check only/);
+    expect(reviewer).not.toContain("(critic-verified, <N> iteration(s), <outcome>)");
     expect(critic).toContain("`FAIL: duplicate-missed`");
     expect(critic).toContain("`FAIL: conflict-unclarified`");
     expect(critic).toContain("inventory-incomplete");
+    expect(critic).toContain("the canonical protocol permits a validated override");
+    expect(protocol).toContain("`downstream-ci-conflict`");
+    expect(protocol).toMatch(/`downstream-ci-conflict`[^\n]+Override allowed/);
     expect(protocol).toContain("**10 non-overridable reasons**");
+    expect(protocol).toContain("PR URL, Session SHA, or Step 6 findings report");
+    expect(inputTemplate).toContain(
+      "Only PR URL, Session SHA, and the\nStep 6 findings report are required",
+    );
+    expect(inputTemplate).toMatch(/\| Iteration\s+\| No\s+\| `1`/);
+    expect(protocol).toContain("critic: pass|warn|override|unknown");
+    expect(protocol).toContain("<RULE-ID-or-summary>");
     expect(protocol).toMatch(/`duplicate-missed`[^\n]+\*\*Yes\*\*/);
     expect(protocol).toMatch(/`conflict-unclarified`[^\n]+\*\*Yes\*\*/);
     expect(reviewer).toContain("at least one Blocking POST-NEW");
@@ -262,6 +287,20 @@ describe("ARM API review workflow", () => {
     expect(source).toContain("`get_reviews` for pull request review bodies");
     expect(source).toContain("Match by semantic finding identity");
     expect(source).toContain("call `report_incomplete` and stop");
+    for (const action of [
+      "SKIP-COVERED",
+      "RESOLVE-AND-REPOST",
+      "REPLY-LINE-SHIFT",
+      "CLARIFY-CONFLICT",
+      "THANK-AND-RESOLVE",
+      "PROPOSE-HUMAN-RESOLVE",
+      "POST-NEW",
+    ]) {
+      expect(source).toContain(`| \`${action}\``);
+    }
+    expect(source).toContain("(<verification-status>, N iteration(s), <outcome>)");
+    expect(source).toContain("Critic unavailable; reviewer self-check only");
+    expect(source).not.toContain("(critic-verified, N iteration(s), <outcome>)");
     expect(compiled).toContain("reply_to_pull_request_review_comment");
     expect(compiled).toContain("resolve_pull_request_review_thread");
     expect(compiled).toContain('"add_comment"');
@@ -271,9 +310,14 @@ describe("ARM API review workflow", () => {
     const [source, compiled] = await readWorkflowFiles();
 
     expect(source).toContain("permissions:\n    pull-requests: read\n  steps:");
-    expect(source).toContain("**Blocking findings found** → add `ARMChangesRequested`, remove");
-    expect(source).toContain("**No blocking findings** → leave `WaitForARMFeedback`,");
-    expect(source).not.toContain("**No blocking findings** → remove `WaitForARMFeedback`");
+    expect(source).toContain(
+      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued**",
+    );
+    expect(source).toContain("**No Blocking finding queued for publication**");
+    expect(source).toContain(
+      "clean, covered,\n  clarification-only, Critic-dropped, or overflow-only",
+    );
+    expect(source).not.toContain("**Blocking findings found**");
 
     const activationStart = compiled.indexOf("\n  activation:\n");
     const agentStart = compiled.indexOf("\n  agent:\n");

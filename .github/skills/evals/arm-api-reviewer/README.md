@@ -27,7 +27,7 @@ arm-api-reviewer/
 │   ├── eval-fast-path-triage.yaml
 │   ├── eval-protocol-safety.yaml
 │   └── eval-pattern-validation.yaml
-├── fixtures/              # Test fixtures (39 data files + README)
+├── fixtures/              # Test fixtures (40 data files + README)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -63,12 +63,13 @@ Total: 58 stimuli across 17 eval files.
 
 ## Fixtures
 
-All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
+All 40 fixture data files live in `fixtures/` (plus a `README.md`). See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated + 1 denylist pattern
+- **16 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded
+  violations + 1 TypeSpec-generated + 1 denylist pattern
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios

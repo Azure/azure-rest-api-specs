@@ -726,7 +726,9 @@ For each persona, produce a short internal note ("persona X found N candidate is
 The full procedure is in the shared reference
 [`downstream-ci-impact.md`](../skills/azure-api-review/references/downstream-ci-impact.md):
 scope, the five required-shape rules, suppression `where:` exact-match
-guarantee, and the Critic FAIL classifications (all non-overridable).
+guarantee, and the Critic FAIL classifications. The canonical protocol
+determines override eligibility; downstream-CI failures allow a validated
+override reason.
 Edit there only; do not duplicate the procedure in this file.
 
 **Reviewer obligations.** Before producing any in-scope finding
@@ -1254,7 +1256,7 @@ gh api graphql -f query='
 ```markdown
 ## ARM API Review
 
-Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (critic-verified, <N> iteration(s), <outcome>) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.<optional sentence describing any findings posted as top-level comments because they concern files outside the PR diff>
+Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (<verification-status>, <N> iteration(s), <outcome>) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.<optional sentence describing any findings posted as top-level comments because they concern files outside the PR diff>
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 ```
@@ -1262,6 +1264,10 @@ Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 Substitution rules:
 
 - `<N>`: the Critic iteration count from Step 7.
+- `<verification-status>`: `critic-verified` only when the Critic returned a
+  verdict that was folded into the posting set. Use `Critic unavailable;
+reviewer self-check only` when all dispatch attempts failed. Never combine
+  `critic-verified` with an unavailable outcome.
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.
 - `<full-sha>`: the **full 40-character** session SHA pinned in Step 1, used in the link target. Do not abbreviate the link target -- short SHAs in URLs are acceptable but the full SHA is canonical and matches the `head-sha` field in each comment's telemetry marker, which is what auditors will grep for.
