@@ -1677,6 +1677,16 @@ model AccountProperties {
    */
   @added(Versions.v2026_07_15_preview)
   capabilitySettings?: CapabilitySettings;
+
+  /**
+   * Customer-owned AKS hosting configurations for Foundry agents. This API version supports exactly one configuration. Once set, the configuration is immutable; subsequent requests may only repeat the same value.
+   */
+  @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minItems(1)
+  @maxItems(1)
+  @identifiers(#["name"])
+  agentHostingConfigurations?: AgentHostingConfiguration[];
 }
 
 /**
@@ -1710,6 +1720,86 @@ model CapabilitySettings {
       type: "Microsoft.Storage/storageAccounts";
     }
   ]>;
+}
+
+/**
+ * Base configuration for hosting Foundry agents.
+ */
+@added(Versions.v2026_07_15_preview)
+@discriminator("hostingType")
+model AgentHostingConfiguration {
+  /**
+   * Unique name of the hosting configuration within the Foundry account.
+   */
+  @minLength(1)
+  @maxLength(64)
+  name: string;
+
+  /**
+   * Type of infrastructure used to host Foundry agents.
+   */
+  hostingType: AgentHostingType;
+}
+
+/**
+ * Configuration for hosting Foundry agents on an Azure Kubernetes Service managed cluster.
+ */
+@added(Versions.v2026_07_15_preview)
+model ManagedClusterAgentHostingConfiguration
+  extends AgentHostingConfiguration {
+  /**
+   * Type of infrastructure used to host Foundry agents.
+   */
+  hostingType: "ManagedCluster";
+
+  /**
+   * Azure resource ID of the user-assigned managed identity used by the Foundry resource provider to manage the hosting configuration. The identity must be assigned to the Foundry account in identity.userAssignedIdentities.
+   */
+  hostingManagementIdentityResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane.
+   */
+  workloadIdentityResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the customer-owned AKS managed cluster that runs the hosted agent workloads.
+   */
+  clusterResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/managedClusters";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the customer-owned storage account used by the hosted agents. The storage account must be in the same subscription and region as the AKS cluster, and its data-plane endpoint must be reachable from the workload network.
+   */
+  storageAccountResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+}
+
+/**
+ * Type of infrastructure used to host Foundry agents.
+ */
+@added(Versions.v2026_07_15_preview)
+union AgentHostingType {
+  string,
+
+  /**
+   * Agents are hosted on an Azure Kubernetes Service managed cluster.
+   */
+  ManagedCluster: "ManagedCluster",
 }
 
 /**
