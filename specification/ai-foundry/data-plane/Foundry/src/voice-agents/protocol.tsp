@@ -211,30 +211,13 @@ model VoiceAgentAvatarScene {
   amplitude?: float32 = 1;
 }
 
-@doc("The avatar implementation.")
-union VoiceAgentAvatarType {
-  video_avatar: "video_avatar",
-  photo_avatar: "photo_avatar",
-}
-
-@doc("The transport used to deliver avatar media.")
-union VoiceAgentAvatarOutputProtocol {
-  websocket: "websocket",
-  websocket_binary: "websocket-binary",
-  webrtc: "webrtc",
-}
-
 @doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
-model VoiceAgentSessionAvatarConfig {
-  type?: VoiceAgentAvatarType = VoiceAgentAvatarType.video_avatar;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session model is a wire-compatible specialization of the persisted avatar configuration and adds only runtime transport fields."
+model VoiceAgentSessionAvatarConfig extends VoiceAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
-  character: string;
-  style?: string | null;
-  customized?: boolean = false;
   `model`?: string | null;
   video?: VoiceAgentAvatarVideoParams | null;
   scene?: VoiceAgentAvatarScene | null;
-  output_protocol?: VoiceAgentAvatarOutputProtocol = VoiceAgentAvatarOutputProtocol.webrtc;
   output_audit_audio?: boolean = false;
 }
 

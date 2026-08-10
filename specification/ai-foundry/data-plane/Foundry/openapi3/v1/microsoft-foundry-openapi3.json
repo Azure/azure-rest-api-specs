@@ -81273,6 +81273,232 @@
           }
         }
       },
+      "VoiceAgentAvatarIceServer": {
+        "type": "object",
+        "required": [
+          "urls"
+        ],
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "credential": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "An ICE server used for avatar WebRTC negotiation."
+      },
+      "VoiceAgentAvatarScene": {
+        "type": "object",
+        "properties": {
+          "zoom": {
+            "type": "number",
+            "format": "float",
+            "exclusiveMinimum": 0,
+            "default": 1
+          },
+          "position_x": {
+            "type": "number",
+            "format": "float",
+            "minimum": -1,
+            "maximum": 1,
+            "default": 0
+          },
+          "position_y": {
+            "type": "number",
+            "format": "float",
+            "minimum": -1,
+            "maximum": 1,
+            "default": 0
+          },
+          "rotation_x": {
+            "type": "number",
+            "format": "float",
+            "minimum": -3.141592653589793,
+            "maximum": 3.141592653589793,
+            "default": 0
+          },
+          "rotation_y": {
+            "type": "number",
+            "format": "float",
+            "minimum": -3.141592653589793,
+            "maximum": 3.141592653589793,
+            "default": 0
+          },
+          "rotation_z": {
+            "type": "number",
+            "format": "float",
+            "minimum": -3.141592653589793,
+            "maximum": 3.141592653589793,
+            "default": 0
+          },
+          "amplitude": {
+            "type": "number",
+            "format": "float",
+            "maximum": 1,
+            "exclusiveMinimum": 0,
+            "default": 1
+          }
+        },
+        "description": "Avatar placement and motion settings."
+      },
+      "VoiceAgentAvatarVideoBackground": {
+        "type": "object",
+        "properties": {
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "The avatar video background."
+      },
+      "VoiceAgentAvatarVideoCrop": {
+        "type": "object",
+        "required": [
+          "bottom_right",
+          "top_left"
+        ],
+        "properties": {
+          "bottom_right": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "format": "uint32"
+              },
+              {
+                "type": "integer",
+                "format": "uint32"
+              }
+            ]
+          },
+          "top_left": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "format": "uint32"
+              },
+              {
+                "type": "integer",
+                "format": "uint32"
+              }
+            ]
+          }
+        },
+        "description": "The rectangular crop applied to avatar video."
+      },
+      "VoiceAgentAvatarVideoParams": {
+        "type": "object",
+        "properties": {
+          "bitrate": {
+            "type": "integer",
+            "format": "int32",
+            "default": 2000000
+          },
+          "codec": {
+            "type": "string",
+            "enum": [
+              "h264"
+            ],
+            "default": "h264"
+          },
+          "crop": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentAvatarVideoCrop"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "resolution": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentAvatarVideoResolution"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "background": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentAvatarVideoBackground"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "gop_size": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2000,
+            "default": 10
+          }
+        },
+        "description": "Avatar video encoder and presentation settings."
+      },
+      "VoiceAgentAvatarVideoResolution": {
+        "type": "object",
+        "required": [
+          "width",
+          "height"
+        ],
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          }
+        },
+        "description": "The avatar video resolution."
+      },
       "VoiceAgentAzureMultilingualSemanticVadTurnDetection": {
         "type": "object",
         "required": [
@@ -81891,6 +82117,64 @@
         },
         "description": "Server VAD turn-detection settings."
       },
+      "VoiceAgentSessionAvatarConfig": {
+        "type": "object",
+        "properties": {
+          "ice_servers": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/VoiceAgentAvatarIceServer"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "video": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentAvatarVideoParams"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scene": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentAvatarScene"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "output_audit_audio": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAvatarConfig"
+          }
+        ],
+        "description": "Avatar settings accepted by the stable voice-agent WebSocket contract."
+      },
       "VoiceAgentSessionIncludeOption": {
         "type": "string",
         "enum": [
@@ -82386,7 +82670,8 @@
             "type": "string",
             "enum": [
               "webrtc",
-              "websocket"
+              "websocket",
+              "websocket-binary"
             ]
           }
         ],

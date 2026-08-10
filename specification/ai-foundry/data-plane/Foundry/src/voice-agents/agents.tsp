@@ -766,6 +766,9 @@ union VoiceAvatarOutputProtocol {
   string,
   webrtc: "webrtc",
   websocket: "websocket",
+
+  @doc("Binary WebSocket transport.")
+  websocket_binary: "websocket-binary",
 }
 
 @doc("An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.")
