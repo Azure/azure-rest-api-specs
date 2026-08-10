@@ -445,6 +445,11 @@ Use GitHub tools to fetch the PR details and list all changed files. Classify ea
 
 **Pin the session SHA and base source (binding for the entire review).** As the very first action in Step 1, record the PR's current head commit SHA (`get_pull_request` -> `head.sha`) and base commit SHA or immutable base ref (`base.sha`, `baseRefOid`, or equivalent). The head commit is the **session SHA** and is binding for every PR-head file fetch. The base SHA/ref is binding for every previous-version file fetch used in breaking-change comparison and `[NEW]`/`[EXISTING]` classification.
 
+- From the same PR metadata response, capture the exact label names matching
+  `BreakingChange-Approved-*`, `Versioning-Approved-*`,
+  `Approved-Suppression`, or `Approved-TypeSpecSuppression`. Record
+  `Approval labels observed: none` when there are no matches. Do not include
+  SDK-language, package-name, or namespace approval labels in this inventory.
 - Every PR-head file fetch (changed files in Step 1, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to the session SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`. Previous-version files MUST pin to the recorded base SHA/ref, not the session SHA.
 - Surface the session SHA in chat as soon as it is captured (e.g., "Reviewing PR #<n> at head SHA `<sha>`").
 - Pass the session SHA and previous-version base source verbatim to the Critic in Step 7, and pass the session SHA to every per-comment telemetry marker (`head-sha:` field) in Step 8.
@@ -847,6 +852,7 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 
 **PR:** `<PR-URL>` - _<PR-title>_
 **Previous version:** `<previous-version>` (or "None - new service")
+**Approval labels observed:** `<exact-label-1>`, `<exact-label-2>` (or `none`)
 
 <!-- Critic status banner - INCLUDE ONLY when not the clean default. Omit entirely on READY TO POST with a passing critic. -->
 <!-- > [!WARNING]
@@ -861,11 +867,13 @@ These issues were **introduced in this PR** and must be resolved.
 
 1. **[NEW]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
    **Issue:** <clear description of the violation>
+   <!-- Include for every breaking-change or suppression finding: -->
+   **Approval context:** <exact matching approval label and confirmation guidance, or the checked label family and "none observed" guidance>
    **Fix:** <exact code or JSON change to apply>
-   <!-- Add a **Note:** line ONLY when the critic changed something about this finding. Examples: -->
-   <!-- **Note:** Severity downgraded from Blocking -> Warning per critic; cited rule is Warning-class in `<instruction-file>` L<a>-L<b>. -->
-   <!-- **Note:** Classification flipped from [NEW] -> [EXISTING] per critic; also present in `<previous-version-file-path>` line <N>. -->
-   <!-- **Note:** Critic FAILed this finding (`<reason>`); reviewer overrode with justification: <reason>. -->
+    <!-- Add a **Note:** line ONLY when the critic changed something about this finding. Examples: -->
+    <!-- **Note:** Severity downgraded from Blocking -> Warning per critic; cited rule is Warning-class in `<instruction-file>` L<a>-L<b>. -->
+    <!-- **Note:** Classification flipped from [NEW] -> [EXISTING] per critic; also present in `<previous-version-file-path>` line <N>. -->
+    <!-- **Note:** Critic FAILed this finding (`<reason>`); reviewer overrode with justification: <reason>. -->
 
 ### Blocking Issues - Existing (pre-existing, should fix)
 
@@ -942,6 +950,7 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
 - **PR:** `<PR-URL>` - _<PR-title>_
 - **Session head SHA (pinned for Reviewer + Critic; use the full 40-char SHA, not the abbreviated 7-char form):** `<full-40-char-sha>`
 - **Previous-version base source (pinned for comparison):** `<base-sha-or-ref>` (or "N/A - new service")
+- **Approval labels observed:** `<exact-label-1>`, `<exact-label-2>` (or `none`)
 - Files reviewed: <count>
 - Previous version compared: `<version>` (or "N/A - new service")
 - **New blocking issues: <count>**
@@ -1125,6 +1134,10 @@ Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate fur
 
 **Classification reasoning:** <why this is NEW vs EXISTING (e.g., "Introduced in this PR - this property did not exist in the previous version at base SHA <short-base-sha>")>.
 
+<!-- Include this paragraph for every breaking-change or suppression finding. -->
+
+**Approval context:** <name the exact matching approval label and ask the author to confirm it covers this finding, or state that no matching label from the applicable family was observed>. If this finding is already covered by an approval, ensure the appropriate label is applied and resolve this conversation; otherwise obtain approval or address the finding.
+
 **Suggested fix:**
 
 ```<lang>
@@ -1226,6 +1239,8 @@ gh api graphql -f query='
 ## ARM API Review
 
 Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (critic-verified, <N> iteration(s), <outcome>) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.<optional sentence describing any findings posted as top-level comments because they concern files outside the PR diff>
+
+Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 ```
 
 Substitution rules:
@@ -1236,6 +1251,10 @@ Substitution rules:
 - `<full-sha>`: the **full 40-character** session SHA pinned in Step 1, used in the link target. Do not abbreviate the link target -- short SHAs in URLs are acceptable but the full SHA is canonical and matches the `head-sha` field in each comment's telemetry marker, which is what auditors will grep for.
 - `<owner>`, `<repo>`, `<pr-number>`: derived from the PR URL captured in Step 1 (e.g., `Azure`, `azure-rest-api-specs`, `41405`).
 - `<range-or-list>`: the inline-finding numbering used in the chat report (e.g., `1-12`, or `3-12` when findings 1-2 were posted as top-level comments). Use a plain space + number; **never** prefix with `#` (see next bullet).
+- Approval labels are the exact names captured from PR metadata in Step 1 that
+  match the API-review families defined in
+  `arm-api-review.instructions.md`. When none matched, replace the line with
+  `Approval labels observed: none.` Do not omit the line.
 - The optional trailing sentence is included **only** when one or more findings could not be attached to a line in the PR diff and were therefore posted as top-level review comments instead of inline comments. Omit it otherwise.
 - **Cross-repo URL choice.** The preamble link target always points at the public `Azure/azure-rest-api-specs` copy of `documentation/api-reviewer-agent.md`, even when the review is posted on the private `Azure/azure-rest-api-specs-pr` repo. The public copy is the canonical, durable reference; the private repo does not maintain an independent copy.
 
@@ -1245,6 +1264,11 @@ Substitution rules:
 - **Escape `@`-mentions in prose (REQUIRED).** GitHub auto-links any bare `@<identifier>` token in comment prose to `https://github.com/<identifier>` and notifies that user. This is a recurring noise source because TypeSpec decorators (`@doc`, `@added`, `@removed`, `@route`, `@key`, `@visibility`, `@armProviderNamespace`, `@armResourceOperations`, `@useAuth`, etc.), TypeSpec library handles (`@typespec/http`, `@azure-tools/typespec-azure-core`), and email-like fragments all match the autolink pattern. **Every `@<word>` token that is not an intentional GitHub user mention MUST be wrapped in backticks** in both the posted PR comment body AND the chat-rendered Step 6 finding -- e.g., write `` `@doc` `` rather than the bare token, and `` `@typespec/http` `` rather than the bare handle. Before submitting any review payload (and before rendering Step 6 in chat), scan every finding body with the regex ``(?<![`\w/])@[A-Za-z][\w/-]*`` -- any match outside a code span or fenced code block is a constraint violation and MUST be backticked before posting. The Critic re-runs the same scan in its Step 6.5 posting-hygiene check; an unescaped mention is a non-overridable posting blocker (re-author the body and re-invoke).
 - **Chat-PR Parity (REQUIRED -- no divergence).** The body of every posted PR comment MUST be **byte-for-byte identical** to the corresponding finding rendered in the Step 6 chat report -- same rule-ID hyperlink, same `[NEW]`/`[EXISTING]` tag, same severity badge, same `Issue:` text, same `Fix:` code block, same trailing telemetry marker. Build the finding body **once** as a single canonical string at Step 6; reference that exact string when assembling the GitHub review payload's `comments[].body` field. Do **not** paraphrase, shorten, drop hyperlinks, collapse code blocks, or re-author for the posting surface. The full rule, including the post-fetch verification step (re-fetch each posted comment and confirm the live body matches the canonical string), is defined in [`arm-api-review.instructions.md` -> Reviewer-Posted Parity](../instructions/arm-api-review.instructions.md#reviewer-posted-parity). This is the single most common posting-time regression mode; treat any divergence as a Step 8 failure and re-post.
 - Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR - this property did not exist in the previous version").
+- Every breaking-change or suppression comment **MUST** contain the exact
+  `**Approval context:**` paragraph required by
+  `arm-api-review.instructions.md`. A PR-level approval label never removes or
+  downgrades the finding; it changes the author guidance to confirmation plus
+  conversation resolution when the approval covers that specific finding.
 - For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟠 Warning`, or `🔵 Suggestion`.
 - **Rule-ID hyperlink (REQUIRED).** Every rule ID in a posted PR comment AND in the Step 6 chat-rendered report MUST be a markdown link to its authoritative definition. A bare `[OAPI027]` is **not acceptable** -- it MUST be `[[OAPI027](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi027)]`. The canonical format, anchor-resolution rules, and multi-rule citation pattern are defined in [`arm-api-review.instructions.md` -> Rule Citation Format](../instructions/arm-api-review.instructions.md#rule-citation-format-required-for-posted-pr-comments) (loaded by Step 2 for ARM PRs). The Critic re-verifies each citation in Re-validation step 3 and records the instruction-file path + line range in its `Re-verified rule citations` output table; use that to construct the link target. Apply this rule to both the chat-rendered Step 6 report and the posted PR comment -- the Reviewer-Posted Parity rule in the same instructions file forbids divergence.
 - Use the format: ``**[NEW] 🔴 Blocking** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> - <issue description>`` or ``**[EXISTING]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> - <issue description>`` followed by the classification reasoning and suggested fix.
