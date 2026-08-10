@@ -211,8 +211,8 @@ model VoiceAgentAvatarScene {
   amplitude?: float32 = 1;
 }
 
-@doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session model is a wire-compatible specialization of the persisted avatar configuration and adds only runtime transport fields."
+@doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
 model VoiceAgentSessionAvatarConfig extends VoiceAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
   `model`?: string | null;
@@ -343,10 +343,7 @@ model VoiceAgentSessionUpdateConfig {
 @doc("The effective stable realtime session settings returned by the voice-agent service.")
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentSessionResponseConfig {
-  ...OmitProperties<
-    VoiceAgentSessionUpdateConfig,
-    "output_modalities" | "include" | "metadata"
-  >;
+  ...VoiceAgentSessionUpdateConfig;
 
   @doc("The object type. Always `realtime.session`.")
   object: "realtime.session";
