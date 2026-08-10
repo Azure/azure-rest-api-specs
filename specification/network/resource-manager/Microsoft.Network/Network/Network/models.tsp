@@ -2820,6 +2820,30 @@ union NspLinkStatus {
    * Disconnected
    */
   Disconnected: "Disconnected",
+
+  /**
+   * A service-managed BCDR relationship that is awaiting peer reconciliation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  Dormant: "Dormant",
+}
+
+/**
+ * The creation mode of a network security perimeter.
+ */
+@added(Versions.v2026_08_01_preview)
+union NspCreateMode {
+  string,
+
+  /**
+   * A normal independently created network security perimeter.
+   */
+  Default: "Default",
+
+  /**
+   * A network security perimeter created as a geo-linked peer of another perimeter.
+   */
+  GeoLinkedPerimeter: "GeoLinkedPerimeter",
 }
 
 /**
@@ -15681,6 +15705,24 @@ model NetworkSecurityPerimeterProperties {
    */
   @visibility(Lifecycle.Read)
   perimeterGuid?: string;
+
+  /**
+   * The creation mode of the network security perimeter. This property is immutable after creation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  createMode?: NspCreateMode;
+
+  /**
+   * The resource ID of the source network security perimeter. This property is required when createMode is GeoLinkedPerimeter and is immutable after creation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  remotePerimeterId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/networkSecurityPerimeters";
+    }
+  ]>;
 }
 
 /**
