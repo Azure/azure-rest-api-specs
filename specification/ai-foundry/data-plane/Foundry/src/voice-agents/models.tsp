@@ -87,7 +87,7 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the projection removes the two intentionally retyped properties."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the projection removes the three intentionally retyped properties."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
   `output` projection may be omitted; retrieve the
@@ -98,7 +98,7 @@ model VoiceResponseAudio {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponse extends OmitProperties<
   OpenAI.RealtimeResponse,
-  "audio" | "output"
+  "audio" | "output" | "metadata"
 > {
   @doc("The unique id of the response.")
   id: string;
@@ -111,6 +111,9 @@ model VoiceResponse extends OmitProperties<
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
+
+  @doc("A set of key-value pairs attached to the response.")
+  metadata?: Record<string>;
 
   @doc("The sampling temperature used for the response.")
   temperature?: float32;

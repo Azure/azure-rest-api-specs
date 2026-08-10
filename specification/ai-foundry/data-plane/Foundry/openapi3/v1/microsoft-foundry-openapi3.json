@@ -91457,6 +91457,13 @@
             "$ref": "#/components/schemas/VoiceResponseAudio",
             "description": "The audio configuration used for the response, including the voice and audio format used for output."
           },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "A set of key-value pairs attached to the response."
+          },
           "temperature": {
             "type": "number",
             "format": "float",
@@ -91501,16 +91508,6 @@
               "status_details": {
                 "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetails",
                 "description": "Additional details about the status."
-              },
-              "metadata": {
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/OpenAI.Metadata"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
               },
               "usage": {
                 "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
