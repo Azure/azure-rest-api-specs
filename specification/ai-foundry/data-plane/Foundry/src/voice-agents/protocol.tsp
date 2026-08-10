@@ -145,12 +145,6 @@ model VoiceAgentSessionAvatarConfig extends VoiceAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
 }
 
-@doc("Voice-optimized instruction adaptation settings.")
-model VoiceAgentVoiceAdaptation {
-  @doc("The adaptation strategy. Always `auto`.")
-  type: "auto";
-}
-
 @doc("A condition that may trigger an interim response.")
 union VoiceAgentInterimResponseTrigger {
   latency: "latency",
@@ -188,7 +182,7 @@ model VoiceAgentLlmInterimResponseConfig
   type: "llm_interim_response";
 
   @doc("The model used to generate interim responses.")
-  `model`?: string = "gpt-4.1-mini";
+  `model`?: string;
 
   @doc("Optional instructions for generating interim responses.")
   instructions?: string;
@@ -213,55 +207,52 @@ model VoiceAgentSessionUpdateConfig {
   type: "realtime";
 
   @doc("Instructions applied throughout the session.")
-  instructions?: string | null;
+  instructions?: string;
 
   @doc("The sampling temperature for compatible cascaded pipelines.")
   @minValue(0)
   @maxValue(2)
-  temperature?: float32 | null;
+  temperature?: float32;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches the service's integer-or-inf token limit."
   @doc("The maximum output-token count for one response.")
-  max_output_tokens?: VoiceAgentMaxOutputTokens | null;
+  max_output_tokens?: VoiceAgentMaxOutputTokens;
 
   @doc("The output modalities enabled for the session.")
-  output_modalities?: VoiceOutputModality[] | null;
+  output_modalities?: VoiceOutputModality[];
 
   @doc("The input- and output-audio settings for the session.")
-  audio?: VoiceAudioConfig | null;
+  audio?: VoiceAudioConfig;
 
   @doc("The avatar settings for the session.")
-  avatar?: VoiceAgentSessionAvatarConfig | null;
+  avatar?: VoiceAgentSessionAvatarConfig;
 
   @doc("Animation settings for the session.")
-  animation?: VoiceAgentAnimationConfig | null;
+  animation?: VoiceAgentAnimationConfig;
 
   @doc("Tools available to the session.")
-  tools?: VoiceAgentTool[] | null;
+  tools?: VoiceAgentTool[];
 
   @doc("Tool-selection behavior for the session.")
-  tool_choice?: VoiceAgentToolChoice | null;
+  tool_choice?: VoiceAgentToolChoice;
 
   @doc("Reasoning settings for compatible realtime models.")
-  reasoning?: OpenAI.RealtimeReasoning | null;
+  reasoning?: OpenAI.RealtimeReasoning;
 
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
 
   @doc("Additional fields to include in service outputs.")
-  include?: VoiceAgentSessionIncludeOption[] | null;
+  include?: VoiceAgentSessionIncludeOption[];
 
   @doc("Up to 16 string key-value pairs attached to the session.")
-  metadata?: Record<string> | null;
-
-  @doc("Voice-optimized instruction adaptation settings.")
-  voice_adaptation?: VoiceAgentVoiceAdaptation | null;
+  metadata?: Record<string>;
 
   @doc("Interim-response settings for latency and tool execution.")
-  interim_response?: VoiceAgentInterimResponse | null;
+  interim_response?: VoiceAgentInterimResponse;
 
   @doc("A proactive assistant greeting started after session configuration.")
-  greeting?: VoiceGreetingConfig | null;
+  greeting?: VoiceGreetingConfig;
 }
 
 @doc("The effective stable realtime session settings returned by the voice-agent service.")
@@ -281,12 +272,6 @@ model VoiceAgentSessionResponseConfig {
   @doc("The session expiration time as a Unix timestamp in seconds.")
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   expires_at?: utcDateTime | null;
-
-  @doc("The output modalities enabled for the session.")
-  output_modalities: VoiceOutputModality[];
-
-  @doc("The idle timeout reported by the service, in milliseconds.")
-  idle_timeout?: int32 | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The service request item spans OpenAI's disconnected message-role and item-type roots."
@@ -338,7 +323,6 @@ model VoiceAgentResponseEventTextContentPart {
 model VoiceAgentResponseEventAudioContentPart {
   type: "audio";
   transcript: string | null;
-  annotations?: unknown;
   audio?: string;
   format?: VoiceAudioFormat;
 }
@@ -360,47 +344,11 @@ union VoiceAgentResponseMessageItem {
   assistant: OpenAI.RealtimeConversationItemMessageAssistant,
 }
 
-@doc("A web-search source URL.")
-model VoiceAgentWebSearchSource {
-  type: "url";
-  url: url;
-}
-
-@doc("A web search action.")
-model VoiceAgentWebSearchActionSearch {
-  type: "search";
-  query: string | null;
-  sources?: VoiceAgentWebSearchSource[] | null;
-}
-
-@doc("An action that opens a web page.")
-model VoiceAgentWebSearchActionOpenPage {
-  type: "open_page";
-  url: url;
-}
-
-@doc("An action that finds text on a web page.")
-model VoiceAgentWebSearchActionFind {
-  type: "find";
-  pattern: string;
-  url: url;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Web-search actions are selected by their `type` property."
-@doc("An action performed by a web-search tool call.")
-@oneOf
-union VoiceAgentWebSearchAction {
-  search: VoiceAgentWebSearchActionSearch,
-  open_page: VoiceAgentWebSearchActionOpenPage,
-  find: VoiceAgentWebSearchActionFind,
-}
-
 @doc("A web-search output item.")
 model VoiceAgentWebSearchCallItem {
   id: string;
   type: "web_search_call";
   status: VoiceAgentWebSearchCallStatus;
-  action?: VoiceAgentWebSearchAction | null;
 }
 
 @doc("The status of a web-search call.")
@@ -489,13 +437,6 @@ union VoiceAgentResponseAudioFormat {
   mp3_24khz_160kbps: "mp3_24khz_160kbps",
 }
 
-@doc("Completeness of a best-effort cost estimate.")
-union VoiceAgentEstimatedCostStatus {
-  complete: "complete",
-  partial: "partial",
-  unavailable: "unavailable",
-}
-
 @doc("The lifecycle status of a voice-agent response.")
 union VoiceAgentResponseStatus {
   in_progress: "in_progress",
@@ -503,39 +444,6 @@ union VoiceAgentResponseStatus {
   cancelled: "cancelled",
   incomplete: "incomplete",
   failed: "failed",
-}
-
-@doc("A best-effort public-retail cost estimate for a response.")
-model VoiceAgentEstimatedCost {
-  @doc("The total estimated amount, when available.")
-  amount: float64 | null;
-
-  @doc("The estimated input cost.")
-  input_cost?: float64 | null;
-
-  @doc("The estimated output cost.")
-  output_cost?: float64 | null;
-
-  @doc("The estimate currency. Always `USD`.")
-  currency?: "USD" = "USD";
-
-  @doc("The portion attributed to Voice Live processing.")
-  voice_live_amount: float64;
-
-  @doc("The portion attributed to a customer-provided model.")
-  byom_model_amount?: float64 | null;
-
-  @doc("Whether the estimate is complete, partial, or unavailable.")
-  status: VoiceAgentEstimatedCostStatus;
-
-  @doc("The Voice Live price version used for the estimate.")
-  price_version: string;
-
-  @doc("The customer-provided model price version used for the estimate.")
-  byom_model_price_version?: string | null;
-
-  @doc("Components for which no price was available.")
-  unpriced_components?: string[] = #[];
 }
 
 @doc("A realtime response returned by the voice-agent service.")
@@ -557,9 +465,6 @@ model VoiceAgentRealtimeResponse {
 
   @doc("Token usage for the response.")
   usage: OpenAI.RealtimeResponseUsage | null;
-
-  @doc("The best-effort response cost estimate. Returned only when cost output is enabled.")
-  estimated_cost?: VoiceAgentEstimatedCost;
 
   @doc("The conversation identifier, or null for an out-of-band response.")
   conversation_id?: string | null;
@@ -1165,9 +1070,8 @@ model VoiceAgentServerEventResponseAnimationBlendshapesDelta {
   output_index: int32;
   content_index: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The service sends either JSON frame arrays or a compact encoded string."
-  @doc("Animation frames as numeric blendshape weights or a compact encoded string.")
-  frames: float32[][] | string;
+  @doc("Animation frames as numeric blendshape weights.")
+  frames: float32[][];
 
   @doc("The index of the first frame in this delta.")
   frame_index: int32;
