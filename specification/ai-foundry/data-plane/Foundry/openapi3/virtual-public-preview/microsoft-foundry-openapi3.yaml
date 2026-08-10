@@ -81068,23 +81068,10 @@ components:
       properties:
         model:
           $ref: '#/components/schemas/VoiceAgentEndOfUtteranceModel'
-        threshold:
-          anyOf:
-            - type: number
-              format: float
-            - type: 'null'
-          minimum: 0
-          maximum: 1
         threshold_level:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceThresholdLevel'
             - type: 'null'
-        timeout:
-          anyOf:
-            - type: number
-              format: float
-            - type: 'null'
-          minimum: 0
         timeout_ms:
           anyOf:
             - type: integer

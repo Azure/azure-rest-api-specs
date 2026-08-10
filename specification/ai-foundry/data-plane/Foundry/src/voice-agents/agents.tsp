@@ -553,15 +553,7 @@ union VoiceAgentEndOfUtteranceThresholdLevel {
 @doc("End-of-utterance detection settings.")
 model VoiceAgentEndOfUtteranceDetection {
   `model`: VoiceAgentEndOfUtteranceModel;
-
-  @minValue(0)
-  @maxValue(1)
-  threshold?: float32 | null;
-
   threshold_level?: VoiceAgentEndOfUtteranceThresholdLevel | null;
-
-  @minValue(0)
-  timeout?: float32 | null;
 
   @minValue(0)
   timeout_ms?: int32 | null;
