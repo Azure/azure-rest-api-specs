@@ -293,7 +293,7 @@ model VoiceAgentSessionUpdateAudioInput {
   ...OmitProperties<VoiceAudioInputConfig, "format" | "turn_detection">;
 
   @doc("The structured input audio format.")
-  format?: VoiceAudioFormat | null;
+  format?: VoiceAudioFormat;
 
   @doc("Turn-detection settings. Set to null to disable server-side turn detection.")
   turn_detection?: VoiceAgentTurnDetection | null;
@@ -909,7 +909,7 @@ model VoiceAgentRealtimeResponse {
   voice_locale?: string | null;
 
   @doc("The output-audio format used by the response.")
-  output_audio_format?: VoiceAgentResponseAudioFormat | null;
+  output_audio_format?: VoiceAgentResponseAudioFormat;
 
   @doc("The sampling temperature used by the response.")
   @minValue(0)
