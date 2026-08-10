@@ -181,38 +181,6 @@ using Azure.ClientGenerator.Core.Legacy;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(AgentPool.properties, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(HybridIdentityMetadata.properties, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(ProvisionedClusterUpgradeProfile.properties, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(VmSkuProfile.properties, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(ProvisionedClusterProperties.linuxProfile, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(LinuxProfileProperties.ssh, "csharp");
-@@clientName(LinuxProfilePropertiesSsh.publicKeys, "SshPublicKeys", "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(
-  ProvisionedClusterProperties.clusterVMAccessProfile,
-  "csharp"
-);
-@@clientName(
-  ClusterVMAccessProfile.authorizedIPRanges,
-  "ClusterVmAccessAuthorizedIPRanges",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(ProvisionedClusterProperties.cloudProviderProfile, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened data shape of the shipped C# SDK."
-@@flattenProperty(CloudProviderProfile.infraNetworkProfile, "csharp");
-@@clientName(
-  CloudProviderProfileInfraNetworkProfile.vnetSubnetIds,
-  "InfraNetworkVnetSubnetIds",
-  "csharp"
-);
 @@alternateType(VirtualNetwork.extendedLocation, ExtendedLocation, "csharp");
 
 @@clientName(KubernetesVersionReadiness.osType, "OSType", "csharp");
@@ -275,3 +243,5 @@ union VirtualNetworkProvisioningState {
   Access.internal,
   "csharp"
 );
+@@usage(OsType, Usage.input, "csharp");
+@@usage(OSSKU, Usage.input, "csharp");
