@@ -5,7 +5,7 @@ import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createDummySwagger } from "../src/command-helpers.ts";
-import { filterSuppressedSwaggerDiffs, validateBreakingChange } from "../src/commands.ts";
+import { filterSuppressedSwaggers, validateBreakingChange } from "../src/commands.ts";
 import { runOad } from "../src/run-oad.ts";
 
 const serviceParent = "specification/foo/data-plane/";
@@ -423,71 +423,49 @@ describe("validateBreakingChange", () => {
 describe("Swagger suppressions", () => {
   it("filters every file in suppressed directories and keeps rule-scoped files", async () => {
     const fixtureRoot = resolve(__dirname, "suppression-fixtures");
-    const result = await filterSuppressedSwaggerDiffs(
-      {
-        ...context,
-        localSpecRepoPath: resolve(fixtureRoot, "head"),
-        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-        prInfo: {
-          ...context.prInfo,
-          tempRepoFolder: resolve(fixtureRoot, "base"),
-        },
+    const testContext = {
+      ...context,
+      localSpecRepoPath: resolve(fixtureRoot, "head"),
+      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+      prInfo: {
+        ...context.prInfo,
+        tempRepoFolder: resolve(fixtureRoot, "base"),
       },
-      {
-        additions: [
-          "specification/contoso/stable/one.json",
-          "specification/contoso/stable/two.json",
-          "specification/contoso/preview/three.json",
-          "specification/contoso/rules/rule-scoped.json",
-        ],
-        modifications: [],
-        deletions: ["specification/contoso/deleted/removed.json"],
-        renames: [],
-        total: 5,
-      },
+    };
+
+    const headResult = await filterSuppressedSwaggers(testContext, testContext.localSpecRepoPath, [
+      "specification/contoso/stable/one.json",
+      "specification/contoso/stable/two.json",
+      "specification/contoso/preview/three.json",
+      "specification/contoso/rules/rule-scoped.json",
+    ]);
+    const baseResult = await filterSuppressedSwaggers(
+      testContext,
+      testContext.prInfo.tempRepoFolder,
+      ["specification/contoso/deleted/removed.json"],
     );
 
-    expect(result).toEqual({
-      additions: ["specification/contoso/rules/rule-scoped.json"],
-      modifications: [],
-      deletions: [],
-      renames: [],
-      total: 1,
-    });
+    expect(headResult).toEqual(["specification/contoso/rules/rule-scoped.json"]);
+    expect(baseResult).toEqual([]);
   });
 
   it("uses the cross-version suppression name independently", async () => {
     const fixtureRoot = resolve(__dirname, "suppression-fixtures");
-    const result = await filterSuppressedSwaggerDiffs(
+    const result = await filterSuppressedSwaggers(
       {
         ...context,
         localSpecRepoPath: resolve(fixtureRoot, "head"),
         runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
-        prInfo: {
-          ...context.prInfo,
-          tempRepoFolder: resolve(fixtureRoot, "base"),
-        },
       },
-      {
-        additions: [
-          "specification/contoso/stable/one.json",
-          "specification/contoso/preview/three.json",
-          "specification/contoso/cross/four.json",
-        ],
-        modifications: [],
-        deletions: [],
-        renames: [],
-        total: 3,
-      },
+      resolve(fixtureRoot, "head"),
+      [
+        "specification/contoso/stable/one.json",
+        "specification/contoso/preview/three.json",
+        "specification/contoso/cross/four.json",
+      ],
     );
 
-    expect(result).toEqual({
-      additions: ["specification/contoso/stable/one.json"],
-      modifications: [],
-      deletions: [],
-      renames: [],
-      total: 1,
-    });
+    expect(result).toEqual(["specification/contoso/stable/one.json"]);
   });
 });
 
