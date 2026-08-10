@@ -63,50 +63,18 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   await context.prInfo?.checkout(context.prInfo.baseBranch);
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
-  const newSwaggers = await filterSuppressedSwaggers(
-    context,
-    context.localSpecRepoPath,
-    diffs.additions || [],
-  );
-  const changedSwaggers = await filterSuppressedSwaggers(
-    context,
-    context.localSpecRepoPath,
-    diffs.modifications || [],
-  );
-  const deletedSwaggers = await filterSuppressedSwaggers(
-    context,
-    context.prInfo!.tempRepoFolder,
-    diffs.deletions || [],
-  );
-  const unsuppressedRenameDestinations = new Set(
-    await filterSuppressedSwaggers(
-      context,
-      context.localSpecRepoPath,
-      (diffs.renames || []).map((rename) => rename.to),
-    ),
-  );
-  const renamedSwaggers = (diffs.renames || []).filter((rename) =>
-    unsuppressedRenameDestinations.has(rename.to),
-  );
+  const filteredDiffs = await filterSuppressedSwaggerDiffs(context, diffs);
 
   logMessage("Found PR changes:");
-  logMessage(
-    JSON.stringify(
-      {
-        additions: newSwaggers,
-        modifications: changedSwaggers,
-        deletions: deletedSwaggers,
-        renames: renamedSwaggers,
-        total:
-          newSwaggers.length +
-          changedSwaggers.length +
-          deletedSwaggers.length +
-          renamedSwaggers.length,
-      },
-      null,
-      2,
-    ),
-  );
+  logMessage(JSON.stringify(filteredDiffs, null, 2));
+
+  const newSwaggers = filteredDiffs.additions || [];
+
+  const changedSwaggers = filteredDiffs.modifications || [];
+
+  const deletedSwaggers = filteredDiffs.deletions || [];
+
+  const renamedSwaggers = filteredDiffs.renames || [];
 
   const newExistingVersionDirs: string[] = [];
 
@@ -284,24 +252,57 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   return statusCode;
 }
 
-export async function filterSuppressedSwaggers(
+type SwaggerDiffs = Awaited<ReturnType<typeof getSwaggerDiffs>>;
+
+export async function filterSuppressedSwaggerDiffs(
   context: Context,
-  rootPath: string,
-  swaggers: string[],
-): Promise<string[]> {
+  diffs: SwaggerDiffs,
+): Promise<SwaggerDiffs> {
   const tool =
     context.runType === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION
       ? SWAGGER_SUPPRESSION_TOOLS.breakingChange
       : SWAGGER_SUPPRESSION_TOOLS.breakingChangeCrossVersion;
 
-  const result = [];
-  for (const swaggerPath of swaggers) {
-    if (!(await isSwaggerSuppressed(tool, path.resolve(rootPath, swaggerPath), swaggerPath))) {
-      result.push(swaggerPath);
-    }
+  const keepHeadPath = async (swaggerPath: string) =>
+    !(await isSwaggerSuppressed(
+      tool,
+      path.resolve(context.localSpecRepoPath, swaggerPath),
+      swaggerPath,
+    ));
+  const keepBasePath = async (swaggerPath: string) =>
+    !(await isSwaggerSuppressed(
+      tool,
+      path.resolve(context.prInfo!.tempRepoFolder, swaggerPath),
+      swaggerPath,
+    ));
+
+  const additions = [];
+  for (const swaggerPath of diffs.additions) {
+    if (await keepHeadPath(swaggerPath)) additions.push(swaggerPath);
   }
 
-  return result;
+  const modifications = [];
+  for (const swaggerPath of diffs.modifications) {
+    if (await keepHeadPath(swaggerPath)) modifications.push(swaggerPath);
+  }
+
+  const deletions = [];
+  for (const swaggerPath of diffs.deletions) {
+    if (await keepBasePath(swaggerPath)) deletions.push(swaggerPath);
+  }
+
+  const renames = [];
+  for (const rename of diffs.renames) {
+    if (await keepHeadPath(rename.to)) renames.push(rename);
+  }
+
+  return {
+    additions,
+    modifications,
+    deletions,
+    renames,
+    total: additions.length + modifications.length + deletions.length + renames.length,
+  };
 }
 
 async function isSwaggerSuppressed(
