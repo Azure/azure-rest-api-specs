@@ -141,22 +141,22 @@ interface StateStores {
     AgentsPagedResult<StateStoreItemKey>
   >;
 
-  /** Idempotent create-or-replace by key. `If-Match` gives optimistic concurrency (`412` on mismatch). */
+  /** Updates an existing item's value and tags. `404` if the item does not exist; `If-Match` gives optimistic concurrency (`412` on mismatch). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @summary("Put a state-store item")
-  @operationId("putStateStoreItem")
+  @summary("Update a state-store item")
+  @operationId("updateStateStoreItem")
   @put
   @route("/agents/{agent_name}/endpoint/state_stores/{name}/items/{key}")
   @extension("x-ms-foundry-meta", StateStoreRequiredPreviews)
-  putStateStoreItem is FoundryDataPlaneRequiredPreviewOperation<
+  updateStateStoreItem is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.state_stores_v1_preview,
     {
       /** The name of the agent whose endpoint owns the state store. */
       @path agent_name: string;
 
-      ...PutItemRequest;
+      ...UpdateItemRequest;
     },
-    PutStateStoreItemResponse,
+    UpdateStateStoreItemResponse,
     StateStoreConditionalErrorResponse
   >;
 

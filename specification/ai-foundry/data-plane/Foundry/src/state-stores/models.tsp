@@ -91,7 +91,7 @@ model StateStoreItem {
   @doc("Opaque JSON object; stored and returned verbatim. <= 1 MB serialized inline.")
   value: Record<unknown>;
 
-  @doc("Optional labels used to filter `listKeys`. Replaced wholesale on write.")
+  @doc("Optional labels used to filter `listItemKeys`. Replaced wholesale on write.")
   tags?: Record<string>;
 
   @doc("Optimistic-concurrency token for this item; also echoed in the `ETag` response header.")
@@ -108,7 +108,7 @@ model StateStoreItem {
 }
 
 /**
- * Response for `createItem` / `putItem` (spec §4.2.1/§4.2.2) — server metadata
+ * Response for `createItem` / `updateItem` (spec §4.2.1/§4.2.2) — server metadata
  * only, no `value` echoed back.
  */
 @doc("Server metadata for a written state-store item (no value echoed back).")
@@ -118,7 +118,7 @@ model StateStoreItemRef is OmitProperties<
   "value" | "tags"
 >;
 
-/** A keys-only projection entry returned by `listKeys` (spec §4.2.5) — never includes `value`. */
+/** A keys-only projection entry returned by `listItemKeys` (spec §4.2.5) — never includes `value`. */
 @doc("A keys-only projection of a state-store item (never includes the value).")
 @extension("x-ms-foundry-meta", StateStoreRequiredPreviews)
 model StateStoreItemKey is OmitProperties<Read<StateStoreItem>, "value">;
@@ -202,7 +202,7 @@ alias ListItemKeysRequest = {
   ...CommonPageQueryParameters;
 };
 
-alias PutItemRequest = {
+alias UpdateItemRequest = {
   @doc("The logical name of the state store. SDKs accept the unencoded name and apply base64url encoding without padding to the path segment.")
   @path
   @extension("x-ms-foundry-path-encoding", "base64url")
@@ -217,7 +217,7 @@ alias PutItemRequest = {
   @maxLength(128)
   key: string;
 
-  @doc("`\"<etag>\"` for a conditional write, or `\"*\"` to require the item already exists. Omit for unconditional last-write-wins.")
+  @doc("`\"<etag>\"` to update a specific version, or `\"*\"` to update any existing version. Omit for unconditional last-write-wins.")
   @header("If-Match")
   if_match?: string;
 
@@ -271,11 +271,10 @@ alias StateStoreItemEtagResponseHeader = {
 alias CreateStateStoreItemResponse = ResourceCreatedResponse<StateStoreItemRef> &
   StateStoreItemEtagResponseHeader;
 
-/** Response for replacing an existing item or creating a missing item. */
-alias PutStateStoreItemResponse =
-  | (Response<200> & StateStoreItemRef & StateStoreItemEtagResponseHeader)
-  | (ResourceCreatedResponse<StateStoreItemRef> &
-      StateStoreItemEtagResponseHeader);
+/** Response for updating an existing item. */
+alias UpdateStateStoreItemResponse = Response<200> &
+  StateStoreItemRef &
+  StateStoreItemEtagResponseHeader;
 
 /** Response for retrieving an item. */
 alias GetStateStoreItemResponse = Response<200> &
