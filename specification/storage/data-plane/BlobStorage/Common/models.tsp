@@ -1841,6 +1841,14 @@ alias ContentCrc64ResponseHeader = {
   contentCrc64?: bytes;
 };
 
+/** The content CRC64 response header. */
+alias ContentCrc64ResponseHeaderV20261006 = {
+  /** The CRC64 hash of the content. */
+  @added(Versions.v2026_10_06)
+  @header("x-ms-content-crc64")
+  contentCrc64?: bytes;
+};
+
 /** The copy status response header. */
 alias CopyStatusResponseHeader = {
   /** Status of the copy operation. */

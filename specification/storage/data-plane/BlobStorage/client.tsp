@@ -366,6 +366,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "xMsContentCrc64",
   "javascript"
 );
+@@clientName(
+  ContentCrc64ResponseHeaderV20261006.contentCrc64,
+  "xMsContentCrc64",
+  "javascript"
+);
 
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
