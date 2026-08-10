@@ -128,27 +128,6 @@ union VoiceAgentMaxOutputTokens {
   unlimited: "inf",
 }
 
-@doc("Output-audio settings accepted in a stable voice-agent session.")
-@usage(VoiceAgentClientEventUsage)
-model VoiceAgentSessionUpdateAudioOutput {
-  ...OmitProperties<VoiceAudioOutputConfig, "speed">;
-
-  @doc("The speaking-speed multiplier.")
-  @minValue(0.25)
-  @maxValue(1.5)
-  speed?: float32 | null;
-}
-
-@doc("Input- and output-audio settings accepted in a `session.update` client event.")
-@usage(VoiceAgentClientEventUsage)
-model VoiceAgentSessionUpdateAudio {
-  @doc("The input-audio settings for the session.")
-  input?: VoiceAudioInputConfig | null;
-
-  @doc("The output-audio settings for the session.")
-  output?: VoiceAgentSessionUpdateAudioOutput | null;
-}
-
 @doc("An animation output produced by a voice-agent session.")
 union VoiceAgentAnimationOutputType {
   blendshapes: "blendshapes",
@@ -349,7 +328,7 @@ model VoiceAgentSessionUpdateConfig {
   output_modalities?: VoiceOutputModality[] | null;
 
   @doc("The input- and output-audio settings for the session.")
-  audio?: VoiceAgentSessionUpdateAudio | null;
+  audio?: VoiceAudioConfig | null;
 
   @doc("The avatar settings for the session.")
   avatar?: VoiceAgentSessionAvatarConfig | null;
@@ -381,27 +360,8 @@ model VoiceAgentSessionUpdateConfig {
   @doc("Interim-response settings for latency and tool execution.")
   interim_response?: VoiceAgentInterimResponse | null;
 
-  @doc("A delimiter appended to generated responses.")
-  response_delimiter?: string;
-
   @doc("A proactive assistant greeting started after session configuration.")
   greeting?: VoiceGreetingConfig | null;
-}
-
-@doc("Output-audio settings returned in a stable voice-agent session event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentSessionResponseAudioOutput {
-  ...VoiceAgentSessionUpdateAudioOutput;
-}
-
-@doc("Input- and output-audio settings returned in a stable voice-agent session event.")
-@usage(VoiceAgentServerEventUsage)
-model VoiceAgentSessionResponseAudio {
-  @doc("The effective input-audio settings.")
-  input?: VoiceAudioInputConfig | null;
-
-  @doc("The output-audio settings for the session.")
-  output?: VoiceAgentSessionResponseAudioOutput | null;
 }
 
 @doc("The effective stable realtime session settings returned by the voice-agent service.")
@@ -409,7 +369,7 @@ model VoiceAgentSessionResponseAudio {
 model VoiceAgentSessionResponseConfig {
   ...OmitProperties<
     VoiceAgentSessionUpdateConfig,
-    "output_modalities" | "audio" | "include" | "metadata"
+    "output_modalities" | "include" | "metadata"
   >;
 
   @doc("The object type. Always `realtime.session`.")
@@ -428,17 +388,8 @@ model VoiceAgentSessionResponseConfig {
   @doc("The output modalities enabled for the session.")
   output_modalities: VoiceOutputModality[];
 
-  @doc("The effective input- and output-audio settings for the session.")
-  audio?: VoiceAgentSessionResponseAudio | null;
-
   @doc("The idle timeout reported by the service, in milliseconds.")
   idle_timeout?: int32 | null;
-}
-
-@doc("Output-audio settings applied to one `response.create` request.")
-model VoiceAgentResponseCreateAudio {
-  @doc("The response-specific output-audio settings.")
-  output?: VoiceAgentSessionUpdateAudioOutput | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The service request item spans OpenAI's disconnected message-role and item-type roots."
@@ -469,7 +420,7 @@ model VoiceAgentResponseCreateParams {
   output_modalities?: VoiceOutputModality[];
 
   @doc("Response-specific audio settings.")
-  audio?: VoiceAgentResponseCreateAudio;
+  audio?: PickProperties<VoiceAudioConfig, "output">;
 
   @doc("A pre-generated assistant message used to begin the response.")
   pre_generated_assistant_message?:

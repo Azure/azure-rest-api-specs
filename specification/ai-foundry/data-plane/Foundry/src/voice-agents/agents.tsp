@@ -411,13 +411,6 @@ model VoiceServerVadTurnDetection extends VoiceTurnDetection {
   type: VoiceTurnDetectionType.server_vad;
 }
 
-@doc("Semantic voice activity detection.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceSemanticVadTurnDetection extends VoiceTurnDetection {
-  ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
-  type: VoiceTurnDetectionType.semantic_vad;
-}
-
 @doc("The semantic end-of-utterance detection model.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceEndOfUtteranceDetectionModel {
@@ -573,7 +566,8 @@ model VoiceAgentServerVadTurnDetection {
 
 @doc("OpenAI semantic VAD turn-detection settings.")
 model VoiceAgentSemanticVadTurnDetection {
-  ...VoiceSemanticVadTurnDetection;
+  ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
+  type: VoiceTurnDetectionType.semantic_vad;
   auto_truncate?: boolean = false;
 }
 
