@@ -638,64 +638,40 @@ union VoiceOutputModality {
   avatar: "avatar",
 }
 
-@doc("The persona/tone a guided-authoring request steers the generated voice agent toward.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentType {
-  string,
-
-  @doc("A personal-assistant persona.")
-  personal: "personal",
-
-  @doc("A business / professional persona.")
-  business: "business",
-}
-
 @doc("""
-  The scenario-template catalog entry a guided-authoring request specializes the generated voice agent for.
-  Extensible: additional use cases may be added over time.
-  """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentUseCase {
-  string,
-  customer_support: "customer_support",
-  reception: "reception",
-  sales: "sales",
-  travel_assistant: "travel_assistant",
-  outreach: "outreach",
-  personal_assistant: "personal_assistant",
-  learning: "learning",
-  call_center: "call_center",
-  in_car: "in_car",
-}
-
-@doc("""
-  The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`
-  are expanded into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
+  The inputs for generating a voice agent. Only `kind`, `name`, and `use_case` are always required.
+  The authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
   The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
   definition, so the caller can edit or override any of them afterward via standard agent versioning.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model GenerateVoiceAgentRequest {
-  @doc("The unique name for the agent to create.")
+model GenerateVoiceAgentRequest extends GenerateAgentRequest {
+  @doc("The agent kind. Always `voice`.")
+  kind: AgentKind.voice;
+
+  @doc("The unique name for the agent to create. Must be a non-empty DNS-like agent name.")
+  @minLength(1)
   @maxLength(63)
   name: string;
 
-  @doc("How the model backing the generated agent is served: `managed` (service-managed) or `self_deployed` (the customer's own deployment). Carried through to the generated definition, not generated.")
-  model_type: VoiceModelType;
+  @doc("Optional inference mode. When omitted, the authoring service uses `managed`. When supplied, use `managed` or `self_deployed`.")
+  model_type?: VoiceModelType;
 
-  @doc("The model paired with `model_type`: the service-managed model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated.")
-  `model`: string;
+  @doc("Optional model identifier. Required when `model_type` is `self_deployed`; optional when `model_type` is `managed` or omitted. The service never invents a customer deployment name.")
+  @maxLength(256)
+  `model`?: string;
 
-  @doc("The persona/tone to steer generation.")
-  agent_type: VoiceAgentType;
+  @doc("The authoring use case. Stage 1 accepts any non-empty string rather than a fixed scenario whitelist.")
+  @minLength(1)
+  @maxLength(128)
+  use_case: string;
 
-  @doc("The scenario-template catalog entry the generator specializes for.")
-  use_case: VoiceAgentUseCase;
+  @doc("An optional natural-language description of what the agent should do. When supplied, it seeds the generated instructions.")
+  @maxLength(4096)
+  goal?: string;
 
-  @doc("A natural-language description of what the agent should do; the seed for the generated `instructions`.")
-  goal: string;
-
-  @doc("An optional description for the agent. Generated from `goal` when omitted.")
+  @doc("An optional agent description. The authoring service resolves its fallback when omitted.")
+  @maxLength(512)
   description?: string;
 
   @doc("Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).")

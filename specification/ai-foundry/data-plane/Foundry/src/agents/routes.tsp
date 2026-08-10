@@ -46,17 +46,17 @@ interface Agents {
   >;
 
   /**
-   * Generates and creates a voice agent from high-level inputs plus a natural-language goal.
+   * Generates and creates an agent from kind-specific high-level inputs.
    * The generated definition remains fully editable through the standard agent versioning operations.
    */
-  @summary("Generate a voice agent")
+  @summary("Generate an agent")
   @post
   @route("/agents:generate")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @tag("Agents")
-  generateVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
+  generateAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    GenerateVoiceAgentRequest,
+    GenerateAgentRequest,
     AgentObject
   >;
 

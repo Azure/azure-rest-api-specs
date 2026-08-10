@@ -301,6 +301,13 @@ model AgentDefinition {
   rai_config?: RaiConfig;
 }
 
+@doc("The inputs for generating and creating an agent. The `kind` discriminator selects the kind-specific authoring contract.")
+@discriminator("kind")
+model GenerateAgentRequest {
+  @doc("The kind of agent to generate.")
+  kind: AgentKind;
+}
+
 @doc("The prompt agent definition")
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
