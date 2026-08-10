@@ -634,7 +634,7 @@ union VoiceOutputModality {
 }
 
 @doc("""
-  The inputs for generating a voice agent. Only `kind`, `name`, and `use_case` are always required.
+  The inputs for generating a voice agent. Only `kind` and `name` are always required.
   The authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
   The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
   definition, so the caller can edit or override any of them afterward via standard agent versioning.
@@ -656,10 +656,9 @@ model GenerateVoiceAgentRequest extends GenerateAgentRequest {
   @maxLength(256)
   `model`?: string;
 
-  @doc("A non-empty authoring use case.")
-  @minLength(1)
+  @doc("An optional authoring use case. An empty string is accepted.")
   @maxLength(128)
-  use_case: string;
+  use_case?: string;
 
   @doc("An optional natural-language description of what the agent should do. When supplied, it seeds the generated instructions.")
   @maxLength(4096)

@@ -37169,8 +37169,7 @@
         "type": "object",
         "required": [
           "kind",
-          "name",
-          "use_case"
+          "name"
         ],
         "properties": {
           "kind": {
@@ -37197,9 +37196,8 @@
           },
           "use_case": {
             "type": "string",
-            "minLength": 1,
             "maxLength": 128,
-            "description": "A non-empty authoring use case."
+            "description": "An optional authoring use case. An empty string is accepted."
           },
           "goal": {
             "type": "string",
@@ -37234,7 +37232,7 @@
             "$ref": "#/components/schemas/GenerateAgentRequest"
           }
         ],
-        "description": "The inputs for generating a voice agent. Only `kind`, `name`, and `use_case` are always required.\nThe authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.\nThe generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent\ndefinition, so the caller can edit or override any of them afterward via standard agent versioning.",
+        "description": "The inputs for generating a voice agent. Only `kind` and `name` are always required.\nThe authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.\nThe generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent\ndefinition, so the caller can edit or override any of them afterward via standard agent versioning.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

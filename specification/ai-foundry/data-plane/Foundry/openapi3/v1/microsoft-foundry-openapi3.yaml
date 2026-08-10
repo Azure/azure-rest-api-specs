@@ -45790,7 +45790,6 @@ components:
       required:
         - kind
         - name
-        - use_case
       properties:
         kind:
           type: string
@@ -45811,9 +45810,8 @@ components:
           description: Optional model identifier. Required when `model_type` is `self_deployed`; optional when `model_type` is `managed` or omitted. The service never invents a customer deployment name.
         use_case:
           type: string
-          minLength: 1
           maxLength: 128
-          description: A non-empty authoring use case.
+          description: An optional authoring use case. An empty string is accepted.
         goal:
           type: string
           maxLength: 4096
@@ -45837,7 +45835,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/GenerateAgentRequest'
       description: |-
-        The inputs for generating a voice agent. Only `kind`, `name`, and `use_case` are always required.
+        The inputs for generating a voice agent. Only `kind` and `name` are always required.
         The authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
         The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
         definition, so the caller can edit or override any of them afterward via standard agent versioning.
