@@ -79,6 +79,21 @@ using Commvault.ContentStore;
   "ShouldNotifyUserOnJobCompletion",
   "csharp"
 );
+@@clientName(
+  RestoreProtectionItemRequest.inPlaceRestore,
+  "IsInPlaceRestore",
+  "csharp"
+);
+@@clientName(
+  VmInfo.powerOnVmAfterRestore,
+  "ShouldPowerOnVmAfterRestore",
+  "csharp"
+);
+@@clientName(
+  VmInfo.attachAndSwapOsDisk,
+  "ShouldAttachAndSwapOsDisk",
+  "csharp"
+);
 
 // [CSPELL] "vmtags" is flagged as an unknown word; use the compound "VmTags"
 // so the generated .NET name splits into known words.
