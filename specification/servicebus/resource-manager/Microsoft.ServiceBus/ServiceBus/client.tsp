@@ -31,6 +31,10 @@ using Microsoft.ServiceBus;
 @@clientName(CorrelationFilter, "ServiceBusCorrelationFilter", "csharp");
 @@clientName(PublicNetworkAccess, "ServiceBusPublicNetworkAccess", "csharp");
 @@clientName(TlsVersion, "ServiceBusMinimumTlsVersion", "csharp");
+@@clientName(TlsVersion.`1.0`, Azure.ClientGenerator.Core.exact("Tls10"), "csharp");
+@@clientName(TlsVersion.`1.1`, Azure.ClientGenerator.Core.exact("Tls11"), "csharp");
+@@clientName(TlsVersion.`1.2`, Azure.ClientGenerator.Core.exact("Tls12"), "csharp");
+@@clientName(TlsVersion.`1.3`, Azure.ClientGenerator.Core.exact("Tls13"), "csharp");
 @@clientName(MigrationConfigProperties, "MigrationConfiguration", "csharp");
 @@clientName(KeyType, "ServiceBusAccessKeyType", "csharp");
 @@clientName(
