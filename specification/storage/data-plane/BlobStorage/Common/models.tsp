@@ -1640,6 +1640,15 @@ alias LastAccessedResponseHeader = {
   lastAccessed?: utcDateTime;
 };
 
+/** The access tier change time response header */
+alias AccessTierChangeTimeResponseHeader = {
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+};
+
 /** The is sealed response header. */
 alias IsSealedResponseHeader = {
   /** Whether the blob is sealed. */

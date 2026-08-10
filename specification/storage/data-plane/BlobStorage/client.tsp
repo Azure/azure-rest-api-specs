@@ -268,6 +268,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "accessTierChangedOn",
   "javascript"
 );
+@@clientName(
+  AccessTierChangeTimeResponseHeader.accessTierChangeTime,
+  "accessTierChangedOn",
+  "javascript"
+);
 @@clientName(BlobProperties.creationTime, "createdOn", "javascript");
 @@clientName(
   CreationTimeResponseHeader.creationTime,
