@@ -132,7 +132,10 @@ interface StateStores {}
   Azure.AI.Projects.StateStores.listStateStoreItemKeys,
   StateStores
 );
-@@clientLocation(Azure.AI.Projects.StateStores.putStateStoreItem, StateStores);
+@@clientLocation(
+  Azure.AI.Projects.StateStores.updateStateStoreItem,
+  StateStores
+);
 @@clientLocation(Azure.AI.Projects.StateStores.getStateStoreItem, StateStores);
 @@clientLocation(
   Azure.AI.Projects.StateStores.deleteStateStoreItem,

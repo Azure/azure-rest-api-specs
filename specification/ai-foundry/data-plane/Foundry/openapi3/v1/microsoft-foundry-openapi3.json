@@ -4441,9 +4441,9 @@
     },
     "/agents/{agent_name}/endpoint/state_stores/{name}/items/{key}": {
       "put": {
-        "operationId": "putStateStoreItem",
-        "summary": "Put a state-store item",
-        "description": "Idempotent create-or-replace by key. `If-Match` gives optimistic concurrency (`412` on mismatch).",
+        "operationId": "updateStateStoreItem",
+        "summary": "Update a state-store item",
+        "description": "Updates an existing item's value and tags. `404` if the item does not exist; `If-Match` gives optimistic concurrency (`412` on mismatch).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4494,7 +4494,7 @@
             "name": "If-Match",
             "in": "header",
             "required": false,
-            "description": "`\"<etag>\"` for a conditional write, or `\"*\"` to require the item already exists. Omit for unconditional last-write-wins.",
+            "description": "`\"<etag>\"` to update a specific version, or `\"*\"` to update any existing version. Omit for unconditional last-write-wins.",
             "schema": {
               "type": "string"
             }
@@ -4513,25 +4513,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": true,
-                "description": "The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StateStoreItemRef"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
               "ETag": {
                 "required": true,
@@ -4608,7 +4589,7 @@
                     "unevaluatedProperties": {
                       "type": "string"
                     },
-                    "description": "Optional labels used to filter `listKeys`. Replaced wholesale on write."
+                    "description": "Optional labels used to filter `listItemKeys`. Replaced wholesale on write."
                   }
                 },
                 "required": [
@@ -82490,7 +82471,7 @@
             "unevaluatedProperties": {
               "type": "string"
             },
-            "description": "Optional labels used to filter `listKeys`. Replaced wholesale on write."
+            "description": "Optional labels used to filter `listItemKeys`. Replaced wholesale on write."
           },
           "etag": {
             "type": "string",
@@ -82540,7 +82521,7 @@
             "unevaluatedProperties": {
               "type": "string"
             },
-            "description": "Optional labels used to filter `listKeys`. Replaced wholesale on write."
+            "description": "Optional labels used to filter `listItemKeys`. Replaced wholesale on write."
           },
           "etag": {
             "type": "string",
