@@ -34,6 +34,7 @@ model `search-management-request-options` {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
@@ -57,6 +58,7 @@ op servicesCheckNameAvailabilityCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
@@ -84,6 +86,7 @@ op servicesCheckNameAvailabilityCustomizationForJs(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
@@ -105,6 +108,7 @@ op usagesListBySubscriptionCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 op usageBySubscriptionSkuCustomization(
@@ -127,6 +131,7 @@ op usageBySubscriptionSkuCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
@@ -144,6 +149,7 @@ op searchServicesListBySubscriptionCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 op searchServicesListByResourceGroupCustomization(
@@ -160,6 +166,7 @@ op searchServicesListByResourceGroupCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
@@ -186,6 +193,7 @@ op searchGetCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
@@ -218,6 +226,7 @@ op searchCreateOrUpdateCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Client-only override: retains PATCH payload."
@@ -251,6 +260,7 @@ op searchUpdateCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
@@ -278,6 +288,7 @@ op searchDeleteCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
@@ -310,6 +321,7 @@ op queryKeysCreateCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @delete
@@ -342,6 +354,7 @@ op queryKeysDeleteCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
@@ -369,6 +382,7 @@ op adminKeysGetCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
@@ -397,6 +411,7 @@ op queryKeysListBySearchServiceCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
@@ -423,6 +438,7 @@ op privateEndpointConnectionsListByServiceCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
@@ -454,6 +470,7 @@ op privateEndpointConnectionsGetCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @put
@@ -492,6 +509,7 @@ op privateEndpointConnectionsUpdateCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @delete
@@ -526,6 +544,7 @@ op privateEndpointConnectionsDeleteCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
@@ -554,6 +573,7 @@ op privateLinkResourcesListSupportedCustomization(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
@@ -587,6 +607,7 @@ op privateLinkResourcesRegenerateCustomization(
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
@@ -614,6 +635,7 @@ op SharedPrivateLinkResourcesListByServiceCustomization(
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
@@ -646,6 +668,7 @@ op SharedPrivateLinkResourcesGetCustomization(
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Client-only override: retains async operation headers."
 @autoRoute
@@ -694,6 +717,7 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Client-only override: retains async operation headers."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Client-only override: retains response contract."
