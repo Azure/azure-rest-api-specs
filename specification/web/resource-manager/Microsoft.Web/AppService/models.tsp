@@ -8624,7 +8624,7 @@ model StaticSite {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-secret", true)
   repositoryToken?: string;
 

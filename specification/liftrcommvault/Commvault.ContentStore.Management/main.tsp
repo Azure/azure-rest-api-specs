@@ -875,10 +875,10 @@ interface ProtectionGroups {
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @doc("Stop Backup for a Protection Group")
   @armResourceAction(ProtectionGroup)
   @post
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-ms-long-running-operation", true)
   stopBackup(
     ...ResourceInstanceParameters<ProtectionGroup>,

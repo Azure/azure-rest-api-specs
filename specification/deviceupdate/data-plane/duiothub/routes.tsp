@@ -22,8 +22,8 @@ model InstanceIdParameter {
   /**
    * The Device Update for IoT Hub account instance identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @path
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-skip-url-encoding", true)
   @extension("x-ms-parameter-grouping", #{ name: "account-options" })
   @extension("x-ms-parameter-location", "client")
@@ -72,8 +72,8 @@ model IfNoneMatchParameter {
    * Defines the If-None-Match condition. The operation will be performed only if
    * the ETag on the server does not match this value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @header("If-None-Match")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
   ifNoneMatch?: string;
 }
@@ -187,11 +187,11 @@ interface DeviceUpdateOperationGroup {
    * Import new update version. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @operationId("DeviceUpdate_ImportUpdate")
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "operation-location" }
@@ -236,11 +236,11 @@ interface DeviceUpdateOperationGroup {
    * Delete a specific update version. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @operationId("DeviceUpdate_DeleteUpdate")
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "operation-location" }
@@ -532,11 +532,11 @@ interface DeviceManagementOperationGroup {
    * Import existing devices from IoT Hub. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @operationId("DeviceManagement_ImportDevices")
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post
   @pollingOperation(DeviceManagementOperationGroup.getOperationStatus)
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "operation-location" }

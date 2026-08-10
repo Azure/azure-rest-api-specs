@@ -71,9 +71,9 @@ interface PrivateAccesses {
    * Gets the private link resources possible under private access resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for Swagger LintDiff validation - x-ms-pageable extension must be specified for LIST APIs"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @get
   @action("privateLinkResources")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   privateLinkResources is ArmResourceActionSync<
     PrivateAccess,

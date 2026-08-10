@@ -267,7 +267,7 @@ model UserDetails {
    * User Email
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Replace this with @secret if this is a field that should eb kept private."
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-ms-secret", true)
   email: string;
 }

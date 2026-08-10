@@ -14,7 +14,7 @@ model SettingNameParameter {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-ms-parameter-location", "method")
   @path
   `setting-name`: string;

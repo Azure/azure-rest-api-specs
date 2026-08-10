@@ -41,8 +41,8 @@ interface VirtualMachineTemplates {
   >;
   /** Updates the VirtualMachineTemplate resource. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @summary("Implements the VirtualMachineTemplate PATCH method.")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }
@@ -50,8 +50,8 @@ interface VirtualMachineTemplates {
   update is ArmTagsPatchAsync<VirtualMachineTemplate>;
   /** Deregisters the ScVmm VM Template from Azure. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @summary("Implements VirtualMachineTemplate DELETE method.")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }

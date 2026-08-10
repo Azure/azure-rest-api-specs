@@ -147,11 +147,11 @@ interface Watchers {
   listBySubscription is ArmListBySubscription<Watcher>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }
@@ -162,11 +162,11 @@ interface Watchers {
     | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",

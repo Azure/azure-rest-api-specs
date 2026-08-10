@@ -140,9 +140,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -166,9 +166,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -196,9 +196,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -223,9 +223,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -250,9 +250,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -277,9 +277,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -307,9 +307,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -336,9 +336,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -366,9 +366,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -396,9 +396,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -427,9 +427,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -470,9 +470,9 @@ interface SearchServices {
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @format("uuid")
       @header("x-ms-client-request-id")
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }

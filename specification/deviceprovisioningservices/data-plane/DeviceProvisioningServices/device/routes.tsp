@@ -20,9 +20,9 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "The DPS device API uses a non-standard LRO pattern; status field is on the nested RegistrationOperationStatus body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @removed(Versions.v2025_07_01_preview)
   @sharedRoute
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-long-running-operation", true)
   @summary("Gets the registration operation status.")
   @route("/{idScope}/registrations/{registrationId}/operations/{operationId}")
@@ -150,9 +150,9 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @removed(Versions.v2025_07_01_preview)
   @sharedRoute
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-long-running-operation", true)
   @pollingOperation(RuntimeRegistration.operationStatusLookup)
   @summary("Registers the devices.")
@@ -201,9 +201,9 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @added(Versions.v2025_07_01_preview)
   @sharedRoute
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-long-running-operation", true)
   @summary("Registers the devices and optionally issue operational certificates for IoT devices.")
   @pollingOperation(RuntimeRegistration.operationStatusLookupPreview)
