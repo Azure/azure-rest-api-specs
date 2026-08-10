@@ -3035,12 +3035,14 @@ model ScalingSchedule {
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
 @added(Versions.vLatestPreview)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
 @OpenAPI.extension("x-nullable", true)
 model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
   @minValue(0)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-nullable", true)
   rampUpMaximumHostPoolSize?: int32;
 
@@ -3049,6 +3051,7 @@ model CreateDeleteProperties {
    */
   @minValue(0)
   @maxValue(59)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-nullable", true)
   rampUpMinimumHostPoolSize?: int32;
 
@@ -3056,6 +3059,7 @@ model CreateDeleteProperties {
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
   @minValue(0)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-nullable", true)
   rampDownMaximumHostPoolSize?: int32;
 
@@ -3064,6 +3068,7 @@ model CreateDeleteProperties {
    */
   @minValue(0)
   @maxValue(59)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-nullable", true)
   rampDownMinimumHostPoolSize?: int32;
 }
@@ -3662,6 +3667,7 @@ model HostPoolProvisioningControlParameter {
 
 @@added(HostPoolPatch.identity, Versions.vLatestPreview);
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
 @@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
 
 /**

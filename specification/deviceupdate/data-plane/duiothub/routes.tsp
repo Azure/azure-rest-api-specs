@@ -23,6 +23,7 @@ model InstanceIdParameter {
    * The Device Update for IoT Hub account instance identifier.
    */
   @path
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-skip-url-encoding", true)
   @extension("x-ms-parameter-grouping", #{ name: "account-options" })
   @extension("x-ms-parameter-location", "client")
@@ -72,6 +73,7 @@ model IfNoneMatchParameter {
    * the ETag on the server does not match this value.
    */
   @header("If-None-Match")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
   ifNoneMatch?: string;
 }
@@ -189,6 +191,7 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "operation-location" }
@@ -237,6 +240,7 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "operation-location" }
@@ -532,6 +536,7 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post
   @pollingOperation(DeviceManagementOperationGroup.getOperationStatus)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "operation-location" }

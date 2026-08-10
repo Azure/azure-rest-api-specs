@@ -23,6 +23,7 @@ alias SchedulesCreateOrUpdateParams = {
 
   @doc("The resource instance.")
   @Http.bodyRoot
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @TypeSpec.OpenAPI.extension("x-ms-client-name", "resource")
   resource: Schedule;
 };

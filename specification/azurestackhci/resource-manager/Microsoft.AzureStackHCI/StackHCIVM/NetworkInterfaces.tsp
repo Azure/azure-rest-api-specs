@@ -16,6 +16,7 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The network interface resource definition.")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
 @extension("x-ms-azure-resource", true)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @doc("Name of the network interface")

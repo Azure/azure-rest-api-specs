@@ -1355,6 +1355,7 @@ model LogCollection {
   /**
    * The log collection id.
    */
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 
@@ -1415,6 +1416,7 @@ model LogCollectionOperationDetailedStatus {
   /**
    * The device diagnostics operation id.
    */
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 

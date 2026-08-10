@@ -102,6 +102,7 @@ interface AzureLargeInstances {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template for optional body"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
 @autoRoute
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
 @OpenAPI.extension("x-ms-long-running-operation", true)
 @OpenAPI.extension(
   "x-ms-long-running-operation-options",

@@ -35,6 +35,7 @@ interface ServicesOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -69,6 +70,7 @@ interface UsagesOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
@@ -103,6 +105,7 @@ op usageBySubscriptionSku(
   #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
   @format("uuid")
   @header("x-ms-client-request-id")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension(
     "x-ms-parameter-grouping",
     #{ name: "search-management-request-options" }
@@ -136,6 +139,7 @@ interface Offerings {
   @get
   @action("offerings")
   @tag("Offerings")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: null })
   list is ArmProviderActionSync<
     Request = void,

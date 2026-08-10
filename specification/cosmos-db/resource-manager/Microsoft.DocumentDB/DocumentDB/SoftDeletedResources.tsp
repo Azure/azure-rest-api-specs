@@ -286,6 +286,7 @@ interface SoftDeletedDatabaseAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   listByLocation(
     ...Azure.ResourceManager.ApiVersionParameter,
@@ -301,6 +302,7 @@ interface SoftDeletedDatabaseAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   listByResourceGroupAndLocation(
     ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -422,6 +424,7 @@ interface SoftDeletedSqlDatabases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases")
   @get
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   list(
     ...Azure.ResourceManager.ApiVersionParameter,
@@ -573,6 +576,7 @@ interface SoftDeletedSqlContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers")
   @get
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   list(
     ...Azure.ResourceManager.ApiVersionParameter,

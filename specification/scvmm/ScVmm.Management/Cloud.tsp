@@ -41,6 +41,7 @@ interface Clouds {
   /** Updates the Clouds resource. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements the Clouds PATCH method.")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }
@@ -49,6 +50,7 @@ interface Clouds {
   /** Deregisters the ScVmm fabric cloud from Azure. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements Cloud resource DELETE method.")
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @extension(
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "azure-async-operation" }

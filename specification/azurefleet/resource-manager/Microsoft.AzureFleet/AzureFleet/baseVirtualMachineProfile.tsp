@@ -1446,6 +1446,7 @@ model VirtualMachineScaleSetExtensionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to mark as secret without changing format"
   @visibility(Lifecycle.Create, Lifecycle.Update)
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
   @OpenAPI.extension("x-ms-secret", true)
   protectedSettings?: Record<unknown>;
 

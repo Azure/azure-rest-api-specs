@@ -2153,6 +2153,7 @@ model ImportFromStorageResponseType extends OperationProgressResponseType {
  * The property of a server's location.
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing API contract: retain this x-ms-* OpenAPI extension for compatibility."
 @OpenAPI.extension("x-ms-parameter-location", "method")
 model LocationNameParameter {
   /**
