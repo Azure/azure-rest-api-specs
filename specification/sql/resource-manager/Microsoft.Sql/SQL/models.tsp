@@ -2021,6 +2021,26 @@ union DayOfWeek {
   Saturday: "Saturday",
 }
 
+/**
+ * Custom maintenance options.
+ */
+model CustomMaintenanceOptions {
+  /**
+   * Custom maintenance day of week.
+   */
+  dayOfWeek?: DayOfWeek;
+
+  /**
+   * Custom maintenance start hour.
+   */
+  startHour?: int32;
+
+  /**
+   * Custom maintenance start minute.
+   */
+  startMinute?: int32;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedShortTermRetentionPolicyName {
   string,
@@ -5950,6 +5970,11 @@ model DatabaseProperties {
   maintenanceConfigurationId?: string;
 
   /**
+   * Custom maintenance options for the database.
+   */
+  customMaintenanceOptions?: CustomMaintenanceOptions;
+
+  /**
    * Whether or not this database is a ledger database, which means all tables in the database are ledger tables. Note: the value of this property cannot be changed after the database has been created.
    */
   isLedgerOn?: boolean;
@@ -6355,6 +6380,11 @@ model DatabaseUpdateProperties {
    * Maintenance configuration id assigned to the database. This configuration defines the period when the maintenance updates will occur.
    */
   maintenanceConfigurationId?: string;
+
+  /**
+   * Custom maintenance options for the database.
+   */
+  customMaintenanceOptions?: CustomMaintenanceOptions;
 
   /**
    * Whether or not this database is a ledger database, which means all tables in the database are ledger tables. Note: the value of this property cannot be changed after the database has been created.
@@ -7981,6 +8011,11 @@ model ElasticPoolProperties {
   maintenanceConfigurationId?: string;
 
   /**
+   * Custom maintenance options for the elastic pool.
+   */
+  customMaintenanceOptions?: CustomMaintenanceOptions;
+
+  /**
    * The number of secondary replicas associated with the Business Critical, Premium, or Hyperscale edition elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic pools.
    */
   highAvailabilityReplicaCount?: int32;
@@ -8088,6 +8123,11 @@ model ElasticPoolUpdateProperties {
    * Maintenance configuration id assigned to the elastic pool. This configuration defines the period when the maintenance updates will will occur.
    */
   maintenanceConfigurationId?: string;
+
+  /**
+   * Custom maintenance options for the elastic pool.
+   */
+  customMaintenanceOptions?: CustomMaintenanceOptions;
 
   /**
    * The number of secondary replicas associated with the Business Critical, Premium, or Hyperscale edition elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic pools.
