@@ -302,6 +302,7 @@ op dryrunResourcesListDryrun(
   "csharp"
 );
 @@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
+@@clientName(DeleteOrUpdateBehavior, "LinkerDeleteOrUpdateBehavior", "csharp");
 @@clientName(DryrunParameters, "DryrunContent", "csharp");
 @@clientName(FabricPlatform, "FabricPlatformTargetService", "csharp");
 @@clientName(FirewallRules, "LinkerFirewallRules", "csharp");
@@ -311,6 +312,7 @@ op dryrunResourcesListDryrun(
 @@clientName(Linkers, "Dryruns", "csharp");
 @@clientName(PublicNetworkSolution, "LinkerPublicNetworkSolution", "csharp");
 @@clientName(SecretInfoBase, "SecretBaseInfo", "csharp");
+@@clientName(SecretSourceType, "LinkerSecretSourceType", "csharp");
 @@clientName(SecretStore.keyVaultId, "SecretStoreKeyVaultId", "csharp");
 @@clientName(SecretStore, "LinkerSecretStore", "csharp");
 @@clientName(SecretType, "LinkerSecretType", "csharp");
