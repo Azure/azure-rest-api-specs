@@ -16,7 +16,7 @@ namespace Microsoft.App;
  * Dapr Component Resiliency Policy.
  */
 @removed(Versions.v2026_01_01)
-@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_01)
 @parentResource(DaprComponent)
 model DaprComponentResiliencyPolicy
   is Azure.ResourceManager.ProxyResource<DaprComponentResiliencyPolicyProperties> {
@@ -60,7 +60,7 @@ alias DaprComponentResiliencyPolicyOps = Azure.ResourceManager.Legacy.LegacyOper
 >;
 
 @removed(Versions.v2026_01_01)
-@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_01)
 @armResourceOperations
 interface DaprComponentResiliencyPolicies {
   /**

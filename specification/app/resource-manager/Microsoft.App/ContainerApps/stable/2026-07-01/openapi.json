@@ -55,10 +55,19 @@
       "name": "ContainerApps"
     },
     {
+      "name": "AzureFunctionsOnContainerApps"
+    },
+    {
       "name": "ContainerAppsRevisions"
     },
     {
+      "name": "ContainerAppsLabelHistory"
+    },
+    {
       "name": "ContainerAppsRevisionReplicas"
+    },
+    {
+      "name": "DotNetComponents"
     },
     {
       "name": "JavaComponents"
@@ -92,6 +101,9 @@
     },
     {
       "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "DaprComponentResiliencyPolicies"
     },
     {
       "name": "HttpRouteConfig"
@@ -2570,6 +2582,113 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/functions": {
+      "get": {
+        "operationId": "ContainerAppsFunctions_List",
+        "tags": [
+          "AzureFunctionsOnContainerApps"
+        ],
+        "summary": "List the functions for a given Container App from the latest Revision.",
+        "description": "List the functions for a given Container App from the latest Revision.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsFunctionCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container App's functions": {
+            "$ref": "./examples/ContainerAppsFunctions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/functions/{functionName}": {
+      "get": {
+        "operationId": "ContainerAppsFunctions_Get",
+        "tags": [
+          "AzureFunctionsOnContainerApps"
+        ],
+        "summary": "Get a specific function of a Container App from the latest Revision.",
+        "description": "Get a specific function of a Container App from the latest Revision.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Name of the Function.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsFunction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App's function": {
+            "$ref": "./examples/ContainerAppsFunctions_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/getAuthtoken": {
       "post": {
         "operationId": "ContainerApps_GetAuthToken",
@@ -2617,6 +2736,174 @@
         "x-ms-examples": {
           "Get Container App Auth Token": {
             "$ref": "./examples/ContainerApps_GetAuthToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/labelHistory": {
+      "get": {
+        "operationId": "ContainerAppsLabelHistory_ListLabelHistory",
+        "tags": [
+          "ContainerAppsLabelHistory"
+        ],
+        "summary": "Get the Label History for a given Container App.",
+        "description": "Get the Label History for a given Container App.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabelHistoryCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container App's all label history": {
+            "$ref": "./examples/LabelHistory_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/labelHistory/{labelName}": {
+      "get": {
+        "operationId": "ContainerAppsLabelHistory_GetLabelHistory",
+        "tags": [
+          "ContainerAppsLabelHistory"
+        ],
+        "summary": "Get the history of a label.",
+        "description": "Get the history of a label.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "Name of the label.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabelHistory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App's single label history": {
+            "$ref": "./examples/LabelHistory_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ContainerAppsLabelHistory_DeleteLabelHistory",
+        "tags": [
+          "ContainerAppsLabelHistory"
+        ],
+        "summary": "Delete the history of a label.",
+        "description": "Delete the history of a label.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "Name of the label.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Container App's label history for a given label": {
+            "$ref": "./examples/LabelHistory_Delete.json"
           }
         }
       }
@@ -3289,6 +3576,129 @@
         "x-ms-examples": {
           "Deactivate Container App's revision": {
             "$ref": "./examples/Revisions_Deactivate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/functions": {
+      "get": {
+        "operationId": "ContainerAppsRevisionFunctions_List",
+        "tags": [
+          "AzureFunctionsOnContainerApps"
+        ],
+        "summary": "List the functions for a given Container App Revision.",
+        "description": "List the functions for a given Container App Revision.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsFunctionCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container App Revision's functions": {
+            "$ref": "./examples/ContainerAppsRevisionFunctions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/functions/{functionName}": {
+      "get": {
+        "operationId": "ContainerAppsRevisionFunctions_Get",
+        "tags": [
+          "AzureFunctionsOnContainerApps"
+        ],
+        "summary": "Get a specific function of a Container App Revision.",
+        "description": "Get a specific function of a Container App Revision.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Name of the Function.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsFunction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App Revision's function": {
+            "$ref": "./examples/ContainerAppsRevisionFunctions_Get.json"
           }
         }
       }
@@ -4561,6 +4971,77 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/resume": {
+      "post": {
+        "operationId": "Jobs_Resume",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Resumes a suspended job",
+        "description": "Resumes a suspended job",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resume Job": {
+            "$ref": "./examples/Jobs_Resume.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Job"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/start": {
       "post": {
         "operationId": "Jobs_Start",
@@ -4700,6 +5181,77 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ContainerAppJobExecutions"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/suspend": {
+      "post": {
+        "operationId": "Jobs_Suspend",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Suspends a job",
+        "description": "Suspends a job",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Suspend Job": {
+            "$ref": "./examples/Jobs_Suspend.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Job"
         },
         "x-ms-long-running-operation": true
       }
@@ -5636,6 +6188,271 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/resiliencyPolicies": {
+      "get": {
+        "operationId": "DaprComponentResiliencyPolicies_List",
+        "tags": [
+          "DaprComponentResiliencyPolicies"
+        ],
+        "summary": "Get the resiliency policies for a Dapr component.",
+        "description": "Get the resiliency policies for a Dapr component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DaprComponentResiliencyPoliciesCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Dapr component resiliency policies": {
+            "$ref": "./examples/DaprComponentResiliencyPolicies_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/resiliencyPolicies/{name}": {
+      "get": {
+        "operationId": "DaprComponentResiliencyPolicies_Get",
+        "tags": [
+          "DaprComponentResiliencyPolicies"
+        ],
+        "summary": "Get a Dapr component resiliency policy.",
+        "description": "Get a Dapr component resiliency policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Dapr Component Resiliency Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Dapr component resiliency policy": {
+            "$ref": "./examples/DaprComponentResiliencyPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DaprComponentResiliencyPolicies_CreateOrUpdate",
+        "tags": [
+          "DaprComponentResiliencyPolicies"
+        ],
+        "summary": "Creates or updates a Dapr component resiliency policy.",
+        "description": "Creates or updates a resiliency policy for a Dapr component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Dapr Component Resiliency Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "daprComponentResiliencyPolicyEnvelope",
+            "in": "body",
+            "description": "Configuration details of the Dapr Component Resiliency Policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DaprComponentResiliencyPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update dapr component resiliency policy with all options": {
+            "$ref": "./examples/DaprComponentResiliencyPolicy_CreateOrUpdate_AllOptions.json"
+          },
+          "Create or update dapr component resiliency policy with outbound policy only": {
+            "$ref": "./examples/DaprComponentResiliencyPolicy_CreateOrUpdate_OutboundOnly.json"
+          },
+          "Create or update dapr component resiliency policy with sparse options": {
+            "$ref": "./examples/DaprComponentResiliencyPolicy_CreateOrUpdate_SparseOptions.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DaprComponentResiliencyPolicies_Delete",
+        "tags": [
+          "DaprComponentResiliencyPolicies"
+        ],
+        "summary": "Delete a Dapr component resiliency policy.",
+        "description": "Delete a resiliency policy for a Dapr component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Dapr Component Resiliency Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete dapr component resiliency policy": {
+            "$ref": "./examples/DaprComponentResiliencyPolicies_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/rootApi/": {
       "get": {
         "operationId": "ManagedEnvironmentsDiagnostics_GetRoot",
@@ -5785,6 +6602,361 @@
             "$ref": "./examples/ManagedEnvironmentDiagnostics_Get.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents": {
+      "get": {
+        "operationId": "DotNetComponents_List",
+        "tags": [
+          "DotNetComponents"
+        ],
+        "summary": "Get the .NET Components for a managed environment.",
+        "description": "Get the .NET Components for a managed environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DotNetComponentsCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List .NET Components": {
+            "$ref": "./examples/DotNetComponents_List.json"
+          },
+          "List .NET Components with ServiceBinds": {
+            "$ref": "./examples/DotNetComponents_List_ServiceBind.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}": {
+      "get": {
+        "operationId": "DotNetComponents_Get",
+        "tags": [
+          "DotNetComponents"
+        ],
+        "summary": "Get a .NET Component.",
+        "description": "Get a .NET Component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the .NET Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DotNetComponent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get .NET Component": {
+            "$ref": "./examples/DotNetComponents_Get.json"
+          },
+          "Get .NET Component with ServiceBinds": {
+            "$ref": "./examples/DotNetComponents_Get_ServiceBind.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DotNetComponents_CreateOrUpdate",
+        "tags": [
+          "DotNetComponents"
+        ],
+        "summary": "Creates or updates a .NET Component.",
+        "description": "Creates or updates a .NET Component in a Managed Environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the .NET Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "dotNetComponentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the .NET Component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DotNetComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DotNetComponent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DotNetComponent"
+            }
+          },
+          "201": {
+            "description": "Resource 'DotNetComponent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DotNetComponent"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update .NET Component": {
+            "$ref": "./examples/DotNetComponents_CreateOrUpdate.json"
+          },
+          "Create or Update .NET Component with ServiceBinds": {
+            "$ref": "./examples/DotNetComponents_CreateOrUpdate_ServiceBind.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DotNetComponent"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DotNetComponents_Update",
+        "tags": [
+          "DotNetComponents"
+        ],
+        "summary": "Update properties of a .NET Component",
+        "description": "Patches a .NET Component using JSON Merge Patch",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the .NET Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "dotNetComponentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the .NET Component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DotNetComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DotNetComponent"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch .NET Component": {
+            "$ref": "./examples/DotNetComponents_Patch.json"
+          },
+          "Patch .NET Component with ServiceBinds": {
+            "$ref": "./examples/DotNetComponents_Patch_ServiceBind.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DotNetComponent"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DotNetComponents_Delete",
+        "tags": [
+          "DotNetComponents"
+        ],
+        "summary": "Delete a .NET Component.",
+        "description": "Delete a .NET Component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the managed environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the .NET Component.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete .NET Component": {
+            "$ref": "./examples/DotNetComponents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/getAuthtoken": {
@@ -9767,6 +10939,70 @@
         }
       }
     },
+    "ContainerAppsFunction": {
+      "type": "object",
+      "description": "Container App Function.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsFunctionProperties",
+          "description": "Function resource specific properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ContainerAppsFunctionCollection": {
+      "type": "object",
+      "description": "Container App Functions collection ARM resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContainerAppsFunction items on this page",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsFunction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContainerAppsFunctionProperties": {
+      "type": "object",
+      "description": "Function resource specific properties",
+      "properties": {
+        "invokeUrlTemplate": {
+          "type": "string",
+          "format": "uri",
+          "description": "Invoke URL for the function.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "type": "string",
+          "description": "Trigger type of the function.",
+          "readOnly": true
+        },
+        "language": {
+          "type": "string",
+          "description": "Programming language of the function.",
+          "readOnly": true
+        },
+        "isDisabled": {
+          "type": "boolean",
+          "description": "Indicates whether the function is disabled.",
+          "readOnly": true
+        }
+      }
+    },
     "ContainerResources": {
       "type": "object",
       "description": "Container App container resource requirements.",
@@ -10398,6 +11634,138 @@
         ]
       }
     },
+    "DaprComponentResiliencyPoliciesCollection": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policies ARM resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DaprComponentResiliencyPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DaprComponentResiliencyPolicy": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyProperties",
+          "description": "Dapr Component Resiliency Policy resource specific properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DaprComponentResiliencyPolicyCircuitBreakerPolicyConfiguration": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy Circuit Breaker Policy Configuration.",
+      "properties": {
+        "consecutiveErrors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive errors before the circuit is opened."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval in seconds until a retry attempt is made after the circuit is opened."
+        },
+        "intervalInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The optional interval in seconds after which the error count resets to 0. An interval of 0 will never reset. If not specified, the timeoutInSeconds value will be used."
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyConfiguration": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy Configuration.",
+      "properties": {
+        "httpRetryPolicy": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyHttpRetryPolicyConfiguration",
+          "description": "The optional HTTP retry policy configuration"
+        },
+        "timeoutPolicy": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyTimeoutPolicyConfiguration",
+          "description": "The optional timeout policy configuration"
+        },
+        "circuitBreakerPolicy": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyCircuitBreakerPolicyConfiguration",
+          "description": "The optional circuit breaker policy configuration"
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyHttpRetryBackOffConfiguration": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy HTTP Retry Backoff Configuration.",
+      "properties": {
+        "initialDelayInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The optional initial delay in milliseconds before an operation is retried"
+        },
+        "maxIntervalInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The optional maximum time interval in milliseconds between retry attempts"
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyHttpRetryPolicyConfiguration": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy HTTP Retry Policy Configuration.",
+      "properties": {
+        "maxRetries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The optional maximum number of retries"
+        },
+        "retryBackOff": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyHttpRetryBackOffConfiguration",
+          "description": "The optional retry backoff configuration"
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyProperties": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy resource specific properties",
+      "properties": {
+        "inboundPolicy": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyConfiguration",
+          "description": "The optional inbound component resiliency policy configuration"
+        },
+        "outboundPolicy": {
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyConfiguration",
+          "description": "The optional outbound component resiliency policy configuration"
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyTimeoutPolicyConfiguration": {
+      "type": "object",
+      "description": "Dapr Component Resiliency Policy Timeout Policy Configuration.",
+      "properties": {
+        "responseTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The optional response timeout in seconds"
+        }
+      }
+    },
     "DaprComponentsCollection": {
       "type": "object",
       "description": "Dapr Components ARM resource.",
@@ -10862,6 +12230,167 @@
           }
         ]
       }
+    },
+    "DotNetComponent": {
+      "type": "object",
+      "description": ".NET Component.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DotNetComponentProperties",
+          "description": ".NET Component resource specific properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DotNetComponentConfigurationProperty": {
+      "type": "object",
+      "description": "Configuration properties for a .NET Component",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "description": "The name of the property"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the property"
+        }
+      }
+    },
+    "DotNetComponentProperties": {
+      "type": "object",
+      "description": ".NET Component resource specific properties",
+      "properties": {
+        "componentType": {
+          "$ref": "#/definitions/DotNetComponentType",
+          "description": "Type of the .NET Component."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DotNetComponentProvisioningState",
+          "description": "Provisioning state of the .NET Component.",
+          "readOnly": true
+        },
+        "configurations": {
+          "type": "array",
+          "description": "List of .NET Components configuration properties",
+          "items": {
+            "$ref": "#/definitions/DotNetComponentConfigurationProperty"
+          },
+          "x-ms-identifiers": [
+            "propertyName"
+          ]
+        },
+        "serviceBinds": {
+          "type": "array",
+          "description": "List of .NET Components that are bound to the .NET component",
+          "items": {
+            "$ref": "#/definitions/DotNetComponentServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "DotNetComponentProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the .NET Component.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "DotNetComponentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          }
+        ]
+      }
+    },
+    "DotNetComponentServiceBind": {
+      "type": "object",
+      "description": "Configuration to bind a .NET Component to another .NET Component",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the service bind"
+        },
+        "serviceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource id of the target service"
+        }
+      }
+    },
+    "DotNetComponentType": {
+      "type": "string",
+      "description": "Type of the .NET Component.",
+      "enum": [
+        "AspireDashboard"
+      ],
+      "x-ms-enum": {
+        "name": "DotNetComponentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AspireDashboard",
+            "value": "AspireDashboard",
+            "description": "AspireDashboard"
+          }
+        ]
+      }
+    },
+    "DotNetComponentsCollection": {
+      "type": "object",
+      "description": ".NET Components ARM resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DotNetComponent items on this page",
+          "items": {
+            "$ref": "#/definitions/DotNetComponent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DynamicPoolConfiguration": {
       "type": "object",
@@ -12534,6 +14063,11 @@
           "description": "Provisioning state of the Container Apps Job.",
           "readOnly": true
         },
+        "runningState": {
+          "$ref": "#/definitions/JobRunningState",
+          "description": "Current running state of the job",
+          "readOnly": true
+        },
         "environmentId": {
           "type": "string",
           "description": "Resource ID of environment.",
@@ -12607,6 +14141,36 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
+          }
+        ]
+      }
+    },
+    "JobRunningState": {
+      "type": "string",
+      "description": "Current running state of the job",
+      "enum": [
+        "Ready",
+        "Progressing",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "JobRunningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Ready"
+          },
+          {
+            "name": "Progressing",
+            "value": "Progressing",
+            "description": "Progressing"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Suspended"
           }
         ]
       }
@@ -12798,6 +14362,87 @@
             "description": "functionapp"
           }
         ]
+      }
+    },
+    "LabelHistory": {
+      "type": "object",
+      "description": "Container App Label History.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabelHistoryProperties",
+          "description": "Container App Label History resource specific properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LabelHistoryCollection": {
+      "type": "object",
+      "description": "Container App Label History collection ARM resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LabelHistory items on this page",
+          "items": {
+            "$ref": "#/definitions/LabelHistory"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabelHistoryProperties": {
+      "type": "object",
+      "description": "Container App Label History resource specific properties",
+      "properties": {
+        "records": {
+          "type": "array",
+          "description": "List of label history records.",
+          "items": {
+            "$ref": "#/definitions/LabelHistoryRecordItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "label"
+          ]
+        }
+      }
+    },
+    "LabelHistoryRecordItem": {
+      "type": "object",
+      "description": "Container App Label History Item resource specific properties",
+      "properties": {
+        "revision": {
+          "type": "string",
+          "description": "Container App revision name that label was applied to.",
+          "readOnly": true
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp describing when the label was applied to the revision.",
+          "readOnly": true
+        },
+        "stop": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp describing when the label was removed from the revision. Only meaningful when the label is currently applied to the revision.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of the label history record.",
+          "readOnly": true
+        }
       }
     },
     "LifecycleConfiguration": {
@@ -15097,6 +16742,36 @@
         }
       ],
       "x-ms-discriminator-value": "SpringCloudEureka"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status of the label history record.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Starting"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Starting"
+          }
+        ]
+      }
     },
     "StorageType": {
       "type": "string",

@@ -16,7 +16,7 @@ namespace Microsoft.App;
  * Container App Label History.
  */
 @removed(Versions.v2026_01_01)
-@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model LabelHistory
   is Azure.ResourceManager.ProxyResource<LabelHistoryProperties> {
@@ -54,7 +54,7 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @removed(Versions.v2026_01_01)
-@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsLabelHistory {
   /**
