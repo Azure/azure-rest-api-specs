@@ -2624,7 +2624,7 @@ model CheckMigrationEligibilityResponse {
   @identifiers(#["code"])
   failureReasons: MigrationEligibilityFailureReason[];
 }
-/**
+
 /**
  * Managed environment resource specific properties
  */
