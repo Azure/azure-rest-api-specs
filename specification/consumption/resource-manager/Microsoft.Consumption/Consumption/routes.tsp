@@ -622,17 +622,17 @@ interface ReservationRecommendationDetailsOperationGroup {
     product: string,
 
     /**
+     * Used to filter reservation recommendation details by: properties/subscriptionId can be specified for billing account and billing profile paths.
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
      * Specify the management group ID. Required when recommendation scope is 'ManagementGroup'.
      */
     @added(Versions.v2026_06_01)
     @query("managementGroupId")
     managementGroupId?: string,
-
-    /**
-     * Used to filter reservation recommendation details by: properties/subscriptionId can be specified for billing account and billing profile paths.
-     */
-    @query("$filter")
-    $filter?: string,
   ):
     | ReservationRecommendationDetailsModel
     | NoContentResponse
