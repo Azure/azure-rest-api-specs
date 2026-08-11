@@ -548,9 +548,8 @@ model CapacityRecommendationDetails {
   @doc("The list of desired Azure regions from the request")
   desiredLocations?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The UTC timestamp of when the recommendation was requested")
-  recommendationRequestedAtUtc?: offsetDateTime;
+  recommendationRequestedAtUtc?: utcDateTime;
 
   @doc("The list of desired VM sizes from the request")
   @identifiers(#[])
