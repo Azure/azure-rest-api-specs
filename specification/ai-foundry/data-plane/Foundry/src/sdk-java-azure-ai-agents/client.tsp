@@ -1,7 +1,7 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
 import "../sdk-common/error.default.tsp";
-import "../sdk-common/beta-ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
 import "../memory-stores/routes.tsp";
@@ -10,8 +10,8 @@ import "../agents-session-files/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
-import "../openai-responses/models.tsp";
-import "../openai-conversations/routes.tsp";
+import "../openai/responses/models.tsp";
+import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -81,6 +81,11 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
+@@clientName(
+  _PreviewAgentToolType.fabric_dataagent_preview,
+  "FABRIC_DATA_AGENT_PREVIEW"
+);
+
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
@@ -89,6 +94,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
+@@clientName(MCPToolboxTool, "McpToolboxTool");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
@@ -96,10 +102,10 @@ using Azure.AI.Projects;
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
 
-@@clientName(OptimizationCandidate.avg_score, "averageScore");
-@@clientName(OptimizationCandidate.avg_tokens, "averageTokens");
-@@clientName(OptimizationCandidate.eval_id, "evaluationId");
-@@clientName(OptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationCandidate.avg_score, "averageScore");
+@@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
+@@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
+@@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 
@@ -127,6 +133,8 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
+@@clientName(OpenAI.NamespaceToolParam, "NamespaceTool", "java");
+@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchTool", "java");
 @@clientName(
   OpenAI.FunctionShellToolParam,
   "FunctionShellToolParameter",
@@ -189,12 +197,21 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
+//@@clientName(WebIQPreviewTool, "WebIqPreviewTool", "java");
+@@clientName(WorkIQPreviewToolboxTool, "WorkIqPreviewToolboxTool", "java");
+@@clientName(FabricIQPreviewToolboxTool, "FabricIqPreviewToolboxTool", "java");
+//@@clientName(WebIQPreviewToolboxTool, "WebIqPreviewToolboxTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+
+@@clientName(UploadSessionFileParams.agent_session_id, "sessionId", "java");
+@@clientName(DownloadSessionFileParams.agent_session_id, "sessionId", "java");
+@@clientName(ListSessionFilesParams.agent_session_id, "sessionId", "java");
+@@clientName(DeleteSessionFileParams.agent_session_id, "sessionId", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -348,6 +365,7 @@ using Azure.AI.Projects;
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 // AI Tooling: openai-java de-dup
@@ -388,6 +406,10 @@ using Azure.AI.Projects;
 
 @@alternateType(OpenAI.OutputItem, unknown, "java");
 @@alternateType(OpenAI.InputItem, unknown, "java");
+
+// Erase strongly-typed payloads on the namespace / tool_search Tool variants.
+@@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
+@@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
@@ -662,4 +684,3 @@ union WebSearchToolSearchContextSizeExpandable {
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
-

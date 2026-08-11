@@ -9,17 +9,25 @@
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+const AgentOptimizationRequiredPreviews = #{
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.agents_optimization_v2_preview
+  ],
+};
 
 // ---------------------------------------------------------------------------
 // Enums / unions
 // ---------------------------------------------------------------------------
 
 /** Agent attribute that can be optimized. */
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 union TargetAttribute {
   string,
 
@@ -36,20 +44,13 @@ union TargetAttribute {
   tool: "tool",
 }
 
-/** Run mode for an optimization job. */
-union OptimizationMode {
-  string,
-
-  @doc("Full optimization: baseline + mutation target attributes.")
-  optimize: "optimize",
-}
-
 // ---------------------------------------------------------------------------
 // Dataset input — discriminated union (inline items or registered reference)
 // ---------------------------------------------------------------------------
 
 /** Discriminator values for the dataset input union. */
-union OptimizationDatasetInputType {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+union AgentOptimizationDatasetInputType {
   string,
 
   @doc("Inline dataset — items are provided directly in the request body.")
@@ -61,24 +62,29 @@ union OptimizationDatasetInputType {
 
 /** Base discriminated model for dataset input. Either inline items or a registered reference. */
 @discriminator("type")
-model OptimizationDatasetInput {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: OptimizationDatasetInputType;
+  type: AgentOptimizationDatasetInputType;
 }
 
 /** Inline dataset — items supplied directly in the request body. */
-model OptimizationInlineDatasetInput extends OptimizationDatasetInput {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationInlineDatasetInput
+  extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: OptimizationDatasetInputType.inline;
+  type: AgentOptimizationDatasetInputType.inline;
 
   @doc("Dataset items.")
-  items: OptimizationDatasetItem[];
+  items: AgentOptimizationDatasetItem[];
 }
 
 /** Reference to a registered Foundry dataset. */
-model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationReferenceDatasetInput
+  extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: OptimizationDatasetInputType.reference;
+  type: AgentOptimizationDatasetInputType.reference;
 
   @doc("Registered dataset name.")
   name: string;
@@ -88,7 +94,8 @@ model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
 }
 
 /** A single item in an inline dataset. */
-model OptimizationDatasetItem {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationDatasetItem {
   @doc("The user query / prompt.")
   query?: string;
 
@@ -101,11 +108,12 @@ model OptimizationDatasetItem {
   desired_num_turns?: int32;
 
   @doc("Per-item evaluation criteria.")
-  criteria?: OptimizationDatasetCriterion[];
+  criteria?: AgentOptimizationDatasetCriterion[];
 }
 
 /** Evaluation criterion: a name + instruction pair used for per-item scoring. */
-model OptimizationDatasetCriterion {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationDatasetCriterion {
   @doc("Criterion name.")
   name: string;
 
@@ -118,7 +126,8 @@ model OptimizationDatasetCriterion {
 // ---------------------------------------------------------------------------
 
 /** Reference to a named evaluator, optionally pinned to a version. */
-model OptimizationEvaluatorRef {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationEvaluatorRef {
   @doc("Evaluator name.")
   name: string;
 
@@ -131,7 +140,8 @@ model OptimizationEvaluatorRef {
 // ---------------------------------------------------------------------------
 
 @doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
-model OptimizationAgentIdentifier {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model OptimizedAgentIdentifier {
   @doc("Registered Foundry agent name (required).")
   agent_name: string;
 
@@ -139,29 +149,10 @@ model OptimizationAgentIdentifier {
   agent_version?: string;
 }
 
-@doc("Agent definition returned in response payloads (includes resolved config).")
-model OptimizationAgentDefinition {
-  @doc("Agent name.")
-  agent_name?: string;
-
-  @doc("Agent version.")
-  agent_version?: string;
-
-  @doc("Model deployment name.")
-  `model`?: string;
-
-  @doc("System prompt / instructions.")
-  system_prompt?: string;
-
-  @doc("Agent skills.")
-  skills?: Record<unknown>[];
-
-  @doc("Agent tools.")
-  tools?: Record<unknown>[];
-}
-
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Tuning knobs and run-mode for an optimization job.")
-model OptimizationOptions {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationOptions {
   @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
   @minValue(1)
   max_candidates?: int32 = 5;
@@ -177,24 +168,29 @@ model OptimizationOptions {
 
   @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
+
+  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.")
+  @minValue(1)
+  max_stalls?: int32 = 5;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
-model OptimizationJobInputs {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: OptimizationAgentIdentifier;
+  agent: OptimizedAgentIdentifier;
 
   @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
-  train_dataset: OptimizationDatasetInput;
+  train_dataset: AgentOptimizationDatasetInput;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset?: OptimizationDatasetInput;
+  validation_dataset?: AgentOptimizationDatasetInput;
 
   @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
-  evaluators: OptimizationEvaluatorRef[];
+  evaluators: AgentOptimizationEvaluatorRef[];
 
   @doc("Tuning knobs and run-mode.")
-  options?: OptimizationOptions;
+  options?: AgentOptimizationOptions;
 }
 
 // ---------------------------------------------------------------------------
@@ -202,7 +198,8 @@ model OptimizationJobInputs {
 // ---------------------------------------------------------------------------
 
 @doc("In-flight progress; only populated while status is queued or in_progress.")
-model OptimizationJobProgress {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationJobProgress {
   @doc("Number of candidates whose evaluation has completed so far.")
   candidates_completed: int32;
 
@@ -214,7 +211,8 @@ model OptimizationJobProgress {
 }
 
 @doc("Aggregated evaluation result for a single candidate agent configuration across all tasks.")
-model OptimizationCandidate {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationCandidate {
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
   candidate_id?: string;
 
@@ -240,45 +238,9 @@ model OptimizationCandidate {
   promotion?: PromotionInfo;
 }
 
-@doc("Per-task evaluation result for a single candidate.")
-model OptimizationTaskResult {
-  @doc("Task name (from the dataset).")
-  task_name: string;
-
-  @doc("The user query / input for the task.")
-  query?: string;
-
-  @doc("Per-evaluator scores keyed by evaluator name.")
-  scores: Record<float64>;
-
-  @doc("Composite score combining all evaluator scores.")
-  composite_score: float64;
-
-  @doc("Total tokens consumed during the agent run for this task.")
-  tokens: int64;
-
-  @doc("Wall-clock seconds for this task's agent execution.")
-  @encode(DurationKnownEncoding.seconds, float64)
-  duration_seconds: duration;
-
-  @doc("Whether the task met the pass threshold.")
-  passed: boolean;
-
-  @doc("Error message if the task failed during execution.")
-  error_message?: string;
-
-  @doc("Per-evaluator reasoning keyed by evaluator name.")
-  rationales?: Record<string>;
-
-  @doc("Raw agent response text.")
-  response?: string;
-
-  @doc("Identifier of the agent run that produced this result.")
-  run_id?: string;
-}
-
 @doc("Terminal-state result body. Populated when status is succeeded or failed.")
-model OptimizationJobResult {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationJobResult {
   @doc("Candidate ID of the original (un-optimized) baseline evaluation.")
   baseline?: string;
 
@@ -286,7 +248,7 @@ model OptimizationJobResult {
   best?: string;
 
   @doc("All evaluated candidates including baseline.")
-  candidates?: OptimizationCandidate[];
+  candidates?: AgentOptimizationCandidate[];
 }
 
 // ---------------------------------------------------------------------------
@@ -294,7 +256,11 @@ model OptimizationJobResult {
 // ---------------------------------------------------------------------------
 
 @doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
-model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationJob is JobLike<
+  AgentOptimizationJobResult,
+  AgentOptimizationJobInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -305,7 +271,7 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 
   @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
   @visibility(Lifecycle.Read)
-  progress?: OptimizationJobProgress;
+  progress?: AgentOptimizationJobProgress;
 
   @doc("Non-fatal warnings emitted at any point during optimization.")
   @visibility(Lifecycle.Read)
@@ -317,11 +283,14 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 // ---------------------------------------------------------------------------
 
 @doc("Slim job representation returned by the LIST endpoint.")
-model OptimizationJobListItem
-  is OmitProperties<OptimizationJob, "inputs" | "result" | "warnings"> {
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+model AgentOptimizationJobListItem is OmitProperties<
+  AgentOptimizationJob,
+  "inputs" | "result" | "warnings"
+> {
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
-  agent?: OptimizationAgentIdentifier;
+  agent?: OptimizedAgentIdentifier;
 }
 
 // ---------------------------------------------------------------------------
@@ -329,6 +298,7 @@ model OptimizationJobListItem
 // ---------------------------------------------------------------------------
 
 @doc("Promotion metadata recorded when a candidate is deployed to a Foundry agent.")
+@extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model PromotionInfo {
   @doc("Timestamp when promotion occurred, represented in Unix time.")
   promoted_at: FoundryTimestamp;

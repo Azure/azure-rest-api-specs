@@ -2,12 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
@@ -2959,6 +2960,11 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
+
+  /**
+   * SecuredByPerimeter
+   */
+  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -5178,6 +5184,7 @@ model DatabaseAutomaticTuningProperties {
  * Automatic tuning properties for individual advisors.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model AutomaticTuningOptions {
   /**
@@ -9051,6 +9058,7 @@ model JobStepOutput {
  * The execution options of a job step.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepExecutionOptions {
   /**
@@ -13855,6 +13863,7 @@ model AutomaticTuningServerProperties {
  * Automatic tuning properties for individual advisors.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerOptions {
   /**
@@ -14214,6 +14223,7 @@ model CheckNameAvailabilityRequest {
  * The result of a name availability check.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityResponse {
   /**
@@ -14663,6 +14673,18 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceName?: string;
+
+  /**
+   * The next reset time for the metric (ISO8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  nextResetTime?: utcDateTime;
 }
 
 /**

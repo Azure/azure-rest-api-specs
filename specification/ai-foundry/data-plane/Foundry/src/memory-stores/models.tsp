@@ -1,5 +1,5 @@
 import "../common/service.tsp";
-import "../openai-responses/models.tsp";
+import "../openai/responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -10,6 +10,7 @@ const MemoryStoreRequiredPreviews = #{
   required_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
@@ -47,6 +48,7 @@ model MemoryStoreObject {
   definition: MemoryStoreDefinition;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryStoreResponse {
   @doc("The object type. Always 'memory_store.deleted'.")
@@ -95,6 +97,7 @@ model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
   options?: MemoryStoreDefaultOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Default memory store configurations.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDefaultOptions {
@@ -141,6 +144,7 @@ union MemoryStoreUpdateStatus {
   superseded: "superseded",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Provides the status of a memory store update operation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreUpdateResponse {
@@ -200,6 +204,7 @@ union MemoryOperationKind {
   delete: "delete",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Memory search options.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemorySearchOptions {
@@ -207,6 +212,7 @@ model MemorySearchOptions {
   max_memories?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Memory search response.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreSearchResponse {
@@ -283,6 +289,7 @@ model ProceduralMemoryItem extends MemoryItem {
   kind: MemoryItemKind.procedural;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for deleting memories from a scope.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDeleteScopeResponse {
@@ -299,6 +306,7 @@ model MemoryStoreDeleteScopeResponse {
   deleted: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for deleting a memory item from a memory store.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryResponse {

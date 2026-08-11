@@ -88,7 +88,7 @@ describe("getLine", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
 
@@ -142,7 +142,7 @@ describe("getFile", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
 
@@ -208,7 +208,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a };
@@ -239,7 +239,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a, level: "warning" };
@@ -253,7 +253,7 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a, level: "error" };
@@ -267,12 +267,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -284,12 +284,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -301,12 +301,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -318,12 +318,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -335,7 +335,7 @@ describe("compareLintDiffViolations", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b: LintDiffViolation = {
@@ -352,7 +352,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b: LintDiffViolation = {
@@ -383,7 +383,7 @@ describe("generateLintDiffReport", () => {
           document:
             "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
           position: { line: 1, colomn: 1 },
-        } as Source,
+        },
       ],
       details: {},
     };
@@ -568,7 +568,7 @@ describe("generateLintDiffReport", () => {
             document:
               "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
             position: { line: 1, colomn: 1 },
-          } as Source,
+          },
         ],
         details: {},
       };

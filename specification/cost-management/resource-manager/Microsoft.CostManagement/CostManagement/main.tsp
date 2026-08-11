@@ -23,6 +23,7 @@ import "./Alert.tsp";
 import "./ScheduledAction.tsp";
 import "./Setting.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
