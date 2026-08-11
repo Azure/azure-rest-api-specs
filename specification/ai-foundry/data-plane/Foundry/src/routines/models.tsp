@@ -435,13 +435,11 @@ model ListRoutinesParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.")
   @query
   after?: string;
 
-  @doc("The ordering direction. Supported values are asc and desc.")
-  @query
-  order?: string;
+  ...PageOrderQueryParameter;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -467,13 +465,11 @@ model ListRoutineRunsParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.")
   @query
   after?: string;
 
-  @doc("The ordering direction. Supported values are asc and desc.")
-  @query
-  order?: string;
+  ...PageOrderQueryParameter;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")

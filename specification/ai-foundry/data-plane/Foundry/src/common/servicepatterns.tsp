@@ -185,6 +185,17 @@ model AgentsPagedResult<T> {
   has_more: boolean;
 }
 
+@doc("A page of items with a URL cursor to the next page.")
+model PagedResultWithNextLink<T> {
+  /** The requested list of items. */
+  @pageItems
+  data: T[];
+
+  /** The URL to fetch the next page of results, or absent if there are no additional pages. */
+  @nextLink
+  next_link?: url;
+}
+
 alias PageLimitQueryParameter = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
