@@ -277,8 +277,10 @@ union AgentKind {
   string,
   prompt: "prompt",
   hosted: "hosted",
-  workflow: "workflow",
   external: "external",
+  
+  #deprecated "Deprecated. Use Microsoft Agent Framework instead"
+  workflow: "workflow",
 
   @removed(Versions.v1)
   container_app: "container_app",
@@ -364,6 +366,7 @@ model PromptAgentDefinitionTextOptions {
 * If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
 * see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
 */
+#deprecated "Deprecated. Use Microsoft Agent Framework instead"
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.workflow_agents_v1_preview] }
