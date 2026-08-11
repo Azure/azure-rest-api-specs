@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "$expand": "properties/usage,properties/allRecommendationDetails",
+    "$filter": "properties/lookBackPeriod eq 'Last7Days' AND properties/term eq 'P1Y'",
+    "api-version": "2026-08-01",
+    "billingScope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.CostManagement/benefitRecommendations",
+            "id": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/benefitRecommendations/00000000-0000-0000-0000-000000000000",
+            "kind": "FlexSpendPlan",
+            "properties": {
+              "allRecommendationDetails": {
+                "value": [
+                  {
+                    "averageUtilizationPercentage": 100.0,
+                    "benefitCost": 21600,
+                    "commitmentAmount": 21600,
+                    "coveragePercentage": 100.0,
+                    "overageCost": 0.0,
+                    "savingsAmount": 1200,
+                    "savingsPercentage": 5.26,
+                    "totalCost": 21600,
+                    "wastageCost": 0.0,
+                    "tierMin": 15000,
+                    "tierMax": 22000
+                  },
+                  {
+                    "averageUtilizationPercentage": 100.0,
+                    "benefitCost": 10000,
+                    "commitmentAmount": 10000,
+                    "coveragePercentage": 55.19,
+                    "overageCost": 12584.95,
+                    "savingsAmount": 215.05,
+                    "savingsPercentage": 0.94,
+                    "totalCost": 22584.95,
+                    "wastageCost": 0.0,
+                    "tierMin": 0,
+                    "tierMax": 10000
+                  }
+                ]
+              },
+              "armSkuName": "Synapse_FCP",
+              "commitmentGranularity": "FullTerm",
+              "costWithoutBenefit": 22800,
+              "currencyCode": "USD",
+              "firstConsumptionDate": "2026-08-18T00:00:00Z",
+              "lastConsumptionDate": "2026-08-25T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "recommendationDetails": {
+                "averageUtilizationPercentage": 100.0,
+                "benefitCost": 21600,
+                "commitmentAmount": 21600,
+                "coveragePercentage": 100.0,
+                "overageCost": 0.0,
+                "savingsAmount": 1200,
+                "savingsPercentage": 5.26,
+                "totalCost": 21600,
+                "wastageCost": 0.0,
+                "tierMin": 15000,
+                "tierMax": 22000
+              },
+              "scope": "Shared",
+              "term": "P1Y",
+              "totalHours": 1440,
+              "usage": {
+                "charges": [25000],
+                "usageGrain": "FullTerm"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BenefitRecommendations_List",
+  "title": "BenefitRecommendationsBillingAccountForFSPList"
+}
