@@ -21,8 +21,10 @@ namespace Microsoft.Chaos;
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 @tenantResource
-model ScenarioTemplate
-  is Azure.ResourceManager.ProxyResource<ScenarioTemplateProperties, false> {
+model ScenarioTemplate is Azure.ResourceManager.ProxyResource<
+  ScenarioTemplateProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ScenarioTemplate,
     KeyName = "scenarioTemplateName",
@@ -39,8 +41,10 @@ model ScenarioTemplate
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 @parentResource(ScenarioTemplate)
-model ScenarioTemplateVersion
-  is Azure.ResourceManager.ProxyResource<ScenarioTemplateVersionProperties, false> {
+model ScenarioTemplateVersion is Azure.ResourceManager.ProxyResource<
+  ScenarioTemplateVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ScenarioTemplateVersion,
     KeyName = "version",

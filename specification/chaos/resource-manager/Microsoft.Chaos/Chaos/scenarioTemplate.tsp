@@ -54,7 +54,8 @@ interface ScenarioTemplateVersions {
 @@doc(
   ScenarioTemplateVersion.name,
   "The version of the scenario template, for example 1.2."
-);@@doc(
+);
+@@doc(
   ScenarioTemplateVersion.properties,
   "The properties of the scenario template version."
 );
