@@ -635,6 +635,34 @@ interface Container {
     }
   >;
 
+  /** Returns a list of the blobs as raw data to be deserialized in the client. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+  @get
+  @sharedRoute
+  @route("?restype=container&comp=list")
+  @scope("rust")
+  listBlobsRaw is StorageOperationResponseBody<
+    {
+      /** The Accept header indicating the requested response media type. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response deserialized in the client"
+      @header("accept")
+      accept: string;
+
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+    },
+    {
+      @body body: bytes;
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
+  >;
+
   /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
