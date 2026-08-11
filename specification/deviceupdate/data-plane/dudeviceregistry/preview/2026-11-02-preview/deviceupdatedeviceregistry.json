@@ -82,7 +82,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -121,7 +127,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -152,7 +164,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -199,7 +217,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -250,7 +274,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -298,7 +328,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -331,7 +367,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -370,7 +412,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -419,7 +467,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -467,7 +521,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -511,7 +571,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -557,7 +623,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -608,7 +680,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -660,7 +738,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -677,6 +761,112 @@
     }
   },
   "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "BestCompatibleUpdate": {
       "type": "object",
       "description": "The best compatible update for a device class.",
@@ -767,57 +957,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "Error": {
-      "type": "object",
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Server defined error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of errors that led to the reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        },
-        "occurredDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time in UTC when the error occurred."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Common error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "The error details."
-        }
-      },
-      "required": [
-        "error"
       ]
     },
     "FileImportMetadata": {
@@ -916,31 +1055,6 @@
         "importUpdateInput"
       ]
     },
-    "InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information than the current object about\nthe error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "A more specific error code than what was provided by the containing error."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "errorDetail": {
-          "type": "string",
-          "description": "The internal error or exception message."
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        }
-      },
-      "required": [
-        "code"
-      ]
-    },
     "Instructions": {
       "type": "object",
       "description": "Update install instructions container.",
@@ -979,42 +1093,6 @@
             "name": "NotStarted",
             "value": "NotStarted",
             "description": "NotStarted"
-          }
-        ]
-      }
-    },
-    "OperationStatus": {
-      "type": "string",
-      "description": "Operation status.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Background operation created but not started yet."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Background operation is currently running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Background operation finished with success."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Background operation finished with failure."
           }
         ]
       }
@@ -1197,7 +1275,7 @@
           "description": "Date and time in UTC when the update was created."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Update ETag."
         }
       },
@@ -1229,7 +1307,7 @@
           "description": "Optional download handler for utilizing related files to download payload file."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "File ETag."
         }
       },
@@ -1385,7 +1463,7 @@
           "description": "Operation Id."
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Operation status."
         },
         "update": {
@@ -1397,7 +1475,7 @@
           "description": "Location of the imported update when operation is successful."
         },
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Operation error encountered, if any."
         },
         "traceId": {
@@ -1415,7 +1493,7 @@
           "description": "Date and time in UTC when the operation was created."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Operation ETag."
         }
       },

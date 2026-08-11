@@ -10,89 +10,14 @@ using Azure.Core;
 namespace DeviceRegistryUpdateClient;
 
 // ---------------------------------------------------------------------------
-// Shared operation template + error models
+// Shared operation template
 // ---------------------------------------------------------------------------
 
-/** Standard operation with custom error response. */
+/** Standard operation with the Azure.Core error response. */
 alias ServiceOperation<
   Params extends TypeSpec.Reflection.Model,
   Response
-> = Foundations.Operation<Params, Response, {}, ErrorResponse>;
-
-/**
- * Common error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * The error details.
-   */
-  error: Error;
-}
-
-/**
- * Error details.
- */
-model Error {
-  /**
-   * Server defined error code.
-   */
-  code: string;
-
-  /**
-   * A human-readable representation of the error.
-   */
-  message: string;
-
-  /**
-   * The target of the error.
-   */
-  target?: string;
-
-  /**
-   * An array of errors that led to the reported error.
-   */
-  details?: Error[];
-
-  /**
-   * An object containing more specific information than the current object about
-   * the error.
-   */
-  innererror?: InnerError;
-
-  /**
-   * Date and time in UTC when the error occurred.
-   */
-  occurredDateTime?: utcDateTime;
-}
-
-/**
- * An object containing more specific information than the current object about
- * the error.
- */
-model InnerError {
-  /**
-   * A more specific error code than what was provided by the containing error.
-   */
-  code: string;
-
-  /**
-   * A human-readable representation of the error.
-   */
-  message?: string;
-
-  /**
-   * The internal error or exception message.
-   */
-  errorDetail?: string;
-
-  /**
-   * An object containing more specific information than the current object about
-   * the error.
-   */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "The original swagger payload uses InnerError.innerError recursively; renaming it would change the JSON contract."
-  innerError?: InnerError;
-}
+> = Foundations.Operation<Params, Response, {}, Foundations.ErrorResponse>;
 
 // ---------------------------------------------------------------------------
 // Shared parameter models. These are spread (...) into operations so the
@@ -185,33 +110,6 @@ union StepType {
    * Step type that installs another update.
    */
   Reference: "reference",
-}
-
-/**
- * Operation status.
- */
-union OperationStatus {
-  string,
-
-  /**
-   * Background operation created but not started yet.
-   */
-  NotStarted: "NotStarted",
-
-  /**
-   * Background operation is currently running.
-   */
-  Running: "Running",
-
-  /**
-   * Background operation finished with success.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Background operation finished with failure.
-   */
-  Failed: "Failed",
 }
 
 /**
@@ -325,7 +223,7 @@ model Update {
   /**
    * Update ETag.
    */
-  etag?: string;
+  etag?: eTag;
 }
 
 /**
@@ -531,7 +429,7 @@ model UpdateFile extends UpdateFileBase {
   /**
    * File ETag.
    */
-  etag?: string;
+  etag?: eTag;
 }
 
 /**
@@ -601,7 +499,7 @@ model UpdateOperation {
   /**
    * Operation status.
    */
-  status: OperationStatus;
+  status: Foundations.OperationState;
 
   /**
    * The update being imported or deleted. For import, this property will only be
@@ -617,7 +515,7 @@ model UpdateOperation {
   /**
    * Operation error encountered, if any.
    */
-  error?: Error;
+  error?: Foundations.Error;
 
   /**
    * Operation correlation identity that can used by Microsoft Support for
@@ -638,7 +536,7 @@ model UpdateOperation {
   /**
    * Operation ETag.
    */
-  etag?: string;
+  etag?: eTag;
 }
 
 /**
