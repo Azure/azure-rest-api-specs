@@ -673,3 +673,17 @@ model TelephonyTransferTargets {
   @doc("The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.")
   transfer_targets: TelephonyTransferTarget[];
 }
+
+/** The entity tag and transfer targets configured for one voice agent. */
+alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
+  @doc("The entity tag to send in the `If-Match` header when replacing the transfer targets.")
+  @header("ETag")
+  etag: Azure.Core.eTag;
+};
+
+/** The optimistic-concurrency precondition for replacing a voice agent's transfer targets. */
+alias TelephonyTransferTargetsIfMatchHeader = {
+  @doc("The entity tag returned by the latest read. The replacement fails if the transfer targets changed since that read.")
+  @header("If-Match")
+  ifMatch: string;
+};

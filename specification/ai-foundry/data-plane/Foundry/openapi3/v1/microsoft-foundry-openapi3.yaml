@@ -3061,6 +3061,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            ETag:
+              required: true
+              description: The entity tag to send in the `If-Match` header when replacing the transfer targets.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3101,6 +3107,12 @@ paths:
           description: The name of the voice agent whose transfer targets are replaced.
           schema:
             type: string
+        - name: If-Match
+          in: header
+          required: true
+          description: The entity tag returned by the latest read. The replacement fails if the transfer targets changed since that read.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -3111,6 +3123,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            ETag:
+              required: true
+              description: The entity tag to send in the `If-Match` header when replacing the transfer targets.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -41013,6 +41031,14 @@ components:
             - Canceled
         - type: string
       description: Enum describing allowed operation states.
+    Azure.Core.eTag:
+      type: string
+      format: eTag
+      description: |-
+        The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.
+        It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.
+
+        It is a string of ASCII characters placed between double quotes, like "675af34563dc-tr34".
     Azure.Core.uuid:
       type: string
       format: uuid

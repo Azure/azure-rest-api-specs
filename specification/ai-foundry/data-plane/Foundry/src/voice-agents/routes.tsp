@@ -724,7 +724,7 @@ interface AgentTelephony {
       /** The name of the voice agent whose transfer targets are retrieved. */
       @path agent_name: string;
     },
-    TelephonyTransferTargets
+    TelephonyTransferTargetsResponse
   >;
 
   /** Replaces all transfer targets configured for the voice agent named in the path. */
@@ -738,8 +738,9 @@ interface AgentTelephony {
       /** The name of the voice agent whose transfer targets are replaced. */
       @path agent_name: string;
 
+      ...TelephonyTransferTargetsIfMatchHeader;
       ...TelephonyTransferTargets;
     },
-    TelephonyTransferTargets
+    TelephonyTransferTargetsResponse
   >;
 }
