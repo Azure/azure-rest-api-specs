@@ -189,45 +189,36 @@ describe("data-plane review workflow scope", () => {
     const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
 
     expect(content).not.toContain("checkout: false");
-    expect(content).toContain("checkout:\n  ref: ${{ steps.resolve_pr_base.outputs.base_sha }}");
+    expect(content).toContain("checkout:\n  ref: ${{ github.workflow_sha }}");
     expect(content).toContain(".github/agents");
     expect(content).toContain(".github/skills/azure-api-review");
     expect(content).toContain("allowed: [get_file_contents, pull_request_read, search_code]");
     expect(content).toContain('"jq"');
     expect(content).toContain('"nl"');
-    expect(content).toContain("Read PR metadata and PR-authored files only through the");
+    expect(content).toContain("Read PR\n  metadata and PR-authored files only through the");
     expect(content).toContain("Do not emulate it with a general-purpose");
   });
 
-  it("resolves the target PR base before checkout for manual dispatch", async () => {
+  it("checks out the trusted workflow commit instead of a potentially stale PR base", async () => {
     const [source, compiled] = await Promise.all([
       readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8"),
       readFile(join(REAL_ROOT, LOCKED_WORKFLOW_FILE), "utf8"),
     ]);
-    const effectivePrNumber = "${{ github.event.pull_request.number || inputs.item_number }}";
 
-    expect(source).toContain("pre-steps:\n  - name: Resolve target pull request base");
-    expect(source).toContain(`PR_NUMBER: ${effectivePrNumber}`);
-    expect(source).toContain("const { data: pull } = await github.rest.pulls.get({");
-    expect(source).toContain('core.setOutput("base_sha", baseSha)');
-    expect(source).not.toContain("ref: ${{ github.event.pull_request.base.sha }}");
+    expect(source).toContain("ref: ${{ github.workflow_sha }}");
+    expect(source).not.toContain("pull.base.sha");
+    expect(source).not.toContain("resolve_pr_base");
 
-    const resolverIndex = compiled.indexOf(`PR_NUMBER: ${effectivePrNumber}`);
     const checkoutIndex = compiled.indexOf("- name: Checkout repository\n");
     const checkoutEndIndex = compiled.indexOf(
       "- name: Clear partial clone markers after sparse checkout",
       checkoutIndex,
     );
-    expect(resolverIndex).toBeGreaterThan(-1);
-    expect(checkoutIndex).toBeGreaterThan(resolverIndex);
+    expect(checkoutIndex).toBeGreaterThan(-1);
     expect(checkoutEndIndex).toBeGreaterThan(checkoutIndex);
-    const resolverStep = compiled.slice(resolverIndex, checkoutIndex);
-    expect(resolverStep).toContain("id: resolve_pr_base");
-    expect(resolverStep).toContain("name: Resolve target pull request base");
-    expect(resolverStep).toContain("github.rest.pulls.get");
     const checkoutStep = compiled.slice(checkoutIndex, checkoutEndIndex);
     expect(checkoutStep.match(/uses: actions\/checkout@/g)).toHaveLength(1);
-    expect(checkoutStep).toContain("ref: ${{ steps.resolve_pr_base.outputs.base_sha }}");
+    expect(checkoutStep).toContain("ref: ${{ github.workflow_sha }}");
   });
 
   it("keeps Phase 2 manually gated, non-blocking, and capped at five inline findings", async () => {
@@ -242,6 +233,8 @@ describe("data-plane review workflow scope", () => {
     expect(workflow).toContain("allowed-events: [COMMENT]");
     expect(workflow).toContain("Always call `add_comment` exactly once");
     expect(workflow).toContain("Questions are not findings and always remain in the summary");
+    expect(workflow).toContain("Post the complete finding\n   at the first instance");
+    expect(workflow).toContain("further repetitions are omitted for brevity");
     expect(rollout).toContain("The workflow is at **Phase 2**");
     expect(rollout).toContain("The manually applied label is the safety control");
     expect(rollout).toContain("not a hard rollout gate");
@@ -252,7 +245,7 @@ describe("data-plane review workflow scope", () => {
     const effectivePrNumber = "${{ github.event.pull_request.number || inputs.item_number }}";
 
     expect(content).toContain("item_number:\n        description: PR number to review");
-    expect(content.split(effectivePrNumber)).toHaveLength(7);
+    expect(content.split(effectivePrNumber)).toHaveLength(6);
     expect(content).not.toContain('target: "${{ github.event.pull_request.number }}"');
   });
 });
