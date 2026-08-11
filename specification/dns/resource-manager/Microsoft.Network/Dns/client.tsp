@@ -5,6 +5,7 @@ using Microsoft.Network;
 
 @@clientName(Microsoft.Network, "DnsManagementClient", "javascript");
 @@clientName(Microsoft.Network, "DnsManagementClient", "java");
+@@clientName(Microsoft.Network, "DnsManagementClient", "python");
 
 @@clientName(Microsoft.Network.RecordSetProperties.TTL, "ttl", "java");
 
@@ -107,6 +108,7 @@ using Microsoft.Network;
 );
 @@clientName(TxtRecord.value, "Values", "csharp");
 @@clientName(RecordSetProperties, "DnsRecordSetProperties", "csharp");
+@@clientName(RecordSets.update::parameters.properties, "data", "csharp");
 
 @@alternateType(DnssecConfig.etag, Azure.Core.eTag, "csharp");
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");

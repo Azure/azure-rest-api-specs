@@ -21,12 +21,13 @@ namespace Microsoft.MachineLearningServices;
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
-model EndpointDeploymentResourcePropertiesBasicResource
-  is Azure.ResourceManager.ProxyResource<
-    EndpointDeploymentResourceProperties,
-    false
-  > {
+model EndpointDeploymentResourcePropertiesBasicResource is Azure.ResourceManager.ProxyResource<
+  EndpointDeploymentResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = EndpointDeploymentResourcePropertiesBasicResource,
     KeyName = "deploymentName",
@@ -42,6 +43,8 @@ model EndpointDeploymentResourcePropertiesBasicResource
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -72,7 +75,9 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         deploymentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningWorkspaceConnectionDeployment"
     > {}
 
 /**
@@ -82,6 +87,8 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -134,6 +141,8 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -164,7 +173,9 @@ interface EndpointDeploymentOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         deploymentName: string,
-      }
+      },
+      ErrorResponse,
+      "EndpointDeployment"
     > {}
 
 /**
@@ -174,6 +185,8 @@ interface EndpointDeploymentOps
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface EndpointDeployment {
   /**

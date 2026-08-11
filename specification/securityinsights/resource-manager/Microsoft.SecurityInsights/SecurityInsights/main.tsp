@@ -75,9 +75,15 @@ namespace Microsoft.SecurityInsights;
  */
 enum Versions {
   /**
-   * The 2025-07-01-preview API version.
+   * The 2025-09-01 API version.
    */
-  v2025_07_01_preview: "2025-07-01-preview",
+  v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2025-10-01-preview API version.
+   */
+  @previewVersion
+  v2025_10_01_preview: "2025-10-01-preview",
 }
 
 interface Operations

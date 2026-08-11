@@ -13,8 +13,10 @@ namespace PrivateLinksAPI;
 /**
  * A private link resource that enables secure, private connectivity to Microsoft Defender for Cloud services. This resource manages the lifecycle of private endpoint connections and provides the necessary infrastructure for private connectivity.
  */
-model PrivateLinkResource
-  is Azure.ResourceManager.TrackedResource<PrivateLinkProperties, false> {
+model PrivateLinkResource is Azure.ResourceManager.TrackedResource<
+  PrivateLinkProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateLinkResource,
     KeyName = "privateLinkName",

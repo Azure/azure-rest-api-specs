@@ -204,7 +204,8 @@ interface GraphQLApiResolverPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceApiResolverPolicy"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -436,7 +437,8 @@ interface PolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiManagementPolicy"
     > {}
 
 @armResourceOperations
@@ -555,7 +557,8 @@ interface ProductPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiManagementProductPolicy"
     > {}
 
 @armResourceOperations
@@ -675,7 +678,8 @@ interface WorkspacePolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspacePolicy"
     > {}
 
 @armResourceOperations
@@ -812,7 +816,8 @@ interface WorkspaceApiOperationPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiOperationPolicy"
     > {}
 
 @armResourceOperations
@@ -941,7 +946,8 @@ interface WorkspaceApiPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiPolicy"
     > {}
 
 @armResourceOperations
@@ -1069,7 +1075,8 @@ interface WorkspaceProductPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProductPolicy"
     > {}
 
 @armResourceOperations
