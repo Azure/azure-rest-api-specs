@@ -2799,6 +2799,84 @@
         }
       }
     },
+    "EncryptionStatus": {
+      "type": "string",
+      "description": "The status of customer-managed key encryption for a configuration store.",
+      "enum": [
+        "Succeeded",
+        "IdentityNotFound",
+        "InvalidKeyState",
+        "InvalidKeyLength",
+        "KeyDisabled",
+        "KeyExpired",
+        "KeyNotFound",
+        "UnsupportedKeyAlgorithm",
+        "Unauthorized",
+        "KeyNotValidYet",
+        "ForbiddenByNetworkSecurityPerimeter"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The customer-managed key is accessible and encryption is functioning as expected."
+          },
+          {
+            "name": "IdentityNotFound",
+            "value": "IdentityNotFound",
+            "description": "The managed identity configured to access the customer-managed key could not be found."
+          },
+          {
+            "name": "InvalidKeyState",
+            "value": "InvalidKeyState",
+            "description": "The customer-managed key is in a state that does not permit encryption operations."
+          },
+          {
+            "name": "InvalidKeyLength",
+            "value": "InvalidKeyLength",
+            "description": "The length of the customer-managed key is not supported for encryption."
+          },
+          {
+            "name": "KeyDisabled",
+            "value": "KeyDisabled",
+            "description": "The customer-managed key is disabled in the key vault."
+          },
+          {
+            "name": "KeyExpired",
+            "value": "KeyExpired",
+            "description": "The customer-managed key has passed its expiration date."
+          },
+          {
+            "name": "KeyNotFound",
+            "value": "KeyNotFound",
+            "description": "The customer-managed key could not be found at the configured key identifier."
+          },
+          {
+            "name": "UnsupportedKeyAlgorithm",
+            "value": "UnsupportedKeyAlgorithm",
+            "description": "The algorithm of the customer-managed key is not supported for encryption."
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "The configured identity is not authorized to perform encryption operations with the customer-managed key."
+          },
+          {
+            "name": "KeyNotValidYet",
+            "value": "KeyNotValidYet",
+            "description": "The customer-managed key is not yet valid because its activation date is in the future."
+          },
+          {
+            "name": "ForbiddenByNetworkSecurityPerimeter",
+            "value": "ForbiddenByNetworkSecurityPerimeter",
+            "description": "Access to the customer-managed key is blocked by a network security perimeter configuration."
+          }
+        ]
+      }
+    },
     "FeatureFlag": {
       "type": "object",
       "description": "The feature flag resource along with all resource properties.",
@@ -3119,15 +3197,36 @@
           "description": "Whether telemetry is enabled."
         },
         "metadata": {
-          "type": "object",
+          "type": "array",
           "description": "The metadata included on outbound telemetry.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/FeatureFlagTelemetryMetadataEntry"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
         "enabled"
+      ]
+    },
+    "FeatureFlagTelemetryMetadataEntry": {
+      "type": "object",
+      "description": "A feature flag telemetry metadata entry.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the telemetry metadata entry."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the telemetry metadata entry."
+        }
+      },
+      "required": [
+        "name",
+        "value"
       ]
     },
     "FeatureFlagUserAllocation": {
@@ -3175,84 +3274,6 @@
       "required": [
         "name"
       ]
-    },
-    "EncryptionStatus": {
-      "type": "string",
-      "description": "The status of customer-managed key encryption for a configuration store.",
-      "enum": [
-        "Succeeded",
-        "IdentityNotFound",
-        "InvalidKeyState",
-        "InvalidKeyLength",
-        "KeyDisabled",
-        "KeyExpired",
-        "KeyNotFound",
-        "UnsupportedKeyAlgorithm",
-        "Unauthorized",
-        "KeyNotValidYet",
-        "ForbiddenByNetworkSecurityPerimeter"
-      ],
-      "x-ms-enum": {
-        "name": "EncryptionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The customer-managed key is accessible and encryption is functioning as expected."
-          },
-          {
-            "name": "IdentityNotFound",
-            "value": "IdentityNotFound",
-            "description": "The managed identity configured to access the customer-managed key could not be found."
-          },
-          {
-            "name": "InvalidKeyState",
-            "value": "InvalidKeyState",
-            "description": "The customer-managed key is in a state that does not permit encryption operations."
-          },
-          {
-            "name": "InvalidKeyLength",
-            "value": "InvalidKeyLength",
-            "description": "The length of the customer-managed key is not supported for encryption."
-          },
-          {
-            "name": "KeyDisabled",
-            "value": "KeyDisabled",
-            "description": "The customer-managed key is disabled in the key vault."
-          },
-          {
-            "name": "KeyExpired",
-            "value": "KeyExpired",
-            "description": "The customer-managed key has passed its expiration date."
-          },
-          {
-            "name": "KeyNotFound",
-            "value": "KeyNotFound",
-            "description": "The customer-managed key could not be found at the configured key identifier."
-          },
-          {
-            "name": "UnsupportedKeyAlgorithm",
-            "value": "UnsupportedKeyAlgorithm",
-            "description": "The algorithm of the customer-managed key is not supported for encryption."
-          },
-          {
-            "name": "Unauthorized",
-            "value": "Unauthorized",
-            "description": "The configured identity is not authorized to perform encryption operations with the customer-managed key."
-          },
-          {
-            "name": "KeyNotValidYet",
-            "value": "KeyNotValidYet",
-            "description": "The customer-managed key is not yet valid because its activation date is in the future."
-          },
-          {
-            "name": "ForbiddenByNetworkSecurityPerimeter",
-            "value": "ForbiddenByNetworkSecurityPerimeter",
-            "description": "Access to the customer-managed key is blocked by a network security perimeter configuration."
-          }
-        ]
-      }
     },
     "IdentityType": {
       "type": "string",

@@ -5,11 +5,6 @@
     - preview/2026-09-01-preview/appconfiguration.json
   reason: The feature flag name combines a data-plane key and optional label and intentionally accepts the data-plane contract's broad character set; TypeSpec constrains it to 1 through 10000 characters.
 
-- tool: AvoidAdditionalProperties
-  paths:
-    - preview/2026-09-01-preview/appconfiguration.json
-  reason: Feature flag filter parameters and telemetry metadata are user-defined key-value maps inherited from the data-plane contract.
-
 - tool: EnumInsteadOfBoolean
   paths:
     - preview/2026-09-01-preview/appconfiguration.json
@@ -19,11 +14,6 @@
   paths:
     - preview/2026-09-01-preview/appconfiguration.json
   reason: This brownfield TypeSpec project emits all existing API versions with common types v5; upgrading globally would modify established contracts outside this change.
-
-- tool: NestedResourcesMustHaveListOperation
-  paths:
-    - preview/2026-09-01-preview/appconfiguration.json
-  reason: Feature flags are exposed through the data-plane proxy with point GET, PUT, and DELETE operations only, matching the existing key-values proxy contract. Collection listing is not supported.
 
 - tool: TypeSpecRequirement
   path: ./preview/2019-02-01-preview/*.json

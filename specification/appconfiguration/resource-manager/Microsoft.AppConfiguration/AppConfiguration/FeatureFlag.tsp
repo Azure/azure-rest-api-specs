@@ -344,8 +344,24 @@ model FeatureFlagTelemetryConfiguration {
   /**
    * The metadata included on outbound telemetry.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Feature flag telemetry metadata is an open dictionary defined by the data plane contract."
-  metadata?: Record<string>;
+  @identifiers(#["name"])
+  metadata?: FeatureFlagTelemetryMetadataEntry[];
+}
+
+/**
+ * A feature flag telemetry metadata entry.
+ */
+@added(Versions.v2026_09_01_preview)
+model FeatureFlagTelemetryMetadataEntry {
+  /**
+   * The name of the telemetry metadata entry.
+   */
+  name: string;
+
+  /**
+   * The value of the telemetry metadata entry.
+   */
+  value: string;
 }
 
 @@doc(
