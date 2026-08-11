@@ -16,6 +16,14 @@ envelope (`Azure.Core.Foundations.ErrorResponse`), and nothing checks whether
 the errors inside it are actually useful. Error quality is almost entirely
 agent-owned.
 
+> **Authoritative upstream:** [error response structure](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-error-response-body-structure),
+> [documented error codes](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-document-error-code-values),
+> [diagnostic fields](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-error-non-api-contract-fields),
+> and
+> [default error responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-error-use-default-response)
+> in the Azure REST API Guidelines. This file adds reviewer-oriented tests for
+> error quality; the upstream Guidelines take precedence.
+
 The test to apply throughout: **can a caller write code against this error, and
 can an on-call engineer diagnose from it?** If the only way to distinguish two
 failures is to string-match `message`, the error design has failed.
