@@ -136,26 +136,6 @@ interface NewRegionFrontloadRelease {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a tenant-level action at /providers/{providerNamespace} and is not an ARM resource operation."
-@added(Versions.v2025_10_01)
-@removed(Versions.v2026_02_01_preview)
-interface NewRegionFrontloadReleaseManifestValidation {
-  /**
-   * Validates the manifest has been applied in all regions.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The operationId must remain NewRegionFrontloadRelease_ValidateManifest to match the existing service contract."
-  @operationId("NewRegionFrontloadRelease_ValidateManifest")
-  @route("/providers/{providerNamespace}/validateManifestAppliedInAllRegions")
-  @post
-  validateManifest(
-    ...ApiVersionParameter,
-
-    /** The name of the resource provider hosted within ProviderHub. */
-    @path
-    providerNamespace: string,
-  ): ArmResponse<string> | ErrorResponse;
-}
-
 @@maxLength(DefaultRollout.name, 260);
 @@doc(DefaultRollout.name, "The rollout name.");
 @@doc(DefaultRollout.properties, "Properties of the rollout.");

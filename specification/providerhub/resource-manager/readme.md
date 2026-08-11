@@ -106,11 +106,6 @@ directive:
     where:
       - $.definitions.ManifestInfo
     reason: The GET manifest operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}" returns a manifest information. The name of the operation cannot be changed at this point.
-  - suppress: XmsLongRunningOperationChanged
-    from: providerhub.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}"].delete
-    reason: As a part of this new API version we are introducing async behavior in the delete flow.
   - suppress: AddedRequiredProperty
     from: providerhub.json
     where:
@@ -135,13 +130,6 @@ directive:
     where:
       - $.definitions.OperationsDefinition.properties.properties
     reason: We are correcting our swagger to match with what our code has been returning in that past. We have been returning back ARM based resource even in the past. This is the localized operation definition.
-
-  - suppress: AddingResponseCode
-    from: providerhub.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}"].delete.responses.202
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}"].delete.responses.200
-    reason: As a part of this new API version we are introducing async behavior in the delete flow in providerRegistrations and matching the response we are sending as a part of resourcetypeRegistrations.
 ```
 
 ### Tag: package-2024-09-01

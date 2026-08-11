@@ -86,47 +86,6 @@
     }
   ],
   "paths": {
-    "/providers/{providerNamespace}/validateManifestAppliedInAllRegions": {
-      "post": {
-        "operationId": "NewRegionFrontloadRelease_ValidateManifest",
-        "description": "Validates the manifest has been applied in all regions.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_ValidateManifest": {
-            "$ref": "./examples/NewRegionFrontloadRelease_ValidateManifest.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.ProviderHub/operations": {
       "get": {
         "operationId": "Operations_List",
