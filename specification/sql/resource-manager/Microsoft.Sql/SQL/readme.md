@@ -4036,6 +4036,14 @@ suppressions:
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"].get.responses.default.schema["$ref"]
   - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries"]
+    reason: serverName and databaseName are ancestor resource name parameters.
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/statistics"]
+    reason: serverName and databaseName are ancestor resource name parameters.
+  - code: ResourceNameRestriction
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
   - code: ParameterNotDefinedInGlobalParameters
@@ -5238,6 +5246,12 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: ManagedInstances.json
     where: $.definitions.TopQueriesListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.QueryStatisticsDatabaseListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.TopQueriesDatabaseListResult
   - code: RequiredReadOnlySystemData
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"].get
