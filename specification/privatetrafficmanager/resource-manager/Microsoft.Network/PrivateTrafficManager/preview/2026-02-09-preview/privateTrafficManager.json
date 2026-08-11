@@ -1596,7 +1596,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TopologyMapUpdate"
+              "$ref": "#/definitions/TopologyMapPatch"
             }
           }
         ],
@@ -2084,6 +2084,10 @@
           }
         ]
       }
+    },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
     },
     "CustomHeader": {
       "type": "object",
@@ -3007,6 +3011,39 @@
         ]
       }
     },
+    "TopologyMapInlineSite": {
+      "type": "object",
+      "description": "A Site embedded in a Topology Map.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "The properties of the Site."
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Site."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "TopologyMapListResult": {
       "type": "object",
       "description": "The response of a TopologyMap list operation.",
@@ -3028,6 +3065,33 @@
         "value"
       ]
     },
+    "TopologyMapPatch": {
+      "type": "object",
+      "description": "The type used for update operations of the Topology Map.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TopologyMapPatchProperties",
+          "description": "The properties of the Topology Map that can be updated."
+        }
+      }
+    },
+    "TopologyMapPatchProperties": {
+      "type": "object",
+      "description": "The properties of a Topology Map that can be updated.",
+      "properties": {
+        "catchAllSiteName": {
+          "type": "string",
+          "description": "The Name of the CatchAll site. There is only one CatchAll site in a TopologyMap"
+        }
+      }
+    },
     "TopologyMapProperties": {
       "type": "object",
       "description": "Class representing the Topology Map properties.",
@@ -3036,7 +3100,7 @@
           "type": "array",
           "description": "The list of Sites in the Topology Map.",
           "items": {
-            "$ref": "#/definitions/Site"
+            "$ref": "#/definitions/TopologyMapInlineSite"
           }
         },
         "catchAllSiteName": {
@@ -3047,40 +3111,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the TopologyMap resource.",
           "readOnly": true
-        }
-      }
-    },
-    "TopologyMapUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the TopologyMap.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/TopologyMapUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "TopologyMapUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the TopologyMap.",
-      "properties": {
-        "sites": {
-          "type": "array",
-          "description": "The list of Sites in the Topology Map.",
-          "items": {
-            "$ref": "#/definitions/Site"
-          }
-        },
-        "catchAllSiteName": {
-          "type": "string",
-          "description": "The Name of the CatchAll site. There is only one CatchAll site in a TopologyMap"
         }
       }
     },

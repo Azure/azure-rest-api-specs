@@ -28,7 +28,7 @@ union ProvisioningState {
 @doc("Class representing the Topology Map properties.")
 model TopologyMapProperties {
   @doc("The list of Sites in the Topology Map.")
-  sites?: Site[];
+  sites?: TopologyMapInlineSite[];
 
   @doc("The Name of the CatchAll site. There is only one CatchAll site in a TopologyMap")
   catchAllSiteName?: string;
@@ -36,4 +36,26 @@ model TopologyMapProperties {
   @doc("The provisioning state of the TopologyMap resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@doc("A Site embedded in a Topology Map.")
+model TopologyMapInlineSite {
+  ...OmitProperties<Site, "name">;
+
+  @doc("The name of the Site.")
+  name: string;
+}
+
+@doc("The properties of a Topology Map that can be updated.")
+model TopologyMapPatchProperties {
+  @doc("The Name of the CatchAll site. There is only one CatchAll site in a TopologyMap")
+  catchAllSiteName?: string;
+}
+
+@doc("The type used for update operations of the Topology Map.")
+model TopologyMapPatch {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The properties of the Topology Map that can be updated.")
+  properties?: TopologyMapPatchProperties;
 }
