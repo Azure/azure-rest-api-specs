@@ -3479,37 +3479,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "BootDiagnostics": {
       "type": "object",
       "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor.",
@@ -6285,7 +6254,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/OccurrenceResourceProvisioningState",
           "description": "The current state of the resource",
           "readOnly": true
         },
@@ -6429,7 +6398,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/OccurrenceResourceProvisioningState",
           "description": "The current state of the resource",
           "readOnly": true
         },
@@ -6467,6 +6436,67 @@
       "required": [
         "value"
       ]
+    },
+    "OccurrenceResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a scheduled-action resource within an occurrence.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Created",
+        "Scheduled",
+        "Cancelling",
+        "Rescheduling",
+        "InvalidState"
+      ],
+      "x-ms-enum": {
+        "name": "OccurrenceResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The resource has been created"
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The resource has been scheduled"
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "The resource is going through cancellation"
+          },
+          {
+            "name": "Rescheduling",
+            "value": "Rescheduling",
+            "description": "The resource is being rescheduled"
+          },
+          {
+            "name": "InvalidState",
+            "value": "InvalidState",
+            "description": "The resource is in an invalid state"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "OccurrenceResultSummary": {
       "type": "object",

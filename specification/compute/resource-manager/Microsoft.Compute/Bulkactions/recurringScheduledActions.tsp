@@ -161,6 +161,30 @@ union OccurrenceState {
   string,
 }
 
+// The provisioning state of a resource within an occurrence.
+@added(Versions.`2026-08-06-preview`)
+@doc("The provisioning state of a scheduled-action resource within an occurrence.")
+union OccurrenceResourceProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("The resource has been created")
+  Created: "Created",
+
+  @doc("The resource has been scheduled")
+  Scheduled: "Scheduled",
+
+  @doc("The resource is going through cancellation")
+  Cancelling: "Cancelling",
+
+  @doc("The resource is being rescheduled")
+  Rescheduling: "Rescheduling",
+
+  @doc("The resource is in an invalid state")
+  InvalidState: "InvalidState",
+
+  string,
+}
+
 @added(Versions.`2026-07-06-preview`)
 @doc("The type of notification supported")
 union NotificationType {
@@ -195,7 +219,10 @@ union ResourceOperationStatus {
 // BulkActions LaunchBulkInstancesOperation `ProvisioningState`; takes the
 // `ScheduledActions*` identity (see file header).
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-08-06-preview`, "RecurringScheduledActionsProvisioningState")
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsProvisioningState"
+)
 @doc("Provisioning state of the scheduled action resource.")
 @lroStatus
 union ScheduledActionsProvisioningState {
@@ -251,7 +278,10 @@ model NotificationProperties {
 // the `Microsoft.Compute` namespace with the BulkActions originals.
 
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-08-06-preview`, "RecurringScheduledActionsDeadlineType")
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsDeadlineType"
+)
 @doc("The type of deadline the scheduled action follows for its schedule.")
 union ScheduledActionsDeadlineType {
   @doc("Default value of Unknown.")
@@ -267,7 +297,10 @@ union ScheduledActionsDeadlineType {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-08-06-preview`, "RecurringScheduledActionsResourceOperationType")
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsResourceOperationType"
+)
 @doc("The resource operation to take on a scheduled-action failure.")
 union ScheduledActionsResourceOperationType {
   @doc("The default value for this enum type")
@@ -292,7 +325,10 @@ union ScheduledActionsResourceOperationType {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-08-06-preview`, "RecurringScheduledActionsRetryPolicy")
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsRetryPolicy"
+)
 @doc("Retry policy the scheduled action can pass")
 model ScheduledActionsRetryPolicy {
   @doc("Retry count for the request")
@@ -306,7 +342,10 @@ model ScheduledActionsRetryPolicy {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-08-06-preview`, "RecurringScheduledActionsExecutionParameters")
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsExecutionParameters"
+)
 @doc("The execution parameters the scheduled action is supposed to follow")
 model ScheduledActionsExecutionParameters {
   @doc("Details that could optimize the user's request")
@@ -627,7 +666,8 @@ model OccurrenceResource is ScheduledActionResource {
 
   @doc("The current state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  @typeChangedFrom(Versions.`2026-08-06-preview`, ResourceProvisioningState)
+  provisioningState?: OccurrenceResourceProvisioningState;
 
   @doc("Error details for the resource. Only populated if resource is in failed state.")
   @visibility(Lifecycle.Read)
@@ -678,7 +718,8 @@ model OccurrenceExtensionProperties {
 
   @doc("The current state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  @typeChangedFrom(Versions.`2026-08-06-preview`, ResourceProvisioningState)
+  provisioningState?: OccurrenceResourceProvisioningState;
 
   @doc("Error details for the resource. Only populated if resource is in failed state.")
   @visibility(Lifecycle.Read)
