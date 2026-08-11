@@ -217,17 +217,17 @@ union PartialFulfillmentReason {
 }
 
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
-@doc("Specifies how partial fulfillment is handled for a BulkCreateCustom request.")
+@doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
 model PartialFulfillmentPolicy {
   @visibility(Lifecycle.Read)
-  @doc("The capacity fulfilled by the request, expressed in units specified by capacityType. This value may be less than capacity when the request is partially fulfilled.")
+  @doc("The amount of capacity that was actually attempted, expressed in the units specified by capacityType. When partial fulfillment is enabled, this value can be less than the requested capacity.")
   fulfilledCapacity?: int32;
 
-  @doc("Specifies whether partial fulfillment is allowed. The default is Enabled. Must be Enabled when minCapacity is specified.")
+  @doc("Specifies whether partial fulfillment is allowed. When Enabled, Azure creates as many VMs as it has high confidence can be successfully allocated. When Disabled, Azure attempts to create all requested VMs, which may result into allocation failures.")
   mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
 
   @visibility(Lifecycle.Read)
-  @doc("The reason the requested capacity was not fully fulfilled.")
+  @doc("Indicates why the fulfilled capacity is less than the requested capacity. Possible values include InsufficientCapacity and InsufficientQuota. Returned only in the create response when partial fulfillment is enabled and the request cannot be fully satisfied.")
   reason?: PartialFulfillmentReason;
 }
 

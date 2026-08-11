@@ -241,12 +241,12 @@ model BulkCreateCustomProperties {
   capacityType?: CapacityType;
 
   @added(Versions.`2026-08-06-preview`)
-  @doc("The minimum capacity required for the request, expressed in units specified by capacityType. Must be greater than 0 and less than capacity. When specified, partialFulfillmentPolicy.mode must be Enabled.")
+  @doc("The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.")
   @minValue(1)
   minCapacity?: int32;
 
   @added(Versions.`2026-08-06-preview`)
-  @doc("Specifies how partial fulfillment is handled for a BulkCreateCustom request.")
+  @doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
 
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
