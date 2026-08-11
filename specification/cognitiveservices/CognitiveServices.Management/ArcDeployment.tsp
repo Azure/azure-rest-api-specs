@@ -425,11 +425,24 @@ model ArcDeploymentListResult {
  * SKU for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+union ArcDeploymentSkuName {
+  string,
+
+  /**
+   * Arc SKU.
+   */
+  Arc: "Arc",
+}
+
+/**
+ * SKU for an Arc deployment.
+ */
+@added(Versions.v2026_07_15_preview)
 model ArcDeploymentSku {
   /**
    * The name of the Arc deployment SKU. Must be Arc.
    */
-  name: "Arc";
+  name: ArcDeploymentSkuName;
 }
 
 /**

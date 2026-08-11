@@ -13183,19 +13183,31 @@
       "description": "SKU for an Arc deployment.",
       "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the Arc deployment SKU. Must be Arc.",
-          "enum": [
-            "Arc"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ArcDeploymentSkuName",
+          "description": "The name of the Arc deployment SKU. Must be Arc."
         }
       },
       "required": [
         "name"
       ]
+    },
+    "ArcDeploymentSkuName": {
+      "type": "string",
+      "description": "SKU for an Arc deployment.",
+      "enum": [
+        "Arc"
+      ],
+      "x-ms-enum": {
+        "name": "ArcDeploymentSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Arc",
+            "value": "Arc",
+            "description": "Arc SKU."
+          }
+        ]
+      }
     },
     "ArcDeploymentUpdate": {
       "type": "object",
