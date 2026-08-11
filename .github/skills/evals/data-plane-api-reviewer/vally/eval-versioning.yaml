@@ -1,0 +1,114 @@
+name: data-plane-api-reviewer-eval-versioning
+description: |
+  Versioning and backward-compatibility tests for the data-plane API reviewer.
+  Covers DP-VERSION-01 through DP-VERSION-04. See
+  references/data-plane-resource-modeling.md.
+
+  This area is entirely agent-owned. The `data-plane` ruleset in
+  @azure-tools/typespec-azure-rulesets sets `non-breaking-versioning: false`,
+  so backward compatibility across API versions is NOT linted on the data
+  plane. It is the single largest looks-linted-but-is-not area, and the
+  reviewer is the only thing standing between a stable-version breaking change
+  and shipped SDKs.
+
+  The corresponding false-positive guard - a breaking change between two
+  PREVIEW versions, which is permitted - lives in eval-true-negatives.yaml as
+  tn-preview-breaking-change-allowed. The two must be kept in sync: a reviewer
+  tuned to pass one and fail the other is not calibrated, it is guessing.
+
+tags:
+  area: data-plane-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "420s"
+  # Keep equal to the top-level `model:` in .github/workflows/data-plane-api-review.md.
+  model: gpt-5.6-sol
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  - name: stable-version-breaking-changes
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/stable-removed-property/stable-2025-01-01.tsp"
+          dest: "specification/alertregistry/data-plane/Contoso.AlertRegistry/stable/2025-01-01/alerts.tsp"
+        - src: "../fixtures/version-pairs/stable-removed-property/stable-2026-01-01.tsp"
+          dest: "specification/alertregistry/data-plane/Contoso.AlertRegistry/stable/2026-01-01/alerts.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the 2026-01-01 stable
+      API version; 2025-01-01 is the previously shipped stable version and is
+      shown for comparison. Pay particular attention to versioning and backward
+      compatibility. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      New version: specification/alertregistry/data-plane/Contoso.AlertRegistry/stable/2026-01-01/alerts.tsp
+      Previous version: specification/alertregistry/data-plane/Contoso.AlertRegistry/stable/2025-01-01/alerts.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports breaking changes"
+        config:
+          pattern: "\\*\\*\\[DP-VERSION-0[0-9]\\]"
+      - type: output-matches
+        name: "raises stable-version breaking changes at blocking severity"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - "The agent identifies the removed response property `lastEvaluatedAt` as a breaking change against the previously shipped stable version."
+      - "The agent identifies that the `AlertSeverity` union was open in 2025-01-01 and is closed in 2026-01-01, and that the `Informational` member was dropped - so values the service may still emit will no longer deserialize in generated clients."
+      - "The agent identifies that the optional request property `notificationChannel` was made required."
+      - "The agent identifies that `thresholdPerMinute` changed type from int32 to float64."
+      - The agent raises these at Blocking severity, because both versions are stable and a breaking change in a stable version cannot be walked back once SDKs ship.
+      - The agent notes that none of the changes carry @added, @removed, or @renamedFrom decorators, so the versioning metadata does not describe what actually happened between the two versions.
+      - The agent does NOT claim that a linter rule would have caught this. Backward compatibility is not linted on the data plane - `non-breaking-versioning` is disabled in the data-plane ruleset - and asserting otherwise misleads the service author into trusting CI.
+      - Findings are anchored to specific line numbers in the new version.
+
+  # DP-VERSION-04. The paired true negative is tn-standard-mandated-route-segment
+  # in eval-true-negatives.yaml, and the two must be kept together: this rule
+  # exists ONLY because the agent is claimed to distinguish a newly-added route
+  # from a pre-existing one. An agent that passes this stimulus but fails the TN
+  # is not making that distinction, it is simply flagging every `/v2/` it sees -
+  # which is exactly the withdrawn lint rule, reimplemented at higher cost.
+  - name: new-route-with-version-segment
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/version-pairs/new-route-version-segment/stable-2025-01-01.tsp"
+          dest: "specification/featureflags/data-plane/Contoso.FeatureFlags/stable/2025-01-01/flags.tsp"
+        - src: "../fixtures/version-pairs/new-route-version-segment/stable-2026-01-01.tsp"
+          dest: "specification/featureflags/data-plane/Contoso.FeatureFlags/stable/2026-01-01/flags.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. The pull request adds the 2026-01-01 stable
+      API version; 2025-01-01 is the previously shipped stable version and is
+      shown for comparison. Pay particular attention to routing and versioning.
+      Report findings with rule IDs, line numbers, and fix suggestions.
+
+      New version: specification/featureflags/data-plane/Contoso.FeatureFlags/stable/2026-01-01/flags.tsp
+      Previous version: specification/featureflags/data-plane/Contoso.FeatureFlags/stable/2025-01-01/flags.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports the version segment in the newly-added route"
+        config:
+          pattern: "\\*\\*\\[DP-VERSION-04\\]"
+      - type: prompt
+    rubric:
+      - The 2026-01-01 version adds a new operation `evaluate` at `/v2/flags:evaluate`. The `/v2/` segment is a version number in an operation path, which the Guidelines prohibit outright - `versioning-no-version-in-path`, "DO NOT include a version number segment in any operation path".
+      - "Critically, this route is NEW: it carries @added(Versions.v2026_01_01) and has no counterpart in 2025-01-01. It is therefore still changeable, and the finding is actionable - which is the entire basis on which the agent owns this rule."
+      - The operation's documentation offers a rationale - that the evaluation engine is versioned independently so scoring changes can ship without an api-version, and that callers pin the engine they tested against. This rationale must NOT be accepted. It describes an internal design preference, not conformance to an external protocol the service does not control. The api-version query parameter already exists to carry version intent.
+      - Accepting that justification and staying silent is a test failure, and is the specific confusion this stimulus probes - a documented reason is not automatically a valid exception. The valid exception is narrow - an external standard such as the OCI Distribution Specification or Apache Atlas dictating the path shape.
+      - Blocking severity is permitted and appropriate here, because the upstream verb is DO NOT and the route is new, so the author can still change it at no cost to existing callers.
+      - The agent does NOT flag the four pre-existing routes generated by the standard resource operations. They are unchanged, contain no version segment, and are not at issue.
