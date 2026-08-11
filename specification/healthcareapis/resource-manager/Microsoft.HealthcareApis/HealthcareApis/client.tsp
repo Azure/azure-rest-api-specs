@@ -269,11 +269,6 @@ namespace Microsoft.HealthcareApis;
   "csharp"
 );
 @@clientName(
-  EncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
-  "KeyEncryptionKeyUri",
-  "csharp"
-);
-@@clientName(
   MetricDimension.toBeExportedForShoebox,
   "IsExportedForShoebox",
   "csharp"

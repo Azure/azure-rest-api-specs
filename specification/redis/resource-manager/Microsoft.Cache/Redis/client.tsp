@@ -226,11 +226,6 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
   #{ RedisCacheContributor: "e0f68234-74aa-48ed-b826-c38b57376e17" },
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateLinkResource,
-  "RedisPrivateLinkResource",
-  "csharp"
-);
 @@clientName(ExportRDBParameters, "ExportRdbContent", "csharp");
 @@clientName(ImportRDBParameters, "ImportRdbContent", "csharp");
 

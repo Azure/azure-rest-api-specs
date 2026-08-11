@@ -750,7 +750,6 @@ union SandboxCustomImageType {
 @@clientName(LanguageExtensionName.PYTHON, "Python", "csharp");
 
 // ---- Migration compat batch 3: property name/type fixes to match GA ----
-@@clientName(ScriptProperties.scriptUrl, "ScriptUri", "csharp");
 @@alternateType(ScriptProperties.scriptUrl, url, "csharp");
 @@alternateType(ClusterProperties.uri, url, "csharp");
 @@clientName(ClusterProperties.dataIngestionUri, "DataIngestionUri", "csharp");

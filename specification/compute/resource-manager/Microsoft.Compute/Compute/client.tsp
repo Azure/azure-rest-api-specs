@@ -806,7 +806,6 @@ model VMSizePropertiesWithAdditionalProperties {
 @@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
 
 // RP-prefix renames.
-@@clientName(Plan, "ComputePlan", "csharp");
 @@clientName(SkuProfile, "ComputeSkuProfile", "csharp");
 @@clientName(UpdateResource, "ComputeResourcePatch", "csharp");
 
@@ -2437,11 +2436,6 @@ union ComputeUsageUnit {
 @@alternateType(
   GallerySoftDeletedResourceProperties.softDeletedTime,
   utcDateTime,
-  "csharp"
-);
-@@clientName(
-  GallerySoftDeletedResourceProperties.softDeletedTime,
-  "softDeletedOn",
   "csharp"
 );
 

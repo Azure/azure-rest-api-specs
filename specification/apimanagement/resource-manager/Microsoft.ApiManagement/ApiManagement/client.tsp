@@ -455,11 +455,6 @@ op replacePurge(
 @@clientName(CacheContract, "ApiManagementCache", "csharp");
 @@clientName(CertificateContract, "ApiManagementCertificate", "csharp");
 @@clientName(
-  CertificateContractProperties.expirationDate,
-  "ExpireOn",
-  "csharp"
-);
-@@clientName(
   CertificateContractProperties.keyVault,
   "KeyVaultDetails",
   "csharp"
@@ -528,11 +523,6 @@ op replacePurge(
 @@clientName(ContentItemContract, "ApiManagementContentItem", "csharp");
 @@clientName(DeletedServiceContract, "ApiManagementDeletedService", "csharp");
 @@clientName(
-  DeletedServiceContractProperties.deletionDate,
-  "DeletedOn",
-  "csharp"
-);
-@@clientName(
   EmailTemplateUpdateParameters,
   "ApiManagementEmailTemplateCreateOrUpdateContent",
   "csharp"
@@ -554,11 +544,6 @@ op replacePurge(
 @@clientName(
   TagCreateUpdateParameters,
   "ApiManagementTagCreateOrUpdateContent",
-  "csharp"
-);
-@@clientName(
-  SubscriptionContractProperties.expirationDate,
-  "ExpireOn",
   "csharp"
 );
 @@clientName(
@@ -1663,7 +1648,6 @@ enum GatewayRegenerateKeyType {
 );
 
 // PortalDelegationSettings.properties flatten now applies to csharp (removed "!csharp" scope in back-compatible.tsp)
-@@clientName(PortalDelegationSettingsProperties.url, "Uri", "csharp");
 @@alternateType(PortalDelegationSettingsProperties.url, url, "csharp");
 
 // Framework WritableSubResource is not modeled by ARM TypeSpec common-types.

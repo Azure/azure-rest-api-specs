@@ -175,7 +175,6 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(ArchivePackageSourceProperties.type, "SourceType", "csharp");
-@@clientName(ArchivePackageSourceProperties.url, "Uri", "csharp");
 @@clientName(ArchiveVersion, "ContainerRegistryArchiveVersion", "csharp");
 @@clientName(AuditLogStatus, "ConnectedRegistryAuditLogStatus", "csharp");
 @@clientName(AuthCredential, "ContainerRegistryAuthCredential", "csharp");

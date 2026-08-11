@@ -1459,7 +1459,6 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 
-@@clientName(ServerUsageProperties.nextResetTime, "NextResetOn", "csharp");
 @@clientName(ResourceWithWritableName.type, "ResourceType", "csharp");
 @@alternateType(ResourceWithWritableName.type, armResourceType, "csharp");
 

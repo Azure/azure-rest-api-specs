@@ -77,16 +77,6 @@ using Microsoft.ConnectedCache;
   "bgpCidrCsvLastUpdatedOn",
   "csharp"
 );
-@@clientName(
-  CacheNodeEntity.bgpLastReportedTime,
-  "bgpLastReportedOn",
-  "csharp"
-);
-@@clientName(
-  CacheNodeEntity.workerConnectionsLastUpdatedDateTime,
-  "workerConnectionsLastUpdatedOn",
-  "csharp"
-);
 @@alternateType(CacheNodeEntity.imageUri, url, "csharp");
 @@clientName(CacheNodeProperty, "MccCacheNodeProperty", "csharp");
 @@clientName(
@@ -111,11 +101,6 @@ using Microsoft.ConnectedCache;
 @@clientName(
   MccCacheNodeAutoUpdateHistory,
   "MccCacheNodeAutoUpdateHistoryData",
-  "csharp"
-);
-@@clientName(
-  MccCacheNodeAutoUpdateInfo.movedToTerminalStateDateTime,
-  "movedToTerminalStateOn",
   "csharp"
 );
 @@clientName(

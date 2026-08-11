@@ -1203,7 +1203,6 @@ using Azure.ResourceManager;
   "KeyVaultSigningKey",
   "csharp"
 );
-@@clientName(Sku, "CdnSku", "csharp");
 @@clientName(UrlSigningParamIdentifier, "UriSigningParamIdentifier", "csharp");
 @@clientName(ResourceUsageOperationGroup.list, "GetResourceUsages", "csharp");
 @@clientName(

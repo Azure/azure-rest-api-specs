@@ -147,8 +147,6 @@ using Microsoft.Cache;
 );
 @@clientName(OperationStatus, "RedisEnterpriseOperationStatus", "csharp");
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
-@@clientName(OperationStatus.startTime, "StartOn", "csharp");
-@@clientName(OperationStatus.endTime, "EndOn", "csharp");
 @@clientName(Persistence.aofEnabled, "IsAofEnabled", "csharp");
 @@clientName(Persistence.rdbEnabled, "IsRdbEnabled", "csharp");
 @@clientName(Persistence, "RedisPersistenceSettings", "csharp");
@@ -181,8 +179,6 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(ResourceState, "RedisEnterpriseClusterResourceState", "csharp");
-@@clientName(Sku, "RedisEnterpriseSku", "csharp");
-@@clientName(SkuName, "RedisEnterpriseSkuName", "csharp");
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");

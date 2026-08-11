@@ -2059,22 +2059,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "OperationInProgressLockTimeoutInUtc",
   "csharp"
 );
-@@clientName(
-  DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
-  "ClientSecretStoreUri",
-  "csharp"
-);
-@@clientName(
-  DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
-  "ClientSecretStoreUri",
-  "csharp"
-);
-@@clientName(TrackingInfo.trackingUrl, "TrackingUri", "csharp");
-@@clientName(
-  ImageRepositoryCredential.imageRepositoryUrl,
-  "ImageRepositoryUri",
-  "csharp"
-);
 @@clientName(SkuName.TEA_1Node, "Tea1Node", "csharp");
 @@clientName(SkuName.TEA_1Node_UPS, "Tea1NodeUps", "csharp");
 @@clientName(SkuName.TEA_1Node_Heater, "Tea1NodeHeater", "csharp");

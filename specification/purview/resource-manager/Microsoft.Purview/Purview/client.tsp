@@ -86,11 +86,6 @@ using Microsoft.Purview;
   "PurviewPrivateLinkResource",
   "csharp"
 );
-@@clientName(
-  Microsoft.Purview.PrivateLinkServiceConnectionState,
-  "PurviewPrivateLinkServiceConnectionState",
-  "csharp"
-);
 @@clientName(ProvisioningState, "PurviewProvisioningState", "csharp");
 @@clientName(PublicNetworkAccess, "PurviewPublicNetworkAccess", "csharp");
 @@clientName(QuotaName, "PurviewQuotaName", "csharp");
@@ -103,7 +98,6 @@ using Microsoft.Purview;
 @@clientName(UserAssignedIdentity, "PurviewUserAssignedIdentity", "csharp");
 
 // --- clientName: property renames ---
-@@clientName(AccountProperties.createdAt, "CreatedOn", "csharp");
 @@clientName(AccountMergeInfo.deprovisioned, "IsDeprovisioned", "csharp");
 @@clientName(AccountStatus.errorDetails, "Error", "csharp");
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");

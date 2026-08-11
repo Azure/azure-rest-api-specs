@@ -122,7 +122,6 @@ using Microsoft.Help;
 @@clientName(ResultType, "KBSearchResultType", "csharp");
 @@clientName(AutomatedCheckResult.type, "ResultType", "csharp");
 @@alternateType(DiagnosticResourceProperties.acceptedAt, utcDateTime, "csharp");
-@@clientName(DiagnosticResourceProperties.acceptedAt, "AcceptedOn", "csharp");
 @@clientName(
   DiagnosticProvisioningState,
   "SelfHelpProvisioningState",

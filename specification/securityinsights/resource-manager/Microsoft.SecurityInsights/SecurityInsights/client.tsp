@@ -1582,11 +1582,6 @@ using Azure.ClientGenerator.Core.Legacy;
 @@alternateType(IncidentProperties.incidentUrl, url, "csharp");
 @@alternateType(FileMetadata.fileContentUri, url, "csharp");
 @@alternateType(MailMessageEntityProperties.urls, url[], "csharp");
-@@clientName(
-  IncidentAdditionalData.providerIncidentUrl,
-  "ProviderIncidentUri",
-  "csharp"
-);
 @@alternateType(IncidentAdditionalData.providerIncidentUrl, url, "csharp");
 @@alternateType(
   RelationProperties.relatedResourceId,
