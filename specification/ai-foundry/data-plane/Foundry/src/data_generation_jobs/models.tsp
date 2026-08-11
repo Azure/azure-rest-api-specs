@@ -232,7 +232,7 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SimulationSeedDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimulationSeed for this model.")
-  type: "simulation_seed";
+  type: DataGenerationJobType.simulation_seed;
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
