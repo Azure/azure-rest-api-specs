@@ -283,8 +283,8 @@ model RoutineCreateOrUpdateRequest {
   @maxLength(1024)
   description?: string;
 
-  @doc("Whether the routine is enabled. If omitted when creating a new routine, the service defaults this value to true. If omitted on update, the service preserves the existing enabled state.")
-  enabled?: boolean = true;
+  @doc("Whether the routine is enabled.")
+  enabled?: boolean;
 
   @doc("The triggers configured for the routine. In v1, exactly one trigger entry is supported.")
   triggers?: RoutineTriggers;
