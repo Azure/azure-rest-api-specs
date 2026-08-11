@@ -21,6 +21,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./SharedPrivateLinkResource.tsp";
 import "./PersistentStorage.tsp";
+import "./AiService.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 

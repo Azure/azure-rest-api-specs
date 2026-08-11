@@ -68,6 +68,9 @@
     },
     {
       "name": "PersistentStorages"
+    },
+    {
+      "name": "AiServices"
     }
   ],
   "paths": {
@@ -529,6 +532,252 @@
         "x-ms-examples": {
           "WebPubSub_Delete": {
             "$ref": "./examples/WebPubSub_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/aiServices": {
+      "get": {
+        "operationId": "WebPubSubAiServices_List",
+        "tags": [
+          "AiServices"
+        ],
+        "description": "List all AI services.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiServiceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubAiServices_List": {
+            "$ref": "./examples/WebPubSubAiServices_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/aiServices/{name}": {
+      "get": {
+        "operationId": "WebPubSubAiServices_Get",
+        "tags": [
+          "AiServices"
+        ],
+        "description": "Get an AI service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "AI service name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubAiServices_Get": {
+            "$ref": "./examples/WebPubSubAiServices_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebPubSubAiServices_CreateOrUpdate",
+        "tags": [
+          "AiServices"
+        ],
+        "description": "Create or update an AI service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "AI service name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The AI service resource and its properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiService"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubAiServices_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubAiServices_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebPubSubAiServices_Delete",
+        "tags": [
+          "AiServices"
+        ],
+        "description": "Delete an AI service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "AI service name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubAiServices_Delete": {
+            "$ref": "./examples/WebPubSubAiServices_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3096,6 +3345,64 @@
         ]
       }
     },
+    "AiService": {
+      "type": "object",
+      "description": "An AI service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiServiceProperties",
+          "description": "Properties of an AI service.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiServiceList": {
+      "type": "object",
+      "description": "AI services list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiService items on this page",
+          "items": {
+            "$ref": "#/definitions/AiService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiServiceProperties": {
+      "type": "object",
+      "description": "Properties of an AI service.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "foundryProject": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "Reference to the Foundry project."
+        }
+      },
+      "required": [
+        "foundryProject"
+      ]
+    },
     "ApplicationFirewallSettings": {
       "type": "object",
       "description": "Application firewall settings for the resource",
@@ -3138,6 +3445,13 @@
         "persistentStorage": {
           "$ref": "#/definitions/ResourceReference",
           "description": "Reference to the the persistent storage for perisisting chat states."
+        },
+        "aiServices": {
+          "type": "array",
+          "description": "References to AI service subresources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
         }
       }
     },
