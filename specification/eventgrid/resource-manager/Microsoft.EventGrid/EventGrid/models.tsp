@@ -3582,6 +3582,28 @@ model NamespaceProperties {
    * Auto-scale configuration for the namespace resource
    */
   autoScaleConfiguration?: AutoScaleConfiguration;
+
+  /**
+   * This property specifies the IP address type for the namespace.
+   */
+  ipAddressType?: IpAddressType;
+}
+
+/**
+ * Specifies the IP address type for the namespace.
+ */
+union IpAddressType {
+  string,
+
+  /**
+   * The namespace supports IPv4 only. This is the default.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The namespace supports both IPv4 and IPv6 (dual-stack).
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -4023,6 +4045,11 @@ model NamespaceUpdateParameterProperties {
    * Auto-scale configuration for the namespace resource
    */
   autoScaleConfiguration?: UpdateAutoScaleConfiguration;
+
+  /**
+   * This property specifies the IP address type for the namespace.
+   */
+  ipAddressType?: IpAddressType;
 }
 
 /**

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-11-15-preview",
+    "version": "2026-06-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -14967,6 +14967,30 @@
         ]
       }
     },
+    "IpAddressType": {
+      "type": "string",
+      "description": "Specifies the IP address type for the namespace.",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The namespace supports IPv4 only. This is the default."
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "The namespace supports both IPv4 and IPv6 (dual-stack)."
+          }
+        ]
+      }
+    },
     "IsNotNullAdvancedFilter": {
       "type": "object",
       "description": "IsNotNull Advanced Filter.",
@@ -15343,6 +15367,10 @@
         "autoScaleConfiguration": {
           "$ref": "#/definitions/AutoScaleConfiguration",
           "description": "Auto-scale configuration for the namespace resource"
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "This property specifies the IP address type for the namespace."
         }
       }
     },
@@ -15696,6 +15724,10 @@
         "autoScaleConfiguration": {
           "$ref": "#/definitions/UpdateAutoScaleConfiguration",
           "description": "Auto-scale configuration for the namespace resource"
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "This property specifies the IP address type for the namespace."
         }
       }
     },
