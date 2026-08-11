@@ -59,11 +59,7 @@ interface CapacityReservationGroups {
    * The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Consistent with established Compute RP delete response patterns for SDK and behavioral consistency."
-  delete is ComputeResourceDeleteAsync<
-    CapacityReservationGroup,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  >;
+  delete is ComputeResourceDeleteSync<CapacityReservationGroup>;
 
   /**
    * Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.
