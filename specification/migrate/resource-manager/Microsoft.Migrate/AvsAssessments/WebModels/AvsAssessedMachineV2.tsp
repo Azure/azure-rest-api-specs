@@ -182,6 +182,7 @@ model AvsAssessedNetworkAdapter {
   @visibility(Lifecycle.Read)
   macAddress?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP V4 addresses for the machine.")
   @visibility(Lifecycle.Read)
   ipAddresses?: string[];
