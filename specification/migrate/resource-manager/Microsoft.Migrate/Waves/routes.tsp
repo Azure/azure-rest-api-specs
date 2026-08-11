@@ -193,11 +193,7 @@ interface Runbooks {
 
   @added(ApiVersions.v2026_08_01_preview)
   @action("addStep")
-  addStep is ArmResourceActionAsync<
-    Runbook,
-    RunbookStepAddRequest,
-    Runbook
-  >;
+  addStep is ArmResourceActionAsync<Runbook, RunbookStepAddRequest, Runbook>;
 
   @added(ApiVersions.v2026_08_01_preview)
   @action("updateStep")
