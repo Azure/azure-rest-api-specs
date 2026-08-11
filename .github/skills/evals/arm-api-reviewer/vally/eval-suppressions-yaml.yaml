@@ -8,6 +8,17 @@ description: |
   field are flagged, and new entries that suppress security-related
   rules with vague or absent justification are treated as Blocking.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
+tags:
+  area: arm-api-reviewer
+
 defaults:
   runs: 1
   timeout: "180s"
