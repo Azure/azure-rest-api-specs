@@ -2024,6 +2024,7 @@ union DayOfWeek {
 /**
  * Custom maintenance options.
  */
+@added(Versions.v2026_08_01_preview)
 model CustomMaintenanceOptions {
   /**
    * Custom maintenance day of week.
@@ -5972,6 +5973,7 @@ model DatabaseProperties {
   /**
    * Custom maintenance options for the database.
    */
+  @added(Versions.v2026_08_01_preview)
   customMaintenanceOptions?: CustomMaintenanceOptions;
 
   /**
@@ -6384,6 +6386,7 @@ model DatabaseUpdateProperties {
   /**
    * Custom maintenance options for the database.
    */
+  @added(Versions.v2026_08_01_preview)
   customMaintenanceOptions?: CustomMaintenanceOptions;
 
   /**
@@ -8013,6 +8016,7 @@ model ElasticPoolProperties {
   /**
    * Custom maintenance options for the elastic pool.
    */
+  @added(Versions.v2026_08_01_preview)
   customMaintenanceOptions?: CustomMaintenanceOptions;
 
   /**
@@ -8127,6 +8131,7 @@ model ElasticPoolUpdateProperties {
   /**
    * Custom maintenance options for the elastic pool.
    */
+  @added(Versions.v2026_08_01_preview)
   customMaintenanceOptions?: CustomMaintenanceOptions;
 
   /**
