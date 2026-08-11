@@ -302,7 +302,7 @@ model Step {
    */
   @minItems(1)
   @maxItems(5)
-  files?: string[];
+  fileNames?: string[];
 
   /**
    * Referenced child update identity.  Required if step type is reference.
@@ -344,7 +344,7 @@ model ImportUpdateInputItem {
   friendlyName?: string;
 
   /**
-   * One or more update file properties like filename and source URL.
+    * One or more update file properties like file name and source URL.
    */
   @minItems(1)
   @maxItems(5)
@@ -384,7 +384,7 @@ model FileImportMetadata {
   /**
    * Update file name as specified inside import manifest.
    */
-  filename: string;
+  fileName: string;
 
   /**
    * Azure Blob location from which the update file can be downloaded by Device

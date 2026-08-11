@@ -963,7 +963,7 @@
       "type": "object",
       "description": "Metadata describing an update file.",
       "properties": {
-        "filename": {
+        "fileName": {
           "type": "string",
           "description": "Update file name as specified inside import manifest."
         },
@@ -973,7 +973,7 @@
         }
       },
       "required": [
-        "filename",
+        "fileName",
         "url"
       ]
     },
@@ -1020,7 +1020,7 @@
         },
         "files": {
           "type": "array",
-          "description": "One or more update file properties like filename and source URL.",
+          "description": "One or more update file properties like file name and source URL.",
           "minItems": 1,
           "maxItems": 5,
           "items": {
@@ -1143,7 +1143,7 @@
           "description": "Parameters to be passed to handler during execution.",
           "additionalProperties": {}
         },
-        "files": {
+        "fileNames": {
           "type": "array",
           "description": "Collection of file names to be passed to handler during execution. Required if\nstep type is inline.",
           "minItems": 1,
