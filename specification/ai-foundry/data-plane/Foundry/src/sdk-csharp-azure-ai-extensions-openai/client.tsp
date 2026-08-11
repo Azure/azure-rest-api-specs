@@ -68,7 +68,7 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@usage(OAuthConsentRequestOutputItem, Usage.input | Usage.output);
-  // The ResponsesOutputItem that OpenAI.OutputItem maps to in C# already has a id proeprty...
+  // The ResponsesOutputItem that OpenAI.OutputItem maps to in C# already has a id property...
   @@withoutOmittedProperties(OAuthConsentRequestOutputItem, "id");
   @@alternateType(OAuthConsentRequestOutputItem.consent_link, url);
 
