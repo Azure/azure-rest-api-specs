@@ -115,7 +115,7 @@ model BulkCreateCustomEnvelope {
   @added(Versions.`2026-08-06-preview`)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  @doc("The virtual machine resources resolved for the operation. This property is returned only when virtual machine information is enabled for a synchronous create response.")
+  @doc("The virtual machine resources resolved for the operation.")
   resources?: Array<BulkCreateCustomResource>;
 
   ...ManagedServiceIdentityProperty;
