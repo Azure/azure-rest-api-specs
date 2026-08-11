@@ -400,6 +400,22 @@ interface Databases {
   >;
 
   /**
+   * Get top resource consuming queries of a database
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_08_01_preview)
+  @Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+  @tag("TopQueries")
+  @list
+  @get
+  @action("topQueries")
+  topQueriesListByDatabase is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<TopQueriesDatabaseListResult>
+  >;
+
+  /**
    * Creates a restore point for a data warehouse.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

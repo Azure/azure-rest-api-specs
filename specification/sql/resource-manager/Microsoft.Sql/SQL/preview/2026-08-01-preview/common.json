@@ -2675,6 +2675,48 @@
         ]
       }
     },
+    "ExecutionType": {
+      "type": "string",
+      "description": "Requested execution type of top queries.",
+      "enum": [
+        "any",
+        "regular",
+        "irregular",
+        "aborted",
+        "exception"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "any",
+            "value": "any",
+            "description": "Any execution type"
+          },
+          {
+            "name": "regular",
+            "value": "regular",
+            "description": "Regular execution type"
+          },
+          {
+            "name": "irregular",
+            "value": "irregular",
+            "description": "Irregular execution type"
+          },
+          {
+            "name": "aborted",
+            "value": "aborted",
+            "description": "Aborted execution type"
+          },
+          {
+            "name": "exception",
+            "value": "exception",
+            "description": "Exception execution type"
+          }
+        ]
+      }
+    },
     "ExternalGovernanceStatus": {
       "type": "string",
       "description": "Status of external governance.",
@@ -2808,6 +2850,7 @@
         "DatabaseEncryptionProtectorRevert",
         "DatabaseExtensions",
         "DatabaseOperations",
+        "DatabaseQueries",
         "DatabaseRecommendedActions",
         "Databases",
         "DatabaseSchemas",
