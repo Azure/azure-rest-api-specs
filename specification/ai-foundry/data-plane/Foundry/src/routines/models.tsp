@@ -272,7 +272,7 @@ model Routine {
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineAuthorization {
   @doc("The identity used when dispatching the routine. Defaults to agent when omitted; set to creator only when the customer opts in to creator identity dispatch.")
-  identity?: RoutineDispatchIdentity;
+  identity?: RoutineDispatchIdentity = RoutineDispatchIdentity.agent;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
