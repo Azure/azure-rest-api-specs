@@ -1785,6 +1785,132 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/generateInputDownloadUrl": {
+      "post": {
+        "operationId": "RunbookExecutions_GenerateInputDownloadUrl",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionInputDownloadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_GenerateInputDownloadUrl_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_GenerateInputDownloadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/generateInputUploadUrl": {
+      "post": {
+        "operationId": "RunbookExecutions_GenerateInputUploadUrl",
+        "tags": [
+          "RunbookExecutions"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookExecutionName",
+            "in": "path",
+            "description": "Runbook execution ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunbookExecutionInputUploadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RunbookExecutions_GenerateInputUploadUrl_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_GenerateInputUploadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/performAction": {
       "post": {
         "operationId": "RunbookExecutions_PerformAction",
@@ -2053,116 +2179,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateDownloadUrl": {
-      "post": {
-        "operationId": "Runbooks_GenerateDownloadUrl",
-        "tags": [
-          "Runbooks"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Migrate Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "runbookName",
-            "in": "path",
-            "description": "Runbook ARM name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RunbookDownloadUrlResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Runbooks_GenerateDownloadUrl_MaximumSet": {
-            "$ref": "./examples/Runbooks_GenerateDownloadUrl_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateInputDownloadUrl": {
-      "post": {
-        "operationId": "Runbooks_GenerateInputDownloadUrl",
-        "tags": [
-          "Runbooks"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Migrate Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "runbookName",
-            "in": "path",
-            "description": "Runbook ARM name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RunbookInputDownloadUrlResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Runbooks_GenerateInputDownloadUrl_MaximumSet": {
-            "$ref": "./examples/Runbooks_GenerateInputDownloadUrl_MaximumSet_Gen.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateInputUploadUrl": {
@@ -4324,25 +4340,33 @@
         }
       ]
     },
-    "RunbookDownloadUrlResponse": {
+    "RunbookApprovalStepAddRequest": {
       "type": "object",
-      "description": "Runbook download URL response.",
+      "description": "Request payload for adding an approval runbook step.",
       "properties": {
-        "downloadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Download URL for runbook content."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration time for the download URL."
+        "migrationEntityIds": {
+          "type": "array",
+          "description": "Migration entity Azure resource identifiers associated with this approval step.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+                }
+              ]
+            }
+          }
         }
       },
-      "required": [
-        "downloadUrl",
-        "expiresAt"
-      ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunbookStepAddRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "common.approval"
     },
     "RunbookExecution": {
       "type": "object",
@@ -4471,9 +4495,7 @@
         }
       },
       "required": [
-        "action",
-        "targetId",
-        "migrationEntityIds"
+        "action"
       ]
     },
     "RunbookExecutionDownloadUrlResponse": {
@@ -4493,6 +4515,46 @@
       },
       "required": [
         "downloadUrl",
+        "expiresAt"
+      ]
+    },
+    "RunbookExecutionInputDownloadUrlResponse": {
+      "type": "object",
+      "description": "Runbook execution input download URL response.",
+      "properties": {
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Download URL for runbook execution input content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the download URL."
+        }
+      },
+      "required": [
+        "downloadUrl",
+        "expiresAt"
+      ]
+    },
+    "RunbookExecutionInputUploadUrlResponse": {
+      "type": "object",
+      "description": "Runbook execution input upload URL response.",
+      "properties": {
+        "uploadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Upload URL for runbook execution input content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the upload URL."
+        }
+      },
+      "required": [
+        "uploadUrl",
         "expiresAt"
       ]
     },
@@ -4579,26 +4641,6 @@
         }
       ]
     },
-    "RunbookInputDownloadUrlResponse": {
-      "type": "object",
-      "description": "Runbook input download URL response.",
-      "properties": {
-        "downloadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Download URL for runbook input content."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration time for the download URL."
-        }
-      },
-      "required": [
-        "downloadUrl",
-        "expiresAt"
-      ]
-    },
     "RunbookInputUploadUrlResponse": {
       "type": "object",
       "description": "Runbook input upload URL response.",
@@ -4640,6 +4682,16 @@
         "value"
       ]
     },
+    "RunbookManualStepAddRequest": {
+      "type": "object",
+      "description": "Request payload for adding a manual runbook step.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunbookStepAddRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "common.manual"
+    },
     "RunbookProperties": {
       "type": "object",
       "description": "Runbook properties.",
@@ -4670,8 +4722,7 @@
         }
       },
       "required": [
-        "scope",
-        "description"
+        "scope"
       ]
     },
     "RunbookScopeProperties": {
@@ -4723,6 +4774,9 @@
           }
         }
       },
+      "required": [
+        "waveId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/RunbookScopeProperties"
@@ -4734,10 +4788,13 @@
       "type": "object",
       "description": "Request payload for adding a runbook step.",
       "properties": {
-        "stepName": {
+        "stepRef": {
+          "$ref": "#/definitions/RunbookStepRef",
+          "description": "Reference value that identifies the concrete runbook step type."
+        },
+        "workstreamId": {
           "type": "string",
-          "description": "Runbook step name.",
-          "maxLength": 64
+          "description": "Identifier of the workstream to which the step is added."
         },
         "displayName": {
           "type": "string",
@@ -4748,26 +4805,6 @@
           "type": "string",
           "description": "Runbook step description.",
           "maxLength": 256
-        },
-        "stepRef": {
-          "type": "string",
-          "description": "Partner step reference identifier."
-        },
-        "migrationEntityIds": {
-          "type": "array",
-          "description": "Migration entity ARM IDs associated with this step.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
-                }
-              ]
-            }
-          }
         },
         "dependsOn": {
           "type": "array",
@@ -4780,11 +4817,11 @@
           ]
         }
       },
+      "discriminator": "stepRef",
       "required": [
-        "stepName",
-        "displayName",
-        "description",
-        "stepRef"
+        "stepRef",
+        "workstreamId",
+        "displayName"
       ]
     },
     "RunbookStepDeleteRequest": {
@@ -4870,6 +4907,30 @@
         "to"
       ]
     },
+    "RunbookStepRef": {
+      "type": "string",
+      "description": "Runbook step reference discriminator.",
+      "enum": [
+        "common.manual",
+        "common.approval"
+      ],
+      "x-ms-enum": {
+        "name": "RunbookStepRef",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "common.manual",
+            "description": "Manual runbook step."
+          },
+          {
+            "name": "Approval",
+            "value": "common.approval",
+            "description": "Approval runbook step."
+          }
+        ]
+      }
+    },
     "RunbookStepUpdateRequest": {
       "type": "object",
       "description": "Request payload for updating a runbook step.",
@@ -4934,7 +4995,7 @@
       "type": "object",
       "description": "Request payload for merging runbook workstreams.",
       "properties": {
-        "workstreamId": {
+        "workstreamIds": {
           "type": "array",
           "description": "Workstream IDs to merge.",
           "items": {
@@ -4943,12 +5004,13 @@
         },
         "newWorkstreamName": {
           "type": "string",
-          "description": "Optional new workstream name for the merged output.",
+          "description": "New workstream name for the merged output.",
           "maxLength": 64
         }
       },
       "required": [
-        "workstreamId"
+        "workstreamIds",
+        "newWorkstreamName"
       ]
     },
     "ServerMigrationSpecificProperties": {

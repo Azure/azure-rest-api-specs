@@ -74,6 +74,18 @@ union RunbookScopeType {
   string,
 }
 
+@doc("Runbook step reference discriminator.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookStepRef {
+  @doc("Manual runbook step.")
+  Manual: "common.manual",
+
+  @doc("Approval runbook step.")
+  Approval: "common.approval",
+
+  string,
+}
+
 @doc("Runbook execution action.")
 @added(ApiVersions.v2026_08_01_preview)
 union RunbookExecutionAction {

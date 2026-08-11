@@ -180,27 +180,11 @@ interface Runbooks {
   regenerate is ArmResourceActionAsync<Runbook, void, Runbook>;
 
   @added(ApiVersions.v2026_08_01_preview)
-  @action("generateDownloadUrl")
-  generateDownloadUrl is ArmResourceActionSync<
-    Runbook,
-    void,
-    RunbookDownloadUrlResponse
-  >;
-
-  @added(ApiVersions.v2026_08_01_preview)
   @action("generateInputUploadUrl")
   generateInputUploadUrl is ArmResourceActionSync<
     Runbook,
     void,
     RunbookInputUploadUrlResponse
-  >;
-
-  @added(ApiVersions.v2026_08_01_preview)
-  @action("generateInputDownloadUrl")
-  generateInputDownloadUrl is ArmResourceActionSync<
-    Runbook,
-    void,
-    RunbookInputDownloadUrlResponse
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
@@ -268,6 +252,22 @@ interface RunbookExecutions {
     RunbookExecution,
     void,
     RunbookExecutionDownloadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateInputUploadUrl")
+  generateInputUploadUrl is ArmResourceActionSync<
+    RunbookExecution,
+    void,
+    RunbookExecutionInputUploadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateInputDownloadUrl")
+  generateInputDownloadUrl is ArmResourceActionSync<
+    RunbookExecution,
+    void,
+    RunbookExecutionInputDownloadUrlResponse
   >;
 
   @added(ApiVersions.v2026_08_01_preview)

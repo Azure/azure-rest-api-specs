@@ -65,10 +65,10 @@ model RunbookExecutionActionRequest {
   comment?: string;
 
   @doc("Target identifier for the action.")
-  targetId: string;
+  targetId?: string;
 
   @doc("Migration entity ARM IDs in scope for this action.")
-  migrationEntityIds: armResourceIdentifier<[
+  migrationEntityIds?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntities";
     }
@@ -79,6 +79,26 @@ model RunbookExecutionActionRequest {
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookExecutionDownloadUrlResponse {
   @doc("Download URL for runbook execution artifacts.")
+  downloadUrl: url;
+
+  @doc("Expiration time for the download URL.")
+  expiresAt: utcDateTime;
+}
+
+@doc("Runbook execution input upload URL response.")
+@added(ApiVersions.v2026_08_01_preview)
+model RunbookExecutionInputUploadUrlResponse {
+  @doc("Upload URL for runbook execution input content.")
+  uploadUrl: url;
+
+  @doc("Expiration time for the upload URL.")
+  expiresAt: utcDateTime;
+}
+
+@doc("Runbook execution input download URL response.")
+@added(ApiVersions.v2026_08_01_preview)
+model RunbookExecutionInputDownloadUrlResponse {
+  @doc("Download URL for runbook execution input content.")
   downloadUrl: url;
 
   @doc("Expiration time for the download URL.")

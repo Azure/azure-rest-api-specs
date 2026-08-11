@@ -40,7 +40,7 @@ model RunbookProperties is AzureResourceProperties {
 
   @doc("Runbook description.")
   @maxLength(256)
-  description: string;
+  description?: string;
 }
 
 @doc("Base runbook scope model.")
@@ -58,7 +58,7 @@ model RunbookScopeWaveProperties extends RunbookScopeProperties {
   scopeType: RunbookScopeType.Wave;
 
   @doc("Wave ARM identifier for wave-scoped runbooks.")
-  waveId?: armResourceIdentifier<[
+  waveId: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/waves";
     }
@@ -66,11 +66,14 @@ model RunbookScopeWaveProperties extends RunbookScopeProperties {
 }
 
 @doc("Request payload for adding a runbook step.")
+@discriminator("stepRef")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookStepAddRequest {
-  @doc("Runbook step name.")
-  @maxLength(64)
-  stepName: string;
+  @doc("Reference value that identifies the concrete runbook step type.")
+  stepRef: RunbookStepRef;
+
+  @doc("Identifier of the workstream to which the step is added.")
+  workstreamId: string;
 
   @doc("Display name for the runbook step.")
   @maxLength(64)
@@ -78,21 +81,32 @@ model RunbookStepAddRequest {
 
   @doc("Runbook step description.")
   @maxLength(256)
-  description: string;
+  description?: string;
 
-  @doc("Partner step reference identifier.")
-  stepRef: string;
+  @doc("Dependencies for this runbook step.")
+  @identifiers(#["stepId"])
+  dependsOn?: RunbookStepDependency[];
+}
 
-  @doc("Migration entity ARM IDs associated with this step.")
+@doc("Request payload for adding a manual runbook step.")
+@added(ApiVersions.v2026_08_01_preview)
+model RunbookManualStepAddRequest extends RunbookStepAddRequest {
+  @doc("Discriminator for a manual runbook step.")
+  stepRef: "common.manual";
+}
+
+@doc("Request payload for adding an approval runbook step.")
+@added(ApiVersions.v2026_08_01_preview)
+model RunbookApprovalStepAddRequest extends RunbookStepAddRequest {
+  @doc("Discriminator for an approval runbook step.")
+  stepRef: "common.approval";
+
+  @doc("Migration entity Azure resource identifiers associated with this approval step.")
   migrationEntityIds?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntities";
     }
   ]>[];
-
-  @doc("Dependencies for this runbook step.")
-  @identifiers(#["stepId"])
-  dependsOn?: RunbookStepDependency[];
 }
 
 @doc("Request payload for updating a runbook step.")
@@ -149,11 +163,11 @@ model RunbookStepEntityMapEntry {
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookWorkstreamsMergeRequest {
   @doc("Workstream IDs to merge.")
-  workstreamId: string[];
+  workstreamIds: string[];
 
-  @doc("Optional new workstream name for the merged output.")
+  @doc("New workstream name for the merged output.")
   @maxLength(64)
-  newWorkstreamName?: string;
+  newWorkstreamName: string;
 }
 
 @doc("Request payload for splitting a runbook workstream.")
@@ -170,16 +184,6 @@ model RunbookWorkstreamSplitRequest {
   newWorkstreamName: string;
 }
 
-@doc("Runbook download URL response.")
-@added(ApiVersions.v2026_08_01_preview)
-model RunbookDownloadUrlResponse {
-  @doc("Download URL for runbook content.")
-  downloadUrl: url;
-
-  @doc("Expiration time for the download URL.")
-  expiresAt: utcDateTime;
-}
-
 @doc("Runbook input upload URL response.")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookInputUploadUrlResponse {
@@ -187,15 +191,5 @@ model RunbookInputUploadUrlResponse {
   uploadUrl: url;
 
   @doc("Expiration time for the upload URL.")
-  expiresAt: utcDateTime;
-}
-
-@doc("Runbook input download URL response.")
-@added(ApiVersions.v2026_08_01_preview)
-model RunbookInputDownloadUrlResponse {
-  @doc("Download URL for runbook input content.")
-  downloadUrl: url;
-
-  @doc("Expiration time for the download URL.")
   expiresAt: utcDateTime;
 }
