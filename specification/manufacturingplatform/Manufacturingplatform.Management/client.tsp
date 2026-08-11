@@ -18,4 +18,13 @@ using Microsoft.ManufacturingPlatform;
 );
 @@clientName(ResourceState, "ManufacturingPlatformResourceState", "csharp");
 @@clientName(RedundancyState, "ManufacturingPlatformRedundancyState", "csharp");
-@@clientName(MoboBrokerResource, "MoboBrokerResourceInfo", "csharp");
+@@clientName(
+  MoboBrokerResource,
+  "ManagedOnBehalfOfBrokerResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ManagedOnBehalfOfConfiguration.moboBrokerResources,
+  "BrokerResources",
+  "csharp"
+);
