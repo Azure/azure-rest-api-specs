@@ -610,7 +610,8 @@ model UpdateFileBase {
   sizeInBytes: int64;
 
   /**
-   * Mapping of hashing algorithm to base64 encoded hash values.
+   * Mapping of hash algorithm names to base64-encoded hash values.
+   * The SHA-256 hash is identified by the `sha256` key and is required.
    */
   @extension("minProperties", 1)
   hashes: Record<string>;
