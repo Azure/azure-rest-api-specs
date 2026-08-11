@@ -8990,7 +8990,7 @@
       "description": "Request body for checking whether a managed environment can migrate to a target mode.",
       "properties": {
         "targetMode": {
-          "$ref": "#/definitions/ManagedEnvironmentMode",
+          "type": "string",
           "description": "The target environment mode to check migration eligibility against."
         }
       },
@@ -9011,11 +9011,11 @@
           "description": "The name of the managed environment that was checked."
         },
         "currentMode": {
-          "$ref": "#/definitions/ManagedEnvironmentMode",
+          "type": "string",
           "description": "The current mode of the managed environment."
         },
         "targetMode": {
-          "$ref": "#/definitions/ManagedEnvironmentMode",
+          "type": "string",
           "description": "The requested target mode."
         },
         "failureReasons": {
@@ -13270,42 +13270,6 @@
         }
       ]
     },
-    "ManagedEnvironmentMode": {
-      "type": "string",
-      "description": "Mode of the managed environment.",
-      "enum": [
-        "ConsumptionOnly",
-        "WorkloadProfiles",
-        "Express",
-        "Archived"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedEnvironmentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ConsumptionOnly",
-            "value": "ConsumptionOnly",
-            "description": "The environment supports consumption-only workloads."
-          },
-          {
-            "name": "WorkloadProfiles",
-            "value": "WorkloadProfiles",
-            "description": "The environment supports workload profiles."
-          },
-          {
-            "name": "Express",
-            "value": "Express",
-            "description": "The environment uses the Express mode."
-          },
-          {
-            "name": "Archived",
-            "value": "Archived",
-            "description": "The environment is archived."
-          }
-        ]
-      }
-    },
     "ManagedEnvironmentProperties": {
       "type": "object",
       "description": "Managed environment resource specific properties",
@@ -13406,8 +13370,18 @@
           "description": "Ingress configuration for the Managed Environment."
         },
         "environmentMode": {
-          "$ref": "#/definitions/ManagedEnvironmentMode",
-          "description": "Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'."
+          "enum": [
+            "ConsumptionOnly",
+            "WorkloadProfiles",
+            "Express",
+            "Archived"
+          ],
+          "description": "Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnvironmentMode",
+            "modelAsString": true
+          }
         },
         "privateEndpointConnections": {
           "type": "array",

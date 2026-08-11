@@ -2574,7 +2574,7 @@ model CheckMigrationEligibilityRequest {
   /**
    * The target environment mode to check migration eligibility against.
    */
-  targetMode: ManagedEnvironmentMode;
+  targetMode: string;
 }
 
 /**
@@ -2611,12 +2611,12 @@ model CheckMigrationEligibilityResponse {
   /**
    * The current mode of the managed environment.
    */
-  currentMode: ManagedEnvironmentMode;
+  currentMode: string;
 
   /**
    * The requested target mode.
    */
-  targetMode: ManagedEnvironmentMode;
+  targetMode: string;
 
   /**
    * The blocking reasons preventing migration. Empty when the managed environment is eligible.
