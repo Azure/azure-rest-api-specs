@@ -552,6 +552,25 @@ interface Databases {
   >;
 }
 
+@armResourceOperations(#{ omitTags: true })
+interface Queries {
+  /**
+   * Get top resource consuming queries of a database
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_08_01_preview)
+  @Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+  @tag("TopQueries")
+  @list
+  @get
+  @action("topQueries")
+  listByDatabase is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<TopQueriesDatabaseListResult>
+  >;
+}
+
 @@doc(Database.name, "The name of the database.");
 @@doc(Database.properties, "Resource properties.");
 @@doc(
