@@ -290,9 +290,9 @@ op IotDpsResourceDeleteCustomized(
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@markAsPageable(CertificateResponses.list, "csharp");
+@@markAsPageable(CertificateResponses.list, "csharp,java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp");
+@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp,java");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
