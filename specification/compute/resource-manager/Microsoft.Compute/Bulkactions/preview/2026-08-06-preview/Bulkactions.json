@@ -6591,6 +6591,12 @@
       "type": "object",
       "description": "Specifies how partial fulfillment is handled for a BulkCreateCustom request.",
       "properties": {
+        "fulfilledCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity fulfilled by the request, expressed in units specified by capacityType. This value may be less than capacity when the request is partially fulfilled.",
+          "readOnly": true
+        },
         "mode": {
           "type": "string",
           "description": "Specifies whether partial fulfillment is allowed. The default is Enabled. Must be Enabled when minCapacity is specified.",
@@ -6615,12 +6621,6 @@
               }
             ]
           }
-        },
-        "fulfilledCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The capacity fulfilled by the request, expressed in units specified by capacityType. This value may be less than capacity when the request is partially fulfilled.",
-          "readOnly": true
         },
         "reason": {
           "$ref": "#/definitions/PartialFulfillmentReason",

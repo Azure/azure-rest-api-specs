@@ -219,12 +219,12 @@ union PartialFulfillmentReason {
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
 @doc("Specifies how partial fulfillment is handled for a BulkCreateCustom request.")
 model PartialFulfillmentPolicy {
-  @doc("Specifies whether partial fulfillment is allowed. The default is Enabled. Must be Enabled when minCapacity is specified.")
-  mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
-
   @visibility(Lifecycle.Read)
   @doc("The capacity fulfilled by the request, expressed in units specified by capacityType. This value may be less than capacity when the request is partially fulfilled.")
   fulfilledCapacity?: int32;
+
+  @doc("Specifies whether partial fulfillment is allowed. The default is Enabled. Must be Enabled when minCapacity is specified.")
+  mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
 
   @visibility(Lifecycle.Read)
   @doc("The reason the requested capacity was not fully fulfilled.")
