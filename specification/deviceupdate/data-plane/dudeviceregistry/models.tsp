@@ -344,7 +344,7 @@ model ImportUpdateInputItem {
   friendlyName?: string;
 
   /**
-    * One or more update file properties like file name and source URL.
+   * One or more update file properties like file name and source URL.
    */
   @minItems(1)
   @maxItems(5)
