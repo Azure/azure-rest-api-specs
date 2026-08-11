@@ -22,12 +22,12 @@ namespace Microsoft.Chaos;
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 @tenantResource
 model ScenarioTemplate
-  is Azure.ResourceManager.ProxyResource<ScenarioTemplateProperties> {
+  is Azure.ResourceManager.ProxyResource<ScenarioTemplateProperties, false> {
   ...ResourceNameParameter<
     Resource = ScenarioTemplate,
     KeyName = "scenarioTemplateName",
     SegmentName = "scenarioTemplates",
-    NamePattern = "^[A-Za-z][A-Za-z0-9]*$"
+    NamePattern = "^[A-Za-z0-9\\-._~]+$"
   >;
 }
 
@@ -40,30 +40,22 @@ model ScenarioTemplate
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 @parentResource(ScenarioTemplate)
 model ScenarioTemplateVersion
-  is Azure.ResourceManager.ProxyResource<ScenarioTemplateProperties> {
+  is Azure.ResourceManager.ProxyResource<ScenarioTemplateVersionProperties, false> {
   ...ResourceNameParameter<
     Resource = ScenarioTemplateVersion,
     KeyName = "version",
     SegmentName = "versions",
-    NamePattern = "^\\d+\\.\\d+(\\.\\d+)?$"
+    NamePattern = "^[A-Za-z0-9\\-._~]+$"
   >;
 }
 
 /**
- * Model that represents the properties of a scenario template. The same properties describe a
- * template and a single version of that template; on the template they describe its newest
- * published version, which `version` names.
+ * Model that represents the properties of a single published version of a scenario template —
+ * the blueprint content itself.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only catalog resource served from the resource provider; there is nothing to provision."
 @added(Microsoft.Chaos.Versions.v2026_11_01)
-model ScenarioTemplateProperties {
-  /**
-   * The version of the template being described. On the template resource this is its newest
-   * published version.
-   */
-  @visibility(Lifecycle.Read)
-  version: string;
-
+model ScenarioTemplateVersionProperties {
   /**
    * Localized display name of the template.
    */
@@ -81,7 +73,7 @@ model ScenarioTemplateProperties {
    * (for example PT3H for three hours).
    */
   @visibility(Lifecycle.Read)
-  maxTimeoutDuration?: string;
+  maxTimeoutDuration?: duration;
 
   /**
    * The resource selectors the template's actions target. Each selector names a group of
@@ -104,12 +96,43 @@ model ScenarioTemplateProperties {
   /**
    * The actions that define the template's orchestration. These are the same model a scenario
    * publishes, and carry unresolved `%%\{...\}%%` macros; the macros are substituted when the
-   * scenario runs.
+   * scenario runs, not when it is read or created.
+   *
+   * Four macro namespaces may appear:
+   *
+   * - `%%\{parameters.\<name\>\}%%` — resolves from the parameter values supplied when the
+   *   scenario is configured. The accepted names are declared by `parameters`.
+   * - `%%\{resourceSelectors.\<name\>\}%%` — resolves to the resources discovered for that
+   *   selector. The accepted names are declared by `resourceSelectors`.
+   * - `%%\{resourceTargeting.include.\<dimension\>\}%%` — resolves from the resource targeting
+   *   of the scenario's configuration (for example `zones`, `locations`). The template does not
+   *   declare these; they are dimensions of the configuration supplied at run time.
+   * - `%%\{filters.\<dimension\>\}%%` — deprecated spelling of `resourceTargeting.include.`,
+   *   retained only so that superseded template versions keep resolving. Do not depend on it;
+   *   the newest version of every template uses `resourceTargeting.include.`.
    */
   @visibility(Lifecycle.Read)
   @minItems(1)
   @identifiers(#["name"])
   actions: ScenarioAction[];
+}
+
+/**
+ * Model that represents the properties of a scenario template. These are the properties of the
+ * template's newest published version, together with the version number that identifies it.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only catalog resource served from the resource provider; there is nothing to provision."
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioTemplateProperties {
+  /**
+   * The newest published version of the template, for example 1.2. This is the version whose
+   * content the remaining properties describe, and the version a scenario records when it is
+   * created from the template without naming one.
+   */
+  @visibility(Lifecycle.Read)
+  latestVersion: string;
+
+  ...ScenarioTemplateVersionProperties;
 }
 
 /**
