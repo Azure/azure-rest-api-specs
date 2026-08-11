@@ -192,10 +192,10 @@ union DistributionStrategy {
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
 @doc("Whether the service may launch fewer instances than requested when the full capacity cannot be satisfied.")
 union PartialFulfillmentMode {
-  @doc("Default. The service launches as much capacity as possible, up to the requested capacity.")
+  @doc("Partial fulfillment is allowed.")
   Enabled: "Enabled",
 
-  @doc("The service launches either all of the requested capacity or none of it.")
+  @doc("Partial fulfillment is not allowed.")
   Disabled: "Disabled",
 
   string,
@@ -217,17 +217,17 @@ union PartialFulfillmentReason {
 }
 
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
-@doc("Controls partial fulfillment of the VMs or vCPUs requested by a BulkCreateCustom or LaunchBulkInstancesOperation request, and reports the outcome when partial fulfillment occurs.")
+@doc("Specifies how partial fulfillment is handled for a BulkCreateCustom request.")
 model PartialFulfillmentPolicy {
-  @doc("Whether partial fulfillment is allowed. Defaults to Enabled. When set to Disabled, minCapacity must not be specified; a request that sets Disabled and also specifies minCapacity is rejected with 400 Bad Request.")
+  @doc("Specifies whether partial fulfillment is allowed. The default is Enabled. Must be Enabled when minCapacity is specified.")
   mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
 
   @visibility(Lifecycle.Read)
-  @doc("The amount of capacity that was successfully fulfilled, expressed in the units given by capacityType. Returned on the create response only when the request was partially fulfilled; otherwise null.")
+  @doc("The capacity fulfilled by the request, expressed in units specified by capacityType. This value may be less than capacity when the request is partially fulfilled.")
   fulfilledCapacity?: int32;
 
   @visibility(Lifecycle.Read)
-  @doc("The reason the requested capacity was only partially fulfilled. Returned on the create response only when the request was partially fulfilled; otherwise null.")
+  @doc("The reason the requested capacity was not fully fulfilled.")
   reason?: PartialFulfillmentReason;
 }
 

@@ -3684,12 +3684,12 @@
         "minCapacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Minimum capacity to achieve, expressed in the units given by capacityType. Must be less than capacity; to require the full requested capacity, set partialFulfillmentPolicy.mode to Disabled instead. If the service cannot allocate at least this much capacity, the request fails and no instances are launched. Setting a minimum requires partial fulfillment to remain enabled, so this property cannot be combined with partialFulfillmentPolicy.mode set to Disabled; such a request is rejected with 400 Bad Request.",
+          "description": "The minimum capacity required for the request, expressed in units specified by capacityType. Must be greater than 0 and less than capacity. When specified, partialFulfillmentPolicy.mode must be Enabled.",
           "minimum": 1
         },
         "partialFulfillmentPolicy": {
           "$ref": "#/definitions/PartialFulfillmentPolicy",
-          "description": "The partial fulfillment policy for the BulkCreateCustom request. When this property is omitted, partial fulfillment is allowed. To require all-or-nothing behavior, set partialFulfillmentPolicy.mode to Disabled, which cannot be combined with minCapacity; such a request is rejected with 400 Bad Request."
+          "description": "Specifies how partial fulfillment is handled for a BulkCreateCustom request."
         },
         "priorityProfile": {
           "$ref": "#/definitions/BulkCreateCustomPriorityProfile",
@@ -6589,11 +6589,11 @@
     },
     "PartialFulfillmentPolicy": {
       "type": "object",
-      "description": "Controls partial fulfillment of the VMs or vCPUs requested by a BulkCreateCustom or LaunchBulkInstancesOperation request, and reports the outcome when partial fulfillment occurs.",
+      "description": "Specifies how partial fulfillment is handled for a BulkCreateCustom request.",
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Whether partial fulfillment is allowed. Defaults to Enabled. When set to Disabled, minCapacity must not be specified; a request that sets Disabled and also specifies minCapacity is rejected with 400 Bad Request.",
+          "description": "Specifies whether partial fulfillment is allowed. The default is Enabled. Must be Enabled when minCapacity is specified.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -6606,12 +6606,12 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Default. The service launches as much capacity as possible, up to the requested capacity."
+                "description": "Partial fulfillment is allowed."
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "The service launches either all of the requested capacity or none of it."
+                "description": "Partial fulfillment is not allowed."
               }
             ]
           }
@@ -6619,12 +6619,12 @@
         "fulfilledCapacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of capacity that was successfully fulfilled, expressed in the units given by capacityType. Returned on the create response only when the request was partially fulfilled; otherwise null.",
+          "description": "The capacity fulfilled by the request, expressed in units specified by capacityType. This value may be less than capacity when the request is partially fulfilled.",
           "readOnly": true
         },
         "reason": {
           "$ref": "#/definitions/PartialFulfillmentReason",
-          "description": "The reason the requested capacity was only partially fulfilled. Returned on the create response only when the request was partially fulfilled; otherwise null.",
+          "description": "The reason the requested capacity was not fully fulfilled.",
           "readOnly": true
         }
       }

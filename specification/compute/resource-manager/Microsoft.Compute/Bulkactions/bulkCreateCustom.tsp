@@ -251,12 +251,12 @@ model BulkCreateCustomProperties {
   capacityType?: CapacityType;
 
   @added(Versions.`2026-08-06-preview`)
-  @doc("Minimum capacity to achieve, expressed in the units given by capacityType. Must be less than capacity; to require the full requested capacity, set partialFulfillmentPolicy.mode to Disabled instead. If the service cannot allocate at least this much capacity, the request fails and no instances are launched. Setting a minimum requires partial fulfillment to remain enabled, so this property cannot be combined with partialFulfillmentPolicy.mode set to Disabled; such a request is rejected with 400 Bad Request.")
+  @doc("The minimum capacity required for the request, expressed in units specified by capacityType. Must be greater than 0 and less than capacity. When specified, partialFulfillmentPolicy.mode must be Enabled.")
   @minValue(1)
   minCapacity?: int32;
 
   @added(Versions.`2026-08-06-preview`)
-  @doc("The partial fulfillment policy for the BulkCreateCustom request. When this property is omitted, partial fulfillment is allowed. To require all-or-nothing behavior, set partialFulfillmentPolicy.mode to Disabled, which cannot be combined with minCapacity; such a request is rejected with 400 Bad Request.")
+  @doc("Specifies how partial fulfillment is handled for a BulkCreateCustom request.")
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
 
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
