@@ -81,16 +81,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     context.prInfo!.tempRepoFolder,
     diffs.deletions || [],
   );
-  const unsuppressedRenameDestinations = new Set(
-    await filterSuppressedSwaggers(
-      context,
-      context.localSpecRepoPath,
-      (diffs.renames || []).map((rename) => rename.to),
-    ),
-  );
-  const renamedSwaggers = (diffs.renames || []).filter((rename) =>
-    unsuppressedRenameDestinations.has(rename.to),
-  );
+  const renamedSwaggers = diffs.renames || [];
 
   const newExistingVersionDirs: string[] = [];
 
