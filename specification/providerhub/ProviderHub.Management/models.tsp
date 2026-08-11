@@ -4459,8 +4459,7 @@ model OperationsDefinition {
   /**
    * Anything
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.v2025_10_01)
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The service models this as a free-form JToken, so it has no fixed schema."
   properties?: unknown;
 }
 
@@ -4536,6 +4535,13 @@ model LocalizedOperationDefinition {
    * The action type.
    */
   actionType?: OperationActionType;
+
+  /**
+   * Anything
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The service models this as a free-form JToken, so it has no fixed schema."
+  @added(Versions.v2025_10_01)
+  properties?: unknown;
 }
 
 /**
@@ -5263,8 +5269,8 @@ model OperationsContent extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Operations content.
    */
-  @removed(Versions.v2025_10_01)
-  properties?: OperationsDefinition;
+  @typeChangedFrom(Versions.v2025_10_01, OperationsDefinition)
+  properties?: OperationsContentProperties;
 
   /**
    * Operations content.
