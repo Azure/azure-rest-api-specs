@@ -315,6 +315,20 @@ union NetworkInterfaceAuxiliarySku {
 }
 
 /**
+ * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD.
+ */
+@added(Versions.v2026_04_01)
+union DiskApiVersion {
+  string,
+
+  /** The 2025-01-02 Disk RP API version. */
+  `2025-01-02`: "2025-01-02",
+
+  /** The 2026-03-02 Disk RP API version. */
+  `2026-03-02`: "2026-03-02",
+}
+
+/**
  * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations
  */
 union NetworkApiVersion {
@@ -2643,6 +2657,12 @@ model VirtualMachineScaleSetStorageProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
+   */
+  @added(Versions.v2026_04_01)
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -2802,6 +2822,12 @@ model VirtualMachineScaleSetManagedDiskParameters {
    * Specifies the security profile for the managed disk.
    */
   securityProfile?: VMDiskSecurityProfile;
+
+  /**
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured for Restore Points.
+   */
+  @added(Versions.v2026_04_01)
+  additionalDiskProperties?: AdditionalDiskProperties;
 }
 
 /**
@@ -4175,6 +4201,12 @@ model VirtualMachineScaleSetUpdateStorageProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
+   */
+  @added(Versions.v2026_04_01)
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -4555,6 +4587,7 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
 /**
  * Response after calling a manual recovery walk
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RecoveryWalkResponse {
   /**
    * Whether the recovery walk was performed
@@ -5581,6 +5614,12 @@ model StorageProfile {
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
   alignRegionalDisksToVMZone?: boolean;
+
+  /**
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
+   */
+  @added(Versions.v2026_04_01)
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -5695,6 +5734,139 @@ model ManagedDiskParameters extends SubResource {
    * Specifies the security profile for the managed disk.
    */
   securityProfile?: VMDiskSecurityProfile;
+
+  /**
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured for Restore Points.
+   */
+  @added(Versions.v2026_04_01)
+  additionalDiskProperties?: AdditionalDiskProperties;
+}
+
+/**
+ * Specifies additional properties for a managed disk that can be set at the time of implicit creation of the disk.
+ */
+@added(Versions.v2026_04_01)
+// AdditionalDiskProperties is intentionally structured as a wrapper to allow future
+// sibling property categories alongside managedDiskProperties without a breaking API change.
+model AdditionalDiskProperties {
+  /**
+   * Specifies the managed disk properties that can be set at the time of implicit creation of the disk.
+   */
+  managedDiskProperties?: ManagedDiskProperties;
+}
+
+/**
+ * Specifies the properties of a managed disk that can be set at the time of implicit creation of the disk.
+ */
+@added(Versions.v2026_04_01)
+model ManagedDiskProperties {
+  /**
+   * Performance tier of the disk (e.g., P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
+   */
+  tier?: string;
+
+  /**
+   * Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.
+   */
+  burstingEnabled?: boolean;
+
+  /**
+   * Set this flag to true to get a boost on the performance target of the disk deployed. This flag can only be set on disk creation time and cannot be disabled after enabled.
+   */
+  performancePlus?: boolean;
+
+  /**
+   * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
+   */
+  optimizedForFrequentAttach?: boolean;
+
+  /**
+   * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
+   */
+  availabilityPolicy?: DiskAvailabilityPolicy;
+
+  /**
+   * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time. Applies to data disks only.
+   */
+  @minValue(1)
+  maxShares?: int32;
+
+  /**
+   * Policy for accessing the disk via network.
+   */
+  networkAccessPolicy?: NetworkAccessPolicy;
+
+  /**
+   * Azure resource Id of the DiskAccess resource for using private endpoints on disks.
+   */
+  diskAccessId?: string;
+
+  /**
+   * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
+   */
+  diskIOPSReadOnly?: int64;
+
+  /**
+   * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
+   */
+  diskMBpsReadOnly?: int64;
+
+  /**
+   * Logical sector size in bytes for Ultra Disks. Supported values are 512 and 4096. 4096 is the default.
+   */
+  logicalSectorSize?: int32;
+}
+
+/**
+ * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
+ */
+@added(Versions.v2026_04_01)
+model DiskAvailabilityPolicy {
+  /**
+   * Determines how to handle disks with slow I/O.
+   */
+  actionOnDiskDelay?: AvailabilityPolicyDiskDelay;
+}
+
+/**
+ * Determines how to handle disks with slow I/O.
+ */
+@added(Versions.v2026_04_01)
+union AvailabilityPolicyDiskDelay {
+  string,
+
+  /**
+   * Defaults to behavior without availability policy specified, which is VM restart upon slow disk I/O.
+   */
+  None: "None",
+
+  /**
+   * Upon a disk I/O failure or slow response, try detaching then reattaching the disk.
+   */
+  AutomaticReattach: "AutomaticReattach",
+}
+
+/**
+ * Policy for accessing the disk via network.
+ */
+@added(Versions.v2026_04_01)
+union NetworkAccessPolicy {
+  string,
+
+  /**
+   * The disk can be exported or uploaded from any network.
+   */
+  AllowAll: "AllowAll",
+
+  /**
+   * The disk can be exported or uploaded using a DiskAccess resource's private endpoints.
+   */
+  AllowPrivate: "AllowPrivate",
+
+  /**
+   * The disk cannot be exported.
+   */
+  DenyAll: "DenyAll",
 }
 
 /**
@@ -6403,6 +6575,7 @@ model VirtualMachineExtensionUpdateProperties {
 /**
  * Specifies the input for attaching and detaching a list of managed data disks.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttachDetachDataDisksRequest {
   /**
    * The list of managed data disks to be attached.
