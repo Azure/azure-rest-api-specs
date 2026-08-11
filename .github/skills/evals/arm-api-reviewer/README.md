@@ -118,6 +118,35 @@ The script will:
 
 Run `Get-Help .\run-evals.ps1 -Detailed` for all parameters.
 
+## Framework version
+
+This suite runs **locally only** today. No workflow in this repo wires it into
+CI: nothing under `.github/workflows/` invokes `run-evals.ps1` or the shard
+runner, so the numbers quoted in this README come from local runs.
+
+There are two ways vally gets acquired, and they are pinned differently:
+
+| Path                                         | Source                                                                  | Version                                       |
+| -------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------- |
+| Local (`run-evals.ps1`)                      | `git clone https://github.com/microsoft/vally` built from source        | **Unpinned** -- tracks the default branch     |
+| CI shard runner (`eng/common/scripts/eval/`) | `@microsoft/vally-cli` from npm, installed from the committed lock file | **Pinned** (see that folder's `package.json`) |
+
+`run-evals.ps1` clones without a ref and runs `git pull --ff-only` on an
+existing clone, so a local run always uses whatever is at the tip of vally's
+default branch. That is convenient for inner-loop work but means **local
+results are not guaranteed to reproduce**: a vally change to grader semantics
+or the copilot-sdk executor can move scores without any change in this repo.
+When a score shifts unexpectedly, check whether vally moved before assuming
+the reviewer guidance regressed, and record the vally commit alongside any
+score you intend to treat as a baseline (`git -C <vally-repo> rev-parse --short HEAD`).
+
+To reproduce against the version CI would use, pass `-VallyRepo` pointing at a
+clone checked out to the tag matching the pinned `@microsoft/vally-cli`
+version in `eng/common/scripts/eval/package.json`. That folder is synced from
+`Azure/azure-sdk-tools`; bump the pin there, not here. If this suite is later
+added to CI, it should go through that same pinned shard runner so local and
+CI agree.
+
 ## Running Manually with the vally CLI
 
 If you prefer to invoke the CLI directly (e.g., on Linux/macOS or in CI),
