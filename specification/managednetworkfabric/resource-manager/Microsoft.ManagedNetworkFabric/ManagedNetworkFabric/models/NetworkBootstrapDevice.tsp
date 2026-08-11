@@ -57,6 +57,17 @@ model NetworkBootstrapDeviceProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @doc("Operational state of networkBootstrapDevice indicating if the device is reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
+  @doc("Secret rotation status for the terminal server's secrets.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  @Azure.ResourceManager.identifiers(#["secretType"])
+  secretRotationStatus?: SecretRotationStatus[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
@@ -79,6 +90,14 @@ model NetworkBootstrapDevicePatchableProperties {
   @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
   serialNumber?: string;
+
+  @doc("Control Plane Access Control List ARM resource IDs.")
+  @added(Versions.v2026_01_15_preview)
+  controlPlaneAcls?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>[];
 }
 
 @doc("Network Bootstrap Device Patch properties.")
