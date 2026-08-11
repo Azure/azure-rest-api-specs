@@ -7627,6 +7627,14 @@ model DistributedAvailabilityGroupProperties {
   linkMode?: LinkModeType;
 
   /**
+   * Additional read-only metadata for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Metadata is a server-computed key/value map with no fixed schema."
+  @visibility(Lifecycle.Read)
+  metadata?: Record<string>;
+
+  /**
    * Databases in the distributed availability group
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

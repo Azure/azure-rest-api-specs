@@ -761,6 +761,14 @@
           "$ref": "./common.json#/definitions/LinkModeType",
           "description": "Specifies whether the link operates in single-database or multi-database mode."
         },
+        "metadata": {
+          "type": "object",
+          "description": "Additional read-only metadata for the distributed availability group.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "databases": {
           "type": "array",
           "description": "Databases in the distributed availability group",
