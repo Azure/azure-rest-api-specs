@@ -76599,6 +76599,16 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    RoutineAuthorization:
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/RoutineDispatchIdentity'
+          description: The identity used when dispatching the routine. When omitted, dispatch uses the target agent identity.
+      description: Optional authorization configuration for a routine dispatch.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     RoutineCreateOrUpdateRequest:
       type: object
       properties:
@@ -76617,7 +76627,21 @@ components:
         action:
           $ref: '#/components/schemas/RoutineAction'
           description: The action executed when the routine fires.
+        authorization:
+          $ref: '#/components/schemas/RoutineAuthorization'
+          description: Optional authorization configuration for dispatching a newly created routine. Ignored when updating an existing routine.
       description: The request body used to create or update a routine.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineDispatchIdentity:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent
+            - creator
+      description: The supported identities for routine dispatch authorization.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
