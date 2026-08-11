@@ -351,9 +351,6 @@ model RaiInvocationModeration {
 
   @doc("One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.")
   stream_selectors?: RaiSseTextSelector[];
-
-  @doc("When true, suppress the zero-yield content-safety alert for agents that legitimately have frequent text-free turns.")
-  allow_empty?: boolean = false;
 }
 
 @discriminator("kind")
