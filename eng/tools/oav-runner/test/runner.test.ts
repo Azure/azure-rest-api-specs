@@ -33,6 +33,7 @@ describe("file processing", () => {
         "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
         "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
         "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec2.json",
       ]
     `);
   });
