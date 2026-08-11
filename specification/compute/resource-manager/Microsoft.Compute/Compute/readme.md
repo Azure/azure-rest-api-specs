@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-12-03
+tag: package-2026-07-02
 
 directive:
   - where:
@@ -869,6 +869,27 @@ suppressions:
     from: ComputeRP.json
     where: $.definitions.DedicatedHostGroupPropertiesAdditionalCapabilities.properties.ultraSSDEnabled
 ```
+### Tag: package-2026-07-02
+
+These settings apply only when `--tag=package-2026-07-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-07-02'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
+  - stable/2026-07-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-12-03/GalleryRP.json
+```
+
+### Tag: package-2026-07-02-only
+
+These settings apply only when `--tag=package-2026-07-02-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-02-only'
+input-file:
+  - stable/2026-07-02/DiskRP.json
+```
+
 ### Tag: package-2025-12-03
 
 These settings apply only when `--tag=package-2025-12-03` is specified on the command line.
