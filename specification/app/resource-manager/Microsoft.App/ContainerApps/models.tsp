@@ -2567,6 +2567,65 @@ union ManagedEnvironmentMode {
 }
 
 /**
+ * Request body for checking whether a managed environment can migrate to a target mode.
+ */
+@added(Versions.v2026_07_01)
+model CheckMigrationEligibilityRequest {
+  /**
+   * The target environment mode to check migration eligibility against.
+   */
+  targetMode: ManagedEnvironmentMode;
+}
+
+/**
+ * A blocking reason that prevents a managed environment migration.
+ */
+@added(Versions.v2026_07_01)
+model MigrationEligibilityFailureReason {
+  /**
+   * The error code identifying the blocker.
+   */
+  code: string;
+
+  /**
+   * A human-readable description of the blocker.
+   */
+  message: string;
+}
+
+/**
+ * Result of a read-only managed environment migration eligibility check.
+ */
+@added(Versions.v2026_07_01)
+model CheckMigrationEligibilityResponse {
+  /**
+   * Whether the managed environment can migrate to the requested target mode.
+   */
+  isEligible: boolean;
+
+  /**
+   * The name of the managed environment that was checked.
+   */
+  environmentName: string;
+
+  /**
+   * The current mode of the managed environment.
+   */
+  currentMode: ManagedEnvironmentMode;
+
+  /**
+   * The requested target mode.
+   */
+  targetMode: ManagedEnvironmentMode;
+
+  /**
+   * The blocking reasons preventing migration. Empty when the managed environment is eligible.
+   */
+  @identifiers(#["code"])
+  failureReasons: MigrationEligibilityFailureReason[];
+}
+/**
+/**
  * Managed environment resource specific properties
  */
 model ManagedEnvironmentProperties {
