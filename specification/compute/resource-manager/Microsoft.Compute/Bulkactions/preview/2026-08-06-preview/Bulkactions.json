@@ -866,7 +866,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{bulkOperationId}/virtualMachinesGetOperationStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}/virtualMachinesGetOperationStatus": {
       "post": {
         "operationId": "BulkCreateCustom_VirtualMachinesGetOperationStatus",
         "tags": [
@@ -892,9 +892,9 @@
             "minLength": 1
           },
           {
-            "name": "bulkOperationId",
+            "name": "name",
             "in": "path",
-            "description": "The identifier of the BulkCreateCustom operation.",
+            "description": "The name of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
