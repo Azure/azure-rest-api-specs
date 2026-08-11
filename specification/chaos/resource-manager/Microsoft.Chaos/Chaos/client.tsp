@@ -7,6 +7,12 @@ using Microsoft.Chaos;
 // csharp
 @@clientName(Workspace, "ChaosWorkspace", "csharp");
 @@clientName(Scenario, "ChaosScenario", "csharp");
+@@clientName(ScenarioTemplate, "ChaosScenarioTemplate", "csharp");
+@@clientName(
+  ScenarioTemplateVersion,
+  "ChaosScenarioTemplateVersion",
+  "csharp"
+);
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
 @@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(DiscoveredResource, "ChaosDiscovered", "csharp");
