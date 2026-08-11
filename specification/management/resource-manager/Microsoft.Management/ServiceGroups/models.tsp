@@ -89,7 +89,7 @@ model ServiceGroupProperties {
   /**
    * The criticality designation of the service group.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_09_01_preview)
   criticality?: float64;
 
   /**
@@ -121,7 +121,7 @@ model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
 /**
  * Request body for the listAncestors action.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ListAncestorsRequest {
   /**
    * An opaque pagination token returned in the previous response's skipToken field.
@@ -134,7 +134,7 @@ model ListAncestorsRequest {
  * Response for the listAncestors action. Contains a page of ancestor service
  * groups plus an opaque skipToken for fetching subsequent pages.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ListAncestorsResponse {
   /**
    * The page of ancestor service groups.
@@ -153,7 +153,7 @@ model ListAncestorsResponse {
 /**
  * Request body for the listDescendants action.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ListDescendantsRequest {
   /**
    * An opaque pagination token returned in the previous response's skipToken field.
@@ -166,7 +166,7 @@ model ListDescendantsRequest {
  * Response for the listDescendants action. Contains a page of service groups
  * plus an opaque skipToken for fetching subsequent pages.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ListDescendantsResponse {
   /**
    * The page of descendant service groups.
@@ -187,7 +187,7 @@ model ListDescendantsResponse {
  * only "allMembers" is supported. If omitted, the service behaves as if
  * "allMembers" was specified.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 union ListMembersExpand {
   string,
 
@@ -200,7 +200,7 @@ union ListMembersExpand {
 /**
  * Request body for the listMembers action.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ListMembersRequest {
   /**
    * Controls which members are returned. Only "allMembers" is supported today;
@@ -226,7 +226,7 @@ model ListMembersRequest {
  * Response for the listMembers action. Contains a page of service group members
  * plus an opaque skipToken for fetching subsequent pages.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ListMembersResponse {
   /**
    * The page of service group members.
@@ -248,7 +248,7 @@ model ListMembersResponse {
  * contains). Descendant service groups are not returned as members; use
  * listDescendants for those.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ServiceGroupMember {
   /**
    * The fully qualified ARM ID of the member. For example,

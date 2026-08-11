@@ -79,7 +79,7 @@ interface ServiceGroups {
   /**
    * Get the details of the serviceGroup's ancestors
    */
-  @removed(Versions.v2026_03_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   @sharedRoute
   listAncestors is ArmResourceActionSync<
     ServiceGroup,
@@ -98,7 +98,7 @@ interface ServiceGroups {
    * natively support POST-based pagination, so callers must loop manually.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId must be pinned so SDK method name stays 'ListAncestors' across the versioned reshape."
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_09_01_preview)
   @operationId("ServiceGroups_ListAncestors")
   @action("listAncestors")
   @sharedRoute
@@ -118,7 +118,7 @@ interface ServiceGroups {
    * When skipToken is absent, the current page is the last page. SDKs do not
    * natively support POST-based pagination, so callers must loop manually.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_09_01_preview)
   listDescendants is ArmResourceActionSync<
     ServiceGroup,
     ListDescendantsRequest,
@@ -140,7 +140,7 @@ interface ServiceGroups {
    * When skipToken is absent, the current page is the last page. SDKs do not
    * natively support POST-based pagination, so callers must loop manually.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_09_01_preview)
   listMembers is ArmResourceActionSync<
     ServiceGroup,
     ListMembersRequest,
