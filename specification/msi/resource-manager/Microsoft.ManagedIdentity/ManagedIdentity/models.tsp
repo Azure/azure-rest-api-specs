@@ -25,26 +25,9 @@ union IsolationScope {
 }
 
 /**
- * Object for defining the allowed identifiers of external identities. Introduced in 2025-01-31-preview.
- */
-@added(Versions.v2025_05_31_preview)
-@removed(Versions.v2026_05_31)
-model ClaimsMatchingExpression {
-  /**
-   * Wildcard-based expression for matching incoming subject claims.
-   */
-  value: string;
-
-  /**
-   * Specifies the version of the flexible fic language used in the expression.
-   */
-  languageVersion: int32;
-}
-
-/**
  * Configuration to restrict identity assignment to specific resource providers or resource types.
  */
-@added(Versions.v2025_05_31_preview)
+@added(Versions.v2026_05_31)
 model AssignmentRestrictions {
   /**
    * List of resource providers or resource providers with resource types that this identity can be assigned to (case-insensitive). Examples: 'Microsoft.Compute', 'Microsoft.Storage/Accounts', 'Microsoft.Network/VirtualNetworks'.
@@ -163,7 +146,7 @@ model UserAssignedIdentityProperties {
   /**
    * Restrictions on which resource providers this identity can be assigned to.
    */
-  @added(Versions.v2025_05_31_preview)
+  @added(Versions.v2026_05_31)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   assignmentRestrictions?: AssignmentRestrictions;
 }
@@ -213,20 +196,12 @@ model FederatedIdentityCredentialProperties {
   /**
    * The identifier of the external identity.
    */
-  @madeOptional(Versions.v2025_05_31_preview)
-  subject?: string;
+  subject: string;
 
   /**
    * The list of audiences that can appear in the issued token.
    */
   audiences: string[];
-
-  /**
-   * Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both. Introduced in 2025-01-31-preview.
-   */
-  @added(Versions.v2025_05_31_preview)
-  @removed(Versions.v2026_05_31)
-  claimsMatchingExpression?: ClaimsMatchingExpression;
 }
 
 /**
