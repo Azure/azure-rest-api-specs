@@ -286,7 +286,7 @@ op IotDpsResourceDeleteCustomized(
 @@override(
   ProvisioningServiceDescriptions.delete,
   IotDpsResourceDeleteCustomized,
-  "python,go,java"
+  "python,go"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
@@ -409,7 +409,7 @@ op IotDpsResourceGetCustomized(
 @@override(
   ProvisioningServiceDescriptions.get,
   IotDpsResourceGetCustomized,
-  "python,go,java"
+  "python,go"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
