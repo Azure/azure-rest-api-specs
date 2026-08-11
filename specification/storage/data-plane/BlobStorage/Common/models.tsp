@@ -485,7 +485,7 @@ model CreateSessionConfiguration {
   @Xml.name("AuthenticationType") authenticationType: AuthenticationType;
 }
 
-/** The result of the Create Session API. */
+/** The response of the Create Session API. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for consistency with the service API contract"
 @added(Versions.v2026_12_06)
 @Xml.name("CreateSessionResult")
@@ -493,7 +493,7 @@ model CreateSessionResponse {
   /** A unique identifier for the created session. */
   @Xml.name("Id") id?: string;
 
-  /** The time when the session will expire. The format follows RFC 1123. */
+  /** The time when the session will expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiration")
