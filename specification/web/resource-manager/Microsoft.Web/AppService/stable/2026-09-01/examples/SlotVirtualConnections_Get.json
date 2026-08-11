@@ -1,0 +1,34 @@
+{
+  "operationId": "VirtualConnectionsSlotConfigs_GetVirtualConnectionsSlot",
+  "title": "Get Virtual Connections configuration for a slot",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg-orders",
+    "name": "orders-api",
+    "slot": "staging",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/slots/staging/config/virtualConnections",
+        "name": "virtualConnections",
+        "type": "Microsoft.Web/sites/slots/config",
+        "properties": {
+          "enabled": "Enabled",
+          "connections": {
+            "orders-db": {
+              "settings": {
+                "OrdersDb": { "role": "value" }
+              },
+              "source": "connectionStrings",
+              "protocol": "tds",
+              "auth": "mi"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

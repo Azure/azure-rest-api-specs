@@ -1,0 +1,32 @@
+{
+  "operationId": "VirtualConnectionsSlotConfigs_ValidateVirtualConnectionsSlot",
+  "title": "Validate Virtual Connections configuration for a slot",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg-orders",
+    "name": "orders-api",
+    "slot": "staging",
+    "api-version": "2026-09-01",
+    "body": {
+      "enabled": "Enabled",
+      "connections": {
+        "orders-db": {
+          "settings": {
+            "OrdersDb": { "role": "value" }
+          },
+          "source": "connectionStrings",
+          "protocol": "tds",
+          "auth": "mi"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "valid": true,
+        "errors": []
+      }
+    }
+  }
+}

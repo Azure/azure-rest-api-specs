@@ -1,0 +1,37 @@
+{
+  "operationId": "VirtualConnectionsConfigs_ValidateVirtualConnections",
+  "title": "Validate Virtual Connections configuration",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg-orders",
+    "name": "orders-api",
+    "api-version": "2026-09-01",
+    "body": {
+      "enabled": "Enabled",
+      "connections": {
+        "third-party-api": {
+          "settings": {
+            "API_KEY": { "role": "credential" }
+          },
+          "protocol": "http",
+          "auth": "credential"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "valid": false,
+        "errors": [
+          {
+            "connectionName": "third-party-api",
+            "setting": "API_KEY",
+            "code": "MissingCredentialInjection",
+            "message": "Connection 'third-party-api' uses protocol=http with auth=credential and a separate credential setting but does not specify credentialInjection."
+          }
+        ]
+      }
+    }
+  }
+}

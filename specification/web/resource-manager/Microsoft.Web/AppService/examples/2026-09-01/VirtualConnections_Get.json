@@ -1,0 +1,48 @@
+{
+  "operationId": "VirtualConnectionsConfigs_GetVirtualConnections",
+  "title": "Get Virtual Connections configuration",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg-orders",
+    "name": "orders-api",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/virtualConnections",
+        "name": "virtualConnections",
+        "type": "Microsoft.Web/sites/config",
+        "properties": {
+          "enabled": "Enabled",
+          "connections": {
+            "orders-db": {
+              "settings": {
+                "OrdersDb": { "role": "value" }
+              },
+              "source": "connectionStrings",
+              "protocol": "tds",
+              "auth": "mi"
+            },
+            "cache": {
+              "settings": {
+                "REDIS_HOST": { "role": "host" },
+                "REDIS_KEY": { "role": "credential" }
+              },
+              "protocol": "redis",
+              "auth": "mi"
+            },
+            "docs-storage": {
+              "settings": {
+                "STORAGE_URL": { "role": "value" }
+              },
+              "protocol": "http",
+              "auth": "mi"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
