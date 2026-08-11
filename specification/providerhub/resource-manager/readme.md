@@ -63,6 +63,11 @@ directive:
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}"].delete
     reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"].delete
+    reason: DeleteOperationsApi in the service always returns 204, including when the operations content does not exist. Declaring a 200 would document a response the service never sends.
   - suppress: NestedResourcesMustHaveListOperation
     from: providerhub.json
     where:
@@ -101,6 +106,11 @@ directive:
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}"].delete
     reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"].delete
+    reason: DeleteOperationsApi in the service always returns 204, including when the operations content does not exist. Declaring a 200 would document a response the service never sends.
   - suppress: NestedResourcesMustHaveListOperation
     from: providerhub.json
     where:
