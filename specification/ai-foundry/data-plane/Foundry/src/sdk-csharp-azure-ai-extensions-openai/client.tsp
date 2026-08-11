@@ -68,6 +68,21 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@usage(OAuthConsentRequestOutputItem, Usage.input | Usage.output);
+  // The ResponsesOutputItem that OpenAI.OutputItem maps to in C# already has a id proeprty...
+  @@withoutOmittedProperties(OAuthConsentRequestOutputItem, "id");
+  @@alternateType(OAuthConsentRequestOutputItem.consent_link, url);
+
+  @@clientName(OpenApiFunctionDefinition.auth, "authentication");
+  @@clientName(OpenApiFunctionDefinition.default_params, "DefaultParameters");
+  @@clientName(
+    OpenApiManagedAuthDetails,
+    "OpenApiManagedAuthenticationDetails"
+  );
+  @@clientName(OpenApiAuthType, "OpenApiAuthenticationKind");
+  @@clientName(OpenApiAuthDetails.type, "Kind");
+
+  @@clientName(BingCustomSearchConfiguration, "BingCustomSearchOptions");
+  @@clientName(BingGroundingSearchConfiguration, "BingGroundingSearchOptions");
 
   @@clientName(WorkflowActionOutputItem.kind, "CSDLActionKind");
 
@@ -872,6 +887,7 @@ namespace Azure.AI.Projects {
 
   @@clientName(MemorySearchPreviewTool.update_delay, "UpdateDelayInSeconds");
   @@clientName(MemorySearchOptions, "MemorySearchResultOptions");
+  @@alternateType(Azure.AI.Projects.OpenApiFunctionDefinition.spec, unknown);
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@usage(OpenApiFunctionDefinition, Usage.input | Usage.output);
 
