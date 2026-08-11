@@ -314,7 +314,7 @@ scalar VoiceDurationMilliseconds extends duration;
   Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
   credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
-  `/audio_content` route.
+  `/audio/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceItemAudioResponse {
@@ -345,7 +345,7 @@ model VoiceItemAudioResponse {
   @doc("The duration of the audio segment.")
   duration_ms?: VoiceDurationMilliseconds;
 
-  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio_content` route instead.")
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
   blob_uri?: url;
 }
 
@@ -378,7 +378,7 @@ model VoiceRecordingChannelLayout {
   Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,
   the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
   own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
-  `/audio_content` route instead.
+  `/audio/content` route instead.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingResponse {
@@ -400,6 +400,6 @@ model VoiceRecordingResponse {
   @doc("The total duration of the recording.")
   duration_ms: VoiceDurationMilliseconds;
 
-  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio_content` route instead.")
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
   blob_uri?: url;
 }

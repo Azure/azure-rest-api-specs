@@ -227,7 +227,7 @@ interface AgentEndpointConversations {
    * Retrieves a single item from the specified conversation by its id, including its transcript. An
    * `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
    * audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
-   * `/items/{item_id}/audio_content`. Returns `404` when the conversation or item was not persisted
+   * `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
    * (`store = false`).
    */
   @summary("Get a voice agent conversation item")
@@ -285,7 +285,7 @@ interface AgentEndpointConversations {
    */
   @summary("Stream a voice agent conversation item's audio")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio_content")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
   getAgentConversationItemAudioContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -337,7 +337,7 @@ interface AgentEndpointConversations {
    */
   @summary("Stream a voice agent conversation's merged recording")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio_content")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
   getAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
