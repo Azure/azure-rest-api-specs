@@ -295,6 +295,7 @@ op dryrunResourcesListDryrun(
   "CreateOrUpdateDryrunContent",
   "csharp"
 );
+@@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
 @@clientName(DryrunParameters, "DryrunContent", "csharp");
 @@clientName(Linker, "LinkerResources", "csharp");
 @@clientName(LinkerPatch, "LinkerResourcePatch", "csharp");
