@@ -34,10 +34,11 @@ permissions:
   copilot-requests: write
   pull-requests: read
 # Keep trusted reviewer instructions and root package metadata local, while PR
-# head content remains available only through the GitHub MCP tools. Cone-mode
-# sparse checkout includes root files such as package.json.
+# head content remains available only through the GitHub MCP tools. With no ref,
+# pull_request_target checks out the latest trusted default-branch commit instead
+# of a potentially stale PR base SHA. Cone mode includes root files such as
+# package.json.
 checkout:
-  ref: ${{ github.workflow_sha }}
   sparse-checkout: |
     .github/agents
     .github/skills/azure-api-review

@@ -189,7 +189,8 @@ describe("data-plane review workflow scope", () => {
     const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
 
     expect(content).not.toContain("checkout: false");
-    expect(content).toContain("checkout:\n  ref: ${{ github.workflow_sha }}");
+    expect(content).toContain("checkout:\n  sparse-checkout:");
+    expect(content).not.toContain("ref: ${{ github.workflow_sha }}");
     expect(content).toContain(".github/agents");
     expect(content).toContain(".github/skills/azure-api-review");
     expect(content).toContain("allowed: [get_file_contents, pull_request_read, search_code]");
@@ -199,13 +200,13 @@ describe("data-plane review workflow scope", () => {
     expect(content).toContain("Do not emulate it with a general-purpose");
   });
 
-  it("checks out the trusted workflow commit instead of a potentially stale PR base", async () => {
+  it("checks out the trusted event commit instead of a potentially stale PR base", async () => {
     const [source, compiled] = await Promise.all([
       readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8"),
       readFile(join(REAL_ROOT, LOCKED_WORKFLOW_FILE), "utf8"),
     ]);
 
-    expect(source).toContain("ref: ${{ github.workflow_sha }}");
+    expect(source).not.toContain("ref: ${{ github.workflow_sha }}");
     expect(source).not.toContain("pull.base.sha");
     expect(source).not.toContain("resolve_pr_base");
 
@@ -218,7 +219,7 @@ describe("data-plane review workflow scope", () => {
     expect(checkoutEndIndex).toBeGreaterThan(checkoutIndex);
     const checkoutStep = compiled.slice(checkoutIndex, checkoutEndIndex);
     expect(checkoutStep.match(/uses: actions\/checkout@/g)).toHaveLength(1);
-    expect(checkoutStep).toContain("ref: ${{ github.workflow_sha }}");
+    expect(checkoutStep).not.toContain("ref:");
   });
 
   it("keeps Phase 2 manually gated, non-blocking, and capped at five inline findings", async () => {
