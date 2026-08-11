@@ -1095,6 +1095,11 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(
+  AccountProperties.a365LoggingEnabled,
+  "IsA365LoggingEnabled",
+  "csharp"
+);
+@@clientName(
   ManagedComputeDeploymentProvisioningDetails.lastOperationTimestamp,
   "LastOperationOn",
   "csharp"
