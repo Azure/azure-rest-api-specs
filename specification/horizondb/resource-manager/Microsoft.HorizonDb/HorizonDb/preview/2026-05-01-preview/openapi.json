@@ -143,6 +143,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups/{parameterGroupName}": {
+      "get": {
+        "operationId": "HorizonDbParameterGroups_Get",
+        "tags": [
+          "HorizonDbParameterGroups"
+        ],
+        "description": "Gets information about a HorizonDB parameter group in a location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameterGroupName",
+            "in": "path",
+            "description": "The name of the HorizonDB parameter group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbParameterGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDB parameter group": {
+            "$ref": "./examples/ParameterGroups_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
       "get": {
         "operationId": "HorizonDbParameterGroups_ListBySubscription",
@@ -2210,53 +2259,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}": {
-      "get": {
-        "operationId": "HorizonDbParameterGroups_Get",
-        "tags": [
-          "HorizonDbParameterGroups"
-        ],
-        "description": "Gets information about a HorizonDB parameter group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parameterGroupName",
-            "in": "path",
-            "description": "The name of the HorizonDB parameter group.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a HorizonDB parameter group": {
-            "$ref": "./examples/ParameterGroups_Get.json"
-          }
-        }
-      },
       "put": {
         "operationId": "HorizonDbParameterGroups_CreateOrUpdate",
         "tags": [
@@ -2920,6 +2922,17 @@
             "read",
             "update"
           ]
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of the parameter group configuration applied to the cluster.",
+          "readOnly": true
+        },
+        "isUsingLatestConfig": {
+          "type": "boolean",
+          "description": "Indicates whether the cluster is using the latest parameter group configuration.",
+          "readOnly": true
         }
       }
     },
@@ -3119,7 +3132,10 @@
             "update"
           ]
         }
-      }
+      },
+      "required": [
+        "parameterGroup"
+      ]
     },
     "HorizonDbComputeModel": {
       "type": "object",

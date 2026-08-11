@@ -178,10 +178,30 @@ interface HorizonDbPrivateLinkResources {
   list is ArmResourceListByParent<HorizonDbPrivateLinkResource>;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface HorizonDbParameterGroups {
+  @removed(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "get")
   @doc("Gets information about a HorizonDB parameter group.")
-  get is ArmResourceRead<HorizonDbParameterGroup>;
+  getByResourceGroup is ArmResourceRead<HorizonDbParameterGroup>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Gets information about a HorizonDB parameter group in a location.")
+  @get
+  @armResourceRead(HorizonDbParameterGroup)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups/{parameterGroupName}")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    @doc("The name of the HorizonDB parameter group.")
+    @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+    @minLength(1)
+    @maxLength(63)
+    @path
+    parameterGroupName: string,
+  ): ArmResponse<HorizonDbParameterGroup> | ErrorResponse;
 
   @doc("Creates a new HorizonDB parameter group or updates an existing parameter group.")
   @Azure.Core.useFinalStateVia("azure-async-operation")

@@ -267,7 +267,7 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   vCores?: int32;
 
   @doc("Defines connection to a parameter group.")
-  parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+  parameterGroup: HorizonDbClusterParameterGroupConnectionProperties;
 
   @added(Versions.v2026_05_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
@@ -693,4 +693,14 @@ model HorizonDbClusterParameterGroupConnectionProperties {
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   applyImmediately?: boolean;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("The version of the parameter group configuration applied to the cluster.")
+  @visibility(Lifecycle.Read)
+  version?: int32;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Indicates whether the cluster is using the latest parameter group configuration.")
+  @visibility(Lifecycle.Read)
+  isUsingLatestConfig?: boolean;
 }
