@@ -43279,6 +43279,22 @@ components:
       allOf:
         - $ref: '#/components/schemas/TraceSource'
       description: A trace source that selects traces by conversation IDs.
+    ConversationSimulationParams:
+      type: object
+      properties:
+        num_conversations:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 5
+          description: Number of simulated conversations to generate per synthetic seed scenario. When omitted, defaults to one conversation per seed row.
+        max_turns:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 20
+          description: Maximum number of turns per simulated conversation. When omitted, the shipped simulation default applies.
+      description: Conversation-simulation controls carried alongside synthetic data generation for conversation-level runs. Both fields are optional; when omitted, service defaults apply (one conversation per seed row and the shipped max-turns default).
     CosmosDBIndex:
       type: object
       required:
@@ -77605,6 +77621,9 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.EvalJsonlFileIdSource'
           description: The optional seed data content source files for data generation.
+        conversation_params:
+          $ref: '#/components/schemas/ConversationSimulationParams'
+          description: Optional conversation-simulation controls. Only meaningful for conversation-level synthetic runs, where the generated seed dataset feeds a downstream multi-turn simulation.
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for synthetic data generation item generation.

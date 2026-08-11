@@ -497,6 +497,22 @@ model SyntheticDataGenerationPreviewItemGenerationParams
 
   /** The optional seed data content source files for data generation. */
   sources: OpenAI.EvalJsonlFileIdSource[];
+
+  /** Optional conversation-simulation controls. Only meaningful for conversation-level synthetic runs, where the generated seed dataset feeds a downstream multi-turn simulation. */
+  conversation_params?: ConversationSimulationParams;
+}
+
+/** Conversation-simulation controls carried alongside synthetic data generation for conversation-level runs. Both fields are optional; when omitted, service defaults apply (one conversation per seed row and the shipped max-turns default). */
+model ConversationSimulationParams {
+  /** Number of simulated conversations to generate per synthetic seed scenario. When omitted, defaults to one conversation per seed row. */
+  @minValue(1)
+  @maxValue(5)
+  num_conversations?: int32;
+
+  /** Maximum number of turns per simulated conversation. When omitted, the shipped simulation default applies. */
+  @minValue(1)
+  @maxValue(20)
+  max_turns?: int32;
 }
 
 /** Represents a data source for evaluation runs that are specific to Continuous Evaluation scenarios. */
