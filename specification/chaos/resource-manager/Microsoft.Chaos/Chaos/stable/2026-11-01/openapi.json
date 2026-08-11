@@ -191,7 +191,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+            "pattern": "^[A-Za-z0-9\\-._~]+$"
           }
         ],
         "responses": {
@@ -233,7 +233,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+            "pattern": "^[A-Za-z0-9\\-._~]+$"
           }
         ],
         "responses": {
@@ -278,7 +278,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+            "pattern": "^[A-Za-z0-9\\-._~]+$"
           },
           {
             "name": "version",
@@ -287,7 +287,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+            "pattern": "^[A-Za-z0-9\\-._~]+$"
           }
         ],
         "responses": {
@@ -7661,6 +7661,9 @@
           "description": "The properties of the scenario template's newest published version."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -7690,11 +7693,11 @@
     },
     "ScenarioTemplateProperties": {
       "type": "object",
-      "description": "Model that represents the properties of a scenario template. The same properties describe a\ntemplate and a single version of that template; on the template they describe its newest\npublished version, which `version` names.",
+      "description": "Model that represents the properties of a scenario template. These are the properties of the\ntemplate's newest published version, together with the version number that identifies it.",
       "properties": {
-        "version": {
+        "latestVersion": {
           "type": "string",
-          "description": "The version of the template being described. On the template resource this is its newest\npublished version.",
+          "description": "The newest published version of the template, for example 1.2. This is the version whose\ncontent the remaining properties describe, and the version a scenario records when it is\ncreated from the template without naming one.",
           "readOnly": true
         },
         "displayName": {
@@ -7709,6 +7712,7 @@
         },
         "maxTimeoutDuration": {
           "type": "string",
+          "format": "duration",
           "description": "ISO 8601 duration bounding how long a scenario created from this template may run\n(for example PT3H for three hours).",
           "readOnly": true
         },
@@ -7736,7 +7740,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nFour macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceSelectors.\\<name\\>\\}%%` — resolves to the resources discovered for that\nselector. The accepted names are declared by `resourceSelectors`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -7748,7 +7752,7 @@
         }
       },
       "required": [
-        "version",
+        "latestVersion",
         "actions"
       ]
     },
@@ -7777,10 +7781,13 @@
       "description": "Model that represents a single published version of a scenario template. A published version\nis immutable: corrections are shipped as a new version rather than by changing an existing\none, so a scenario that records the version it was created from always resolves to the same\ncontent.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScenarioTemplateProperties",
+          "$ref": "#/definitions/ScenarioTemplateVersionProperties",
           "description": "The properties of the scenario template version."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -7806,6 +7813,65 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ScenarioTemplateVersionProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of a single published version of a scenario template —\nthe blueprint content itself.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name of the template.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what the template does, and what resilience question it answers.",
+          "readOnly": true
+        },
+        "maxTimeoutDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO 8601 duration bounding how long a scenario created from this template may run\n(for example PT3H for three hours).",
+          "readOnly": true
+        },
+        "resourceSelectors": {
+          "type": "array",
+          "description": "The resource selectors the template's actions target. Each selector names a group of\nresources of a single Azure resource type, and is referenced from an action through the\n`%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
+          "items": {
+            "$ref": "#/definitions/ScenarioTemplateResourceSelector"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Parameter definitions the template accepts. Values are supplied when the scenario created\nfrom this template is configured, and are referenced from an action through the\n`%%\\{parameters.\\<name\\>\\}%%` macro.",
+          "items": {
+            "$ref": "#/definitions/ScenarioParameter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "actions": {
+          "type": "array",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nFour macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceSelectors.\\<name\\>\\}%%` — resolves to the resources discovered for that\nselector. The accepted names are declared by `resourceSelectors`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ScenarioAction"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "actions"
       ]
     },
     "ScenarioValidationState": {
