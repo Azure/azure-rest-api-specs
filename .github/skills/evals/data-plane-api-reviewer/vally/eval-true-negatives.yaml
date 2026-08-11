@@ -3,11 +3,11 @@ description: |
   True-negative (false-positive resistance) tests for the data-plane API
   reviewer.
 
-  These are the gate. False positives are the reviewer's main failure mode --
-  a bot that cries wolf gets muted permanently, and a muted bot has zero value
-  regardless of how good its true positives are. Every stimulus here asserts
-  that the reviewer stays SILENT, or at most asks a question, on input that
-  looks wrong and is not.
+  This is the load-bearing regression suite. False positives are the reviewer's
+  main failure mode -- a bot that cries wolf gets muted permanently, and a muted
+  bot has zero value regardless of how good its true positives are. Every
+  stimulus here asserts that the reviewer stays SILENT, or at most asks a
+  question, on input that looks wrong and is not.
 
   Five true-negative classes are covered:
     1. Clean spec              -- tn-clean-service
@@ -32,10 +32,11 @@ defaults:
   # 2/3 rather than being indistinguishable from a flake.
   runs: 3
   timeout: "420s"
-  # These two MUST stay equal to `engine.model` in
+  # `model` MUST stay equal to the top-level `model:` in
   # .github/workflows/data-plane-api-review.md. Measuring the false-positive
-  # rate on one model and shipping another transfers nothing.
-  model: claude-opus-4.6
+  # rate on one model and shipping another transfers nothing. `judge_model`
+  # remains frozen separately; see the eval README.
+  model: gpt-5.6-sol
   judge_model: claude-sonnet-4.6
 
 scoring:
