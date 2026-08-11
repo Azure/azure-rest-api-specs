@@ -427,26 +427,17 @@
           "description": "The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases."
         },
         "lockImmutability": {
-          "description": "Whether to lock the immutability of the backups governed by this short term retention policy.",
           "type": "boolean",
+          "description": "Whether to lock the immutability of the backups governed by this short term retention policy.",
           "x-ms-mutability": [
-            "create",
-            "update"
+            "update",
+            "create"
           ]
         },
         "immutabilityStatus": {
+          "$ref": "./common.json#/definitions/ImmutabilityStatus",
           "description": "The immutability status of the backups governed by this short term retention policy.",
-          "enum": [
-            "Disabled",
-            "Enabled",
-            "Locked"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ImmutabilityStatus",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
       }
     }
