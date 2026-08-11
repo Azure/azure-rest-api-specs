@@ -202,6 +202,11 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   "csharp"
 );
 @@alternateType(KpiProperties.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  ManagementGroupScopeBenefitRecommendationProperties.managementGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
