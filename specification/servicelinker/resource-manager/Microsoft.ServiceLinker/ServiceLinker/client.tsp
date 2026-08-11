@@ -269,7 +269,10 @@ op dryrunResourcesListDryrun(
 @@override(DryrunResources.listDryrun, dryrunResourcesListDryrun);
 
 // C# customizations preserve the shipped SDK surface and disambiguate dry-run resources.
+@@clientName(ActionType, "LinkerActionType", "csharp");
+@@clientName(AllowType, "LinkerAllowType", "csharp");
 @@clientName(AuthInfoBase, "AuthBaseInfo", "csharp");
+@@clientName(AuthMode, "LinkerAuthMode", "csharp");
 @@clientName(Microsoft.ServiceLinker.AuthType, "LinkerAuthType", "csharp");
 @@clientName(
   AzureKeyVaultProperties.connectAsKubernetesCsiDriver,
@@ -283,6 +286,9 @@ op dryrunResourcesListDryrun(
   "csharp"
 );
 @@clientName(ClientType, "LinkerClientType", "csharp");
+@@clientName(ConfigurationInfo, "LinkerConfigurationInfo", "csharp");
+@@clientName(ConfigurationName, "LinkerConfigurationName", "csharp");
+@@clientName(ConfigurationNameItem, "LinkerConfigurationNameItem", "csharp");
 @@clientName(ConfigurationResult, "SourceConfigurationResult", "csharp");
 @@clientName(
   ConfluentBootstrapServer,
@@ -297,14 +303,18 @@ op dryrunResourcesListDryrun(
 );
 @@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
 @@clientName(DryrunParameters, "DryrunContent", "csharp");
+@@clientName(FabricPlatform, "FabricPlatformTargetService", "csharp");
+@@clientName(FirewallRules, "LinkerFirewallRules", "csharp");
 @@clientName(Linker, "LinkerResources", "csharp");
 @@clientName(LinkerPatch, "LinkerResourcePatch", "csharp");
 @@clientName(LinkerResources, "ConnectorResources", "csharp");
 @@clientName(Linkers, "Dryruns", "csharp");
+@@clientName(PublicNetworkSolution, "LinkerPublicNetworkSolution", "csharp");
 @@clientName(SecretInfoBase, "SecretBaseInfo", "csharp");
 @@clientName(SecretStore.keyVaultId, "SecretStoreKeyVaultId", "csharp");
 @@clientName(SecretStore, "LinkerSecretStore", "csharp");
 @@clientName(SecretType, "LinkerSecretType", "csharp");
+@@clientName(SelfHostedServer, "SelfHostedServerTargetService", "csharp");
 @@clientName(TargetServiceBase, "TargetServiceBaseInfo", "csharp");
 @@clientName(
   ValidateOperationResult,
