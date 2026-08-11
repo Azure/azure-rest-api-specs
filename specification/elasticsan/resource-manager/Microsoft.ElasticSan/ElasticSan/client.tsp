@@ -5,6 +5,7 @@ using Microsoft.ElasticSan;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
+@@clientName(SkuName, "ElasticSanSkuName", "csharp");
 @@clientName(SkuName.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(SkuName.Premium_ZRS, "PremiumZrs", "csharp");
 @@clientName(EncryptionType, "ElasticSanEncryptionType", "csharp");
@@ -69,6 +70,7 @@ using Azure.Core;
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(ManagedByInfo.resourceId, armResourceIdentifier, "csharp");
+@@clientName(PrivateLinkResource, "ElasticSanPrivateLinkResource", "csharp");
 @@usage(PrivateLinkResource, Usage.input, "csharp");
 @@clientName(restoreVolume, "RestoreVolume", "csharp");
 @@clientName(VolumeGroups.preBackup, "PreBackupVolume", "csharp");

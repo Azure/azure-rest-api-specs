@@ -193,6 +193,11 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
   "csharp"
 );
 @@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource,
+  "RedisPrivateLinkResource",
+  "csharp"
+);
+@@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.provisioningState,
   "RedisProvisioningState",
   "csharp"

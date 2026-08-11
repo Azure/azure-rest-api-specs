@@ -344,6 +344,7 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 );
 @@alternateType(SignalRUsage.id, armResourceIdentifier, "csharp");
 @@clientName(SignalRNetworkACLs, "SignalRNetworkAcls", "csharp");
+@@clientName(PrivateLinkResource, "SignalRPrivateLinkResource", "csharp");
 @@clientName(SignalRResources.list, "GetSignalRPrivateLinkResources", "csharp");
 @@clientName(RegenerateKeyParameters, "SignalRRegenerateKeyContent", "csharp");
 @@usage(

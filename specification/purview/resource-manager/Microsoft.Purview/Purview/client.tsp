@@ -86,6 +86,11 @@ using Microsoft.Purview;
   "PurviewPrivateLinkResource",
   "csharp"
 );
+@@clientName(
+  Microsoft.Purview.PrivateLinkServiceConnectionState,
+  "PurviewPrivateLinkServiceConnectionState",
+  "csharp"
+);
 @@clientName(ProvisioningState, "PurviewProvisioningState", "csharp");
 @@clientName(PublicNetworkAccess, "PurviewPublicNetworkAccess", "csharp");
 @@clientName(QuotaName, "PurviewQuotaName", "csharp");

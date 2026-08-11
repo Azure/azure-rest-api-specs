@@ -3860,6 +3860,11 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "AppServicePrivateLinkResourceData",
   "csharp"
 );
+@@clientName(
+  Microsoft.Web.PrivateLinkResourceProperties,
+  "AppServicePrivateLinkResourceProperties",
+  "csharp"
+);
 @@clientName(ProcessInfoCollection, "ProcessInfoListResult", "csharp");
 @@clientName(
   ProcessModuleInfoCollection,

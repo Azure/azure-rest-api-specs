@@ -806,6 +806,7 @@ model VMSizePropertiesWithAdditionalProperties {
 @@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
 
 // RP-prefix renames.
+@@clientName(Plan, "ComputePlan", "csharp");
 @@clientName(SkuProfile, "ComputeSkuProfile", "csharp");
 @@clientName(UpdateResource, "ComputeResourcePatch", "csharp");
 

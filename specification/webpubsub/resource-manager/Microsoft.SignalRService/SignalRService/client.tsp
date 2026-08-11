@@ -93,6 +93,11 @@ using Http;
   "WebPubSubSharedPrivateLinkStatus",
   "csharp"
 );
+@@clientName(
+  PrivateLinkServiceConnectionState,
+  "WebPubSubPrivateLinkServiceConnectionState",
+  "csharp"
+);
 @@clientName(WebPubSubResource, "WebPubSub", "csharp");
 @@clientName(WebPubSubProperties.disableAadAuth, "IsAadAuthDisabled", "csharp");
 @@clientName(
@@ -164,6 +169,7 @@ using Http;
   "csharp"
 );
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
+@@clientName(Sku, "WebPubSubSku", "csharp");
 @@alternateType(Sku.resourceType, armResourceType, "csharp");
 @@clientName(ResourceSku, "BillingInfoSku", "csharp");
 @@clientName(SkuCapacity, "WebPubSubSkuCapacity", "csharp");

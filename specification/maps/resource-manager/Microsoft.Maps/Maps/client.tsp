@@ -43,6 +43,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.Maps.Kind, "MapsAccountKind", "csharp");
 @@clientName(Microsoft.Maps.Name, "MapsSkuName", "csharp");
+@@clientName(Microsoft.Maps.Sku, "MapsSku", "csharp");
 @@clientName(
   Microsoft.Maps.InfrastructureEncryption,
   "MapsInfrastructureEncryption",

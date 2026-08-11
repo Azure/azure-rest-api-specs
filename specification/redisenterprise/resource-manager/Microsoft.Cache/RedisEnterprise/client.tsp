@@ -179,6 +179,8 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(ResourceState, "RedisEnterpriseClusterResourceState", "csharp");
+@@clientName(Sku, "RedisEnterpriseSku", "csharp");
+@@clientName(SkuName, "RedisEnterpriseSkuName", "csharp");
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");
