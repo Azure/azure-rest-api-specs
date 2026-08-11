@@ -60,6 +60,16 @@ function createResolverHarness(script, { value, eventName = "workflow_dispatch",
   };
 }
 
+/**
+ * Collapse runs of whitespace so prose assertions do not depend on where
+ * Prettier happens to wrap a Markdown paragraph.
+ *
+ * @param {string} text
+ */
+function collapseWhitespace(text) {
+  return text.replace(/\s+/g, " ");
+}
+
 async function readWorkflowFiles() {
   return Promise.all([
     readFile(join(ROOT, SOURCE_FILE), "utf8"),
@@ -97,7 +107,9 @@ describe("ARM API review workflow", () => {
       "**Authoritative target pull request:** `#${{ needs.pre_activation.outputs.target_pr_number }}`",
     );
     expect(source).toContain("call `report_incomplete` and stop");
-    expect(source).toContain("Do not call `noop` for\n   target-resolution");
+    expect(collapseWhitespace(source)).toContain(
+      "call `report_incomplete` and stop. Do not call `noop` for target-resolution or infrastructure failures.",
+    );
 
     const preActivationIndex = compiled.indexOf("\n  pre_activation:\n");
     const resolverIndex = compiled.indexOf(

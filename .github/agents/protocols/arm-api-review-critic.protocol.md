@@ -81,7 +81,7 @@ it MAY use a **compact-mode** payload to reduce dispatch size:
   findings with their prior-iteration Critic verdicts, labeled
   `## Carry-over verdicts`.
 - **Re-pin the session SHA** before each compact-mode dispatch: run
-  `gh pr view <n> --json headRefOid` (or `get_pull_request`) to confirm
+  `gh pr view <n> --json headRefOid` (or `pull_request_read(method: "get")`) to confirm
   `head.sha` still equals the pinned session SHA. If it has moved, abort
   per the session-invalidation rule.
 - **File-drift check (`carry-over-stale`).** For each carry-over finding,

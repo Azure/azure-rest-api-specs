@@ -5,10 +5,8 @@ user-invocable: false
 tools:
   - execute/runInTerminal
   - github/get_file_contents
-  - github/get_pull_request
-  - github/get_review_comments
   - github/list_commits
-  - github/list_pull_request_files
+  - github/pull_request_read
   - github/search_code
   - read/problems
   - search
@@ -133,8 +131,7 @@ Do **not** silently fall back to a different repo.
 
 **Tooling prerequisite for private-repo PRs.** `Azure/azure-rest-api-specs-pr`
 is private. Re-fetching files from it normally uses the GitHub MCP server
-(`github/get_file_contents`, `github/get_pull_request`,
-`github/list_pull_request_files`, `github/get_review_comments`) bound in this
+(`github/get_file_contents`, `github/pull_request_read`) bound in this
 session. The deferred `web/githubRepo` tool resolves public refs only and is
 **not** a substitute for `azure-rest-api-specs-pr`.
 
@@ -392,7 +389,7 @@ re-verify the reconciliation plan (Input #6).
 
 ### Step 0: Re-verify approval-label awareness
 
-Call `get_pull_request` and independently inventory the exact current PR label
+Call `pull_request_read(method: "get")` and independently inventory the exact current PR label
 names matching `BreakingChange-Approved-*`, `Versioning-Approved-*`,
 `Approved-Suppression`, or `Approved-TypeSpecSuppression`. Compare that
 inventory with the report's `Approval labels observed` line.

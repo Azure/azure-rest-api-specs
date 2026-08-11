@@ -127,8 +127,8 @@ engine:
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
-    # `issues` is deliberately omitted. The review body reads PRs solely via the
-    # `pull_requests` toolset (get_pull_request, list_pull_request_files), and
+    # `issues` is deliberately omitted — the review body reads PRs solely via the
+    # `pull_requests` toolset (`pull_request_read`), and
     # all issue/label writes go through gh-aw safe-outputs, so a read `issues`
     # scope is unnecessary attack surface. Do not add mutating toolsets here.
     toolsets: [context, repos, pull_requests]
@@ -303,16 +303,17 @@ read-only `github` toolset. If any check fails, act as directed and stop.
 
 1. **Resolve the PR number** from the event context per the table above. If it
    differs from the authoritative target above or cannot be fetched with
-   `get_pull_request`, call `report_incomplete` and stop. Do not call `noop` for
-   target-resolution or infrastructure failures. Pin the returned `head.sha`
-   immediately and use that session SHA for all subsequent PR-head file reads.
-2. **`skip-arm-review` label**: call `get_pull_request` and inspect the labels.
+   `pull_request_read(method: "get")`, call `report_incomplete` and stop. Do not
+   call `noop` for target-resolution or infrastructure failures. Pin the returned
+   `head.sha` immediately and use that session SHA for all subsequent PR-head
+   file reads.
+2. **`skip-arm-review` label** — call `pull_request_read(method: "get")` and inspect the labels.
    If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
    From the same response, capture the exact label names matching
    `BreakingChange-Approved-*`, `Versioning-Approved-*`,
    `Approved-Suppression`, or `Approved-TypeSpecSuppression`. This is the
    approval-label inventory for the review; record `none` when it is empty.
-3. **`specification/` scope**: call `list_pull_request_files`. If **no** changed
+3. **`specification/` scope** — call `pull_request_read(method: "get_files")`. If **no** changed
    file path starts with `specification/`, call `noop` and stop (nothing to
    review). Paginate the file list so busy PRs are counted reliably.
 4. **Size cap → scoped review**: count the changed files whose path starts with
@@ -341,12 +342,12 @@ Check 4 sets the review scope; it never stops the review.
 
 ### Step 1: Fetch PR Metadata and Changed Files
 
-1. Call `get_pull_request` to fetch PR metadata (title, base, head SHA, labels,
-   draft status). **Pin the session SHA** (`head.sha`) immediately. Use it for
+1. Call `pull_request_read(method: "get")` to fetch PR metadata (title, base, head SHA, labels,
+   draft status). **Pin the session SHA** (`head.sha`) immediately — use it for
    every subsequent file fetch. Retain the approval-label inventory captured
    during Trigger Validation. Do not include SDK-language, package-name, or
    namespace approval labels.
-2. Call `list_pull_request_files` to list changed files.
+2. Call `pull_request_read(method: "get_files")` to list changed files.
 3. Filter to `specification/**` files only. If none remain (e.g., all changes
    are outside the spec folder), call `noop` and stop.
 4. Classify each spec file by type:
@@ -547,7 +548,7 @@ flag, and iteration number.
 
 ### Step 6: Post Findings
 
-Immediately before queuing the first safe output, call `get_pull_request` and
+Immediately before queuing the first safe output, call `pull_request_read(method: "get")` and
 verify that `head.sha` still equals the pinned session SHA. If it changed, do
 not post or mutate threads; follow the Step 5.6 restart path. Then post each
 finding as a `create-pull-request-review-comment` (inline) or `add-comment`
