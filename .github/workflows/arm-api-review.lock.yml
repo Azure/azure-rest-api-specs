@@ -180,7 +180,7 @@ jobs:
           GH_AW_INFO_WORKFLOW_NAME: "ARM API Review: Automated Workflow"
           GH_AW_INFO_EXPERIMENTAL: "false"
           GH_AW_INFO_SUPPORTS_TOOLS_ALLOWLIST: "true"
-          GH_AW_INFO_STAGED: "false"
+          GH_AW_INFO_STAGED: "true"
           GH_AW_INFO_ALLOWED_DOMAINS: '["defaults"]'
           GH_AW_INFO_FIREWALL_ENABLED: "true"
           GH_AW_INFO_AWF_VERSION: "v0.27.43"
@@ -1005,6 +1005,7 @@ jobs:
           GH_AW_PHASE: agent
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
           GH_AW_SAFE_OUTPUTS: ${{ steps.set-runtime-paths.outputs.GH_AW_SAFE_OUTPUTS }}
+          GH_AW_SAFE_OUTPUTS_STAGED: true
           GH_AW_TIMEOUT_MINUTES: 30
           GH_AW_VERSION: v0.84.3
           GITHUB_API_URL: ${{ github.api_url }}
@@ -1174,8 +1175,7 @@ jobs:
       needs.activation.outputs.daily_ai_credits_exceeded == 'true')
     runs-on: ubuntu-slim
     permissions:
-      issues: write
-      pull-requests: write
+      actions: write
     concurrency:
       group: "gh-aw-conclusion-arm-api-review"
       cancel-in-progress: false
@@ -1764,9 +1764,7 @@ jobs:
       - detection
     if: (!cancelled()) && needs.agent.result != 'skipped' && needs.detection.result == 'success'
     runs-on: ubuntu-slim
-    permissions:
-      issues: write
-      pull-requests: write
+    permissions: {}
     timeout-minutes: 45
     env:
       GH_AW_AGENT_AIC: ${{ needs.agent.outputs.aic }}
@@ -1780,6 +1778,7 @@ jobs:
       GH_AW_ENGINE_MODEL: ${{ needs.agent.outputs.model }}
       GH_AW_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       GH_AW_RUNTIME_FEATURES: ${{ vars.GH_AW_RUNTIME_FEATURES }}
+      GH_AW_SAFE_OUTPUTS_STAGED: "true"
       GH_AW_SAFE_OUTPUT_MESSAGES: "{\"footer\":\"\\u003e 🔍 *ARM API review by [{workflow_name}]({run_url})*\",\"runStarted\":\"🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…\",\"runSuccess\":\"🔍 [{workflow_name}]({run_url}) completed the ARM API review. ✅\",\"runFailure\":\"🔍 [{workflow_name}]({run_url}) {status}. ❌\"}"
       GH_AW_THREAT_DETECTION_AIC: ${{ needs.detection.outputs.aic }}
       GH_AW_WORKFLOW_ID: "arm-api-review"
@@ -1842,6 +1841,7 @@ jobs:
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_API_URL: ${{ github.api_url }}
           GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"add_comment\":{\"max\":4,\"target\":\"${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}\"},\"add_labels\":{\"max\":3,\"target\":\"${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}\"},\"create_pull_request_review_comment\":{\"max\":50,\"side\":\"RIGHT\",\"target\":\"${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}\"},\"create_report_incomplete_issue\":{},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"remove_labels\":{\"max\":3,\"target\":\"${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}\"},\"reply_to_pull_request_review_comment\":{\"max\":50,\"target\":\"${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}\"},\"report_incomplete\":{},\"resolve_pull_request_review_thread\":{\"max\":50},\"submit_pull_request_review\":{\"footer\":\"if-body\",\"max\":1,\"target\":\"${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}\"}}"
+          GH_AW_SAFE_OUTPUTS_STAGED: "true"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -1849,14 +1849,3 @@ jobs:
             setupGlobals(core, github, context, exec, io, getOctokit);
             const { main } = require('${{ runner.temp }}/gh-aw/actions/process_safe_outputs.cjs');
             await main();
-      - name: Upload Safe Outputs Items
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: safe-outputs-items
-          path: |
-            /tmp/gh-aw/safe-output-items.jsonl
-            /tmp/gh-aw/temporary-id-map.json
-            /tmp/gh-aw/process-safe-outputs.stdout.log
-            /tmp/gh-aw/process-safe-outputs.stderr.log
-          if-no-files-found: ignore
