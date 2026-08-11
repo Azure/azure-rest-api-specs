@@ -836,6 +836,24 @@ union MigrationProvisioningState {
    * The migration operation cancellation has failed.
    */
   CancellationFailed: "CancellationFailed",
+
+  /**
+   * The migrated endpoint is being unlinked from the cluster.
+   */
+  @added(Versions.v2026_08_01)
+  Unlinking: "Unlinking",
+
+  /**
+   * The migrated endpoint has been unlinked from the cluster.
+   */
+  @added(Versions.v2026_08_01)
+  Unlinked: "Unlinked",
+
+  /**
+   * Unlinking the migrated endpoint from the cluster has failed.
+   */
+  @added(Versions.v2026_08_01)
+  UnlinkFailed: "UnlinkFailed",
 }
 
 /**
@@ -1696,6 +1714,72 @@ model MigrationProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
+
+  /**
+   * The timestamp when the migrated endpoint was unlinked from the cluster.
+   */
+  @added(Versions.v2026_08_01)
+  @visibility(Lifecycle.Read)
+  unlinkedTime?: utcDateTime;
+
+  /**
+   * The timestamp until which a successful migration remains eligible to be undone (rolled back) to the source cache. This property is only returned while the migration is in the Succeeded state, and is calculated from the time the migration succeeded plus the rollback window. After this time the source cache is released and the migration can no longer be undone.
+   */
+  @added(Versions.v2026_08_01)
+  @visibility(Lifecycle.Read)
+  rollbackEligibleUntil?: utcDateTime;
+}
+
+/**
+ * Parameters supplied to the undo migration operation.
+ */
+model MigrationUndoRequest {
+  /**
+   * The reason the migration is being undone (rolled back). This value is used to improve the migration experience and is not otherwise validated.
+   */
+  rollbackReason?: MigrationRollbackReason;
+}
+
+/**
+ * The reason a migration operation is being undone (rolled back).
+ */
+union MigrationRollbackReason {
+  string,
+
+  /**
+   * The target cache did not meet the expected performance characteristics.
+   */
+  Performance: "performance",
+
+  /**
+   * The target cache was not compatible with the client application or workload.
+   */
+  Compatibility: "compatibility",
+
+  /**
+   * The client application was unable to connect to the target cache.
+   */
+  ClientConnection: "clientConnection",
+
+  /**
+   * The target cache did not meet the expected cost characteristics.
+   */
+  Cost: "cost",
+
+  /**
+   * The migration was performed as a test and is being reverted.
+   */
+  Testing: "testing",
+
+  /**
+   * The target cache did not meet the expected stability characteristics.
+   */
+  Stability: "stability",
+
+  /**
+   * The migration is being undone for a reason not covered by the other values.
+   */
+  Other: "other",
 }
 
 /**

@@ -62,7 +62,22 @@ interface Migrations {
   /**
    * Cancel or rollback the migration operation in a Redis Enterprise cluster.
    */
-  cancel is ArmResourceActionAsyncBase<
+  @renamedFrom(Versions.v2026_08_01, "cancel")
+  @action("cancel")
+  undo is ArmResourceActionAsyncBase<
+    Migration,
+    MigrationUndoRequest,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Migration>,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Unlinks the migrated endpoint from the Redis Enterprise cluster, removing the source cache endpoint that was redirected to this cluster during migration.
+   */
+  @added(Versions.v2026_08_01)
+  @action("unlinkMigratedEndpoint")
+  unlinkMigratedEndpoint is ArmResourceActionAsyncBase<
     Migration,
     void,
     ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
@@ -84,6 +99,11 @@ interface Migrations {
 
 @@doc(Migration.name, "");
 @@doc(Migration.properties, "Properties of the migration operation.");
+@@added(Migrations.undo::parameters.body, Versions.v2026_08_01);
+@@doc(
+  Migrations.undo::parameters.body,
+  "Parameters supplied to undo a migration operation."
+);
 @@doc(
   Migrations.start::parameters.resource,
   "Parameters supplied to start a migration operation."

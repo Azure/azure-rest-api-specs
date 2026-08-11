@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Cache;
 /**
@@ -104,6 +106,18 @@ interface Clusters {
     Cluster,
     void,
     ArmResponse<SkuDetailsList>
+  >;
+
+  /**
+   * Unlinks the migrated endpoint from a Redis Enterprise cluster that was migrated from Azure Cache for Redis, removing the source cache endpoint that was redirected to this cluster during migration.
+   */
+  @added(Versions.v2026_08_01)
+  @action("unlinkMigratedEndpoint")
+  unlinkMigratedEndpoint is ArmResourceActionAsyncBase<
+    Cluster,
+    void,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
   /**

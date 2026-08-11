@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RedisEnterpriseManagementClient",
-    "version": "2026-06-01-preview",
+    "version": "2026-08-01",
     "description": "REST API for managing Redis Enterprise resources in Azure.",
     "x-typespec-generated": [
       {
@@ -2019,11 +2019,79 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/cancel": {
       "post": {
-        "operationId": "Migrations_Cancel",
+        "operationId": "Migrations_Undo",
         "tags": [
           "Migrations"
         ],
         "description": "Cancel or rollback the migration operation in a Redis Enterprise cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Redis Enterprise cluster. Name must be 1-60 characters long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor consecutive hyphens",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to undo a migration operation.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MigrationUndoRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseMigrationUndo": {
+            "$ref": "./examples/RedisEnterpriseMigrationUndo.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/unlinkMigratedEndpoint": {
+      "post": {
+        "operationId": "Migrations_UnlinkMigratedEndpoint",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Unlinks the migrated endpoint from the Redis Enterprise cluster, removing the source cache endpoint that was redirected to this cluster during migration.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2066,8 +2134,8 @@
           }
         },
         "x-ms-examples": {
-          "RedisEnterpriseMigrationCancel": {
-            "$ref": "./examples/RedisEnterpriseMigrationCancel.json"
+          "RedisEnterpriseMigrationUnlinkMigratedEndpoint": {
+            "$ref": "./examples/RedisEnterpriseMigrationUnlinkMigratedEndpoint.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2419,6 +2487,65 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/unlinkMigratedEndpoint": {
+      "post": {
+        "operationId": "Clusters_UnlinkMigratedEndpoint",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Unlinks the migrated endpoint from a Redis Enterprise cluster that was migrated from Azure Cache for Redis Enterprise, removing the source cache endpoint that was redirected to this cluster during migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Redis Enterprise cluster. Name must be 1-60 characters long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor consecutive hyphens",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseUnlinkMigratedEndpoint": {
+            "$ref": "./examples/RedisEnterpriseUnlinkMigratedEndpoint.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -3656,6 +3783,18 @@
           "format": "date-time",
           "description": "The timestamp when the migration operation was last updated.",
           "readOnly": true
+        },
+        "unlinkedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the migrated endpoint was unlinked from the cluster.",
+          "readOnly": true
+        },
+        "rollbackEligibleUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp until which a successful migration remains eligible to be undone (rolled back) to the source cache. This property is only returned while the migration is in the Succeeded state, and is calculated from the time the migration succeeded plus the rollback window. After this time the source cache is released and the migration can no longer be undone.",
+          "readOnly": true
         }
       },
       "discriminator": "sourceType",
@@ -3674,7 +3813,10 @@
         "Failed",
         "Cancelling",
         "Cancelled",
-        "CancellationFailed"
+        "CancellationFailed",
+        "Unlinking",
+        "Unlinked",
+        "UnlinkFailed"
       ],
       "x-ms-enum": {
         "name": "MigrationProvisioningState",
@@ -3719,8 +3861,87 @@
             "name": "CancellationFailed",
             "value": "CancellationFailed",
             "description": "The migration operation cancellation has failed."
+          },
+          {
+            "name": "Unlinking",
+            "value": "Unlinking",
+            "description": "The migrated endpoint is being unlinked from the cluster."
+          },
+          {
+            "name": "Unlinked",
+            "value": "Unlinked",
+            "description": "The migrated endpoint has been unlinked from the cluster."
+          },
+          {
+            "name": "UnlinkFailed",
+            "value": "UnlinkFailed",
+            "description": "Unlinking the migrated endpoint from the cluster has failed."
           }
         ]
+      }
+    },
+    "MigrationRollbackReason": {
+      "type": "string",
+      "description": "The reason a migration operation is being undone (rolled back).",
+      "enum": [
+        "performance",
+        "compatibility",
+        "clientConnection",
+        "cost",
+        "testing",
+        "stability",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationRollbackReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Performance",
+            "value": "performance",
+            "description": "The target cache did not meet the expected performance characteristics."
+          },
+          {
+            "name": "Compatibility",
+            "value": "compatibility",
+            "description": "The target cache was not compatible with the client application or workload."
+          },
+          {
+            "name": "ClientConnection",
+            "value": "clientConnection",
+            "description": "The client application was unable to connect to the target cache."
+          },
+          {
+            "name": "Cost",
+            "value": "cost",
+            "description": "The target cache did not meet the expected cost characteristics."
+          },
+          {
+            "name": "Testing",
+            "value": "testing",
+            "description": "The migration was performed as a test and is being reverted."
+          },
+          {
+            "name": "Stability",
+            "value": "stability",
+            "description": "The target cache did not meet the expected stability characteristics."
+          },
+          {
+            "name": "Other",
+            "value": "other",
+            "description": "The migration is being undone for a reason not covered by the other values."
+          }
+        ]
+      }
+    },
+    "MigrationUndoRequest": {
+      "type": "object",
+      "description": "Parameters supplied to the undo migration operation.",
+      "properties": {
+        "rollbackReason": {
+          "$ref": "#/definitions/MigrationRollbackReason",
+          "description": "The reason the migration is being undone (rolled back). This value is used to improve the migration experience and is not otherwise validated."
+        }
       }
     },
     "MigrationValidationDisparity": {
