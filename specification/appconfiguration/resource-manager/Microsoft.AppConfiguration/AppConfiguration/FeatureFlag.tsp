@@ -41,6 +41,11 @@ interface FeatureFlags {
   get is ArmResourceRead<FeatureFlag>;
 
   /**
+   * Lists the feature flags for the specified configuration store. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
+   */
+  listByConfigurationStore is ArmResourceListByParent<FeatureFlag>;
+
+  /**
    * Creates a feature flag. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<FeatureFlag>;
@@ -161,8 +166,24 @@ model FeatureFlagFilter {
   /**
    * The parameters used by the filter.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Feature flag filter parameters are an open dictionary defined by each filter."
-  parameters?: Record<string>;
+  @identifiers(#["name"])
+  parameters?: FeatureFlagFilterParameter[];
+}
+
+/**
+ * A feature flag filter parameter.
+ */
+@added(Versions.v2026_09_01_preview)
+model FeatureFlagFilterParameter {
+  /**
+   * The name of the filter parameter.
+   */
+  name: string;
+
+  /**
+   * The value of the filter parameter.
+   */
+  value: string;
 }
 
 /**
