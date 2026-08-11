@@ -1411,6 +1411,26 @@
         ]
       }
     },
+    "CustomMaintenanceOptions": {
+      "type": "object",
+      "description": "Custom maintenance options.",
+      "properties": {
+        "dayOfWeek": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Custom maintenance day of week."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom maintenance start hour."
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom maintenance start minute."
+        }
+      }
+    },
     "DNSRefreshOperationStatus": {
       "type": "string",
       "description": "The status of the DNS refresh operation.",
