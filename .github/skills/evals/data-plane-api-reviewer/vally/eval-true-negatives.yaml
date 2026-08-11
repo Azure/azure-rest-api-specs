@@ -3,11 +3,11 @@ description: |
   True-negative (false-positive resistance) tests for the data-plane API
   reviewer.
 
-  These are the gate. False positives are the reviewer's main failure mode --
-  a bot that cries wolf gets muted permanently, and a muted bot has zero value
-  regardless of how good its true positives are. Every stimulus here asserts
-  that the reviewer stays SILENT, or at most asks a question, on input that
-  looks wrong and is not.
+  This is the load-bearing regression suite. False positives are the reviewer's
+  main failure mode -- a bot that cries wolf gets muted permanently, and a muted
+  bot has zero value regardless of how good its true positives are. Every
+  stimulus here asserts that the reviewer stays SILENT, or at most asks a
+  question, on input that looks wrong and is not.
 
   Five true-negative classes are covered:
     1. Clean spec              -- tn-clean-service
