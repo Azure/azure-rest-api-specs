@@ -291,15 +291,6 @@ model LaunchBulkInstancesOperationProperties {
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
-  @added(Versions.`2026-08-06-preview`)
-  @doc("Minimum capacity to achieve, expressed in the units given by capacityType. Must be less than capacity; to require the full requested capacity, set partialFulfillmentPolicy.mode to Disabled instead. If the service cannot allocate at least this much capacity, the request fails and no instances are launched. Setting a minimum capacity requires partial fulfillment to remain enabled, so this property cannot be combined with partialFulfillmentPolicy.mode set to Disabled; such a request is rejected with 400 Bad Request.")
-  @minValue(1)
-  minCapacity?: int32;
-
-  @added(Versions.`2026-08-06-preview`)
-  @doc("The partial fulfillment policy for the LaunchBulkInstancesOperation request. When this property is omitted, partial fulfillment is allowed. To require all-or-nothing behavior, set partialFulfillmentPolicy.mode to Disabled, which cannot be combined with minCapacity; such a request is rejected with 400 Bad Request.")
-  partialFulfillmentPolicy?: PartialFulfillmentPolicy;
-
   @doc("Configuration Options for Regular or Spot instances in LaunchBulkInstancesOperation.")
   priorityProfile: PriorityProfile;
 

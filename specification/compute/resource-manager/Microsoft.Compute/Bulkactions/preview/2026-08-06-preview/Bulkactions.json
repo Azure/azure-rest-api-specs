@@ -5368,16 +5368,6 @@
           "$ref": "#/definitions/CapacityType",
           "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
         },
-        "minCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum capacity to achieve, expressed in the units given by capacityType. Must be less than capacity; to require the full requested capacity, set partialFulfillmentPolicy.mode to Disabled instead. If the service cannot allocate at least this much capacity, the request fails and no instances are launched. Setting a minimum capacity requires partial fulfillment to remain enabled, so this property cannot be combined with partialFulfillmentPolicy.mode set to Disabled; such a request is rejected with 400 Bad Request.",
-          "minimum": 1
-        },
-        "partialFulfillmentPolicy": {
-          "$ref": "#/definitions/PartialFulfillmentPolicy",
-          "description": "The partial fulfillment policy for the LaunchBulkInstancesOperation request. When this property is omitted, partial fulfillment is allowed. To require all-or-nothing behavior, set partialFulfillmentPolicy.mode to Disabled, which cannot be combined with minCapacity; such a request is rejected with 400 Bad Request."
-        },
         "priorityProfile": {
           "$ref": "#/definitions/PriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in LaunchBulkInstancesOperation."
