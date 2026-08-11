@@ -117,7 +117,7 @@ union RoutineDispatchIdentity {
   @doc("Dispatches with the target agent identity and a foundation token.")
   agent: "agent",
 
-  @doc("Dispatches as the principal that created the routine.")
+  @doc("An explicit customer opt-in to dispatch as the principal that created the routine.")
   creator: "creator",
 }
 
@@ -271,7 +271,7 @@ model Routine {
 @doc("Optional authorization configuration for a routine dispatch.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineAuthorization {
-  @doc("The identity used when dispatching the routine. When omitted, dispatch uses the target agent identity.")
+  @doc("The identity used when dispatching the routine. Defaults to agent when omitted; set to creator only when the customer opts in to creator identity dispatch.")
   identity?: RoutineDispatchIdentity;
 }
 
