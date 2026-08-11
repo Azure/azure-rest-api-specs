@@ -277,10 +277,8 @@ union AgentKind {
   string,
   prompt: "prompt",
   hosted: "hosted",
-  external: "external",
-  
-  #deprecated "deprecated"
   workflow: "workflow",
+  external: "external",
 
   @removed(Versions.v1)
   container_app: "container_app",
