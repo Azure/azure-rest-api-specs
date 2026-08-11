@@ -3,7 +3,7 @@ emit:
 
 parameters:
   "service-dir":
-    default: "sdk/deviceupdate"
+    default: "sdk/deviceregistry"
 
 linter:
   extends:
@@ -22,19 +22,19 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/deviceupdatedeviceregistry.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistryupdate"
-    package-dir: "azure-iot-deviceregistryupdate"
-    namespace: "azure.iot.deviceregistryupdate"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-deviceregistrysoftwareupdate"
+    package-dir: "azure-mgmt-deviceregistrysoftwareupdate"
+    namespace: "azure.mgmt.deviceregistrysoftwareupdate"
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistryupdate"
-    namespace: com.azure.iot.deviceregistryupdate
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-device-registry-software-update"
+    namespace: com.azure.resourcemanager.deviceregistry.softwareupdate
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/iot-device-registry-update"
+    emitter-output-dir: "{output-dir}/{service-dir}/resourcemanager-device-registry-software-update"
     package-details:
-      name: "@azure/iot-device-registry-update"
+      name: "@azure/resourcemanager-device-registry-software-update"
     flavor: azure
-  "@azure-typespec/http-client-csharp":
-    namespace: "Azure.IoT.DeviceRegistryUpdate"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DeviceRegistry.SoftwareUpdate"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
