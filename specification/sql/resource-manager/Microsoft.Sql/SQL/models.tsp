@@ -7629,8 +7629,8 @@ model DistributedAvailabilityGroupProperties {
   /**
    * Additional read-only metadata for the distributed availability group.
    */
-  @added(Versions.v2026_08_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Metadata is a server-computed key/value map with no fixed schema."
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
