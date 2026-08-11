@@ -19138,10 +19138,6 @@
                   "user_security_context": {
                     "$ref": "#/components/schemas/AzureUserSecurityContext",
                     "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
-                  },
-                  "routing_config": {
-                    "$ref": "#/components/schemas/RoutingConfiguration",
-                    "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint."
                   }
                 }
               }
@@ -80093,34 +80089,6 @@
             "Routines=V1Preview"
           ]
         }
-      },
-      "RoutingConfiguration": {
-        "type": "object",
-        "properties": {
-          "price_limit": {
-            "$ref": "#/components/schemas/RoutingPriceLimit",
-            "description": "A request-level hard price ceiling (USD per 1M tokens) that filters the model\ncandidate pool before routing optimization. Composes with the deployment-level\nrouting mode (Balanced, Quality, or Cost): the price filter narrows the pool first,\nthen the mode selects from the remaining models.\n\nIf omitted, no price filtering is applied."
-          }
-        },
-        "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint."
-      },
-      "RoutingPriceLimit": {
-        "type": "object",
-        "properties": {
-          "input": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "description": "Maximum input token price in USD per 1M tokens. Models whose input price\nexceeds this value are excluded. When omitted, input price is unconstrained."
-          },
-          "output": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "description": "Maximum output token price in USD per 1M tokens. Models whose output price\nexceeds this value are excluded. When omitted, output price is unconstrained."
-          }
-        },
-        "description": "Maximum acceptable token price thresholds for input and/or output tokens.\nModels exceeding any specified threshold are excluded from routing.\n\nWhen the filter eliminates all models, the service returns a 400 Bad Request\nwith an actionable error message indicating no models satisfy the constraints."
       },
       "RubricBasedEvaluatorDefinition": {
         "type": "object",
