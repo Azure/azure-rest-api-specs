@@ -1,0 +1,108 @@
+{
+  "title": "StandbyContainerGroupPoolRuntimeViews_Get",
+  "operationId": "StandbyContainerGroupPoolRuntimeViews_Get",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000009",
+    "resourceGroupName": "rgstandbypool",
+    "standbyContainerGroupPoolName": "pool",
+    "runtimeView": "latest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "instanceCountSummary": [
+            {
+              "zone": 1,
+              "instanceCountsByState": [
+                {
+                  "state": "Creating",
+                  "count": 100
+                },
+                {
+                  "state": "Running",
+                  "count": 20
+                },
+                {
+                  "state": "Deleting",
+                  "count": 21
+                }
+              ]
+            },
+            {
+              "zone": 2,
+              "instanceCountsByState": [
+                {
+                  "state": "Creating",
+                  "count": 100
+                },
+                {
+                  "state": "Running",
+                  "count": 500
+                },
+                {
+                  "state": "Deleting",
+                  "count": 20
+                }
+              ]
+            },
+            {
+              "zone": 3,
+              "instanceCountsByState": [
+                {
+                  "state": "Creating",
+                  "count": 100
+                },
+                {
+                  "state": "Running",
+                  "count": 20
+                },
+                {
+                  "state": "Deleting",
+                  "count": 7
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "status": {
+            "code": "HealthState/healthy",
+            "message": "The pool is healthy."
+          },
+          "prediction": {
+            "forecastValues": {
+              "instancesRequestedCount": [
+                24,
+                10,
+                200,
+                12,
+                5,
+                10,
+                15,
+                23,
+                56,
+                38,
+                12,
+                19
+              ]
+            },
+            "forecastStartTime": "2025-02-14T01:34:59.228Z",
+            "forecastInfo": "{\"forecastAccuracy\": 85, \"seriesUnitIntervalInMins\": 60, \"instancesRequestedCount_recentHistory\": \"[9, 4, 2, 8, 8, 2, 3, 6, 5, 3, 2, 6]\"}"
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyContainerGroupPools/pool/runtimeViews/latest",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyContainerGroupPools/runtimeViews",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    }
+  }
+}

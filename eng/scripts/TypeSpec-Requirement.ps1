@@ -3,7 +3,7 @@ param (
   [Parameter(Position = 0)]
   [string] $BaseCommitish = "HEAD^",
   [Parameter(Position = 1)]
-  [string] $TargetCommitish = "HEAD",
+  [string] $HeadCommitish = "HEAD",
   [Parameter(Position = 2)]
   [string] $SpecType = "data-plane|resource-manager",
   [string] $CheckAllUnder,
@@ -15,25 +15,15 @@ param (
 Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
-. $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/../common/scripts/logging.ps1
+. $PSScriptRoot/Suppressions-Functions.ps1
 
-function Get-Suppression {
+function Get-ValidatedSuppression {
   param (
     [string]$fileInSpecFolder
   )
 
-  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
-  # -AsHashtable is closer to raw JSON than PSCustomObject
-  $suppressions = npm exec --no -- get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
-
-  if ($LASTEXITCODE -ne 0) {
-      LogError "Failure running 'npm exec get-suppressions'"
-      LogJobFailure
-      exit 1
-  }
-
-  # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
-  $suppression = $suppressions ? $suppressions[0] : $null
+  $suppression = Get-Suppression "TypeSpecRequirement" $fileInSpecFolder
 
   if ($suppression) {
     # Each path must specify a single version (without wildcards) under "preview|stable"
@@ -59,12 +49,24 @@ function Get-Suppression {
   return $suppression
 }
 
+function LogWarningForFile($file, $warningString) {
+  if (Test-SupportsDevOpsLogging) {
+    Write-Host ("##vso[task.logissue type=warning;sourcepath=$file;linenumber=1;columnnumber=1;]$warningString" -replace "`n", "%0D%0A")
+  }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Host ("::warning file=$file,line=1,col=1::$warningString" -replace "`n", "%0D%0A")
+  }
+  else {
+    Write-Host "[Warning in file $file] $warningString" -ForegroundColor Yellow
+  }
+}
+
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 $filesToCheck = $CheckAllUnder ?
   (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative -RelativeBasePath $repoPath | ForEach-Object { $_ -replace '\\', '/' }) :
-  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
+  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $HeadCommitish))
 
 $filesToCheck = $filesToCheck.Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
@@ -90,7 +92,7 @@ else {
 
     $fullPath = (Join-Path $repoPath $file)
 
-    $suppression = Get-Suppression $fullPath
+    $suppression = Get-ValidatedSuppression $fullPath
     if ($suppression) {
       $reason = $suppression["reason"] ?? "<no reason specified>"
 
@@ -139,9 +141,9 @@ else {
       }
     }
 
-    # Extract path between "specification/" and "/(preview|stable)"
-    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
-      $servicePath = $Matches["servicePath"]
+    # Extract path to API version (between "specification" and swagger filename)
+    if ($file -match "specification/(?<apiVersion>[^/]+/($SpecType).*?/(preview|stable)/[^/]+)/[^/]+\.json$") {
+      $apiVersion = $Matches["apiVersion"]
     }
     else {
       LogError "Path to OpenAPI did not match expected regex.  Unable to extract service path."
@@ -149,26 +151,26 @@ else {
       exit 1
     }
 
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
+    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$apiVersion"
 
     # Avoid conflict with pipeline secret
-    $logUrlToStableFolder = $urlToStableFolder -replace '^https://', ''
+    $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
 
-    LogInfo "  Checking $logUrlToStableFolder"
+    LogInfo "  Checking $logUrlToApiVersion"
 
-    $responseStatus = $responseCache[$urlToStableFolder];
+    $responseStatus = $responseCache[$urlToApiVersion];
     if ($null -ne $responseStatus) {
       LogInfo "    Found in cache"
     }
     else {
       LogInfo "    Not found in cache, making web request"
       try {
-        $response = Invoke-WebRequest -Uri $urlToStableFolder -Method Head -SkipHttpErrorCheck
+        $response = Invoke-WebRequest -Uri $urlToApiVersion -Method Head -SkipHttpErrorCheck
         $responseStatus = $response.StatusCode
-        $responseCache[$urlToStableFolder] = $responseStatus
+        $responseCache[$urlToApiVersion] = $responseStatus
       }
       catch {
-        LogError "Exception making web request to ${logUrlToStableFolder}: $_"
+        LogError "Exception making web request to ${logUrlToApiVersion}: $_"
         LogJobFailure
         exit 1
       }
@@ -177,14 +179,22 @@ else {
     LogInfo "    Status: $responseStatus"
 
     if ($responseStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
+      LogInfo "  Branch 'main' contains path '$apiVersion', so API version already exists and is not required to use TypeSpec"
+
+      $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
+      LogWarningForFile $file $warning
+
+      if ($env:GITHUB_OUTPUT) {
+        # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yaml
+        Add-Content -Path $env:GITHUB_OUTPUT -Value "brownfield=true"
+      }
     }
     elseif ($responseStatus -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
+      LogInfo "  Branch 'main' does not contain path '$apiVersion', so API version is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${logUrlToStableFolder}: ${responseStatus}"
+      LogError "Unexpected response from ${logUrlToApiVersion}: ${responseStatus}"
       LogJobFailure
       exit 1
     }
@@ -198,7 +208,7 @@ if ($pathsWithErrors.Count -gt 0) {
   LogJobFailure
 
   foreach ($path in $pathsWithErrors) {
-    LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
+    LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and API version appears to be new"
   }
   exit 1
 }

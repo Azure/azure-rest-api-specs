@@ -1,0 +1,306 @@
+{
+  "parameters": {
+    "api-version": "2025-04-01",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "fluxConfiguration": {
+      "properties": {
+        "kustomizations": {
+          "srs-kustomization1": {
+            "path": "./test/path",
+            "dependsOn": [],
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600
+          },
+          "srs-kustomization2": {
+            "path": "./other/test/path",
+            "dependsOn": [
+              "srs-kustomization1"
+            ],
+            "prune": false,
+            "retryIntervalInSeconds": 600,
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600
+          }
+        },
+        "namespace": "srs-namespace",
+        "ociRepository": {
+          "serviceAccountName": "testserviceaccount",
+          "syncIntervalInSeconds": 1000,
+          "timeoutInSeconds": 1000,
+          "url": "oci://ghcr.io/stefanprodan/manifests/podinfo"
+        },
+        "scope": "cluster",
+        "sourceKind": "OCIRepository",
+        "suspend": false
+      }
+    },
+    "fluxConfigurationName": "srs-fluxconfig",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Details of the Kubernetes Flux Configuration's current status.",
+      "body": {
+        "name": "srs-fluxconfig",
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
+        "properties": {
+          "azureBlob": null,
+          "bucket": null,
+          "complianceState": "Compliant",
+          "errorMessage": "",
+          "gitRepository": null,
+          "kustomizations": {
+            "srs-kustomization1": {
+              "name": "srs-kustomization1",
+              "path": "./test/path",
+              "dependsOn": [],
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600
+            },
+            "srs-kustomization2": {
+              "name": "srs-kustomization2",
+              "path": "./other/test/path",
+              "dependsOn": [
+                "srs-kustomization1"
+              ],
+              "prune": false,
+              "retryIntervalInSeconds": 600,
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600
+            }
+          },
+          "namespace": "srs-namespace",
+          "ociRepository": {
+            "serviceAccountName": "testserviceaccount",
+            "syncIntervalInSeconds": 1000,
+            "timeoutInSeconds": 1000,
+            "url": "oci://ghcr.io/stefanprodan/manifests/podinfo"
+          },
+          "provisioningState": "Succeeded",
+          "repositoryPublicKey": "",
+          "scope": "cluster",
+          "sourceKind": "OCIRepository",
+          "sourceSyncedCommitId": "0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
+          "sourceUpdatedAt": "2021-05-19T18:17:12Z",
+          "statusUpdatedAt": "2021-05-19T18:17:12Z",
+          "statuses": [
+            {
+              "name": "srs-fluxconfig",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": null,
+              "kind": "OCIRepository",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2022-05-04T07:17:30+00:00",
+                  "message": "stored artifact for revision '55396be14f18fa2b977c1f22becef26a94d1d9a7ccb1e19d12f9cac52d757a84'",
+                  "reason": "Succeeded",
+                  "status": "True"
+                }
+              ]
+            },
+            {
+              "name": "srs-fluxconfig-srs-kustomization1",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": {
+                "failureCount": null,
+                "helmChartRef": {
+                  "name": "myname",
+                  "namespace": "mynamespace"
+                },
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
+              },
+              "kind": "Kustomization",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Applied revision: 0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True"
+                }
+              ]
+            },
+            {
+              "name": "srs-fluxconfig-srs-kustomization2",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": {
+                "failureCount": null,
+                "helmChartRef": {
+                  "name": "myname",
+                  "namespace": "mynamespace"
+                },
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
+              },
+              "kind": "Kustomization",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Applied revision: 0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True"
+                }
+              ]
+            }
+          ],
+          "suspend": false
+        },
+        "systemData": {
+          "createdAt": "2021-05-19T05:10:57.027Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-05-19T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      }
+    },
+    "201": {
+      "description": "Details of the Kubernetes Flux Configuration's current status.",
+      "body": {
+        "name": "srs-fluxconfig",
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
+        "properties": {
+          "azureBlob": null,
+          "bucket": null,
+          "complianceState": "Compliant",
+          "errorMessage": "",
+          "gitRepository": null,
+          "kustomizations": {
+            "srs-kustomization1": {
+              "name": "srs-kustomization1",
+              "path": "./test/path",
+              "dependsOn": [],
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600
+            },
+            "srs-kustomization2": {
+              "name": "srs-kustomization2",
+              "path": "./other/test/path",
+              "dependsOn": [
+                "srs-kustomization1"
+              ],
+              "prune": false,
+              "retryIntervalInSeconds": 600,
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600
+            }
+          },
+          "namespace": "srs-namespace",
+          "ociRepository": {
+            "serviceAccountName": "testserviceaccount",
+            "syncIntervalInSeconds": 1000,
+            "timeoutInSeconds": 1000,
+            "url": "oci://ghcr.io/stefanprodan/manifests/podinfo"
+          },
+          "provisioningState": "Succeeded",
+          "repositoryPublicKey": "",
+          "scope": "cluster",
+          "sourceKind": "OCIRepository",
+          "sourceSyncedCommitId": "0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
+          "sourceUpdatedAt": "2021-05-19T18:17:12Z",
+          "statusUpdatedAt": "2021-05-19T18:17:12Z",
+          "statuses": [
+            {
+              "name": "srs-fluxconfig",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "kind": "OCIRepository",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2022-05-04T07:17:30+00:00",
+                  "message": "stored artifact for revision '55396be14f18fa2b977c1f22becef26a94d1d9a7ccb1e19d12f9cac52d757a84'",
+                  "reason": "Succeeded",
+                  "status": "True"
+                }
+              ]
+            },
+            {
+              "name": "srs-fluxconfig-srs-kustomization1",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": {
+                "failureCount": null,
+                "helmChartRef": {
+                  "name": "myname",
+                  "namespace": "mynamespace"
+                },
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
+              },
+              "kind": "Kustomization",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Applied revision: 0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True"
+                }
+              ]
+            },
+            {
+              "name": "srs-fluxconfig-srs-kustomization2",
+              "appliedBy": null,
+              "complianceState": "Compliant",
+              "helmReleaseProperties": {
+                "failureCount": null,
+                "helmChartRef": {
+                  "name": "myname",
+                  "namespace": "mynamespace"
+                },
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
+              },
+              "kind": "Kustomization",
+              "statusConditions": [
+                {
+                  "type": "Ready",
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Applied revision: 0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True"
+                }
+              ]
+            }
+          ],
+          "suspend": false
+        },
+        "systemData": {
+          "createdAt": "2021-05-19T05:10:57.027Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-05-19T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      }
+    }
+  },
+  "operationId": "FluxConfigurations_CreateOrUpdate",
+  "title": "Create Flux Configuration with OCIRepository Source Kind"
+}

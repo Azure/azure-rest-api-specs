@@ -1,0 +1,21 @@
+title: Retrieves an assistant.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2024-08-01-preview
+  assistant_id: asst_abc123
+responses:
+  "200":
+    body:
+      id: asst_abc123
+      object: assistant
+      created_at: 1699009709
+      name: HR Helper
+      description: null
+      model: gpt-4-turbo
+      instructions: You are an HR bot, and you have access to files to answer employee questions about company policies.
+      tools:
+        - type: file_search
+      metadata: {}
+      top_p: 1
+      temperature: 1
+      response_format: auto

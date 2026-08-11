@@ -94,10 +94,7 @@
         },
         "x-ms-examples": {
           "List registries with system created accounts.": {
-            "$ref": "./examples/Registries/list-SystemCreated.json"
-          },
-          "List registries with user created accounts.": {
-            "$ref": "./examples/Registries/list-UserCreated.json"
+            "$ref": "./examples/Registries/list.json"
           }
         },
         "x-ms-pageable": {
@@ -196,10 +193,7 @@
         },
         "x-ms-examples": {
           "Get Registry with system created accounts.": {
-            "$ref": "./examples/Registries/get-SystemCreated.json"
-          },
-          "Get Registry with user created accounts.": {
-            "$ref": "./examples/Registries/get-UserCreated.json"
+            "$ref": "./examples/Registries/get.json"
           }
         }
       },
@@ -259,10 +253,7 @@
         },
         "x-ms-examples": {
           "Update Registry with system created accounts.": {
-            "$ref": "./examples/Registries/update-SystemCreated.json"
-          },
-          "Update Registry with user created accounts.": {
-            "$ref": "./examples/Registries/update-UserCreated.json"
+            "$ref": "./examples/Registries/update.json"
           }
         }
       },
@@ -332,10 +323,7 @@
         },
         "x-ms-examples": {
           "CreateOrUpdate Registry with system created accounts.": {
-            "$ref": "./examples/Registries/createOrUpdate-SystemCreated.json"
-          },
-          "CreateOrUpdate Registry with user created accounts.": {
-            "$ref": "./examples/Registries/createOrUpdate-UserCreated.json"
+            "$ref": "./examples/Registries/createOrUpdate.json"
           }
         }
       }
@@ -348,10 +336,6 @@
       "properties": {
         "systemCreatedAcrAccount": {
           "$ref": "#/definitions/SystemCreatedAcrAccount",
-          "x-nullable": true
-        },
-        "userCreatedAcrAccount": {
-          "$ref": "#/definitions/UserCreatedAcrAccount",
           "x-nullable": true
         }
       },
@@ -740,10 +724,6 @@
         "systemCreatedStorageAccount": {
           "$ref": "#/definitions/SystemCreatedStorageAccount",
           "x-nullable": true
-        },
-        "userCreatedStorageAccount": {
-          "$ref": "#/definitions/UserCreatedStorageAccount",
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -777,28 +757,6 @@
         "storageAccountType": {
           "description": "Allowed values:\r\n\"Standard_LRS\",\r\n\"Standard_GRS\",\r\n\"Standard_RAGRS\",\r\n\"Standard_ZRS\",\r\n\"Standard_GZRS\",\r\n\"Standard_RAGZRS\",\r\n\"Premium_LRS\",\r\n\"Premium_ZRS\"",
           "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "UserCreatedAcrAccount": {
-      "type": "object",
-      "properties": {
-        "armResourceId": {
-          "description": "ARM ResourceId of a resource",
-          "$ref": "#/definitions/ArmResourceId",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "UserCreatedStorageAccount": {
-      "type": "object",
-      "properties": {
-        "armResourceId": {
-          "description": "ARM ResourceId of a resource",
-          "$ref": "#/definitions/ArmResourceId",
           "x-nullable": true
         }
       },

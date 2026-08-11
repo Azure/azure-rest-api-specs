@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "schemaId": "schema1",
+    "parameters": {
+      "properties": {
+        "description": "sample schema description",
+        "schemaType": "json",
+        "document": {
+          "$id": "https://example.com/person.schema.json",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Person",
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "The person's first name."
+            },
+            "lastName": {
+              "type": "string",
+              "description": "The person's last name."
+            },
+            "age": {
+              "description": "Age in years which must be equal to or greater than zero.",
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1?api-version=2024-05-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-05-01"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema1",
+        "properties": {
+          "description": "sample schema description",
+          "schemaType": "json",
+          "document": {
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Person",
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              },
+              "age": {
+                "description": "Age in years which must be equal to or greater than zero.",
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "provisioningState": "InProgress"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1?api-version=2024-05-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-05-01"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema1",
+        "properties": {
+          "description": "sample schema description",
+          "schemaType": "json",
+          "document": {
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Person",
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              },
+              "age": {
+                "description": "Age in years which must be equal to or greater than zero.",
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "containerAppName": "testcontainerApp0",
+    "logicAppName": "testcontainerApp0",
+    "workflowName": "stateful1",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/stateful1",
+        "name": "testcontainerApp0/stateful1",
+        "type": "Microsoft.App/logicApps/workflows",
+        "kind": "Stateful",
+        "location": "East US",
+        "properties": {
+          "files": {
+            "workflow.json": {
+              "definition": {
+                "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                "actions": {},
+                "contentVersion": "1.0.0.0",
+                "outputs": {},
+                "parameters": {},
+                "triggers": {}
+              }
+            },
+            "connections.json": {
+              "managedApiConnections": {
+                "office365": {
+                  "api": {
+                    "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/brazilsouth/managedApis/office365"
+                  },
+                  "connection": {
+                    "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/connections/office365-1"
+                  },
+                  "connectionRuntimeUrl": "string",
+                  "authentication": {
+                    "type": "Raw",
+                    "scheme": "Key",
+                    "parameter": "@appsetting('office365-connectionKey')"
+                  }
+                }
+              }
+            }
+          },
+          "flowState": "Enabled",
+          "health": {
+            "state": "Healthy"
+          }
+        }
+      }
+    }
+  }
+}

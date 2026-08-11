@@ -1,33 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "4.0",
-    "title": "Common types"
+    "title": "Common types",
+    "version": "4.0"
   },
   "paths": {},
   "definitions": {
-    "encryption": {
-      "type": "object",
-      "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
-      "properties": {
-        "infrastructureEncryption": {
-          "type": "string",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "x-ms-enum": {
-            "name": "InfrastructureEncryption",
-            "modelAsString": true
-          },
-          "description": "Values are enabled and disabled."
-        },
-        "customerManagedKeyEncryption": {
-          "description": "All Customer-managed key encryption properties for the resource.",
-          "$ref": "#/definitions/customerManagedKeyEncryption"
-        }
-      }
-    },
     "customerManagedKeyEncryption": {
       "type": "object",
       "description": "All Customer-managed key encryption properties for the resource.",
@@ -38,6 +16,7 @@
           "properties": {
             "identityType": {
               "type": "string",
+              "description": "Values can be systemAssignedIdentity or userAssignedIdentity",
               "enum": [
                 "systemAssignedIdentity",
                 "userAssignedIdentity",
@@ -46,8 +25,7 @@
               "x-ms-enum": {
                 "name": "IdentityType",
                 "modelAsString": true
-              },
-              "description": "Values can be systemAssignedIdentity or userAssignedIdentity"
+              }
             },
             "userAssignedIdentityResourceId": {
               "type": "string",
@@ -64,6 +42,28 @@
         "keyEncryptionKeyUrl": {
           "type": "string",
           "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "encryption": {
+      "type": "object",
+      "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
+      "properties": {
+        "infrastructureEncryption": {
+          "type": "string",
+          "description": "Values are enabled and disabled.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryption",
+            "modelAsString": true
+          }
+        },
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/customerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
         }
       }
     }

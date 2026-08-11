@@ -49,6 +49,7 @@ union TimeGranularity {
   None: "none",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request of the entire or last anomaly detection.")
 model UnivariateDetectionOptions {
   @doc("""
@@ -242,6 +243,7 @@ model UnivariateLastDetectionResult {
   severity?: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request of change point detection.")
 model UnivariateChangePointDetectionOptions {
   @doc("""
@@ -288,7 +290,7 @@ model UnivariateChangePointDetectionResult {
     Frequency extracted from the series. Zero means no recurrent pattern has been
     found.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   period?: int32;
 
   @doc("""

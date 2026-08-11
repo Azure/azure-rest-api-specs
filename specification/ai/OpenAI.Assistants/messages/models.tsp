@@ -8,6 +8,7 @@ namespace Azure.AI.OpenAI.Assistants;
 using TypeSpec.Versioning;
 
 /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_02_15_preview)
 model ThreadMessageOptions {
   /**
@@ -112,7 +113,8 @@ model MessageAttachment {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
 union MessageAttachmentToolDefinition {
-  CodeInterpreterToolDefinition | FileSearchToolDefinition,
+  CodeInterpreterToolDefinition,
+  FileSearchToolDefinition,
 }
 
 // Message content types: "text" | "image_file"
@@ -443,4 +445,14 @@ model MessageDeltaTextFilePathAnnotation {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")
   fileId?: string;
+}
+
+/** A representation of the URL used for the text citation. */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model MessageDeltaTextUrlCitationDetails {
+  /** The URL where the citation is from. */
+  url?: string;
+
+  /** The title of the URL. */
+  title?: string;
 }

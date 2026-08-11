@@ -10,6 +10,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   The configuration information for an embeddings request.
   Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
@@ -90,6 +91,10 @@ model EmbeddingItem {
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   @clientName("promptIndex", "java")
   index: int32;
+
+  @doc("The object type which is always 'embedding'.")
+  @added(ServiceApiVersions.v2024_07_01_Preview)
+  object: "embedding";
 }
 
 @doc("Measurement of the amount of tokens used in this request and response.")

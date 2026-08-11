@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "jobName": "testcontainerAppsJob0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testcontainerAppsJob0",
+        "type": "Microsoft.App/jobs",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "identitySettings": [
+              {
+                "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+                "lifecycle": "All"
+              },
+              {
+                "identity": "system",
+                "lifecycle": "Init"
+              }
+            ],
+            "manualTriggerConfig": {
+              "parallelism": 4,
+              "replicaCompletionCount": 1
+            },
+            "replicaRetryLimit": 10,
+            "replicaTimeout": 10,
+            "triggerType": "Manual"
+          },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "provisioningState": "Succeeded",
+          "runningState": "Ready",
+          "template": {
+            "containers": [
+              {
+                "name": "testcontainerAppsJob0",
+                "image": "repo/testcontainerAppsJob0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1",
+                    "volumeName": "azurefile"
+                  },
+                  {
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2",
+                    "volumeName": "nfsazurefile"
+                  }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "testinitcontainerAppsJob0",
+                "image": "repo/testcontainerAppsJob0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageName": "storage",
+                "storageType": "AzureFile"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageName": "nfsStorage",
+                "storageType": "NfsAzureFile"
+              }
+            ]
+          }
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/jobs/testcontainerAppsJob0/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2025-10-02-preview",
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/jobs/testcontainerAppsJob0/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2025-10-02-preview"
+      }
+    }
+  },
+  "operationId": "Jobs_Resume",
+  "title": "Resume Job"
+}

@@ -1,0 +1,90 @@
+{
+  "title": "List deleted backup vaults by subscription",
+  "operationId": "DeletedBackupVaults_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataProtection/locations/westus/deletedBackupVaults/deleted-vault-01",
+            "name": "deleted-vault-01",
+            "type": "Microsoft.DataProtection/deletedBackupVaults",
+            "properties": {
+              "originalBackupVaultId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.DataProtection/backupVaults/sample-vault",
+              "originalBackupVaultName": "sample-vault",
+              "originalBackupVaultResourcePath": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.DataProtection/backupVaults/sample-vault",
+              "resourceDeletionInfo": {
+                "deletionTime": "2025-09-18T10:00:00.000Z",
+                "scheduledPurgeTime": "2025-10-18T10:00:00.000Z",
+                "deleteActivityId": "00000000-0000-0000-0000-000000000000"
+              },
+              "monitoringSettings": {
+                "azureMonitorAlertSettings": {
+                  "alertsForAllJobFailures": "Enabled"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "securitySettings": {
+                "softDeleteSettings": {
+                  "state": "On",
+                  "retentionDurationInDays": 14.0
+                }
+              },
+              "storageSettings": [
+                {
+                  "datastoreType": "VaultStore",
+                  "type": "LocallyRedundant"
+                }
+              ]
+            },
+            "location": "westus",
+            "tags": {
+              "key1": "value1"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataProtection/locations/eastus/deletedBackupVaults/deleted-vault-02",
+            "name": "deleted-vault-02",
+            "type": "Microsoft.DataProtection/deletedBackupVaults",
+            "properties": {
+              "originalBackupVaultId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/another-rg/providers/Microsoft.DataProtection/backupVaults/another-vault",
+              "originalBackupVaultName": "another-vault",
+              "originalBackupVaultResourcePath": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/another-rg/providers/Microsoft.DataProtection/backupVaults/another-vault",
+              "resourceDeletionInfo": {
+                "deletionTime": "2025-09-17T14:30:00.000Z",
+                "scheduledPurgeTime": "2025-10-17T14:30:00.000Z",
+                "deleteActivityId": "11111111-1111-1111-1111-111111111111"
+              },
+              "monitoringSettings": {
+                "azureMonitorAlertSettings": {
+                  "alertsForAllJobFailures": "Disabled"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "securitySettings": {
+                "softDeleteSettings": {
+                  "state": "AlwaysOn",
+                  "retentionDurationInDays": 30.0
+                }
+              },
+              "storageSettings": [
+                {
+                  "datastoreType": "VaultStore",
+                  "type": "GeoRedundant"
+                }
+              ]
+            },
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -42,7 +42,8 @@ paths:
           required: false
           description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
           schema:
-            $ref: '#/components/schemas/ListSortOrder'
+            allOf:
+              - $ref: '#/components/schemas/ListSortOrder'
             default: desc
           explode: false
         - name: after
@@ -55,7 +56,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -192,6 +193,7 @@ paths:
                 file:
                   type: string
                   format: binary
+                  description: The file data (not filename) to upload.
                 purpose:
                   allOf:
                     - $ref: '#/components/schemas/FilePurpose'
@@ -202,6 +204,10 @@ paths:
               required:
                 - file
                 - purpose
+            encoding:
+              purpose:
+                contentType: text/plain
+        description: The file data to upload and its purpose.
   /files/{fileId}:
     delete:
       operationId: deleteFile
@@ -252,10 +258,10 @@ paths:
         '200':
           description: The request has succeeded.
           content:
-            application/json:
+            application/octet-stream:
               schema:
                 type: string
-                format: byte
+                format: binary
   /threads:
     post:
       operationId: createThread
@@ -402,7 +408,8 @@ paths:
           required: false
           description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
           schema:
-            $ref: '#/components/schemas/ListSortOrder'
+            allOf:
+              - $ref: '#/components/schemas/ListSortOrder'
             default: desc
           explode: false
         - name: after
@@ -415,7 +422,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -562,7 +569,8 @@ paths:
           required: false
           description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
           schema:
-            $ref: '#/components/schemas/ListSortOrder'
+            allOf:
+              - $ref: '#/components/schemas/ListSortOrder'
             default: desc
           explode: false
         - name: after
@@ -575,7 +583,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -728,7 +736,8 @@ paths:
           required: false
           description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
           schema:
-            $ref: '#/components/schemas/ListSortOrder'
+            allOf:
+              - $ref: '#/components/schemas/ListSortOrder'
             default: desc
           explode: false
         - name: after
@@ -741,7 +750,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -965,13 +974,12 @@ components:
     AssistantStreamEvent:
       anyOf:
         - type: string
-        - anyOf:
-            - $ref: '#/components/schemas/ThreadStreamEvent'
-            - $ref: '#/components/schemas/RunStreamEvent'
-            - $ref: '#/components/schemas/RunStepStreamEvent'
-            - $ref: '#/components/schemas/MessageStreamEvent'
-            - $ref: '#/components/schemas/ErrorEvent'
-            - $ref: '#/components/schemas/DoneEvent'
+        - $ref: '#/components/schemas/ThreadStreamEvent'
+        - $ref: '#/components/schemas/RunStreamEvent'
+        - $ref: '#/components/schemas/RunStepStreamEvent'
+        - $ref: '#/components/schemas/MessageStreamEvent'
+        - $ref: '#/components/schemas/ErrorEvent'
+        - $ref: '#/components/schemas/DoneEvent'
       description: |-
         Each event in a server-sent events stream has an `event` and `data` property:
 
@@ -2409,6 +2417,10 @@ components:
       enum:
         - 2024-02-15-preview
         - 2024-05-01-preview
+        - 2024-07-01-preview
+        - 2024-09-01-preview
+        - 2024-10-01-preview
+        - 2025-01-01-preview
       description: The known set of supported API versions.
     SubmitToolOutputsAction:
       type: object
@@ -2654,7 +2666,7 @@ components:
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         incomplete_details:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/IncompleteRunDetails'
           nullable: true
           description: Details on why the run is incomplete. Will be `null` if the run is not incomplete.

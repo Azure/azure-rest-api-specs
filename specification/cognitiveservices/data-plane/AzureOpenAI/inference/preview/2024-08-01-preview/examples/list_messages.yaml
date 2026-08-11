@@ -1,0 +1,41 @@
+title: List Messages
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2024-08-01-preview
+  thread_id: thread_abc123
+responses:
+  "200":
+    body:
+      object: list
+      data:
+        - id: msg_abc123
+          object: thread.message
+          created_at: 1699016383
+          assistant_id: null
+          thread_id: thread_abc123
+          run_id: null
+          role: user
+          content:
+            - type: text
+              text:
+                value: How does AI work? Explain it in simple terms.
+                annotations: []
+          attachments: []
+          metadata: {}
+        - id: msg_abc456
+          object: thread.message
+          created_at: 1699016383
+          assistant_id: null
+          thread_id: thread_abc123
+          run_id: null
+          role: user
+          content:
+            - type: text
+              text:
+                value: Hello, what is AI?
+                annotations: []
+          attachments: []
+          metadata: {}
+      first_id: msg_abc123
+      last_id: msg_abc456
+      has_more: false

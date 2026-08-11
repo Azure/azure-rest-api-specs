@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 model ApiSpecExportResult {
   @doc("API definition identifier.")
   @key("definitionName")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   definitionName: string;
 
   @doc("The result of the specification export.")

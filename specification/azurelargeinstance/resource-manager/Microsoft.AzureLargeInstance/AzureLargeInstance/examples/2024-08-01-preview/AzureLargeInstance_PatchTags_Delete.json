@@ -1,0 +1,60 @@
+{
+  "operationId": "AzureLargeInstance_Update",
+  "title": "AzureLargeInstance_Delete_Tag",
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "f0f4887f-d13c-4943-a8ba-d7da28d2a3fd",
+    "resourceGroupName": "myResourceGroup",
+    "azureLargeInstanceName": "myALInstance",
+    "tagsParameter": {
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.AzureLargeInstance/AzureLargeInstances/myALInstance",
+        "name": "myALInstance",
+        "type": "Microsoft.AzureLargeInstance/AzureLargeInstances",
+        "location": "westus",
+        "tags": {},
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2020-12-20T23:10:22.6828621Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-07-21T08:01:22.0000000Z"
+        },
+        "properties": {
+          "azureLargeInstanceId": "23415635-4d7e-41dc-9598-8194f22c24e1",
+          "powerState": "started",
+          "proximityPlacementGroup": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+          "hwRevision": "Rev 3",
+          "hardwareProfile": {
+            "hardwareType": "Cisco_UCS",
+            "azureLargeInstanceSize": "S72"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "ipAddress": "100.100.100.100"
+              }
+            ],
+            "circuitId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit"
+          },
+          "storageProfile": {
+            "nfsIpAddress": "200.200.200.200"
+          },
+          "osProfile": {
+            "computerName": "myComputerName",
+            "osType": "SUSE",
+            "version": "12 SP1",
+            "sshPublicKey": "{ssh-rsa public key}"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,607 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "InstanceFailoverGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups": {
+      "get": {
+        "operationId": "InstanceFailoverGroups_ListByLocation",
+        "tags": [
+          "InstanceFailoverGroups"
+        ],
+        "description": "Lists the failover groups in a location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List failover group": {
+            "$ref": "./examples/InstanceFailoverGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}": {
+      "get": {
+        "operationId": "InstanceFailoverGroups_Get",
+        "tags": [
+          "InstanceFailoverGroups"
+        ],
+        "description": "Gets a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get failover group": {
+            "$ref": "./examples/InstanceFailoverGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InstanceFailoverGroups_CreateOrUpdate",
+        "tags": [
+          "InstanceFailoverGroups"
+        ],
+        "description": "Creates or updates a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The failover group parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InstanceFailoverGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'InstanceFailoverGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create failover group": {
+            "$ref": "./examples/InstanceFailoverGroupCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InstanceFailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "InstanceFailoverGroups_Delete",
+        "tags": [
+          "InstanceFailoverGroups"
+        ],
+        "description": "Deletes a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete failover group": {
+            "$ref": "./examples/InstanceFailoverGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/failover": {
+      "post": {
+        "operationId": "InstanceFailoverGroups_Failover",
+        "tags": [
+          "InstanceFailoverGroups"
+        ],
+        "description": "Fails over from the current primary managed instance to this managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Planned failover of a failover group": {
+            "$ref": "./examples/InstanceFailoverGroupFailover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InstanceFailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss": {
+      "post": {
+        "operationId": "InstanceFailoverGroups_ForceFailoverAllowDataLoss",
+        "tags": [
+          "InstanceFailoverGroups"
+        ],
+        "description": "Fails over from the current primary managed instance to this managed instance. This operation might result in data loss.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InstanceFailoverGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Forced failover of a failover group allowing data loss": {
+            "$ref": "./examples/InstanceFailoverGroupForceFailoverAllowDataLoss.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InstanceFailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "InstanceFailoverGroup": {
+      "type": "object",
+      "description": "An instance failover group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InstanceFailoverGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InstanceFailoverGroupListResult": {
+      "type": "object",
+      "description": "The response of a InstanceFailoverGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InstanceFailoverGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/InstanceFailoverGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InstanceFailoverGroupProperties": {
+      "type": "object",
+      "description": "Properties of a instance failover group.",
+      "properties": {
+        "secondaryType": {
+          "$ref": "./common.json#/definitions/SecondaryInstanceType",
+          "description": "Type of the geo-secondary instance. Set 'Standby' if the instance is used as a DR option only."
+        },
+        "readWriteEndpoint": {
+          "$ref": "#/definitions/InstanceFailoverGroupReadWriteEndpoint",
+          "description": "Read-write endpoint of the failover group instance."
+        },
+        "readOnlyEndpoint": {
+          "$ref": "#/definitions/InstanceFailoverGroupReadOnlyEndpoint",
+          "description": "Read-only endpoint of the failover group instance."
+        },
+        "replicationRole": {
+          "$ref": "./common.json#/definitions/InstanceFailoverGroupReplicationRole",
+          "description": "Local replication role of the failover group instance.",
+          "readOnly": true
+        },
+        "replicationState": {
+          "type": "string",
+          "description": "Replication state of the failover group instance.",
+          "readOnly": true
+        },
+        "partnerRegions": {
+          "type": "array",
+          "description": "Partner region information for the failover group.",
+          "items": {
+            "$ref": "#/definitions/PartnerRegionInfo"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedInstancePairs": {
+          "type": "array",
+          "description": "List of managed instance pairs in the failover group.",
+          "items": {
+            "$ref": "#/definitions/ManagedInstancePairInfo"
+          }
+        }
+      },
+      "required": [
+        "readWriteEndpoint",
+        "partnerRegions",
+        "managedInstancePairs"
+      ]
+    },
+    "InstanceFailoverGroupReadOnlyEndpoint": {
+      "type": "object",
+      "description": "Read-only endpoint of the failover group instance.",
+      "properties": {
+        "failoverPolicy": {
+          "$ref": "./common.json#/definitions/ReadOnlyEndpointFailoverPolicy",
+          "description": "Failover policy of the read-only endpoint for the failover group."
+        }
+      }
+    },
+    "InstanceFailoverGroupReadWriteEndpoint": {
+      "type": "object",
+      "description": "Read-write endpoint of the failover group instance.",
+      "properties": {
+        "failoverPolicy": {
+          "$ref": "./common.json#/definitions/ReadWriteEndpointFailoverPolicy",
+          "description": "Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required."
+        },
+        "failoverWithDataLossGracePeriodMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Grace period before failover with data loss is attempted for the read-write endpoint. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required."
+        }
+      },
+      "required": [
+        "failoverPolicy"
+      ]
+    },
+    "ManagedInstancePairInfo": {
+      "type": "object",
+      "description": "Pairs of Managed Instances in the failover group.",
+      "properties": {
+        "primaryManagedInstanceId": {
+          "type": "string",
+          "description": "Id of Primary Managed Instance in pair."
+        },
+        "partnerManagedInstanceId": {
+          "type": "string",
+          "description": "Id of Partner Managed Instance in pair."
+        }
+      }
+    },
+    "PartnerRegionInfo": {
+      "type": "object",
+      "description": "Partner region information for the failover group.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Geo location of the partner managed instances."
+        },
+        "replicationRole": {
+          "$ref": "./common.json#/definitions/InstanceFailoverGroupReplicationRole",
+          "description": "Replication role of the partner managed instances.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

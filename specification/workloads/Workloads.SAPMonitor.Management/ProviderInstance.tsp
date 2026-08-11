@@ -15,7 +15,7 @@ model ProviderInstance is ProxyResource<ProviderInstanceProperties> {
   @path
   @key("providerInstanceName")
   @segment("providerInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -47,6 +47,7 @@ interface ProviderInstances {
   listByMonitor is ArmResourceListByParent<ProviderInstance>;
 }
 
-@@doc(ProviderInstances.create::parameters.resource,
+@@doc(
+  ProviderInstances.create::parameters.resource,
   "Request body representing a provider instance associated with a SAP monitor."
 );

@@ -4,21 +4,24 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
 
-@service({
-  title: "Azure Communication Routing Service",
-})
+@useAuth(AadOauth2Auth<["https://communication.azure.com/.default"]>)
+@service(#{ title: "Azure Communication Routing Service" })
 @server(
   "{endpoint}",
   "Azure Communication Routing Service",
   {
     @doc("Uri of your Communication resource")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(Versions)

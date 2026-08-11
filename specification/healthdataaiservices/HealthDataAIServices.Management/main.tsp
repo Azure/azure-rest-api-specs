@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,18 +12,15 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Using the AI acronym similar to what was done for OpenAI"
 @armProviderNamespace("Microsoft.HealthDataAIServices")
-@service({
-  title: "Microsoft.HealthDataAIServices",
-})
+@service(#{ title: "Microsoft.HealthDataAIServices" })
 @versioned(Microsoft.HealthDataAIServices.Versions)
 namespace Microsoft.HealthDataAIServices;
 
 @doc("Supported API versions for the Microsoft.HealthDataAIServices resource provider.")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @doc("The 2024-02-28-preview version.")
-  v2024_02_28_preview: "2024-02-28-preview",
+  @doc("The 2024-09-20 version.")
+  v2024_09_20: "2024-09-20",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -96,16 +94,17 @@ enum PublicNetworkAccess {
 
 @doc("Details of the HealthDataAIServices DeidService.")
 model DeidServiceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @visibility(Lifecycle.Read)
   @doc("Deid service url.")
   serviceUrl?: string;
 
   @doc("List of private endpoint connections.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   @doc("Gets or sets allow or disallow public network access to resource")

@@ -96,6 +96,7 @@ model MultivariateBatchDetectionResultSummary {
   setupInfo: MultivariateBatchDetectionOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Error information that the API returned.")
 @error
 model ErrorResponse {
@@ -127,6 +128,7 @@ model VariableState {
   lastTimestamp?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Detection request for batch inference. This is an asynchronous inference that
   will need another API to get detection results.
@@ -264,15 +266,15 @@ model ModelInfo {
   alignPolicy?: AlignPolicy;
 
   @doc("Model status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ModelStatus;
 
   @doc("Error messages after failure to create a model.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorResponse[];
 
   @doc("Diagnostics information to help inspect the states of a model or variable.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diagnosticsInfo?: DiagnosticsInfo;
 }
 
@@ -349,10 +351,9 @@ model AnomalyDetectionModel {
 }
 
 @doc("Response of listing models.")
-@pagedResult
 model ModelList {
   @doc("List of models.")
-  @items
+  @pageItems
   models: AnomalyDetectionModel[];
 
   @doc("Number of trained multivariate models.")
@@ -366,6 +367,7 @@ model ModelList {
   nextLink?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request of the last detection.")
 model MultivariateLastDetectionOptions {
   @doc("""

@@ -31,6 +31,13 @@ model CodeInterpreterToolDefinition extends ToolDefinition {
 model FileSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
+
+  /**
+   * Options overrides for the file search tool.
+   */
+  @encodedName("application/json", "file_search")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  fileSearch?: FileSearchToolDefinitionDetails;
 }
 
 @doc("The input definition information for a function tool as used to configure an assistant.")
@@ -41,6 +48,24 @@ model FunctionToolDefinition extends ToolDefinition {
 
   @doc("The definition of the concrete function that the function tool should call.")
   function: FunctionDefinition;
+}
+
+// Definition details: File Search
+
+/**
+ * Options overrides for the file search tool.
+ */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model FileSearchToolDefinitionDetails {
+  /**
+   * The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.
+   *
+   * Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.
+   */
+  @encodedName("application/json", "max_num_results")
+  @minValue(1)
+  @maxValue(50)
+  maxNumResults?: int32;
 }
 
 // Definition details: Functions
@@ -136,9 +161,40 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
 
-  @doc("Reserved for future use.")
+  /** The results of the file search. */
+  @typeChangedFrom(ServiceApiVersions.v2025_01_01_preview, Record<string>)
   @encodedName("application/json", "file_search")
-  fileSearch: Record<string>;
+  fileSearch: FileSearchToolCallResult[];
+}
+
+/** File search tool call result */
+@added(ServiceApiVersions.v2025_01_01_preview)
+model FileSearchToolCallResult {
+  /** The ID of the file that result was found in. */
+  @encodedName("application/json", "file_id")
+  fileId: string;
+
+  /** The name of the file that result was found in. */
+  @encodedName("application/json", "file_name")
+  fileName: string;
+
+  /** The score of the result. All values must be a floating point number between 0 and 1. */
+  @minValue(0)
+  @maxValue(1)
+  score: float64;
+
+  /** The content of the result that was found. The content is only included if requested via the include query parameter. */
+  content?: FileSearchToolCallResultContentItem[];
+}
+
+/** Content item in a file search result */
+@added(ServiceApiVersions.v2025_01_01_preview)
+model FileSearchToolCallResultContentItem {
+  /** The type of the content. */
+  type?: "text";
+
+  /** The text content of the file. */
+  text?: string;
 }
 
 @doc("""

@@ -40,9 +40,6 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "GalleryImages"
     },
     {
@@ -77,6 +74,9 @@
     },
     {
       "name": "GuestAgents"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -3889,8 +3889,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "GalleryImageIdentifier": {
       "type": "object",
@@ -4018,8 +4017,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "GalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4391,8 +4389,7 @@
           "$ref": "#/definitions/IPConfigurationProperties",
           "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "IPConfigurationProperties": {
       "type": "object",
@@ -4512,12 +4509,12 @@
     },
     "ImageArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Gallery Image.",
+      "description": "The Azure Resource ID for a Gallery Image.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for an image resource used by the virtual machine instance.",
+          "description": "The Azure Resource ID for an image resource used by the virtual machine instance.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4618,21 +4615,23 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "LogicalNetworkArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Logical Network.",
+      "description": "The Azure Resource ID for a Logical Network.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Logical Network.",
+          "description": "The Azure Resource ID for a Logical Network.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/virtualNetwork/subnets"
               }
             ]
           }
@@ -4721,8 +4720,7 @@
           "$ref": "#/definitions/LogicalNetworkStatusProvisioningStatus",
           "description": "Logical network provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "LogicalNetworkStatusProvisioningStatus": {
       "type": "object",
@@ -4770,8 +4768,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "MarketplaceGalleryImageListResult": {
       "type": "object",
@@ -4870,8 +4867,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "MarketplaceGalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4943,17 +4939,16 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "NetworkInterfaceArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Network Interface.",
+      "description": "The Azure Resource ID for a Network Interface.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Network Interface.",
+          "description": "The Azure Resource ID for a Network Interface.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5037,8 +5032,7 @@
           "$ref": "#/definitions/NetworkInterfaceStatusProvisioningStatus",
           "description": "Network interface provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "NetworkInterfaceStatusProvisioningStatus": {
       "type": "object",
@@ -5121,12 +5115,12 @@
     },
     "NetworkSecurityGroupArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Network Security Group.",
+      "description": "The Azure Resource ID for a Network Security Group.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Network Security Group.",
+          "description": "The Azure Resource ID for a Network Security Group.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5725,7 +5719,7 @@
         },
         "keyData": {
           "type": "string",
-          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
         }
       }
     },
@@ -5840,17 +5834,16 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "StorageContainerArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Storage Container.",
+      "description": "The Azure Resource ID for a Storage Container.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Storage Container.",
+          "description": "The Azure Resource ID for a Storage Container.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5931,8 +5924,7 @@
           "$ref": "#/definitions/StorageContainerStatusProvisioningStatus",
           "description": "Storage container's provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "StorageContainerStatusProvisioningStatus": {
       "type": "object",
@@ -6005,12 +5997,12 @@
     },
     "SubnetIpConfigurationReference": {
       "type": "object",
-      "description": "The ARM ID for a Network Interface.",
+      "description": "The Azure Resource ID for a Network Interface.",
       "properties": {
         "ID": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Network Interface.",
+          "description": "The Azure Resource ID for a Network Interface.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6103,17 +6095,16 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualHardDiskArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Virtual Hard Disk.",
+      "description": "The Azure Resource ID for a Virtual Hard Disk.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Hard Disk.",
+          "description": "The Azure Resource ID for a Virtual Hard Disk.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6221,8 +6212,7 @@
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
@@ -6266,12 +6256,12 @@
     },
     "VirtualMachineArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Virtual Machine.",
+      "description": "The Azure Resource ID for a Virtual Machine.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Machine.",
+          "description": "The Azure Resource ID for a Virtual Machine.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6323,8 +6313,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualMachineInstanceListResult": {
       "type": "object",
@@ -6768,7 +6757,7 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virtual Hard Disk.",
+          "description": "The Azure Resource ID for a Virtual Hard Disk.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6803,8 +6792,7 @@
           "$ref": "#/definitions/VirtualMachineInstanceStatusProvisioningStatus",
           "description": "Provisioning status of the virtual machine instance"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualMachineInstanceStatusProvisioningStatus": {
       "type": "object",

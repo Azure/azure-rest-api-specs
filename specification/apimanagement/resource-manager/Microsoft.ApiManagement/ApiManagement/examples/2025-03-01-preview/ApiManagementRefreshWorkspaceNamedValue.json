@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "namedValueId": "testprop2",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testprop6",
+        "type": "Microsoft.ApiManagement/service/workspaces/namedValues",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "identityClientId": "2d2df842-44d8-4885-8dec-77cc1a984a31",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            },
+            "secretIdentifier": "https://rpbvtkeyvaultintegration.vault.azure.net/secrets/msitestingCert"
+          },
+          "secret": true,
+          "tags": [
+            "foo",
+            "bar"
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2025-03-01-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop6/refreshSecret?api-version=2025-03-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "WorkspaceNamedValue_RefreshSecret",
+  "title": "ApiManagementRefreshWorkspaceNamedValue"
+}

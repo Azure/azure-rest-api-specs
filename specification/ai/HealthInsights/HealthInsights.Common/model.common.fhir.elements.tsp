@@ -78,7 +78,7 @@ model Element {
   @doc("Unique id for inter-element referencing")
   id?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "must keep the name 'extension' for compatibility with FHIR"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "must keep the name 'extension' for compatibility with FHIR"
   @doc("Additional Content defined by implementations")
   extension?: Extension[];
 }
@@ -161,7 +161,7 @@ model Narrative extends Element {
   Based on [FHIR Reference](https://www.hl7.org/fhir/R4/references.html)
   """)
 model Reference extends Element {
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "must keep the name 'reference' for compatibility with FHIR"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "must keep the name 'reference' for compatibility with FHIR"
   @doc("Literal reference, Relative, internal or absolute URL")
   reference?: string;
 

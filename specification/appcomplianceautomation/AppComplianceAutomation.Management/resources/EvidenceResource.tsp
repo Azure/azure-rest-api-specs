@@ -20,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EvidenceProperties)
 model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -28,7 +28,7 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
    */
   @key("evidenceName")
   @segment("evidences")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_.]+$")
   @path
   name: string;
@@ -36,8 +36,6 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Evidence property.
    */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
   properties: EvidenceProperties;
 }
 
@@ -47,7 +45,7 @@ interface Evidence {
   /**
    * Get the evidence metadata
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Evidence_Get")
   get is ArmResourceRead<
     EvidenceResource,
@@ -59,7 +57,7 @@ interface Evidence {
   /**
    * Create or Update an evidence a specified report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Evidence_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EvidenceResource,
@@ -72,14 +70,14 @@ interface Evidence {
   /**
    *  Delete an existent evidence from a specified report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Evidence_Delete")
   delete is ArmResourceDeleteSync<EvidenceResource>;
 
   /**
    * Returns a paginated list of evidences for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Evidence_ListByReport")
   listByReport is ArmResourceListByParent<
     EvidenceResource,
@@ -92,7 +90,7 @@ interface Evidence {
   /**
    * Download evidence file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Evidence_Download")
   download is ArmResourceActionSync<
     EvidenceResource,
@@ -101,23 +99,21 @@ interface Evidence {
   >;
 }
 
-@@doc(Evidence.createOrUpdate::parameters.resource,
+@@doc(
+  Evidence.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@encodedName(Evidence.download::parameters.body,
+@@encodedName(
+  Evidence.download::parameters.body,
   "application/json",
   "parameters"
 );
 @@doc(Evidence.download::parameters.body, "Parameters for the query operation");
 
-@@encodedName(Evidence.createOrUpdate::parameters.resource,
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(
+  Evidence.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );
-
-@@OpenAPI.extension(Evidence.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
-@@clientName(Evidence.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Evidence.createOrUpdate::parameters.resource, "properties");

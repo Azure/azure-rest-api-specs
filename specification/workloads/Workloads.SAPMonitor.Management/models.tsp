@@ -4,9 +4,10 @@ using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
+using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
-
 /**
  * State of provisioning of the SAP monitor.
  */
@@ -36,6 +37,119 @@ union WorkloadMonitorProvisioningState {
 
   /** The resource operation was canceled. */
   Canceled: "Canceled",
+}
+
+/**
+ * The value which indicates whether this scheduled query rule is enabled. Value should be enabled or disabled
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertRuleStatus {
+  string,
+
+  /** The scheduled query rule is enabled */
+  Enabled: "Enabled",
+
+  /** The scheduled query rule is disabled */
+  Disabled: "Disabled",
+}
+
+/**
+ * Result Condition Evaluation Criteria
+ */
+@added(Versions.v2024_02_01_preview)
+union ConditionalOperator {
+  string,
+
+  /** The value is less than the specified value. */
+  LessThan: "LessThan",
+
+  /** The value is greater than the specified value. */
+  GreaterThan: "GreaterThan",
+
+  /** The value is equal to the specified value. */
+  Equal: "Equal",
+
+  /** The value is greater than or equal to the specified value. */
+  GreaterThanOrEqual: "GreaterThanOrEqual",
+
+  /** The value is less than or equal to the specified value. */
+  LessThanOrEqual: "LessThanOrEqual",
+}
+
+/**
+ * The value that indicates whether the alert should be automatically resolved or not. The default is Disable.
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertAutoMitigate {
+  string,
+
+  /** The alert should be automatically resolved. */
+  Enable: "Enable",
+
+  /** The alert should not be automatically resolved. */
+  Disable: "Disable",
+}
+
+/**
+ * Is input required for Default Threshold Value Associated with the Alert Template
+ */
+@added(Versions.v2024_02_01_preview)
+union DefaultThresholdInputOption {
+  string,
+
+  /** The default threshold value is required. */
+  Required: "Required",
+
+  /** The default threshold value is not required. */
+  NotRequired: "NotRequired",
+
+  /** The default threshold value is optional. */
+  Optional: "Optional",
+}
+
+/**
+ * Metric Trigger Type Associated with the Alert Template for Metric Measurement
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertTemplateMetricTriggerType {
+  string,
+
+  /** The metric trigger type is consecutive. */
+  Consecutive: "Consecutive",
+
+  /** The metric trigger type is total. */
+  Total: "Total",
+}
+
+/**
+ * Type of the Query Input Parameter
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertTemplateParameterType {
+  string,
+
+  /** Log Analytics query parameter */
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+
+  /** Provider property parameter */
+  ProviderProperty: "ProviderProperty",
+
+  /** Custom input parameter */
+  CustomInput: "CustomInput",
+}
+
+/**
+ * Selection Mode of the Query Input Parameter
+ */
+@added(Versions.v2024_02_01_preview)
+union AlertTemplateSelectionMode {
+  string,
+
+  /** The selection mode is single. */
+  Single: "Single",
+
+  /** The selection mode is Multiple. */
+  Multiple: "Multiple",
 }
 
 /**
@@ -128,13 +242,13 @@ model MonitorProperties {
   /**
    * State of provisioning of the SAP monitor.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
    * Defines the SAP monitor errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
@@ -175,13 +289,13 @@ model MonitorProperties {
   /**
    * The ARM ID of the MSI used for SAP monitoring.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   msiArmId?: string;
 
   /**
    * The ARM ID of the Storage account used for SAP monitoring.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageAccountArmId?: string;
 }
 
@@ -214,6 +328,7 @@ model AppServicePlanConfiguration {
 /**
  * Defines the request body for updating SAP monitor resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateMonitorRequest {
   ...ArmTagsProperty;
   ...ManagedServiceIdentityProperty;
@@ -226,19 +341,19 @@ model ProviderInstanceProperties {
   /**
    * State of provisioning of the provider instance
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
    * Resource health details
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: Health;
 
   /**
    * Defines the provider instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
@@ -254,13 +369,13 @@ model Health {
   /**
    * Health state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthState?: WorkloadProviderInstanceHealthState;
 
   /**
    * Reasons impacting health state
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   impactingReasons?: string;
 }
 
@@ -273,7 +388,7 @@ model ProviderSpecificProperties {
    * The provider type. For example, the value can be SapHana.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   providerType: string;
 }
 
@@ -284,7 +399,7 @@ model SapLandscapeMonitorProperties {
   /**
    * State of provisioning of the SAP monitor.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SapLandscapeMonitorProvisioningState;
 
   /**
@@ -296,7 +411,7 @@ model SapLandscapeMonitorProperties {
    * Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   topMetricsThresholds?: SapLandscapeMonitorMetricThresholds[];
 }
 
@@ -308,14 +423,14 @@ model SapLandscapeMonitorPropertiesGrouping {
    * Gets or sets the list of landscape to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   landscape?: SapLandscapeMonitorSidMapping[];
 
   /**
    * Gets or sets the list of Sap Applications to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   sapApplication?: SapLandscapeMonitorSidMapping[];
 }
 
@@ -363,6 +478,7 @@ model SapLandscapeMonitorMetricThresholds {
 /**
  * Gets or sets the provider properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the target virtual machine size.
@@ -372,6 +488,7 @@ model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the hana database name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbName?: string;
 
   /**
@@ -387,17 +504,20 @@ model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**
@@ -496,11 +616,13 @@ model SapNetWeaverProviderInstanceProperties
 /**
  * Gets or sets the PrometheusOS provider properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model PrometheusOsProviderInstanceProperties
   extends ProviderSpecificProperties {
   /**
    * URL of the Node Exporter endpoint
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   prometheusUrl?: string;
 
   /**
@@ -527,6 +649,7 @@ model PrometheusOsProviderInstanceProperties
 /**
  * Gets or sets the DB2 provider properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2ProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the target virtual machine name.
@@ -536,27 +659,32 @@ model Db2ProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the db2 database name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbName?: string;
 
   /**
    * Gets or sets the db2 database sql port.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPort?: string;
 
   /**
    * Gets or sets the db2 database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the db2 database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**
@@ -588,6 +716,7 @@ model PrometheusHaClusterProviderInstanceProperties
   /**
    * URL of the Node Exporter endpoint.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   prometheusUrl?: string;
 
   /**
@@ -633,22 +762,26 @@ model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
   /**
    * Gets or sets the database sql port.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPort?: string;
 
   /**
    * Gets or sets the database user name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbUsername?: string;
 
   /**
    * Gets or sets the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @secret
   dbPassword?: string;
 
   /**
    * Gets or sets the key vault URI to secret with the database password.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbPasswordUri?: string;
 
   /**
@@ -670,4 +803,364 @@ model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
    * The provider type. For example, the value can be SapHana.
    */
   providerType: "MsSqlServer";
+}
+
+/**
+ * Gets or sets the Oracle provider properties.
+ */
+@added(Versions.v2024_02_01_preview)
+model OracleProviderInstanceProperties extends ProviderSpecificProperties {
+  /**
+   * Gets or sets the target virtual machine name.
+   */
+  hostname?: string;
+
+  /**
+   * Gets or sets the oracle database sql port.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  dbPort?: string;
+
+  /**
+   * Gets or sets the oracle database name.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  dbName?: string;
+
+  /**
+   * Gets or sets the oracle database user name.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  dbUsername?: string;
+
+  /**
+   * Gets or sets the oracle database password.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  @secret
+  dbPassword?: string;
+
+  /**
+   * Gets or sets the key vault URI to secret with the database password.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  dbPasswordUri?: string;
+
+  /**
+   * Gets or sets the SAP System Identifier
+   */
+  sapSid?: string;
+
+  /**
+   * Gets or sets certificate preference if secure communication is enabled.
+   */
+  sslPreference?: SslPreference;
+
+  /**
+   * Gets or sets the blob URI to SSL certificate for the Oracle Database.
+   */
+  sslCertificateUri?: string;
+
+  /**
+   * The provider type. For example, the value can be SapHana.
+   */
+  providerType: "Oracle";
+}
+
+/**
+ * Describes the properties of an Alert for SAP monitor.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertProperties {
+  /**
+   * Defines the alert instance errors.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: ErrorDetail;
+
+  /**
+   * ID of the alert rule resource created.
+   */
+  @visibility(Lifecycle.Read)
+  alertRuleResourceId?: armResourceIdentifier;
+
+  /**
+   * Name of the alert template from which it was created.
+   */
+  templateName?: string;
+
+  /**
+   * The provider type for alert. For example, the value can be SapHana.
+   */
+  providerType?: string;
+
+  /**
+   * Name of provider instances associated with the alert.
+   */
+  providerNames?: string[];
+
+  /**
+   * Describes the properties of an alert.
+   */
+  alertRuleProperties?: AlertRuleProperties;
+
+  /**
+   * State of provisioning of the alert instance
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: WorkloadMonitorProvisioningState;
+}
+
+/**
+ * Describes the properties of an alert.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertRuleProperties {
+  /**
+   * Indicates whether the alert is in an enabled state.
+   */
+  status?: AlertRuleStatus;
+
+  /**
+   * Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest.
+   */
+  @minValue(0)
+  @maxValue(4)
+  severity?: int32;
+
+  /**
+   * Action Group resource Ids to invoke when the alert fires
+   */
+  actionGroups?: armResourceIdentifier[];
+
+  /**
+   * The threshold of the alert.
+   */
+  threshold?: int32;
+
+  /**
+   * The threshold operator of the alert.
+   */
+  thresholdOperator?: ConditionalOperator;
+
+  /**
+   * The period of time on which the Alert query will be executed.
+   */
+  windowSize?: int32;
+
+  /**
+   * How often the scheduled query rule is evaluated.
+   */
+  evaluationFrequency?: int32;
+
+  /**
+   * The number of failing periods to trigger an alert.
+   */
+  failingPeriodsToAlert?: int32;
+
+  /**
+   * The operator for failing periods.
+   */
+  failingPeriodsOperator?: ConditionalOperator;
+
+  /**
+   * Mute actions for the chosen period of time after the alert is fired.
+   */
+  muteActionsDuration?: int32;
+
+  /**
+   * The value that indicates whether the alert should be automatically resolved or not. The default is Disable.
+   */
+  autoMitigate?: AlertAutoMitigate;
+
+  /**
+   * Evaluation of metric on a particular column.
+   */
+  dimension?: string;
+
+  /**
+   * The alert query parameters.
+   */
+  @identifiers(#["name"])
+  alertQueryParameters?: AlertQueryParameter[];
+}
+
+/**
+ * Defines the Alert Query Parameter.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertQueryParameter {
+  /**
+   * The name of the alert query parameter.
+   */
+  name?: string;
+
+  /**
+   * The value of the alert query parameter.
+   */
+  value?: string;
+}
+
+/**
+ * Describes the properties of an Alert Template for SAP monitor.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertTemplateProperties {
+  /**
+   * Defines the SAP monitor Alert Template errors.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: ErrorDetail;
+
+  /**
+   * State of provisioning of the Alert Template.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: WorkloadMonitorProvisioningState;
+
+  /**
+   * Display name of the alert template.
+   */
+  templateDisplayName?: string;
+
+  /**
+   * The provider type for alert template. For example, the value can be SapHana.
+   */
+  providerType?: string;
+
+  /**
+   * Description of the template.
+   */
+  description?: string;
+
+  /**
+   * Severity of the alert. Should be an integer between [0-4]. Value of 0 is most severe and value of 4 is least severe.
+   */
+  @minValue(0)
+  @maxValue(4)
+  severity?: int32;
+
+  /**
+   * Query associated with the alert template.
+   */
+  query?: string;
+
+  /**
+   * Operator used for threshold comparison.
+   */
+  thresholdOperator?: ConditionalOperator;
+
+  /**
+   * Default threshold value.
+   */
+  defaultThreshold?: int32;
+
+  /**
+   * Minimum possible Default Threshold Value Associated with the Alert Template.
+   */
+  lowerBound?: int32;
+
+  /**
+   * Maximum possible Default Threshold Value Associated with the Alert Template.
+   */
+  upperBound?: int32;
+
+  /**
+   * Input option for the default threshold.
+   */
+  defaultThresholdInputOption?: DefaultThresholdInputOption;
+
+  /**
+   * Unit of the alert.
+   */
+  alertUnit?: string;
+
+  /**
+   * Describes the properties for metric measurement in alerts template.
+   */
+  metricMeasurement?: AlertTemplateMetricMeasurement;
+
+  /**
+   * Describes the Query Input Parameter properties in alerts template.
+   */
+  @maxItems(50)
+  @identifiers(#["name"])
+  queryInputParameters?: AlertTemplateQueryInputParameter[];
+}
+
+/**
+ * Defines the Alert Template MetricMeasurement Properties.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertTemplateMetricMeasurement {
+  /**
+   * Operator used for threshold comparison.
+   */
+  thresholdOperator?: ConditionalOperator;
+
+  /**
+   * The Threshold Value Associated with the Alert Template for Metric Measurement.
+   */
+  threshold?: int32;
+
+  /**
+   * Metric Trigger Type Associated with the Alert Template for Metric Measurement.
+   */
+  metricTriggerType?: AlertTemplateMetricTriggerType;
+
+  /**
+   * Metric Column Associated with the Alert Template for Metric Measurement.
+   */
+  metricColumn?: string;
+
+  /**
+   * Frequency (mins) value Associated with the Alert Template for Metric Measurement.
+   */
+  frequencyInMinutes?: int32;
+
+  /**
+   * Time Window (mins) Value Associated with the Alert Template for Metric Measurement.
+   */
+  timeWindowInMinutes?: int32;
+}
+
+/**
+ * Describes the Query Input Parameter properties in alerts template.
+ */
+@added(Versions.v2024_02_01_preview)
+model AlertTemplateQueryInputParameter {
+  /**
+   * Name of the Query Input Parameter
+   */
+  name?: string;
+
+  /**
+   * Type of the Query Input Parameter
+   */
+  type?: AlertTemplateParameterType;
+
+  /**
+   * Description of the Query Input Parameter
+   */
+  description?: string;
+
+  /**
+   * Default Value of the Query Input Parameter
+   */
+  defaultValue?: string;
+
+  /**
+   * Log Analytics query associated with the parameter.
+   */
+  laQuery?: string;
+
+  /**
+   * Selection mode for the parameter.
+   */
+  selectionMode?: AlertTemplateSelectionMode;
+
+  /**
+   * Display Name of the Query Input Parameter.
+   */
+  displayName?: string;
 }

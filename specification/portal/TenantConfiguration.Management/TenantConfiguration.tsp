@@ -48,7 +48,7 @@ interface TenantConfigurations {
   /**
    * Gets list of the tenant configurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("TenantConfigurations_List")
   list is ArmResourceListByParent<Configuration, TenantBaseParameters>;
 }
@@ -58,18 +58,22 @@ interface ListTenantConfigurationViolationsOperations {
   /**
    * Gets list of items that violate tenant's configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @route("/providers/Microsoft.Portal/listTenantConfigurationViolations")
   @armResourceCollectionAction
   @post
   @operationId("ListTenantConfigurationViolations_List")
+  @list
   list(...ApiVersionParameter): ArmResponse<ViolationsList> | ErrorResponse;
 }
 
-@@doc(TenantConfigurations.create::parameters.resource,
+@@doc(
+  TenantConfigurations.create::parameters.resource,
   "The parameters required to create or update tenant configuration."
 );
-@@encodedName(TenantConfigurations.create::parameters.resource,
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(
+  TenantConfigurations.create::parameters.resource,
   "application/json",
   "tenantConfiguration"
 );

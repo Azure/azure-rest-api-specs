@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "notificationName": "RequestPublisherNotificationMessage",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "contoso@live.com",
+            "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage/recipientEmails/contoso@live.com",
+            "properties": {
+              "email": "contoso@live.com"
+            }
+          },
+          {
+            "name": "foobar!live",
+            "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage/recipientEmails/foobar!live",
+            "properties": {
+              "email": "foobar!live"
+            }
+          },
+          {
+            "name": "foobar@live.com",
+            "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage/recipientEmails/foobar@live.com",
+            "properties": {
+              "email": "foobar@live.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkspaceNotificationRecipientEmail_ListByNotification",
+  "title": "ApiManagementListWorkspaceNotificationRecipientEmails"
+}

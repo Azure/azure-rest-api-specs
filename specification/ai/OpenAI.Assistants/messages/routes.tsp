@@ -23,7 +23,7 @@ namespace Azure.AI.OpenAI.Assistants;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages")
@@ -43,7 +43,7 @@ op createMessage(
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/messages")
@@ -67,7 +67,7 @@ op listMessages(
  * @returns A representation of the requested message.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
@@ -83,7 +83,7 @@ op getMessage(@path threadId: string, @path messageId: string): ThreadMessage;
  * @returns A representation of the modified message.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages/{messageId}")

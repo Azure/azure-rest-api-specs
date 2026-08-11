@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "migrationName": "examplemigration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "77840327-7be8-44b8-adc0-af0ccccfeb36",
+          "currentStatus": {
+            "state": "Succeeded",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {},
+              "validationDetails": {
+                "status": "Succeeded",
+                "validationStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+                "validationEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "UnknownCollationTest",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "migrationMode": "Offline",
+          "migrationWindowEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "UnknownCollationTest"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "triggerCutover": "True",
+          "migrateRoles": "False",
+          "migrationOption": "Validate"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

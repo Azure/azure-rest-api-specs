@@ -65,6 +65,7 @@ model FileSearchToolResource {
  * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
  * tool requires a list of vector store IDs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model CreateToolResourcesOptions {
   /**
@@ -82,6 +83,7 @@ model CreateToolResourcesOptions {
 /**
  * A set of resources that will be used by the `code_interpreter` tool. Request object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model CreateCodeInterpreterToolResourceOptions {
   /** A list of file IDs made available to the `code_interpreter` tool. */
@@ -111,12 +113,18 @@ union CreateFileSearchToolResourceOptions {
 }
 
 /** File IDs associated to the vector store to be passed to the helper. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model CreateFileSearchToolResourceVectorStoreOptions {
   /** A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store. */
   @encodedName("application/json", "file_ids")
   @maxItems(10000)
   fileIds: string[];
+
+  /** The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. */
+  @encodedName("application/json", "chunking_strategy")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  chunkingStrategy: VectorStoreChunkingStrategyRequest;
 
   /** Set of 16 key-value pairs that can be attached to a vector store. This can be useful for storing additional information
    * about the vector store in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of
@@ -133,6 +141,7 @@ model CreateFileSearchToolResourceVectorStoreOptions {
  * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
  * vector store IDs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateToolResourcesOptions {
   /**
@@ -148,14 +157,17 @@ model UpdateToolResourcesOptions {
 }
 
 /** Request object to update `code_interpreted` tool resources. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateCodeInterpreterToolResourceOptions {
   /** A list of file IDs to override the current list of the assistant. */
+  @encodedName("application/json", "file_ids")
   @maxItems(20)
   fileIds?: string[];
 }
 
 /** Request object to update `file_search` tool resources. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateFileSearchToolResourceOptions {
   /** A list of vector store IDs to override the current list of the assistant. */

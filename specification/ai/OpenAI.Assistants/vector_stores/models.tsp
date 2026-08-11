@@ -114,6 +114,7 @@ model VectorStore {
 }
 
 /** Request object for creating a vector store. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreOptions {
   /** A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files. */
@@ -128,10 +129,16 @@ model VectorStoreOptions {
   @encodedName("application/json", "expires_after")
   expiresAfter?: VectorStoreExpirationPolicy;
 
+  /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty. */
+  @encodedName("application/json", "chunking_strategy")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  chunkingStrategy?: VectorStoreChunkingStrategyRequest;
+
   ...OptionalNullableMetadata;
 }
 
 /** Request object for updating a vector store. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreUpdateOptions {
   /** The name of the vector store. */

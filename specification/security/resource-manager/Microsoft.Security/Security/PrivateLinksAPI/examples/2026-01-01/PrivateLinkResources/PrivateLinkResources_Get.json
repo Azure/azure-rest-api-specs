@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "groupId": "containers",
+    "privateLinkName": "pls",
+    "privateLinkResourceName": "containers",
+    "resourceGroupName": "rg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "containers",
+        "type": "Microsoft.Security/privateLinks/privateLinkResources",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateLinkResources/containers",
+        "properties": {
+          "groupId": "containers",
+          "requiredMembers": [
+            "api",
+            "data-eastus"
+          ],
+          "requiredZoneNames": [
+            "privatelink.cloud.defender.microsoft.com"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Get private link resource"
+}

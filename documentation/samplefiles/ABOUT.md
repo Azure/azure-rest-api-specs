@@ -9,9 +9,6 @@ specification files referenced by the README files.
 > which is a legacy, obsolete approach. For current approach refer to
 > [aka.ms/azsdk/typespec](https://aka.ms/azsdk/typespec).
 
-Finally, the `./Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml`
-is an [`api-scenario`](../api-scenario/README.md) sample.
-
 You can learn more about AutoRest configuration files at
 [aka.ms/azsdk/autorest](https://aka.ms/azsdk/autorest).
 

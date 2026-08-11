@@ -8,9 +8,9 @@ using TypeSpec.Rest;
 @resource("versions")
 @parentResource(Api)
 model ApiVersion {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: misused @visibility to get around this warning"
   @doc("Version identifier.")
   @key("versionName")
-  @visibility
   @maxLength(50)
   name: string;
 

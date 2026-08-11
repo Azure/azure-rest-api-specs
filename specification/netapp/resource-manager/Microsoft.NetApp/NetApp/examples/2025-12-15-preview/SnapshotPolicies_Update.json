@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-12-15-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "dailySchedule": {
+          "hour": 14,
+          "minute": 30,
+          "snapshotsToKeep": 4
+        },
+        "enabled": true,
+        "hourlySchedule": {
+          "minute": 50,
+          "snapshotsToKeep": 2
+        },
+        "monthlySchedule": {
+          "daysOfMonth": "10,11,12",
+          "hour": 14,
+          "minute": 15,
+          "snapshotsToKeep": 5
+        },
+        "weeklySchedule": {
+          "day": "Wednesday",
+          "hour": 14,
+          "minute": 45,
+          "snapshotsToKeep": 3
+        }
+      }
+    },
+    "resourceGroupName": "myRG",
+    "snapshotPolicyName": "snapshotPolicyName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1/snapshotPolicy1",
+        "type": "Microsoft.NetApp/netAppAccounts/snapshotPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/snapshotPolicies/snapshotPolicy1",
+        "location": "eastus",
+        "properties": {
+          "dailySchedule": {
+            "hour": 14,
+            "minute": 30,
+            "snapshotsToKeep": 4
+          },
+          "enabled": true,
+          "hourlySchedule": {
+            "minute": 50,
+            "snapshotsToKeep": 2
+          },
+          "monthlySchedule": {
+            "daysOfMonth": "10,11,12",
+            "hour": 14,
+            "minute": 15,
+            "snapshotsToKeep": 5
+          },
+          "provisioningState": "Succeeded",
+          "weeklySchedule": {
+            "day": "Wednesday",
+            "hour": 14,
+            "minute": 45,
+            "snapshotsToKeep": 3
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "account1/snapshotPolicy1",
+        "type": "Microsoft.NetApp/netAppAccounts/snapshotPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/snapshotPolicies/snapshotPolicy1",
+        "location": "eastus",
+        "properties": {
+          "dailySchedule": {
+            "hour": 14,
+            "minute": 30,
+            "snapshotsToKeep": 4
+          },
+          "enabled": true,
+          "hourlySchedule": {
+            "minute": 50,
+            "snapshotsToKeep": 2
+          },
+          "monthlySchedule": {
+            "daysOfMonth": "10,11,12",
+            "hour": 14,
+            "minute": 15,
+            "snapshotsToKeep": 5
+          },
+          "provisioningState": "Succeeded",
+          "weeklySchedule": {
+            "day": "Wednesday",
+            "hour": 14,
+            "minute": 45,
+            "snapshotsToKeep": 3
+          }
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/18c499e1-2a3c-441c-950e-4b456c991c18?api-version=2025-12-15-preview&operationResultResponseType=Location"
+      }
+    }
+  },
+  "operationId": "SnapshotPolicies_Update",
+  "title": "SnapshotPolicies_Update"
+}

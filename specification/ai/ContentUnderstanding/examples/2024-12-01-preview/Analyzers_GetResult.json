@@ -1,0 +1,57 @@
+{
+  "title": "Get Analysis Result",
+  "operationId": "Analyzers_GetResult",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "analyzerId": "myAnalyzer",
+    "operationId": "3b31320d-8bab-4f88-b19c-2322a7f11034"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "3b31320d-8bab-4f88-b19c-2322a7f11034",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "myAnalyzer",
+          "apiVersion": "2024-12-01-preview",
+          "createdAt": "2024-10-14T18:46:36.244Z",
+          "contents": [
+            {
+              "kind": "document",
+              "markdown": "# CONTOSO\n\n...",
+              "startPageNumber": 1,
+              "endPageNumber": 2,
+              "unit": "inch",
+              "pages": [
+                {
+                  "pageNumber": 1,
+                  "width": 8.5,
+                  "height": 11
+                },
+                {
+                  "pageNumber": 2,
+                  "width": 8.5,
+                  "height": 11
+                }
+              ],
+              "fields": {
+                "Company": {
+                  "type": "string",
+                  "valueString": "CONTOSO",
+                  "spans": [
+                    {
+                      "offset": 7,
+                      "length": 2
+                    }
+                  ],
+                  "confidence": 0.95,
+                  "source": "D(1,5,1,7,1,7,1.5,5,1.5)"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -43,40 +43,19 @@ configuration:
           reply: Hi, we're sending this friendly reminder because we haven't heard back from you in a while. We need more information about this issue to help address it. Please be sure to give us your input within the next **7 days**. If we don't hear back from you within **14 days** of this comment the issue will be automatically closed. Thank you!
     - description: 
       frequencies:
-      - weekday:
-          day: Monday
-          time: 0:0
-      filters:
-      - noActivitySince:
-          days: 14
-      - isOpen
-      - isNotLabeledWith:
-          label: no-recent-activity
-      - isNotLabeledWith:
-          label: customer-reported
-      - isPullRequest
-      - isNotDraftPullRequest
-      actions:
-      - addReply:
-          reply: 'Hi, @${issueAuthor}. Your PR has no update for 14 days and it is marked as stale PR. If no further update for over 14 days, the bot will close the PR.  If you want to refresh the PR, please remove `no-recent-activity` label. '
-      - addLabel:
-          label: no-recent-activity
-    - description: 
-      frequencies:
       - daily:
           time: 13:0
       filters:
+      - isIssue
       - isOpen
       - hasLabel:
           label: no-recent-activity
       - noActivitySince:
           days: 14
-      - isNotLabeledWith:
-          label: customer-reported
       actions:
       - closeIssue
       - addReply:
-          reply: Hi, @${issueAuthor}. The PR will be closed since the PR has no update for 28 days.  If you still need the PR review to proceed, please reopen it and @ mention PR assignee.
+          reply: Hi, @${issueAuthor}. This issue has been closed since it had no activity for 14 days after being marked as stale. If you still need help, please reopen it.
     eventResponderTasks:
     - if:
       - payloadType: Issue_Comment
@@ -670,7 +649,8 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - yangyuan
+            - rkuthala
+            - MattGal
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
       - if:
@@ -937,8 +917,7 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - Jingshu923
-            - zhangyd2015
+            - ruowan
             - Frey-Wang
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
@@ -1182,9 +1161,10 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - RandalliLama
-            - schaabs
-            - jlichwa
+            - cheathamb36
+            - chen-karen
+            - lgonsoulin
+            - vickm
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
       - if:
@@ -1983,7 +1963,7 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - wonner
+            - wanyang7
             - yanjungao718
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
@@ -2507,31 +2487,12 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
-      - hasLabel:
-          label: no-recent-activity
-      - or:
-        - isAction:
-            action: Synchronize
-        - isAction:
-            action: Null
-        - isAction:
-            action: Unlabeled
-        - isAction:
-            action: Edited
-        - isAction:
-            action: Null
-        - isAction:
-            action: Reopened
-        - isAction:
-            action: Labeled
-        - isAction:
-            action: Edited
-      then:
-      - removeLabel:
-          label: no-recent-activity
-      description: 
-    - if:
-      - payloadType: Pull_Request
+      # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
+      # which adds all labels to the PR.
+      # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:
@@ -2610,6 +2571,12 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
+      # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
+      # which adds all labels to the PR.
+      # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:
@@ -2773,6 +2740,16 @@ configuration:
         then:
         - addLabel:
             label: Container Service
+      - if:
+        - includesModifiedFiles:
+            files:
+            - specification/containerservice/Fleet.Management
+            - specification/containerservice/fleet
+            excludedFiles:
+            - ''
+        then:
+        - addLabel:
+            label: Container Service Fleet
       - if:
         - includesModifiedFiles:
             files:
@@ -3277,19 +3254,15 @@ configuration:
         then:
         - addLabel:
             label: Profile
-      - if:
-        - includesModifiedFiles:
-            files:
-            - specification/hybridcompute/resource-manager/
-            - specification/connectedvmware/resource-manager/
-            - specification/azurestackhci/resource-manager/
-            - specification/scvmm/resource-manager/
-        then:
-        - addLabel:
-            label: ArcReview
       description: 
     - if:
       - payloadType: Pull_Request
+      # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
+      # which adds all labels to the PR.
+      # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:

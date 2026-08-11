@@ -1,0 +1,52 @@
+{
+  "title": "NodeCustomizations_ListVersions",
+  "operationId": "NodeCustomizations_ListVersions",
+  "parameters": {
+    "api-version": "2025-09-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "nodeCustomizationName": "my-node-customization"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "containerImages": [
+                "redis:8.0.0"
+              ],
+              "identityProfile": {
+                "principalId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "clientId": "df4316d4-0ef3-45a3-99d0-2d13a6543aff"
+              },
+              "version": "20250101-abcd1234",
+              "provisioningState": "Succeeded",
+              "customizationScripts": [
+                {
+                  "name": "initialize-node",
+                  "executionPoint": "NodeImageBuildTime",
+                  "scriptType": "Bash",
+                  "script": "echo 'Hello World'",
+                  "rebootAfter": false
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/nodeCustomizations/my-node-customization/versions/20250101-abcd1234",
+            "name": "my-node-customization",
+            "type": "Microsoft.ContainerService/nodeCustomizations",
+            "systemData": {
+              "createdBy": "someUser",
+              "createdByType": "User",
+              "createdAt": "2025-05-02T04:08:43.702Z",
+              "lastModifiedBy": "someOtherUser",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-05-02T04:08:43.702Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

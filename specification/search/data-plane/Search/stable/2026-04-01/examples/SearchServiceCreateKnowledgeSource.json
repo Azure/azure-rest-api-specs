@@ -1,0 +1,77 @@
+{
+  "operationId": "KnowledgeSources_Create",
+  "title": "SearchServiceCreateKnowledgeSource",
+  "parameters": {
+    "endpoint": "https://exampleservice.search.windows.net",
+    "api-version": "2026-04-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "knowledgeSource": {
+      "searchIndexParameters": {
+        "searchIndexName": "example-index",
+        "sourceDataFields": [
+          {
+            "name": "description"
+          },
+          {
+            "name": "category"
+          }
+        ],
+        "searchFields": [
+          {
+            "name": "*"
+          }
+        ],
+        "semanticConfigurationName": "testconfig"
+      },
+      "name": "ks-example-index",
+      "description": "Description of the knowledge source.",
+      "kind": "searchIndex",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-example-index",
+        "kind": "searchIndex",
+        "description": "Description of the knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "searchIndexParameters": {
+          "searchIndexName": "example-index",
+          "semanticConfigurationName": "testconfig",
+          "sourceDataFields": [
+            {
+              "name": "description"
+            },
+            {
+              "name": "category"
+            }
+          ],
+          "searchFields": [
+            {
+              "name": "*"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

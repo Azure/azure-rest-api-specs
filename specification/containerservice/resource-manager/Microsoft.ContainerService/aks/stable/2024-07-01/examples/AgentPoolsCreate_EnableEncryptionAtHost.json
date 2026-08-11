@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1",
+    "parameters": {
+      "properties": {
+        "orchestratorVersion": "",
+        "count": 3,
+        "vmSize": "Standard_DS2_v2",
+        "osType": "Linux",
+        "enableEncryptionAtHost": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "orchestratorVersion": "1.17.13",
+          "currentOrchestratorVersion": "1.17.13",
+          "count": 3,
+          "vmSize": "Standard_DS2_v2",
+          "maxPods": 110,
+          "osType": "Linux",
+          "enableEncryptionAtHost": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Creating",
+          "orchestratorVersion": "1.17.13",
+          "currentOrchestratorVersion": "1.17.13",
+          "count": 3,
+          "vmSize": "Standard_DS2_v2",
+          "maxPods": 110,
+          "osType": "Linux",
+          "enableEncryptionAtHost": true
+        }
+      }
+    }
+  }
+}

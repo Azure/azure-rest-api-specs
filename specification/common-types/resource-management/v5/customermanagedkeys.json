@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "5.0",
-    "title": "Common types"
+    "title": "Common types",
+    "version": "5.0"
   },
   "paths": {},
   "definitions": {
@@ -12,6 +12,7 @@
       "properties": {
         "infrastructureEncryption": {
           "type": "string",
+          "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
           "enum": [
             "enabled",
             "disabled"
@@ -19,8 +20,7 @@
           "x-ms-enum": {
             "name": "InfrastructureEncryption",
             "modelAsString": true
-          },
-          "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled."
+          }
         },
         "customerManagedKeyEncryption": {
           "type": "object",
@@ -32,12 +32,12 @@
               "properties": {
                 "identityType": {
                   "type": "string",
+                  "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity.",
                   "enum": [
                     "systemAssignedIdentity",
                     "userAssignedIdentity",
                     "delegatedResourceIdentity"
-                  ],
-                  "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+                  ]
                 },
                 "userAssignedIdentityResourceId": {
                   "type": "string",

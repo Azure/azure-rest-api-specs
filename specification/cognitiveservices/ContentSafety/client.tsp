@@ -3,8 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2024_09_01)
+@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_07_01_preview)
 namespace Customizations;
 
 @client({
@@ -16,6 +15,16 @@ interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
+}
+
+@client({
+  name: "ContentProvenanceClient",
+  service: ContentSafety,
+})
+@TypeSpec.Http.route("/provenance")
+interface ContentProvenanceClient {
+  detect is ContentSafety.ContentProvenanceOperations.detect;
+  getOperationStatus is ContentSafety.ContentProvenanceOperations.getOperationStatus;
 }
 
 @client({
@@ -33,3 +42,8 @@ interface BlocklistClient {
   listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
+@@clientName(
+  Azure.Core.Foundations.ResourceBody.resource,
+  "options",
+  "!autorest"
+);

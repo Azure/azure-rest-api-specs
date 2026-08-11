@@ -8,31 +8,31 @@ namespace AzureHealthInsights;
 model HealthInsightsJobBase {
   @key("id")
   @doc("The unique ID of the job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(36)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
   id: string;
 
   @doc("The status of the job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @lroStatus
   status: JobStatus;
 
   @doc("The date and time when the processing job was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
 
   @doc("The date and time when the processing job is set to expire.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiresAt?: utcDateTime;
 
   @doc("The date and time when the processing job was last updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
 
   @doc("Error object that describes the error when status is \"Failed\".")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Foundations.Error;
 }
 

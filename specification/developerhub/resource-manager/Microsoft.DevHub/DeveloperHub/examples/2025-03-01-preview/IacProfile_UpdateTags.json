@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "iacProfileName": "iacprofile",
+    "parameters": {
+      "tags": {
+        "promote": "false",
+        "resourceEnv": "testing"
+      }
+    },
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "a0a37f63-7183-4e86-9ac7-ce8036a3ed31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "iacprofile",
+        "type": "Micfosoft.DevHub/iacProfiles",
+        "id": "/subscriptions/a0a37f63-7183-4e86-9ac7-ce8036a3ed31/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles/iacprofile",
+        "location": "location1",
+        "properties": {
+          "githubProfile": {
+            "authStatus": "Authorized",
+            "branchName": "aks-devhub-ybvmw",
+            "prStatus": "submitted",
+            "pullNumber": 8,
+            "repositoryMainBranch": "main",
+            "repositoryName": "localtest",
+            "repositoryOwner": "owner"
+          },
+          "stages": [
+            {
+              "dependencies": [],
+              "gitEnvironment": "Terraform",
+              "stageName": "dev"
+            },
+            {
+              "dependencies": [
+                "dev"
+              ],
+              "gitEnvironment": "Terraform",
+              "stageName": "qa"
+            },
+            {
+              "dependencies": [
+                "qa"
+              ],
+              "gitEnvironment": "Terraform",
+              "stageName": "prod"
+            }
+          ],
+          "templates": [
+            {
+              "templateDetails": [
+                {
+                  "count": 1,
+                  "namingConvention": "$sitid-hci",
+                  "productName": "HCI"
+                },
+                {
+                  "count": 1,
+                  "namingConvention": "$sitid-aks",
+                  "productName": "AKSarc"
+                }
+              ],
+              "templateName": "base"
+            }
+          ],
+          "terraformProfile": {
+            "storageAccountName": "hybridiac",
+            "storageAccountResourceGroup": "hybrid-iac",
+            "storageAccountSubscription": "subscriptions",
+            "storageContainerName": "hybridiac"
+          }
+        },
+        "systemData": {
+          "createdAt": "2024-01-16T09:56:23.933651400Z",
+          "createdBy": "",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-01-16T14:35:15.206059900Z",
+          "lastModifiedBy": "aks-dev-hub-devhub",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "appname": "testapp",
+          "promote": "false",
+          "resourceEnv": "testing"
+        }
+      }
+    }
+  },
+  "operationId": "IacProfiles_UpdateTags",
+  "title": "Update IacProfile Tags"
+}

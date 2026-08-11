@@ -32,6 +32,16 @@ model PineconeChatExtensionConfiguration
 model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
+  @doc("""
+    The authentication method to use when accessing the defined data source.
+    Each data source type supports a specific set of available authentication methods; please see the documentation of
+    the data source for supported mechanisms.
+    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
+    authentication.
+    """)
+  @clientName("Authentication", "csharp")
+  authentication?: OnYourDataAuthenticationOptions;
+
   @doc("The environment name of Pinecone.")
   @clientName("EnvironmentName", "csharp")
   environment: string;
@@ -50,6 +60,7 @@ model PineconeChatExtensionParameters {
   embeddingDependency: OnYourDataVectorizationSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model PineconeFieldMappingOptions {

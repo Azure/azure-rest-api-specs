@@ -1,298 +1,396 @@
-import { describe, it } from "vitest";
-import { FolderStructureRule } from "../src/rules/folder-structure.js";
-import { TsvTestHost } from "./tsv-test-host.js";
+import { mockAll, mockFolder } from "./mocks.ts";
+mockAll();
+
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
+import * as globby from "globby";
 import { strict as assert } from "node:assert";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { FolderStructureRule } from "../src/rules/folder-structure.ts";
+
+import * as utils from "../src/utils.ts";
 
 describe("folder-structure", function () {
-  it("should fail if tspconfig has incorrect extension", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yml"];
-    };
+  let fileExistsSpy: MockInstance;
+  let normalizePathSpy: MockInstance;
+  let readTspConfigSpy: MockInstance;
 
-    const result = await new FolderStructureRule().execute(host, TsvTestHost.folder);
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("Invalid config file"));
+  beforeEach(() => {
+    fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    normalizePathSpy = vi.spyOn(utils, "normalizePath");
+    readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
   });
 
-  it("should fail if folder under specification/ is capitalized", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-
-    const result = await new FolderStructureRule().execute(host, "/gitroot/specification/Foo/Foo");
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be lower case"));
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 
-  it("should succeed if package folder has trailing slash", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
+  describe("v1", function () {
+    beforeEach(() => {
+      vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+        {
+          tool: "TypeSpecValidation",
+          paths: ["**"],
+          reason: "many tests use fsv1",
+          rules: ["FolderStructure"],
+          subRules: ["MustUseV2"],
+        },
+      ]);
+    });
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo/Foo/",
-    );
-    assert(result.success);
-  });
+    it("should have suppressable flag set to true", function () {
+      assert.equal(new FolderStructureRule().suppressable, true);
+    });
 
-  it("should fail if package folder is more than 3 levels deep", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
+    it("should not suppress when suppression targets a different rule", async function () {
+      vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+        {
+          tool: "TypeSpecValidation",
+          paths: ["."],
+          reason: "test other reason",
+          rules: ["OtherRule"],
+        },
+      ]);
+      fileExistsSpy.mockResolvedValue(false);
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo/Foo/Foo",
-    );
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("3 levels or less"));
-  });
+      const result = await new FolderStructureRule().execute(mockFolder);
+      assert(!result.success);
+    });
 
-  it("should fail if second level folder not capitalized at after each '.' ", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
+    it("should fail if folder doesn't exist", async function () {
+      fileExistsSpy.mockResolvedValue(false);
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.foo",
-    );
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
-  });
+      const result = await new FolderStructureRule().execute(mockFolder);
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("does not exist"));
+    });
 
-  it("should fail if second level folder is data-plane", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
+    it("should fail if tspconfig has incorrect extension", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yml"]),
+      );
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/data-plane",
-    );
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
-  });
+      const result = await new FolderStructureRule().execute(mockFolder);
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("Invalid config file"));
+    });
 
-  it("should fail if second level folder is resource-manager", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
+    it("should fail if folder under specification/ is capitalized", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/resource-manager",
-    );
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
-  });
+      const result = await new FolderStructureRule().execute("/gitroot/specification/Foo/Foo");
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("must be lower case"));
+    });
 
-  it("should fail if Shared does not follow Management ", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
+    it("should succeed if package folder has trailing slash", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.Management.Foo.Shared",
-    );
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("should follow"));
-  });
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo/Foo/");
+      assert(result.success);
+    });
 
-  it("should fail if folder doesn't contain main.tsp nor client.tsp", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.checkFileExists = async (file: string) => {
-      if (file.includes("main.tsp")) {
-        return false;
-      } else if (file.includes("client.tsp")) {
-        return false;
-      }
-      return true;
-    };
+    it("should fail if package folder is more than 3 levels deep", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.Management",
-    );
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo/Foo/Foo",
+      );
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("3 levels or less"));
+    });
 
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must contain"));
-  });
+    it("should fail if second level folder not capitalized at after each '.' ", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-  it("should fail if folder doesn't contain examples when main.tsp exists", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.checkFileExists = async (file: string) => {
-      if (file.includes("main.tsp")) {
-        return true;
-      } else if (file.includes("examples")) {
-        return false;
-      }
-      return true;
-    };
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo.foo");
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("must be capitalized"));
+    });
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.Management",
-    );
+    it("should fail if second level folder is data-plane", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must contain"));
-  });
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane",
+      );
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("does not match regex"));
+    });
 
-  it("should fail if non-shared folder doesn't contain tspconfig", async function () {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/bar/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.checkFileExists = async (file: string) => {
-      if (file.includes("tspconfig.yaml")) {
-        return false;
-      }
-      return true;
-    };
+    it("should fail if second level folder is resource-manager", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.Management",
-    );
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager",
+      );
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("does not match regex"));
+    });
 
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes("must contain"));
-  });
+    it("should fail if Shared does not follow Management ", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
 
-  it("should succeed with resource-manager/Management", async function() {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/Foo.Management/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.readTspConfig = async (_folder: string) => `
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo.Management.Foo.Shared",
+      );
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("should follow"));
+    });
+
+    it("should fail if folder doesn't contain main.tsp nor client.tsp", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      fileExistsSpy.mockImplementation((file: string) => {
+        if (file.includes("main.tsp")) {
+          return Promise.resolve(false);
+        } else if (file.includes("client.tsp")) {
+          return Promise.resolve(false);
+        }
+        return Promise.resolve(true);
+      });
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo.Management",
+      );
+
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("must contain"));
+    });
+
+    it("should fail if folder doesn't contain examples when main.tsp exists", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      fileExistsSpy.mockImplementation((file: string) => {
+        if (file.includes("main.tsp")) {
+          return Promise.resolve(true);
+        } else if (file.includes("examples")) {
+          return Promise.resolve(false);
+        }
+        return Promise.resolve(true);
+      });
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo.Management",
+      );
+
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("must contain"));
+    });
+
+    it("should fail if non-shared folder doesn't contain tspconfig", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/bar/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      fileExistsSpy.mockImplementation((file: string) => {
+        if (file.includes("tspconfig.yaml")) {
+          return Promise.resolve(false);
+        }
+        return Promise.resolve(true);
+      });
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo.Management",
+      );
+
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes("must contain"));
+    });
+
+    it("should succeed with resource-manager/Management", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+      readTspConfigSpy.mockImplementation(() =>
+        Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`;
+`),
+      );
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.Management",
-    );
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo.Management",
+      );
 
-    assert(result.success);
-  });
+      assert(result.success);
+    });
 
-  it("should succeed with data-plane/NoManagement", async function() {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/Foo/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.readTspConfig = async (_folder: string) => `
+    it("should succeed with data-plane/NoManagement", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/Foo/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+      readTspConfigSpy.mockImplementation(() =>
+        Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-`;
+`),
+      );
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo",
-    );
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
 
-    assert(result.success);
-  });
+      assert(result.success);
+    });
 
-  it("should fail with resource-manager/NoManagement", async function() {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/Foo/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.readTspConfig = async (_folder: string) => `
+    it("should fail with resource-manager/NoManagement", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/Foo/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+      readTspConfigSpy.mockImplementation(() =>
+        Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`;
+`),
+      );
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo",
-    );
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
 
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes(".Management"));
-  });
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes(".Management"));
+    });
 
-  it("should fail with data-plane/Management", async function() {
-    let host = new TsvTestHost();
-    host.globby = async () => {
-      return ["/foo/Foo.Management/tspconfig.yaml"];
-    };
-    host.normalizePath = () => {
-      return "/gitroot";
-    };
-    host.readTspConfig = async (_folder: string) => `
+    it("should fail with data-plane/Management", async function () {
+      vi.mocked(globby.globby).mockImplementation(() =>
+        Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+      readTspConfigSpy.mockImplementation(() =>
+        Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-`;
+`),
+      );
 
-    const result = await new FolderStructureRule().execute(
-      host,
-      "/gitroot/specification/foo/Foo.Management",
-    );
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/Foo.Management",
+      );
 
-    assert(result.errorOutput);
-    assert(result.errorOutput.includes(".Management"));
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes(".Management"));
+    });
+
+    it("should fail if MustUseV2 not suppressed", async function () {
+      vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+
+      const result = await new FolderStructureRule().execute(mockFolder);
+      assert(result.errorOutput);
+      assert(result.errorOutput.includes('must use "folder structure v2'));
+    });
+  });
+
+  describe("v2", () => {
+    it("should fail if no tspconfig.yaml", async function () {
+      vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+
+      vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["main.tsp"]));
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      fileExistsSpy.mockImplementation((file: string) => {
+        if (file.includes("tspconfig.yaml")) {
+          return Promise.resolve(false);
+        }
+        return Promise.resolve(true);
+      });
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane/Foo",
+      );
+
+      assert(result.errorOutput?.includes("must contain"));
+    });
+
+    it("should fail if incorrect folder depth", async function () {
+      vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+
+      vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["tspconfig.yaml"]));
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      let result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
+      assert(result.errorOutput?.includes("level under"));
+
+      result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane/Foo/too-deep",
+      );
+      assert(result.errorOutput?.includes("level under"));
+
+      result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager",
+      );
+      assert(result.errorOutput?.includes("levels under"));
+
+      result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager/RP.Namespace",
+      );
+      assert(result.errorOutput?.includes("levels under"));
+
+      result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager/RP.Namespace/FooManagement/too-deep",
+      );
+      assert(result.errorOutput?.includes("levels under"));
+    });
+
+    it("should succeed with data-plane", async function () {
+      vi.mocked(globby.globby).mockImplementation((patterns) =>
+        patterns[0].includes("tspconfig")
+          ? Promise.resolve(["tspconfig.yaml"])
+          : Promise.resolve(["main.tsp"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane/Foo",
+      );
+
+      assert(result.success);
+    });
+
+    it("should succeed with resource-manager", async function () {
+      vi.mocked(globby.globby).mockImplementation(async (patterns) =>
+        patterns[0].includes("tspconfig")
+          ? Promise.resolve(["tspconfig.yaml"])
+          : Promise.resolve(["main.tsp"]),
+      );
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/resource-manager/Microsoft.Foo/FooManagement",
+      );
+
+      assert(result.success);
+    });
   });
 });

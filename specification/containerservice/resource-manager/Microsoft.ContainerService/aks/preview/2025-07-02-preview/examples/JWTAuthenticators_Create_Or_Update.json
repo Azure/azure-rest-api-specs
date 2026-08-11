@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2025-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "jwtAuthenticatorName": "jwt1",
+    "parameters": {
+      "properties": {
+        "issuer": {
+          "url": "https://example.com",
+          "audiences": [
+            "https://example.com/audience1",
+            "https://example.com/audience2"
+          ]
+        },
+        "claimValidationRules": [
+          {
+            "expression": "has(claims.sub)",
+            "message": "Sub is required"
+          },
+          {
+            "expression": "claims.sub != ''",
+            "message": "Sub cannot be empty"
+          }
+        ],
+        "claimMappings": {
+          "username": {
+            "expression": "'aks:jwt:' + claims.sub"
+          },
+          "groups": {
+            "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+          },
+          "extra": [
+            {
+              "key": "example.com/extrakey",
+              "valueExpression": "claims.customfield"
+            }
+          ]
+        },
+        "userValidationRules": [
+          {
+            "expression": "user.groups.all(group, group.startsWith('aks:jwt:admin:'))",
+            "message": "Must be in admin user group"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
+        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
+        "name": "jwt1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "issuer": {
+            "url": "https://example.com",
+            "audiences": [
+              "https://example.com/audience1",
+              "https://example.com/audience2"
+            ]
+          },
+          "claimValidationRules": [
+            {
+              "expression": "has(claims.sub)",
+              "message": "Sub is required"
+            },
+            {
+              "expression": "claims.sub != ''",
+              "message": "Sub cannot be empty"
+            }
+          ],
+          "claimMappings": {
+            "username": {
+              "expression": "'aks:jwt:' + claims.sub"
+            },
+            "groups": {
+              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+            },
+            "extra": [
+              {
+                "key": "example.com/extrakey",
+                "valueExpression": "claims.customfield"
+              }
+            ]
+          },
+          "userValidationRules": [
+            {
+              "expression": "user.groups.all(group, group.startsWith('aks:jwt:admin:'))",
+              "message": "Must be in admin user group"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
+        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
+        "name": "jwt1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "issuer": {
+            "url": "https://example.com",
+            "audiences": [
+              "https://example.com/audience1",
+              "https://example.com/audience2"
+            ]
+          },
+          "claimValidationRules": [
+            {
+              "expression": "has(claims.sub)",
+              "message": "Sub is required"
+            },
+            {
+              "expression": "claims.sub != ''",
+              "message": "Sub cannot be empty"
+            }
+          ],
+          "claimMappings": {
+            "username": {
+              "expression": "'aks:jwt:' + claims.sub"
+            },
+            "groups": {
+              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+            },
+            "extra": [
+              {
+                "key": "example.com/extrakey",
+                "valueExpression": "claims.customfield"
+              }
+            ]
+          },
+          "userValidationRules": [
+            {
+              "expression": "user.groups.all(group, group.startsWith('aks:jwt:admin:'))",
+              "message": "Must be in admin user group"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

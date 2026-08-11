@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "api-version": "2024-10-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-1",
+            "type": "Microsoft.App/managedEnvironments/httpRouteConfigs",
+            "properties": {
+              "fqdn": "app1.example.com",
+              "provisioningState": "Succeeded",
+              "customDomains": [
+                {
+                  "name": "example.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
+                }
+              ],
+              "rules": [
+                {
+                  "targets": [
+                    {
+                      "containerApp": "containerApp1"
+                    }
+                  ],
+                  "routes": [
+                    {
+                      "match": {
+                        "prefix": "/api",
+                        "caseSensitive": true
+                      },
+                      "action": {
+                        "prefixRewrite": "/v1/api"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-2",
+            "type": "Microsoft.App/managedEnvironments/httpRouteConfigs",
+            "properties": {
+              "fqdn": "app2.example.com",
+              "provisioningState": "Succeeded",
+              "customDomains": [
+                {
+                  "name": "example.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-2"
+                }
+              ],
+              "rules": [
+                {
+                  "targets": [
+                    {
+                      "containerApp": "containerApp2",
+                      "revision": "rev-2",
+                      "weight": 50
+                    },
+                    {
+                      "containerApp": "containerApp2",
+                      "revision": "rev-3",
+                      "weight": 50
+                    }
+                  ],
+                  "routes": [
+                    {
+                      "match": {
+                        "prefix": "/api",
+                        "caseSensitive": false
+                      },
+                      "action": {
+                        "prefixRewrite": "/v2/api"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

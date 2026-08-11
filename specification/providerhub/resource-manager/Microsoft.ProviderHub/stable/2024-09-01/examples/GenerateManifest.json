@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "providerNamespace": "Microsoft.Contoso",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "Generates the manifest for the given provider.",
+      "body": {
+        "capabilities": [
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_2015-05-01"
+          },
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_MG_2017-12-01"
+          }
+        ],
+        "crossTenantTokenValidation": "EnsureSecureValidation",
+        "globalNotificationEndpoints": [
+          {
+            "enabled": true,
+            "endpointUri": "https://notificationendpoint.com"
+          }
+        ],
+        "management": {
+          "authorizationOwners": [
+            "authorizationOwners-group"
+          ],
+          "incidentContactEmail": "helpme@contoso.com",
+          "incidentRoutingService": "",
+          "incidentRoutingTeam": "",
+          "manifestOwners": [
+            "manifestOwners-group"
+          ],
+          "resourceAccessPolicy": "NotSpecified"
+        },
+        "metadata": {
+          "onboardedVia": "ProviderHub"
+        },
+        "namespace": "microsoft.contoso",
+        "providerAuthorizations": [
+          {
+            "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+            "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+          }
+        ],
+        "providerType": "Internal, Hidden",
+        "providerVersion": "2.0",
+        "reRegisterSubscriptionMetadata": {
+          "concurrencyLimit": 100,
+          "enabled": true
+        },
+        "resourceProviderAuthorizationRules": {
+          "asyncOperationPollingRules": {
+            "authorizationActions": [
+              "Microsoft.Contoso/classicAdministrators/operationStatuses/read"
+            ]
+          }
+        },
+        "resourceTypes": [
+          {
+            "name": "Operations",
+            "allowedUnauthorizedActions": [
+              "microsoft.contoso/operations/read"
+            ],
+            "allowedUnauthorizedActionsExtensions": [
+              {
+                "action": "Microsoft.BizTalkServices/bizTalk/read",
+                "intent": "DEFERRED_ACCESS_CHECK"
+              }
+            ],
+            "endpoints": [
+              {
+                "apiVersions": [
+                  "2020-01-01-preview"
+                ],
+                "endpointUri": "https://resource-endpoint.com/",
+                "locations": [
+                  ""
+                ],
+                "timeout": "PT20S"
+              }
+            ],
+            "linkedOperationRules": [],
+            "notifications": [
+              {
+                "notificationType": "SubscriptionNotification",
+                "skipNotifications": "Disabled"
+              }
+            ],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly, Tenant"
+          },
+          {
+            "name": "Locations",
+            "endpoints": [
+              {
+                "apiVersions": [
+                  "2020-01-01-preview"
+                ],
+                "endpointUri": "https://resource-endpoint.com/",
+                "locations": [
+                  ""
+                ],
+                "timeout": "PT20S"
+              }
+            ],
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly"
+          },
+          {
+            "name": "Locations/OperationStatuses",
+            "additionalOptions": "ProtectedAsyncOperationPolling",
+            "endpoints": [
+              {
+                "apiVersions": [
+                  "2020-01-01-preview"
+                ],
+                "endpointUri": "https://resource-endpoint.com/",
+                "locations": [
+                  ""
+                ],
+                "timeout": "PT20S"
+              }
+            ],
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly, LocationBased"
+          }
+        ],
+        "serviceName": "root",
+        "services": [
+          {
+            "serviceName": "tags",
+            "status": "Inactive"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GenerateManifest",
+  "title": "GenerateManifest"
+}

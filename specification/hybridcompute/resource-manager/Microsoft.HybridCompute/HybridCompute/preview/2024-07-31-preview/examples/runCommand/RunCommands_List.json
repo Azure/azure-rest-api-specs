@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "api-version": "2024-07-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand_1",
+            "name": "myRunCommand_1",
+            "location": "eastus2",
+            "type": "Microsoft.HybridCompute/machines/runcommands",
+            "properties": {
+              "source": {
+                "script": "Write-Host Hello World!"
+              },
+              "parameters": [
+                {
+                  "name": "param1",
+                  "value": "value1"
+                },
+                {
+                  "name": "param2",
+                  "value": "value2"
+                }
+              ],
+              "protectedParameters": [],
+              "asyncExecution": false,
+              "runAsUser": "user1",
+              "timeoutInSeconds": 3600,
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "executionState": "Succeeded",
+                "executionMessage": "",
+                "exitCode": 0,
+                "output": "Hello World",
+                "error": "",
+                "startTime": "2023-06-15T20:48:41.4641785+00:00",
+                "endTime": "2023-06-15T20:48:41.4641785+00:00"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand_2",
+            "name": "myRunCommand_2",
+            "location": "eastus2",
+            "type": "Microsoft.HybridCompute/machines/runcommands",
+            "properties": {
+              "source": {
+                "script": "Get-Process | Where-Object { $_.CPU -gt 10000 }"
+              },
+              "parameters": [],
+              "protectedParameters": [],
+              "asyncExecution": false,
+              "runAsUser": "userA",
+              "timeoutInSeconds": 100,
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "executionState": "Succeeded",
+                "executionMessage": "",
+                "exitCode": 0,
+                "output": "<some output>",
+                "error": "",
+                "startTime": "2023-06-15T20:48:41.4641785+00:00",
+                "endTime": "2023-06-15T20:48:41.4641785+00:00"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

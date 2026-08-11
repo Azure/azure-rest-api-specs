@@ -1,0 +1,33 @@
+{
+  "title": "Get Frontends",
+  "operationId": "FrontendsInterface_ListByTrafficController",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "fe1",
+            "location": "NorthCentralUS",
+            "type": "Microsoft.ServiceNetworking/trafficControllers/frontends",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1",
+            "properties": {
+              "fqdn": "test.net",
+              "securityPolicyConfigurations": {
+                "ipAccessRulesSecurityPolicy": {
+                  "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/sample-tc/securityPolicies/ipAccessRules-0"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

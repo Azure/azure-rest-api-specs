@@ -15,7 +15,7 @@ model Monitor is TrackedResource<MonitorProperties> {
   @path
   @key("monitorName")
   @segment("monitors")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   ...ManagedServiceIdentityProperty;
@@ -41,7 +41,7 @@ interface Monitors {
   /**
    * Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Monitor, UpdateMonitorRequest>;
 
   /**
@@ -60,9 +60,11 @@ interface Monitors {
   list is ArmListBySubscription<Monitor>;
 }
 
-@@doc(Monitors.create::parameters.resource,
+@@doc(
+  Monitors.create::parameters.resource,
   "Request body representing a SAP monitor"
 );
-@@doc(Monitors.update::parameters.properties,
+@@doc(
+  Monitors.update::parameters.properties,
   "The Update SAP workload monitor request body."
 );

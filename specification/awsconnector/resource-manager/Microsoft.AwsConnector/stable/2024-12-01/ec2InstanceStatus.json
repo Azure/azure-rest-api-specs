@@ -1,0 +1,895 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Ec2InstanceStatuses"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ec2InstanceStatuses": {
+      "get": {
+        "operationId": "Ec2InstanceStatuses_ListBySubscription",
+        "tags": [
+          "Ec2InstanceStatuses"
+        ],
+        "description": "List Ec2InstanceStatus resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2InstanceStatuses_ListBySubscription": {
+            "$ref": "./examples/Ec2InstanceStatuses_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2InstanceStatuses": {
+      "get": {
+        "operationId": "Ec2InstanceStatuses_ListByResourceGroup",
+        "tags": [
+          "Ec2InstanceStatuses"
+        ],
+        "description": "List Ec2InstanceStatus resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2InstanceStatuses_ListByResourceGroup": {
+            "$ref": "./examples/Ec2InstanceStatuses_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2InstanceStatuses/{name}": {
+      "get": {
+        "operationId": "Ec2InstanceStatuses_Get",
+        "tags": [
+          "Ec2InstanceStatuses"
+        ],
+        "description": "Get a Ec2InstanceStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2InstanceStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2InstanceStatuses_Get": {
+            "$ref": "./examples/Ec2InstanceStatuses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ec2InstanceStatuses_CreateOrReplace",
+        "tags": [
+          "Ec2InstanceStatuses"
+        ],
+        "description": "Create a Ec2InstanceStatus. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2InstanceStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Ec2InstanceStatus' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatus"
+            }
+          },
+          "201": {
+            "description": "Resource 'Ec2InstanceStatus' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatus"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2InstanceStatuses_CreateOrReplace": {
+            "$ref": "./examples/Ec2InstanceStatuses_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Ec2InstanceStatuses_Update",
+        "tags": [
+          "Ec2InstanceStatuses"
+        ],
+        "description": "Update a Ec2InstanceStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2InstanceStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatusTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2InstanceStatus"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2InstanceStatuses_Update": {
+            "$ref": "./examples/Ec2InstanceStatuses_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Ec2InstanceStatuses_Delete",
+        "tags": [
+          "Ec2InstanceStatuses"
+        ],
+        "description": "Delete a Ec2InstanceStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2InstanceStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2InstanceStatuses_Delete": {
+            "$ref": "./examples/Ec2InstanceStatuses_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEc2InstanceStatusProperties": {
+      "type": "object",
+      "description": "Definition of awsEc2InstanceStatus",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "<p>The Availability Zone of the instance.</p>"
+        },
+        "events": {
+          "type": "array",
+          "description": "<p>Any scheduled events associated with the instance.</p>",
+          "items": {
+            "$ref": "#/definitions/InstanceStatusEvent"
+          },
+          "x-ms-identifiers": []
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "<p>The ID of the instance.</p>"
+        },
+        "instanceState": {
+          "$ref": "#/definitions/InstanceState",
+          "description": "<p>The intended state of the instance. <a>DescribeInstanceStatus</a> requires that an instance be in the <code>running</code> state.</p>"
+        },
+        "instanceStatus": {
+          "$ref": "#/definitions/InstanceStatusSummary",
+          "description": "<p>Reports impaired functionality that stems from issues internal to the instance, such as impaired reachability.</p>"
+        },
+        "outpostArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
+        },
+        "systemStatus": {
+          "$ref": "#/definitions/InstanceStatusSummary",
+          "description": "<p>Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.</p>"
+        }
+      }
+    },
+    "Ec2InstanceStatus": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Ec2InstanceStatusProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Ec2InstanceStatusListResult": {
+      "type": "object",
+      "description": "The response of a Ec2InstanceStatus list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Ec2InstanceStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/Ec2InstanceStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Ec2InstanceStatusProperties": {
+      "type": "object",
+      "description": "Definition of Ec2InstanceStatus",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEc2InstanceStatusProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Ec2InstanceStatusTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Ec2InstanceStatus resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EventCode": {
+      "type": "string",
+      "description": "EventCode enum",
+      "enum": [
+        "instance-reboot",
+        "instance-retirement",
+        "instance-stop",
+        "system-maintenance",
+        "system-reboot"
+      ],
+      "x-ms-enum": {
+        "name": "EventCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InstanceReboot",
+            "value": "instance-reboot",
+            "description": "EventCode enum instance-reboot"
+          },
+          {
+            "name": "InstanceRetirement",
+            "value": "instance-retirement",
+            "description": "EventCode enum instance-retirement"
+          },
+          {
+            "name": "InstanceStop",
+            "value": "instance-stop",
+            "description": "EventCode enum instance-stop"
+          },
+          {
+            "name": "SystemMaintenance",
+            "value": "system-maintenance",
+            "description": "EventCode enum system-maintenance"
+          },
+          {
+            "name": "SystemReboot",
+            "value": "system-reboot",
+            "description": "EventCode enum system-reboot"
+          }
+        ]
+      }
+    },
+    "EventCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of EventCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/EventCode",
+          "description": "Property value"
+        }
+      }
+    },
+    "InstanceState": {
+      "type": "object",
+      "description": "Definition of InstanceState",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>"
+        },
+        "name": {
+          "$ref": "#/definitions/InstanceStateNameEnumValue",
+          "description": "<p>The current state of the instance.</p>"
+        }
+      }
+    },
+    "InstanceStateName": {
+      "type": "string",
+      "description": "InstanceStateName enum",
+      "enum": [
+        "pending",
+        "running",
+        "shutting-down",
+        "stopped",
+        "stopping",
+        "terminated"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceStateName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "InstanceStateName enum pending"
+          },
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "InstanceStateName enum running"
+          },
+          {
+            "name": "ShuttingDown",
+            "value": "shutting-down",
+            "description": "InstanceStateName enum shutting-down"
+          },
+          {
+            "name": "Stopped",
+            "value": "stopped",
+            "description": "InstanceStateName enum stopped"
+          },
+          {
+            "name": "Stopping",
+            "value": "stopping",
+            "description": "InstanceStateName enum stopping"
+          },
+          {
+            "name": "Terminated",
+            "value": "terminated",
+            "description": "InstanceStateName enum terminated"
+          }
+        ]
+      }
+    },
+    "InstanceStateNameEnumValue": {
+      "type": "object",
+      "description": "Definition of InstanceStateNameEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/InstanceStateName",
+          "description": "Property value"
+        }
+      }
+    },
+    "InstanceStatusDetails": {
+      "type": "object",
+      "description": "Definition of InstanceStatusDetails",
+      "properties": {
+        "impairedSince": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.</p>"
+        },
+        "name": {
+          "$ref": "#/definitions/StatusNameEnumValue",
+          "description": "<p>The type of instance status.</p>"
+        },
+        "status": {
+          "$ref": "#/definitions/StatusTypeEnumValue",
+          "description": "<p>The status.</p>"
+        }
+      }
+    },
+    "InstanceStatusEvent": {
+      "type": "object",
+      "description": "Definition of InstanceStatusEvent",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/EventCodeEnumValue",
+          "description": "<p>The event code.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>A description of the event.</p> <p>After a scheduled event is completed, it can still be described for up to a week. If the event has been completed, this description starts with the following text: [Completed].</p>"
+        },
+        "instanceEventId": {
+          "type": "string",
+          "description": "<p>The ID of the event.</p>"
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The latest scheduled end time for the event.</p>"
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The earliest scheduled start time for the event.</p>"
+        },
+        "notBeforeDeadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The deadline for starting the event.</p>"
+        }
+      }
+    },
+    "InstanceStatusSummary": {
+      "type": "object",
+      "description": "Definition of InstanceStatusSummary",
+      "properties": {
+        "details": {
+          "type": "array",
+          "description": "<p>The system instance health or application instance health.</p>",
+          "items": {
+            "$ref": "#/definitions/InstanceStatusDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/SummaryStatusEnumValue",
+          "description": "<p>The status.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StatusName": {
+      "type": "string",
+      "description": "StatusName enum",
+      "enum": [
+        "reachability"
+      ],
+      "x-ms-enum": {
+        "name": "StatusName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Reachability",
+            "value": "reachability",
+            "description": "StatusName enum reachability"
+          }
+        ]
+      }
+    },
+    "StatusNameEnumValue": {
+      "type": "object",
+      "description": "Definition of StatusNameEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/StatusName",
+          "description": "Property value"
+        }
+      }
+    },
+    "StatusType": {
+      "type": "string",
+      "description": "StatusType enum",
+      "enum": [
+        "failed",
+        "initializing",
+        "insufficient-data",
+        "passed"
+      ],
+      "x-ms-enum": {
+        "name": "StatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "StatusType enum failed"
+          },
+          {
+            "name": "Initializing",
+            "value": "initializing",
+            "description": "StatusType enum initializing"
+          },
+          {
+            "name": "InsufficientData",
+            "value": "insufficient-data",
+            "description": "StatusType enum insufficient-data"
+          },
+          {
+            "name": "Passed",
+            "value": "passed",
+            "description": "StatusType enum passed"
+          }
+        ]
+      }
+    },
+    "StatusTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of StatusTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/StatusType",
+          "description": "Property value"
+        }
+      }
+    },
+    "SummaryStatus": {
+      "type": "string",
+      "description": "SummaryStatus enum",
+      "enum": [
+        "impaired",
+        "initializing",
+        "insufficient-data",
+        "not-applicable",
+        "ok"
+      ],
+      "x-ms-enum": {
+        "name": "SummaryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Impaired",
+            "value": "impaired",
+            "description": "SummaryStatus enum impaired"
+          },
+          {
+            "name": "Initializing",
+            "value": "initializing",
+            "description": "SummaryStatus enum initializing"
+          },
+          {
+            "name": "InsufficientData",
+            "value": "insufficient-data",
+            "description": "SummaryStatus enum insufficient-data"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "not-applicable",
+            "description": "SummaryStatus enum not-applicable"
+          },
+          {
+            "name": "Ok",
+            "value": "ok",
+            "description": "SummaryStatus enum ok"
+          }
+        ]
+      }
+    },
+    "SummaryStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of SummaryStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SummaryStatus",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-12-15-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "activeDirectories": [
+          {
+            "aesEncryption": true,
+            "dns": "10.10.10.3",
+            "domain": "10.10.10.3",
+            "ldapOverTLS": false,
+            "ldapSigning": false,
+            "organizationalUnit": "OU=Engineering",
+            "password": "<REDACTED>",
+            "site": "SiteName",
+            "smbServerName": "SMBServer",
+            "username": "ad_user_name"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "location": "eastus",
+        "properties": {
+          "activeDirectories": [
+            {
+              "activeDirectoryId": "503d38f9-f17c-f92d-ef26-b0d46374534b",
+              "aesEncryption": true,
+              "dns": "10.10.10.3",
+              "domain": "10.10.10.3",
+              "ldapOverTLS": false,
+              "ldapSigning": false,
+              "organizationalUnit": "OU=Engineering",
+              "password": null,
+              "site": "SiteName",
+              "smbServerName": "SMBServer",
+              "username": "ad_user_name"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "location": "eastus",
+        "properties": {
+          "activeDirectories": [
+            {
+              "activeDirectoryId": "503d38f9-f17c-f92d-ef26-b0d46374534b",
+              "aesEncryption": true,
+              "dns": "10.10.10.3",
+              "domain": "10.10.10.3",
+              "ldapOverTLS": false,
+              "ldapSigning": false,
+              "organizationalUnit": "OU=Engineering",
+              "password": null,
+              "site": "SiteName",
+              "smbServerName": "SMBServer",
+              "username": "ad_user_name"
+            }
+          ],
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "Accounts_CreateOrUpdate",
+  "title": "Accounts_CreateOrUpdateWithActiveDirectory"
+}

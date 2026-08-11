@@ -30,6 +30,12 @@ union OnYourDataVectorizationSourceType {
     Currently only supported by Elasticsearch®.
     """)
   modelId: "model_id",
+
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  @doc("""
+    Represents the integrated vectorizer defined within the search resource.
+    """)
+  integrated: "integrated",
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -93,6 +99,16 @@ model OnYourDataModelIdVectorizationSource
   modelId: string;
 }
 
+@added(ServiceApiVersions.v2024_08_01_Preview)
+@doc("""
+  Represents the integrated vectorizer defined within the search resource.
+  """)
+model OnYourDataIntegratedVectorizationSource
+  extends OnYourDataVectorizationSource {
+  /** The type discriminator. ALways 'integrated'. */
+  type: OnYourDataVectorizationSourceType.integrated;
+}
+
 /** The authentication types supported with Azure OpenAI On Your Data vector search. */
 @added(ServiceApiVersions.v2024_05_01_Preview)
 union OnYourDataVectorSearchAuthenticationType {
@@ -108,6 +124,7 @@ union OnYourDataVectorSearchAuthenticationType {
 /**
  * The authentication options for Azure OpenAI On Your Data vector search.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("type")
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchAuthenticationOptions {
@@ -118,6 +135,7 @@ model OnYourDataVectorSearchAuthenticationOptions {
 /**
  * The authentication options for Azure OpenAI On Your Data when using an API key.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchApiKeyAuthenticationOptions
   extends OnYourDataVectorSearchAuthenticationOptions {
@@ -131,6 +149,7 @@ model OnYourDataVectorSearchApiKeyAuthenticationOptions
 /**
  * The authentication options for Azure OpenAI On Your Data vector search when using access token.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchAccessTokenAuthenticationOptions
   extends OnYourDataVectorSearchAuthenticationOptions {

@@ -33,11 +33,11 @@ model ApcGatewayIdHeader {
 
 @doc("Identifier for the network to be queried")
 model NetworkIdentifier {
-  @doc("The type of identifier for the network. one of: 'IPv4', 'IPv6', 'NetworkCode'")
+  @doc("The type of identifier for the network. one of: 'IPv4', 'IPv6', 'MSISDN', 'NetworkCode'")
   identifierType: string;
 
   @doc("""
-    The network identifier, based on the identifierType: an IPv4 address, and IPv6 address, or a Network Code.
+    The network identifier, based on the identifierType: an IPv4 address, an IPv6 address, an MSISDN, or a Network Code.
     A Network Code may be obtained from APC documentation or from the APC /Network:retrieve endpoint.
     """)
   identifier: string;
@@ -56,6 +56,7 @@ model NetworkAccessIdentifierModel {
   networkAccessIdentifier?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 @doc("A custom error response for APC.")
 model ApcErrorResponse {
@@ -71,6 +72,7 @@ model ApcErrorResponse {
 model ApcError {
   ...Azure.Core.Foundations.Error;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The consent URL in case of a consent failure")
   consentUrl?: url;
 }
