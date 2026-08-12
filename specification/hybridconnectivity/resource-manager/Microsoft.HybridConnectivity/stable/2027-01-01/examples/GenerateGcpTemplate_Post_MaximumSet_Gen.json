@@ -1,0 +1,43 @@
+{
+  "title": "GenerateGcpTemplate_Post_MaximumSet",
+  "operationId": "GenerateGcpTemplate_Post",
+  "parameters": {
+    "api-version": "2027-01-01",
+    "subscriptionId": "5ACC4579-DB34-4C2F-8F8C-25061168F342",
+    "generateGcpTemplateRequest": {
+      "connectorId": "lvrdneuerxztxiixlzswcbm",
+      "gcpTemplateFormat": "terraform",
+      "solutionTypes": [
+        {
+          "solutionType": "hjyownzpfxwiufmd",
+          "solutionSettings": {}
+        }
+      ],
+      "gcpCloudProfile": {
+        "projectProperties": {
+          "projectNumber": "mjubieitixhpm",
+          "projectId": "mjubieitixhpmid"
+        },
+        "organizationProperties": {
+          "organizationId": "vqlzghfdinlamurmg",
+          "managementProjectNumber": "mjubieitixhpm",
+          "managementProjectId": "mjubieitixhpmid",
+          "excludedProjectNumbers": [
+            "sepdnfxmhcrubtklwllxfbhju"
+          ],
+          "excludedFolderIds": [
+            "xxl"
+          ]
+        },
+        "isOrganization": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "template": "{\n  \"terraform\": {\n    \"required_providers\": {\n      \"google\": {\n        \"source\": \"hashicorp/google\",\n        \"version\": \"~> 5.0\"\n      }\n    }\n  },\n  \"provider\": {\n    \"google\": {\n      \"project\": \"mjubieitixhpmid\"\n    }\n  },\n  \"resource\": {\n    \"google_iam_workload_identity_pool\": {\n      \"arc_multicloud\": {\n        \"workload_identity_pool_id\": \"azure-arc-multicloud-pool\",\n        \"display_name\": \"Azure Arc Multicloud Connector\"\n      }\n    },\n    \"google_service_account\": {\n      \"arc_connector\": {\n        \"account_id\": \"azure-arc-connector\",\n        \"display_name\": \"Azure Arc Connector Service Account\"\n      }\n    }\n  }\n}"
+      }
+    }
+  }
+}

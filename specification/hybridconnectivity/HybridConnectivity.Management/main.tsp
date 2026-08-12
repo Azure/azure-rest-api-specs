@@ -37,6 +37,9 @@ namespace Microsoft.HybridConnectivity;
 enum Versions {
   @doc("Version 2024-12-01")
   v2024_12_01: "2024-12-01",
+
+  @doc("Version 2027-01-01")
+  v2027_01_01: "2027-01-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
