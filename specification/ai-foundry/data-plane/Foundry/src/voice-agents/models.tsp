@@ -53,7 +53,7 @@ model VoiceConversation {
   @doc("A set of key-value pairs attached to the conversation.")
   metadata?: Record<string>;
 
-  @doc("Aggregate token usage totals across all responses in this conversation.")
+  @doc("Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after `status` is `completed`; values are not guaranteed to be reported incrementally.")
   usage?: OpenAI.RealtimeResponseUsage;
 }
 
@@ -64,7 +64,7 @@ model VoiceConversation {
 // The projected base omits audio because Foundry adds extensible voice provider and locale fields
 // alongside the OpenAI-compatible flat voice string.
 
-@doc("The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.")
+@doc("The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudioOutput {
   @doc("The voice name used for the response's audio output.")

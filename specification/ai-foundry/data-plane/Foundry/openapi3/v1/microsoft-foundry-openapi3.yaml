@@ -84934,7 +84934,7 @@ components:
           description: A set of key-value pairs attached to the conversation.
         usage:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
-          description: Aggregate token usage totals across all responses in this conversation.
+          description: Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after `status` is `completed`; values are not guaranteed to be reported incrementally.
       description: |-
         A persisted voice conversation. The Foundry envelope that owns a voice agent's stored
         transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
@@ -85668,7 +85668,7 @@ components:
         format:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format used for the response's audio output.
-      description: The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.
+      description: The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
