@@ -1,0 +1,36 @@
+{
+  "operationId": "MaintenanceWindowOptions_Get",
+  "parameters": {
+    "api-version": "2021-06-01-preview",
+    "maintenanceWindowOptionsName": "current",
+    "resourceGroupName": "samplerg",
+    "sqlPoolName": "testsp",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "title": "Get list of transparent data encryption configurations of a SQL Analytics pool",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Synapse/workspaces/sqlPools/maintenanceWindowOptions",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/samplerg/providers/Microsoft.Synapse/workspaces/testworkspace/sqlPools/testsp/maintenanceWindowOptions/current",
+        "properties": {
+          "allowMultipleMaintenanceWindowsPerCycle": true,
+          "defaultDurationInMinutes": 120,
+          "isEnabled": true,
+          "maintenanceWindowCycles": [
+            {
+              "dayOfWeek": "Saturday",
+              "duration": "PT60M",
+              "startTime": "00:00:00"
+            }
+          ],
+          "minCycles": 2,
+          "minDurationInMinutes": 60,
+          "timeGranularityInMinutes": 5
+        }
+      }
+    }
+  }
+}
