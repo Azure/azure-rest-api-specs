@@ -212,6 +212,18 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
 @@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
 
+@@clientName(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  "listBlobsHierarchicalXml",
+  "rust"
+);
+@@access(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  Access.internal,
+  "rust"
+);
+@@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
+
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
@@ -836,7 +848,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
-@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
