@@ -1653,6 +1653,7 @@ alias AccessTierChangeTimeResponseHeader = {
 alias AccessTierChangeTimeResponseHeaderV2026_10_06 = {
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @added(Versions.v2026_10_06)
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
   accessTierChangeTime?: utcDateTime;
