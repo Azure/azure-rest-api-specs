@@ -1236,7 +1236,10 @@ paths:
         - name: store
           in: query
           required: false
-          description: Whether to persist the conversation created by this session. Defaults to false.
+          description: |-
+            Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
+            persisted voice agent definition's configured `store` value. If supplied, this value overrides the
+            definition's `store` setting for this session only.
           schema:
             type: boolean
           explode: false

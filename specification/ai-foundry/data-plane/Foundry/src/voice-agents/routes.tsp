@@ -38,7 +38,11 @@ interface VoiceAgentWebSocket {
       /** An optional identifier used to correlate the voice session. */
       @query agent_session_id?: string;
 
-      /** Whether to persist the conversation created by this session. Defaults to false. */
+      /**
+       * Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
+       * persisted voice agent definition's configured `store` value. If supplied, this value overrides the
+       * definition's `store` setting for this session only.
+       */
       @query store?: boolean;
 
       /** Selects a specific version of the voice agent for this session. */
