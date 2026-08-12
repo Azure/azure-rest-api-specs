@@ -22,5 +22,6 @@ namespace Microsoft.Resources;
 @@clientLocation(checkResourceName, "SubscriptionClient", "go");
 
 @@clientName(Microsoft.Resources, "SubscriptionClient", "java");
+@@clientName(CloudError, "ManagementException", "java");
 @@clientLocation(checkResourceName, "ResourceNames", "java");
 @@scope(Operations.list, "!java");
