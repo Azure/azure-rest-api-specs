@@ -1584,6 +1584,12 @@ model AccountProperties {
    */
   storedCompletionsDisabled?: boolean;
 
+  /**
+   * Specifies whether A365 logging is enabled. Defaults to true. Set to false to opt out.
+   */
+  @added(Versions.v2026_07_15_preview)
+  a365LoggingEnabled?: boolean;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The quota limit for AccountProperties"
   @visibility(Lifecycle.Read)
   quotaLimit?: QuotaLimit;
