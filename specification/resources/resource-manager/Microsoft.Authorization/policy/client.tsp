@@ -93,6 +93,71 @@ namespace Microsoft.Authorization {
   "IdentityUserAssignedIdentitiesValue",
   "java"
 );
+@@alternateType(
+  Microsoft.Authorization.PolicyAssignmentProperties.metadata,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.ParameterValuesValue.value,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.ExternalEvaluationEndpointSettings.details,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicyDefinitionProperties.policyRule,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicyDefinitionProperties.metadata,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicyDefinitionVersionProperties.policyRule,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicyDefinitionVersionProperties.metadata,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.ParameterDefinitionsValue.defaultValue,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.ParameterDefinitionsValue.schema,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicySetDefinitionProperties.metadata,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicySetDefinitionVersionProperties.metadata,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.PolicyTokenOperation.content,
+  unknown,
+  "java"
+);
+@@alternateType(
+  Microsoft.Authorization.ExternalEvaluationEndpointInvocationResult.claims,
+  unknown,
+  "java"
+);
 
 // Rename models with forbidden suffixes for C# naming conventions
 @@clientName(
