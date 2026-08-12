@@ -78,6 +78,31 @@ directive:
     from: openapi.json
     reason: |
       Pre-existing. Using the same error response as other APIs.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/resume"].post.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/suspend"].post.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.responses["200"].schema
+    reason: |
+      False positives for resources promoted from preview. The provisioningState properties are already read-only.
+  - suppress: UnSupportedPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.parameters[5]
+    reason: |
+      False positive for the legacy full-resource patch schema. The provisioningState property is already read-only.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: openapi.json
+    reason: |
+      The service currently uses ARM common types v5. Migrating the full API to v6 is outside this feature promotion.
+  - suppress: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ContainerAppsFunctionProperties.properties.isDisabled
+    reason: |
+      isDisabled is a read-only state with true and false semantics.
 ```
 
 ### Tag: package-preview-2025-10-02-preview

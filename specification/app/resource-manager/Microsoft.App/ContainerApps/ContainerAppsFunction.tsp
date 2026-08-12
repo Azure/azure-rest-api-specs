@@ -91,13 +91,13 @@ alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.Lega
 @tag("AzureFunctionsOnContainerApps")
 interface ContainerAppsFunctions {
   /**
-   * Get a specific function of a Container App Revision.
+   * Gets the details of a specific function in a Container App revision.
    */
   @summary("Get a specific function of a Container App Revision.")
   get is ContainerAppsFunctionOps.Read<ContainerAppsFunction>;
 
   /**
-   * List the functions for a given Container App Revision.
+   * Lists the functions available in a specific Container App revision.
    */
   @summary("List the functions for a given Container App Revision.")
   list is ContainerAppsFunctionOps.List<
@@ -106,13 +106,13 @@ interface ContainerAppsFunctions {
   >;
 
   /**
-   * Get a specific function of a Container App from the latest Revision.
+   * Gets the details of a specific function from the latest Container App revision.
    */
   @summary("Get a specific function of a Container App from the latest Revision.")
   getAzureFunctionsOnContainerApps is ContainerAppsFunctionOperationGroupOps.Read<ContainerAppsFunction>;
 
   /**
-   * List the functions for a given Container App from the latest Revision.
+   * Lists the functions available in the latest revision of a Container App.
    */
   @summary("List the functions for a given Container App from the latest Revision.")
   listAzureFunctionsOnContainerApps is ContainerAppsFunctionOperationGroupOps.List<

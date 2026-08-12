@@ -64,7 +64,7 @@ alias DaprComponentResiliencyPolicyOps = Azure.ResourceManager.Legacy.LegacyOper
 @armResourceOperations
 interface DaprComponentResiliencyPolicies {
   /**
-   * Get a Dapr component resiliency policy.
+   * Gets the details of a resiliency policy for a Dapr component.
    */
   @summary("Get a Dapr component resiliency policy.")
   get is DaprComponentResiliencyPolicyOps.Read<DaprComponentResiliencyPolicy>;
@@ -89,7 +89,7 @@ interface DaprComponentResiliencyPolicies {
   delete is DaprComponentResiliencyPolicyOps.DeleteSync<DaprComponentResiliencyPolicy>;
 
   /**
-   * Get the resiliency policies for a Dapr component.
+   * Lists the resiliency policies configured for a Dapr component.
    */
   @summary("Get the resiliency policies for a Dapr component.")
   list is DaprComponentResiliencyPolicyOps.List<

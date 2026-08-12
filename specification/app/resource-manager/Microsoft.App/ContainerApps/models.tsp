@@ -524,17 +524,17 @@ union JobRunningState {
   string,
 
   /**
-   * Ready
+   * The job is ready to run.
    */
   Ready: "Ready",
 
   /**
-   * Progressing
+   * The job is transitioning to its target state.
    */
   Progressing: "Progressing",
 
   /**
-   * Suspended
+   * The job is suspended.
    */
   Suspended: "Suspended",
 }
@@ -5471,17 +5471,17 @@ union Status {
   string,
 
   /**
-   * Succeeded
+   * The label operation completed successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The label operation failed.
    */
   Failed: "Failed",
 
   /**
-   * Starting
+   * The label operation is starting.
    */
   Starting: "Starting",
 }
@@ -5730,7 +5730,7 @@ union DotNetComponentType {
   string,
 
   /**
-   * AspireDashboard
+   * An Aspire dashboard component.
    */
   AspireDashboard: "AspireDashboard",
 }
@@ -5742,27 +5742,27 @@ union DotNetComponentProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * The .NET component was provisioned successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The .NET component failed to provision.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Provisioning of the .NET component was canceled.
    */
   Canceled: "Canceled",
 
   /**
-   * Deleting
+   * The .NET component is being deleted.
    */
   Deleting: "Deleting",
 
   /**
-   * InProgress
+   * The .NET component is being provisioned.
    */
   InProgress: "InProgress",
 }
@@ -8126,9 +8126,8 @@ model LabelHistoryProperties {
   /**
    * List of label history records.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @identifiers(#["label"])
+  @identifiers(#[])
   records?: LabelHistoryRecordItem[];
 }
 

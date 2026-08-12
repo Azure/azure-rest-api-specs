@@ -56,7 +56,7 @@ alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
 @armResourceOperations
 interface DotNetComponents {
   /**
-   * Get a .NET Component.
+   * Gets the details of a .NET component in a managed environment.
    */
   @summary("Get a .NET Component.")
   get is DotNetComponentOps.Read<DotNetComponent>;
@@ -78,13 +78,13 @@ interface DotNetComponents {
   >;
 
   /**
-   * Delete a .NET Component.
+   * Deletes a .NET component from a managed environment.
    */
   @summary("Delete a .NET Component.")
   delete is DotNetComponentOps.DeleteWithoutOkAsync<DotNetComponent>;
 
   /**
-   * Get the .NET Components for a managed environment.
+   * Lists the .NET components in a managed environment.
    */
   @summary("Get the .NET Components for a managed environment.")
   list is DotNetComponentOps.List<

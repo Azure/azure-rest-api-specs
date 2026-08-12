@@ -175,7 +175,7 @@ interface Jobs {
   >;
 
   /**
-   * Resumes a suspended job
+   * Resumes execution for a suspended Container Apps job.
    */
   @tag("Jobs")
   @summary("Resumes a suspended job")
@@ -194,7 +194,7 @@ interface Jobs {
   >;
 
   /**
-   * Suspends a job
+   * Suspends execution for a running Container Apps job.
    */
   @tag("Jobs")
   @summary("Suspends a job")

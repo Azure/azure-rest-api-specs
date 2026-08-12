@@ -2589,7 +2589,7 @@
           "AzureFunctionsOnContainerApps"
         ],
         "summary": "List the functions for a given Container App from the latest Revision.",
-        "description": "List the functions for a given Container App from the latest Revision.",
+        "description": "Lists the functions available in the latest revision of a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2640,7 +2640,7 @@
           "AzureFunctionsOnContainerApps"
         ],
         "summary": "Get a specific function of a Container App from the latest Revision.",
-        "description": "Get a specific function of a Container App from the latest Revision.",
+        "description": "Gets the details of a specific function from the latest Container App revision.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2747,7 +2747,7 @@
           "ContainerAppsLabelHistory"
         ],
         "summary": "Get the Label History for a given Container App.",
-        "description": "Get the Label History for a given Container App.",
+        "description": "Lists the label revision histories for a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2805,7 +2805,7 @@
           "ContainerAppsLabelHistory"
         ],
         "summary": "Get the history of a label.",
-        "description": "Get the history of a label.",
+        "description": "Gets the revision history associated with a Container App label.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2859,7 +2859,7 @@
           "ContainerAppsLabelHistory"
         ],
         "summary": "Delete the history of a label.",
-        "description": "Delete the history of a label.",
+        "description": "Deletes the revision history associated with a Container App label.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3587,7 +3587,7 @@
           "AzureFunctionsOnContainerApps"
         ],
         "summary": "List the functions for a given Container App Revision.",
-        "description": "List the functions for a given Container App Revision.",
+        "description": "Lists the functions available in a specific Container App revision.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3646,7 +3646,7 @@
           "AzureFunctionsOnContainerApps"
         ],
         "summary": "Get a specific function of a Container App Revision.",
-        "description": "Get a specific function of a Container App Revision.",
+        "description": "Gets the details of a specific function in a Container App revision.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4978,7 +4978,7 @@
           "Jobs"
         ],
         "summary": "Resumes a suspended job",
-        "description": "Resumes a suspended job",
+        "description": "Resumes execution for a suspended Container Apps job.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -5192,7 +5192,7 @@
           "Jobs"
         ],
         "summary": "Suspends a job",
-        "description": "Suspends a job",
+        "description": "Suspends execution for a running Container Apps job.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6195,7 +6195,7 @@
           "DaprComponentResiliencyPolicies"
         ],
         "summary": "Get the resiliency policies for a Dapr component.",
-        "description": "Get the resiliency policies for a Dapr component.",
+        "description": "Lists the resiliency policies configured for a Dapr component.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6254,7 +6254,7 @@
           "DaprComponentResiliencyPolicies"
         ],
         "summary": "Get a Dapr component resiliency policy.",
-        "description": "Get a Dapr component resiliency policy.",
+        "description": "Gets the details of a resiliency policy for a Dapr component.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6611,7 +6611,7 @@
           "DotNetComponents"
         ],
         "summary": "Get the .NET Components for a managed environment.",
-        "description": "Get the .NET Components for a managed environment.",
+        "description": "Lists the .NET components in a managed environment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6665,7 +6665,7 @@
           "DotNetComponents"
         ],
         "summary": "Get a .NET Component.",
-        "description": "Get a .NET Component.",
+        "description": "Gets the details of a .NET component in a managed environment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6895,7 +6895,7 @@
           "DotNetComponents"
         ],
         "summary": "Delete a .NET Component.",
-        "description": "Delete a .NET Component.",
+        "description": "Deletes a .NET component from a managed environment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -12313,27 +12313,27 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "The .NET component was provisioned successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "The .NET component failed to provision."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "Provisioning of the .NET component was canceled."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deleting"
+            "description": "The .NET component is being deleted."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "InProgress"
+            "description": "The .NET component is being provisioned."
           }
         ]
       }
@@ -12366,7 +12366,7 @@
           {
             "name": "AspireDashboard",
             "value": "AspireDashboard",
-            "description": "AspireDashboard"
+            "description": "An Aspire dashboard component."
           }
         ]
       }
@@ -14160,17 +14160,17 @@
           {
             "name": "Ready",
             "value": "Ready",
-            "description": "Ready"
+            "description": "The job is ready to run."
           },
           {
             "name": "Progressing",
             "value": "Progressing",
-            "description": "Progressing"
+            "description": "The job is transitioning to its target state."
           },
           {
             "name": "Suspended",
             "value": "Suspended",
-            "description": "Suspended"
+            "description": "The job is suspended."
           }
         ]
       }
@@ -14411,9 +14411,7 @@
             "$ref": "#/definitions/LabelHistoryRecordItem"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "label"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -16758,17 +16756,17 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "The label operation completed successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "The label operation failed."
           },
           {
             "name": "Starting",
             "value": "Starting",
-            "description": "Starting"
+            "description": "The label operation is starting."
           }
         ]
       }
