@@ -3222,18 +3222,6 @@ model StorageAccountPropertiesCreateParameters {
   allowCrossTenantDelegationSas?: boolean;
 
   /**
-   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
-   */
-  @added(Versions.v2026_06_01)
-  requireUserBoundUserDelegationSas?: boolean;
-
-  /**
-   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
-   */
-  @added(Versions.v2026_06_01)
-  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
-
-  /**
    * Indicates whether Files change feed event logging is enabled for the storage account.
    */
   @added(Versions.v2026_06_01)
@@ -3253,6 +3241,18 @@ model SasPolicy {
    * The SAS Expiration Action defines the action to be performed when sasPolicy.sasExpirationPeriod is violated. The 'Log' action can be used for audit purposes and the 'Block' action can be used to block and deny the usage of SAS tokens that do not adhere to the sas policy expiration period.
    */
   expirationAction: ExpirationAction = ExpirationAction.Log;
+
+  /**
+   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSas?: boolean;
+
+  /**
+   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 }
 
 /**
@@ -3971,18 +3971,6 @@ model StorageAccountProperties {
   allowCrossTenantDelegationSas?: boolean;
 
   /**
-   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
-   */
-  @added(Versions.v2026_06_01)
-  requireUserBoundUserDelegationSas?: boolean;
-
-  /**
-   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
-   */
-  @added(Versions.v2026_06_01)
-  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
-
-  /**
    * Indicates whether Files change feed event logging is enabled for the storage account.
    */
   @added(Versions.v2026_06_01)
@@ -4546,18 +4534,6 @@ model StorageAccountPropertiesUpdateParameters {
    */
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
-
-  /**
-   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
-   */
-  @added(Versions.v2026_06_01)
-  requireUserBoundUserDelegationSas?: boolean;
-
-  /**
-   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
-   */
-  @added(Versions.v2026_06_01)
-  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 
   /**
    * Indicates whether Files change feed event logging is enabled for the storage account.

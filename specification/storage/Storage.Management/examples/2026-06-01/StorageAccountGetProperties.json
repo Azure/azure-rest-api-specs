@@ -91,9 +91,13 @@
           "geoPriorityReplicationStatus": {
             "isBlobEnabled": true
           },
+          "sasPolicy": {
+            "expirationAction": "Log",
+            "sasExpirationPeriod": "1.15:59:59",
+            "requireUserBoundUserDelegationSas": true,
+            "requireUserBoundUserDelegationSasAction": "Block"
+          },
           "allowCrossTenantDelegationSas": false,
-          "requireUserBoundUserDelegationSas": true,
-          "requireUserBoundUserDelegationSasAction": "Block",
           "enableFilesChangeFeed": true
         },
         "sku": {
