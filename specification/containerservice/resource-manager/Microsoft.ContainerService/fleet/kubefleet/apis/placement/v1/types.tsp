@@ -126,3 +126,72 @@ model Toleration {
   @doc("Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule.")
   effect?: TaintEffect;
 }
+
+@doc("The ClusterResourcePlacement settings that can be patched.")
+model ClusterResourcePlacementSpecPatch {
+  @doc("The placement policy that can be patched.")
+  policy?: PlacementPolicyPatch;
+}
+
+@doc("The placement policy settings that can be patched.")
+model PlacementPolicyPatch {
+  @doc("The placement type that can be patched.")
+  placementType?: PlacementType;
+
+  @doc("The member cluster names that can be patched.")
+  clusterNames?: string[];
+
+  @doc("The cluster affinity settings that can be patched.")
+  affinity?: AffinityPatch;
+
+  @doc("The tolerations that can be patched.")
+  @identifiers(#[])
+  tolerations?: Toleration[];
+}
+
+@doc("The affinity settings that can be patched.")
+model AffinityPatch {
+  @doc("The cluster affinity settings that can be patched.")
+  clusterAffinity?: ClusterAffinityPatch;
+}
+
+@doc("The cluster affinity rules that can be patched.")
+model ClusterAffinityPatch {
+  @doc("The required cluster selector that can be patched.")
+  requiredDuringSchedulingIgnoredDuringExecution?: ClusterSelectorPatch;
+}
+
+@doc("The cluster selector settings that can be patched.")
+model ClusterSelectorPatch {
+  @doc("The cluster selector terms that can be patched.")
+  @identifiers(#[])
+  clusterSelectorTerms?: ClusterSelectorTermPatch[];
+}
+
+@doc("A cluster selector term that can be patched.")
+model ClusterSelectorTermPatch {
+  @doc("The label selector that can be patched.")
+  labelSelector?: LabelSelectorPatch;
+
+  @doc("The property selector that can be patched.")
+  propertySelector?: PropertySelectorPatch;
+}
+
+@doc("The property selector settings that can be patched.")
+model PropertySelectorPatch {
+  @doc("The property selector requirements that can be patched.")
+  @identifiers(#[])
+  matchExpressions?: PropertySelectorRequirementPatch[];
+}
+
+@doc("A property selector requirement that can be patched.")
+model PropertySelectorRequirementPatch {
+  @doc("The property name that can be patched.")
+  name?: string;
+
+  @doc("The property selector operator that can be patched.")
+  operator?: PropertySelectorOperator;
+
+  @doc("The property values that can be patched.")
+  values?: string[];
+}

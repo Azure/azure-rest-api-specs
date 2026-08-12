@@ -167,9 +167,8 @@ union DeletePolicy {
 @added(Versions.v2025_08_01_preview)
 @doc("The propagation to be used for provisioning the namespace among the fleet.")
 model PropagationPolicy {
-  @madeOptional(Microsoft.ContainerService.Versions.v2026_06_02_preview)
   @doc("The type of the policy to be used. Default is Placement.")
-  type?: PropagationType;
+  type: PropagationType;
 
   @doc("The profile to be used for propagation via placement.")
   placementProfile?: PlacementProfile;
@@ -260,16 +259,12 @@ interface FleetManagedNamespaces {
   >;
 
   @added(Versions.v2026_11_01_preview)
-  @list
   @action("listMemberCredentials")
   @doc("Lists the Fleet member credentials scoped to the managed namespace.")
   listMemberCredentials is ArmResourceActionSync<
     FleetManagedNamespace,
-    void,
-    FleetMemberCredentialResults,
-    Parameters = FilterQueryParameter &
-      TopQueryParameter &
-      SkipTokenQueryParameter
+    FleetMemberCredentialRequest,
+    FleetMemberCredentialResults
   >;
 }
 
@@ -297,5 +292,22 @@ model FleetManagedNamespacePropertiesPatch {
   deletePolicy?: DeletePolicy;
 
   @doc("The profile of the propagation to create the namespace.")
-  propagationPolicy?: PropagationPolicy;
+  propagationPolicy?: PropagationPolicyPatch;
+}
+
+@added(Versions.v2026_06_02_preview)
+@doc("The propagation settings that can be patched.")
+model PropagationPolicyPatch {
+  @doc("The type of the policy to be used.")
+  type?: PropagationType;
+
+  @doc("The placement profile to patch.")
+  placementProfile?: PlacementProfilePatch;
+}
+
+@added(Versions.v2026_06_02_preview)
+@doc("The placement profile settings that can be patched.")
+model PlacementProfilePatch {
+  @doc("The default ClusterResourcePlacement policy configuration to patch.")
+  defaultClusterResourcePlacement?: ClusterResourcePlacementSpecPatch;
 }

@@ -220,18 +220,32 @@ model FleetMemberCredentialResult {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("The paged Fleet member credential results.")
+@doc("The request for Fleet member credentials.")
+model FleetMemberCredentialRequest {
+  @doc("The names of the Fleet members for which credentials are requested. When omitted, all applicable Fleet members are selected.")
+  memberNames?: string[];
+
+  @minValue(1)
+  @doc("The maximum number of credential results to return. The service may return fewer results.")
+  maxPageSize?: int32;
+
+  @secret
+  @doc("The opaque continuation token from a previous request.")
+  continuationToken?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The Fleet member credential results.")
 model FleetMemberCredentialResults {
-  @pageItems
   @identifiers(#["name"])
   @visibility(Lifecycle.Read)
-  @doc("The Fleet member credential results for this page.")
+  @doc("The Fleet member credential results for this response.")
   value: FleetMemberCredentialResult[];
 
-  @nextLink
+  @secret
   @visibility(Lifecycle.Read)
-  @doc("The URL to use for getting the next page of results.")
-  nextLink?: url;
+  @doc("The opaque continuation token to use in a subsequent request. This property is omitted when there are no more results.")
+  continuationToken?: string;
 }
 
 @added(Versions.v2025_03_01)
@@ -312,15 +326,11 @@ interface Fleets {
   listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
 
   @added(Versions.v2026_11_01_preview)
-  @list
   @action("listMemberCredentials")
   @doc("Lists the Kubernetes credentials of the Fleet members.")
   listMemberCredentials is ArmResourceActionSync<
     Fleet,
-    void,
-    FleetMemberCredentialResults,
-    Parameters = FilterQueryParameter &
-      TopQueryParameter &
-      SkipTokenQueryParameter
+    FleetMemberCredentialRequest,
+    FleetMemberCredentialResults
   >;
 }
