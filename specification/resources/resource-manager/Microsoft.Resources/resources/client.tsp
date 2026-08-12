@@ -54,16 +54,12 @@ using Microsoft.Resources;
 @@responseAsBool(Resources.checkExistenceById, "javascript");
 @@responseAsBool(ResourceGroups.checkExistence, "javascript");
 
-@@clientLocation(TagsResources.getAtScope, "TagOperations", "java");
-@@clientLocation(TagsResources.createOrUpdateAtScope, "TagOperations", "java");
-@@clientLocation(TagsResources.updateAtScope, "TagOperations", "java");
-@@clientLocation(TagsResources.deleteAtScope, "TagOperations", "java");
-@@clientLocation(TagsOperationGroup.deleteValue, "TagOperations", "java");
-@@clientLocation(
-  TagsOperationGroup.createOrUpdateValue,
-  "TagOperations",
-  "java"
-);
-@@clientLocation(TagsOperationGroup.createOrUpdate, "TagOperations", "java");
-@@clientLocation(TagsOperationGroup.delete, "TagOperations", "java");
-@@clientLocation(TagsOperationGroup.list, "TagOperations", "java");
+@@clientLocation(TagsResources.getAtScope, "Tag", "java");
+@@clientLocation(TagsResources.createOrUpdateAtScope, "Tag", "java");
+@@clientLocation(TagsResources.updateAtScope, "Tag", "java");
+@@clientLocation(TagsResources.deleteAtScope, "Tag", "java");
+@@clientLocation(TagsOperationGroup.deleteValue, "Tag", "java");
+@@clientLocation(TagsOperationGroup.createOrUpdateValue, "Tag", "java");
+@@clientLocation(TagsOperationGroup.createOrUpdate, "Tag", "java");
+@@clientLocation(TagsOperationGroup.delete, "Tag", "java");
+@@clientLocation(TagsOperationGroup.list, "Tag", "java");
