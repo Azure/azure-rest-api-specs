@@ -30,13 +30,7 @@ interface TopologyMaps {
 
   @doc("Updates a Topology Map.")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    TopologyMap,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      TopologyMap,
-      TopologyMapProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<TopologyMap, TopologyMapPatch>;
 
   @doc("Deletes a Topology Map.")
   delete is ArmResourceDeleteWithoutOkAsync<TopologyMap>;

@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 import "@typespec/rest";
 import "../models/ProbingGatewayModels.tsp";
 import "./Profile.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace Microsoft.Network;
@@ -36,9 +38,13 @@ interface ProfileProbingGateways {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ProfileProbingGateway>;
 
   @doc("Updates a probing gateway association with a Private Traffic Manager profile. Only available when the parent profile has `customTopologyMapMode` set to `Disabled`.")
-  update is ArmResourcePatchAsync<
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
     ProfileProbingGateway,
-    ProfileProbingGatewayProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ProfileProbingGateway,
+      ProfileProbingGatewayProperties
+    >
   >;
 
   @doc("Deletes a probing gateway association from a Private Traffic Manager profile. Only available when the parent profile has `customTopologyMapMode` set to `Disabled`.")
