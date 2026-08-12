@@ -7,6 +7,26 @@ using Azure.ResourceManager;
 using Microsoft.Resources.DeploymentStacks;
 using TypeSpec.Versioning;
 
+namespace Microsoft.Resources.DeploymentStacks {
+  /**
+   * Specifies whether to delete or detach a resource from the deployment stack.
+   */
+  @scope("java")
+  union DeploymentStacksDeleteDetachEnum {
+    string,
+
+    /**
+     * Delete the resource from Azure.
+     */
+    Delete: "delete",
+
+    /**
+     * Keep the resource in Azure.
+     */
+    Detach: "detach",
+  }
+}
+
 @@alternateType(DeploymentStackProperties.template, unknown, "go");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "go");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "go");
@@ -26,19 +46,19 @@ using TypeSpec.Versioning;
   "DeploymentStacksManagementClient",
   "java"
 );
-@@clientName(
-  UnmanageActionResourceMode,
-  "DeploymentStacksDeleteDetachEnum",
+@@alternateType(
+  ActionOnUnmanage.resources,
+  DeploymentStacksDeleteDetachEnum,
   "java"
 );
 @@alternateType(
   ActionOnUnmanage.resourceGroups,
-  UnmanageActionResourceMode,
+  DeploymentStacksDeleteDetachEnum,
   "java"
 );
 @@alternateType(
   ActionOnUnmanage.managementGroups,
-  UnmanageActionResourceMode,
+  DeploymentStacksDeleteDetachEnum,
   "java"
 );
 
