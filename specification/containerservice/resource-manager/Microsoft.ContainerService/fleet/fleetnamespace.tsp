@@ -59,6 +59,11 @@ model FleetManagedNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
+
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  @doc("The Fleet members where this managed namespace is currently placed.")
+  placedMembers?: string[];
 }
 
 @added(Versions.v2025_08_01_preview)
@@ -243,6 +248,28 @@ interface FleetManagedNamespaces {
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
       IfMatchParameters<FleetManagedNamespace>
+  >;
+
+  @added(Versions.v2026_11_01_preview)
+  @action("listCredentials")
+  @doc("Lists the Fleet hub credentials scoped to the managed namespace.")
+  listCredentials is ArmResourceActionSync<
+    FleetManagedNamespace,
+    void,
+    FleetCredentialResults
+  >;
+
+  @added(Versions.v2026_11_01_preview)
+  @list
+  @action("listMemberCredentials")
+  @doc("Lists the Fleet member credentials scoped to the managed namespace.")
+  listMemberCredentials is ArmResourceActionSync<
+    FleetManagedNamespace,
+    void,
+    FleetMemberCredentialResults,
+    Parameters = FilterQueryParameter &
+      TopQueryParameter &
+      SkipTokenQueryParameter
   >;
 }
 
