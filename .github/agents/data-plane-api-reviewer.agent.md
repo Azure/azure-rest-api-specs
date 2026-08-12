@@ -7,15 +7,13 @@ description: Reviews Azure data-plane TypeSpec specifications for conformance to
 #
 # NO MUTATING GITHUB TOOLS. The write channel is gh-aw `safe-outputs`
 # (unattended) or the human (interactive); the agent never posts. Do not add
-# `add_labels`, `create_pull_request_review`, `remove_labels`,
-# `update_review_comment`, or any other mutating GitHub tool.
+# `issue_write`, `pull_request_review_write`,
+# `add_comment_to_pending_review`, or any other mutating GitHub tool.
 tools:
   - agent
   # GitHub read-only:
   - github/get_file_contents
-  - github/get_pull_request
-  - github/get_review_comments
-  - github/list_pull_request_files
+  - github/pull_request_read
   - github/search_code
   - search
   - search/codebase
@@ -75,8 +73,12 @@ file's workflow only.
 
 ## Scope
 
-**In scope:** `specification/**/data-plane/**/*.tsp` and the `tspconfig.yaml` in
-the same TypeSpec project.
+**In scope:** changed `.tsp` files in TypeSpec data-plane projects under
+`specification/`, plus the `tspconfig.yaml` in the same project. Do not require a
+`data-plane` path segment: newer projects commonly use
+`specification/<area>/<service>/`, while older projects use
+`specification/<service>/data-plane/`. Exclude every project under
+`resource-manager/`.
 
 **Evidence only, never itself reviewed:** emitted swagger under
 `stable/<version>/` and `preview/<version>/`. Read it to confirm wire shape --
@@ -143,12 +145,14 @@ next step's input.
 
 1. Fetch the PR and pin the **head SHA**; every later file read uses it. Record
    the **base SHA** for previous-version reads.
-2. List changed files; keep only `specification/**/data-plane/**/*.tsp`.
+2. List changed files; keep `.tsp` files in TypeSpec data-plane projects under
+   `specification/`, excluding projects under `resource-manager/`. Do not require
+   a `data-plane` path segment.
 3. **If no in-scope files changed, stop.** Emit "No data-plane TypeSpec changes
    in this PR." and end -- no ARM review, no JSON review, no general commentary.
 4. Classify:
-   - **New service** (a `data-plane` directory absent on base) -- full review,
-     Blocking permitted.
+   - **New service** (the TypeSpec data-plane project directory is absent on
+     base) -- full review, Blocking permitted.
    - **New API version** -- full review plus the versioning pass against the
      previous stable version. Blocking permitted.
    - **Maintenance edit** (changes inside an already-shipped version) --
@@ -165,11 +169,19 @@ next step's input.
 Read the interlock **first**; it determines what is reportable. Then read only
 the rule references the diff actually needs.
 
-Fetch the root `package.json` with `github/get_file_contents` to get the pinned
-`@azure-tools/typespec-azure-core` version. **It is not on disk** -- the workflow
-declares `checkout: false`, so only `.github/` instructions are local. If it
-differs from the interlock header, say so and treat every ⏳/🔒 boundary as
-uncertain for that run, preferring questions to assertions.
+In the unattended workflow, the local sparse checkout contains trusted
+workflow/base-commit copies of `.github/agents`,
+`.github/skills/azure-api-review`, and root package metadata. Read those files
+locally. It deliberately does **not** contain PR-head specification files: fetch
+PR metadata once, fetch changed files once per page with `perPage: 100`, and read
+every PR-authored file through the GitHub tools at the full pinned head SHA.
+Reuse tool results. If a large result is saved under `/tmp`, inspect it with the
+allowlisted `jq` and `nl`; do not attempt Python or Git as a fallback.
+
+Read the root `package.json` locally to get the pinned
+`@azure-tools/typespec-azure-core` version. If it differs from the interlock
+header, say so and treat every ⏳/🔒 boundary as uncertain for that run,
+preferring questions to assertions.
 
 ### Step 3 -- Graph pass
 
@@ -264,12 +276,13 @@ finding; it does not soften it.
 
 ### Step 7 -- Critic
 
-Dispatch the **Data-Plane API Review Critic** subagent per
+Dispatch the named **Data-Plane API Review Critic** custom agent directly per
 [`protocols/data-plane-api-review-critic.protocol.md`](protocols/data-plane-api-review-critic.protocol.md).
-It is scoped to **false-positive defense only** and does not hunt for missed
-violations. Apply its verdicts: `FAIL` **drops** the finding (interactive, you
-may put the disagreement to the human); `DOWNGRADE` lowers severity as directed;
-`PASS` keeps.
+Do not emulate it with a general-purpose subagent. It is scoped to
+**false-positive defense only** and does not hunt for missed violations. Apply
+its verdicts: `FAIL` **drops** the finding (interactive, you may put the
+disagreement to the human); `DOWNGRADE` lowers severity as directed; `PASS`
+keeps.
 
 If dispatch fails, say so in the report and **drop every Blocking finding to
 Warning**. An unverified Blocking finding from an unattended bot is the failure
@@ -277,9 +290,12 @@ this design exists to avoid.
 
 ### Step 8 -- Report
 
-Emit the report. **Do not post it.** `safe-outputs` owns posting when
-unattended, the human when interactive. You have no mutating GitHub tools and
-must not attempt to acquire any.
+Build the canonical report before choosing an output channel. In interactive
+and eval sessions, emit it verbatim. In an unattended workflow, follow the
+workflow prompt's safe-output projection: `safe-outputs` is the only write
+channel, and the workflow may split the canonical report into an updateable
+summary and inline comments. Never use mutating GitHub tools or shell commands
+to post, and never attempt to acquire them.
 
 ---
 

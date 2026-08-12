@@ -2684,26 +2684,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource 'Compute' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Compute"
-            }
-          },
-          "201": {
-            "description": "Resource 'Compute' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Compute"
-            },
+          "202": {
+            "description": "Resource creation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2723,93 +2714,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Compute"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Computes_Update",
-        "tags": [
-          "Computes"
-        ],
-        "description": "Updates a compute associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "computeName",
-            "in": "path",
-            "description": "The name of the compute associated with the Cognitive Services Account.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The compute properties to update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Compute"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Compute"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateCompute": {
-            "$ref": "./examples/UpdateCompute.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Compute"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -13284,14 +13189,6 @@
           "description": "Resource Etag.",
           "readOnly": true
         },
-        "location": {
-          "type": "string",
-          "description": "The location of the compute resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -13420,6 +13317,14 @@
           "$ref": "#/definitions/ComputeType",
           "description": "The type of compute resource."
         },
+        "location": {
+          "type": "string",
+          "description": "The location of the compute resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "provisioningState": {
           "$ref": "#/definitions/ComputeProvisioningState",
           "description": "Provisioning state of the compute resource.",
@@ -13442,7 +13347,8 @@
       },
       "discriminator": "computeType",
       "required": [
-        "computeType"
+        "computeType",
+        "location"
       ]
     },
     "ComputeProvisioningState": {
@@ -17460,7 +17366,6 @@
       },
       "required": [
         "name",
-        "vmPriority",
         "instanceType",
         "nodeCount"
       ]
@@ -20044,7 +19949,7 @@
       "description": "VM priority for a compute pool.",
       "enum": [
         "Regular",
-        "LowPriority"
+        "Spot"
       ],
       "x-ms-enum": {
         "name": "VmPriority",
@@ -20056,9 +19961,9 @@
             "description": "Regular VM priority."
           },
           {
-            "name": "LowPriority",
-            "value": "LowPriority",
-            "description": "Low-priority VM."
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Spot VM priority."
           }
         ]
       }
