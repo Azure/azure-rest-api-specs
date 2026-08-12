@@ -362,6 +362,7 @@ model LogStatusRequest {
 /**
  * List of all the resources being monitored by Dynatrace monitor resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 /**
@@ -533,6 +534,7 @@ model MetricRules {
 /**
  * Dynatrace resource can be created or not.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateResourceSupportedResponse {
   /**
    * Represents the properties of the resource.
@@ -751,6 +753,7 @@ model DynatraceSingleSignOnProperties {
   /**
    * The login URL specific to this Dynatrace Environment
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   singleSignOnUrl?: string;
 
   /**
@@ -915,6 +918,7 @@ model OperationDisplay {
 /**
  * Request for getting connected resources count for a Marketplace Subscription Id
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MarketplaceSubscriptionIdRequest {
   /**
    * Marketplace Subscription Id
@@ -1048,6 +1052,7 @@ model MetricsStatusResponse {
 /**
  * Response of a list App Services Operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AppServiceListResponse is Azure.Core.Page<AppServiceInfo>;
 
 /**
@@ -1134,11 +1139,13 @@ model SSODetailsResponse {
   /**
    * URL for Azure AD metadata
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   metadataUrl?: string;
 
   /**
    * The login URL specific to this Dynatrace Environment
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   singleSignOnUrl?: string;
 
   /**
@@ -1175,6 +1182,7 @@ model LinkableEnvironmentRequest {
 /**
  * Response for getting all the linkable environments
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LinkableEnvironmentListResponse
   is Azure.Core.Page<LinkableEnvironmentResponse>;
 

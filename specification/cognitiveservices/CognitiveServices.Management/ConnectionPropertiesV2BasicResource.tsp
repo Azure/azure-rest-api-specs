@@ -36,8 +36,10 @@ alias ConnectionsListParameters = {
  * Connection base resource schema.
  */
 @parentResource(Account)
-model ConnectionPropertiesV2BasicResource
-  is Azure.ResourceManager.ProxyResource<ConnectionPropertiesV2, false> {
+model ConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource<
+  ConnectionPropertiesV2,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ConnectionPropertiesV2BasicResource,
     KeyName = "connectionName",

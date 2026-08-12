@@ -27,6 +27,7 @@ model TaskHubProperties {
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URL of the durable task scheduler dashboard")
   @visibility(Lifecycle.Read)
   dashboardUrl?: url;

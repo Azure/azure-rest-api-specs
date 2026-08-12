@@ -5,6 +5,7 @@ emit: ["@azure-tools/typespec-autorest"]
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -12,12 +13,6 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/devcenter.json"
     omit-unreachable-types: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.Developer.DevCenter"
-    clear-output-folder: true
-    flavor: azure
-    api-version: "2023-04-01"
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.DevCenter

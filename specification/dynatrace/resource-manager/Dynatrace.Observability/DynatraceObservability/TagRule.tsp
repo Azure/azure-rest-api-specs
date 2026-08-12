@@ -15,8 +15,10 @@ namespace Dynatrace.Observability;
  * Tag rules for a monitor resource
  */
 @parentResource(MonitorResource)
-model TagRule
-  is Azure.ResourceManager.ProxyResource<MonitoringTagRulesProperties, false> {
+model TagRule is Azure.ResourceManager.ProxyResource<
+  MonitoringTagRulesProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = TagRule,
     KeyName = "ruleSetName",

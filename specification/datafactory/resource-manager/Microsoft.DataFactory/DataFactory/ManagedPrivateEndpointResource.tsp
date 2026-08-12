@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Managed private endpoint resource type.
  */
 @parentResource(ManagedVirtualNetworkResource)
-model ManagedPrivateEndpointResource
-  is Azure.ResourceManager.ProxyResource<ManagedPrivateEndpoint, false> {
+model ManagedPrivateEndpointResource is Azure.ResourceManager.ProxyResource<
+  ManagedPrivateEndpoint,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ManagedPrivateEndpointResource,
     KeyName = "managedPrivateEndpointName",
