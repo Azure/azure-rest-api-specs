@@ -721,11 +721,21 @@ namespace Azure.AI.Projects {
   @@access(BingGroundingToolCallOutput, Access.public);
   @@usage(BingGroundingToolCallOutput, Usage.input | Usage.output);
 
+  @@clientName(
+    SharepointGroundingToolCall,
+    "SharePointGroundingToolCall",
+    "!autorest"
+  );
   @@access(SharepointGroundingToolCall, Access.public);
   @@usage(SharepointGroundingToolCall, Usage.input | Usage.output);
 
   @@access(SharepointGroundingToolCallOutput, Access.public);
   @@usage(SharepointGroundingToolCallOutput, Usage.input | Usage.output);
+  @@clientName(
+    SharepointGroundingToolCallOutput,
+    "SharePointGroundingToolCallOutput",
+    "!autorest"
+  );
 
   @@clientName(
     SharepointGroundingToolParameters,
@@ -845,7 +855,7 @@ namespace Azure.AI.Projects {
 
   @@clientName(
     OpenApiAnonymousAuthDetails,
-    "OpenAPIAnonymousAuthenticationDetails",
+    "OpenApiAnonymousAuthenticationDetails",
     "!autorest"
   );
 
@@ -883,7 +893,6 @@ namespace Azure.AI.Projects {
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@usage(OpenApiFunctionDefinition, Usage.input | Usage.output);
 
-  @@clientName(OpenApiTool, "OpenAPITool", "!autorest");
   @@usage(OpenApiTool, Usage.input | Usage.output);
   @@access(OpenApiTool, Access.public);
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
