@@ -43,7 +43,17 @@ using Microsoft.Advisor;
   "!csharp"
 );
 @@clientLocation(
-  ResourceRecommendationBases.updateByServiceGroup,
+  ServiceGroupRecommendationOperations.listByServiceGroup,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
+  ServiceGroupRecommendationOperations.getByServiceGroup,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
+  ServiceGroupRecommendationOperations.patchByServiceGroup,
   "Recommendations",
   "!csharp"
 );

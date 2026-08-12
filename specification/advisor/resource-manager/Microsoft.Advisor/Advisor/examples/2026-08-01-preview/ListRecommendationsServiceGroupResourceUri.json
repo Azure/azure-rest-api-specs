@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "resourceUri": "providers/microsoft.management/serviceGroups/serviceGroupXYZ",
+    "serviceGroupName": "serviceGroupXYZ",
     "mode": "contextual",
     "$top": 10,
     "api-version": "2026-08-01-preview"
@@ -11,7 +11,7 @@
         "nextLink": "https://management.azure.com/providers/microsoft.management/serviceGroups/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations?api-version=2026-08-01-preview&mode=contextual&$top=10&$skiptoken=skiptoken",
         "value": [
           {
-            "id": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b87",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b87",
             "name": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b87",
             "type": "Microsoft.Advisor/recommendations",
             "properties": {
@@ -68,7 +68,7 @@
             }
           },
           {
-            "id": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
             "name": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
             "type": "Microsoft.Advisor/recommendations",
             "properties": {
@@ -128,6 +128,6 @@
       }
     }
   },
-  "operationId": "Recommendations_ListByTenant",
+  "operationId": "Recommendations_ListByServiceGroup",
   "title": "ListRecommendationsServiceGroupResourceUri"
 }

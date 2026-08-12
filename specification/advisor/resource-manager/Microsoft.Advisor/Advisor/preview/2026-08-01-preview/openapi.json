@@ -97,34 +97,6 @@
             "description": "The page-continuation token to use with a paged version of this API.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "mode",
-            "in": "query",
-            "description": "Controls whether all recommendations or only contextually prioritized recommendations are returned. The default is all.",
-            "required": false,
-            "type": "string",
-            "default": "all",
-            "enum": [
-              "all",
-              "contextual"
-            ],
-            "x-ms-enum": {
-              "name": "RecommendationMode",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "All",
-                  "value": "all",
-                  "description": "Return all recommendations."
-                },
-                {
-                  "name": "Contextual",
-                  "value": "contextual",
-                  "description": "Return only recommendations that have contextual prioritization signals."
-                }
-              ]
-            }
           }
         ],
         "responses": {
@@ -139,11 +111,6 @@
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListRecommendationsServiceGroupResourceUri": {
-            "$ref": "./examples/ListRecommendationsServiceGroupResourceUri.json"
           }
         },
         "x-ms-pageable": {
@@ -188,9 +155,6 @@
           }
         },
         "x-ms-examples": {
-          "GetRecommendationDetailServiceGroupResourceUri": {
-            "$ref": "./examples/GetRecommendationDetailServiceGroupResourceUri.json"
-          },
           "GetRecommendationDetailSubscriptionResourceUri": {
             "$ref": "./examples/GetRecommendationDetailSubscriptionResourceUri.json"
           }
@@ -482,13 +446,100 @@
         }
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
-      "patch": {
-        "operationId": "Recommendations_UpdateByServiceGroup",
-        "tags": [
-          "ResourceRecommendationBases"
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations": {
+      "get": {
+        "operationId": "Recommendations_ListByServiceGroup",
+        "description": "Lists recommendations for a service group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "The name of the service group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Controls whether all recommendations or only contextually prioritized recommendations are returned.",
+            "required": false,
+            "type": "string",
+            "default": "all",
+            "enum": [
+              "all",
+              "contextual"
+            ],
+            "x-ms-enum": {
+              "name": "RecommendationMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "all",
+                  "description": "Return all recommendations."
+                },
+                {
+                  "name": "Contextual",
+                  "value": "contextual",
+                  "description": "Return only recommendations that have contextual prioritization signals."
+                }
+              ]
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the recommendations.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of recommendations per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The page-continuation token.",
+            "required": false,
+            "type": "string"
+          }
         ],
-        "description": "Update the state of a Recommendation in a service group.",
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListRecommendationsServiceGroupResourceUri": {
+            "$ref": "./examples/ListRecommendationsServiceGroupResourceUri.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
+      "get": {
+        "operationId": "Recommendations_GetByServiceGroup",
+        "description": "Gets a recommendation viewed in a service group scope.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -506,14 +557,59 @@
           {
             "name": "recommendationId",
             "in": "path",
-            "description": "The recommendation ID.",
+            "description": "The service-group-scoped recommendation identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRecommendationDetailServiceGroupResourceUri": {
+            "$ref": "./examples/GetRecommendationDetailServiceGroupResourceUri.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Recommendations_PatchByServiceGroup",
+        "description": "Updates the state of a recommendation viewed in a service group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "The name of the service group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The service-group-scoped recommendation identifier.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The state properties to update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RecommendationPatchPayload"
@@ -530,7 +626,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },

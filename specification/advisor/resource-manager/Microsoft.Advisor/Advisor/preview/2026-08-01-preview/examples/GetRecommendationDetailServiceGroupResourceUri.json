@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "resourceUri": "providers/microsoft.management/serviceGroups/serviceGroupXYZ",
+    "serviceGroupName": "serviceGroupXYZ",
     "recommendationId": "37c93209-4bfb-4f3b-8874-ccc718f7a467",
     "api-version": "2026-08-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations/37c93209-4bfb-4f3b-8874-ccc718f7a467",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/37c93209-4bfb-4f3b-8874-ccc718f7a467",
         "name": "37c93209-4bfb-4f3b-8874-ccc718f7a467",
         "properties": {
           "sgId": "/providers/microsoft.management/serviceGroups/serviceGroupXYZ",
@@ -65,6 +65,6 @@
       }
     }
   },
-  "operationId": "Recommendations_Get",
+  "operationId": "Recommendations_GetByServiceGroup",
   "title": "GetRecommendationDetailServiceGroupResourceUri"
 }
