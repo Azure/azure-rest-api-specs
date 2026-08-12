@@ -71,6 +71,48 @@ function collapseWhitespace(text) {
   return text.replace(/\s+/g, " ");
 }
 
+/**
+ * Remove XML/HTML comments the same way gh-aw does, so the stripping tests
+ * model the real behaviour rather than an approximation of it.
+ *
+ * A lazy `/<!--[\s\S]*?-->/g` replace is NOT equivalent and must not be used
+ * here: it consumes only the innermost pair, so a nested opener such as
+ * `<!-- <!-- --> PAYLOAD -->` leaves `PAYLOAD -->` behind, and a single pass
+ * can even reassemble a fresh `<!--` out of the surrounding text. That is the
+ * incomplete-multi-character-sanitization pattern CodeQL rejects. gh-aw's own
+ * `removeXmlComments` (actions/setup/js/sanitize_content_core.cjs) therefore
+ * scans with a depth counter and treats every `<!--` as a nesting level,
+ * emitting characters only at depth zero. This mirrors that scanner.
+ *
+ * @param {string} text
+ * @returns {string} text with every comment region removed
+ */
+function stripXmlComments(text) {
+  let result = "";
+  let depth = 0;
+  let position = 0;
+
+  while (position < text.length) {
+    if (text.startsWith("<!--", position)) {
+      depth++;
+      position += 4;
+    } else if (depth > 0 && text.startsWith("--!>", position)) {
+      depth--;
+      position += 4;
+    } else if (depth > 0 && text.startsWith("-->", position)) {
+      depth--;
+      position += 3;
+    } else {
+      if (depth === 0) {
+        result += text[position];
+      }
+      position++;
+    }
+  }
+
+  return result;
+}
+
 async function readWorkflowFiles() {
   return Promise.all([
     readFile(join(ROOT, SOURCE_FILE), "utf8"),
@@ -594,7 +636,7 @@ describe("ARM API review live-run regressions", () => {
     //
     // So the marker cannot be an HTML comment on either side. It must be
     // plain text, which survives both.
-    const stripped = source.replace(/<!--[\s\S]*?-->/g, "");
+    const stripped = stripXmlComments(source);
     const collapsedStripped = collapseWhitespace(stripped);
 
     expect(collapsedStripped).toContain("Never write the marker as an HTML comment.");
@@ -621,5 +663,25 @@ describe("ARM API review live-run regressions", () => {
     // The reconciliation reader must still recognise the legacy HTML form,
     // because interactive agent sessions bypass the publishing sanitizer.
     expect(collapseWhitespace(source)).toContain("may still carry it inside an HTML comment");
+  });
+
+  it("strips nested comment openers the way gh-aw actually does", () => {
+    // Guards the stripping simulation itself. The obvious lazy regex
+    // (`/<!--[\s\S]*?-->/g`) consumes only the innermost pair and leaves the
+    // payload exposed, which is why gh-aw counts nesting depth instead. If the
+    // simulation ever regresses to the regex, the stripping test above would
+    // silently start asserting against content the real sanitizer removes.
+    expect(stripXmlComments("<!-- <!-- --> PAYLOAD -->")).toBe("");
+    expect(stripXmlComments("keep<!-- drop -->keep")).toBe("keepkeep");
+    expect(stripXmlComments("<!-- malformed --!>tail")).toBe("tail");
+    expect(stripXmlComments("no comments here")).toBe("no comments here");
+
+    // An unterminated opener swallows the rest, exactly as the depth scanner
+    // does -- it never re-emits buffered comment text.
+    expect(stripXmlComments("head<!-- unterminated")).toBe("head");
+
+    // And the result is a fixpoint: stripping twice changes nothing.
+    const once = stripXmlComments("<!-- <!-- --> PAYLOAD --> visible");
+    expect(stripXmlComments(once)).toBe(once);
   });
 });
