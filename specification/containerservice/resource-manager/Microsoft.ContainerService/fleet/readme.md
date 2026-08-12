@@ -58,6 +58,10 @@ suppressions:
     from: fleets.json
     where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
     reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelectorPatch'].properties.matchLabels
+    reason: MatchLabels are a user-defined key/value map that is passed through to the underlying Kubernetes model during patch operations.
 ```
 
 ### Tag: package-2026-06-01
