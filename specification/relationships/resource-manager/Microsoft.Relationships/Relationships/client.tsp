@@ -16,8 +16,8 @@ namespace Microsoft.Relationships {
   @doc("DependencyOf relationship resource for create or update.")
   model DependencyOfRelationshipCreateOrUpdate
     is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of dependencyOf relationship.")
-    @pattern("^[^:]{3,64}$")
     @key
     @path
     @segment("dependencyOf")
@@ -37,8 +37,8 @@ namespace Microsoft.Relationships {
   @doc("ServiceGroupMember relationship resource for create or update.")
   model ServiceGroupMemberRelationshipCreateOrUpdate
     is ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate> {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of ServiceGroupMember relationship.")
-    @pattern("^[^:]{3,64}$")
     @key
     @path
     @segment("serviceGroupMember")
