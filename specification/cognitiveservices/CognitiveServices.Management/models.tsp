@@ -6091,8 +6091,8 @@ union VmPriority {
   /** Regular VM priority. */
   Regular: "Regular",
 
-  /** Low-priority VM. */
-  LowPriority: "LowPriority",
+  /** Spot VM priority. */
+  Spot: "Spot",
 }
 
 /**
@@ -6112,7 +6112,7 @@ model Pool {
   /**
    * The VM priority of the pool.
    */
-  vmPriority: VmPriority;
+  vmPriority?: VmPriority;
 
   /**
    * The instance type (VM SKU) used in the pool.
@@ -6158,6 +6158,12 @@ model ComputeProperties {
    * The type of compute resource.
    */
   computeType: ComputeType;
+
+  /**
+   * The location of the compute resource.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
 
   /**
    * Provisioning state of the compute resource.
