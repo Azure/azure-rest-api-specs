@@ -4645,6 +4645,12 @@ model LocalizedOperationDisplayDefinition {
    * Display information of the operation for zh-Hant locale.
    */
   zhHant?: LocalizedOperationDisplayDefinitionZhHant;
+
+  /**
+   * Display information of the operation for qps-Ploc pseudo locale.
+   */
+  @added(Versions.v2025_10_01)
+  qpsPloc?: LocalizedOperationDisplayDefinitionQpsPloc;
 }
 
 /**
@@ -4791,6 +4797,15 @@ model LocalizedOperationDisplayDefinitionZhHans
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalizedOperationDisplayDefinitionZhHant
+  extends OperationsDisplayDefinition {}
+
+/**
+ * Display information of the operation for qps-Ploc pseudo locale.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the shape of the sibling locale models on LocalizedOperationDisplayDefinition."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matches the shape of the sibling locale models on LocalizedOperationDisplayDefinition."
+@added(Versions.v2025_10_01)
+model LocalizedOperationDisplayDefinitionQpsPloc
   extends OperationsDisplayDefinition {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

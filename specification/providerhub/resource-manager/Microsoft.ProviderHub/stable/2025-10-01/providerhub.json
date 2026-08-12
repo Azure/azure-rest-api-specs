@@ -5805,6 +5805,10 @@
         "zhHant": {
           "$ref": "#/definitions/LocalizedOperationDisplayDefinitionZhHant",
           "description": "Display information of the operation for zh-Hant locale."
+        },
+        "qpsPloc": {
+          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionQpsPloc",
+          "description": "Display information of the operation for qps-Ploc pseudo locale."
         }
       },
       "required": [
@@ -5931,6 +5935,15 @@
     "LocalizedOperationDisplayDefinitionPtPT": {
       "type": "object",
       "description": "Display information of the operation for pt-PT locale.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationsDisplayDefinition"
+        }
+      ]
+    },
+    "LocalizedOperationDisplayDefinitionQpsPloc": {
+      "type": "object",
+      "description": "Display information of the operation for qps-Ploc pseudo locale.",
       "allOf": [
         {
           "$ref": "#/definitions/OperationsDisplayDefinition"
