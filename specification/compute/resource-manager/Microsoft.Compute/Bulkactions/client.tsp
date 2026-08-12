@@ -478,6 +478,6 @@ namespace Microsoft.Compute;
 // APIView naming feedback: give the generic single-word resource/model/enum
 // names an RP/domain prefix so they are self-descriptive in .NET IntelliSense.
 @@clientName(Occurrence, "ScheduledActionOccurrence", "csharp");
-@@clientName(DelayRequest.delay, "delayTo", "csharp");
+@@clientName(DelayRequest.delay, "scheduleAt", "csharp");
 @@clientName(Mode, "ProxyAgentMode", "csharp");
 @@clientName(Modes, "ImdsAccessControlMode", "csharp");
