@@ -283,8 +283,8 @@ union VoiceAgentResponseItem {
   VoiceMcpApprovalResponseItem,
 }
 
-@doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract while replacing audio and output and omitting conversation_id."
+@doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 model VoiceAgentRealtimeResponse extends OmitProperties<
   OpenAI.RealtimeResponse,
   "audio" | "output" | "conversation_id"
