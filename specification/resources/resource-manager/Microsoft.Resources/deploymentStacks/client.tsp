@@ -7,24 +7,22 @@ using Azure.ResourceManager;
 using Microsoft.Resources.DeploymentStacks;
 using TypeSpec.Versioning;
 
-namespace Microsoft.Resources.DeploymentStacks {
+/**
+ * Specifies whether to delete or detach a resource from the deployment stack.
+ */
+@scope("java")
+union DeploymentStacksDeleteDetachEnum {
+  string,
+
   /**
-   * Specifies whether to delete or detach a resource from the deployment stack.
+   * Delete the resource from Azure.
    */
-  @scope("java")
-  union DeploymentStacksDeleteDetachEnum {
-    string,
+  Delete: "delete",
 
-    /**
-     * Delete the resource from Azure.
-     */
-    Delete: "delete",
-
-    /**
-     * Keep the resource in Azure.
-     */
-    Detach: "detach",
-  }
+  /**
+   * Keep the resource in Azure.
+   */
+  Detach: "detach",
 }
 
 @@alternateType(DeploymentStackProperties.template, unknown, "go");
