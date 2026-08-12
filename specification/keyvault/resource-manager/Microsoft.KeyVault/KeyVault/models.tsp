@@ -38,7 +38,7 @@ union JsonWebKeyType {
   `RSA-HSM`: "RSA-HSM",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_05_15)
   `oct-HSM`: "oct-HSM",
 }
 
@@ -494,7 +494,7 @@ union ManagedHsmSkuFamily {
 /**
  * This specifies whether token binding is disabled, enabled or enforced.
  */
-@Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_06_01_preview)
 union TokenBindingMode {
   string,
 
@@ -508,7 +508,7 @@ union TokenBindingMode {
 /**
  * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
  */
-@Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_06_01_preview)
 union TokenBindingStrength {
   string,
 
@@ -604,7 +604,7 @@ enum ManagedHsmSkuName {
 /**
  * SKU of the managed HSM Pool
  */
-@Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_05_15)
 union ManagedHsmSkuNameV2 {
   string,
 
@@ -1162,7 +1162,7 @@ model VaultProperties {
   /**
    * Configuration for Token Binding for Entra tokens
    */
-  @Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
 }
 
@@ -1234,7 +1234,7 @@ model Permissions {
 /**
  * Configuration for Token Binding for Entra tokens
  */
-@Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_06_01_preview)
 model TokenBindingParameters {
   /**
    * This specifies whether token binding is disabled, enabled or enforced.
@@ -1490,7 +1490,7 @@ model VaultPatchProperties {
   /**
    * Configuration for Token Binding for Entra tokens
    */
-  @Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
 }
 
@@ -1953,10 +1953,7 @@ model ManagedHsmSku {
   /**
    * SKU of the managed HSM Pool
    */
-  @Versioning.typeChangedFrom(
-    KeyVault.Versions.v2026_03_01_preview,
-    ManagedHsmSkuName
-  )
+  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_05_15, ManagedHsmSkuName)
   name: ManagedHsmSkuNameV2;
 }
 
@@ -2506,8 +2503,7 @@ model MHSMPrivateEndpointConnectionsListResult
  */
 model VaultListResult
   is Azure.Core.Page<Azure.ResourceManager.Foundations.TrackedResource>;
-@@doc(
-  VaultListResult.nextLink,
+@@doc(VaultListResult.nextLink,
   "The URL to get the next set of vault resources."
 );
 @@doc(VaultListResult.value, "The list of vault resources.");

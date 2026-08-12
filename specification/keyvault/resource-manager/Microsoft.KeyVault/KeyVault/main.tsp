@@ -55,14 +55,14 @@ enum Versions {
   v2026_02_01: "2026-02-01",
 
   /**
-   * The 2026-03-01-preview API version.
-   */
-  v2026_03_01_preview: "2026-03-01-preview",
-
-  /**
    * The 2026-05-15 API version.
    */
   v2026_05_15: "2026-05-15",
+
+  /**
+   * The 2026-06-01-preview API version.
+   */
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 interface Operations
