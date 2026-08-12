@@ -26,6 +26,20 @@ model LabelSelectorRequirement {
   values?: string[];
 }
 
+@doc("The label selector settings that can be patched.")
+model LabelSelectorPatch is OmitProperties<
+  OptionalProperties<LabelSelector>,
+  "matchExpressions"
+> {
+  @doc("The label selector requirements that can be patched.")
+  @identifiers(#[])
+  matchExpressions?: LabelSelectorRequirementPatch[];
+}
+
+@doc("A label selector requirement that can be patched.")
+model LabelSelectorRequirementPatch
+  is OptionalProperties<LabelSelectorRequirement>;
+
 @doc("A label selector operator is the set of operators that can be used in a selector requirement.")
 union LabelSelectorOperator {
   @doc("Label Selector Operator In")
