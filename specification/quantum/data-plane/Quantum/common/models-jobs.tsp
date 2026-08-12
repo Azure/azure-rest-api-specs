@@ -32,7 +32,6 @@ union JobStatus {
   string,
 
   /** The job has been queued. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   Queued: "Queued",
 
   /** The job is waiting in the queue to be executed. */
@@ -42,19 +41,15 @@ union JobStatus {
   Executing: "Executing",
 
   /** Cancellation of the job has been requested. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   CancellationRequested: "CancellationRequested",
 
   /** The job is in the process of being cancelled. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   Cancelling: "Cancelling",
 
   /** The job is in the process of being finished. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   Finishing: "Finishing",
 
   /** The job completed. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   Completed: "Completed",
 
   /** The job completed with success. */
@@ -135,17 +130,10 @@ model JobDetails extends ItemDetails {
   /** The format of the output data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
-
-  /** List of user-supplied tags associated with the job. */
-  @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
-  @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "tags")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  oldTags?: string[];
 }
 
 /** Options for updating a job. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 @parentResource(Quantum.Workspace.QuantumWorkspace)
 @resource("jobs")
 model JobUpdateOptions {
@@ -169,7 +157,6 @@ model JobUpdateOptions {
 }
 
 /** Response returned when a job update succeeds. */
-@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model JobUpdateResponse {
   /** The name of the job. */
   name: string;
