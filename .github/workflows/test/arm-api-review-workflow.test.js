@@ -10,6 +10,7 @@ import { runInNewContext } from "vm";
 const ROOT = join(import.meta.dirname, "..", "..", "..");
 const SOURCE_FILE = ".github/workflows/arm-api-review.md";
 const LOCK_FILE = ".github/workflows/arm-api-review.lock.yml";
+const AGENT_FILE = ".github/agents/arm-api-reviewer.agent.md";
 const TARGET_EXPRESSION =
   "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}";
 let resolverScript = "";
@@ -358,5 +359,113 @@ describe("ARM API review workflow", () => {
     expect(preActivationJob).not.toContain("issues: write");
     expect(safeOutputsJob).toContain("issues: write");
     expect(safeOutputsJob).toContain("pull-requests: write");
+  });
+});
+
+describe("ARM API review posting reliability", () => {
+  it("requires a non-empty review body", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain(
+      "The `submit-pull-request-review` body is **REQUIRED and MUST be non-empty**.",
+    );
+    expect(source).toContain(
+      "Never submit a review whose body is empty, whitespace-only, or a placeholder.",
+    );
+    // A missing field must degrade the value, never the whole body.
+    expect(source).toContain("substitute `unknown` for that one value");
+    expect(source).toContain(
+      "Dropping the body is never an acceptable fallback for a missing field.",
+    );
+  });
+
+  it("requires a telemetry marker on every posted body and bans the one-field form", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    expect(source).toContain("### Telemetry Marker: Required on Every Posted Body");
+    // Each posting surface must be named, so the summary comment cannot be
+    // treated as exempt the way it was on earlier runs.
+    for (const surface of [
+      "create-pull-request-review-comment",
+      "reply-to-pull-request-review-comment",
+      "add-comment",
+    ]) {
+      expect(source).toContain(surface);
+    }
+    expect(collapsed).toContain(
+      "A marker that carries only `posted-by: arm-api-reviewer-agent` and no other field is **not** a valid marker on a posted body.",
+    );
+    expect(collapsed).toContain("It is a defect, not a fallback");
+    // Ordered degradation path, so a missing field never silently drops telemetry.
+    expect(collapsed).toContain("Omit the optional fields");
+    expect(collapsed).toContain("Set `critic: unknown`");
+    expect(collapsed).toContain("`telemetry: degraded` field and a `reason:` field");
+  });
+
+  it("leaves no exception to the ARMChangesRequested label rule", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain("These two rules are **exhaustive**.");
+    expect(source).toContain(
+      "draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a bot-authored PR, or the author's stated intent not to merge are **not** grounds to skip a label change",
+    );
+    expect(source).toContain(
+      "The only input to this decision is whether a Blocking finding was queued.",
+    );
+  });
+
+  it("makes the Step 8 summary comment unconditional", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain("This is **unconditional**:");
+    // Reconciliation-only runs previously posted replies and resolutions but no summary.
+    expect(source).toContain(
+      "including runs whose only other outputs were reconciliation replies and thread resolutions",
+    );
+    expect(source).toContain(
+      "A run that queues replies, resolutions or inline findings but no summary comment is a defect.",
+    );
+  });
+
+  it("pins the scoped-review disclosure above the approval labels line", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain(
+      'add this line **immediately below the "Reviewed PR" line and above the "Approval labels observed" line**',
+    );
+    expect(source).toContain("The summary block order is fixed");
+    expect(source).toContain(
+      "Placing the disclosure after the approval labels is a template violation even when its content is correct.",
+    );
+  });
+
+  it("tells the agent to wrap at-mentions exactly once", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain("**Autolink hygiene (REQUIRED).**");
+    expect(source).toContain("in a **single** pair of backticks");
+    expect(source).toContain(
+      "Wrap each token exactly once: do not nest backticks, do not repeat them, and do not combine backticks with a backslash escape.",
+    );
+    expect(source).toContain(
+      "Doubly-escaped tokens render as visible garbage in the posted comment.",
+    );
+  });
+
+  it("keeps the reviewer agent consistent with the workflow's summary mandate", async () => {
+    const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
+    const collapsed = collapseWhitespace(agent);
+
+    // The forbidden one-field marker must never appear verbatim in a prompt:
+    // a live run reproduced exactly this shape after it was shown as an
+    // anti-example.
+    expect(agent).not.toContain("<!-- posted-by: arm-api-reviewer-agent -->");
+    expect(collapsed).toContain("Emitting the **one-field marker form**");
+
+    // The agent previously claimed summaries are not posted by default, which
+    // contradicted the workflow's unconditional Step 8 mandate.
+    expect(collapsed).not.toContain("the agent does not post summary comments by default");
+    expect(collapsed).toContain("its Step 8 posts a summary comment on **every** run");
   });
 });

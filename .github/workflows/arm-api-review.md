@@ -554,6 +554,13 @@ not post or mutate threads; follow the Step 5.6 restart path. Then post each
 finding as a `create-pull-request-review-comment` (inline) or `add-comment`
 (PR-level for summary), and call `submit-pull-request-review`.
 
+The `submit-pull-request-review` body is **REQUIRED and MUST be non-empty**. The
+safe-output schema does not enforce this, so an empty body is accepted and
+published silently. This review body is the only surface that renders the
+Critic-verification disclosure, so submitting it empty defeats that disclosure
+entirely. Never submit a review whose body is empty, whitespace-only, or a
+placeholder.
+
 Use this body for `submit-pull-request-review`:
 
 <!-- markdownlint-disable MD013 -->
@@ -575,6 +582,10 @@ Set `<verification-status>` to `critic-verified` only when the Critic actually
 returned a verdict that was folded into the posting set. When all Critic
 dispatch attempts failed, use `Critic unavailable; reviewer self-check only`.
 Never describe an unavailable-Critic review as verified.
+
+If any individual placeholder above cannot be resolved, still submit a non-empty
+body: substitute `unknown` for that one value and keep every other line intact.
+Dropping the body is never an acceptable fallback for a missing field.
 
 **Hard limits per category:**
 
@@ -632,6 +643,17 @@ anchor. Add `downstream-rule` when Step 4.5 requires it. The telemetry marker
 must be the literal last line; if it cannot be assembled, use the protocol's
 explicit `telemetry: degraded` fallback rather than omitting the marker.
 
+**Autolink hygiene (REQUIRED).** GitHub turns a bare `@<word>` token into a user
+mention and notifies whoever owns that account, and turns `#<number>` into a
+cross-reference to another PR or issue. TypeSpec decorators and library handles
+(`@doc`, `@added`, `@clientName`, `@typespec/http`) all match the mention
+pattern, so this is a recurring noise source. Wrap every `@<word>` token that is
+not an intentional GitHub user mention in a **single** pair of backticks --
+write `` `@clientName` ``, not the bare token. Wrap each token exactly once: do
+not nest backticks, do not repeat them, and do not combine backticks with a
+backslash escape. Doubly-escaped tokens render as visible garbage in the posted
+comment. Never prefix a bare finding number with `#`.
+
 For breaking-change findings, use `BreakingChange-Approved-*` for cross-version
 breaks and `Versioning-Approved-*` for same-version or published-version
 exceptions. For suppression findings, use `Approved-Suppression` for OpenAPI
@@ -650,6 +672,36 @@ that specific finding.
   (missing descriptions, additionalProperties on service-owned models, etc.).
 - `🔵 Suggestion`: design trade-offs and best-practice recommendations.
 
+### Telemetry Marker: Required on Every Posted Body
+
+The hidden telemetry marker is **REQUIRED** as the literal last line of every
+comment body this workflow publishes -- not only inline findings:
+
+| Surface              | Safe output                            | `rule:` value                    |
+| -------------------- | -------------------------------------- | -------------------------------- |
+| Inline finding       | `create-pull-request-review-comment`   | the finding's rule ID            |
+| Reconciliation reply | `reply-to-pull-request-review-comment` | the replied-to finding's rule ID |
+| Step 8 summary       | `add-comment`                          | `summary`                        |
+
+A marker that carries only `posted-by: arm-api-reviewer-agent` and no other
+field is **not** a valid marker on a posted body. It is a defect, not a
+fallback: it makes the comment indistinguishable from every other agent comment
+and drops the severity, classification, critic and head-sha signals the next
+run's Step 5.5 reconciliation depends on. The one-field form is acceptable only
+as a _substring match_ when reading pre-existing comments during reconciliation.
+
+When one or more fields cannot be assembled, degrade in this order and stop at
+the first step that succeeds:
+
+1. Omit the optional fields (`downstream-rule`, `override-reason`).
+2. Set `critic: unknown`.
+3. Emit the explicit degraded marker, which MUST carry both a
+   `telemetry: degraded` field and a `reason:` field naming what failed (for
+   example `head-sha-unavailable`).
+
+Never block a comment from posting because its marker could not be assembled,
+and never emit a marker that names neither the finding nor a degradation reason.
+
 ### Step 7: Update Labels
 
 After queuing the reconciled posting set, apply label changes based on outputs
@@ -665,9 +717,20 @@ that will actually be published:
 
 Use the `add-labels` and `remove-labels` safe outputs for label changes.
 
+These two rules are **exhaustive**. Do not invent additional exceptions from PR
+metadata: draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a
+bot-authored PR, or the author's stated intent not to merge are **not** grounds
+to skip a label change. If a Blocking finding was queued for publication, the
+label change is queued too. The only input to this decision is whether a
+Blocking finding was queued.
+
 ### Step 8: Summary Comment
 
-Post a final `add-comment` summarizing the review:
+Post a final `add-comment` summarizing the review. This is **unconditional**:
+post the summary on every run that reaches this step, including runs whose only
+other outputs were reconciliation replies and thread resolutions, and runs that
+found nothing to report. A run that queues replies, resolutions or inline
+findings but no summary comment is a defect. Use this body:
 
 ```text
 ## ARM API Review Summary
@@ -686,14 +749,21 @@ Approval labels observed: `<exact-label-1>`, `<exact-label-2>` (or `none`).
 ```
 
 If the PR was over the size cap and you ran a **scoped review** (Trigger
-Validation step 4), add this line directly below the "Reviewed PR" line so the
-human reviewer knows recall is intentionally partial:
+Validation step 4), add this line **immediately below the "Reviewed PR" line and
+above the "Approval labels observed" line** so the human reviewer knows recall is
+intentionally partial:
 
 ```text
 **Scoped review:** M of N changed `specification/` files reviewed (PR exceeds the
 automated-review size cap). Not reviewed: <short description of the excluded
 files>.
 ```
+
+The summary block order is fixed and must be emitted exactly as: the
+"Reviewed PR" line, then the scoped-review disclosure when applicable, then
+"Approval labels observed", then the counts table, then the one-sentence
+summary. Placing the disclosure after the approval labels is a template
+violation even when its content is correct.
 
 Always end the summary with the standard footer marker:
 
