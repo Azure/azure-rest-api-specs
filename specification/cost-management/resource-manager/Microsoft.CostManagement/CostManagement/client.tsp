@@ -552,3 +552,31 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 // to free the original names for non-nullable [Obsolete] backward-compat shims.
 @@clientName(BudgetProperties.category, "BudgetCategory", "csharp");
 @@clientName(BudgetProperties.timeGrain, "BudgetTimeGrain", "csharp");
+
+// Preserve Java enum constant names from the previous SDK.
+@@clientName(
+  CostDetailsMetricType.ActualCostCostDetailsMetricType,
+  "ACTUAL_COST",
+  "java"
+);
+@@clientName(
+  CostDetailsMetricType.AmortizedCostCostDetailsMetricType,
+  "AMORTIZED_COST",
+  "java"
+);
+@@clientName(
+  CostDetailsStatusType.CompletedCostDetailsStatusType,
+  "COMPLETED",
+  "java"
+);
+@@clientName(
+  CostDetailsStatusType.NoDataFoundCostDetailsStatusType,
+  "NO_DATA_FOUND",
+  "java"
+);
+@@clientName(
+  CostDetailsStatusType.FailedCostDetailsStatusType,
+  "FAILED",
+  "java"
+);
+@@clientName(CostDetailsDataFormat.CsvCostDetailsDataFormat, "CSV", "java");
