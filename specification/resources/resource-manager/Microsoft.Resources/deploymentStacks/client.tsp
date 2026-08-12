@@ -16,6 +16,11 @@ using TypeSpec.Versioning;
 @@alternateType(DeploymentStackProperties.template, unknown, "java");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "java");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Flattening preserves the existing Java SDK surface."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DeploymentStack.properties,
+  "java"
+);
 @@clientName(
   Microsoft.Resources.DeploymentStacks,
   "DeploymentStacksManagementClient",
