@@ -8,6 +8,17 @@ description: |
   touch schema content perform the full review with version comparison.
   The critic gate (Step 7) is never skipped regardless of track.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
+tags:
+  area: arm-api-reviewer
+
 defaults:
   runs: 1
   timeout: "240s"
