@@ -662,6 +662,10 @@ union IdentityType {
 union PostgresMajorVersion {
   string,
 
+  /** PostgreSQL 19. */
+  @added(Versions.v2026_07_01)
+  `19`: "19",
+
   /** PostgreSQL 18. */
   `18`: "18",
 
