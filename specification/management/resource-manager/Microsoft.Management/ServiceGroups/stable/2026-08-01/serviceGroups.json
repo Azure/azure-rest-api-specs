@@ -275,47 +275,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/listAncestors": {
-      "post": {
-        "operationId": "ServiceGroups_ListAncestors",
-        "tags": [
-          "ServiceGroups"
-        ],
-        "description": "Get the details of the serviceGroup's ancestors",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "serviceGroupName",
-            "in": "path",
-            "description": "ServiceGroup Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServiceGroupCollectionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListServiceGroupAncestors": {
-            "$ref": "./examples/ServiceGroup_ListAncestors.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -409,26 +368,18 @@
         }
       ]
     },
-    "ServiceGroupCollectionResponse": {
+    "ServiceGroupAttributes": {
       "type": "object",
-      "description": "Response holding an array of service groups and a nextLink that supports pagination",
+      "description": "The attributes of the serviceGroup.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ServiceGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/ServiceGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+        "criticality": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The criticality designation of the service group. Valid values range from 0 through 4.",
+          "minimum": 0,
+          "maximum": 4
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ServiceGroupProperties": {
       "type": "object",
@@ -442,6 +393,10 @@
         "displayName": {
           "type": "string",
           "description": "The display name of the serviceGroup. For example, ServiceGroupTest1"
+        },
+        "attributes": {
+          "$ref": "#/definitions/ServiceGroupAttributes",
+          "description": "The attributes of the serviceGroup."
         },
         "parent": {
           "$ref": "#/definitions/ParentServiceGroupProperties",
