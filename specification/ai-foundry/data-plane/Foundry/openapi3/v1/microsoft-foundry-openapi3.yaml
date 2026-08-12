@@ -35740,7 +35740,15 @@ paths:
               - Routines=V2Preview
         - $ref: '#/components/parameters/ListRoutinesParameters.limit'
         - $ref: '#/components/parameters/ListRoutinesParameters.after'
-        - $ref: '#/components/parameters/ListRoutinesParameters.order'
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -35754,7 +35762,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedRoutine'
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Routine'
+                    description: The requested list of items.
+                  next_link:
+                    type: string
+                    format: uri
+                    description: The URL to fetch the next page of results, or absent if there are no additional pages.
+                description: A page of items with a URL cursor to the next page.
         4XX:
           description: Client error
           content:
@@ -35928,7 +35949,15 @@ paths:
         - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.limit'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.after'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.order'
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -35942,7 +35971,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedRoutineRun'
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoutineRun'
+                    description: The requested list of items.
+                  next_link:
+                    type: string
+                    format: uri
+                    description: The URL to fetch the next page of results, or absent if there are no additional pages.
+                description: A page of items with a URL cursor to the next page.
         4XX:
           description: Client error
           content:
@@ -37667,7 +37709,7 @@ components:
       name: after
       in: query
       required: false
-      description: An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.
+      description: An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.
       schema:
         type: string
       explode: false
@@ -37688,14 +37730,6 @@ components:
         type: integer
         format: int32
       explode: false
-    ListRoutineRunsParameters.order:
-      name: order
-      in: query
-      required: false
-      description: The ordering direction. Supported values are asc and desc.
-      schema:
-        type: string
-      explode: false
     ListRoutineRunsParameters.routine_name:
       name: routine_name
       in: path
@@ -37708,7 +37742,7 @@ components:
       name: after
       in: query
       required: false
-      description: An opaque continuation token identifying where to resume the list. Prefer following the `nextLink` returned by the previous response, which embeds this value.
+      description: An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.
       schema:
         type: string
       explode: false
@@ -37720,14 +37754,6 @@ components:
       schema:
         type: integer
         format: int32
-      explode: false
-    ListRoutinesParameters.order:
-      name: order
-      in: query
-      required: false
-      description: The ordering direction. Supported values are asc and desc.
-      schema:
-        type: string
       explode: false
     UpdateToolboxRequest.name:
       name: name
@@ -72570,36 +72596,6 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of RedTeam items
-    PagedRoutine:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Routine'
-          description: The Routine items on this page
-        nextLink:
-          type: string
-          format: uri
-          description: The link to the next page of items
-      description: Paged collection of Routine items
-    PagedRoutineRun:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoutineRun'
-          description: The RoutineRun items on this page
-        nextLink:
-          type: string
-          format: uri
-          description: The link to the next page of items
-      description: Paged collection of RoutineRun items
     PagedSchedule:
       type: object
       required:
