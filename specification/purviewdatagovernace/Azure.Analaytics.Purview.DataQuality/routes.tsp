@@ -903,8 +903,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}:observations")
   @tag("DQ Assessment Observations")
@@ -973,8 +971,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/observations/{observationId}")
   @delete
@@ -1552,8 +1548,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Should mention long running operations for actions"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}:profile")
   @tag("Profiles")

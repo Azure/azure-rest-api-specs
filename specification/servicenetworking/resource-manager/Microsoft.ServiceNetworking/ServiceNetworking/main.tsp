@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
@@ -149,6 +150,7 @@ model SecurityPolicyProperties {
   wafPolicy?: WafPolicy;
 
   /** Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesPolicy?: IpAccessRulesPolicy;
 

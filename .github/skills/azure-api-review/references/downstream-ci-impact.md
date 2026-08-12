@@ -85,16 +85,17 @@ satisfy all five:
 
 ## Failure modes (Critic FAILs)
 
-The Critic returns a non-overridable FAIL when any of the following is
-true. **Non-overridable** means the per-comment `critic: override`
-marker does NOT clear it -- see
+The Critic returns a FAIL when any of the following is true.
+`downstream-ci-conflict` and `suppression-path-mismatch` are
+**overridable with a valid justification** (the three-check override-reason
+validator applies, same as any other finding-level FAIL) -- see
 [protocol → Non-overridable FAIL catalog](../../../agents/protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog).
 
-| Critic FAIL                 | Triggered when                                                                                                                | Recovery                                                                                           |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `downstream-ci-conflict`    | Required shape items 1, 2, 3, or 5 are not satisfied; or the `downstream-rule:` marker is missing on an in-scope finding.     | Reviewer rephrases the finding as a multi-option recommendation with the correct suppression form. |
-| `suppression-path-mismatch` | Required shape item 4's exact-match check fails (rendered `where:` does not equal the quoted `jsonpath` segment-for-segment). | Reviewer re-renders `where:` from the quoted `jsonpath` array verbatim.                            |
-| `rule-not-found`            | The `downstream-rule:` value does not appear in [`linter-rule-coverage.md`](./linter-rule-coverage.md).                       | Reviewer cites a real entry or drops the finding; do not invent coverage entries.                  |
+| Critic FAIL                 | Triggered when                                                                                                                | Recovery                                                                                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `downstream-ci-conflict`    | Required shape items 1, 2, 3, or 5 are not satisfied; or the `downstream-rule:` marker is missing on an in-scope finding.     | Reviewer rephrases the finding as a multi-option recommendation with the correct suppression form, or supplies a validated `override-reason` if genuinely justified. |
+| `suppression-path-mismatch` | Required shape item 4's exact-match check fails (rendered `where:` does not equal the quoted `jsonpath` segment-for-segment). | Reviewer re-renders `where:` from the quoted `jsonpath` array verbatim, or supplies a validated `override-reason` if genuinely justified.                            |
+| `rule-not-found`            | The `downstream-rule:` value does not appear in [`linter-rule-coverage.md`](./linter-rule-coverage.md).                       | Reviewer cites a real entry or drops the finding; do not invent coverage entries.                                                                                    |
 
 Self-checks by the Reviewer do not substitute for this verification --
 the Critic re-runs the procedure independently.
