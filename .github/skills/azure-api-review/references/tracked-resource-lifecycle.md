@@ -119,7 +119,8 @@ Every resource provider **MUST** expose an operations API at:
 GET /providers/Microsoft.{Namespace}/operations
 ```
 
-Using the common-types `OperationListResult` and `Operation` definitions.
+The response **SHOULD** use the common-types `OperationListResult` and `Operation`
+definitions. Inline definitions with the same shape are acceptable.
 
 ---
 

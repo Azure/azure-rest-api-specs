@@ -32,9 +32,9 @@
   rules: [FolderStructure]
   paths:
     - ResourceChanges
-    - ResourceGraph
+    - ResourceGraphApi
     - ResourceHistory
-    - GraphQuery
+    - GraphQueryApi
 
 - tool: TypeSpecValidation
   reason: >
@@ -46,8 +46,9 @@
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
+    - options.@azure-typespec/http-client-csharp-mgmt.*
   paths: 
     - ResourceChanges/tspconfig.yaml
-    - ResourceGraph/tspconfig.yaml
+    - ResourceGraphApi/tspconfig.yaml
     - ResourceHistory/tspconfig.yaml
-    - GraphQuery/tspconfig.yaml
+    - GraphQueryApi/tspconfig.yaml

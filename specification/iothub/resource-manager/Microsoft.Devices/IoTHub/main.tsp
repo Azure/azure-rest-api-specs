@@ -19,6 +19,7 @@ import "./CertificateDescription.tsp";
 import "./GroupIdInformation.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -32,8 +33,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "iotHubClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Devices;
 
 /**
@@ -41,9 +41,14 @@ namespace Microsoft.Devices;
  */
 enum Versions {
   /**
-   * The 2025-08-01-preview API version.
+   * The 2026-03-01-preview API version.
    */
-  v2025_08_01_preview: "2025-08-01-preview",
+  v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations

@@ -4,16 +4,17 @@ import YAML from "js-yaml";
 import { resolve } from "path";
 import { inspect } from "util";
 import * as z from "zod";
-import { getChangedFiles } from "../../../shared/src/changed-files.js";
+import { getChangedFilesStatuses } from "../../../shared/src/changed-files.js";
 import { CoreLogger } from "../core-logger.js";
 
 // ============================================
 // Configuration
 // ============================================
 
-export const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9-]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
+export const LEASE_FILE_PATTERN =
+  /^\.github\/arm-leases\/[a-zA-Z0-9-]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
 export const LEASE_FILE_WITH_GROUP_PATTERN =
-  /^\.github\/arm-leases\/[a-z0-9-]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
+  /^\.github\/arm-leases\/[a-zA-Z0-9-]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
 
 export const ALLOWED_FILE_PATTERNS = [
   LEASE_FILE_PATTERN,
@@ -230,12 +231,24 @@ export default async function validateArmLeases(core) {
 
   core.info("Running ARM Lease File Validation");
 
-  // Get all changed files under .github/arm-leases/
-  const allChangedFiles = await getChangedFiles({
+  // Get all changed files under .github/arm-leases/ with their statuses
+  const changedFilesStatuses = await getChangedFilesStatuses({
     cwd,
     paths: [".github/arm-leases"],
     logger: new CoreLogger(core),
   });
+
+  // Combine all files that exist (exclude deletions, include rename destinations)
+  const allChangedFiles = [
+    ...changedFilesStatuses.additions,
+    ...changedFilesStatuses.modifications,
+    ...changedFilesStatuses.renames.map((r) => r.to),
+  ];
+
+  // Log deleted files for informational purposes
+  if (changedFilesStatuses.deletions.length > 0) {
+    core.info(`Skipping ${changedFilesStatuses.deletions.length} deleted file(s) from validation`);
+  }
 
   // Check for disallowed files
   core.startGroup("Checking for disallowed files");

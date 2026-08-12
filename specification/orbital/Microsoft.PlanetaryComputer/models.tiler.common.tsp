@@ -474,6 +474,7 @@ model TileJsonMetadata {
 /**
  * Successful Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WmtsCapabilitiesXmlResponse {
   /**
    * status code for WMTSCapabilitiesXmlResponse
@@ -654,19 +655,6 @@ model ZoomQueryParameters {
    */
   @query("maxzoom")
   maxZoom?: int32;
-}
-
-/**
- * STAC Collection Identifier as a query parameter
- */
-@added(Versions.v2026_04_15)
-model CollectionQueryParameter {
-  /**
-   * STAC Collection Identifier
-   */
-  @added(Versions.v2026_04_15)
-  @query("collection")
-  collection?: string;
 }
 
 /**

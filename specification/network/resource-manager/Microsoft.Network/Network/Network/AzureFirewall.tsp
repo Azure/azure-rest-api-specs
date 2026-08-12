@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -62,6 +64,14 @@ interface AzureFirewalls {
   @tag("AzureFirewalls")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureFirewall,
+    Parameters = {
+      /**
+       * When set to true, creates an AFC control plane for the Azure Firewall.
+       */
+      @added(Versions.v2025_07_01)
+      @query("createAfcControlPlane")
+      createAfcControlPlane?: boolean;
+    },
     Error = CloudError
   >;
 
@@ -86,7 +96,10 @@ interface AzureFirewalls {
   @tag("AzureFirewalls")
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureFirewall,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -139,15 +152,19 @@ interface AzureFirewalls {
 
 @@doc(AzureFirewall.name, "The name of the Azure Firewall.");
 @@doc(AzureFirewall.properties, "Properties of the azure firewall.");
-@@doc(AzureFirewalls.createOrUpdate::parameters.resource,
+@@doc(
+  AzureFirewalls.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Azure Firewall operation."
 );
-@@doc(AzureFirewalls.updateTags::parameters.properties,
+@@doc(
+  AzureFirewalls.updateTags::parameters.properties,
   "Parameters supplied to update azure firewall tags."
 );
-@@doc(AzureFirewalls.packetCapture::parameters.body,
+@@doc(
+  AzureFirewalls.packetCapture::parameters.body,
   "Parameters supplied to run packet capture on azure firewall."
 );
-@@doc(AzureFirewalls.packetCaptureOperation::parameters.body,
+@@doc(
+  AzureFirewalls.packetCaptureOperation::parameters.body,
   "Parameters supplied to run packet capture on azure firewall."
 );

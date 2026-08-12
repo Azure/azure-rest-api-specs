@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/VirtualNetwork.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -60,7 +62,10 @@ interface VirtualNetworks {
   @tag("VirtualNetworks")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -90,6 +95,7 @@ interface VirtualNetworks {
       /**
        * The private IP address to be verified.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("ipAddress")
       ipAddress: string;
     },
@@ -131,6 +137,26 @@ interface VirtualNetworks {
       @query("skipToken")
       skipToken?: string;
     },
+    Error = CloudError
+  >;
+
+  /**
+   * Move IP configurations from one virtual network to another.
+   */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "azure-async-operation used for LRO polling"
+  @added(Versions.v2025_09_01)
+  @tag("VirtualNetworks")
+  @action("moveIpConfigurations")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  moveIpConfigurations is ArmResourceActionAsync<
+    VirtualNetwork,
+    MoveIpConfigurationsRequest,
+    Response = {
+      @body body: void;
+    },
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+      ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 }
@@ -186,15 +212,23 @@ interface EffectiveConfigurations {
 
 @@doc(VirtualNetwork.name, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "Properties of the virtual network.");
-@@doc(VirtualNetworks.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworks.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network operation."
 );
-@@doc(VirtualNetworks.updateTags::parameters.properties,
+@@doc(
+  VirtualNetworks.updateTags::parameters.properties,
   "Parameters supplied to update virtual network tags."
 );
-@@doc(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
+@@doc(
+  VirtualNetworks.moveIpConfigurations::parameters.body,
+  "Parameters supplied to move IP configurations from one virtual network to another."
+);
+@@doc(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
   "Parameters supplied to list correct page."
 );
-@@doc(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
+@@doc(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
   "Parameters supplied to list correct page."
 );

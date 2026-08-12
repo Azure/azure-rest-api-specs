@@ -25,6 +25,7 @@ model NetworkInterfaceIPConfiguration extends SubResourceModel {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: NetworkInterfaceIPConfigurationPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @path
   @key("ipConfigurationName")
@@ -37,6 +38,7 @@ model NetworkInterfaceIPConfiguration extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(NetworkInterfaceIPConfiguration.name,
+@@doc(
+  NetworkInterfaceIPConfiguration.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );

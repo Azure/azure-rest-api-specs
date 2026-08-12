@@ -64,10 +64,9 @@ op ArmCustomPatchAsyncWithOptionalBody<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} = ArmResponse<Resource> | ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders
-  >,
+  Response extends {} =
+    | ArmResponse<Resource>
+    | ArmAcceptedLroResponse<"Resource update request accepted.", LroHeaders>,
   Error extends {} = ErrorResponse
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,

@@ -11,7 +11,8 @@ using Http;
 @@clientName(Addon, "DataBoxEdgeRoleAddon", "csharp");
 @@clientName(Role, "DataBoxEdgeRole", "csharp");
 @@clientName(Share, "DataBoxEdgeShare", "csharp");
-@@clientName(StorageAccountCredential,
+@@clientName(
+  StorageAccountCredential,
   "DataBoxEdgeStorageAccountCredential",
   "csharp"
 );
@@ -19,11 +20,13 @@ using Http;
 @@clientName(Container, "DataBoxEdgeStorageContainer", "csharp");
 @@clientName(Trigger, "DataBoxEdgeTrigger", "csharp");
 @@clientName(User, "DataBoxEdgeUser", "csharp");
-@@clientName(DiagnosticProactiveLogCollectionSettings,
+@@clientName(
+  DiagnosticProactiveLogCollectionSettings,
   "DiagnosticProactiveLogCollectionSetting",
   "csharp"
 );
-@@clientName(DiagnosticRemoteSupportSettings,
+@@clientName(
+  DiagnosticRemoteSupportSettings,
   "DiagnosticRemoteSupportSetting",
   "csharp"
 );
@@ -32,12 +35,14 @@ using Http;
 @@clientName(NetworkAdapterDHCPStatus, "NetworkAdapterDhcpStatus", "java");
 @@clientName(NetworkAdapterRDMAStatus, "NetworkAdapterRdmaStatus", "java");
 @@clientName(ARMBaseModel, "ArmBaseModel", "java");
-@@clientName(RefreshDetails.lastCompletedRefreshJobTimeInUTC,
+@@clientName(
+  RefreshDetails.lastCompletedRefreshJobTimeInUTC,
   "lastCompletedRefreshJobTimeInUtc",
   "java"
 );
 @@clientName(StorageAccountCredentialProperties.userName, "username", "java");
-@@clientName(Microsoft.DataBoxEdge,
+@@clientName(
+  Microsoft.DataBoxEdge,
   "DataBoxEdgeManagementClient",
   "javascript, python"
 );
@@ -61,7 +66,7 @@ op UsersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Users.delete, UsersDeleteCustomized, "python,go");
+@@override(Users.delete, UsersDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -82,9 +87,10 @@ op UsersListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): UserList;
 
-@@override(Users.listByDataBoxEdgeDevice,
+@@override(
+  Users.listByDataBoxEdgeDevice,
   UsersListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -106,7 +112,7 @@ op UsersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): User;
 
-@@override(Users.get, UsersGetCustomized, "python,go");
+@@override(Users.get, UsersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -130,7 +136,11 @@ op UsersCreateOrUpdateCustomized(
   user: User,
 ): void;
 
-@@override(Users.createOrUpdate, UsersCreateOrUpdateCustomized, "python,go");
+@@override(
+  Users.createOrUpdate,
+  UsersCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -151,9 +161,10 @@ op StorageAccountsDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(StorageAccounts.delete,
+@@override(
+  StorageAccounts.delete,
   StorageAccountsDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -171,9 +182,10 @@ op StorageAccountsListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): StorageAccountList;
 
-@@override(StorageAccounts.listByDataBoxEdgeDevice,
+@@override(
+  StorageAccounts.listByDataBoxEdgeDevice,
   StorageAccountsListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -195,7 +207,11 @@ op StorageAccountsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): StorageAccount;
 
-@@override(StorageAccounts.get, StorageAccountsGetCustomized, "python,go");
+@@override(
+  StorageAccounts.get,
+  StorageAccountsGetCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -219,9 +235,10 @@ op StorageAccountsCreateOrUpdateCustomized(
   storageAccount: StorageAccount,
 ): void;
 
-@@override(StorageAccounts.createOrUpdate,
+@@override(
+  StorageAccounts.createOrUpdate,
   StorageAccountsCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -243,9 +260,10 @@ op MonitoringMetricConfigurationsDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(MonitoringMetricConfigurations.delete,
+@@override(
+  MonitoringMetricConfigurations.delete,
   MonitoringMetricConfigurationsDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -267,9 +285,10 @@ op MonitoringMetricConfigurationsListCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): MonitoringMetricConfigurationList;
 
-@@override(MonitoringMetricConfigurations.list,
+@@override(
+  MonitoringMetricConfigurations.list,
   MonitoringMetricConfigurationsListCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -291,9 +310,10 @@ op MonitoringMetricConfigurationsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): MonitoringMetricConfiguration;
 
-@@override(MonitoringMetricConfigurations.get,
+@@override(
+  MonitoringMetricConfigurations.get,
   MonitoringMetricConfigurationsGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -315,12 +335,13 @@ op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  MonitoringMetricConfiguration: MonitoringMetricConfiguration,
+  monitoringMetricConfiguration: MonitoringMetricConfiguration,
 ): void;
 
-@@override(MonitoringMetricConfigurations.createOrUpdate,
+@@override(
+  MonitoringMetricConfigurations.createOrUpdate,
   MonitoringMetricConfigurationsCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -342,7 +363,11 @@ op OperationsStatusGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): OperationsStatus;
 
-@@override(OperationsStatus.get, OperationsStatusGetCustomized, "python,go");
+@@override(
+  OperationsStatus.get,
+  OperationsStatusGetCustomized,
+  "python,go,javascript"
+);
 
 // Core lib supports query operation status, so scope out this operation for .NET.
 @@scope(OperationsStatus.get, "!csharp");
@@ -366,7 +391,7 @@ op JobsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Job;
 
-@@override(Jobs.get, JobsGetCustomized, "python,go");
+@@override(Jobs.get, JobsGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -387,7 +412,7 @@ op RolesDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Roles.delete, RolesDeleteCustomized, "python,go");
+@@override(Roles.delete, RolesDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -404,9 +429,10 @@ op RolesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): RoleList;
 
-@@override(Roles.listByDataBoxEdgeDevice,
+@@override(
+  Roles.listByDataBoxEdgeDevice,
   RolesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -428,7 +454,7 @@ op RolesGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Role;
 
-@@override(Roles.get, RolesGetCustomized, "python,go");
+@@override(Roles.get, RolesGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -449,10 +475,14 @@ op RolesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Role,
+  role: Role,
 ): void;
 
-@@override(Roles.createOrUpdate, RolesCreateOrUpdateCustomized, "python,go");
+@@override(
+  Roles.createOrUpdate,
+  RolesCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -473,7 +503,7 @@ op SharesDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Shares.delete, SharesDeleteCustomized, "python,go");
+@@override(Shares.delete, SharesDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -490,9 +520,10 @@ op SharesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): ShareList;
 
-@@override(Shares.listByDataBoxEdgeDevice,
+@@override(
+  Shares.listByDataBoxEdgeDevice,
   SharesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -517,7 +548,7 @@ op SharesRefreshCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Shares.refresh, SharesRefreshCustomized, "python,go");
+@@override(Shares.refresh, SharesRefreshCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -538,7 +569,7 @@ op SharesGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Share;
 
-@@override(Shares.get, SharesGetCustomized, "python,go");
+@@override(Shares.get, SharesGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -559,10 +590,14 @@ op SharesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Share,
+  share: Share,
 ): void;
 
-@@override(Shares.createOrUpdate, SharesCreateOrUpdateCustomized, "python,go");
+@@override(
+  Shares.createOrUpdate,
+  SharesCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -587,7 +622,11 @@ op ContainersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Containers.delete, ContainersDeleteCustomized, "python,go");
+@@override(
+  Containers.delete,
+  ContainersDeleteCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -615,7 +654,11 @@ op ContainersRefreshCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Containers.refresh, ContainersRefreshCustomized, "python,go");
+@@override(
+  Containers.refresh,
+  ContainersRefreshCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -636,9 +679,10 @@ op ContainersListByStorageAccountCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): ContainerList;
 
-@@override(Containers.listByStorageAccount,
+@@override(
+  Containers.listByStorageAccount,
   ContainersListByStorageAccountCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -664,7 +708,7 @@ op ContainersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Container;
 
-@@override(Containers.get, ContainersGetCustomized, "python,go");
+@@override(Containers.get, ContainersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -689,12 +733,13 @@ op ContainersCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Container,
+  container: Container,
 ): void;
 
-@@override(Containers.createOrUpdate,
+@@override(
+  Containers.createOrUpdate,
   ContainersCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -711,12 +756,12 @@ op OrdersDeleteCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Orders.delete, OrdersDeleteCustomized, "python,go");
+@@override(Orders.delete, OrdersDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -732,7 +777,7 @@ op OrderslistDCAccessCodeCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   @body
   body: void,
@@ -740,9 +785,10 @@ op OrderslistDCAccessCodeCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): DCAccessCode;
 
-@@override(Orders.listDCAccessCode,
+@@override(
+  Orders.listDCAccessCode,
   OrderslistDCAccessCodeCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -760,9 +806,10 @@ op OrdersListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): OrderList;
 
-@@override(Orders.listByDataBoxEdgeDevice,
+@@override(
+  Orders.listByDataBoxEdgeDevice,
   OrdersListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -779,12 +826,12 @@ op OrdersGetCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Order;
 
-@@override(Orders.get, OrdersGetCustomized, "python,go");
+@@override(Orders.get, OrdersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -800,15 +847,19 @@ op OrdersCreateOrUpdateCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Order,
+  order: Order,
 ): void;
 
-@@override(Orders.createOrUpdate, OrdersCreateOrUpdateCustomized, "python,go");
+@@override(
+  Orders.createOrUpdate,
+  OrdersCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -829,7 +880,7 @@ op TriggersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Triggers.delete, TriggersDeleteCustomized, "python,go");
+@@override(Triggers.delete, TriggersDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -850,9 +901,10 @@ op TriggersListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): TriggerList;
 
-@@override(Triggers.listByDataBoxEdgeDevice,
+@@override(
+  Triggers.listByDataBoxEdgeDevice,
   TriggersListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -874,7 +926,7 @@ op TriggersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Trigger;
 
-@@override(Triggers.get, TriggersGetCustomized, "python,go");
+@@override(Triggers.get, TriggersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -895,12 +947,13 @@ op TriggersCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Trigger,
+  trigger: Trigger,
 ): void;
 
-@@override(Triggers.createOrUpdate,
+@@override(
+  Triggers.createOrUpdate,
   TriggersCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -926,7 +979,7 @@ op AddonsDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Addons.delete, AddonsDeleteCustomized, "python,go");
+@@override(Addons.delete, AddonsDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -947,7 +1000,11 @@ op AddonsListByRoleCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): AddonList;
 
-@@override(Addons.listByRole, AddonsListByRoleCustomized, "python,go");
+@@override(
+  Addons.listByRole,
+  AddonsListByRoleCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -972,7 +1029,7 @@ op AddonsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Addon;
 
-@@override(Addons.get, AddonsGetCustomized, "python,go");
+@@override(Addons.get, AddonsGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -997,10 +1054,14 @@ op AddonsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Addon,
+  addon: Addon,
 ): void;
 
-@@override(Addons.createOrUpdate, AddonsCreateOrUpdateCustomized, "python,go");
+@@override(
+  Addons.createOrUpdate,
+  AddonsCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1017,9 +1078,10 @@ op AlertsListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): AlertList;
 
-@@override(Alerts.listByDataBoxEdgeDevice,
+@@override(
+  Alerts.listByDataBoxEdgeDevice,
   AlertsListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1041,7 +1103,7 @@ op AlertsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Alert;
 
-@@override(Alerts.get, AlertsGetCustomized, "python,go");
+@@override(Alerts.get, AlertsGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1062,9 +1124,10 @@ op BandwidthSchedulesDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(BandwidthSchedules.delete,
+@@override(
+  BandwidthSchedules.delete,
   BandwidthSchedulesDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1082,9 +1145,10 @@ op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): BandwidthSchedulesList;
 
-@@override(BandwidthSchedules.listByDataBoxEdgeDevice,
+@@override(
+  BandwidthSchedules.listByDataBoxEdgeDevice,
   BandwidthSchedulesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1106,9 +1170,10 @@ op BandwidthSchedulesGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): BandwidthSchedule;
 
-@@override(BandwidthSchedules.get,
+@@override(
+  BandwidthSchedules.get,
   BandwidthSchedulesGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1130,12 +1195,13 @@ op BandwidthSchedulesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: BandwidthSchedule,
+  parameters: BandwidthSchedule,
 ): void;
 
-@@override(BandwidthSchedules.createOrUpdate,
+@@override(
+  BandwidthSchedules.createOrUpdate,
   BandwidthSchedulesCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1157,9 +1223,10 @@ op StorageAccountCredentialsDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(StorageAccountCredentials.delete,
+@@override(
+  StorageAccountCredentials.delete,
   StorageAccountCredentialsDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1177,9 +1244,10 @@ op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): StorageAccountCredentialList;
 
-@@override(StorageAccountCredentials.listByDataBoxEdgeDevice,
+@@override(
+  StorageAccountCredentials.listByDataBoxEdgeDevice,
   StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1201,9 +1269,10 @@ op StorageAccountCredentialsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): StorageAccountCredential;
 
-@@override(StorageAccountCredentials.get,
+@@override(
+  StorageAccountCredentials.get,
   StorageAccountCredentialsGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1225,12 +1294,13 @@ op StorageAccountCredentialsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: StorageAccountCredential,
+  storageAccountCredential: StorageAccountCredential,
 ): void;
 
-@@override(StorageAccountCredentials.createOrUpdate,
+@@override(
+  StorageAccountCredentials.createOrUpdate,
   StorageAccountCredentialsCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1251,9 +1321,10 @@ op DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): NodeList;
 
-@@override(DataBoxEdgeDevices.listByDataBoxEdgeDevice,
+@@override(
+  DataBoxEdgeDevices.listByDataBoxEdgeDevice,
   DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1271,9 +1342,10 @@ op DataBoxEdgeDevicesDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(DataBoxEdgeDevices.delete,
+@@override(
+  DataBoxEdgeDevices.delete,
   DataBoxEdgeDevicesDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1291,12 +1363,13 @@ op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  body: SecuritySettings,
+  securitySettings: SecuritySettings,
 ): void;
 
-@@override(DataBoxEdgeDevices.createOrUpdateSecuritySettings,
+@@override(
+  DataBoxEdgeDevices.createOrUpdateSecuritySettings,
   DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1314,12 +1387,13 @@ op DataBoxEdgeDevicesUploadCertificateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  body: UploadCertificateRequest,
+  parameters: UploadCertificateRequest,
 ): UploadCertificateResponse;
 
-@@override(DataBoxEdgeDevices.uploadCertificate,
+@@override(
+  DataBoxEdgeDevices.uploadCertificate,
   DataBoxEdgeDevicesUploadCertificateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1340,9 +1414,10 @@ op DataBoxEdgeDevicesInstallUpdatesCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(DataBoxEdgeDevices.installUpdates,
+@@override(
+  DataBoxEdgeDevices.installUpdates,
   DataBoxEdgeDevicesInstallUpdatesCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1364,9 +1439,10 @@ op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): NetworkSettings;
 
-@@override(Devices.getNetworkSettings,
+@@override(
+  Devices.getNetworkSettings,
   DataBoxEdgeDevicesGetNetworkSettingsCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1388,9 +1464,10 @@ op DataBoxEdgeDevicesGenerateCertificateCustomized(
   body: void,
 ): GenerateCertResponse;
 
-@@override(DataBoxEdgeDevices.generateCertificate,
+@@override(
+  DataBoxEdgeDevices.generateCertificate,
   DataBoxEdgeDevicesGenerateCertificateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1411,9 +1488,10 @@ op DataBoxEdgeDevicesScanForUpdatesCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(DataBoxEdgeDevices.scanForUpdates,
+@@override(
+  DataBoxEdgeDevices.scanForUpdates,
   DataBoxEdgeDevicesScanForUpdatesCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1431,9 +1509,10 @@ op DataBoxEdgeDevicesGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): DataBoxEdgeDevices;
 
-@@override(DataBoxEdgeDevices.get,
+@@override(
+  DataBoxEdgeDevices.get,
   DataBoxEdgeDevicesGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1451,12 +1530,13 @@ op DataBoxEdgeDevicesUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  properties: DataBoxEdgeDevicePatch,
+  parameters: DataBoxEdgeDevicePatch,
 ): DataBoxEdgeDevices;
 
-@@override(DataBoxEdgeDevices.update,
+@@override(
+  DataBoxEdgeDevices.update,
   DataBoxEdgeDevicesUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1478,9 +1558,10 @@ op DataBoxEdgeDevicesGetUpdateSummaryCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): UpdateSummary;
 
-@@override(UpdateSummaries.getUpdateSummary,
+@@override(
+  UpdateSummaries.getUpdateSummary,
   DataBoxEdgeDevicesGetUpdateSummaryCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1498,12 +1579,13 @@ op DataBoxEdgeDevicesUpdateExtendedInformationCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  body: DataBoxEdgeDeviceExtendedInfoPatch,
+  parameters: DataBoxEdgeDeviceExtendedInfoPatch,
 ): DataBoxEdgeDeviceExtendedInfo;
 
-@@override(DataBoxEdgeDevices.updateExtendedInformation,
+@@override(
+  DataBoxEdgeDevices.updateExtendedInformation,
   DataBoxEdgeDevicesUpdateExtendedInformationCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1524,9 +1606,10 @@ op DataBoxEdgeDevicesDownloadUpdatesCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(DataBoxEdgeDevices.downloadUpdates,
+@@override(
+  DataBoxEdgeDevices.downloadUpdates,
   DataBoxEdgeDevicesDownloadUpdatesCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1547,9 +1630,10 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): DataBoxEdgeDeviceExtendedInfo;
 
-@@override(DataBoxEdgeDevices.getExtendedInformation,
+@@override(
+  DataBoxEdgeDevices.getExtendedInformation,
   DataBoxEdgeDevicesGetExtendedInformationCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 @@clientName(DataBoxEdgeSkuList, "AvailableDataBoxEdgeSkuList", "csharp");
@@ -1559,7 +1643,8 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(BandwidthScheduleProperties.stop, "StopOn", "csharp");
 @@alternateType(BandwidthScheduleProperties.start, duration, "csharp");
 @@alternateType(BandwidthScheduleProperties.stop, duration, "csharp");
-@@clientName(DataBoxEdgeDeviceProperties.systemData,
+@@clientName(
+  DataBoxEdgeDeviceProperties.systemData,
   "DataBoxEdgeSystemData",
   "csharp"
 );
@@ -1568,67 +1653,81 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(AccessLevel, "EdgeRemoteApplicationAccessLevel", "csharp");
 @@clientName(AccountType, "DataBoxEdgeStorageAccountType", "csharp");
 @@clientName(Address, "DataBoxEdgeShippingAddress", "csharp");
-@@clientName(ClusterMemoryCapacity.clusterFailoverMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterFailoverMemoryMb,
   "ClusterFailoverMemoryInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterFreeMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterFreeMemoryMb,
   "ClusterFreeMemoryInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterUsedMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterUsedMemoryMb,
   "ClusterUsedMemoryInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterFragmentationMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterFragmentationMemoryMb,
   "ClusterFragmentationMemoryInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterInfraVmMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterInfraVmMemoryMb,
   "ClusterInfraVmMemoryInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterTotalMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterTotalMemoryMb,
   "ClusterTotalMemoryInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterNonFailoverVmMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterNonFailoverVmMb,
   "ClusterNonFailoverVmInMB",
   "csharp"
 );
-@@clientName(ClusterMemoryCapacity.clusterMemoryUsedByVmsMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterMemoryUsedByVmsMb,
   "ClusterMemoryUsedByVmsInMB",
   "csharp"
 );
-@@clientName(ClusterStorageViewData.clusterFreeStorageMb,
+@@clientName(
+  ClusterStorageViewData.clusterFreeStorageMb,
   "ClusterFreeStorageInMB",
   "csharp"
 );
-@@clientName(ClusterStorageViewData.clusterTotalStorageMb,
+@@clientName(
+  ClusterStorageViewData.clusterTotalStorageMb,
   "ClusterTotalStorageInMB",
   "csharp"
 );
 @@clientName(GenerateCertResponse, "GenerateCertResult", "csharp");
 @@clientName(GenerateCertResponse.expiryTimeInUTC, "ExpireOn", "csharp");
-@@clientName(HostCapacity.effectiveAvailableMemoryMbOnHost,
+@@clientName(
+  HostCapacity.effectiveAvailableMemoryMbOnHost,
   "EffectiveAvailableMemoryInMBOnHost",
   "csharp"
 );
 @@clientName(NodeInfo, "EdgeKubernetesNodeInfo", "csharp");
-@@clientName(NumaNodeData.effectiveAvailableMemoryInMb,
+@@clientName(
+  NumaNodeData.effectiveAvailableMemoryInMb,
   "EffectiveAvailableMemoryInMB",
   "csharp"
 );
 @@clientName(NumaNodeData.totalMemoryInMb, "TotalMemoryInMB", "csharp");
 @@clientName(NumaNodeData, "NumaNodeInfo", "csharp");
 @@clientName(PlatformType, "DataBoxEdgeOSPlatformType", "csharp");
-@@clientName(RemoteSupportSettings.expirationTimeStampInUTC,
+@@clientName(
+  RemoteSupportSettings.expirationTimeStampInUTC,
   "ExpireOn",
   "csharp"
 );
 @@clientName(Secret, "DataBoxEdgeDeviceSecret", "csharp");
 @@clientName(UpdateDetails.updateSize, "UpdateSizeInBytes", "csharp");
-@@alternateType(UserAccessRight.userId,
+@@alternateType(
+  UserAccessRight.userId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -1637,11 +1736,13 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(UpdateSummary, "DataBoxEdgeDeviceUpdateSummary", "csharp");
 @@clientName(NetworkSettings, "DataBoxEdgeDeviceNetworkSettings", "csharp");
 @@clientName(DeviceCapacityInfo, "DataBoxEdgeDeviceCapacityInfo", "csharp");
-@@alternateType(IoTDeviceInfo.ioTHostHubId,
+@@alternateType(
+  IoTDeviceInfo.ioTHostHubId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(AzureContainerDataFormat,
+@@clientName(
+  AzureContainerDataFormat,
   "DataBoxEdgeStorageContainerDataFormat",
   "csharp"
 );
@@ -1649,7 +1750,8 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(ContainerStatus, "DataBoxEdgeStorageContainerStatus", "csharp");
 @@clientName(ComputeResource, "EdgeComputeResourceInfo", "csharp");
 @@clientName(MonitoringStatus, "DataBoxEdgeShareMonitoringStatus", "csharp");
-@@alternateType(MetricConfiguration.resourceId,
+@@alternateType(
+  MetricConfiguration.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -1665,7 +1767,8 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(ClusterStorageViewData, "EdgeClusterStorageViewInfo", "csharp");
 @@clientName(ClusterGpuCapacity, "EdgeClusterGpuCapacity", "csharp");
 @@clientName(ClusterWitnessType, "EdgeClusterWitnessType", "csharp");
-@@alternateType(EdgeProfileSubscription.id,
+@@alternateType(
+  EdgeProfileSubscription.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -1673,7 +1776,8 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(FileEventTrigger, "EdgeFileEventTrigger", "csharp");
 @@clientName(KeyVaultSyncStatus, "EdgeKeyVaultSyncStatus", "csharp");
 @@clientName(KubernetesClusterInfo, "EdgeKubernetesClusterInfo", "csharp");
-@@clientName(KubernetesIPConfiguration,
+@@clientName(
+  KubernetesIPConfiguration,
   "EdgeKubernetesIPConfiguration",
   "csharp"
 );
@@ -1683,43 +1787,51 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(KubernetesRoleNetwork, "EdgeKubernetesRoleNetwork", "csharp");
 @@clientName(KubernetesRoleResources, "EdgeKubernetesRoleResources", "csharp");
 @@clientName(KubernetesRoleStorage, "EdgeKubernetesRoleStorage", "csharp");
-@@clientName(KubernetesRoleStorageClassInfo,
+@@clientName(
+  KubernetesRoleStorageClassInfo,
   "EdgeKubernetesRoleStorageClassInfo",
   "csharp"
 );
 @@clientName(KubernetesState, "EdgeKubernetesState", "csharp");
-@@clientName(NetworkAdapterPosition,
+@@clientName(
+  NetworkAdapterPosition,
   "DataBoxEdgeNetworkAdapterPosition",
   "csharp"
 );
 @@clientName(NetworkAdapterStatus, "DataBoxEdgeNetworkAdapterStatus", "csharp");
 @@clientName(RemoteSupportSettings, "EdgeRemoteSupportSettings", "csharp");
 @@clientName(RemoteApplicationType, "EdgeRemoteApplicationType", "csharp");
-@@alternateType(DataBoxEdgeDevice.identity,
+@@alternateType(
+  DataBoxEdgeDevice.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(ResourceIdentity.tenantId, Azure.Core.uuid, "csharp");
 @@alternateType(SubscriptionProperties.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(UploadCertificateResponse.aadTenantId,
+@@alternateType(
+  UploadCertificateResponse.aadTenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(ArcAddonProperties.resourceLocation,
+@@alternateType(
+  ArcAddonProperties.resourceLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(EdgeProfileSubscription.registrationId,
+@@alternateType(
+  EdgeProfileSubscription.registrationId,
   Azure.Core.uuid,
   "csharp"
 );
 @@alternateType(NetworkAdapter.nodeId, Azure.Core.uuid, "csharp");
 @@alternateType(NodeProperties.nodeInstanceId, Azure.Core.uuid, "csharp");
-@@alternateType(UploadCertificateResponse.servicePrincipalObjectId,
+@@alternateType(
+  UploadCertificateResponse.servicePrincipalObjectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(UploadCertificateResponse.servicePrincipalClientId,
+@@alternateType(
+  UploadCertificateResponse.servicePrincipalClientId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -1780,76 +1892,94 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(AlertErrorDetails, "DataBoxEdgeAlertErrorDetails", "csharp");
 
 @@clientName(IoTEdgeAgentInfo, "IotEdgeAgentInfo", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(JobProperties.refreshedEntityId,
+@@alternateType(
+  JobProperties.refreshedEntityId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(StorageAccountCredentialProperties.storageAccountId,
+@@alternateType(
+  StorageAccountCredentialProperties.storageAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AzureContainerInfo.storageAccountCredentialId,
+@@alternateType(
+  AzureContainerInfo.storageAccountCredentialId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(StorageAccountProperties.storageAccountCredentialId,
+@@alternateType(
+  StorageAccountProperties.storageAccountCredentialId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreId,
+@@alternateType(
+  DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreId,
+@@alternateType(
+  DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EdgeProfileSubscriptionPatch.id,
+@@alternateType(
+  EdgeProfileSubscriptionPatch.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MountPointMap.roleId,
+@@alternateType(
+  MountPointMap.roleId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MountPointMap.shareId,
+@@alternateType(
+  MountPointMap.shareId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ShareAccessRight.shareId,
+@@alternateType(
+  ShareAccessRight.shareId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(FileSourceInfo.shareId,
+@@alternateType(
+  FileSourceInfo.shareId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RoleSinkInfo.roleId,
+@@alternateType(
+  RoleSinkInfo.roleId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RefreshDetails.inProgressRefreshJobId,
+@@alternateType(
+  RefreshDetails.inProgressRefreshJobId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpdateSummaryProperties.lastCompletedDownloadJobId,
+@@alternateType(
+  UpdateSummaryProperties.lastCompletedDownloadJobId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpdateSummaryProperties.lastCompletedInstallJobId,
+@@alternateType(
+  UpdateSummaryProperties.lastCompletedInstallJobId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpdateSummaryProperties.inProgressDownloadJobId,
+@@alternateType(
+  UpdateSummaryProperties.inProgressDownloadJobId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpdateSummaryProperties.inProgressInstallJobId,
+@@alternateType(
+  UpdateSummaryProperties.inProgressInstallJobId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -1858,19 +1988,23 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 
 @@clientName(MECRole, "MecRole", "csharp");
 @@clientName(UploadCertificateRequest, "UploadCertificateContent", "csharp");
-@@clientName(DeviceCapacityRequestInfo,
+@@clientName(
+  DeviceCapacityRequestInfo,
   "DeviceCapacityRequestContent",
   "csharp"
 );
-@@clientName(TriggerSupportPackageRequest,
+@@clientName(
+  TriggerSupportPackageRequest,
   "TriggerSupportPackageContent",
   "csharp"
 );
-@@clientName(NetworkAdapterDHCPStatus,
+@@clientName(
+  NetworkAdapterDHCPStatus,
   "DataBoxEdgeNetworkAdapterDhcpStatus",
   "csharp"
 );
-@@clientName(NetworkAdapterRDMAStatus,
+@@clientName(
+  NetworkAdapterRDMAStatus,
   "DataBoxEdgeNetworkAdapterRdmaStatus",
   "csharp"
 );
@@ -1879,6 +2013,9 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(ShareAccessProtocol.NFS, "Nfs", "csharp");
 @@clientName(RoleTypes.IOT, "IoT", "csharp");
 @@clientName(RoleTypes.ASA, "Asa", "csharp");
+
+@@clientName(MetricDimension_V1, "MetricDimensionV1", "python");
+@@clientName(MetricSpecification_V1, "MetricSpecificationV1", "python");
 @@clientName(RoleTypes.MEC, "Mec", "csharp");
 @@clientName(NetworkGroup.NonRDMA, "NonRdma", "csharp");
 @@clientName(NetworkGroup.RDMA, "Rdma", "csharp");
@@ -1888,7 +2025,8 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 
 @@clientName(NetworkAdapter.ipv4Configuration, "IPv4Configuration", "csharp");
 @@clientName(NetworkAdapter.ipv6Configuration, "IPv6Configuration", "csharp");
-@@clientName(NetworkAdapter.ipv6LinkLocalAddress,
+@@clientName(
+  NetworkAdapter.ipv6LinkLocalAddress,
   "IPv6LinkLocalAddress",
   "csharp"
 );
@@ -1900,33 +2038,40 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 
 @@clientName(EtcdInfo.type, "EtcdInfoType", "csharp");
 @@clientName(CniConfig.type, "CniConfigType", "csharp");
-@@clientName(KubernetesRoleStorageClassInfo.type,
+@@clientName(
+  KubernetesRoleStorageClassInfo.type,
   "KubernetesRoleStorageClassInfoType",
   "csharp"
 );
 @@clientName(LoadBalancerConfig.type, "LoadBalancerConfigType", "csharp");
-@@clientName(ClusterMemoryCapacity.clusterHypervReserveMemoryMb,
+@@clientName(
+  ClusterMemoryCapacity.clusterHypervReserveMemoryMb,
   "ClusterHyperVReserveMemoryMb",
   "csharp"
 );
-@@clientName(RefreshDetails.lastCompletedRefreshJobTimeInUTC,
+@@clientName(
+  RefreshDetails.lastCompletedRefreshJobTimeInUTC,
   "LastCompletedRefreshJobTimeInUtc",
   "csharp"
 );
-@@clientName(ResourceMoveDetails.operationInProgressLockTimeoutInUTC,
+@@clientName(
+  ResourceMoveDetails.operationInProgressLockTimeoutInUTC,
   "OperationInProgressLockTimeoutInUtc",
   "csharp"
 );
-@@clientName(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
+@@clientName(
+  DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
   "ClientSecretStoreUri",
   "csharp"
 );
-@@clientName(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
+@@clientName(
+  DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
   "ClientSecretStoreUri",
   "csharp"
 );
 @@clientName(TrackingInfo.trackingUrl, "TrackingUri", "csharp");
-@@clientName(ImageRepositoryCredential.imageRepositoryUrl,
+@@clientName(
+  ImageRepositoryCredential.imageRepositoryUrl,
   "ImageRepositoryUri",
   "csharp"
 );
@@ -1943,25 +2088,53 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(SkuName.TCA_Large, "TcaLarge", "csharp");
 @@clientName(SkuName.EdgePR_Base_UPS, "EdgePRBaseUps", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(SkuName.EP2_64_1VPU_W, "EP2_64_1VpuW", "csharp");
+@@clientName(
+  SkuName.EP2_64_1VPU_W,
+  Azure.ClientGenerator.Core.exact("EP2_64_1VpuW"),
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(SkuName.EP2_128_1T4_Mx1_W, "EP2_128_1T4Mx1W", "csharp");
+@@clientName(
+  SkuName.EP2_128_1T4_Mx1_W,
+  Azure.ClientGenerator.Core.exact("EP2_128_1T4Mx1W"),
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(SkuName.EP2_256_2T4_W, "EP2_256_2T4W", "csharp");
+@@clientName(
+  SkuName.EP2_256_2T4_W,
+  Azure.ClientGenerator.Core.exact("EP2_256_2T4W"),
+  "csharp"
+);
 @@clientName(SkuName.RCA_Small, "RcaSmall", "csharp");
 @@clientName(SkuName.RCA_Large, "RcaLarge", "csharp");
 @@clientName(SkuName.RDC, "Rdc", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(SkuName.EP2_64_Mx1_W, "EP2_64_Mx1W", "csharp");
+@@clientName(
+  SkuName.EP2_64_Mx1_W,
+  Azure.ClientGenerator.Core.exact("EP2_64_Mx1W"),
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(SkuName.EP2_128_GPU1_Mx1_W, "EP2_128Gpu1Mx1W", "csharp");
+@@clientName(
+  SkuName.EP2_128_GPU1_Mx1_W,
+  Azure.ClientGenerator.Core.exact("EP2_128Gpu1Mx1W"),
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(SkuName.EP2_256_GPU2_Mx1, "EP2_256Gpu2Mx1", "csharp");
+@@clientName(
+  SkuName.EP2_256_GPU2_Mx1,
+  Azure.ClientGenerator.Core.exact("EP2_256Gpu2Mx1"),
+  "csharp"
+);
 @@clientName(SkuName.EdgeMR_TCP, "EdgeMRTcp", "csharp");
 
 @@clientName(EncryptionAlgorithm.AES256, "Aes256", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
-@@clientName(EncryptionAlgorithm.RSAES_PKCS1_v_1_5, "RsaesPkcs1V1_5", "csharp");
+@@clientName(
+  EncryptionAlgorithm.RSAES_PKCS1_v_1_5,
+  Azure.ClientGenerator.Core.exact("RsaesPkcs1V1_5"),
+  "csharp"
+);
 
 @@usage(Alert, Usage.input | Usage.output, "csharp");
 @@usage(DiagnosticRemoteSupportSettings, Usage.input | Usage.output, "csharp");
@@ -1984,11 +2157,13 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@access(RoleSinkInfo, Access.public, "csharp");
 @@access(FileSourceInfo, Access.public, "csharp");
 
-@@alternateType(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
+@@alternateType(
+  DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
   url,
   "csharp"
 );
-@@alternateType(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
+@@alternateType(
+  DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
   url,
   "csharp"
 );
@@ -1998,7 +2173,8 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(DataBoxEdgeSku.locations, Azure.Core.azureLocation[], "csharp");
 @@alternateType(GenerateCertResponse.expiryTimeInUTC, utcDateTime, "csharp");
-@@alternateType(DataBoxEdgeDevicePatch.identity,
+@@alternateType(
+  DataBoxEdgeDevicePatch.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -2007,17 +2183,20 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(IoTDeviceInfo.ioTHostHub, "IotHostHub", "csharp");
 @@clientName(IoTDeviceInfo.ioTHostHubId, "IotHostHubId", "csharp");
 @@clientName(IoTRoleProperties.ioTDeviceDetails, "IotDeviceDetails", "csharp");
-@@clientName(IoTRoleProperties.ioTEdgeDeviceDetails,
+@@clientName(
+  IoTRoleProperties.ioTEdgeDeviceDetails,
   "IotEdgeDeviceDetails",
   "csharp"
 );
 @@clientName(IoTRoleProperties.ioTEdgeAgentInfo, "IotEdgeAgentInfo", "csharp");
 @@clientName(IoTAddonProperties.ioTDeviceDetails, "IotDeviceDetails", "csharp");
-@@clientName(IoTAddonProperties.ioTEdgeDeviceDetails,
+@@clientName(
+  IoTAddonProperties.ioTEdgeDeviceDetails,
   "IotEdgeDeviceDetails",
   "csharp"
 );
-@@clientName(DataBoxEdgeDevices.listByDataBoxEdgeDevice,
+@@clientName(
+  DataBoxEdgeDevices.listByDataBoxEdgeDevice,
   "GetEdgeNodes",
   "csharp"
 );
@@ -2025,42 +2204,239 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(AvailableSkusOperationGroup.list, "GetAvailableSkus", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DataBoxEdgeDeviceExtendedInfo,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DataBoxEdgeDeviceExtendedInfo,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Node,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Node,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SecuritySettings,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SecuritySettings,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TriggerSupportPackageRequest,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  TriggerSupportPackageRequest,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceCapacityInfo.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DeviceCapacityInfo.properties,
   "csharp"
 );
 
-@@alternateType(CloudEdgeManagementRoleProperties.roleStatus,
+@@alternateType(
+  CloudEdgeManagementRoleProperties.roleStatus,
   RoleStatus | null,
   "csharp"
 );
 @@alternateType(IoTRoleProperties.roleStatus, RoleStatus | null, "csharp");
 @@alternateType(IoTRoleProperties.hostPlatform, PlatformType | null, "csharp");
-@@alternateType(KubernetesRoleProperties.roleStatus,
+@@alternateType(
+  KubernetesRoleProperties.roleStatus,
   RoleStatus | null,
   "csharp"
 );
-@@alternateType(KubernetesRoleProperties.hostPlatform,
+@@alternateType(
+  KubernetesRoleProperties.hostPlatform,
   PlatformType | null,
   "csharp"
 );
 @@alternateType(MECRoleProperties.roleStatus, RoleStatus | null, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized(
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  deviceCapacityRequestInfo: DeviceCapacityRequestInfo,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("capacityName")
+  capacityName?: string,
+):
+  | OkResponse
+  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
+  | CloudError;
+
+@@override(
+  DataBoxEdgeDevices.checkResourceCreationFeasibility,
+  DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DataBoxEdgeDevicesCreateOrUpdateCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  @body
+  dataBoxEdgeDevice: DataBoxEdgeDevice,
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): DataBoxEdgeDevice;
+
+@@override(
+  DataBoxEdgeDevices.createOrUpdate,
+  DataBoxEdgeDevicesCreateOrUpdateCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticProactiveLogCollectionSetting: string,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): DiagnosticProactiveLogCollectionSettings;
+
+@@override(
+  DiagnosticSettings.getDiagnosticProactiveLogCollectionSettings,
+  DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "customization"
+op DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticProactiveLogCollectionSetting: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  @body
+  proactiveLogCollectionSettings: DiagnosticProactiveLogCollectionSettings,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): void;
+
+@@override(
+  DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings,
+  DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticRemoteSupportSetting: string,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): DiagnosticRemoteSupportSettings;
+
+@@override(
+  DiagnosticRemoteSupportSettingsOperationGroup.getDiagnosticRemoteSupportSettings,
+  DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "customization"
+op DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticRemoteSupportSetting: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  @body
+  diagnosticRemoteSupportSettings: DiagnosticRemoteSupportSettings,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): void;
+
+@@override(
+  DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings,
+  DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DataBoxEdgeDevicesTriggerSupportPackageCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  @body
+  triggerSupportPackageRequest: TriggerSupportPackageRequest,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): void;
+
+@@override(
+  DataBoxEdgeDevices.triggerSupportPackage,
+  DataBoxEdgeDevicesTriggerSupportPackageCustomized
+);
+
+@@clientName(DataBoxEdgeSku, "ResourceTypeSku", "java");
+@@clientLocation(AvailableSkusOperationGroup.list, "Skus", "java");

@@ -15,30 +15,34 @@ using Microsoft.Resources;
 @@clientLocation(ResourceGroups.moveResources, "Resources");
 @@clientName(ResourceGroups.moveResources::parameters.body, "parameters");
 @@clientLocation(ResourceGroups.validateMoveResources, "Resources");
-@@clientName(ResourceGroups.validateMoveResources::parameters.body,
+@@clientName(
+  ResourceGroups.validateMoveResources::parameters.body,
   "parameters"
 );
 @@clientName(ResourceGroups.exportTemplate::parameters.body, "parameters");
 
 @@clientName(Resources.createOrUpdateById::parameters.resource, "parameters");
 @@clientName(Resources.updateById::parameters.properties, "parameters");
-@@clientName(SpecificResources.createOrUpdate::parameters.resource,
+@@clientName(
+  SpecificResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(SpecificResources.update::parameters.properties, "parameters");
 
-@@clientLocation(TagsResources.getAtScope, "Tags");
-@@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");
-@@clientName(TagsResources.createOrUpdateAtScope::parameters.resource,
+@@clientLocation(TagsResources.getAtScope, "Tags", "!javascript");
+@@clientLocation(TagsResources.createOrUpdateAtScope, "Tags", "!javascript");
+@@clientName(
+  TagsResources.createOrUpdateAtScope::parameters.resource,
   "parameters"
 );
-@@clientLocation(TagsResources.updateAtScope, "Tags");
+@@clientLocation(TagsResources.updateAtScope, "Tags", "!javascript");
 @@clientName(TagsResources.updateAtScope::parameters.properties, "parameters");
-@@clientLocation(TagsResources.deleteAtScope, "Tags");
+@@clientLocation(TagsResources.deleteAtScope, "Tags", "!javascript");
 
 @@clientLocation(ProvidersOperationGroup.listAtTenantScope, "Providers");
 @@clientLocation(ProvidersOperationGroup.unregister, "Providers");
-@@clientLocation(ProvidersOperationGroup.registerAtManagementGroupScope,
+@@clientLocation(
+  ProvidersOperationGroup.registerAtManagementGroupScope,
   "Providers"
 );
 @@clientLocation(ProvidersOperationGroup.providerPermissions, "Providers");
@@ -47,14 +51,40 @@ using Microsoft.Resources;
 @@clientLocation(ProvidersOperationGroup.get, "Providers");
 @@clientLocation(ProvidersOperationGroup.getAtTenantScope, "Providers");
 
-@@clientLocation(ProviderResourceTypesOperationGroup.list,
+@@clientLocation(
+  ProviderResourceTypesOperationGroup.list,
   "ProviderResourceTypes"
 );
 
 @@clientLocation(ResourcesOperationGroup.list, "Resources");
 
-@@clientLocation(TagsOperationGroup.deleteValue, "Tags");
-@@clientLocation(TagsOperationGroup.createOrUpdateValue, "Tags");
-@@clientLocation(TagsOperationGroup.createOrUpdate, "Tags");
-@@clientLocation(TagsOperationGroup.delete, "Tags");
-@@clientLocation(TagsOperationGroup.list, "Tags");
+@@clientLocation(TagsOperationGroup.deleteValue, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.createOrUpdateValue, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.createOrUpdate, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.delete, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.list, "Tags", "!javascript");
+@@clientLocation(TagsResources.getAtScope, "TagsOperations", "javascript");
+@@clientLocation(
+  TagsResources.createOrUpdateAtScope,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(TagsResources.updateAtScope, "TagsOperations", "javascript");
+@@clientLocation(TagsResources.deleteAtScope, "TagsOperations", "javascript");
+@@clientLocation(
+  TagsOperationGroup.deleteValue,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdateValue,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdate,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(TagsOperationGroup.delete, "TagsOperations", "javascript");
+@@clientLocation(TagsOperationGroup.list, "TagsOperations", "javascript");

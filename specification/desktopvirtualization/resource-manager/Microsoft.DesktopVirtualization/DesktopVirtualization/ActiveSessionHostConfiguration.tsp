@@ -19,11 +19,10 @@ namespace Microsoft.DesktopVirtualization;
 @added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
-model ActiveSessionHostConfiguration
-  is Azure.ResourceManager.ProxyResource<
-    ActiveSessionHostConfigurationProperties,
-    false
-  > {
+model ActiveSessionHostConfiguration is Azure.ResourceManager.ProxyResource<
+  ActiveSessionHostConfigurationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ActiveSessionHostConfiguration,
     SegmentName = "activeSessionHostConfigurations",
@@ -57,9 +56,11 @@ interface ActiveSessionHostConfigurations {
 
 @@maxLength(ActiveSessionHostConfiguration.name, 24);
 @@minLength(ActiveSessionHostConfiguration.name, 3);
-@@doc(ActiveSessionHostConfiguration.name,
+@@doc(
+  ActiveSessionHostConfiguration.name,
   "The name of the ActiveSessionHostConfiguration within the specified ActiveSessionHostConfiguration group"
 );
-@@doc(ActiveSessionHostConfiguration.properties,
+@@doc(
+  ActiveSessionHostConfiguration.properties,
   "Detailed properties for ActiveSessionHostConfiguration"
 );

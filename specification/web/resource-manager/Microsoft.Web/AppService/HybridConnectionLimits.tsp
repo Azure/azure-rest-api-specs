@@ -46,6 +46,7 @@ interface HybridConnectionLimitsOperationGroup {
 }
 
 @@doc(HybridConnectionLimits.name, "");
-@@doc(HybridConnectionLimits.properties,
+@@doc(
+  HybridConnectionLimits.properties,
   "HybridConnectionLimits resource specific properties"
 );

@@ -2,13 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Profile.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
 /**
@@ -35,12 +36,32 @@ interface RuleSets {
    * Creates a new rule set within the specified profile.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
+  @renamedFrom(Versions.v2025_12_01, "create")
+  @sharedRoute
   @put
-  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+  createV1 is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RuleSet,
     void,
     Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>,
     Error = ErrorResponse
+  >;
+
+  /**
+   * Creates or update a batch rule set within the specified profile along with the rules associate to it.
+   */
+  @added(Versions.v2025_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    RuleSet,
+    OptionalRequestBody = true,
+    Response =
+      | ArmResponse<RuleSet>
+      | (ArmCreatedResponse<RuleSet> &
+          ArmAsyncOperationHeader<FinalResult = RuleSet> &
+          ArmLroLocationHeader<FinalResult = RuleSet>)
+      | ErrorResponse
   >;
 
   /**
@@ -50,9 +71,12 @@ interface RuleSets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     RuleSet,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -73,9 +97,16 @@ interface RuleSets {
   >;
 }
 
-@@doc(RuleSet.name,
+@@doc(
+  RuleSet.name,
   "Name of the rule set under the profile which is unique globally."
 );
-@@doc(RuleSet.properties,
+@@doc(
+  RuleSet.properties,
   "The JSON object that contains the properties of the Rule Set to create."
 );
+
+// Mark batch mode properties as added in version 2025-12-01
+@@added(RuleSetProperties.batchMode, Versions.v2025_12_01);
+@@added(RuleSetProperties.rules, Versions.v2025_12_01);
+@@added(BatchRuleProperties, Versions.v2025_12_01);

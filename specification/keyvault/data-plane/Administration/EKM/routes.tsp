@@ -66,6 +66,7 @@ op createEkmConnection is KeyVaultOperation<
 /**
  * The External Key Manager (EKM) updates the existing EKM connection. If the EKM connection does not exist, this operation fails. This operation requires ekm/write permission.
  */
+#suppress "@typespec/http/deprecated-implicit-optionality" "Legacy - DO NOT COPY"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @added(KeyVault.Versions.v2026_01_01_preview)
 @summary("Updates the EKM connection.")

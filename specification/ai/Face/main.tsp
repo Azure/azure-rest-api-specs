@@ -8,6 +8,7 @@ import "./routes.facelist.tsp";
 import "./routes.persondirectory.tsp";
 import "./routes.persongroup.tsp";
 import "./routes.session.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -42,7 +43,9 @@ model AADToken
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.authorizationCode;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://api.example.com/oauth2/authorize";
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       tokenUrl: "https://api.example.com/oauth2/token";
       scopes: ["https://cognitiveservices.azure.com/.default"];
     }

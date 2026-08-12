@@ -71,7 +71,10 @@ interface VirtualRouters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualRouter,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -88,6 +91,7 @@ interface VirtualRouters {
 
 @@doc(VirtualRouter.name, "The name of the Virtual Router.");
 @@doc(VirtualRouter.properties, "Properties of the Virtual Router.");
-@@doc(VirtualRouters.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualRouters.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Virtual Router."
 );

@@ -12,7 +12,8 @@ using Microsoft.Databricks;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Workspace.properties);
 
-@@clientName(PrivateEndpointConnections.create::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.create::parameters.resource,
   "privateEndpointConnection"
 );
 
@@ -21,7 +22,8 @@ using Microsoft.Databricks;
 
 @@clientLocation(VirtualNetworkPeerings.get, "vNetPeering");
 @@clientLocation(VirtualNetworkPeerings.createOrUpdate, "vNetPeering");
-@@clientName(VirtualNetworkPeerings.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkPeerings.createOrUpdate::parameters.resource,
   "VirtualNetworkPeeringParameters"
 );
 @@clientLocation(VirtualNetworkPeerings.delete, "vNetPeering");
@@ -29,7 +31,8 @@ using Microsoft.Databricks;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualNetworkPeering.properties);
 
-@@clientName(AccessConnectors.createOrUpdate::parameters.resource,
+@@clientName(
+  AccessConnectors.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(AccessConnectors.update::parameters.properties, "parameters");

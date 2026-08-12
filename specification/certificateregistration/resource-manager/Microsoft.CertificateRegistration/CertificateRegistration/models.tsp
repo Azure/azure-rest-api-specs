@@ -157,7 +157,8 @@ model AppServiceCertificateOrderCollection
   is Azure.Core.Page<AppServiceCertificateOrder>;
 
 @@doc(AppServiceCertificateOrderCollection.value, "Collection of resources.");
-@@doc(AppServiceCertificateOrderCollection.nextLink,
+@@doc(
+  AppServiceCertificateOrderCollection.nextLink,
   "Link to next page of resources."
 );
 /**
@@ -376,6 +377,7 @@ model CertificateOrderContact {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**

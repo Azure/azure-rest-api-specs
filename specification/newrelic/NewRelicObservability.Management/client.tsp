@@ -4,38 +4,46 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
 using NewRelic.Observability;
 
-@@clientName(NewRelic.Observability,
+@@clientName(
+  NewRelic.Observability,
   "NewRelicObservabilityMgmtClient",
   "python"
 );
 
-@@clientName(NewRelic.Observability.NewRelicAccountProperties,
+@@clientName(
+  NewRelic.Observability.NewRelicAccountProperties,
   "AccountPropertiesForNewRelic",
   "go"
 );
 
-@@clientName(NewRelic.Observability.MonitoredSubscriptions.createOrUpdate,
+@@clientName(
+  NewRelic.Observability.MonitoredSubscriptions.createOrUpdate,
   "createorUpdate",
   "go"
 );
 
 // ===== C# operation renames =====
-@@clientName(NewRelicMonitorResources.billingInfoGet,
+@@clientName(
+  NewRelicMonitorResources.billingInfoGet,
   "GetBillingInfo",
   "csharp"
 );
 @@clientName(AccountsOperationGroup.list, "GetNewRelicAccounts", "csharp");
-@@clientName(OrganizationsOperationGroup.list,
+@@clientName(
+  OrganizationsOperationGroup.list,
   "GetNewRelicOrganizations",
   "csharp"
 );
 @@clientName(PlansOperationGroup.list, "GetNewRelicPlans", "csharp");
 
 // ===== C# resource type renames =====
-@@clientName(MonitoredSubscriptionProperties,
+@@clientName(
+  MonitoredSubscriptionProperties,
   "NewRelicMonitoredSubscription",
   "csharp"
 );
@@ -47,56 +55,68 @@ using NewRelic.Observability;
 @@clientName(FilteringTag, "NewRelicObservabilityFilteringTag", "csharp");
 @@clientName(LogRules, "NewRelicObservabilityLogRules", "csharp");
 @@clientName(MetricRules, "NewRelicObservabilityMetricRules", "csharp");
-@@clientName(OrganizationInfo,
+@@clientName(
+  OrganizationInfo,
   "NewRelicObservabilityOrganizationInfo",
   "csharp"
 );
 @@clientName(UserInfo, "NewRelicObservabilityUserInfo", "csharp");
-@@clientName(VMExtensionPayload,
+@@clientName(
+  VMExtensionPayload,
   "NewRelicObservabilityVmExtensionPayload",
   "csharp"
 );
 @@clientName(VMInfo, "NewRelicObservabilityVmInfo", "csharp");
 
 // ===== C# enum/union renames (RP prefix) =====
-@@clientName(AccountCreationSource,
+@@clientName(
+  AccountCreationSource,
   "NewRelicObservabilityAccountCreationSource",
   "csharp"
 );
 @@clientName(BillingSource, "NewRelicObservabilityBillingSource", "csharp");
-@@clientName(MarketplaceSubscriptionStatus,
+@@clientName(
+  MarketplaceSubscriptionStatus,
   "NewRelicObservabilityMarketplaceSubscriptionStatus",
   "csharp"
 );
-@@clientName(MonitoringStatus,
+@@clientName(
+  MonitoringStatus,
   "NewRelicObservabilityMonitoringStatus",
   "csharp"
 );
-@@clientName(OrgCreationSource,
+@@clientName(
+  OrgCreationSource,
   "NewRelicObservabilityOrgCreationSource",
   "csharp"
 );
-@@clientName(SendAadLogsStatus,
+@@clientName(
+  SendAadLogsStatus,
   "NewRelicObservabilitySendAadLogsStatus",
   "csharp"
 );
-@@clientName(SendActivityLogsStatus,
+@@clientName(
+  SendActivityLogsStatus,
   "NewRelicObservabilitySendActivityLogsStatus",
   "csharp"
 );
-@@clientName(SendingLogsStatus,
+@@clientName(
+  SendingLogsStatus,
   "NewRelicObservabilitySendingLogsStatus",
   "csharp"
 );
-@@clientName(SendingMetricsStatus,
+@@clientName(
+  SendingMetricsStatus,
   "NewRelicObservabilitySendingMetricsStatus",
   "csharp"
 );
-@@clientName(SendMetricsStatus,
+@@clientName(
+  SendMetricsStatus,
   "NewRelicObservabilitySendMetricsStatus",
   "csharp"
 );
-@@clientName(SendSubscriptionLogsStatus,
+@@clientName(
+  SendSubscriptionLogsStatus,
   "NewRelicObservabilitySendSubscriptionLogsStatus",
   "csharp"
 );
@@ -118,26 +138,31 @@ using NewRelic.Observability;
 @@clientName(SendSubscriptionLogsStatus.Disabled, "IsDisabled", "csharp");
 
 // ===== C# model renames (rename-mapping equivalents) =====
-@@clientName(ActivateSaaSParameterRequest,
+@@clientName(
+  ActivateSaaSParameterRequest,
   "ActivateSaaSParameterContent",
   "csharp"
 );
 @@clientName(AppServicesGetRequest, "NewRelicAppServicesGetContent", "csharp");
 @@clientName(BillingInfoResponse, "NewRelicBillingInfoResult", "csharp");
-@@clientName(ConnectedPartnerResourcesListFormat,
+@@clientName(
+  ConnectedPartnerResourcesListFormat,
   "NewRelicConnectedPartnerResourceInfo",
   "csharp"
 );
-@@clientName(ConnectedPartnerResourceProperties,
+@@clientName(
+  ConnectedPartnerResourceProperties,
   "NewRelicConnectedPartnerResourceProperties",
   "csharp"
 );
 @@clientName(HostsGetRequest, "NewRelicHostsGetContent", "csharp");
-@@clientName(LatestLinkedSaaSResponse,
+@@clientName(
+  LatestLinkedSaaSResponse,
   "NewRelicObservabilityLatestLinkedSaaSResult",
   "csharp"
 );
-@@clientName(LiftrResourceCategories,
+@@clientName(
+  LiftrResourceCategories,
   "NewRelicLiftrResourceCategory",
   "csharp"
 );
@@ -145,11 +170,13 @@ using NewRelic.Observability;
 @@clientName(MetricsStatusRequest, "NewRelicMetricsStatusContent", "csharp");
 @@clientName(MetricsStatusResponse, "NewRelicMetricsStatusResult", "csharp");
 @@clientName(MonitoredResource, "NewRelicResourceMonitorResult", "csharp");
-@@clientName(MonitoredSubscription,
+@@clientName(
+  MonitoredSubscription,
   "NewRelicMonitoredSubscriptionInfo",
   "csharp"
 );
-@@clientName(MonitoringTagRulesProperties,
+@@clientName(
+  MonitoringTagRulesProperties,
   "NewRelicMonitoringTagRules",
   "csharp"
 );
@@ -157,22 +184,26 @@ using NewRelic.Observability;
 @@clientName(SingleSignOnStates, "NewRelicSingleSignOnState", "csharp");
 @@clientName(Status, "NewRelicMonitoringStatus", "csharp");
 @@clientName(SwitchBillingRequest, "NewRelicSwitchBillingContent", "csharp");
-@@clientName(ConfigurationName,
+@@clientName(
+  ConfigurationName,
   "MonitoredSubscriptionConfigurationName",
   "csharp"
 );
 @@clientName(PatchOperation, "MonitoredSubscriptionPatchOperation", "csharp");
-@@clientName(SubscriptionList,
+@@clientName(
+  SubscriptionList,
   "NewRelicMonitoredSubscriptionProperties",
   "csharp"
 );
-@@clientName(SaaSResourceDetailsResponse,
+@@clientName(
+  SaaSResourceDetailsResponse,
   "NewRelicObservabilitySaaSResourceDetailsResult",
   "csharp"
 );
 @@clientName(SaaSData, "NewRelicObservabilitySaaSInfo", "csharp");
 @@clientName(AccountResource, "NewRelicAccountResourceData", "csharp");
-@@clientName(OrganizationResource,
+@@clientName(
+  OrganizationResource,
   "NewRelicOrganizationResourceData",
   "csharp"
 );
@@ -181,30 +212,36 @@ using NewRelic.Observability;
 @@clientName(PlanData.billingCycle, "NewRelicPlanBillingCycle", "csharp");
 
 // ===== C# type overrides for ARM Common Types v3 =====
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // ===== C# alternateType for ResourceIdentifier properties =====
-@@alternateType(AppServiceInfo.azureResourceId,
+@@alternateType(
+  AppServiceInfo.azureResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SwitchBillingRequest.azureResourceId,
+@@alternateType(
+  SwitchBillingRequest.azureResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(VMInfo.vmId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(MonitoredResource.id,
+@@alternateType(
+  MonitoredResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AppServicesGetRequest.azureResourceIds,
+@@alternateType(
+  AppServicesGetRequest.azureResourceIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(HostsGetRequest.vmIds,
+@@alternateType(
+  HostsGetRequest.vmIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
@@ -212,14 +249,16 @@ using NewRelic.Observability;
 // ===== C# alternateType for AzureLocation properties =====
 @@alternateType(AccountProperties.region, Azure.Core.azureLocation, "csharp");
 @@alternateType(AccountInfo.region, Azure.Core.azureLocation, "csharp");
-@@alternateType(ConnectedPartnerResourceProperties.location,
+@@alternateType(
+  ConnectedPartnerResourceProperties.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
 // ===== C# alternateType for Uri properties =====
 @@alternateType(NewRelicSingleSignOnProperties.singleSignOnUrl, url, "csharp");
-@@clientName(NewRelicSingleSignOnProperties.singleSignOnUrl,
+@@clientName(
+  NewRelicSingleSignOnProperties.singleSignOnUrl,
   "SingleSignOnUri",
   "csharp"
 );
@@ -235,17 +274,20 @@ using NewRelic.Observability;
 @@clientName(UsageType.COMMITTED, "Committed", "csharp");
 
 // ===== C# operation renames for ConnectedPartnerResources =====
-@@clientName(NewRelicMonitorResources.list,
+@@clientName(
+  NewRelicMonitorResources.list,
   "GetConnectedPartnerResources",
   "csharp"
 );
 
 // ===== C# alternateType for operation parameters =====
-@@alternateType(AccountsOperationGroup.list::parameters.location,
+@@alternateType(
+  AccountsOperationGroup.list::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(OrganizationsOperationGroup.list::parameters.location,
+@@alternateType(
+  OrganizationsOperationGroup.list::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -257,7 +299,8 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(LinkedResourceListResponse.value,
+@@alternateType(
+  LinkedResourceListResponse.value,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
@@ -278,3 +321,34 @@ namespace Azure.ResourceManager.Models {
 @@usage(AccountProperties, Usage.input | Usage.output, "csharp");
 @@usage(OrganizationProperties, Usage.input | Usage.output, "csharp");
 @@usage(PlanDataProperties, Usage.input | Usage.output, "csharp");
+
+// ===== Go delete parameter reorder =====
+// Reorder the delete method parameters for the Go SDK to keep backward compatibility.
+/**
+ * Deletes an existing New Relic monitor resource from your Azure subscription, removing the integration and stopping the observability of your Azure resources through New Relic
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Override to reorder parameters for the Go SDK"
+op newRelicMonitorResourceDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * User Email.
+   */
+  @query("userEmail")
+  userEmail: string,
+
+  /**
+   * Name of the Monitors resource.
+   */
+  @path
+  monitorName: string,
+): void;
+
+@@override(
+  NewRelicMonitorResources.delete,
+  newRelicMonitorResourceDelete,
+  "go"
+);

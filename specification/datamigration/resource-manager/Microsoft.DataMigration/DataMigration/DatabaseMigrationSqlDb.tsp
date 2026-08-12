@@ -36,6 +36,7 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     providerNamespace: "Microsoft.Sql";
 
     /** The name of the target SQL DB instance. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("servers")
     @key
@@ -46,6 +47,7 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
 
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key
@@ -66,6 +68,7 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     providerNamespace: "Microsoft.Sql";
 
     /** The name of the target SQL DB instance. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("servers")
     @key
@@ -77,6 +80,7 @@ alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.Extens
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
 
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key
@@ -98,9 +102,8 @@ interface DatabaseMigrationSqlDbs {
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @query("migrationOperationId")
-      migrationOperationId?: string;
+      migrationOperationId?: Azure.Core.uuid;
 
       /**
        * Complete migration details be included in the response.
@@ -134,7 +137,10 @@ interface DatabaseMigrationSqlDbs {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -170,15 +176,19 @@ interface DatabaseMigrationSqlDbs {
 }
 
 @@doc(DatabaseMigrationSqlDb.name, "The name of the target database.");
-@@doc(DatabaseMigrationSqlDb.properties,
+@@doc(
+  DatabaseMigrationSqlDb.properties,
   "Database Migration Resource properties for SQL database."
 );
-@@doc(DatabaseMigrationSqlDbs.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseMigrationSqlDbs.createOrUpdate::parameters.resource,
   "Details of Sql Db migration resource."
 );
-@@doc(DatabaseMigrationSqlDbs.cancel::parameters.body,
+@@doc(
+  DatabaseMigrationSqlDbs.cancel::parameters.body,
   "Required migration operation ID for which cancel will be initiated."
 );
-@@doc(DatabaseMigrationSqlDbs.retry::parameters.body,
+@@doc(
+  DatabaseMigrationSqlDbs.retry::parameters.body,
   "Required migration operation ID for which retry will be initiated."
 );

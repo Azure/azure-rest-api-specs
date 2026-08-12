@@ -34,6 +34,7 @@ namespace Microsoft.Monitor {
     /**
      * Metrics limits.
      */
+    @removed(Versions.v2025_10_03_stable)
     limits?: MetricsLimits;
 
     /**

@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -106,6 +108,7 @@ op listBillingMeters is ArmProviderActionSync<
     /**
      * App Service OS type meters used for
      */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @query("osType")
     osType?: string;
   },
@@ -222,7 +225,7 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
   Request = DnlResourceNameAvailabilityRequest,
   Response = DnlResourceNameAvailability,
   Scope = SubscriptionActionScope,
-  Parameters = LocationParameter,
+  Parameters = LocationResourceParameter,
   Error = DefaultErrorResponse
 >;
 
@@ -329,6 +332,7 @@ interface ProviderOperationGroup {
     Response = ApplicationStackCollection,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
     },
@@ -348,6 +352,7 @@ interface ProviderOperationGroup {
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -364,11 +369,12 @@ interface ProviderOperationGroup {
   getFunctionAppStacksForLocation is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -385,11 +391,12 @@ interface ProviderOperationGroup {
   getWebAppStacksForLocation is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -409,6 +416,7 @@ interface ProviderOperationGroup {
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -427,6 +435,7 @@ interface ProviderOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
     },
@@ -544,7 +553,7 @@ interface GetUsagesInLocationOperationGroup {
   list is ArmProviderActionSync<
     Response = CsmUsageQuotaCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }
@@ -562,7 +571,7 @@ interface StaticSitesOperationGroup {
     Request = StaticSitesWorkflowPreviewRequest,
     Response = StaticSitesWorkflowPreview,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }

@@ -21,6 +21,7 @@ import "./ServerEndpoint.tsp";
 import "./RegisteredServer.tsp";
 import "./Workflow.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -55,16 +56,15 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): (ArmResponse<OperationEntityListResult> & {
-    @header("x-ms-correlation-request-id")
-    @doc("correlation request id.")
-    correlationRequestId?: string;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | (ArmResponse<OperationEntityListResult> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-    @header("x-ms-request-id")
-    @doc("request id.")
-    requestId?: string;
-  }) | StorageSyncError;
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      })
+    | StorageSyncError;
 }

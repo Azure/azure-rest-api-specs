@@ -53,51 +53,61 @@ interface ConversationAdministrationClient
 interface ConversationThreadClient
   extends Azure.Communication.MessagesService.ConversationThreadOperations {}
 
-@@access(Azure.Communication.MessagesService.MessageDataStream,
+@@access(
+  Azure.Communication.MessagesService.MessageDataStream,
   Access.internal
 );
 
-@@clientName(Azure.Communication.MessagesService.MessageTemplate.values,
+@@clientName(
+  Azure.Communication.MessagesService.MessageTemplate.values,
   "templateValues",
   "python"
 );
 
-@@clientName(Azure.Communication.MessagesService.NotificationMessagesSendRequestBody.body,
+@@clientName(
+  Azure.Communication.MessagesService.NotificationMessagesSendRequestBody.body,
   "notificationContent",
   "csharp,java"
 );
 
-@@clientName(Azure.Communication.MessagesService.LinkContent.url,
+@@clientName(
+  Azure.Communication.MessagesService.LinkContent.url,
   "uri",
   "csharp"
 );
 
-@@clientName(Azure.Communication.MessagesService.MediaMessageContent.mediaUri,
+@@clientName(
+  Azure.Communication.MessagesService.MediaMessageContent.mediaUri,
   "mediaUrl",
   "java"
 );
 
-@@clientName(Azure.Communication.MessagesService.Versions.c2024_02_01,
+@@clientName(
+  Azure.Communication.MessagesService.Versions.c2024_02_01,
   "2024_02_01",
   "csharp"
 );
 
-@@clientName(Azure.Communication.MessagesService.Versions.c2024_08_30,
+@@clientName(
+  Azure.Communication.MessagesService.Versions.c2024_08_30,
   "2024_08_30",
   "csharp"
 );
 
-@@clientName(Azure.Communication.MessagesService.Versions.c2025_01_15_Preview,
+@@clientName(
+  Azure.Communication.MessagesService.Versions.c2025_01_15_Preview,
   "2025_01_15_Preview",
   "csharp"
 );
 
-@@clientName(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview,
+@@clientName(
+  Azure.Communication.MessagesService.Versions.c2025_04_01_Preview,
   "2025_04_01_Preview",
   "csharp"
 );
 
-@@clientName(Azure.Communication.MessagesService.Versions.c2025_09_01_Preview,
+@@clientName(
+  Azure.Communication.MessagesService.Versions.c2025_09_01_Preview,
   "2025_09_01_Preview",
   "csharp"
 );

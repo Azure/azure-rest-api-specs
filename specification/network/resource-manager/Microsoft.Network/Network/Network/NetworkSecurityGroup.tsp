@@ -56,7 +56,10 @@ interface NetworkSecurityGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkSecurityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -72,12 +75,15 @@ interface NetworkSecurityGroups {
 }
 
 @@doc(NetworkSecurityGroup.name, "The name of the network security group.");
-@@doc(NetworkSecurityGroup.properties,
+@@doc(
+  NetworkSecurityGroup.properties,
   "Properties of the network security group."
 );
-@@doc(NetworkSecurityGroups.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkSecurityGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network security group operation."
 );
-@@doc(NetworkSecurityGroups.updateTags::parameters.properties,
+@@doc(
+  NetworkSecurityGroups.updateTags::parameters.properties,
   "Parameters supplied to update network security group tags."
 );

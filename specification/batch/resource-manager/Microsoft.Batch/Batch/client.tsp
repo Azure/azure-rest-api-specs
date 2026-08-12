@@ -8,40 +8,48 @@ using Microsoft.Batch;
 @@clientName(Microsoft.Batch, "BatchManagementClient", "javascript, python");
 
 // Java compat renames for existing management SDK surface
-@@clientName(Microsoft.Batch.IPAddressProvisioningType,
+@@clientName(
+  Microsoft.Batch.IPAddressProvisioningType,
   "IpAddressProvisioningType",
   "java"
 );
-@@clientName(Microsoft.Batch.PublicIPAddressConfiguration,
+@@clientName(
+  Microsoft.Batch.PublicIPAddressConfiguration,
   "PublicIpAddressConfiguration",
   "java"
 );
 @@clientName(Microsoft.Batch.IPRule, "IpRule", "java");
 @@clientName(Microsoft.Batch.IPRuleAction, "IpRuleAction", "java");
-@@clientName(Microsoft.Batch.NFSMountConfiguration,
+@@clientName(
+  Microsoft.Batch.NFSMountConfiguration,
   "NfsMountConfiguration",
   "java"
 );
-@@clientName(Microsoft.Batch.CifsMountConfiguration,
+@@clientName(
+  Microsoft.Batch.CifsMountConfiguration,
   "CifsMountConfiguration",
   "java"
 );
-@@clientName(Microsoft.Batch.NetworkConfiguration.publicIPAddressConfiguration,
+@@clientName(
+  Microsoft.Batch.NetworkConfiguration.publicIPAddressConfiguration,
   "publicIpAddressConfiguration",
   "java"
 );
-@@clientName(Microsoft.Batch.CifsMountConfiguration.userName,
+@@clientName(
+  Microsoft.Batch.CifsMountConfiguration.userName,
   "username",
   "java"
 );
 @@clientName(Microsoft.Batch.ContainerRegistry.username, "username", "java");
 @@clientName(Microsoft.Batch.UserIdentity.userName, "username", "java");
 
-@@clientName(Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired,
+@@clientName(
+  Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired,
   "ActionRequired",
   "go"
 );
-@@clientName(Microsoft.Batch.NetworkConfiguration.dynamicVnetAssignmentScope,
+@@clientName(
+  Microsoft.Batch.NetworkConfiguration.dynamicVnetAssignmentScope,
   "DynamicVNetAssignmentScope",
   "go"
 );
@@ -51,52 +59,61 @@ using Microsoft.Batch;
 @@clientName(Application, "BatchApplication", "csharp");
 @@alternateType(Application.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@clientName(ApplicationPackage, "BatchApplicationPackage", "csharp");
-@@alternateType(ApplicationPackage.etag,
+@@alternateType(
+  ApplicationPackage.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@clientName(ApplicationPackageProperties.lastActivationTime,
+@@clientName(
+  ApplicationPackageProperties.lastActivationTime,
   "LastActivatedOn",
   "csharp"
 );
 @@alternateType(ApplicationPackageProperties.storageUrl, url, "csharp");
 @@clientName(PublicNetworkAccessType, "BatchPublicNetworkAccess", "csharp");
-@@clientName(BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyEnforced,
+@@clientName(
+  BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyEnforced,
   "IsDedicatedCoreQuotaPerVmFamilyEnforced",
   "csharp"
 );
-@@clientName(BatchAccountProperties.dedicatedCoreQuotaPerVMFamily,
+@@clientName(
+  BatchAccountProperties.dedicatedCoreQuotaPerVMFamily,
   "DedicatedCoreQuotaPerVmFamily",
   "csharp"
 );
 @@clientName(DetectorResponse, "BatchAccountDetector", "csharp");
 @@alternateType(DetectorResponse.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@usage(DetectorResponse, Usage.input, "csharp");
-@@clientName(OutboundEnvironmentEndpoint,
+@@clientName(
+  OutboundEnvironmentEndpoint,
   "BatchAccountOutboundEnvironmentEndpoint",
   "csharp"
 );
 @@clientName(EndpointDependency, "BatchAccountEndpointDependency", "csharp");
 @@clientName(EndpointDetail, "BatchEndpointDetail", "csharp");
 @@clientName(Pool, "BatchAccountPool", "csharp");
-@@alternateType(Pool.identity,
+@@alternateType(
+  Pool.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(Pool.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@clientName(PoolProperties.lastModified, "LastModifiedOn", "csharp");
-@@clientName(PoolProperties.provisioningStateTransitionTime,
+@@clientName(
+  PoolProperties.provisioningStateTransitionTime,
   "provisioningStateTransitOn",
   "csharp"
 );
 @@clientName(PoolAllocationMode, "BatchAccountPoolAllocationMode", "csharp");
 @@clientName(AutoScaleRun, "BatchAccountPoolAutoScaleRun", "csharp");
-@@alternateType(AutoScaleRun.error,
+@@alternateType(
+  AutoScaleRun.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
 @@clientName(ResizeOperationStatus, "BatchResizeOperationStatus", "csharp");
-@@clientName(ComputeNodeDeallocationOption,
+@@clientName(
+  ComputeNodeDeallocationOption,
   "BatchNodeDeallocationOption",
   "csharp"
 );
@@ -104,30 +121,36 @@ using Microsoft.Batch;
 @@alternateType(Certificate.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@usage(Certificate, Usage.input, "csharp");
 @@clientName(CertificateFormat, "BatchAccountCertificateFormat", "csharp");
-@@alternateType(CertificateProvisioningState,
+@@alternateType(
+  CertificateProvisioningState,
   BatchAccountCertificateProvisioningState,
   "csharp"
 );
 @@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
-@@clientName(CertificateProperties.provisioningStateTransitionTime,
+@@clientName(
+  CertificateProperties.provisioningStateTransitionTime,
   "provisioningStateTransitOn",
   "csharp"
 );
-@@clientName(CertificateProperties.previousProvisioningStateTransitionTime,
+@@clientName(
+  CertificateProperties.previousProvisioningStateTransitionTime,
   "previousProvisioningStateTransitOn",
   "csharp"
 );
-@@alternateType(CertificateProperties.deleteCertificateError,
+@@alternateType(
+  CertificateProperties.deleteCertificateError,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@clientName(CertificateStoreLocation,
+@@clientName(
+  CertificateStoreLocation,
   "BatchCertificateStoreLocation",
   "csharp"
 );
 @@clientName(CertificateVisibility, "BatchCertificateVisibility", "csharp");
 @@clientName(DeploymentConfiguration, "BatchDeploymentConfiguration", "csharp");
-@@clientName(DeploymentConfiguration.virtualMachineConfiguration,
+@@clientName(
+  DeploymentConfiguration.virtualMachineConfiguration,
   "vmConfiguration",
   "csharp"
 );
@@ -141,7 +164,8 @@ using Microsoft.Batch;
 @@clientName(ContainerConfiguration.type, "containerType", "csharp");
 @@clientName(ContainerType, "BatchVmContainerType", "csharp");
 @@clientName(ContainerRegistry, "BatchVmContainerRegistry", "csharp");
-@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+@@clientName(
+  WindowsConfiguration.enableAutomaticUpdates,
   "IsAutomaticUpdateEnabled",
   "csharp"
 );
@@ -149,75 +173,90 @@ using Microsoft.Batch;
 @@clientName(NetworkProfile, "BatchNetworkProfile", "csharp");
 @@clientName(EndpointAccessProfile, "BatchEndpointAccessProfile", "csharp");
 @@clientName(EndpointAccessProfile.ipRules, "IPRules", "csharp");
-@@clientName(EndpointAccessDefaultAction,
+@@clientName(
+  EndpointAccessDefaultAction,
   "BatchEndpointAccessDefaultAction",
   "csharp"
 );
 @@clientName(AllocationState, "BatchAccountPoolAllocationState", "csharp");
-@@clientName(ApplicationPackageReference,
+@@clientName(
+  ApplicationPackageReference,
   "BatchApplicationPackageReference",
   "csharp"
 );
-@@alternateType(ApplicationPackageReference.id,
+@@alternateType(
+  ApplicationPackageReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(CertificateReference, "BatchCertificateReference", "csharp");
-@@alternateType(CertificateReference.id,
+@@alternateType(
+  CertificateReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(MetadataItem, "BatchAccountPoolMetadataItem", "csharp");
 @@clientName(MountConfiguration, "BatchMountConfiguration", "csharp");
-@@clientName(AzureBlobFileSystemConfiguration,
+@@clientName(
+  AzureBlobFileSystemConfiguration,
   "BatchBlobFileSystemConfiguration",
   "csharp"
 );
-@@clientName(AzureBlobFileSystemConfiguration.identityReference,
+@@clientName(
+  AzureBlobFileSystemConfiguration.identityReference,
   "Identity",
   "csharp"
 );
-@@clientName(AzureFileShareConfiguration,
+@@clientName(
+  AzureFileShareConfiguration,
   "BatchFileShareConfiguration",
   "csharp"
 );
 @@clientName(AzureFileShareConfiguration.azureFileUrl, "FileUri", "csharp");
 @@alternateType(AzureFileShareConfiguration.azureFileUrl, url, "csharp");
-@@alternateType(ComputeNodeIdentityReference.resourceId,
+@@alternateType(
+  ComputeNodeIdentityReference.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(AutoStorageProperties,
+@@clientName(
+  AutoStorageProperties,
   "BatchAccountAutoStorageConfiguration",
   "csharp"
 );
 @@clientName(AutoStorageProperties.lastKeySync, "LastKeySyncedOn", "csharp");
 @@usage(AutoStorageProperties, Usage.input, "csharp");
-@@clientName(AutoStorageBaseProperties,
+@@clientName(
+  AutoStorageBaseProperties,
   "BatchAccountAutoStorageBaseConfiguration",
   "csharp"
 );
-@@alternateType(AutoStorageBaseProperties.storageAccountId,
+@@alternateType(
+  AutoStorageBaseProperties.storageAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(AutoStorageAuthenticationMode,
+@@clientName(
+  AutoStorageAuthenticationMode,
   "BatchAutoStorageAuthenticationMode",
   "csharp"
 );
-@@clientName(AutoStorageBaseProperties.nodeIdentityReference,
+@@clientName(
+  AutoStorageBaseProperties.nodeIdentityReference,
   "NodeIdentity",
   "csharp"
 );
 @@clientName(KeyVaultReference, "BatchKeyVaultReference", "csharp");
-@@alternateType(KeyVaultReference.id,
+@@alternateType(
+  KeyVaultReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(KeyVaultReference.url, url, "csharp");
 @@clientName(AuthenticationMode, "BatchAuthenticationMode", "csharp");
 @@clientName(AuthenticationMode.AAD, "Aad", "csharp");
-@@clientName(EncryptionProperties,
+@@clientName(
+  EncryptionProperties,
   "BatchAccountEncryptionConfiguration",
   "csharp"
 );
@@ -240,34 +279,41 @@ using Microsoft.Batch;
 @@clientName(AutoUserScope, "BatchAutoUserScope", "csharp");
 @@clientName(AutoUserSpecification, "BatchAutoUserSpecification", "csharp");
 @@clientName(LinuxUserConfiguration, "BatchLinuxUserConfiguration", "csharp");
-@@clientName(WindowsUserConfiguration,
+@@clientName(
+  WindowsUserConfiguration,
   "BatchWindowsUserConfiguration",
   "csharp"
 );
 @@clientName(LoginMode, "BatchWindowsLoginMode", "csharp");
-@@clientName(ApplicationPackageProperties.storageUrlExpiry,
+@@clientName(
+  ApplicationPackageProperties.storageUrlExpiry,
   "StorageUriExpireOn",
   "csharp"
 );
 @@clientName(SupportedSku, "BatchSupportedSku", "csharp");
-@@clientName(ActivateApplicationPackageParameters,
+@@clientName(
+  ActivateApplicationPackageParameters,
   "BatchApplicationPackageActivateContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityParameters,
+@@clientName(
+  CheckNameAvailabilityParameters,
   "BatchNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
-@@alternateType(CheckNameAvailabilityParameters.type,
+@@alternateType(
+  CheckNameAvailabilityParameters.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "BatchNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
@@ -275,7 +321,8 @@ using Microsoft.Batch;
 @@clientName(CifsMountConfiguration, "BatchCifsMountConfiguration", "csharp");
 @@clientName(CifsMountConfiguration.userName, "username", "csharp");
 @@clientName(NFSMountConfiguration, "BatchNfsMountConfiguration", "csharp");
-@@clientName(ContainerWorkingDirectory,
+@@clientName(
+  ContainerWorkingDirectory,
   "BatchContainerWorkingDirectory",
   "csharp"
 );
@@ -285,49 +332,59 @@ using Microsoft.Batch;
 @@clientName(InboundEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(InboundEndpointProtocol.UDP, "Udp", "csharp");
 @@clientName(InboundNatPool, "BatchInboundNatPool", "csharp");
-@@clientName(IPAddressProvisioningType,
+@@clientName(
+  IPAddressProvisioningType,
   "BatchIPAddressProvisioningType",
   "csharp"
 );
 @@alternateType(IPRuleAction, BatchIPRuleAction, "csharp");
 @@clientName(NetworkConfiguration, "BatchNetworkConfiguration", "csharp");
-@@clientName(NetworkConfiguration.dynamicVnetAssignmentScope,
+@@clientName(
+  NetworkConfiguration.dynamicVnetAssignmentScope,
   "dynamicVNetAssignmentScope",
   "csharp"
 );
-@@alternateType(NetworkConfiguration.subnetId,
+@@alternateType(
+  NetworkConfiguration.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(NetworkSecurityGroupRule,
+@@clientName(
+  NetworkSecurityGroupRule,
   "BatchNetworkSecurityGroupRule",
   "csharp"
 );
-@@clientName(NetworkSecurityGroupRuleAccess,
+@@clientName(
+  NetworkSecurityGroupRuleAccess,
   "BatchNetworkSecurityGroupRuleAccess",
   "csharp"
 );
 @@clientName(NodePlacementPolicyType, "BatchNodePlacementPolicyType", "csharp");
 @@clientName(PackageState, "BatchApplicationPackageState", "csharp");
-@@clientName(PrivateLinkServiceConnectionStatus,
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
   "BatchPrivateLinkServiceConnectionStatus",
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnectionState.actionsRequired,
+@@clientName(
+  PrivateLinkServiceConnectionState.actionsRequired,
   "actionRequired",
   "csharp"
 );
-@@clientName(PublicIPAddressConfiguration,
+@@clientName(
+  PublicIPAddressConfiguration,
   "BatchPublicIPAddressConfiguration",
   "csharp"
 );
 @@clientName(PublicIPAddressConfiguration.ipTags, "IPTags", "csharp");
 @@clientName(PublicIPAddressConfiguration.ipFamilies, "IPFamilies", "csharp");
-@@clientName(PublicIPAddressConfiguration.ipAddressIds,
+@@clientName(
+  PublicIPAddressConfiguration.ipAddressIds,
   "IPAddressIds",
   "csharp"
 );
-@@alternateType(PublicIPAddressConfiguration.ipAddressIds,
+@@alternateType(
+  PublicIPAddressConfiguration.ipAddressIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
@@ -337,27 +394,32 @@ using Microsoft.Batch;
 @@alternateType(ImageReference.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(CertificateCreateOrUpdateProperties.data, unknown, "csharp");
 @@alternateType(KeyVaultProperties.keyIdentifier, url, "csharp");
-@@clientName(MountConfiguration.azureBlobFileSystemConfiguration,
+@@clientName(
+  MountConfiguration.azureBlobFileSystemConfiguration,
   "BlobFileSystemConfiguration",
   "csharp"
 );
-@@clientName(MountConfiguration.azureFileShareConfiguration,
+@@clientName(
+  MountConfiguration.azureFileShareConfiguration,
   "FileShareConfiguration",
   "csharp"
 );
 @@clientName(ResourceFile.storageContainerUrl, "BlobContainerUri", "csharp");
-@@clientName(ResourceFile.autoStorageContainerName,
+@@clientName(
+  ResourceFile.autoStorageContainerName,
   "AutoBlobContainerName",
   "csharp"
 );
 @@clientName(AccountKeyType, "BatchAccountKeyType", "csharp");
 @@clientName(BatchAccountRegenerateKeyParameters.keyName, "KeyType", "csharp");
-@@clientName(CertificateCreateOrUpdateProperties.thumbprint,
+@@clientName(
+  CertificateCreateOrUpdateProperties.thumbprint,
   "ThumbprintString",
   "csharp"
 );
 @@clientName(OSDisk, "BatchOSDisk", "csharp");
-@@clientName(OSDisk.writeAcceleratorEnabled,
+@@clientName(
+  OSDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
   "csharp"
 );
@@ -372,97 +434,119 @@ using Microsoft.Batch;
 @@clientName(StorageAccountType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(StorageAccountType, "BatchStorageAccountType", "csharp");
 @@alternateType(ProvisioningState, BatchProvisioningState, "csharp");
-@@alternateType(PoolProvisioningState,
+@@alternateType(
+  PoolProvisioningState,
   BatchAccountPoolProvisioningState,
   "csharp"
 );
 @@alternateType(DiffDiskPlacement, BatchDiffDiskPlacement, "csharp");
-@@alternateType(PrivateEndpointConnectionProvisioningState,
+@@alternateType(
+  PrivateEndpointConnectionProvisioningState,
   BatchPrivateEndpointConnectionProvisioningState,
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.Severity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
   "BatchSeverity",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurations,
+@@clientName(
+  NetworkSecurityPerimeterConfigurations,
   "NetworkSecurityPerimeterConfiguration",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRule,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRule,
   "BatchAccessRule",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleDirection,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleDirection,
   "BatchAccessRuleDirection",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties,
   "BatchAccessRuleProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.IssueType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
   "BatchIssueType",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssue,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssue,
   "BatchProvisioningIssue",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
   "BatchProvisioningIssueProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociation,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociation,
   "BatchResourceAssociation",
   "csharp"
 );
-@@usage(Azure.ResourceManager.CommonTypes.ResourceAssociation,
+@@usage(
+  Azure.ResourceManager.CommonTypes.ResourceAssociation,
   Usage.input,
   "csharp"
 );
-@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+@@usage(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
   Usage.input,
   "csharp"
 );
-@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+@@usage(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
   Usage.input,
   "csharp"
 );
-@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+@@usage(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
   Usage.input,
   "csharp"
 );
 @@usage(NetworkSecurityPerimeterConfiguration, Usage.input, "csharp");
-@@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
+@@clientName(
+  SecurityEncryptionTypes.VMGuestStateOnly,
   "VmGuestStateOnly",
   "csharp"
 );
-@@clientName(SecurityEncryptionTypes.DiskWithVMGuestState,
+@@clientName(
+  SecurityEncryptionTypes.DiskWithVMGuestState,
   "DiskWithVmGuestState ",
   "csharp"
 );
 @@clientName(SecurityEncryptionTypes, "BatchSecurityEncryptionType", "csharp");
-@@clientName(AutomaticOSUpgradePolicy.osRollingUpgradeDeferral,
+@@clientName(
+  AutomaticOSUpgradePolicy.osRollingUpgradeDeferral,
   "OSRollingUpgradeDeferral",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "BatchPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(TaskSchedulingPolicy, "BatchTaskSchedulingPolicy", "csharp");
 @@clientName(DiskCustomerManagedKey, "BatchDiskCustomerManagedKey", "csharp");
-@@clientName(DiskEncryptionConfiguration,
+@@clientName(
+  DiskEncryptionConfiguration,
   "BatchDiskEncryptionConfiguration",
   "csharp"
 );
 @@clientName(HostEndpointSettings, "BatchHostEndpointSettings", "csharp");
-@@clientName(HostEndpointSettings.inVMAccessControlProfileReferenceId,
+@@clientName(
+  HostEndpointSettings.inVMAccessControlProfileReferenceId,
   "InVmAccessControlProfileReferenceId",
   "csharp"
 );
-@@clientName(HostEndpointSettingsModeTypes,
+@@clientName(
+  HostEndpointSettingsModeTypes,
   "BatchHostEndpointSettingsModeType",
   "csharp"
 );
@@ -473,84 +557,103 @@ using Microsoft.Batch;
 @@clientName(ProxyAgentSettings, "BatchProxyAgentSettings", "csharp");
 @@clientName(VMDiskSecurityProfile, "VmDiskSecurityProfile", "csharp");
 @@clientName(ResizeError, "BatchResizeError", "csharp");
-@@alternateType(PrivateEndpointConnection.etag,
+@@alternateType(
+  PrivateEndpointConnection.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 @@clientName(PrivateLinkResource, "BatchPrivateLinkResource", "csharp");
-@@alternateType(PrivateLinkResource.etag,
+@@alternateType(
+  PrivateLinkResource.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@clientName(BatchAccountCreateParameters,
+@@clientName(
+  BatchAccountCreateParameters,
   "BatchAccountCreateOrUpdateContent",
   "csharp"
 );
-@@alternateType(BatchAccountCreateParameters.identity,
+@@alternateType(
+  BatchAccountCreateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(BatchAccountCreateParameters.location,
+@@alternateType(
+  BatchAccountCreateParameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@clientName(CertificateCreateOrUpdateParameters,
+@@clientName(
+  CertificateCreateOrUpdateParameters,
   "BatchAccountCertificateCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(BatchAccountRegenerateKeyParameters,
+@@clientName(
+  BatchAccountRegenerateKeyParameters,
   "BatchAccountRegenerateKeyContent",
   "csharp"
 );
 @@clientName(BatchAccount, "BatchAccountRenamed", "csharp");
-@@clientName(LocationOperationGroup.checkNameAvailability,
+@@clientName(
+  LocationOperationGroup.checkNameAvailability,
   "CheckBatchNameAvailability",
   "csharp"
 );
 @@clientName(LocationOperationGroup.getQuotas, "GetBatchQuotas", "csharp");
-@@clientName(LocationOperationGroup.listSupportedVirtualMachineSkus,
+@@clientName(
+  LocationOperationGroup.listSupportedVirtualMachineSkus,
   "GetBatchSupportedVirtualMachineSkus",
   "csharp"
 );
-@@alternateType(QuotasLocationParameter.locationName,
+@@alternateType(
+  QuotasLocationParameter.locationName,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(SKUsLocationParameter.locationName,
+@@alternateType(
+  SKUsLocationParameter.locationName,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(CheckNameLocationParameter.locationName,
+@@alternateType(
+  CheckNameLocationParameter.locationName,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(BatchAccountUpdateParameters.identity,
+@@alternateType(
+  BatchAccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(ServiceArtifactReference.id,
+@@alternateType(
+  ServiceArtifactReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(BatchAccount, BatchAccountData, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BatchAccountData.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BatchAccountData.properties,
   "csharp"
 );
-@@alternateType(BatchAccount.identity,
+@@alternateType(
+  BatchAccount.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );

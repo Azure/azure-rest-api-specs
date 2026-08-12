@@ -30,7 +30,19 @@ op getConsoleStatus(
    * Default parameter. Leave the value as "default".
    */
   @path default: string,
-): ArmResponse<SerialConsoleStatus> | GetSerialConsoleSubscriptionNotFoundError | CloudError;
+):
+  | ArmResponse<SerialConsoleStatus>
+  | GetSerialConsoleSubscriptionNotFoundError
+  | CloudError;
+
+alias ConsoleServiceDefaultParameter = {
+  /**
+   * Default parameter. Leave the value as "default".
+   */
+  @path
+  @segment("consoleServices")
+  default: string;
+};
 
 @armResourceOperations(#{ omitTags: true })
 interface SerialConsoleOperationGroup {
@@ -42,16 +54,11 @@ interface SerialConsoleOperationGroup {
   @operationId("DisableConsole")
   @tag("SerialConsole")
   disableConsole is ArmProviderActionSync<
-    Response = DisableSerialConsoleResult | GetSerialConsoleSubscriptionNotFoundError,
+    Response =
+      | DisableSerialConsoleResult
+      | GetSerialConsoleSubscriptionNotFoundError,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Default parameter. Leave the value as "default".
-       */
-      @path
-      @segment("consoleServices")
-      default: string;
-    },
+    Parameters = ConsoleServiceDefaultParameter,
     Error = CloudError
   >;
 
@@ -63,16 +70,11 @@ interface SerialConsoleOperationGroup {
   @operationId("EnableConsole")
   @tag("SerialConsole")
   enableConsole is ArmProviderActionSync<
-    Response = EnableSerialConsoleResult | GetSerialConsoleSubscriptionNotFoundError,
+    Response =
+      | EnableSerialConsoleResult
+      | GetSerialConsoleSubscriptionNotFoundError,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Default parameter. Leave the value as "default".
-       */
-      @path
-      @segment("consoleServices")
-      default: string;
-    },
+    Parameters = ConsoleServiceDefaultParameter,
     Error = CloudError
   >;
 }

@@ -13,15 +13,18 @@ namespace Client;
 
 @@clientNamespace(Client, "com.azure.ai.openai", "java");
 @@clientNamespace(Azure.OpenAI, "com.azure.ai.openai", "java");
-@@clientNamespace(Azure.OpenAI.FunctionCallPreset,
+@@clientNamespace(
+  Azure.OpenAI.FunctionCallPreset,
   "com.azure.ai.openai.implementation",
   "java"
 );
-@@clientNamespace(Azure.OpenAI.FileListResponse,
+@@clientNamespace(
+  Azure.OpenAI.FileListResponse,
   "com.azure.ai.openai.implementation",
   "java"
 );
-@@clientNamespace(Azure.OpenAI.OpenAIPageableListOf,
+@@clientNamespace(
+  Azure.OpenAI.OpenAIPageableListOf,
   "com.azure.ai.openai.implementation",
   "java"
 );
@@ -101,33 +104,40 @@ interface OpenAIClient {
   cancelUpload is Azure.OpenAI.cancelUpload;
 }
 
-@@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
+@@clientName(
+  Azure.OpenAI.GenerateSpeechFromTextBody.body,
   "speechGenerationOptions",
   "java"
 );
-@@clientName(Azure.OpenAI.GetAudioTranscriptionBody.body,
+@@clientName(
+  Azure.OpenAI.GetAudioTranscriptionBody.body,
   "audioTranscriptionOptions",
   "java"
 );
-@@clientName(Azure.OpenAI.GetAudioTranslationBody.body,
+@@clientName(
+  Azure.OpenAI.GetAudioTranslationBody.body,
   "audioTranslationOptions",
   "java"
 );
-@@clientName(Azure.OpenAI.GetChatCompletionsBody.body,
+@@clientName(
+  Azure.OpenAI.GetChatCompletionsBody.body,
   "chatCompletionsOptions",
   "java"
 );
-@@clientName(Azure.OpenAI.GetCompletionsBody.body,
+@@clientName(
+  Azure.OpenAI.GetCompletionsBody.body,
   "completionsOptions",
   "java"
 );
 @@clientName(Azure.OpenAI.GetEmbeddingsBody.body, "embeddingsOptions", "java");
-@@clientName(Azure.OpenAI.GetImageGenerationsBody.body,
+@@clientName(
+  Azure.OpenAI.GetImageGenerationsBody.body,
   "imageGenerationOptions",
   "java"
 );
 
-@@clientName(Azure.OpenAI.uploadFile::parameters.file,
+@@clientName(
+  Azure.OpenAI.uploadFile::parameters.file,
   "uploadFileRequest",
   "java"
 );

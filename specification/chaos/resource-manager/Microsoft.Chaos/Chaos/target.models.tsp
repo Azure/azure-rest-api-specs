@@ -29,6 +29,7 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>, false> {
    * Azure resource location.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: azureLocation;
 }
 

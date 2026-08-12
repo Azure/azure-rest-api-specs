@@ -2,13 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyTrackedResourcesClient",
-    "version": "2018-07-01-preview"
+    "version": "2018-07-01-preview",
+    "description": "PolicyTrackedResources Management Api",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
+  "host": "management.azure.com",
   "produces": [
+    "application/json"
+  ],
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -21,55 +30,180 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [],
   "paths": {
+    "/{resourceId}/providers/Microsoft.PolicyInsights/policyTrackedResources/{policyTrackedResourcesResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyTrackedResources_ListQueryResultsForResource",
+        "description": "Queries policy tracked resources under the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Resource ID.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyTrackedResourcesResource",
+            "in": "path",
+            "description": "The name of the virtual resource under PolicyTrackedResources resource type; only \"default\" is allowed.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyTrackedResourcesResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "x-ms-client-name": "Top"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter expression.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTrackedResourcesQueryResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at resource scope": {
+            "$ref": "./examples/PolicyTrackedResources_QueryResourceScope.json"
+          },
+          "Query at resource scope using query parameters": {
+            "$ref": "./examples/PolicyTrackedResources_QueryResourceScopeWithFilterAndTop.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyTrackedResources/{policyTrackedResourcesResource}/queryResults": {
       "post": {
         "operationId": "PolicyTrackedResources_ListQueryResultsForManagementGroup",
         "description": "Queries policy tracked resources under the management group.",
         "parameters": [
           {
-            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/managementGroupNameParameter"
+            "name": "managementGroupsNamespace",
+            "in": "path",
+            "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Microsoft.Management"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
-            "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
+            "name": "managementGroupName",
+            "in": "path",
+            "description": "Management group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/topParameter"
+            "name": "policyTrackedResourcesResource",
+            "in": "path",
+            "description": "The name of the virtual resource under PolicyTrackedResources resource type; only \"default\" is allowed.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyTrackedResourcesResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/filterParameter"
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "x-ms-client-name": "Top"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter expression.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Filter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Query results.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PolicyTrackedResourcesQueryResults"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query at management group scope": {
@@ -78,6 +212,9 @@
           "Query at management group scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QueryManagementGroupScopeWithFilterAndTop.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -87,37 +224,64 @@
         "description": "Queries policy tracked resources under the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/topParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/filterParameter"
+            "name": "policyTrackedResourcesResource",
+            "in": "path",
+            "description": "The name of the virtual resource under PolicyTrackedResources resource type; only \"default\" is allowed.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyTrackedResourcesResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "x-ms-client-name": "Top"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter expression.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Filter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Query results.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PolicyTrackedResourcesQueryResults"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query at subscription scope": {
@@ -126,6 +290,9 @@
           "Query at subscription scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QuerySubscriptionScopeWithFilterAndTop.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -135,40 +302,67 @@
         "description": "Queries policy tracked resources under the resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/topParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/filterParameter"
+            "name": "policyTrackedResourcesResource",
+            "in": "path",
+            "description": "The name of the virtual resource under PolicyTrackedResources resource type; only \"default\" is allowed.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyTrackedResourcesResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "x-ms-client-name": "Top"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter expression.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Filter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Query results.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PolicyTrackedResourcesQueryResults"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/QueryFailure"
+              "$ref": "#/definitions/PolicyInsightsCommon.QueryFailure"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query at resource group scope": {
@@ -177,76 +371,72 @@
           "Query at resource group scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QueryResourceGroupScopeWithFilterAndTop.json"
           }
-        }
-      }
-    },
-    "/{resourceId}/providers/Microsoft.PolicyInsights/policyTrackedResources/{policyTrackedResourcesResource}/queryResults": {
-      "post": {
-        "operationId": "PolicyTrackedResources_ListQueryResultsForResource",
-        "description": "Queries policy tracked resources under the resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/policyTrackedResourcesResourceParameter"
-          },
-          {
-            "$ref": "#/parameters/topParameter"
-          },
-          {
-            "$ref": "#/parameters/filterParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Query results.",
-            "schema": {
-              "$ref": "#/definitions/PolicyTrackedResourcesQueryResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/QueryFailure"
-            }
-          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Query at resource scope": {
-            "$ref": "./examples/PolicyTrackedResources_QueryResourceScope.json"
-          },
-          "Query at resource scope using query parameters": {
-            "$ref": "./examples/PolicyTrackedResources_QueryResourceScopeWithFilterAndTop.json"
-          }
         }
       }
     }
   },
   "definitions": {
-    "PolicyTrackedResourcesQueryResults": {
-      "description": "Query results.",
+    "PolicyDetails": {
+      "type": "object",
+      "description": "The policy details.",
       "properties": {
-        "value": {
-          "description": "Query results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PolicyTrackedResource"
-          },
-          "x-ms-identifiers": [
-            "trackedResourceId"
-          ],
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The ID of the policy definition.",
           "readOnly": true
         },
-        "nextLink": {
+        "policyAssignmentId": {
           "type": "string",
-          "description": "The URL to get the next set of results.",
+          "description": "The ID of the policy assignment.",
+          "readOnly": true
+        },
+        "policyAssignmentDisplayName": {
+          "type": "string",
+          "description": "The display name of the policy assignment.",
+          "readOnly": true
+        },
+        "policyAssignmentScope": {
+          "type": "string",
+          "description": "The scope of the policy assignment.",
+          "readOnly": true
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The ID of the policy set definition.",
+          "readOnly": true
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition reference ID within the policy set definition.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyInsightsCommon.QueryFailure": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/PolicyInsightsCommon.QueryFailureError",
+          "description": "Error definition."
+        }
+      }
+    },
+    "PolicyInsightsCommon.QueryFailureError": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
           "readOnly": true
         }
       }
@@ -256,8 +446,8 @@
       "description": "Policy tracked resource record.",
       "properties": {
         "trackedResourceId": {
-          "description": "The ID of the policy tracked resource.",
           "type": "string",
+          "description": "The ID of the policy tracked resource.",
           "readOnly": true
         },
         "policyDetails": {
@@ -276,10 +466,32 @@
           "readOnly": true
         },
         "lastUpdateUtc": {
-          "description": "Timestamp of the last update to the tracked resource.",
           "type": "string",
           "format": "date-time",
+          "description": "Timestamp of the last update to the tracked resource.",
           "readOnly": true
+        }
+      }
+    },
+    "PolicyTrackedResourcesQueryResults": {
+      "type": "object",
+      "description": "Query results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicyTrackedResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicyTrackedResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "trackedResourceId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       }
     },
@@ -293,171 +505,18 @@
           "readOnly": true
         },
         "deploymentId": {
-          "description": "The ID of the deployment that created or modified the tracked resource.",
           "type": "string",
+          "description": "The ID of the deployment that created or modified the tracked resource.",
           "readOnly": true
         },
         "deploymentTime": {
-          "description": "Timestamp of the deployment that created or modified the tracked resource.",
           "type": "string",
           "format": "date-time",
+          "description": "Timestamp of the deployment that created or modified the tracked resource.",
           "readOnly": true
-        }
-      }
-    },
-    "PolicyDetails": {
-      "type": "object",
-      "description": "The policy details.",
-      "properties": {
-        "policyDefinitionId": {
-          "description": "The ID of the policy definition.",
-          "type": "string",
-          "readOnly": true
-        },
-        "policyAssignmentId": {
-          "description": "The ID of the policy assignment.",
-          "type": "string",
-          "readOnly": true
-        },
-        "policyAssignmentDisplayName": {
-          "description": "The display name of the policy assignment.",
-          "type": "string",
-          "readOnly": true
-        },
-        "policyAssignmentScope": {
-          "description": "The scope of the policy assignment.",
-          "type": "string",
-          "readOnly": true
-        },
-        "policySetDefinitionId": {
-          "description": "The ID of the policy set definition.",
-          "type": "string",
-          "readOnly": true
-        },
-        "policyDefinitionReferenceId": {
-          "description": "The policy definition reference ID within the policy set definition.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "QueryFailure": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "description": "Error definition.",
-          "properties": {
-            "code": {
-              "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "Description of the error.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       }
     }
   },
-  "parameters": {
-    "policyTrackedResourcesResourceParameter": {
-      "name": "policyTrackedResourcesResource",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "PolicyTrackedResourcesResourceType",
-        "modelAsString": true
-      },
-      "description": "The name of the virtual resource under PolicyTrackedResources resource type; only \"default\" is allowed.",
-      "x-ms-parameter-location": "method"
-    },
-    "managementGroupsNamespaceParameter": {
-      "name": "managementGroupsNamespace",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Microsoft.Management"
-      ],
-      "x-ms-enum": {
-        "name": "ManagementGroupsNamespaceType",
-        "modelAsString": false
-      },
-      "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
-      "x-ms-parameter-location": "method"
-    },
-    "managementGroupNameParameter": {
-      "name": "managementGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Management group name.",
-      "x-ms-parameter-location": "method"
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Resource group name.",
-      "x-ms-parameter-location": "method"
-    },
-    "resourceIdParameter": {
-      "name": "resourceId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Resource ID.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
-    "topParameter": {
-      "name": "$top",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "minimum": 0,
-      "description": "Maximum number of records to return.",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "QueryOptions"
-      },
-      "x-ms-client-name": "Top"
-    },
-    "filterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "OData filter expression.",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "QueryOptions"
-      },
-      "x-ms-client-name": "Filter"
-    },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Microsoft Azure subscription ID."
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version.",
-      "x-ms-parameter-location": "client"
-    }
-  }
+  "parameters": {}
 }

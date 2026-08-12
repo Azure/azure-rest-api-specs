@@ -1,0 +1,420 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ServerKeys"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys": {
+      "get": {
+        "operationId": "ServerKeys_ListByServer",
+        "tags": [
+          "ServerKeys"
+        ],
+        "description": "Gets a list of server keys.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the server keys by server": {
+            "$ref": "./examples/ServerKeyList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}": {
+      "get": {
+        "operationId": "ServerKeys_Get",
+        "tags": [
+          "ServerKeys"
+        ],
+        "description": "Gets a server key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the server key to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the server key": {
+            "$ref": "./examples/ServerKeyGet.json"
+          },
+          "Get the server key with versionless key": {
+            "$ref": "./examples/ServerKeyGetWithVersionlessKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServerKeys_CreateOrUpdate",
+        "tags": [
+          "ServerKeys"
+        ],
+        "description": "Creates or updates a server key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the server key to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested server key resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServerKey' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServerKey' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a server key": {
+            "$ref": "./examples/ServerKeyCreateOrUpdate.json"
+          },
+          "Creates or updates a server key with versionless key": {
+            "$ref": "./examples/ServerKeyCreateOrUpdateWithVersionlessKey.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerKey"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ServerKeys_Delete",
+        "tags": [
+          "ServerKeys"
+        ],
+        "description": "Deletes the server key with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the server key to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the server key": {
+            "$ref": "./examples/ServerKeyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ServerKey": {
+      "type": "object",
+      "description": "A server key.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerKeyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerKeyListResult": {
+      "type": "object",
+      "description": "The response of a ServerKey list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerKey items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerKeyProperties": {
+      "type": "object",
+      "description": "Properties for a server key execution.",
+      "properties": {
+        "subregion": {
+          "type": "string",
+          "description": "Subregion of the server key.",
+          "readOnly": true
+        },
+        "serverKeyType": {
+          "$ref": "./common.json#/definitions/ServerKeyType",
+          "description": "The server key type like 'ServiceManaged', 'AzureKeyVault'.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the server key. If the ServerKeyType is AzureKeyVault, then the URI is required. The AKV URI is required to be in this format: 'https://YourVaultName.vault.azure.net/keys/YourKeyName/YourKeyVersion' or can be 'https://YourVaultName.vault.azure.net/keys/YourKeyName'",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the server key.",
+          "readOnly": true
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The server key creation date.",
+          "readOnly": true
+        },
+        "autoRotationEnabled": {
+          "type": "boolean",
+          "description": "Key auto rotation opt-in flag. Either true or false.",
+          "readOnly": true
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the server key.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serverKeyType"
+      ]
+    }
+  },
+  "parameters": {}
+}
