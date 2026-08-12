@@ -58,4 +58,9 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
 
   @doc("Migration path")
   migrationPath?: string;
+
+  @doc("Execution mode for the migration process.")
+  @added(ApiVersions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  executionMode?: ExecutionMode;
 }

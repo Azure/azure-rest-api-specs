@@ -1,12 +1,23 @@
 {
-  "title": "MigrationEntities_Get_MaximumSet",
-  "operationId": "MigrationEntities_Get",
+  "title": "MigrationEntities_Update_MaximumSet",
+  "operationId": "MigrationEntities_Update",
   "parameters": {
     "api-version": "2026-08-01-preview",
     "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
     "resourceGroupName": "rgwaves",
     "projectName": "project1",
-    "migrationEntityName": "entity1"
+    "migrationEntityName": "entity1",
+    "properties": {
+      "properties": {
+        "executionStage": "Migration",
+        "executionStatus": "InProgress",
+        "toolReportedMigrationStatus": "ReplicationInProgress",
+        "error": {
+          "code": "ToolWarning",
+          "message": "Migration tool reported a transient warning."
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -25,14 +36,14 @@
           "executionStartDate": "2026-02-12T12:54:24.783Z",
           "target": "anenonptqbrzszgdlfypqltgifinq",
           "migrationStrategy": "None",
-          "executionStage": "gzpxqdmiawk",
-          "executionStatus": "impuxduqrfwxxqrppkxlv",
+          "executionStage": "Migration",
+          "executionStatus": "InProgress",
           "toolReportedMigrationStatus": "ReplicationInProgress",
           "error": {
             "code": "ToolWarning",
             "message": "Migration tool reported a transient warning."
           },
-          "executionReadiness": "sczoxife",
+          "executionReadiness": "Ready",
           "migrationSpecificProperties": {
             "instanceType": "MigrationSpecificPropertiesBase"
           },
@@ -44,8 +55,8 @@
         },
         "eTag": "zdjjdovl",
         "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/migrateProjects/MyMigrateProject/migrationEntities/entity1",
-        "name": "qctntejaxi",
-        "type": "hhnhk",
+        "name": "entity1",
+        "type": "Microsoft.Migrate/migrateProjects/migrationEntities",
         "systemData": {
           "createdBy": "bqcziilopnqpdhc",
           "createdByType": "User",
@@ -54,6 +65,12 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2026-02-12T12:54:24.784Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus",
+        "Retry-After": 30
       }
     }
   }

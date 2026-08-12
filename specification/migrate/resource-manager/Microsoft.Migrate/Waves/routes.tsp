@@ -108,6 +108,10 @@ interface MigrationEntities {
   @added(ApiVersions.v2025_03_30_preview)
   create is ArmResourceCreateOrUpdateAsync<MigrationEntity>;
 
+  @added(ApiVersions.v2026_08_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<MigrationEntity, MigrationEntityPatch>;
+
   @added(ApiVersions.v2025_03_30_preview)
   get is ArmResourceRead<MigrationEntity>;
 

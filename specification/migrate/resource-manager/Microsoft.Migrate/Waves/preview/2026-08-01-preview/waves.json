@@ -620,6 +620,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "MigrationEntities_Update",
+        "tags": [
+          "MigrationEntities"
+        ],
+        "description": "Update a MigrationEntity",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "migrationEntityName",
+            "in": "path",
+            "description": "Migration Entity ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationEntityPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationEntity"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationEntities_Update_MaximumSet": {
+            "$ref": "./examples/MigrationEntities_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "MigrationEntities_Delete",
         "tags": [
@@ -3352,6 +3432,30 @@
         "skippedWaves"
       ]
     },
+    "ExecutionMode": {
+      "type": "string",
+      "description": "Execution mode for the migration process.",
+      "enum": [
+        "TaskBased",
+        "RunbookBased"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TaskBased",
+            "value": "TaskBased",
+            "description": "Task-based execution mode, where tasks are executed in a predefined sequence."
+          },
+          {
+            "name": "RunbookBased",
+            "value": "RunbookBased",
+            "description": "Runbook-based execution mode, where runbooks perform the migration process."
+          }
+        ]
+      }
+    },
     "FetchSasUriResponse": {
       "type": "object",
       "description": "Response body for the fetchSASUri action.",
@@ -3794,6 +3898,20 @@
         }
       ]
     },
+    "MigrationEntityError": {
+      "type": "object",
+      "description": "Error details for a migration entity.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code reported for the migration entity."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message reported for the migration entity."
+        }
+      }
+    },
     "MigrationEntityGroup": {
       "type": "object",
       "description": "Migration Entity Group resource.",
@@ -3894,6 +4012,11 @@
         "migrationPath": {
           "type": "string",
           "description": "Migration path"
+        },
+        "executionMode": {
+          "$ref": "#/definitions/ExecutionMode",
+          "description": "Execution mode for the migration process.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3921,6 +4044,38 @@
       "required": [
         "value"
       ]
+    },
+    "MigrationEntityPatch": {
+      "type": "object",
+      "description": "Patch request for a migration entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationEntityPatchProperties",
+          "description": "Properties to update on the migration entity."
+        }
+      }
+    },
+    "MigrationEntityPatchProperties": {
+      "type": "object",
+      "description": "Properties that can be updated on a migration entity.",
+      "properties": {
+        "executionStage": {
+          "type": "string",
+          "description": "Execution stage of the migration entity."
+        },
+        "executionStatus": {
+          "type": "string",
+          "description": "Execution status of the migration entity."
+        },
+        "toolReportedMigrationStatus": {
+          "type": "string",
+          "description": "Migration status reported by the migration tool."
+        },
+        "error": {
+          "$ref": "#/definitions/MigrationEntityError",
+          "description": "Error details reported for the migration entity."
+        }
+      }
     },
     "MigrationEntityProperties": {
       "type": "object",
@@ -4012,6 +4167,16 @@
           "description": "Execution Status of Migration Entity.",
           "readOnly": true
         },
+        "toolReportedMigrationStatus": {
+          "type": "string",
+          "description": "Migration status reported by the migration tool.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/MigrationEntityError",
+          "description": "Error details reported for the migration entity.",
+          "readOnly": true
+        },
         "executionReadiness": {
           "type": "string",
           "description": "Execution Readiness of Migration Entity.",
@@ -4032,6 +4197,15 @@
         "assessedEntityArmId": {
           "type": "string",
           "description": "Assessed Entity ARM Id"
+        },
+        "migrationToolId": {
+          "type": "string",
+          "description": "Identifier of the migration tool used for the migration entity."
+        },
+        "executionMode": {
+          "$ref": "#/definitions/ExecutionMode",
+          "description": "Execution mode for the migration process.",
+          "readOnly": true
         }
       },
       "required": [
@@ -5538,6 +5712,10 @@
           "type": "string",
           "description": "The current stage of the wave.",
           "readOnly": true
+        },
+        "executionMode": {
+          "$ref": "#/definitions/ExecutionMode",
+          "description": "Execution mode for the migration process."
         }
       },
       "required": [
