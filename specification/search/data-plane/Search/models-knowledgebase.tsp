@@ -1451,7 +1451,7 @@ model KnowledgeBaseAnswerCompletedEvent {
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseStreamErrorEvent {
   /** The error detail explaining why the retrieval stream failed. */
-  error?: KnowledgeBaseErrorDetail;
+  error: KnowledgeBaseErrorDetail;
 
   /** Activity records that completed before the retrieval failed. */
   activity?: KnowledgeBaseActivityRecord[];
