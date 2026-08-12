@@ -59,14 +59,6 @@ These settings apply only when `--tag=package-2026-08-06-preview` is specified o
 ```yaml $(tag) == 'package-2026-08-06-preview'
 input-file:
   - preview/2026-08-06-preview/Bulkactions.json
-suppressions:
-  - code: BodyTopLevelProperties
-    reason: >
-      The deployed BulkCreateCustom response contract returns resolved per-VM allocation metadata
-      in the top-level resources property. Moving this field into the properties bag would make
-      the public specification inconsistent with the service wire response.
-    from: Bulkactions.json
-    where: $.definitions.LocationBasedBulkCreateCustom
 ```
 
 ### Tag: package-2026-07-06-preview
