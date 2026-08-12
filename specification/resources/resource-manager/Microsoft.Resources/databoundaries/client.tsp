@@ -9,3 +9,5 @@ using Azure.ClientGenerator.Core;
   "DataboundariesManegementClient",
   "javascript"
 );
+
+@@access(Microsoft.Resources.Operations.list, Access.internal, "java");
