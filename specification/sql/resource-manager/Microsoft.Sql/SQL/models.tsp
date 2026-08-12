@@ -4416,6 +4416,15 @@ model ServerBlobAuditingPolicyProperties {
   isManagedIdentityInUse?: boolean;
 
   /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
+
+  /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
    */
   state: BlobAuditingPolicyState;
@@ -4552,6 +4561,15 @@ model DatabaseBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4695,6 +4713,15 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4853,6 +4880,15 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
