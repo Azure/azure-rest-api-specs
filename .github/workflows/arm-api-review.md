@@ -681,7 +681,44 @@ comment body this workflow publishes -- not only inline findings:
 | -------------------- | -------------------------------------- | -------------------------------- |
 | Inline finding       | `create-pull-request-review-comment`   | the finding's rule ID            |
 | Reconciliation reply | `reply-to-pull-request-review-comment` | the replied-to finding's rule ID |
+| Review body          | `submit-pull-request-review`           | `review-body`                    |
 | Step 8 summary       | `add-comment`                          | `summary`                        |
+
+**Marker syntax is literal and non-negotiable.** The marker is a **single-line
+HTML comment** whose fields are separated by `|`. It must render invisibly on
+GitHub. Emitting the fields as plain `key: value` lines is a defect: the
+telemetry becomes visible boilerplate at the bottom of every comment a human
+reads. Do not split the marker across lines, do not drop the `<!--`/`-->`
+delimiters, and do not substitute a fenced block or a bullet list.
+
+<!-- markdownlint-disable MD013 -->
+
+Correct (one line, delimited, pipe-separated):
+
+```text
+<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000 -->
+```
+
+Incorrect (plain-text lines -- publicly visible, and rejected):
+
+```text
+rule: RPC-Versioning
+severity: blocking
+posted-by: arm-api-reviewer-agent
+```
+
+<!-- markdownlint-enable MD013 -->
+
+All six fields are **required on every posted body**, including the Step 8
+summary: `posted-by`, `rule`, `severity`, `classification`, `critic`, and
+`head-sha`. The summary's marker is not a reduced form -- it carries
+`rule: summary` and the run's own severity, classification, critic verdict and
+head SHA like any other body.
+
+`critic:` accepts exactly one of `pass`, `warn`, or `unknown`. Confidence
+wording from the Critic's verdict (for example `verified-high`) is not a legal
+value: map a confirmed verdict to `pass`, a downgraded or contested verdict to
+`warn`, and an unavailable Critic to `unknown`.
 
 A marker that carries only `posted-by: arm-api-reviewer-agent` and no other
 field is **not** a valid marker on a posted body. It is a defect, not a
@@ -737,6 +774,8 @@ findings but no summary comment is a defect. Use this body:
 
 Reviewed PR #N at head SHA `<sha>` | Triggered by: <event>
 
+<scoped-review disclosure line -- include ONLY for a scoped review; omit this line entirely otherwise>
+
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>` (or `none`).
 
 | Category | Count |
@@ -749,9 +788,9 @@ Approval labels observed: `<exact-label-1>`, `<exact-label-2>` (or `none`).
 ```
 
 If the PR was over the size cap and you ran a **scoped review** (Trigger
-Validation step 4), add this line **immediately below the "Reviewed PR" line and
-above the "Approval labels observed" line** so the human reviewer knows recall is
-intentionally partial:
+Validation step 4), fill the disclosure slot above -- between the "Reviewed PR"
+line and the "Approval labels observed" line -- with this line verbatim, so the
+human reviewer knows recall is intentionally partial:
 
 ```text
 **Scoped review:** M of N changed `specification/` files reviewed (PR exceeds the
@@ -759,11 +798,17 @@ automated-review size cap). Not reviewed: <short description of the excluded
 files>.
 ```
 
+Use that exact `**Scoped review:**` lead-in and the `M of N changed
+specification/ files reviewed` phrasing. A differently-titled variant (for
+example `**Scope note:**`) or a free-prose paragraph in its place is a template
+violation even when the content is accurate, because downstream tooling keys off
+the literal lead-in.
+
 The summary block order is fixed and must be emitted exactly as: the
 "Reviewed PR" line, then the scoped-review disclosure when applicable, then
 "Approval labels observed", then the counts table, then the one-sentence
-summary. Placing the disclosure after the approval labels is a template
-violation even when its content is correct.
+summary. Placing the disclosure after the approval labels or after the counts
+table is a template violation even when its content is correct.
 
 Always end the summary with the standard footer marker:
 

@@ -432,11 +432,11 @@ describe("ARM API review posting reliability", () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
     expect(source).toContain(
-      'add this line **immediately below the "Reviewed PR" line and above the "Approval labels observed" line**',
+      'fill the disclosure slot above -- between the "Reviewed PR" line and the "Approval labels observed" line -- with this line verbatim',
     );
     expect(source).toContain("The summary block order is fixed");
     expect(source).toContain(
-      "Placing the disclosure after the approval labels is a template violation even when its content is correct.",
+      "Placing the disclosure after the approval labels or after the counts table is a template violation even when its content is correct.",
     );
   });
 
@@ -467,5 +467,77 @@ describe("ARM API review posting reliability", () => {
     // contradicted the workflow's unconditional Step 8 mandate.
     expect(collapsed).not.toContain("the agent does not post summary comments by default");
     expect(collapsed).toContain("its Step 8 posts a summary comment on **every** run");
+  });
+});
+
+describe("ARM API review live-run regressions", () => {
+  // Every assertion below encodes a deviation observed on live run
+  // 31635310062 (`/arm-review` on a fork PR), where the agent job succeeded
+  // and emitted a full safe-output set that nonetheless broke the template.
+
+  it("requires the telemetry marker to be a single-line HTML comment", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    // The run emitted the marker fields as bare `key: value` lines, which
+    // render as visible boilerplate instead of hidden telemetry.
+    expect(collapsed).toContain("**Marker syntax is literal and non-negotiable.**");
+    expect(collapsed).toContain("single-line HTML comment");
+    expect(collapsed).toContain("Emitting the fields as plain `key: value` lines is a defect");
+
+    // A correct/incorrect pair must exist outside the canonical template so the
+    // syntax is stated, not merely demonstrated inside a fenced block.
+    expect(collapsed).toContain("Incorrect (plain-text lines -- publicly visible, and rejected)");
+  });
+
+  it("requires all six marker fields on the summary, not a reduced form", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    // The run's summary marker carried only `rule:` and `posted-by:`.
+    expect(collapsed).toContain(
+      "All six fields are **required on every posted body**, including the Step 8 summary",
+    );
+    expect(collapsed).toContain("The summary's marker is not a reduced form");
+  });
+
+  it("constrains the critic field to pass, warn, or unknown", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    // The run emitted `critic: verified-high`, which is not a legal value.
+    expect(collapsed).toContain("`critic:` accepts exactly one of `pass`, `warn`, or `unknown`");
+    expect(collapsed).toContain("for example `verified-high`");
+  });
+
+  it("declares a marker surface for the review body", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+
+    // The section claims "every posted body" but the surface table omitted the
+    // review body, and the live run posted a review body with no marker.
+    expect(source).toContain("| Review body          | `submit-pull-request-review`");
+  });
+
+  it("puts the scoped-review disclosure slot inside the summary template", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    // Prose alone did not hold: the run appended the disclosure after the
+    // counts table. The slot must appear in the fenced template itself, between
+    // the "Reviewed PR" line and the "Approval labels observed" line.
+    const template = source.slice(
+      source.indexOf("## ARM API Review Summary"),
+      source.indexOf("<one-sentence summary of key themes"),
+    );
+    expect(template).toContain("<scoped-review disclosure line");
+    expect(template.indexOf("<scoped-review disclosure line")).toBeLessThan(
+      template.indexOf("Approval labels observed"),
+    );
+
+    // And the lead-in must be the literal `**Scoped review:**`, not a variant.
+    expect(collapsed).toContain("for example `**Scope note:**`");
+    expect(collapsed).toContain(
+      "Placing the disclosure after the approval labels or after the counts table is a template violation",
+    );
   });
 });
