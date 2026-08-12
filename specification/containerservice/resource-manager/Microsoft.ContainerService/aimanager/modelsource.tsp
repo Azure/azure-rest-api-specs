@@ -63,8 +63,8 @@ model ModelSourceProperties {
   credential?: CredentialValue;
 
   @added(Versions.v2026_08_02_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation. Enforced at request-validation time with error code `InvalidModelSourceConfiguration`.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Read)
+  @doc("Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation.")
   microsoftFoundry?: MicrosoftFoundrySource;
 }
 
@@ -77,18 +77,13 @@ union ModelSourceType {
   HuggingFace: "HuggingFace",
 
   @added(Versions.v2026_08_02_preview)
-  @doc("A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a customer user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project).")
+  @doc("A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project).")
   MicrosoftFoundry: "MicrosoftFoundry",
 }
 
 @added(Versions.v2026_05_02_preview)
 @doc("""
-  A credential value.
-  
-  In the current API version, only the `inline` variant is supported. Future
-  API versions are expected to add additional credential kinds (for example,
-  managed identity and Key Vault secret references) as sibling variants on
-  this model.
+  A credential value used for accessing gated or private models.
   """)
 model CredentialValue {
   @doc("An inline credential containing a secret value supplied in the request payload.")
@@ -109,31 +104,24 @@ model InlineCredential {
 }
 
 @added(Versions.v2026_08_02_preview)
-@doc("A credential backed by a customer-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored. Because the platform generally has no read access to a customer's identity, the `clientId` is supplied by the caller rather than resolved by the service.")
+@doc("A credential backed by a user-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored.")
 model ManagedIdentityCredential {
-  @doc("The ARM resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported. The RP first-party application must be granted `Managed Identity Operator` on this identity so it can be federated for Workload Identity.")
+  @doc("The Azure resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported.")
   resourceId: UserAssignedIdentityResourceId;
-
-  @doc("The client (application) id of the identity, supplied by the caller. Used by the platform to annotate the in-cluster puller ServiceAccount for Workload Identity. Must match `resourceId`.")
-  clientId: string;
-
-  @doc("The home tenant id of the identity, supplied by the caller. Used to annotate the in-cluster puller ServiceAccount (`azure.workload.identity/tenant-id`) for the Workload Identity token exchange. Must match `resourceId`.")
-  tenantId: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
 @added(Versions.v2026_08_02_preview)
 @doc("""
   Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`
-  ModelSource. Only the project ARM id is required; the Foundry account and its
+  ModelSource. Only the project Azure id is required; the Foundry account and its
   data-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform
   from the project (the account is the project's parent resource).
   
   Authentication uses the user-assigned managed identity referenced in the
-  ModelSource `credential.managedIdentity`, which the customer must grant the
+  ModelSource `credential.managedIdentity`, which the user must grant the
   `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)
-  on this project. No secret is stored by the platform; access to model
-  artifacts is brokered by Foundry at pull time.
+  on this project.
   """)
 model MicrosoftFoundrySource {
   @visibility(Lifecycle.Create, Lifecycle.Read)

@@ -15,7 +15,7 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
 @doc("""
-  A custom AI model registered by the customer and scoped to a specific
+  A custom AI model registered by the user and scoped to a specific
   AIManager.
   """)
 @resource("customAIModels")
@@ -43,8 +43,7 @@ model CustomAIModelProperties {
     The model identifier, interpreted per the referenced ModelSource type.
     For `HuggingFace` sources this is the upstream `<org>/<repo>` id, e.g.
     `meta-llama/Llama-2-7b-chat`. For `MicrosoftFoundry` sources this is
-    `modelName/version`, e.g. `private-llama/1` (the platform splits model and
-    version on the final `/`). Immutable after creation.
+    `modelName/version`, e.g. `private-llama/1`. Immutable after creation.
     """)
   modelId: string;
 
@@ -56,7 +55,7 @@ model CustomAIModelProperties {
   @doc("Azure resource id of the ModelSource to use when pulling artifacts. Required for `MicrosoftFoundry` sources and for gated/private `HuggingFace` repositories; omitted for public models. Immutable after creation.")
   modelSourceResourceId: ModelSourceResourceId;
 
-  @doc("Optional. Free-form description of the model. Mutable via a full-replace PUT.")
+  @doc("Optional. Free-form description of the model. Mutable.")
   @maxLength(250)
   description?: string;
 
@@ -67,23 +66,23 @@ model CustomAIModelProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_08_02_preview)
-@doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.")
+@doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only. Reserved so custom-model-specific fields can be added without changing the SDK surface.")
 model CustomAIModelSpec is ModelSpec;
 
 @added(Versions.v2026_08_02_preview)
-@doc("The base model a custom model was trained from. Supplied by the customer because the platform may lack access to private source repositories (e.g. private Foundry projects); consumed by the dataplane for GPU sizing and vLLM configuration.")
+@doc("The base model a custom model was trained from. A HuggigFace repository supplied by the user because the platform may lack access to private source repositories.")
 model BaseModelReference {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.")
   id: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The total size of the model weights. eg `28.7Gi`.")
+  @doc("The total size of the model weights. eg `28.7Gi`. Required if the base model is not publically accessible on HuggingFace.")
   totalWeightSize?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "config.json is opaque upstream JSON"
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The verbatim `config.json` of the base model, supplied by the customer. Stored by the platform and projected into the dataplane (ConfigMap) to determine GPU node count and vLLM configuration.")
+  @doc("The verbatim `config.json` of the base model, supplied by the user. Required if the base model is not publically accessible on HuggingFace.")
   config?: Record<unknown>;
 }
 

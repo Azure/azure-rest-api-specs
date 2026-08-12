@@ -652,6 +652,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List CustomAIModel resources by AIManager": {
+            "$ref": "./examples/CustomAIModels_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -707,6 +712,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a CustomAIModel": {
+            "$ref": "./examples/CustomAIModels_Get.json"
           }
         }
       },
@@ -803,6 +813,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a CustomAIModel": {
+            "$ref": "./examples/CustomAIModels_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -878,6 +893,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a CustomAIModel": {
+            "$ref": "./examples/CustomAIModels_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -943,6 +963,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CustomAIModels_CalculateCost": {
+            "$ref": "./examples/CustomAIModels_CalculateCost.json"
           }
         }
       }
@@ -2476,7 +2501,7 @@
     },
     "BaseModelReference": {
       "type": "object",
-      "description": "The base model a custom model was trained from. Supplied by the customer because the platform may lack access to private source repositories (e.g. private Foundry projects); consumed by the dataplane for GPU sizing and vLLM configuration.",
+      "description": "The base model a custom model was trained from. A HuggigFace repository supplied by the user because the platform may lack access to private source repositories.",
       "properties": {
         "id": {
           "type": "string",
@@ -2488,7 +2513,7 @@
         },
         "totalWeightSize": {
           "type": "string",
-          "description": "The total size of the model weights. eg `28.7Gi`.",
+          "description": "The total size of the model weights. eg `28.7Gi`. Required if the base model is not publically accessible on HuggingFace.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2496,7 +2521,7 @@
         },
         "config": {
           "type": "object",
-          "description": "The verbatim `config.json` of the base model, supplied by the customer. Stored by the platform and projected into the dataplane (ConfigMap) to determine GPU node count and vLLM configuration.",
+          "description": "The verbatim `config.json` of the base model, supplied by the user. Required if the base model is not publically accessible on HuggingFace.",
           "additionalProperties": {},
           "x-ms-mutability": [
             "read",
@@ -2657,7 +2682,7 @@
     },
     "CredentialValue": {
       "type": "object",
-      "description": "A credential value.\n\nIn the current API version, only the `inline` variant is supported. Future\nAPI versions are expected to add additional credential kinds (for example,\nmanaged identity and Key Vault secret references) as sibling variants on\nthis model.",
+      "description": "A credential value used for accessing gated or private models.",
       "properties": {
         "inline": {
           "$ref": "#/definitions/InlineCredential",
@@ -2671,7 +2696,7 @@
     },
     "CustomAIModel": {
       "type": "object",
-      "description": "A custom AI model registered by the customer and scoped to a specific\nAIManager.",
+      "description": "A custom AI model registered by the user and scoped to a specific\nAIManager.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CustomAIModelProperties",
@@ -2721,7 +2746,7 @@
         },
         "modelId": {
           "type": "string",
-          "description": "The model identifier, interpreted per the referenced ModelSource type.\nFor `HuggingFace` sources this is the upstream `<org>/<repo>` id, e.g.\n`meta-llama/Llama-2-7b-chat`. For `MicrosoftFoundry` sources this is\n`modelName/version`, e.g. `private-llama/1` (the platform splits model and\nversion on the final `/`). Immutable after creation.",
+          "description": "The model identifier, interpreted per the referenced ModelSource type.\nFor `HuggingFace` sources this is the upstream `<org>/<repo>` id, e.g.\n`meta-llama/Llama-2-7b-chat`. For `MicrosoftFoundry` sources this is\n`modelName/version`, e.g. `private-llama/1`. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2745,7 +2770,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Optional. Free-form description of the model. Mutable via a full-replace PUT.",
+          "description": "Optional. Free-form description of the model. Mutable.",
           "maxLength": 250
         },
         "spec": {
@@ -2811,7 +2836,7 @@
     },
     "CustomAIModelSpec": {
       "type": "object",
-      "description": "Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only.",
+      "description": "Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only. Reserved so custom-model-specific fields can be added without changing the SDK surface.",
       "properties": {
         "license": {
           "type": "string",
@@ -2957,25 +2982,15 @@
     },
     "ManagedIdentityCredential": {
       "type": "object",
-      "description": "A credential backed by a customer-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored. Because the platform generally has no read access to a customer's identity, the `clientId` is supplied by the caller rather than resolved by the service.",
+      "description": "A credential backed by a user-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored.",
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/UserAssignedIdentityResourceId",
-          "description": "The ARM resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported. The RP first-party application must be granted `Managed Identity Operator` on this identity so it can be federated for Workload Identity."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client (application) id of the identity, supplied by the caller. Used by the platform to annotate the in-cluster puller ServiceAccount for Workload Identity. Must match `resourceId`."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The home tenant id of the identity, supplied by the caller. Used to annotate the in-cluster puller ServiceAccount (`azure.workload.identity/tenant-id`) for the Workload Identity token exchange. Must match `resourceId`."
+          "description": "The Azure resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported."
         }
       },
       "required": [
-        "resourceId",
-        "clientId",
-        "tenantId"
+        "resourceId"
       ]
     },
     "ManualScalingProfile": {
@@ -2995,7 +3010,7 @@
     },
     "MicrosoftFoundrySource": {
       "type": "object",
-      "description": "Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`\nModelSource. Only the project ARM id is required; the Foundry account and its\ndata-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform\nfrom the project (the account is the project's parent resource).\n\nAuthentication uses the user-assigned managed identity referenced in the\nModelSource `credential.managedIdentity`, which the customer must grant the\n`Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)\non this project. No secret is stored by the platform; access to model\nartifacts is brokered by Foundry at pull time.",
+      "description": "Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`\nModelSource. Only the project Azure id is required; the Foundry account and its\ndata-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform\nfrom the project (the account is the project's parent resource).\n\nAuthentication uses the user-assigned managed identity referenced in the\nModelSource `credential.managedIdentity`, which the user must grant the\n`Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)\non this project.",
       "properties": {
         "projectResourceId": {
           "$ref": "#/definitions/FoundryProjectResourceId",
@@ -3328,7 +3343,7 @@
         },
         "microsoftFoundry": {
           "$ref": "#/definitions/MicrosoftFoundrySource",
-          "description": "Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation. Enforced at request-validation time with error code `InvalidModelSourceConfiguration`.",
+          "description": "Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3370,7 +3385,7 @@
           {
             "name": "MicrosoftFoundry",
             "value": "MicrosoftFoundry",
-            "description": "A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a customer user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project)."
+            "description": "A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project)."
           }
         ]
       }
