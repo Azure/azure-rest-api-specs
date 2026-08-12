@@ -78,6 +78,18 @@ directive:
     from: openapi.json
     reason: |
       Pre-existing. Using the same error response as other APIs.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/resume"].post.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/suspend"].post.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.responses["200"].schema
+    reason: |
+      The referenced provisioningState properties are marked readOnly in the generated Swagger.
+      The validator does not recognize readOnly when it is a sibling of $ref.
 ```
 
 ### Tag: package-preview-2025-10-02-preview
