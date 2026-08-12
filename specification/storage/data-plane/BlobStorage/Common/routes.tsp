@@ -844,7 +844,7 @@ interface Blob {
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
 
-        ...AccessTierChangeTimeResponseHeader;
+        ...AccessTierChangeTimeResponseHeaderV2026_10_06;
 
         /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
         @added(Versions.v2026_10_06)
@@ -916,7 +916,7 @@ interface Blob {
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
 
-        ...AccessTierChangeTimeResponseHeader;
+        ...AccessTierChangeTimeResponseHeaderV2026_10_06;
 
         /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
         @added(Versions.v2026_10_06)
