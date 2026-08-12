@@ -556,27 +556,27 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 // Preserve Java enum constant names from the previous SDK.
 @@clientName(
   CostDetailsMetricType.ActualCostCostDetailsMetricType,
-  "ActualCost",
+  "ACTUAL_COST",
   "java"
 );
 @@clientName(
   CostDetailsMetricType.AmortizedCostCostDetailsMetricType,
-  "AmortizedCost",
+  "AMORTIZED_COST",
   "java"
 );
 @@clientName(
   CostDetailsStatusType.CompletedCostDetailsStatusType,
-  "Completed",
+  "COMPLETED",
   "java"
 );
 @@clientName(
   CostDetailsStatusType.NoDataFoundCostDetailsStatusType,
-  "NoDataFound",
+  "NO_DATA_FOUND",
   "java"
 );
 @@clientName(
   CostDetailsStatusType.FailedCostDetailsStatusType,
-  "Failed",
+  "FAILED",
   "java"
 );
-@@clientName(CostDetailsDataFormat.CsvCostDetailsDataFormat, "Csv", "java");
+@@clientName(CostDetailsDataFormat.CsvCostDetailsDataFormat, "CSV", "java");
