@@ -21,6 +21,21 @@ using TypeSpec.Versioning;
   "DeploymentStacksManagementClient",
   "java"
 );
+@@clientName(
+  UnmanageActionResourceMode,
+  "DeploymentStacksDeleteDetachEnum",
+  "java"
+);
+@@alternateType(
+  ActionOnUnmanage.resourceGroups,
+  UnmanageActionResourceMode,
+  "java"
+);
+@@alternateType(
+  ActionOnUnmanage.managementGroups,
+  UnmanageActionResourceMode,
+  "java"
+);
 
 // CSharp SDK: Generate scoped resources, and make it backwards compatible with existing patterns
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
