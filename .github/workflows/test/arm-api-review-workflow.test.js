@@ -475,19 +475,26 @@ describe("ARM API review live-run regressions", () => {
   // 31635310062 (`/arm-review` on a fork PR), where the agent job succeeded
   // and emitted a full safe-output set that nonetheless broke the template.
 
-  it("requires the telemetry marker to be a single-line HTML comment", async () => {
+  it("requires the telemetry marker to be a single plain-text line, not an HTML comment", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
     const collapsed = collapseWhitespace(source);
 
-    // The run emitted the marker fields as bare `key: value` lines, which
-    // render as visible boilerplate instead of hidden telemetry.
+    // Originally this asserted the marker must be a single-line HTML comment,
+    // to stop the run emitting bare `key: value` lines. Live run 31646990677
+    // disproved that premise: the agent emitted a perfect HTML-comment marker
+    // and the publisher's sanitizer deleted it outright, so the published
+    // comment carried no telemetry at all. Single-line is still required; HTML
+    // comment is now forbidden.
     expect(collapsed).toContain("**Marker syntax is literal and non-negotiable.**");
-    expect(collapsed).toContain("single-line HTML comment");
-    expect(collapsed).toContain("Emitting the fields as plain `key: value` lines is a defect");
+    expect(collapsed).toContain("single plain-text line");
+    expect(collapsed).toContain("**Never write the marker as an HTML comment.**");
 
     // A correct/incorrect pair must exist outside the canonical template so the
     // syntax is stated, not merely demonstrated inside a fenced block.
-    expect(collapsed).toContain("Incorrect (plain-text lines -- publicly visible, and rejected)");
+    expect(collapsed).toContain(
+      "Incorrect (HTML comment -- deleted by the sanitizer before publication)",
+    );
+    expect(collapsed).toContain("Incorrect (fields split across lines -- unparseable)");
   });
 
   it("requires all six marker fields on the summary, not a reduced form", async () => {
@@ -568,35 +575,51 @@ describe("ARM API review live-run regressions", () => {
     expect(collapsed).toContain("All findings are reported in the summary comment.");
   });
 
-  it("teaches the marker syntax in a form that survives HTML-comment stripping", async () => {
+  it("teaches a marker form that survives both prompt rendering and publication", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
 
-    // gh-aw strips HTML comments before the prompt reaches the agent. Live run
-    // 31645723290 proved it: the source had 16 `<!--` sequences and the
-    // rendered prompt had zero, so every canonical marker template arrived
-    // blank. The agent saw an EMPTY "Correct" code block next to an intact
-    // plain-text "Incorrect" one, and duly copied the wrong shape.
+    // Two independent sanitizers bracket this marker, and they pull in
+    // opposite directions:
+    //
+    //  1. The gh-aw compiler strips HTML comments out of the PROMPT. Live run
+    //     31645723290 proved it -- 16 `<!--` in the source, zero in the
+    //     rendered prompt -- so a marker template written as a real HTML
+    //     comment arrives blank and teaches the agent nothing.
+    //  2. The safe-output publisher (`removeXmlComments` in
+    //     sanitize_content_core.cjs) strips HTML comments out of every BODY
+    //     the agent emits, with no code-fence exemption. Live run
+    //     31646990677 proved it: the agent emitted a flawless single-line
+    //     HTML-comment marker into safeoutputs.jsonl and the published
+    //     comment carried no marker at all.
+    //
+    // So the marker cannot be an HTML comment on either side. It must be
+    // plain text, which survives both.
     const stripped = source.replace(/<!--[\s\S]*?-->/g, "");
     const collapsedStripped = collapseWhitespace(stripped);
 
-    // Whatever survives stripping must still fully specify the marker.
-    expect(collapsedStripped).toContain("| `OPEN` | `<` then `!` then `-` then `-` |");
-    expect(collapsedStripped).toContain("| `CLOSE` | `-` then `-` then `>` |");
-    expect(collapsedStripped).toContain("strips HTML comments before the prompt reaches you");
+    expect(collapsedStripped).toContain("Never write the marker as an HTML comment.");
+    expect(collapsedStripped).toContain("silently discarded");
 
-    // Every marker template must survive: each one carries all six fields.
+    // Every marker template must survive prompt stripping intact and carry all
+    // six fields, and none may be wrapped in HTML-comment delimiters.
     const templates = [
-      ...collapsedStripped.matchAll(/OPEN posted-by: arm-api-reviewer-agent[^`]*?CLOSE/g),
+      ...collapsedStripped.matchAll(/_posted-by: arm-api-reviewer-agent[^`\n]*?_/g),
     ];
     expect(templates.length).toBeGreaterThanOrEqual(3);
     for (const [template] of templates) {
       for (const field of ["rule:", "severity:", "classification:", "critic:", "head-sha:"]) {
         expect(template).toContain(field);
       }
+      expect(template).not.toContain("<!--");
     }
 
-    // And no marker template may be written as a literal HTML comment in the
-    // source, which would be erased on the way to the agent.
+    // No marker template may be written as a literal HTML comment anywhere in
+    // the source: it would be erased on the way to the agent, and copying it
+    // would get the published marker erased too.
     expect(source).not.toContain("<!-- posted-by: arm-api-reviewer-agent");
+
+    // The reconciliation reader must still recognise the legacy HTML form,
+    // because interactive agent sessions bypass the publishing sanitizer.
+    expect(collapseWhitespace(source)).toContain("may still carry it inside an HTML comment");
   });
 });

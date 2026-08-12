@@ -459,7 +459,11 @@ state. Record item counts and pagination completion for each surface. Comments
 from humans, interactive agent sessions, automated runs, and `/arm-review` runs
 all participate in matching. The `posted-by: arm-api-reviewer-agent` marker
 controls ownership and resolution only; it does not control duplicate or
-contradiction detection.
+contradiction detection. When reading, match the marker as a plain **substring**
+of the body and accept either form: workflow-published comments carry it as
+visible italicised text, while comments posted by interactive agent sessions
+(which bypass the publishing sanitizer) may still carry it inside an HTML
+comment. Both are agent-owned.
 
 Match by semantic finding identity: same rule or review topic, same affected
 API element, and same underlying corrective outcome. Author, entry point,
@@ -658,14 +662,15 @@ JSON path: `$.path.to.element` (for OpenAPI files)
 
 **Suggested fix:** Concrete code, JSON, or TypeSpec change.
 
-OPEN posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> CLOSE
+_posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-`OPEN` and `CLOSE` above stand for the HTML-comment delimiters; emit the real
-characters, not the words. See **Telemetry Marker: Required on Every Posted
-Body** below for the exact characters and the full field rules.
+The final line is the telemetry marker: a single italicised plain-text line,
+never an HTML comment. See **Telemetry Marker: Required on Every Posted Body**
+below for the full field rules and the reason the HTML-comment form is
+forbidden.
 
 For `[NEW]` findings, use `🔴 Blocking`, `🟠 Warning`, or `🔵 Suggestion`.
 For `[EXISTING]` findings, use `**[EXISTING]**` without a severity badge, but
@@ -716,35 +721,36 @@ comment body this workflow publishes -- not only inline findings:
 | Review body          | `submit-pull-request-review`           | `review-body`                    |
 | Step 8 summary       | `add-comment`                          | `summary`                        |
 
-**Marker syntax is literal and non-negotiable.** The marker is a **single-line
-HTML comment** whose fields are separated by `|`. It must render invisibly on
-GitHub. Emitting the fields as plain `key: value` lines is a defect: the
-telemetry becomes visible boilerplate at the bottom of every comment a human
-reads. Do not split the marker across lines, do not drop the comment
-delimiters, and do not substitute a fenced block or a bullet list.
+**Marker syntax is literal and non-negotiable.** The marker is a **single
+plain-text line**, wrapped in Markdown italics, whose fields are separated by
+`|`. Do not split it across lines, and do not substitute a fenced block, a
+table, or a bullet list.
 
-**Delimiters.** This prompt is Markdown, and the loader **strips HTML comments
-before the prompt reaches you** -- so a marker written here as a real HTML
-comment would arrive blank and teach you nothing. Every template below
-therefore spells the two delimiters as the tokens `OPEN` and `CLOSE`:
-
-| Token   | Emit exactly these characters  |
-| ------- | ------------------------------ |
-| `OPEN`  | `<` then `!` then `-` then `-` |
-| `CLOSE` | `-` then `-` then `>`          |
-
-Emit those characters, never the literal words `OPEN` or `CLOSE`. A body whose
-last line still contains the word `OPEN` or `CLOSE` is malformed.
+**Never write the marker as an HTML comment.** The publishing harness runs every
+body you emit through a sanitizer that deletes **all** HTML comments before the
+comment reaches GitHub -- it is a security control against payload smuggling, it
+has no exemption for code fences or trailing lines, and it cannot be opted out
+of. A marker written as `<!-- ... -->` is therefore not "hidden": it is
+**silently discarded**, the published comment carries no telemetry at all, and
+the next run's Step 5.5 reconciliation cannot recognise the comment as
+agent-owned -- so it re-posts the finding as a duplicate. A visible marker line
+is the intended trade-off; an invisible one does not exist.
 
 <!-- markdownlint-disable MD013 -->
 
-Correct (one line, delimited, pipe-separated):
+Correct (one italicised line, pipe-separated, no HTML comment delimiters):
 
 ```text
-OPEN posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000 CLOSE
+_posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000_
 ```
 
-Incorrect (plain-text lines -- publicly visible, and rejected):
+Incorrect (HTML comment -- deleted by the sanitizer before publication):
+
+```text
+[an HTML comment wrapping the same fields; it never reaches GitHub]
+```
+
+Incorrect (fields split across lines -- unparseable):
 
 ```text
 rule: RPC-Versioning
@@ -855,13 +861,13 @@ The summary block order is fixed and must be emitted exactly as: the
 summary. Placing the disclosure after the approval labels or after the counts
 table is a template violation even when its content is correct.
 
-Always end the summary with the standard footer marker, using the same
-`OPEN`/`CLOSE` delimiter tokens defined above:
+Always end the summary with the standard footer marker -- a single italicised
+plain-text line, never an HTML comment:
 
 <!-- markdownlint-disable MD013 -->
 
 ```text
-OPEN posted-by: arm-api-reviewer-agent | rule: summary | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> CLOSE
+_posted-by: arm-api-reviewer-agent | rule: summary | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
 ```
 
 <!-- markdownlint-enable MD013 -->
