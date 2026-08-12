@@ -41,11 +41,6 @@ interface FeatureFlags {
   get is ArmResourceRead<FeatureFlag>;
 
   /**
-   * Lists the feature flags for the specified configuration store. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
-   */
-  listByConfigurationStore is ArmResourceListByParent<FeatureFlag>;
-
-  /**
    * Creates a feature flag. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<FeatureFlag>;
