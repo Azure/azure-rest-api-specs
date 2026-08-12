@@ -87,15 +87,28 @@ model ServiceGroupProperties {
   displayName?: string;
 
   /**
-   * The criticality designation of the service group.
+   * The non-indexed attributes of the service group.
    */
   @added(Versions.v2026_03_01_preview)
-  criticality?: float64;
+  attributes?: ServiceGroupAttributes;
 
   /**
    * The details of the parent serviceGroup.
    */
   parent?: ParentServiceGroupProperties;
+}
+
+/**
+ * The non-indexed attributes of a service group.
+ */
+@added(Versions.v2026_03_01_preview)
+model ServiceGroupAttributes {
+  /**
+   * The criticality designation of the service group. The value must be an integer from 0 to 4.
+   */
+  @minValue(0)
+  @maxValue(4)
+  criticality?: float64;
 }
 
 /**

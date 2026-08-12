@@ -409,6 +409,19 @@
         }
       ]
     },
+    "ServiceGroupAttributes": {
+      "type": "object",
+      "description": "The non-indexed attributes of a service group.",
+      "properties": {
+        "criticality": {
+          "type": "number",
+          "format": "double",
+          "description": "The criticality designation of the service group. The value must be an integer from 0 to 4.",
+          "minimum": 0,
+          "maximum": 4
+        }
+      }
+    },
     "ServiceGroupCollectionResponse": {
       "type": "object",
       "description": "Response holding an array of service groups and a nextLink that supports pagination",
@@ -443,10 +456,9 @@
           "type": "string",
           "description": "The display name of the serviceGroup. For example, ServiceGroupTest1"
         },
-        "criticality": {
-          "type": "number",
-          "format": "double",
-          "description": "The criticality designation of the service group."
+        "attributes": {
+          "$ref": "#/definitions/ServiceGroupAttributes",
+          "description": "The non-indexed attributes of the service group."
         },
         "parent": {
           "$ref": "#/definitions/ParentServiceGroupProperties",
