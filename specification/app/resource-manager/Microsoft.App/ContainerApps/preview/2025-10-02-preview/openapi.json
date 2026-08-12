@@ -8846,7 +8846,7 @@
             "description": "Configuration details of the .NET Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DotNetComponent"
+              "$ref": "#/definitions/DotNetComponentPatch"
             }
           }
         ],
@@ -12239,7 +12239,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "BuildResource": {
       "type": "object",
@@ -12297,7 +12298,8 @@
             "description": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "BuildToken": {
       "type": "object",
@@ -12414,7 +12416,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "BuilderResource": {
       "type": "object",
@@ -12666,7 +12669,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "CertificateType": {
       "type": "string",
@@ -12969,7 +12973,8 @@
             "description": "ScheduledForDelete"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ConnectedEnvironmentStorage": {
       "type": "object",
@@ -13050,7 +13055,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ConnectedEnvironmentStoragesCollection": {
       "type": "object",
@@ -13493,7 +13499,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ContainerAppReplicaRunningState": {
       "type": "string",
@@ -14498,7 +14505,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "DaprComponentResiliencyPoliciesCollection": {
       "type": "object",
@@ -15030,7 +15038,8 @@
             "description": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "DiagnosticDataProviderMetadata": {
       "type": "object",
@@ -15391,6 +15400,46 @@
         }
       }
     },
+    "DotNetComponentPatch": {
+      "type": "object",
+      "description": "The properties of a .NET Component that can be updated.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DotNetComponentPatchProperties",
+          "description": "The updatable .NET Component properties."
+        }
+      }
+    },
+    "DotNetComponentPatchProperties": {
+      "type": "object",
+      "description": "The properties that can be updated on a .NET Component.",
+      "properties": {
+        "componentType": {
+          "$ref": "#/definitions/DotNetComponentType",
+          "description": "Type of the .NET Component."
+        },
+        "configurations": {
+          "type": "array",
+          "description": "List of .NET Components configuration properties.",
+          "items": {
+            "$ref": "#/definitions/DotNetComponentConfigurationProperty"
+          },
+          "x-ms-identifiers": [
+            "propertyName"
+          ]
+        },
+        "serviceBinds": {
+          "type": "array",
+          "description": "List of .NET Components that are bound to the .NET component.",
+          "items": {
+            "$ref": "#/definitions/DotNetComponentServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "DotNetComponentProperties": {
       "type": "object",
       "description": ".NET Component resource specific properties",
@@ -15466,7 +15515,8 @@
             "description": "The .NET component is being provisioned."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "DotNetComponentServiceBind": {
       "type": "object",
@@ -15651,7 +15701,8 @@
             "description": "UpgradeFailed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "EnvironmentVar": {
       "type": "object",
@@ -16333,7 +16384,8 @@
             "description": "Pending"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "HttpRouteRule": {
       "type": "object",
@@ -16975,7 +17027,8 @@
             "description": "InProgress"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "JavaComponentServiceBind": {
       "type": "object",
@@ -17394,7 +17447,8 @@
             "description": "Succeeded"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "JobExecutionTemplate": {
       "type": "object",
@@ -17573,7 +17627,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "JobRunningState": {
       "type": "string",
@@ -19373,7 +19428,8 @@
             "description": "Pending"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -20652,7 +20708,8 @@
             "description": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SessionPoolSecret": {
       "type": "object",
@@ -21002,7 +21059,8 @@
             "description": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SourceControlProperties": {
       "type": "object",
@@ -21123,7 +21181,8 @@
             "description": "The label operation is starting."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StorageType": {
       "type": "string",

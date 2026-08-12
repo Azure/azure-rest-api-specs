@@ -8552,6 +8552,38 @@ model DotNetComponentProperties {
 }
 
 /**
+ * The properties that can be updated on a .NET Component.
+ */
+model DotNetComponentPatchProperties {
+  /**
+   * Type of the .NET Component.
+   */
+  componentType?: DotNetComponentType;
+
+  /**
+   * List of .NET Components configuration properties.
+   */
+  @identifiers(#["propertyName"])
+  configurations?: DotNetComponentConfigurationProperty[];
+
+  /**
+   * List of .NET Components that are bound to the .NET component.
+   */
+  @identifiers(#["name"])
+  serviceBinds?: DotNetComponentServiceBind[];
+}
+
+/**
+ * The properties of a .NET Component that can be updated.
+ */
+model DotNetComponentPatch {
+  /**
+   * The updatable .NET Component properties.
+   */
+  properties?: DotNetComponentPatchProperties;
+}
+
+/**
  * Configuration properties for a .NET Component
  */
 model DotNetComponentConfigurationProperty {
