@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "../openai/realtime/models.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -282,80 +283,17 @@ union VoiceAgentResponseItem {
   VoiceMcpApprovalResponseItem,
 }
 
-@doc("An audio format reported on a voice-agent response resource.")
-union VoiceAgentResponseAudioFormat {
-  pcm16: "pcm16",
-  pcm16_8000hz: "pcm16_8000hz",
-  pcm16_16000hz: "pcm16_16000hz",
-  pcm16_22050hz: "pcm16_22050hz",
-  pcm16_24000hz: "pcm16_24000hz",
-  pcm16_44100hz: "pcm16_44100hz",
-  pcm16_48000hz: "pcm16_48000hz",
-  g711_ulaw: "g711_ulaw",
-  g711_alaw: "g711_alaw",
-  mp3: "mp3",
-  mp3_24khz_48kbps: "mp3_24khz_48kbps",
-  mp3_24khz_96kbps: "mp3_24khz_96kbps",
-  mp3_24khz_160kbps: "mp3_24khz_160kbps",
-}
+@doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract while replacing audio and output and omitting conversation_id."
+model VoiceAgentRealtimeResponse extends OmitProperties<
+  OpenAI.RealtimeResponse,
+  "audio" | "output" | "conversation_id"
+> {
+  @doc("The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.")
+  audio?: VoiceResponseAudio;
 
-@doc("The lifecycle status of a voice-agent response.")
-union VoiceAgentResponseStatus {
-  in_progress: "in_progress",
-  completed: "completed",
-  cancelled: "cancelled",
-  incomplete: "incomplete",
-  failed: "failed",
-}
-
-@doc("A realtime response returned by the voice-agent service.")
-model VoiceAgentRealtimeResponse {
-  @doc("The object type. Always `realtime.response`.")
-  object: "realtime.response";
-
-  @doc("The response identifier.")
-  id: string;
-
-  @doc("The response lifecycle status.")
-  status: VoiceAgentResponseStatus;
-
-  @doc("Additional details for a terminal response status.")
-  status_details: OpenAI.RealtimeResponseStatusDetails | null;
-
-  @doc("The items produced by the response.")
-  output: VoiceAgentResponseItem[];
-
-  @doc("Token usage for the response.")
-  usage: OpenAI.RealtimeResponseUsage | null;
-
-  @doc("The conversation identifier, or null for an out-of-band response.")
-  conversation_id?: string | null;
-
-  @doc("The modalities used by the response.")
-  modalities?: VoiceOutputModality[] | null;
-
-  @doc("The voice name used by the response.")
-  voice?: string | null;
-
-  @doc("The extensible provider/type of the voice used by the response.")
-  voice_type?: string | null;
-
-  @doc("The BCP-47 locale of the voice used by the response.")
-  voice_locale?: string | null;
-
-  @doc("The output-audio format used by the response.")
-  output_audio_format?: VoiceAgentResponseAudioFormat;
-
-  @doc("The sampling temperature used by the response.")
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null;
-
-  @doc("The maximum output-token count used by the response.")
-  max_output_tokens?: VoiceAgentMaxOutputTokens | null;
-
-  @doc("String key-value metadata attached to the response.")
-  metadata?: Record<string> | null;
+  @doc("The items produced by the live response.")
+  output?: VoiceAgentResponseItem[];
 }
 
 @doc("A time-stamped word in an input-audio transcription.")

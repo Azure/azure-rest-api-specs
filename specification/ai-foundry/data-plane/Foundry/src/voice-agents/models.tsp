@@ -58,11 +58,11 @@ model VoiceConversation {
 }
 
 // ---------------------------------------------------------------------------
-// Voice response
+// Shared voice response audio
 // ---------------------------------------------------------------------------
 //
-// The projected base omits audio because Foundry adds extensible voice provider and locale fields
-// alongside the OpenAI-compatible flat voice string.
+// Live WebSocket events and persisted responses use the same flat output projection so provider and
+// locale extensions stay aligned with the OpenAI-compatible voice and format fields.
 
 @doc("The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -87,7 +87,7 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the projection removes the three intentionally retyped properties."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
   `output` projection may be omitted; retrieve the

@@ -82341,91 +82341,74 @@ components:
           - VoiceAgents=V1Preview
     VoiceAgentRealtimeResponse:
       type: object
-      required:
-        - object
-        - id
-        - status
-        - status_details
-        - output
-        - usage
       properties:
-        object:
-          type: string
-          enum:
-            - realtime.response
-          description: The object type. Always `realtime.response`.
-        id:
-          type: string
-          description: The response identifier.
-        status:
-          $ref: '#/components/schemas/VoiceAgentResponseStatus'
-          description: The response lifecycle status.
-        status_details:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
-            - type: 'null'
-          description: Additional details for a terminal response status.
+        audio:
+          $ref: '#/components/schemas/VoiceResponseAudio'
+          description: The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.
         output:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentResponseItem'
-          description: The items produced by the response.
-        usage:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
-            - type: 'null'
-          description: Token usage for the response.
-        conversation_id:
-          anyOf:
-            - type: string
-            - type: 'null'
-          description: The conversation identifier, or null for an out-of-band response.
-        modalities:
-          anyOf:
-            - type: array
+          description: The items produced by the live response.
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              description: The unique ID of the response, will look like `resp_1234`.
+            object:
+              type: string
+              enum:
+                - realtime.response
+              description: The object type, must be `realtime.response`.
+              x-stainless-const: true
+            status:
+              type: string
+              enum:
+                - completed
+                - cancelled
+                - failed
+                - incomplete
+                - in_progress
+              description: |-
+                The final status of the response (`completed`, `cancelled`, `failed`, or
+                  `incomplete`, `in_progress`).
+            status_details:
+              $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
+              description: Additional details about the status.
+            metadata:
+              anyOf:
+                - $ref: '#/components/schemas/OpenAI.Metadata'
+                - type: 'null'
+            usage:
+              $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
+              description: |-
+                Usage statistics for the Response, this will correspond to billing. A
+                  Realtime API session will maintain a conversation context and append new
+                  Items to the Conversation, thus output from previous turns (text and
+                  audio tokens) will become the input for later turns.
+            output_modalities:
+              type: array
               items:
-                $ref: '#/components/schemas/VoiceOutputModality'
-            - type: 'null'
-          description: The modalities used by the response.
-        voice:
-          anyOf:
-            - type: string
-            - type: 'null'
-          description: The voice name used by the response.
-        voice_type:
-          anyOf:
-            - type: string
-            - type: 'null'
-          description: The extensible provider/type of the voice used by the response.
-        voice_locale:
-          anyOf:
-            - type: string
-            - type: 'null'
-          description: The BCP-47 locale of the voice used by the response.
-        output_audio_format:
-          $ref: '#/components/schemas/VoiceAgentResponseAudioFormat'
-          description: The output-audio format used by the response.
-        temperature:
-          anyOf:
-            - type: number
-              format: float
-            - type: 'null'
-          minimum: 0
-          maximum: 2
-          description: The sampling temperature used by the response.
-        max_output_tokens:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentMaxOutputTokens'
-            - type: 'null'
-          description: The maximum output-token count used by the response.
-        metadata:
-          anyOf:
-            - type: object
-              unevaluatedProperties:
                 type: string
-            - type: 'null'
-          description: String key-value metadata attached to the response.
-      description: A realtime response returned by the voice-agent service.
+                enum:
+                  - text
+                  - audio
+              description: |-
+                The set of modalities the model used to respond, currently the only possible values are
+                  `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
+                  output to mode `text` will disable audio output from the model.
+            max_output_tokens:
+              oneOf:
+                - $ref: '#/components/schemas/OpenAI.integer'
+                - type: string
+                  enum:
+                    - inf
+              description: |-
+                Maximum number of output tokens for a single assistant response,
+                  inclusive of tool calls, that was used in this response.
+          description: The template for omitting properties.
+      description: A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.
     VoiceAgentRequestConversationItem:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem'
@@ -82434,23 +82417,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall'
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput'
       description: A conversation item accepted as inline response input.
-    VoiceAgentResponseAudioFormat:
-      type: string
-      enum:
-        - pcm16
-        - pcm16_8000hz
-        - pcm16_16000hz
-        - pcm16_22050hz
-        - pcm16_24000hz
-        - pcm16_44100hz
-        - pcm16_48000hz
-        - g711_ulaw
-        - g711_alaw
-        - mp3
-        - mp3_24khz_48kbps
-        - mp3_24khz_96kbps
-        - mp3_24khz_160kbps
-      description: An audio format reported on a voice-agent response resource.
     VoiceAgentResponseCreateParams:
       type: object
       properties:
@@ -82578,15 +82544,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUser'
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant'
       description: A role-specific message item returned by the voice-agent runtime.
-    VoiceAgentResponseStatus:
-      type: string
-      enum:
-        - in_progress
-        - completed
-        - cancelled
-        - incomplete
-        - failed
-      description: The lifecycle status of a voice-agent response.
     VoiceAgentSemanticVadTurnDetection:
       type: object
       required:
