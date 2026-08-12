@@ -85,6 +85,7 @@ model OccurrenceResource is ScheduledActionResource {
 }
 
 @@identifiers(OccurrenceResourceListResponse.value, #[]);
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
