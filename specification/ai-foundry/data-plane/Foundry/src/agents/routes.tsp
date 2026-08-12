@@ -340,7 +340,6 @@ interface Agents {
   /**
    * Applies a merge-patch update to the specified agent endpoint configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")

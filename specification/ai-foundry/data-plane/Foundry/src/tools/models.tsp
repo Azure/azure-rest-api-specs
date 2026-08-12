@@ -861,7 +861,6 @@ namespace Azure.AI.Projects {
      * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
@@ -896,7 +895,6 @@ namespace Azure.AI.Projects {
      * Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }

@@ -53,7 +53,6 @@ interface Skills {
   /**
    * Removes the specified skill and its associated versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @summary("Delete a skill")
   @delete
   @route("/skills/{name}")
