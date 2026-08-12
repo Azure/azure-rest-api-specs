@@ -283,10 +283,6 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValue
     reason: Listing is not supported in ARM templates.
-  - suppress: NestedResourcesMustHaveListOperation
-    from: appconfiguration.json
-    where: $.definitions.FeatureFlag
-    reason: Feature flags support point GET, PUT, and DELETE operations through the management endpoint for ARM template deployments. Collection listing is intentionally supported only by the data-plane API.
   - suppress: TrackedResourceListByImmediateParent
     from: appconfiguration.json
     where: $.definitions.KeyValue
