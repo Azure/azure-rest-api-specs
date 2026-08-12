@@ -58,9 +58,9 @@ interface ArcDeployments {
   get is ArmResourceRead<ArcDeployment>;
 
   /**
-   * Creates an Arc deployment associated with the Cognitive Services account.
+   * Creates or updates an Arc deployment associated with the Cognitive Services account.
    */
-  create is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ArcDeployment,
     LroHeaders = ArcDeploymentCreateLroHeaders
   >;
@@ -476,7 +476,7 @@ model ArcDeploymentVllmParameters {
   "Properties of the Cognitive Services Arc deployment."
 );
 @@doc(
-  ArcDeployments.create::parameters.resource,
+  ArcDeployments.createOrUpdate::parameters.resource,
   "The Arc deployment properties."
 );
 @@doc(
