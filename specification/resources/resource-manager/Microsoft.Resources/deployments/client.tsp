@@ -294,13 +294,3 @@ using Microsoft.Resources;
 
 @@clientName(Microsoft.Resources, "DeploymentsManagementClient", "java");
 @@usage(DeploymentExtended, Usage.input | Usage.output, "java");
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.UserAssignedIdentity.clientId,
-  uuid,
-  "java"
-);
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.UserAssignedIdentity.principalId,
-  uuid,
-  "java"
-);
