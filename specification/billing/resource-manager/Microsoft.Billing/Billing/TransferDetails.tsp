@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./InvoiceSection.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -45,7 +47,7 @@ interface Transfers {
    */
   initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TransferDetails,
-    Request = InitiateTransferRequest,
+    Request = TransferDetails,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
@@ -74,6 +76,11 @@ interface Transfers {
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(TransferDetails.properties, "Details of the transfer.");
+@@typeChangedFrom(
+  Transfers.initiate::parameters.resource,
+  Versions.v2024_08_01_preview,
+  InitiateTransferRequest
+);
 @@doc(
   Transfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."

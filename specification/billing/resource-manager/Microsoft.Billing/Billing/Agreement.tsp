@@ -8,6 +8,15 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.Billing;
+
+alias AgreementListByBillingAccountParameters = {
+  /**
+   * May be used to expand the participants.
+   */
+  @query("expand")
+  expand?: string;
+};
+
 /**
  * An agreement.
  */
@@ -47,13 +56,7 @@ interface Agreements {
   listByBillingAccount is ArmResourceListByParent<
     Agreement,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * May be used to expand the participants.
-       */
-      @query("expand")
-      expand?: string;
-    },
+    Parameters = AgreementListByBillingAccountParameters,
     Response = ArmResponse<AgreementListResult>
   >;
 }

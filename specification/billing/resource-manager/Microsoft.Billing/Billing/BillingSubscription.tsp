@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -91,6 +93,20 @@ interface BillingSubscriptions {
     BillingSubscription,
     Response = ArmResponse<BillingSubscriptionListResult>,
     Parameters = BillingSubscriptionsListByBillingProfileParameters
+  >;
+
+  /**
+   * History of events related to the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "The legacy action template requires an action segment override to preserve the existing route."
+  @added(Versions.v2024_08_01_preview)
+  @TypeSpec.Rest.Private.actionSegment("fetchHistory")
+  @tag("BillingSubscription")
+  fetchHistoryByBillingSubscription is BillingSubscriptionOperationGroupOps.ActionSync<
+    BillingSubscription,
+    void,
+    ArmResponse<BillingSubscriptionEventList>,
+    Parameters = BillingSubscriptionsFetchHistoryParameters
   >;
 }
 alias BillingSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -259,6 +275,38 @@ alias BillingSubscriptionsListByBillingAccountParameters = {
   expand?: string;
 
   ...DefaultODataParameters;
+};
+
+alias BillingSubscriptionsFetchHistoryParameters = {
+  /**
+   * The start date of the period for which the history of events need to be pulled. The date is in MM-DD-YYYY format.
+   */
+  @query
+  startDate?: plainDate;
+
+  /**
+   * The end date of the period for which the history of events need to be pulled. The date is in MM-DD-YYYY format.
+   */
+  @query
+  endDate?: plainDate;
+
+  /**
+   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
+   */
+  @query("filter")
+  filter?: string;
+
+  /**
+   * The top query option requests the number of items in the queried collection to be included in the result.
+   */
+  @query
+  top?: int64;
+
+  /**
+   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
+   */
+  @query
+  skip?: int64;
 };
 
 @@doc(

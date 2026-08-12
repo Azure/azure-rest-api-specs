@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -64,6 +66,20 @@ alias BillingPropertyGetParameters = {
    */
   @query("includeTransitionStatus")
   includeTransitionStatus?: boolean = false;
+
+  /**
+   * A flag that specifies whether or not to include payment instrument.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @query("includePaymentInstrument")
+  includePaymentInstrument?: boolean = false;
+
+  /**
+   * A flag that specifies whether or not to include soldTo address.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @query("includeAddress")
+  includeAddress?: boolean = false;
 };
 
 @@doc(BillingProperty.name, "");

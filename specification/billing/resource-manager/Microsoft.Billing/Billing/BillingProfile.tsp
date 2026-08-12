@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./BillingAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -114,6 +116,21 @@ interface BillingProfiles {
     void,
     ArmResponse<DeleteBillingProfileEligibilityResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Updates invoice recipient contacts for a billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("BillingProfile")
+  @action("updateInvoiceRecipientContacts")
+  updateInvoiceRecipientContacts is ArmResourceActionAsync<
+    BillingProfile,
+    UpdateInvoiceRecipientContactsRequest,
+    BillingProfile,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    LroHeaders = ArmLroLocationHeader<FinalResult = BillingProfile> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./BillingAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -57,6 +59,42 @@ alias InvoiceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     invoiceName: string;
   },
   "BillingInvoice"
+>;
+
+alias InvoiceByBillingProfileOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    billingProfileName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies an invoice. */
+    @path
+    @segment("invoices")
+    @key
+    @pattern(InvoicePattern)
+    invoiceName: string;
+  },
+  "BillingProfileInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -181,6 +219,30 @@ interface Invoices {
       @query("search")
       search?: string;
     }
+  >;
+
+  /**
+   * Initiates a pay now operation for an invoice.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("Invoice")
+  @action("paynow")
+  paynow is InvoiceByBillingProfileOps.ActionAsync<
+    Invoice,
+    InvoicePaynowRequest,
+    Azure.ResourceManager.Foundations.OperationStatusResult
+  >;
+
+  /**
+   * Validate whether a user is eligible to use the Pay Now feature for the invoice.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("Invoice")
+  @action("validatePaynowEligibility")
+  validatePaynowEligibility is InvoiceByBillingProfileOps.ActionSync<
+    Invoice,
+    void,
+    ArmResponse<PaynowEligibilityResult>
   >;
 }
 alias InvoiceByBillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -307,3 +369,7 @@ interface InvoiceById {
 
 @@doc(Invoice.name, "The ID that uniquely identifies an invoice.");
 @@doc(Invoice.properties, "An invoice.");
+@@doc(
+  Invoices.paynow::parameters.body,
+  "The request details for a pay now operation."
+);

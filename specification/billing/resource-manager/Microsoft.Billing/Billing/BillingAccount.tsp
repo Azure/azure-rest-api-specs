@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 
@@ -29,6 +31,51 @@ model BillingAccount
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
+
+/**
+ * An address associated with a billing account.
+ */
+@added(Versions.v2024_08_01_preview)
+@tenantResource
+@parentResource(BillingAccount)
+model AddressEntity
+  is Azure.ResourceManager.ProxyResource<AddressEntityProperties> {
+  ...ResourceNameParameter<
+    Resource = AddressEntity,
+    KeyName = "addressId",
+    SegmentName = "addresses",
+    NamePattern = BillingProfileCustomerInvoiceSectionNamePattern
+  >;
+}
+
+alias BillingAccountAddressOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The resource provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+  },
+  {},
+  {
+    /** The name of the address. */
+    @path
+    @segment("addresses")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    addressId: string;
+  },
+  "BillingAccountAddress"
+>;
 
 @armResourceOperations(#{ omitTags: true })
 interface BillingAccounts {
@@ -61,6 +108,48 @@ interface BillingAccounts {
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = BillingAccountsListParameters,
     Response = ArmResponse<BillingAccountListResult>
+  >;
+
+  /**
+   * Creates or updates an address for a billing account. The address can be used for billing and shipping purposes.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("BillingAccount")
+  putAddress is BillingAccountAddressOps.CreateOrUpdateAsync<
+    AddressEntity,
+    Request = AddressEntityProperties,
+    Response =
+      | ArmResourceUpdatedResponse<AddressEntity>
+      | ArmResourceCreatedResponse<
+          AddressEntity,
+          ArmLroLocationHeader<FinalResult = AddressEntity> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+  >;
+
+  /**
+   * Transfers an enrollment from Enterprise Agreement to Microsoft Customer Agreement.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the established MCA acronym in the operation name."
+  @added(Versions.v2024_08_01_preview)
+  @tag("BillingAccount")
+  transferEnrollmentToMCA is ArmResourceActionSync<
+    BillingAccount,
+    void,
+    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Validates invoice payment eligibility for a billing account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("BillingAccount")
+  validateInvoicePayEligibility is ArmResourceActionSync<
+    BillingAccount,
+    void,
+    ArmResponse<InvoicePayEligibilityResult>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**

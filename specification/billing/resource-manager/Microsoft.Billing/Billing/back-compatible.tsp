@@ -38,6 +38,21 @@ using Microsoft.Billing;
 @@Legacy.flattenProperty(PartnerInitiateTransferRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(PurchaseOrder.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(PurchaseOrderMapping.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(InvoicingPreferences.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(Alert.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(LicenseReservation.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(AcceptTransferRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
@@ -47,6 +62,21 @@ using Microsoft.Billing;
   AssociatedTenants.createOrUpdate::parameters.resource,
   "parameters"
 );
+
+@@clientName(BillingAccounts.putAddress::parameters.resource, "parameters");
+
+@@clientName(Alerts.createOrUpdate::parameters.resource, "parameters");
+
+@@clientName(
+  BillingProfiles.updateInvoiceRecipientContacts::parameters.body,
+  "parameters"
+);
+
+@@clientName(Invoices.paynow::parameters.body, "parameters");
+
+@@clientName(LicenseReservations.cancel::parameters.body, "parameters");
+
+@@clientName(LicenseReservations.create::parameters.resource, "parameters");
 
 @@clientLocation(
   AvailableBalanceOperationGroup.getByBillingProfile,
@@ -541,6 +571,7 @@ using Microsoft.Billing;
 );
 
 @@clientLocation(PaymentMethodLinks.getByBillingProfile, PaymentMethods);
+@@clientLocation(PaymentMethodLinks.deleteAtBillingProfile, PaymentMethods);
 @@clientLocation(PaymentMethodLinks.listByBillingProfile, PaymentMethods);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PaymentMethodLink.properties);
