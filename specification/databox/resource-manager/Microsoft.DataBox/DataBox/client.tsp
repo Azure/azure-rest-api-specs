@@ -480,3 +480,5 @@ op mitigateCustomized(
 @@override(JobResources.markDevicesShipped, jobMarkDevicesShippedCustomized);
 
 @@override(mitigate, mitigateCustomized);
+
+@@alternateType(OperationProperties, Record<unknown>, "javascript");

@@ -6,6 +6,8 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.KeyVault;
 using Azure.Core;
 
+@@clientName(ManagedHsmSkuNameV2, "ManagedHsmSKUName", "go");
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"
 @@clientOption(
@@ -487,12 +489,4 @@ enum NameAvailabilityReason {
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 127, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
-);
-// temporary until https://github.com/Azure/typespec-rust/issues/907 is fixed
-@@clientInitialization(
-  Microsoft.KeyVault,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  },
-  "rust"
 );

@@ -42,7 +42,7 @@ interface PrivateEndpointConnectionOps
       },
       {},
       ResourceRoute = #{
-        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}",
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}",
       }
     > {}
 
@@ -53,7 +53,7 @@ interface PrivateEndpointConnections {
    */
   @summary("Get a specific private endpoint connection.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
   get is PrivateEndpointConnectionOps.ActionSync<
     PrivateEndpointConnection,
     Request = void,
@@ -72,7 +72,7 @@ interface PrivateEndpointConnections {
    */
   @put
   @summary("Update a specific private endpoint connection.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
   update is PrivateEndpointConnectionOps.ActionAsync<
     PrivateEndpointConnection,
     Request = PrivateEndpointConnection,
@@ -100,7 +100,7 @@ interface PrivateEndpointConnections {
    */
   @summary("Delete a specific private endpoint connection.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
   delete is PrivateEndpointConnectionOps.ActionAsync<
     PrivateEndpointConnection,
     Request = void,

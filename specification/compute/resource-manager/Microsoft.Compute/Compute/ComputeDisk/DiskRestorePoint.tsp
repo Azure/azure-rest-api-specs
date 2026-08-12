@@ -25,7 +25,10 @@ model DiskRestorePoint
 }
 
 alias VMRestorePointPath = {
-  ...Azure.ResourceManager.Legacy.BasePath;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
 
   /**
    * The name of the restore point collection that the disk restore point belongs.
@@ -44,7 +47,7 @@ alias VMRestorePointPath = {
 
 @armResourceOperations
 interface DiskRestorePointsOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VMRestorePointPath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -53,7 +56,8 @@ interface DiskRestorePointsOps
           KeyName = "diskRestorePointName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
 @armResourceOperations(#{ omitTags: true })

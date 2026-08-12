@@ -10,6 +10,7 @@ import "./update/run.tsp";
 import "./update/strategy.tsp";
 import "./update/autoupgradeprofile.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -69,4 +70,8 @@ enum Versions {
   @doc("Azure Kubernetes Fleet Manager api version 2026-03-02-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_03_02_preview: "2026-03-02-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2026-06-01.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_06_01: "2026-06-01",
 }
