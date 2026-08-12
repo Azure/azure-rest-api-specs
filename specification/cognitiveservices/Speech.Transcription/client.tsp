@@ -26,10 +26,12 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(TranscriptionOptions.enhancedMode, "enhancedModeOptions", "java");
 @@clientName(EnhancedModeProperties, "EnhancedModeOptions", "java");
 @@clientName(EnhancedModeProperties, "EnhancedModeOptions", "javascript");
+@@clientName(EnhancedModeProperties, "EnhancedModeOptions", "go");
 @@clientName(EnhancedModeProperties.prompt, "prompts", "java");
 @@access(EnhancedModeProperties.enabled, Access.internal);
 @@clientName(PhraseListProperties, "PhraseListOptions", "java");
 @@clientName(PhraseListProperties, "PhraseListOptions", "javascript");
+@@clientName(PhraseListProperties, "PhraseListOptions", "go");
 @@clientName(TranscriptionResult.durationMilliseconds, "duration", "java");
 @@clientName(
   TranscriptionResult.durationMilliseconds,
@@ -56,9 +58,11 @@ namespace Azure.Ai.Speech.Transcription;
 @@access(TranscriptionContent, Access.internal, "java");
 @@access(TranscriptionContent, Access.internal, "csharp");
 @@access(TranscriptionContent, Access.internal, "javascript");
+@@access(TranscriptionContent, Access.internal, "go");
 @@clientName(TranscriptionContent.definition, "options", "java");
 @@clientName(TranscriptionContent.definition, "options", "csharp");
 @@clientName(TranscriptionContent.definition, "options", "javascript");
+@@clientName(TranscriptionContent.definition, "options", "go");
 @@clientName(
   Azure.Core.Foundations.ApiVersionParameter.apiVersion,
   "serviceVersion",
