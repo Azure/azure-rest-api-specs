@@ -293,3 +293,5 @@ using Microsoft.Resources;
 @@responseAsBool(DeploymentExtendedOperationGroup.checkExistence, "javascript");
 
 @@clientName(Microsoft.Resources, "DeploymentsManagementClient", "java");
+@@clientName(Deployment, "DeploymentInner", "java");
+@@clientName(Provider, "ProviderInner", "java");
