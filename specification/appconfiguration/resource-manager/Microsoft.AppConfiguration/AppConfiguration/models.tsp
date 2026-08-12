@@ -360,9 +360,15 @@ model ConfigurationStoreProperties {
   softDeleteRetentionInDays?: int32 = 7;
 
   /**
-   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores.
+   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
    */
   defaultKeyValueRevisionRetentionPeriodInSeconds?: int64;
+
+  /**
+   * The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
+   */
+  @added(Versions.v2026_09_01_preview)
+  defaultFeatureFlagRevisionRetentionPeriodInSeconds?: int64;
 
   /**
    * Property specifying whether protection against purge is enabled for this configuration store.
@@ -616,9 +622,15 @@ model ConfigurationStorePropertiesUpdateParameters {
   dataPlaneProxy?: DataPlaneProxyProperties;
 
   /**
-   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores.
+   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
    */
   defaultKeyValueRevisionRetentionPeriodInSeconds?: int64;
+
+  /**
+   * The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
+   */
+  @added(Versions.v2026_09_01_preview)
+  defaultFeatureFlagRevisionRetentionPeriodInSeconds?: int64;
 
   /**
    * Property specifying the configuration of telemetry to update for this configuration store
@@ -971,6 +983,12 @@ model KeyValueProperties {
   contentType?: string;
 
   /**
+   * The description of the key-value.
+   */
+  @added(Versions.v2026_09_01_preview)
+  description?: string;
+
+  /**
    * An ETag indicating the state of a key-value within a configuration store.
    */
   @visibility(Lifecycle.Read)
@@ -1127,6 +1145,12 @@ model SnapshotProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
+
+  /**
+   * The description of the snapshot.
+   */
+  @added(Versions.v2026_09_01_preview)
+  description?: string;
 
   /**
    * A value representing the current state of the snapshot.
