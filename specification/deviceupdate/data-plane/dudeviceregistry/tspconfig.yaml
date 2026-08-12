@@ -1,5 +1,5 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 
 parameters:
   "service-dir":
@@ -7,7 +7,7 @@ parameters:
 
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
   # This TypeSpec was assembled from an existing swagger-derived spec. The rules
   # below are disabled because the existing swagger is the source of truth:
   # turning them on would force changes that alter the generated swagger and
@@ -22,19 +22,19 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/deviceupdatedeviceregistry.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-deviceregistrysoftwareupdate"
-    package-dir: "azure-mgmt-deviceregistrysoftwareupdate"
-    namespace: "azure.mgmt.deviceregistrysoftwareupdate"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistrysoftwareupdate"
+    package-dir: "azure-iot-deviceregistrysoftwareupdate"
+    namespace: "azure.iot.deviceregistrysoftwareupdate"
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-device-registry-software-update"
-    namespace: com.azure.resourcemanager.deviceregistry.softwareupdate
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-device-registry-software-update"
+    namespace: com.azure.iot.deviceregistry.softwareupdate
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/resourcemanager-device-registry-software-update"
+    emitter-output-dir: "{output-dir}/{service-dir}/iot-device-registry-software-update"
     package-details:
-      name: "@azure/resourcemanager-device-registry-software-update"
+      name: "@azure/iot-device-registry-software-update"
     flavor: azure
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.DeviceRegistry.SoftwareUpdate"
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.IoT.DeviceRegistry.SoftwareUpdate"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
