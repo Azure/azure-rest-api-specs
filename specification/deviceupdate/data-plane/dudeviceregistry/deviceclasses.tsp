@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace DeviceRegistryUpdateClient;
+namespace DeviceRegistrySoftwareUpdateClient;
 
 /** Properties that identify a device class. */
 model DeviceClassProperties {

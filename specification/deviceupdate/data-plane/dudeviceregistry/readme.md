@@ -1,8 +1,8 @@
-# Device Update for Device Registry
+# Software Update for Device Registry
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Device Update for Device Registry.
+This is the AutoRest configuration file for Software Update for Device Registry.
 
 ## Configuration
 

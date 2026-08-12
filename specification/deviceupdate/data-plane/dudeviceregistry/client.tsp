@@ -2,9 +2,9 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using DeviceRegistryUpdateClient;
+using DeviceRegistrySoftwareUpdateClient;
 
-// Organize the generated SDK operation groups for the Device Registry Update
+// Organize the generated SDK operation groups for the Device Registry Software Update
 // client surface (DeviceUpdate / DeviceClasses).
 @@clientLocation(DeviceUpdateOperationGroup.listUpdates, "DeviceUpdate");
 @@clientLocation(DeviceUpdateOperationGroup.importUpdate, "DeviceUpdate");

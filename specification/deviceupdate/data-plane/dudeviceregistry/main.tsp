@@ -11,22 +11,22 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 /**
- * Device Update for Device Registry is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in Device Registry). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for Device Registry handle the updates.
+ * Software Update for Device Registry is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in Device Registry). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Software Update for Device Registry handle the updates.
  */
 @useAuth(AzureAuth)
-@service(#{ title: "DeviceRegistryUpdateClient" })
+@service(#{ title: "DeviceRegistrySoftwareUpdateClient" })
 @versioned(Versions)
 @server(
   "https://{endpoint}",
-  "Device Update for Device Registry is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in Device Registry). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for Device Registry handle the updates.",
+  "Software Update for Device Registry is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in Device Registry). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Software Update for Device Registry handle the updates.",
   {
     /**
-     * The Device Update for Device Registry account endpoint (hostname only, no protocol).
+     * The Software Update for Device Registry account endpoint (hostname only, no protocol).
      */
     endpoint: url,
   }
 )
-namespace DeviceRegistryUpdateClient;
+namespace DeviceRegistrySoftwareUpdateClient;
 
 /**
  * Azure Active Directory OAuth2 Flow.
@@ -53,7 +53,7 @@ alias AzureAuth = OAuth2Auth<[
 enum Versions {
   /**
    * The 2026-11-02-preview API version. First public preview of the Device
-   * Update for Device Registry data-plane service. Exposes update (content)
+   * Software Update for Device Registry data-plane service. Exposes update (content)
    * management operations and device class operations.
    */
   @Azure.Core.previewVersion

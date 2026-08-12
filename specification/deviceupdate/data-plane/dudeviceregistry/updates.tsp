@@ -5,12 +5,12 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace DeviceRegistryUpdateClient;
+namespace DeviceRegistrySoftwareUpdateClient;
 
 @tag("Update management")
 interface DeviceUpdateOperationGroup {
   /**
-   * Get a list of all updates that have been imported to Device Update for Device
+   * Get a list of all updates that have been imported to Software Update for Device
    * Registry.
    */
   @route("/updates")

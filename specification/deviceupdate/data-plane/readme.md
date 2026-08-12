@@ -7,5 +7,5 @@ folder during migration to service-owned specification directories.
 
 Each service has its own AutoRest and SDK configuration:
 
-- [Device Update for Device Registry](./dudeviceregistry/readme.md)
+- [Software Update for Device Registry](./dudeviceregistry/readme.md)
 - [Device Update for IoT Hub](./duiothub/readme.md)

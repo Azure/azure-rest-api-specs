@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace DeviceRegistryUpdateClient;
+namespace DeviceRegistrySoftwareUpdateClient;
 
 // ---------------------------------------------------------------------------
 // Shared operation template
