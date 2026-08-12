@@ -106,6 +106,9 @@ model SkuSummary {
 
   @doc("SKU price related properties")
   offeringProperties?: OfferingProperties[];
+
+  @doc("Offering type of product family Offers")
+  offeringType?: string;
 }
 
 @doc("Sku object properties")
@@ -288,6 +291,9 @@ model ProductBase {
 
   @doc("Maximum quantity allowed on a proposal")
   maxQuantityOnProposal?: int32;
+
+  @doc("Offering type of product family Offers")
+  offeringType?: string;
 }
 
 @doc("Returns a subset of Product attributes")

@@ -810,6 +810,7 @@ model NotificationSettings {
   /**
    * The webhook URL to which the notification will be sent.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   webhookUrl?: string;
 
   /**
@@ -1422,11 +1423,13 @@ model CustomImagePropertiesFromVm {
   /**
    * The Windows OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   windowsOsInfo?: WindowsOsInfo;
 
   /**
    * The Linux OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   linuxOsInfo?: LinuxOsInfo;
 }
 
@@ -1876,6 +1879,7 @@ model NetworkInterfaceProperties {
 /**
  * Properties of a virtual machine that determine how it is connected to a load balancer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules
@@ -2100,6 +2104,7 @@ model NotificationChannelProperties {
   /**
    * The webhook URL to send notifications to.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   webHookUrl?: string;
 
   /**
@@ -2350,6 +2355,7 @@ model IdentityProperties {
   /**
    * The client secret URL of the identity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   clientSecretUrl?: string;
 }
 
@@ -3380,6 +3386,7 @@ model ShutdownNotificationContent {
   /**
    * The URL to skip auto-shutdown.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   skipUrl?: string;
 
   /**
@@ -3410,6 +3417,7 @@ model ShutdownNotificationContent {
   /**
    * The URL of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   vmUrl?: string;
 
   /**

@@ -265,10 +265,12 @@ model HorizonDbReplicaForPatchUpdate {
 
 @doc("Properties of a HorizonDB firewall rule.")
 model HorizonDbFirewallRuleProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The start IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The end IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: string;

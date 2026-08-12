@@ -22,6 +22,8 @@ namespace Customizations;
 @@clientName(KeyVault, "KeyVaultSecretsClient", "csharp");
 @@clientName(SecretAttributes, "SecretAttributesBundle", "csharp");
 
+@@access(KeyVault, Access.internal, "csharp");
+
 using KeyVault;
 
 // Make optional path parameter required for all languages
