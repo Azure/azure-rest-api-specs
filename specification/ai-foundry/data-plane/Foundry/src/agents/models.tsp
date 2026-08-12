@@ -359,7 +359,12 @@ model PromptAgentDefinitionTextOptions {
   format?: OpenAI.TextResponseFormatConfiguration;
 }
 
-@doc("The workflow agent definition.")
+/**
+* The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026. 
+* If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
+* see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
+*/
+#deprecated "deprecated"
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.workflow_agents_v1_preview] }
