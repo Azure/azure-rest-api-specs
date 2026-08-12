@@ -591,11 +591,11 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 
   @doc("""
-    The Entra application audiences this scheme accepts inbound tokens for. When omitted, the scheme
-    behaves as if set to `["foundry"]`. GET preserves omission rather than materializing the default.
-    An explicitly empty array is invalid; an Entra scheme must accept at least one audience type.
-    Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of the
-    Foundry path.
+    The Entra application audiences for which this scheme accepts inbound tokens. When omitted, the
+    scheme behaves as if set to `["foundry"]`. GET preserves omission rather than materializing the
+    default. An explicitly empty array is invalid; an Entra scheme must accept at least one audience
+    type. Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of
+    the Foundry path.
     """)
   audience_types?: EntraAudienceType[];
 
