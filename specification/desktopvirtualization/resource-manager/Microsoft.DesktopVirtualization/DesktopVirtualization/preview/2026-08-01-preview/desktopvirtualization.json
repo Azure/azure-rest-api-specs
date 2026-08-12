@@ -7629,6 +7629,22 @@
         ]
       }
     },
+    "FirstPartyExtensionAutoUpdateSettings": {
+      "type": "object",
+      "description": "The automatic update settings for supported first-party extensions.",
+      "properties": {
+        "MicrosoftMultimediaRedirection": {
+          "type": "boolean",
+          "description": "Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.",
+          "x-ms-client-name": "microsoftMultimediaRedirection"
+        },
+        "TeamsMediaOptimization": {
+          "type": "boolean",
+          "description": "Whether automatic updates are enabled for the Teams Media Optimization extension.",
+          "x-ms-client-name": "teamsMediaOptimization"
+        }
+      }
+    },
     "HealthCheckName": {
       "type": "string",
       "description": "Represents the name of the health check operation performed.",
@@ -7943,11 +7959,8 @@
           "description": "The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`."
         },
         "firstPartyExtensionAutoUpdate": {
-          "type": "object",
-          "description": "The automatic update settings for first-party extensions, keyed by extension name.",
-          "additionalProperties": {
-            "type": "boolean"
-          }
+          "$ref": "#/definitions/FirstPartyExtensionAutoUpdateSettings",
+          "description": "The automatic update settings for supported first-party extensions."
         }
       }
     },
@@ -8104,11 +8117,8 @@
           "description": "The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`."
         },
         "firstPartyExtensionAutoUpdate": {
-          "type": "object",
-          "description": "The automatic update settings for first-party extensions, keyed by extension name.",
-          "additionalProperties": {
-            "type": "boolean"
-          }
+          "$ref": "#/definitions/FirstPartyExtensionAutoUpdateSettings",
+          "description": "The automatic update settings for supported first-party extensions."
         }
       },
       "required": [

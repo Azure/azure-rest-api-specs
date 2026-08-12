@@ -2726,11 +2726,27 @@ model HostPoolProperties {
   conditionalRdpProperty?: string;
 
   /**
-   * The automatic update settings for first-party extensions, keyed by extension name.
+   * The automatic update settings for supported first-party extensions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved ARM contract requires an open-ended dictionary keyed by first-party extension name."
   @added(Versions.vLatestPreview)
-  firstPartyExtensionAutoUpdate?: Record<boolean>;
+  firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
+}
+
+/**
+ * The automatic update settings for supported first-party extensions.
+ */
+model FirstPartyExtensionAutoUpdateSettings {
+  /**
+   * Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.
+   */
+  @encodedName("application/json", "MicrosoftMultimediaRedirection")
+  microsoftMultimediaRedirection?: boolean;
+
+  /**
+   * Whether automatic updates are enabled for the Teams Media Optimization extension.
+   */
+  @encodedName("application/json", "TeamsMediaOptimization")
+  teamsMediaOptimization?: boolean;
 }
 
 /**
@@ -3836,11 +3852,10 @@ model HostPoolPatchProperties {
   conditionalRdpProperty?: string;
 
   /**
-   * The automatic update settings for first-party extensions, keyed by extension name.
+   * The automatic update settings for supported first-party extensions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved ARM contract requires an open-ended dictionary keyed by first-party extension name."
   @added(Versions.vLatestPreview)
-  firstPartyExtensionAutoUpdate?: Record<boolean>;
+  firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
 }
 
 /**
