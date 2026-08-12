@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/resources"
+    default: "sdk/dataBoundaries"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -22,6 +22,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    service-dir: "sdk/resources"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources"
     namespace: "com.azure.resourcemanager.resources"
     service-name: "Data Boundaries"
@@ -32,7 +33,6 @@ options:
     enable-sync-stack: false
     float32-as-double: false
     use-object-for-unknown: true
-    generate-samples: false
     metadata-suffix: databoundary
   "@azure-tools/typespec-ts":
     service-dir: "sdk/databoundaries"
