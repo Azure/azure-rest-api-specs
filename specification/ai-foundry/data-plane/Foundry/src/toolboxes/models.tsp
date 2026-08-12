@@ -72,6 +72,7 @@ alias ToolFields<Source> = {
 alias ToolboxCodeInterpreterToolType = "code_interpreter";
 alias ToolboxFileSearchToolType = "file_search";
 alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxShellToolType = "shell";
 alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
@@ -91,6 +92,7 @@ union ToolboxToolType {
   code_interpreter: ToolboxCodeInterpreterToolType,
   file_search: ToolboxFileSearchToolType,
   web_search: ToolboxWebSearchToolType,
+  shell: ToolboxShellToolType,
   mcp: ToolboxMCPToolType,
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
@@ -142,6 +144,168 @@ model FileSearchToolboxTool extends ToolboxTool {
 model WebSearchToolboxTool extends ToolboxTool {
   type: ToolboxWebSearchToolType;
   ...ToolFields<OpenAI.WebSearchTool>;
+}
+
+/**
+ * An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract.
+ */
+@discriminator("type")
+model ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment.
+   */
+  type: string;
+}
+
+/**
+ * A reference to an existing skill used by a shell tool stored in a toolbox.
+ */
+model ToolboxShellSkillReference {
+  ...OpenAI.SkillReferenceParam;
+
+  /**
+   * The name of the referenced skill.
+   */
+  name: SkillName;
+
+  /**
+   * A human-readable description of the referenced skill.
+   */
+  @maxLength(1024)
+  description: string;
+}
+
+/**
+ * A skill used by a shell tool stored in a toolbox.
+ */
+union ToolboxShellSkill {
+  skill_reference: ToolboxShellSkillReference,
+  inline: OpenAI.InlineSkillParam,
+}
+
+/**
+ * A project connection used to provide a secret to an allowlisted domain.
+ */
+model ToolboxShellDomainSecretReference {
+  /**
+   * The name of the secret to inject.
+   */
+  @minLength(1)
+  name: string;
+
+  /**
+   * The ID of the project connection that contains the secret value.
+   */
+  @minLength(1)
+  project_connection_id: string;
+}
+
+/**
+ * Network access policy for an automatically provisioned toolbox shell container.
+ */
+@discriminator("type")
+model ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy.
+   */
+  type: string;
+}
+
+/**
+ * A network policy that disables outbound access from a toolbox shell container.
+ */
+model ToolboxShellNetworkPolicyDisabled extends ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy. Always `disabled`.
+   */
+  type: "disabled";
+}
+
+/**
+ * A network policy that permits outbound access only to specified domains.
+ */
+model ToolboxShellNetworkPolicyAllowlist extends ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy. Always `allowlist`.
+   */
+  type: "allowlist";
+
+  /**
+   * The domains to which the container can make outbound requests.
+   */
+  @minItems(1)
+  allowed_domains: string[];
+
+  /**
+   * Optional project connections that provide secrets for allowlisted domains.
+   */
+  @minItems(1)
+  domain_secrets?: ToolboxShellDomainSecretReference[];
+}
+
+/**
+ * An automatically provisioned container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_auto`.
+   */
+  type: "container_auto";
+
+  ...OmitProperties<
+    OpenAI.ContainerAutoParam,
+    "type" | "skills" | "network_policy"
+  >;
+
+  /**
+   * The network access policy for the container.
+   */
+  network_policy?: ToolboxShellNetworkPolicy;
+
+  /**
+   * An optional list of skills referenced by ID or inline data.
+   */
+  @maxItems(200)
+  skills?: ToolboxShellSkill[];
+}
+
+/**
+ * An existing container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerReferenceEnvironment
+  extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_reference`.
+   */
+  type: "container_reference";
+
+  ...OmitProperties<
+    OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+    "type"
+  >;
+}
+
+/**
+ * A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
+ */
+model ShellToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `shell`.
+   */
+  type: ToolboxShellToolType;
+
+  /**
+   * The unique name of this shell tool within the toolbox version.
+   */
+  @minLength(1)
+  name: string;
+
+  ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
+
+  /**
+   * The environment in which shell commands are executed.
+   */
+  environment?: ToolboxShellEnvironment;
 }
 
 /**
