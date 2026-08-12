@@ -783,6 +783,7 @@ model CancelOperationsResponse {
 @doc("The response from listing bulk operation errors")
 model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from acknowledging bulk operation errors")
 model AcknowledgeBulkOperationErrorsResponse {
@@ -796,6 +797,7 @@ model AcknowledgeBulkOperationErrorsResponse {
   skipped: Array<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The request to acknowledge bulk operation errors")
 model AcknowledgeBulkOperationErrorsRequest {

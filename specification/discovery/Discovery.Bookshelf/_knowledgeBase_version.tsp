@@ -32,6 +32,7 @@ model KnowledgeBaseVersion {
 }
 
 /** Response body for a long-running delete operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseDeleteResponse {
   @doc("The unique ID of the operation.")
   id: string;
