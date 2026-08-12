@@ -7,6 +7,12 @@ using Azure.ResourceManager;
 using Microsoft.Resources.DeploymentStacks;
 using TypeSpec.Versioning;
 
+@@alternateType(DeploymentStackProperties.template, unknown, "go");
+@@alternateType(DeploymentStackProperties.outputs, unknown, "go");
+@@alternateType(DeploymentStackTemplateDefinition.template, unknown, "go");
+@@alternateType(ResourceReference.identifiers, unknown, "go");
+
+// Java SDK: Mitigate breaks from TypeSpec migration
 /**
  * Specifies whether to delete or detach a resource from the deployment stack.
  */
@@ -25,12 +31,6 @@ union DeploymentStacksDeleteDetachEnum {
   Detach: "detach",
 }
 
-@@alternateType(DeploymentStackProperties.template, unknown, "go");
-@@alternateType(DeploymentStackProperties.outputs, unknown, "go");
-@@alternateType(DeploymentStackTemplateDefinition.template, unknown, "go");
-@@alternateType(ResourceReference.identifiers, unknown, "go");
-
-// Java SDK: Mitigate breaks from TypeSpec migration
 @@alternateType(DeploymentStackProperties.template, unknown, "java");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "java");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
