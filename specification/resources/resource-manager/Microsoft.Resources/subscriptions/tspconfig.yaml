@@ -22,13 +22,19 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-subscriptions"
-    namespace: "com.azure.resourcemanager.subscriptions"
-    service-name: "Subscriptions"
-    enable-sync-stack: true
+    service-dir: "sdk/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources"
+    namespace: "com.azure.resourcemanager.resources"
+    service-name: "Resource"
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
     flavor: azure
     use-object-for-unknown: true
     float32-as-double: false
+    metadata-suffix: subscription
+    api-version: "2022-12-01"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/resources-subscriptions"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-resources-subscriptions"
