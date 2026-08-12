@@ -11093,7 +11093,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
    */
   retentionDays?: int32;
-  
+
   /**
    * Whether to lock the immutability of the backups governed by this short term retention policy.
    */
