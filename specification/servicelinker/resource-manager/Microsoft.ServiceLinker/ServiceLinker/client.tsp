@@ -304,6 +304,11 @@ op dryrunResourcesListDryrun(
 @@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
 @@clientName(DeleteOrUpdateBehavior, "LinkerDeleteOrUpdateBehavior", "csharp");
 @@clientName(DryrunParameters, "DryrunContent", "csharp");
+@@clientName(
+  EasyAuthMicrosoftEntraIDAuthInfo,
+  "EasyAuthMicrosoftEntraIdAuthInfo",
+  "csharp"
+);
 @@clientName(FabricPlatform, "FabricPlatformTargetService", "csharp");
 @@clientName(FirewallRules, "LinkerFirewallRules", "csharp");
 @@clientName(Linker, "LinkerResources", "csharp");
