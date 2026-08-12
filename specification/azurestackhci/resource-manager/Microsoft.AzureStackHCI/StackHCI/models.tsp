@@ -3731,6 +3731,231 @@ model EceDeploymentSecrets {
   secretLocation?: url;
 }
 
+////////////////////////////////////////////////////////////////
+////////// Edge Machine Deployment Setting /////////////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * The properties of an Edge Machine Deployment Setting.
+ */
+@added(Versions.v2026_10_15_preview)
+model EdgeMachineDeploymentSettingProperties {
+  /**
+   * The provisioning state of the deployment setting resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The deployment configuration for the edge machine.
+   */
+  deploymentConfiguration: EdgeMachineDeploymentConfiguration;
+
+  /**
+   * Deployment status reported from the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: EceReportedProperties;
+}
+
+/**
+ * Edge Machine Deployment Configuration.
+ */
+@added(Versions.v2026_10_15_preview)
+model EdgeMachineDeploymentConfiguration {
+  /**
+   * Deployment template version.
+   */
+  version?: string;
+
+  /**
+   * The list of deployment data.
+   */
+  @identifiers(#[])
+  scaleUnits: EdgeMachineScaleUnits[];
+}
+
+/**
+ * A scale unit containing deployment data.
+ */
+@added(Versions.v2026_10_15_preview)
+model EdgeMachineScaleUnits {
+  /**
+   * Deployment data to configure the edge machine.
+   */
+  deploymentData: EdgeMachineDeploymentData;
+}
+
+/**
+ * The deployment data of an edge machine.
+ */
+@added(Versions.v2026_10_15_preview)
+model EdgeMachineDeploymentData {
+  /**
+   * Storage type for the edge machine node.
+   */
+  storageType: NodeStorageType;
+
+  /**
+   * iSCSI configuration for the edge machine.
+   */
+  iScsiConfig?: IscsiConfig;
+
+  /**
+   * Protected parameters stored in Key Vault and applied during edge machine node preparation.
+   */
+  @identifiers(#[])
+  secrets?: EceDeploymentSecrets[];
+}
+
+/**
+ * Node storage type for an edge machine.
+ */
+@added(Versions.v2026_10_15_preview)
+union NodeStorageType {
+  string,
+
+  /** Storage Spaces Direct (S2D) storage type. */
+  S2D: "S2D",
+
+  /** SAN iSCSI storage type. */
+  SanIscsi: "SANISCSI",
+
+  /** SAN Fibre Channel storage type. */
+  SanFc: "SANFC",
+}
+
+/**
+ * iSCSI configuration.
+ */
+@added(Versions.v2026_10_15_preview)
+model IscsiConfig {
+  /**
+   * iSCSI network configuration.
+   */
+  iScsiNetworkConfig?: IscsiNetworkConfig;
+
+  /**
+   * CHAP authentication settings.
+   */
+  chapSettings?: IscsiChapSettings;
+
+  /**
+   * iSCSI Qualified Name of the initiator.
+   */
+  initiatorIqn?: string;
+}
+
+/**
+ * iSCSI network configuration.
+ */
+@added(Versions.v2026_10_15_preview)
+model IscsiNetworkConfig {
+  /**
+   * Common adapter properties applied to all iSCSI network adapters.
+   */
+  adapterProperties?: IscsiAdapterProperties;
+
+  /**
+   * Per-adapter IP configuration for the iSCSI network adapters.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches the iSCSI network configuration wire format."
+  @identifiers(#["networkAdapterName"])
+  adapterIPConfig?: IscsiAdapterIPConfig[];
+}
+
+/**
+ * Common properties applied to iSCSI network adapters.
+ */
+@added(Versions.v2026_10_15_preview)
+model IscsiAdapterProperties {
+  /**
+   * 802.1p priority value for iSCSI traffic.
+   */
+  priorityValue8021ActionIscsi?: int32;
+
+  /**
+   * iSCSI bandwidth percentage.
+   */
+  bandwidthPercentageIscsi?: int32;
+
+  /**
+   * Jumbo frame size in bytes.
+   */
+  jumboPacket?: int32;
+}
+
+/**
+ * IP configuration for a single iSCSI network adapter.
+ */
+@added(Versions.v2026_10_15_preview)
+model IscsiAdapterIPConfig {
+  /**
+   * Name of the iSCSI network adapter.
+   */
+  networkAdapterName?: string;
+
+  /**
+   * VLAN ID associated with the iSCSI network adapter.
+   */
+  vlanId?: int32;
+
+  /**
+   * Address prefix in CIDR notation.
+   */
+  addressPrefix?: string;
+
+  /**
+   * Target portal addresses reachable through this adapter.
+   */
+  @identifiers(#["ipAddress"])
+  targetPortalAddresses?: IscsiTargetPortalAddress[];
+}
+
+/**
+ * iSCSI target portal address.
+ */
+@added(Versions.v2026_10_15_preview)
+model IscsiTargetPortalAddress {
+  /**
+   * IP address of the iSCSI target portal.
+   */
+  ipAddress?: string;
+
+  /**
+   * Next hop IP address used to reach the target portal.
+   */
+  nextHop?: string;
+}
+
+/**
+ * CHAP authentication settings for an iSCSI connection.
+ */
+@added(Versions.v2026_10_15_preview)
+model IscsiChapSettings {
+  /**
+   * The CHAP authentication mode to use.
+   */
+  chapType?: IscsiChapType;
+}
+
+/**
+ * The CHAP authentication mode for an iSCSI connection.
+ */
+@added(Versions.v2026_10_15_preview)
+union IscsiChapType {
+  string,
+
+  /** No CHAP authentication is used. */
+  NoChap: "NoChap",
+
+  /** The target authenticates the initiator. */
+  OneWay: "OneWay",
+
+  /** The initiator and target authenticate each other. */
+  Bidirectional: "Bidirectional",
+}
+
 /**
  * The OptionalServices of AzureStackHCI Cluster.
  */
