@@ -31,32 +31,6 @@ union DeploymentStacksDeleteDetachEnum {
   Detach: "detach",
 }
 
-/**
- * Defines the behavior of resources that are no longer managed after the stack is updated or deleted.
- */
-@scope("java")
-model JavaActionOnUnmanage {
-  /**
-   * Specifies an action for a newly unmanaged resource.
-   */
-  resources: DeploymentStacksDeleteDetachEnum;
-
-  /**
-   * Specifies an action for a newly unmanaged resource group.
-   */
-  resourceGroups?: DeploymentStacksDeleteDetachEnum;
-
-  /**
-   * Specifies an action for a newly unmanaged resource management group.
-   */
-  managementGroups?: DeploymentStacksDeleteDetachEnum;
-
-  /**
-   * Specifies an action for resources that do not support deletion.
-   */
-  resourcesWithoutDeleteSupport?: ResourcesWithoutDeleteSupportAction;
-}
-
 @@alternateType(DeploymentStackProperties.template, unknown, "java");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "java");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
@@ -70,8 +44,21 @@ model JavaActionOnUnmanage {
   "DeploymentStacksManagementClient",
   "java"
 );
-@@clientName(JavaActionOnUnmanage, "ActionOnUnmanage", "java");
-@@alternateType(ActionOnUnmanage, JavaActionOnUnmanage, "java");
+@@alternateType(
+  ActionOnUnmanage.resources,
+  DeploymentStacksDeleteDetachEnum,
+  "java"
+);
+@@alternateType(
+  ActionOnUnmanage.resourceGroups,
+  DeploymentStacksDeleteDetachEnum,
+  "java"
+);
+@@alternateType(
+  ActionOnUnmanage.managementGroups,
+  DeploymentStacksDeleteDetachEnum,
+  "java"
+);
 
 // CSharp SDK: Generate scoped resources, and make it backwards compatible with existing patterns
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
