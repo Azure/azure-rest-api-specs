@@ -659,7 +659,6 @@ union IdentityType {
 /**
  * Major version of PostgreSQL database engine.
  */
-@removed(Versions.v2026_07_01)
 union PostgresMajorVersion {
   string,
 
@@ -2972,9 +2971,10 @@ model ServerProperties {
   @secret
   administratorLoginPassword?: string;
 
-  @doc("Major version of PostgreSQL database engine.")
-  @typeChangedFrom(Versions.v2026_07_01, PostgresMajorVersion)
-  version?: string;
+  /**
+   * Major version of PostgreSQL database engine.
+   */
+  version?: PostgresMajorVersion;
 
   /**
    * Minor version of PostgreSQL database engine.
@@ -3415,9 +3415,10 @@ model ServerPropertiesForPatch {
   @secret
   administratorLoginPassword?: string;
 
-  @doc("Major version of PostgreSQL database engine.")
-  @typeChangedFrom(Versions.v2026_07_01, PostgresMajorVersion)
-  version?: string;
+  /**
+   * Major version of PostgreSQL database engine.
+   */
+  version?: PostgresMajorVersion;
 
   /**
    * Storage properties of a server.
@@ -4139,12 +4140,10 @@ model MaintenanceEventActionResponse {
 @added(Versions.v2026_04_01)
 model UpgradeSequence {
   @doc("The source PostgreSQL version.")
-  @typeChangedFrom(Versions.v2026_07_01, PostgresMajorVersion)
-  sourceVersion?: string;
+  sourceVersion?: PostgresMajorVersion;
 
   @doc("The target PostgreSQL version.")
-  @typeChangedFrom(Versions.v2026_07_01, PostgresMajorVersion)
-  targetVersion?: string;
+  targetVersion?: PostgresMajorVersion;
 }
 
 @doc("Precheck result details.")
@@ -4194,8 +4193,7 @@ model MajorVersionUpgradePrecheckResourceProperties {
   precheckResult?: PrecheckResult;
 
   @doc("The target PostgreSQL major version for the upgrade.")
-  @typeChangedFrom(Versions.v2026_07_01, PostgresMajorVersion)
-  targetVersion?: string;
+  targetVersion?: PostgresMajorVersion;
 
   @doc("Array of policy validation details.")
   @identifiers(#["policyName"])
@@ -4206,8 +4204,7 @@ model MajorVersionUpgradePrecheckResourceProperties {
 @added(Versions.v2026_04_01)
 model StartMajorVersionUpgradePrecheckRequest {
   @doc("The target major version to upgrade to.")
-  @typeChangedFrom(Versions.v2026_07_01, PostgresMajorVersion)
-  targetVersion: string;
+  targetVersion: PostgresMajorVersion;
 }
 
 @doc("Response model for starting a major version upgrade precheck.")
