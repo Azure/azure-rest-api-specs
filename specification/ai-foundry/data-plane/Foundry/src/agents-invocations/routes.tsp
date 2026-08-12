@@ -34,8 +34,14 @@ interface AgentInvocations {
    * Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven
    * invocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the
    * companion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.
-   * Returns 404 if the agent does not publish an AsyncAPI specification. Publishing is
-   * optional; when published, both JSON and YAML representations are available.
+   *
+   * Before serving the document, the service performs baseline validation checks including
+   * document size limits, external reference restrictions, and structural validity checks.
+   * Validation failures return 400.
+   *
+   * Returns 404 if the agent version does not publish an AsyncAPI specification.
+   * Publishing is optional; when published, JSON and YAML representations may be served as
+   * separately stored artifacts.
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json")
@@ -57,7 +63,13 @@ interface AgentInvocations {
    * Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven
    * invocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path
    * extension is authoritative for the returned content type (no `Accept` negotiation).
-   * Returns 404 if the agent does not publish an AsyncAPI specification.
+   *
+   * Before serving the document, the service performs baseline validation checks including
+   * document size limits, external reference restrictions, and structural validity checks.
+   * Validation failures return 400.
+   *
+   * Returns 404 if the agent version does not publish an AsyncAPI specification, or if only
+   * a JSON representation is published for that version.
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml")
