@@ -5105,6 +5105,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "The label selector requirements that can be patched.",
+          "items": {
+            "$ref": "#/definitions/Meta.V1.LabelSelectorRequirementPatch"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5132,6 +5140,27 @@
         "key",
         "operator"
       ]
+    },
+    "Meta.V1.LabelSelectorRequirementPatch": {
+      "type": "object",
+      "description": "A label selector requirement that can be patched.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the label key that the selector applies to."
+        },
+        "operator": {
+          "$ref": "#/definitions/Meta.V1.LabelSelectorOperator",
+          "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "description": "values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "NetworkPolicy": {
       "type": "object",

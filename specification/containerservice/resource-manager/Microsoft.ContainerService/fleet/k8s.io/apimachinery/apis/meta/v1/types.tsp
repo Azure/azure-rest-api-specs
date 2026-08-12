@@ -27,10 +27,9 @@ model LabelSelectorRequirement {
 }
 
 @doc("The label selector settings that can be patched.")
-model LabelSelectorPatch is OmitProperties<
-  OptionalProperties<LabelSelector>,
-  "matchExpressions"
-> {
+model LabelSelectorPatch {
+  ...OmitProperties<OptionalProperties<LabelSelector>, "matchExpressions">;
+
   @doc("The label selector requirements that can be patched.")
   @identifiers(#[])
   matchExpressions?: LabelSelectorRequirementPatch[];
