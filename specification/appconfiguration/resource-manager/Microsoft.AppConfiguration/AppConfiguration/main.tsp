@@ -19,6 +19,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./NetworkSecurityPerimeterConfigurations.tsp";
 import "./PrivateLinkResource.tsp";
 import "./KeyValue.tsp";
+import "./FeatureFlag.tsp";
 import "./Replica.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
