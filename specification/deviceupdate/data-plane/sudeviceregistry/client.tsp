@@ -19,7 +19,10 @@ using DeviceRegistrySoftwareUpdateClient;
   SoftwareUpdateOperationGroup.listOperationStatuses,
   "SoftwareUpdate"
 );
-@@clientLocation(SoftwareUpdateOperationGroup.getOperationStatus, "SoftwareUpdate");
+@@clientLocation(
+  SoftwareUpdateOperationGroup.getOperationStatus,
+  "SoftwareUpdate"
+);
 
 @@clientLocation(DeviceClasses.list, "DeviceClasses");
 @@clientLocation(DeviceClasses.getDeviceClass, "DeviceClasses");
