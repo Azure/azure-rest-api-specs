@@ -222,22 +222,18 @@ interface FleetManagedNamespaces {
 
   @sharedRoute
   @removed(Versions.v2026_06_02_preview)
-  update is ArmCustomPatchAsync<
+  @renamedFrom(Versions.v2026_06_02_preview, "update")
+  updateOld is ArmCustomPatchAsync<
     FleetManagedNamespace,
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
       IfMatchParameters<FleetManagedNamespace>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify final-state-via for LRO polling"
   @sharedRoute
   @added(Versions.v2026_06_02_preview)
-  @operationId("FleetManagedNamespaces_Update")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "original-uri" }
-  )
-  updateAsync is ArmCustomPatchAsync<
+  @Azure.Core.useFinalStateVia("original-uri")
+  update is ArmCustomPatchAsync<
     FleetManagedNamespace,
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
