@@ -2121,11 +2121,11 @@
         }
       },
       "put": {
-        "operationId": "ArcDeployments_Create",
+        "operationId": "ArcDeployments_CreateOrUpdate",
         "tags": [
           "ArcDeployments"
         ],
-        "description": "Creates an Arc deployment associated with the Cognitive Services account.",
+        "description": "Creates or updates an Arc deployment associated with the Cognitive Services account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2165,6 +2165,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource 'ArcDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ArcDeployment"
+            }
+          },
           "201": {
             "description": "Resource 'ArcDeployment' create operation succeeded",
             "schema": {
@@ -2190,11 +2196,11 @@
           }
         },
         "x-ms-examples": {
-          "CreateArcDeployment": {
-            "$ref": "./examples/CreateArcDeployment.json"
+          "CreateOrUpdateArcDeployment": {
+            "$ref": "./examples/CreateOrUpdateArcDeployment.json"
           },
-          "CreateArcDeploymentWithTemplate": {
-            "$ref": "./examples/CreateArcDeploymentWithTemplate.json"
+          "CreateOrUpdateArcDeploymentWithTemplate": {
+            "$ref": "./examples/CreateOrUpdateArcDeploymentWithTemplate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13187,19 +13193,31 @@
       "description": "SKU for an Arc deployment.",
       "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the Arc deployment SKU. Must be Arc.",
-          "enum": [
-            "Arc"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ArcDeploymentSkuName",
+          "description": "The name of the Arc deployment SKU. Must be Arc."
         }
       },
       "required": [
         "name"
       ]
+    },
+    "ArcDeploymentSkuName": {
+      "type": "string",
+      "description": "SKU for an Arc deployment.",
+      "enum": [
+        "Arc"
+      ],
+      "x-ms-enum": {
+        "name": "ArcDeploymentSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Arc",
+            "value": "Arc",
+            "description": "Arc SKU."
+          }
+        ]
+      }
     },
     "ArcDeploymentUpdate": {
       "type": "object",

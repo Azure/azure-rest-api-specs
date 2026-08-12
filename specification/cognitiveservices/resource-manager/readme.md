@@ -168,14 +168,6 @@ suppressions:
       - $.definitions.ArcDeploymentProperties.properties.nodeSelector
       - $.definitions.ArcDeploymentProperties.properties.capabilities
       - $.definitions.ArcDeploymentUpdateProperties.properties.nodeSelector
-  - code: PutResponseCodes
-    reason: The Arc deployment PUT is create-only; updates are supported through PATCH, so the operation intentionally returns 201 + default without 200. This matches the arm-put-operation-response-codes suppression in the TypeSpec source.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    reason: The Arc deployment PUT is a create-only long-running operation that returns 201. provisioningState is present in ArcDeploymentProperties (read-only) and returned in the GET and final LRO result. This matches the create-only PUT design and the arm-put-operation-response-codes suppression in the TypeSpec source.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments/{deploymentName}"].put
 ```
 
 ### Tag: package-2026-07-01

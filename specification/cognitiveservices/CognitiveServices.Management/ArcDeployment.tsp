@@ -58,16 +58,11 @@ interface ArcDeployments {
   get is ArmResourceRead<ArcDeployment>;
 
   /**
-   * Creates an Arc deployment associated with the Cognitive Services account.
+   * Creates or updates an Arc deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Arc deployment PUT is create-only; updates are supported through PATCH."
-  create is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ArcDeployment,
-    LroHeaders = ArcDeploymentCreateLroHeaders,
-    Response = ArmResourceCreatedResponse<
-      ArcDeployment,
-      ArcDeploymentCreateLroHeaders
-    >
+    LroHeaders = ArcDeploymentCreateLroHeaders
   >;
 
   /**
@@ -425,11 +420,24 @@ model ArcDeploymentListResult {
  * SKU for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+union ArcDeploymentSkuName {
+  string,
+
+  /**
+   * Arc SKU.
+   */
+  Arc: "Arc",
+}
+
+/**
+ * SKU for an Arc deployment.
+ */
+@added(Versions.v2026_07_15_preview)
 model ArcDeploymentSku {
   /**
    * The name of the Arc deployment SKU. Must be Arc.
    */
-  name: "Arc";
+  name: ArcDeploymentSkuName;
 }
 
 /**
@@ -468,7 +476,7 @@ model ArcDeploymentVllmParameters {
   "Properties of the Cognitive Services Arc deployment."
 );
 @@doc(
-  ArcDeployments.create::parameters.resource,
+  ArcDeployments.createOrUpdate::parameters.resource,
   "The Arc deployment properties."
 );
 @@doc(
