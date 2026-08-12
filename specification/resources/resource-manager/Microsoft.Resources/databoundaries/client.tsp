@@ -10,4 +10,4 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 
-@@scope(Microsoft.Resources.Operations, "!java");
+@@scope(Microsoft.Resources.Operations.list, "!java");
