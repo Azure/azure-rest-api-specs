@@ -1142,6 +1142,110 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:createHoldRoom": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Creates a hold room with a pre-created PE and looping play prompt.",
+        "operationId": "CallMedia_CreateHoldRoom",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "callConnectionId",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createHoldRoomRequest",
+            "description": "The create hold room request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateHoldRoomRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Room creation started asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_CreateHoldRoom": {
+            "$ref": "./examples/CallMedia_CreateHoldRoom.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:deleteHoldRoom": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Deletes a hold room, terminating its PE and releasing all held participants.",
+        "operationId": "CallMedia_DeleteHoldRoom",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "callConnectionId",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "deleteHoldRoomRequest",
+            "description": "The delete hold room request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteHoldRoomRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the delete hold room response."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_DeleteHoldRoom": {
+            "$ref": "./examples/CallMedia_DeleteHoldRoom.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/dialogs/{dialogId}": {
       "put": {
         "tags": [
@@ -2306,6 +2410,31 @@
           "description": "DTMF (Dual-Tone Multi-Frequency) configuration for the call."
         }
       }
+    },
+    "CreateHoldRoomRequest": {
+      "description": "The request payload for creating a hold room.",
+      "type": "object",
+      "properties": {
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeleteHoldRoomRequest": {
+      "description": "The request payload for deleting a hold room.\r\nPer design doc: single room per call, no holdRoomId needed.\r\nNote: DeleteHoldRoom is marked as \"Future Addition\" in design doc,\r\nbut kept for testing purposes.",
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Optional operation context for correlation.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "CustomCallingContext": {
       "description": "The custom calling context which will be sent to the target",
