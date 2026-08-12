@@ -4452,27 +4452,27 @@ model EmbeddingSource {
   /**
    * The list of source paths in the document to generate embeddings from.
    */
-  sourcePaths?: string[];
+  sourcePaths: string[];
 
   /**
    * The endpoint URL of the AI model provider resource.
    */
-  endpoint?: string;
+  endpoint: string;
 
   /**
    * The model deployment name used for generating embeddings.
    */
-  deploymentName?: string;
+  deploymentName: string;
 
   /**
    * The name of the embedding model.
    */
-  modelName?: string;
+  modelName: string;
 
   /**
    * The authentication type Azure Cosmos DB uses when calling the embedding model endpoint.
    */
-  authType?: EmbeddingSourceAuthenticationType;
+  authType: EmbeddingSourceAuthenticationType;
 }
 
 /**

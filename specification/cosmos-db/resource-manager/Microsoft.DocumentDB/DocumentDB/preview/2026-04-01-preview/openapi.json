@@ -67,9 +67,6 @@
       "name": "MaterializedViewsBuilder"
     },
     {
-      "name": "EmbeddingGenerator"
-    },
-    {
       "name": "ThroughputPools"
     },
     {
@@ -13366,8 +13363,7 @@
           "DataTransfer",
           "SqlDedicatedGateway",
           "GraphAPICompute",
-          "MaterializedViewsBuilder",
-          "EmbeddingGenerator"
+          "MaterializedViewsBuilder"
         ],
         "description": "Gets the status of service.",
         "parameters": [
@@ -13438,8 +13434,7 @@
           "DataTransfer",
           "SqlDedicatedGateway",
           "GraphAPICompute",
-          "MaterializedViewsBuilder",
-          "EmbeddingGenerator"
+          "MaterializedViewsBuilder"
         ],
         "description": "Creates a service.",
         "parameters": [
@@ -13538,8 +13533,7 @@
           "DataTransfer",
           "SqlDedicatedGateway",
           "GraphAPICompute",
-          "MaterializedViewsBuilder",
-          "EmbeddingGenerator"
+          "MaterializedViewsBuilder"
         ],
         "description": "Deletes service with the given serviceName.",
         "parameters": [
@@ -25907,7 +25901,14 @@
           "$ref": "#/definitions/EmbeddingSourceAuthenticationType",
           "description": "The authentication type Azure Cosmos DB uses when calling the embedding model endpoint."
         }
-      }
+      },
+      "required": [
+        "sourcePaths",
+        "endpoint",
+        "deploymentName",
+        "modelName",
+        "authType"
+      ]
     },
     "EmbeddingSourceAuthenticationType": {
       "type": "string",

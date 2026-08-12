@@ -34,7 +34,6 @@ interface ServiceResources {
   @tag("SqlDedicatedGateway")
   @tag("GraphAPICompute")
   @tag("MaterializedViewsBuilder")
-  @tag("EmbeddingGenerator")
   get is ArmResourceRead<ServiceResource, Error = CloudError>;
 
   /**
@@ -45,7 +44,6 @@ interface ServiceResources {
   @tag("SqlDedicatedGateway")
   @tag("GraphAPICompute")
   @tag("MaterializedViewsBuilder")
-  @tag("EmbeddingGenerator")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServiceResource,
     Request = ServiceResourceCreateUpdateParameters,
@@ -64,7 +62,6 @@ interface ServiceResources {
   @tag("SqlDedicatedGateway")
   @tag("GraphAPICompute")
   @tag("MaterializedViewsBuilder")
-  @tag("EmbeddingGenerator")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
     Response =
