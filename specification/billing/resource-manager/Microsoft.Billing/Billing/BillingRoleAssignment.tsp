@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -28,6 +30,38 @@ model BillingRoleAssignment
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Response descriptions are defined on the individual response variants."
+union BillingRoleAssignmentCreateOrUpdateByBillingAccountResponse {
+  /** Resource 'BillingRoleAssignment' update operation succeeded */
+  updated: ArmResourceUpdatedResponse<BillingRoleAssignment>,
+
+  /** Resource 'BillingRoleAssignment' create operation succeeded */
+  created: ArmResourceCreatedResponse<
+    BillingRoleAssignment,
+    ArmLroLocationHeader<FinalResult = BillingRoleAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >,
+
+  /** Resource 'BillingRoleAssignment' create operation accepted */
+  @added(Versions.v2024_08_01_preview)
+  accepted: ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BillingRoleAssignment> &
+    Azure.Core.Foundations.RetryAfterHeader>,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Response descriptions are defined on the individual response variants."
+union BillingRoleAssignmentDeleteByBillingAccountResponse {
+  /** Resource deleted successfully. */
+  deleted: ArmDeletedResponse,
+
+  /** Resource does not exist. */
+  noContent: ArmDeletedNoContentResponse,
+
+  /** Resource deletion accepted. */
+  @added(Versions.v2024_08_01_preview)
+  accepted: ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader>,
 }
 
 alias BillingRoleAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -322,14 +356,18 @@ interface BillingRoleAssignmentByBillingAccount {
   createOrUpdateByBillingAccount is BillingRoleAssignmentByBillingAccountOps.CreateOrUpdateAsync<
     BillingRoleAssignment,
     LroHeaders = ArmLroLocationHeader<FinalResult = BillingRoleAssignment> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = BillingRoleAssignmentCreateOrUpdateByBillingAccountResponse
   >;
 
   /**
    * Deletes a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
   @tag("BillingRoleAssignment")
-  deleteByBillingAccount is BillingRoleAssignmentByBillingAccountOps.DeleteSync<BillingRoleAssignment>;
+  deleteByBillingAccount is BillingRoleAssignmentByBillingAccountOps.DeleteSync<
+    BillingRoleAssignment,
+    Response = BillingRoleAssignmentDeleteByBillingAccountResponse
+  >;
 
   /**
    * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.

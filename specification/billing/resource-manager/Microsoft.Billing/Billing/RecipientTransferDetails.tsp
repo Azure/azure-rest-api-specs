@@ -1,8 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -31,7 +35,6 @@ interface RecipientTransfers {
   /**
    * Gets a transfer request by ID. The caller must be the recipient of the transfer request.
    */
-  @summary("Gets a transfer request by ID. The caller must be the recipient of the transfer request.")
   get is ArmResourceRead<
     RecipientTransferDetails,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -40,17 +43,23 @@ interface RecipientTransfers {
   /**
    * Lists the transfer requests received by the caller.
    */
-  @summary("Lists the transfer requests received by the caller.")
   list is ArmResourceListByParent<
     RecipientTransferDetails,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      /**
+       * OData filter options.
+       */
+      @added(Versions.v2024_08_01_preview)
+      @query("$filter")
+      filter?: string;
+    },
     Response = ArmResponse<RecipientTransferDetailsListResult>
   >;
 
   /**
    * Accepts a transfer request.
    */
-  @summary("Accepts a transfer request.")
   accept is ArmResourceActionSync<
     RecipientTransferDetails,
     AcceptTransferRequest,
@@ -61,7 +70,6 @@ interface RecipientTransfers {
   /**
    * Validates if a subscription or a reservation can be transferred. Use this operation to validate your subscriptions or reservation before using the accept transfer operation.
    */
-  @summary("Validates if a subscription or a reservation can be transferred. Use this operation to validate your subscriptions or reservation before using the accept transfer operation.")
   validate is ArmResourceActionSync<
     RecipientTransferDetails,
     AcceptTransferRequest,
@@ -72,7 +80,6 @@ interface RecipientTransfers {
   /**
    * Declines a transfer request.
    */
-  @summary("Declines a transfer request.")
   decline is ArmResourceActionSync<
     RecipientTransferDetails,
     void,

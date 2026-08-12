@@ -47,7 +47,6 @@ interface Reservations {
   /**
    * Get specific Reservation details in the billing account.
    */
-  @summary("Get Reservation details in the billing account.")
   @tag("Reservation")
   getByReservationOrder is ArmResourceRead<
     Reservation,
@@ -78,7 +77,6 @@ interface Reservations {
   /**
    * List Reservations within a single ReservationOrder in the billing account.
    */
-  @summary("Get Reservations in a given reservation Order in the billing account")
   @tag("Reservations")
   listByReservationOrder is ArmResourceListByParent<
     Reservation,

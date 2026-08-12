@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 
@@ -16,6 +18,11 @@ const AgreementNamePattern = string("^[a-fA-F0-9]{1,12}$");
 const GuidPattern = string("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$");
 const LowerAlphaNumericPattern = string("^[a-z0-9]*$");
 const PaymentMethodPattern = string("^[A-Za-z0-9:_+\\-]{1,128}$");
+const PoNumberPattern = string("^[A-Za-z0-9._\\-]{1,64}$");
+const PoMappingPattern = string("^[A-Za-z0-9._\\-]{1,128}$");
+const AlertPattern = string("^[a-z][a-z0-9]*$");
+const LicenseReservationPattern = string("[a-zA-Z\\d-_]+");
+const EmailAddressPattern = string("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
 /**
  * The mode of acceptance for an agreement.
@@ -300,6 +307,24 @@ union PaymentMethodFamily {
    * The DirectDebit option for the payment method family.
    */
   DirectDebit: "DirectDebit",
+
+  /**
+   * The RealTimePayments option for the payment method family.
+   */
+  @added(Versions.v2024_08_01_preview)
+  RealTimePayments: "RealTimePayments",
+
+  /**
+   * The Virtual option for the payment method family.
+   */
+  @added(Versions.v2024_08_01_preview)
+  Virtual: "Virtual",
+
+  /**
+   * The Sandbox option for the payment method family.
+   */
+  @added(Versions.v2024_08_01_preview)
+  Sandbox: "Sandbox",
 }
 
 /**
@@ -2250,6 +2275,12 @@ union PaymentMethodStatus {
   string,
 
   /**
+   * The unknown option for the payment method status.
+   */
+  @added(Versions.v2024_08_01_preview)
+  Unknown: "unknown",
+
+  /**
    * The active option for the payment method status.
    */
   active: "active",
@@ -3049,6 +3080,268 @@ union SupportedAccountType {
 }
 
 /**
+ * The state of an alert.
+ */
+@added(Versions.v2024_08_01_preview)
+union AlertState {
+  string,
+
+  /**
+   * The unknown alert state.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * A newly fired alert.
+   */
+  New: "New",
+
+  /**
+   * An alert acknowledged by a user.
+   */
+  Acknowledged: "Acknowledged",
+
+  /**
+   * An alert dismissed by the system.
+   */
+  Closed: "Closed",
+}
+
+/**
+ * The severity of an alert. Severity ranges from Sev0, which is the highest, to Sev3, which is the lowest.
+ */
+@added(Versions.v2024_08_01_preview)
+union AlertSeverity {
+  string,
+
+  /**
+   * The highest alert severity.
+   */
+  Sev0: "Sev0",
+
+  /**
+   * The second-highest alert severity.
+   */
+  Sev1: "Sev1",
+
+  /**
+   * The second-lowest alert severity.
+   */
+  Sev2: "Sev2",
+
+  /**
+   * The lowest alert severity.
+   */
+  Sev3: "Sev3",
+}
+
+/**
+ * The resource type of the target Azure Resource Manager resource. This represents a billing account, billing profile, billing subscription, invoice, or transaction.
+ */
+@added(Versions.v2024_08_01_preview)
+union AlertTargetResourceType {
+  string,
+
+  /**
+   * The target resource type is unknown.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * A billing subscription.
+   */
+  BillingSubscription: "BillingSubscription",
+
+  /**
+   * A billing account.
+   */
+  BillingAccount: "BillingAccount",
+
+  /**
+   * A billing profile.
+   */
+  BillingProfile: "BillingProfile",
+
+  /**
+   * An invoice.
+   */
+  Invoice: "Invoice",
+
+  /**
+   * A transaction.
+   */
+  Transaction: "Transaction",
+}
+
+/**
+ * The type of alert.
+ */
+@added(Versions.v2024_08_01_preview)
+union AlertType {
+  string,
+
+  /**
+   * The alert type is unknown.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * A custom alert.
+   */
+  Custom: "Custom",
+
+  /**
+   * A service alert.
+   */
+  Service: "Service",
+
+  /**
+   * A maintenance alert.
+   */
+  Maintenance: "Maintenance",
+
+  /**
+   * An alert for a successful billing authorization threshold.
+   */
+  ThresholdBillingAuthSuccess: "ThresholdBillingAuthSuccess",
+
+  /**
+   * An alert for a declined billing limit threshold.
+   */
+  ThresholdBillingLimitDeclined: "ThresholdBillingLimitDeclined",
+
+  /**
+   * A reminder alert for a declined billing limit threshold.
+   */
+  ThresholdBillingLimitDeclinedReminder: "ThresholdBillingLimitDeclinedReminder",
+
+  /**
+   * An alert for a billing consumption threshold.
+   */
+  ThresholdBillingConsumption: "ThresholdBillingConsumption",
+
+  /**
+   * A successful payment alert.
+   */
+  PaymentSuccessful: "PaymentSuccessful",
+
+  /**
+   * A failed payment alert.
+   */
+  PaymentFailed: "PaymentFailed",
+
+  /**
+   * A purchase-started alert.
+   */
+  PurchaseStarted: "PurchaseStarted",
+
+  /**
+   * A purchase-completed alert.
+   */
+  PurchaseCompleted: "PurchaseCompleted",
+
+  /**
+   * The default alert type.
+   */
+  Default: "Default",
+}
+
+/**
+ * A billing alert.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model AlertProperties {
+  /**
+   * Information that is common to all alert types.
+   */
+  essentials?: AlertEssentials;
+
+  /**
+   * Information that will be used to display the alert in the portal.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free form by design to support different kinds of alerts to display to the customer. Entirely system generated values, the service guarantees no secret material is ever placed in this map."
+  egressConfig?: Record<string>;
+
+  /**
+   * Information specific to an alert type.
+   */
+  context?: AlertContext;
+}
+
+/**
+ * Information that is common to all alert types.
+ */
+@added(Versions.v2024_08_01_preview)
+model AlertEssentials {
+  /**
+   * The state of an alert.
+   */
+  alertState?: AlertState;
+
+  /**
+   * The description of the alert.
+   */
+  description?: string;
+
+  /**
+   * The severity of an alert. Severity ranges from Sev0, which is the highest, to Sev3, which is the lowest.
+   */
+  severity?: AlertSeverity;
+
+  /**
+   * Alert starts display time.
+   */
+  startDateTime?: utcDateTime;
+
+  /**
+   * The time at which the alert expires.
+   */
+  expiredDateTime?: utcDateTime;
+
+  /**
+   * Resource ID of the target Azure Resource Manager resource on which the alert was created. This represents a billing scope ID, invoice ID, or billing subscription ID.
+   */
+  targetResource?: string;
+
+  /**
+   * The resource type of the target Azure Resource Manager resource. This represents a billing account, billing profile, billing subscription, invoice, or transaction.
+   */
+  targetResourceType?: AlertTargetResourceType;
+}
+
+/**
+ * Information specific to an alert type.
+ */
+@added(Versions.v2024_08_01_preview)
+model AlertContext {
+  /**
+   * The type of alert.
+   */
+  alertType?: AlertType;
+
+  /**
+   * The resource ID that uniquely identifies a billing account resource.
+   */
+  billingAccountId?: string;
+
+  /**
+   * The name of the billing account.
+   */
+  billingAccountDisplayName?: string;
+
+  /**
+   * The resource ID that uniquely identifies a billing profile resource.
+   */
+  billingProfileId?: string;
+
+  /**
+   * The name of the billing profile.
+   */
+  billingProfileDisplayName?: string;
+}
+
+/**
  * An agreement.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
@@ -3114,6 +3407,44 @@ model AgreementProperties {
    */
   @visibility(Lifecycle.Read)
   leadBillingAccountName?: string;
+
+  /**
+   * A list of clauses in an agreement.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  clauses?: Clause[];
+}
+
+/**
+ * A clause in an agreement.
+ */
+@added(Versions.v2024_08_01_preview)
+model Clause {
+  /**
+   * The ID that uniquely identifies an agreement clause.
+   */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /**
+   * The name of the agreement clause.
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * The date from which the agreement clause is effective.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveDate: utcDateTime;
+
+  /**
+   * The date when the agreement clause expires.
+   */
+  @visibility(Lifecycle.Read)
+  expirationDate?: utcDateTime;
 }
 
 /**
@@ -3157,16 +3488,75 @@ model Participant {
   email?: string;
 
   /**
+   * The first name of the participant.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  firstName?: string;
+
+  /**
+   * The last name of the participant.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  lastName?: string;
+
+  /**
    * The acceptance status of the participant.
    */
   @visibility(Lifecycle.Read)
   status?: string;
 
   /**
+   * The role of the participant.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  role?: ParticipantRole;
+
+  /**
    * The date when the status got changed.
    */
   @visibility(Lifecycle.Read)
   statusDate?: utcDateTime;
+}
+
+/**
+ * The role of the participant.
+ */
+@added(Versions.v2024_08_01_preview)
+union ParticipantRole {
+  string,
+
+  /**
+   * The participant role is not specified.
+   */
+  Other: "Other",
+
+  /**
+   * The participant can accept or sign the agreement.
+   */
+  Signer: "Signer",
+
+  /**
+   * The participant can review the agreement.
+   */
+  Reviewer: "Reviewer",
+
+  /**
+   * The participant allows the system to automatically sign the agreement.
+   */
+  AutoSigner: "AutoSigner",
+
+  /**
+   * The participant accepts or signs the agreement on behalf of another individual or organization.
+   */
+  OnBehalfOf: "OnBehalfOf",
+
+  /**
+   * The participant is the lead or parent of the entity signing the agreement.
+   */
+  Lead: "Lead",
 }
 
 /**
@@ -3354,6 +3744,12 @@ model BillingAccountProperties {
   displayName?: string;
 
   /**
+   * The trade name of the legal entity for the billing account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  tradeName?: string;
+
+  /**
    * The properties of an enrollment.
    */
   enrollmentDetails?: EnrollmentDetails;
@@ -3405,6 +3801,50 @@ model BillingAccountProperties {
    */
   @identifiers(#[])
   taxIds?: TaxIdentifier[];
+
+  /**
+   * Provides information such as name and country about the organization affiliated with the billing account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  affiliatedOrganization?: AffiliatedOrganizationInfo;
+
+  /**
+   * The sandbox information for the billing account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  sandboxInformation?: SandboxInfo;
+}
+
+/**
+ * The organization that the billing account is affiliated with.
+ */
+@added(Versions.v2024_08_01_preview)
+model AffiliatedOrganizationInfo {
+  /**
+   * The name of the affiliated organization.
+   */
+  affiliatedOrganizationName?: string;
+
+  /**
+   * The country of the affiliated organization.
+   */
+  affiliatedOrganizationCountry?: string;
+}
+
+/**
+ * The sandbox information for the billing account.
+ */
+@added(Versions.v2024_08_01_preview)
+model SandboxInfo {
+  /**
+   * The name of the sandbox.
+   */
+  name?: string;
+
+  /**
+   * The type of the sandbox.
+   */
+  type?: string;
 }
 
 /**
@@ -3496,6 +3936,86 @@ model EnrollmentDetails {
    */
   @visibility(Lifecycle.Read)
   invoiceRecipient?: string;
+
+  /**
+   * Agreement status of an enrollment, applicable only for users with non-Azure roles.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  agreementStatus?: EaAgreementStatus;
+}
+
+/**
+ * The agreement status of an enrollment.
+ */
+@added(Versions.v2024_08_01_preview)
+union EaAgreementStatus {
+  string,
+
+  /**
+   * The Other agreement status.
+   */
+  Other: "Other",
+
+  /**
+   * The Active agreement status.
+   */
+  Active: "Active",
+
+  /**
+   * The Amended agreement status.
+   */
+  Amended: "Amended",
+
+  /**
+   * The AmendmentHold agreement status.
+   */
+  AmendmentHold: "AmendmentHold",
+
+  /**
+   * The AmendmentInProgress agreement status.
+   */
+  AmendmentInProgress: "AmendmentInProgress",
+
+  /**
+   * The Ended agreement status.
+   */
+  Ended: "Ended",
+
+  /**
+   * The Expired agreement status.
+   */
+  Expired: "Expired",
+
+  /**
+   * The New agreement status.
+   */
+  New: "New",
+
+  /**
+   * The Hold agreement status.
+   */
+  Hold: "Hold",
+
+  /**
+   * The Pending agreement status.
+   */
+  Pending: "Pending",
+
+  /**
+   * The Rejected agreement status.
+   */
+  Rejected: "Rejected",
+
+  /**
+   * The Review agreement status.
+   */
+  Review: "Review",
+
+  /**
+   * The Terminated agreement status.
+   */
+  Terminated: "Terminated",
 }
 
 /**
@@ -3598,6 +4118,139 @@ model AddressDetails {
    * Indicates if the address is incomplete.
    */
   isValidAddress?: boolean;
+}
+
+/**
+ * The type of the address usage.
+ */
+@added(Versions.v2024_08_01_preview)
+union AddressUsageType {
+  string,
+
+  /**
+   * Another address usage type.
+   */
+  Other: "Other",
+
+  /**
+   * A billing address.
+   */
+  BillTo: "BillTo",
+
+  /**
+   * A shipping address.
+   */
+  ShipTo: "ShipTo",
+
+  /**
+   * A sold-to address.
+   */
+  SoldTo: "SoldTo",
+
+  /**
+   * An operating address.
+   */
+  Operating: "Operating",
+}
+
+/**
+ * Address details.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model AddressEntityProperties {
+  /**
+   * The system identifier of the address.
+   */
+  systemId?: string;
+
+  /**
+   * Address line 1.
+   */
+  @minLength(1)
+  addressLine1: string;
+
+  /**
+   * Address line 2.
+   */
+  addressLine2?: string;
+
+  /**
+   * Address line 3.
+   */
+  addressLine3?: string;
+
+  /**
+   * Address city.
+   */
+  city?: string;
+
+  /**
+   * Company name.
+   */
+  companyName?: string;
+
+  /**
+   * Country code uses ISO 3166-1 Alpha-2 format.
+   */
+  @minLength(1)
+  country: string;
+
+  /**
+   * Address district.
+   */
+  district?: string;
+
+  /**
+   * Email address.
+   */
+  email?: string;
+
+  /**
+   * First name.
+   */
+  firstName?: string;
+
+  /**
+   * Last name.
+   */
+  lastName?: string;
+
+  /**
+   * Middle name.
+   */
+  middleName?: string;
+
+  /**
+   * Phone number.
+   */
+  phoneNumber?: string;
+
+  /**
+   * Postal code.
+   */
+  postalCode?: string;
+
+  /**
+   * Address region.
+   */
+  region?: string;
+
+  /**
+   * Indicates whether the address is valid.
+   */
+  @visibility(Lifecycle.Read)
+  isValidAddress?: boolean;
+
+  /**
+   * The address snapshot identifier.
+   */
+  snapshotId?: string;
+
+  /**
+   * The type of the address usage.
+   */
+  addressUsage?: AddressUsageType[];
 }
 
 /**
@@ -3938,7 +4591,15 @@ model BillingProfileProperties {
   /**
    * Identifies the billing profile that is linked to another billing profile in indirect purchase motion.
    */
+  @removed(Versions.v2024_08_01_preview)
   indirectRelationshipInfo?: IndirectRelationshipInfo;
+
+  /**
+   * The details of the relationship between a partner's billing profile and a customer's billing profile. The partner could be either a direct-bill Cloud Solution Provider partner or an indirect reseller.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  partnerRelationshipInfo?: IndirectRelationshipInfo;
 
   /**
    * The day of the month when the invoice for the billing profile is generated.
@@ -3955,6 +4616,13 @@ model BillingProfileProperties {
    * The list of email addresses to receive invoices by email for the billing profile.
    */
   invoiceRecipients?: string[];
+
+  /**
+   * The list of contacts who will receive invoices by email for the selected billing profile and will be contacted if there are issues related to payments of these invoices.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @identifiers(#[])
+  invoiceRecipientContacts?: InvoiceRecipientContact[];
 
   /**
    * The default purchase order number that will appear on the invoices generated for the billing profile.
@@ -4029,6 +4697,54 @@ model BillingProfileProperties {
 }
 
 /**
+ * Invoice recipient contact.
+ */
+@added(Versions.v2024_08_01_preview)
+model InvoiceRecipientContact {
+  /**
+   * First name.
+   */
+  firstName: string;
+
+  /**
+   * Middle name. Optional.
+   */
+  middleName?: string;
+
+  /**
+   * Last name.
+   */
+  lastName: string;
+
+  /**
+   * Phone number.
+   */
+  phoneNumber?: string;
+
+  /**
+   * Email address.
+   */
+  email?: string;
+
+  /**
+   * Email address.
+   */
+  emailAddress?: string;
+}
+
+/**
+ * Request parameters that are provided to update invoice recipient contacts.
+ */
+@added(Versions.v2024_08_01_preview)
+model UpdateInvoiceRecipientContactsRequest {
+  /**
+   * The list of contacts who will receive invoices by email for the selected billing profile and will be contacted if there are issues related to payments of these invoices.
+   */
+  @identifiers(#[])
+  invoiceRecipientContacts: InvoiceRecipientContact[];
+}
+
+/**
  * The billing profile spending limit.
  */
 model SpendingLimitDetails {
@@ -4097,6 +4813,20 @@ model BillingPropertyProperties {
    */
   @visibility(Lifecycle.Read)
   billingAccountSoldToCountry?: string;
+
+  /**
+   * The address of the individual or organization that is responsible for the billing account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  billingAccountSoldToAddress?: AddressDetails;
+
+  /**
+   * The address of the individual or organization that is responsible for the customer.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  customerSoldToAddress?: AddressDetails;
 
   /**
    * The current status of the billing account.
@@ -4237,6 +4967,20 @@ model BillingPropertyProperties {
   isTransitionedBillingAccount?: boolean;
 
   /**
+   * The market country of the end organization.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  market?: string;
+
+  /**
+   * A payment method.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  paymentMethod?: BillingPropertyPaymentMethod;
+
+  /**
    * The sku description.
    */
   @visibility(Lifecycle.Read)
@@ -4300,6 +5044,66 @@ model BillingPropertyProperties {
    */
   @visibility(Lifecycle.Read)
   productName?: string;
+
+  /**
+   * The current daily invoicing override term, if any.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  currentDailyInvoicingOverrideTerm?: DailyInvoicingOverrideTerm;
+
+  /**
+   * Other daily invoicing override terms that are not currently active.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  otherDailyInvoicingOverrideTerms?: DailyInvoicingOverrideTerm[];
+}
+
+/**
+ * A payment method.
+ */
+@added(Versions.v2024_08_01_preview)
+model BillingPropertyPaymentMethod {
+  /**
+   * The family of payment method.
+   */
+  @visibility(Lifecycle.Read)
+  family?: PaymentMethodFamily;
+
+  /**
+   * The type of payment method.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * A daily invoicing override term.
+ */
+@added(Versions.v2024_08_01_preview)
+model DailyInvoicingOverrideTerm {
+  /**
+   * Unique identifier of the daily invoicing override term.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Start date of daily invoicing override term in UTC.
+   */
+  startDate?: utcDateTime;
+
+  /**
+   * End date of daily invoicing override term in UTC.
+   */
+  endDate?: utcDateTime;
+
+  /**
+   * When true, product invoice policy is disabled. When false, product invoice policy is enabled.
+   */
+  isProductInvoicePolicyDisabled?: boolean;
 }
 
 /**
@@ -4726,6 +5530,13 @@ model BillingRoleAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   customerDisplayName?: string;
+
+  /**
+   * The flag that indicates whether the role assignment is inherited from the parent scope. This is supported only for billing accounts with agreement type Enterprise Agreement.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  isInherited?: boolean;
 }
 
 /**
@@ -5272,7 +6083,6 @@ model UtilizationAggregates {
 /**
  * Savings plan patch request
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanUpdateRequest {
   /**
    * Savings plan patch request
@@ -5394,6 +6204,20 @@ model BillingSubscriptionProperties {
   billingFrequency?: string;
 
   /**
+   * The day of the month on which the subscription is billed.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  billingDay?: int32;
+
+  /**
+   * The first billing month of the subscription.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  firstBillingMonth?: int32;
+
+  /**
    * The fully qualified ID that uniquely identifies a billing profile.
    */
   billingProfileId?: string;
@@ -5498,6 +6322,13 @@ model BillingSubscriptionProperties {
   nextBillingCycleDetails?: NextBillingCycleDetails;
 
   /**
+   * The date when the subscription will be next invoiced.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  nextInvoiceDate?: utcDateTime;
+
+  /**
    * The offer ID for the subscription. This field is only available for the Microsoft Online Services Program billing accounts or billing accounts with agreement type Enterprise Agreement.
    */
   @visibility(Lifecycle.Read)
@@ -5566,6 +6397,13 @@ model BillingSubscriptionProperties {
   resourceUri?: string;
 
   /**
+   * The unique code that identifies the product.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  productCode?: string;
+
+  /**
    * The duration in ISO8601 format for which you can use the subscription. Example: P1M, P3M, P1Y
    */
   termDuration?: string;
@@ -5617,6 +6455,980 @@ model BillingSubscriptionProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   suspensionReasonDetails?: BillingSubscriptionStatusDetails[];
+
+  /**
+   * The details of the product that was acquired for this subscription. This is promotion product used during purchase.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  acquiredProduct?: AcquiredProduct;
+
+  /**
+   * Scheduled actions for the billing subscription.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  scheduledActions?: ScheduledAction[];
+}
+
+/**
+ * The details of the product that was acquired for a billing subscription.
+ */
+@added(Versions.v2024_08_01_preview)
+model AcquiredProduct {
+  /**
+   * The unique code that identifies the product.
+   */
+  productCode?: string;
+}
+
+/**
+ * A scheduled action on a billing subscription.
+ */
+@added(Versions.v2024_08_01_preview)
+model ScheduledAction {
+  /**
+   * The type of scheduled action, for example NextTerm or AbsoluteDate.
+   */
+  type?: string;
+
+  /**
+   * The effective date of the scheduled action in UTC.
+   */
+  effectiveDate?: utcDateTime;
+
+  /**
+   * The product information for the scheduled action.
+   */
+  product?: ScheduledActionProduct;
+
+  /**
+   * The product code for the scheduled action.
+   */
+  productCode?: string;
+
+  /**
+   * The quantity associated with the scheduled action.
+   */
+  quantity?: int64;
+
+  /**
+   * The end date of the scheduled action in UTC.
+   */
+  endDate?: utcDateTime;
+
+  /**
+   * The operation type for the scheduled action, for example deactivate or update.
+   */
+  operation?: string;
+
+  /**
+   * The reason code for the scheduled action, for example customer_cancellation.
+   */
+  reasonCode?: string;
+}
+
+/**
+ * Product information for a scheduled action.
+ */
+@added(Versions.v2024_08_01_preview)
+model ScheduledActionProduct {
+  /**
+   * The product type ID in the scheduled action product.
+   */
+  productTypeId?: string;
+
+  /**
+   * The SKU ID in the scheduled action product.
+   */
+  skuId?: string;
+
+  /**
+   * The billing frequency in ISO8601 format, for example P1M or P12M.
+   */
+  billingFrequency?: string;
+
+  /**
+   * The term duration in ISO8601 format.
+   */
+  term?: string;
+
+  /**
+   * The acquired product details in the scheduled action product.
+   */
+  acquiredProduct?: AcquiredProduct;
+}
+
+/**
+ * List of events related to a billing subscription.
+ */
+@added(Versions.v2024_08_01_preview)
+model BillingSubscriptionEventList {
+  /**
+   * The events related to the billing subscription.
+   */
+  @identifiers(#[])
+  value?: BillingSubscriptionEvent[];
+
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  nextLink?: string;
+
+  /**
+   * The total number of events.
+   */
+  totalCount?: int32;
+}
+
+/**
+ * History of events related to a billing subscription.
+ */
+@added(Versions.v2024_08_01_preview)
+model BillingSubscriptionEvent {
+  /**
+   * Type of billing subscription event, for example conversion, quantityChange, renewal, or termExtension.
+   */
+  type?: string;
+
+  /**
+   * Date and time when the subscription event occurred.
+   */
+  date?: utcDateTime;
+
+  /**
+   * Subscription term details before the event for conversions and changes.
+   */
+  fromTermDetails?: BillingSubscriptionEventTermDetails;
+
+  /**
+   * Subscription term details after the event for conversions and changes.
+   */
+  toTermDetails?: BillingSubscriptionEventTermDetails;
+
+  /**
+   * Subscription product details before the event for conversions and changes.
+   */
+  fromProductDetails?: BillingSubscriptionEventProductDetails;
+
+  /**
+   * Subscription product details after the event for conversions and changes.
+   */
+  toProductDetails?: BillingSubscriptionEventProductDetails;
+
+  /**
+   * The quantity of licenses or fulfillment units for the subscription.
+   */
+  quantity?: int64;
+}
+
+/**
+ * Subscription term details for a billing subscription event.
+ */
+@added(Versions.v2024_08_01_preview)
+model BillingSubscriptionEventTermDetails {
+  /**
+   * Start date of the term in UTC time.
+   */
+  startDate?: utcDateTime;
+
+  /**
+   * End date of the term in UTC time.
+   */
+  endDate?: utcDateTime;
+
+  /**
+   * Product term duration, for example P1Y for one year or P1M for one month.
+   */
+  termDuration?: string;
+}
+
+/**
+ * Product details for a billing subscription event.
+ */
+@added(Versions.v2024_08_01_preview)
+model BillingSubscriptionEventProductDetails {
+  /**
+   * Type of the product.
+   */
+  productTypeId?: string;
+
+  /**
+   * The SKU ID of the product for which the subscription is purchased. This field is is only available  for Microsoft Customer Agreement billing accounts.
+   */
+  skuId?: string;
+
+  /**
+   * The unique code that identifies the product and represents UPN.
+   */
+  productCode?: string;
+}
+
+/**
+ * The status of invoice payment eligibility.
+ */
+@added(Versions.v2024_08_01_preview)
+union InvoicePayEligibilityStatus {
+  string,
+
+  /**
+   * The Pending invoice payment eligibility status.
+   */
+  Pending: "Pending",
+
+  /**
+   * The Approved invoice payment eligibility status.
+   */
+  Approved: "Approved",
+
+  /**
+   * The Rejected invoice payment eligibility status.
+   */
+  Rejected: "Rejected",
+}
+
+/**
+ * The reason for the invoice payment eligibility status.
+ */
+@added(Versions.v2024_08_01_preview)
+union InvoicePayEligibilityReason {
+  string,
+
+  /**
+   * No eligibility reason is specified.
+   */
+  None: "None",
+
+  /**
+   * The invoice payment eligibility is under review.
+   */
+  InReview: "InReview",
+
+  /**
+   * The account type is not eligible.
+   */
+  AccountTypeInvalid: "AccountTypeInvalid",
+
+  /**
+   * The payment history is insufficient.
+   */
+  InsufficientPaymentHistory: "InsufficientPaymentHistory",
+
+  /**
+   * The spending history is insufficient.
+   */
+  InsufficientSpendingHistory: "InsufficientSpendingHistory",
+
+  /**
+   * The country is not supported.
+   */
+  CountryNotSupported: "CountryNotSupported",
+
+  /**
+   * There is an outstanding balance.
+   */
+  OutstandingBalance: "OutstandingBalance",
+
+  /**
+   * The eligibility decision is based on the credit response.
+   */
+  CreditResponse: "CreditResponse",
+}
+
+/**
+ * The result of the invoice payment eligibility validation.
+ */
+@added(Versions.v2024_08_01_preview)
+model InvoicePayEligibilityResult {
+  /**
+   * The status of the invoice payment eligibility.
+   */
+  @visibility(Lifecycle.Read)
+  status?: InvoicePayEligibilityStatus;
+
+  /**
+   * The reason for the invoice payment eligibility status.
+   */
+  @visibility(Lifecycle.Read)
+  reason?: InvoicePayEligibilityReason;
+}
+
+/**
+ * The request details for a pay now operation.
+ */
+@added(Versions.v2024_08_01_preview)
+model InvoicePaynowRequest {
+  /**
+   * The amount to be paid for the invoice.
+   */
+  amount?: float32;
+
+  /**
+   * The payment method to be used for the payment.
+   */
+  paymentMethodName?: string;
+}
+
+/**
+ * The payment method eligibility for the Pay Now feature.
+ */
+@added(Versions.v2024_08_01_preview)
+model PaymentMethodEligibility {
+  /**
+   * The family of the payment method for the Pay Now feature eligibility.
+   */
+  family?: PaymentMethodFamily;
+
+  /**
+   * The type of the payment method for the Pay Now feature eligibility.
+   */
+  type?: string;
+
+  /**
+   * The status of the payment method for the Pay Now feature eligibility.
+   */
+  isEligible?: boolean;
+
+  /**
+   * Indicates the reason for the ineligibility of the payment method for the Pay Now feature.
+   */
+  reasonCode?: PaynowEligibilityReasonCode;
+}
+
+/**
+ * The reason code for Pay Now feature eligibility.
+ */
+@added(Versions.v2024_08_01_preview)
+union PaynowEligibilityReasonCode {
+  string,
+
+  /**
+   * The Pay Now eligibility reason is unspecified.
+   */
+  Other: "Other",
+
+  /**
+   * The invoice is not eligible for Pay Now.
+   */
+  NotEligible: "NotEligible",
+
+  /**
+   * The Pay Now limit has been exceeded.
+   */
+  PayNowLimitExceeded: "PayNowLimitExceeded",
+
+  /**
+   * The caller has insufficient permissions.
+   */
+  InsufficientPermissions: "InsufficientPermissions",
+
+  /**
+   * The invoice has a duplicate payment.
+   */
+  DuplicatePayment: "DuplicatePayment",
+
+  /**
+   * The invoice was not found.
+   */
+  InvoiceNotFound: "InvoiceNotFound",
+
+  /**
+   * The payment amount is invalid.
+   */
+  InvalidAmount: "InvalidAmount",
+
+  /**
+   * The billing account is invalid.
+   */
+  InvalidAccount: "InvalidAccount",
+}
+
+/**
+ * Result of the Pay Now feature eligibility.
+ */
+@added(Versions.v2024_08_01_preview)
+model PaynowEligibilityResult {
+  /**
+   * Indicates the reason for the ineligibility of the Pay Now feature.
+   */
+  reasonCode?: PaynowEligibilityReasonCode;
+
+  /**
+   * The payment methods for the Pay Now feature eligibility.
+   */
+  @identifiers(#[])
+  paymentMethods?: PaymentMethodEligibility[];
+}
+
+/**
+ * The properties of a license reservation.
+ */
+@added(Versions.v2024_08_01_preview)
+model LicenseReservationProperties {
+  /**
+   * The provisioning state of the resource during a long-running operation.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The line items (or licenses) that are reserved.
+   */
+  @identifiers(#[])
+  lineItems: LicenseReservationLineItem[];
+
+  /**
+   * The date from which the license would be used.
+   */
+  termStartDate: utcDateTime;
+
+  /**
+   * The status of the license reservation.
+   */
+  @visibility(Lifecycle.Read)
+  status?: ReservationStatus;
+
+  /**
+   * Name of the entity that created the license reservation.
+   */
+  @visibility(Lifecycle.Read)
+  reservedBy?: string;
+
+  /**
+   * System imposed policies that regulate behavior of the license reservation.
+   */
+  systemOverrides?: ReservationSystemOverrides;
+}
+
+/**
+ * A container for a list of license reservations.
+ */
+@added(Versions.v2024_08_01_preview)
+model LicenseReservationListResult is Azure.Core.Page<LicenseReservation>;
+
+/**
+ * Request parameters for canceling a license reservation.
+ */
+@added(Versions.v2024_08_01_preview)
+model CancelLicenseReservationRequest {
+  /**
+   * Cancellation reason.
+   */
+  cancellationReason?: string;
+}
+
+/**
+ * A license reservation line item (or license).
+ */
+@added(Versions.v2024_08_01_preview)
+model LicenseReservationLineItem {
+  /**
+   * The SKU ID of the license to reserve.
+   */
+  @minLength(1)
+  skuId: string;
+
+  /**
+   * The description of the SKU.
+   */
+  skuDescription?: string;
+
+  /**
+   * The number of licenses reserved.
+   */
+  quantity: int32;
+
+  /**
+   * The country where the licenses are used.
+   */
+  @minLength(1)
+  usageCountry: string;
+}
+
+/**
+ * The status of the license reservation.
+ */
+@added(Versions.v2024_08_01_preview)
+union ReservationStatus {
+  string,
+
+  /**
+   * The reservation is active.
+   */
+  Active: "Active",
+
+  /**
+   * The reservation is pending.
+   */
+  Pending: "Pending",
+
+  /**
+   * Cancellation of the reservation is pending.
+   */
+  CancelPending: "CancelPending",
+
+  /**
+   * The reservation is cancelled.
+   */
+  Cancelled: "Cancelled",
+
+  /**
+   * The reservation request has been received.
+   */
+  RequestReceived: "RequestReceived",
+
+  /**
+   * The reservation is held.
+   */
+  Held: "Held",
+
+  /**
+   * The reservation is reconciled.
+   */
+  Reconciled: "Reconciled",
+
+  /**
+   * The reservation failed.
+   */
+  Failed: "Failed",
+}
+
+/**
+ * System imposed policies that regulate behavior of the license reservation.
+ */
+@added(Versions.v2024_08_01_preview)
+model ReservationSystemOverrides {
+  /**
+   * The last date by which the license reservation can be canceled.
+   */
+  @visibility(Lifecycle.Read)
+  cancellationAllowedEndDate?: utcDateTime;
+}
+
+/**
+ * The properties of the cancellation of partner change request.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestCancellationProperties {
+  /**
+   * The description of the reason for cancellation.
+   */
+  @visibility(Lifecycle.Read)
+  cancellationReason?: string;
+
+  /**
+   * The email ID of the user who canceled the partner change request.
+   */
+  @pattern(EmailAddressPattern)
+  @visibility(Lifecycle.Read)
+  canceledBy?: string;
+
+  /**
+   * The partner change request status.
+   */
+  @visibility(Lifecycle.Read)
+  requestStatus?: RequestStatus;
+}
+
+/**
+ * The request parameters for cancellation of partner change request.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeCancelRequest {
+  /**
+   * Request parameters to partner change cancel request.
+   */
+  properties?: PartnerChangeCancelRequestProperties;
+}
+
+/**
+ * The properties for cancelling a partner change request.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeCancelRequestProperties {
+  /**
+   * The description of the reason for cancellation.
+   */
+  @minLength(1)
+  cancellationReason: string;
+}
+
+/**
+ * The details of the partner change request for initiate operations.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestInitiateResponse
+  is Azure.ResourceManager.ProxyResource<PartnerChangeRequestInitiateResponseProperties> {
+  ...ResourceNameParameter<Resource = PartnerChangeRequestInitiateResponseProperties>;
+
+  /**
+   * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  tags?: Record<string>;
+}
+
+/**
+ * The list of the partner change requests initiated by the initiator.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestListResult
+  is Azure.Core.Page<PartnerChangeRequestGetDetails>;
+
+@@doc(
+  PartnerChangeRequestListResult.value,
+  "The details of the partner change requests initiated by the initiator."
+);
+@@doc(
+  PartnerChangeRequestListResult.nextLink,
+  "The link (url) to the next page of results."
+);
+
+/**
+ * The properties of the partner change request for GET operations.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestGetDetailsProperties {
+  ...PartnerChangeRequestBaseProperties;
+
+  /**
+   * The email ID of the user who canceled the partner change request.
+   */
+  @pattern(EmailAddressPattern)
+  @visibility(Lifecycle.Read)
+  canceledBy?: string;
+
+  /**
+   * The partner change request package ID.
+   */
+  @visibility(Lifecycle.Read)
+  partnerChangePackageId?: string;
+}
+
+/**
+ * A secure URL that can be used to download an entity until the URL expires.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeDocumentDownloadResultProperties {
+  /**
+   * The URL to the PDF or .zip file.
+   */
+  @secret
+  @visibility(Lifecycle.Read)
+  url?: string;
+
+  /**
+   * The time in UTC when the download URL will expire.
+   */
+  @visibility(Lifecycle.Read)
+  expiryTime?: utcDateTime;
+}
+
+/**
+ * The partner change request status.
+ */
+@added(Versions.v2024_08_01_preview)
+union RequestStatus {
+  string,
+
+  /**
+   * The partner change request is currently in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The partner change request is pending Microsoft review.
+   */
+  PendingMSReview: "PendingMSReview",
+
+  /**
+   * The partner change request is in grace period. Grace period : When a customer switches to a new channel partner, there is a grace period during which the new partner cannot access the customer's agreement, and the old partner remains the official partner on record. Once the grace period ends, the new partner gains access to the customer's agreement, and the old partner loses access.
+   */
+  InGracePeriod: "InGracePeriod",
+
+  /**
+   * The partner change request has been completed successfully.
+   */
+  Complete: "Complete",
+
+  /**
+   * The partner change request was declined by the partner.
+   */
+  DeclinedByPartner: "DeclinedByPartner",
+
+  /**
+   * The partner change request was rejected by Microsoft.
+   */
+  RejectedByMS: "RejectedByMS",
+
+  /**
+   * The partner change request has been canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The partner change request has failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The partner change request has expired.
+   */
+  Expired: "Expired",
+
+  /**
+   * The partner change request cancellation is in progress.
+   */
+  CancellationInProgress: "CancellationInProgress",
+}
+
+/**
+ * The type of partner.
+ */
+@added(Versions.v2024_08_01_preview)
+union PartnerType {
+  string,
+
+  /**
+   * The partner acts as a reseller
+   */
+  Reseller: "Reseller",
+
+  /**
+   * The partner acts as a software advisor
+   */
+  SoftwareAdvisor: "SoftwareAdvisor",
+}
+
+/**
+ * The reason code for the partner change request.
+ */
+@added(Versions.v2024_08_01_preview)
+union PartnerChangeReasonCode {
+  string,
+
+  /**
+   * The current partner's service quality did not meet expectations.
+   */
+  UnsatisfactoryService: "UnsatisfactoryService",
+
+  /**
+   * The current partner has been off-boarded by Microsoft.
+   */
+  PartnerOffBoarded: "PartnerOffBoarded",
+
+  /**
+   * Other business reasons for changing the partner.
+   */
+  Other: "Other",
+}
+
+/**
+ * Partner change request error response properties.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestErrorProperties {
+  /**
+   * Any validation results that occurred during the operation.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  validationResults?: ValidationResultProperties[];
+}
+
+/**
+ * The request parameters for initiating a partner change request.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeInitiateRequest {
+  /**
+   * Request parameters to initiate partner change request.
+   */
+  properties?: PartnerChangeInitiateRequestProperties;
+}
+
+/**
+ * The properties of the partner change request for initiate operation.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestInitiateResponseProperties {
+  ...PartnerChangeRequestBaseProperties;
+
+  /**
+   * Validation results from the partner change request initiation.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  validationResults?: ValidationResultProperties[];
+}
+
+/**
+ * The base properties of the partner change request.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeRequestBaseProperties {
+  /**
+   * The type of partner.
+   */
+  @visibility(Lifecycle.Read)
+  partnerType?: PartnerType;
+
+  /**
+   * The time at which the partner change request expires in UTC.
+   */
+  @encodedName("application/json", "expirationTimeUTC")
+  @visibility(Lifecycle.Read)
+  expirationTimeUtc?: utcDateTime;
+
+  /**
+   * The status of the partner change request.
+   */
+  @visibility(Lifecycle.Read)
+  requestStatus?: RequestStatus;
+
+  /**
+   * The email ID of the user to whom the partner change request was sent.
+   */
+  @pattern(EmailAddressPattern)
+  @visibility(Lifecycle.Read)
+  recipientEmailId?: string;
+
+  /**
+   * The email ID of the user who initiated the partner change request.
+   */
+  @pattern(EmailAddressPattern)
+  @visibility(Lifecycle.Read)
+  initiatorEmailId?: string;
+
+  /**
+   * The first name of the initiator.
+   */
+  @visibility(Lifecycle.Read)
+  initiatorFirstName?: string;
+
+  /**
+   * The last name of the initiator.
+   */
+  @visibility(Lifecycle.Read)
+  initiatorLastName?: string;
+
+  /**
+   * The date and time when the partner change request was initiated, in UTC.
+   */
+  @encodedName("application/json", "initiatedOnUTC")
+  @visibility(Lifecycle.Read)
+  initiatedOnUtc?: utcDateTime;
+
+  /**
+   * The effective date when the partner change will take effect, in UTC.
+   */
+  @encodedName("application/json", "effectiveDateUTC")
+  @visibility(Lifecycle.Read)
+  effectiveDateUtc?: utcDateTime;
+
+  /**
+   * The primary contact email ID of the partner.
+   */
+  @pattern(EmailAddressPattern)
+  @visibility(Lifecycle.Read)
+  partnerPrimaryContactEmailId?: string;
+
+  /**
+   * The public customer number of the source partner organization.
+   */
+  @visibility(Lifecycle.Read)
+  sourcePartnerOrganizationPcn?: string;
+
+  /**
+   * The name of the source partner organization.
+   */
+  @visibility(Lifecycle.Read)
+  sourcePartnerOrganizationName?: string;
+
+  /**
+   * The public customer number of the target partner organization.
+   */
+  @visibility(Lifecycle.Read)
+  targetPartnerOrganizationPcn?: string;
+
+  /**
+   * The name of the target partner organization.
+   */
+  @visibility(Lifecycle.Read)
+  targetPartnerOrganizationName?: string;
+
+  /**
+   * The public customer number of the customer organization.
+   */
+  @visibility(Lifecycle.Read)
+  customerOrganizationPcn?: string;
+
+  /**
+   * The name of the customer organization.
+   */
+  @visibility(Lifecycle.Read)
+  customerOrganizationName?: string;
+
+  /**
+   * The reason code for the partner change request.
+   */
+  @visibility(Lifecycle.Read)
+  partnerChangeReasonCode?: PartnerChangeReasonCode;
+
+  /**
+   * The reason for the partner change request.
+   */
+  @visibility(Lifecycle.Read)
+  partnerChangeReason?: string;
+}
+
+/**
+ * The properties for initiating a partner change request.
+ */
+@added(Versions.v2024_08_01_preview)
+model PartnerChangeInitiateRequestProperties {
+  /**
+   * The email ID of the user to whom the partner change request will be sent.
+   */
+  @pattern(EmailAddressPattern)
+  recipientEmailId?: string;
+
+  /**
+   * The effective date of the partner change request in UTC.
+   */
+  @encodedName("application/json", "effectiveDateUTC")
+  effectiveDateUtc?: utcDateTime;
+
+  /**
+   * The public customer number of the target partner organization.
+   */
+  targetPartnerOrganizationPcn?: string;
+
+  /**
+   * The reason code for the partner change request.
+   */
+  partnerChangeReasonCode?: PartnerChangeReasonCode;
+
+  /**
+   * The reason for the partner change request.
+   */
+  partnerChangeReason?: string;
+
+  /**
+   * The first name of the initiator.
+   */
+  initiatorFirstName?: string;
+
+  /**
+   * The last name of the initiator.
+   */
+  initiatorLastName?: string;
 }
 
 /**
@@ -5723,6 +7535,13 @@ model RenewalTermDetails {
    */
   @visibility(Lifecycle.Read)
   termEndDate?: utcDateTime;
+
+  /**
+   * The unique code that identifies the product and represents UPN.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  productCode?: string;
 }
 
 /**
@@ -5943,10 +7762,23 @@ model DepartmentProperties {
   displayName?: string;
 
   /**
+   * The name of the department.
+   */
+  @added(Versions.v2024_08_01_preview)
+  departmentName?: string;
+
+  /**
+   * The spending budget of the department.
+   */
+  @added(Versions.v2024_08_01_preview)
+  spendingQuota?: string;
+
+  /**
    * The ID that uniquely identifies the department.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Existing documentation where id is also in properties. For back compat."
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2024_08_01_preview)
   id?: string;
 
   /**
@@ -6017,6 +7849,41 @@ model EnrollmentAccountProperties {
    */
   @visibility(Lifecycle.Read)
   endDate?: utcDateTime;
+
+  /**
+   * The offer types associated with the enrollment account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  offerTypes?: string[];
+
+  /**
+   * Details of the owner of the enrollment account.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  ownerDetails?: EnrollmentAccountOwnerDetails;
+}
+
+/**
+ * Details of an enrollment account owner.
+ */
+@added(Versions.v2024_08_01_preview)
+model EnrollmentAccountOwnerDetails {
+  /**
+   * The email address of the enrollment account owner.
+   */
+  email?: string;
+
+  /**
+   * The tenant ID of the enrollment account owner.
+   */
+  tenantId?: string;
+
+  /**
+   * The object ID of the enrollment account owner.
+   */
+  objectId?: string;
 }
 
 /**
@@ -6543,6 +8410,34 @@ model PaymentMethodLinkProperties {
    */
   @visibility(Lifecycle.Read)
   status?: PaymentMethodStatus;
+
+  /**
+   * The address of the payment instrument.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  address?: AddressDetails;
+
+  /**
+   * The name of bank where the account is held. This is only supported for payment methods with family DirectDebit.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  bankName?: string;
+
+  /**
+   * The friendly ID of the billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  billingProfileId?: string;
+
+  /**
+   * The display name of the billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  billingProfileDisplayName?: string;
 }
 
 /**
@@ -6619,6 +8514,19 @@ model PaymentMethodProperties {
    * Status of the payment method.
    */
   status?: PaymentMethodStatus;
+
+  /**
+   * The address of the payment instrument.
+   */
+  @added(Versions.v2024_08_01_preview)
+  address?: AddressDetails;
+
+  /**
+   * The name of bank where the account is held. This is only supported for payment methods with family DirectDebit.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  bankName?: string;
 }
 
 /**
@@ -7343,7 +9251,6 @@ model RenewPropertiesResponse {
 /**
  * The request for reservation purchase
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReservationPurchaseRequest {
   /**
    * The name of sku
@@ -8058,14 +9965,42 @@ model TransferProperties {
   /**
    * The email ID of the user to whom the transfer request was sent.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   recipientEmailId?: string;
 
   /**
    * The email ID of the user who sent the transfer request.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   initiatorEmailId?: string;
+
+  /**
+   * The tenant ID of the user to whom the transfer request was sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  recipientTenantId?: string;
+
+  /**
+   * The email or object ID of the user to whom the transfer request was sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  recipientUserId?: string;
+
+  /**
+   * The tenant ID of the user who sent the transfer request.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  initiatorTenantId?: string;
+
+  /**
+   * The email or object ID of the user who sent the transfer request.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  initiatorUserId?: string;
 
   /**
    * The email ID of the user who canceled the transfer request.
@@ -8100,12 +10035,14 @@ model DetailedTransferStatus {
   /**
    * The name of the product that is transferred.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   productName?: string;
 
   /**
    * The SKU of the product that is transferred.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   skuDescription?: string;
 
@@ -8128,14 +10065,16 @@ model TransferError {
   /**
    * Error code.
    */
+  @renamedFrom(Versions.v2024_08_01_preview, "code")
   @visibility(Lifecycle.Read)
-  code?: string;
+  errorCode?: string;
 
   /**
    * Error message.
    */
+  @renamedFrom(Versions.v2024_08_01_preview, "message")
   @visibility(Lifecycle.Read)
-  message?: string;
+  errorMessage?: string;
 }
 
 /**
@@ -8178,25 +10117,63 @@ model PartnerTransferProperties {
   /**
    * The email ID of the user to whom the transfer request was sent.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   recipientEmailId?: string;
 
   /**
    * The type of customer who sent the transfer request.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   initiatorCustomerType?: InitiatorCustomerType;
 
   /**
    * The email ID of the user who sent the transfer request.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   initiatorEmailId?: string;
 
   /**
+   * The tenant ID of the user to whom the transfer request was sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  recipientTenantId?: string;
+
+  /**
+   * The email or object ID of the user to whom the transfer request was sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  recipientUserId?: string;
+
+  /**
+   * The tenant ID of the user who sent the transfer request.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  initiatorTenantId?: string;
+
+  /**
+   * The email or object ID of the user who sent the transfer request.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  initiatorUserId?: string;
+
+  // This property is still in 2024-04-01 and 2024-08-01-preview and beyond, and is called resellerId in all cases, but we made it writeable in 2024-08-01-preview.
+  /**
    * Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2024_08_01_preview, "resellerId")
+  oldResellerId?: string;
+
+  /**
+   * Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.
+   */
+  @added(Versions.v2024_08_01_preview)
   resellerId?: string;
 
   /**
@@ -8236,7 +10213,20 @@ model PartnerInitiateTransferProperties {
   /**
    * The email ID of the recipient to whom the transfer request is sent.
    */
+  @removed(Versions.v2024_08_01_preview)
   recipientEmailId?: string;
+
+  /**
+   * The tenant ID of the recipient to whom the transfer request is sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  recipientTenantId?: string;
+
+  /**
+   * The email or object ID of the user to whom the transfer request is sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  recipientUserId?: string;
 
   /**
    * Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.
@@ -8306,14 +10296,44 @@ model RecipientTransferProperties {
   /**
    * The email ID of the user to whom the transfer request was sent.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   recipientEmailId?: string;
 
   /**
    * The email ID of the user who sent the transfer request.
    */
+  @removed(Versions.v2024_08_01_preview)
   @visibility(Lifecycle.Read)
   initiatorEmailId?: string;
+
+  /**
+   * The tenant ID of the user to whom the transfer request was sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  recipientTenantId?: string;
+
+  /**
+   * The email or object ID of the user to whom the transfer request was sent.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  recipientUserId?: string;
+
+  /**
+   * The tenant ID of the user who sent the transfer request.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  initiatorTenantId?: string;
+
+  /**
+   * The email or object ID of the user who sent the transfer request.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @visibility(Lifecycle.Read)
+  initiatorUserId?: string;
 
   /**
    * Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.
@@ -8362,7 +10382,6 @@ model RecipientTransferProperties {
 /**
  * Result of transfer validation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateTransferListResponse {
   /**
    * The list of transfer validation results.
@@ -8513,11 +10532,464 @@ model ReservationOrderList is Azure.Core.Page<ReservationOrder>;
 /**
  * Query parameter to enumerate transfer requests.
  */
+@added(Versions.v2024_08_01_preview)
 model TransferItemQueryParameter {
   /**
    * State of the transfer request query filter.
    */
   state?: string;
+}
+
+/**
+ * The list transfer supported accounts operation response.
+ */
+@added(Versions.v2024_08_01_preview)
+model SupportedAccountsDetails {
+  /**
+   * The resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The list of transfer supported accounts for the customer.
+   */
+  value: SupportedAccountType[];
+}
+
+/**
+ * The list transfer supported accounts operation response.
+ */
+@added(Versions.v2024_08_01_preview)
+model SupportedAccountsDetailsListResult
+  is Azure.Core.Page<SupportedAccountsDetails>;
+
+/**
+ * The purchase order.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Purchase orders do not expose a provisioning state."
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderProperties {
+  /**
+   * Identifies the status of purchase order.
+   */
+  status: PurchaseOrderStatus;
+
+  /**
+   * The description of the purchase order.
+   */
+  description?: string;
+
+  /**
+   * The date when the purchase order was created.
+   */
+  @visibility(Lifecycle.Read)
+  creationDate?: utcDateTime;
+
+  /**
+   * The date when the purchase order becomes effective.
+   */
+  effectiveDate: utcDateTime;
+
+  /**
+   * The date when the purchase order expires.
+   */
+  expirationDate: utcDateTime;
+
+  /**
+   * The allocated budget amount for the purchase order.
+   */
+  allocatedBudget?: float32;
+
+  /**
+   * Indicates whether the purchase order (PO) number has been assigned to a charge.
+   */
+  @visibility(Lifecycle.Read)
+  isPoUtilized?: boolean;
+}
+
+/**
+ * Identifies the status of a purchase order.
+ */
+@added(Versions.v2024_08_01_preview)
+union PurchaseOrderStatus {
+  string,
+
+  /**
+   * The purchase order is active.
+   */
+  Active: "active",
+
+  /**
+   * The purchase order is inactive.
+   */
+  Inactive: "inactive",
+}
+
+/**
+ * A purchase order mapping that associates specific products to a purchase order.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderMappingBase {
+  /**
+   * The fully qualified ID that uniquely identifies a purchase order.
+   */
+  @minLength(1)
+  purchaseOrderId: string;
+
+  /**
+   * A description of the purchase order mapping.
+   */
+  description?: string;
+
+  /**
+   * The title or name of the product associated with this mapping.
+   */
+  @visibility(Lifecycle.Read)
+  productTitle?: string;
+
+  /**
+   * The offer identifier of the product associated with this mapping.
+   */
+  @minLength(1)
+  offerId: string;
+
+  /**
+   * The publisher identifier of the product associated with this mapping.
+   */
+  @minLength(1)
+  publisherId: string;
+
+  /**
+   * The product identifier associated with this mapping.
+   */
+  productId?: string;
+
+  /**
+   * The unique code of the product associated with this mapping.
+   */
+  productCode?: string;
+
+  /**
+   * The date when the purchase order mapping becomes effective.
+   */
+  effectiveDate: utcDateTime;
+
+  /**
+   * The date when the purchase order mapping expires.
+   */
+  expirationDate: utcDateTime;
+
+  /**
+   * The status of the purchase order mapping.
+   */
+  status: POMappingStatus;
+}
+
+/**
+ * A purchase order mapping that associates specific products to a purchase order.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Purchase order mappings do not expose a provisioning state."
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderMappingProperties {
+  ...PurchaseOrderMappingBase;
+
+  /**
+   * The date when the purchase order mapping was created.
+   */
+  @visibility(Lifecycle.Read)
+  creationDate?: utcDateTime;
+
+  /**
+   * The date when the purchase order mapping was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  updatedDate?: utcDateTime;
+
+  /**
+   * Indicates whether this purchase order mapping has been assigned to a charge.
+   */
+  @visibility(Lifecycle.Read)
+  isMapUtilized?: boolean;
+}
+
+/**
+ * The status of a purchase order mapping.
+ */
+@added(Versions.v2024_08_01_preview)
+union POMappingStatus {
+  string,
+
+  /**
+   * The purchase order mapping is active.
+   */
+  Active: "active",
+
+  /**
+   * The purchase order mapping is inactive.
+   */
+  Inactive: "inactive",
+}
+
+/**
+ * Request body for validating purchase order mappings.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderMappingValidationRequest {
+  ...PurchaseOrderMappingBase;
+}
+
+/**
+ * Response of purchase order mapping validation.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderMappingValidationResponse {
+  ...PurchaseOrderMappingBase;
+
+  /**
+   * A collection of validation errors that occurred during validation. If empty, validation succeeded.
+   */
+  @identifiers(#[])
+  errors?: ValidationError[];
+}
+
+/**
+ * A purchase order mapping validation error.
+ */
+@added(Versions.v2024_08_01_preview)
+model ValidationError {
+  /**
+   * The name of the invalid field.
+   */
+  fieldName?: string;
+
+  /**
+   * The validation error message.
+   */
+  errorMessage?: string;
+
+  /**
+   * The validation error code.
+   */
+  errorCode?: string;
+}
+
+/**
+ * A container for a list of purchase order mappings.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderMappingListResult {
+  /**
+   * The link to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+
+  /**
+   * The list of purchase order mappings.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  @visibility(Lifecycle.Read)
+  value?: PurchaseOrderMapping[];
+}
+
+/**
+ * A summary of a purchase order invoice.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderInvoiceSummary {
+  /**
+   * An invoice id.
+   */
+  @visibility(Lifecycle.Read)
+  invoiceId?: string;
+
+  /**
+   * The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
+   */
+  @visibility(Lifecycle.Read)
+  invoicePeriodStartDate?: utcDateTime;
+
+  /**
+   * The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
+   */
+  @visibility(Lifecycle.Read)
+  invoicePeriodEndDate?: utcDateTime;
+
+  /**
+   * The date when the invoice was generated.
+   */
+  @visibility(Lifecycle.Read)
+  invoiceDate?: utcDateTime;
+
+  /**
+   * The total pre-tax charged amount for a purchase order number.
+   */
+  @visibility(Lifecycle.Read)
+  subTotal?: float32;
+
+  /**
+   * The total tax amount applied for a purchase order number.
+   */
+  @visibility(Lifecycle.Read)
+  taxAmount?: float32;
+
+  /**
+   * The total charges for a purchase order number.
+   */
+  @visibility(Lifecycle.Read)
+  totalAmount?: float32;
+
+  /**
+   * The total tax amount applied for an invoice.
+   */
+  @visibility(Lifecycle.Read)
+  invoiceTaxAmount?: float32;
+
+  /**
+   * The total pre-tax charged amount for an invoice.
+   */
+  @visibility(Lifecycle.Read)
+  invoiceSubTotal?: float32;
+
+  /**
+   * The amount due when the invoice was generated.
+   */
+  @visibility(Lifecycle.Read)
+  invoiceTotalAmount?: float32;
+
+  /**
+   * The ISO 4217 code for the currency in which the charges are billed.
+   */
+  @visibility(Lifecycle.Read)
+  billingCurrency?: string;
+}
+
+/**
+ * The unbilled charge summary for a purchase order number.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderTransactionSummary {
+  /**
+   * The total pre-tax charged amount for a purchase order number.
+   */
+  @visibility(Lifecycle.Read)
+  subTotal?: float32;
+
+  /**
+   * The total tax amount applied for a purchase order number.
+   */
+  @visibility(Lifecycle.Read)
+  taxAmount?: float32;
+
+  /**
+   * The total charges for a purchase order number.
+   */
+  @visibility(Lifecycle.Read)
+  totalAmount?: float32;
+
+  /**
+   * The purchase order (PO) number.
+   */
+  @visibility(Lifecycle.Read)
+  poNumber?: string;
+
+  /**
+   * The ISO 4217 code for the currency in which the charges are billed.
+   */
+  @visibility(Lifecycle.Read)
+  billingCurrency?: string;
+}
+
+/**
+ * A container for a list of purchase orders.
+ */
+@added(Versions.v2024_08_01_preview)
+model PurchaseOrderListResult {
+  /**
+   * The link to the next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+
+  /**
+   * The list of purchase orders.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  @visibility(Lifecycle.Read)
+  value?: PurchaseOrder[];
+}
+
+/**
+ * Migration details.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not a subscription provisioned resource."
+@added(Versions.v2024_08_01_preview)
+model MigrationDetailsProperties {
+  /**
+   * Destination billing scope to be mapped.
+   */
+  destinationBillingScope?: string;
+
+  /**
+   * Migration status.
+   */
+  status?: MigrationStatus;
+
+  /**
+   * Transfer ID.
+   */
+  @visibility(Lifecycle.Read)
+  transferId?: string;
+}
+
+/**
+ * Migration status.
+ */
+@added(Versions.v2024_08_01_preview)
+union MigrationStatus {
+  string,
+
+  /**
+   * The Draft migration status.
+   */
+  Draft: "Draft",
+
+  /**
+   * The InProgress migration status.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The Completed migration status.
+   */
+  Completed: "Completed",
+
+  /**
+   * The Failed migration status.
+   */
+  Failed: "Failed",
+
+  /**
+   * The CompletedWithErrors migration status.
+   */
+  CompletedWithErrors: "CompletedWithErrors",
 }
 
 /**
@@ -8646,3 +11118,71 @@ model RecipientTransferDetailsListResult
   is Azure.Core.Page<RecipientTransferDetails>;
 
 model TransferDetailsListResult is Azure.Core.Page<TransferDetails>;
+
+/**
+ * A container for a list of alerts.
+ */
+@added(Versions.v2024_08_01_preview)
+model AlertListResult is Azure.Core.Page<Alert>;
+
+/**
+ * Invoicing preferences.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Invoicing preferences do not expose a provisioning state."
+@added(Versions.v2024_08_01_preview)
+model InvoicingPreferencesProperties {
+  /**
+   * Specifies whether invoice supplements should be created based on the line-item-level purchase order (PO) number for a billing profile.
+   */
+  supplementalDocumentsEnabled: boolean;
+
+  /**
+   * The frequency at which invoices will be generated.
+   */
+  @visibility(Lifecycle.Read)
+  invoiceFrequency?: FlushFrequency;
+
+  /**
+   * The date when the next invoice will be generated.
+   */
+  @visibility(Lifecycle.Read)
+  nextInvoiceDate?: utcDateTime;
+}
+
+/**
+ * The frequency at which invoices will be generated.
+ */
+@added(Versions.v2024_08_01_preview)
+union FlushFrequency {
+  string,
+
+  /**
+   * Invoices are generated manually.
+   */
+  Manual: "manual",
+
+  /**
+   * Invoices are generated immediately.
+   */
+  Immediate: "immediate",
+
+  /**
+   * Invoices are generated daily.
+   */
+  Daily: "daily",
+
+  /**
+   * Invoices are generated monthly.
+   */
+  Monthly: "monthly",
+
+  /**
+   * Invoices are generated quarterly.
+   */
+  Quarterly: "quarterly",
+
+  /**
+   * Invoices are generated yearly.
+   */
+  Yearly: "yearly",
+}

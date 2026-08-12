@@ -1,10 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Customer.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -29,6 +33,50 @@ model PartnerTransferDetails
   tags?: Record<string>;
 }
 
+alias PartnerTransferOperations = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The resource provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @removed(Versions.v2024_08_01_preview)
+    @path
+    @segment("billingProfiles")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    billingProfileName: string;
+
+    /** The ID that uniquely identifies a customer. */
+    @path
+    @segment("customers")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    customerName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies a transfer request. */
+    @path
+    @segment("transfers")
+    @key
+    @pattern(LowerAlphaNumericPattern)
+    transferName: string;
+  },
+  "BillingCustomerTransfer"
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "A transfer is not a living resource, so it does not support delete operation."
 @armResourceOperations(#{ omitTags: true })
 interface PartnerTransfers {
@@ -36,28 +84,23 @@ interface PartnerTransfers {
    * Gets a transfer request by ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  get is ArmResourceRead<
-    PartnerTransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
-  >;
+  get is PartnerTransferOperations.Read<PartnerTransferDetails>;
 
   /**
    * Sends a request to a user in a customer's billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+  initiate is PartnerTransferOperations.CreateOrUpdateSync<
     PartnerTransferDetails,
-    Request = PartnerInitiateTransferRequest,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    Request = PartnerTransferDetails
   >;
 
   /**
    * Lists the transfer requests sent to a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  list is ArmResourceListByParent<
+  list is PartnerTransferOperations.List<
     PartnerTransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResponse<PartnerTransferDetailsListResult>
   >;
 
@@ -65,11 +108,57 @@ interface PartnerTransfers {
    * Cancels a transfer request. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  cancel is ArmResourceActionSync<
+  @action("cancel")
+  cancel is PartnerTransferOperations.ActionSync<
     PartnerTransferDetails,
     void,
-    ArmResponse<PartnerTransferDetails>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    ArmResponse<PartnerTransferDetails>
+  >;
+}
+
+alias TransferSupportedAccountOperations = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The resource provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies a customer. */
+    @path
+    @segment("customers")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    customerName: string;
+  },
+  "BillingCustomer"
+>;
+
+@added(Versions.v2024_08_01_preview)
+@armResourceOperations(#{ omitTags: true })
+interface TransferSupportedAccounts {
+  /**
+   * Gets the accounts that support transfers for a customer.
+   */
+  @tag("Transfers")
+  @get
+  @list
+  @action("transferSupportedAccounts")
+  get is TransferSupportedAccountOperations.ActionSync<
+    Customer,
+    void,
+    ArmResponse<SupportedAccountsDetailsListResult>
   >;
 }
 
@@ -78,6 +167,11 @@ interface PartnerTransfers {
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(PartnerTransferDetails.properties, "Details of the transfer.");
+@@typeChangedFrom(
+  PartnerTransfers.initiate::parameters.resource,
+  Versions.v2024_08_01_preview,
+  PartnerInitiateTransferRequest
+);
 @@doc(
   PartnerTransfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."

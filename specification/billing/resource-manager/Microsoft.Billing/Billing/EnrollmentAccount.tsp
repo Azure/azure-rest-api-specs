@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Department.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -83,6 +85,122 @@ interface EnrollmentAccounts {
     Parameters = {
       ...DefaultODataParameters;
     },
+    Response = ArmResponse<EnrollmentAccountListResult>
+  >;
+}
+
+alias BillingProfileEnrollmentAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    billingProfileName: string;
+  },
+  {},
+  {
+    /** The name of the enrollment account. */
+    @path
+    @segment("enrollmentAccounts")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    enrollmentAccountName: string;
+  },
+  "BillingProfileEnrollmentAccount"
+>;
+
+alias BillingProfileDepartmentEnrollmentAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    billingProfileName: string;
+
+    /** The name of the department. */
+    @path
+    @segment("departments")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    departmentName: string;
+  },
+  {},
+  {
+    /** The name of the enrollment account. */
+    @path
+    @segment("enrollmentAccounts")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    enrollmentAccountName: string;
+  },
+  "BillingProfileDepartmentEnrollmentAccount"
+>;
+
+@armResourceOperations(#{ omitTags: true })
+interface BillingProfileEnrollmentAccounts {
+  /**
+   * Gets an enrollment account for a billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("EnrollmentAccount")
+  getById is BillingProfileEnrollmentAccountOps.Read<EnrollmentAccount>;
+
+  /**
+   * Lists the enrollment accounts for a billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("EnrollmentAccount")
+  listByBillingProfile is BillingProfileEnrollmentAccountOps.List<
+    EnrollmentAccount,
+    Response = ArmResponse<EnrollmentAccountListResult>
+  >;
+
+  /**
+   * Gets an enrollment account for a department in a billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("EnrollmentAccount")
+  getByAccountIdByDepartmentId is BillingProfileDepartmentEnrollmentAccountOps.Read<EnrollmentAccount>;
+
+  /**
+   * Lists the enrollment accounts for a department in a billing profile.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("EnrollmentAccount")
+  listByDepartmentName is BillingProfileDepartmentEnrollmentAccountOps.List<
+    EnrollmentAccount,
     Response = ArmResponse<EnrollmentAccountListResult>
   >;
 }

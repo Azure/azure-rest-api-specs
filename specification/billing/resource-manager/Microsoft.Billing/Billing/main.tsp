@@ -14,6 +14,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Agreement.tsp";
 import "./AssociatedTenant.tsp";
+import "./Alert.tsp";
 import "./AvailableBalance.tsp";
 import "./BillingAccount.tsp";
 import "./BillingProfile.tsp";
@@ -30,8 +31,14 @@ import "./Department.tsp";
 import "./EnrollmentAccount.tsp";
 import "./Invoice.tsp";
 import "./InvoiceSection.tsp";
+import "./InvoicingPreference.tsp";
+import "./LicenseReservation.tsp";
+import "./Migration.tsp";
 import "./PaymentMethodLink.tsp";
 import "./PaymentMethod.tsp";
+import "./PartnerChangeRequest.tsp";
+import "./PurchaseOrder.tsp";
+import "./PurchaseOrderMapping.tsp";
 import "./CustomerPolicy.tsp";
 import "./BillingProfilePolicy.tsp";
 import "./BillingAccountPolicy.tsp";
@@ -65,6 +72,12 @@ enum Versions {
    * Represents API version 2024-04-01.
    */
   v2024_04_01: "2024-04-01",
+
+  /**
+   * Represents API version 2024-08-01-preview.
+   */
+  @Azure.Core.previewVersion
+  v2024_08_01_preview: "2024-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
