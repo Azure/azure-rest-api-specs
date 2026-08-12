@@ -73,10 +73,10 @@ function collapseWhitespace(text) {
 
 /**
  * Remove XML/HTML comments the same way gh-aw does, so the stripping tests
- * model the real behaviour rather than an approximation of it.
+ * model the real behavior rather than an approximation of it.
  *
  * A lazy `/<!--[\s\S]*?-->/g` replace is NOT equivalent and must not be used
- * here: it consumes only the innermost pair, so a nested opener such as
+ * here: it consumes only the innermost pair, so a nested opening tag such as
  * `<!-- <!-- --> PAYLOAD -->` leaves `PAYLOAD -->` behind, and a single pass
  * can even reassemble a fresh `<!--` out of the surrounding text. That is the
  * incomplete-multi-character-sanitization pattern CodeQL rejects. gh-aw's own
@@ -536,7 +536,7 @@ describe("ARM API review live-run regressions", () => {
     expect(collapsed).toContain(
       "Incorrect (HTML comment -- deleted by the sanitizer before publication)",
     );
-    expect(collapsed).toContain("Incorrect (fields split across lines -- unparseable)");
+    expect(collapsed).toContain("Incorrect (fields split across lines -- cannot be parsed)");
   });
 
   it("requires all six marker fields on the summary, not a reduced form", async () => {
@@ -660,12 +660,12 @@ describe("ARM API review live-run regressions", () => {
     // would get the published marker erased too.
     expect(source).not.toContain("<!-- posted-by: arm-api-reviewer-agent");
 
-    // The reconciliation reader must still recognise the legacy HTML form,
+    // The reconciliation reader must still recognize the legacy HTML form,
     // because interactive agent sessions bypass the publishing sanitizer.
     expect(collapseWhitespace(source)).toContain("may still carry it inside an HTML comment");
   });
 
-  it("strips nested comment openers the way gh-aw actually does", () => {
+  it("strips nested comment tags the way gh-aw actually does", () => {
     // Guards the stripping simulation itself. The obvious lazy regex
     // (`/<!--[\s\S]*?-->/g`) consumes only the innermost pair and leaves the
     // payload exposed, which is why gh-aw counts nesting depth instead. If the
@@ -676,11 +676,11 @@ describe("ARM API review live-run regressions", () => {
     expect(stripXmlComments("<!-- malformed --!>tail")).toBe("tail");
     expect(stripXmlComments("no comments here")).toBe("no comments here");
 
-    // An unterminated opener swallows the rest, exactly as the depth scanner
+    // An unclosed opening tag swallows the rest, exactly as the depth scanner
     // does -- it never re-emits buffered comment text.
-    expect(stripXmlComments("head<!-- unterminated")).toBe("head");
+    expect(stripXmlComments("head<!-- never closed")).toBe("head");
 
-    // And the result is a fixpoint: stripping twice changes nothing.
+    // And the result is stable: stripping twice changes nothing.
     const once = stripXmlComments("<!-- <!-- --> PAYLOAD --> visible");
     expect(stripXmlComments(once)).toBe(once);
   });

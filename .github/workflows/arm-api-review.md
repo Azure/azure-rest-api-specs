@@ -461,7 +461,7 @@ all participate in matching. The `posted-by: arm-api-reviewer-agent` marker
 controls ownership and resolution only; it does not control duplicate or
 contradiction detection. When reading, match the marker as a plain **substring**
 of the body and accept either form: workflow-published comments carry it as
-visible italicised text, while comments posted by interactive agent sessions
+visible italic text, while comments posted by interactive agent sessions
 (which bypass the publishing sanitizer) may still carry it inside an HTML
 comment. Both are agent-owned.
 
@@ -667,7 +667,7 @@ _posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|
 
 <!-- markdownlint-enable MD013 -->
 
-The final line is the telemetry marker: a single italicised plain-text line,
+The final line is the telemetry marker: a single italic plain-text line,
 never an HTML comment. See **Telemetry Marker: Required on Every Posted Body**
 below for the full field rules and the reason the HTML-comment form is
 forbidden.
@@ -732,13 +732,13 @@ comment reaches GitHub -- it is a security control against payload smuggling, it
 has no exemption for code fences or trailing lines, and it cannot be opted out
 of. A marker written as `<!-- ... -->` is therefore not "hidden": it is
 **silently discarded**, the published comment carries no telemetry at all, and
-the next run's Step 5.5 reconciliation cannot recognise the comment as
+the next run's Step 5.5 reconciliation cannot recognize the comment as
 agent-owned -- so it re-posts the finding as a duplicate. A visible marker line
 is the intended trade-off; an invisible one does not exist.
 
 <!-- markdownlint-disable MD013 -->
 
-Correct (one italicised line, pipe-separated, no HTML comment delimiters):
+Correct (one italic line, pipe-separated, no HTML comment delimiters):
 
 ```text
 _posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000_
@@ -750,7 +750,7 @@ Incorrect (HTML comment -- deleted by the sanitizer before publication):
 [an HTML comment wrapping the same fields; it never reaches GitHub]
 ```
 
-Incorrect (fields split across lines -- unparseable):
+Incorrect (fields split across lines -- cannot be parsed):
 
 ```text
 rule: RPC-Versioning
@@ -861,7 +861,7 @@ The summary block order is fixed and must be emitted exactly as: the
 summary. Placing the disclosure after the approval labels or after the counts
 table is a template violation even when its content is correct.
 
-Always end the summary with the standard footer marker -- a single italicised
+Always end the summary with the standard footer marker -- a single italic
 plain-text line, never an HTML comment:
 
 <!-- markdownlint-disable MD013 -->
