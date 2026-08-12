@@ -372,7 +372,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "javascript"
 );
 @@clientName(
-  ContentCrc64ResponseHeaderV20261006.contentCrc64,
+  ContentCrc64ResponseHeaderV2026_10_06.contentCrc64,
   "xMsContentCrc64",
   "javascript"
 );

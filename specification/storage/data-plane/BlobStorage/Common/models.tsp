@@ -1851,7 +1851,7 @@ alias ContentCrc64ResponseHeader = {
 };
 
 /** The content CRC64 response header. */
-alias ContentCrc64ResponseHeaderV20261006 = {
+alias ContentCrc64ResponseHeaderV2026_10_06 = {
   /** The CRC64 hash of the content. */
   @added(Versions.v2026_10_06)
   @header("x-ms-content-crc64")

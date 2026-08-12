@@ -2224,7 +2224,7 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
-      ...ContentCrc64ResponseHeaderV20261006;
+      ...ContentCrc64ResponseHeaderV2026_10_06;
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
