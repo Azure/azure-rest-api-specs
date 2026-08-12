@@ -107,3 +107,49 @@ using Commvault.ContentStore;
 
 // The "Equals" union member collides with the generated value-type's Equals(object) method.
 @@clientName(Operator.Equals, "Equal", "csharp");
+
+// [RESNAME001] The "Storage" resource trio (StorageCollection/StorageData/StorageResource)
+// lacks RP/domain context after stripping reserved suffixes and collides with
+// Azure.ResourceManager.Storage types; prefix the whole trio with the RP name.
+@@clientName(Storage, "CommvaultStorage", "csharp");
+
+// [Contextual naming] Add RP/domain context to type names that are too generic on their own.
+@@clientName(RoleAssignment, "CommvaultRoleAssignment", "csharp");
+@@clientName(Rule, "ProtectionGroupRule", "csharp");
+@@clientName(Schedule, "CommvaultBackupSchedule", "csharp");
+@@clientName(EntityInfo, "CommvaultEntityInfo", "csharp");
+@@clientName(PlanProperties, "CommvaultPlanProperties", "csharp");
+@@clientName(LiftrBase.OfferDetails, "CommvaultOfferDetails", "csharp");
+@@clientName(LiftrBase.UserDetails, "CommvaultUserDetails", "csharp");
+
+// [TYPE001] Properties that hold ARM resource IDs should be typed as
+// Azure.Core.ResourceIdentifier rather than a raw string.
+@@alternateType(
+  SaaSData.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LatestLinkedSaaSResponse.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SaaSResourceDetailsResponse.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LiftrBase.MarketplaceDetails.saasResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// [TYPE003] "location" properties represent Azure region names; type them as AzureLocation.
+@@alternateType(PlanProperties.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  ProtectedItemProperties.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(StorageProperties.location, Azure.Core.azureLocation, "csharp");
