@@ -750,58 +750,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/featureFlags": {
-      "get": {
-        "operationId": "FeatureFlags_ListByConfigurationStore",
-        "tags": [
-          "FeatureFlags"
-        ],
-        "description": "Lists the feature flags for the specified configuration store. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration feature flags the data plane API should be used instead.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configStoreName",
-            "in": "path",
-            "description": "The name of the configuration store.",
-            "required": true,
-            "type": "string",
-            "minLength": 5,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9_-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FeatureFlagListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FeatureFlags_ListByConfigurationStore": {
-            "$ref": "./examples/ConfigurationStoresListFeatureFlags.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/featureFlags/{featureFlagName}": {
       "get": {
         "operationId": "FeatureFlags_Get",
@@ -3020,27 +2968,6 @@
       "required": [
         "variant",
         "groups"
-      ]
-    },
-    "FeatureFlagListResult": {
-      "type": "object",
-      "description": "The response of a FeatureFlag list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FeatureFlag items on this page",
-          "items": {
-            "$ref": "#/definitions/FeatureFlag"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "FeatureFlagPercentileAllocation": {
