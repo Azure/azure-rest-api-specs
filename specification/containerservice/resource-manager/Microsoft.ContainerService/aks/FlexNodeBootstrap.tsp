@@ -192,5 +192,6 @@ model BootstrapKubeletConfig {
  * Empty request body for listing FlexNode bootstrap data.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The POST action accepts an empty JSON object for forward-compatible request shape."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_06_02_preview)
 model ListBootstrapDataRequest {}
