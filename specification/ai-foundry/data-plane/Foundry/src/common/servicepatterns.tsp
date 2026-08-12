@@ -105,6 +105,10 @@ union FoundryFeaturesOptInKeys {
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
+
+  @removed(Versions.v1)
+  agent_insights_v1_preview: "AgentInsights=V1Preview",
+
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   routines_v1_preview: "Routines=V1Preview",
   skills_v1_preview: "Skills=V1Preview",

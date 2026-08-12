@@ -3,6 +3,7 @@ info:
   title: Microsoft Foundry
   version: virtual-public-preview
 tags:
+  - name: Agent Insight Monitors
   - name: Agent Conversations
   - name: Voice Agents
   - name: Voice Agent Versions
@@ -117,6 +118,875 @@ tags:
   - name: Insights
     parent: Evaluations
 paths:
+  /agent_insight_monitors:
+    get:
+      operationId: AgentInsightMonitors_list
+      description: List Agent Insights monitors, optionally filtered by agent name.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: after
+          in: query
+          required: false
+          description: A cursor that identifies the last item in the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor that identifies the first item in the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return. Defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by creation time. Defaults to descending.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter monitors by agent name.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentInsightMonitor'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+    post:
+      operationId: AgentInsightMonitors_create
+      description: Create an Agent Insights monitor for an agent.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Location:
+              required: true
+              description: URL of the created monitor.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightMonitor'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightMonitorCreate'
+        description: The monitor to create.
+  /agent_insight_monitors/{monitor_id}:
+    get:
+      operationId: AgentInsightMonitors_get
+      description: Get an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightMonitor'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+    delete:
+      operationId: AgentInsightMonitors_delete
+      description: Delete an Agent Insights monitor and all of its runs, insights, and state.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+    patch:
+      operationId: AgentInsightMonitors_update
+      description: Update an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightMonitor'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightMonitorUpdate'
+        description: The monitor fields to update.
+  /agent_insight_monitors/{monitor_id}/insights:
+    get:
+      operationId: AgentInsightMonitors_listInsights
+      description: List current insights for an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: A cursor that identifies the last item in the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor that identifies the first item in the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return. Defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by creation time. Defaults to descending.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: category
+          in: query
+          required: false
+          description: Filter insights by category.
+          schema:
+            type: string
+          explode: false
+        - name: severity
+          in: query
+          required: false
+          description: Filter insights by severity.
+          schema:
+            $ref: '#/components/schemas/AgentInsightSeverity'
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter insights by lifecycle status.
+          schema:
+            $ref: '#/components/schemas/AgentInsightStatus'
+          explode: false
+        - name: include_details
+          in: query
+          required: false
+          description: Whether to include expanded insight details such as evidence and run links in the response. Defaults to false.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentInsight'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+  /agent_insight_monitors/{monitor_id}/insights/{insight_id}:
+    get:
+      operationId: AgentInsightMonitors_getInsight
+      description: Get a full insight for an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: insight_id
+          in: path
+          required: true
+          description: The identifier of the insight.
+          schema:
+            type: string
+        - name: include_details
+          in: query
+          required: false
+          description: Whether to include expanded insight details such as evidence and run links in the response. Defaults to false.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsight'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+    patch:
+      operationId: AgentInsightMonitors_updateInsight
+      description: Update the lifecycle status of an insight.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: insight_id
+          in: path
+          required: true
+          description: The identifier of the insight.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsight'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightUpdate'
+        description: The insight fields to update.
+  /agent_insight_monitors/{monitor_id}/runs:
+    post:
+      operationId: AgentInsightMonitors_createRun
+      description: Start an Agent Insights run for a monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightRunCreate'
+        description: Optional run inputs.
+    get:
+      operationId: AgentInsightMonitors_listRuns
+      description: List Agent Insights runs for a monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: A cursor that identifies the last item in the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor that identifies the first item in the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return. Defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by creation time. Defaults to descending.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter runs by status.
+          schema:
+            $ref: '#/components/schemas/AgentInsightRunStatus'
+          explode: false
+        - name: trigger
+          in: query
+          required: false
+          description: Filter runs by trigger.
+          schema:
+            $ref: '#/components/schemas/AgentInsightRunTrigger'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentInsightRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+  /agent_insight_monitors/{monitor_id}/runs/{run_id}:
+    get:
+      operationId: AgentInsightMonitors_getRun
+      description: Get an Agent Insights run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          description: The identifier of the run.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+  /agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel:
+    post:
+      operationId: AgentInsightMonitors_cancelRun
+      description: Cancel an Agent Insights run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          description: The identifier of the run.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+  /agent_insight_monitors/{monitor_id}:reset:
+    post:
+      operationId: AgentInsightMonitors_reset
+      description: Reset an Agent Insights monitor's overview, checkpoint, and active insight state.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
   /agent_optimization_jobs:
     post:
       operationId: AgentOptimizationJobs_create
@@ -42536,6 +43406,606 @@ components:
             - active
             - disabled
       description: The status of an agent identity, applicable to both the agent instance identity and the agent blueprint.
+    AgentInsight:
+      type: object
+      required:
+        - id
+        - monitor_id
+        - agent_name
+        - agent_version
+        - title
+        - severity
+        - category
+        - status
+        - trace_count
+        - created_at
+        - updated_at
+        - description
+      properties:
+        id:
+          type: string
+          description: The insight identifier.
+          readOnly: true
+        monitor_id:
+          type: string
+          description: The Agent Insights monitor this insight belongs to.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent this insight belongs to.
+          readOnly: true
+        agent_version:
+          type: string
+          description: The latest immutable agent version associated with this insight.
+          readOnly: true
+        title:
+          type: string
+          description: A short title for the issue.
+          readOnly: true
+        severity:
+          $ref: '#/components/schemas/AgentInsightSeverity'
+          description: The severity of the issue.
+          readOnly: true
+        category:
+          type: string
+          description: The category of the issue.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/AgentInsightStatus'
+          description: The lifecycle status of the insight.
+          readOnly: true
+        trace_count:
+          type: integer
+          format: int32
+          description: The number of traces that provide evidence for this insight.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this insight was created.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this insight was last updated.
+          readOnly: true
+        description:
+          type: string
+          description: The root-cause diagnosis for the issue.
+          readOnly: true
+        details:
+          $ref: '#/components/schemas/AgentInsightDetails'
+          description: Additional insight details. Omitted unless details are requested.
+          readOnly: true
+      description: A persisted issue discovered from an agent's traces.
+    AgentInsightDetails:
+      type: object
+      required:
+        - highlighted_traces
+        - linked_traces
+        - recommended_actions
+      properties:
+        highlighted_traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInsightHighlightedTrace'
+          maxItems: 5
+          description: Up to 5 highlighted traces that provide evidence for this insight.
+        linked_traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInsightLinkedTrace'
+          maxItems: 200
+          description: Up to 200 most recent traces linked to this insight as supporting evidence.
+        recommended_actions:
+          $ref: '#/components/schemas/AgentInsightRecommendedActions'
+          description: Recommended actions for remediating this insight.
+      description: Additional insight details. Omitted unless details are requested.
+    AgentInsightError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          $ref: '#/components/schemas/AgentInsightRunErrorCode'
+          description: Stable, machine-readable error category.
+        message:
+          type: string
+          description: Human-readable description of the error.
+      description: Structured error information for an Agent Insights run failure.
+    AgentInsightEstimatedCost:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Estimated cost amount.
+        currency:
+          type: string
+          description: Currency for the estimated cost amount, for example `USD`.
+      description: Estimated Agent Insights cost.
+    AgentInsightHighlightedTrace:
+      type: object
+      required:
+        - trace_id
+        - summary
+        - duration_ms
+        - timestamp
+      properties:
+        trace_id:
+          type: string
+          description: The trace identifier.
+          readOnly: true
+        summary:
+          type: string
+          description: A short summary of the trace.
+        duration_ms:
+          type: integer
+          format: int32
+          description: The end-to-end duration of the trace in milliseconds.
+        total_tokens:
+          type: integer
+          format: int32
+          description: Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation.
+        timestamp:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when the trace was recorded.
+      description: A highlighted trace that provides evidence for an agent insight.
+    AgentInsightLinkedTrace:
+      type: object
+      required:
+        - trace_id
+        - timestamp
+      properties:
+        trace_id:
+          type: string
+          description: The trace identifier.
+          readOnly: true
+        timestamp:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when the trace was recorded.
+          readOnly: true
+      description: A lightweight trace reference linked to an agent insight as supporting evidence.
+    AgentInsightMonitor:
+      type: object
+      required:
+        - id
+        - agent_name
+        - enabled
+        - run_interval_hours
+        - model_deployment_name
+        - suspension
+        - overview
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: The monitor identifier.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent this monitor analyzes. There can be only one monitor per agent.
+          readOnly: true
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation is armed for the monitor.
+          readOnly: true
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours.
+          readOnly: true
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+          readOnly: true
+        next_scheduled_run_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
+          readOnly: true
+        estimated_cost:
+          $ref: '#/components/schemas/AgentInsightEstimatedCost'
+          description: Estimated cost accumulated by Agent Insights for this monitor.
+          readOnly: true
+        suspension:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightSuspension'
+            - type: 'null'
+          description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
+          readOnly: true
+        overview:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightsOverview'
+            - type: 'null'
+          description: The effective overview, or null before an overview is available.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this monitor was last updated.
+          readOnly: true
+      description: A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.
+    AgentInsightMonitorCreate:
+      type: object
+      required:
+        - agent_name
+        - model_deployment_name
+      properties:
+        agent_name:
+          type: string
+          description: The agent this monitor should analyze.
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation should be armed. Defaults to false.
+          default: false
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours. Defaults to 6.
+          default: 6
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+      description: Fields accepted when creating an Agent Insights monitor for an agent.
+    AgentInsightMonitorUpdate:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation is armed for the monitor.
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours.
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+        overview_override:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightsOverviewOverride'
+            - type: 'null'
+          description: |-
+            Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
+            the overview unchanged. This field cannot be combined with other monitor updates.
+      description: Fields that can be updated on an Agent Insights monitor.
+    AgentInsightOverviewSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - generated
+            - user_override
+      description: Identifies where an Agent Insights overview came from.
+    AgentInsightPromptSurface:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - instructions
+            - tool
+      description: The Prompt surface changed by a proposed fix.
+    AgentInsightProposedFix:
+      type: object
+      required:
+        - kind
+        - text
+      properties:
+        kind:
+          $ref: '#/components/schemas/AgentInsightProposedFixKind'
+          description: The proposed-fix discriminator.
+        text:
+          type: string
+          description: The human-readable remediation guidance.
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInsightProposedFixChange'
+          description: The concrete changes. Omitted for a prose-only fix.
+      description: A recommended fix for an agent insight.
+    AgentInsightProposedFixChange:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The source path changed by a code change.
+        language:
+          type: string
+          description: The language of the changed source path.
+        diff:
+          type: string
+          description: The unified diff for the changed source path.
+        surface:
+          $ref: '#/components/schemas/AgentInsightPromptSurface'
+          description: The Prompt surface changed by a Prompt change.
+        target:
+          type: string
+          description: The user-visible target within a Prompt surface, when needed.
+        old_value:
+          anyOf:
+            - {}
+            - type: 'null'
+          description: The bounded Prompt value before the change. Present for Prompt changes, including when null.
+        new_value:
+          anyOf:
+            - {}
+            - type: 'null'
+          description: The bounded Prompt value after the change. Present for Prompt changes, including when null.
+      description: A customer-renderable change in a proposed fix.
+    AgentInsightProposedFixKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - prose
+            - code_change
+            - prompt_change
+      description: The customer-renderable kind of an agent insight's proposed fix.
+    AgentInsightRecommendedActions:
+      type: object
+      required:
+        - proposed_fix
+      properties:
+        proposed_fix:
+          $ref: '#/components/schemas/AgentInsightProposedFix'
+          description: A recommended fix for the issue represented by the insight.
+      description: Recommended actions for an agent insight.
+    AgentInsightRun:
+      type: object
+      required:
+        - id
+        - monitor_id
+        - agent_name
+        - status
+        - trigger
+        - created_at
+        - updated_at
+        - window_start
+        - window_end
+        - model_deployment_name
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        monitor_id:
+          type: string
+          description: The Agent Insights monitor this run belongs to.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent whose traces are analyzed by this run.
+          readOnly: true
+        inputs:
+          $ref: '#/components/schemas/AgentInsightRunCreate'
+          description: Caller-supplied inputs.
+        result:
+          $ref: '#/components/schemas/AgentInsightRunResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/AgentInsightRunStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/AgentInsightError'
+          description: Error details — populated only on failure.
+          readOnly: true
+        trigger:
+          $ref: '#/components/schemas/AgentInsightRunTrigger'
+          description: The trigger that started the run.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this run was created.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this run was last updated.
+          readOnly: true
+        window_start:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The start of the trace window analyzed by this run.
+          readOnly: true
+        window_end:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The end of the trace window analyzed by this run.
+          readOnly: true
+        started_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this run started processing.
+          readOnly: true
+        completed_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this run reached a terminal status.
+          readOnly: true
+        model_deployment_name:
+          type: string
+          description: The model deployment used to analyze traces for this run.
+          readOnly: true
+      description: A long-running run that analyzes one agent's traces and updates that agent's insights.
+    AgentInsightRunCreate:
+      type: object
+      properties:
+        lookback_hours:
+          type: integer
+          format: int32
+          minimum: 3
+          maximum: 2160
+          description: Optional number of hours of trace history to analyze. Defaults to 168.
+          default: 168
+      description: Inputs used when creating an agent insight run.
+    AgentInsightRunErrorCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - DeploymentNotFound
+            - Forbidden
+            - ServiceUnavailable
+            - DownstreamFailure
+            - DownstreamTimeout
+            - InternalError
+      description: Public error categories returned for a failed Agent Insights run.
+    AgentInsightRunResult:
+      type: object
+      required:
+        - traces_in_window
+        - traces_analyzed
+        - insights_created
+        - insights_updated
+        - insights_reopened
+        - token_usage
+      properties:
+        traces_in_window:
+          type: integer
+          format: int32
+          description: The number of traces in the analyzed time window.
+        traces_analyzed:
+          type: integer
+          format: int32
+          description: The number of traces analyzed by the run.
+        insights_created:
+          type: integer
+          format: int32
+          description: The number of insights created by the run.
+        insights_updated:
+          type: integer
+          format: int32
+          description: The number of insights updated by the run.
+        insights_reopened:
+          type: integer
+          format: int32
+          description: The number of insights reopened by the run.
+        token_usage:
+          $ref: '#/components/schemas/AgentInsightTokenUsage'
+          description: Token usage for the run's insight-generation analysis.
+      description: Result statistics produced when an agent insight run succeeds.
+    AgentInsightRunStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - succeeded
+            - failed
+            - canceled
+      description: The public lifecycle status of an Agent Insights run.
+    AgentInsightRunTrigger:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - on_demand
+            - scheduled
+      description: The trigger that started an agent insight run.
+    AgentInsightSeverity:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - high
+            - medium
+            - low
+      description: The severity of an agent insight.
+    AgentInsightStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - active
+            - resolved
+            - ignored
+      description: The lifecycle status of an agent insight.
+    AgentInsightSuspension:
+      type: object
+      required:
+        - code
+        - message
+        - occurred_at
+      properties:
+        code:
+          type: string
+          description: Stable, machine-readable suspension category.
+        message:
+          type: string
+          description: Human-readable description of the suspension.
+        occurred_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when the suspension occurred.
+        details:
+          type: object
+          unevaluatedProperties: {}
+          description: Additional reason-specific suspension details.
+      description: Structured reason why scheduled generation is suspended for a monitor.
+    AgentInsightTokenUsage:
+      type: object
+      required:
+        - input_tokens
+        - output_tokens
+        - total_tokens
+      properties:
+        input_tokens:
+          type: integer
+          format: int32
+          description: The number of input tokens used by the run.
+        output_tokens:
+          type: integer
+          format: int32
+          description: The number of output tokens used by the run.
+        cached_tokens:
+          type: integer
+          format: int32
+          description: The number of input tokens served from cache.
+        total_tokens:
+          type: integer
+          format: int32
+          description: The total number of tokens used by the run.
+      description: Token usage for an Agent Insights run.
+    AgentInsightUpdate:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/AgentInsightStatus'
+          description: The lifecycle status to apply to the insight.
+      description: Fields that can be updated on an agent insight.
+    AgentInsightsOverview:
+      type: object
+      required:
+        - content
+        - source
+        - updated_at
+      properties:
+        content:
+          type: string
+          description: The overview content.
+        source:
+          $ref: '#/components/schemas/AgentInsightOverviewSource'
+          description: Where the effective overview came from.
+        updated_at:
+          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          description: The time when this overview was last updated.
+      description: The effective overview for an Agent Insights monitor.
+    AgentInsightsOverviewOverride:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: The nonblank overview content, limited to 64 KiB when encoded as UTF-8.
+      description: A user-provided overview that becomes effective immediately and seeds the next generation.
+    AgentInsightsTimestamp:
+      type: string
+      format: date-time
+      description: An ISO 8601 timestamp returned by Agent Insights.
     AgentKind:
       anyOf:
         - type: string
