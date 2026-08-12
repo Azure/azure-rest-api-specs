@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -126,19 +128,19 @@ interface ResourceRecommendationBases {
        */
       @query("$skipToken")
       $skipToken?: string;
-
     },
     Error = ArmDefaultErrorResponse
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains explicit service-group routes rather than standard ARM resource operations."
 /** Operations for recommendations viewed in a service group scope. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains explicit service-group routes rather than standard ARM resource operations."
 interface ServiceGroupRecommendationOperations {
   /** Lists recommendations for a service group. */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The explicit operation returns a paged resource response or the standard ARM error response."
   @added(Versions.v2026_08_01_preview)
   @route("/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations")
+  @list
   @get
   listByServiceGroup(
     ...ApiVersionParameter,
@@ -162,7 +164,9 @@ interface ServiceGroupRecommendationOperations {
     /** The page-continuation token. */
     @query("$skipToken")
     $skipToken?: string,
-  ): ArmResponse<ResourceListResult<ResourceRecommendationBase>> | ArmDefaultErrorResponse;
+  ):
+    | ArmResponse<ResourceListResult<ResourceRecommendationBase>>
+    | ArmDefaultErrorResponse;
 
   /** Gets a recommendation viewed in a service group scope. */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The explicit operation returns a resource response or the standard ARM error response."
