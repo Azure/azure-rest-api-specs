@@ -122,6 +122,22 @@ using Commvault.ContentStore;
 @@clientName(LiftrBase.OfferDetails, "CommvaultOfferDetails", "csharp");
 @@clientName(LiftrBase.UserDetails, "CommvaultUserDetails", "csharp");
 
+// [Contextual naming] Generic/unprefixed type names are unclear in IntelliSense
+// without relying on the namespace; add RP/domain-context prefixes.
+@@clientName(EntityType, "CommvaultEntityType", "csharp");
+@@clientName(Frequency, "CommvaultBackupFrequency", "csharp");
+@@clientName(MatchType, "ProtectionGroupMatchType", "csharp");
+@@clientName(ProtectionStatus, "CommvaultProtectionStatus", "csharp");
+@@clientName(RestoreType, "CommvaultRestoreType", "csharp");
+@@clientName(RetentionTime, "CommvaultRetentionTime", "csharp");
+@@clientName(RoleName, "CommvaultRoleName", "csharp");
+@@clientName(RuleProperty, "ProtectionGroupRuleProperty", "csharp");
+@@clientName(StorageClassType, "CommvaultStorageClassType", "csharp");
+@@clientName(StoragePlan, "CommvaultStoragePlan", "csharp");
+@@clientName(StorageProperties, "CommvaultStorageProperties", "csharp");
+@@clientName(StorageType, "CommvaultStorageType", "csharp");
+@@clientName(Vendor, "CommvaultVendor", "csharp");
+
 // [TYPE001] Properties that hold ARM resource IDs should be typed as
 // Azure.Core.ResourceIdentifier rather than a raw string.
 @@alternateType(
