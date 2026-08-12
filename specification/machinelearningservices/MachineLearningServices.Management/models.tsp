@@ -16284,6 +16284,7 @@ model AccessKeyAuthTypeWorkspaceConnectionProperties
 model WorkspaceConnectionAccessKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   accessKeyId?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   secretAccessKey?: string;
