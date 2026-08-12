@@ -24995,7 +24995,7 @@
         },
         "enableEmbeddingGenerator": {
           "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account"
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts and cannot\nbe enabled during account creation. Enable it by updating an existing account."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25274,7 +25274,7 @@
         },
         "enableEmbeddingGenerator": {
           "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account"
+          "description": "Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25656,7 +25656,7 @@
         },
         "enableEmbeddingGenerator": {
           "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account"
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25847,6 +25847,23 @@
     "EmbeddingGeneratorServiceResourceCreateUpdateProperties": {
       "type": "object",
       "description": "Properties for Create or Update request for EmbeddingGeneratorServiceResource",
+      "properties": {
+        "instanceSize": {
+          "$ref": "#/definitions/EmbeddingGeneratorServiceSize",
+          "description": "Instance type for the Embedding Generator service."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Instance count for the Embedding Generator service. Counts above five require\nthe increased instance count subscription capability.",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "instanceSize",
+        "instanceCount"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
@@ -25873,6 +25890,48 @@
         }
       ],
       "x-ms-discriminator-value": "EmbeddingGenerator"
+    },
+    "EmbeddingGeneratorServiceSize": {
+      "type": "string",
+      "description": "Instance type for the Embedding Generator service.",
+      "enum": [
+        "Cosmos.D2s",
+        "Cosmos.D4s",
+        "Cosmos.D8s",
+        "Cosmos.D16s",
+        "Cosmos.D32s"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingGeneratorServiceSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CosmosD2S",
+            "value": "Cosmos.D2s",
+            "description": "Cosmos.D2s instance size."
+          },
+          {
+            "name": "CosmosD4S",
+            "value": "Cosmos.D4s",
+            "description": "Cosmos.D4s instance size."
+          },
+          {
+            "name": "CosmosD8S",
+            "value": "Cosmos.D8s",
+            "description": "Cosmos.D8s instance size."
+          },
+          {
+            "name": "CosmosD16S",
+            "value": "Cosmos.D16s",
+            "description": "Cosmos.D16s instance size."
+          },
+          {
+            "name": "CosmosD32S",
+            "value": "Cosmos.D32s",
+            "description": "Cosmos.D32s instance size."
+          }
+        ]
+      }
     },
     "EmbeddingSource": {
       "type": "object",

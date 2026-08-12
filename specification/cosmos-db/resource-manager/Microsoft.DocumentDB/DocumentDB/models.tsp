@@ -1741,7 +1741,8 @@ model DatabaseAccountGetProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
+   * Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB
+   * account. This property is supported only for API for NoSQL accounts.
    */
   @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -2557,7 +2558,8 @@ model DatabaseAccountUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB
+   * account. This property is supported only for API for NoSQL accounts.
    */
   @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -2800,7 +2802,9 @@ model DatabaseAccountCreateUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB
+   * account. This property is supported only for API for NoSQL accounts and cannot
+   * be enabled during account creation. Enable it by updating an existing account.
    */
   @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -9628,11 +9632,57 @@ model EmbeddingGeneratorRegionalServiceResource
   extends RegionalServiceResource {}
 
 /**
+ * Instance type for the Embedding Generator service.
+ */
+@added(Versions.v2026_04_01_preview)
+union EmbeddingGeneratorServiceSize {
+  string,
+
+  /**
+   * Cosmos.D2s instance size.
+   */
+  CosmosD2S: "Cosmos.D2s",
+
+  /**
+   * Cosmos.D4s instance size.
+   */
+  CosmosD4S: "Cosmos.D4s",
+
+  /**
+   * Cosmos.D8s instance size.
+   */
+  CosmosD8S: "Cosmos.D8s",
+
+  /**
+   * Cosmos.D16s instance size.
+   */
+  CosmosD16S: "Cosmos.D16s",
+
+  /**
+   * Cosmos.D32s instance size.
+   */
+  CosmosD32S: "Cosmos.D32s",
+}
+
+/**
  * Properties for Create or Update request for EmbeddingGeneratorServiceResource
  */
 @added(Versions.v2026_04_01_preview)
 model EmbeddingGeneratorServiceResourceCreateUpdateProperties
   extends ServiceResourceCreateUpdateProperties {
+  /**
+   * Instance type for the Embedding Generator service.
+   */
+  instanceSize: EmbeddingGeneratorServiceSize;
+
+  /**
+   * Instance count for the Embedding Generator service. Counts above five require
+   * the increased instance count subscription capability.
+   */
+  @minValue(1)
+  @maxValue(20)
+  instanceCount: int32;
+
   /**
    * ServiceType for the service.
    */
