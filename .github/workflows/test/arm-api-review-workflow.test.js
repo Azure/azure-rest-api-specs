@@ -540,4 +540,31 @@ describe("ARM API review live-run regressions", () => {
       "Placing the disclosure after the approval labels or after the counts table is a template violation",
     );
   });
+
+  it("routes findings on unchanged files to the summary instead of inline", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    // The live run queued an inline comment on a readme.md that the PR never
+    // touched. The publisher dropped it with only a warning and still reported
+    // `Failed: 0`, so the Warning finding vanished while the summary counted it.
+    expect(collapsed).toContain("**Inline comments must target a file in the PR diff.**");
+    expect(collapsed).toContain("silently dropped with a warning");
+    expect(collapsed).toContain("**`Findings on unchanged files`**");
+    expect(collapsed).toContain(
+      "Count it in the summary's category table exactly as if it had been posted inline",
+    );
+  });
+
+  it("keeps the review body's finding range honest", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const collapsed = collapseWhitespace(source);
+
+    // The live review body said "See inline comments for findings 1-2" when
+    // only finding 1 was ever published.
+    expect(collapsed).toContain(
+      "must enumerate only findings that were actually queued as inline comments",
+    );
+    expect(collapsed).toContain("All findings are reported in the summary comment.");
+  });
 });

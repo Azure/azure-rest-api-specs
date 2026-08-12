@@ -583,6 +583,13 @@ returned a verdict that was folded into the posting set. When all Critic
 dispatch attempts failed, use `Critic unavailable; reviewer self-check only`.
 Never describe an unavailable-Critic review as verified.
 
+`<range-or-list>` must enumerate only findings that were actually queued as
+inline comments. Findings routed to the summary because their file is not in
+the PR diff are excluded from that range; when no inline comment was queued at
+all, replace the sentence with `All findings are reported in the summary
+comment.` A range that names a finding the reader cannot find inline is a
+defect.
+
 If any individual placeholder above cannot be resolved, still submit a non-empty
 body: substitute `unknown` for that one value and keep every other line intact.
 Dropping the body is never an acceptable fallback for a missing field.
@@ -603,6 +610,27 @@ with the note: _"N additional findings were identified but not posted inline.
 Key themes: [list]."_ Replies (`reply-to-pull-request-review-comment`) and
 thread resolutions (`resolve-pull-request-review-thread`) from Step 5.5 have
 their own budgets and do **not** consume this 50-inline budget.
+
+**Inline comments must target a file in the PR diff.** The publisher can only
+attach an inline comment to a file that the PR actually changed; a comment whose
+`path` is absent from the diff is **silently dropped with a warning**, and the
+run still reports zero failures. A finding about an unchanged file -- a
+`readme.md` whose AutoRest tag was never wired up, a `main.tsp` that should have
+gained a version member, a shared `types.json` -- is legitimate and must still
+be reported, but it cannot be reported inline.
+
+Before queuing any `create-pull-request-review-comment`, confirm its `path`
+appears in the PR's changed-file list. If it does not:
+
+1. Do **not** queue the inline comment.
+2. Report the finding in the Step 8 summary instead, under a
+   **`Findings on unchanged files`** subsection, naming the file and the rule ID
+   and carrying the same severity.
+3. Count it in the summary's category table exactly as if it had been posted
+   inline, so the counts stay truthful.
+
+Never describe a dropped finding as though it were posted: the review body must
+not reference an inline finding number that was not published.
 
 The agreed posting set is selected after these limits are applied. Exact
 one-to-one parity applies to every individually posted entry in that set.
