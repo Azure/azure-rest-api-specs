@@ -291,3 +291,5 @@ using Microsoft.Resources;
   "javascript"
 );
 @@responseAsBool(DeploymentExtendedOperationGroup.checkExistence, "javascript");
+
+@@clientName(Microsoft.Resources, "DeploymentsManagementClient", "java");
