@@ -101,13 +101,6 @@ model BulkCreateCustomEnvelope {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The deployed BulkCreateCustom response contract returns resolved per-VM allocation metadata at the top level."
-  @added(Versions.`2026-08-06-preview`)
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  @doc("The virtual machine resources resolved for the operation.")
-  resources?: Array<BulkCreateCustomResource>;
-
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
 }
@@ -248,6 +241,12 @@ model BulkCreateCustomProperties {
   @added(Versions.`2026-08-06-preview`)
   @doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
+
+  @added(Versions.`2026-08-06-preview`)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @doc("The virtual machine resources resolved for the operation.")
+  resources?: Array<BulkCreateCustomResource>;
 
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;

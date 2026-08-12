@@ -3691,6 +3691,15 @@
           "$ref": "#/definitions/PartialFulfillmentPolicy",
           "description": "Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures."
         },
+        "resources": {
+          "type": "array",
+          "description": "The virtual machine resources resolved for the operation.",
+          "items": {
+            "$ref": "#/definitions/BulkCreateCustomResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "priorityProfile": {
           "$ref": "#/definitions/BulkCreateCustomPriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in BulkCreateCustom."
@@ -5581,15 +5590,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "resources": {
-          "type": "array",
-          "description": "The virtual machine resources resolved for the operation.",
-          "items": {
-            "$ref": "#/definitions/BulkCreateCustomResource"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
