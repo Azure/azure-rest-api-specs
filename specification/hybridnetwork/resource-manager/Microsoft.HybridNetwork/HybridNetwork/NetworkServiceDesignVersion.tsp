@@ -14,8 +14,8 @@ namespace Microsoft.HybridNetwork;
 /**
  * network service design version.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "Brownfield conversion of API version 2024-04-15: the model name matches the schema name in the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 @parentResource(NetworkServiceDesignGroup)
 model networkServiceDesignVersion
   is Azure.ResourceManager.TrackedResource<networkServiceDesignVersionPropertiesFormat> {
@@ -71,7 +71,7 @@ interface NetworkServiceDesignVersions {
   /**
    * Update network service design version state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Brownfield conversion of API version 2024-04-15: the explicit OpenAPI decorator is required to preserve the operationId emitted by the existing swagger. Removing it would rename operations across every generated SDK."
   @operationId("NetworkServiceDesignVersions_updateState")
   updateState is ArmResourceActionAsyncBase<
     networkServiceDesignVersion,

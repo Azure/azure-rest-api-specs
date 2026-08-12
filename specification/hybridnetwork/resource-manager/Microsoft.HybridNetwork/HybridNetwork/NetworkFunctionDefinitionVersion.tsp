@@ -69,7 +69,7 @@ interface NetworkFunctionDefinitionVersions {
   /**
    * Update network function definition version state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Brownfield conversion of API version 2024-04-15: the explicit OpenAPI decorator is required to preserve the operationId emitted by the existing swagger. Removing it would rename operations across every generated SDK."
   @operationId("NetworkFunctionDefinitionVersions_updateState")
   updateState is ArmResourceActionAsyncBase<
     NetworkFunctionDefinitionVersion,

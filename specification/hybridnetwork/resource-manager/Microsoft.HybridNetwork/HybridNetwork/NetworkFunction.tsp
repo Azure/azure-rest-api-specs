@@ -19,13 +19,13 @@ model NetworkFunction
     Resource = NetworkFunction,
     KeyName = "networkFunctionName",
     SegmentName = "networkFunctions",
-    NamePattern = ""
+    NamePattern = "^[^\\s]*[^\\s]+[^\\s]*$"
   >;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Brownfield conversion of API version 2024-04-15: this envelope property is returned at the resource envelope level by the existing contract. Removing or relocating it into properties would be breaking."
   etag?: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -55,7 +55,7 @@ interface NetworkFunctions {
   /**
    * Deletes the specified network function resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Brownfield conversion of API version 2024-04-15: the existing delete operation returns 200 in addition to 202 and 204. Removing the 200 response would be a breaking change; the response set is tracked for correction in the next API version."
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkFunction,
     Response = ArmDeletedResponse | ArmAcceptedLroResponse<
@@ -100,6 +100,7 @@ alias NetworkFunctionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @@doc(NetworkFunction.name, "Resource name for the network function resource.");
+@@maxLength(NetworkFunction.name, 64);
 @@doc(NetworkFunction.properties, "Network function properties.");
 @@doc(NetworkFunctions.createOrUpdate::parameters.resource,
   "Parameters supplied in the body to the create or update network function operation."

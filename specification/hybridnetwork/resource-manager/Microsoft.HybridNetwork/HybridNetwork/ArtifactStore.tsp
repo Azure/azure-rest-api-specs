@@ -149,7 +149,7 @@ interface ProxyArtifact {
   /**
    * Lists all the available artifacts in the parent Artifact Store.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Brownfield conversion of API version 2024-04-15: the explicit OpenAPI decorator is required to preserve the operationId emitted by the existing swagger. Removing it would rename operations across every generated SDK."
   @list
   @get
   @action("artifacts")
@@ -162,7 +162,7 @@ interface ProxyArtifact {
   /**
    * Get a Artifact overview information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Brownfield conversion of API version 2024-04-15: the explicit OpenAPI decorator is required to preserve the operationId emitted by the existing swagger. Removing it would rename operations across every generated SDK."
   @list
   @get
   @action("artifactVersions")
@@ -184,7 +184,7 @@ interface ProxyArtifact {
   /**
    * Change artifact state defined in artifact store.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Brownfield conversion of API version 2024-04-15: this custom PATCH shape, including its artifactName query parameter, is part of the existing contract. Converting it to a standard ARM resource operation would change the request URI and is breaking."
   @patch(#{ implicitOptionality: false })
   updateState(
     ...ApiVersionParameter,

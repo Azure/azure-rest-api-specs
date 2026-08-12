@@ -15,23 +15,23 @@ namespace Microsoft.HybridNetwork;
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Converging: "Converging",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Cancelling: "Cancelling",
 }
 
@@ -40,17 +40,17 @@ union ProvisioningState {
  */
 union VersionState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Preview: "Preview",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Deprecated: "Deprecated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Validating: "Validating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ValidationFailed: "ValidationFailed",
 }
 
@@ -59,13 +59,13 @@ union VersionState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Key: "Key",
 }
 
@@ -74,9 +74,9 @@ union CreatedByType {
  */
 union PublisherScope {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Private: "Private",
 }
 
@@ -85,11 +85,11 @@ union PublisherScope {
  */
 union IdType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Open: "Open",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Secret: "Secret",
 }
 
@@ -98,11 +98,11 @@ union IdType {
  */
 union ConfigurationGroupValueConfigurationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Secret: "Secret",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Open: "Open",
 }
 
@@ -111,13 +111,13 @@ union ConfigurationGroupValueConfigurationType {
  */
 union NfviType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureArcKubernetes: "AzureArcKubernetes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureCore: "AzureCore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureOperatorNexus: "AzureOperatorNexus",
 }
 
@@ -126,11 +126,11 @@ union NfviType {
  */
 union NetworkFunctionConfigurationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Secret: "Secret",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Open: "Open",
 }
 
@@ -139,17 +139,17 @@ union NetworkFunctionConfigurationType {
  */
 union HttpMethod {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Post: "Post",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Put: "Put",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Get: "Get",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Patch: "Patch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Delete: "Delete",
 }
 
@@ -158,33 +158,33 @@ union HttpMethod {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Deployed: "Deployed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Uninstalled: "Uninstalled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Superseded: "Superseded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Uninstalling: "Uninstalling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   `Pending-Install`: "Pending-Install",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   `Pending-Upgrade`: "Pending-Upgrade",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   `Pending-Rollback`: "Pending-Rollback",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Downloading: "Downloading",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Installing: "Installing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Reinstalling: "Reinstalling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Rollingback: "Rollingback",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Upgrading: "Upgrading",
 }
 
@@ -193,19 +193,19 @@ union Status {
  */
 union PodStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Terminating: "Terminating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   NotReady: "NotReady",
 }
 
@@ -214,9 +214,9 @@ union PodStatus {
  */
 union PodEventType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Normal: "Normal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Warning: "Warning",
 }
 
@@ -225,11 +225,11 @@ union PodEventType {
  */
 union NetworkFunctionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   VirtualNetworkFunction: "VirtualNetworkFunction",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ContainerizedNetworkFunction: "ContainerizedNetworkFunction",
 }
 
@@ -238,11 +238,11 @@ union NetworkFunctionType {
  */
 union Type {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ArmResourceDefinition: "ArmResourceDefinition",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   NetworkFunctionDefinition: "NetworkFunctionDefinition",
 }
 
@@ -251,11 +251,11 @@ union Type {
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   `user,system`: "user,system",
 }
 
@@ -264,7 +264,7 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Internal: "Internal",
 }
 
@@ -273,11 +273,11 @@ union ActionType {
  */
 union ArtifactStoreType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureContainerRegistry: "AzureContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureStorageAccount: "AzureStorageAccount",
 }
 
@@ -286,9 +286,9 @@ union ArtifactStoreType {
  */
 union BackingResourcePublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Disabled: "Disabled",
 }
 
@@ -297,9 +297,9 @@ union BackingResourcePublicNetworkAccess {
  */
 union ArtifactReplicationStrategy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   SingleReplication: "SingleReplication",
 }
 
@@ -308,17 +308,17 @@ union ArtifactReplicationStrategy {
  */
 union ArtifactManifestState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Uploading: "Uploading",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Uploaded: "Uploaded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Validating: "Validating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ValidationFailed: "ValidationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Succeeded: "Succeeded",
 }
 
@@ -327,15 +327,15 @@ union ArtifactManifestState {
  */
 union ArtifactType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   OCIArtifact: "OCIArtifact",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   VhdImageFile: "VhdImageFile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ArmTemplate: "ArmTemplate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ImageFile: "ImageFile",
 }
 
@@ -344,11 +344,11 @@ union ArtifactType {
  */
 union CredentialType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureContainerRegistryScopedToken: "AzureContainerRegistryScopedToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureStorageAccountToken: "AzureStorageAccountToken",
 }
 
@@ -357,13 +357,13 @@ union CredentialType {
  */
 union ArtifactState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Preview: "Preview",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Deprecated: "Deprecated",
 }
 
@@ -372,9 +372,9 @@ union ArtifactState {
  */
 union SkuName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Standard: "Standard",
 }
 
@@ -383,9 +383,9 @@ union SkuName {
  */
 union SkuTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Standard: "Standard",
 }
 
@@ -394,9 +394,9 @@ union SkuTier {
  */
 union LongRunningOperation {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Put: "Put",
 }
 
@@ -405,11 +405,11 @@ union LongRunningOperation {
  */
 union ApplicationEnablement {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Disabled: "Disabled",
 }
 
@@ -418,9 +418,9 @@ union ApplicationEnablement {
  */
 union ContainerizedNetworkFunctionNFVIType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureArcKubernetes: "AzureArcKubernetes",
 }
 
@@ -429,11 +429,11 @@ union ContainerizedNetworkFunctionNFVIType {
  */
 union VirtualNetworkFunctionNFVIType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureCore: "AzureCore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   AzureOperatorNexus: "AzureOperatorNexus",
 }
 
@@ -442,9 +442,9 @@ union VirtualNetworkFunctionNFVIType {
  */
 union AzureArcKubernetesArtifactType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   HelmPackage: "HelmPackage",
 }
 
@@ -453,11 +453,11 @@ union AzureArcKubernetesArtifactType {
  */
 union AzureCoreArtifactType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   VhdImageFile: "VhdImageFile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ArmTemplate: "ArmTemplate",
 }
 
@@ -466,11 +466,11 @@ union AzureCoreArtifactType {
  */
 union AzureOperatorNexusArtifactType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ImageFile: "ImageFile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ArmTemplate: "ArmTemplate",
 }
 
@@ -479,9 +479,9 @@ union AzureOperatorNexusArtifactType {
  */
 union TemplateType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   ArmTemplate: "ArmTemplate",
 }
 
@@ -490,9 +490,9 @@ union TemplateType {
  */
 union ConfigurationGenerationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   HandlebarTemplate: "HandlebarTemplate",
 }
 
@@ -526,12 +526,12 @@ model ConfigurationGroupSchemaPropertiesFormat {
 /**
  * Tags object for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Brownfield conversion of API version 2024-04-15: the update operation accepts tags only, matching the existing contract. Adding envelope properties would change the request schema."
 model TagsObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Brownfield conversion of API version 2024-04-15: this free-form map is part of the existing wire contract for caller-supplied configuration and reference payloads whose keys are not known at design time. Replacing it with a typed model would be breaking."
   tags?: Record<string>;
 }
 
@@ -549,7 +549,7 @@ model ConfigurationGroupSchemaVersionUpdateState {
 /**
  * Hybrid configuration group value properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 @discriminator("configurationType")
 model configurationGroupValuePropertiesFormat {
   /**
@@ -751,7 +751,6 @@ model DeploymentStatusProperties {
   /**
    * The next expected update of deployment status.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextExpectedUpdateAt?: utcDateTime;
 }
 
@@ -822,7 +821,6 @@ model Deployment {
   /**
    * Creation Time of deployment.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 }
 
@@ -858,7 +856,6 @@ model Pod {
   /**
    * Creation Time of Pod.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
@@ -890,7 +887,6 @@ model PodEvent {
   /**
    * Event Last seen.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSeenTime?: utcDateTime;
 }
 
@@ -926,7 +922,6 @@ model ReplicaSet {
   /**
    * Creation Time of replicaSet.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 }
 
@@ -957,7 +952,6 @@ model StatefulSet {
   /**
    * Creation Time of statefulset.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 }
 
@@ -1003,7 +997,6 @@ model DaemonSet {
   /**
    * Creation Time of daemonSet.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 }
 
@@ -1086,7 +1079,7 @@ model NetworkServiceDesignGroupPropertiesFormat {
 /**
  * network service design version properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model networkServiceDesignVersionPropertiesFormat {
   /**
    * The provisioning state of the network service design version resource.
@@ -1108,13 +1101,13 @@ model networkServiceDesignVersionPropertiesFormat {
   /**
    * The configuration schemas to used to define the values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Brownfield conversion of API version 2024-04-15: this free-form map is part of the existing wire contract for caller-supplied configuration and reference payloads whose keys are not known at design time. Replacing it with a typed model would be breaking."
   configurationGroupSchemaReferences?: Record<ReferencedResource>;
 
   /**
    * The nfvis from the site.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Brownfield conversion of API version 2024-04-15: this free-form map is part of the existing wire contract for caller-supplied configuration and reference payloads whose keys are not known at design time. Replacing it with a typed model would be breaking."
   nfvisFromSite?: Record<NfviDetails>;
 
   /**
@@ -1273,7 +1266,7 @@ model ArtifactStorePropertiesFormat {
    */
   replicationStrategy?: ArtifactReplicationStrategy;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
   managedResourceGroupConfiguration?: ArtifactStorePropertiesFormatManagedResourceGroupConfiguration;
 
   /**
@@ -1283,7 +1276,7 @@ model ArtifactStorePropertiesFormat {
   storageResourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
 model ArtifactStorePropertiesFormatManagedResourceGroupConfiguration {
   /**
    * The managed resource group name.
@@ -1403,16 +1396,16 @@ model ArtifactManifestUpdateState {
 /**
  * The proxy artifact overview.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Brownfield conversion of API version 2024-04-15: the type declares no additional properties in the existing contract and is retained so the emitted schema name and shape are unchanged."
 model ProxyArtifactListOverview
   extends Azure.ResourceManager.CommonTypes.ProxyResource {}
 
 /**
  * The proxy artifact overview.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model ProxyArtifactVersionsListOverview
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -1422,7 +1415,7 @@ model ProxyArtifactVersionsListOverview
   properties?: ProxyArtifactOverviewPropertiesValue;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Brownfield conversion of API version 2024-04-15: the source swagger defines no description for this value and the value is self-descriptive. Per-value documentation will be added in a future API version."
 model ProxyArtifactOverviewPropertiesValue {
   /**
    * The artifact type.
@@ -1487,7 +1480,7 @@ model SitePropertiesFormat {
 /**
  * The NFVI object.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 @discriminator("nfviType")
 model NFVIs {
   /**
@@ -1559,7 +1552,7 @@ model SiteNetworkServicePropertiesFormat {
   /**
    * The goal state of the site network service resource. This has references to the configuration group value objects that describe the desired state of the site network service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Brownfield conversion of API version 2024-04-15: this free-form map is part of the existing wire contract for caller-supplied configuration and reference payloads whose keys are not known at design time. Replacing it with a typed model would be breaking."
   desiredStateConfigurationGroupValueReferences?: Record<ReferencedResource>;
 
   /**
@@ -1571,7 +1564,7 @@ model SiteNetworkServicePropertiesFormat {
   /**
    * The last state of the site network service resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Brownfield conversion of API version 2024-04-15: this free-form map is part of the existing wire contract for caller-supplied configuration and reference payloads whose keys are not known at design time. Replacing it with a typed model would be breaking."
   @visibility(Lifecycle.Read)
   lastStateConfigurationGroupValueReferences?: Record<ReferencedResource>;
 }
@@ -1681,7 +1674,7 @@ model AzureContainerRegistryScopedTokenCredential
   /**
    * The credential value.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "By design: acrToken is the intended payload of the ArtifactManifests_ListCredential POST list* action, the ARM-sanctioned pattern for surfacing a secret. @secret declares a property must never appear in a response, which would contradict the operation's purpose and break a GA contract shipped since 2023-09-01. The secret is gated: never on the resource GET, only from an explicit POST action, and short-lived via expiry."
   acrToken?: string;
 
   /**
@@ -1697,7 +1690,6 @@ model AzureContainerRegistryScopedTokenCredential
   /**
    * The UTC time when credential will expire.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiry?: utcDateTime;
 
   /**
@@ -1724,7 +1716,6 @@ model AzureStorageAccountCredential extends ArtifactAccessCredential {
   /**
    * The UTC time when credential will expire.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiry?: utcDateTime;
 
   /**
@@ -1783,7 +1774,7 @@ model OpenDeploymentResourceReference extends DeploymentResourceIdReference {
 /**
  * The ConfigurationValue with secrets.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model ConfigurationValueWithSecrets
   extends configurationGroupValuePropertiesFormat {
   /**
@@ -1802,7 +1793,7 @@ model ConfigurationValueWithSecrets
 /**
  * The ConfigurationValue with no secrets.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model ConfigurationValueWithoutSecrets
   extends configurationGroupValuePropertiesFormat {
   /**
@@ -1925,7 +1916,7 @@ model AzureArcKubernetesNetworkFunctionTemplate
 /**
  * Azure arc kubernetes network function application definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 @discriminator("artifactType")
 model AzureArcKubernetesNetworkFunctionApplication
   extends NetworkFunctionApplication {
@@ -1959,7 +1950,7 @@ model AzureArcKubernetesHelmApplication
 /**
  * Azure arc kubernetes artifact profile properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureArcKubernetesArtifactProfile extends ArtifactProfile {
   /**
    * Helm artifact profile.
@@ -1995,7 +1986,7 @@ model HelmArtifactProfile {
 /**
  * Azure arc kubernetes deploy mapping rule profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureArcKubernetesDeployMappingRuleProfile extends MappingRuleProfile {
   /**
    * The helm mapping rule profile.
@@ -2110,7 +2101,7 @@ model AzureCoreNetworkFunctionTemplate extends VirtualNetworkFunctionTemplate {
 /**
  * Azure virtual network function application definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 @discriminator("artifactType")
 model AzureCoreNetworkFunctionApplication extends NetworkFunctionApplication {
   /**
@@ -2139,7 +2130,7 @@ model AzureOperatorNexusNetworkFunctionTemplate
 /**
  * Azure Operator Distributed Services network function application definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 @discriminator("artifactType")
 model AzureOperatorNexusNetworkFunctionApplication
   extends NetworkFunctionApplication {
@@ -2173,7 +2164,7 @@ model AzureCoreNetworkFunctionVhdApplication
 /**
  * Azure vhd artifact profile properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureCoreVhdImageArtifactProfile extends ArtifactProfile {
   /**
    * Vhd artifact profile.
@@ -2199,7 +2190,7 @@ model VhdImageArtifactProfile {
 /**
  * Azure vhd deploy mapping rule profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureCoreVhdImageDeployMappingRuleProfile extends MappingRuleProfile {
   /**
    * The vhd mapping rule profile.
@@ -2241,7 +2232,7 @@ model AzureCoreNetworkFunctionArmTemplateApplication
 /**
  * Azure template artifact profile properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureCoreArmTemplateArtifactProfile extends ArtifactProfile {
   /**
    * Template artifact profile.
@@ -2267,7 +2258,7 @@ model ArmTemplateArtifactProfile {
 /**
  * Azure template deploy mapping rule profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureCoreArmTemplateDeployMappingRuleProfile extends MappingRuleProfile {
   /**
    * The template mapping rule profile.
@@ -2309,7 +2300,7 @@ model AzureOperatorNexusNetworkFunctionImageApplication
 /**
  * Azure Operator Distributed Services image artifact profile properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureOperatorNexusImageArtifactProfile extends ArtifactProfile {
   /**
    * Image artifact profile.
@@ -2335,7 +2326,7 @@ model ImageArtifactProfile {
 /**
  * Azure Operator Distributed Services image deploy mapping rule profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureOperatorNexusImageDeployMappingRuleProfile
   extends MappingRuleProfile {
   /**
@@ -2378,7 +2369,7 @@ model AzureOperatorNexusNetworkFunctionArmTemplateApplication
 /**
  * Azure Operator Distributed Services vhd artifact profile properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureOperatorNexusArmTemplateArtifactProfile extends ArtifactProfile {
   /**
    * Template artifact profile.
@@ -2389,7 +2380,7 @@ model AzureOperatorNexusArmTemplateArtifactProfile extends ArtifactProfile {
 /**
  * Azure Operator Distributed Services template deploy mapping rule profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield conversion of API version 2024-04-15: the discriminated inheritance hierarchy is part of the existing wire contract. Restructuring it as composition would change the emitted schema names and break existing clients."
 model AzureOperatorNexusArmTemplateDeployMappingRuleProfile
   extends MappingRuleProfile {
   /**
@@ -2437,7 +2428,7 @@ model ArmResourceDefinitionResourceElementTemplate {
 /**
  * Artifact profile properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model NSDArtifactProfile {
   /**
    * The artifact store resource id
@@ -2474,7 +2465,7 @@ model NetworkFunctionDefinitionResourceElementTemplateDetails
 /**
  * Proxy Artifact overview properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Brownfield conversion of API version 2024-04-15: this read-only overview projection carries no provisioningState in the existing contract. Adding one would change the emitted response schema."
 model ProxyArtifactOverviewPropertiesFormat {
   /**
    * The proxy artifact overview properties.
@@ -2486,7 +2477,7 @@ model ProxyArtifactOverviewPropertiesFormat {
 /**
  * The Azure Core NFVI detail.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model AzureCoreNFVIDetails extends NFVIs {
   /**
    * Location of the Azure core.
@@ -2502,7 +2493,7 @@ model AzureCoreNFVIDetails extends NFVIs {
 /**
  * The AzureArcK8sCluster NFVI detail.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model AzureArcK8sClusterNFVIDetails extends NFVIs {
   /**
    * The reference to the custom location.
@@ -2518,7 +2509,7 @@ model AzureArcK8sClusterNFVIDetails extends NFVIs {
 /**
  * The AzureOperatorNexusCluster NFVI detail.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Brownfield conversion of API version 2024-04-15: the identifier casing matches the schema name emitted by the existing swagger. Renaming would change generated SDK type names and is a breaking change."
 model AzureOperatorNexusClusterNFVIDetails extends NFVIs {
   /**
    * The reference to the custom location.
@@ -2532,34 +2523,34 @@ model AzureOperatorNexusClusterNFVIDetails extends NFVIs {
 }
 
 /**
- * The description for page model
+ * The proxy artifact list result.
  */
 model ProxyArtifactVersionsOverviewListResult {
   /**
-   * The description for value property
+   * A list of available proxy artifacts.
    */
   @pageItems
   value: ProxyArtifactVersionsListOverview[];
 
   /**
-   * The description for nextLink property
+   * The URL to get the next set of results.
    */
   @nextLink
   nextLink?: string;
 }
 
 /**
- * The description for page model
+ * The proxy artifact list result.
  */
 model ProxyArtifactOverviewListResult {
   /**
-   * The description for value property
+   * A list of available proxy artifacts.
    */
   @pageItems
   value: ProxyArtifactListOverview[];
 
   /**
-   * The description for nextLink property
+   * The URL to get the next set of results.
    */
   @nextLink
   nextLink?: string;

@@ -159,6 +159,9 @@
               }
             }
           },
+          "204": {
+            "description": "Cancellation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -715,7 +718,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           }
         ],
         "responses": {
@@ -765,7 +770,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "parameters",
@@ -847,7 +854,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "parameters",
@@ -900,7 +909,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           }
         ],
         "responses": {
@@ -965,7 +976,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           }
         ],
         "responses": {
@@ -1014,7 +1027,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "componentName",
@@ -1069,7 +1084,9 @@
             "in": "path",
             "description": "Resource name for the network function resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[^\\s]*[^\\s]+[^\\s]*$"
           },
           {
             "name": "parameters",
@@ -7918,7 +7935,8 @@
             "value": "NotReady"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ProvisioningState": {
       "type": "string",
@@ -7975,7 +7993,8 @@
             "value": "Cancelling"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ProxyArtifactListOverview": {
       "type": "object",
@@ -7988,18 +8007,18 @@
     },
     "ProxyArtifactOverviewListResult": {
       "type": "object",
-      "description": "The description for page model",
+      "description": "The proxy artifact list result.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The description for value property",
+          "description": "A list of available proxy artifacts.",
           "items": {
             "$ref": "#/definitions/ProxyArtifactListOverview"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The description for nextLink property"
+          "description": "The URL to get the next set of results."
         }
       },
       "required": [
@@ -8041,18 +8060,18 @@
     },
     "ProxyArtifactVersionsOverviewListResult": {
       "type": "object",
-      "description": "The description for page model",
+      "description": "The proxy artifact list result.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The description for value property",
+          "description": "A list of available proxy artifacts.",
           "items": {
             "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The description for nextLink property"
+          "description": "The URL to get the next set of results."
         }
       },
       "required": [

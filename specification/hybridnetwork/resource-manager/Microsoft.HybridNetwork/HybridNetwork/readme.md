@@ -39,6 +39,78 @@ suppressions:
   - code: PatchSkuProperty
     from: openapi.json
     reason: sku cannot be patched
+  - code: PostResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}/executeRequest"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/addNetworkFabricControllerEndPoints"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/approvePrivateEndPoints"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/deleteNetworkFabricControllerEndPoints"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/removePrivateEndPoints"].post
+    reason: >
+      Pre-existing response shapes carried forward unchanged from the API version 2024-04-15,
+      where these operations declare the identical response codes. The deployed service returns
+      these codes today; altering them in 2025-03-30 would misrepresent the service contract and
+      break existing clients. Tracked for correction in the next API version.
+  - code: DeleteResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}"].delete
+    reason: >
+      Pre-existing. NetworkFunctions_Delete returns 200/202/204/default in the API version
+      2024-04-15 and the deployed service still returns 200. Removing the 200 response would be a
+      breaking change for existing clients. Tracked for correction in the next API version.
+  - code: PatchIdentityProperty
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/siteNetworkServices/{siteNetworkServiceName}"].patch
+    reason: >
+      These PATCH operations are tags-only updates (TagsObject request body) carried forward
+      unchanged from the API version 2024-04-15. Identity is not updatable through these
+      operations by design, so the request body intentionally omits the identity property.
+  - code: ProvisioningStateSpecifiedForLROPatch
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions/{artifactVersionName}"].patch
+    reason: >
+      Pre-existing. ProxyArtifact_UpdateState is carried forward unchanged from the API version
+      2024-04-15. Its 200 response returns the artifact state overview, which has no
+      provisioningState property in the deployed contract. Adding one would be a breaking change.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions["SiteNetworkServicePropertiesFormat"].properties["desiredStateConfigurationGroupValueReferences"]
+      - $.definitions["SiteNetworkServicePropertiesFormat"].properties["lastStateConfigurationGroupValueReferences"]
+      - $.definitions["networkServiceDesignVersionPropertiesFormat"].properties["configurationGroupSchemaReferences"]
+      - $.definitions["networkServiceDesignVersionPropertiesFormat"].properties["nfvisFromSite"]
+    reason: >
+      These are user-defined key-value maps whose keys are chosen by the publisher at design time
+      and therefore cannot be modelled as a fixed schema. They are carried forward unchanged from
+      the API version 2024-04-15; converting them to a closed schema would be a breaking change.
+  - code: XMSSecretInResponse
+    from: openapi.json
+    where:
+      - $.definitions["AzureContainerRegistryScopedTokenCredential"].properties["acrToken"]
+    reason: >
+      By design. acrToken is the intended payload of ArtifactManifests_ListCredential, an explicit
+      POST list* credential action - the ARM-sanctioned pattern for surfacing a secret. The
+      x-ms-secret annotation declares that a property must never appear in any response, so
+      applying it here would contradict the sole purpose of the operation, fail Swagger
+      ModelValidation (SECRET_PROPERTY) against ArtifactManifestListCredential.json, and risk the
+      token being stripped at runtime - breaking a GA contract shipped since 2023-09-01. The secret
+      is already correctly gated: it is never returned on the resource GET, is only issued from an
+      explicit POST action, and is short-lived (see the expiry property).
+  - code: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    where:
+      - $.definitions["ProxyArtifactVersionsListOverview"]
+    reason: >
+      Pre-existing. ProxyArtifactVersionsListOverview is carried forward unchanged from API
+      version 2024-04-15. It is an overview projection returned by the artifact versions list
+      operation rather than an independently addressable nested resource, so a dedicated list
+      operation does not apply.
 ```
 
 ### Tag: package-2024-04-15

@@ -26,7 +26,7 @@ model SiteNetworkService
   /**
    * Sku of the site network service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Brownfield conversion of API version 2024-04-15: this envelope property is returned at the resource envelope level by the existing contract. Removing or relocating it into properties would be breaking."
   sku?: Sku;
 }
 

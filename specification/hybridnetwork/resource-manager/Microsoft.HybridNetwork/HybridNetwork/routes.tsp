@@ -1,4 +1,3 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -24,7 +23,7 @@ interface SiteNetworkServicesOperationGroup {
     Response = ArmAcceptedLroResponse<
       "Accepted. The header contains Location URL to check the status of the asynchronous operation",
       ArmLroLocationHeader
-    >,
+    > | ArmNoContentResponse<"Cancellation completed successfully.">,
     Scope = SubscriptionActionScope,
     Parameters = {},
     LroHeaders = ArmLroLocationHeader
