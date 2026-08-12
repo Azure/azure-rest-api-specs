@@ -15,6 +15,11 @@
     - preview/2026-09-01-preview/appconfiguration.json
   reason: This brownfield TypeSpec project emits all existing API versions with common types v5; upgrading globally would modify established contracts outside this change.
 
+- tool: NestedResourcesMustHaveListOperation
+  paths:
+    - preview/2026-09-01-preview/appconfiguration.json
+  reason: Feature flags are exposed through the data-plane proxy with point GET, PUT, and DELETE operations only. Collection listing is intentionally not supported by the management endpoint; feature flag enumeration uses the data-plane API.
+
 - tool: TypeSpecRequirement
   path: ./preview/2019-02-01-preview/*.json
   reason: Brownfield service not ready to migrate
