@@ -63,7 +63,63 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 <a id="reviewer-posted-parity"></a>
 
-See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). It defines the two **review modes** (interactive, where findings are presented to a human who decides what to post; and autonomous, where the agreed finding set is posted and addressed threads are resolved without a human gate), the hard rules, the post-post verification procedure, and worked examples. This section is a pointer so the three instruction files cannot drift.
+
+### Approval-Label Awareness (REQUIRED)
+
+At the session SHA, inspect the complete set of labels returned with the PR
+metadata. Record the exact, case-sensitive names of approval labels relevant to
+API review:
+
+- API breaking-change approvals: labels beginning with
+  `BreakingChange-Approved-`.
+- API versioning approvals: labels beginning with `Versioning-Approved-`.
+- OpenAPI suppression approval: `Approved-Suppression`.
+- TypeSpec suppression approval: `Approved-TypeSpecSuppression`.
+
+Do not treat SDK-language approval labels, package-name approvals, namespace
+approvals, or an arbitrary label containing the word `Approved` as API-review
+approval. The canonical breaking-change and versioning label definitions live
+in [`.github/shared/src/breaking-change.js`](../shared/src/breaking-change.js).
+
+**Review preamble disclosure.** In the review-body preamble, immediately after
+the sentence that identifies the reviewed commit, include exactly one of:
+
+```text
+Approval labels observed: `<label-1>`, `<label-2>`.
+```
+
+```text
+Approval labels observed: none.
+```
+
+This line is required even when the review finds no breaking changes or
+suppressions. It demonstrates that the reviewer inspected the PR labels rather
+than inferring approval from the PR text or CI status.
+
+**Finding-specific awareness.** An approval label is context, not proof that a
+particular finding was reviewed or a reason to hide, downgrade, or omit the
+finding. Every posted breaking-change or suppression finding MUST include an
+`**Approval context:**` paragraph before the suggested fix:
+
+- Cross-version breaking changes check `BreakingChange-Approved-*`.
+- Same-version or published-version exceptions check `Versioning-Approved-*`.
+- OpenAPI suppression findings check `Approved-Suppression`.
+- TypeSpec suppression findings check `Approved-TypeSpecSuppression`.
+
+- **Matching label observed:** name the exact label and ask the author to
+  confirm that it covers this specific breaking change or suppression. State
+  that if it does, the only remaining action for this comment is to resolve the
+  conversation; otherwise the author must obtain the appropriate approval or
+  address the finding.
+- **No matching label observed:** state which approval label family was checked
+  and that no matching label was present at the session SHA. Ask the author to
+  confirm whether approval exists. State that if the change is already approved,
+  they should ensure the appropriate label is applied and resolve the
+  conversation; otherwise they must obtain approval or address the finding.
+
+Never claim that a specific finding is approved solely because a broad PR-level
+label is present. The author must confirm that the approval covers that finding.
 
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
