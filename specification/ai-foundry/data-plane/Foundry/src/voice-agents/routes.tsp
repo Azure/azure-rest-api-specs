@@ -24,6 +24,10 @@ interface VoiceAgentWebSocket {
   /**
    * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
    * headers. The optional `realtime` subprotocol is the only accepted subprotocol value.
+   *
+   * If the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`
+   * upgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with
+   * `error.code = agent_disabled`. This failure is terminal until the caller enables the agent.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
   @summary("Connect to a voice agent")

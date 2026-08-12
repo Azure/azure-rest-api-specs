@@ -1804,7 +1804,7 @@
       "get": {
         "operationId": "VoiceAgentWebSocket_connectVoiceAgent",
         "summary": "Connect to a voice agent",
-        "description": "Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`\nheaders. The optional `realtime` subprotocol is the only accepted subprotocol value.",
+        "description": "Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`\nheaders. The optional `realtime` subprotocol is the only accepted subprotocol value.\n\nIf the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`\nupgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with\n`error.code = agent_disabled`. This failure is terminal until the caller enables the agent.",
         "parameters": [
           {
             "name": "Foundry-Features",
