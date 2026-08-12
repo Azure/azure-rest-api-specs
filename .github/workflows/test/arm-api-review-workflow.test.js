@@ -567,4 +567,36 @@ describe("ARM API review live-run regressions", () => {
     );
     expect(collapsed).toContain("All findings are reported in the summary comment.");
   });
+
+  it("teaches the marker syntax in a form that survives HTML-comment stripping", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+
+    // gh-aw strips HTML comments before the prompt reaches the agent. Live run
+    // 31645723290 proved it: the source had 16 `<!--` sequences and the
+    // rendered prompt had zero, so every canonical marker template arrived
+    // blank. The agent saw an EMPTY "Correct" code block next to an intact
+    // plain-text "Incorrect" one, and duly copied the wrong shape.
+    const stripped = source.replace(/<!--[\s\S]*?-->/g, "");
+    const collapsedStripped = collapseWhitespace(stripped);
+
+    // Whatever survives stripping must still fully specify the marker.
+    expect(collapsedStripped).toContain("| `OPEN` | `<` then `!` then `-` then `-` |");
+    expect(collapsedStripped).toContain("| `CLOSE` | `-` then `-` then `>` |");
+    expect(collapsedStripped).toContain("strips HTML comments before the prompt reaches you");
+
+    // Every marker template must survive: each one carries all six fields.
+    const templates = [
+      ...collapsedStripped.matchAll(/OPEN posted-by: arm-api-reviewer-agent[^`]*?CLOSE/g),
+    ];
+    expect(templates.length).toBeGreaterThanOrEqual(3);
+    for (const [template] of templates) {
+      for (const field of ["rule:", "severity:", "classification:", "critic:", "head-sha:"]) {
+        expect(template).toContain(field);
+      }
+    }
+
+    // And no marker template may be written as a literal HTML comment in the
+    // source, which would be erased on the way to the agent.
+    expect(source).not.toContain("<!-- posted-by: arm-api-reviewer-agent");
+  });
 });

@@ -658,10 +658,14 @@ JSON path: `$.path.to.element` (for OpenAPI files)
 
 **Suggested fix:** Concrete code, JSON, or TypeSpec change.
 
-<!-- posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
+OPEN posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> CLOSE
 ```
 
 <!-- markdownlint-enable MD013 -->
+
+`OPEN` and `CLOSE` above stand for the HTML-comment delimiters; emit the real
+characters, not the words. See **Telemetry Marker: Required on Every Posted
+Body** below for the exact characters and the full field rules.
 
 For `[NEW]` findings, use `🔴 Blocking`, `🟠 Warning`, or `🔵 Suggestion`.
 For `[EXISTING]` findings, use `**[EXISTING]**` without a severity badge, but
@@ -716,15 +720,28 @@ comment body this workflow publishes -- not only inline findings:
 HTML comment** whose fields are separated by `|`. It must render invisibly on
 GitHub. Emitting the fields as plain `key: value` lines is a defect: the
 telemetry becomes visible boilerplate at the bottom of every comment a human
-reads. Do not split the marker across lines, do not drop the `<!--`/`-->`
+reads. Do not split the marker across lines, do not drop the comment
 delimiters, and do not substitute a fenced block or a bullet list.
+
+**Delimiters.** This prompt is Markdown, and the loader **strips HTML comments
+before the prompt reaches you** -- so a marker written here as a real HTML
+comment would arrive blank and teach you nothing. Every template below
+therefore spells the two delimiters as the tokens `OPEN` and `CLOSE`:
+
+| Token   | Emit exactly these characters  |
+| ------- | ------------------------------ |
+| `OPEN`  | `<` then `!` then `-` then `-` |
+| `CLOSE` | `-` then `-` then `>`          |
+
+Emit those characters, never the literal words `OPEN` or `CLOSE`. A body whose
+last line still contains the word `OPEN` or `CLOSE` is malformed.
 
 <!-- markdownlint-disable MD013 -->
 
 Correct (one line, delimited, pipe-separated):
 
 ```text
-<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000 -->
+OPEN posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000 CLOSE
 ```
 
 Incorrect (plain-text lines -- publicly visible, and rejected):
@@ -838,11 +855,14 @@ The summary block order is fixed and must be emitted exactly as: the
 summary. Placing the disclosure after the approval labels or after the counts
 table is a template violation even when its content is correct.
 
-Always end the summary with the standard footer marker:
+Always end the summary with the standard footer marker, using the same
+`OPEN`/`CLOSE` delimiter tokens defined above:
 
 <!-- markdownlint-disable MD013 -->
 
-`<!-- posted-by: arm-api-reviewer-agent | rule: summary | severity: suggestion | classification: new | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->`
+```text
+OPEN posted-by: arm-api-reviewer-agent | rule: summary | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> CLOSE
+```
 
 <!-- markdownlint-enable MD013 -->
 
