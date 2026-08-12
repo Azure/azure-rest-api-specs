@@ -60,14 +60,9 @@ interface ArcDeployments {
   /**
    * Creates an Arc deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Arc deployment PUT is create-only; updates are supported through PATCH."
   create is ArmResourceCreateOrReplaceAsync<
     ArcDeployment,
-    LroHeaders = ArcDeploymentCreateLroHeaders,
-    Response = ArmResourceCreatedResponse<
-      ArcDeployment,
-      ArcDeploymentCreateLroHeaders
-    >
+    LroHeaders = ArcDeploymentCreateLroHeaders
   >;
 
   /**
