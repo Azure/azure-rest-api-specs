@@ -235,16 +235,16 @@ interface SigningCertificates {
    * Retrieves metadata signing certificates in use by the attestation service
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Unversioned discovery endpoint - clients call /certs before negotiating an API version, and every prior API version declares no parameters on this route"
   @summary("Retrieves the attestation signing keys in use by the attestation service")
   @route("/certs")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {},
-    JsonWebKeySet & {
-      @header
-      contentType: SigningCertificatesContentType;
-    }
-  >;
+  get():
+    | (JsonWebKeySet & {
+        @header
+        contentType: SigningCertificatesContentType;
+      })
+    | Azure.Core.Foundations.ErrorResponse;
 }
 
 interface MetadataConfiguration {
@@ -253,8 +253,9 @@ interface MetadataConfiguration {
    * service
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Unversioned discovery endpoint - clients call the OpenID metadata document before negotiating an API version, and every prior API version declares no parameters on this route"
   @summary("Retrieves the OpenID Configuration data for the Azure Attestation Service")
   @route("/.well-known/openid-configuration")
   @get
-  get is Azure.Core.Foundations.Operation<{}, OpenIDConfigurationResponse>;
+  get(): OpenIDConfigurationResponse | Azure.Core.Foundations.ErrorResponse;
 }
