@@ -16,6 +16,11 @@ using TypeSpec.Versioning;
 @@alternateType(DeploymentStackProperties.template, unknown, "java");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "java");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
+@@clientName(
+  Microsoft.Resources.DeploymentStacks,
+  "DeploymentStacksManagementClient",
+  "java"
+);
 
 // CSharp SDK: Generate scoped resources, and make it backwards compatible with existing patterns
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."

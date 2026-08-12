@@ -10,4 +10,5 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 
+@@clientName(Microsoft.Resources, "DataBoundariesManagementClient", "java");
 @@scope(Microsoft.Resources.Operations.list, "!java");
