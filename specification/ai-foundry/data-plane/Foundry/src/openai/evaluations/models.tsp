@@ -12,6 +12,7 @@ union EvalObjectType {
 }
 
 /** A deleted evaluation Object */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteEvalResponse {
   @doc("The object type. Always 'eval.deleted'.")
   object: EvalObjectType.evalDeleted;
@@ -24,6 +25,7 @@ model DeleteEvalResponse {
 }
 
 /** A deleted evaluation run Object. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeleteEvalRunResponse {
   @doc("The object type. Always 'eval.deleted'.")
   object?: "eval.deleted";
@@ -191,6 +193,7 @@ model Eval is OpenAI.Eval {
     | OpenAI.EvalGraderScoreModel
     | TestingCriterionAzureAIEvaluator)[]
 );
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateEvalRequest is OpenAI.CreateEvalRequest {
   /**
     Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -709,6 +712,7 @@ model EvalRun is OpenAI.EvalRun {
     | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
   /**
     Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
