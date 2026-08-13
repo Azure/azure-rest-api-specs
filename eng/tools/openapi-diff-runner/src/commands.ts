@@ -61,6 +61,11 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   logMessage("Found PR changes:");
   logMessage(JSON.stringify(diffs, null, 2));
 
+  let swaggersToProcess = diffs.modifications?.concat(diffs.additions || []) as Array<string>;
+
+  logMessage("Processing swaggers:");
+  logMessage(JSON.stringify(swaggersToProcess, null, 2));
+
   // switch pr to base branch
   changeBaseBranch(context);
   await context.prInfo?.checkout(context.prInfo.baseBranch);
