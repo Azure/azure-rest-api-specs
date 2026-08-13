@@ -67,6 +67,8 @@ union VirtualConnectionsEnabledState {
 
 /** The resource provisioning state. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "The OpenAPI validator requires readOnly on the referenced provisioning-state definition; TypeSpec lifecycle visibility cannot be applied to a union."
+@extension("readOnly", true)
 union VirtualConnectionsProvisioningState {
   ResourceProvisioningState,
 
