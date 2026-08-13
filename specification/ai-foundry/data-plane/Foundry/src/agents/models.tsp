@@ -668,6 +668,11 @@ model ProtocolConfiguration {
 model ActivityProtocolConfiguration {
   @doc("Whether to enable the M365 public endpoint for the activity protocol.")
   enable_m365_public_endpoint?: boolean;
+
+  @doc("The autopilot boundaries for the activity protocol.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v1)
+  autopilot_boundaries?: string[];
 }
 
 @doc("Configuration specific to the responses protocol.")
@@ -698,11 +703,6 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
-
-  @doc("The access boundaries for the agent endpoint.")
-  @visibility(Lifecycle.Read)
-  @added(Versions.v1)
-  access_boundaries?: string[];
 }
 
 model AgentIdentity {
