@@ -36,10 +36,8 @@ interface ServiceEntitlements {
   update is ArmCustomPatchAsync<
     ServiceEntitlement,
     ServiceEntitlementUpdate,
-    LroHeaders = ArmCombinedLroHeaders<
-      ArmOperationStatus,
-      ServiceEntitlement
-    > & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, ServiceEntitlement> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Deletes a service entitlement. */
@@ -78,5 +76,7 @@ interface ServiceEntitlements {
     serviceEntitlementName: string,
 
     ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
 }
