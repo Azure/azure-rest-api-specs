@@ -32,6 +32,9 @@ options:
     flavor: azure
     use-object-for-unknown: true
     float32-as-double: false
+    resource-collection-associations:
+      - resource: ConnectionPropertiesV2BasicResource
+        collection: AccountConnections
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-cognitiveservices"
     flavor: azure
@@ -42,7 +45,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cognitiveservices"
     emitter-output-dir: "{output-dir}/{service-dir}/armcognitiveservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcognitiveservices/v4"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcognitiveservices"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
