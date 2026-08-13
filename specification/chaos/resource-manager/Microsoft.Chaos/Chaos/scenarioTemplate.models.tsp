@@ -73,13 +73,6 @@ model ScenarioTemplateVersionProperties {
   description?: string;
 
   /**
-   * ISO 8601 duration bounding how long a scenario created from this template may run
-   * (for example PT3H for three hours).
-   */
-  @visibility(Lifecycle.Read)
-  maxTimeoutDuration?: duration;
-
-  /**
    * The resource selectors the template's actions target. Each selector names a group of
    * resources of a single Azure resource type, and is referenced from an action through the
    * `%%\{resourceSelectors.\<name\>\}%%` macro.
