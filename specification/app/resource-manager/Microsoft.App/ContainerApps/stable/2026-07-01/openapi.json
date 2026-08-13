@@ -6843,7 +6843,7 @@
             "description": "Configuration details of the .NET Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DotNetComponentPatch"
+              "$ref": "#/definitions/DotNetComponent"
             }
           }
         ],
@@ -12258,46 +12258,6 @@
         "value": {
           "type": "string",
           "description": "The value of the property"
-        }
-      }
-    },
-    "DotNetComponentPatch": {
-      "type": "object",
-      "description": "The properties of a .NET Component that can be updated.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DotNetComponentPatchProperties",
-          "description": "The updatable .NET Component properties."
-        }
-      }
-    },
-    "DotNetComponentPatchProperties": {
-      "type": "object",
-      "description": "The properties that can be updated on a .NET Component.",
-      "properties": {
-        "componentType": {
-          "$ref": "#/definitions/DotNetComponentType",
-          "description": "Type of the .NET Component."
-        },
-        "configurations": {
-          "type": "array",
-          "description": "List of .NET Components configuration properties.",
-          "items": {
-            "$ref": "#/definitions/DotNetComponentConfigurationProperty"
-          },
-          "x-ms-identifiers": [
-            "propertyName"
-          ]
-        },
-        "serviceBinds": {
-          "type": "array",
-          "description": "List of .NET Components that are bound to the .NET component.",
-          "items": {
-            "$ref": "#/definitions/DotNetComponentServiceBind"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
       }
     },

@@ -74,7 +74,7 @@ interface DotNetComponents {
   @summary("Update properties of a .NET Component")
   update is DotNetComponentOps.CustomPatchAsync<
     DotNetComponent,
-    PatchModel = DotNetComponentPatch
+    PatchModel = DotNetComponent
   >;
 
   /**

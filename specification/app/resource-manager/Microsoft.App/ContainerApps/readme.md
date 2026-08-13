@@ -93,6 +93,16 @@ directive:
       false positive. This emitter issue is tracked by
       https://github.com/Azure/typespec-azure/issues/2042.
       Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
+  - suppress: UnSupportedPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.parameters[5]
+    reason: |
+      The published preview PATCH contract uses the full resource schema. Its provisioningState
+      property is read-only in TypeSpec, but typespec-autorest emits readOnly as a sibling of
+      $ref, which the validator discards while resolving the schema. Changing to a dedicated
+      PATCH model removes published request properties and is reported as a breaking change.
+      This emitter issue is tracked by https://github.com/Azure/typespec-azure/issues/2042.
+      Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
   - suppress: LatestVersionOfCommonTypesMustBeUsed
     from: openapi.json
     reason: |
