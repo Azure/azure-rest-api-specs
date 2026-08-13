@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace BillingPlansAPI;
 
 /** A Microsoft Defender for Cloud billing plan. */
-model BillingPlan is TrackedResource<BillingPlanProperties> {
+model BillingPlan is ProxyResource<BillingPlanProperties> {
   ...ResourceNameParameter<
     Resource = BillingPlan,
     KeyName = "billingPlanName",

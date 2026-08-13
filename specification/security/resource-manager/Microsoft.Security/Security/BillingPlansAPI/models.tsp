@@ -72,8 +72,6 @@ model BillingPlanUpdateProperties {
 
 /** The request body for updating a billing plan. */
 model BillingPlanUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   /** Properties to update on the billing plan. */
   properties?: BillingPlanUpdateProperties;
 }
