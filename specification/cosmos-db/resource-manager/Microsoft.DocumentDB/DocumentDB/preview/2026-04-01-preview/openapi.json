@@ -2631,6 +2631,9 @@
         "x-ms-examples": {
           "CosmosDBDatabaseAccountPatch": {
             "$ref": "./examples/CosmosDBDatabaseAccountPatch.json"
+          },
+          "Enable Integrated Embeddings on an existing account": {
+            "$ref": "./examples/CosmosDBDatabaseAccountEnableEmbeddingGenerator.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -24995,7 +24998,7 @@
         },
         "enableEmbeddingGenerator": {
           "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts and cannot\nbe enabled during account creation. Enable it by updating an existing account."
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts and cannot\nbe enabled during account creation. Enable it by updating an existing account\nthat has continuous backup and all versions and deletes change feed enabled.\nIntegrated Embeddings cannot be disabled after it is enabled."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25656,7 +25659,7 @@
         },
         "enableEmbeddingGenerator": {
           "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts."
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for existing API for NoSQL accounts\nwith continuous backup and all versions and deletes change feed enabled.\nIntegrated Embeddings cannot be disabled after it is enabled."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25939,7 +25942,8 @@
       "properties": {
         "sourcePaths": {
           "type": "array",
-          "description": "The list of source paths in the document to generate embeddings from.",
+          "description": "The non-empty list of top-level source paths in the document to generate\nembeddings from. A source path cannot be the same as the destination vector\nembedding path.",
+          "minItems": 1,
           "items": {
             "type": "string"
           }

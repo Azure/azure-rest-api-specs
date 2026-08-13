@@ -2559,7 +2559,9 @@ model DatabaseAccountUpdateProperties {
 
   /**
    * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB
-   * account. This property is supported only for API for NoSQL accounts.
+   * account. This property is supported only for existing API for NoSQL accounts
+   * with continuous backup and all versions and deletes change feed enabled.
+   * Integrated Embeddings cannot be disabled after it is enabled.
    */
   @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -2804,7 +2806,9 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB
    * account. This property is supported only for API for NoSQL accounts and cannot
-   * be enabled during account creation. Enable it by updating an existing account.
+   * be enabled during account creation. Enable it by updating an existing account
+   * that has continuous backup and all versions and deletes change feed enabled.
+   * Integrated Embeddings cannot be disabled after it is enabled.
    */
   @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -4454,8 +4458,11 @@ model VectorEmbedding {
 @added(Versions.v2026_04_01_preview)
 model EmbeddingSource {
   /**
-   * The list of source paths in the document to generate embeddings from.
+   * The non-empty list of top-level source paths in the document to generate
+   * embeddings from. A source path cannot be the same as the destination vector
+   * embedding path.
    */
+  @minItems(1)
   sourcePaths: string[];
 
   /**
