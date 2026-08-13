@@ -92,6 +92,8 @@ directive:
       of $ref. The validator discards sibling properties while resolving $ref and reports a
       false positive. This emitter issue is tracked by
       https://github.com/Azure/typespec-azure/issues/2042.
+      The use-read-only-status-schema workaround was tested, but it changes the schemas emitted
+      for existing API versions and caused 76 cross-version breaking-change findings.
       Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
   - suppress: UnSupportedPatchProperties
     from: openapi.json
@@ -100,15 +102,18 @@ directive:
       The published preview PATCH contract uses the full resource schema. Its provisioningState
       property is read-only in TypeSpec, but typespec-autorest emits readOnly as a sibling of
       $ref, which the validator discards while resolving the schema. Changing to a dedicated
-      PATCH model removes published request properties and is reported as a breaking change.
+      PATCH model redirected two published model references and removed provisioningState, id,
+      name, type, and systemData from the existing preview PATCH request.
       This emitter issue is tracked by https://github.com/Azure/typespec-azure/issues/2042.
       Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
   - suppress: LatestVersionOfCommonTypesMustBeUsed
     from: openapi.json
+    where: $..['$ref']
     reason: |
       This established API family uses ARM common types v5. Moving only the 2026-07-01 version
       to v6 changes the identity, SKU, and plan schemas, including newly required properties,
-      and is reported as a breaking change against prior versions.
+      and caused 12 cross-version breaking-change findings. The rule reports on the common-types
+      $ref nodes throughout this API family, so the suppression is scoped to $ref nodes only.
       Remove this suppression when the API family can migrate common types without changing
       its existing wire contract.
 ```
