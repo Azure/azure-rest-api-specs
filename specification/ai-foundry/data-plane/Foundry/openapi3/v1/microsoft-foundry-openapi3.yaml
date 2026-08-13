@@ -43299,10 +43299,14 @@ components:
             $ref: '#/components/schemas/EvaluatorVersionDiagnostics'
           description: The requested evaluator-version diagnostic groups.
         first_version:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: The first evaluator version represented in this page.
         last_version:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: The last evaluator version represented in this page.
         has_more:
           type: boolean

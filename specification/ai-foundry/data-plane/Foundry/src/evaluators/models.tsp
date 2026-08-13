@@ -592,11 +592,11 @@ model EvaluatorDiagnosticsPage {
   data: EvaluatorVersionDiagnostics[];
 
   @doc("The first evaluator version represented in this page.")
-  first_version?: string;
+  first_version?: string | null;
 
   @doc("The last evaluator version represented in this page.")
   @continuationToken
-  last_version?: string;
+  last_version?: string | null;
 
   @doc("A value indicating whether additional evaluator-version groups are available.")
   has_more: boolean;
