@@ -278,9 +278,6 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 
-// The resource-name union is part of the shipped provisioning API.
-@@access(MigrationConfigurationName, Access.public, "csharp");
-
 // Step 6: Avoid Windows filename collision between FailOverProperties.cs and FailoverProperties.cs
 @@clientName(FailOverProperties, "ServiceBusFailOverDetail", "csharp");
 
