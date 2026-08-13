@@ -2246,7 +2246,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationAudio",
         "summary": "Get a voice agent conversation's merged recording metadata",
-        "description": "Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio\non the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned\nfor both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally\nincludes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads\nwith their own credentials. The recording is built once from the per-turn segments after the session ends;\na request against an in-progress session returns `409`. Requires the conversation to have persisted audio\n(`store = true`); otherwise returns `404`.",
+        "description": "Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio\non the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned\nfor both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally\nincludes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads\nwith their own credentials. The recording is built once from the per-turn segments after persistence\nfinalization succeeds. While the conversation is `in_progress`, this route returns retriable `409 Conflict`\nwith `error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the\nconversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.\nFor a `completed` conversation, metadata is available subject to the existing BYOS behavior. Requires the\nconversation to have persisted audio (`store = true`); otherwise returns `404`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2335,7 +2335,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationAudioContent",
         "summary": "Stream a voice agent conversation's merged recording",
-        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied — the caller must download directly from customer storage using the\n`blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.\nA request against an in-progress session also returns `409` (a distinct condition: session-not-ended\nversus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.",
+        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied — the caller must download directly from customer storage using the\n`blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.\nWhile the conversation is `in_progress`, this route returns retriable `409 Conflict` with\n`error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the\nconversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.\nFor a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation\nwithout persisted audio (`store = false`) returns `404`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -94177,7 +94177,7 @@
           },
           "completed_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the conversation's session ended. Absent while in progress."
+            "description": "The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`."
           },
           "metadata": {
             "type": "object",
@@ -94188,10 +94188,14 @@
           },
           "usage": {
             "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
-            "description": "Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after `status` is `completed`; values are not guaranteed to be reported incrementally."
+            "description": "Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after successful `completed` finalization; it may be absent when `status` is `failed`, and values are not guaranteed to be reported incrementally."
+          },
+          "last_error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "The terminal error that prevented persistence finalization. Present only when `status` is `failed`."
           }
         },
-        "description": "A persisted voice conversation. The Foundry envelope that owns a voice agent's stored\ntranscript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:\ndeleting it cascades to its responses, items, metrics, and audio.",
+        "description": "A persisted voice conversation. The Foundry envelope that owns a voice agent's stored\ntranscript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:\ndeleting it cascades to its responses, items, metrics, and audio. When finalization fails, any partial persisted\nresponses, items, and item audio remain readable.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -94270,11 +94274,12 @@
             "type": "string",
             "enum": [
               "in_progress",
-              "completed"
+              "completed",
+              "failed"
             ]
           }
         ],
-        "description": "The lifecycle status of a persisted voice conversation.",
+        "description": "The lifecycle status of a persisted voice conversation:\n- `in_progress`: the live session is active, or post-session persistence finalization is pending.\n- `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`\n  close, or a client or network disconnect that the service can still finalize.\n- `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

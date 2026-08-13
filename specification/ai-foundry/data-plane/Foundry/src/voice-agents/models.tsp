@@ -16,22 +16,32 @@ namespace Azure.AI.Projects;
 // audio bytes are streamed through the dedicated item and recording routes.
 // ============================================================================
 
-@doc("The lifecycle status of a persisted voice conversation.")
+@doc("""
+  The lifecycle status of a persisted voice conversation:
+  - `in_progress`: the live session is active, or post-session persistence finalization is pending.
+  - `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`
+    close, or a client or network disconnect that the service can still finalize.
+  - `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationStatus {
   string,
 
-  @doc("The conversation's live session is still in progress.")
+  @doc("The live session is active, or post-session persistence finalization is still pending.")
   in_progress: "in_progress",
 
-  @doc("The conversation's live session has ended.")
+  @doc("Persistence finalization succeeded. This includes normal or client-initiated close, the `end_conversation` system tool, a max-duration `1001` close, and client or network disconnects that the service can still finalize.")
   completed: "completed",
+
+  @doc("A terminal service, bridge, storage, or unrecoverable transport failure prevented persistence finalization.")
+  failed: "failed",
 }
 
 @doc("""
   A persisted voice conversation. The Foundry envelope that owns a voice agent's stored
   transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
-  deleting it cascades to its responses, items, metrics, and audio.
+  deleting it cascades to its responses, items, metrics, and audio. When finalization fails, any partial persisted
+  responses, items, and item audio remain readable.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversation {
@@ -47,14 +57,17 @@ model VoiceConversation {
   @doc("The Unix timestamp (in seconds) for when the conversation was created.")
   created_at: FoundryTimestamp;
 
-  @doc("The Unix timestamp (in seconds) for when the conversation's session ended. Absent while in progress.")
+  @doc("The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`.")
   completed_at?: FoundryTimestamp;
 
   @doc("A set of key-value pairs attached to the conversation.")
   metadata?: Record<string>;
 
-  @doc("Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after `status` is `completed`; values are not guaranteed to be reported incrementally.")
+  @doc("Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after successful `completed` finalization; it may be absent when `status` is `failed`, and values are not guaranteed to be reported incrementally.")
   usage?: OpenAI.RealtimeResponseUsage;
+
+  @doc("The terminal error that prevented persistence finalization. Present only when `status` is `failed`.")
+  last_error?: ApiError;
 }
 
 // ---------------------------------------------------------------------------
