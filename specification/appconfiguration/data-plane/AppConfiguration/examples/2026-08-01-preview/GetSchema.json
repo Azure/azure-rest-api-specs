@@ -1,0 +1,45 @@
+{
+  "operationId": "GetSchema",
+  "title": "Gets a single schema.",
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2026-08-01-preview",
+    "schemaName": "Contoso.Backend.Schema"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json",
+        "ETag": "W/\"4f6dd610dd5e4deebc7fbaef685fb903\"",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763"
+      },
+      "body": {
+        "id": "schema-uuid-1",
+        "name": "Contoso.Backend.Schema",
+        "description": "Validation schema for backend config",
+        "type": "custom",
+        "status": "enabled",
+        "target": "kv",
+        "key_label_scope": {
+          "key": "Contoso:Backend",
+          "label": "staging"
+        },
+        "tags": {
+          "team": "payments"
+        },
+        "json_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "$id": "appconfig://contoso-21f3/schemas/Contoso.Backend.Schema",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "last_modified": "2026-05-01T00:00:00+00:00",
+        "etag": "4f6dd610dd5e4deebc7fbaef685fb903"
+      }
+    }
+  }
+}
