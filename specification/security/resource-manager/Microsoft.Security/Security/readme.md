@@ -24,6 +24,8 @@ To see additional help and options, run:
 
 ``` yaml
 directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: The default package intentionally composes the latest API version for each Microsoft.Security resource type.
   - suppress: ValidFormats
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
@@ -767,6 +769,7 @@ input-file:
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
+- preview/2026-09-01-preview/billingPlans.json
 
 # Autorest suppressions
 suppressions:
