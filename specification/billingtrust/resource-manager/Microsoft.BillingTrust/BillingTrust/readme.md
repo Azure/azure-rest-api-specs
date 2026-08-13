@@ -99,27 +99,6 @@ directive:
       validation, and consistency with other Azure RP specs that reference
       Entra tenant IDs (e.g. Microsoft.ManagedIdentity, Microsoft.Authorization).
 
-  - suppress: WriteOnlyProperties
-    from:
-      - openapi.json
-    where:
-      - $.definitions.AssessmentProperties.properties.initialValues
-    reason: |
-      `initialValues` is an intentional transient seed parameter forwarded by
-      the parent resource provider at assessment creation. The values are forwarded to the
-      per-kind rule resources and are NOT persisted on the assessment itself,
-      so they cannot be returned on Read. The rules themselves expose the
-      read-side projection of these seeds (for example,
-      `EduQualificationRuleProperties.domains` is the readable projection of
-      the eduQualification seed). This is the ARM-recommended pattern for
-      "create-only seed" inputs and is mirrored by the
-      `x-ms-mutability: ["create"]` annotation in the schema. A round-trip
-      (GET → PUT) re-issued with the same `initialValues` after the assessment
-      exists is a no-op on the rules (already instantiated); a round-trip
-      with a different seed that would re-seed existing rules is rejected
-      with 409 Conflict — so the absence of `initialValues` in the GET
-      response cannot cause What-If false drift.
-
   - suppress: ParametersInPointGet
     from:
       - openapi.json
