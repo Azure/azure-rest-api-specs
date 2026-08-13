@@ -220,13 +220,16 @@ model FleetMemberCredentialResult {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("The request for Fleet member credentials.")
+@doc("The request for Fleet member credentials. Specify either memberNames for an initial request or continuationToken for a subsequent request, but not both.")
 model FleetMemberCredentialRequest {
-  @doc("The names of the Fleet members for which credentials are requested. When omitted, all applicable Fleet members are selected.")
+  @minItems(1)
+  @maxItems(100)
+  @uniqueItems
+  @doc("The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. When omitted from an initial request, all applicable Fleet members are selected. This property must be omitted when continuationToken is provided.")
   memberNames?: string[];
 
   @secret
-  @doc("The opaque continuation token from a previous request.")
+  @doc("The opaque continuation token from a previous request. When provided, this must be the only field in the request body because it preserves the original member selection and cursor state.")
   continuationToken?: string;
 }
 

@@ -4340,11 +4340,14 @@
     },
     "FleetMemberCredentialRequest": {
       "type": "object",
-      "description": "The request for Fleet member credentials.",
+      "description": "The request for Fleet member credentials. Specify either memberNames for an initial request or continuationToken for a subsequent request, but not both.",
       "properties": {
         "memberNames": {
           "type": "array",
-          "description": "The names of the Fleet members for which credentials are requested. When omitted, all applicable Fleet members are selected.",
+          "description": "The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. When omitted from an initial request, all applicable Fleet members are selected. This property must be omitted when continuationToken is provided.",
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true,
           "items": {
             "type": "string"
           }
@@ -4352,7 +4355,7 @@
         "continuationToken": {
           "type": "string",
           "format": "password",
-          "description": "The opaque continuation token from a previous request.",
+          "description": "The opaque continuation token from a previous request. When provided, this must be the only field in the request body because it preserves the original member selection and cursor state.",
           "x-ms-secret": true
         }
       }
