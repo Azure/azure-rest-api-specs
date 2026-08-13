@@ -497,6 +497,13 @@ model VoiceTurnDetection {
 model VoiceServerVadTurnDetection extends VoiceTurnDetection {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionServerVad, "type">;
   type: VoiceTurnDetectionType.server_vad;
+
+  @doc("Minimum speech duration required to trigger detection, in milliseconds.")
+  @minValue(0)
+  speech_duration_ms?: int32;
+
+  @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
+  end_of_utterance_detection?: VoiceEndOfUtteranceDetection | null;
 }
 
 @doc("The semantic end-of-utterance detection model.")
@@ -620,31 +627,18 @@ model VoiceAzureSemanticVadMultilingualTurnDetection
   languages?: string[];
 }
 
-@doc("Server VAD turn-detection settings.")
-model VoiceAgentServerVadTurnDetection {
-  ...OmitProperties<VoiceServerVadTurnDetection, "type">;
-  type: VoiceTurnDetectionType.server_vad;
-
-  @minValue(0)
-  speech_duration_ms?: int32;
-
-  end_of_utterance_detection?: VoiceEndOfUtteranceDetection | null;
-}
-
 @doc("OpenAI semantic VAD turn-detection settings.")
-model VoiceAgentSemanticVadTurnDetection {
+model VoiceAgentSemanticVadTurnDetection extends VoiceTurnDetection {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
   type: VoiceTurnDetectionType.semantic_vad;
-
-  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
-  auto_truncate?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Turn-detection settings are selected by their `type` property."
 @doc("Turn-detection settings accepted by a stable voice-agent session.")
 @oneOf
+@Azure.ClientGenerator.Core.alternateType(VoiceTurnDetection, "csharp")
 union VoiceAgentTurnDetection {
-  server_vad: VoiceAgentServerVadTurnDetection,
+  server_vad: VoiceServerVadTurnDetection,
   semantic_vad: VoiceAgentSemanticVadTurnDetection,
   azure_semantic_vad: VoiceAzureSemanticVadTurnDetection,
   azure_semantic_vad_en: VoiceAzureSemanticVadEnTurnDetection,

@@ -82590,10 +82590,8 @@ components:
           type: string
           enum:
             - semantic_vad
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
+      allOf:
+        - $ref: '#/components/schemas/VoiceTurnDetection'
       description: OpenAI semantic VAD turn-detection settings.
     VoiceAgentServerEvent:
       oneOf:
@@ -84072,44 +84070,6 @@ components:
         param:
           type: string
       description: Details of a non-fatal warning.
-    VoiceAgentServerVadTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        threshold:
-          $ref: '#/components/schemas/OpenAI.numeric'
-        prefix_padding_ms:
-          $ref: '#/components/schemas/OpenAI.integer'
-        silence_duration_ms:
-          $ref: '#/components/schemas/OpenAI.integer'
-        create_response:
-          type: boolean
-          default: true
-        interrupt_response:
-          type: boolean
-          default: true
-        idle_timeout_ms:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-            - type: 'null'
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
-        type:
-          type: string
-          enum:
-            - server_vad
-        speech_duration_ms:
-          type: integer
-          format: int32
-          minimum: 0
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
-            - type: 'null'
-      description: Server VAD turn-detection settings.
     VoiceAgentSessionAvatarConfig:
       type: object
       properties:
@@ -84404,7 +84364,7 @@ components:
       description: A time-stamped word in an input-audio transcription.
     VoiceAgentTurnDetection:
       oneOf:
-        - $ref: '#/components/schemas/VoiceAgentServerVadTurnDetection'
+        - $ref: '#/components/schemas/VoiceServerVadTurnDetection'
         - $ref: '#/components/schemas/VoiceAgentSemanticVadTurnDetection'
         - $ref: '#/components/schemas/VoiceAzureSemanticVadTurnDetection'
         - $ref: '#/components/schemas/VoiceAzureSemanticVadEnTurnDetection'
@@ -85683,6 +85643,16 @@ components:
           type: string
           enum:
             - server_vad
+        speech_duration_ms:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Minimum speech duration required to trigger detection, in milliseconds.
+        end_of_utterance_detection:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceEndOfUtteranceDetection'
+            - type: 'null'
+          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
       allOf:
         - $ref: '#/components/schemas/VoiceTurnDetection'
       description: Server-side voice activity detection.
@@ -85802,10 +85772,11 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          server_vad: '#/components/schemas/VoiceServerVadTurnDetection'
+          semantic_vad: '#/components/schemas/VoiceAgentSemanticVadTurnDetection'
+          azure_semantic_vad: '#/components/schemas/VoiceAzureSemanticVadTurnDetection'
           azure_semantic_vad_en: '#/components/schemas/VoiceAzureSemanticVadEnTurnDetection'
           azure_semantic_vad_multilingual: '#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection'
-          azure_semantic_vad: '#/components/schemas/VoiceAzureSemanticVadTurnDetection'
+          server_vad: '#/components/schemas/VoiceServerVadTurnDetection'
       description: Turn-detection configuration for a voice agent.
       x-ms-foundry-meta:
         required_previews:
