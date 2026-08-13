@@ -3,14 +3,12 @@ import "./main.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
-using Azure.ResourceManager;
 using Microsoft.BotService;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Customizations {
   @@clientName(Microsoft.BotService, "AzureBotServiceMgmtClient", "python");
-  @@scope(Microsoft.BotService.Operations.list, "!csharp");
+  @@scope(Operations.list, "!csharp");
   @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
   @@alternateType(AlexaChannelProperties.serviceEndpointUri, url, "csharp");
   @@alternateType(Bot.location, azureLocation, "csharp");
@@ -86,12 +84,8 @@ namespace Customizations {
     "csharp"
   );
   @@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
-  @@alternateType(
-    Microsoft.BotService.Resource.location,
-    azureLocation,
-    "csharp"
-  );
-  @@alternateType(Microsoft.BotService.Resource.etag, eTag, "csharp");
+  @@alternateType(Resource.location, azureLocation, "csharp");
+  @@alternateType(Resource.etag, eTag, "csharp");
   @@clientName(Site, "BotChannelSite", "csharp");
   @@alternateType(Site.tenantId, uuid, "csharp");
   @@alternateType(Site.eTag, eTag, "csharp");
@@ -230,7 +224,7 @@ namespace Customizations {
   @@clientName(ChannelNameUnion, "BotChannelName", "csharp");
 
   @@clientName(
-    Microsoft.BotService.PrivateEndpointConnection,
+    PrivateEndpointConnection,
     "BotServicePrivateEndpointConnection",
     "csharp"
   );
@@ -242,13 +236,13 @@ namespace Customizations {
   );
   @@clientName(TelephonyChannelProperties.premiumSKU, "PremiumSku", "csharp");
   @@clientName(
-    Microsoft.BotService.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+    PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
     "ConnectionState",
     "csharp"
   );
 
   @@alternateType(
-    Microsoft.BotService.PrivateEndpoint.id,
+    PrivateEndpoint.id,
     Azure.Core.armResourceIdentifier,
     "csharp"
   );
@@ -288,18 +282,14 @@ namespace Customizations {
   @@clientName(Omnichannel, "Dynamics365OmnichannelChannel", "csharp");
   @@clientName(ConnectionSetting, "BotConnectionSetting", "csharp");
   @@clientName(
-    Microsoft.BotService.PrivateLinkResource,
+    PrivateLinkResource,
     "BotServicePrivateLinkResourceData",
     "csharp"
   );
-  @@usage(
-    Microsoft.BotService.PrivateLinkResource,
-    Usage.input | Usage.output,
-    "csharp"
-  );
+  @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
   @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-    Microsoft.BotService.PrivateLinkResource.properties
+    PrivateLinkResource.properties
   );
 
   @@clientName(
@@ -372,16 +362,16 @@ namespace Customizations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotChannelsUpdate(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
     ...Azure.ResourceManager.Legacy.Provider,
 
     /**
      * The name of the Bot resource.
      */
     @path
-    @segment("botServices")
+    @TypeSpec.Rest.segment("botServices")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
     @maxLength(64)
     @minLength(2)
@@ -391,10 +381,10 @@ namespace Customizations {
      * The name of the Channel resource.
      */
     @path
-    @segment("channels")
+    @TypeSpec.Rest.segment("channels")
     channelName: ChannelName,
 
-    properties?: Microsoft.BotService.Channel,
+    properties?: Channel,
 
     @visibility(Lifecycle.Read)
     name?: string,
@@ -403,14 +393,14 @@ namespace Customizations {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     tags?: Record<string>,
-    sku?: Microsoft.BotService.Sku,
-    kind?: Microsoft.BotService.Kind,
+    sku?: Sku,
+    kind?: Kind,
     etag?: string,
     zones?: string[],
   ):
-    | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
-    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
-    | Microsoft.BotService.Error;
+    | Azure.ResourceManager.ArmResponse<BotChannel>
+    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<BotChannel>
+    | Error;
 
   @@override(BotChannels.update, BotChannelsUpdate, "javascript");
 
@@ -418,15 +408,15 @@ namespace Customizations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotsUpdate(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
     ...Azure.ResourceManager.Legacy.Provider,
 
     @path
     resourceName: string,
 
-    properties?: Microsoft.BotService.BotProperties,
+    properties?: BotProperties,
 
     @visibility(Lifecycle.Read)
     name?: string,
@@ -435,14 +425,14 @@ namespace Customizations {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     tags?: Record<string>,
-    sku?: Microsoft.BotService.Sku,
-    kind?: Microsoft.BotService.Kind,
+    sku?: Sku,
+    kind?: Kind,
     etag?: string,
     zones?: string[],
   ):
-    | Azure.ResourceManager.ArmResponse<Microsoft.BotService.Bot>
-    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
-    | Microsoft.BotService.Error;
+    | Azure.ResourceManager.ArmResponse<Bot>
+    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Bot>
+    | Error;
 
   @@override(Bots.update, BotsUpdate, "javascript");
 }
