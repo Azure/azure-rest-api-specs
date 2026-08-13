@@ -5607,6 +5607,10 @@
         "policy": {
           "$ref": "#/definitions/Placement.V1.PlacementPolicy",
           "description": "Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected."
+        },
+        "rolloutStrategy": {
+          "$ref": "#/definitions/Placement.V1.RolloutStrategy",
+          "description": "The rollout strategy configuration for the cluster resource placement."
         }
       }
     },
@@ -5617,6 +5621,10 @@
         "policy": {
           "$ref": "#/definitions/Placement.V1.PlacementPolicyPatch",
           "description": "The placement policy that can be patched."
+        },
+        "rolloutStrategy": {
+          "$ref": "#/definitions/Placement.V1.RolloutStrategy",
+          "description": "The rollout strategy configuration that can be patched."
         }
       }
     },
@@ -5676,6 +5684,16 @@
         "propertySelector": {
           "$ref": "#/definitions/Placement.V1.PropertySelectorPatch",
           "description": "The property selector that can be patched."
+        }
+      }
+    },
+    "Placement.V1.ClusterUpdateStrategyReference": {
+      "type": "object",
+      "description": "A reference to an existing cluster staged update strategy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of an existing cluster staged update strategy."
         }
       }
     },
@@ -5884,6 +5902,44 @@
             "type": "string"
           }
         }
+      }
+    },
+    "Placement.V1.RolloutStrategy": {
+      "type": "object",
+      "description": "The rollout strategy configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Placement.V1.RolloutStrategyType",
+          "description": "The type of rollout strategy. Default is RollingUpdate."
+        },
+        "clusterUpdateStrategy": {
+          "$ref": "#/definitions/Placement.V1.ClusterUpdateStrategyReference",
+          "description": "Reference to an existing cluster update strategy. Required when type is External."
+        }
+      }
+    },
+    "Placement.V1.RolloutStrategyType": {
+      "type": "string",
+      "description": "The possible rollout strategy types.",
+      "enum": [
+        "RollingUpdate",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "RolloutStrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RollingUpdate",
+            "value": "RollingUpdate",
+            "description": "Use rolling update strategy for rollout."
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "Use external rollout strategy via Staged Update Run."
+          }
+        ]
       }
     },
     "Placement.V1.Toleration": {
