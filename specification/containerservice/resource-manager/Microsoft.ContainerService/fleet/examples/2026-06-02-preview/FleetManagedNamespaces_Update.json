@@ -8,21 +8,23 @@
     "fleetName": "fleet1",
     "managedNamespaceName": "namespace1",
     "properties": {
-      "propagationPolicy": {
-        "placementProfile": {
-          "defaultClusterResourcePlacement": {
-            "rolloutStrategy": {
-              "type": "External",
-              "clusterUpdateStrategy": {
-                "name": "my-staged-update-strategy"
+      "properties": {
+        "propagationPolicy": {
+          "placementProfile": {
+            "defaultClusterResourcePlacement": {
+              "rolloutStrategy": {
+                "type": "External",
+                "clusterUpdateStrategy": {
+                  "name": "my-staged-update-strategy"
+                }
               }
             }
           }
         }
+      },
+      "tags": {
+        "tag2": "tagValue2"
       }
-    },
-    "tags": {
-      "tag2": "tagValue2"
     }
   },
   "responses": {
