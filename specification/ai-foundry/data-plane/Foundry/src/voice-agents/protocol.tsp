@@ -22,7 +22,7 @@ union VoiceAgentWebSocketSubprotocol {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "A WebSocket message may be sent by either the client or the server."
-@doc("A JSON text message exchanged over an established voice-agent WebSocket.")
+@doc("A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are carried only as base64-encoded fields in JSON events; raw binary WebSocket frames are not supported.")
 @usage(VoiceAgentWebSocketMessageUsage)
 @oneOf
 union VoiceAgentWebSocketMessage {
@@ -136,12 +136,47 @@ model VoiceAgentAvatarIceServer {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session model is a wire-compatible specialization of the persisted avatar configuration and adds only runtime transport fields."
-@doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
+@doc("Effective avatar settings returned by the stable voice-agent WebSocket contract.")
 model VoiceAgentSessionAvatarConfig extends VoiceAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
 }
 
-@doc("The stable realtime session settings accepted in a `session.update` client event.")
+@doc("Input-transcription settings mutable through `session.update`. The transcription model remains fixed by the persisted agent definition.")
+model VoiceAgentSessionUpdateInputTranscription is OmitProperties<
+  VoiceInputTranscription,
+  "model"
+>;
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance reuses the management audio-input shape while replacing transcription with the restricted session-update projection."
+@doc("Input-audio settings mutable through `session.update`.")
+model VoiceAgentSessionUpdateAudioInputConfig extends OmitProperties<
+  VoiceAudioInputConfig,
+  "transcription"
+> {
+  @doc("Asynchronous input-audio transcription settings. Set to null to disable transcription. The transcription model remains fixed by the persisted agent definition.")
+  transcription?: VoiceAgentSessionUpdateInputTranscription | null;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance reuses the management audio-output shape while omitting fixed voice_type and redocumenting the mutable voice name."
+@doc("Output-audio settings mutable through `session.update` and response-level overrides.")
+model VoiceAgentSessionUpdateAudioOutputConfig extends OmitProperties<
+  VoiceAudioOutputConfig,
+  "voice" | "voice_type"
+> {
+  @doc("The voice name or identifier. It can be changed only before the first audio response is produced in the session.")
+  voice?: string;
+}
+
+@doc("The input- and output-audio settings mutable through `session.update`.")
+model VoiceAgentSessionUpdateAudioConfig {
+  @doc("Mutable input-audio settings.")
+  input?: VoiceAgentSessionUpdateAudioInputConfig;
+
+  @doc("Mutable output-audio settings. The output `voice_type` remains fixed by the persisted agent definition.")
+  output?: VoiceAgentSessionUpdateAudioOutputConfig;
+}
+
+@doc("The mutable stable realtime session settings accepted in a `session.update` client event. Model, avatar, output `voice_type`, and transcription model remain fixed by the persisted agent definition.")
 @usage(VoiceAgentClientEventUsage)
 model VoiceAgentSessionUpdateConfig {
   @doc("The session type. Always `realtime`.")
@@ -162,11 +197,8 @@ model VoiceAgentSessionUpdateConfig {
   @doc("The output modalities enabled for the session.")
   output_modalities?: VoiceOutputModality[];
 
-  @doc("The input- and output-audio settings for the session.")
-  audio?: VoiceAudioConfig;
-
-  @doc("The avatar settings for the session.")
-  avatar?: VoiceAgentSessionAvatarConfig;
+  @doc("The mutable input- and output-audio settings for the session.")
+  audio?: VoiceAgentSessionUpdateAudioConfig;
 
   @doc("Animation settings for the session.")
   animation?: VoiceAgentAnimationConfig;
@@ -183,23 +215,29 @@ model VoiceAgentSessionUpdateConfig {
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
 
-  @doc("Additional fields to include in service outputs.")
-  include?: VoiceAgentSessionIncludeOption[];
-
   @doc("Up to 16 string key-value pairs attached to the session.")
   metadata?: Record<string>;
 
   @doc("Interim-response settings for latency and tool execution.")
   interim_response?: VoiceAgentInterimResponse;
-
-  @doc("A proactive assistant greeting started after session configuration.")
-  greeting?: VoiceGreetingConfig;
 }
 
 @doc("The effective stable realtime session settings returned by the voice-agent service.")
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentSessionResponseConfig {
-  ...VoiceAgentSessionUpdateConfig;
+  ...OmitProperties<VoiceAgentSessionUpdateConfig, "audio">;
+
+  @doc("The full effective input- and output-audio configuration, including the fixed transcription model and output `voice_type`.")
+  audio?: VoiceAudioConfig;
+
+  @doc("The effective avatar configuration fixed by the persisted agent definition.")
+  avatar?: VoiceAgentSessionAvatarConfig;
+
+  @doc("Additional fields included in service outputs.")
+  include?: VoiceAgentSessionIncludeOption[];
+
+  @doc("The proactive assistant greeting configured by the persisted agent definition.")
+  greeting?: VoiceGreetingConfig;
 
   @doc("The object type. Always `realtime.session`.")
   object: "realtime.session";
@@ -242,8 +280,8 @@ model VoiceAgentResponseCreateParams {
   @doc("Modalities that the response may return.")
   output_modalities?: VoiceOutputModality[];
 
-  @doc("Response-specific audio settings.")
-  audio?: PickProperties<VoiceAudioConfig, "output">;
+  @doc("Response-specific output-audio settings. The output `voice_type` remains fixed by the persisted agent definition.")
+  audio?: PickProperties<VoiceAgentSessionUpdateAudioConfig, "output">;
 
   @doc("A pre-generated assistant message used to begin the response.")
   pre_generated_assistant_message?:

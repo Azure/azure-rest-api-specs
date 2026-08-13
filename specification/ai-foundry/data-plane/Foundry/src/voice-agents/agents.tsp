@@ -115,8 +115,9 @@ model VoiceAgentDefinition extends AgentDefinition {
   greeting?: VoiceGreetingConfig;
 
   @doc("""
-    The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
-    transcription. These values are session defaults; a client may override supported fields when connecting.
+    The persisted audio configuration, including input and output formats, voice, turn detection, noise reduction,
+    and transcription. A `session.update` may override only the mutable session-update subset; the transcription
+    model and output `voice_type` remain fixed by this definition.
     """)
   audio?: VoiceAudioConfig;
 
@@ -135,7 +136,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Interim-response settings for latency and tool execution.")
   interim_response?: VoiceAgentInterimResponse;
 
-  @doc("Optional avatar configuration. These values are session defaults and may be overridden when connecting.")
+  @doc("Optional avatar configuration. The avatar is fixed by the persisted agent definition and cannot be overridden by `session.update`.")
   avatar?: VoiceAvatarConfig;
 
   @doc("""
@@ -313,7 +314,8 @@ model VoiceToolboxTool extends VoiceAgentTool {
 }
 
 @doc("""
-  The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
+  The persisted audio configuration for a voice agent. Only the session-update subset may override these defaults;
+  the transcription model and output `voice_type` remain fixed by the agent definition.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioConfig {
@@ -793,7 +795,8 @@ model VoiceAgentAvatarScene {
 }
 
 @doc("""
-  Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
+  Avatar configuration for a voice agent. The avatar is fixed by the persisted agent definition and cannot be
+  overridden by `session.update`.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAvatarConfig {
