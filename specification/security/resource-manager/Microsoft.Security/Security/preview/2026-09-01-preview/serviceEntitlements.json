@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Defender for Cloud",
     "version": "2026-09-01-preview",
-    "description": "API specification for Microsoft Defender for Cloud billing plans.",
+    "description": "API specification for Microsoft Defender for Cloud service entitlements.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,17 +40,50 @@
   },
   "tags": [
     {
-      "name": "BillingPlans"
+      "name": "ServiceEntitlements"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/billingPlans": {
+    "/providers/Microsoft.Security/serviceEntitlements": {
       "get": {
-        "operationId": "BillingPlans_ListBySubscription",
+        "operationId": "ServiceEntitlements_ListByTenant",
         "tags": [
-          "BillingPlans"
+          "ServiceEntitlements"
         ],
-        "description": "Lists billing plans in a subscription.",
+        "description": "Lists service entitlements in the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists security entitlements in the tenant": {
+            "$ref": "./examples/ServiceEntitlements/ListServiceEntitlementsByTenant.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/serviceEntitlements": {
+      "get": {
+        "operationId": "ServiceEntitlements_ListBySubscription",
+        "tags": [
+          "ServiceEntitlements"
+        ],
+        "description": "Lists service entitlements in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +96,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BillingPlanListResult"
+              "$ref": "#/definitions/ServiceEntitlementListResult"
             }
           },
           "default": {
@@ -74,8 +107,8 @@
           }
         },
         "x-ms-examples": {
-          "Lists billing plans in a subscription": {
-            "$ref": "./examples/BillingPlans/ListBillingPlansBySubscription.json"
+          "Lists security entitlements in a subscription": {
+            "$ref": "./examples/ServiceEntitlements/ListServiceEntitlementsBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +116,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/billingPlans": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlements": {
       "get": {
-        "operationId": "BillingPlans_ListByResourceGroup",
+        "operationId": "ServiceEntitlements_ListByResourceGroup",
         "tags": [
-          "BillingPlans"
+          "ServiceEntitlements"
         ],
-        "description": "Lists billing plans in a resource group.",
+        "description": "Lists service entitlements in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +138,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BillingPlanListResult"
+              "$ref": "#/definitions/ServiceEntitlementListResult"
             }
           },
           "default": {
@@ -116,8 +149,8 @@
           }
         },
         "x-ms-examples": {
-          "Lists billing plans in a resource group": {
-            "$ref": "./examples/BillingPlans/ListBillingPlansByResourceGroup.json"
+          "Lists security entitlements in a resource group": {
+            "$ref": "./examples/ServiceEntitlements/ListServiceEntitlementsByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -125,13 +158,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/billingPlans/{billingPlanName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlements/{serviceEntitlementName}": {
       "get": {
-        "operationId": "BillingPlans_Get",
+        "operationId": "ServiceEntitlements_Get",
         "tags": [
-          "BillingPlans"
+          "ServiceEntitlements"
         ],
-        "description": "Gets a billing plan.",
+        "description": "Gets a service entitlement.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -143,9 +176,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "billingPlanName",
+            "name": "serviceEntitlementName",
             "in": "path",
-            "description": "The name of the BillingPlan",
+            "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
             "pattern": "^.+$"
@@ -155,7 +188,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BillingPlan"
+              "$ref": "#/definitions/ServiceEntitlement"
             }
           },
           "default": {
@@ -166,17 +199,17 @@
           }
         },
         "x-ms-examples": {
-          "Gets a billing plan": {
-            "$ref": "./examples/BillingPlans/GetBillingPlan.json"
+          "Gets a service entitlement": {
+            "$ref": "./examples/ServiceEntitlements/GetServiceEntitlement.json"
           }
         }
       },
       "put": {
-        "operationId": "BillingPlans_CreateOrUpdate",
+        "operationId": "ServiceEntitlements_CreateOrUpdate",
         "tags": [
-          "BillingPlans"
+          "ServiceEntitlements"
         ],
-        "description": "Creates or replaces a billing plan.",
+        "description": "Creates or replaces a service entitlement.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -188,9 +221,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "billingPlanName",
+            "name": "serviceEntitlementName",
             "in": "path",
-            "description": "The name of the BillingPlan",
+            "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
             "pattern": "^.+$"
@@ -201,21 +234,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingPlan"
+              "$ref": "#/definitions/ServiceEntitlement"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'BillingPlan' update operation succeeded",
+            "description": "Resource 'ServiceEntitlement' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/BillingPlan"
+              "$ref": "#/definitions/ServiceEntitlement"
             }
           },
           "201": {
-            "description": "Resource 'BillingPlan' create operation succeeded",
+            "description": "Resource 'ServiceEntitlement' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/BillingPlan"
+              "$ref": "#/definitions/ServiceEntitlement"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -237,22 +270,22 @@
           }
         },
         "x-ms-examples": {
-          "Creates a billing plan": {
-            "$ref": "./examples/BillingPlans/CreateOrUpdateBillingPlan.json"
+          "Creates or updates a service entitlement": {
+            "$ref": "./examples/ServiceEntitlements/CreateOrUpdateServiceEntitlement.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/BillingPlan"
+          "final-state-schema": "#/definitions/ServiceEntitlement"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "BillingPlans_Update",
+        "operationId": "ServiceEntitlements_Update",
         "tags": [
-          "BillingPlans"
+          "ServiceEntitlements"
         ],
-        "description": "Updates a billing plan.",
+        "description": "Updates a service entitlement.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -264,9 +297,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "billingPlanName",
+            "name": "serviceEntitlementName",
             "in": "path",
-            "description": "The name of the BillingPlan",
+            "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
             "pattern": "^.+$"
@@ -277,7 +310,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingPlanUpdate"
+              "$ref": "#/definitions/ServiceEntitlementUpdate"
             }
           }
         ],
@@ -285,7 +318,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BillingPlan"
+              "$ref": "#/definitions/ServiceEntitlement"
             }
           },
           "202": {
@@ -310,22 +343,22 @@
           }
         },
         "x-ms-examples": {
-          "Updates a billing plan": {
-            "$ref": "./examples/BillingPlans/UpdateBillingPlan.json"
+          "Updates a security entitlement": {
+            "$ref": "./examples/ServiceEntitlements/UpdateServiceEntitlement.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/BillingPlan"
+          "final-state-schema": "#/definitions/ServiceEntitlement"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "BillingPlans_Delete",
+        "operationId": "ServiceEntitlements_Delete",
         "tags": [
-          "BillingPlans"
+          "ServiceEntitlements"
         ],
-        "description": "Deletes a billing plan.",
+        "description": "Deletes a service entitlement.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -337,9 +370,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "billingPlanName",
+            "name": "serviceEntitlementName",
             "in": "path",
-            "description": "The name of the BillingPlan",
+            "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
             "pattern": "^.+$"
@@ -371,8 +404,8 @@
           }
         },
         "x-ms-examples": {
-          "Deletes a billing plan": {
-            "$ref": "./examples/BillingPlans/DeleteBillingPlan.json"
+          "Deletes a service entitlement": {
+            "$ref": "./examples/ServiceEntitlements/DeleteServiceEntitlement.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -383,30 +416,30 @@
     }
   },
   "definitions": {
-    "BillingPlan": {
+    "ServiceEntitlement": {
       "type": "object",
-      "description": "A Microsoft Defender for Cloud billing plan.",
+      "description": "A Microsoft Defender for Cloud service entitlement.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BillingPlanProperties",
+          "$ref": "#/definitions/ServiceEntitlementProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "BillingPlanListResult": {
+    "ServiceEntitlementListResult": {
       "type": "object",
-      "description": "The response of a BillingPlan list operation.",
+      "description": "The response of a ServiceEntitlement list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The BillingPlan items on this page",
+          "description": "The ServiceEntitlement items on this page",
           "items": {
-            "$ref": "#/definitions/BillingPlan"
+            "$ref": "#/definitions/ServiceEntitlement"
           }
         },
         "nextLink": {
@@ -419,38 +452,29 @@
         "value"
       ]
     },
-    "BillingPlanProperties": {
+    "ServiceEntitlementProperties": {
       "type": "object",
-      "description": "Properties of a billing plan.",
+      "description": "Properties of a service entitlement.",
       "properties": {
         "serviceType": {
           "type": "string",
-          "description": "The service associated with the billing plan.",
+          "description": "The service associated with the service entitlement.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "state": {
-          "$ref": "#/definitions/BillingPlanState",
-          "description": "Indicates whether the billing plan is enabled.",
+          "$ref": "#/definitions/ServiceEntitlementState",
+          "description": "Indicates whether the service entitlement is enabled.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
-        "serviceProperties": {
-          "type": "object",
-          "description": "Service-specific billing plan configuration. The schema is owned by the\nservice identified by serviceType.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "provisioningState": {
-          "$ref": "#/definitions/BillingPlanProvisioningState",
+          "$ref": "#/definitions/ServiceEntitlementProvisioningState",
           "description": "The status of the most recent resource operation.",
           "readOnly": true
         }
@@ -460,9 +484,9 @@
         "state"
       ]
     },
-    "BillingPlanProvisioningState": {
+    "ServiceEntitlementProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of a billing plan.",
+      "description": "The provisioning state of a service entitlement.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -473,7 +497,7 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "BillingPlanProvisioningState",
+        "name": "ServiceEntitlementProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -514,47 +538,54 @@
         ]
       }
     },
-    "BillingPlanState": {
+    "ServiceEntitlementState": {
       "type": "string",
-      "description": "The operational state of a billing plan.",
+      "description": "The operational state of a service entitlement.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "BillingPlanState",
+        "name": "ServiceEntitlementState",
         "modelAsString": true,
         "values": [
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "The billing plan is enabled."
+            "description": "The service entitlement is enabled."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "The billing plan is disabled."
+            "description": "The service entitlement is disabled."
           }
         ]
       }
     },
-    "BillingPlanUpdate": {
+    "ServiceEntitlementUpdate": {
       "type": "object",
-      "description": "The request body for updating a billing plan.",
+      "description": "The request body for updating a service entitlement.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/BillingPlanUpdateProperties",
-          "description": "Properties to update on the billing plan."
+          "$ref": "#/definitions/ServiceEntitlementUpdateProperties",
+          "description": "Properties to update on the service entitlement."
         }
       }
     },
-    "BillingPlanUpdateProperties": {
+    "ServiceEntitlementUpdateProperties": {
       "type": "object",
-      "description": "Properties that can be updated on a billing plan.",
+      "description": "Properties that can be updated on a service entitlement.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/BillingPlanState",
-          "description": "Indicates whether the billing plan is enabled."
+          "$ref": "#/definitions/ServiceEntitlementState",
+          "description": "Indicates whether the service entitlement is enabled."
         }
       }
     }

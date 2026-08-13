@@ -148,7 +148,7 @@ These settings apply only when
 
 ```yaml $(tag) == 'package-preview-2026-09-01-preview'
 input-file:
-  - preview/2026-09-01-preview/billingPlans.json
+  - preview/2026-09-01-preview/serviceEntitlements.json
 ```
 
 ### Tag: package-preview-2026-04-only
@@ -769,7 +769,7 @@ input-file:
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
-- preview/2026-09-01-preview/billingPlans.json
+- preview/2026-09-01-preview/serviceEntitlements.json
 
 # Autorest suppressions
 suppressions:

@@ -1,12 +1,15 @@
 {
-  "operationId": "BillingPlans_Update",
-  "title": "Updates a billing plan",
+  "operationId": "ServiceEntitlements_Update",
+  "title": "Updates a security entitlement",
   "parameters": {
     "api-version": "2026-09-01-preview",
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "resourceGroupName": "myResourceGroup",
-    "billingPlanName": "MyBillingPlan1",
+    "serviceEntitlementName": "MyServiceEntitlement1",
     "properties": {
+      "tags": {
+        "environment": "test"
+      },
       "properties": {
         "state": "Disabled"
       }
@@ -15,9 +18,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/billingPlans/MyBillingPlan1",
-        "name": "MyBillingPlan1",
-        "type": "Microsoft.Security/billingPlans",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlements/MyServiceEntitlement1",
+        "name": "MyServiceEntitlement1",
+        "type": "Microsoft.Security/serviceEntitlements",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
         "properties": {
           "serviceType": "Perception",
           "state": "Disabled",
