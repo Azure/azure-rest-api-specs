@@ -16,11 +16,10 @@ using Azure.ResourceManager;
  * API specification for Microsoft Defender for Cloud service entitlements.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The provider-wide Microsoft.Security operations endpoint is defined by the separate OperationsAPI TypeSpec project."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Microsoft.Security TypeSpec projects use PascalCase namespaces with an uppercase 'API' suffix as a service-wide convention."
 @armProviderNamespace("Microsoft.Security")
 @service(#{ title: "Microsoft Defender for Cloud" })
 @versioned(Versions)
-namespace ServiceEntitlementsAPI;
+namespace ServiceEntitlementsApi;
 
 /** The available API versions. */
 enum Versions {

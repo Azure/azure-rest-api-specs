@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace ServiceEntitlementsAPI;
+namespace ServiceEntitlementsApi;
 
 /** A Microsoft Defender for Cloud service entitlement. */
 model ServiceEntitlement is TrackedResource<ServiceEntitlementProperties> {
@@ -17,7 +17,7 @@ model ServiceEntitlement is TrackedResource<ServiceEntitlementProperties> {
     Resource = ServiceEntitlement,
     KeyName = "serviceEntitlementName",
     SegmentName = "serviceEntitlements",
-    NamePattern = "^.+$"
+    NamePattern = "^[a-z0-9]{3,24}$"
   >;
 }
 
@@ -33,11 +33,18 @@ interface ServiceEntitlements {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ServiceEntitlement,
-    ServiceEntitlementUpdate
+    ServiceEntitlementUpdate,
+    LroHeaders = ArmCombinedLroHeaders<
+      ArmOperationStatus,
+      ServiceEntitlement
+    > & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Deletes a service entitlement. */
-  delete is ArmResourceDeleteWithoutOkAsync<ServiceEntitlement>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ServiceEntitlement,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Lists service entitlements in a resource group. */
   listByResourceGroup is ArmResourceListByParent<ServiceEntitlement>;

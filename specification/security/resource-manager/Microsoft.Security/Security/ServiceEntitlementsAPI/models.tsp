@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace ServiceEntitlementsAPI;
+namespace ServiceEntitlementsApi;
 
 /** The operational state of a service entitlement. */
 union ServiceEntitlementState {

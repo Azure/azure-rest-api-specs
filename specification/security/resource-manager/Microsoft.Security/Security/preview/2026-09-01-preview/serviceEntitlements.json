@@ -181,7 +181,7 @@
             "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
-            "pattern": "^.+$"
+            "pattern": "^[a-z0-9]{3,24}$"
           }
         ],
         "responses": {
@@ -226,7 +226,7 @@
             "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
-            "pattern": "^.+$"
+            "pattern": "^[a-z0-9]{3,24}$"
           },
           {
             "name": "resource",
@@ -274,10 +274,6 @@
             "$ref": "./examples/ServiceEntitlements/CreateOrUpdateServiceEntitlement.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ServiceEntitlement"
-        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -302,7 +298,7 @@
             "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
-            "pattern": "^.+$"
+            "pattern": "^[a-z0-9]{3,24}$"
           },
           {
             "name": "properties",
@@ -324,6 +320,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -346,10 +347,6 @@
           "Updates a security entitlement": {
             "$ref": "./examples/ServiceEntitlements/UpdateServiceEntitlement.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ServiceEntitlement"
         },
         "x-ms-long-running-operation": true
       },
@@ -375,13 +372,18 @@
             "description": "The name of the ServiceEntitlement",
             "required": true,
             "type": "string",
-            "pattern": "^.+$"
+            "pattern": "^[a-z0-9]{3,24}$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -407,9 +409,6 @@
           "Deletes a service entitlement": {
             "$ref": "./examples/ServiceEntitlements/DeleteServiceEntitlement.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -536,7 +535,8 @@
             "description": "The resource is being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ServiceEntitlementState": {
       "type": "string",
