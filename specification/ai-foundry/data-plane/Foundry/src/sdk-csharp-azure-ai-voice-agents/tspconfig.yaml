@@ -2,60 +2,27 @@ parameters:
   "service-dir":
     default: "sdk/ai"
 options:
-  "@azure-tools/typespec-python":
-    package-mode: "dataplane"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
-    package-name: "azure-ai-projects"
-    namespace: "azure.ai.projects"
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Agents.Voice
     api-version: "v1"
-    flavor: azure
-    generate-test: false
-    generate-sample: false
-    generate-typeddict: false
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/ai-projects"
-    api-version: "v1"
-    is-modular-library: true
-    generate-test: true
-    generate-metadata: false
-    ignore-property-name-normalize: true
-    ignore-enum-member-name-normalize: true
-    package-details:
-      name: "@azure/ai-projects"
-      description: "Azure AI Projects Client"
-    flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
-      - specification/ai-foundry/data-plane/Foundry/src/agents-optimization
-      - specification/ai-foundry/data-plane/Foundry/src/agents-session-files
       - specification/ai-foundry/data-plane/Foundry/src/common
-      - specification/ai-foundry/data-plane/Foundry/src/connections
-      - specification/ai-foundry/data-plane/Foundry/src/data_generation_jobs
-      - specification/ai-foundry/data-plane/Foundry/src/datasets
-      - specification/ai-foundry/data-plane/Foundry/src/deployments
-      - specification/ai-foundry/data-plane/Foundry/src/evaluation-rules
-      - specification/ai-foundry/data-plane/Foundry/src/evaluation-taxonomies
-      - specification/ai-foundry/data-plane/Foundry/src/evaluators
-      - specification/ai-foundry/data-plane/Foundry/src/indexes
-      - specification/ai-foundry/data-plane/Foundry/src/insights
       - specification/ai-foundry/data-plane/Foundry/src/memory-stores
-      - specification/ai-foundry/data-plane/Foundry/src/models
       - specification/ai-foundry/data-plane/Foundry/src/openai
-      - specification/ai-foundry/data-plane/Foundry/src/red-teams
-      - specification/ai-foundry/data-plane/Foundry/src/routines
-      - specification/ai-foundry/data-plane/Foundry/src/schedules
       - specification/ai-foundry/data-plane/Foundry/src/sdk-common
       - specification/ai-foundry/data-plane/Foundry/src/skills
-      - specification/ai-foundry/data-plane/Foundry/src/toolboxes
       - specification/ai-foundry/data-plane/Foundry/src/tools
+      - specification/ai-foundry/data-plane/Foundry/src/toolboxes
+      - specification/ai-foundry/data-plane/Foundry/src/voice-agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
-  - "@azure-tools/openai-typespec/models/evals"
-  - "@azure-tools/openai-typespec/models/fine-tuning"
+  - "@azure-tools/openai-typespec/models/realtime"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
