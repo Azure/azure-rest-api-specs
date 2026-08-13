@@ -3361,7 +3361,18 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Accepted (202) response for the cross-tenant operation-result poller: carries the Location header\nthe caller polls (plus Retry-After) while the long-running operation is still in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to poll for the operation result while it is still in progress."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before polling again."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7232,11 +7243,6 @@
               }
             ]
           }
-        },
-        "mappingName": {
-          "type": "string",
-          "description": "Name of the cross-tenant vault mapping.",
-          "readOnly": true
         },
         "createdTime": {
           "type": "string",

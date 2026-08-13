@@ -56,6 +56,10 @@ These settings apply only when `--tag=package-2026-08-31-preview` is specified o
 ```yaml $(tag) == 'package-2026-08-31-preview'
 input-file:
   - preview/2026-08-31-preview/dataprotection.json
+suppressions:
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: dataprotection.json
+    reason: DPP list models compose value + DppResourceList.nextLink via allOf and satisfy the value+nextLink condition; the LintDiff rule does not follow the allOf composition (tool false-positive). Consistent with the existing suppression on prior DPP tags (package-preview-2024-02).
 ```
 
 ### Tag: package-2026-04-01-preview

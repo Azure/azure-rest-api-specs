@@ -50,12 +50,6 @@ model CrossTenantVaultMappingProperties {
   ]>;
 
   /**
-   * Name of the cross-tenant vault mapping.
-   */
-  @visibility(Lifecycle.Read)
-  mappingName?: string;
-
-  /**
    * Timestamp when the cross-tenant vault mapping was created.
    */
   @visibility(Lifecycle.Read)
@@ -479,6 +473,28 @@ interface BackupInstanceOperationStatusFromDppCrossTenantVault {
   >;
 }
 
+/**
+ * Accepted (202) response for the cross-tenant operation-result poller: carries the Location header
+ * the caller polls (plus Retry-After) while the long-running operation is still in progress.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantOperationResultAcceptedResponse {
+  /**
+   * The HTTP 202 status code indicating the cross-tenant operation is still in progress.
+   */
+  @statusCode statusCode: 202;
+
+  /**
+   * The URL to poll for the operation result while it is still in progress.
+   */
+  @header("Location") location?: string;
+
+  /**
+   * The recommended number of seconds to wait before polling again.
+   */
+  @header("Retry-After") retryAfter?: int32;
+}
+
 // Operation-result poller (Location-header LRO), parented at the backup instance under the mapping.
 @armResourceOperations
 interface BackupInstanceOperationResultFromCrossTenantVaultOps
@@ -523,10 +539,11 @@ interface BackupInstanceOperationResultFromDppCrossTenantVault {
    * mapped source vault - the leg the restore's Location header points at. Returns 202 with Location/Retry-After
    * while pending, and 200 with the operation result body when complete.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "BMS/DPP async operation-result GET is a Location-header LRO poller (202 while pending, 200 with body when done) - the frozen BMS-wide wire every existing Azure-Backup SDK/CLI poller depends on."
   get is BackupInstanceOperationResultFromCrossTenantVaultOps.Read<
     OperationJobExtendedInfo,
-    Response = ArmResponse<OperationJobExtendedInfo> | AcceptedResponse,
+    Response =
+      | ArmResponse<OperationJobExtendedInfo>
+      | CrossTenantOperationResultAcceptedResponse,
     OverrideErrorType = CloudError
   >;
 }
