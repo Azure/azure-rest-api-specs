@@ -363,6 +363,26 @@ model StorageAccountConfiguration {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension for backward compatibility"
   @extension("x-ms-secret", true)
   storageAccountKey?: string;
+
+  /**
+   * The storage account authentication method. Specifies how the deployment script authenticates to the storage account. Use 'Key' for storage account key-based authentication or 'ManagedIdentity' to authenticate using a user-assigned managed identity. If not specified, storage account key-based authentication is used by default.
+   */
+  @added(Versions.v2026_04_01)
+  storageAuthenticationType?: StorageAuthenticationTypeEnum;
+}
+
+/**
+ * Specifies the authentication type to be used for connecting to the storage account used for script execution.
+ */
+@added(Versions.v2026_04_01)
+union StorageAuthenticationTypeEnum {
+  string,
+
+  /** Use storage account key-based authentication. The storage account access key will be used to connect to the storage account. In private networks, both the storage account key and a user-assigned managed identity are used to access the storage account. */
+  Key: "Key",
+
+  /** Use a user-assigned managed identity to authenticate to the storage account. The identity assigned to the deployment script resource will be used. */
+  ManagedIdentity: "ManagedIdentity",
 }
 
 /**
