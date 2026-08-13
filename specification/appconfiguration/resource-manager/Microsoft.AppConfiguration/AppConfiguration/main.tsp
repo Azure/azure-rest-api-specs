@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./ConfigurationStore.tsp";
 import "./DeletedConfigurationStore.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./NetworkSecurityPerimeter.tsp";
 import "./NetworkSecurityPerimeterConfigurations.tsp";
 import "./PrivateLinkResource.tsp";
 import "./KeyValue.tsp";

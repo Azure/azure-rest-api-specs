@@ -192,7 +192,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@alternateType(
-  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Microsoft.AppConfiguration.NetworkSecurityPerimeter.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -207,12 +207,12 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Azure.ResourceManager.CommonTypes.Severity,
+  Microsoft.AppConfiguration.Severity,
   "AppConfigurationSeverity",
   "csharp"
 );
 @@clientName(
-  Azure.ResourceManager.CommonTypes.IssueType,
+  Microsoft.AppConfiguration.IssueType,
   "AppConfigurationIssueType",
   "csharp"
 );
