@@ -1,0 +1,28 @@
+{
+  "operationId": "BillingPlans_ListByResourceGroup",
+  "title": "Lists billing plans in a resource group",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/billingPlans/MyBillingPlan1",
+            "name": "MyBillingPlan1",
+            "type": "Microsoft.Security/billingPlans",
+            "location": "eastus",
+            "properties": {
+              "serviceType": "Perception",
+              "state": "Enabled",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

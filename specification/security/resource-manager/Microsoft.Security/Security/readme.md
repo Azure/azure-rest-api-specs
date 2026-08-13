@@ -139,6 +139,16 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2026-09-01-preview
+
+These settings apply only when
+`--tag=package-preview-2026-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-09-01-preview'
+input-file:
+  - preview/2026-09-01-preview/billingPlans.json
+```
+
 ### Tag: package-preview-2026-04-only
 
 These settings apply only when `--tag=package-preview-2026-04-only` is specified on the command line.
