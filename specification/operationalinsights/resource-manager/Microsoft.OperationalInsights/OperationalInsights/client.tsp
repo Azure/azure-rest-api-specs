@@ -5,7 +5,6 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.OperationalInsights;
-using Microsoft.OperationalInsights.Customizations;
 
 @@clientName(
   Microsoft.OperationalInsights,
@@ -286,7 +285,11 @@ using Microsoft.OperationalInsights.Customizations;
   "csharp"
 );
 @@clientName(ClusterSku, "OperationalInsightsClusterSku", "csharp");
-@@clientName(Capacity, "OperationalInsightsClusterCapacity", "csharp");
+@@clientName(
+  Customizations.Capacity,
+  "OperationalInsightsClusterCapacity",
+  "csharp"
+);
 @@clientName(Type, "OperationalInsightsDataExportDestinationType", "csharp");
 @@clientName(DataSourceKind, "OperationalInsightsDataSourceKind", "csharp");
 @@clientName(
@@ -414,7 +417,7 @@ using Microsoft.OperationalInsights.Customizations;
   "csharp"
 );
 @@clientName(
-  CapacityReservationLevel,
+  Customizations.CapacityReservationLevel,
   "OperationalInsightsWorkspaceCapacityReservationLevel",
   "csharp"
 );
@@ -426,10 +429,10 @@ using Microsoft.OperationalInsights.Customizations;
   "csharp"
 );
 
-@@alternateType(ClusterSku.capacity, Capacity, "csharp");
+@@alternateType(ClusterSku.capacity, Customizations.Capacity, "csharp");
 @@alternateType(
   WorkspaceSku.capacityReservationLevel,
-  CapacityReservationLevel,
+  Customizations.CapacityReservationLevel,
   "csharp"
 );
 @@clientName(
@@ -618,7 +621,7 @@ using Microsoft.OperationalInsights.Customizations;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET pageable shape for workspace schema values"
 @@markAsPageable(Workspaces.schemaGet, "csharp");
 
-namespace Microsoft.OperationalInsights.Customizations {
+namespace Customizations {
   #suppress "@azure-tools/typespec-azure-core/no-enum" "Preserve previous .NET numeric enum shape used by @@alternateType for SDK compatibility"
   enum Capacity {
     FiveHundred: 500,

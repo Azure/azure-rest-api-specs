@@ -10,13 +10,16 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Microsoft.Relationships.Customizations;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Relationships.Customizations {
+namespace Customizations {
   @doc("DependencyOf relationship resource for create or update.")
-  model DependencyOfRelationshipCreateOrUpdate
-    is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {
+  model DependencyOfRelationshipCreateOrUpdate {
+    ...OmitProperties<
+      ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate>,
+      "name"
+    >;
+
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of dependencyOf relationship.")
     @key
@@ -36,8 +39,12 @@ namespace Microsoft.Relationships.Customizations {
   }
 
   @doc("ServiceGroupMember relationship resource for create or update.")
-  model ServiceGroupMemberRelationshipCreateOrUpdate
-    is ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate> {
+  model ServiceGroupMemberRelationshipCreateOrUpdate {
+    ...OmitProperties<
+      ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate>,
+      "name"
+    >;
+
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of ServiceGroupMember relationship.")
     @key
@@ -76,12 +83,12 @@ namespace Microsoft.Relationships.Customizations {
 // which omits server-side read-only fields (sourceId, originInformation, metadata, etc.)
 @@alternateType(
   DependencyOfRelationships.createOrUpdate::parameters.resource,
-  DependencyOfRelationshipCreateOrUpdate,
+  Customizations.DependencyOfRelationshipCreateOrUpdate,
   "javascript"
 );
 @@alternateType(
   ServiceGroupMemberRelationships.createOrUpdate::parameters.resource,
-  ServiceGroupMemberRelationshipCreateOrUpdate,
+  Customizations.ServiceGroupMemberRelationshipCreateOrUpdate,
   "javascript"
 );
 

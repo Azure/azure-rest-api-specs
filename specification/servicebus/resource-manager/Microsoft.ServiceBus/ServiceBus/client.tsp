@@ -3,7 +3,6 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ServiceBus;
-using Microsoft.ServiceBus.Customizations;
 
 @@clientName(Microsoft.ServiceBus, "ServiceBusManagementClient", "javascript");
 @@clientName(Microsoft.ServiceBus, "ServiceBusManagementClient", "python");
@@ -266,7 +265,7 @@ using Microsoft.ServiceBus.Customizations;
 // C# SDK backward-compatibility replacement models
 // =============================================================================
 
-namespace Microsoft.ServiceBus.Customizations {
+namespace Customizations {
   /**
    * Parameters supplied to the Patch Namespace operation.
    */
@@ -296,32 +295,40 @@ namespace Microsoft.ServiceBus.Customizations {
 
 @@alternateType(
   SBNamespaceUpdateParameters,
-  SBNamespaceUpdateParametersReplacement,
+  Customizations.SBNamespaceUpdateParametersReplacement,
   "csharp"
 );
 @@clientName(
-  SBNamespaceUpdateParametersReplacement,
+  Customizations.SBNamespaceUpdateParametersReplacement,
   "ServiceBusNamespacePatch",
   "csharp"
 );
 @@usage(
-  SBNamespaceUpdateParametersReplacement,
+  Customizations.SBNamespaceUpdateParametersReplacement,
   Usage.input | Usage.output,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  SBNamespaceUpdateParametersReplacement.properties
+  Customizations.SBNamespaceUpdateParametersReplacement.properties
 );
 
-@@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
+@@alternateType(
+  PrivateLinkResource,
+  Customizations.PrivateLinkResourceReplacement,
+  "csharp"
+);
 @@clientName(
-  PrivateLinkResourceReplacement,
+  Customizations.PrivateLinkResourceReplacement,
   "ServiceBusPrivateLinkResource",
   "csharp"
 );
-@@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
+@@usage(
+  Customizations.PrivateLinkResourceReplacement,
+  Usage.input | Usage.output,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateLinkResourceReplacement.properties
+  Customizations.PrivateLinkResourceReplacement.properties
 );

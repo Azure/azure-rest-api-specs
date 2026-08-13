@@ -4,7 +4,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Batch;
-using Microsoft.Batch.Customizations;
 
 @@clientName(Microsoft.Batch, "BatchManagementClient", "javascript, python");
 
@@ -124,7 +123,7 @@ using Microsoft.Batch.Customizations;
 @@clientName(CertificateFormat, "BatchAccountCertificateFormat", "csharp");
 @@alternateType(
   CertificateProvisioningState,
-  BatchAccountCertificateProvisioningState,
+  Customizations.BatchAccountCertificateProvisioningState,
   "csharp"
 );
 @@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
@@ -338,7 +337,7 @@ using Microsoft.Batch.Customizations;
   "BatchIPAddressProvisioningType",
   "csharp"
 );
-@@alternateType(IPRuleAction, BatchIPRuleAction, "csharp");
+@@alternateType(IPRuleAction, Customizations.BatchIPRuleAction, "csharp");
 @@clientName(NetworkConfiguration, "BatchNetworkConfiguration", "csharp");
 @@clientName(
   NetworkConfiguration.dynamicVnetAssignmentScope,
@@ -434,16 +433,24 @@ using Microsoft.Batch.Customizations;
 @@clientName(StorageAccountType.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(StorageAccountType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(StorageAccountType, "BatchStorageAccountType", "csharp");
-@@alternateType(ProvisioningState, BatchProvisioningState, "csharp");
 @@alternateType(
-  PoolProvisioningState,
-  BatchAccountPoolProvisioningState,
+  ProvisioningState,
+  Customizations.BatchProvisioningState,
   "csharp"
 );
-@@alternateType(DiffDiskPlacement, BatchDiffDiskPlacement, "csharp");
+@@alternateType(
+  PoolProvisioningState,
+  Customizations.BatchAccountPoolProvisioningState,
+  "csharp"
+);
+@@alternateType(
+  DiffDiskPlacement,
+  Customizations.BatchDiffDiskPlacement,
+  "csharp"
+);
 @@alternateType(
   PrivateEndpointConnectionProvisioningState,
-  BatchPrivateEndpointConnectionProvisioningState,
+  Customizations.BatchPrivateEndpointConnectionProvisioningState,
   "csharp"
 );
 @@clientName(
@@ -647,10 +654,10 @@ using Microsoft.Batch.Customizations;
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(BatchAccount, BatchAccountData, "csharp");
+@@alternateType(BatchAccount, Customizations.BatchAccountData, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  BatchAccountData.properties,
+  Customizations.BatchAccountData.properties,
   "csharp"
 );
 @@alternateType(
@@ -660,14 +667,17 @@ using Microsoft.Batch.Customizations;
 );
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
-namespace Microsoft.Batch.Customizations {
+namespace Customizations {
   /**
    * Contains information about an Azure Batch account.
    */
   @usage(Usage.input, "csharp")
   @clientName("BatchAccount", "csharp")
-  model BatchAccountData
-    is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
+  model BatchAccountData {
+    ...OmitProperties<
+      Azure.ResourceManager.ProxyResource<BatchAccountProperties>,
+      "name" | "systemData"
+    >;
     ...Azure.ResourceManager.ResourceNameParameter<
       Resource = BatchAccount,
       KeyName = "accountName",

@@ -2,8 +2,9 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Fabric;
 
-namespace Microsoft.Fabric.Customizations {
+namespace Customizations {
   @@clientName(
     FabricCapacities.checkNameAvailability,
     "CheckFabricCapacityNameAvailability",

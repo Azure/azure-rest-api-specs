@@ -3,7 +3,9 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
-namespace Microsoft.HybridConnectivity.Customizations;
+using Microsoft.HybridConnectivity;
+
+namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(

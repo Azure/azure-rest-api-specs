@@ -3,8 +3,9 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.AI.OpenAI.Assistants;
 
-namespace Azure.AI.OpenAI.Assistants.Customizations {
+namespace Customizations {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
   @@clientName(

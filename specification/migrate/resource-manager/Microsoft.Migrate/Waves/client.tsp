@@ -9,7 +9,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Microsoft.Migrate;
-using Microsoft.Migrate.Customizations;
 
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties,
@@ -17,7 +16,7 @@ using Microsoft.Migrate.Customizations;
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Migrate namespace"
-namespace Microsoft.Migrate.Customizations {
+namespace Customizations {
   // ===== Task create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
   @doc("Task properties for create operations, omitting server-side read-only fields (taskType, isEditable, completionDate, provisioningState).")
@@ -53,7 +52,9 @@ namespace Microsoft.Migrate.Customizations {
 
   @parentResource(MigrateProject)
   @doc("Task resource for create operations.")
-  model TaskCreate is ProxyResource<TaskPropertiesCreate> {
+  model TaskCreate {
+    ...OmitProperties<ProxyResource<TaskPropertiesCreate>, "name">;
+
     @doc("Task ARM name")
     @key("taskName")
     @segment("tasks")
@@ -65,4 +66,8 @@ namespace Microsoft.Migrate.Customizations {
   }
 }
 
-@@alternateType(Tasks.create::parameters.resource, TaskCreate, "javascript");
+@@alternateType(
+  Tasks.create::parameters.resource,
+  Customizations.TaskCreate,
+  "javascript"
+);

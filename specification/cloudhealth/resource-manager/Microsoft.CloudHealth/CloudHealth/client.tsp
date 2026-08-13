@@ -9,7 +9,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.ResourceManager;
 using Microsoft.CloudHealth;
-using Microsoft.CloudHealth.Customizations;
 
 @@clientName(Microsoft.CloudHealth, "CloudHealthMgmtClient", "python");
 
@@ -117,7 +116,7 @@ using Microsoft.CloudHealth.Customizations;
 // JS SDK users are not forced to supply server-computed values.
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Write-only helper models for JS SDK alternate types; operations are defined on the original resources in main.tsp"
-namespace Microsoft.CloudHealth.Customizations {
+namespace Customizations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   @doc("Discovery rule properties for create/update operations, omitting server-side read-only fields (entityName is required+read-only in the canonical model).")
   model DiscoveryRulePropertiesCreate {
@@ -152,8 +151,12 @@ namespace Microsoft.CloudHealth.Customizations {
 
   @parentResource(HealthModel)
   @doc("Discovery rule resource for create/update operations.")
-  model DiscoveryRuleResourceCreate
-    is Azure.ResourceManager.ProxyResource<DiscoveryRulePropertiesCreate> {
+  model DiscoveryRuleResourceCreate {
+    ...OmitProperties<
+      Azure.ResourceManager.ProxyResource<DiscoveryRulePropertiesCreate>,
+      "name"
+    >;
+
     @doc("Name of the discovery rule. Must be unique within a health model.")
     @key("discoveryRuleName")
     @segment("discoveryrules")
@@ -164,11 +167,11 @@ namespace Microsoft.CloudHealth.Customizations {
 
 @@alternateType(
   DiscoveryRules.createOrUpdateV1::parameters.resource,
-  DiscoveryRuleResourceCreate,
+  Customizations.DiscoveryRuleResourceCreate,
   "javascript"
 );
 @@alternateType(
   DiscoveryRules.createOrUpdate::parameters.resource,
-  DiscoveryRuleResourceCreate,
+  Customizations.DiscoveryRuleResourceCreate,
   "javascript"
 );

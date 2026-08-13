@@ -5,12 +5,13 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using Microsoft.Authorization;
 
 /**
  * To manage and control access to your resources, you can define customized policies and assign them at a scope.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For client"
-namespace Microsoft.Authorization.Customizations {
+namespace Customizations {
   alias PolicyAssignmentIdParameter = {
     /**
      * The ID of the policy assignment to get. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.

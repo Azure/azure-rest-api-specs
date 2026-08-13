@@ -10,7 +10,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Microsoft.Monitor;
-using Microsoft.Monitor.Customizations;
 
 @@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
 
@@ -142,7 +141,7 @@ using Microsoft.Monitor.Customizations;
 // provide write-specific models that omit those fields so SDK users see a clean API.
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/40791
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
-namespace Microsoft.Monitor.Customizations {
+namespace Customizations {
   // ===== Issue create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
   @doc("Issue properties for create/update operations, omitting server-side read-only fields (investigations, investigationsCount, provisioningState).")
@@ -166,8 +165,12 @@ namespace Microsoft.Monitor.Customizations {
 
   @parentResource(AzureMonitorWorkspaceResource)
   @doc("Issue resource for create/update operations.")
-  model IssueResourceCreate
-    is Azure.ResourceManager.ProxyResource<IssuePayloadCreate> {
+  model IssueResourceCreate {
+    ...OmitProperties<
+      Azure.ResourceManager.ProxyResource<IssuePayloadCreate>,
+      "name"
+    >;
+
     @doc("The name of the Issue")
     @key("issueName")
     @path
@@ -219,21 +222,21 @@ namespace Microsoft.Monitor.Customizations {
 
 @@alternateType(
   Issue.create::parameters.resource,
-  IssueResourceCreate,
+  Customizations.IssueResourceCreate,
   "javascript"
 );
 @@alternateType(
   Issue.setBackgroundVisualization::parameters.body,
-  BackgroundVisualizationCreate,
+  Customizations.BackgroundVisualizationCreate,
   "javascript"
 );
 @@alternateType(
   Issue.addOrUpdateAlerts::parameters.body,
-  RelatedAlertsCreate,
+  Customizations.RelatedAlertsCreate,
   "javascript"
 );
 @@alternateType(
   Issue.addOrUpdateResources::parameters.body,
-  RelatedResourcesCreate,
+  Customizations.RelatedResourcesCreate,
   "javascript"
 );
