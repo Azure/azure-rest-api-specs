@@ -10962,6 +10962,34 @@ model ManagedInstanceLongTermRetentionBackupProperties {
    */
   @visibility(Lifecycle.Read)
   backupStorageAccessTier?: BackupStorageAccessTier;
+
+  /**
+   * The setting whether the LTR backup is immutable
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  isBackupImmutable?: boolean;
+
+  /**
+   * The setting for whether or not time-based immutability is enabled for the LTR backup. When time-based immutability is enabled and locked, the backup cannot be deleted until BackupExpirationTime.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutability?: TimeBasedImmutability;
+
+  /**
+   * The time-based immutability mode. Only applicable if time-based immutability is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
+
+  /**
+   * The setting for whether LegalHold is enabled or disabled on the LTR backup. When LegalHold is enabled, the backup cannot be deleted until the LegalHold is removed.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  legalHoldImmutability?: SetLegalHoldImmutability;
 }
 
 /**
@@ -12411,6 +12439,18 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
    * The BackupStorageAccessTier for the LTR backups
    */
   backupStorageAccessTier?: BackupStorageAccessTier;
+
+  /**
+   * The setting for whether to enable time-based immutability for future backups. When set, future backups will have TimeBasedImmutability enabled.
+   */
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutability?: TimeBasedImmutability;
+
+  /**
+   * The setting for time-based immutability mode for future backup (Value can be either Locked or UnLocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
+   */
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
 
   /**
    * The weekly retention policy for an LTR backup in an ISO 8601 format.
