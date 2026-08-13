@@ -43,6 +43,7 @@ using Azure.Core;
 );
 @@clientName(EndpointDetail, "DedicatedHsmEndpointDetail", "csharp");
 @@clientName(EndpointDependency, "DedicatedHsmEndpointDependency", "csharp");
+@@clientName(HsmState, "HardwareSecurityModuleState", "csharp");
 @@clientName(JsonWebKeyType, "DedicatedHsmJsonWebKeyType", "csharp");
 @@clientName(NetworkInterface, "DedicatedHsmNetworkInterface", "csharp");
 @@clientName(NetworkProfile, "DedicatedHsmNetworkProfile", "csharp");
@@ -141,6 +142,11 @@ using Azure.Core;
   "csharp"
 );
 @@alternateType(PrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(
+  PaymentHsmClusterPrivateEndpointConnection.etag,
+  eTag,
+  "csharp"
+);
 @@usage(Azure.ResourceManager.PrivateLinkResource, Usage.input, "csharp");
 @@clientName(
   Azure.ResourceManager.PrivateLinkResource,
