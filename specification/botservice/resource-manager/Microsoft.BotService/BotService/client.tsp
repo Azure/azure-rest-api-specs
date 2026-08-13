@@ -3,7 +3,9 @@ import "./main.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using Microsoft.BotService;
+using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Customizations {
@@ -370,16 +372,16 @@ namespace Customizations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotChannelsUpdate(
-    ...Azure.ResourceManager.ApiVersionParameter,
-    ...Azure.ResourceManager.SubscriptionIdParameter,
-    ...Azure.ResourceManager.ResourceGroupParameter,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
     ...Azure.ResourceManager.Legacy.Provider,
 
     /**
      * The name of the Bot resource.
      */
     @path
-    @TypeSpec.Rest.segment("botServices")
+    @segment("botServices")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
     @maxLength(64)
     @minLength(2)
@@ -389,7 +391,7 @@ namespace Customizations {
      * The name of the Channel resource.
      */
     @path
-    @TypeSpec.Rest.segment("channels")
+    @segment("channels")
     channelName: ChannelName,
 
     properties?: Microsoft.BotService.Channel,
@@ -406,8 +408,8 @@ namespace Customizations {
     etag?: string,
     zones?: string[],
   ):
-    | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
-    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
+    | ArmResponse<Microsoft.BotService.BotChannel>
+    | ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
     | Microsoft.BotService.Error;
 
   @@override(BotChannels.update, BotChannelsUpdate, "javascript");
@@ -416,9 +418,9 @@ namespace Customizations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotsUpdate(
-    ...Azure.ResourceManager.ApiVersionParameter,
-    ...Azure.ResourceManager.SubscriptionIdParameter,
-    ...Azure.ResourceManager.ResourceGroupParameter,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
     ...Azure.ResourceManager.Legacy.Provider,
 
     @path
@@ -438,8 +440,8 @@ namespace Customizations {
     etag?: string,
     zones?: string[],
   ):
-    | Azure.ResourceManager.ArmResponse<Microsoft.BotService.Bot>
-    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
+    | ArmResponse<Microsoft.BotService.Bot>
+    | ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
     | Microsoft.BotService.Error;
 
   @@override(Bots.update, BotsUpdate, "javascript");
