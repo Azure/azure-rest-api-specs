@@ -33,39 +33,12 @@ permissions:
   contents: read
   copilot-requests: write
   pull-requests: read
-pre-steps:
-  - name: Resolve target pull request base
-    id: resolve_pr_base
-    uses: actions/github-script@v9
-    env:
-      PR_NUMBER: ${{ github.event.pull_request.number || inputs.item_number }}
-    with:
-      script: |
-        const value = process.env.PR_NUMBER ?? "";
-        if (!/^[1-9]\d*$/.test(value)) {
-          throw new Error(`Invalid or missing pull request number: ${JSON.stringify(value)}`);
-        }
-
-        const pullNumber = Number(value);
-        if (!Number.isSafeInteger(pullNumber)) {
-          throw new Error(`Pull request number is outside the safe integer range: ${value}`);
-        }
-
-        const { data: pull } = await github.rest.pulls.get({
-          ...context.repo,
-          pull_number: pullNumber
-        });
-        const baseSha = pull.base.sha;
-        if (!/^[0-9a-f]{40}$/.test(baseSha)) {
-          throw new Error(`GitHub returned an invalid base SHA for pull request #${pullNumber}`);
-        }
-
-        core.setOutput("base_sha", baseSha);
 # Keep trusted reviewer instructions and root package metadata local, while PR
-# head content remains available only through the GitHub MCP tools. Cone-mode
-# sparse checkout includes root files such as package.json.
+# head content remains available only through the GitHub MCP tools. With no ref,
+# pull_request_target checks out the latest trusted default-branch commit instead
+# of a potentially stale PR base SHA. Cone mode includes root files such as
+# package.json.
 checkout:
-  ref: ${{ steps.resolve_pr_base.outputs.base_sha }}
   sparse-checkout: |
     .github/agents
     .github/skills/azure-api-review
@@ -154,10 +127,11 @@ run-specific context and the constraints particular to running unattended.
 - Pull request: `#${{ github.event.pull_request.number || inputs.item_number }}`
 - You are running **unattended**. There is no human to answer questions
   mid-run and no human to override a critic verdict.
-- The local sparse checkout contains trusted guidance from the workflow/base
-  commit, not the PR head. Read `.github/agents`, `.github/skills`, and root package
-  metadata locally. Read PR metadata and PR-authored files only through the
-  GitHub tools at the full pinned head SHA.
+- The local sparse checkout contains trusted guidance from the commit that
+  supplied this workflow, not the PR head or its potentially stale base. Read
+  `.github/agents`, `.github/skills`, and root package metadata locally. Read PR
+  metadata and PR-authored files only through the GitHub tools at the full
+  pinned head SHA.
 
 ## Constraints for this run
 
@@ -177,7 +151,8 @@ run-specific context and the constraints particular to running unattended.
    the change. Do not review any `.json` Swagger/OpenAPI files from that project;
    they are generated output and would duplicate review of the TypeSpec source.
 
-   Fetch PR metadata once. Fetch changed files once per page with `perPage: 100`
+   Fetch PR metadata once. Fetch every page of changed files once with
+   `perPage: 100`, account for every returned file when applying the scope gate,
    and reuse the result. When a large tool result is saved under `/tmp`, use the
    allowlisted `jq` and `nl` commands to inspect it. Python and Git are not
    available for PR-data processing; do not attempt them or retry a denied
@@ -231,16 +206,23 @@ Then project it to Phase 2 safe outputs:
 3. Rank surviving findings by severity, then file and line. Select at most five
    that have a verified changed line in the PR diff. Prefer a RIGHT-side anchor;
    use LEFT only when the finding is about a deleted line and no meaningful
-   RIGHT-side anchor exists.
+   RIGHT-side anchor exists. The inline review comment is the link to the
+   offending line; never fall back to an unanchored summary when a changed-line
+   anchor exists.
 4. For each selected finding, call `create_pull_request_review_comment` with its
    complete canonical finding body, `path`, and ending `line`. Omit `side` for
    the default RIGHT side; pass `side: LEFT` only for the deleted-line case
    above. Set `start_line` only when the quoted source spans multiple changed
    lines. Do not include the severity heading in an inline body.
-5. After queuing at least one inline comment, call
+5. Do not repeat the same feedback throughout a file. Post the complete finding
+   at the first instance and, at most, one concise comment at the second instance
+   stating that more violations exist, all instances should be checked, and
+   further repetitions are omitted for brevity. Do not comment on later
+   instances of the same violation.
+6. After queuing at least one inline comment, call
    `submit_pull_request_review` once with `event: COMMENT` and no body. Never
    submit `APPROVE` or `REQUEST_CHANGES`.
-6. The summary contains the canonical introduction and counts, a compact index
+7. The summary contains the canonical introduction and counts, a compact index
    of inline findings using **bare** rule IDs, full canonical bodies for any
    overflow or unanchorable findings, Questions, and the canonical "Not
    reviewed" footer. Do not duplicate full inline finding bodies in the summary.
