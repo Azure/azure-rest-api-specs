@@ -138,6 +138,11 @@ namespace Microsoft.HybridConnectivity;
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(
+  GenerateGcpTemplateRequest,
+  "GenerateGcpTemplateContent",
+  "csharp"
+);
 @@clientName(ListCredentialsRequest, "ListCredentialsContent", "csharp");
 @@clientName(
   ListIngressGatewayCredentialsRequest,
