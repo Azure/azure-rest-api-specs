@@ -8,7 +8,7 @@ using TypeSpec.Http;
 
 namespace Customizations {
   @@clientName(Microsoft.BotService, "AzureBotServiceMgmtClient", "python");
-  @@scope(Operations.list, "!csharp");
+  @@scope(Microsoft.BotService.Operations.list, "!csharp");
   @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
   @@alternateType(AlexaChannelProperties.serviceEndpointUri, url, "csharp");
   @@alternateType(Bot.location, azureLocation, "csharp");
@@ -84,8 +84,12 @@ namespace Customizations {
     "csharp"
   );
   @@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
-  @@alternateType(Resource.location, azureLocation, "csharp");
-  @@alternateType(Resource.etag, eTag, "csharp");
+  @@alternateType(
+    Microsoft.BotService.Resource.location,
+    azureLocation,
+    "csharp"
+  );
+  @@alternateType(Microsoft.BotService.Resource.etag, eTag, "csharp");
   @@clientName(Site, "BotChannelSite", "csharp");
   @@alternateType(Site.tenantId, uuid, "csharp");
   @@alternateType(Site.eTag, eTag, "csharp");
@@ -224,7 +228,7 @@ namespace Customizations {
   @@clientName(ChannelNameUnion, "BotChannelName", "csharp");
 
   @@clientName(
-    PrivateEndpointConnection,
+    Microsoft.BotService.PrivateEndpointConnection,
     "BotServicePrivateEndpointConnection",
     "csharp"
   );
@@ -236,13 +240,13 @@ namespace Customizations {
   );
   @@clientName(TelephonyChannelProperties.premiumSKU, "PremiumSku", "csharp");
   @@clientName(
-    PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+    Microsoft.BotService.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
     "ConnectionState",
     "csharp"
   );
 
   @@alternateType(
-    PrivateEndpoint.id,
+    Microsoft.BotService.PrivateEndpoint.id,
     Azure.Core.armResourceIdentifier,
     "csharp"
   );
@@ -282,14 +286,18 @@ namespace Customizations {
   @@clientName(Omnichannel, "Dynamics365OmnichannelChannel", "csharp");
   @@clientName(ConnectionSetting, "BotConnectionSetting", "csharp");
   @@clientName(
-    PrivateLinkResource,
+    Microsoft.BotService.PrivateLinkResource,
     "BotServicePrivateLinkResourceData",
     "csharp"
   );
-  @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
+  @@usage(
+    Microsoft.BotService.PrivateLinkResource,
+    Usage.input | Usage.output,
+    "csharp"
+  );
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
   @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-    PrivateLinkResource.properties
+    Microsoft.BotService.PrivateLinkResource.properties
   );
 
   @@clientName(
@@ -384,7 +392,7 @@ namespace Customizations {
     @TypeSpec.Rest.segment("channels")
     channelName: ChannelName,
 
-    properties?: Channel,
+    properties?: Microsoft.BotService.Channel,
 
     @visibility(Lifecycle.Read)
     name?: string,
@@ -393,14 +401,14 @@ namespace Customizations {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     tags?: Record<string>,
-    sku?: Sku,
-    kind?: Kind,
+    sku?: Microsoft.BotService.Sku,
+    kind?: Microsoft.BotService.Kind,
     etag?: string,
     zones?: string[],
   ):
-    | Azure.ResourceManager.ArmResponse<BotChannel>
-    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<BotChannel>
-    | Error;
+    | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
+    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
+    | Microsoft.BotService.Error;
 
   @@override(BotChannels.update, BotChannelsUpdate, "javascript");
 
@@ -416,7 +424,7 @@ namespace Customizations {
     @path
     resourceName: string,
 
-    properties?: BotProperties,
+    properties?: Microsoft.BotService.BotProperties,
 
     @visibility(Lifecycle.Read)
     name?: string,
@@ -425,14 +433,14 @@ namespace Customizations {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     tags?: Record<string>,
-    sku?: Sku,
-    kind?: Kind,
+    sku?: Microsoft.BotService.Sku,
+    kind?: Microsoft.BotService.Kind,
     etag?: string,
     zones?: string[],
   ):
-    | Azure.ResourceManager.ArmResponse<Bot>
-    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Bot>
-    | Error;
+    | Azure.ResourceManager.ArmResponse<Microsoft.BotService.Bot>
+    | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
+    | Microsoft.BotService.Error;
 
   @@override(Bots.update, BotsUpdate, "javascript");
 }
