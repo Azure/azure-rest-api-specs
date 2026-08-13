@@ -777,17 +777,12 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
-// ----- CSharp mgmt emitter requirement rule -----
-const CSHARP_MGMT_EMITTER = "@azure-typespec/http-client-csharp-mgmt";
+// ----- Legacy CSharp emitter rule -----
 const LEGACY_CSHARP_EMITTER = "@azure-tools/typespec-csharp";
 
-export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleBase {
+export class TspConfigLegacyCsharpEmitterForbiddenSubRule extends TspconfigSubRuleBase {
   constructor() {
-    super("emit", CSHARP_MGMT_EMITTER);
-  }
-
-  protected skip(_config: any, folder: string): SkipResult {
-    return skipForDataPlane(folder);
+    super("emit", LEGACY_CSHARP_EMITTER);
   }
 
   protected validate(config: any): RuleResult {
@@ -799,8 +794,8 @@ export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleB
 
     if (hasLegacyEmitter) {
       return this.createFailedResult(
-        `Management plane TypeSpec projects must not use the legacy "${LEGACY_CSHARP_EMITTER}" emitter`,
-        `Please use "${CSHARP_MGMT_EMITTER}" instead of "${LEGACY_CSHARP_EMITTER}" in your tspconfig.yaml`,
+        `TypeSpec projects must not use the legacy "${LEGACY_CSHARP_EMITTER}" emitter`,
+        `Please use "@azure-typespec/http-client-csharp" for data plane or "@azure-typespec/http-client-csharp-mgmt" for management plane instead`,
       );
     }
 
@@ -808,7 +803,7 @@ export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleB
   }
 
   public getPathOfKeyToValidate(): string {
-    return `emit.${CSHARP_MGMT_EMITTER}`;
+    return `emit.${LEGACY_CSHARP_EMITTER}`;
   }
 }
 
@@ -820,7 +815,7 @@ export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleB
  */
 export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
-  new TspConfigCsharpMgmtEmitterRequiredSubRule(),
+  new TspConfigLegacyCsharpEmitterForbiddenSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),

@@ -39,6 +39,7 @@ interface AvailabilitySets {
   >;
   /** Updates the AvailabilitySets resource. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Implements the AvailabilitySets PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",

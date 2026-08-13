@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "resourceGroupName": "rg1",
+    "firstPartyServiceTagName": "myServiceTag",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myServiceTag",
+        "type": "Microsoft.Network/firstPartyServiceTags",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firstPartyServiceTags/myServiceTag",
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "value": "myServiceTagValue",
+          "failedReason": "",
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-09-01"
+      }
+    }
+  },
+  "operationId": "FirstPartyServiceTags_UpdateTags",
+  "title": "Update first party service tag tags"
+}
