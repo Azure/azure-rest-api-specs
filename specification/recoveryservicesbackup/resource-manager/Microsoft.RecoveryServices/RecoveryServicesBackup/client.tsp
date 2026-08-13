@@ -2862,6 +2862,11 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(ProtectionPolicyResource, "BackupProtectionPolicy", "csharp");
 @@clientName(RecoveryPointResource, "BackupRecoveryPoint", "csharp");
 @@clientName(RecoveryPoint, "BackupGenericRecoveryPoint", "csharp");
+@@clientName(
+  ProtectedItemConfigureSourceScanRequest,
+  "BackupProtectedItemConfigureSourceScanContent",
+  "csharp"
+);
 @@clientName(ResourceGuardProxyBaseResource, "ResourceGuardProxy", "csharp");
 @@clientName(ResourceGuardProxyBase, "ResourceGuardProxyProperties", "csharp");
 @@clientName(ResourceGuardProxyBase.lastUpdatedTime, "LastUpdatedOn", "csharp");
