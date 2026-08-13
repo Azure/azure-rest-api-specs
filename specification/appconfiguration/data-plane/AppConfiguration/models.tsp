@@ -320,14 +320,14 @@ model FeatureFlagConditions {
   filters?: FeatureFlagFilter[];
 }
 
-@doc("Requirement Type.")
+@doc("Controls how multiple feature-flag filters are combined.")
 @added(Versions.v2026_05_01_preview)
 union RequirementType {
-  @doc("Any.")
-  Any: "Any",
+  @doc("Enables the feature flag when any filter matches.")
+  any: "Any",
 
-  @doc("All.")
-  All: "All",
+  @doc("Enables the feature flag only when all filters match.")
+  all: "All",
 
   string,
 }
@@ -363,14 +363,14 @@ model FeatureFlagVariantDefinition {
 @doc("Status Override.")
 @added(Versions.v2026_05_01_preview)
 union StatusOverride {
-  @doc("None.")
-  None: "None",
+  @doc("No status override.")
+  none: "None",
 
-  @doc("Enabled.")
-  Enabled: "Enabled",
+  @doc("Overrides the status to enabled.")
+  enabled: "Enabled",
 
-  @doc("Disabled.")
-  Disabled: "Disabled",
+  @doc("Overrides the status to disabled.")
+  disabled: "Disabled",
 
   string,
 }

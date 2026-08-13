@@ -4690,7 +4690,7 @@
     },
     "RequirementType": {
       "type": "string",
-      "description": "Requirement Type.",
+      "description": "Controls how multiple feature-flag filters are combined.",
       "enum": [
         "Any",
         "All"
@@ -4700,14 +4700,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Any",
+            "name": "any",
             "value": "Any",
-            "description": "Any."
+            "description": "Enables the feature flag when any filter matches."
           },
           {
-            "name": "All",
+            "name": "all",
             "value": "All",
-            "description": "All."
+            "description": "Enables the feature flag only when all filters match."
           }
         ]
       }
@@ -4955,19 +4955,19 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "None",
+            "name": "none",
             "value": "None",
-            "description": "None."
+            "description": "No status override."
           },
           {
-            "name": "Enabled",
+            "name": "enabled",
             "value": "Enabled",
-            "description": "Enabled."
+            "description": "Overrides the status to enabled."
           },
           {
-            "name": "Disabled",
+            "name": "disabled",
             "value": "Disabled",
-            "description": "Disabled."
+            "description": "Overrides the status to disabled."
           }
         ]
       }
