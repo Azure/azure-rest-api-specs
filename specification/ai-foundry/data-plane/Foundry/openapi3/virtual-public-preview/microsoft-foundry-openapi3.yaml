@@ -4,6 +4,8 @@ info:
   version: virtual-public-preview
 tags:
   - name: EvaluationSuiteGenerationJobs
+  - name: SimulationConfigurations
+  - name: SimulationRuns
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -104,6 +106,8 @@ tags:
   - name: Evaluators
     parent: Evaluations
   - name: Evaluation Taxonomies
+    parent: Evaluations
+  - name: Simulations
     parent: Evaluations
   - name: Redteams
     parent: Evaluations
@@ -38361,6 +38365,764 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Schedules
+  /simulation_configurations:
+    post:
+      operationId: SimulationConfigurations_createConfig
+      summary: Create a simulation configuration
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationConfiguration'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationConfigurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationConfiguration'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: SimulationConfigurations_listConfigs
+      summary: List simulation configurations
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SimulationConfiguration'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationConfigurations
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /simulation_configurations/{simulation_configuration_name}/versions/{simulation_configuration_version}:
+    get:
+      operationId: SimulationConfigurations_getConfig
+      summary: Get a simulation configuration
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: simulation_configuration_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: simulation_configuration_version
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationConfiguration'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationConfigurations
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    post:
+      operationId: SimulationConfigurations_updateConfig
+      summary: Update a simulation configuration
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: simulation_configuration_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: simulation_configuration_version
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationConfiguration'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationConfigurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationConfiguration'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: SimulationConfigurations_deleteConfig
+      summary: Delete a simulation configuration
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: simulation_configuration_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: simulation_configuration_version
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationConfigurations
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /simulation_runs:
+    post:
+      operationId: SimulationRuns_run
+      summary: Run a simulation
+      description: Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationRuns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationRun'
+        description: The job to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: SimulationRuns_list
+      summary: List simulation runs
+      description: List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter by the target agent name associated with the simulation run.
+          schema:
+            type: string
+          explode: false
+        - name: agent_version
+          in: query
+          required: false
+          description: Filter by the target agent version associated with the simulation run.
+          schema:
+            type: string
+          explode: false
+        - name: simulation_configuration_name
+          in: query
+          required: false
+          description: Filter by the name of the simulation configuration associated with the run.
+          schema:
+            type: string
+          explode: false
+        - name: simulation_configuration_version
+          in: query
+          required: false
+          description: Filter by the version of the simulation configuration associated with the run.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SimulationRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /simulation_runs/{jobId}:
+    get:
+      operationId: SimulationRuns_getRun
+      summary: Get a simulation run
+      description: Get a job by ID (preview). Includes optional Foundry-Features header.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: SimulationRuns_delete
+      summary: Delete a simulation run
+      description: Delete a job (preview). Returns 204 No Content.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /simulation_runs/{jobId}/items:
+    get:
+      operationId: SimulationRuns_listItems
+      summary: List simulation run items
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationRunItemList'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /simulation_runs/{jobId}:cancel:
+    post:
+      operationId: SimulationRuns_cancel
+      summary: Cancel a simulation run
+      description: Cancel a running job (preview). Returns 200 with the updated job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - SimulationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
   /skills:
     get:
       operationId: Skills_listSkills
@@ -40751,6 +41513,15 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Agentic identity credential definition
+    AmbientEffect:
+      anyOf:
+        - type: string
+          enum:
+            - street_traffic
+            - crowd_chatter
+            - background_tv
+            - metro_station
+        - type: string
     ApiErrorResponse:
       type: object
       required:
@@ -40860,6 +41631,74 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
+    AudioEnvironmentConfiguration:
+      type: object
+      properties:
+        ambience_effects:
+          type: array
+          items:
+            $ref: '#/components/schemas/AmbientEffect'
+          description: Ambient effects to apply in the simulation audio environment.
+        ambience_volume_percentage:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: Ambient audio percentage level for the environment, between 1 and 100.
+        telephonic_voice:
+          $ref: '#/components/schemas/TelephonicVoice'
+          description: Whether telephonic voice behavior is enabled for the environment.
+          default: DISABLED
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    AudioTranscriptionConfiguration:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: Model name used for audio transcription.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    AudioVoiceConfiguration:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioVoiceType'
+          description: Voice type for the simulation audio output.
+        name:
+          type: string
+          description: Name of the voice to use.
+        rate:
+          type: string
+          description: Optional speech rate for the voice output.
+        temperature:
+          type: number
+          format: float
+          description: Optional voice temperature controlling variability in speech generation.
+        custom_lexicon_url:
+          type: string
+          description: Optional URL to a custom lexicon resource used by the voice configuration.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    AudioVoiceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - openai
+            - azure-standard
+            - azure-realtime-native
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -44347,6 +45186,7 @@ components:
         mapping:
           azure_ai_traces_preview: '#/components/schemas/TracesPreviewEvalRunDataSource'
           azure_ai_synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewEvalRunDataSource'
+          azure_ai_simulation_preview: '#/components/schemas/SimulationConfigPreviewEvalRunDataSource'
           azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
           csv: '#/components/schemas/EvalCsvRunDataSource'
@@ -46369,6 +47209,60 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryDatasetReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Optional dataset identifier. At least one of `id` or `name` must be supplied.
+        name:
+          type: string
+          description: Optional dataset name. At least one of `id` or `name` must be supplied.
+        version:
+          type: string
+          description: Optional dataset version identifier.
+      description: Reference to a Foundry dataset. At least one of `id` or `name` must be supplied.
+    FoundryMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          description: Role for the message in the conversation.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundryMessageContentPart'
+          description: Multimodal content for the message. The content can contain one or more typed parts such as text, images, or audio.
+      description: Generic conversational message shape that can be reused across Foundry APIs.
+    FoundryMessageContentPart:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/FoundryMessageContentPartType'
+          description: The content part type.
+      discriminator:
+        propertyName: type
+        mapping:
+          input_text: '#/components/schemas/FoundryTextContentPart'
+          output_text: '#/components/schemas/FoundryTextContentPart'
+      description: Base model for a typed content part in a multimodal message.
+    FoundryMessageContentPartType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - input_text
+            - output_text
+            - input_image
+            - output_image
+            - input_audio
+            - output_audio
+      description: Type discriminator for a multimodal content part used in conversational APIs across Foundry.
     FoundryModelArtifactProfileCategory:
       anyOf:
         - type: string
@@ -46442,6 +47336,29 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
+    FoundryTextContentPart:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          $ref: '#/components/schemas/FoundryTextContentPartType'
+          description: The content part type. Must be `input_text` or `output_text`.
+        text:
+          type: string
+          description: The text payload for this content part.
+      allOf:
+        - $ref: '#/components/schemas/FoundryMessageContentPart'
+      description: Text content part for a conversational message.
+    FoundryTextContentPartType:
+      anyOf:
+        - type: string
+          enum:
+            - input_text
+            - output_text
+        - type: string
+      description: Text content part types for conversational messages.
     FoundryTimestamp:
       type: integer
       format: unixtime
@@ -77153,6 +78070,177 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
+    SimulationAgentTargetConfiguration:
+      type: object
+      required:
+        - target_type
+        - agent_name
+      properties:
+        target_type:
+          type: string
+          enum:
+            - agent
+          description: Target type for an agent-based simulation.
+        agent_name:
+          type: string
+          description: Name of the target agent to run the simulation against.
+        agent_version:
+          type: string
+          description: Optional version of the target agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    SimulationConfigPreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+        - simulation_configuration_id
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_simulation_preview
+          description: The type of data source, always `azure_ai_simulation_preview`.
+        simulation_configuration_id:
+          type: string
+          description: Identifier of the simulation configuration to run before evaluation.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Represents an evaluation run data source generated from a reusable simulation configuration.
+    SimulationConfiguration:
+      type: object
+      required:
+        - id
+        - name
+        - version
+        - test_cases_configuration
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the simulation configuration.
+          readOnly: true
+        name:
+          type: string
+          description: Display name of the simulation configuration.
+        version:
+          type: string
+          description: Version identifier for this simulation configuration.
+        test_cases_configuration:
+          $ref: '#/components/schemas/SimulationTestCasesConfiguration'
+          description: Configuration describing the test cases that will be executed by the simulation.
+        model_configuration:
+          $ref: '#/components/schemas/SimulationModelConfiguration'
+          description: Model configuration used by the simulation, including sampling and audio settings.
+        default_target:
+          $ref: '#/components/schemas/SimulationTargetConfiguration'
+          description: Default target configuration used when a simulation target is not explicitly specified.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when the simulation configuration was created.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when the simulation configuration was last updated.
+          readOnly: true
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    SimulationModelConfiguration:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: Model name used by the simulation.
+        model_sampling_parameters:
+          $ref: '#/components/schemas/ModelSamplingParams'
+          description: Sampling parameters used for model generation.
+        audio_transcription_configuration:
+          $ref: '#/components/schemas/AudioTranscriptionConfiguration'
+          description: Configuration for audio transcription during the simulation.
+        audio_voice_configuration:
+          $ref: '#/components/schemas/AudioVoiceConfiguration'
+          description: Configuration for the voice used by the simulation.
+    SimulationResultDatasetGenerationMode:
+      anyOf:
+        - type: string
+          enum:
+            - ENABLED
+            - DISABLED
+        - type: string
+    SimulationRun:
+      type: object
+      required:
+        - id
+        - configuration
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          readOnly: true
+        configuration:
+          type: string
+          description: Identifier of the simulation configuration this run is using.
+        target:
+          $ref: '#/components/schemas/SimulationTargetConfiguration'
+          description: Target configuration override for this particular simulation run. When omitted, the run uses the configuration-level default simulation target.
+        result_dataset_generation:
+          $ref: '#/components/schemas/SimulationResultDatasetGenerationMode'
+          description: Whether the service should generate and expose a result dataset for this run. Defaults to `DISABLED`.
+          default: DISABLED
+        result_dataset:
+          $ref: '#/components/schemas/FoundryDatasetReference'
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          readOnly: true
+        finished_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          readOnly: true
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    SimulationRunItem:
+      $ref: '#/components/schemas/UserConversationRunItem'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    SimulationRunItemList:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimulationRunItem'
+          description: The simulation run items on this page.
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of simulation run items.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    SimulationTargetConfiguration:
+      $ref: '#/components/schemas/SimulationAgentTargetConfiguration'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    SimulationTestCasesConfiguration:
+      $ref: '#/components/schemas/UserConversationSimulationTestCasesConfiguration'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     Skill:
       type: object
       required:
@@ -77636,6 +78724,13 @@ components:
             - Http
             - Grpc
       description: The transport protocol for telemetry export.
+    TelephonicVoice:
+      anyOf:
+        - type: string
+          enum:
+            - ENABLED
+            - DISABLED
+        - type: string
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -78316,6 +79411,95 @@ components:
         default_version:
           type: string
           description: The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest.
+    UserConversationRunItem:
+      type: object
+      required:
+        - type
+        - messages
+      properties:
+        type:
+          type: string
+          enum:
+            - user_conversation
+          description: Type of simulation run item. Must be user_conversation.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundryMessage'
+          description: Message list for this conversation item. Uses the shared multimodal content-part model so the payload can carry text and future modalities.
+          readOnly: true
+        conversation_audio_uri:
+          type: string
+          description: Audio playback URI for the generated conversation audio, when available.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    UserConversationSimulationModality:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - audio
+            - text
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    UserConversationSimulationTestCase:
+      type: object
+      properties:
+        test_case_description:
+          type: string
+          maxLength: 1000
+          description: Free-form description of the test case.
+        max_turns:
+          type: integer
+          format: int32
+          description: Maximum number of turns to allow in each conversation for this test case.
+        conversations_count:
+          type: integer
+          format: int32
+          description: Number of conversations to run for this test case.
+        audio_environment_configuration:
+          $ref: '#/components/schemas/AudioEnvironmentConfiguration'
+          description: Audio environment settings for this test case. These settings override the configuration-level audio environment settings.
+    UserConversationSimulationTestCasesConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - user_conversation
+          description: Type of simulation test case configuration. Must be user_conversation.
+        conversation_modality:
+          $ref: '#/components/schemas/UserConversationSimulationModality'
+          description: Conversation modality for the simulation. If omitted, the server defaults this based on the target kind.
+        test_cases_dataset:
+          $ref: '#/components/schemas/FoundryDatasetReference'
+          description: Reference to the dataset containing test case inputs for the simulation. At least one of `id` or `name` must be supplied.
+        inline_test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserConversationSimulationTestCase'
+          minItems: 1
+          description: Inline list of test cases to execute. At least one test case is required.
+        default_max_turns:
+          type: integer
+          format: int32
+          description: Default maximum number of turns for any conversation unless overridden by a test case.
+          default: 20
+        default_conversations_count:
+          type: integer
+          format: int32
+          description: Default number of conversations to run per test case unless overridden at the test case level.
+          default: 1
+        default_audio_environment_configuration:
+          $ref: '#/components/schemas/AudioEnvironmentConfiguration'
+          description: Default audio environment settings for all test cases. Test case-level settings take precedence when provided.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     UserMessage:
       type: object
       required:

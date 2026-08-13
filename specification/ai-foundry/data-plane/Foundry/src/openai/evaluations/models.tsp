@@ -418,6 +418,18 @@ model SyntheticDataGenerationPreviewEvalRunDataSource
   input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate;
 }
 
+/** Represents an evaluation run data source generated from a reusable simulation configuration. */
+model SimulationConfigPreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_simulation_preview`. */
+  type: "azure_ai_simulation_preview";
+
+  /** Name of the simulation configuration to run before evaluation. */
+  configuration_name: string;
+
+  /** Version of the simulation configuration to run before evaluation. */
+  configuration_version: string;
+}
+
 /** Represents the parameters for synthetic data generation item generation. */
 model SyntheticDataGenerationPreviewItemGenerationParams
   extends ItemGenerationParams {
@@ -649,7 +661,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource | SimulationConfigPreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -709,7 +721,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource | SimulationConfigPreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
