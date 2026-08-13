@@ -33,12 +33,6 @@ using Microsoft.ManufacturingPlatform;
   "BrokerResources",
   "csharp"
 );
-@@doc(MoboBrokerResource, "Broker resource managed on behalf of the service.");
-@@doc(MoboBrokerResource.id, "Resource identifier of the broker resource.");
-@@doc(
-  ManagedOnBehalfOfConfiguration.moboBrokerResources,
-  "Associated broker resources managed on behalf of the service."
-);
 
 @@alternateType(AksProfile.id, armResourceIdentifier, "csharp");
 @@alternateType(StorageProfile.id, armResourceIdentifier, "csharp");
