@@ -967,7 +967,7 @@ model SecretsProvisioningSettings {
   /**
    * Specifies whether the image version supports secrets provisioning.
    */
-  isSupported: boolean;
+  isSupported?: boolean;
 
   /**
    * The name of the operating system (e.g., "mariner").
