@@ -22,6 +22,7 @@ model InstanceIdParameter {
   /**
    * The Device Update for IoT Hub account instance identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-skip-url-encoding', 'x-ms-parameter-grouping', 'x-ms-parameter-location' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @path
   @extension("x-ms-skip-url-encoding", true)
   @extension("x-ms-parameter-grouping", #{ name: "account-options" })
@@ -71,6 +72,7 @@ model IfNoneMatchParameter {
    * Defines the If-None-Match condition. The operation will be performed only if
    * the ETag on the server does not match this value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-grouping' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a parameter model / spread."
   @header("If-None-Match")
   @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
   ifNoneMatch?: string;
@@ -185,6 +187,7 @@ interface DeviceUpdateOperationGroup {
    * Import new update version. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @operationId("DeviceUpdate_ImportUpdate")
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
@@ -205,12 +208,11 @@ interface DeviceUpdateOperationGroup {
       @bodyRoot
       updateToImport: ImportUpdateInput;
     },
-
-      | Update
-      | {
-          @statusCode _: 202;
-          ...Foundations.LongRunningStatusLocation;
-        }
+    | Update
+    | {
+        @statusCode _: 202;
+        ...Foundations.LongRunningStatusLocation;
+      }
   >;
 
   /**
@@ -234,6 +236,7 @@ interface DeviceUpdateOperationGroup {
    * Delete a specific update version. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @operationId("DeviceUpdate_DeleteUpdate")
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
@@ -529,6 +532,7 @@ interface DeviceManagementOperationGroup {
    * Import existing devices from IoT Hub. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @operationId("DeviceManagement_ImportDevices")
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post

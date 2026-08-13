@@ -19,7 +19,7 @@ using Azure.Core;
 @@clientName(EventSummary.eTag, "etag", "java");
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
-@@clientName(CreditSummary.eTag, "etag", "java,go");
+@@clientName(CreditSummary.eTag, "etag", "java,go,python");
 @@clientName(EventProperties.eTag, "etag", "java");
 @@clientName(LotProperties.eTag, "etag", "java");
 @@clientName(CreditSummaryProperties.eTag, "etag", "java");

@@ -5,10 +5,8 @@ user-invocable: false
 tools:
   - execute/runInTerminal
   - github/get_file_contents
-  - github/get_pull_request
-  - github/get_review_comments
   - github/list_commits
-  - github/list_pull_request_files
+  - github/pull_request_read
   - github/search_code
   - read/problems
   - search
@@ -74,19 +72,19 @@ parses programmatically. Section headings below match the `### Step N:`
 headings further down the file; navigate via VS Code's outline view or
 browser "find on page".
 
-| #   | Section                                      | Purpose                                                                                                                                                                                                                                                                                                              |
-| --- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Re-fetch the cited file                      | Fresh fetch at the session SHA -- never trust the Reviewer's quoted content.                                                                                                                                                                                                                                         |
-| 2   | Re-read the cited line(s)                    | Off-by-one + conflict-marker check.                                                                                                                                                                                                                                                                                  |
-| 3   | Re-read and re-quote the cited rule          | Verbatim quote from instruction file.                                                                                                                                                                                                                                                                                |
-| 4   | Re-verify [NEW] vs [EXISTING] classification | Fetch previous-version file; compare.                                                                                                                                                                                                                                                                                |
-| 4.5 | Re-verify downstream-CI impact               | Non-overridable FAIL when fix would trigger a required LintDiff rule and Reviewer did not handle.                                                                                                                                                                                                                    |
-| 5   | Assign a confidence level                    | High/Medium/Low + override-reason validation.                                                                                                                                                                                                                                                                        |
-| 6   | Hunt for missed violations (advisory)        | Six bias filters; suppress declined candidates per Input #8.                                                                                                                                                                                                                                                         |
-| 7   | Re-verify the reconciliation plan            | Independent re-anchor of every Step 5.5 plan entry.                                                                                                                                                                                                                                                                  |
-| 8   | Independent graph re-derivation              | Build graphs from scratch; diff against Reviewer's Mermaid. Skipped when `graphs-produced: false` or `degraded`. Under `graphs-produced: downgraded` the resource/operation/version-delta views are skipped but the sensitive-data-flow view is still re-derived. Runs once per iteration, independent of steps 1-7. |
-| --  | Iteration discipline                         | Session-SHA recheck and FAIL-set carryover. Hard cap = 3 iterations.                                                                                                                                                                                                                                                 |
-| --  | Output schema                                | The exact structure the Reviewer parses.                                                                                                                                                                                                                                                                             |
+| #   | Section                                      | Purpose                                                                                                                                                                                                                                                                                                                                      |
+| --- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Re-fetch the cited file                      | Fresh fetch at the session SHA -- never trust the Reviewer's quoted content.                                                                                                                                                                                                                                                                 |
+| 2   | Re-read the cited line(s)                    | Off-by-one + conflict-marker check.                                                                                                                                                                                                                                                                                                          |
+| 3   | Re-read and re-quote the cited rule          | Verbatim quote from instruction file.                                                                                                                                                                                                                                                                                                        |
+| 4   | Re-verify [NEW] vs [EXISTING] classification | Fetch previous-version file; compare.                                                                                                                                                                                                                                                                                                        |
+| 4.5 | Re-verify downstream-CI impact               | FAIL when a fix would trigger a required LintDiff rule and the Reviewer did not handle it; the canonical protocol permits a validated override.                                                                                                                                                                                              |
+| 5   | Assign a confidence level                    | High/Medium/Low + override-reason validation.                                                                                                                                                                                                                                                                                                |
+| 6   | Hunt for missed violations (advisory)        | Six bias filters; suppress declined candidates per Input #8.                                                                                                                                                                                                                                                                                 |
+| 7   | Re-verify the reconciliation plan            | Independent re-anchor of every Step 5.5 plan entry.                                                                                                                                                                                                                                                                                          |
+| 8   | Independent graph re-derivation              | Build graphs from scratch; diff against Reviewer's Mermaid. Skipped when `Graphs: false` without a banner (fast path). When `Graphs: false` with the Step-3.5-failure banner the resource/operation/version-delta views are skipped but the sensitive-data-flow view is still re-derived. Runs once per iteration, independent of steps 1-7. |
+| --  | Iteration discipline                         | Session-SHA recheck and FAIL-set carryover. Hard cap = 3 iterations.                                                                                                                                                                                                                                                                         |
+| --  | Output schema                                | The exact structure the Reviewer parses.                                                                                                                                                                                                                                                                                                     |
 
 Supporting sections:
 
@@ -106,10 +104,10 @@ The Critic emits **one** marker on every response and **reads** one
 marker field during reconciliation validation. Both schemas live in the
 shared protocol; do not restate the fields here.
 
-| Direction | Marker                                        | Where                                                                                                                                                                                   | Source of truth                                                                                                                                                 |
-| --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response (dispatch return or session-handoff paste). Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
-| Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                                                                     | [protocol -> Per-comment telemetry marker](./protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
+| Direction | Marker                                        | Where                                                                                                                                        | Source of truth                                                                                                                                                 |
+| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response. Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
+| Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                          | [protocol -> Per-comment telemetry marker](./protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
 
 The Critic does **not** emit any other HTML marker. It does **not** read
 or write the Reviewer's per-response `<!-- review-state: ... -->`
@@ -133,8 +131,7 @@ Do **not** silently fall back to a different repo.
 
 **Tooling prerequisite for private-repo PRs.** `Azure/azure-rest-api-specs-pr`
 is private. Re-fetching files from it normally uses the GitHub MCP server
-(`github/get_file_contents`, `github/get_pull_request`,
-`github/list_pull_request_files`, `github/get_review_comments`) bound in this
+(`github/get_file_contents`, `github/pull_request_read`) bound in this
 session. The deferred `web/githubRepo` tool resolves public refs only and is
 **not** a substitute for `azure-rest-api-specs-pr`.
 
@@ -179,7 +176,7 @@ chat text only; it does not write to the workspace.
 If a finding's re-fetch fails via **both** MCP and the `gh` CLI fallback
 (e.g., the user is not authenticated to the private repo at all), mark
 that finding `FAIL: file-fetch-failed` and surface the tooling problem to
-the Reviewer so it escalates via the session-handoff fallback. Do not
+the Reviewer so it can escalate the finding appropriately. Do not
 attempt to validate against file content quoted in the Reviewer's report.
 
 ## Why this agent exists
@@ -202,9 +199,9 @@ produces its structured findings report (Step 6 of the reviewer's workflow)
 and **before** any human posting decision (Step 8).
 
 Inputs you receive from the reviewer. The canonical wire format is the
-YAML template at
+template at
 [`./protocols/arm-api-review-critic-inputs.template.md`](./protocols/arm-api-review-critic-inputs.template.md);
-the shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) defines the field semantics (see its "Inputs the Reviewer passes to the Critic" section). FAIL any invocation whose prompt does not contain exactly one `# critic-inputs/v1` block. The list below restates the field meanings for in-file readability
+the shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) defines the field semantics (see its "Inputs the Reviewer passes to the Critic" section). The Critic accepts **tolerant prose input**: labeled fields in any order; missing optional fields fall back to documented defaults. Only Inputs #1, #2, and #3 are required -- a prompt missing any required field returns `Finding accuracy = FAIL` reason `missing-inputs`. The list below restates the field meanings for in-file readability
 and adds Critic-specific behavioral notes that are not in the protocol.
 
 1. The PR URL (owner, repo, number).
@@ -225,15 +222,16 @@ and adds Critic-specific behavioral notes that are not in the protocol.
 classification (for example, `base-sha: <sha>; path: <path>`), or
 "None - new service".
 <!-- cspell:ignore REPOST -->
-6. **The Step 5.5 reconciliation plan** (verbatim) - per-finding actions
-   (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and
-   per-existing-thread dispositions (THANK-AND-RESOLVE /
-   PROPOSE-HUMAN-RESOLVE), each with anchors (existing comment URL, and
-   for fix-verified dispositions: original line, re-read line at session
-   SHA, construct description). If the Reviewer passes the literal string
-   `reconciliation skipped`, validate findings only and record
-   `Reconciliation accuracy = N/A` in your verdict - do not attempt to
-   verify a plan that does not exist.
+6. **The Step 5.5 reconciliation plan** (verbatim) - all three discussion
+   surface counts and pagination status; per-finding actions (POST-NEW /
+   SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT /
+   CLARIFY-CONFLICT); and per-existing-thread dispositions
+   (THANK-AND-RESOLVE / PROPOSE-HUMAN-RESOLVE), each with anchors (existing
+   item URL and, for fix-verified dispositions, original line, re-read line at
+   session SHA, construct description). If the Reviewer passes the literal
+   string `reconciliation skipped`, validate findings only and record
+   `Reconciliation accuracy = N/A` in your verdict - do not attempt to verify
+   a plan that does not exist.
 7. **Prior iterations' FAIL set summary** (iteration N-1 and N-2) - rule
    ID + file/line tuples that came back `FAIL` in each prior iteration.
    Empty list on iteration 1. The Critic is stateless across invocations
@@ -249,31 +247,29 @@ classification (for example, `base-sha: <sha>; path: <path>`), or
    what new evidence justifies the re-surfacing. Empty list on iteration
    1. Without this suppression, advisory items oscillate forever and
       convergence becomes impossible except via the iteration cap.
-9. **Graph production flag** - `graphs-produced: true|false|downgraded|degraded`.
-   - `true`: perform the full independent graph re-derivation and diff against the Reviewer's Mermaid output.
-   - `false`: record `Graph integrity = N/A` and skip re-derivation entirely (fast path, Step 3.5 skipped by design). **Forbidden on full-review PRs** -- if you see `false` while Input #4 contains a full-review file set, treat the inputs as malformed and FAIL with `missing-inputs`.
-   - `downgraded`: record `Graph integrity = N/A` for rendered-diff purposes, but **independently re-derive the sensitive-data-flow view in summary form** -- the resource and operation views are skipped because the Reviewer downgraded them on size grounds, but secret-leak analysis is rendering-cost-insensitive and remains the highest-value missed-violation signal. Surface any new secret-bearing LIST-response findings in the advisory `Likely missed violations` section.
-   - `degraded`: record `Graph integrity = N/A` and skip re-derivation. Also verify that the Reviewer's Step 6 report contains the required `[!CAUTION]` Step-3.5-failure banner with a `Reason:` line; if the banner is missing, FAIL with `missing-step35-banner` (advisory, not finding-level). Surface the missing structural analysis in the Critic output so the Reviewer cannot quietly suppress the banner.
+9. **Graphs flag** - `Graphs: true` or `Graphs: false` (default `false`).
+   - `Graphs: true`: perform the full independent graph re-derivation and diff against the Reviewer's Mermaid output (full-review PRs where Step 3.5 ran successfully and graphs appear in the report).
+   - `Graphs: false`: record `Graph integrity = N/A`. Two sub-cases distinguished by the presence of a `[!CAUTION]` banner in the Step 6 report:
+     - **No banner** (fast-path-by-design): skip re-derivation entirely. This is the expected state for fast-path PRs where Step 3.5 was intentionally skipped.
+     - **With `[!CAUTION]` Step-3.5-failure banner** (attempted and failed): record `Graph integrity = N/A` but **independently re-derive the sensitive-data-flow view in summary form** -- the resource and operation views are skipped because rendering was not possible, but secret-leak analysis is rendering-cost-insensitive and remains the highest-value missed-violation signal. Surface any new secret-bearing LIST-response findings in the advisory `Likely missed violations` section. Also verify the banner contains a `Reason:` line; if it is missing, FAIL with `missing-step35-banner` (advisory, not finding-level).
+   - The four-value `downgraded`/`degraded` schema is deprecated. If you receive `graphs-produced: downgraded` or `graphs-produced: degraded`, treat as `Graphs: false` per the rules above.
 10. **Current iteration number** (`1` through `3`). Echo this value
     verbatim in your output header (`Iteration: <n> of 3`); do not infer
     it from the length of prior-FAIL-set inputs.
 
-Input validation is strict and fail-fast:
+Input parsing is **tolerant prose**: labeled fields are accepted in any order; unrecognized or extra fields are silently ignored. Missing optional fields fall back to documented defaults per the [shared protocol](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic):
 
-- Inputs 1-10 are required on every invocation. **None may be omitted.**
-- On iteration 1, Inputs #7 and #8 MUST be passed as an explicit empty
-  list (`[]` or the literal string `none`). Omission is not equivalent
-  and FAILs the run -- the protocol's input contract is "pass all ten on
-  every invocation" (see [`./protocols/arm-api-review-critic.protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic)).
-- Input 6 must be either a real reconciliation plan or the literal
-  sentinel `reconciliation skipped`.
-- Input 9 must be explicitly `graphs-produced: true`,
-  `graphs-produced: false`, `graphs-produced: downgraded`, or
-  `graphs-produced: degraded`.
-- Input 10 must be an integer `1` through `3`.
+- Inputs #1, #2, and #3 (PR URL, session SHA, Step 6 findings report) are **required** on every invocation. A prompt missing any of these returns `Finding accuracy = FAIL` reason `missing-inputs`.
+- Input #4 (reviewed files): defaults to inferred from findings when absent.
+- Input #5 (previous-version path): defaults to `None - new service` when absent.
+- Input #6 (reconciliation plan): defaults to the literal sentinel `reconciliation skipped` when absent.
+- Inputs #7 and #8 (prior FAIL sets, considered-and-declined list): default to empty list when absent.
+- Input #9 (Graphs flag): defaults to `Graphs: false` when absent.
+- Input #10 (iteration number): defaults to `1` when absent.
+- Input 10 must be an integer `1` through `3` when present.
 
 If validation fails, return `Finding accuracy = FAIL` with reason
-`missing-inputs` and list exactly which inputs were missing or malformed.
+`missing-inputs` and list exactly which required inputs were missing or malformed.
 
 ## Hard constraints
 
@@ -391,6 +387,31 @@ For **every** finding in the reviewer's report (Blocking, Warning, Suggestion;
 New and Existing), perform steps 1-6 below. Then perform step 7 once to
 re-verify the reconciliation plan (Input #6).
 
+### Step 0: Re-verify approval-label awareness
+
+Call `pull_request_read(method: "get")` and independently inventory the exact current PR label
+names matching `BreakingChange-Approved-*`, `Versioning-Approved-*`,
+`Approved-Suppression`, or `Approved-TypeSpecSuppression`. Compare that
+inventory with the report's `Approval labels observed` line.
+
+- A missing inventory line, an omitted matching label, or a listed label that
+  is not on the PR is `FAIL: approval-label-mismatch`.
+- For each breaking-change finding, verify that an `**Approval context:**`
+  paragraph names the observed applicable label or states that no label in the
+  applicable breaking-change/versioning family was observed.
+- For each suppression finding, perform the same check using
+  `Approved-Suppression` or `Approved-TypeSpecSuppression` as applicable.
+- Missing or contradictory finding guidance is
+  `FAIL: approval-context-missing`.
+- A label must not cause a finding to be dropped or downgraded. The context must
+  ask the author to confirm that the PR-level approval covers the specific
+  finding and explain that, when it does, the remaining action is to resolve
+  the conversation.
+
+If labels changed after the Reviewer's Step 1 snapshot, return the mismatch so
+the Reviewer can refresh the inventory and canonical comment bodies before
+posting. Label drift does not invalidate the session SHA.
+
 ### Step 1: Re-fetch the cited file
 
 Call `get_file_contents` for the cited file at the **session SHA** the
@@ -467,10 +488,11 @@ fails:
   → `FAIL: rule-not-found` (fabricated rule ID).
 
 Both `downstream-ci-conflict` and `suppression-path-mismatch` are
-**non-overridable** via the per-comment `critic: override` marker, on
-the same footing as reconciliation FAILs: the Reviewer must correct
-the finding, drop it, or escalate per
-`arm-api-reviewer.agent.md` Step 7.
+**overridable with a valid justification** via the per-comment `critic: override`
+marker (same path as any other finding-level FAIL per Reviewer Step 7
+item 13). The Reviewer must correct the finding or supply a validated
+`override-reason`; escalate to `MANUAL DECISION REQUIRED` if neither
+is possible.
 
 ### Step 5: Assign a confidence level
 
@@ -613,31 +635,48 @@ Scan the body text of every finding (both the Step 6 chat-rendered form and the 
 - **Unescaped `@`-mentions.** Run the regex ``(?<![`\w/])@[A-Za-z][\w/-]*`` against the finding body **outside** code spans and fenced code blocks. Any match is a posting hazard: GitHub will resolve `@doc`, `@added`, `@typespec/http`, etc. as a user mention to `https://github.com/<token>` and notify that account. This is a recurring noise source because TypeSpec decorator names and library handles all match the autolink pattern. Mark the finding `FAIL: unescaped-mention` and instruct the Reviewer to wrap every offending token in backticks. This FAIL is **non-overridable** -- silently pinging an unrelated GitHub user is exactly the failure mode this check exists to prevent.
 - **Unescaped `#<number>` tokens.** Already covered by Reviewer formatting rules; flag any leftover as `FAIL: hash-number-autolink`.
 
-These checks apply to every finding regardless of severity or classification, and apply equally to reply text for SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT / THANK-AND-RESOLVE plan rows when the Reviewer surfaces the reply body in Input #6.
+These checks apply to every finding regardless of severity or classification, and apply equally to reply text for SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT / CLARIFY-CONFLICT / THANK-AND-RESOLVE plan rows when the Reviewer surfaces the reply body in Input #6.
 
 ### Step 7: Re-verify the reconciliation plan (Input #6)
 
 The Reviewer's Step 5.5 plan auto-resolves prior threads (THANK-AND-RESOLVE),
-drops findings (SKIP-COVERED), and reroutes posts (RESOLVE-AND-REPOST /
-REPLY-LINE-SHIFT) based on existing-comment inventory and
-**fix-verification claims**. A wrong "fixed" claim silently closes a thread
-that may still contain a real violation - the most expensive failure mode
-this gate guards against. Re-verify every plan entry **independently**; do
-not trust the Reviewer's anchors. Skip this step **only** if Input #6 is the
-literal string `reconciliation skipped` (record `Reconciliation accuracy =
-N/A` in your verdict).
+drops findings (SKIP-COVERED), reroutes posts (RESOLVE-AND-REPOST /
+REPLY-LINE-SHIFT), and corrects incompatible guidance (CLARIFY-CONFLICT) based
+on the complete PR discussion inventory and **fix-verification claims**. A
+wrong "fixed" claim silently closes a thread that may still contain a real
+violation. A missed duplicate or contradiction creates competing instructions
+for the author. Re-verify every plan entry **independently**; do not trust the
+Reviewer's anchors. Skip this step **only** if Input #6 is the literal string
+`reconciliation skipped` (record `Reconciliation accuracy = N/A` in your
+verdict).
 
-For each plan entry, fetch the cited existing comment via
-`get_review_comments` (or `gh api .../comments`) at the session SHA, then
-apply the verdict rules below:
+First independently paginate all three discussion surfaces: GraphQL
+`reviewThreads` (all states and comments), REST issue comments for top-level PR
+conversation comments, and REST pull request reviews for review bodies. Compare
+your counts and pagination completion with the plan's inventory header. A
+missing surface, incomplete pagination, or count mismatch is `FAIL:
+inventory-incomplete`; require the Reviewer to retry inventory construction or
+use the explicit `reconciliation skipped` path. Do not validate a plan that
+silently omits a discussion surface.
 
-- **POST-NEW**: no action beyond steps 1-5 above (the finding itself is
-  already re-verified). Mark `PASS`.
-- **SKIP-COVERED (Scenario A)**: confirm the cited existing comment cites
-  the **same rule** at the **same file and line** as the finding. If the
-  existing comment is at a different location, about a different rule, or
-  the URL does not resolve to a real comment, mark `FAIL:
-skip-not-justified` and recommend demoting to POST-NEW.
+For each plan entry, fetch the cited item from its recorded surface. Match by
+semantic finding identity: same rule or review topic, same affected API
+element, and same underlying corrective outcome. Author, entry point, surface,
+wording, exact line, severity wording, and marker presence are not part of
+identity. Generic summary themes without an affected element and actionable
+guidance do not count as coverage. Then apply the verdict rules below:
+
+- **POST-NEW**: independently confirm no actionable item on any discussion
+  surface has the same semantic identity and no incompatible prior guidance
+  exists. Existing coverage is `FAIL: duplicate-missed` and requires
+  reclassification to SKIP-COVERED or a line-shift action. Incompatible prior
+  guidance is `FAIL: conflict-unclarified` and requires CLARIFY-CONFLICT.
+- **SKIP-COVERED (Scenario A)**: confirm the cited item resolves and provides
+  actionable coverage for the same semantic finding. Exact line equality is
+  not required when the affected API element is the same. If the item is about
+  a different rule/topic or API element, is only a generic summary theme, or
+  the URL does not resolve, mark `FAIL: skip-not-justified` and recommend
+  POST-NEW.
 - **RESOLVE-AND-REPOST (Scenario B)**: confirm (a) the existing comment is
   agent-origin (body contains the substring `posted-by:
 arm-api-reviewer-agent`, which matches both the full 6-field per-comment
@@ -655,6 +694,17 @@ shift-misclassified` and recommend the correction (e.g., "existing
 arm-api-reviewer-agent`); (b) the violation is still present at the new
   line; and (c) the original line is genuinely shifted. Same `FAIL:
 shift-misclassified` reasons apply with symmetric corrections.
+- **CLARIFY-CONFLICT**: confirm (a) the cited prior item has the same semantic
+  identity; (b) its guidance materially conflicts with the current finding;
+  (c) the clarification states the prior position, current evidence at the
+  session SHA, current guidance, why it changed, and which guidance is
+  superseded or that the evidence is inconclusive; and (d) the plan does not
+  also POST-NEW the same finding. For an inline thread, permit resolution only
+  when it is agent-origin and the prior guidance is explicitly superseded.
+  Human-origin threads must remain unresolved. For top-level comments/review
+  bodies, require one consolidated top-level clarification with links to every
+  contradicted item. Failures are `FAIL: clarification-unsupported` or `FAIL:
+conflict-unclarified` as applicable.
 - **THANK-AND-RESOLVE (Scenario E)**: confirm the existing comment is
   agent-origin. Then **independently re-read** the file region the
   existing comment originally cited, at the session SHA, and re-apply the
@@ -687,13 +737,18 @@ SHA and re-derive the conclusion yourself.
 
 **Critic-side limits.**
 
-- Severity: this step is **binding** when it returns `FAIL`. A reconciliation
-  `FAIL` cannot be overridden by the Reviewer via the standard `critic:
-override` finding-marker path; see Reviewer Step 7 item 9.
-- Downgrade-only still applies: you may recommend dropping a disposition or
-  demoting SKIP-COVERED -> POST-NEW, but you may **not** recommend upgrading a
-  POST-NEW to a SKIP/RESOLVE on your own initiative - that is a Reviewer
-  decision.
+- Severity: this step is **binding** when it returns `FAIL`. Override
+  eligibility is reason-specific and comes only from the protocol's
+  Non-overridable FAIL catalog. In particular, `inventory-incomplete`,
+  `duplicate-missed`, `conflict-unclarified`, and
+  `clarification-unsupported` require correction and cannot be overridden.
+  The Critic reports the FAIL and recommended correction; the Reviewer applies
+  the protocol recovery before re-invoking.
+- Correct in either direction. A POST-NEW that duplicates or contradicts prior
+  actionable guidance MUST be changed to SKIP-COVERED, the applicable
+  line-shift action, or CLARIFY-CONFLICT. Preventing duplicate and incompatible
+  comments is a binding reconciliation responsibility, not an optional Reviewer
+  preference.
 
 Record a per-entry verdict in the `Per-reconciliation-entry annotations`
 section of the output schema below.
@@ -703,12 +758,12 @@ section of the output schema below.
 Return **four** verdicts at the top of every output. The shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) is the canonical schema (see its "Critic verdict tracks" section); the table below restates it for in-file
 readability and adds the value definitions the Reviewer expects to parse.
 
-| Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Finding accuracy        | `PASS` / `WARN` / `FAIL` / `INVALIDATED`             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but >= 1 at Low confidence. `FAIL` = >= 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched. `INVALIDATED` = session SHA moved or became unreachable; this overrides every other track and kills the session.                                                                                      |
-| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. `N/A` is valid only when Input #9 is `graphs-produced: false`. |
-| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but >= 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = >= 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, or `fix-anchor-unreachable`. `N/A` = Input #6 was the literal `reconciliation skipped`.                                      |
-| Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                                                                                            |
+| Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Finding accuracy        | `PASS` / `WARN` / `FAIL` / `INVALIDATED`             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but >= 1 at Low confidence. `FAIL` = >= 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched. `INVALIDATED` = session SHA moved or became unreachable; this overrides every other track and kills the session.                                                                                                                               |
+| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. `N/A` is valid when `Graphs: false` (no banner) or when the Step-3.5-failure caution banner is present. |
+| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = the complete discussion inventory and every Step 5.5 plan entry were independently re-verified at session SHA. `WARN` = entries verified, but >= 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = the inventory is incomplete, a duplicate/conflict was missed, a clarification is unsupported, or another reconciliation entry failed validation. `N/A` = Input #6 was the literal `reconciliation skipped`.                   |
+| Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                                                                                                                                     |
 
 **Authorization rule (informs the reviewer's Step 7 gate):**
 
@@ -761,6 +816,7 @@ Omit this entire section if Input #6 was `reconciliation skipped` (note that fac
 | --- | --------------------- | --------------------------------------------- | ------------------------ | --------------------------------------------------------------------- |
 | 1   | SKIP-COVERED          | `<existing-comment-url>`                      | PASS                     | Keep as planned                                                       |
 | 2   | THANK-AND-RESOLVE     | `<existing-comment-url>`                      | FAIL: fix-not-verified   | DROP from plan - violation still present at `<file> line <N>`         |
+| 3   | CLARIFY-CONFLICT      | `<existing-comment-or-review-url>`            | PASS                     | Post clarification only; do not post a duplicate standalone finding   |
 | 3   | RESOLVE-AND-REPOST    | `<existing-comment-url>` -> `<file> line <N>` | PASS                     | Keep as planned                                                       |
 | 4   | PROPOSE-HUMAN-RESOLVE | `<existing-comment-url>`                      | WARN                     | Proof anchor required heavy interpretation; flag for human spot-check |
 | 5   | SKIP-COVERED          | `<existing-comment-url>`                      | FAIL: skip-not-justified | DEMOTE to POST-NEW - cited existing comment is about a different rule |

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-04-01",
+    "capacityReservationGroupName": "openCapacityReservationGroup",
+    "capacityReservationName": "openCapacityReservation",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/openCapacityReservationGroup/capacityReservations/openCapacityReservation",
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "utilizationInfo": {
+              "currentCapacity": 10,
+              "usedReservedCountBySubscription": {
+                "{subscription-id1}": 3,
+                "{subscription-id2}": 2
+              }
+            },
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
+              }
+            ]
+          },
+          "timeCreated": "2021-06-27T01:02:38.3138469+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "sku": {
+          "name": "Standard_DS1_v2",
+          "capacity": 10
+        },
+        "zones": [
+          "1"
+        ],
+        "name": "openCapacityReservation"
+      }
+    }
+  },
+  "operationId": "CapacityReservations_Get",
+  "title": "Get an open capacity reservation with instance view."
+}

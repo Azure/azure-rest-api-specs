@@ -75,7 +75,7 @@ the link from the heading's anchor icon.
 
 <a id="reviewer-posted-parity"></a>
 
-See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). It defines the two **review modes** (interactive, where findings are presented to a human who decides what to post; and autonomous, where the agreed finding set is posted and addressed threads are resolved without a human gate), the hard rules, the post-post verification procedure, and worked examples. This section is a pointer so the three instruction files cannot drift.
 
 ---
 
@@ -130,6 +130,17 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
   set, and prevention of leading special characters.
   Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern`)
+- `@pattern` decorator values and `NamePattern` constraints **MUST**
+  use allowlist (positive character class) syntax. Denylist (negated
+  character class `[^...]`) syntax **MUST NOT** be used as the primary
+  character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A negative
+  lookahead (`(?!...)`) used alongside a positive class is acceptable
+  (e.g., `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`). Severity:
+  **Blocking** for new properties/parameters; **Warning** for existing
+  ones carried forward from a prior API version. See
+  [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md)
+  for detection guidance, severity matrix, fix examples, and
+  regression-risk notes.
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
@@ -444,3 +455,4 @@ When reviewing TypeSpec files, verify:
 - ✅ No bearer/OAuth tokens passed in ARM request bodies -- use managed identity or Key Vault
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations, with realistic descriptive values (EX-DESCRIPTIVE-VALUES)
+- ✅ All `@pattern` and `NamePattern` constraints use allowlist (positive character class) syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new properties/parameters, Warning for existing ones
