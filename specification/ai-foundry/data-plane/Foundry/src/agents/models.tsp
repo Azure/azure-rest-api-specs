@@ -698,6 +698,11 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The access boundaries for the agent endpoint.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v1)
+  access_boundaries?: string[];
 }
 
 model AgentIdentity {
