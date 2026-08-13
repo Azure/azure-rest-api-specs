@@ -208,10 +208,20 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
-@@scope(Storage.Blob.Container.listBlobs, "!rust");
+@@clientName(Storage.Blob.Container.listBlobs, "listBlobsXml", "rust");
+@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
 @@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
 
-@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
+@@clientName(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  "listBlobsHierarchicalXml",
+  "rust"
+);
+@@access(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  Access.internal,
+  "rust"
+);
 @@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
 
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
