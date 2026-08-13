@@ -3454,251 +3454,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/{nodeName}/{nodeName}": {
-      "get": {
-        "operationId": "IntegrationRuntimeNodes_Get",
-        "tags": [
-          "IntegrationRuntimeResources"
-        ],
-        "description": "Get an integration runtime node",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "description": "Integration runtime name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "Integration runtime node name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get integration runtime node": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Get.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "IntegrationRuntimeNodes_Update",
-        "tags": [
-          "IntegrationRuntimeResources"
-        ],
-        "description": "Create an integration runtime node",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "description": "Integration runtime name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "Integration runtime node name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "updateIntegrationRuntimeNodeRequest",
-            "in": "body",
-            "description": "The parameters for updating an integration runtime node.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateIntegrationRuntimeNodeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update integration runtime node": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "IntegrationRuntimeNodes_Delete",
-        "tags": [
-          "IntegrationRuntimeResources"
-        ],
-        "description": "Delete an integration runtime node",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "description": "Integration runtime name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "Integration runtime node name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete integration runtime node": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/{nodeName}/ipAddress": {
-      "post": {
-        "operationId": "IntegrationRuntimeNodeIpAddress_Get",
-        "tags": [
-          "IntegrationRuntimeResources"
-        ],
-        "description": "Get the IP address of an integration runtime node",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "description": "Integration runtime name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "Integration runtime node name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeNodeIpAddress"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get integration runtime node IP address": {
-            "$ref": "./examples/IntegrationRuntimeNodes_GetIpAddress.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/disableInteractiveQuery": {
       "post": {
         "operationId": "IntegrationRuntimes_DisableInteractiveQuery",
@@ -4159,6 +3914,251 @@
         "x-ms-examples": {
           "Get monitoring data": {
             "$ref": "./examples/IntegrationRuntimeMonitoringData_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
+      "get": {
+        "operationId": "IntegrationRuntimeNodes_Get",
+        "tags": [
+          "IntegrationRuntimeResources"
+        ],
+        "description": "Get an integration runtime node",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "description": "Integration runtime name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "Integration runtime node name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get integration runtime node": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "IntegrationRuntimeNodes_Update",
+        "tags": [
+          "IntegrationRuntimeResources"
+        ],
+        "description": "Create an integration runtime node",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "description": "Integration runtime name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "Integration runtime node name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateIntegrationRuntimeNodeRequest",
+            "in": "body",
+            "description": "The parameters for updating an integration runtime node.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateIntegrationRuntimeNodeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update integration runtime node": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "IntegrationRuntimeNodes_Delete",
+        "tags": [
+          "IntegrationRuntimeResources"
+        ],
+        "description": "Delete an integration runtime node",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "description": "Integration runtime name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "Integration runtime node name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete integration runtime node": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress": {
+      "post": {
+        "operationId": "IntegrationRuntimeNodeIpAddress_Get",
+        "tags": [
+          "IntegrationRuntimeResources"
+        ],
+        "description": "Get the IP address of an integration runtime node",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "description": "Integration runtime name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "Integration runtime node name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeNodeIpAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get integration runtime node IP address": {
+            "$ref": "./examples/IntegrationRuntimeNodes_GetIpAddress.json"
           }
         }
       }

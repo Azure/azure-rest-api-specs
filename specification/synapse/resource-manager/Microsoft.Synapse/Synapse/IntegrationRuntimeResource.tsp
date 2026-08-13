@@ -181,6 +181,7 @@ interface IntegrationRuntimeResources {
       /**
        * Integration runtime node name
        */
+      @segment("nodes")
       @path
       nodeName: string;
     }
@@ -223,19 +224,18 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{nodeName}")
   @operationId("IntegrationRuntimeNodes_Get")
-  integrationRuntimeNodesGet is ArmResourceActionSync<
+  integrationRuntimeNodesGet is ArmResourceRead<
     IntegrationRuntimeResource,
-    void,
-    ArmResponse<SelfHostedIntegrationRuntimeNode>,
     Parameters = {
       /**
        * Integration runtime node name
        */
+      @segment("nodes")
       @path
       nodeName: string;
-    }
+    },
+    Response = ArmResponse<SelfHostedIntegrationRuntimeNode>
   >;
 
   /**
@@ -243,19 +243,19 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch
-  @action("{nodeName}")
   @operationId("IntegrationRuntimeNodes_Update")
-  integrationRuntimeNodesUpdate is ArmResourceActionSync<
+  integrationRuntimeNodesUpdate is ArmCustomPatchSync<
     IntegrationRuntimeResource,
     UpdateIntegrationRuntimeNodeRequest,
-    ArmResponse<SelfHostedIntegrationRuntimeNode>,
     Parameters = {
       /**
        * Integration runtime node name
        */
+      @segment("nodes")
       @path
       nodeName: string;
-    }
+    },
+    Response = ArmResponse<SelfHostedIntegrationRuntimeNode>
   >;
 
   /**
@@ -263,19 +263,18 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
-  @action("{nodeName}")
   @operationId("IntegrationRuntimeNodes_Delete")
-  integrationRuntimeNodesDelete is ArmResourceActionSync<
+  integrationRuntimeNodesDelete is ArmResourceDeleteSync<
     IntegrationRuntimeResource,
-    void,
-    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * Integration runtime node name
        */
+      @segment("nodes")
       @path
       nodeName: string;
-    }
+    },
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -358,7 +357,7 @@ interface IntegrationRuntimeResources {
   "The parameters for updating an integration runtime."
 );
 @@doc(
-  IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.properties,
   "The parameters for updating an integration runtime node."
 );
 @@doc(

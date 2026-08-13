@@ -44,6 +44,20 @@ using Microsoft.Synapse;
 
 @@clientName(Resource, "SynapseResource");
 @@clientName(ResourceProvisioningState, "SynapseResourceProvisioningState");
+@@clientName(
+  ResourceProvisioningState,
+  "SynapseSynapseResourceProvisioningState",
+  "go"
+);
+
+@@clientName(ManagedIntegrationRuntime.type, "managedType", "java");
+@@clientName(SelfHostedIntegrationRuntime.type, "selfHostedType", "java");
+@@clientName(ManagedIntegrationRuntimeStatus.type, "managedStatusType", "java");
+@@clientName(
+  SelfHostedIntegrationRuntimeStatus.type,
+  "selfHostedStatusType",
+  "java"
+);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(KustoPoolPrivateLinkResources.properties);
@@ -355,7 +369,7 @@ using Microsoft.Synapse;
   "updateIntegrationRuntimeRequest"
 );
 @@clientName(
-  IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.properties,
   "updateIntegrationRuntimeNodeRequest"
 );
 @@clientName(
