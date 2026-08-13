@@ -892,6 +892,7 @@ model MetadataKeyValue {
   /**
    * The metadata key. Known keys emitted by the service include 'Linux.AzureSecretsProvisioning.Enabled', 'OS.Name', and '{componentName}.Version' (e.g., 'AzureGuestAgent.Version'). All values are non-sensitive configuration; no secrets, credentials, or cryptographic material transit this field.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "metadataKey is a dictionary-style key name (e.g. 'OS.Name'), not a cryptographic key or secret. The suffix match on 'key' is a false positive."
   metadataKey: string;
 
   /**
