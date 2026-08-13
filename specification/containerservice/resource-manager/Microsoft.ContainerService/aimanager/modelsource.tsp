@@ -30,7 +30,6 @@ scalar UserAssignedIdentityResourceId
     }
   ]>;
 
-@added(Versions.v2026_05_02_preview)
 @doc("A model source registered with an AI Manager. Describes an external model registry (e.g. Hugging Face) and the credentials the platform uses to pull artifacts from it.")
 @resource("modelSources")
 @parentResource(AIManager)
@@ -44,7 +43,6 @@ model ModelSource is ProxyResource<ModelSourceProperties> {
   ...EntityTagProperty;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Model source properties.")
 model ModelSourceProperties {
   @visibility(Lifecycle.Read)
@@ -68,7 +66,6 @@ model ModelSourceProperties {
   microsoftFoundry?: MicrosoftFoundrySource;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The type of a model source.")
 union ModelSourceType {
   string,
@@ -81,7 +78,6 @@ union ModelSourceType {
   MicrosoftFoundry: "MicrosoftFoundry",
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("""
   A credential value used for accessing gated or private models.
   """)
@@ -94,7 +90,6 @@ model CredentialValue {
   managedIdentity?: ManagedIdentityCredential;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("A credential provided inline.")
 model InlineCredential {
   @secret
@@ -129,7 +124,6 @@ model MicrosoftFoundrySource {
   projectResourceId: FoundryProjectResourceId;
 }
 
-@added(Versions.v2026_05_02_preview)
 @armResourceOperations
 interface ModelSources {
   get is ArmResourceRead<ModelSource>;

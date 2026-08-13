@@ -2450,6 +2450,21 @@
         "spec"
       ]
     },
+    "AIModelResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource id of an AIModel.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/aiModels"
+          },
+          {
+            "type": "Microsoft.ContainerService/aiManagers/customAIModels"
+          }
+        ]
+      }
+    },
     "AutoscaleProfile": {
       "type": "object",
       "description": "Autoscaling configuration: scale replica count between a minimum and maximum.",
@@ -2887,21 +2902,6 @@
         ]
       }
     },
-    "DeployableModelResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "The ARM resource id of an AIModel or CustomAIModel.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.ContainerService/aiModels"
-          },
-          {
-            "type": "Microsoft.ContainerService/aiManagers/customAIModels"
-          }
-        ]
-      }
-    },
     "FoundryProjectResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -3122,7 +3122,7 @@
           "readOnly": true
         },
         "modelResourceId": {
-          "$ref": "#/definitions/DeployableModelResourceId",
+          "$ref": "#/definitions/AIModelResourceId",
           "description": "Full ARM resource id of the model to deploy. Immutable after creation.",
           "x-ms-mutability": [
             "read",

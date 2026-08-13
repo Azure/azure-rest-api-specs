@@ -16,12 +16,14 @@ using Azure.ResourceManager;
 namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_05_02_preview)
 @doc("The ARM resource id of an AIModel.")
 scalar AIModelResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/aiModels",
+    },
+    {
+      type: "Microsoft.ContainerService/aiManagers/customAIModels",
     }
   ]>;
 
@@ -38,7 +40,6 @@ scalar DeployableModelResourceId
     }
   ]>;
 
-@added(Versions.v2026_05_02_preview)
 @doc("The ARM resource id of a ModelSource.")
 scalar ModelSourceResourceId
   extends Azure.Core.armResourceIdentifier<[
@@ -47,7 +48,6 @@ scalar ModelSourceResourceId
     }
   ]>;
 
-@added(Versions.v2026_05_02_preview)
 @doc("""
   A running deployment of a model in an AI Manager namespace.
   
@@ -68,7 +68,6 @@ model ModelDeployment is ProxyResource<ModelDeploymentProperties> {
   ...EntityTagProperty;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Model deployment properties.")
 model ModelDeploymentProperties {
   @visibility(Lifecycle.Read)
@@ -76,11 +75,10 @@ model ModelDeploymentProperties {
   provisioningState?: ModelDeploymentProvisioningState;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_08_02_preview, AIModelResourceId)
   @doc("""
     Full ARM resource id of the model to deploy. Immutable after creation.
     """)
-  modelResourceId: DeployableModelResourceId;
+  modelResourceId: AIModelResourceId;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Full ARM resource id of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.")
@@ -104,7 +102,6 @@ model ModelDeploymentProperties {
   status?: ModelDeploymentStatus;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The provisioning state of a model deployment resource.")
 union ModelDeploymentProvisioningState {
   string,
@@ -120,7 +117,6 @@ union ModelDeploymentProvisioningState {
   Deleting: "Deleting",
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The runtime performance mode of a model deployment.")
 union ModelDeploymentPerformanceMode {
   string,
@@ -135,7 +131,6 @@ union ModelDeploymentPerformanceMode {
   Throughput: "Throughput",
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The runtime status of a model deployment. All fields are read-only and populated once reconciliation has started.")
 model ModelDeploymentStatus {
   @visibility(Lifecycle.Read)
@@ -175,7 +170,6 @@ model ModelDeploymentStatus {
   estimatedProvisionTimeSeconds?: int32;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("User overrides for a model deployment.")
 model ModelDeploymentOverrides {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form override key/value pairs."
@@ -183,7 +177,6 @@ model ModelDeploymentOverrides {
   values?: Record<string>;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("""
   Scaling configuration for a model deployment. Exactly one of `manual` or
   `autoscale` must be set.
@@ -217,7 +210,6 @@ model ScalingProfile {
   autoscale?: AutoscaleProfile;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Manual scaling configuration: fixed replica count.")
 model ManualScalingProfile {
   @doc("Fixed number of replicas. May be `0` to stop serving traffic while keeping the deployment configuration (see `ScalingProfile`).")
@@ -225,7 +217,6 @@ model ManualScalingProfile {
   replicas: int32;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Autoscaling configuration: scale replica count between a minimum and maximum.")
 model AutoscaleProfile {
   @doc("The minimum number of replicas. Must be at least `1`; scale-to-zero is not supported in autoscale mode (see `ScalingProfile`).")
@@ -237,7 +228,6 @@ model AutoscaleProfile {
   maxReplicas?: int32;
 }
 
-@added(Versions.v2026_05_02_preview)
 @armResourceOperations
 interface ModelDeployments {
   get is ArmResourceRead<ModelDeployment>;

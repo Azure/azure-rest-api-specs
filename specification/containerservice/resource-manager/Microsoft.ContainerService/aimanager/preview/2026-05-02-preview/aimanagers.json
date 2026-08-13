@@ -2269,7 +2269,7 @@
     },
     "CredentialValue": {
       "type": "object",
-      "description": "A credential value used for accessing gated or private models.",
+      "description": "A credential value. Exactly one variant must be set.\n\nIn the current API version, only the `inline` variant is supported. Future\nAPI versions are expected to add additional credential kinds (for example,\nmanaged identity and Key Vault secret references) as sibling variants on\nthis model.",
       "properties": {
         "inline": {
           "$ref": "#/definitions/InlineCredential",
@@ -2480,7 +2480,7 @@
         },
         "modelResourceId": {
           "$ref": "#/definitions/AIModelResourceId",
-          "description": "Full ARM resource id of the model to deploy. Immutable after creation.",
+          "description": "Full ARM resource id of the model to deploy. Phase 1 accepts an `AIModel` resource id only. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
