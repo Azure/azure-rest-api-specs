@@ -31,6 +31,31 @@ union RLEnvironmentDiskImageConversionStatus {
   failed: "Failed",
 }
 
+@doc("Semantic-version component to bump when creating a new version of an existing RLE environment.")
+union RLEnvironmentVersionBump {
+  string,
+
+  @doc("Increment the major version component.")
+  major: "Major",
+
+  @doc("Increment the minor version component.")
+  minor: "Minor",
+
+  @doc("Increment the patch version component.")
+  patch: "Patch",
+}
+
+@doc("Sort order for opaque cursor pagination.")
+union RLEPaginationOrder {
+  string,
+
+  @doc("Ascending order.")
+  asc: "asc",
+
+  @doc("Descending order.")
+  desc: "desc",
+}
+
 @doc("A hosted reinforcement-learning environment that instances are leased from.")
 @resource("environments")
 model RLEnvironment {
@@ -80,15 +105,27 @@ model CreateRLEnvironmentRequest {
 
   @doc("Container image reference (Azure Container Registry path) that backs the environment.")
   acrImagePath: string;
+
+  @doc("Optional semantic-version bump to apply when a new version of an existing environment is created. Defaults to a patch bump when omitted.")
+  versionBump?: RLEnvironmentVersionBump;
 }
 
-@doc("Response for listing hosted RLE environments.")
+@doc("Response for listing hosted RLE environments, using opaque cursor pagination.")
 model ListRLEnvironmentsResponse {
   @doc("Environments on this page.")
-  value: RLEnvironment[];
+  data: RLEnvironment[];
 
-  @doc("Number of environments returned on this page.")
-  count: int32;
+  @doc("Opaque cursor of the first item on this page, for paging backward.")
+  @encodedName("application/json", "first_id")
+  firstId?: string;
+
+  @doc("Opaque cursor of the last item on this page, for paging forward.")
+  @encodedName("application/json", "last_id")
+  lastId?: string;
+
+  @doc("True when more environments are available beyond this page.")
+  @encodedName("application/json", "has_more")
+  hasMore: boolean;
 }
 
 @doc("A historical version snapshot of a hosted RLE environment.")
@@ -109,34 +146,27 @@ model RLEnvironmentVersion {
   createdAtUtc: utcDateTime;
 }
 
+@doc("Response for listing versions of a hosted RLE environment, using opaque cursor pagination.")
+model ListRLEnvironmentVersionsResponse {
+  @doc("Environment versions on this page.")
+  data: RLEnvironmentVersion[];
+
+  @doc("Opaque cursor of the first item on this page, for paging backward.")
+  @encodedName("application/json", "first_id")
+  firstId?: string;
+
+  @doc("Opaque cursor of the last item on this page, for paging forward.")
+  @encodedName("application/json", "last_id")
+  lastId?: string;
+
+  @doc("True when more versions are available beyond this page.")
+  @encodedName("application/json", "has_more")
+  hasMore: boolean;
+}
+
 // ============================================================================
 // Instance groups
 // ============================================================================
-
-@doc("""
-  Allocation lifecycle status of an RLE instance group. This tracks allocation, not
-  ML outcome: RLE does not run the training, so there is no group-level `Succeeded`
-  status. `Closed` is the normal (success-equivalent) terminal and `Failed` is an
-  infrastructure/allocation verdict only (RLE could not serve the environment).
-  """)
-union RLEInstanceGroupStatus {
-  string,
-
-  @doc("Instance-group record exists; no instance has been leased yet.")
-  created: "Created",
-
-  @doc("At least one instance has been leased for the group.")
-  active: "Active",
-
-  @doc("Ended normally; all instances released. Success-equivalent terminal state.")
-  closed: "Closed",
-
-  @doc("RLE could not serve the environment (invalid version, broken image, or all instances failed). Infrastructure verdict only.")
-  failed: "Failed",
-
-  @doc("Aborted early by an explicit cancel or delete.")
-  cancelled: "Cancelled",
-}
 
 @doc("Forward-compatible resource allocation hints for an instance group. Recorded but not scheduled against in this version.")
 model RLEInstanceGroupResourceProfile {
@@ -152,47 +182,33 @@ model RLEInstanceGroupResourceProfile {
 
 @doc("""
   A first-class group of RLE instances leased for a single reinforcement-learning
-  training job. Created from a registered environment (referenced by name and
-  version); the environment does not appear in the instance-group URI.
+  training job. Created under a specific version of a registered environment; the
+  environment name and version are carried in the request URI.
   """)
-@resource("instance-groups")
+@parentResource(RLEnvironment)
+@resource("instance_groups")
 model RLEInstanceGroup {
   @doc("Instance group identifier, assigned by the service.")
   @key("instanceGroupId")
-  @encodedName("application/json", "instance_group_id")
+  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   instanceGroupId: string;
 
   @doc("Foundry project identifier that owns this instance group.")
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "project_id")
   projectId: string;
 
-  @doc("Display name for the instance group. Supplied by the caller or generated by the service.")
-  name: string;
-
   @doc("Name of the registered RLE environment the group's instances are leased from.")
-  @encodedName("application/json", "environment_name")
   @visibility(Lifecycle.Read)
   environmentName: string;
 
   @doc("Version of the registered RLE environment the group's instances are leased from.")
-  @encodedName("application/json", "environment_version")
   @visibility(Lifecycle.Read)
   environmentVersion: string;
 
-  @doc("Reserved quota: the maximum number of concurrently-active instances the group may hold. Defaults to 1 when omitted on create.")
-  @encodedName("application/json", "instance_count")
+  @doc("Maximum number of concurrently-active instances the group may hold. Defaults to 1 when omitted on create.")
   @visibility(Lifecycle.Read)
-  instanceCount: int32;
-
-  @doc("Allocation lifecycle status of the instance group.")
-  @visibility(Lifecycle.Read)
-  status: RLEInstanceGroupStatus;
-
-  @doc("Failure detail when the instance group enters the `Failed` state.")
-  @visibility(Lifecycle.Read)
-  error?: string;
+  maxActiveInstances: int32;
 
   @doc("""
     Free-form correlation/tag key-values, persisted opaquely by RLE and echoed on
@@ -202,61 +218,45 @@ model RLEInstanceGroup {
   metadata?: Record<string>;
 
   @doc("Forward-compatible resource allocation hints. Recorded but not scheduled against in this version.")
-  @encodedName("application/json", "resource_profile")
   resourceProfile?: RLEInstanceGroupResourceProfile;
 
-  @doc("Forward-compatible scheduling priority hint. Recorded but not scheduled against in this version.")
-  priority?: int32;
-
   @doc("Timestamp the instance group was created, in UTC.")
-  @encodedName("application/json", "created_at_utc")
   @visibility(Lifecycle.Read)
   createdAtUtc: utcDateTime;
 
   @doc("Timestamp the instance group was last updated, in UTC.")
-  @encodedName("application/json", "updated_at_utc")
   @visibility(Lifecycle.Read)
   updatedAtUtc: utcDateTime;
 }
 
-@doc("Request body for creating an RLE instance group.")
+@doc("Request body for creating an RLE instance group. The environment name and version are supplied in the request URI.")
 model CreateRLEInstanceGroupRequest {
-  @doc("Name of the registered RLE environment to lease instances from.")
-  @encodedName("application/json", "environment_name")
-  environmentName: string;
-
-  @doc("Version of the registered RLE environment to lease instances from.")
-  @encodedName("application/json", "environment_version")
-  environmentVersion: string;
-
-  @doc("Reserved quota: the maximum number of concurrently-active instances. Optional; defaults to 1 when omitted.")
-  @encodedName("application/json", "instance_count")
-  instanceCount?: int32;
-
-  @doc("Optional caller-provided display name. The service generates one when omitted.")
-  name?: string;
+  @doc("Maximum number of concurrently-active instances the group may hold. Optional; defaults to 1 when omitted.")
+  maxActiveInstances?: int32;
 
   @doc("Optional free-form correlation/tag key-values. `external_job_id` is a reserved well-known key for the upstream Training API job / AML run.")
   metadata?: Record<string>;
 
   @doc("Optional forward-compatible resource allocation hints. Recorded only in this version.")
-  @encodedName("application/json", "resource_profile")
   resourceProfile?: RLEInstanceGroupResourceProfile;
 }
 
-@doc("Request body for updating an RLE instance group. Used to signal completion by setting `status` to `Closed`.")
-model UpdateRLEInstanceGroupRequest {
-  @doc("New allocation lifecycle status. Setting `Closed` signals normal completion and releases all owned instances.")
-  status?: RLEInstanceGroupStatus;
-}
-
-@doc("Response for listing RLE instance groups.")
+@doc("Response for listing RLE instance groups, using opaque cursor pagination.")
 model ListRLEInstanceGroupsResponse {
   @doc("Instance groups on this page.")
-  value: RLEInstanceGroup[];
+  data: RLEInstanceGroup[];
 
-  @doc("Number of instance groups returned on this page.")
-  count: int32;
+  @doc("Opaque cursor of the first item on this page, for paging backward.")
+  @encodedName("application/json", "first_id")
+  firstId?: string;
+
+  @doc("Opaque cursor of the last item on this page, for paging forward.")
+  @encodedName("application/json", "last_id")
+  lastId?: string;
+
+  @doc("True when more instance groups are available beyond this page.")
+  @encodedName("application/json", "has_more")
+  hasMore: boolean;
 }
 
 // ============================================================================
@@ -273,7 +273,7 @@ union RLEInstanceStatus {
   @doc("The instance is up and serving data-plane calls.")
   running: "Running",
 
-  @doc("The instance's task finished and RLE stopped the backing runtime. Not reused in this version.")
+  @doc("The instance's task finished and RLE stopped the backing runtime.")
   stopped: "Stopped",
 
   @doc("The instance errored during provisioning or at runtime. See `error` for details.")
@@ -281,112 +281,45 @@ union RLEInstanceStatus {
 
   @doc("The backing runtime has been torn down / removed.")
   deleted: "Deleted",
-
-  @doc("The instance was released before its task completed (e.g. the instance group was cancelled).")
-  cancelled: "Cancelled",
-}
-
-@doc("Allocation (lease) state of an RLE instance, orthogonal to its runtime `status`.")
-union RLEInstanceLeaseState {
-  string,
-
-  @doc("The instance is actively leased and counts against the group's reserved quota.")
-  leased: "Leased",
-
-  @doc("Reserved for future instance reuse. Not used in this version.")
-  idle: "Idle",
-
-  @doc("The lease has been released; the instance no longer counts against quota and is not reused.")
-  released: "Released",
 }
 
 @doc("""
   A leased runtime unit owned by an RLE instance group (replaces the former
-  \"sandbox\" concept). Combines the owning instance-group identity, the runtime
-  identity, internal backing details, runtime status, and lease bookkeeping.
+  "sandbox" concept). Combines the owning instance-group identity, the runtime
+  identity, runtime status, and the base URL used to reach its data-plane
+  (OpenEnv) endpoints.
   """)
 @parentResource(RLEInstanceGroup)
 @resource("instances")
 model RLEInstance {
   @doc("Instance identifier, assigned by the service. Globally unique.")
   @key("instanceId")
-  @encodedName("application/json", "instance_id")
   @visibility(Lifecycle.Read)
   instanceId: string;
 
   @doc("Identifier of the owning RLE instance group.")
-  @encodedName("application/json", "instance_group_id")
   @visibility(Lifecycle.Read)
   instanceGroupId: string;
-
-  @doc("Internal identifier of the backing runtime sandbox. Surfaced for diagnostics only.")
-  @encodedName("application/json", "adc_sandbox_id")
-  @visibility(Lifecycle.Read)
-  adcSandboxId?: string;
 
   @doc("Runtime status of the instance.")
   @visibility(Lifecycle.Read)
   status: RLEInstanceStatus;
 
-  @doc("Allocation (lease) state of the instance.")
-  @encodedName("application/json", "lease_state")
+  @doc("Base URL clients use to reach the instance's data-plane (OpenEnv) endpoints, when running.")
   @visibility(Lifecycle.Read)
-  leaseState: RLEInstanceLeaseState;
-
-  @doc("Timestamp the instance was leased, in UTC.")
-  @encodedName("application/json", "leased_at_utc")
-  @visibility(Lifecycle.Read)
-  leasedAtUtc?: utcDateTime;
-
-  @doc("Timestamp the instance was released, in UTC.")
-  @encodedName("application/json", "released_at_utc")
-  @visibility(Lifecycle.Read)
-  releasedAtUtc?: utcDateTime;
-
-  @doc("Timestamp of the most recent data-plane activity on the instance, in UTC. Bumped on every data-plane call.")
-  @encodedName("application/json", "last_activity_utc")
-  @visibility(Lifecycle.Read)
-  lastActivityUtc?: utcDateTime;
-
-  @doc("Idle-timeout deadline, in UTC. Computed as `last_activity_utc` plus the idle TTL.")
-  @encodedName("application/json", "lease_expires_at_utc")
-  @visibility(Lifecycle.Read)
-  leaseExpiresAtUtc?: utcDateTime;
-
-  @doc("CPU allocation of the instance, encoded as a string.")
-  @visibility(Lifecycle.Read)
-  cpu?: string;
-
-  @doc("Memory allocation of the instance, for example \"2Gi\".")
-  @visibility(Lifecycle.Read)
-  memory?: string;
-
-  @doc("Disk allocation of the instance, for example \"10Gi\".")
-  @visibility(Lifecycle.Read)
-  disk?: string;
+  baseUrl?: string;
 
   @doc("Failure detail when the instance enters the `Failed` state.")
   @visibility(Lifecycle.Read)
   error?: string;
 
   @doc("Timestamp the instance was created, in UTC.")
-  @encodedName("application/json", "created_at_utc")
   @visibility(Lifecycle.Read)
   createdAtUtc: utcDateTime;
 
   @doc("Timestamp the instance was last updated, in UTC.")
-  @encodedName("application/json", "updated_at_utc")
   @visibility(Lifecycle.Read)
   updatedAtUtc: utcDateTime;
-}
-
-@doc("Response for listing instances owned by an RLE instance group.")
-model ListRLEInstancesResponse {
-  @doc("Instances on this page.")
-  value: RLEInstance[];
-
-  @doc("Number of instances returned on this page.")
-  count: int32;
 }
 
 // ============================================================================

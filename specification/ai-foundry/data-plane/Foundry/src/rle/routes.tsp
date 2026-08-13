@@ -12,16 +12,16 @@ namespace Azure.AI.Projects;
  * Lifecycle operations for hosted reinforcement-learning environments.
  *
  * Environments are created from a container image (`acrImagePath`) and
- * versioned: every successful `updateEnvironment` produces a new immutable
- * version while preserving the environment identity. Instances are leased
- * from an environment under an `RLEInstanceGroup` via the `RLEInstances`
- * interface.
+ * versioned: every successful create against an existing name produces a new
+ * immutable version (per `versionBump`) while preserving the environment
+ * identity. Instance groups are created under a specific environment version,
+ * and instances are leased from a group via the `RLEInstances` interface.
  */
-@route("rle/environments")
+@route("rl_environments")
 @tag("ReinforcementLearning")
 interface RLEnvironments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a non-standard `create` collection action so a service-assigned id is returned without a client-supplied PUT."
-  @doc("Create a new hosted RLE environment.")
+  @doc("Create a new hosted RLE environment, or a new version of an existing one.")
   @route("create")
   @post
   createEnvironment is FoundryDataPlaneOperation<
@@ -32,7 +32,7 @@ interface RLEnvironments {
     RLEnvironment
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list with skip/top/name filters."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with opaque cursor pagination."
   @doc("List all hosted RLE environments in the project.")
   @get
   listEnvironments is FoundryDataPlaneOperation<
@@ -41,13 +41,21 @@ interface RLEnvironments {
       @query
       name?: string;
 
-      @doc("Number of environments to skip. Defaults to 0.")
+      @doc("Maximum number of environments to return. Defaults to 100; valid range is [1, 100].")
       @query
-      skip?: int32;
+      limit?: int32;
 
-      @doc("Maximum number of environments to return. Defaults to 50; valid range is [1, 200].")
+      @doc("Opaque cursor for paging forward. Returns items after the given cursor.")
       @query
-      top?: int32;
+      after?: string;
+
+      @doc("Opaque cursor for paging backward. Returns items before the given cursor.")
+      @query
+      before?: string;
+
+      @doc("Sort order for the page. Defaults to descending by creation time.")
+      @query
+      order?: RLEPaginationOrder;
     },
     ListRLEnvironmentsResponse
   >;
@@ -99,7 +107,7 @@ interface RLEnvironments {
     NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged array of versions."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a list of versions with opaque cursor pagination."
   @doc("List historical versions of a hosted RLE environment.")
   @route("{name}/versions")
   @get
@@ -108,8 +116,24 @@ interface RLEnvironments {
       @doc("Environment name.")
       @path
       name: string;
+
+      @doc("Maximum number of versions to return. Defaults to 100; valid range is [1, 100].")
+      @query
+      limit?: int32;
+
+      @doc("Opaque cursor for paging forward. Returns items after the given cursor.")
+      @query
+      after?: string;
+
+      @doc("Opaque cursor for paging backward. Returns items before the given cursor.")
+      @query
+      before?: string;
+
+      @doc("Sort order for the page. Defaults to ascending by version.")
+      @query
+      order?: RLEPaginationOrder;
     },
-    RLEnvironmentVersion[]
+    ListRLEnvironmentVersionsResponse
   >;
 }
 
@@ -117,53 +141,61 @@ interface RLEnvironments {
  * RLEInstanceGroup lifecycle operations.
  *
  * An instance group is the first-class unit that groups the instances leased for
- * a single reinforcement-learning training job. It is created from a registered
- * environment (referenced by `environment_name` and `environment_version`); the
- * environment does not appear in the URI. `instance_count` is a reserved quota
- * (the maximum number of concurrently-active instances) and is reserved at create
- * time. Status follows an allocation lifecycle
- * (`Created → Active → Closed | Failed | Cancelled`); `Closed` is the normal
- * terminal and is signaled via `updateInstanceGroup` (`status: Closed`) or the
- * background reaper. Reaching any terminal status releases all owned instances.
+ * a single reinforcement-learning training job. It is created under a specific
+ * version of a registered environment; the environment name and version appear
+ * in the request URI. `max_active_instances` bounds the number of
+ * concurrently-active instances the group may hold.
  */
-@route("rle/instance-groups")
+@route("rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups")
 @tag("ReinforcementLearning")
 interface RLEInstanceGroups {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service mints the id and reserves quota, so create is a non-standard collection action rather than a client-supplied PUT."
-  @doc("""
-    Create a new RLE instance group. The service mints `instance_group_id` and
-    reserves `instance_count` slots of quota. Returns `403` with code
-    `QuotaExceeded` when the requested quota cannot be reserved.
-    """)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service mints the id, so create is a non-standard collection action rather than a client-supplied PUT."
+  @doc("Create a new RLE instance group under the given environment version. The service mints `id`.")
   @post
   createInstanceGroup is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment to lease instances from.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment to lease instances from.")
+      @path
+      environmentVersion: string;
+
       @doc("The instance group to create.")
       @body body: CreateRLEInstanceGroupRequest;
     },
     RLEInstanceGroup
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list with skip/top and status/environment filters."
-  @doc("List RLE instance groups in the project.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with opaque cursor pagination."
+  @doc("List RLE instance groups under the given environment version.")
   @get
   listInstanceGroups is FoundryDataPlaneOperation<
     {
-      @doc("Optional instance group status filter.")
-      @query
-      status?: RLEInstanceGroupStatus;
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
 
-      @doc("Optional environment name filter.")
-      @query
-      environmentName?: string;
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
 
-      @doc("Number of instance groups to skip. Defaults to 0.")
+      @doc("Maximum number of instance groups to return. Defaults to 100; valid range is [1, 100].")
       @query
-      skip?: int32;
+      limit?: int32;
 
-      @doc("Maximum number of instance groups to return. Defaults to 50; valid range is [1, 200].")
+      @doc("Opaque cursor for paging forward. Returns items after the given cursor.")
       @query
-      top?: int32;
+      after?: string;
+
+      @doc("Opaque cursor for paging backward. Returns items before the given cursor.")
+      @query
+      before?: string;
+
+      @doc("Sort order for the page. Defaults to descending by creation time.")
+      @query
+      order?: RLEPaginationOrder;
     },
     ListRLEInstanceGroupsResponse
   >;
@@ -174,38 +206,35 @@ interface RLEInstanceGroups {
   @get
   getInstanceGroup is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
       @doc("Instance group identifier.")
       @path
       instanceGroupId: string;
-    },
-    RLEInstanceGroup
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a status-update completion signal via a non-standard flat route shape."
-  @doc("""
-    Update an RLE instance group. Setting `status` to `Closed` signals normal
-    completion and releases all instances owned by the group.
-    """)
-  @route("{instanceGroupId}")
-  @patch(#{ implicitOptionality: true })
-  updateInstanceGroup is FoundryDataPlaneOperation<
-    {
-      @doc("Instance group identifier.")
-      @path
-      instanceGroupId: string;
-
-      @doc("The update to apply.")
-      @body body: UpdateRLEInstanceGroupRequest;
     },
     RLEInstanceGroup
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
-  @doc("Cancel an RLE instance group. The group is marked `Cancelled` and all owned instances are released.")
+  @doc("Delete an RLE instance group. All instances owned by the group are released.")
   @route("{instanceGroupId}")
   @delete
   deleteInstanceGroup is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
       @doc("Instance group identifier.")
       @path
       instanceGroupId: string;
@@ -218,58 +247,37 @@ interface RLEInstanceGroups {
  * RLEInstance lifecycle operations (replaces the former sandbox surface).
  *
  * Instances are leased by the backend under an instance group; the client never
- * creates a sandbox directly. `createInstance` is a synchronous, non-LRO
- * collection-create that always leases a brand-new instance from a warm pool
- * (no reuse): it returns `201` with the new instance, `429` with a `Retry-After`
- * when the group is at its reserved capacity, `202` with a `Retry-After` when
- * under cap but no warm instance is available yet, and `503` on a hard backend
- * failure. `releaseInstance` is a soft delete that stops the backing runtime and
- * marks the instance `Stopped`/`Released` while retaining the ledger row; it is
- * idempotent. Instances are also released automatically on instance-group
- * terminal status and by an idle timeout.
+ * creates a sandbox directly. `createInstance` takes no client body, mints the
+ * `instance_id`, and returns `201` with the new instance (or `429` with a
+ * `Retry-After` when the group is at its active-instance limit). `deleteInstance`
+ * stops the backing runtime and removes the instance. Instances are also released
+ * automatically when their instance group is deleted.
  */
-@route("rle/instance-groups/{instanceGroupId}/instances")
+@route("rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances")
 @tag("ReinforcementLearning")
 interface RLEInstances {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backend lease: create takes no client body, mints the id, and is non-idempotent, so it is a non-standard collection action rather than a PUT."
   @doc("""
-    Lease a new RLE instance under the instance group. Synchronous and non-LRO:
-    returns `201` with the new instance, `429` (with `Retry-After`) at the group's
-    reserved capacity, `202` (with `Retry-After`, status `Pending`) when under cap
-    but no warm instance is available yet, or `503` on a hard backend failure.
+    Lease a new RLE instance under the instance group. Returns `201` with the new
+    instance, or `429` (with `Retry-After`) when the group is at its active-instance
+    limit.
     """)
   @post
   createInstance is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
       @doc("Instance group identifier to lease the instance under.")
       @path
       instanceGroupId: string;
     },
     RLEInstance
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list with skip/top and lease-state filters."
-  @doc("List instances owned by an RLE instance group.")
-  @get
-  listInstances is FoundryDataPlaneOperation<
-    {
-      @doc("Instance group identifier whose instances to list.")
-      @path
-      instanceGroupId: string;
-
-      @doc("Optional lease-state filter.")
-      @query
-      leaseState?: RLEInstanceLeaseState;
-
-      @doc("Number of instances to skip. Defaults to 0.")
-      @query
-      skip?: int32;
-
-      @doc("Maximum number of instances to return. Defaults to 50; valid range is [1, 200].")
-      @query
-      top?: int32;
-    },
-    ListRLEInstancesResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
@@ -278,6 +286,14 @@ interface RLEInstances {
   @get
   getInstance is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
       @doc("Instance group identifier the instance belongs to.")
       @path
       instanceGroupId: string;
@@ -289,17 +305,20 @@ interface RLEInstances {
     RLEInstance
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Release is a soft delete that returns the final instance state; idempotent."
-  @doc("""
-    Release an RLE instance (soft delete): the backing runtime is stopped and the
-    instance is marked `Stopped`/`Released` while the ledger row is retained.
-    Idempotent — re-releasing an already-released instance is a no-op. Returns the
-    final instance state.
-    """)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
+  @doc("Delete an RLE instance: the backing runtime is stopped and the instance is removed.")
   @route("{instanceId}")
   @delete
-  releaseInstance is FoundryDataPlaneOperation<
+  deleteInstance is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
       @doc("Instance group identifier the instance belongs to.")
       @path
       instanceGroupId: string;
@@ -308,22 +327,18 @@ interface RLEInstances {
       @path
       instanceId: string;
     },
-    RLEInstance
+    NoContentResponse
   >;
 }
 
 /**
- * RLEInstance runtime (data-plane) operations, addressed by the globally-unique
- * `instance_id`.
+ * RLEInstance runtime (data-plane) operations.
  *
  * These are the OpenEnv / Gymnasium runtime endpoints proxied verbatim through
- * RLE under a passthrough `openenv` segment. The route is flat and group-less:
- * RLE resolves the owning instance group internally from `instance_id`. Each call
- * bumps the instance's `last_activity_utc` and extends its lease. A caller may
- * supply an `x-rle-session-id` header, which RLE echoes to the runtime and logs
- * for the caller's own correlation without storing it.
+ * RLE under a passthrough `openenv` segment, addressed by the full
+ * environment/version/instance-group/instance path.
  */
-@route("rle/instances/{instanceId}/openenv")
+@route("rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv")
 @tag("ReinforcementLearning")
 interface RLEInstanceRuntime {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime episode control is a non-standard, environment-defined action."
@@ -332,13 +347,21 @@ interface RLEInstanceRuntime {
   @post
   reset is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
+      @doc("Instance group identifier the instance belongs to.")
+      @path
+      instanceGroupId: string;
+
       @doc("Instance identifier.")
       @path
       instanceId: string;
-
-      @doc("Optional client-supplied session identifier, echoed to the runtime and logs for correlation only.")
-      @header("x-rle-session-id")
-      sessionId?: string;
 
       @doc("Reset request body.")
       @body body: RLEResetRequest;
@@ -352,13 +375,21 @@ interface RLEInstanceRuntime {
   @post
   step is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
+      @doc("Instance group identifier the instance belongs to.")
+      @path
+      instanceGroupId: string;
+
       @doc("Instance identifier.")
       @path
       instanceId: string;
-
-      @doc("Optional client-supplied session identifier, echoed to the runtime and logs for correlation only.")
-      @header("x-rle-session-id")
-      sessionId?: string;
 
       @doc("Step request body.")
       @body body: RLEStepRequest;
@@ -372,13 +403,21 @@ interface RLEInstanceRuntime {
   @get
   state is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
+      @doc("Instance group identifier the instance belongs to.")
+      @path
+      instanceGroupId: string;
+
       @doc("Instance identifier.")
       @path
       instanceId: string;
-
-      @doc("Optional client-supplied session identifier, echoed to the runtime and logs for correlation only.")
-      @header("x-rle-session-id")
-      sessionId?: string;
     },
     RLEnvironmentState
   >;
@@ -389,13 +428,21 @@ interface RLEInstanceRuntime {
   @get
   health is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
+      @doc("Instance group identifier the instance belongs to.")
+      @path
+      instanceGroupId: string;
+
       @doc("Instance identifier.")
       @path
       instanceId: string;
-
-      @doc("Optional client-supplied session identifier, echoed to the runtime and logs for correlation only.")
-      @header("x-rle-session-id")
-      sessionId?: string;
     },
     RLEJsonObject
   >;
@@ -406,13 +453,21 @@ interface RLEInstanceRuntime {
   @get
   getMetadata is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
+      @doc("Instance group identifier the instance belongs to.")
+      @path
+      instanceGroupId: string;
+
       @doc("Instance identifier.")
       @path
       instanceId: string;
-
-      @doc("Optional client-supplied session identifier, echoed to the runtime and logs for correlation only.")
-      @header("x-rle-session-id")
-      sessionId?: string;
     },
     RLEJsonObject
   >;
@@ -423,13 +478,21 @@ interface RLEInstanceRuntime {
   @get
   schema is FoundryDataPlaneOperation<
     {
+      @doc("Name of the registered RLE environment.")
+      @path
+      environmentName: string;
+
+      @doc("Version of the registered RLE environment.")
+      @path
+      environmentVersion: string;
+
+      @doc("Instance group identifier the instance belongs to.")
+      @path
+      instanceGroupId: string;
+
       @doc("Instance identifier.")
       @path
       instanceId: string;
-
-      @doc("Optional client-supplied session identifier, echoed to the runtime and logs for correlation only.")
-      @header("x-rle-session-id")
-      sessionId?: string;
     },
     RLEJsonObject
   >;
