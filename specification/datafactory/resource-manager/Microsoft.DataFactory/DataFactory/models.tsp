@@ -3283,6 +3283,7 @@ enum DayOfWeek {
 }
 
 /** A list of operations that can be performed by the Data Factory service. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationListResponse {
   /** List of Data Factory operations supported by the Data Factory resource provider. */
   @pageItems
@@ -3688,6 +3689,7 @@ model EncryptionConfiguration {
   /**
    * The url of the Azure Key Vault used for CMK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   vaultBaseUrl: string;
 
   /**
@@ -3834,6 +3836,7 @@ model GitHubAccessTokenRequest {
   /**
    * GitHub access token base URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   gitHubAccessTokenBaseUrl: string;
 }
 
@@ -3844,6 +3847,7 @@ model GitHubClientSecret {
   /**
    * Bring your own app client secret AKV URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   byoaSecretAkvUrl?: string;
 
   /**
@@ -3911,6 +3915,7 @@ model AccessPolicyResponse {
   /**
    * Data Plane service base URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   dataPlaneUrl?: string;
 }
 
@@ -3972,6 +3977,7 @@ model SubResource {
 /**
  * Update integration runtime request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateIntegrationRuntimeRequest {
   /**
    * Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.
@@ -5916,6 +5922,7 @@ model PrivateLinkConnectionApprovalRequestResource extends SubResource {
 /**
  * A request to approve or reject a private endpoint connection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateLinkConnectionApprovalRequest {
   /**
    * The state of a private link connection
@@ -6396,6 +6403,7 @@ model AzureKeyVaultSecretReference extends SecretBase {
 /**
  * A list of integration runtime status.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IntegrationRuntimeStatusListResponse
   is Azure.Core.Page<IntegrationRuntimeStatusResponse>;
 
@@ -6505,6 +6513,7 @@ model DatasetReference {
 /**
  * Response body structure for get data factory operation status.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetDataFactoryOperationStatusResponse {
   ...Record<unknown>;
 
@@ -6978,6 +6987,7 @@ model HttpServerLocation extends DatasetLocation {
   /**
    * Specify the relativeUrl of http server. Type: string (or Expression with resultType string)
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   relativeUrl?: Dfe<string>;
 
   /**
@@ -7864,6 +7874,7 @@ model CosmosDbSqlApiCollectionDataset extends Dataset {
 /**
  * CosmosDB (SQL API) Collection dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbSqlApiCollectionDatasetTypeProperties {
   /**
    * CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string).
@@ -7889,6 +7900,7 @@ model DocumentDbCollectionDataset extends Dataset {
 /**
  * DocumentDB Collection dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DocumentDbCollectionDatasetTypeProperties {
   /**
    * Document Database collection name. Type: string (or Expression with resultType string).
@@ -8156,6 +8168,7 @@ model MongoDbCollectionDataset extends Dataset {
 /**
  * MongoDB database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbCollectionDatasetTypeProperties {
   /**
    * The table name of the MongoDB database. Type: string (or Expression with resultType string).
@@ -8181,6 +8194,7 @@ model MongoDbAtlasCollectionDataset extends Dataset {
 /**
  * MongoDB Atlas database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbAtlasCollectionDatasetTypeProperties {
   /**
    * The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string).
@@ -8206,6 +8220,7 @@ model MongoDbV2CollectionDataset extends Dataset {
 /**
  * MongoDB database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbV2CollectionDatasetTypeProperties {
   /**
    * The collection name of the MongoDB database. Type: string (or Expression with resultType string).
@@ -8231,6 +8246,7 @@ model CosmosDbMongoDbApiCollectionDataset extends Dataset {
 /**
  * CosmosDB (MongoDB API) database dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbMongoDbApiCollectionDatasetTypeProperties {
   /**
    * The collection name of the CosmosDB (MongoDB API) database. Type: string (or Expression with resultType string).
@@ -8428,6 +8444,7 @@ model AmazonRedshiftTableDatasetTypeProperties {
 /**
  * The Db2 table dataset.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2TableDataset extends Dataset {
   /**
    * Db2 table dataset properties.
@@ -8443,6 +8460,7 @@ model Db2TableDataset extends Dataset {
 /**
  * Db2 table dataset properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2TableDatasetTypeProperties {
   /**
    * This property will be retired. Please consider using schema + table properties instead.
@@ -8938,6 +8956,7 @@ model RestResourceDatasetTypeProperties {
   /**
    * The relative URL to the resource that the RESTful API provides. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   relativeUrl?: Dfe<string>;
 
   /**
@@ -9095,6 +9114,7 @@ model HttpDatasetTypeProperties {
   /**
    * The relative URL based on the URL in the HttpLinkedService refers to an HTTP file Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   relativeUrl?: Dfe<string>;
 
   /**
@@ -12100,6 +12120,7 @@ model AzureKeyVaultLinkedServiceTypeProperties {
   /**
    * The base URL of the Azure Key Vault. e.g. https://myakv.vault.azure.net Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   baseUrl: Dfe<string>;
 
   /**
@@ -12126,6 +12147,7 @@ model CosmosDbLinkedService extends LinkedService {
 /**
  * CosmosDB linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbLinkedServiceTypeProperties {
   /**
    * The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -12684,6 +12706,7 @@ model AmazonS3CompatibleLinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the Amazon S3 Compatible Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -12730,6 +12753,7 @@ model OracleCloudStorageLinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the Oracle Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -12771,6 +12795,7 @@ model GoogleCloudStorageLinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the Google Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -13350,6 +13375,7 @@ model SybaseLinkedServiceTypeProperties {
 /**
  * Linked service for DB2 data source.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2LinkedService extends LinkedService {
   /**
    * DB2 linked service properties.
@@ -13365,6 +13391,7 @@ model Db2LinkedService extends LinkedService {
 /**
  * DB2 linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model Db2LinkedServiceTypeProperties {
   /**
    * The connection string. It is mutually exclusive with server, database, authenticationType, userName, packageCollection and certificateCommonName property. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -14063,6 +14090,7 @@ model MongoDbLinkedService extends LinkedService {
 /**
  * MongoDB linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbLinkedServiceTypeProperties {
   /**
    * The IP address or server name of the MongoDB server. Type: string (or Expression with resultType string).
@@ -14134,6 +14162,7 @@ model MongoDbAtlasLinkedService extends LinkedService {
 /**
  * MongoDB Atlas linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbAtlasLinkedServiceTypeProperties {
   /**
    * The MongoDB Atlas connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -14169,6 +14198,7 @@ model MongoDbV2LinkedService extends LinkedService {
 /**
  * MongoDB linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MongoDbV2LinkedServiceTypeProperties {
   /**
    * The MongoDB connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.
@@ -14199,6 +14229,7 @@ model CosmosDbMongoDbApiLinkedService extends LinkedService {
 /**
  * CosmosDB (MongoDB API) linked service properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbMongoDbApiLinkedServiceTypeProperties {
   /**
    * Whether the CosmosDB (MongoDB API) server version is higher than 3.2. The default value is false. Type: boolean (or Expression with resultType boolean).
@@ -14453,6 +14484,7 @@ model SalesforceLinkedServiceTypeProperties {
   /**
    * The URL of Salesforce instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -14504,6 +14536,7 @@ model SalesforceServiceCloudLinkedServiceTypeProperties {
   /**
    * The URL of Salesforce Service Cloud instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -15297,6 +15330,7 @@ model AmazonS3LinkedServiceTypeProperties {
   /**
    * This value specifies the endpoint to access with the S3 Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serviceUrl?: Dfe<string>;
 
   /**
@@ -18749,6 +18783,7 @@ model AzureFunctionLinkedServiceTypeProperties {
   /**
    * The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   functionAppUrl: Dfe<string>;
 
   /**
@@ -18942,6 +18977,7 @@ model SharePointOnlineListLinkedServiceTypeProperties {
   /**
    * The URL of the SharePoint Online site. For example, https://contoso.sharepoint.com/sites/siteName. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   siteUrl: Dfe<string>;
 
   /**
@@ -19109,6 +19145,7 @@ model SalesforceV2LinkedServiceTypeProperties {
   /**
    * The URL of Salesforce instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -19160,6 +19197,7 @@ model SalesforceServiceCloudV2LinkedServiceTypeProperties {
   /**
    * The URL of Salesforce Service Cloud instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   environmentUrl?: Dfe<string>;
 
   /**
@@ -21533,6 +21571,7 @@ model MicrosoftAccessSource extends CopySource {
  * A copy activity source for Db2 databases.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
 model Db2Source extends CopySource {
   ...TabularSourceProperties;

@@ -7,6 +7,8 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using Azure.Core;
+
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
@@ -15,7 +17,6 @@ namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
   /**
@@ -24,9 +25,10 @@ interface AgentOptimizationJobs {
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  @pollingOperation(AgentOptimizationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -37,7 +39,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   get is queryJobStatusPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -48,7 +50,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJobListItem,
+    AgentOptimizationJobListItem,
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
@@ -68,7 +70,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
