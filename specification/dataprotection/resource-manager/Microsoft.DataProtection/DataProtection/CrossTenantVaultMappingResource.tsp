@@ -126,7 +126,7 @@ model CrossTenantVaultMapping
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Cross-tenant vault mappings are removed via the POST 'remove' action (RBAC separation-of-duties + Resource Guard / MUA body semantics), not a DELETE verb."
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface CrossTenantVaultMappings {
+interface DppCrossTenantVaultMappings {
   /**
    * Gets a cross-tenant vault mapping by name from the target vault.
    */
@@ -164,7 +164,7 @@ interface CrossTenantVaultMappings {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface CrossTenantVaultMappingStatus {
+interface DppCrossTenantVaultMappingStatus {
   /**
    * Gets the status (Active/Inactive) of a cross-tenant vault mapping from the source vault side.
    */
@@ -228,7 +228,7 @@ interface BackupInstanceFromCrossTenantVaultOps
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface BackupInstancesFromCrossTenantVault {
+interface BackupInstancesFromDppCrossTenantVault {
   /**
    * Lists the backup instances of the mapped source vault in a different tenant.
    */
@@ -241,7 +241,7 @@ interface BackupInstancesFromCrossTenantVault {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface BackupInstanceFromCrossTenantVault {
+interface BackupInstanceFromDppCrossTenantVault {
   /**
    * Gets a backup instance of the mapped source vault in a different tenant.
    */
@@ -253,7 +253,7 @@ interface BackupInstanceFromCrossTenantVault {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface RestoresFromCrossTenantVault {
+interface RestoresFromDppCrossTenantVault {
   /**
    * Triggers restore for a backup instance of the mapped source vault in a different tenant.
    */
@@ -271,7 +271,7 @@ interface RestoresFromCrossTenantVault {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface ValidateRestoreFromCrossTenantVault {
+interface ValidateRestoreFromDppCrossTenantVault {
   /**
    * Validates whether restore can be triggered for a backup instance of the mapped source vault in a different tenant.
    */
@@ -289,7 +289,7 @@ interface ValidateRestoreFromCrossTenantVault {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface RestorableTimeRangesFromCrossTenantVault {
+interface RestorableTimeRangesFromDppCrossTenantVault {
   /**
    * Finds the restorable time ranges for a backup instance of the mapped source vault in a different tenant.
    */
@@ -340,7 +340,7 @@ interface RecoveryPointFromCrossTenantVaultOps
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface RecoveryPointsFromCrossTenantVault {
+interface RecoveryPointsFromDppCrossTenantVault {
   /**
    * Lists the vault-tier recovery points for a backup instance of the mapped source vault in a different tenant.
    */
@@ -366,7 +366,7 @@ interface RecoveryPointsFromCrossTenantVault {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface RecoveryPointFromCrossTenantVault {
+interface RecoveryPointFromDppCrossTenantVault {
   /**
    * Gets a vault-tier recovery point for a backup instance of the mapped source vault in a different tenant.
    */
@@ -408,7 +408,7 @@ interface JobFromCrossTenantVaultOps
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface BackupJobsFromCrossTenantVault {
+interface BackupJobsFromDppCrossTenantVault {
   /**
    * Lists the jobs of the mapped source vault in a different tenant.
    */
@@ -421,7 +421,7 @@ interface BackupJobsFromCrossTenantVault {
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface JobFromCrossTenantVault {
+interface JobFromDppCrossTenantVault {
   /**
    * Gets a job of the mapped source vault in a different tenant.
    */
@@ -469,7 +469,7 @@ interface BackupInstanceOperationStatusFromCrossTenantVaultOps
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface BackupInstanceOperationStatusFromCrossTenantVault {
+interface BackupInstanceOperationStatusFromDppCrossTenantVault {
   /**
    * Gets the status of a cross-tenant operation (e.g. a cross-tenant restore) for a backup instance of the mapped source vault.
    */
@@ -517,7 +517,7 @@ interface BackupInstanceOperationResultFromCrossTenantVaultOps
 
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
-interface BackupInstanceOperationResultFromCrossTenantVault {
+interface BackupInstanceOperationResultFromDppCrossTenantVault {
   /**
    * Fetches the result of a cross-tenant operation (e.g. a cross-tenant restore) for a backup instance of the
    * mapped source vault - the leg the restore's Location header points at. Returns 202 with Location/Retry-After
@@ -532,14 +532,14 @@ interface BackupInstanceOperationResultFromCrossTenantVault {
 }
 
 @@doc(
-  RestoresFromCrossTenantVault.trigger::parameters.body,
+  RestoresFromDppCrossTenantVault.trigger::parameters.body,
   "Request body for operation"
 );
 @@doc(
-  ValidateRestoreFromCrossTenantVault.trigger::parameters.body,
+  ValidateRestoreFromDppCrossTenantVault.trigger::parameters.body,
   "Request body for operation"
 );
 @@doc(
-  RestorableTimeRangesFromCrossTenantVault.find::parameters.body,
+  RestorableTimeRangesFromDppCrossTenantVault.find::parameters.body,
   "Request body for operation"
 );

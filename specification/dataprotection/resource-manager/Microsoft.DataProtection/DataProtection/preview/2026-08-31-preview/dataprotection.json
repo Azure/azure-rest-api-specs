@@ -82,43 +82,43 @@
       "name": "ResourceGuardProxyBaseResources"
     },
     {
-      "name": "CrossTenantVaultMappings"
+      "name": "DppCrossTenantVaultMappings"
     },
     {
-      "name": "CrossTenantVaultMappingStatus"
+      "name": "DppCrossTenantVaultMappingStatus"
     },
     {
-      "name": "BackupInstancesFromCrossTenantVault"
+      "name": "BackupInstancesFromDppCrossTenantVault"
     },
     {
-      "name": "BackupInstanceFromCrossTenantVault"
+      "name": "BackupInstanceFromDppCrossTenantVault"
     },
     {
-      "name": "RestoresFromCrossTenantVault"
+      "name": "RestoresFromDppCrossTenantVault"
     },
     {
-      "name": "ValidateRestoreFromCrossTenantVault"
+      "name": "ValidateRestoreFromDppCrossTenantVault"
     },
     {
-      "name": "RestorableTimeRangesFromCrossTenantVault"
+      "name": "RestorableTimeRangesFromDppCrossTenantVault"
     },
     {
-      "name": "RecoveryPointsFromCrossTenantVault"
+      "name": "RecoveryPointsFromDppCrossTenantVault"
     },
     {
-      "name": "RecoveryPointFromCrossTenantVault"
+      "name": "RecoveryPointFromDppCrossTenantVault"
     },
     {
-      "name": "BackupJobsFromCrossTenantVault"
+      "name": "BackupJobsFromDppCrossTenantVault"
     },
     {
-      "name": "JobFromCrossTenantVault"
+      "name": "JobFromDppCrossTenantVault"
     },
     {
-      "name": "BackupInstanceOperationStatusFromCrossTenantVault"
+      "name": "BackupInstanceOperationStatusFromDppCrossTenantVault"
     },
     {
-      "name": "BackupInstanceOperationResultFromCrossTenantVault"
+      "name": "BackupInstanceOperationResultFromDppCrossTenantVault"
     }
   ],
   "paths": {
@@ -2910,9 +2910,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappingStatus": {
       "post": {
-        "operationId": "CrossTenantVaultMappingStatus_Check",
+        "operationId": "DppCrossTenantVaultMappingStatus_Check",
         "tags": [
-          "CrossTenantVaultMappingStatus"
+          "DppCrossTenantVaultMappingStatus"
         ],
         "description": "Gets the status (Active/Inactive) of a cross-tenant vault mapping from the source vault side.",
         "parameters": [
@@ -2949,16 +2949,16 @@
         },
         "x-ms-examples": {
           "Get cross-tenant vault mapping status": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappingStatus_Check.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/DppCrossTenantVaultMappingStatus_Check.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings": {
       "get": {
-        "operationId": "CrossTenantVaultMappings_List",
+        "operationId": "DppCrossTenantVaultMappings_List",
         "tags": [
-          "CrossTenantVaultMappings"
+          "DppCrossTenantVaultMappings"
         ],
         "description": "Lists the cross-tenant vault mappings under the target vault.",
         "parameters": [
@@ -2995,7 +2995,7 @@
         },
         "x-ms-examples": {
           "List cross-tenant vault mappings in a vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_List.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/DppCrossTenantVaultMappings_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3005,9 +3005,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}": {
       "get": {
-        "operationId": "CrossTenantVaultMappings_Get",
+        "operationId": "DppCrossTenantVaultMappings_Get",
         "tags": [
-          "CrossTenantVaultMappings"
+          "DppCrossTenantVaultMappings"
         ],
         "description": "Gets a cross-tenant vault mapping by name from the target vault.",
         "parameters": [
@@ -3051,14 +3051,14 @@
         },
         "x-ms-examples": {
           "Get a cross-tenant vault mapping": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_Get.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/DppCrossTenantVaultMappings_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "CrossTenantVaultMappings_CreateOrUpdate",
+        "operationId": "DppCrossTenantVaultMappings_CreateOrUpdate",
         "tags": [
-          "CrossTenantVaultMappings"
+          "DppCrossTenantVaultMappings"
         ],
         "description": "Creates or updates a cross-tenant vault mapping under the target vault.",
         "parameters": [
@@ -3117,16 +3117,16 @@
         },
         "x-ms-examples": {
           "Create or update a cross-tenant vault mapping": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_CreateOrUpdate.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/DppCrossTenantVaultMappings_CreateOrUpdate.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances": {
       "get": {
-        "operationId": "BackupInstancesFromCrossTenantVault_List",
+        "operationId": "BackupInstancesFromDppCrossTenantVault_List",
         "tags": [
-          "BackupInstancesFromCrossTenantVault"
+          "BackupInstancesFromDppCrossTenantVault"
         ],
         "description": "Lists the backup instances of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3170,7 +3170,7 @@
         },
         "x-ms-examples": {
           "List backup instances from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstancesFromCrossTenantVault_List.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstancesFromDppCrossTenantVault_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3180,9 +3180,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}": {
       "get": {
-        "operationId": "BackupInstanceFromCrossTenantVault_Get",
+        "operationId": "BackupInstanceFromDppCrossTenantVault_Get",
         "tags": [
-          "BackupInstanceFromCrossTenantVault"
+          "BackupInstanceFromDppCrossTenantVault"
         ],
         "description": "Gets a backup instance of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3233,16 +3233,16 @@
         },
         "x-ms-examples": {
           "Get a backup instance from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceFromCrossTenantVault_Get.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceFromDppCrossTenantVault_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/findRestorableTimeRanges": {
       "post": {
-        "operationId": "RestorableTimeRangesFromCrossTenantVault_Find",
+        "operationId": "RestorableTimeRangesFromDppCrossTenantVault_Find",
         "tags": [
-          "RestorableTimeRangesFromCrossTenantVault"
+          "RestorableTimeRangesFromDppCrossTenantVault"
         ],
         "description": "Finds the restorable time ranges for a backup instance of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3302,16 +3302,16 @@
         },
         "x-ms-examples": {
           "Find restorable time ranges from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/RestorableTimeRangesFromCrossTenantVault_Find.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RestorableTimeRangesFromDppCrossTenantVault_Find.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
       "get": {
-        "operationId": "BackupInstanceOperationResultFromCrossTenantVault_Get",
+        "operationId": "BackupInstanceOperationResultFromDppCrossTenantVault_Get",
         "tags": [
-          "BackupInstanceOperationResultFromCrossTenantVault"
+          "BackupInstanceOperationResultFromDppCrossTenantVault"
         ],
         "description": "Fetches the result of a cross-tenant operation (e.g. a cross-tenant restore) for a backup instance of the\nmapped source vault - the leg the restore's Location header points at. Returns 202 with Location/Retry-After\nwhile pending, and 200 with the operation result body when complete.",
         "parameters": [
@@ -3372,16 +3372,16 @@
         },
         "x-ms-examples": {
           "Get cross-tenant operation result": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceOperationResultFromCrossTenantVault_Get.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceOperationResultFromDppCrossTenantVault_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/operationStatus/{operationId}": {
       "get": {
-        "operationId": "BackupInstanceOperationStatusFromCrossTenantVault_Get",
+        "operationId": "BackupInstanceOperationStatusFromDppCrossTenantVault_Get",
         "tags": [
-          "BackupInstanceOperationStatusFromCrossTenantVault"
+          "BackupInstanceOperationStatusFromDppCrossTenantVault"
         ],
         "description": "Gets the status of a cross-tenant operation (e.g. a cross-tenant restore) for a backup instance of the mapped source vault.",
         "parameters": [
@@ -3439,16 +3439,16 @@
         },
         "x-ms-examples": {
           "Get cross-tenant operation status": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceOperationStatusFromCrossTenantVault_Get.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupInstanceOperationStatusFromDppCrossTenantVault_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/recoveryPoints": {
       "get": {
-        "operationId": "RecoveryPointsFromCrossTenantVault_List",
+        "operationId": "RecoveryPointsFromDppCrossTenantVault_List",
         "tags": [
-          "RecoveryPointsFromCrossTenantVault"
+          "RecoveryPointsFromDppCrossTenantVault"
         ],
         "description": "Lists the vault-tier recovery points for a backup instance of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3513,7 +3513,7 @@
         },
         "x-ms-examples": {
           "List recovery points from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/RecoveryPointsFromCrossTenantVault_List.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RecoveryPointsFromDppCrossTenantVault_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3523,9 +3523,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/recoveryPoints/{recoveryPointId}": {
       "get": {
-        "operationId": "RecoveryPointFromCrossTenantVault_Get",
+        "operationId": "RecoveryPointFromDppCrossTenantVault_Get",
         "tags": [
-          "RecoveryPointFromCrossTenantVault"
+          "RecoveryPointFromDppCrossTenantVault"
         ],
         "description": "Gets a vault-tier recovery point for a backup instance of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3583,16 +3583,16 @@
         },
         "x-ms-examples": {
           "Get a recovery point from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/RecoveryPointFromCrossTenantVault_Get.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RecoveryPointFromDppCrossTenantVault_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/restore": {
       "post": {
-        "operationId": "RestoresFromCrossTenantVault_Trigger",
+        "operationId": "RestoresFromDppCrossTenantVault_Trigger",
         "tags": [
-          "RestoresFromCrossTenantVault"
+          "RestoresFromDppCrossTenantVault"
         ],
         "description": "Triggers restore for a backup instance of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3666,7 +3666,7 @@
         },
         "x-ms-examples": {
           "Trigger restore from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/RestoresFromCrossTenantVault_Trigger.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/RestoresFromDppCrossTenantVault_Trigger.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3678,9 +3678,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/validateRestore": {
       "post": {
-        "operationId": "ValidateRestoreFromCrossTenantVault_Trigger",
+        "operationId": "ValidateRestoreFromDppCrossTenantVault_Trigger",
         "tags": [
-          "ValidateRestoreFromCrossTenantVault"
+          "ValidateRestoreFromDppCrossTenantVault"
         ],
         "description": "Validates whether restore can be triggered for a backup instance of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3754,7 +3754,7 @@
         },
         "x-ms-examples": {
           "Validate restore from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/ValidateRestoreFromCrossTenantVault_Trigger.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ValidateRestoreFromDppCrossTenantVault_Trigger.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3766,9 +3766,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupJobs": {
       "get": {
-        "operationId": "BackupJobsFromCrossTenantVault_List",
+        "operationId": "BackupJobsFromDppCrossTenantVault_List",
         "tags": [
-          "BackupJobsFromCrossTenantVault"
+          "BackupJobsFromDppCrossTenantVault"
         ],
         "description": "Lists the jobs of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3812,7 +3812,7 @@
         },
         "x-ms-examples": {
           "List jobs from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupJobsFromCrossTenantVault_List.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/BackupJobsFromDppCrossTenantVault_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3822,9 +3822,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupJobs/{jobId}": {
       "get": {
-        "operationId": "JobFromCrossTenantVault_Get",
+        "operationId": "JobFromDppCrossTenantVault_Get",
         "tags": [
-          "JobFromCrossTenantVault"
+          "JobFromDppCrossTenantVault"
         ],
         "description": "Gets a job of the mapped source vault in a different tenant.",
         "parameters": [
@@ -3875,16 +3875,16 @@
         },
         "x-ms-examples": {
           "Get a job from a cross-tenant vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/JobFromCrossTenantVault_Get.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/JobFromDppCrossTenantVault_Get.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/remove": {
       "post": {
-        "operationId": "CrossTenantVaultMappings_Remove",
+        "operationId": "DppCrossTenantVaultMappings_Remove",
         "tags": [
-          "CrossTenantVaultMappings"
+          "DppCrossTenantVaultMappings"
         ],
         "description": "Removes a cross-tenant vault mapping from the target vault.",
         "parameters": [
@@ -3925,7 +3925,7 @@
         },
         "x-ms-examples": {
           "Remove a cross-tenant vault mapping": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/CrossTenantVaultMappings_Remove.json"
+            "$ref": "./examples/CrossTenantVaultMappingOperations/DppCrossTenantVaultMappings_Remove.json"
           }
         }
       }
