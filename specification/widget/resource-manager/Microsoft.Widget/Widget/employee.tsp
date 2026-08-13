@@ -13,7 +13,10 @@ namespace Microsoft.Widget;
 /** Employee resource */
 model Employee is TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<Employee>;
+  ...ResourceSkuProperty;
 }
+
+@@added(Employee.sku, Versions.v2026_07_01_preview);
 
 /** Employee properties */
 model EmployeeProperties {
