@@ -11,6 +11,7 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview
   ],
 };
@@ -23,7 +24,7 @@ model CreateAgentVersionRequest {
   @maxLength(512)
   description?: string;
 
-  @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 
@@ -268,6 +269,7 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
+  voice: "voice",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
@@ -279,6 +281,7 @@ union AgentKind {
   hosted: "hosted",
   workflow: "workflow",
   external: "external",
+  voice: "voice",
 
   @removed(Versions.v1)
   container_app: "container_app",
@@ -296,6 +299,13 @@ model AgentDefinition {
 
   @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
   rai_config?: RaiConfig;
+}
+
+@doc("The inputs for generating and creating an agent. The `kind` discriminator selects the kind-specific authoring contract.")
+@discriminator("kind")
+model GenerateAgentRequest {
+  @doc("The kind of agent to generate.")
+  kind: AgentKind;
 }
 
 @doc("The prompt agent definition")

@@ -45,6 +45,7 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/skills/"
       - "specification/ai-foundry/data-plane/Foundry/src/toolboxes/"
       - "specification/ai-foundry/data-plane/Foundry/src/tools/"
+      - "specification/ai-foundry/data-plane/Foundry/src/voice-agents/"
   # Exports the @extension("x-ms-foundry-meta", ...) beta entities for the Java emitter consumption
   # - run `tsp-client sync` from package folder
   # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter`
@@ -65,6 +66,7 @@ imports:
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
   - "@azure-tools/openai-typespec/models/evals"
+  - "@azure-tools/openai-typespec/models/realtime"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
