@@ -106,7 +106,7 @@ interface Databases {
   checkNameAvailability is ArmResourceActionSync<
     Database,
     DataConnectionCheckNameRequest,
-    ArmResponse<CheckNameResult>
+    OkResponse & CheckNameResult
   >;
 
   /**
@@ -117,7 +117,7 @@ interface Databases {
   dataConnectionValidation is ArmResourceActionAsync<
     Database,
     DataConnectionValidation,
-    ArmResponse<DataConnectionValidationListResult>
+    DataConnectionValidationListResult
   >;
 
   /**
@@ -129,7 +129,7 @@ interface Databases {
   kustoPoolDatabasePrincipalAssignmentsCheckNameAvailability is ArmResourceActionSync<
     Database,
     DatabasePrincipalAssignmentCheckNameRequest,
-    ArmResponse<CheckNameResult>
+    OkResponse & CheckNameResult
   >;
 }
 

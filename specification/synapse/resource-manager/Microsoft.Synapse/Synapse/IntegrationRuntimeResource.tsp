@@ -120,7 +120,7 @@ interface IntegrationRuntimeResources {
   start is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeStatusResponse>,
+    IntegrationRuntimeStatusResponse,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -142,7 +142,7 @@ interface IntegrationRuntimeResources {
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse>
+    OkResponse & IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse
   >;
 
   /**
@@ -176,7 +176,7 @@ interface IntegrationRuntimeResources {
   integrationRuntimeNodeIpAddressGet is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeNodeIpAddress>,
+    OkResponse & IntegrationRuntimeNodeIpAddress,
     Parameters = {
       /**
        * Integration runtime node name
@@ -202,7 +202,7 @@ interface IntegrationRuntimeResources {
       @bodyRoot
       getMetadataRequest?: GetSsisObjectMetadataRequest;
     },
-    ArmResponse<SsisObjectMetadataListResponse>
+    OkResponse & SsisObjectMetadataListResponse
   >;
 
   /**
@@ -214,7 +214,7 @@ interface IntegrationRuntimeResources {
   refresh is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<SsisObjectMetadataStatusResponse>,
+    SsisObjectMetadataStatusResponse,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -294,7 +294,7 @@ interface IntegrationRuntimeResources {
   integrationRuntimeConnectionInfosGet is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeConnectionInfo>
+    OkResponse & IntegrationRuntimeConnectionInfo
   >;
 
   /**
@@ -306,7 +306,7 @@ interface IntegrationRuntimeResources {
   regenerate is ArmResourceActionSync<
     IntegrationRuntimeResource,
     IntegrationRuntimeRegenerateKeyParameters,
-    ArmResponse<IntegrationRuntimeAuthKeys>
+    OkResponse & IntegrationRuntimeAuthKeys
   >;
 
   /**
@@ -318,7 +318,7 @@ interface IntegrationRuntimeResources {
   integrationRuntimeAuthKeysList is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeAuthKeys>
+    OkResponse & IntegrationRuntimeAuthKeys
   >;
 
   /**
@@ -330,7 +330,7 @@ interface IntegrationRuntimeResources {
   integrationRuntimeMonitoringDataList is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeMonitoringData>
+    OkResponse & IntegrationRuntimeMonitoringData
   >;
 
   /**
@@ -342,7 +342,7 @@ interface IntegrationRuntimeResources {
   integrationRuntimeStatusGet is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeStatusResponse>
+    OkResponse & IntegrationRuntimeStatusResponse
   >;
 }
 

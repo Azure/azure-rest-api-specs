@@ -87,7 +87,7 @@ interface Workspaces {
   replaceAll is ArmResourceActionAsync<
     Workspace,
     ReplaceAllIpFirewallRulesRequest,
-    ArmResponse<ReplaceAllFirewallRulesOperationResponse>
+    ReplaceAllFirewallRulesOperationResponse
   >;
 
   /**
@@ -100,7 +100,7 @@ interface Workspaces {
   workspaceManagedSqlServerUsagesList is ArmResourceActionSync<
     Workspace,
     void,
-    ArmResponse<ServerUsageListResult>
+    OkResponse & ServerUsageListResult
   >;
 }
 

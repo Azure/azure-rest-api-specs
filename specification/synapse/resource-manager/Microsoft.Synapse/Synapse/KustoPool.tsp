@@ -121,7 +121,7 @@ interface KustoPools {
   listSkusByResource is ArmResourceActionSync<
     KustoPool,
     void,
-    ArmResponse<ListResourceSkusResult>
+    OkResponse & ListResourceSkusResult
   >;
 
   /**
@@ -130,7 +130,7 @@ interface KustoPools {
   listLanguageExtensions is ArmResourceActionSync<
     KustoPool,
     void,
-    ArmResponse<LanguageExtensionsList>
+    OkResponse & LanguageExtensionsList
   >;
 
   /**
@@ -157,7 +157,7 @@ interface KustoPools {
   listFollowerDatabases is ArmResourceActionSync<
     KustoPool,
     void,
-    ArmResponse<FollowerDatabaseListResult>
+    OkResponse & FollowerDatabaseListResult
   >;
 
   /**
@@ -177,7 +177,7 @@ interface KustoPools {
   checkNameAvailability is ArmResourceActionSync<
     KustoPool,
     DatabaseCheckNameRequest,
-    ArmResponse<CheckNameResult>
+    OkResponse & CheckNameResult
   >;
 
   /**
@@ -189,7 +189,7 @@ interface KustoPools {
   kustoPoolPrincipalAssignmentsCheckNameAvailability is ArmResourceActionSync<
     KustoPool,
     ClusterPrincipalAssignmentCheckNameRequest,
-    ArmResponse<CheckNameResult>
+    OkResponse & CheckNameResult
   >;
 
   /**
@@ -202,7 +202,7 @@ interface KustoPools {
   list is ArmResourceActionSync<
     KustoPool,
     void,
-    ArmResponse<PrivateLinkResources>
+    OkResponse & PrivateLinkResources
   >;
 }
 

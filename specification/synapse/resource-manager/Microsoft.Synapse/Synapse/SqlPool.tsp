@@ -100,12 +100,12 @@ interface SqlPools {
   /**
    * Pause a SQL pool
    */
-  pause is SqlPoolOps.ActionAsync<SqlPool, void, ArmResponse<SqlPool>>;
+  pause is SqlPoolOps.ActionAsync<SqlPool, void, SqlPool>;
 
   /**
    * Resume a SQL pool
    */
-  resume is SqlPoolOps.ActionAsync<SqlPool, void, ArmResponse<SqlPool>>;
+  resume is SqlPoolOps.ActionAsync<SqlPool, void, SqlPool>;
 
   /**
    * Creates a restore point for a data warehouse.
@@ -116,7 +116,14 @@ interface SqlPools {
   sqlPoolRestorePointsCreate is SqlPoolOps.ActionAsync<
     SqlPool,
     CreateSqlPoolRestorePointDefinition,
-    ArmResponse<RestorePoint> | ArmResourceCreatedResponse<RestorePoint>
+    RestorePoint,
+    Response =
+      | RestorePoint
+      | (CreatedResponse &
+          Azure.Core.Foundations.RetryAfterHeader &
+          RestorePoint)
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -129,7 +136,7 @@ interface SqlPools {
   list is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<ResourceListResult<SqlPoolOperation>>
+    OkResponse & ResourceListResult<SqlPoolOperation>
   >;
 
   /**
@@ -142,7 +149,7 @@ interface SqlPools {
   sqlPoolUsagesList is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<SqlPoolUsageListResult>
+    OkResponse & SqlPoolUsageListResult
   >;
 
   /**
@@ -155,7 +162,7 @@ interface SqlPools {
   listCurrent is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<ResourceListResult<SensitivityLabel>>,
+    OkResponse & ResourceListResult<SensitivityLabel>,
     Parameters = {
       /**
        * An OData filter expression that filters elements in the collection.
@@ -188,7 +195,7 @@ interface SqlPools {
   listRecommended is SqlPoolOps.ActionSync<
     SqlPool,
     void,
-    ArmResponse<ResourceListResult<SensitivityLabel>>,
+    OkResponse & ResourceListResult<SensitivityLabel>,
     Parameters = {
       /**
        * Specifies whether to include disabled recommendations or not.
