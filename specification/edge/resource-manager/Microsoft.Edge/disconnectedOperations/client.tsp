@@ -11,7 +11,7 @@ using Microsoft.Edge;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using Customizations;
+using Microsoft.Edge.Customizations;
 
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmtClient", "python");
 @@clientName(
@@ -107,8 +107,7 @@ using Customizations;
 @@alternateType(HardwareSettingProperties.deviceId, uuid, "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace("Microsoft.Edge")
-namespace Customizations {
+namespace Microsoft.Edge.Customizations {
   @doc("Disconnected operation resource for create or update.")
   model DisconnectedOperationCreateOrUpdate
     is TrackedResource<DisconnectedOperationPropertiesCreateOrUpdate> {

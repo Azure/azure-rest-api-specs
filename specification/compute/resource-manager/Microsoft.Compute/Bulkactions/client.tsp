@@ -2,9 +2,8 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Compute;
 
-namespace Customizations;
+namespace Microsoft.Compute.Customizations;
 
 @@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
 @@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");

@@ -3,9 +3,8 @@ import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Azure.Ai.Speech.Transcription;
 
-namespace Customizations;
+namespace Azure.Ai.Speech.Transcription.Customizations;
 
 @@clientNamespace(
   Azure.Ai.Speech.Transcription,

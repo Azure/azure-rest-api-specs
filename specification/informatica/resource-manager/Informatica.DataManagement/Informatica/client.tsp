@@ -2,7 +2,6 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Informatica.DataManagement;
 
 @@clientNamespace(
   Informatica.DataManagement,
@@ -17,7 +16,7 @@ using Informatica.DataManagement;
   "java"
 );
 
-namespace Customizations {
+namespace Informatica.DataManagement.Customizations {
   @@access(Operations.list, Access.internal);
 
   @@clientName(

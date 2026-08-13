@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.OperationalInsights;
-using Customizations;
+using Microsoft.OperationalInsights.Customizations;
 
 @@clientName(
   Microsoft.OperationalInsights,
@@ -618,7 +618,7 @@ using Customizations;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET pageable shape for workspace schema values"
 @@markAsPageable(Workspaces.schemaGet, "csharp");
 
-namespace Customizations {
+namespace Microsoft.OperationalInsights.Customizations {
   #suppress "@azure-tools/typespec-azure-core/no-enum" "Preserve previous .NET numeric enum shape used by @@alternateType for SDK compatibility"
   enum Capacity {
     FiveHundred: 500,

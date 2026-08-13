@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
-using Customizations;
+using Microsoft.EventHub.Customizations;
 
 @@clientName(
   Microsoft.EventHub,
@@ -498,8 +498,7 @@ using Customizations;
 );
 
 // Custom models to ensure C# resource classes inherit TrackedResourceData
-@Azure.ResourceManager.armProviderNamespace("Microsoft.EventHub")
-namespace Customizations {
+namespace Microsoft.EventHub.Customizations {
   /**
    * Single Event Hubs Cluster resource in List or Get operations.
    */

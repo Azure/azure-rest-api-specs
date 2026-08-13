@@ -7,11 +7,10 @@ using Azure.ResourceManager;
 using Microsoft.BotService;
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Customizations;
 
-namespace Customizations {
+namespace Microsoft.BotService.Customizations {
   @@clientName(Microsoft.BotService, "AzureBotServiceMgmtClient", "python");
-  @@scope(Microsoft.BotService.Operations.list, "!csharp");
+  @@scope(Operations.list, "!csharp");
   @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
   @@alternateType(AlexaChannelProperties.serviceEndpointUri, url, "csharp");
   @@alternateType(Bot.location, azureLocation, "csharp");
@@ -87,12 +86,8 @@ namespace Customizations {
     "csharp"
   );
   @@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
-  @@alternateType(
-    Microsoft.BotService.Resource.location,
-    azureLocation,
-    "csharp"
-  );
-  @@alternateType(Microsoft.BotService.Resource.etag, eTag, "csharp");
+  @@alternateType(Resource.location, azureLocation, "csharp");
+  @@alternateType(Resource.etag, eTag, "csharp");
   @@clientName(Site, "BotChannelSite", "csharp");
   @@alternateType(Site.tenantId, uuid, "csharp");
   @@alternateType(Site.eTag, eTag, "csharp");
@@ -231,7 +226,7 @@ namespace Customizations {
   @@clientName(ChannelNameUnion, "BotChannelName", "csharp");
 
   @@clientName(
-    Microsoft.BotService.PrivateEndpointConnection,
+    PrivateEndpointConnection,
     "BotServicePrivateEndpointConnection",
     "csharp"
   );
@@ -243,13 +238,13 @@ namespace Customizations {
   );
   @@clientName(TelephonyChannelProperties.premiumSKU, "PremiumSku", "csharp");
   @@clientName(
-    Microsoft.BotService.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+    PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
     "ConnectionState",
     "csharp"
   );
 
   @@alternateType(
-    Microsoft.BotService.PrivateEndpoint.id,
+    PrivateEndpoint.id,
     Azure.Core.armResourceIdentifier,
     "csharp"
   );
@@ -289,18 +284,14 @@ namespace Customizations {
   @@clientName(Omnichannel, "Dynamics365OmnichannelChannel", "csharp");
   @@clientName(ConnectionSetting, "BotConnectionSetting", "csharp");
   @@clientName(
-    Microsoft.BotService.PrivateLinkResource,
+    PrivateLinkResource,
     "BotServicePrivateLinkResourceData",
     "csharp"
   );
-  @@usage(
-    Microsoft.BotService.PrivateLinkResource,
-    Usage.input | Usage.output,
-    "csharp"
-  );
+  @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
   @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-    Microsoft.BotService.PrivateLinkResource.properties
+    PrivateLinkResource.properties
   );
 
   @@clientName(

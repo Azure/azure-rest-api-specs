@@ -3,23 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-using Azure.AI.OpenAI.Assistants;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-namespace Azure.AI {
-
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-namespace Azure.AI.OpenAI {
-
-}
-
-@@TypeSpec.Versioning.versioned(
-  Azure.AI.OpenAI.Assistants,
-  Azure.AI.OpenAI.Assistants.ServiceApiVersions
-);
-namespace Customizations {
+namespace Azure.AI.OpenAI.Assistants.Customizations {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
   @@clientName(

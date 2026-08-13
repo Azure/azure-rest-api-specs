@@ -2,9 +2,8 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Resources;
 
-namespace Customizations;
+namespace Microsoft.Resources.Customizations;
 
 @@clientLocation(
   Subscriptions.checkZonePeers::parameters.subscriptionId,

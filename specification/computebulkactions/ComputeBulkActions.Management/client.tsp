@@ -3,9 +3,8 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
-using Microsoft.ComputeBulkActions;
 
-namespace Customizations;
+namespace Microsoft.ComputeBulkActions.Customizations;
 
 @@clientName(ExecuteTypeRequest.correlationid, "correlationId", "java");
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");

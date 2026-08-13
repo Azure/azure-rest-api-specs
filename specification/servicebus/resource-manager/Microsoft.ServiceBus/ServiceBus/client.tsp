@@ -3,7 +3,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ServiceBus;
-using Customizations;
+using Microsoft.ServiceBus.Customizations;
 
 @@clientName(Microsoft.ServiceBus, "ServiceBusManagementClient", "javascript");
 @@clientName(Microsoft.ServiceBus, "ServiceBusManagementClient", "python");
@@ -266,7 +266,7 @@ using Customizations;
 // C# SDK backward-compatibility replacement models
 // =============================================================================
 
-namespace Customizations {
+namespace Microsoft.ServiceBus.Customizations {
   /**
    * Parameters supplied to the Patch Namespace operation.
    */

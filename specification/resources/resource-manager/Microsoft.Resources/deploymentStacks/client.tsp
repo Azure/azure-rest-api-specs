@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 
 // CSharp SDK: Generate scoped resources, and make it backwards compatible with existing patterns
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
-namespace Customizations {
+namespace Microsoft.Resources.DeploymentStacks.Customizations {
   // DeploymentStacks
   @@scope(DeploymentStacksAtResourceGroup.get, "!csharp");
   @@scope(DeploymentStacksAtResourceGroup.list, "!csharp");
