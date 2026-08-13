@@ -30,6 +30,44 @@ openapi-type: arm
 tag: package-2026-06-01
 ```
 
+### Tag: package-2026-11-01-preview
+
+These settings apply only when `--tag=package-2026-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01-preview'
+input-file:
+  - preview/2026-11-01-preview/fleets.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.FleetMemberProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.FleetMemberUpdateProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
+    reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelectorPatch'].properties.matchLabels
+    reason: MatchLabels are a user-defined key/value map that is passed through to the underlying Kubernetes model during patch operations.
+  - code: PostResponseCodes
+    from: fleets.json
+    where: $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generateUpdateRun'].post
+    reason: The operation returns 200 when an update run is generated and 204 when no update run is needed.
+```
+
 ### Tag: package-2026-06-02-preview
 
 These settings apply only when `--tag=package-2026-06-02-preview` is specified on the command line.
@@ -58,6 +96,10 @@ suppressions:
     from: fleets.json
     where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
     reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelectorPatch'].properties.matchLabels
+    reason: MatchLabels are a user-defined key/value map that is passed through to the underlying Kubernetes model during patch operations.
 ```
 
 ### Tag: package-2026-06-01

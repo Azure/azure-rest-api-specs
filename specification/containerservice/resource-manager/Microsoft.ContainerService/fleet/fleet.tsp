@@ -186,6 +186,67 @@ model FleetCredentialResults {
   kubeconfigs?: FleetCredentialResult[];
 }
 
+@added(Versions.v2026_11_01_preview)
+@doc("The status of a Fleet member credential request.")
+union FleetMemberCredentialStatus {
+  @doc("The credential request succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The credential request failed.")
+  Failed: "Failed",
+
+  string,
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The credential request result for a Fleet member.")
+model FleetMemberCredentialResult {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the Fleet member.")
+  name: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The status of the credential request.")
+  status: FleetMemberCredentialStatus;
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("The base64-encoded Kubernetes configuration file when credential retrieval succeeds.")
+  kubeconfig?: bytes;
+
+  @visibility(Lifecycle.Read)
+  @doc("The error details when credential retrieval fails.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The request for Fleet member credentials. Specify either memberNames for an initial request or continuationToken for a subsequent request, but not both.")
+model FleetMemberCredentialRequest {
+  @minItems(1)
+  @maxItems(100)
+  @uniqueItems
+  @doc("The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. When omitted from an initial request, all applicable Fleet members are selected. This property must be omitted when continuationToken is provided.")
+  memberNames?: string[];
+
+  @secret
+  @doc("The opaque continuation token from a previous request. When provided, this must be the only field in the request body because it preserves the original member selection and cursor state.")
+  continuationToken?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The Fleet member credential results.")
+model FleetMemberCredentialResults {
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Read)
+  @doc("The Fleet member credential results for this response.")
+  value: FleetMemberCredentialResult[];
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("The opaque continuation token to use in a subsequent request. This property is omitted when there are no more results.")
+  continuationToken?: string;
+}
+
 @added(Versions.v2025_03_01)
 @doc("Status information for the fleet.")
 model FleetStatus {
@@ -262,4 +323,13 @@ interface Fleets {
 
   @doc("Lists the user credentials of a Fleet.")
   listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
+
+  @added(Versions.v2026_11_01_preview)
+  @action("listMemberCredentials")
+  @doc("Lists the Kubernetes credentials of the Fleet members.")
+  listMemberCredentials is ArmResourceActionSync<
+    Fleet,
+    FleetMemberCredentialRequest,
+    FleetMemberCredentialResults
+  >;
 }
