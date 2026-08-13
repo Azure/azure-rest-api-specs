@@ -115,7 +115,7 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @segment("publicCloudConnectors")
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "'kind' is a valid ARM envelope property, but is not included in TrackedResource. It is declared at the envelope level to identify which public cloud the connector targets."
   @added(Versions.v2027_01_01)
   @doc("The kind of the public cloud connector.")
   @visibility(Lifecycle.Read)
