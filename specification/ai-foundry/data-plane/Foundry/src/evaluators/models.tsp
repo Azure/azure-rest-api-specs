@@ -235,7 +235,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Evaluator diagnostics
 // ============================================================================
 
-@doc("The type of actor responsible for an evaluator diagnostic event.")
+@doc("The type of actor responsible for an evaluator diagnostic change.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticActorType {
   string,
@@ -247,7 +247,7 @@ union EvaluatorDiagnosticActorType {
   service: "service",
 }
 
-@doc("The actor responsible for an evaluator diagnostic event.")
+@doc("The actor responsible for an evaluator diagnostic change.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDiagnosticActor {
   @doc("The type of actor.")
@@ -302,7 +302,7 @@ union EvaluatorDiagnosticMessageCode {
   health_invalidated_after_manual_edit: "health_invalidated_after_manual_edit",
 }
 
-@doc("A deterministic detail associated with an evaluator diagnostic event.")
+@doc("A deterministic detail associated with an evaluator diagnostic change.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDiagnosticMessage {
   @doc("A stable searchable message code.")
@@ -350,13 +350,13 @@ union EvaluatorDiagnosticChangeType {
   @doc("A manual functional definition change invalidated prior rubric health.")
   manual_definition_changed: "manual_definition_changed",
 
-  @doc("The event is a baseline imported from legacy evaluator history.")
+  @doc("The diagnostic change is a baseline imported from legacy evaluator history.")
   history_imported: "history_imported",
 }
 
-@doc("The supported evaluator diagnostic event categories.")
+@doc("The supported evaluator diagnostic change shapes.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union EvaluatorDiagnosticEventType {
+union EvaluatorDiagnosticChangeKind {
   string,
 
   @doc("An evaluator version was created.")
@@ -381,33 +381,21 @@ union EvaluatorDiagnosticEventType {
   health_invalidated: "health_invalidated",
 }
 
-/** Fields shared by every evaluator diagnostic event. */
-alias EvaluatorDiagnosticEventProperties = {
-  @doc("A stable lexicographically sortable event identifier that can be used as a pagination cursor.")
-  id: string;
-
-  @doc("An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.")
-  change_id: string;
-
-  @doc("The evaluator name associated with the event.")
-  evaluator_name: string;
-
-  @doc("The project-local evaluator version associated with the event.")
-  evaluator_version: string;
-
-  @doc("The server-recorded time when the event occurred.")
+/** Fields shared by every evaluator diagnostic change. */
+alias EvaluatorDiagnosticChangeProperties = {
+  @doc("The server-recorded time when the change occurred.")
   occurred_at: utcDateTime;
 
-  @doc("The user or service responsible for the event.")
+  @doc("The user or service responsible for the change.")
   actor: EvaluatorDiagnosticActor;
 
-  @doc("A stable machine-readable classification describing why the event occurred.")
+  @doc("A stable machine-readable classification describing why the change occurred.")
   change_type: EvaluatorDiagnosticChangeType;
 
-  @doc("A bounded deterministic summary of the event.")
+  @doc("A bounded deterministic summary of the change.")
   explanation?: string;
 
-  @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.")
+  @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.")
   @pattern("^[0-9a-f]{64}$")
   content_hash: string;
 };
@@ -441,12 +429,12 @@ model RubricHealthDelta {
   overall?: float32;
 }
 
-@doc("An event recording the creation of an evaluator version.")
+@doc("A diagnostic change recording the creation of an evaluator version.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model VersionCreatedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model VersionCreatedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "version_created";
 
   @doc("The preceding evaluator version, when one exists.")
@@ -456,33 +444,33 @@ model VersionCreatedDiagnosticEvent {
   generation_job_id?: string;
 }
 
-@doc("An event recording the addition of a rubric dimension.")
+@doc("A diagnostic change recording the addition of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DimensionAddedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model DimensionAddedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "dimension_added";
 
-  @doc("The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.")
+  @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
 
   @doc("The resulting complete dimension snapshot.")
   after: Dimension;
 
-  @doc("The public dimension fields changed by the event, when reported.")
+  @doc("The public dimension fields changed, when reported.")
   changed_fields?: string[];
 }
 
-@doc("An event recording an update to a rubric dimension.")
+@doc("A diagnostic change recording an update to a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DimensionUpdatedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model DimensionUpdatedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "dimension_updated";
 
-  @doc("The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.")
+  @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
 
   @doc("The complete dimension snapshot before the update.")
@@ -491,47 +479,47 @@ model DimensionUpdatedDiagnosticEvent {
   @doc("The complete dimension snapshot after the update.")
   after: Dimension;
 
-  @doc("The public dimension fields changed by the event, when reported.")
+  @doc("The public dimension fields changed, when reported.")
   changed_fields?: string[];
 }
 
-@doc("An event recording the removal of a rubric dimension.")
+@doc("A diagnostic change recording the removal of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DimensionRemovedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model DimensionRemovedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "dimension_removed";
 
-  @doc("The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.")
+  @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
 
   @doc("The complete dimension snapshot before removal.")
   before: Dimension;
 
-  @doc("The public dimension fields changed by the event, when reported.")
+  @doc("The public dimension fields changed, when reported.")
   changed_fields?: string[];
 }
 
-@doc("An event recording functional evaluator changes outside individual dimensions.")
+@doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DefinitionUpdatedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model DefinitionUpdatedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "definition_updated";
 
-  @doc("The functional field changes applied by the event.")
+  @doc("The functional field changes applied.")
   @minItems(1)
-  changes: EvaluatorFieldChange[];
+  field_changes: EvaluatorFieldChange[];
 }
 
-@doc("An event recording a rubric health computation.")
+@doc("A diagnostic change recording a rubric health computation.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model HealthComputedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model HealthComputedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "health_computed";
 
   @doc("The computed rubric health snapshot.")
@@ -547,42 +535,71 @@ model HealthComputedDiagnosticEvent {
   messages?: EvaluatorDiagnosticMessage[];
 }
 
-@doc("An event recording that a prior rubric health snapshot no longer applies.")
+@doc("A diagnostic change recording that a prior rubric health snapshot no longer applies.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model HealthInvalidatedDiagnosticEvent {
-  ...EvaluatorDiagnosticEventProperties;
+model HealthInvalidatedDiagnosticChange {
+  ...EvaluatorDiagnosticChangeProperties;
 
-  @doc("The event category.")
+  @doc("The diagnostic change shape.")
   type: "health_invalidated";
 
   @doc("Component-level diagnostic details associated with the invalidation.")
   messages?: EvaluatorDiagnosticMessage[];
 }
 
-@doc("An append-only evaluator version, dimension, definition, or rubric health diagnostic event.")
+@doc("An append-only evaluator version, dimension, definition, or rubric health diagnostic change.")
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union EvaluatorDiagnosticEvent {
-  @doc("An evaluator version creation event.")
-  version_created: VersionCreatedDiagnosticEvent,
+union EvaluatorDiagnosticChange {
+  @doc("An evaluator version creation change.")
+  version_created: VersionCreatedDiagnosticChange,
 
-  @doc("A rubric dimension addition event.")
-  dimension_added: DimensionAddedDiagnosticEvent,
+  @doc("A rubric dimension addition change.")
+  dimension_added: DimensionAddedDiagnosticChange,
 
-  @doc("A rubric dimension update event.")
-  dimension_updated: DimensionUpdatedDiagnosticEvent,
+  @doc("A rubric dimension update change.")
+  dimension_updated: DimensionUpdatedDiagnosticChange,
 
-  @doc("A rubric dimension removal event.")
-  dimension_removed: DimensionRemovedDiagnosticEvent,
+  @doc("A rubric dimension removal change.")
+  dimension_removed: DimensionRemovedDiagnosticChange,
 
-  @doc("A functional evaluator definition update event.")
-  definition_updated: DefinitionUpdatedDiagnosticEvent,
+  @doc("A functional evaluator definition update change.")
+  definition_updated: DefinitionUpdatedDiagnosticChange,
 
-  @doc("A rubric health computation event.")
-  health_computed: HealthComputedDiagnosticEvent,
+  @doc("A rubric health computation change.")
+  health_computed: HealthComputedDiagnosticChange,
 
-  @doc("A rubric health invalidation event.")
-  health_invalidated: HealthInvalidatedDiagnosticEvent,
+  @doc("A rubric health invalidation change.")
+  health_invalidated: HealthInvalidatedDiagnosticChange,
+}
+
+@doc("Evaluator diagnostic changes grouped under one project-local evaluator version.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorVersionDiagnostics {
+  @doc("The project-local evaluator version and page cursor.")
+  evaluator_version: string;
+
+  @doc("The matching diagnostic changes for this evaluator version.")
+  @minItems(1)
+  changes: EvaluatorDiagnosticChange[];
+}
+
+@doc("A page of evaluator diagnostics grouped by evaluator version.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnosticsPage {
+  @doc("The requested evaluator-version diagnostic groups.")
+  @pageItems
+  data: EvaluatorVersionDiagnostics[];
+
+  @doc("The first evaluator version represented in this page.")
+  first_version?: string;
+
+  @doc("The last evaluator version represented in this page.")
+  @continuationToken
+  last_version?: string;
+
+  @doc("A value indicating whether additional evaluator-version groups are available.")
+  has_more: boolean;
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")

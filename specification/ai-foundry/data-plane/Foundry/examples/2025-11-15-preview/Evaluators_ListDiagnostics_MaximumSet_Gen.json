@@ -10,7 +10,10 @@
     "from_version": "3",
     "to_version": "3",
     "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
-    "event_type": [
+    "order": "asc",
+    "limit": 7,
+    "after": "2",
+    "type": [
       "version_created",
       "dimension_added",
       "dimension_updated",
@@ -18,198 +21,176 @@
       "definition_updated",
       "health_computed",
       "health_invalidated"
-    ],
-    "order": "asc",
-    "limit": 7,
-    "after": "diag_support_quality_3_0000"
+    ]
   },
   "responses": {
     "200": {
       "body": {
         "data": [
           {
-            "id": "diag_support_quality_3_0001",
-            "change_id": "chg_support_quality_3_publish",
-            "type": "version_created",
-            "evaluator_name": "support_quality",
             "evaluator_version": "3",
-            "occurred_at": "2026-08-05T19:00:00Z",
-            "actor": {
-              "type": "service",
-              "id": "foundry.evaluator_generation",
-              "display_name": "Evaluator Generation"
-            },
-            "change_type": "generated",
-            "explanation": "Evaluator generation published version 3.",
-            "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
-            "prior_version": "2",
-            "generation_job_id": "evaluatorgen-support_quality-v3-a1b2c3d4"
-          },
-          {
-            "id": "diag_support_quality_3_0002",
-            "change_id": "chg_support_quality_3_publish",
-            "type": "dimension_added",
-            "evaluator_name": "support_quality",
-            "evaluator_version": "3",
-            "occurred_at": "2026-08-05T19:00:00Z",
-            "actor": {
-              "type": "service",
-              "id": "foundry.evaluator_generation"
-            },
-            "change_type": "generated",
-            "explanation": "Generation added a fraud-escalation dimension.",
-            "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
-            "dimension_id": "fraud_escalation",
-            "after": {
-              "id": "fraud_escalation",
-              "description": "The response escalates suspected fraud safely.",
-              "weight": 8
-            },
-            "changed_fields": [
-              "id",
-              "description",
-              "weight"
-            ]
-          },
-          {
-            "id": "diag_support_quality_3_0003",
-            "change_id": "chg_support_quality_3_publish",
-            "type": "dimension_updated",
-            "evaluator_name": "support_quality",
-            "evaluator_version": "3",
-            "occurred_at": "2026-08-05T19:00:00Z",
-            "actor": {
-              "type": "service",
-              "id": "foundry.evaluator_generation"
-            },
-            "change_type": "regenerated",
-            "explanation": "Description changed and weight increased from 4 to 5.",
-            "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
-            "dimension_id": "communication_clarity",
-            "before": {
-              "id": "communication_clarity",
-              "description": "The response is clear and concise.",
-              "weight": 4
-            },
-            "after": {
-              "id": "communication_clarity",
-              "description": "The response is clear, concise, and confirms next steps.",
-              "weight": 5
-            },
-            "changed_fields": [
-              "description",
-              "weight"
-            ]
-          },
-          {
-            "id": "diag_support_quality_3_0004",
-            "change_id": "chg_support_quality_3_publish",
-            "type": "dimension_removed",
-            "evaluator_name": "support_quality",
-            "evaluator_version": "3",
-            "occurred_at": "2026-08-05T19:00:00Z",
-            "actor": {
-              "type": "service",
-              "id": "foundry.evaluator_generation"
-            },
-            "change_type": "not_present_in_generated_rubric",
-            "explanation": "The generated rubric no longer contains generic helpfulness.",
-            "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
-            "dimension_id": "generic_helpfulness",
-            "before": {
-              "id": "generic_helpfulness",
-              "description": "The response is generally helpful to the customer.",
-              "weight": 4,
-              "always_applicable": false
-            },
-            "changed_fields": [
-              "id"
-            ]
-          },
-          {
-            "id": "diag_support_quality_3_0005",
-            "change_id": "chg_support_quality_3_publish",
-            "type": "definition_updated",
-            "evaluator_name": "support_quality",
-            "evaluator_version": "3",
-            "occurred_at": "2026-08-05T19:00:00Z",
-            "actor": {
-              "type": "service",
-              "id": "foundry.evaluator_generation",
-              "display_name": "Evaluator Generation"
-            },
-            "change_type": "generated",
-            "explanation": "Generation changed the pass threshold from 0.5 to 0.6.",
-            "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
             "changes": [
               {
-                "field": "pass_threshold",
-                "before": 0.5,
-                "after": 0.6
-              }
-            ]
-          },
-          {
-            "id": "diag_support_quality_3_0006",
-            "change_id": "chg_support_quality_3_health_1",
-            "type": "health_computed",
-            "evaluator_name": "support_quality",
-            "evaluator_version": "3",
-            "occurred_at": "2026-08-05T19:00:01Z",
-            "actor": {
-              "type": "service",
-              "id": "foundry.rubric_health"
-            },
-            "change_type": "generation_completed",
-            "explanation": "Rubric health was recomputed after generation.",
-            "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
-            "previous_health": {
-              "overall": 0.68,
-              "confidence": "low",
-              "computation": {
-                "algorithm_version": "1",
-                "embedding_provider": "local_tfidf_feature_hashing",
-                "embedding_provider_version": "1",
-                "similarity_metric": "cosine"
-              }
-            },
-            "health": {
-              "diversity": 0.82,
-              "coverage": 0.76,
-              "negative_vs_positive": 0.67,
-              "overall": 0.77,
-              "confidence": "low",
-              "computation": {
-                "algorithm_version": "1",
-                "embedding_provider": "local_tfidf_feature_hashing",
-                "embedding_provider_version": "1",
-                "similarity_metric": "cosine"
-              }
-            },
-            "delta": {
-              "diversity": 0.04,
-              "coverage": 0.03,
-              "negative_vs_positive": 0.02,
-              "overall": 0.09
-            },
-            "messages": [
-              {
-                "code": "health_improved",
-                "severity": "info",
-                "component": "overall",
-                "message": "Overall health increased by 0.09."
+                "type": "version_created",
+                "occurred_at": "2026-08-05T19:00:00Z",
+                "actor": {
+                  "type": "service",
+                  "id": "foundry.evaluator_generation",
+                  "display_name": "Evaluator Generation"
+                },
+                "change_type": "generated",
+                "explanation": "Evaluator generation published version 3.",
+                "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+                "prior_version": "2",
+                "generation_job_id": "evaluatorgen-support_quality-v3-a1b2c3d4"
               },
               {
-                "code": "low_confidence_no_evaluation_evidence",
-                "severity": "warning",
-                "component": "confidence",
-                "message": "Confidence is low because evaluation evidence was unavailable."
+                "type": "dimension_added",
+                "occurred_at": "2026-08-05T19:00:00Z",
+                "actor": {
+                  "type": "service",
+                  "id": "foundry.evaluator_generation"
+                },
+                "change_type": "generated",
+                "explanation": "Generation added a fraud-escalation dimension.",
+                "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+                "dimension_id": "fraud_escalation",
+                "after": {
+                  "id": "fraud_escalation",
+                  "description": "The response escalates suspected fraud safely.",
+                  "weight": 8
+                },
+                "changed_fields": [
+                  "id",
+                  "description",
+                  "weight"
+                ]
+              },
+              {
+                "type": "dimension_updated",
+                "occurred_at": "2026-08-05T19:00:00Z",
+                "actor": {
+                  "type": "service",
+                  "id": "foundry.evaluator_generation"
+                },
+                "change_type": "regenerated",
+                "explanation": "Description changed and weight increased from 4 to 5.",
+                "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+                "dimension_id": "communication_clarity",
+                "before": {
+                  "id": "communication_clarity",
+                  "description": "The response is clear and concise.",
+                  "weight": 4
+                },
+                "after": {
+                  "id": "communication_clarity",
+                  "description": "The response is clear, concise, and confirms next steps.",
+                  "weight": 5
+                },
+                "changed_fields": [
+                  "description",
+                  "weight"
+                ]
+              },
+              {
+                "type": "dimension_removed",
+                "occurred_at": "2026-08-05T19:00:00Z",
+                "actor": {
+                  "type": "service",
+                  "id": "foundry.evaluator_generation"
+                },
+                "change_type": "not_present_in_generated_rubric",
+                "explanation": "The generated rubric no longer contains generic helpfulness.",
+                "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+                "dimension_id": "generic_helpfulness",
+                "before": {
+                  "id": "generic_helpfulness",
+                  "description": "The response is generally helpful to the customer.",
+                  "weight": 4,
+                  "always_applicable": false
+                },
+                "changed_fields": [
+                  "id"
+                ]
+              },
+              {
+                "type": "definition_updated",
+                "occurred_at": "2026-08-05T19:00:00Z",
+                "actor": {
+                  "type": "service",
+                  "id": "foundry.evaluator_generation",
+                  "display_name": "Evaluator Generation"
+                },
+                "change_type": "generated",
+                "explanation": "Generation changed the pass threshold from 0.5 to 0.6.",
+                "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+                "field_changes": [
+                  {
+                    "field": "pass_threshold",
+                    "before": 0.5,
+                    "after": 0.6
+                  }
+                ]
+              },
+              {
+                "type": "health_computed",
+                "occurred_at": "2026-08-05T19:00:01Z",
+                "actor": {
+                  "type": "service",
+                  "id": "foundry.rubric_health"
+                },
+                "change_type": "generation_completed",
+                "explanation": "Rubric health was recomputed after generation.",
+                "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+                "previous_health": {
+                  "overall": 0.68,
+                  "confidence": "low",
+                  "computation": {
+                    "algorithm_version": "1",
+                    "embedding_provider": "local_tfidf_feature_hashing",
+                    "embedding_provider_version": "1",
+                    "similarity_metric": "cosine"
+                  }
+                },
+                "health": {
+                  "diversity": 0.82,
+                  "coverage": 0.76,
+                  "negative_vs_positive": 0.67,
+                  "overall": 0.77,
+                  "confidence": "low",
+                  "computation": {
+                    "algorithm_version": "1",
+                    "embedding_provider": "local_tfidf_feature_hashing",
+                    "embedding_provider_version": "1",
+                    "similarity_metric": "cosine"
+                  }
+                },
+                "delta": {
+                  "diversity": 0.04,
+                  "coverage": 0.03,
+                  "negative_vs_positive": 0.02,
+                  "overall": 0.09
+                },
+                "messages": [
+                  {
+                    "code": "health_improved",
+                    "severity": "info",
+                    "component": "overall",
+                    "message": "Overall health increased by 0.09."
+                  },
+                  {
+                    "code": "low_confidence_no_evaluation_evidence",
+                    "severity": "warning",
+                    "component": "confidence",
+                    "message": "Confidence is low because evaluation evidence was unavailable."
+                  }
+                ]
               }
             ]
           }
         ],
-        "first_id": "diag_support_quality_3_0001",
-        "last_id": "diag_support_quality_3_0006",
+        "first_version": "3",
+        "last_version": "3",
         "has_more": false
       }
     }

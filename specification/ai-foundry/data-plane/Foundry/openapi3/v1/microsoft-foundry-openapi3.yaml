@@ -4231,12 +4231,14 @@ paths:
       operationId: Evaluators_listDiagnostics
       summary: List evaluator diagnostics
       description: |-
-        Returns append-only diagnostic events for the specified evaluator.
+        Returns append-only diagnostic changes for the specified evaluator,
+        grouped by evaluator version.
 
-        Time, version, dimension, content-hash, and event-type filters are intersected.
+        Time, version, dimension, content-hash, and change-shape filters are intersected.
         Time and version bounds are inclusive. Version bounds use evaluator-version
-        ordering rather than lexical ordering. Repeat `event_type` to select multiple
-        event categories.
+        ordering rather than lexical ordering. Filters apply to nested changes, and
+        version groups with no matching changes are omitted. Repeat `type` to select
+        multiple diagnostic change shapes.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4255,18 +4257,18 @@ paths:
         - name: limit
           in: query
           required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
+          description: The maximum number of evaluator-version groups to return. The default is 20 and the supported range is 1 through 100.
           schema:
             type: integer
             format: int32
+            minimum: 1
+            maximum: 100
             default: 20
           explode: false
         - name: order
           in: query
           required: false
-          description: Sort order by `occurred_at` and then event ID. The default is `desc` so an unbounded request returns the newest events first.
+          description: Sort order for evaluator-version groups and their nested changes. Version groups use evaluator-version ordering; nested changes use `occurred_at` and preserve service write order for ties. The default is `desc`.
           schema:
             $ref: '#/components/schemas/PageOrder'
             default: desc
@@ -4274,27 +4276,21 @@ paths:
         - name: after
           in: query
           required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          description: An evaluator-version cursor for the next page.
           schema:
             type: string
           explode: false
         - name: before
           in: query
           required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: An evaluator-version cursor for the previous page.
           schema:
             type: string
           explode: false
         - name: start_time
           in: query
           required: false
-          description: Inclusive lower bound for the event occurrence time.
+          description: Inclusive lower bound for the diagnostic change occurrence time.
           schema:
             type: string
             format: date-time
@@ -4302,7 +4298,7 @@ paths:
         - name: end_time
           in: query
           required: false
-          description: Inclusive upper bound for the event occurrence time.
+          description: Inclusive upper bound for the diagnostic change occurrence time.
           schema:
             type: string
             format: date-time
@@ -4324,26 +4320,26 @@ paths:
         - name: dimension_id
           in: query
           required: false
-          description: Filter events for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.
+          description: Filter diagnostic changes for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.
           schema:
             type: string
           explode: false
         - name: content_hash
           in: query
           required: false
-          description: Filter events that apply to one canonical functional evaluator state.
+          description: Filter diagnostic changes that apply to one canonical functional evaluator state.
           schema:
             type: string
             pattern: ^[0-9a-f]{64}$
           explode: false
-        - name: event_type
+        - name: type
           in: query
           required: false
-          description: Filter by one or more event categories by repeating the query parameter.
+          description: Filter by one or more diagnostic change shapes by repeating the query parameter.
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/EvaluatorDiagnosticEventType'
+              $ref: '#/components/schemas/EvaluatorDiagnosticChangeKind'
         - name: api-version
           in: query
           required: true
@@ -4357,26 +4353,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EvaluatorDiagnosticEvent'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/EvaluatorDiagnosticsPage'
         4XX:
           description: Client error
           content:
@@ -41440,61 +41417,45 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
-    DefinitionUpdatedDiagnosticEvent:
+    DefinitionUpdatedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
         - content_hash
         - type
-        - changes
+        - field_changes
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - definition_updated
-          description: The event category.
-        changes:
+          description: The diagnostic change shape.
+        field_changes:
           type: array
           items:
             $ref: '#/components/schemas/EvaluatorFieldChange'
           minItems: 1
-          description: The functional field changes applied by the event.
-      description: An event recording functional evaluator changes outside individual dimensions.
+          description: The functional field changes applied.
+      description: A diagnostic change recording functional evaluator changes outside individual dimensions.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -41733,13 +41694,9 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    DimensionAddedDiagnosticEvent:
+    DimensionAddedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
@@ -41748,43 +41705,31 @@ components:
         - dimension_id
         - after
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - dimension_added
-          description: The event category.
+          description: The diagnostic change shape.
         dimension_id:
           type: string
-          description: The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.
+          description: The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.
         after:
           $ref: '#/components/schemas/Dimension'
           description: The resulting complete dimension snapshot.
@@ -41792,18 +41737,14 @@ components:
           type: array
           items:
             type: string
-          description: The public dimension fields changed by the event, when reported.
-      description: An event recording the addition of a rubric dimension.
+          description: The public dimension fields changed, when reported.
+      description: A diagnostic change recording the addition of a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    DimensionRemovedDiagnosticEvent:
+    DimensionRemovedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
@@ -41812,43 +41753,31 @@ components:
         - dimension_id
         - before
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - dimension_removed
-          description: The event category.
+          description: The diagnostic change shape.
         dimension_id:
           type: string
-          description: The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.
+          description: The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.
         before:
           $ref: '#/components/schemas/Dimension'
           description: The complete dimension snapshot before removal.
@@ -41856,18 +41785,14 @@ components:
           type: array
           items:
             type: string
-          description: The public dimension fields changed by the event, when reported.
-      description: An event recording the removal of a rubric dimension.
+          description: The public dimension fields changed, when reported.
+      description: A diagnostic change recording the removal of a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    DimensionUpdatedDiagnosticEvent:
+    DimensionUpdatedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
@@ -41877,43 +41802,31 @@ components:
         - before
         - after
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - dimension_updated
-          description: The event category.
+          description: The diagnostic change shape.
         dimension_id:
           type: string
-          description: The public dimension identifier associated with the event. It remains stable until explicitly changed; changing an identifier produces a removal event for the prior identifier and an addition event for the new identifier.
+          description: The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.
         before:
           $ref: '#/components/schemas/Dimension'
           description: The complete dimension snapshot before the update.
@@ -41924,8 +41837,8 @@ components:
           type: array
           items:
             type: string
-          description: The public dimension fields changed by the event, when reported.
-      description: An event recording an update to a rubric dimension.
+          description: The public dimension fields changed, when reported.
+      description: A diagnostic change recording an update to a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -43249,7 +43162,7 @@ components:
         display_name:
           type: string
           description: A presentation name for the actor, when available.
-      description: The actor responsible for an evaluator diagnostic event.
+      description: The actor responsible for an evaluator diagnostic change.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -43260,7 +43173,47 @@ components:
           enum:
             - user
             - service
-      description: The type of actor responsible for an evaluator diagnostic event.
+      description: The type of actor responsible for an evaluator diagnostic change.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorDiagnosticChange:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/VersionCreatedDiagnosticChange'
+        - $ref: '#/components/schemas/DimensionAddedDiagnosticChange'
+        - $ref: '#/components/schemas/DimensionUpdatedDiagnosticChange'
+        - $ref: '#/components/schemas/DimensionRemovedDiagnosticChange'
+        - $ref: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
+        - $ref: '#/components/schemas/HealthComputedDiagnosticChange'
+        - $ref: '#/components/schemas/HealthInvalidatedDiagnosticChange'
+      discriminator:
+        propertyName: type
+        mapping:
+          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
+          dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
+          dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
+          dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
+          definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
+          health_computed: '#/components/schemas/HealthComputedDiagnosticChange'
+          health_invalidated: '#/components/schemas/HealthInvalidatedDiagnosticChange'
+      description: An append-only evaluator version, dimension, definition, or rubric health diagnostic change.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorDiagnosticChangeKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - version_created
+            - dimension_added
+            - dimension_updated
+            - dimension_removed
+            - definition_updated
+            - health_computed
+            - health_invalidated
+      description: The supported evaluator diagnostic change shapes.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -43283,46 +43236,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    EvaluatorDiagnosticEvent:
-      type: object
-      oneOf:
-        - $ref: '#/components/schemas/VersionCreatedDiagnosticEvent'
-        - $ref: '#/components/schemas/DimensionAddedDiagnosticEvent'
-        - $ref: '#/components/schemas/DimensionUpdatedDiagnosticEvent'
-        - $ref: '#/components/schemas/DimensionRemovedDiagnosticEvent'
-        - $ref: '#/components/schemas/DefinitionUpdatedDiagnosticEvent'
-        - $ref: '#/components/schemas/HealthComputedDiagnosticEvent'
-        - $ref: '#/components/schemas/HealthInvalidatedDiagnosticEvent'
-      discriminator:
-        propertyName: type
-        mapping:
-          version_created: '#/components/schemas/VersionCreatedDiagnosticEvent'
-          dimension_added: '#/components/schemas/DimensionAddedDiagnosticEvent'
-          dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticEvent'
-          dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticEvent'
-          definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticEvent'
-          health_computed: '#/components/schemas/HealthComputedDiagnosticEvent'
-          health_invalidated: '#/components/schemas/HealthInvalidatedDiagnosticEvent'
-      description: An append-only evaluator version, dimension, definition, or rubric health diagnostic event.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDiagnosticEventType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - version_created
-            - dimension_added
-            - dimension_updated
-            - dimension_removed
-            - definition_updated
-            - health_computed
-            - health_invalidated
-      description: The supported evaluator diagnostic event categories.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticMessage:
       type: object
       required:
@@ -43342,7 +43255,7 @@ components:
         message:
           type: string
           description: Bounded deterministic display text that does not contain raw evaluator evidence.
-      description: A deterministic detail associated with an evaluator diagnostic event.
+      description: A deterministic detail associated with an evaluator diagnostic change.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -43371,6 +43284,30 @@ components:
             - info
             - warning
       description: The severity of an evaluator diagnostic message.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorDiagnosticsPage:
+      type: object
+      required:
+        - data
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorVersionDiagnostics'
+          description: The requested evaluator-version diagnostic groups.
+        first_version:
+          type: string
+          description: The first evaluator version represented in this page.
+        last_version:
+          type: string
+          description: The last evaluator version represented in this page.
+        has_more:
+          type: boolean
+          description: A value indicating whether additional evaluator-version groups are available.
+      description: A page of evaluator diagnostics grouped by evaluator version.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -43745,6 +43682,25 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorVersionDiagnostics:
+      type: object
+      required:
+        - evaluator_version
+        - changes
+      properties:
+        evaluator_version:
+          type: string
+          description: The project-local evaluator version and page cursor.
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorDiagnosticChange'
+          minItems: 1
+          description: The matching diagnostic changes for this evaluator version.
+      description: Evaluator diagnostic changes grouped under one project-local evaluator version.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -44274,13 +44230,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelemetryEndpointAuth'
       description: Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.
-    HealthComputedDiagnosticEvent:
+    HealthComputedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
@@ -44288,40 +44240,28 @@ components:
         - type
         - health
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - health_computed
-          description: The event category.
+          description: The diagnostic change shape.
         health:
           $ref: '#/components/schemas/RubricHealth'
           description: The computed rubric health snapshot.
@@ -44336,63 +44276,47 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorDiagnosticMessage'
           description: Component-level diagnostic details associated with the computation.
-      description: An event recording a rubric health computation.
+      description: A diagnostic change recording a rubric health computation.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    HealthInvalidatedDiagnosticEvent:
+    HealthInvalidatedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
         - content_hash
         - type
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - health_invalidated
-          description: The event category.
+          description: The diagnostic change shape.
         messages:
           type: array
           items:
             $ref: '#/components/schemas/EvaluatorDiagnosticMessage'
           description: Component-level diagnostic details associated with the invalidation.
-      description: An event recording that a prior rubric health snapshot no longer applies.
+      description: A diagnostic change recording that a prior rubric health snapshot no longer applies.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -76078,60 +76002,44 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - MemoryStores=V1Preview
-    VersionCreatedDiagnosticEvent:
+    VersionCreatedDiagnosticChange:
       type: object
       required:
-        - id
-        - change_id
-        - evaluator_name
-        - evaluator_version
         - occurred_at
         - actor
         - change_type
         - content_hash
         - type
       properties:
-        id:
-          type: string
-          description: A stable lexicographically sortable event identifier that can be used as a pagination cursor.
-        change_id:
-          type: string
-          description: An identifier grouping events produced by one atomic evaluator write or asynchronous diagnostic computation.
-        evaluator_name:
-          type: string
-          description: The evaluator name associated with the event.
-        evaluator_version:
-          type: string
-          description: The project-local evaluator version associated with the event.
         occurred_at:
           type: string
           format: date-time
-          description: The server-recorded time when the event occurred.
+          description: The server-recorded time when the change occurred.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The user or service responsible for the event.
+          description: The user or service responsible for the change.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
-          description: A stable machine-readable classification describing why the event occurred.
+          description: A stable machine-readable classification describing why the change occurred.
         explanation:
           type: string
-          description: A bounded deterministic summary of the event.
+          description: A bounded deterministic summary of the change.
         content_hash:
           type: string
           pattern: ^[0-9a-f]{64}$
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the event applies.
+          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         type:
           type: string
           enum:
             - version_created
-          description: The event category.
+          description: The diagnostic change shape.
         prior_version:
           type: string
           description: The preceding evaluator version, when one exists.
         generation_job_id:
           type: string
           description: The evaluator generation job that created the version, when applicable.
-      description: An event recording the creation of an evaluator version.
+      description: A diagnostic change recording the creation of an evaluator version.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
