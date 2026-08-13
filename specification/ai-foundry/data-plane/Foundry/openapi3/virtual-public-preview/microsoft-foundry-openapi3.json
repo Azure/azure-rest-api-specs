@@ -37337,6 +37337,30 @@
         ],
         "description": "Represents the parameters for conversation simulation item generation."
       },
+      "ConversationGenerationParams": {
+        "type": "object",
+        "properties": {
+          "model_deployment_name": {
+            "type": "string",
+            "description": "The name of the model deployment used to run the multi-turn conversation simulation. This is distinct from the `model_deployment_name` on `item_generation_params`, which generates the seed scenarios. When omitted, the simulation falls back to the seed-generation model."
+          },
+          "num_conversations": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Number of simulated conversations to generate per synthetic seed scenario. When omitted, defaults to one conversation per seed row."
+          },
+          "max_turns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20,
+            "description": "Maximum number of turns per simulated conversation. When omitted, the shipped simulation default applies."
+          }
+        },
+        "description": "Conversation-simulation controls for a conversation-level synthetic run, carried on the synthetic data generation data source as a sibling of `item_generation_params`. These parameterize the downstream multi-turn simulation: the model that runs the simulation and how many conversations/turns to produce. All fields are optional; when omitted, service defaults apply."
+      },
       "ConversationIdTraceSource": {
         "type": "object",
         "required": [
@@ -37365,26 +37389,6 @@
           }
         ],
         "description": "A trace source that selects traces by conversation IDs."
-      },
-      "ConversationSimulationParams": {
-        "type": "object",
-        "properties": {
-          "num_conversations": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 5,
-            "description": "Number of simulated conversations to generate per synthetic seed scenario. When omitted, defaults to one conversation per seed row."
-          },
-          "max_turns": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 20,
-            "description": "Maximum number of turns per simulated conversation. When omitted, the shipped simulation default applies."
-          }
-        },
-        "description": "Conversation-simulation controls carried alongside synthetic data generation for conversation-level runs. Both fields are optional; when omitted, service defaults apply (one conversation per seed row and the shipped max-turns default)."
       },
       "CosmosDBIndex": {
         "type": "object",
@@ -85771,6 +85775,10 @@
           "input_messages": {
             "$ref": "#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate",
             "description": "Input messages template configuration applicable only if target is of type 'azure_ai_model'"
+          },
+          "conversation_generation_params": {
+            "$ref": "#/components/schemas/ConversationGenerationParams",
+            "description": "Optional conversation-simulation controls, supplied as a sibling of `item_generation_params`. Only meaningful for conversation-level synthetic runs, where the generated seed dataset feeds a downstream multi-turn simulation."
           }
         },
         "allOf": [
@@ -85824,10 +85832,6 @@
               "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
             },
             "description": "The optional seed data content source files for data generation."
-          },
-          "conversation_params": {
-            "$ref": "#/components/schemas/ConversationSimulationParams",
-            "description": "Optional conversation-simulation controls. Only meaningful for conversation-level synthetic runs, where the generated seed dataset feeds a downstream multi-turn simulation."
           }
         },
         "allOf": [
