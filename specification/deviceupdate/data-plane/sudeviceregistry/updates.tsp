@@ -188,8 +188,8 @@ interface SoftwareUpdateOperationGroup {
        * from a collection. The service returns the number of available items up to but
        * not greater than the specified value n.
        */
-      @query("top")
-      top?: int32;
+      @query("maxpagesize")
+      maxPageSize?: int32;
     },
     UpdateOperationsList
   >;

@@ -515,6 +515,7 @@ model UpdateOperation {
   /**
    * Operation error encountered, if any.
    */
+  @lroErrorResult
   error?: Foundations.Error;
 
   /**
