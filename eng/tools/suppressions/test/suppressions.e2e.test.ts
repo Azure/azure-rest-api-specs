@@ -51,13 +51,7 @@ test.concurrent("suppress foo.json, get foo.json w/ different tool", async () =>
     join("suppressFooJson", "foo.json"),
     "TestToolNotExist",
   );
-  expect(suppressions).toEqual([
-    {
-      tool: "TestTool2",
-      paths: ["foo.json"],
-      reason: "test 2",
-    },
-  ]);
+  expect(suppressions).toEqual([]);
 });
 
 test.concurrent("get suppressions for multiple tools", async () => {
