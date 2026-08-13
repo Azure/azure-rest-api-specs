@@ -10,9 +10,11 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Customizations;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Relationships {
+@armProviderNamespace("Microsoft.Relationships")
+namespace Customizations {
   @doc("DependencyOf relationship resource for create or update.")
   model DependencyOfRelationshipCreateOrUpdate
     is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {

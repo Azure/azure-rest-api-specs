@@ -4,6 +4,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Batch;
+using Customizations;
 
 @@clientName(Microsoft.Batch, "BatchManagementClient", "javascript, python");
 
@@ -659,7 +660,8 @@ using Microsoft.Batch;
 );
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
-namespace Microsoft.Batch {
+@Azure.ResourceManager.armProviderNamespace("Microsoft.Batch")
+namespace Customizations {
   /**
    * Contains information about an Azure Batch account.
    */

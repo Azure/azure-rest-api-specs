@@ -10,6 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Microsoft.Monitor;
+using Customizations;
 
 @@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
 
@@ -141,7 +142,8 @@ using Microsoft.Monitor;
 // provide write-specific models that omit those fields so SDK users see a clean API.
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/40791
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
-namespace Microsoft.Monitor {
+@armProviderNamespace("Microsoft.Monitor")
+namespace Customizations {
   // ===== Issue create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
   @doc("Issue properties for create/update operations, omitting server-side read-only fields (investigations, investigationsCount, provisioningState).")

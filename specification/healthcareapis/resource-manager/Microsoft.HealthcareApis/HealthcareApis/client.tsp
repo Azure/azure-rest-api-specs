@@ -3,8 +3,9 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
+using Microsoft.HealthcareApis;
 
-namespace Microsoft.HealthcareApis;
+namespace Customizations;
 
 @@clientName(
   Microsoft.HealthcareApis,

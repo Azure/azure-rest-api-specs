@@ -5,6 +5,7 @@ import "@typespec/versioning";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using Microsoft.ContainerService;
+using Customizations;
 
 @@clientName(
   Microsoft.ContainerService,
@@ -16,7 +17,7 @@ using Microsoft.ContainerService;
 // The canonical create model includes server-side read-only required fields
 // (for example systemExcludedNamespaces), so provide a write-specific model
 // for JavaScript create input.
-namespace Microsoft.ContainerService {
+namespace Customizations {
   @doc("DeploymentSafeguards properties for create/update operations, omitting server-side read-only fields such as systemExcludedNamespaces and provisioningState.")
   model DeploymentSafeguardsPropertiesCreate {
     @doc("The deployment safeguards level. Possible values are Warn and Enforce")
@@ -39,7 +40,7 @@ namespace Microsoft.ContainerService {
 
 @@alternateType(
   Microsoft.ContainerService.DeploymentSafeguards.create::parameters.resource,
-  Microsoft.ContainerService.DeploymentSafeguardCreate,
+  Customizations.DeploymentSafeguardCreate,
   "javascript"
 );
 

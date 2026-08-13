@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.HealthDataAIServices;
 
 @@clientName(
   Microsoft.HealthDataAIServices,
@@ -10,7 +11,7 @@ using Azure.ClientGenerator.Core;
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Using the AI acronym similar to what was done for OpenAI"
-namespace Microsoft.HealthDataAIServices {
+namespace Customizations {
   @@clientName(
     PrivateEndpointConnectionResource,
     "HealthDataAIServicesPrivateEndpointConnectionResource",

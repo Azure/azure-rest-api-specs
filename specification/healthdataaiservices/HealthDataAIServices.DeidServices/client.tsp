@@ -2,9 +2,10 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using HealthDataAIServices.DeidServices;
 
 // @TypeSpec.Versioning.versioned(HealthDataAIServices.DeidServices.Versions)
-namespace HealthDataAIServices.DeidServices {
+namespace Customizations {
   @@clientName(listJobDocuments, "listJobDocumentsInternal", "csharp,python");
   @@clientName(listJobs, "listJobsInternal", "csharp,python");
   @@clientName(HealthDataAIServices.DeidServices, "DeidentificationClient");

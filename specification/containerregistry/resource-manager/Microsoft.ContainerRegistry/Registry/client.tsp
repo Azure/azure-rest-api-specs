@@ -4,6 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ContainerRegistry;
+using Customizations;
 
 @@clientName(
   Microsoft.ContainerRegistry,
@@ -43,7 +44,7 @@ using Microsoft.ContainerRegistry;
 // ContainerRegistryResourceTypeExtensible is a custom extensible union wrapping the original enum,
 // allowing the RegistryNameCheckRequest.type property to accept both known enum values and arbitrary strings,
 // which matches the behavior of the previous SDK where the type was represented as a plain string.
-namespace Microsoft.ContainerRegistry {
+namespace Customizations {
   /** Extensible union for ContainerRegistryResourceType to accept both known enum values and arbitrary strings. */
   union ContainerRegistryResourceTypeExtensible {
     ContainerRegistryResourceType,
@@ -134,7 +135,7 @@ namespace Microsoft.ContainerRegistry {
 );
 @@alternateType(
   RegistryNameCheckRequest.type,
-  Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
+  Customizations.ContainerRegistryResourceTypeExtensible,
   "csharp"
 );
 @@alternateType(
@@ -327,7 +328,7 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(
-  Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
+  Customizations.ContainerRegistryResourceTypeExtensible,
   "ContainerRegistryResourceType",
   "csharp"
 );
