@@ -975,6 +975,24 @@ union ArchiveStatus {
   string,
 }
 
+/** The download hint for a blob. */
+@added(Versions.v2026_12_06)
+union DownloadHint {
+  /** The blob layout can be retrieved with the Get Blob Layout operation. */
+  Layout: "layout",
+
+  /** Extensible. */
+  string,
+}
+
+/** The download hint response header. */
+alias DownloadHintResponseHeader = {
+  /** Indicates the download hint for the blob. */
+  @added(Versions.v2026_12_06)
+  @header("x-ms-download-hint")
+  downloadHint?: DownloadHint;
+};
+
 /** Represents a blob. */
 @Xml.name("Blob")
 model BlobItem {
@@ -1412,6 +1430,168 @@ model ClearRange {
   /** The end of the byte range. */
   @Xml.name("End") end: int64;
 }
+
+/** The result of the Get Blob Layout API. */
+@added(Versions.v2026_12_06)
+@Xml.name("BlobLayout")
+model BlobLayout {
+  /** The ranges that make up the blob. */
+  @Xml.name("Ranges")
+  ranges?: BlobLayoutRanges;
+
+  /** The endpoints that serve the ranges of the blob. */
+  @Xml.name("Endpoints")
+  endpoints?: BlobLayoutEndpoints;
+
+  /** The continuation marker used for this request. */
+  @Xml.name("Marker")
+  marker?: string;
+
+  /** If the number of ranges exceeds MaxResults, a NextMarker is returned for use in subsequent requests to continue listing. */
+  @continuationToken
+  @Xml.name("NextMarker")
+  nextMarker?: string;
+
+  /** The maximum number of ranges to return per request. */
+  @Xml.name("MaxResults")
+  maxResults?: int32;
+}
+
+/** The ranges that make up a blob. */
+@added(Versions.v2026_12_06)
+@Xml.name("Ranges")
+model BlobLayoutRanges {
+  /** The list of ranges. */
+  @pageItems
+  @Xml.unwrapped
+  @Xml.name("Range")
+  range?: BlobLayoutRange[];
+}
+
+/** A range of a blob, and the endpoint that serves it. */
+@added(Versions.v2026_12_06)
+@Xml.name("Range")
+model BlobLayoutRange {
+  /** The start byte offset of the range. */
+  @Xml.attribute
+  @Xml.name("Start")
+  start: int64;
+
+  /** The end byte offset of the range. */
+  @Xml.attribute
+  @Xml.name("End")
+  end: int64;
+
+  /** Index into the Endpoints array indicating which endpoint serves this range. */
+  @Xml.attribute
+  @Xml.name("EndpointIndex")
+  endpointIndex: int32;
+}
+
+/** The endpoints that serve the ranges of a blob. */
+@added(Versions.v2026_12_06)
+@Xml.name("Endpoints")
+model BlobLayoutEndpoints {
+  /** The list of endpoints. */
+  @Xml.unwrapped
+  @Xml.name("Endpoint")
+  endpoint?: BlobLayoutEndpoint[];
+}
+
+/** An endpoint that serves ranges of a blob. */
+@added(Versions.v2026_12_06)
+@Xml.name("Endpoint")
+model BlobLayoutEndpoint {
+  /** The index of the endpoint, referenced by Range elements. */
+  @Xml.attribute
+  @Xml.name("Index")
+  index: int32;
+
+  /** The host:port of the endpoint. */
+  @Xml.attribute
+  @Xml.name("Value")
+  value: string;
+}
+
+/** The response headers common to the success responses of the Get Blob Layout API. */
+alias BlobLayoutResponseHeaders = {
+  ...LastModifiedResponseHeader;
+  ...BlobContentLengthResponseHeader;
+  ...BlobContentTypeResponseHeader;
+  ...BlobContentEncodingResponseHeader;
+  ...BlobContentMd5ResponseHeader;
+  ...BlobCreationTimeResponseHeader;
+  ...CreationTimeResponseHeader;
+  ...MetadataHeaders;
+  ...ObjectReplicationPolicyIdResponseHeader;
+  ...ObjectReplicationHeaders;
+  ...BlobTypeResponseHeader;
+  ...CopyCompletionTimeResponseHeader;
+  ...CopyStatusDescriptionResponseHeader;
+  ...CopyIdResponseHeader;
+  ...CopyProgressResponseHeader;
+  ...CopySourceResponseHeader;
+  ...CopyStatusResponseHeader;
+
+  /** Included if the blob is incremental copy blob. */
+  @header("x-ms-incremental-copy")
+  isIncrementalCopy?: boolean;
+
+  /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. */
+  @header("x-ms-copy-destination-snapshot")
+  destinationSnapshot?: string;
+
+  ...LeaseDurationResponseHeader;
+  ...LeaseStateResponseHeader;
+  ...LeaseStatusResponseHeader;
+  ...ContentLengthResponseHeader;
+  ...EtagResponseHeader;
+  ...ContentMd5ResponseHeader;
+  ...ContentEncodingResponseParameter;
+  ...ContentDispositionResponseHeader;
+  ...ContentLanguageResponseHeader;
+  ...CacheControlResponseHeader;
+  ...BlobSequenceNumberResponseHeader;
+  ...AcceptRangesResponseHeaderPrivate;
+  ...BlobCommittedBlockCountResponseHeader;
+  ...ServerEncryptedResponseHeader;
+  ...EncryptionKeySha256ResponseHeader;
+  ...EncryptionScopeResponseHeader;
+
+  /** The access tier of the blob. */
+  @header("x-ms-access-tier")
+  accessTier?: string;
+
+  /** Included if the access tier is inferred. */
+  @header("x-ms-access-tier-inferred")
+  accessTierInferred?: boolean;
+
+  /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+  @header("x-ms-smart-access-tier")
+  smartAccessTier?: string;
+
+  /** Included if the blob rehydrate operation is pending. Indicates the destination tier. */
+  @header("x-ms-archive-status")
+  @alternateType(string, "go")
+  archiveStatus?: ArchiveStatus;
+
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+
+  ...VersionIdResponseHeader;
+  ...IsCurrentVersionResponseHeader;
+  ...TagCountResponseHeader;
+  ...ExpiryTimeResponseHeader;
+  ...IsSealedResponseHeader;
+  ...RehydratePriorityResponseHeader;
+  ...LastAccessedResponseHeader;
+  ...ImmutabilityPolicyExpiresOnResponseHeader;
+  ...ImmutabilityPolicyModeResponseHeader;
+  ...LegalHoldOptionalResponseHeader;
+};
 
 /** A list of blob tags. */
 @Xml.name("Tags")
@@ -2119,6 +2299,15 @@ alias CreationTimeResponseHeader = {
   creationTime: utcDateTime;
 };
 
+/** The blob creation time response header. */
+alias BlobCreationTimeResponseHeader = {
+  /** The date-time the blob was created. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-blob-creation-time")
+  blobCreationTime?: utcDateTime;
+};
+
 /** The last modified response header. */
 alias LastModifiedResponseHeader = {
   /** The date-time that the resource was last modified. */
@@ -2397,6 +2586,20 @@ alias BlobContentTypeParameter = {
   /** Specifies the blob's Content-Type. If specified, this property is stored with the blob and returned with a read request. */
   @header("x-ms-blob-content-type")
   blobContentType?: string;
+};
+
+/** The blob content type response header. */
+alias BlobContentTypeResponseHeader = {
+  /** The Content-Type of the blob. */
+  @header("x-ms-blob-content-type")
+  blobContentType?: string;
+};
+
+/** The blob content encoding response header. */
+alias BlobContentEncodingResponseHeader = {
+  /** The Content-Encoding of the blob. */
+  @header("x-ms-blob-content-encoding")
+  blobContentEncoding?: string;
 };
 
 /** The premium page blob access tier types. */

@@ -412,6 +412,24 @@
                 "format": "date-time-rfc7231",
                 "description": "The date-time the blob was created."
               },
+              "x-ms-download-hint": {
+                "type": "string",
+                "description": "Indicates the download hint for the blob.",
+                "enum": [
+                  "layout"
+                ],
+                "x-ms-enum": {
+                  "name": "DownloadHint",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Layout",
+                      "value": "layout",
+                      "description": "The blob layout can be retrieved with the Get Blob Layout operation."
+                    }
+                  ]
+                }
+              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the provided encryption key."
@@ -794,6 +812,24 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date-time the blob was created."
+              },
+              "x-ms-download-hint": {
+                "type": "string",
+                "description": "Indicates the download hint for the blob.",
+                "enum": [
+                  "layout"
+                ],
+                "x-ms-enum": {
+                  "name": "DownloadHint",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Layout",
+                      "value": "layout",
+                      "description": "The blob layout can be retrieved with the Get Blob Layout operation."
+                    }
+                  ]
+                }
               },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
@@ -5046,6 +5082,1099 @@
               "x-ms-version": {
                 "type": "string",
                 "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?comp=layout": {
+      "get": {
+        "operationId": "Blob_GetLayout",
+        "description": "The Get Blob Layout operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob.  In addition, it may optionally return the layout of the blob.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "description": "Specifies the snapshot of the blob.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "versionid",
+            "in": "query",
+            "description": "Specifies the version ID of the blob.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "versionId"
+          },
+          {
+            "name": "marker",
+            "in": "query",
+            "description": "An opaque string value that identifies the portion of the result set to return with this operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "description": "Specifies the maximum number of resources to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Specifies the range of the blob to operate on.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "range"
+          },
+          {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-if-tags",
+            "in": "header",
+            "description": "Specifies a SQL-like where clause on blob tags to operate only on a blob with matching tags.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "Specify this value to operate only on a blob if it has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "Specify this value to operate only on a blob if it has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Specify this value to operate only on a blob with a matching Etag value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Specify this value to operate only on a blob with a non-matching Etag value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "x-ms-encryption-key",
+            "in": "header",
+            "description": "Specifies the encryption key to use to encrypt the data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionKey"
+          },
+          {
+            "name": "x-ms-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided encryption key. Must be provided if the encryption key is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionKeySha256"
+          },
+          {
+            "name": "x-ms-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the encryption key hash. Must be provided if the encryption key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "encryptionAlgorithm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BlobLayout"
+            },
+            "headers": {
+              "Accept-Ranges": {
+                "type": "string",
+                "description": "Indicates that the service supports requests for partial blob content."
+              },
+              "Cache-Control": {
+                "type": "string",
+                "description": "The Cache-Control of the blob."
+              },
+              "Content-Disposition": {
+                "type": "string",
+                "description": "The Content-Disposition of the blob."
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "description": "The Content-Encoding of the blob."
+              },
+              "Content-Language": {
+                "type": "string",
+                "description": "The Content-Language of the blob."
+              },
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of bytes present in the response body."
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "The blob content MD5 hash. Only returned if the full blob is read."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Date-time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "An opaque identifier for the current state of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time that the resource was last modified."
+              },
+              "x-ms-access-tier": {
+                "type": "string",
+                "description": "The access tier of the blob."
+              },
+              "x-ms-access-tier-change-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set."
+              },
+              "x-ms-access-tier-inferred": {
+                "type": "boolean",
+                "description": "Included if the access tier is inferred."
+              },
+              "x-ms-archive-status": {
+                "type": "string",
+                "description": "Included if the blob rehydrate operation is pending. Indicates the destination tier.",
+                "enum": [
+                  "rehydrate-pending-to-hot",
+                  "rehydrate-pending-to-cool",
+                  "rehydrate-pending-to-cold",
+                  "rehydrate-pending-to-smart"
+                ],
+                "x-ms-enum": {
+                  "name": "ArchiveStatus",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "RehydratePendingToHot",
+                      "value": "rehydrate-pending-to-hot",
+                      "description": "The archive status is rehydrating pending to Hot."
+                    },
+                    {
+                      "name": "RehydratePendingToCool",
+                      "value": "rehydrate-pending-to-cool",
+                      "description": "The archive status is rehydrating pending to Cool."
+                    },
+                    {
+                      "name": "RehydratePendingToCold",
+                      "value": "rehydrate-pending-to-cold",
+                      "description": "The archive status is rehydrating pending to Cold."
+                    },
+                    {
+                      "name": "RehydratePendingToSmart",
+                      "value": "rehydrate-pending-to-smart",
+                      "description": "The archive status is rehydrating pending to Smart."
+                    }
+                  ]
+                }
+              },
+              "x-ms-blob-committed-block-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of committed blocks present in the blob."
+              },
+              "x-ms-blob-content-encoding": {
+                "type": "string",
+                "description": "The Content-Encoding of the blob."
+              },
+              "x-ms-blob-content-length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The size of the blob in bytes."
+              },
+              "x-ms-blob-content-md5": {
+                "type": "string",
+                "format": "byte",
+                "description": "MD5 hash of the full blob content only returned for ranged reads. This is the hash of the complete blob, not just the requested range."
+              },
+              "x-ms-blob-content-type": {
+                "type": "string",
+                "description": "The Content-Type of the blob."
+              },
+              "x-ms-blob-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time the blob was created."
+              },
+              "x-ms-blob-sealed": {
+                "type": "boolean",
+                "description": "Whether the blob is sealed."
+              },
+              "x-ms-blob-sequence-number": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The current sequence number for a page blob."
+              },
+              "x-ms-blob-type": {
+                "type": "string",
+                "description": "The type of the blob.",
+                "enum": [
+                  "BlockBlob",
+                  "PageBlob",
+                  "AppendBlob"
+                ],
+                "x-ms-enum": {
+                  "name": "BlobType",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "BlockBlob",
+                      "value": "BlockBlob",
+                      "description": "The blob is a block blob."
+                    },
+                    {
+                      "name": "PageBlob",
+                      "value": "PageBlob",
+                      "description": "The blob is a page blob."
+                    },
+                    {
+                      "name": "AppendBlob",
+                      "value": "AppendBlob",
+                      "description": "The blob is an append blob."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-copy-completion-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "If this blob was the destination of a copy, specifies the completion time of the last attempted copy operation."
+              },
+              "x-ms-copy-destination-snapshot": {
+                "type": "string",
+                "description": "Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success."
+              },
+              "x-ms-copy-id": {
+                "type": "string",
+                "description": "Identifier for this copy operation."
+              },
+              "x-ms-copy-progress": {
+                "type": "string",
+                "description": "If this blob was the destination of a copy, specifies the number of bytes copied and the total bytes in the source."
+              },
+              "x-ms-copy-source": {
+                "type": "string",
+                "description": "If this blob was the destination of a copy, specifies the source URL."
+              },
+              "x-ms-copy-status": {
+                "type": "string",
+                "description": "Status of the copy operation.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "failed",
+                  "aborted"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    }
+                  ]
+                }
+              },
+              "x-ms-copy-status-description": {
+                "type": "string",
+                "description": "If this blob was the destination of a copy, specifies the cause of the copy operation failure."
+              },
+              "x-ms-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time the blob was created."
+              },
+              "x-ms-encryption-key-sha256": {
+                "type": "string",
+                "description": "The SHA-256 hash of the provided encryption key."
+              },
+              "x-ms-encryption-scope": {
+                "type": "string",
+                "description": "Specifies the encryption scope used to encrypt the data."
+              },
+              "x-ms-expiry-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time this blob will expire."
+              },
+              "x-ms-immutability-policy-mode": {
+                "type": "string",
+                "description": "Indicates the immutability policy mode of the blob.",
+                "enum": [
+                  "mutable",
+                  "locked",
+                  "unlocked"
+                ],
+                "x-ms-enum": {
+                  "name": "ImmutabilityPolicyMode",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Mutable",
+                      "value": "mutable",
+                      "description": "Response only. The immutability policy is mutable."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The immutability policy is locked."
+                    },
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The immutability policy is unlocked."
+                    }
+                  ]
+                }
+              },
+              "x-ms-immutability-policy-until-date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time that indicates the time at which the blob immutability policy will expire."
+              },
+              "x-ms-incremental-copy": {
+                "type": "boolean",
+                "description": "Included if the blob is incremental copy blob."
+              },
+              "x-ms-is-current-version": {
+                "type": "boolean",
+                "description": "Indicates whether this is the current version of the blob."
+              },
+              "x-ms-last-access-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time value that indicates the time at which the blob was last read or written."
+              },
+              "x-ms-lease-duration": {
+                "type": "string",
+                "description": "Specifies the duration of the lease.",
+                "enum": [
+                  "infinite",
+                  "fixed"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseDuration",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Infinite",
+                      "value": "infinite",
+                      "description": "The lease is of infinite duration."
+                    },
+                    {
+                      "name": "Fixed",
+                      "value": "fixed",
+                      "description": "The lease is of fixed duration."
+                    }
+                  ]
+                }
+              },
+              "x-ms-lease-state": {
+                "type": "string",
+                "description": "The lease state of the blob.",
+                "enum": [
+                  "available",
+                  "leased",
+                  "expired",
+                  "breaking",
+                  "broken"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseState",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Available",
+                      "value": "available",
+                      "description": "The lease is available."
+                    },
+                    {
+                      "name": "Leased",
+                      "value": "leased",
+                      "description": "The lease is currently leased."
+                    },
+                    {
+                      "name": "Expired",
+                      "value": "expired",
+                      "description": "The lease is expired."
+                    },
+                    {
+                      "name": "Breaking",
+                      "value": "breaking",
+                      "description": "The lease is breaking."
+                    },
+                    {
+                      "name": "Broken",
+                      "value": "broken",
+                      "description": "The lease is broken."
+                    }
+                  ]
+                }
+              },
+              "x-ms-lease-status": {
+                "type": "string",
+                "description": "The lease status of the blob.",
+                "enum": [
+                  "unlocked",
+                  "locked"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
+                    }
+                  ]
+                }
+              },
+              "x-ms-legal-hold": {
+                "type": "boolean",
+                "description": "Indicates whether the blob has a legal hold."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "description": "The metadata headers."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "description": "The object replication status headers."
+              },
+              "x-ms-or-policy-id": {
+                "type": "string",
+                "description": "The object replication policy ID."
+              },
+              "x-ms-rehydrate-priority": {
+                "type": "string",
+                "description": "The priority of the rehydration operation.",
+                "enum": [
+                  "High",
+                  "Standard"
+                ],
+                "x-ms-enum": {
+                  "name": "RehydratePriority",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "High",
+                      "value": "High",
+                      "description": "The rehydrate priority is high."
+                    },
+                    {
+                      "name": "Standard",
+                      "value": "Standard",
+                      "description": "The rehydrate priority is standard."
+                    }
+                  ]
+                }
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-server-encrypted": {
+                "type": "boolean",
+                "description": "Indicates whether the contents of the request are successfully encrypted."
+              },
+              "x-ms-smart-access-tier": {
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
+              },
+              "x-ms-tag-count": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              },
+              "x-ms-version-id": {
+                "type": "string",
+                "description": "The version ID of the blob."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Accept-Ranges": {
+                "type": "string",
+                "description": "Indicates that the service supports requests for partial blob content."
+              },
+              "Cache-Control": {
+                "type": "string",
+                "description": "The Cache-Control of the blob."
+              },
+              "Content-Disposition": {
+                "type": "string",
+                "description": "The Content-Disposition of the blob."
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "description": "The Content-Encoding of the blob."
+              },
+              "Content-Language": {
+                "type": "string",
+                "description": "The Content-Language of the blob."
+              },
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of bytes present in the response body."
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "The blob content MD5 hash. Only returned if the full blob is read."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Date-time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "An opaque identifier for the current state of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time that the resource was last modified."
+              },
+              "x-ms-access-tier": {
+                "type": "string",
+                "description": "The access tier of the blob."
+              },
+              "x-ms-access-tier-change-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set."
+              },
+              "x-ms-access-tier-inferred": {
+                "type": "boolean",
+                "description": "Included if the access tier is inferred."
+              },
+              "x-ms-archive-status": {
+                "type": "string",
+                "description": "Included if the blob rehydrate operation is pending. Indicates the destination tier.",
+                "enum": [
+                  "rehydrate-pending-to-hot",
+                  "rehydrate-pending-to-cool",
+                  "rehydrate-pending-to-cold",
+                  "rehydrate-pending-to-smart"
+                ],
+                "x-ms-enum": {
+                  "name": "ArchiveStatus",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "RehydratePendingToHot",
+                      "value": "rehydrate-pending-to-hot",
+                      "description": "The archive status is rehydrating pending to Hot."
+                    },
+                    {
+                      "name": "RehydratePendingToCool",
+                      "value": "rehydrate-pending-to-cool",
+                      "description": "The archive status is rehydrating pending to Cool."
+                    },
+                    {
+                      "name": "RehydratePendingToCold",
+                      "value": "rehydrate-pending-to-cold",
+                      "description": "The archive status is rehydrating pending to Cold."
+                    },
+                    {
+                      "name": "RehydratePendingToSmart",
+                      "value": "rehydrate-pending-to-smart",
+                      "description": "The archive status is rehydrating pending to Smart."
+                    }
+                  ]
+                }
+              },
+              "x-ms-blob-committed-block-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of committed blocks present in the blob."
+              },
+              "x-ms-blob-content-encoding": {
+                "type": "string",
+                "description": "The Content-Encoding of the blob."
+              },
+              "x-ms-blob-content-length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The size of the blob in bytes."
+              },
+              "x-ms-blob-content-md5": {
+                "type": "string",
+                "format": "byte",
+                "description": "MD5 hash of the full blob content only returned for ranged reads. This is the hash of the complete blob, not just the requested range."
+              },
+              "x-ms-blob-content-type": {
+                "type": "string",
+                "description": "The Content-Type of the blob."
+              },
+              "x-ms-blob-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time the blob was created."
+              },
+              "x-ms-blob-sealed": {
+                "type": "boolean",
+                "description": "Whether the blob is sealed."
+              },
+              "x-ms-blob-sequence-number": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The current sequence number for a page blob."
+              },
+              "x-ms-blob-type": {
+                "type": "string",
+                "description": "The type of the blob.",
+                "enum": [
+                  "BlockBlob",
+                  "PageBlob",
+                  "AppendBlob"
+                ],
+                "x-ms-enum": {
+                  "name": "BlobType",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "BlockBlob",
+                      "value": "BlockBlob",
+                      "description": "The blob is a block blob."
+                    },
+                    {
+                      "name": "PageBlob",
+                      "value": "PageBlob",
+                      "description": "The blob is a page blob."
+                    },
+                    {
+                      "name": "AppendBlob",
+                      "value": "AppendBlob",
+                      "description": "The blob is an append blob."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-copy-completion-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "If this blob was the destination of a copy, specifies the completion time of the last attempted copy operation."
+              },
+              "x-ms-copy-destination-snapshot": {
+                "type": "string",
+                "description": "Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success."
+              },
+              "x-ms-copy-id": {
+                "type": "string",
+                "description": "Identifier for this copy operation."
+              },
+              "x-ms-copy-progress": {
+                "type": "string",
+                "description": "If this blob was the destination of a copy, specifies the number of bytes copied and the total bytes in the source."
+              },
+              "x-ms-copy-source": {
+                "type": "string",
+                "description": "If this blob was the destination of a copy, specifies the source URL."
+              },
+              "x-ms-copy-status": {
+                "type": "string",
+                "description": "Status of the copy operation.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "failed",
+                  "aborted"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    }
+                  ]
+                }
+              },
+              "x-ms-copy-status-description": {
+                "type": "string",
+                "description": "If this blob was the destination of a copy, specifies the cause of the copy operation failure."
+              },
+              "x-ms-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time the blob was created."
+              },
+              "x-ms-encryption-key-sha256": {
+                "type": "string",
+                "description": "The SHA-256 hash of the provided encryption key."
+              },
+              "x-ms-encryption-scope": {
+                "type": "string",
+                "description": "Specifies the encryption scope used to encrypt the data."
+              },
+              "x-ms-expiry-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time this blob will expire."
+              },
+              "x-ms-immutability-policy-mode": {
+                "type": "string",
+                "description": "Indicates the immutability policy mode of the blob.",
+                "enum": [
+                  "mutable",
+                  "locked",
+                  "unlocked"
+                ],
+                "x-ms-enum": {
+                  "name": "ImmutabilityPolicyMode",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Mutable",
+                      "value": "mutable",
+                      "description": "Response only. The immutability policy is mutable."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The immutability policy is locked."
+                    },
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The immutability policy is unlocked."
+                    }
+                  ]
+                }
+              },
+              "x-ms-immutability-policy-until-date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time that indicates the time at which the blob immutability policy will expire."
+              },
+              "x-ms-incremental-copy": {
+                "type": "boolean",
+                "description": "Included if the blob is incremental copy blob."
+              },
+              "x-ms-is-current-version": {
+                "type": "boolean",
+                "description": "Indicates whether this is the current version of the blob."
+              },
+              "x-ms-last-access-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date-time value that indicates the time at which the blob was last read or written."
+              },
+              "x-ms-lease-duration": {
+                "type": "string",
+                "description": "Specifies the duration of the lease.",
+                "enum": [
+                  "infinite",
+                  "fixed"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseDuration",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Infinite",
+                      "value": "infinite",
+                      "description": "The lease is of infinite duration."
+                    },
+                    {
+                      "name": "Fixed",
+                      "value": "fixed",
+                      "description": "The lease is of fixed duration."
+                    }
+                  ]
+                }
+              },
+              "x-ms-lease-state": {
+                "type": "string",
+                "description": "The lease state of the blob.",
+                "enum": [
+                  "available",
+                  "leased",
+                  "expired",
+                  "breaking",
+                  "broken"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseState",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Available",
+                      "value": "available",
+                      "description": "The lease is available."
+                    },
+                    {
+                      "name": "Leased",
+                      "value": "leased",
+                      "description": "The lease is currently leased."
+                    },
+                    {
+                      "name": "Expired",
+                      "value": "expired",
+                      "description": "The lease is expired."
+                    },
+                    {
+                      "name": "Breaking",
+                      "value": "breaking",
+                      "description": "The lease is breaking."
+                    },
+                    {
+                      "name": "Broken",
+                      "value": "broken",
+                      "description": "The lease is broken."
+                    }
+                  ]
+                }
+              },
+              "x-ms-lease-status": {
+                "type": "string",
+                "description": "The lease status of the blob.",
+                "enum": [
+                  "unlocked",
+                  "locked"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
+                    }
+                  ]
+                }
+              },
+              "x-ms-legal-hold": {
+                "type": "boolean",
+                "description": "Indicates whether the blob has a legal hold."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "description": "The metadata headers."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "description": "The object replication status headers."
+              },
+              "x-ms-or-policy-id": {
+                "type": "string",
+                "description": "The object replication policy ID."
+              },
+              "x-ms-rehydrate-priority": {
+                "type": "string",
+                "description": "The priority of the rehydration operation.",
+                "enum": [
+                  "High",
+                  "Standard"
+                ],
+                "x-ms-enum": {
+                  "name": "RehydratePriority",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "High",
+                      "value": "High",
+                      "description": "The rehydrate priority is high."
+                    },
+                    {
+                      "name": "Standard",
+                      "value": "Standard",
+                      "description": "The rehydrate priority is standard."
+                    }
+                  ]
+                }
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-server-encrypted": {
+                "type": "boolean",
+                "description": "Indicates whether the contents of the request are successfully encrypted."
+              },
+              "x-ms-smart-access-tier": {
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
+              },
+              "x-ms-tag-count": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              },
+              "x-ms-version-id": {
+                "type": "string",
+                "description": "The version ID of the blob."
               }
             }
           },
@@ -16118,6 +17247,149 @@
         "name": "Blob"
       }
     },
+    "BlobLayout": {
+      "type": "object",
+      "description": "The result of the Get Blob Layout API.",
+      "properties": {
+        "Ranges": {
+          "$ref": "#/definitions/BlobLayoutRanges",
+          "description": "The ranges that make up the blob.",
+          "x-ms-client-name": "ranges"
+        },
+        "Endpoints": {
+          "$ref": "#/definitions/BlobLayoutEndpoints",
+          "description": "The endpoints that serve the ranges of the blob.",
+          "x-ms-client-name": "endpoints"
+        },
+        "Marker": {
+          "type": "string",
+          "description": "The continuation marker used for this request.",
+          "x-ms-client-name": "marker"
+        },
+        "NextMarker": {
+          "type": "string",
+          "description": "If the number of ranges exceeds MaxResults, a NextMarker is returned for use in subsequent requests to continue listing.",
+          "x-ms-client-name": "nextMarker"
+        },
+        "MaxResults": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of ranges to return per request.",
+          "x-ms-client-name": "maxResults"
+        }
+      }
+    },
+    "BlobLayoutEndpoint": {
+      "type": "object",
+      "description": "An endpoint that serves ranges of a blob.",
+      "properties": {
+        "Index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the endpoint, referenced by Range elements.",
+          "xml": {
+            "attribute": true
+          },
+          "x-ms-client-name": "index"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The host:port of the endpoint.",
+          "xml": {
+            "attribute": true
+          },
+          "x-ms-client-name": "value"
+        }
+      },
+      "required": [
+        "Index",
+        "Value"
+      ],
+      "xml": {
+        "name": "Endpoint"
+      }
+    },
+    "BlobLayoutEndpoints": {
+      "type": "object",
+      "description": "The endpoints that serve the ranges of a blob.",
+      "properties": {
+        "Endpoint": {
+          "type": "array",
+          "description": "The list of endpoints.",
+          "items": {
+            "$ref": "#/definitions/BlobLayoutEndpoint"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "endpoint"
+        }
+      },
+      "xml": {
+        "name": "Endpoints"
+      }
+    },
+    "BlobLayoutRange": {
+      "type": "object",
+      "description": "A range of a blob, and the endpoint that serves it.",
+      "properties": {
+        "Start": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The start byte offset of the range.",
+          "xml": {
+            "attribute": true
+          },
+          "x-ms-client-name": "start"
+        },
+        "End": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The end byte offset of the range.",
+          "xml": {
+            "attribute": true
+          },
+          "x-ms-client-name": "end"
+        },
+        "EndpointIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index into the Endpoints array indicating which endpoint serves this range.",
+          "xml": {
+            "attribute": true
+          },
+          "x-ms-client-name": "endpointIndex"
+        }
+      },
+      "required": [
+        "Start",
+        "End",
+        "EndpointIndex"
+      ],
+      "xml": {
+        "name": "Range"
+      }
+    },
+    "BlobLayoutRanges": {
+      "type": "object",
+      "description": "The ranges that make up a blob.",
+      "properties": {
+        "Range": {
+          "type": "array",
+          "description": "The list of ranges.",
+          "items": {
+            "$ref": "#/definitions/BlobLayoutRange"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "range"
+        }
+      },
+      "xml": {
+        "name": "Ranges"
+      }
+    },
     "BlobMetadata": {
       "type": "object",
       "description": "The blob metadata.",
@@ -16884,7 +18156,7 @@
     },
     "CreateSessionResponse": {
       "type": "object",
-      "description": "The result of the Create Session API.",
+      "description": "The response of the Create Session API.",
       "properties": {
         "Id": {
           "type": "string",
@@ -16894,7 +18166,7 @@
         "Expiration": {
           "type": "string",
           "format": "date-time-rfc7231",
-          "description": "The time when the session will expire. The format follows RFC 1123.",
+          "description": "The time when the session will expire.",
           "x-ms-client-name": "expiration"
         },
         "AuthenticationType": {
@@ -16965,6 +18237,24 @@
           "description": "Represents whether the data has headers.",
           "x-ms-client-name": "headersPresent"
         }
+      }
+    },
+    "DownloadHint": {
+      "type": "string",
+      "description": "The download hint for a blob.",
+      "enum": [
+        "layout"
+      ],
+      "x-ms-enum": {
+        "name": "DownloadHint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Layout",
+            "value": "layout",
+            "description": "The blob layout can be retrieved with the Get Blob Layout operation."
+          }
+        ]
       }
     },
     "EncryptionAlgorithmType": {
