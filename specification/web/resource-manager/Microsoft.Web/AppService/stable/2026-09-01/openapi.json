@@ -10520,8 +10520,29 @@
           }
         },
         "x-ms-examples": {
+          "API Management with subscription key injection": {
+            "$ref": "./examples/VirtualConnections_CreateOrUpdate_ApimKey.json"
+          },
+          "Configure Redis and Storage with Managed Identity": {
+            "$ref": "./examples/VirtualConnections_CreateOrUpdate_MultiHttp.json"
+          },
+          "Configure SQL with Managed Identity": {
+            "$ref": "./examples/VirtualConnections_CreateOrUpdate_SqlManagedIdentity.json"
+          },
+          "Configure third-party API with credential injection": {
+            "$ref": "./examples/VirtualConnections_CreateOrUpdate_ThirdPartyApi.json"
+          },
           "Create or replace Virtual Connections configuration": {
             "$ref": "./examples/VirtualConnections_CreateOrUpdate.json"
+          },
+          "Disable Virtual Connections": {
+            "$ref": "./examples/VirtualConnections_Disable.json"
+          },
+          "Storage SAS URL upgraded to Managed Identity": {
+            "$ref": "./examples/VirtualConnections_CreateOrUpdate_SasToManagedIdentity.json"
+          },
+          "Storage SAS URL with credential passthrough (secret hidden from app)": {
+            "$ref": "./examples/VirtualConnections_CreateOrUpdate_SasPassthrough.json"
           }
         }
       }
@@ -23290,6 +23311,9 @@
           }
         },
         "x-ms-examples": {
+          "Configure Virtual Connections on a deployment slot": {
+            "$ref": "./examples/SlotVirtualConnections_CreateOrUpdate_SourceScenario.json"
+          },
           "Create or replace Virtual Connections configuration for a slot": {
             "$ref": "./examples/SlotVirtualConnections_CreateOrUpdate.json"
           }
@@ -57432,11 +57456,11 @@
         },
         "auth": {
           "$ref": "#/definitions/VirtualConnectionAuthType",
-          "description": "Authentication strategy for the backend connection.\n\"credential\" — proxy injects the original secret (from setting value).\n\"mi\" — proxy acquires a managed identity token for upstream auth."
+          "description": "Authentication strategy for the backend connection.\n\"credential\" — proxy injects the original secret (from setting value).\n\"managedIdentity\" — proxy acquires a managed identity token for upstream auth."
         },
         "identityScope": {
           "type": "string",
-          "description": "Managed Identity scope for token acquisition. Only relevant when auth=mi.\nOptional — the platform infers a default scope from protocol + host.\nSpecify explicitly for custom hosts or non-standard resource URIs."
+          "description": "Managed Identity scope for token acquisition. Only relevant when auth=managedIdentity.\nOptional — the platform infers a default scope from protocol + host.\nSpecify explicitly for custom hosts or non-standard resource URIs."
         },
         "identityResourceId": {
           "type": "string",
@@ -57444,7 +57468,7 @@
         },
         "credentialInjection": {
           "$ref": "#/definitions/HttpCredentialInjection",
-          "description": "How to inject a standalone credential into upstream HTTP requests.\nRequired when protocol=http + auth=credential and the credential is a\nseparate setting. Not needed for role=\"value\" or auth=mi."
+          "description": "How to inject a standalone credential into upstream HTTP requests.\nRequired when protocol=http + auth=credential and the credential is a\nseparate setting. Not needed for role=\"value\" or auth=managedIdentity."
         }
       },
       "required": [
@@ -57458,7 +57482,7 @@
       "description": "Authentication strategy for upstream connections.",
       "enum": [
         "credential",
-        "mi"
+        "managedIdentity"
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionAuthType",
@@ -57470,8 +57494,8 @@
             "description": "Proxy injects the original credential from the setting value."
           },
           {
-            "name": "mi",
-            "value": "mi",
+            "name": "managedIdentity",
+            "value": "managedIdentity",
             "description": "Proxy acquires a Managed Identity token for upstream auth."
           }
         ]

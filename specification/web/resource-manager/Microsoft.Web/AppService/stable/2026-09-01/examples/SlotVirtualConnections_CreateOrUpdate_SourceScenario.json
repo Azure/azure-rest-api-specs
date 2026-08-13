@@ -1,6 +1,6 @@
 {
   "operationId": "VirtualConnectionsSlotConfigs_CreateOrUpdateVirtualConnectionsSlot",
-  "title": "Create or replace Virtual Connections configuration for a slot",
+  "title": "Configure Virtual Connections on a deployment slot",
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg-orders",
@@ -12,9 +12,7 @@
         "enabled": "Enabled",
         "connections": {
           "orders-db": {
-            "settings": {
-              "OrdersDb": { "role": "value" }
-            },
+            "settings": { "OrdersDb": { "role": "value" } },
             "source": "connectionStrings",
             "protocol": "tds",
             "auth": "managedIdentity"
@@ -33,9 +31,7 @@
           "enabled": "Enabled",
           "connections": {
             "orders-db": {
-              "settings": {
-                "OrdersDb": { "role": "value" }
-              },
+              "settings": { "OrdersDb": { "role": "value" } },
               "source": "connectionStrings",
               "protocol": "tds",
               "auth": "managedIdentity"

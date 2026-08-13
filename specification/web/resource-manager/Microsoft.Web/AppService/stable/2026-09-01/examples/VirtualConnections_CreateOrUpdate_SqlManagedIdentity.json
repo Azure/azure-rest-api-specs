@@ -1,11 +1,24 @@
 {
-  "operationId": "VirtualConnectionsConfigs_GetVirtualConnections",
-  "title": "Get Virtual Connections configuration",
+  "operationId": "VirtualConnectionsConfigs_CreateOrUpdateVirtualConnections",
+  "title": "Configure SQL with Managed Identity",
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg-orders",
     "name": "orders-api",
-    "api-version": "2026-09-01"
+    "api-version": "2026-09-01",
+    "resource": {
+      "properties": {
+        "enabled": "Enabled",
+        "connections": {
+          "orders-db": {
+            "settings": { "OrdersDb": { "role": "value" } },
+            "source": "connectionStrings",
+            "protocol": "tds",
+            "auth": "managedIdentity"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -17,26 +30,9 @@
           "enabled": "Enabled",
           "connections": {
             "orders-db": {
-              "settings": {
-                "OrdersDb": { "role": "value" }
-              },
+              "settings": { "OrdersDb": { "role": "value" } },
               "source": "connectionStrings",
               "protocol": "tds",
-              "auth": "managedIdentity"
-            },
-            "cache": {
-              "settings": {
-                "REDIS_HOST": { "role": "host" },
-                "REDIS_KEY": { "role": "credential" }
-              },
-              "protocol": "redis",
-              "auth": "managedIdentity"
-            },
-            "docs-storage": {
-              "settings": {
-                "STORAGE_URL": { "role": "value" }
-              },
-              "protocol": "http",
               "auth": "managedIdentity"
             }
           },

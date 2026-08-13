@@ -113,12 +113,12 @@ model VirtualConnection {
   /**
    * Authentication strategy for the backend connection.
    * "credential" — proxy injects the original secret (from setting value).
-   * "mi" — proxy acquires a managed identity token for upstream auth.
+    * "managedIdentity" — proxy acquires a managed identity token for upstream auth.
    */
   auth: VirtualConnectionAuthType;
 
   /**
-   * Managed Identity scope for token acquisition. Only relevant when auth=mi.
+    * Managed Identity scope for token acquisition. Only relevant when auth=managedIdentity.
    * Optional — the platform infers a default scope from protocol + host.
    * Specify explicitly for custom hosts or non-standard resource URIs.
    */
@@ -134,7 +134,7 @@ model VirtualConnection {
   /**
    * How to inject a standalone credential into upstream HTTP requests.
    * Required when protocol=http + auth=credential and the credential is a
-   * separate setting. Not needed for role="value" or auth=mi.
+    * separate setting. Not needed for role="value" or auth=managedIdentity.
    */
   credentialInjection?: HttpCredentialInjection;
 }
@@ -210,7 +210,7 @@ union VirtualConnectionAuthType {
   credential: "credential",
 
   /** Proxy acquires a Managed Identity token for upstream auth. */
-  mi: "mi",
+  managedIdentity: "managedIdentity",
 
   string,
 }

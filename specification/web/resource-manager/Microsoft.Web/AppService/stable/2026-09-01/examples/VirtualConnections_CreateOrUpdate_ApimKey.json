@@ -1,6 +1,6 @@
 {
   "operationId": "VirtualConnectionsConfigs_CreateOrUpdateVirtualConnections",
-  "title": "Create or replace Virtual Connections configuration",
+  "title": "API Management with subscription key injection",
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg-orders",
@@ -10,21 +10,14 @@
       "properties": {
         "enabled": "Enabled",
         "connections": {
-          "orders-db": {
+          "internal-api": {
             "settings": {
-              "OrdersDb": { "role": "value" }
+              "API_GATEWAY_HOST": { "role": "host" },
+              "APIM_SUBSCRIPTION_KEY": { "role": "credential" }
             },
-            "source": "connectionStrings",
-            "protocol": "tds",
-            "auth": "managedIdentity"
-          },
-          "cache": {
-            "settings": {
-              "REDIS_HOST": { "role": "host" },
-              "REDIS_KEY": { "role": "credential" }
-            },
-            "protocol": "redis",
-            "auth": "managedIdentity"
+            "protocol": "http",
+            "auth": "credential",
+            "credentialInjection": { "header": "Ocp-Apim-Subscription-Key" }
           }
         }
       }
@@ -39,21 +32,14 @@
         "properties": {
           "enabled": "Enabled",
           "connections": {
-            "orders-db": {
+            "internal-api": {
               "settings": {
-                "OrdersDb": { "role": "value" }
+                "API_GATEWAY_HOST": { "role": "host" },
+                "APIM_SUBSCRIPTION_KEY": { "role": "credential" }
               },
-              "source": "connectionStrings",
-              "protocol": "tds",
-              "auth": "managedIdentity"
-            },
-            "cache": {
-              "settings": {
-                "REDIS_HOST": { "role": "host" },
-                "REDIS_KEY": { "role": "credential" }
-              },
-              "protocol": "redis",
-              "auth": "managedIdentity"
+              "protocol": "http",
+              "auth": "credential",
+              "credentialInjection": { "header": "Ocp-Apim-Subscription-Key" }
             }
           },
           "provisioningState": "Succeeded"

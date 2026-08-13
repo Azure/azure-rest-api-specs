@@ -1,0 +1,42 @@
+{
+  "operationId": "VirtualConnectionsConfigs_CreateOrUpdateVirtualConnections",
+  "title": "Storage SAS URL upgraded to Managed Identity",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg-orders",
+    "name": "orders-api",
+    "api-version": "2026-09-01",
+    "resource": {
+      "properties": {
+        "enabled": "Enabled",
+        "connections": {
+          "docs-storage": {
+            "settings": { "STORAGE_URL": { "role": "value" } },
+            "protocol": "http",
+            "auth": "managedIdentity"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/virtualConnections",
+        "name": "virtualConnections",
+        "type": "Microsoft.Web/sites/config",
+        "properties": {
+          "enabled": "Enabled",
+          "connections": {
+            "docs-storage": {
+              "settings": { "STORAGE_URL": { "role": "value" } },
+              "protocol": "http",
+              "auth": "managedIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
