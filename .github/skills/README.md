@@ -99,3 +99,93 @@ Changes to any of these files should pass the eval suite before merging:
 - `.github/instructions/*review*.instructions.md`
 - `.github/skills/azure-api-review/**`
 - `.github/skills/evals/arm-api-reviewer/**`
+
+---
+
+## Data-Plane API Reviewer
+
+The **Data-Plane API Reviewer** agent
+([`.github/agents/data-plane-api-reviewer.agent.md`](../agents/data-plane-api-reviewer.agent.md))
+is a read-only PR review agent that checks **data-plane TypeSpec**
+specifications against the
+[Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
+
+It shares the **azure-api-review** skill
+([`skills/azure-api-review/`](azure-api-review/)) with the ARM reviewer
+rather than forking it; the skill's reference table is split into
+cross-cutting, ARM-only, and data-plane-only sections.
+
+It is deliberately scoped to the residue that deterministic tooling cannot
+reach -- resource modeling quality, POST actions that are CRUD in disguise,
+naming clarity as opposed to naming casing, documentation substance as
+opposed to documentation presence, error-code craftsmanship, LRO and paging
+shape, visibility and secret exposure, and breaking-change judgment. Rules
+that `@azure-tools/typespec-azure-core` already enforces mechanically are
+off-limits, and rules about service runtime behavior are out of scope
+entirely because a `.tsp` file cannot show them.
+
+Which is which is decided by the **linter interlock**,
+[`azure-api-review/references/data-plane-linter-rule-coverage.md`](azure-api-review/references/data-plane-linter-rule-coverage.md),
+not by the agent's judgment. That file is version-pinned to the
+`@azure-tools/typespec-azure-core` version this repository resolves, and
+[`.github/workflows/data-plane-review-alignment.yaml`](../workflows/data-plane-review-alignment.yaml)
+fails the build if the two drift apart -- so every linter bump forces a human
+to re-verify the table. The same check asserts that the model the workflow runs
+in production equals the model the true-negative eval suite measures, so its
+regression results describe the configuration that actually ships.
+
+The reviewer's **report format** — the bracketed `[DP-XXX-NN]` finding syntax
+and the 🔴/🟡/💡 severity glyphs — is defined in
+[`azure-api-review/references/data-plane-report-format.md`](azure-api-review/references/data-plane-report-format.md)
+rather than in the agent file, so that the eval harness (which loads the skill
+and has no concept of an agent file) grades the format the agent is actually
+told to emit. The same alignment check enforces that, because the previous
+arrangement failed silently until a full eval run was attempted.
+
+Findings are re-verified by the **Data-Plane API Review Critic**
+([`.github/agents/data-plane-api-review-critic.agent.md`](../agents/data-plane-api-review-critic.agent.md)),
+which hunts false positives only.
+
+The unattended entry point is the gh-aw workflow
+[`.github/workflows/data-plane-api-review.md`](../workflows/data-plane-api-review.md),
+which is label-gated and [rolls out in phases](evals/data-plane-api-reviewer/ROLLOUT.md).
+It grants the agent **no** mutating GitHub tools; `safe-outputs` is the only
+write channel.
+
+### Evaluation suite
+
+See
+[`evals/data-plane-api-reviewer/README.md`](evals/data-plane-api-reviewer/README.md).
+
+Unlike the ARM suite, the center of gravity is false-positive resistance:
+true-negative stimuli are at least 40% of the suite, they run three times,
+and a single true-negative failure is treated as a regression rather than a
+flake. During the manually label-gated Phase 2 rollout, real author feedback is
+the primary signal and the suite guards against repeatable regressions.
+
+```powershell
+cd .github/skills/evals
+.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer"
+
+# The true-negative regression suite (`runs: 3` is already configured)
+.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives"
+```
+
+`run-evals.ps1` is shared by every suite and lives at the evals root; select
+a suite with `-SuiteDir`.
+
+### Gating changes
+
+Changes to any of these files should pass the data-plane eval suite before
+merging:
+
+- `.github/agents/data-plane-api-reviewer.agent.md`
+- `.github/agents/data-plane-api-review-critic.agent.md`
+- `.github/agents/protocols/data-plane-api-review-critic.protocol.md`
+- `.github/skills/azure-api-review/**`
+- `.github/skills/evals/data-plane-api-reviewer/**`
+- `.github/workflows/data-plane-api-review.md`
+
+Note that `.github/skills/azure-api-review/**` now gates **both** suites.
+Changing a cross-cutting reference means running the ARM suite and the
+data-plane suite.
