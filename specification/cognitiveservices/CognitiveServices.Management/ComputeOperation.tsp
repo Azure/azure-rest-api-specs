@@ -20,6 +20,8 @@ namespace Microsoft.CognitiveServices;
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
 model ComputeOperationStatus
@@ -36,6 +38,8 @@ model ComputeOperationStatus
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface ComputeOperations {
   /**
@@ -61,6 +65,8 @@ interface ComputeOperations {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 model ComputeOperationStatusProperties {
   /**
    * The start time of the operation.
@@ -92,6 +98,8 @@ model ComputeOperationStatusProperties {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 union ComputeOperationStatusType {
   string,
 

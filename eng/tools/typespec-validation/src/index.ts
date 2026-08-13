@@ -2,6 +2,7 @@ import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Suppression } from "suppressions";
 import { type Rule } from "./rule.ts";
+import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
 import { FlavorAzureRule } from "./rules/flavor-azure.ts";
@@ -10,6 +11,7 @@ import { FormatRule } from "./rules/format.ts";
 import { LinterRulesetRule } from "./rules/linter-ruleset.ts";
 import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
+import { ServiceYamlRule } from "./rules/service-yaml.ts";
 import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -111,8 +113,10 @@ export async function main() {
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
+    new ServiceYamlRule(),
     new FlavorAzureRule(),
     new LinterRulesetRule(),
+    new ClientTspImportRule(),
     new CompileRule(),
     new FormatRule(),
     new SdkTspConfigValidationRule(),

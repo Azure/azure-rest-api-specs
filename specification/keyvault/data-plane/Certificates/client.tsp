@@ -43,6 +43,8 @@ namespace Customizations;
 );
 @@clientName(IssuerParameters, "IssuerParametersBundle", "csharp");
 
+@@access(KeyVault, Access.internal, "csharp");
+
 using KeyVault;
 
 // Make optional path parameter required for all languages

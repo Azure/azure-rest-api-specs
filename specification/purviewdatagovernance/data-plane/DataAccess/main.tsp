@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
  */
 @service(#{ title: "PurviewDataAccess" })
 @server(
-  "{endpoint}/datagovernance/access",
+  "{endpoint}/datagovernance/dataaccess",
   "Purview Data Access Service manages data subscriptions, workflows, and policy sets for governing access to data products within Microsoft Purview.",
   {
     @doc("The endpoint of the Purview Data Access service. Example: https://api.purview-service.microsoft.com/")

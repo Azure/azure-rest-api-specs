@@ -4,23 +4,19 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DevTestLab;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   LabVirtualMachineCreationParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ScheduleCreationParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImage.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ApplicableSchedule.properties
 );
@@ -48,7 +44,6 @@ using Microsoft.DevTestLab;
   "evaluatePoliciesRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Lab.properties);
 
 @@clientName(GlobalSchedules.createOrUpdate::parameters.resource, "schedule");
@@ -70,7 +65,6 @@ using Microsoft.DevTestLab;
 );
 @@clientName(VirtualMachineSchedules.update::parameters.properties, "schedule");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Schedule.properties);
 
 @@clientName(
@@ -79,11 +73,9 @@ using Microsoft.DevTestLab;
 );
 @@clientName(ArtifactSources.update::parameters.properties, "artifactSource");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArtifactSource.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArmTemplate.properties);
 
 @@clientName(
@@ -91,24 +83,20 @@ using Microsoft.DevTestLab;
   "generateArmTemplateRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Artifact.properties);
 
 @@clientName(Costs.createOrUpdate::parameters.resource, "labCost");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LabCost.properties);
 
 @@clientName(CustomImages.createOrUpdate::parameters.resource, "customImage");
 @@clientName(CustomImages.update::parameters.properties, "customImage");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomImage.properties);
 
 @@clientName(Formulas.createOrUpdate::parameters.resource, "formula");
 @@clientName(Formulas.update::parameters.properties, "formula");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Formula.properties);
 
 @@clientName(
@@ -121,7 +109,6 @@ using Microsoft.DevTestLab;
 );
 @@clientName(NotificationChannels.notify::parameters.body, "notifyParameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   NotificationChannel.properties
 );
@@ -129,7 +116,6 @@ using Microsoft.DevTestLab;
 @@clientName(Policies.createOrUpdate::parameters.resource, "policy");
 @@clientName(Policies.update::parameters.properties, "policy");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Policy.properties);
 
 @@clientName(
@@ -140,7 +126,6 @@ using Microsoft.DevTestLab;
 @@clientName(Users.createOrUpdate::parameters.resource, "user");
 @@clientName(Users.update::parameters.properties, "user");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(User.properties);
 
 @@clientName(Disks.createOrUpdate::parameters.resource, "disk");
@@ -148,7 +133,6 @@ using Microsoft.DevTestLab;
 @@clientName(Disks.attach::parameters.body, "attachDiskProperties");
 @@clientName(Disks.detach::parameters.body, "detachDiskProperties");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Disk.properties);
 
 @@clientName(
@@ -157,13 +141,11 @@ using Microsoft.DevTestLab;
 );
 @@clientName(Environments.update::parameters.properties, "dtlEnvironment");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DtlEnvironment.properties);
 
 @@clientName(Secrets.createOrUpdate::parameters.resource, "secret");
 @@clientName(Secrets.update::parameters.properties, "secret");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Secret.properties);
 
 @@clientName(
@@ -172,7 +154,6 @@ using Microsoft.DevTestLab;
 );
 @@clientName(ServiceFabrics.update::parameters.properties, "serviceFabric");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceFabric.properties);
 
 @@clientName(
@@ -200,7 +181,6 @@ using Microsoft.DevTestLab;
   "resizeLabVirtualMachineProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   LabVirtualMachine.properties
 );
@@ -211,7 +191,6 @@ using Microsoft.DevTestLab;
 );
 @@clientName(VirtualNetworks.update::parameters.properties, "virtualNetwork");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualNetwork.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"

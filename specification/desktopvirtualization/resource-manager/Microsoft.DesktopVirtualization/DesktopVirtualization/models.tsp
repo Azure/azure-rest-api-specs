@@ -1244,7 +1244,7 @@ union DiffDiskOption {
 }
 
 /**
- * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+ * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
  */
 union DiffDiskPlacement {
   string,
@@ -1255,9 +1255,9 @@ union DiffDiskPlacement {
   CacheDisk: "CacheDisk",
 
   /**
-   * Resource disk placement
+   * Temp disk placement
    */
-  ResourceDisk: "ResourceDisk",
+  TempDisk: "TempDisk",
 }
 
 /**
@@ -1497,6 +1497,7 @@ model AppAttachPackageProperties {
    * Lookback url to third party control plane, is null for native app attach packages
    * @Introduced in 2024-03-06-preview
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.vLatestPreview)
   packageLookbackUrl?: url;
 
@@ -1741,7 +1742,7 @@ model DiffDiskProperties {
   option?: DiffDiskOption;
 
   /**
-   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
    */
   placement?: DiffDiskPlacement;
 }
@@ -2113,6 +2114,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customConfigurationScriptUrl?: url;
 
   /**
@@ -3222,6 +3224,7 @@ model AppAttachPackagePatchProperties {
    * Lookback url to third party control plane, is null for native app attach packages
    * @Introduced in 2024-03-06-preview
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.vLatestPreview)
   packageLookbackUrl?: url;
 
@@ -5114,6 +5117,7 @@ model SessionHostConfigurationProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customConfigurationScriptUrl?: url;
 
   /**
@@ -5200,6 +5204,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customConfigurationScriptUrl?: url;
 
   /**

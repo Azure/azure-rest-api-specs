@@ -75,6 +75,14 @@ export async function setSpecGenSdkStatusImpl({
     core.info(`- ${check.name}: ${check.status} (${check.conclusion})`);
   }
 
+  // No SDK Validation check runs exist for this commit (e.g. a PR without SDK-relevant changes that
+  // was reopened). Skip setting a status, to avoid creating a spurious "pending" status that would
+  // never be resolved, since the Azure DevOps pipelines won't run for such PRs.
+  if (specGenSdkChecks.length === 0) {
+    core.info("No SDK Validation check runs found. Skipping status update.");
+    return;
+  }
+
   // Check if all SDK generation checks have completed
   const allCompleted =
     specGenSdkChecks.length > 0 &&
