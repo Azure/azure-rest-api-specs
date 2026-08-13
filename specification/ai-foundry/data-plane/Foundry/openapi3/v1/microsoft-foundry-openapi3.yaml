@@ -77332,17 +77332,12 @@ components:
       type: object
       required:
         - type
-        - name
       properties:
         type:
           type: string
           enum:
             - shell
           description: The type of the tool. Always `shell`.
-        name:
-          type: string
-          minLength: 1
-          description: The unique name of this shell tool within the toolbox version.
         allowed_callers:
           anyOf:
             - type: array
@@ -78063,15 +78058,15 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
             - type: 'null'
-        network_policy:
-          $ref: '#/components/schemas/ToolboxShellNetworkPolicy'
-          description: The network access policy for the container.
         skills:
           type: array
           items:
-            $ref: '#/components/schemas/ToolboxShellSkill'
+            $ref: '#/components/schemas/OpenAI.ContainerSkill'
           maxItems: 200
-          description: An optional list of skills referenced by ID or inline data.
+          description: An optional list of skills referenced by id or inline data.
+        network_policy:
+          $ref: '#/components/schemas/ToolboxShellNetworkPolicy'
+          description: The network access policy for the container.
       allOf:
         - $ref: '#/components/schemas/ToolboxShellEnvironment'
       description: An automatically provisioned container environment for a shell tool stored in a toolbox.
@@ -78174,41 +78169,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxShellNetworkPolicy'
       description: A network policy that disables outbound access from a toolbox shell container.
-    ToolboxShellSkill:
-      anyOf:
-        - $ref: '#/components/schemas/ToolboxShellSkillReference'
-        - $ref: '#/components/schemas/OpenAI.InlineSkillParam'
-      description: A skill used by a shell tool stored in a toolbox.
-    ToolboxShellSkillReference:
-      type: object
-      required:
-        - type
-        - skill_id
-        - name
-        - description
-      properties:
-        type:
-          type: string
-          enum:
-            - skill_reference
-          description: References a skill created with the /v1/skills endpoint.
-          x-stainless-const: true
-        skill_id:
-          type: string
-          minLength: 1
-          maxLength: 64
-          description: The ID of the referenced skill.
-        version:
-          type: string
-          description: Optional skill version. Use a positive integer or 'latest'. Omit for default.
-        name:
-          $ref: '#/components/schemas/SkillName'
-          description: The name of the referenced skill.
-        description:
-          type: string
-          maxLength: 1024
-          description: A human-readable description of the referenced skill.
-      description: A reference to an existing skill used by a shell tool stored in a toolbox.
     ToolboxSkill:
       type: object
       required:

@@ -158,32 +158,6 @@ model ToolboxShellEnvironment {
 }
 
 /**
- * A reference to an existing skill used by a shell tool stored in a toolbox.
- */
-model ToolboxShellSkillReference {
-  ...OpenAI.SkillReferenceParam;
-
-  /**
-   * The name of the referenced skill.
-   */
-  name: SkillName;
-
-  /**
-   * A human-readable description of the referenced skill.
-   */
-  @maxLength(1024)
-  description: string;
-}
-
-/**
- * A skill used by a shell tool stored in a toolbox.
- */
-union ToolboxShellSkill {
-  skill_reference: ToolboxShellSkillReference,
-  inline: OpenAI.InlineSkillParam,
-}
-
-/**
  * A project connection used to provide a secret to an allowlisted domain.
  */
 model ToolboxShellDomainSecretReference {
@@ -254,19 +228,13 @@ model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
 
   ...OmitProperties<
     OpenAI.ContainerAutoParam,
-    "type" | "skills" | "network_policy"
+    "type" | "network_policy"
   >;
 
   /**
    * The network access policy for the container.
    */
   network_policy?: ToolboxShellNetworkPolicy;
-
-  /**
-   * An optional list of skills referenced by ID or inline data.
-   */
-  @maxItems(200)
-  skills?: ToolboxShellSkill[];
 }
 
 /**
@@ -293,12 +261,6 @@ model ShellToolboxTool extends ToolboxTool {
    * The type of the tool. Always `shell`.
    */
   type: ToolboxShellToolType;
-
-  /**
-   * The unique name of this shell tool within the toolbox version.
-   */
-  @minLength(1)
-  name: string;
 
   ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
 
