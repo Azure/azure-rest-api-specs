@@ -141,6 +141,9 @@ using Microsoft.Monitor;
 // provide write-specific models that omit those fields so SDK users see a clean API.
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/40791
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
+@armProviderNamespace("Microsoft.Monitor")
 namespace Customizations {
   // ===== Issue create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
@@ -165,12 +168,8 @@ namespace Customizations {
 
   @parentResource(AzureMonitorWorkspaceResource)
   @doc("Issue resource for create/update operations.")
-  model IssueResourceCreate {
-    ...OmitProperties<
-      Azure.ResourceManager.ProxyResource<IssuePayloadCreate>,
-      "name"
-    >;
-
+  model IssueResourceCreate
+    is Azure.ResourceManager.ProxyResource<IssuePayloadCreate> {
     @doc("The name of the Issue")
     @key("issueName")
     @path

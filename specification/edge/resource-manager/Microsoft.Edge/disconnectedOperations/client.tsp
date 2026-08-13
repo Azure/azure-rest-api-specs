@@ -106,14 +106,13 @@ using TypeSpec.Rest;
 @@alternateType(HardwareSettingProperties.deviceId, uuid, "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
+@armProviderNamespace("Microsoft.Edge")
 namespace Customizations {
   @doc("Disconnected operation resource for create or update.")
-  model DisconnectedOperationCreateOrUpdate {
-    ...OmitProperties<
-      TrackedResource<DisconnectedOperationPropertiesCreateOrUpdate>,
-      "name"
-    >;
-
+  model DisconnectedOperationCreateOrUpdate
+    is TrackedResource<DisconnectedOperationPropertiesCreateOrUpdate> {
     @doc("Name of the resource")
     @path
     @key("name")

@@ -667,17 +667,18 @@ using Microsoft.Batch;
 );
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Client-only customization namespace has no service operations."
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
+@Azure.ResourceManager.armProviderNamespace("Microsoft.Batch")
 namespace Customizations {
   /**
    * Contains information about an Azure Batch account.
    */
   @usage(Usage.input, "csharp")
   @clientName("BatchAccount", "csharp")
-  model BatchAccountData {
-    ...OmitProperties<
-      Azure.ResourceManager.ProxyResource<BatchAccountProperties>,
-      "name" | "systemData"
-    >;
+  model BatchAccountData
+    is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
     ...Azure.ResourceManager.ResourceNameParameter<
       Resource = BatchAccount,
       KeyName = "accountName",

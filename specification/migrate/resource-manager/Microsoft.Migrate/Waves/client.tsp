@@ -16,6 +16,9 @@ using Microsoft.Migrate;
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Migrate namespace"
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
+@armProviderNamespace("Microsoft.Migrate")
 namespace Customizations {
   // ===== Task create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
@@ -52,9 +55,7 @@ namespace Customizations {
 
   @parentResource(MigrateProject)
   @doc("Task resource for create operations.")
-  model TaskCreate {
-    ...OmitProperties<ProxyResource<TaskPropertiesCreate>, "name">;
-
+  model TaskCreate is ProxyResource<TaskPropertiesCreate> {
     @doc("Task ARM name")
     @key("taskName")
     @segment("tasks")

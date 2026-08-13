@@ -12,14 +12,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
+@armProviderNamespace("Microsoft.Relationships")
 namespace Customizations {
   @doc("DependencyOf relationship resource for create or update.")
-  model DependencyOfRelationshipCreateOrUpdate {
-    ...OmitProperties<
-      ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate>,
-      "name"
-    >;
-
+  model DependencyOfRelationshipCreateOrUpdate
+    is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of dependencyOf relationship.")
     @key
@@ -39,12 +38,8 @@ namespace Customizations {
   }
 
   @doc("ServiceGroupMember relationship resource for create or update.")
-  model ServiceGroupMemberRelationshipCreateOrUpdate {
-    ...OmitProperties<
-      ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate>,
-      "name"
-    >;
-
+  model ServiceGroupMemberRelationshipCreateOrUpdate
+    is ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate> {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of ServiceGroupMember relationship.")
     @key

@@ -501,15 +501,16 @@ using Microsoft.EventHub;
 );
 
 // Custom models to ensure C# resource classes inherit TrackedResourceData
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Client-only customization namespace has no service operations."
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
+@Azure.ResourceManager.armProviderNamespace("Microsoft.EventHub")
 namespace Customizations {
   /**
    * Single Event Hubs Cluster resource in List or Get operations.
    */
-  model EventHubsCluster {
-    ...OmitProperties<
-      Azure.ResourceManager.TrackedResource<ClusterProperties>,
-      "name" | "systemData" | "tags"
-    >;
+  model EventHubsCluster
+    is Azure.ResourceManager.TrackedResource<ClusterProperties> {
     ...Azure.ResourceManager.ResourceNameParameter<
       Resource = Cluster,
       KeyName = "clusterName",
@@ -525,11 +526,8 @@ namespace Customizations {
   /**
    * Single Namespace item in List or Get Operation
    */
-  model EventHubsNamespace {
-    ...OmitProperties<
-      Azure.ResourceManager.TrackedResource<EHNamespaceProperties>,
-      "name" | "systemData" | "tags"
-    >;
+  model EventHubsNamespace
+    is Azure.ResourceManager.TrackedResource<EHNamespaceProperties> {
     ...Azure.ResourceManager.ResourceNameParameter<
       Resource = EHNamespace,
       KeyName = "namespaceName",
