@@ -74,6 +74,9 @@
           "Lists security entitlements in the tenant": {
             "$ref": "./examples/ServiceEntitlements/ListServiceEntitlementsByTenant.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -435,14 +438,11 @@
             "in": "path",
             "description": "The name of the service entitlement.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,24}$"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of the long-running operation.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
