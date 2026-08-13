@@ -810,6 +810,7 @@ model JobDefinitionProperties {
   /**
    * The list of cloud endpoints to migrate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @added(Versions.v2025_07_01)
   sourceTargetMap?: {
     @visibility(Lifecycle.Read)
