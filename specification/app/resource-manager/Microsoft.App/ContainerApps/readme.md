@@ -88,8 +88,11 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.responses["200"].schema
     reason: |
-      The referenced provisioningState properties are marked readOnly in the generated Swagger.
-      The validator does not recognize readOnly when it is a sibling of $ref.
+      The TypeSpec properties are read-only, but typespec-autorest emits readOnly as a sibling
+      of $ref. The validator discards sibling properties while resolving $ref and reports a
+      false positive. This emitter issue is tracked by
+      https://github.com/Azure/typespec-azure/issues/2042.
+      Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
 ```
 
 ### Tag: package-preview-2025-10-02-preview
