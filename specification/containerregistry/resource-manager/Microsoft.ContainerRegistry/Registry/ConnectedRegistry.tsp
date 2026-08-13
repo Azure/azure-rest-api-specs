@@ -32,7 +32,7 @@ model ConnectedRegistry
 @@added(ConnectedRegistry.identity, Versions.vLatestPreview);
 @@doc(
   ConnectedRegistry.identity,
-  "The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations."
+  "The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations. Requires authType to be ManagedIdentity."
 );
 
 @armResourceOperations

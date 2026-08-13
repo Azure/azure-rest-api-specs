@@ -6099,7 +6099,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations."
+          "description": "The user-assigned managed identity used by the on-prem connected registry to authenticate with the cloud registry for sync operations. Requires authType to be ManagedIdentity."
         }
       },
       "allOf": [
@@ -6253,7 +6253,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The user-assigned managed identity used to authenticate the connected registry with its parent during sync."
+          "description": "The user-assigned managed identity used to authenticate the connected registry with its parent during synchronization. Requires authType to be ManagedIdentity."
         }
       }
     },
@@ -9465,10 +9465,6 @@
           "type": "string",
           "format": "duration",
           "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601."
-        },
-        "tokenId": {
-          "type": "string",
-          "description": "The resource ID of the ACR token used to authenticate the connected registry to its parent during sync. Required when the resource-level identity is not set (SyncToken mode). Must not be set when identity is provided."
         },
         "authType": {
           "$ref": "#/definitions/AuthType",

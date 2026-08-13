@@ -513,7 +513,7 @@ model ConnectedRegistryUpdateParameters {
 @@added(ConnectedRegistryUpdateParameters.identity, Versions.vLatestPreview);
 @@doc(
   ConnectedRegistryUpdateParameters.identity,
-  "The user-assigned managed identity used to authenticate the connected registry with its parent during sync."
+  "The user-assigned managed identity used to authenticate the connected registry with its parent during synchronization. Requires authType to be ManagedIdentity."
 );
 
 /**
@@ -564,12 +564,6 @@ model SyncUpdateProperties {
    * The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.
    */
   messageTtl?: duration;
-
-  /**
-   * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync. Required when the resource-level identity is not set (SyncToken mode). Must not be set when identity is provided.
-   */
-  @added(Versions.vLatestPreview)
-  tokenId?: string;
 
   /**
    * The authentication type used for the connected registry to sync with its parent.
