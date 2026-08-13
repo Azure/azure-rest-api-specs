@@ -16,8 +16,7 @@ const VoiceAgentConversationRequiredPreviews = #{
 /**
  * Establishes a service-terminated WebSocket for a voice-agent session. The service applies the persisted
  * agent definition, resolves configured tools, sends the initial session configuration, and then exchanges
- * OpenAI Realtime GA JSON events with the client. Audio bytes are carried only as base64-encoded fields in
- * JSON events; raw binary WebSocket frames are not supported.
+ * OpenAI Realtime GA JSON events with the client. Audio bytes are base64-encoded in JSON event fields.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
 @tag("Voice Agent WebSocket")

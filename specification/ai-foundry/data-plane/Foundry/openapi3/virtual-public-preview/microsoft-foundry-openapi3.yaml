@@ -84582,9 +84582,8 @@ components:
         audio:
           $ref: '#/components/schemas/VoiceAudioConfig'
           description: |-
-            The persisted audio configuration, including input and output formats, voice, turn detection, noise reduction,
-            and transcription. A `session.update` may override only the mutable session-update subset; the transcription
-            model and output `voice_type` remain fixed by this definition.
+            The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
+            transcription. These values are session defaults; a client may override supported fields when connecting.
         output_modalities:
           type: array
           items:
@@ -84607,7 +84606,7 @@ components:
           description: Interim-response settings for latency and tool execution.
         avatar:
           $ref: '#/components/schemas/VoiceAvatarConfig'
-          description: Optional avatar configuration. The avatar is fixed by the persisted agent definition and cannot be overridden by `session.update`.
+          description: Optional avatar configuration. These values are session defaults and may be overridden when connecting.
         tools:
           type: array
           items:
@@ -84843,6 +84842,10 @@ components:
           type: string
           format: uri
           description: The URL for the MCP server.
+        response_scheduling:
+          $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
+          description: When the MCP invocation creates a follow-up response. Defaults to `when_idle`.
+          default: when_idle
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: An MCP tool available to a voice agent.
@@ -85015,9 +85018,9 @@ components:
           type: object
           properties:
             output:
-              $ref: '#/components/schemas/VoiceAgentSessionUpdateAudioOutputConfig'
-              description: Mutable output-audio settings. The output `voice_type` remains fixed by the persisted agent definition.
-          description: Response-specific output-audio settings. The output `voice_type` remains fixed by the persisted agent definition.
+              $ref: '#/components/schemas/VoiceAudioOutputConfig'
+              description: Output (agent speech) audio configuration.
+          description: Response-specific audio settings.
         pre_generated_assistant_message:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant'
@@ -86617,7 +86620,7 @@ components:
             - type: 'null'
       allOf:
         - $ref: '#/components/schemas/VoiceAvatarConfig'
-      description: Effective avatar settings returned by the stable voice-agent WebSocket contract.
+      description: Avatar settings accepted by the stable voice-agent WebSocket contract.
     VoiceAgentSessionIncludeOption:
       type: string
       enum:
@@ -86658,6 +86661,12 @@ components:
           items:
             $ref: '#/components/schemas/VoiceOutputModality'
           description: The output modalities enabled for the session.
+        audio:
+          $ref: '#/components/schemas/VoiceAudioConfig'
+          description: The input- and output-audio settings for the session.
+        avatar:
+          $ref: '#/components/schemas/VoiceAgentSessionAvatarConfig'
+          description: The avatar settings for the session.
         animation:
           $ref: '#/components/schemas/VoiceAgentAnimationConfig'
           description: Animation settings for the session.
@@ -86675,6 +86684,11 @@ components:
         parallel_tool_calls:
           type: boolean
           description: Whether the model may call multiple tools in parallel.
+        include:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSessionIncludeOption'
+          description: Additional fields to include in service outputs.
         metadata:
           type: object
           unevaluatedProperties:
@@ -86683,20 +86697,9 @@ components:
         interim_response:
           $ref: '#/components/schemas/VoiceAgentInterimResponse'
           description: Interim-response settings for latency and tool execution.
-        audio:
-          $ref: '#/components/schemas/VoiceAudioConfig'
-          description: The full effective input- and output-audio configuration, including the fixed transcription model and output `voice_type`.
-        avatar:
-          $ref: '#/components/schemas/VoiceAgentSessionAvatarConfig'
-          description: The effective avatar configuration fixed by the persisted agent definition.
-        include:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentSessionIncludeOption'
-          description: Additional fields included in service outputs.
         greeting:
           $ref: '#/components/schemas/VoiceGreetingConfig'
-          description: The proactive assistant greeting configured by the persisted agent definition.
+          description: A proactive assistant greeting started after session configuration.
         object:
           type: string
           enum:
@@ -86717,110 +86720,6 @@ components:
           format: int64
           description: The session expiration time as a Unix timestamp in seconds.
       description: The effective stable realtime session settings returned by the voice-agent service.
-    VoiceAgentSessionUpdateAudioConfig:
-      type: object
-      properties:
-        input:
-          $ref: '#/components/schemas/VoiceAgentSessionUpdateAudioInputConfig'
-          description: Mutable input-audio settings.
-        output:
-          $ref: '#/components/schemas/VoiceAgentSessionUpdateAudioOutputConfig'
-          description: Mutable output-audio settings. The output `voice_type` remains fixed by the persisted agent definition.
-      description: The input- and output-audio settings mutable through `session.update`.
-    VoiceAgentSessionUpdateAudioInputConfig:
-      type: object
-      properties:
-        transcription:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentSessionUpdateInputTranscription'
-            - type: 'null'
-          description: Asynchronous input-audio transcription settings. Set to null to disable transcription. The transcription model remains fixed by the persisted agent definition.
-      allOf:
-        - type: object
-          properties:
-            format:
-              $ref: '#/components/schemas/VoiceAudioFormat'
-              description: The input audio format.
-            noise_reduction:
-              anyOf:
-                - $ref: '#/components/schemas/VoiceNoiseReduction'
-                - type: 'null'
-              description: Input noise reduction. Set to null to disable.
-            turn_detection:
-              anyOf:
-                - $ref: '#/components/schemas/VoiceAgentTurnDetection'
-                - type: 'null'
-              description: Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually.
-            echo_cancellation:
-              anyOf:
-                - $ref: '#/components/schemas/VoiceAgentEchoCancellation'
-                - type: 'null'
-              description: Optional server-side echo cancellation settings.
-          description: The template for omitting properties.
-      description: Input-audio settings mutable through `session.update`.
-    VoiceAgentSessionUpdateAudioOutputConfig:
-      type: object
-      properties:
-        voice:
-          type: string
-          description: The voice name or identifier. It can be changed only before the first audio response is produced in the session.
-      allOf:
-        - type: object
-          properties:
-            format:
-              $ref: '#/components/schemas/VoiceAudioFormat'
-              description: The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.
-            voice_locale:
-              type: string
-              description: The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            speed:
-              type: number
-              format: float
-              minimum: 0.25
-              maximum: 1.5
-              description: The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.
-              default: 1
-            voice_temperature:
-              type: number
-              format: float
-              minimum: 0
-              maximum: 1
-              description: The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            custom_lexicon_url:
-              type: string
-              format: uri
-              description: The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            custom_text_normalization_url:
-              type: string
-              format: uri
-              description: The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            prefer_locales:
-              type: array
-              items:
-                type: string
-              description: Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            style:
-              type: string
-              description: The voice speaking style. Applies only when `voice_type` is `azure-standard`.
-            pitch:
-              type: string
-              description: The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            volume:
-              type: string
-              description: The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-            custom_voice_endpoint_id:
-              type: string
-              description: The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`.
-            personal_voice_model:
-              type: string
-              description: The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.
-            output_audio_timestamp_types:
-              type: array
-              items:
-                $ref: '#/components/schemas/VoiceAudioTimestampType'
-              description: Timestamp kinds to include with output audio. Applies to every `voice_type`.
-          description: The template for omitting properties.
-      description: Output-audio settings mutable through `session.update` and response-level overrides.
     VoiceAgentSessionUpdateConfig:
       type: object
       required:
@@ -86849,8 +86748,11 @@ components:
             $ref: '#/components/schemas/VoiceOutputModality'
           description: The output modalities enabled for the session.
         audio:
-          $ref: '#/components/schemas/VoiceAgentSessionUpdateAudioConfig'
-          description: The mutable input- and output-audio settings for the session.
+          $ref: '#/components/schemas/VoiceAudioConfig'
+          description: The input- and output-audio settings for the session.
+        avatar:
+          $ref: '#/components/schemas/VoiceAgentSessionAvatarConfig'
+          description: The avatar settings for the session.
         animation:
           $ref: '#/components/schemas/VoiceAgentAnimationConfig'
           description: Animation settings for the session.
@@ -86868,6 +86770,11 @@ components:
         parallel_tool_calls:
           type: boolean
           description: Whether the model may call multiple tools in parallel.
+        include:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSessionIncludeOption'
+          description: Additional fields to include in service outputs.
         metadata:
           type: object
           unevaluatedProperties:
@@ -86876,47 +86783,10 @@ components:
         interim_response:
           $ref: '#/components/schemas/VoiceAgentInterimResponse'
           description: Interim-response settings for latency and tool execution.
-      description: The mutable stable realtime session settings accepted in a `session.update` client event. Model, avatar, output `voice_type`, and transcription model remain fixed by the persisted agent definition.
-    VoiceAgentSessionUpdateInputTranscription:
-      type: object
-      properties:
-        language:
-          type: string
-          description: |-
-            The language of the input audio. Supplying the input language in
-              [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-              will improve accuracy and latency.
-        prompt:
-          type: string
-          description: |-
-            An optional text to guide the model's style or continue a previous audio
-              segment.
-              For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).
-              For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example "expect words related to technology".
-              Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions.
-        delay:
-          type: string
-          enum:
-            - minimal
-            - low
-            - medium
-            - high
-            - xhigh
-          description: |-
-            Controls how long the model waits before emitting transcription text.
-              Higher values can improve transcription accuracy at the cost of latency.
-              Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
-        custom_speech:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: Optional custom speech model configuration, keyed by locale.
-        phrase_list:
-          type: array
-          items:
-            type: string
-          description: Optional phrase hints that bias recognition toward domain terms.
-      description: Input-transcription settings mutable through `session.update`. The transcription model remains fixed by the persisted agent definition.
+        greeting:
+          $ref: '#/components/schemas/VoiceGreetingConfig'
+          description: A proactive assistant greeting started after session configuration.
+      description: The stable realtime session settings accepted in a `session.update` client event.
     VoiceAgentStaticInterimResponseConfig:
       type: object
       required:
@@ -86942,10 +86812,6 @@ components:
         type:
           type: string
           description: The tool kind.
-        response_scheduling:
-          $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
-          description: When the tool invocation creates a follow-up response. Defaults to `when_idle`.
-          default: when_idle
       discriminator:
         propertyName: type
         mapping:
@@ -87047,7 +86913,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/VoiceAgentClientEvent'
         - $ref: '#/components/schemas/VoiceAgentServerEvent'
-      description: A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are carried only as base64-encoded fields in JSON events; raw binary WebSocket frames are not supported.
+      description: A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields.
     VoiceAgentWebSocketSubprotocol:
       type: string
       enum:
@@ -87111,9 +86977,7 @@ components:
         output:
           $ref: '#/components/schemas/VoiceAudioOutputConfig'
           description: Output (agent speech) audio configuration.
-      description: |-
-        The persisted audio configuration for a voice agent. Only the session-update subset may override these defaults;
-        the transcription model and output `voice_type` remain fixed by the agent definition.
+      description: The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87314,9 +87178,7 @@ components:
           type: boolean
           description: Whether audit audio is emitted with avatar output. Defaults to false.
           default: false
-      description: |-
-        Avatar configuration for a voice agent. The avatar is fixed by the persisted agent definition and cannot be
-        overridden by `session.update`.
+      description: Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88404,6 +88266,10 @@ components:
         toolbox_version:
           type: string
           description: The immutable version of the toolbox to attach.
+        response_scheduling:
+          $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
+          description: When the toolbox invocation creates a follow-up response. Defaults to `when_idle`.
+          default: when_idle
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.

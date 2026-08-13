@@ -115,9 +115,8 @@ model VoiceAgentDefinition extends AgentDefinition {
   greeting?: VoiceGreetingConfig;
 
   @doc("""
-    The persisted audio configuration, including input and output formats, voice, turn detection, noise reduction,
-    and transcription. A `session.update` may override only the mutable session-update subset; the transcription
-    model and output `voice_type` remain fixed by this definition.
+    The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
+    transcription. These values are session defaults; a client may override supported fields when connecting.
     """)
   audio?: VoiceAudioConfig;
 
@@ -136,7 +135,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Interim-response settings for latency and tool execution.")
   interim_response?: VoiceAgentInterimResponse;
 
-  @doc("Optional avatar configuration. The avatar is fixed by the persisted agent definition and cannot be overridden by `session.update`.")
+  @doc("Optional avatar configuration. These values are session defaults and may be overridden when connecting.")
   avatar?: VoiceAvatarConfig;
 
   @doc("""
@@ -222,9 +221,6 @@ union VoiceModelType {
 model VoiceAgentTool {
   @doc("The tool kind.")
   type: string;
-
-  @doc("When the tool invocation creates a follow-up response. Defaults to `when_idle`.")
-  response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
 }
 
 @doc("A native function tool executed by the client.")
@@ -252,7 +248,7 @@ union VoiceAgentToolChoice {
 union VoiceAgentToolResponseScheduling {
   string,
 
-  @doc("Do not create a follow-up response after the MCP invocation completes.")
+  @doc("Do not create a follow-up response after the service-executed tool invocation completes.")
   silent: "silent",
 
   @doc("Create a follow-up response when the conversation is idle.")
@@ -276,6 +272,9 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
 
   @doc("The URL for the MCP server.")
   server_url?: url;
+
+  @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle`.")
+  response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
 }
 
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
@@ -311,11 +310,13 @@ model VoiceToolboxTool extends VoiceAgentTool {
 
   @doc("The immutable version of the toolbox to attach.")
   toolbox_version: string;
+
+  @doc("When the toolbox invocation creates a follow-up response. Defaults to `when_idle`.")
+  response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
 }
 
 @doc("""
-  The persisted audio configuration for a voice agent. Only the session-update subset may override these defaults;
-  the transcription model and output `voice_type` remain fixed by the agent definition.
+  The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioConfig {
@@ -795,8 +796,7 @@ model VoiceAgentAvatarScene {
 }
 
 @doc("""
-  Avatar configuration for a voice agent. The avatar is fixed by the persisted agent definition and cannot be
-  overridden by `session.update`.
+  Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAvatarConfig {
