@@ -3,17 +3,17 @@ name: "Summarize Checks"
 on:
   workflow_run:
     workflows:
-      - "Swagger SemanticValidation - Set Status"
-      - "Swagger ModelValidation - Set Status"
-      - "Swagger BreakingChange - Set Status"
       - "Breaking Change(Cross-Version) - Set Status"
-      - "Summarize PR Impact"
-      - "Swagger Avocado - Set Status"
-      - "Swagger LintDiff - Set Status"
-      - "SDK Validation Status"
-      - "TypeSpec Validation"
       - "Package Name Approval - Set Status"
       - "Package Name Approval - Validate Labels"
+      - "SDK Validation Status"
+      - "Summarize PR Impact"
+      - "Swagger Avocado - Set Status"
+      - "Swagger BreakingChange - Set Status"
+      - "Swagger LintDiff - Set Status"
+      - "Swagger ModelValidation - Set Status"
+      - "Swagger SemanticValidation - Set Status"
+      - "TypeSpec Validation"
       - "Update Labels"
     types:
       - completed
