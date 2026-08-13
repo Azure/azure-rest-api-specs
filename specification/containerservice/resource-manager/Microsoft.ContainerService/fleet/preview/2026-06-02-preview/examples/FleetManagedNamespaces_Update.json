@@ -7,7 +7,20 @@
     "resourceGroupName": "rgfleets",
     "fleetName": "fleet1",
     "managedNamespaceName": "namespace1",
-    "properties": {},
+    "properties": {
+      "propagationPolicy": {
+        "placementProfile": {
+          "defaultClusterResourcePlacement": {
+            "rolloutStrategy": {
+              "type": "External",
+              "clusterUpdateStrategy": {
+                "name": "my-staged-update-strategy"
+              }
+            }
+          }
+        }
+      }
+    },
     "tags": {
       "tag2": "tagValue2"
     }
@@ -89,6 +102,12 @@
                       "effect": "NoSchedule"
                     }
                   ]
+                },
+                "rolloutStrategy": {
+                  "type": "External",
+                  "clusterUpdateStrategy": {
+                    "name": "my-staged-update-strategy"
+                  }
                 }
               }
             }
