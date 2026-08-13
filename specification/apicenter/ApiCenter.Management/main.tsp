@@ -141,7 +141,9 @@ enum Versions {
  * @template TParentName Optional. The name of the parent resource
  * @template TParentFriendlyName Optional. The friendly name of the parent resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @get
 @autoRoute
@@ -164,7 +166,9 @@ op ArmResourceListByParent<
  * @template TResource the resource being patched
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @autoRoute
 @doc("Get a {name}", TResource)
@@ -182,7 +186,9 @@ op ArmResourceRead<
  * @template TResource the resource being patched
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @autoRoute
 @doc("Create a {name}", TResource)
