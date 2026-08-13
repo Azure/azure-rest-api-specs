@@ -358,6 +358,68 @@ describe("update labels", () => {
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
     },
   );
+
+  describe("anyRequiredChecksFailing removes ARMReview label", () => {
+    const baseImpactAssessment = {
+      suppressionReviewRequired: false,
+      rpaasChange: false,
+      newRP: false,
+      rpaasRPMissing: false,
+      rpaasRpNotInPrivateRepo: false,
+      resourceManagerRequired: true,
+      dataPlaneRequired: false,
+      typeSpecChanged: true,
+      isNewApiVersion: false,
+      isDraft: false,
+      targetBranch: "main",
+    };
+
+    it("should remove ARMReview label when required checks are failing and ARMReview is present", () => {
+      const existingLabels = ["ARMReview", "WaitForARMFeedback", "resource-manager", "TypeSpec"];
+      const labelContext = updateLabels(existingLabels, baseImpactAssessment, true);
+
+      expect(labelContext.toRemove.has("ARMReview")).toBe(true);
+      expect(labelContext.toAdd.has("ARMReview")).toBe(false);
+      // WaitForARMFeedback should also be removed since ARMReview is being removed
+      expect(labelContext.toRemove.has("WaitForARMFeedback")).toBe(true);
+      // WaitForARMFeedback should NOT be re-added
+      expect(labelContext.toAdd.has("WaitForARMFeedback")).toBe(false);
+    });
+
+    it("should not add ARMReview label when required checks are failing and ARMReview is not present", () => {
+      const existingLabels = ["resource-manager", "TypeSpec"];
+      const labelContext = updateLabels(existingLabels, baseImpactAssessment, true);
+
+      expect(labelContext.toAdd.has("ARMReview")).toBe(false);
+      expect(labelContext.toRemove.has("ARMReview")).toBe(false);
+      // WaitForARMFeedback should NOT be added since ARMReview is not being added
+      expect(labelContext.toAdd.has("WaitForARMFeedback")).toBe(false);
+    });
+
+    it("should add ARMReview label normally when required checks are not failing", () => {
+      const existingLabels = ["resource-manager", "TypeSpec"];
+      const labelContext = updateLabels(existingLabels, baseImpactAssessment, false);
+
+      expect(labelContext.toAdd.has("ARMReview")).toBe(true);
+      expect(labelContext.toAdd.has("WaitForARMFeedback")).toBe(true);
+    });
+
+    it("should remove ARMSignedOff when required checks are failing and ARMReview + ARMSignedOff are present", () => {
+      const existingLabels = [
+        "ARMReview",
+        "ARMSignedOff",
+        "resource-manager",
+        "TypeSpec",
+        "WaitForARMFeedback",
+      ];
+      const labelContext = updateLabels(existingLabels, baseImpactAssessment, true);
+
+      expect(labelContext.toRemove.has("ARMReview")).toBe(true);
+      expect(labelContext.toRemove.has("ARMSignedOff")).toBe(true);
+      expect(labelContext.toAdd.has("ARMReview")).toBe(false);
+      expect(labelContext.toAdd.has("ARMSignedOff")).toBe(false);
+    });
+  });
 });
 
 describe("ARM review process labelling", () => {
