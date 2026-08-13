@@ -225,10 +225,6 @@ model FleetMemberCredentialRequest {
   @doc("The names of the Fleet members for which credentials are requested. When omitted, all applicable Fleet members are selected.")
   memberNames?: string[];
 
-  @minValue(1)
-  @doc("The maximum number of credential results to return. The service may return fewer results.")
-  maxPageSize?: int32;
-
   @secret
   @doc("The opaque continuation token from a previous request.")
   continuationToken?: string;
