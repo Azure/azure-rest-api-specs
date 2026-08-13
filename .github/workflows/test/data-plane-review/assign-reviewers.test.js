@@ -11,12 +11,12 @@ vi.mock("js-yaml", () => ({
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import assignReviewers, {
-  loadReviewerPool,
+  REVIEWER_TEAM,
   SIGNOFF_LABEL,
   TRIGGER_LABEL,
 } from "../../src/data-plane-review/assign-reviewers.js";
 
-/** Mock protected-labels config (as yaml.load would return). The pool = sign-off list. */
+/** Mock protected-labels config (as yaml.load would return). Gates the sign-off label. */
 const protectedLabelsConfig = {
   "APIStewardshipBoard-SignedOff": ["username1", "username2"],
 };
@@ -31,8 +31,7 @@ function setupConfigMock() {
  * @param {string} opts.action - "labeled" | "unlabeled"
  * @param {string} opts.labelName
  * @param {string} [opts.author]
- * @param {{ login: string }[]} [opts.requestedReviewers]
- * @param {{ login: string }[]} [opts.assignees]
+ * @param {{ slug: string }[]} [opts.requestedTeams] - teams currently requested on the PR
  * @param {{ name: string }[]} [opts.labels] - labels currently on the PR
  * @param {string} [opts.sender] - login of the actor that triggered the event
  */
@@ -40,8 +39,7 @@ function createPayload({
   action,
   labelName,
   author = "some-author",
-  requestedReviewers = [],
-  assignees = [],
+  requestedTeams = [],
   labels = [],
   sender = "some-actor",
 }) {
@@ -54,8 +52,7 @@ function createPayload({
       number: 42,
       head: { sha: "abc123" },
       user: { login: author },
-      requested_reviewers: requestedReviewers,
-      assignees,
+      requested_teams: requestedTeams,
       labels,
     },
   };
@@ -84,69 +81,18 @@ describe("assign-reviewers", () => {
     context.eventName = "pull_request_target";
     core = createMockCore();
 
-    // Methods not present on the shared mock.
+    // Method not present on the shared mock.
     /** @type {any} */ (github.rest.pulls).requestReviewers = vi.fn().mockResolvedValue({});
-    /** @type {any} */ (github.rest.pulls).removeRequestedReviewers = vi.fn().mockResolvedValue({});
-    /** @type {any} */ (github.rest.issues).addAssignees = vi.fn().mockResolvedValue({});
-    /** @type {any} */ (github.rest.issues).removeAssignees = vi.fn().mockResolvedValue({});
-    /** @type {any} */ (github.rest.pulls).get = vi
-      .fn()
-      .mockResolvedValue({ data: { requested_reviewers: [], assignees: [] } });
-
-    // The dispatcher re-reads the current labels before it assigns or removes the pool;
-    // default to the trigger label being present so assign-path tests exercise assignment.
-    /** @type {any} */ (github.rest.issues).listLabelsOnIssue = vi
-      .fn()
-      .mockResolvedValue({ data: [{ name: TRIGGER_LABEL }] });
   });
 
-  describe("loadReviewerPool", () => {
-    it("returns a deduplicated, trimmed list of logins", async () => {
-      /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue({
-        "APIStewardshipBoard-SignedOff": ["username1", " username1 ", "username2", "", 123],
-      });
-      const pool = await loadReviewerPool();
-      expect(pool).toEqual(["username1", "username2"]);
-    });
-
-    it("flattens a plane-aware entry", async () => {
-      /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue({
-        "APIStewardshipBoard-SignedOff": {
-          "management-plane": ["mgmt-reviewer"],
-          "data-plane": ["username1", "username2"],
-        },
-      });
-      const pool = await loadReviewerPool();
-      expect(pool).toEqual(["mgmt-reviewer", "username1", "username2"]);
-    });
-
-    it("returns [] when the pool label is absent", async () => {
-      /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue({});
-      expect(await loadReviewerPool()).toEqual([]);
-    });
-  });
-
-  it("ignores labels other than the trigger label", async () => {
+  it("ignores labels other than the trigger or sign-off label", async () => {
     context.payload = createPayload({ action: "labeled", labelName: "some-other-label" });
     await assignReviewers(args());
 
     expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
-    expect(/** @type {any} */ (github.rest.issues).addAssignees).not.toHaveBeenCalled();
   });
 
-  it("warns and stops when the reviewer pool is empty", async () => {
-    /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue({});
-    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
-
-    await assignReviewers(args());
-
-    expect(core.warning).toHaveBeenCalledWith(
-      expect.stringContaining("APIStewardshipBoard-SignedOff"),
-    );
-    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
-  });
-
-  it("requests and assigns the full pool on labeled", async () => {
+  it("requests the reviewer team on labeled", async () => {
     context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
     await assignReviewers(args());
 
@@ -155,133 +101,22 @@ describe("assign-reviewers", () => {
         owner: "owner",
         repo: "repo",
         pull_number: 42,
-        reviewers: ["username1", "username2"],
+        team_reviewers: [REVIEWER_TEAM],
       }),
     );
-    expect(/** @type {any} */ (github.rest.issues).addAssignees).toHaveBeenCalledWith(
-      expect.objectContaining({
-        issue_number: 42,
-        assignees: ["username1", "username2"],
-      }),
-    );
-    // The assignment/review-request is the notification; no bot comment is posted.
+    // The team request is the notification; no bot comment is posted.
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("excludes the PR author from reviewers and assignees", async () => {
+  it("does not re-request the team when it is already a requested reviewer", async () => {
     context.payload = createPayload({
       action: "labeled",
       labelName: TRIGGER_LABEL,
-      author: "Username1", // different casing on purpose
+      requestedTeams: [{ slug: REVIEWER_TEAM }],
     });
-    await assignReviewers(args());
-
-    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).toHaveBeenCalledWith(
-      expect.objectContaining({ reviewers: ["username2"] }),
-    );
-    expect(/** @type {any} */ (github.rest.issues).addAssignees).toHaveBeenCalledWith(
-      expect.objectContaining({ assignees: ["username2"] }),
-    );
-  });
-
-  it("does not re-request reviewers already requested", async () => {
-    context.payload = createPayload({
-      action: "labeled",
-      labelName: TRIGGER_LABEL,
-      requestedReviewers: [{ login: "username1" }],
-    });
-    await assignReviewers(args());
-
-    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).toHaveBeenCalledWith(
-      expect.objectContaining({ reviewers: ["username2"] }),
-    );
-  });
-
-  it("does not fail the run when requestReviewers throws (falls back to assignment)", async () => {
-    /** @type {any} */ (github.rest.pulls).requestReviewers = vi
-      .fn()
-      .mockRejectedValue(new Error("Review cannot be requested from pull request author."));
-    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
-
-    await expect(assignReviewers(args())).resolves.toBeUndefined();
-    expect(/** @type {any} */ (github.rest.issues).addAssignees).toHaveBeenCalled();
-    expect(core.warning).toHaveBeenCalled();
-  });
-
-  it("removes only pool members on unlabeled", async () => {
-    /** @type {any} */ (github.rest.issues).listLabelsOnIssue = vi
-      .fn()
-      .mockResolvedValue({ data: [] });
-    /** @type {any} */ (github.rest.pulls).get = vi.fn().mockResolvedValue({
-      data: {
-        requested_reviewers: [{ login: "username1" }, { login: "outside-reviewer" }],
-        assignees: [{ login: "username2" }, { login: "manual-assignee" }],
-      },
-    });
-    context.payload = createPayload({ action: "unlabeled", labelName: TRIGGER_LABEL });
-
-    await assignReviewers(args());
-
-    expect(/** @type {any} */ (github.rest.pulls).removeRequestedReviewers).toHaveBeenCalledWith(
-      expect.objectContaining({ reviewers: ["username1"] }),
-    );
-    expect(/** @type {any} */ (github.rest.issues).removeAssignees).toHaveBeenCalledWith(
-      expect.objectContaining({ assignees: ["username2"] }),
-    );
-  });
-
-  it("fails the run when adding assignees genuinely errors", async () => {
-    /** @type {any} */ (github.rest.issues).addAssignees = vi
-      .fn()
-      .mockRejectedValue(new Error("API is down"));
-    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
-
-    await expect(assignReviewers(args())).rejects.toThrow("API is down");
-    expect(core.error).toHaveBeenCalled();
-  });
-
-  it("fails the run when cleanup removal errors so it can be retried", async () => {
-    /** @type {any} */ (github.rest.issues).listLabelsOnIssue = vi
-      .fn()
-      .mockResolvedValue({ data: [] });
-    /** @type {any} */ (github.rest.pulls).get = vi.fn().mockResolvedValue({
-      data: {
-        requested_reviewers: [{ login: "username1" }],
-        assignees: [{ login: "username2" }],
-      },
-    });
-    /** @type {any} */ (github.rest.issues).removeAssignees = vi
-      .fn()
-      .mockRejectedValue(new Error("API is down"));
-    context.payload = createPayload({ action: "unlabeled", labelName: TRIGGER_LABEL });
-
-    await expect(assignReviewers(args())).rejects.toThrow(/clean up/i);
-  });
-
-  it("reconciles to the current label set, removing the pool when a labeled event is stale", async () => {
-    // A labeled event arrives, but the trigger label has since been removed.
-    /** @type {any} */ (github.rest.issues).listLabelsOnIssue = vi
-      .fn()
-      .mockResolvedValue({ data: [] });
-    /** @type {any} */ (github.rest.pulls).get = vi.fn().mockResolvedValue({
-      data: { requested_reviewers: [{ login: "username1" }], assignees: [] },
-    });
-    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
-
     await assignReviewers(args());
 
     expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
-    expect(/** @type {any} */ (github.rest.pulls).removeRequestedReviewers).toHaveBeenCalled();
-  });
-
-  it("reconciles to the current label set, assigning when an unlabeled event is stale", async () => {
-    // An unlabeled event arrives, but the trigger label is present again.
-    context.payload = createPayload({ action: "unlabeled", labelName: TRIGGER_LABEL });
-
-    await assignReviewers(args());
-
-    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).toHaveBeenCalled();
-    expect(/** @type {any} */ (github.rest.pulls).removeRequestedReviewers).not.toHaveBeenCalled();
   });
 
   describe("sign-off", () => {
@@ -320,7 +155,7 @@ describe("assign-reviewers", () => {
       expect(readFile).toHaveBeenCalledTimes(1);
     });
 
-    it("does not unassign reviewers when signing off (lingering reviewer is acceptable)", async () => {
+    it("does not request the team when signing off", async () => {
       context.payload = createPayload({
         action: "labeled",
         labelName: SIGNOFF_LABEL,
@@ -330,10 +165,7 @@ describe("assign-reviewers", () => {
 
       await assignReviewers(args());
 
-      expect(
-        /** @type {any} */ (github.rest.pulls).removeRequestedReviewers,
-      ).not.toHaveBeenCalled();
-      expect(/** @type {any} */ (github.rest.issues).removeAssignees).not.toHaveBeenCalled();
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
     });
 
     it("is a no-op on sign-off when the review-request label is absent", async () => {
@@ -376,19 +208,6 @@ describe("assign-reviewers", () => {
       expect(/** @type {any} */ (github.rest.issues).removeLabel).toHaveBeenCalledWith(
         expect.objectContaining({ name: TRIGGER_LABEL }),
       );
-    });
-
-    it("ignores the sign-off label being removed (unlabeled)", async () => {
-      context.payload = createPayload({
-        action: "unlabeled",
-        labelName: SIGNOFF_LABEL,
-        labels: [{ name: TRIGGER_LABEL }],
-      });
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.issues).removeLabel).not.toHaveBeenCalled();
-      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
     });
 
     it("does not fail when the label was already removed (404)", async () => {
