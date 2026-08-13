@@ -63,13 +63,6 @@ using Commvault.ContentStore;
 // [SUFFIX003] The "Options" suffix is reserved for client configuration types.
 @@clientName(BackupOptions, "BackupConfig", "csharp");
 
-// [SUFFIX006] "Update" is an avoid-suffix; PATCH-body property bags use "Patch".
-@@clientName(
-  CloudAccountUpdateProperties,
-  "CloudAccountPatchProperties",
-  "csharp"
-);
-
 // [BOOL001] Boolean properties require an Is/Can/Has/Should prefix (and corrected "Snapshot" casing).
 @@clientName(
   BackupOptions.backupCopyImmediately,
