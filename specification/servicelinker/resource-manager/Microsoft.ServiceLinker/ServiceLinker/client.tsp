@@ -275,6 +275,11 @@ op dryrunResourcesListDryrun(
 @@clientName(AuthMode, "LinkerAuthMode", "csharp");
 @@clientName(Microsoft.ServiceLinker.AuthType, "LinkerAuthType", "csharp");
 @@clientName(
+  AzureAppConfigProperties.connectWithKubernetesExtension,
+  "IsConnectedWithKubernetesExtension",
+  "csharp"
+);
+@@clientName(
   AzureKeyVaultProperties.connectAsKubernetesCsiDriver,
   "DoesConnectAsKubernetesCsiDriver",
   "csharp"
@@ -288,6 +293,7 @@ op dryrunResourcesListDryrun(
 @@clientName(ClientType, "LinkerClientType", "csharp");
 @@clientName(ConfigurationInfo, "LinkerConfigurationInfo", "csharp");
 @@clientName(ConfigurationName, "LinkerConfigurationName", "csharp");
+@@clientName(ConfigurationName.required, "IsRequired", "csharp");
 @@clientName(ConfigurationNameItem, "LinkerConfigurationNameItem", "csharp");
 @@clientName(ConfigurationResult, "SourceConfigurationResult", "csharp");
 @@clientName(
@@ -304,6 +310,7 @@ op dryrunResourcesListDryrun(
 @@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
 @@clientName(DeleteOrUpdateBehavior, "LinkerDeleteOrUpdateBehavior", "csharp");
 @@clientName(DryrunParameters, "DryrunContent", "csharp");
+@@clientName(DryrunResource, "LinkerDryrun", "csharp");
 @@clientName(
   EasyAuthMicrosoftEntraIDAuthInfo,
   "EasyAuthMicrosoftEntraIdAuthInfo",
@@ -314,7 +321,7 @@ op dryrunResourcesListDryrun(
 @@clientName(Linker, "LinkerResources", "csharp");
 @@clientName(LinkerPatch, "LinkerResourcePatch", "csharp");
 @@clientName(LinkerResources, "ConnectorResources", "csharp");
-@@clientName(Linkers, "Dryruns", "csharp");
+@@clientName(Linkers, "LinkerDryruns", "csharp");
 @@clientName(PublicNetworkSolution, "LinkerPublicNetworkSolution", "csharp");
 @@clientName(SecretInfoBase, "SecretBaseInfo", "csharp");
 @@clientName(SecretSourceType, "LinkerSecretSourceType", "csharp");
@@ -336,6 +343,14 @@ op dryrunResourcesListDryrun(
 @@clientName(VNetSolution, "VnetSolution", "csharp");
 @@clientName(VNetSolution.type, "SolutionType", "csharp");
 @@clientName(VNetSolutionType, "VnetSolutionType", "csharp");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@clientOption(
+  LinkerResources.get,
+  "resource-name",
+  "LinkerConnector",
+  "csharp"
+);
 
 @@alternateType(AzureResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(
