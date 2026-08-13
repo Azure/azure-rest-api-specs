@@ -31,8 +31,7 @@ op getApplicationCustomization is Azure.Batch.ReadOperation<
   Azure.Batch.BatchApplication
 >;
 
-@@override(
-  Azure.Batch.Applications.getApplication,
+@@override(Azure.Batch.Applications.getApplication,
   getApplicationCustomization,
   "java"
 );
@@ -57,8 +56,7 @@ op listApplicationsCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchApplicationListResult
 >;
 
-@@override(
-  Azure.Batch.Applications.listApplications,
+@@override(Azure.Batch.Applications.listApplications,
   listApplicationsCustomization,
   "java"
 );
@@ -83,8 +81,7 @@ op listPoolUsageMetricsCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchPoolListUsageMetricsResult
 >;
 
-@@override(
-  Azure.Batch.Pools.listPoolUsageMetrics,
+@@override(Azure.Batch.Pools.listPoolUsageMetrics,
   listPoolUsageMetricsCustomization,
   "java"
 );
@@ -258,8 +255,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Pools.disablePoolAutoScale,
+@@override(Azure.Batch.Pools.disablePoolAutoScale,
   disablePoolAutoScaleCustomization,
   "java"
 );
@@ -267,7 +263,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 // Enable Pool Autoscale Operation
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Optional parameters for Enable Pool AutoScale operation.")
-model BatchPoolEnableAutoScaleOptions {
+model BatchPoolAutoScaleEnableOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
 
@@ -280,15 +276,14 @@ op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
     @doc("Optional parameters for Enable Pool AutoScale operation.")
     @bodyIgnore
-    options?: BatchPoolEnableAutoScaleOptions;
+    options?: BatchPoolAutoScaleEnableOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
   },
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Pools.enablePoolAutoScale,
+@@override(Azure.Batch.Pools.enablePoolAutoScale,
   enablePoolAutoScaleCustomization,
   "java"
 );
@@ -314,8 +309,7 @@ op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperation<
   Azure.Batch.AutoScaleRun & Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Pools.evaluatePoolAutoScale,
+@@override(Azure.Batch.Pools.evaluatePoolAutoScale,
   evaluatePoolAutoScaleCustomization,
   "java"
 );
@@ -368,8 +362,7 @@ op stopPoolResizeCustomization is Azure.Batch.PostOperation<
   Azure.Batch.AcceptedProcessingResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Pools.stopPoolResize,
+@@override(Azure.Batch.Pools.stopPoolResize,
   stopPoolResizeCustomization,
   "java"
 );
@@ -395,8 +388,7 @@ op replacePoolPropertiesCustomization is Azure.Batch.PostOperation<
   Azure.Batch.NoContentSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Pools.replacePoolProperties,
+@@override(Azure.Batch.Pools.replacePoolProperties,
   replacePoolPropertiesCustomization,
   "java"
 );
@@ -446,8 +438,7 @@ op listSupportedImagesCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchAccountListSupportedImagesResult
 >;
 
-@@override(
-  Azure.Batch.Pools.listSupportedImages,
+@@override(Azure.Batch.Pools.listSupportedImages,
   listSupportedImagesCustomization,
   "java"
 );
@@ -472,8 +463,7 @@ op listPoolNodeCountsCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchPoolNodeCountsListResult
 >;
 
-@@override(
-  Azure.Batch.Pools.listPoolNodeCounts,
+@@override(Azure.Batch.Pools.listPoolNodeCounts,
   listPoolNodeCountsCustomization,
   "java"
 );
@@ -723,8 +713,7 @@ op listJobsFromScheduleCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchJobListResult
 >;
 
-@@override(
-  Azure.Batch.Jobs.listJobsFromSchedule,
+@@override(Azure.Batch.Jobs.listJobsFromSchedule,
   listJobsFromScheduleCustomization,
   "java"
 );
@@ -751,8 +740,7 @@ op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperat
   Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult
 >;
 
-@@override(
-  Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus,
+@@override(Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus,
   listJobPreparationAndReleaseTaskStatusCustomization,
   "java"
 );
@@ -778,8 +766,7 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
   Azure.Batch.BatchTaskCountsResult
 >;
 
-@@override(
-  Azure.Batch.Jobs.getJobTaskCounts,
+@@override(Azure.Batch.Jobs.getJobTaskCounts,
   getJobTaskCountsCustomization,
   "java"
 );
@@ -809,8 +796,7 @@ op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditi
   Azure.Batch.JobScheduleDoesNotExistResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.jobScheduleExists,
+@@override(Azure.Batch.JobSchedules.jobScheduleExists,
   jobScheduleExistsCustomization,
   "java"
 );
@@ -839,8 +825,7 @@ op deleteJobScheduleCustomization is Azure.Batch.DeleteOperation<
   Azure.Batch.DeleteResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.deleteJobSchedule,
+@@override(Azure.Batch.JobSchedules.deleteJobSchedule,
   deleteJobScheduleCustomization,
   "java"
 );
@@ -869,8 +854,7 @@ op getJobScheduleCustomization is Azure.Batch.ReadOperation<
   Azure.Batch.BatchJobSchedule
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.getJobSchedule,
+@@override(Azure.Batch.JobSchedules.getJobSchedule,
   getJobScheduleCustomization,
   "java"
 );
@@ -898,8 +882,7 @@ op updateJobScheduleCustomization is Azure.Batch.UpdateOperation<
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.updateJobSchedule,
+@@override(Azure.Batch.JobSchedules.updateJobSchedule,
   updateJobScheduleCustomization,
   "java"
 );
@@ -927,8 +910,7 @@ op replaceJobScheduleCustomization is Azure.Batch.ReplaceOperation<
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.replaceJobSchedule,
+@@override(Azure.Batch.JobSchedules.replaceJobSchedule,
   replaceJobScheduleCustomization,
   "java"
 );
@@ -956,8 +938,7 @@ op disableJobScheduleCustomization is Azure.Batch.PostOperation<
   Azure.Batch.NoContentSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.disableJobSchedule,
+@@override(Azure.Batch.JobSchedules.disableJobSchedule,
   disableJobScheduleCustomization,
   "java"
 );
@@ -985,8 +966,7 @@ op enableJobScheduleCustomization is Azure.Batch.PostOperation<
   Azure.Batch.NoContentSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.enableJobSchedule,
+@@override(Azure.Batch.JobSchedules.enableJobSchedule,
   enableJobScheduleCustomization,
   "java"
 );
@@ -1015,8 +995,7 @@ op terminateJobScheduleCustomization is Azure.Batch.PostOperation<
   Azure.Batch.AcceptedProcessingResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.terminateJobSchedule,
+@@override(Azure.Batch.JobSchedules.terminateJobSchedule,
   terminateJobScheduleCustomization,
   "java"
 );
@@ -1042,8 +1021,7 @@ op createJobScheduleCustomization is Azure.Batch.CreateOperation<
   void
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.createJobSchedule,
+@@override(Azure.Batch.JobSchedules.createJobSchedule,
   createJobScheduleCustomization,
   "java"
 );
@@ -1068,8 +1046,7 @@ op listJobSchedulesCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchJobScheduleListResult
 >;
 
-@@override(
-  Azure.Batch.JobSchedules.listJobSchedules,
+@@override(Azure.Batch.JobSchedules.listJobSchedules,
   listJobSchedulesCustomization,
   "java"
 );
@@ -1142,8 +1119,7 @@ op createTaskCollectionCustomization is Azure.Batch.PostOperation<
   Azure.Batch.BatchCreateTaskCollectionResult
 >;
 
-@@override(
-  Azure.Batch.Tasks.createTaskCollection,
+@@override(Azure.Batch.Tasks.createTaskCollection,
   createTaskCollectionCustomization,
   "java"
 );
@@ -1297,8 +1273,7 @@ op reactivateTaskCustomization is Azure.Batch.PostOperation<
   NoContentResponse & Azure.Batch.DataServiceResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Tasks.reactivateTask,
+@@override(Azure.Batch.Tasks.reactivateTask,
   reactivateTaskCustomization,
   "java"
 );
@@ -1325,8 +1300,7 @@ op deleteTaskFileCustomization is Azure.Batch.DeleteOperation<
   Azure.Batch.DeleteTaskFileResponse
 >;
 
-@@override(
-  Azure.Batch.Tasks.deleteTaskFile,
+@@override(Azure.Batch.Tasks.deleteTaskFile,
   deleteTaskFileCustomization,
   "java"
 );
@@ -1378,8 +1352,7 @@ op getTaskFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
   {}
 >;
 
-@@override(
-  Azure.Batch.Tasks.getTaskFileProperties,
+@@override(Azure.Batch.Tasks.getTaskFileProperties,
   getTaskFilePropertiesCustomization,
   "java"
 );
@@ -1429,8 +1402,7 @@ op createNodeUserCustomization is Azure.Batch.CreateOperation<
   void
 >;
 
-@@override(
-  Azure.Batch.Nodes.createNodeUser,
+@@override(Azure.Batch.Nodes.createNodeUser,
   createNodeUserCustomization,
   "java"
 );
@@ -1456,8 +1428,7 @@ op deleteNodeUserCustomization is Azure.Batch.DeleteOperation<
   Azure.Batch.DeleteNodeUserResponse
 >;
 
-@@override(
-  Azure.Batch.Nodes.deleteNodeUser,
+@@override(Azure.Batch.Nodes.deleteNodeUser,
   deleteNodeUserCustomization,
   "java"
 );
@@ -1483,8 +1454,7 @@ op replaceNodeUserCustomization is Azure.Batch.ReplaceOperation<
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Nodes.replaceNodeUser,
+@@override(Azure.Batch.Nodes.replaceNodeUser,
   replaceNodeUserCustomization,
   "java"
 );
@@ -1582,8 +1552,7 @@ op deallocateNodeCustomization is Azure.Batch.PostOperation<
   Azure.Batch.AcceptedProcessingResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Nodes.deallocateNode,
+@@override(Azure.Batch.Nodes.deallocateNode,
   deallocateNodeCustomization,
   "java"
 );
@@ -1634,8 +1603,7 @@ op disableNodeSchedulingCustomization is Azure.Batch.PostOperation<
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Nodes.disableNodeScheduling,
+@@override(Azure.Batch.Nodes.disableNodeScheduling,
   disableNodeSchedulingCustomization,
   "java"
 );
@@ -1661,8 +1629,7 @@ op enableNodeSchedulingCustomization is Azure.Batch.PostOperation<
   Azure.Batch.RequestSuccessResponseHeaders
 >;
 
-@@override(
-  Azure.Batch.Nodes.enableNodeScheduling,
+@@override(Azure.Batch.Nodes.enableNodeScheduling,
   enableNodeSchedulingCustomization,
   "java"
 );
@@ -1688,8 +1655,7 @@ op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperation<
   Azure.Batch.BatchNodeRemoteLoginSettings
 >;
 
-@@override(
-  Azure.Batch.Nodes.getNodeRemoteLoginSettings,
+@@override(Azure.Batch.Nodes.getNodeRemoteLoginSettings,
   getNodeRemoteLoginSettingsCustomization,
   "java"
 );
@@ -1715,8 +1681,7 @@ op uploadNodeLogsCustomization is Azure.Batch.PostOperation<
   Azure.Batch.UploadBatchServiceLogsResult
 >;
 
-@@override(
-  Azure.Batch.Nodes.uploadNodeLogs,
+@@override(Azure.Batch.Nodes.uploadNodeLogs,
   uploadNodeLogsCustomization,
   "java"
 );
@@ -1767,8 +1732,7 @@ op getNodeExtensionCustomization is Azure.Batch.ReadOperation<
   Azure.Batch.BatchNodeVMExtension
 >;
 
-@@override(
-  Azure.Batch.Nodes.getNodeExtension,
+@@override(Azure.Batch.Nodes.getNodeExtension,
   getNodeExtensionCustomization,
   "java"
 );
@@ -1795,8 +1759,7 @@ op listNodeExtensionsCustomization is Azure.Batch.ListOperation<
   Azure.Batch.BatchNodeVMExtensionListResult
 >;
 
-@@override(
-  Azure.Batch.Nodes.listNodeExtensions,
+@@override(Azure.Batch.Nodes.listNodeExtensions,
   listNodeExtensionsCustomization,
   "java"
 );
@@ -1823,8 +1786,7 @@ op deleteNodeFileCustomization is Azure.Batch.DeleteOperation<
   Azure.Batch.DeleteNodeFileResponse
 >;
 
-@@override(
-  Azure.Batch.Nodes.deleteNodeFile,
+@@override(Azure.Batch.Nodes.deleteNodeFile,
   deleteNodeFileCustomization,
   "java"
 );
@@ -1876,8 +1838,7 @@ op getNodeFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
   {}
 >;
 
-@@override(
-  Azure.Batch.Nodes.getNodeFileProperties,
+@@override(Azure.Batch.Nodes.getNodeFileProperties,
   getNodeFilePropertiesCustomization,
   "java"
 );
@@ -1909,170 +1870,143 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 // Client Name Overrides
 
 // Rename Parameter models to avoid conflicts with Options bag names
-@@clientName(
-  Azure.Batch.BatchJobScheduleUpdateOptions,
+@@clientName(Azure.Batch.BatchJobScheduleUpdateOptions,
   "BatchJobScheduleUpdateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchJobScheduleCreateOptions,
+@@clientName(Azure.Batch.BatchJobScheduleCreateOptions,
   "BatchJobScheduleCreateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchJobCreateOptions,
+@@clientName(Azure.Batch.BatchJobCreateOptions,
   "BatchJobCreateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchJobUpdateOptions,
+@@clientName(Azure.Batch.BatchJobUpdateOptions,
   "BatchJobUpdateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchJobDisableOptions,
+@@clientName(Azure.Batch.BatchJobDisableOptions,
   "BatchJobDisableParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchJobTerminateOptions,
+@@clientName(Azure.Batch.BatchJobTerminateOptions,
   "BatchJobTerminateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchPoolCreateOptions,
+@@clientName(Azure.Batch.BatchPoolCreateOptions,
   "BatchPoolCreateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchPoolReplaceOptions,
+@@clientName(Azure.Batch.ContainerType, "BatchContainerType", "java");
+@@clientName(Azure.Batch.BatchPoolReplaceOptions,
   "BatchPoolReplaceParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchPoolUpdateOptions,
+@@clientName(Azure.Batch.BatchPoolUpdateOptions,
   "BatchPoolUpdateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchPoolEnableAutoScaleOptions,
-  "BatchPoolEnableAutoScaleParameters",
+@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
+  "BatchPoolAutoScaleEnableParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
+@@clientName(Azure.Batch.VMExtension, "VirtualMachineExtension", "java");
+@@clientName(Azure.Batch.VMExtensionInstanceView,
+  "VirtualMachineExtensionInstanceView",
+  "java"
+);
+@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
   "BatchPoolEvaluateAutoScaleParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchPoolResizeOptions,
+@@clientName(Azure.Batch.BatchPoolResizeOptions,
   "BatchPoolResizeParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeRemoveOptions,
+@@clientName(Azure.Batch.BatchNodeRemoveOptions,
   "BatchNodeRemoveParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeDeallocateOptions,
+@@clientName(Azure.Batch.BatchNodeDeallocateOptions,
   "BatchNodeDeallocateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchTaskCreateOptions,
+@@clientName(Azure.Batch.BatchTaskCreateOptions,
   "BatchTaskCreateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeUserCreateOptions,
+@@clientName(Azure.Batch.BatchNodeUserCreateOptions,
   "BatchNodeUserCreateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeUserUpdateOptions,
+@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
   "BatchNodeUserUpdateParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeRebootOptions,
+@@clientName(Azure.Batch.BatchNodeRebootOptions,
   "BatchNodeRebootParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeReimageOptions,
+@@clientName(Azure.Batch.BatchNodeReimageOptions,
   "BatchNodeReimageParameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.BatchNodeDisableSchedulingOptions,
-  "BatchNodeDisableSchedulingParameters",
+@@clientName(Azure.Batch.BatchNodeDisableSchedulingOptions,
+  "BatchNodeSchedulingDisableParameters ",
   "java"
 );
-@@clientName(
-  Azure.Batch.UploadBatchServiceLogsOptions,
+@@clientName(Azure.Batch.UploadBatchServiceLogsOptions,
   "UploadBatchServiceLogsParameters",
   "java"
 );
 
 // Rename options to parameters in Java to avoid having two 'options'
-@@clientName(
-  Azure.Batch.EnablePoolAutoscaleRequiredParameters.enableAutoScaleOptions,
+@@clientName(Azure.Batch.EnablePoolAutoscaleRequiredParameters.enableAutoScaleOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.EvaluatePoolAutoScaleRequiredParameters.evaluateAutoScaleOptions,
+@@clientName(Azure.Batch.EvaluatePoolAutoScaleRequiredParameters.evaluateAutoScaleOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.ResizePoolRequiredParameters.resizeOptions,
+@@clientName(Azure.Batch.ResizePoolRequiredParameters.resizeOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.RemoveNodesRequiredParameters.removeOptions,
+@@clientName(Azure.Batch.RemoveNodesRequiredParameters.removeOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.DisableJobRequiredParameters.disableOptions,
+@@clientName(Azure.Batch.DisableJobRequiredParameters.disableOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.ReplaceNodeUserRequiredParameters.updateOptions,
+@@clientName(Azure.Batch.ReplaceNodeUserRequiredParameters.updateOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.UploadNodeLogsRequiredParameters.uploadOptions,
+@@clientName(Azure.Batch.UploadNodeLogsRequiredParameters.uploadOptions,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.TerminateJobOptionalParameters.options,
+@@clientName(Azure.Batch.TerminateJobOptionalParameters.options,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.RebootNodeOptionalParameters.options,
+@@clientName(Azure.Batch.RebootNodeOptionalParameters.options,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.DeallocateNodeOptionalParameters.options,
+@@clientName(Azure.Batch.DeallocateNodeOptionalParameters.options,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.ReimageNodeOptionalParameters.options,
+@@clientName(Azure.Batch.ReimageNodeOptionalParameters.options,
   "parameters",
   "java"
 );
-@@clientName(
-  Azure.Batch.DisableNodeSchedulingOptionalParameters.options,
+@@clientName(Azure.Batch.DisableNodeSchedulingOptionalParameters.options,
   "parameters",
   "java"
 );
@@ -2117,8 +2051,7 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 @@access(Azure.Batch.Jobs.terminateJob, Access.internal, "java");
 @@access(BatchJobTerminateOptions, Access.public, "java");
 
-@@access(
-  Azure.Batch.JobSchedules.terminateJobSchedule,
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
   Access.internal,
   "java"
 );
