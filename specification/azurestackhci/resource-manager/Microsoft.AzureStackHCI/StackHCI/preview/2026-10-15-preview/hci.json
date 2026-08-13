@@ -14837,6 +14837,15 @@
           "format": "date-time",
           "description": "Last time the device management extension refreshed the local Hyper-V workload inventory.",
           "readOnly": true
+        },
+        "storageInitiators": {
+          "type": "array",
+          "description": "Storage fabric initiator ports (iSCSI or Fibre Channel) discovered on the edge machine.",
+          "items": {
+            "$ref": "#/definitions/StorageInitiator"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -21546,7 +21555,9 @@
         "ScanFailed",
         "AdditionalContentRequired",
         "HealthCheckExpired",
-        "PendingOEMValidation"
+        "PendingOEMValidation",
+        "ScheduledToInstall",
+        "InstallingPerSchedule"
       ],
       "x-ms-enum": {
         "name": "State",
@@ -21656,6 +21667,16 @@
             "name": "PendingOEMValidation",
             "value": "PendingOEMValidation",
             "description": "The update is pending OEM validation before it can proceed."
+          },
+          {
+            "name": "ScheduledToInstall",
+            "value": "ScheduledToInstall",
+            "description": "The update is scheduled to be installed at a later time."
+          },
+          {
+            "name": "InstallingPerSchedule",
+            "value": "InstallingPerSchedule",
+            "description": "The update is currently being installed as part of a scheduled installation."
           }
         ]
       }
@@ -21856,6 +21877,76 @@
           "type": "string",
           "description": "Partition size."
         }
+      }
+    },
+    "StorageInitiator": {
+      "type": "object",
+      "description": "A storage fabric initiator port (iSCSI or Fibre Channel) discovered on the edge machine.",
+      "properties": {
+        "initiatorType": {
+          "$ref": "#/definitions/StorageInitiatorType",
+          "description": "Transport type of the initiator port.",
+          "readOnly": true
+        },
+        "initiatorIdentifier": {
+          "type": "string",
+          "description": "Node identifier of the initiator. IQN for iSCSI or node WWN (WWNN) for Fibre Channel. Corresponds to the NodeAddress reported by Get-InitiatorPort.",
+          "readOnly": true
+        },
+        "portWorldWideName": {
+          "type": "string",
+          "description": "Fibre Channel port World Wide Name (WWPN). Populated for FibreChannel initiators only; corresponds to the PortAddress reported by Get-InitiatorPort.",
+          "readOnly": true
+        },
+        "ethernetAdapterName": {
+          "type": "string",
+          "description": "Name of the Ethernet adapter the iSCSI initiator is bound to. Populated for iSCSI initiators only; matches EdgeMachineNicDetail.adapterName.",
+          "readOnly": true
+        },
+        "ethernetAdapterMacAddress": {
+          "type": "string",
+          "description": "MAC address of the Ethernet adapter the iSCSI initiator is bound to. Populated for iSCSI initiators only; matches EdgeMachineNicDetail.macAddress.",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "type": "string",
+          "description": "Operational status of the initiator port as reported by the host. Corresponds to OperationalStatus from Get-InitiatorPort.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "initiatorType",
+        "initiatorIdentifier"
+      ]
+    },
+    "StorageInitiatorType": {
+      "type": "string",
+      "description": "Transport type of a storage fabric initiator port on the edge machine.",
+      "enum": [
+        "iSCSI",
+        "FibreChannel",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "StorageInitiatorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "iSCSI",
+            "value": "iSCSI",
+            "description": "iSCSI initiator. The initiator identifier is an IQN (iSCSI Qualified Name)."
+          },
+          {
+            "name": "FibreChannel",
+            "value": "FibreChannel",
+            "description": "Fibre Channel initiator. The initiator identifier is the node WWN (WWNN); the port is identified by its WWPN."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The initiator transport type could not be determined."
+          }
+        ]
       }
     },
     "StorageProfile": {
@@ -22385,6 +22476,10 @@
           "$ref": "#/definitions/Step",
           "description": "Progress representation of the update run steps.",
           "x-ms-client-flatten": true
+        },
+        "updateRunType": {
+          "$ref": "#/definitions/UpdateRunType",
+          "description": "Differentiates the purpose of an update run so that clients can represent it correctly."
         }
       }
     },
@@ -22424,6 +22519,42 @@
         ]
       },
       "readOnly": true
+    },
+    "UpdateRunType": {
+      "type": "string",
+      "description": "Differentiates the purpose of an update run so that clients can represent it correctly.",
+      "enum": [
+        "Unknown",
+        "PrepareIntoInstall",
+        "PrepareOnly",
+        "Install"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateRunType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The update run type is unknown."
+          },
+          {
+            "name": "PrepareIntoInstall",
+            "value": "PrepareIntoInstall",
+            "description": "Preparation run that will transition into installation if it completes successfully."
+          },
+          {
+            "name": "PrepareOnly",
+            "value": "PrepareOnly",
+            "description": "Preparation-only run that will not transition into installation."
+          },
+          {
+            "name": "Install",
+            "value": "Install",
+            "description": "Installation run."
+          }
+        ]
+      }
     },
     "UpdateStateProperties": {
       "type": "object",
