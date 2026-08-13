@@ -59,4 +59,21 @@ interface ServiceEntitlements {
   listByTenant(...ApiVersionParameter):
     | ArmResponse<ResourceListResult<ServiceEntitlement>>
     | ErrorResponse;
+
+  /** Gets the result of a long-running operation performed on a service entitlement. */
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlements/{serviceEntitlementName}/operationResults/{operationId}")
+  getOperationResult(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /** The name of the service entitlement. */
+    @path
+    serviceEntitlementName: string,
+
+    /** The ID of the long-running operation. */
+    @path
+    operationId: string,
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 }
