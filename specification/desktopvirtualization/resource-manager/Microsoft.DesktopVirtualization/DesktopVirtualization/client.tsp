@@ -744,7 +744,7 @@ using Microsoft.DesktopVirtualization;
 @@clientName(DeploymentScope, "DesktopVirtualizationDeploymentScope", "csharp");
 @@clientName(
   CreateDeleteProperties,
-  "ScalingPlanHostPoolSizeProperties",
+  "DesktopVirtualizationCreateDeleteProperties",
   "csharp"
 );
 @@clientName(DiffDiskOption, "DesktopVirtualizationDiffDiskOption", "csharp");
