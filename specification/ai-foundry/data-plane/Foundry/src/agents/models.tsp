@@ -619,6 +619,71 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("""
+    The Entra application audiences for which this scheme accepts inbound tokens. When omitted, the
+    scheme behaves as if set to `["foundry"]`. GET preserves omission rather than materializing the
+    default. An explicitly empty array is invalid; an Entra scheme must accept at least one audience
+    type. Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of
+    the Foundry path.
+    """)
+  audience_types?: EntraAudienceType[];
+
+  @doc("""
+    Optional agent-blueprint-specific configuration for the Entra scheme. Only meaningful when
+    `agent_blueprint` is present in `audience_types`. When omitted or explicitly null, the service uses
+    the backing blueprint's system-determined audience, tenant, and default `access_agent` scope for
+    the agent-blueprint token path.
+    """)
+  agent_blueprint?: AgentBlueprintConfiguration;
+}
+
+@doc("The Entra application audience an inbound token targets and the authorization model the agent endpoint applies to it.")
+union EntraAudienceType {
+  string,
+
+  @doc("Foundry-audience (ai.azure.com) tokens, authorized through the existing Foundry/Azure RBAC path.")
+  foundry: "foundry",
+
+  @doc("Backing agent-blueprint-audience tokens, authorized through agent-blueprint token validation.")
+  agent_blueprint: "agent_blueprint",
+}
+
+@doc("Agent-blueprint-specific configuration for the Entra authorization scheme.")
+model AgentBlueprintConfiguration {
+  @doc("""
+    The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
+    omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
+    blueprint resource URI, tenant = subscription tenant, required scope = `access_agent`).
+    """)
+  token_validation_rules?: TokenValidationRules;
+}
+
+@doc("""
+  Validation applied to an inbound bearer token addressed to the backing blueprint audience. Each list
+  accepts at most 10 values. A null or omitted list applies the documented default for that rule; an
+  empty list (except `required_scopes`) blocks all requests.
+  """)
+model TokenValidationRules {
+  @doc("The accepted token audiences (the `aud` claim). Null/omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests.")
+  @maxItems(10)
+  allowed_audiences?: string[];
+
+  @doc("The accepted token tenants (the `tid` claim). Null/omitted defaults to the backing blueprint tenant. Empty blocks all requests.")
+  @maxItems(10)
+  allowed_tenants?: string[];
+
+  @doc("The accepted client applications (the `azp`/`appid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
+  @maxItems(10)
+  allowed_clients?: string[];
+
+  @doc("The accepted principals (the `oid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
+  @maxItems(10)
+  allowed_principals?: string[];
+
+  @doc("The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `[\"access_agent\"]`. An empty list is invalid.")
+  @maxItems(10)
+  required_scopes?: string[];
 }
 
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
@@ -696,7 +761,7 @@ model AgentEndpointConfig {
   @doc("Per-protocol configuration for the agent endpoint.")
   protocol_configuration?: ProtocolConfiguration;
 
-  @doc("The authorization schemes supported by the agent endpoint")
+  @doc("The authorization schemes supported by the agent endpoint.")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 }
 

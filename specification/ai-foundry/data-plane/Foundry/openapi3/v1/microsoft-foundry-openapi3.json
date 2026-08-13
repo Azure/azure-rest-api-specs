@@ -29336,6 +29336,16 @@
         },
         "description": "Configuration specific to the activity protocol."
       },
+      "AgentBlueprintConfiguration": {
+        "type": "object",
+        "properties": {
+          "token_validation_rules": {
+            "$ref": "#/components/schemas/TokenValidationRules",
+            "description": "The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When\nomitted, each rule falls back to the backing blueprint's system-determined defaults (audience =\nblueprint resource URI, tenant = subscription tenant, required scope = `access_agent`)."
+          }
+        },
+        "description": "Agent-blueprint-specific configuration for the Entra authorization scheme."
+      },
       "AgentBlueprintReference": {
         "type": "object",
         "required": [
@@ -29661,7 +29671,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
-            "description": "The authorization schemes supported by the agent endpoint"
+            "description": "The authorization schemes supported by the agent endpoint."
           }
         }
       },
@@ -29681,7 +29691,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
-            "description": "The authorization schemes supported by the agent endpoint"
+            "description": "The authorization schemes supported by the agent endpoint."
           }
         }
       },
@@ -35734,6 +35744,21 @@
         ],
         "description": "Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row."
       },
+      "EntraAudienceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "foundry",
+              "agent_blueprint"
+            ]
+          }
+        ],
+        "description": "The Entra application audience an inbound token targets and the authorization model the agent endpoint applies to it."
+      },
       "EntraAuthorizationScheme": {
         "type": "object",
         "required": [
@@ -35745,6 +35770,17 @@
             "enum": [
               "Entra"
             ]
+          },
+          "audience_types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntraAudienceType"
+            },
+            "description": "The Entra application audiences for which this scheme accepts inbound tokens. When omitted, the\nscheme behaves as if set to `[\"foundry\"]`. GET preserves omission rather than materializing the\ndefault. An explicitly empty array is invalid; an Entra scheme must accept at least one audience\ntype. Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of\nthe Foundry path."
+          },
+          "agent_blueprint": {
+            "$ref": "#/components/schemas/AgentBlueprintConfiguration",
+            "description": "Optional agent-blueprint-specific configuration for the Entra scheme. Only meaningful when\n`agent_blueprint` is present in `audience_types`. When omitted or explicitly null, the service uses\nthe backing blueprint's system-determined audience, tenant, and default `access_agent` scope for\nthe agent-blueprint token path."
           }
         },
         "allOf": [
@@ -81691,6 +81727,52 @@
             "Routines=V1Preview"
           ]
         }
+      },
+      "TokenValidationRules": {
+        "type": "object",
+        "properties": {
+          "allowed_audiences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "description": "The accepted token audiences (the `aud` claim). Null/omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests."
+          },
+          "allowed_tenants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "description": "The accepted token tenants (the `tid` claim). Null/omitted defaults to the backing blueprint tenant. Empty blocks all requests."
+          },
+          "allowed_clients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "description": "The accepted client applications (the `azp`/`appid` claim). Null/omitted imposes no restriction. Empty blocks all requests."
+          },
+          "allowed_principals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "description": "The accepted principals (the `oid` claim). Null/omitted imposes no restriction. Empty blocks all requests."
+          },
+          "required_scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "description": "The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `[\"access_agent\"]`. An empty list is invalid."
+          }
+        },
+        "description": "Validation applied to an inbound bearer token addressed to the backing blueprint audience. Each list\naccepts at most 10 values. A null or omitted list applies the documented default for that rule; an\nempty list (except `required_scopes`) blocks all requests."
       },
       "ToolCallOutputContent": {
         "anyOf": [
