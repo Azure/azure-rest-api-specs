@@ -17,6 +17,11 @@ using Microsoft.ManufacturingPlatform;
   "csharp"
 );
 @@clientName(
+  AvailableVersionListResult,
+  "ManufacturingDataServiceAvailableVersionListResult",
+  "csharp"
+);
+@@clientName(
   ProvisioningState,
   "ManufacturingPlatformProvisioningState",
   "csharp"
