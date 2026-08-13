@@ -1,9 +1,9 @@
 | Short Link: | [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs) |
-|--|--|
+| ----------- | -------------------------------------------------------- |
 
-<!-- 
+<!--
 Table of contents generated with VSCode Markdown All in One:
-https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one 
+https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 -->
 
 - [`specification` directory structure](#specification-directory-structure)
@@ -17,6 +17,7 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
   - [`specification/common-types`](#specificationcommon-types)
   - [Naming guidelines for `specification` folder contents](#naming-guidelines-for-specification-folder-contents)
   - [Legacy and deprecated patterns](#legacy-and-deprecated-patterns)
+  - [Nested SDK configuration directories (exceptional cases)](#nested-sdk-configuration-directories-exceptional-cases)
   - [Current migration efforts](#current-migration-efforts)
   - [Existing violations and historical context](#existing-violations-and-historical-context)
 
@@ -61,6 +62,7 @@ Each organization folder contains up to two main directories:
 - **One `data-plane/` folder** for non-ARM APIs containing **one or more** `<service>` folders
 
 **Important notes:**
+
 - Organizations may have only ARM services, only data-plane services, or both
 - The presence of both directories is not mandatory - it depends on the services offered by the organization
 
@@ -69,6 +71,7 @@ Each organization folder contains up to two main directories:
 The `<organization>/resource-manager/<RPNS>` folder corresponds to an ARM **Resource Provider (RP) namespace**. This namespace defines the scope of resource management operations for the organization's ARM services.
 
 **Example structure:**
+
 - RPNS example: `Microsoft.Automation`
 - Full path: `specification/containerservice/resource-manager/Microsoft.ContainerService/aks`
 - Service: `aks` service within the `Microsoft.ContainerService` ARM Resource Provider namespace
@@ -83,6 +86,7 @@ For a complete list of Resource Providers, see the [Resource Provider list].
 The `<organization>/data-plane` folder contains data-plane service APIs, which differ from ARM services in several key ways:
 
 **Key characteristics:**
+
 - Contains data-plane service APIs (not ARM service APIs)
 - No Resource Provider Namespace (`<RPNS>`) concept applies
 - Each service gets its own folder directly under `data-plane/`
@@ -98,6 +102,7 @@ Each `<organization>/data-plane` folder contains one or more `<service>` folders
 Every service folder follows a consistent structure regardless of whether it's an ARM or data-plane service. This consistency simplifies navigation and tooling across all Azure services.
 
 **Standard service folder paths:**
+
 - **ARM services**: `specification/<organization>/resource-manager/<RPNS>/<service>`
 - **Data-plane services**: `specification/<organization>/data-plane/<service>`
 
@@ -108,16 +113,19 @@ Each service folder contains a standardized set of files and directories organiz
 A service folder contains the following elements:
 
 **TypeSpec files** (for TypeSpec-based services):
+
 - `main.tsp` - Main TypeSpec entry point for the service
 - `tspconfig.yaml` - TypeSpec compilation configuration with OpenAPI/SDK emitter options
 - Additional `*.tsp` files - Supporting TypeSpec files for the service
 - `examples/<apiVersion>/` - TypeSpec examples organized by API version
 
 **README and configuration files**:
+
 - `readme.md` - Central file that groups APIs into different tags for tooling purposes
 - `readme.lang.md` - Language-specific README files for SDK generation (deprecated when TypeSpec is used)
 
 **Generated OpenAPI specifications**:
+
 - `stable/<apiVersion>/` - Contains stable API version specifications
 - `preview/<apiVersion>/` - Contains preview API version specifications
 
@@ -130,14 +138,17 @@ API version folders reflect the actual service API version, following Azure's st
 **Folder structure by service type:**
 
 **ARM services**:
+
 - `<organization>/resource-manager/<RPNS>/<service>/stable/<YYYY-MM-DD>`
 - `<organization>/resource-manager/<RPNS>/<service>/preview/<YYYY-MM-DD-preview>`
 
 **Data-plane services**:
+
 - `<organization>/data-plane/<service>/stable/<YYYY-MM-DD>`
 - `<organization>/data-plane/<service>/preview/<YYYY-MM-DD-preview>`
 
 **Contents of each API version folder:**
+
 - `.json` files containing OpenAPI specifications (typically emitted from TypeSpec)
 - `examples/` subfolder containing `.json` files with [`x-ms-examples`] content referenced from the OpenAPI specifications
 
@@ -151,6 +162,7 @@ For detailed information about API versioning practices, see the [API versioning
 The [`specification/common-types`] directory serves a special purpose in the repository structure, containing shared definitions that can be reused across all Azure service specifications.
 
 **Purpose and usage:**
+
 - Contains common models, types, and operations used across multiple Azure services
 - Enables consistency and reduces duplication across service specifications
 - Provides standardized definitions for common Azure patterns
@@ -192,11 +204,13 @@ specification/compute/resource-manager/Microsoft.Compute/
 Consistent naming conventions across the repository improve readability and reduce ambiguity. Follow these guidelines when creating new folders and files:
 
 **Folder naming rules:**
+
 - Use singular forms (e.g., `keyvault` not `keyvaults`) to eliminate ambiguity for non-English speakers
 - Generic folder names should be lowercase
 - Resource Provider Namespace (`<RPNS>`) folders may use PascalCase (e.g., `KeyVault`)
 
 **File naming rules:**
+
 - Any casing is acceptable for file names
 - Follow the patterns established in existing examples when unsure
 
@@ -214,16 +228,19 @@ Due to the evolutionary nature of the Azure REST API specifications repository, 
 The following patterns exist in the repository for historical reasons but are **strongly discouraged** for new services:
 
 #### ARM services - deprecated patterns:
+
 - **Single service without RPNS folder**: Placing a single ARM service directly in `specification/<organization>/resource-manager/` instead of `specification/<organization>/resource-manager/<RPNS>/<service>`
 - **Mixed directory structures**: When teams expand from one to multiple services, mixing the old flat structure (for the original service) with the correct nested structure (for new services)
 - **Multiple RPNS subfolders**: Having multiple `<RPNS>` subfolders under `resource-manager/` folder
 
 #### Data-plane services - deprecated patterns:
+
 - **Additional grouping folders**: Using extra nesting like `<organization>/data-plane/<groupingDir>/<service>` instead of `<organization>/data-plane/<service>`
 - **Service name prefixes**: Prefixing service names with `Azure.<SomeService>` or RPNS `Microsoft.<SomeService>` or similar patterns
 - **RPNS-style folders**: Using Resource Provider-style folder names under `data-plane/`
 
 **General deprecated patterns:**
+
 - **Incorrect folder nesting**: Deeper nesting than the recommended structure allows
 - **Misplaced README files**: Placing `readme.md` files in incorrect folders or incorrectly identifying them as service folders
 - **Missing service directories**: Absence of proper `<service>` directory structure
@@ -232,6 +249,66 @@ The following patterns exist in the repository for historical reasons but are **
 - **Mixed API versions**: Combining `stable` and `preview` API versions in the same folder subtree
 - **Mixed lifecycle stages**: Combining multiple API version lifecycle stages in the same `readme.md` configuration
 
+## Nested SDK configuration directories (exceptional cases)
+
+> [!CAUTION]
+> This pattern is **not** standard and should **not** be adopted by default. It is reserved for very exceptional circumstances where the SDK Architecture Board has explicitly recommended a separate package configuration for a given language that already targets the main specification. Do not use this pattern without prior approval from the SDK Architecture Board.
+
+In rare cases, a service may need to produce a secondary SDK package for a specific language that differs significantly from the primary SDK generated from the main TypeSpec project. This typically occurs when a language SDK already targets the main specification but requires a completely different package configuration — for example, a different client surface, a distinct set of operations, or a separate package identity.
+
+When this is necessary, the secondary SDK configuration is expressed as a **nested directory** within the parent service folder. This nested directory contains its own `tspconfig.yaml` and TypeSpec files that define the custom SDK package.
+
+### Requirements
+
+1. **The nested directory must be a direct child of the parent service folder.** For example, `WidgetAnalytics/SdkIngestionJava/` is valid; deeper nesting is not.
+
+2. **The parent project's `suppressions.yaml` must suppress the `FolderStructure` rule** for the nested SDK directories, since they do not follow the standard service folder layout.
+
+3. **Common REST API definitions must live in a shared child directory** (typically named `Common/`) that is a sibling to the nested SDK directories. Both the parent `main.tsp` and the nested SDK directories import from this shared directory.
+
+4. **The parent `main.tsp` should only import from the shared directory** (e.g., `Common/`), not directly from the nested SDK directories.
+
+5. **Each nested SDK directory must contain at minimum:**
+   - `tspconfig.yaml` — with SDK emitter configuration for the target language
+   - `client.tsp` — with client-specific customizations for the secondary package
+   - Optionally, a `main.tsp` and additional `.tsp` files as needed for project organization
+
+6. **The `tspconfig.yaml` in nested directories must include `additionalDirectories`** referencing the shared directory, so that the SDK generation tooling can resolve common models and routes. For example:
+
+   ```yaml
+   options:
+     "@azure-tools/typespec-client-generator-cli":
+       additionalDirectories:
+         - "specification/widget/data-plane/WidgetAnalytics/Common"
+   ```
+
+7. **All shared models and API definitions must remain inside child directories of the parent service folder.** Placing common definitions outside the parent directory will break the toolchain. Only one level of nesting is allowed — all shared and SDK-specific directories must be siblings.
+
+8. **Recommended:** Create a `service.tsp` file inside the shared directory containing the main server definition and supported API versions enum. This file can be imported by both the parent `main.tsp` and the nested SDK directories as needed.
+
+### Example structure
+
+```
+WidgetAnalytics/
+├── Common/
+│   ├── service.tsp          # Server definition + API versions enum
+│   ├── models.tsp           # Shared model definitions
+│   └── routes.tsp           # Shared route definitions
+├── SdkBatchPython/           # Secondary SDK package for Python
+│   ├── client.tsp
+│   └── tspconfig.yaml
+├── SdkIngestionJava/         # Secondary SDK package for Java
+│   ├── client.tsp
+│   ├── main.tsp
+│   └── tspconfig.yaml
+├── main.tsp                  # Parent entry point (imports from Common/)
+├── client.tsp
+└── tspconfig.yaml
+```
+
+> [!NOTE]
+> When creating new nested directories, prefer to align with the casing used for service and RPNS folder names elsewhere in the repository.
+
 ## Current migration efforts
 
 We are actively working to finish the entire repository migration to align with the new directory structure guidelines by March 2026. This comprehensive migration effort aims to eliminate inconsistencies between legacy patterns and the recommended structure.
@@ -239,6 +316,7 @@ We are actively working to finish the entire repository migration to align with 
 ### Migration objectives
 
 **What we're standardizing:**
+
 - **Consistent service patterns**: Ensuring uniform folder structure regardless of whether a team has one or multiple services
 - **Eliminating mixed structures**: Converting teams that use a combination of old and new patterns to the recommended structure
 - **Simplifying tooling**: Reducing complexity in engineering systems by implementing a single, consistent structure
@@ -249,17 +327,19 @@ We are actively working to finish the entire repository migration to align with 
 Refer to [Widget] as an example of the suggested folder structure and if any concerns,
 
 **For new services:**
+
 - Always use the recommended structure described in this document
 
 **For existing services:**
+
 - When folder migration PRs are merged, they may conflict with ongoing PRs. Follow the [Conflict Resolve Guide] to handle these conflicts.
 
 ## Contact Us
 
 If you have any questions regarding folder structure and Azure Service Versioning Guideline, you can reach out by:
+
 - [TypeSpec Discussion] Channel.
 - Email to azversioning@service.microsoft.com
-
 
 > [!WARNING]
 > **All violations described above are considered legacy and deprecated.** They are strongly discouraged for any new development and will be addressed through the ongoing migration efforts.
