@@ -92,7 +92,7 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
   type: "azure_ai_source";
 
   /** Data schema scenario. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   scenario:
     | "red_team"
     | "responses"
@@ -119,7 +119,7 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 /** Adding Azure AI Source type to data source for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
 #suppress "deprecated" "Deprecated status inherited from source OpenAI specification"
 @@changePropertyType(
   OpenAI.Eval.data_source_config,
@@ -134,7 +134,7 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 /** Adding Azure AI Evaluator type to testing criteria for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
 @@changePropertyType(
   OpenAI.Eval.testing_criteria,
   (
@@ -167,7 +167,7 @@ model Eval is OpenAI.Eval {
 /** Adding Azure AI Source type to data source for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
 #suppress "deprecated" "Deprecated status inherited from source OpenAI specification"
 @@changePropertyType(
   OpenAI.CreateEvalRequest.data_source_config,
@@ -182,7 +182,7 @@ model Eval is OpenAI.Eval {
 /** Adding Azure AI Evaluator type to testing criteria for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
 @@changePropertyType(
   OpenAI.CreateEvalRequest.testing_criteria,
   (
@@ -295,7 +295,7 @@ model ResponseRetrievalItemGenerationParams extends ItemGenerationParams {
 
   /** The source from which JSONL content is read. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
 }
 
@@ -469,7 +469,7 @@ model TargetCompletionEvalRunDataSource extends EvalRunDataSource {
 
   /** The source configuration for inline or file data. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
 
   /** The target configuration for the evaluation. */
@@ -495,7 +495,7 @@ model EvalCsvRunDataSource extends EvalRunDataSource {
 
   /** The source of the CSV data, either inline content or a file reference. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   source: EvalCsvFileIdSource;
 }
 
@@ -636,13 +636,13 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
    * inference parameters are auto-filled from the benchmark specification stored in eval group properties.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   target: AzureAIModelTarget | AzureAIAgentTarget;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
 @@changePropertyType(
   OpenAI.EvalRun.data_source,
 
@@ -702,7 +702,7 @@ model EvalRun is OpenAI.EvalRun {
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
 @@changePropertyType(
   OpenAI.CreateEvalRunRequest.data_source,
 
