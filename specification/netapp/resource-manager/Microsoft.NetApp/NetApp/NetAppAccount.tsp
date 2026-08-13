@@ -427,7 +427,23 @@ model LdapConfiguration {
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
   ldapOverTLS?: boolean;
+
+  /**
+   * Indicates the secure LDAP mode for encrypting communication between ANF storage and customer LDAP servers.
+   */
+  @added(Versions.v2026_06_15_preview)
+  secureLdapType?: SecureLdapType = SecureLdapType.None;
 
   /**
    * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
