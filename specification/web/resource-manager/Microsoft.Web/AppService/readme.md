@@ -116,6 +116,14 @@ directive:
     reason: >-
       virtualConnections follows the established Microsoft.Web sites/config singleton path shape and intentionally uses
       a fixed nested-resource name.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.VirtualConnectionsProperties.properties.connections
+      - $.definitions.VirtualConnection.properties.settings
+    reason: >-
+      Connection names and setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of
+      model properties. These dictionaries retain typed values for each customer-defined key.
 ```
 
 ### Tag: package-2026-09
