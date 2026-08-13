@@ -74,26 +74,6 @@ test.concurrent("get suppressions for multiple tools", async () => {
   ]);
 });
 
-test.concurrent("get suppressions for multiple tools", async () => {
-  const suppressions = await getSuppressionsForTools(
-    ["TestTool2", "TestTool", "TestTool2"],
-    join(__dirname, "e2e", "suppressFooJson", "foo.json"),
-  );
-
-  expect(suppressions).toEqual([
-    {
-      tool: "TestTool2",
-      paths: ["foo.json"],
-      reason: "test 2",
-    },
-    {
-      tool: "TestTool",
-      paths: ["foo.json"],
-      reason: "test",
-    },
-  ]);
-});
-
 test.concurrent("merge, get bar.json", async () => {
   const suppressions: Suppression[] = await getTestSuppressions(
     join("merge", "foo", "bar", "bar.json"),
