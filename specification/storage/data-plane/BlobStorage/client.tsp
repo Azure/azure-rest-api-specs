@@ -237,6 +237,19 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "python,csharp,javascript,go"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(
+  Storage.Blob.Blob.getLayout, 
+  "forcePageIterator", 
+  true, 
+  "rust"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Storage.Blob.Blob.getLayout,
+  "python,csharp,javascript,go"
+);
+
 @@clientName(
   BlobProperties.customerProvidedKeySha256,
   "encryptionKeySha256",

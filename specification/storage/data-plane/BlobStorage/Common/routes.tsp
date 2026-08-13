@@ -878,6 +878,7 @@ interface Blob {
         @header("x-ms-smart-access-tier")
         smartAccessTier?: string;
 
+        ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
     | (BodyParameter & {
@@ -955,6 +956,7 @@ interface Blob {
         @header("x-ms-smart-access-tier")
         smartAccessTier?: string;
 
+        ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
     | Error;
@@ -1614,6 +1616,65 @@ interface Blob {
       @statusCode statusCode: 204;
     }
   >;
+
+  /** The Get Blob Layout operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob.  In addition, it may optionally return the layout of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @added(Versions.v2026_12_06)
+  @list
+  @get
+  @route("?comp=layout")
+  getLayout(
+    ...ApiVersionHeader,
+    ...ClientRequestIdHeader,
+    ...SnapshotParameter,
+    ...VersionIdParameter,
+    ...MarkerParameter,
+    ...MaxResultsParameter,
+    ...TimeoutParameter,
+    ...RangeParameter,
+    ...LeaseIdOptionalParameter,
+    ...IfTagsParameter,
+    ...IfModifiedSinceParameter,
+    ...IfUnmodifiedSinceParameter,
+    ...IfMatchParameter,
+    ...IfNoneMatchParameter,
+    ...EncryptionKeyParameter,
+    ...EncryptionKeySha256Parameter,
+    ...EncryptionAlgorithmParameter,
+  ):
+    | {
+        /** The content type of the body of the response. */
+        @header("Content-Type")
+        contentType: "application/xml";
+
+        ...BlobLayoutResponseHeaders;
+        ...ClientRequestIdHeader;
+        ...RequestIdResponseHeader;
+        ...ApiVersionHeader;
+        ...DateResponseHeaderPrivate;
+
+        /** The layout of the blob. */
+        @body
+        blobLayout: BlobLayout;
+      }
+    | {
+        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+        @statusCode statusCode: 204;
+
+        /** Content-type. */
+        #suppress "@typespec/http/content-type-ignored" "There is no response body, so the content-type header can be returned."
+        @header("Content-Type")
+        contentType?: string;
+
+        ...BlobLayoutResponseHeaders;
+        ...ClientRequestIdHeader;
+        ...RequestIdResponseHeader;
+        ...ApiVersionHeader;
+        ...DateResponseHeaderPrivate;
+      }
+    | Error;
 }
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
