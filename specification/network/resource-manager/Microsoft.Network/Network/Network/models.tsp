@@ -1514,6 +1514,12 @@ union ExpressRouteCircuitSkuTier {
    * Local
    */
   Local: "Local",
+
+  /**
+   * MultiCloud tier for cross-cloud connectivity.
+   */
+  @added(Versions.v2025_09_01)
+  MultiCloud: "MultiCloud",
 }
 
 /**
@@ -1558,6 +1564,35 @@ union ServiceProviderProvisioningState {
    * Deprovisioning
    */
   Deprovisioning: "Deprovisioning",
+
+  /**
+   * DeProvisioned State
+   */
+  @added(Versions.v2025_09_01)
+  DeProvisioned: "DeProvisioned",
+}
+
+/**
+ * The resiliency level of the ExpressRoute circuit.
+ */
+@added(Versions.v2025_09_01)
+union ResiliencyLevel {
+  string,
+
+  /**
+   * Standard resiliency level.
+   */
+  Standard: "Standard",
+
+  /**
+   * High resiliency level.
+   */
+  High: "High",
+
+  /**
+   * Maximum resiliency level.
+   */
+  Maximum: "Maximum",
 }
 
 /**
@@ -1575,6 +1610,60 @@ union ExpressRoutePortsEncapsulation {
    * QinQ
    */
   QinQ: "QinQ",
+}
+
+/**
+ * Encapsulation method on LAG.
+ */
+@added(Versions.v2025_09_01)
+union ExpressRouteLagEncapsulation {
+  string,
+
+  /**
+   * IEEE 802.1Q encapsulation.
+   */
+  Dot1Q: "Dot1Q",
+
+  /**
+   * IEEE 802.1ad encapsulation.
+   */
+  QinQ: "QinQ",
+}
+
+/**
+ * The billing type of the ExpressRouteLag resource.
+ */
+@added(Versions.v2025_09_01)
+union ExpressRouteLagBillingType {
+  string,
+
+  /**
+   * Metered data transfer billing.
+   */
+  MeteredData: "MeteredData",
+
+  /**
+   * Unlimited data transfer billing.
+   */
+  UnlimitedData: "UnlimitedData",
+}
+
+/**
+ * LACP timer configuration.
+ */
+@added(Versions.v2025_09_01)
+union ExpressRouteLagLacpTimer {
+  string,
+
+  /**
+   * Fast LACP timer (30 seconds).
+   */
+  Fast: "Fast",
+
+  /**
+   * Slow LACP timer (90 seconds).
+   */
+  Slow: "Slow",
 }
 
 /**
@@ -8585,6 +8674,12 @@ model ApplicationGatewayGlobalConfiguration {
    * Enable response buffering.
    */
   enableResponseBuffering?: boolean;
+
+  /**
+   * Disable default server header in response.
+   */
+  @added(Versions.v2025_09_01)
+  disableDefaultServerHeaderInResponse?: boolean;
 }
 
 /**
@@ -11293,6 +11388,26 @@ model ExpressRouteCircuitPropertiesFormat {
   stag?: int32;
 
   /**
+   * The resiliency level of the ExpressRoute circuit.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  resiliencyLevel?: ResiliencyLevel;
+
+  /**
+   * Account ID of customer account on partner cloud provider.
+   */
+  @added(Versions.v2025_09_01)
+  partnerAccountId?: string;
+
+  /**
+   * Activation Key from partner cloud provider.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning."
+  @added(Versions.v2025_09_01)
+  activationKey?: string;
+
+  /**
    * The provisioning state of the express route circuit resource.
    */
   @visibility(Lifecycle.Read)
@@ -12126,6 +12241,309 @@ model ExpressRouteProviderPortProperties {
 }
 
 /**
+ * Parameters for updating ExpressRouteLag tags or identity.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLag Update Tags or Identity Request")
+model ExpressRouteLagUpdateTagsOrIdentityRequest {
+  /**
+   * The identity of ExpressRouteLag, if configured.
+   */
+  identity?: Common.ManagedServiceIdentity;
+
+  ...TagsObject;
+}
+
+/**
+ * Properties specific to ExpressRouteLag resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLag Resource Properties")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagPropertiesFormat {
+  /**
+   * The name of the peering location that the ExpressRouteLag is mapped to physically.
+   */
+  peeringLocation?: string;
+
+  /**
+   * Bandwidth of procured LAG in Gbps.
+   */
+  bandwidthInGbps?: int32;
+
+  /**
+   * Aggregate Gbps of associated circuit bandwidths.
+   */
+  @visibility(Lifecycle.Read)
+  provisionedBandwidthInGbps?: float64;
+
+  /**
+   * Maximum transmission unit of the LAG.
+   */
+  @visibility(Lifecycle.Read)
+  mtu?: string;
+
+  /**
+   * Encapsulation method on LAG.
+   */
+  encapsulation?: ExpressRouteLagEncapsulation;
+
+  /**
+   * Ether type of the LAG.
+   */
+  @visibility(Lifecycle.Read)
+  etherType?: string;
+
+  /**
+   * The set of links of the ExpressRouteLag resource.
+   */
+  @summary("ExpressRouteLagLink Sub-Resources")
+  links?: ExpressRouteLagLink[];
+
+  /**
+   * The date and time when the ExpressRouteLag was allocated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-datetime" "Backend emits allocationDate as a non-ISO 8601 formatted string (e.g. '6/16/2026 5:28:06 PM'); the property is preserved as string to maintain wire compatibility with the existing ExpressRouteLag service contract."
+  @visibility(Lifecycle.Read)
+  allocationDate?: string;
+
+  /**
+   * The provisioning state of the express route LAG resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The resource GUID property of the express route LAG resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /**
+   * The billing type of the ExpressRouteLag resource.
+   */
+  billingType?: ExpressRouteLagBillingType;
+
+  /**
+   * Number of ports in the LAG.
+   */
+  @minValue(1)
+  numberOfPorts?: int32;
+
+  /**
+   * Minimum number of active ports required for LAG.
+   */
+  @minValue(1)
+  minimumActivePortsRequired?: int32;
+
+  /**
+   * LACP timer configuration.
+   */
+  lacpTimer?: ExpressRouteLagLacpTimer;
+}
+
+/**
+ * ExpressRouteLagLink child resource definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This child resource uses composition with properties object to maintain consistency with existing Network RP sub-resource modeling patterns."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagLink")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagLink extends SubResource {
+  /**
+   * ExpressRouteLagLink properties.
+   */
+  properties?: ExpressRouteLagLinkPropertiesFormat;
+
+  /** The unique identifier of the resource. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Read)
+  type: string;
+
+  /**
+   * Name of child link resource that is unique among child link resources of the parent.
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+/**
+ * Properties specific to ExpressRouteLagLink resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagLink Resource Properties")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagLinkPropertiesFormat {
+  /**
+   * Name of Azure router associated with link.
+   */
+  @visibility(Lifecycle.Read)
+  routerName?: string;
+
+  /**
+   * Name of Azure router interface.
+   */
+  @visibility(Lifecycle.Read)
+  interfaceName?: string;
+
+  /**
+   * Administrative state of the link.
+   */
+  adminState?: ExpressRouteLinkAdminState;
+
+  /**
+   * The provisioning state of the express route LAG link resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * MacSec configuration.
+   */
+  macSecConfig?: ExpressRouteLinkMacSecConfig;
+
+  /**
+   * The set of members of the ExpressRouteLagLink resource.
+   */
+  @summary("ExpressRouteLagMember Sub-Resources")
+  members?: ExpressRouteLagMember[];
+}
+
+/**
+ * ExpressRouteLagMember child resource definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This child resource uses composition with properties object to maintain consistency with existing Network RP sub-resource modeling patterns."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagMember")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagMember extends SubResource {
+  /**
+   * ExpressRouteLagMember properties.
+   */
+  properties?: ExpressRouteLagMemberPropertiesFormat;
+
+  /** The unique identifier of the resource. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Read)
+  type: string;
+
+  /**
+   * Name of child member resource that is unique among child member resources of the parent.
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+/**
+ * Properties specific to ExpressRouteLagMember resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRouteLagMember Resource Properties")
+@added(Versions.v2025_09_01)
+model ExpressRouteLagMemberPropertiesFormat {
+  /**
+   * Name of Azure router interface.
+   */
+  @visibility(Lifecycle.Read)
+  interfaceName?: string;
+
+  /**
+   * Mapping between physical port to patch panel port.
+   */
+  @visibility(Lifecycle.Read)
+  patchPanelId?: string;
+
+  /**
+   * Mapping of physical patch panel to rack.
+   */
+  @visibility(Lifecycle.Read)
+  rackId?: string;
+
+  /**
+   * Cololocation for ExpressRoute member.
+   */
+  @visibility(Lifecycle.Read)
+  coloLocation?: string;
+
+  /**
+   * Physical fiber port type.
+   */
+  @visibility(Lifecycle.Read)
+  connectorType?: ExpressRouteLinkConnectorType;
+
+  /**
+   * Administrative state of the member port.
+   */
+  adminState?: ExpressRouteLinkAdminState;
+
+  /**
+   * The provisioning state of the express route LAG member resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * The customer name to be printed on a letter of authorization for ExpressRouteLag.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "LOA is the standard acronym for 'Letter of Authorization' and is used consistently in service operations."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model GenerateExpressRouteLagsLOARequest {
+  /**
+   * The customer name.
+   */
+  customerName: string;
+
+  /**
+   * The list of member names for which LOA should be generated.
+   */
+  members?: string[];
+}
+
+/**
+ * Response for GenerateExpressRouteLagsLOA API service call.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "LOA is the standard acronym for 'Letter of Authorization' and is used consistently in service operations."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model GenerateExpressRouteLagsLOAResult {
+  /**
+   * The content as a base64 encoded string.
+   */
+  encodedContent?: string;
+}
+
+/**
  * Firewall Policy definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12142,6 +12560,13 @@ model FirewallPolicyPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   ruleCollectionGroups?: SubResource[];
+
+  /**
+   * List of references to FirewallPolicyKubeSelectorGroups.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  kubeSelectorGroups?: SubResource[];
 
   /**
    * The provisioning state of the firewall policy resource.
@@ -12215,6 +12640,13 @@ model FirewallPolicyPropertiesFormat {
    * The Firewall Policy SKU.
    */
   sku?: FirewallPolicySku;
+
+  /**
+   * Indicates that the Firewall Policy is managed by AFC (Azure Firewall for Containers). When set, the policy is treated as read-only for callers that do not supply the AFC-managed sync marker on write operations.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  afcManaged?: boolean;
 }
 
 /**
@@ -12540,6 +12972,77 @@ model FirewallPolicySku {
 }
 
 /**
+ * Kubernetes Label Selector for matching labels in Kubernetes Selector Groups.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "KubeLabelSelector belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2025_09_01)
+model KubeLabelSelector {
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "matchLabels is a pass-through, user-defined Kubernetes label map of arbitrary string key/value pairs chosen by the user and not validated or owned by the service, mirroring Kubernetes LabelSelector.matchLabels; a Record<string> is required to represent it."
+  matchLabels?: Record<string>;
+
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "LabelSelectorExpression has no single identifying property; it mirrors the Kubernetes label selector requirement (key/operator/values), which has no unique key, so no x-ms-identifiers can be provided."
+  matchExpressions?: LabelSelectorExpression[];
+}
+
+/**
+ * operator represents a Kubernetes label selector requirement's relationship to a set of values.
+ */
+@added(Versions.v2025_09_01)
+union LabelSelectorOperator {
+  /** The label value must be in the supplied set of values. */
+  In: "In",
+
+  /** The label value must not be in the supplied set of values. */
+  NotIn: "NotIn",
+
+  /** The label key must exist, regardless of its value. */
+  Exists: "Exists",
+
+  /** The label key must not exist. */
+  DoesNotExist: "DoesNotExist",
+
+  string,
+}
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "LabelSelectorExpression belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2025_09_01)
+model LabelSelectorExpression {
+  /**
+   * key is a string of 63 characters or less, and must consist of alphanumeric characters,
+   * '-', '_' or '.'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "key here is a Kubernetes label selector key, not a secret/credential"
+  key?: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   */
+  operator?: LabelSelectorOperator;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty.
+   */
+  values?: string[];
+}
+
+/**
  * Properties of the rule collection group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12566,6 +13069,30 @@ model FirewallPolicyRuleCollectionGroupProperties {
 
   /**
    * The provisioning state of the firewall policy rule collection group resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Properties of the Kubernetes Selector Group.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyKubeSelectorGroupProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2025_09_01)
+model FirewallPolicyKubeSelectorGroupProperties {
+  /**
+   * Kubernetes Pod selector for matching pods in the Kubernetes cluster.
+   */
+  podSelector?: KubeLabelSelector;
+
+  /**
+   * Kubernetes Namespace selector for matching namespaces in the Kubernetes cluster.
+   */
+  namespaceSelector?: KubeLabelSelector;
+
+  /**
+   * The provisioning state of the firewall policy Kubernetes selector group resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -15879,6 +16406,13 @@ model NetworkVirtualAppliancePropertiesFormat {
   addressPrefix?: string;
 
   /**
+   * Address Prefix for Dual-Stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  addressPrefixV6?: string;
+
+  /**
    * BootStrapConfigurationBlobs storage URLs.
    */
   bootStrapConfigurationBlobs?: string[];
@@ -15980,10 +16514,32 @@ model NetworkVirtualAppliancePropertiesFormat {
   nvaInterfaceConfigurations?: NvaInterfaceConfigurationsProperties[];
 
   /**
+   * The address families to deploy the NVA in. ["IPv4", "IPv6"] deploys a dual-stack NVA (the vHub/VNet must also be dual-stack). ["IPv4"], an empty array, or omitting the field deploys an IPv4-only NVA. The value "IPv6" may only appear in combination with "IPv4"; standalone ["IPv6"] is reserved for future use and is rejected by the service today.
+   */
+  @added(Versions.v2025_09_01)
+  @uniqueItems
+  @maxItems(2)
+  addressFamily?: IPVersion[];
+
+  /**
    * A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * An Internal Load Balancer's HA port frontend IPv6 address. Can be used to set routes & UDR to load balance traffic between NVA instances. This field appears in dual-stack NVAs.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  privateIpAddressV6?: string;
+
+  /**
+   * The migration status of the Network Virtual Appliance.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  migrationStatus?: NetworkVirtualApplianceMigrationStatus;
 }
 
 /**
@@ -16037,6 +16593,20 @@ model VirtualApplianceNicProperties {
    */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
+
+  /**
+   * Public IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  publicIpAddressV6?: string;
+
+  /**
+   * Private IPv6 address. Populated for dual-stack NVAs, including on additional-NIC configurations when the NVA is dual-stack.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01)
+  privateIpAddressV6?: string;
 
   /**
    * Instance on which nic is attached.
@@ -16242,6 +16812,135 @@ model NvaInVnetSubnetReferenceProperties {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
+}
+
+/**
+ * The type of migration workflow performed on a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+union MigrationType {
+  string,
+
+  /**
+   * Migrate the Network Virtual Appliance to a new OS / marketplace image version.
+   */
+  MigrateToNewOSVersion: "MigrateToNewOSVersion",
+
+  /**
+   * Migrate the Network Virtual Appliance to the new internal load balancer architecture.
+   */
+  MigrateToNewILBArchitecture: "MigrateToNewILBArchitecture",
+}
+
+/**
+ * Properties supplied to prepare the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualAppliancePrepareMigrationProperties {
+  /**
+   * The type of migration workflow to prepare.
+   */
+  migrationType: MigrationType;
+
+  /**
+   * The marketplace version to migrate to. Applicable when migrationType is MigrateToNewOSVersion.
+   */
+  marketPlaceVersion?: string;
+}
+
+/**
+ * Parameters supplied to prepare the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualAppliancePrepareMigrationRequest {
+  /**
+   * Properties of the prepare migration request.
+   */
+  properties?: NetworkVirtualAppliancePrepareMigrationProperties;
+}
+
+/**
+ * Properties supplied to execute the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceExecuteMigrationProperties {
+  /**
+   * The type of migration workflow to execute.
+   */
+  migrationType: MigrationType;
+}
+
+/**
+ * Parameters supplied to execute the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceExecuteMigrationRequest {
+  /**
+   * Properties of the execute migration request.
+   */
+  properties?: NetworkVirtualApplianceExecuteMigrationProperties;
+}
+
+/**
+ * Properties supplied to commit the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceCommitMigrationProperties {
+  /**
+   * The type of migration workflow to commit.
+   */
+  migrationType: MigrationType;
+}
+
+/**
+ * Parameters supplied to commit the migration of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceCommitMigrationRequest {
+  /**
+   * Properties of the commit migration request.
+   */
+  properties?: NetworkVirtualApplianceCommitMigrationProperties;
+}
+
+/**
+ * The migration status of a Network Virtual Appliance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model NetworkVirtualApplianceMigrationStatus {
+  /**
+   * The type of migration workflow currently in progress or last performed.
+   */
+  migrationType?: MigrationType;
+
+  /**
+   * The current phase of the migration workflow (for example, Prepare, Execute, Commit, or Abort).
+   */
+  migrationPhase?: string;
+
+  /**
+   * The detailed status of the current migration phase.
+   */
+  migrationPhaseStatus?: string;
 }
 
 /**
@@ -19153,6 +19852,13 @@ model PublicIPPrefixPropertiesFormat {
    * NatGateway of Public IP Prefix.
    */
   natGateway?: NatGateway;
+
+  /**
+   * Whether the public IP prefix SKU has been upgraded from Standard to StandardV2.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  upgradedToV2?: boolean;
 }
 
 /**
@@ -19700,6 +20406,56 @@ model VirtualNetworkUsageName {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkDdosProtectionStatusResult
   is Azure.Core.Page<PublicIpDdosProtectionStatusResult>;
+
+/**
+ * Request body for the MoveIpConfigurations operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model MoveIpConfigurationsRequest {
+  /**
+   * A list of IP configuration move items.
+   */
+  @identifiers(#[])
+  moveIpConfigurationItems: MoveIpConfigurationItem[];
+}
+
+/**
+ * An item representing a source and target IP configuration for a move operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model MoveIpConfigurationItem {
+  /**
+   * The source IP configuration to move from.
+   */
+  sourceIpConfiguration: MoveIpConfigurationResourceReference;
+
+  /**
+   * The target IP configuration to move to.
+   */
+  targetIpConfiguration: MoveIpConfigurationResourceReference;
+}
+
+/**
+ * Reference to an IP configuration resource by ARM resource ID.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model MoveIpConfigurationResourceReference {
+  /**
+   * The ARM resource ID of the IP configuration.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/networkInterfaces/ipConfigurations";
+    }
+  ]>;
+}
 
 /**
  * VirtualNetworkGateway properties.
@@ -20900,6 +21656,76 @@ model GatewayRoute {
    */
   @visibility(Lifecycle.Read)
   weight?: int32;
+}
+
+/**
+ * List of virtual network gateway effective routes.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+model GatewayEffectiveRouteListResult {
+  /**
+   * List of gateway effective routes.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Effective route items have no single stable identifier property to key on."
+  @pageItems
+  value?: GatewayEffectiveRoute[];
+}
+
+/**
+ * Gateway effective routing details.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Network Gateway resource type and must use legacy patterns for backward compatibility"
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+model GatewayEffectiveRoute {
+  /**
+   * The gateway's local address.
+   */
+  @visibility(Lifecycle.Read)
+  localAddress?: string;
+
+  /**
+   * The list of address prefixes for the effective route.
+   */
+  @visibility(Lifecycle.Read)
+  addressPrefixes?: string[];
+
+  /**
+   * The IP address of the next hop for the effective route.
+   */
+  @visibility(Lifecycle.Read)
+  nextHopIpAddress?: string;
+
+  /**
+   * The next hop type of the effective route.
+   */
+  @visibility(Lifecycle.Read)
+  nextHopType?: GatewayEffectiveRouteNextHopType;
+}
+
+/**
+ * The next hop type of a gateway effective route.
+ */
+@added(Versions.v2025_09_01)
+union GatewayEffectiveRouteNextHopType {
+  string,
+
+  /**
+   * The next hop is a VPN tunnel.
+   */
+  Tunnel: "Tunnel",
+
+  /**
+   * The next hop is within the local virtual network.
+   */
+  VirtualNetwork: "VirtualNetwork",
+
+  /**
+   * The next hop type could not be determined.
+   */
+  Unknown: "Unknown",
 }
 
 /**
@@ -23044,6 +23870,18 @@ model VirtualHubProperties {
   virtualRouterIps?: string[];
 
   /**
+   * IPv6 Address-prefix for this VirtualHub.
+   */
+  @added(Versions.v2025_09_01)
+  addressPrefixV6?: string;
+
+  /**
+   * VirtualRouter IPv6 IPs.
+   */
+  @added(Versions.v2025_09_01)
+  virtualRouterIpsV6?: string[];
+
+  /**
    * Flag to control transit for VirtualRouter hub.
    */
   allowBranchToBranchTraffic?: boolean;
@@ -23383,10 +24221,34 @@ model HubVirtualNetworkConnectionProperties {
   routingConfiguration?: RoutingConfiguration;
 
   /**
+   * Enable Only IPv6 Peering for this connection.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  enableOnlyIpv6Peering?: EnableOnlyIpv6PeeringState;
+
+  /**
    * The provisioning state of the hub virtual network connection resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * The state of IPv6 peering.
+ */
+union EnableOnlyIpv6PeeringState {
+  string,
+
+  /**
+   * IPv6 peering is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * IPv6 peering is disabled.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -25410,6 +26272,12 @@ model ApplicationRule extends FirewallPolicyRule {
   sourceIpGroups?: string[];
 
   /**
+   * List of source Kubernetes Selector Groups for this rule.
+   */
+  @added(Versions.v2025_09_01)
+  sourceKubeSelectorGroups?: string[];
+
+  /**
    * Terminate TLS connections for this rule.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -25560,6 +26428,12 @@ model NetworkRule extends FirewallPolicyRule {
    * List of destination FQDNs.
    */
   destinationFqdns?: string[];
+
+  /**
+   * List of source Kubernetes Selector Groups for this rule.
+   */
+  @added(Versions.v2025_09_01)
+  sourceKubeSelectorGroups?: string[];
 
   /**
    * Rule Type.
@@ -26118,6 +26992,24 @@ model ExpressRoutePortListResult is Azure.Core.Page<ExpressRoutePort>;
 model ExpressRoutePortAuthorizationListResult
   is Azure.Core.Page<ExpressRoutePortAuthorization>;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute LAG List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model ExpressRouteLagListResult is Azure.Core.Page<ExpressRouteLag>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute LAG Link List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model ExpressRouteLagLinkListResult is Azure.Core.Page<ExpressRouteLagLink>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute LAG Member List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_09_01)
+model ExpressRouteLagMemberListResult is Azure.Core.Page<ExpressRouteLagMember>;
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("ExpressRoutePorts Location List Result")
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
@@ -26518,6 +27410,480 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+// =============================================================================
+// Connection Analyzer (api-version 2025-09-01)
+// =============================================================================
+
+/**
+ * The type of diagnostic operation to run on a connection analyzer.
+ */
+@added(Versions.v2025_09_01)
+union DiagnosticOperation {
+  string,
+
+  /**
+   * Determines the next hop for traffic from the source to the destination.
+   */
+  NextHop: "NextHop",
+
+  /**
+   * Evaluates the network security group rules that apply to the traffic.
+   */
+  NSG: "NSG",
+
+  /**
+   * Scans the destination ports to determine their reachability.
+   */
+  PortScan: "PortScan",
+
+  /**
+   * Performs an end-to-end connectivity check between the source and destination.
+   */
+  ConnectivityCheck: "ConnectivityCheck",
+
+  /**
+   * Runs Express Route specific diagnostics for the connection.
+   */
+  ExpressRouteDiagnostic: "ExpressRouteDiagnostic",
+}
+
+namespace ConnectionAnalyzerEndpointTypes {
+  /**
+   * The endpoint type for a connection analyzer source or destination.
+   */
+  @added(Versions.v2025_09_01)
+  union EndpointType {
+    string,
+
+    /**
+     * An Azure virtual machine endpoint, identified by its ARM resource ID.
+     */
+    VM: "VM",
+
+    /**
+     * An Azure virtual machine scale set (or scale set instance) endpoint, identified by its ARM resource ID.
+     */
+    VMSS: "VMSS",
+
+    /**
+     * An external endpoint reachable from outside Azure, identified by an IP address or FQDN.
+     */
+    ExternalAddress: "ExternalAddress",
+
+    /**
+     * An Azure Bastion host endpoint, identified by its ARM resource ID.
+     */
+    BastionHost: "BastionHost",
+
+    /**
+     * An Application Gateway endpoint, identified by its ARM resource ID.
+     */
+    ApplicationGateway: "ApplicationGateway",
+  }
+}
+
+/**
+ * Current execution status of the connection analyzer.
+ */
+@added(Versions.v2025_09_01)
+union ConnectionAnalyzerStatus {
+  string,
+
+  /**
+   * The connection analyzer has been created but execution has not yet begun.
+   */
+  NotStarted: "NotStarted",
+
+  /**
+   * The connection analyzer is currently running its diagnostic operations.
+   */
+  Running: "Running",
+
+  /**
+   * The connection analyzer completed all diagnostic operations successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The connection analyzer failed to complete its diagnostic operations.
+   */
+  Failed: "Failed",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+@doc("""
+  Describes a source or destination endpoint of a connection analyzer.
+  
+  The schema is intentionally permissive (a flat object) because the set of
+  valid fields is determined by `type` and is enforced server-side by the
+  Network Resource Provider. The required and allowed fields per `type` are:
+  
+  - `VM`, `VMSS`, `BastionHost`, `ApplicationGateway`: `resourceId` is
+    required and must be the ARM resource ID of the corresponding resource
+    (a virtual machine, virtual machine scale set or VMSS instance, Azure
+    Bastion host, or Application Gateway, respectively); `address` is not
+    used; `port` is optional.
+  - `ExternalAddress`: `address` is required and must be an IP address or
+    FQDN reachable from outside Azure; `resourceId` is not used; `port` is
+    optional.
+  
+  Requests that supply fields not allowed for the chosen `type`, or omit a
+  required field, are rejected by the service with a validation error. This
+  follows the same convention used by `ConnectivitySource` and
+  `ConnectivityDestination` on Network Watcher.
+  """)
+model ConnectionAnalyzerEndpoint {
+  /**
+   * The type of the endpoint. Determines which of `resourceId` and `address`
+   * are required; see the model-level documentation for the per-type contract.
+   */
+  type: ConnectionAnalyzerEndpointTypes.EndpointType;
+
+  /**
+   * ARM resource ID of the endpoint resource. Required when `type` is `VM`,
+   * `VMSS`, `BastionHost`, or `ApplicationGateway`. Not used when `type` is
+   * `ExternalAddress`.
+   */
+  resourceId?: armResourceIdentifier;
+
+  /**
+   * IP address or FQDN of the endpoint. Required when `type` is
+   * `ExternalAddress`. Not used for the resource-typed endpoint kinds (`VM`,
+   * `VMSS`, `BastionHost`, `ApplicationGateway`).
+   */
+  address?: string;
+
+  /**
+   * Port to use for the endpoint (0-65535).
+   */
+  @minValue(0)
+  @maxValue(65535)
+  port?: int32;
+}
+
+/**
+ * Settings that control how connectivity checks are performed by the connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectivityCheckSettings {
+  /**
+   * Whether to generate a hop-by-hop path during the connectivity check. Default value is true.
+   */
+  generatePath?: boolean = true;
+
+  /**
+   * Preferred IP version for the connectivity check.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name preserves uppercase 'IP' acronym to remain consistent with existing Microsoft.Network properties named preferredIPVersion."
+  preferredIPVersion?: PreferredIPVersion;
+}
+
+/**
+ * Settings that control how Express Route diagnostics are performed by the connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ExpressRouteDiagnosticsSettings {
+  /**
+   * Resource ID of the Express Route circuit.
+   */
+  erCircuitResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/expressRouteCircuits";
+    }
+  ]>;
+
+  /**
+   * Bandwidth (in Mbps) to use for the Express Route diagnostic.
+   */
+  bandwidth?: float32;
+}
+
+/**
+ * Diagnostic settings to provide for the ConnectionAnalyzer operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model DiagnosticOperationsSettings {
+  /**
+   * Settings for the ConnectivityCheck diagnostic operation.
+   */
+  connectivityCheckSettings?: ConnectivityCheckSettings;
+
+  /**
+   * Settings for the ExpressRouteDiagnostic diagnostic operation.
+   */
+  expressRouteDiagnosticsSettings?: ExpressRouteDiagnosticsSettings;
+}
+
+/**
+ * Protocol-level settings for the connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ProtocolSettings {
+  /**
+   * Network protocol.
+   */
+  protocol?: Protocol;
+
+  /**
+   * HTTP configuration (used when protocol is Http or Https).
+   */
+  httpConfiguration?: HttpConfiguration;
+}
+
+/**
+ * Storage account where the connection analyzer writes its output.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model StorageAccountSettings {
+  /**
+   * Resource ID of the storage account.
+   */
+  storageAccountId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  /**
+   * Sub-path within the storage account where results are written.
+   */
+  path?: string;
+}
+
+/**
+ * Settings that control where the connection analyzer writes its results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model OutputSettings {
+  /**
+   * Storage account where output is written.
+   */
+  storageAccountSettings?: StorageAccountSettings;
+}
+
+/**
+ * Properties of a connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectionAnalyzerProperties {
+  /**
+   * Source endpoint of the connection analyzer.
+   */
+  source: ConnectionAnalyzerEndpoint;
+
+  /**
+   * Destination endpoint of the connection analyzer.
+   */
+  destination: ConnectionAnalyzerEndpoint;
+
+  /**
+   * List of diagnostic operations to run.
+   */
+  @minItems(1)
+  diagnosticOperations: DiagnosticOperation[];
+
+  /**
+   * Protocol-level settings.
+   */
+  protocolSettings?: ProtocolSettings;
+
+  /**
+   * Per-operation diagnostic settings.
+   */
+  diagnosticOperationsSettings?: DiagnosticOperationsSettings;
+
+  /**
+   * Time-to-live (days) before the analyzer expires.
+   */
+  @minValue(1)
+  expiryInDays?: int32;
+
+  /**
+   * Output settings (e.g. storage account).
+   */
+  outputSettings?: OutputSettings;
+
+  /**
+   * UTC time when the connection analyzer request was received.
+   */
+  @visibility(Lifecycle.Read)
+  requestTime?: utcDateTime;
+
+  /**
+   * The provisioning state of the connection analyzer resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Current execution status of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  status?: ConnectionAnalyzerStatus;
+}
+
+/**
+ * Defines a connection analyzer resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "ConnectionAnalyzer is exposed via the legacy NetworkWatcher action pattern; its key is supplied by the routed operation, not modeled on the resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Connection Analyzer follows the existing legacy custom-resource pattern used by sibling NetworkWatcher child resources in this project."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ConnectionAnalyzer {
+  /**
+   * Name of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource ID of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource location.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags must be modeled as Record<string> per the ARM resource contract."
+  tags?: Record<string>;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  /**
+   * Properties of the connection analyzer.
+   */
+  properties: ConnectionAnalyzerProperties;
+}
+
+/**
+ * List of connection analyzers.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectionAnalyzerListResult {
+  /**
+   * Information about connection analyzers.
+   */
+  @pageItems
+  value?: ConnectionAnalyzer[];
+
+  /**
+   * URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Result of an individual diagnostic operation run by a connection analyzer.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model DiagnosticOperationResult {
+  /**
+   * The diagnostic operation that was run.
+   */
+  diagnosticOperation: DiagnosticOperation;
+
+  /**
+   * Error encountered while running the diagnostic operation, if any.
+   */
+  error?: string;
+
+  /**
+   * The result of the diagnostic operation, serialized as a JSON string.
+   *
+   * The payload shape varies by `diagnosticOperation`. For example, a
+   * `ConnectivityCheck` operation returns a JSON object such as
+   * `{ "ConnectivityStatus": "Reachable" }`. Consumers should parse this
+   * string as JSON according to the corresponding diagnostic operation.
+   */
+  result?: string;
+}
+
+/**
+ * Status result returned when querying a connection analyzer for its diagnostic results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to attach Connection Analyzer child models to the existing NetworkWatcher resource which is modeled with the legacy ARM resource pattern via Azure.ResourceManager.Legacy.feature."
+@added(Versions.v2025_09_01)
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+model ConnectionAnalyzerQueryStatusResult {
+  /**
+   * Resource ID of the connection analyzer.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Current execution status of the connection analyzer.
+   */
+  connectionAnalyzerStatus?: ConnectionAnalyzerStatus;
+
+  /**
+   * Error message if the connection analyzer operation failed.
+   */
+  error?: string;
+
+  /**
+   * Storage path where the connection analyzer output is written.
+   */
+  outputStoragePath?: string;
+
+  /**
+   * UTC time when the connection analyzer expires.
+   */
+  expiryInUtc?: utcDateTime;
+
+  /**
+   * Results of the individual diagnostic operations.
+   */
+  @identifiers(#["diagnosticOperation"])
+  diagnosticOperationResults?: DiagnosticOperationResult[];
+}
+
 @@added(DisablePeeringRoute, Versions.v2025_07_01);
 @@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
 

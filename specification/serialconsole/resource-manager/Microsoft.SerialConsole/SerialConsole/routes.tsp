@@ -37,6 +37,15 @@ op getConsoleStatus(
   | GetSerialConsoleSubscriptionNotFoundError
   | CloudError;
 
+alias ConsoleServiceDefaultParameter = {
+  /**
+   * Default parameter. Leave the value as "default".
+   */
+  @path
+  @segment("consoleServices")
+  default: string;
+};
+
 @armResourceOperations(#{ omitTags: true })
 interface SerialConsoleOperationGroup {
   /**
@@ -51,14 +60,7 @@ interface SerialConsoleOperationGroup {
       | DisableSerialConsoleResult
       | GetSerialConsoleSubscriptionNotFoundError,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Default parameter. Leave the value as "default".
-       */
-      @path
-      @segment("consoleServices")
-      default: string;
-    },
+    Parameters = ConsoleServiceDefaultParameter,
     Error = CloudError
   >;
 
@@ -74,14 +76,7 @@ interface SerialConsoleOperationGroup {
       | EnableSerialConsoleResult
       | GetSerialConsoleSubscriptionNotFoundError,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Default parameter. Leave the value as "default".
-       */
-      @path
-      @segment("consoleServices")
-      default: string;
-    },
+    Parameters = ConsoleServiceDefaultParameter,
     Error = CloudError
   >;
 }

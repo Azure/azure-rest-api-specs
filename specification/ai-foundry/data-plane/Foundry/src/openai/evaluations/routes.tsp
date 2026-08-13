@@ -17,7 +17,6 @@ alias EvalQueryParameters = {
 
   /** The order query parameter. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @query
   @doc("Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.")
   order?: "asc" | "desc" = "asc";
@@ -28,7 +27,6 @@ alias RunListQueryParameters = {
 
   /** The status query parameter. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @query
   @doc("Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed` | `canceled`.")
   status?: "queued" | "in_progress" | "completed" | "canceled" | "failed";

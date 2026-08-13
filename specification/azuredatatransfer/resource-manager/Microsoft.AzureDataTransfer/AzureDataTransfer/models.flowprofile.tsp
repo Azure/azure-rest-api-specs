@@ -3,6 +3,10 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./main.tsp";
+import "./Connection.tsp";
+import "./Flow.tsp";
+import "./Pipeline.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -13,6 +17,7 @@ namespace Microsoft.AzureDataTransfer;
 /**
  * Defines the required request body for retrieving FlowProfile information for a provided pipeline.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_05_30_preview)
 model ListFlowProfilesRequest {
   /**

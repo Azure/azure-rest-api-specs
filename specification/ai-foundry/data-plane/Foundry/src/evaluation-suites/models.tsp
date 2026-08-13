@@ -117,7 +117,6 @@ model EvaluationSuiteVersion {
     """)
   dataset?: EvaluationDatasetReference;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching eval group testing_criteria pattern"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
     Testing criteria — the evaluator configurations for this suite.
@@ -141,7 +140,6 @@ model EvaluationSuiteVersion {
     """)
   target?: Target;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
     How to send dataset rows to the target (agent or model).
@@ -317,7 +315,6 @@ model EvaluationSuiteGenerationJobInputs {
     """)
   target?: Target;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
     How to send dataset rows to the target.
