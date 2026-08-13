@@ -2085,10 +2085,6 @@
         ]
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "CustomHeader": {
       "type": "object",
       "description": "Custom header name and value.",
@@ -3015,29 +3011,13 @@
       "type": "object",
       "description": "A Site embedded in a Topology Map.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SiteProperties",
-          "description": "The properties of the Site."
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "The name of the Site."
+        },
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "The properties of the Site."
         }
       },
       "required": [
@@ -3101,7 +3081,10 @@
           "description": "The list of Sites in the Topology Map.",
           "items": {
             "$ref": "#/definitions/TopologyMapInlineSite"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "catchAllSiteName": {
           "type": "string",
