@@ -87,6 +87,7 @@ model VoiceAgentLlmInterimResponseConfig
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Interim response settings are selected by their `type` property."
 @doc("Interim-response settings for latency and tool execution.")
 @oneOf
+@Azure.ClientGenerator.Core.alternateType(VoiceAgentInterimResponseConfig, "csharp")
 union VoiceAgentInterimResponse {
   static: VoiceAgentStaticInterimResponseConfig,
   llm: VoiceAgentLlmInterimResponseConfig,
