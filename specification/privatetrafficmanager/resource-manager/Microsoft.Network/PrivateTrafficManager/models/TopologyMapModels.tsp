@@ -28,6 +28,7 @@ union ProvisioningState {
 @doc("Class representing the Topology Map properties.")
 model TopologyMapProperties {
   @doc("The list of Sites in the Topology Map.")
+  @identifiers(#["name"])
   sites?: TopologyMapInlineSite[];
 
   @doc("The Name of the CatchAll site. There is only one CatchAll site in a TopologyMap")
@@ -40,10 +41,11 @@ model TopologyMapProperties {
 
 @doc("A Site embedded in a Topology Map.")
 model TopologyMapInlineSite {
-  ...OmitProperties<Site, "name">;
-
   @doc("The name of the Site.")
   name: string;
+
+  @doc("The properties of the Site.")
+  properties?: SiteProperties;
 }
 
 @doc("The properties of a Topology Map that can be updated.")
