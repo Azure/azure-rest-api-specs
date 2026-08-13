@@ -49,13 +49,33 @@ test.concurrent("suppress foo.json, get bar.json", async () => {
 test.concurrent("suppress foo.json, get foo.json w/ different tool", async () => {
   const suppressions: Suppression[] = await getTestSuppressions(
     join("suppressFooJson", "foo.json"),
-    "TestTool2",
+    "TestToolNotExist",
   );
   expect(suppressions).toEqual([
     {
       tool: "TestTool2",
       paths: ["foo.json"],
       reason: "test 2",
+    },
+  ]);
+});
+
+test.concurrent("get suppressions for multiple tools", async () => {
+  const suppressions = await getSuppressionsForTools(
+    ["TestTool2", "TestTool", "TestTool2"],
+    join(__dirname, "e2e", "suppressFooJson", "foo.json"),
+  );
+
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool2",
+      paths: ["foo.json"],
+      reason: "test 2",
+    },
+    {
+      tool: "TestTool",
+      paths: ["foo.json"],
+      reason: "test",
     },
   ]);
 });
