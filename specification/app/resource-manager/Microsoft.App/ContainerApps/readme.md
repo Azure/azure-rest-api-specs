@@ -93,6 +93,14 @@ directive:
       false positive. This emitter issue is tracked by
       https://github.com/Azure/typespec-azure/issues/2042.
       Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: openapi.json
+    reason: |
+      This established API family uses ARM common types v5. Moving only the 2026-07-01 version
+      to v6 changes the identity, SKU, and plan schemas, including newly required properties,
+      and is reported as a breaking change against prior versions.
+      Remove this suppression when the API family can migrate common types without changing
+      its existing wire contract.
 ```
 
 ### Tag: package-preview-2025-10-02-preview
