@@ -452,8 +452,8 @@ namespace Microsoft.Compute;
 );
 @@clientName(DelayRequest, "DelayRequestContent", "csharp");
 @@clientName(
-  RecurringScheduledActionsExecutionParameters,
-  "RecurringScheduledActionsExecutionParametersContent",
+  ScheduledActionsExecutionParameters,
+  "ScheduledActionsExecutionParametersContent",
   "csharp"
 );
 @@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");
