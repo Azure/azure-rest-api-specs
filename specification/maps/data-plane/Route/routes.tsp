@@ -583,18 +583,16 @@ interface Route {
    * request's parameters, the request does not meet the requirements and will not
    * be processed.
    *
-   * | Max matrix size | Max number of origins  | Max number of destinations |
-   * Additional limits
-   *
-   * |------------------|------------------------|----------------------------|------------|
-   * | 100              | 100         | 100              | N/A |
-   * | 200              | 200         | 200              | All origins and
+   * Max matrix size | Max number of origins  | Max number of destinations | Additional limits
+   * ----------------|------------------------|----------------------------|------------------
+   * 100             | 100         | 100              | N/A
+   * 200             | 200         | 200              | All origins and
    * destinations should be contained in an axis-aligned 400 km x 400 km bounding
-   * box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.  |
-   * | 2500             | 1000        | 1000             | - `departAt` or
+   * box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.
+   * 2500            | 1000        | 1000             | - `departAt` or
    * `arriveAt` must be any.<br> - `traffic` must be historical.<br> - `travelMode`
    * must be either driving or truck<br> - No other parameters can be used
-   * explicitly   |
+   * explicitly
    *
    *
    * Examples:
