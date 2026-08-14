@@ -39,8 +39,8 @@ model Employee is TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<Employee>;
 
   /** The SKU assigned to the Employee resource. */
-  @added(Versions.v2026_07_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The SKU is a standard ARM resource envelope property."
+  @added(Versions.v2026_07_01_preview)
   sku?: EmployeeSku;
 }
 
