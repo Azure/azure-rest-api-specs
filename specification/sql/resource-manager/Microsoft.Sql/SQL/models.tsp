@@ -4294,7 +4294,6 @@ model BackupShortTermRetentionPolicyProperties {
    * Whether to lock the immutability of the backups governed by this short term retention policy.
    */
   @added(Versions.v2026_08_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   lockImmutability?: boolean;
 
   /**
@@ -11148,7 +11147,6 @@ model ManagedBackupShortTermRetentionPolicyProperties {
    * Whether to lock the immutability of the backups governed by this short term retention policy.
    */
   @added(Versions.v2026_08_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   lockImmutability?: boolean;
 
   /**
