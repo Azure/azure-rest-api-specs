@@ -385,6 +385,7 @@ interface StoragePools {
     | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Initiate a connection between the storage pool and a specified AVS SDDC resource")
   @armResourceAction(StoragePool)
   @action("enableAvsConnection")
@@ -408,6 +409,7 @@ interface StoragePools {
     | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Disable the existing AVS connection")
   @armResourceAction(StoragePool)
   @action("disableAvsConnection")
@@ -425,6 +427,7 @@ interface StoragePools {
     | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Finalize an already started AVS connection to a specific AVS SDDC")
   @armResourceAction(StoragePool)
   @action("finalizeAvsConnection")
@@ -448,6 +451,7 @@ interface StoragePools {
     | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Test and repair, if needed, all configuration elements of the storage pool connection to the AVS instance")
   @armResourceAction(StoragePool)
   @action("repairAvsConnection")

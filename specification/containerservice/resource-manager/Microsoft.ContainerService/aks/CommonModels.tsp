@@ -2823,6 +2823,7 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @added(Versions.v2026_06_01)
   outboundIPPrefixes?: {
     /**
@@ -2840,6 +2841,7 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP resources for the managed NAT Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @added(Versions.v2026_06_01)
   outboundIPs?: {
     /**

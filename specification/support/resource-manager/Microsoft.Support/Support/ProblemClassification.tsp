@@ -31,6 +31,7 @@ interface ClassifyProblems {
       /**
        * Name of the Azure service for which the problem classifications need to be retrieved.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
       @pattern("^[0-9a-zA-Z_\\-. ]+$")
       @path
       @segment("services")
@@ -57,6 +58,7 @@ interface ClassifyProblemsNoSubscription {
       /**
        * Name of the Azure service for which the problem classifications need to be retrieved.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
       @pattern("^[0-9a-zA-Z_\\-. ]+$")
       @path
       @segment("services")

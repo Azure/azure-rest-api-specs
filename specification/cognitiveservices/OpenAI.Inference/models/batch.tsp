@@ -182,7 +182,7 @@ model Batch {
   cancelledAt?: utcDateTime;
 
   /** The request counts for different statuses within the batch. */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @encodedName("application/json", "request_counts")
   requestCounts?: {
     /** Total number of requests in the batch. */
@@ -228,6 +228,7 @@ model BatchRequestOutput {
   customId?: string;
 
   /** The http response */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   response?: {
     /** The HTTP status code of the response */
     @encodedName("application/json", "status_code")
@@ -242,6 +243,7 @@ model BatchRequestOutput {
   };
 
   /** For requests that failed with a non-HTTP error, this will contain more information on the cause of the failure. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   error?: {
     /** A machine-readable error code. */
     code?: string;
