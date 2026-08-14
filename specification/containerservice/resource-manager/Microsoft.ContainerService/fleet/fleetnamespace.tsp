@@ -62,7 +62,7 @@ model FleetManagedNamespaceProperties {
 
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
-  @doc("The Fleet members where this managed namespace is currently placed.")
+  @doc("The Fleet members where the current-generation ClusterResourcePlacement status reports the managed namespace as successfully applied. This property is omitted while current-generation placement status is unavailable, including while an update is being scheduled. An empty array indicates that current-generation placement status is available but the managed namespace is not successfully applied to any members.")
   placedMembers?: string[];
 }
 
