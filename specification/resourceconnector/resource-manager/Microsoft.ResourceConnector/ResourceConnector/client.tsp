@@ -12,7 +12,9 @@ using Microsoft.ResourceConnector;
  * Shared client overrides
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AppliancesUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
