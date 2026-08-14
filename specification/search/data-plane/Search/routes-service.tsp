@@ -969,6 +969,8 @@ interface KnowledgeSources {
   @sharedRoute
   @route("/knowledgesources('{sourceName}')/files")
   @post
+  @Azure.ClientGenerator.Core.convenientAPI(false)
+  @Azure.ClientGenerator.Core.protocolAPI(false)
   uploadFile is SearchSourceOperation<
     {
       /** The content type of the request body. Must be application/octet-stream. */
@@ -1001,13 +1003,8 @@ interface KnowledgeSources {
   uploadFileMultipart is SearchSourceOperation<
     {
       /** The multipart/form-data body containing the metadata and content parts. */
-      @multipartBody body: {
-        /** The JSON metadata part describing the file. */
-        metadata: HttpPart<FileUploadMetadata>;
-
-        /** The raw file content part. */
-        content: HttpPart<File>;
-      };
+      @multipartBody
+      body: UploadKnowledgeSourceFileMultipartRequest;
     },
     KnowledgeSourceFile & {
       @statusCode
@@ -1068,13 +1065,8 @@ interface KnowledgeSources {
       @path fileId: string;
 
       /** The multipart/form-data body containing the metadata and content parts. */
-      @multipartBody body: {
-        /** The JSON metadata part describing the file. */
-        metadata: HttpPart<FileUploadMetadata>;
-
-        /** The raw file content part. */
-        content: HttpPart<File>;
-      };
+      @multipartBody
+      body: UpdateKnowledgeSourceFileRequest;
     },
     KnowledgeSourceFile
   >;
