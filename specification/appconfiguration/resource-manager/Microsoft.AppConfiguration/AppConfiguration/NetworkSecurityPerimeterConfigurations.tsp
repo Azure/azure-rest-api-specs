@@ -24,7 +24,8 @@ model NetworkSecurityPerimeterConfiguration
 }
 
 // Before 2026-09-01-preview the NSP configuration used the ARM common-types v5 shape.
-@@typeChangedFrom(NetworkSecurityPerimeterConfiguration.properties,
+@@typeChangedFrom(
+  NetworkSecurityPerimeterConfiguration.properties,
   Versions.v2026_09_01_preview,
   Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties
 );

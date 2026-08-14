@@ -3,9 +3,11 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AppConfiguration;
 
@@ -35,6 +37,8 @@ union AccessRuleDirection {
  * Provisioning state of a network security perimeter configuration that is being created or updated.
  */
 @added(Versions.v2026_09_01_preview)
+// readOnly must live on the definition (not the $ref sibling) to satisfy ProvisioningStateMustBeReadOnly for this newly-introduced enum.
+@extension("readOnly", true)
 union NetworkSecurityPerimeterConfigurationProvisioningState {
   string,
 
