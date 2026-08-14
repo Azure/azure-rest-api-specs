@@ -1838,8 +1838,8 @@ model DeletedVaultUndeleteInput {
 );
 
 /**
- * Region of choice settings at the vault level.
- * This setting allows customers to configure backups for data sources from a different region.
+ * Region of choice settings at vault level.
+ * This setting allows customers to configure backups for datasources from different region.
  */
 @added(Versions.v2026_07_01)
 model RegionOfChoiceSettings {
