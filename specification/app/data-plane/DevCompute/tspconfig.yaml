@@ -1,0 +1,22 @@
+emit:
+  - "@typespec/openapi3"
+
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{output-dir}/openapi"
+    file-type: json
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+  disable:
+    "@azure-tools/typespec-azure-core/no-openapi": "This project intentionally emits OpenAPI for downstream validation and coverage comparison."
+    "@azure-tools/typespec-azure-core/no-nullable": "The TypeSpec is preserving an existing deployed JSON contract whose OpenAPI explicitly permits null values."
+    "@azure-tools/typespec-azure-core/no-unnamed-union": "The existing deployed contract contains mixed primitive and nullable unions that must remain wire-compatible."
+    "@azure-tools/typespec-azure-core/use-standard-operations": "Sandbox exposes existing custom data-plane routes that do not map to the standard Azure.Core resource operation templates."
+    "@azure-tools/typespec-azure-core/use-standard-names": "Existing public path and query parameter names are preserved for compatibility."
+    "@azure-tools/typespec-azure-core/response-schema-problem": "Shared operation templates parameterize their scope-specific unions of @error response models."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "The existing service uses closed C# enums and rejects unknown serialized values."
+    "@azure-tools/typespec-azure-core/casing-style": "Existing serialized property and query parameter casing is preserved for wire compatibility."
+
+output-dir: "{project-root}/tsp-output"

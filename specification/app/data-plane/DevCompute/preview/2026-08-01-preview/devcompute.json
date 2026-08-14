@@ -1,0 +1,5360 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ADC Data Plane API",
+    "description": "ADC Data Plane API.",
+    "version": "2026-08-01-preview"
+  },
+  "tags": [
+    {
+      "name": "Sandboxes"
+    }
+  ],
+  "paths": {
+    "/sandboxGroups/{sandboxGroupId}/sandboxes": {
+      "get": {
+        "operationId": "SandboxGroupSandboxes_list",
+        "description": "Lists sandboxes in a scope.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/SandboxGroupScope"
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "required": false,
+            "description": "One-based page number.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": true
+            },
+            "explode": false
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of sandboxes returned per page.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": true
+            },
+            "explode": false
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated label selector.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox list response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SandboxFields"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      }
+    },
+    "/sandboxGroups/{sandboxGroupId}/sandboxes/{id}": {
+      "get": {
+        "operationId": "SandboxGroupSandboxes_get",
+        "description": "Gets a sandbox by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/SandboxGroupScope"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox get or update response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "SandboxGroupSandboxes_update",
+        "description": "Updates mutable sandbox properties.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/SandboxGroupScope"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox get or update response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchSandboxRequest"
+              }
+            }
+          },
+          "description": "Sandbox merge-patch request."
+        },
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "SandboxGroupSandboxes_delete",
+        "description": "Deletes a sandbox by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/SandboxGroupScope"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox delete response with an empty 200 body."
+          },
+          "204": {
+            "description": "Successful Sandbox delete response with no content."
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          },
+          "503": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      }
+    },
+    "/sandboxes": {
+      "get": {
+        "operationId": "Sandboxes_list",
+        "description": "Lists sandboxes in a scope.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "required": false,
+            "description": "One-based page number.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": true
+            },
+            "explode": false
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of sandboxes returned per page.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": true
+            },
+            "explode": false
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated label selector.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox list response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SandboxFields"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "Sandboxes_create",
+        "description": "Creates a sandbox in a scope.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "includeDebug",
+            "in": "query",
+            "required": false,
+            "description": "Includes server debug timing information in the response.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Sandbox create response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          },
+          "503": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SandboxRequest"
+              }
+            }
+          },
+          "description": "Sandbox create request."
+        },
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      }
+    },
+    "/sandboxes/{id}": {
+      "get": {
+        "operationId": "Sandboxes_get",
+        "description": "Gets a sandbox by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox get or update response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "Sandboxes_update",
+        "description": "Updates mutable sandbox properties.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox get or update response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchSandboxRequest"
+              }
+            }
+          },
+          "description": "Sandbox merge-patch request."
+        },
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "Sandboxes_delete",
+        "description": "Deletes a sandbox by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox delete response with an empty 200 body."
+          },
+          "204": {
+            "description": "Successful Sandbox delete response with no content."
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          },
+          "503": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "security": [
+          {
+            "UserEntraAuth": [
+              "https://management.azuredevcompute.io/.default"
+            ]
+          },
+          {
+            "UserBearerAuth": []
+          },
+          {
+            "UserGitHubAuth": []
+          },
+          {
+            "UserApiKeyAuth": []
+          },
+          {
+            "UserPortalCookieAuth": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes": {
+      "get": {
+        "operationId": "AzureSandboxes_list",
+        "description": "Lists sandboxes in a scope.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "required": false,
+            "description": "One-based page number.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": true
+            },
+            "explode": false
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of sandboxes returned per page.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "nullable": true
+            },
+            "explode": false
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated label selector.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox list response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SandboxFields"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ]
+      },
+      "put": {
+        "operationId": "AzureSandboxes_create",
+        "description": "Creates a sandbox in a scope.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "includeDebug",
+            "in": "query",
+            "required": false,
+            "description": "Includes server debug timing information in the response.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Sandbox create response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          },
+          "503": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SandboxRequest"
+              }
+            }
+          },
+          "description": "Sandbox create request."
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}": {
+      "get": {
+        "operationId": "AzureSandboxes_get",
+        "description": "Gets a sandbox by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox get or update response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxFields"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ]
+      },
+      "delete": {
+        "operationId": "AzureSandboxes_delete",
+        "description": "Deletes a sandbox by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/components/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier.",
+            "schema": {
+              "$ref": "#/components/schemas/SandboxId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Sandbox delete response with an empty 200 body."
+          },
+          "204": {
+            "description": "Successful Sandbox delete response with no content."
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response with a 500 status code and no guaranteed response body."
+          },
+          "503": {
+            "description": "An error response with an HTTP status code and error body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sandboxes"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "AzureDataPlaneS2SAuth": [
+        "https://management.azuredevcompute.io/.default"
+      ]
+    }
+  ],
+  "components": {
+    "parameters": {
+      "Azure.Core.Foundations.ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "description": "The API version to use for this operation.",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "explode": false
+      },
+      "AzureResourceScope.resourceGroupName": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "description": "Azure resource group name.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "AzureResourceScope.sandboxGroupName": {
+        "name": "sandboxGroupName",
+        "in": "path",
+        "required": true,
+        "description": "ADC sandbox group name.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "AzureResourceScope.subscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "description": "Azure subscription identifier.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "SandboxGroupScope": {
+        "name": "sandboxGroupId",
+        "in": "path",
+        "required": true,
+        "description": "Sandbox group identifier.",
+        "schema": {
+          "$ref": "#/components/schemas/SandboxGroupId"
+        }
+      }
+    },
+    "schemas": {
+      "AbsoluteDirectoryPath": {
+        "type": "string",
+        "description": "AbsoluteDirectoryPath wire value."
+      },
+      "AbsoluteFilePath": {
+        "type": "string",
+        "description": "AbsoluteFilePath wire value."
+      },
+      "AddPortRequest": {
+        "type": "object",
+        "required": [
+          "port"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional name for the port (must be unique per sandbox if provided)."
+          },
+          "port": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxPortNumber"
+              }
+            ],
+            "description": "The port number to expose (required, must be unique per sandbox)."
+          },
+          "auth": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortAuthConfig"
+              }
+            ],
+            "nullable": true,
+            "description": "auth value."
+          },
+          "activationMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortActivationMode"
+              }
+            ],
+            "nullable": true,
+            "description": "activationMode value."
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortProtocol"
+              }
+            ],
+            "description": "The HTTP protocol version to use when forwarding requests to this port. Defaults to Http (HTTP/1.1)."
+          },
+          "ipAccessControl": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IpAccessControl"
+              }
+            ],
+            "nullable": true,
+            "description": "ipAccessControl value."
+          },
+          "cors": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortCorsConfig"
+              }
+            ],
+            "nullable": true,
+            "description": "cors value."
+          }
+        },
+        "description": "Request to add a port to a sandbox."
+      },
+      "ApiVersions": {
+        "type": "string",
+        "enum": [
+          "2026-08-01-preview"
+        ],
+        "description": "Supported ADC Data Plane API versions."
+      },
+      "AutoDeleteTrigger": {
+        "type": "string",
+        "enum": [
+          "AfterSuspend",
+          "AfterCreation"
+        ],
+        "description": "AutoDeleteTrigger values."
+      },
+      "AzureBlobByoPodVolume": {
+        "type": "object",
+        "required": [
+          "fileCacheSizeLimit",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "AzureBlobByo"
+            ],
+            "description": "kind value."
+          },
+          "fileCacheSizeLimit": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StorageQuantity"
+              }
+            ],
+            "description": "fileCacheSizeLimit value."
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "readOnly value.",
+            "default": false
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VolumeName"
+              }
+            ],
+            "description": "name value."
+          }
+        },
+        "description": "Bring-your-own (BYO) Azure Blob container volume source, backed by blobfuse2."
+      },
+      "AzureBlobPodVolume": {
+        "type": "object",
+        "required": [
+          "fileCacheSizeLimit",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "AzureBlob"
+            ],
+            "description": "kind value."
+          },
+          "fileCacheSizeLimit": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StorageQuantity"
+              }
+            ],
+            "description": "fileCacheSizeLimit value."
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "readOnly value.",
+            "default": false
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VolumeName"
+              }
+            ],
+            "description": "name value."
+          }
+        },
+        "description": "Azure Blob Storage volume source, backed by blobfuse2."
+      },
+      "Base64": {
+        "type": "string",
+        "description": "Represents a base64-encoded value."
+      },
+      "ContainerProbe": {
+        "type": "object",
+        "properties": {
+          "httpGet": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProbeHttpGetAction"
+              }
+            ],
+            "nullable": true,
+            "description": "httpGet value."
+          },
+          "exec": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProbeExecAction"
+              }
+            ],
+            "nullable": true,
+            "description": "exec value."
+          },
+          "tcpSocket": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProbeTcpSocketAction"
+              }
+            ],
+            "nullable": true,
+            "description": "tcpSocket value."
+          },
+          "initialDelaySeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "initialDelaySeconds value."
+          },
+          "periodSeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "periodSeconds value."
+          },
+          "timeoutSeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "timeoutSeconds value."
+          },
+          "failureThreshold": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "failureThreshold value."
+          },
+          "successThreshold": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "successThreshold value."
+          },
+          "terminationGracePeriodSeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "terminationGracePeriodSeconds value."
+          }
+        },
+        "description": "Probe configuration for checking a container's startup, liveness, or readiness state."
+      },
+      "ContainerProbeResult": {
+        "type": "string",
+        "enum": [
+          "Success",
+          "Failure",
+          "Unknown"
+        ],
+        "description": "ContainerProbeResult values."
+      },
+      "ContainerProbeStatus": {
+        "type": "object",
+        "required": [
+          "consecutiveFailures",
+          "consecutiveSuccesses"
+        ],
+        "properties": {
+          "lastResult": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerProbeResult"
+              }
+            ],
+            "nullable": true,
+            "description": "lastResult value."
+          },
+          "consecutiveFailures": {
+            "type": "integer",
+            "format": "int32",
+            "description": "consecutiveFailures value."
+          },
+          "consecutiveSuccesses": {
+            "type": "integer",
+            "format": "int32",
+            "description": "consecutiveSuccesses value."
+          },
+          "lastCheckedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "lastCheckedAt value."
+          },
+          "lastTransitionAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "lastTransitionAt value."
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "message value."
+          }
+        },
+        "description": "Runtime status for a configured container probe."
+      },
+      "ContainerResources": {
+        "type": "object",
+        "properties": {
+          "cpu": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CpuQuantity"
+              }
+            ],
+            "description": "Kubernetes-style CPU resource quantity string (e.g. \"500m\", \"2\", \"0.5\")."
+          },
+          "memory": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryQuantity"
+              }
+            ],
+            "description": "Kubernetes-style memory resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
+          },
+          "disk": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StorageQuantity"
+              }
+            ],
+            "description": "Kubernetes-style storage/disk resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
+          }
+        },
+        "description": "Per-container resource configuration. CPU and Memory set cgroup limits inside the VM. Disk controls writable layer sizing."
+      },
+      "ContainerRestartPolicy": {
+        "type": "string",
+        "enum": [
+          "Always",
+          "OnFailure",
+          "Never"
+        ],
+        "description": "ContainerRestartPolicy values."
+      },
+      "ContainerRuntimeState": {
+        "type": "string",
+        "enum": [
+          "Unknown",
+          "Waiting",
+          "Running",
+          "Terminated"
+        ],
+        "description": "Customer-facing container runtime state."
+      },
+      "ContainerSecurityContext": {
+        "type": "object",
+        "properties": {
+          "runAsUser": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "runAsUser value."
+          },
+          "runAsGroup": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "runAsGroup value."
+          },
+          "runAsNonRoot": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "runAsNonRoot value."
+          },
+          "privileged": {
+            "type": "boolean",
+            "description": "privileged value.",
+            "default": false
+          },
+          "capabilities": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinuxCapabilities"
+              }
+            ],
+            "nullable": true,
+            "description": "capabilities value."
+          },
+          "allowPrivilegeEscalation": {
+            "type": "boolean",
+            "description": "allowPrivilegeEscalation value.",
+            "default": true
+          },
+          "readOnlyRootFilesystem": {
+            "type": "boolean",
+            "description": "readOnlyRootFilesystem value.",
+            "default": false
+          },
+          "seccompProfile": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SeccompProfile"
+              }
+            ],
+            "nullable": true,
+            "description": "seccompProfile value."
+          }
+        },
+        "description": "Container-level security context — overrides pod-level settings where applicable. Follows Kubernetes container securityContext semantics."
+      },
+      "ContainerSpec": {
+        "type": "object",
+        "required": [
+          "name",
+          "diskImage"
+        ],
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PodContainerName"
+              }
+            ],
+            "description": "name value."
+          },
+          "diskImage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSourceDiskImage"
+              }
+            ],
+            "description": "diskImage value."
+          },
+          "command": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "command value."
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "args value."
+          },
+          "env": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "env value."
+          },
+          "resources": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerResources"
+              }
+            ],
+            "nullable": true,
+            "description": "resources value."
+          },
+          "volumeMounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerVolumeMount"
+            },
+            "nullable": true,
+            "description": "volumeMounts value."
+          },
+          "contentPackageDownloads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxContentPackageDownload"
+            },
+            "nullable": true,
+            "description": "contentPackageDownloads value."
+          },
+          "securityContext": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerSecurityContext"
+              }
+            ],
+            "nullable": true,
+            "description": "securityContext value."
+          },
+          "startupProbe": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerProbe"
+              }
+            ],
+            "nullable": true,
+            "description": "startupProbe value."
+          },
+          "livenessProbe": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerProbe"
+              }
+            ],
+            "nullable": true,
+            "description": "livenessProbe value."
+          },
+          "readinessProbe": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerProbe"
+              }
+            ],
+            "nullable": true,
+            "description": "readinessProbe value."
+          }
+        },
+        "description": "Per-container specification within a pod source."
+      },
+      "ContainerStatus": {
+        "type": "object",
+        "required": [
+          "name",
+          "state",
+          "ready",
+          "started",
+          "restartCount"
+        ],
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PodContainerName"
+              }
+            ],
+            "description": "name value."
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerRuntimeState"
+              }
+            ],
+            "description": "state value."
+          },
+          "ready": {
+            "type": "boolean",
+            "description": "ready value."
+          },
+          "started": {
+            "type": "boolean",
+            "description": "started value."
+          },
+          "restartCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "restartCount value."
+          },
+          "reason": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerStatusReason"
+              }
+            ],
+            "nullable": true,
+            "description": "reason value."
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "message value."
+          },
+          "lastExitCode": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "lastExitCode value."
+          },
+          "lastStartedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "lastStartedAt value."
+          },
+          "lastFinishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "lastFinishedAt value."
+          },
+          "probes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ContainerProbeStatus"
+            },
+            "nullable": true,
+            "description": "probes value."
+          }
+        },
+        "description": "Runtime status for one pod container."
+      },
+      "ContainerStatusReason": {
+        "type": "string",
+        "enum": [
+          "Completed",
+          "Error",
+          "CrashLoopBackOff",
+          "RootfsResetPending",
+          "RootfsResetFailed"
+        ],
+        "description": "ContainerStatusReason values."
+      },
+      "ContainerVolumeMount": {
+        "type": "object",
+        "required": [
+          "name",
+          "mountPath"
+        ],
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VolumeName"
+              }
+            ],
+            "description": "name value."
+          },
+          "mountPath": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AbsoluteDirectoryPath"
+              }
+            ],
+            "description": "mountPath value."
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "readOnly value.",
+            "default": false
+          }
+        },
+        "description": "Per-container volume mount specifying which volume to mount and where."
+      },
+      "ContentPackageAction": {
+        "type": "string",
+        "enum": [
+          "Download",
+          "Mount"
+        ],
+        "description": "Specifies how a content package should be delivered to the container."
+      },
+      "ContentPackageId": {
+        "type": "string",
+        "description": "ContentPackageId wire value."
+      },
+      "CpuQuantity": {
+        "type": "string",
+        "description": "Kubernetes-style CPU resource quantity string (e.g. \"500m\", \"2\", \"0.5\")."
+      },
+      "DataDiskPodVolume": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "DataDisk"
+            ],
+            "description": "kind value."
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VolumeName"
+              }
+            ],
+            "description": "name value."
+          }
+        },
+        "description": "Data disk volume source backed by a persistent ext4 block device in cluster storage."
+      },
+      "DebugInfo": {
+        "type": "object",
+        "properties": {
+          "traceId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The OTEL trace ID for correlating logs and requests across services."
+          },
+          "traces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfTrace"
+            },
+            "nullable": true,
+            "description": "Performance spans for waterfall visualization. Flat list with parent-child relationships via ParentId."
+          }
+        },
+        "description": "Debug information that can be included in API responses."
+      },
+      "DiskImageId": {
+        "type": "string",
+        "description": "DiskImageId wire value."
+      },
+      "EgressHostRule": {
+        "type": "object",
+        "required": [
+          "pattern"
+        ],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "pattern value."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyAction"
+              }
+            ],
+            "nullable": true,
+            "description": "action value."
+          }
+        },
+        "description": "EgressHostRule wire model."
+      },
+      "EgressPolicyAction": {
+        "type": "string",
+        "enum": [
+          "Allow",
+          "Deny"
+        ],
+        "description": "EgressPolicyAction values."
+      },
+      "EgressPolicyActionType": {
+        "type": "string",
+        "enum": [
+          "Allow",
+          "Deny",
+          "Transform",
+          "Rewrite"
+        ],
+        "description": "Types of actions that an egress policy rule can take."
+      },
+      "EgressPolicyEnforcementMode": {
+        "type": "string",
+        "enum": [
+          "Enforced",
+          "Audit"
+        ],
+        "description": "EgressPolicyEnforcementMode values."
+      },
+      "EgressPolicyHeaderOperation": {
+        "type": "string",
+        "enum": [
+          "Set",
+          "Insert",
+          "Remove"
+        ],
+        "description": "Types of header transformation operations."
+      },
+      "EgressPolicyHeaderTransform": {
+        "type": "object",
+        "required": [
+          "operation",
+          "name"
+        ],
+        "properties": {
+          "operation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyHeaderOperation"
+              }
+            ],
+            "description": "operation value."
+          },
+          "name": {
+            "type": "string",
+            "description": "name value."
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "value value."
+          },
+          "valueRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyValueRef"
+              }
+            ],
+            "nullable": true,
+            "description": "valueRef value."
+          }
+        },
+        "description": "Describes a header transformation to apply to matching requests."
+      },
+      "EgressPolicyHookFailBehavior": {
+        "type": "string",
+        "enum": [
+          "Deny",
+          "Allow"
+        ],
+        "description": "What the egress proxy should do when a webhook invocation fails (timeout, non-2xx, invalid payload, SSRF-rejected URL, etc.)."
+      },
+      "EgressPolicyHookRef": {
+        "type": "object",
+        "required": [
+          "endpoint"
+        ],
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "description": "endpoint value."
+          },
+          "failBehavior": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyHookFailBehavior"
+              }
+            ],
+            "description": "failBehavior value."
+          },
+          "requestHeaders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "requestHeaders value."
+          },
+          "authHeaders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressPolicyHeaderTransform"
+            },
+            "nullable": true,
+            "description": "authHeaders value."
+          },
+          "timeoutMs": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "timeoutMs value."
+          },
+          "routingMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressRuleRoutingMode"
+              }
+            ],
+            "description": "routingMode value."
+          }
+        },
+        "description": "Configures a webhook called at request time for rules whose static decision cannot be expressed declaratively. When a rule's EgressPolicyHookRef? EgressPolicyRule.HookRef is set, the egress proxy POSTs a request-context payload to string EgressPolicyHookRef.Endpoint and applies the returned decision (Allow / Deny / Transform / Rewrite) in place of the rule's static Action.  EgressRuleRoutingMode EgressPolicyHookRef.RoutingMode controls how the egress proxy reaches the webhook endpoint itself: EgressRuleRoutingMode.Vnet binds the outbound socket to the sandbox's customer VNET IP (so the hook host can be a private service reachable only from inside the VNET), EgressRuleRoutingMode.Platform forces the node's platform egress (bypassing Swift SNAT), and EgressRuleRoutingMode.Default uses the sandbox-level routing. The webhook response itself can also carry a `routingMode` field that overrides routing for the downstream upstream call when the decision is Rewrite."
+      },
+      "EgressPolicyManagedIdentityRef": {
+        "type": "object",
+        "required": [
+          "resource"
+        ],
+        "properties": {
+          "resource": {
+            "type": "string",
+            "description": "resource value."
+          },
+          "format": {
+            "type": "string",
+            "nullable": true,
+            "description": "format value."
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyManagedIdentityType"
+              }
+            ],
+            "nullable": true,
+            "description": "type value."
+          },
+          "identityResourceId": {
+            "type": "string",
+            "nullable": true,
+            "description": "identityResourceId value."
+          }
+        },
+        "description": "References a managed identity token to be fetched and injected as a header value. EgressPolicyManagedIdentityType? EgressPolicyManagedIdentityRef.Type must be set to specify which identity to use."
+      },
+      "EgressPolicyManagedIdentityType": {
+        "type": "string",
+        "enum": [
+          "SystemAssigned",
+          "UserAssigned"
+        ],
+        "description": "EgressPolicyManagedIdentityType values."
+      },
+      "EgressPolicyMatchScheme": {
+        "type": "string",
+        "enum": [
+          "http",
+          "https",
+          "any"
+        ],
+        "description": "EgressPolicyMatchScheme values."
+      },
+      "EgressPolicyRule": {
+        "type": "object",
+        "required": [
+          "name",
+          "match"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "name value."
+          },
+          "match": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyRuleMatch"
+              }
+            ],
+            "description": "match value."
+          },
+          "action": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyRuleAction"
+              }
+            ],
+            "nullable": true,
+            "description": "action value."
+          },
+          "proxyActions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "proxyActions value."
+          },
+          "source": {
+            "type": "string",
+            "nullable": true,
+            "description": "source value."
+          },
+          "hookRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyHookRef"
+              }
+            ],
+            "nullable": true,
+            "description": "hookRef value."
+          }
+        },
+        "description": "A single egress policy rule. Rules are evaluated in order; first match wins. A rule has either a static EgressPolicyRuleAction? EgressPolicyRule.Action or a dynamic EgressPolicyHookRef? EgressPolicyRule.HookRef, never both. When EgressPolicyHookRef? EgressPolicyRule.HookRef is set, the proxy calls the configured webhook at request time and applies the returned decision in place of EgressPolicyRuleAction? EgressPolicyRule.Action."
+      },
+      "EgressPolicyRuleAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyActionType"
+              }
+            ],
+            "description": "type value."
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressPolicyHeaderTransform"
+            },
+            "nullable": true,
+            "description": "headers value."
+          },
+          "scheme": {
+            "type": "string",
+            "nullable": true,
+            "description": "scheme value."
+          },
+          "host": {
+            "type": "string",
+            "nullable": true,
+            "description": "host value."
+          },
+          "path": {
+            "type": "string",
+            "nullable": true,
+            "description": "path value."
+          },
+          "routingMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressRuleRoutingMode"
+              }
+            ],
+            "description": "routingMode value."
+          }
+        },
+        "description": "The action to take when a rule matches. For Rewrite actions, Scheme/Host/Path specify the destination to rewrite the request to, and EgressRuleRoutingMode EgressPolicyRuleAction.RoutingMode optionally overrides the sandbox-level egress routing for this rule."
+      },
+      "EgressPolicyRuleMatch": {
+        "type": "object",
+        "required": [
+          "host"
+        ],
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "host value."
+          },
+          "path": {
+            "type": "string",
+            "nullable": true,
+            "description": "path value."
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "methods value."
+          },
+          "scheme": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyMatchScheme"
+              }
+            ],
+            "nullable": true,
+            "description": "scheme value."
+          },
+          "normalizePath": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "normalizePath value."
+          }
+        },
+        "description": "Request matching criteria for an egress policy rule. All specified conditions must match (AND logic). EgressPolicyMatchScheme? EgressPolicyRuleMatch.Scheme is nullable; null means the author did not specify a scheme and the effective default is resolved per rule polarity at evaluation time. A static Deny defaults to EgressPolicyMatchScheme.Any so a block is not silently scoped to HTTPS and bypassed over HTTP. Every other rule — including positive rules (Allow / Transform / Rewrite) and dynamic EgressPolicyHookRef? EgressPolicyRule.HookRef rules (whose outcome can be Allow/Transform/Rewrite or fail open) — defaults to EgressPolicyMatchScheme.Https: on plaintext HTTP there is no SNI, so matching uses the sandbox-controlled Host header with no certificate validation, and a positive or hook match there would let a sandbox reach a non-allowlisted IP while spoofing an allowlisted Host. Set EgressPolicyMatchScheme.Any explicitly to match both schemes, or EgressPolicyMatchScheme.Http / EgressPolicyMatchScheme.Https to pin a single scheme. For IP-based match hosts, scheme matching is ignored (no TLS certificate validation applies to IPs anyway).bool? EgressPolicyRuleMatch.NormalizePath controls whether the request path is decoded and normalized (encoded-slash decode, slash merging, and ./.. dot-segment removal) before it is matched against string? EgressPolicyRuleMatch.Path. It defaults to enabled (null is treated as true) to prevent path-confusion bypasses where an encoded path such as /allowed%2F.. matches an allow rule but the upstream server resolves it to a different path. Set to false only for upstreams that require the raw, un-normalized path."
+      },
+      "EgressPolicySecretRef": {
+        "type": "object",
+        "required": [
+          "secretId"
+        ],
+        "properties": {
+          "secretId": {
+            "type": "string",
+            "description": "secretId value."
+          },
+          "secretKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "secretKey value."
+          },
+          "format": {
+            "type": "string",
+            "nullable": true,
+            "description": "format value."
+          }
+        },
+        "description": "References a secret stored via the Secrets API for header value injection."
+      },
+      "EgressPolicyValueRef": {
+        "type": "object",
+        "properties": {
+          "secretRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicySecretRef"
+              }
+            ],
+            "nullable": true,
+            "description": "secretRef value."
+          },
+          "managedIdentityRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyManagedIdentityRef"
+              }
+            ],
+            "nullable": true,
+            "description": "managedIdentityRef value."
+          }
+        },
+        "description": "A dynamic value reference for header transforms. Exactly one of the ref fields should be set."
+      },
+      "EgressRuleRoutingMode": {
+        "type": "string",
+        "enum": [
+          "Default",
+          "Vnet",
+          "Platform"
+        ],
+        "description": "Per-rule override of how the egress proxy creates the upstream socket. Today only honored on EgressPolicyActionType.Rewrite rules."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true,
+            "description": "A URI reference identifying the problem type."
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "description": "A short summary of the problem."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "The HTTP status code generated by the origin server."
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true,
+            "description": "A human-readable explanation of the problem."
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true,
+            "description": "A URI reference identifying the specific problem occurrence."
+          }
+        },
+        "description": "Azure Dev Compute error object."
+      },
+      "FsGroupChangePolicy": {
+        "type": "string",
+        "enum": [
+          "OnRootMismatch",
+          "Always",
+          "None"
+        ],
+        "description": "FsGroupChangePolicy values."
+      },
+      "GatewayConnection": {
+        "type": "object",
+        "required": [
+          "resourceId"
+        ],
+        "properties": {
+          "resourceId": {
+            "type": "string",
+            "description": "ARM resource ID of the AI Gateway MCP server config or connection. Format: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Web/aigateways/{gw}/mcpServerConfigs/{config} or: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Web/connectorGateways/{gw}/connections/{conn}"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional user-friendly name for this connection. Used as the key in mcp-config.json and connections.json. When not provided, derived from the last segment of string GatewayConnection.ResourceId."
+          },
+          "mcpRuntimeUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "MCP server endpoint URL for invoking the connection (agent discovery). Resolved from the parent sandbox group; not required on sandbox requests."
+          },
+          "connectionRuntimeUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "Direct API Hub connection endpoint URL for app invocation (non-MCP). Resolved from the parent sandbox group; not required on sandbox requests."
+          },
+          "authentication": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GatewayConnectionAuth"
+              }
+            ],
+            "nullable": true,
+            "description": "authentication value."
+          }
+        },
+        "description": "Represents an AI Gateway connection to associate with a sandbox (3P flow). On sandbox requests: only string GatewayConnection.ResourceId is required; full details are resolved from the parent sandbox group. On sandbox responses: legacy sandboxes include all fields; new sandboxes include only string GatewayConnection.ResourceId."
+      },
+      "GatewayConnectionAuth": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GatewayConnectionAuthType"
+              }
+            ],
+            "description": "The type of managed identity to use: \"SystemAssignedManagedIdentity\" or \"UserAssignedManagedIdentity\"."
+          },
+          "identityResourceId": {
+            "type": "string",
+            "nullable": true,
+            "description": "ARM resource ID of the user-assigned managed identity. Required when GatewayConnectionAuthType GatewayConnectionAuth.Type is GatewayConnectionAuthType.UserAssignedManagedIdentity, omitted when GatewayConnectionAuthType.SystemAssignedManagedIdentity."
+          }
+        },
+        "description": "Authentication configuration specifying which managed identity to use for a connection at runtime."
+      },
+      "GatewayConnectionAuthType": {
+        "type": "string",
+        "enum": [
+          "SystemAssignedManagedIdentity",
+          "UserAssignedManagedIdentity"
+        ],
+        "description": "The type of managed identity to use for a gateway connection."
+      },
+      "HttpEgressSection": {
+        "type": "object",
+        "required": [
+          "defaultAction"
+        ],
+        "properties": {
+          "defaultAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyAction"
+              }
+            ],
+            "description": "The default action applied when no rule matches. Required: a request that sends an `http` section must specify a default action."
+          },
+          "hostRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressHostRule"
+            },
+            "description": "hostRules value."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressPolicyRule"
+            },
+            "nullable": true,
+            "description": "Rich egress policy rules supporting Allow, Deny, and Transform actions with header mutations. Rules are evaluated after connector-generated rules, in order (first match wins)."
+          },
+          "trafficInspection": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrafficInspection"
+              }
+            ],
+            "description": "Controls the scope of TLS inspection for the egress proxy. Defaults to Full."
+          },
+          "enforcementMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyEnforcementMode"
+              }
+            ],
+            "description": "enforcementMode value."
+          }
+        },
+        "description": "The HTTP section of a sandbox egress policy. This is the canonical way to configure HTTP egress and is a sibling to TdsEgressSection? SandboxEgressPolicy.Tds and TransportEgressSection? SandboxEgressPolicy.TransportRules. It carries the same fields the policy view historically exposed at the top level."
+      },
+      "IdentitySetting": {
+        "type": "object",
+        "required": [
+          "identity"
+        ],
+        "properties": {
+          "identity": {
+            "type": "string",
+            "description": "The identity reference — ARM resource ID for user-assigned, \"system\" for system-assigned, or a client ID."
+          },
+          "lifecycle": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IdentitySettingLifecycle"
+              }
+            ],
+            "description": "Lifecycle phase gating for this identity."
+          }
+        },
+        "description": "Per-identity availability setting on a sandbox. Allows explicit control over which identities from the group are served to the sandbox."
+      },
+      "IdentitySettingLifecycle": {
+        "type": "string",
+        "enum": [
+          "None",
+          "Main",
+          "All"
+        ],
+        "description": "Controls which identity lifecycle phases a specific identity is available in."
+      },
+      "IpAccessControl": {
+        "type": "object",
+        "required": [
+          "defaultAction"
+        ],
+        "properties": {
+          "defaultAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IpAccessControlAction"
+              }
+            ],
+            "description": "defaultAction value."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessControlRule"
+            },
+            "description": "rules value."
+          }
+        },
+        "description": "IP access control configuration for a port. Rules are evaluated in priority order; first match wins."
+      },
+      "IpAccessControlAction": {
+        "type": "string",
+        "enum": [
+          "Allow",
+          "Deny"
+        ],
+        "description": "IpAccessControlAction values."
+      },
+      "IpAccessControlRule": {
+        "type": "object",
+        "required": [
+          "name",
+          "action",
+          "priority",
+          "sourceCidrs"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name value."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IpAccessControlAction"
+              }
+            ],
+            "description": "action value."
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "description": "priority value."
+          },
+          "sourceCidrs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "sourceCidrs value."
+          }
+        },
+        "description": "A single IP access control rule."
+      },
+      "LinuxCapabilities": {
+        "type": "object",
+        "properties": {
+          "add": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "add value."
+          },
+          "drop": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "drop value."
+          }
+        },
+        "description": "Linux capabilities to add or drop from the container's default capability set."
+      },
+      "LocalPodVolume": {
+        "type": "object",
+        "required": [
+          "size",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Local"
+            ],
+            "description": "kind value."
+          },
+          "size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StorageQuantity"
+              }
+            ],
+            "description": "size value."
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VolumeName"
+              }
+            ],
+            "description": "name value."
+          }
+        },
+        "description": "Local volume source backed by rootfs space."
+      },
+      "LogColumnDef": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/LogColumnDefValueLogColumnDef"
+          },
+          {
+            "$ref": "#/components/schemas/LogColumnDefRefLogColumnDef"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Value": "#/components/schemas/LogColumnDefValueLogColumnDef",
+            "Ref": "#/components/schemas/LogColumnDefRefLogColumnDef"
+          }
+        },
+        "description": "Defines a single column in a custom log output schema. Polymorphic on `kind` discriminator: `\"Value\"` or `\"Ref\"`."
+      },
+      "LogColumnDefRefLogColumnDef": {
+        "type": "object",
+        "required": [
+          "refName"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Ref"
+            ],
+            "description": "kind value."
+          },
+          "refName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogColumnRef"
+              }
+            ],
+            "description": "The ADC attribute to resolve."
+          }
+        },
+        "description": "A column whose value is resolved from a well-known ADC attribute at runtime."
+      },
+      "LogColumnDefValueLogColumnDef": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Value"
+            ],
+            "description": "kind value."
+          },
+          "value": {
+            "type": "string",
+            "description": "The static value injected into every log record."
+          }
+        },
+        "description": "A column whose value is a literal string provided by the partner."
+      },
+      "LogColumnRef": {
+        "type": "string",
+        "enum": [
+          "LogContent",
+          "LogStream",
+          "SandboxId",
+          "Region",
+          "ContainerName"
+        ],
+        "description": "Well-known ADC attributes that can be referenced by custom columns."
+      },
+      "MegaBytes": {
+        "type": "string",
+        "description": "MegaBytes wire value."
+      },
+      "MemoryQuantity": {
+        "type": "string",
+        "description": "Kubernetes-style memory resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
+      },
+      "PatchSandboxRequest": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true,
+            "description": "labels value."
+          }
+        },
+        "description": "Request body for `PATCH /sandboxes/{id}`. Uses JSON Merge Patch semantics for labels: keys with non-null values are set, keys with null values are removed, absent keys are unchanged."
+      },
+      "PerfTrace": {
+        "type": "object",
+        "required": [
+          "id",
+          "parentId",
+          "startMs",
+          "durationMs",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Base64"
+              }
+            ],
+            "description": "Base64-encoded span ID (12-char)."
+          },
+          "parentId": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Base64"
+              }
+            ],
+            "nullable": true,
+            "description": "parentId value."
+          },
+          "startMs": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp in milliseconds when the span started."
+          },
+          "durationMs": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Span duration in milliseconds."
+          },
+          "name": {
+            "type": "string",
+            "description": "Descriptive name (e.g., \"NodeAgent.InjectVmm\")."
+          }
+        },
+        "description": "Represents a performance span for waterfall visualization."
+      },
+      "PodContainerName": {
+        "type": "string",
+        "description": "User-provided container name within a pod. DNS label format: lowercase alphanumeric + hyphens, 1-63 chars, must start and end with alphanumeric."
+      },
+      "PodContentPackage": {
+        "type": "object",
+        "required": [
+          "contentPackageId"
+        ],
+        "properties": {
+          "contentPackageId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentPackageId"
+              }
+            ],
+            "description": "contentPackageId value."
+          }
+        },
+        "description": "Pod-level content package declaration. Declares a content package that the pod uses. Per-container downloads reference content packages by ContentPackageId PodContentPackage.ContentPackageId."
+      },
+      "PodSecurityContext": {
+        "type": "object",
+        "properties": {
+          "runAsUser": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "runAsUser value."
+          },
+          "runAsGroup": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "runAsGroup value."
+          },
+          "runAsNonRoot": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "runAsNonRoot value."
+          },
+          "supplementalGroups": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true,
+            "description": "supplementalGroups value."
+          },
+          "fsGroup": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "fsGroup value."
+          },
+          "fsGroupChangePolicy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FsGroupChangePolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "fsGroupChangePolicy value."
+          }
+        },
+        "description": "Pod-level security context — applies to all containers unless overridden at the container level. Follows Kubernetes pod securityContext semantics."
+      },
+      "PodVolume": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AzureBlobPodVolume"
+          },
+          {
+            "$ref": "#/components/schemas/AzureBlobByoPodVolume"
+          },
+          {
+            "$ref": "#/components/schemas/LocalPodVolume"
+          },
+          {
+            "$ref": "#/components/schemas/DataDiskPodVolume"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "AzureBlob": "#/components/schemas/AzureBlobPodVolume",
+            "AzureBlobByo": "#/components/schemas/AzureBlobByoPodVolume",
+            "Local": "#/components/schemas/LocalPodVolume",
+            "DataDisk": "#/components/schemas/DataDiskPodVolume"
+          }
+        },
+        "description": "Pod-level volume declaration. Declares a named volume source that can be referenced by containers via ContainerVolumeMount."
+      },
+      "PortActivationMode": {
+        "type": "string",
+        "enum": [
+          "Manual",
+          "OnDemand"
+        ],
+        "description": "PortActivationMode values."
+      },
+      "PortAuthConfig": {
+        "type": "object",
+        "properties": {
+          "anonymous": {
+            "type": "boolean",
+            "description": "anonymous value."
+          },
+          "github": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortAuthConfigGithub"
+              }
+            ],
+            "nullable": true,
+            "description": "github value."
+          },
+          "entraId": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortAuthConfigEntraId"
+              }
+            ],
+            "nullable": true,
+            "description": "entraId value."
+          }
+        },
+        "description": "Auth configuration for a port. Each provider can be independently enabled/disabled without removing configuration."
+      },
+      "PortAuthConfigEntraId": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether Entra ID authentication is enabled."
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed email addresses (exact match). Empty means any authenticated Entra ID user can access. Combined with emailSuffixes, objectIds, and tenantIds, maximum 100 entries allowed."
+          },
+          "emailSuffixes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed email domain suffixes (e.g., \""
+          },
+          "objectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed Entra ID object IDs (user or group GUIDs). Combined with emails, emailSuffixes, and tenantIds, maximum 100 entries allowed."
+          },
+          "tenantIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed Entra ID tenant IDs (directory GUIDs). Matches any user from the specified tenant. Combined with emails, emailSuffixes, and objectIds, maximum 100 entries allowed."
+          }
+        },
+        "description": "Entra ID-specific auth configuration for a port."
+      },
+      "PortAuthConfigGithub": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether GitHub authentication is enabled."
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed email addresses (exact match). Empty means any"
+          },
+          "emailSuffixes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed email domain suffixes (e.g., \""
+          },
+          "usernames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed GitHub usernames (exact match). Empty means any authenticated GitHub user can access. Combined with emails, emailSuffixes, and usernameSuffixes, maximum 100 entries allowed."
+          },
+          "usernameSuffixes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed username suffixes (e.g., \"_microsoft\" for EMU accounts). Matches any username ending with the suffix. Combined with emails, emailSuffixes, and usernames, maximum 100 entries allowed."
+          }
+        },
+        "description": "GitHub-specific auth configuration for a port. Permits users whose verified email ends with"
+      },
+      "PortCorsConfig": {
+        "type": "object",
+        "properties": {
+          "allowOrigins": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "allowOrigins value."
+          },
+          "allowMethods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "allowMethods value."
+          },
+          "allowHeaders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "allowHeaders value."
+          },
+          "allowCredentials": {
+            "type": "boolean",
+            "description": "allowCredentials value."
+          },
+          "maxAge": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "maxAge value."
+          }
+        },
+        "description": "CORS configuration for a sandbox port."
+      },
+      "PortProtocol": {
+        "type": "string",
+        "enum": [
+          "Http",
+          "Http2"
+        ],
+        "description": "Specifies the HTTP protocol version to use when forwarding requests to a port."
+      },
+      "PresetSandboxType": {
+        "type": "string",
+        "enum": [
+          "None",
+          "GitHubCopilot",
+          "Moltbot",
+          "UbuntuSystemd",
+          "Claude",
+          "OpenClaw"
+        ],
+        "description": "PresetSandboxType values."
+      },
+      "ProbeExecAction": {
+        "type": "object",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "command value."
+          }
+        },
+        "description": "Exec probe handler that runs a command in the container."
+      },
+      "ProbeHttpGetAction": {
+        "type": "object",
+        "required": [
+          "port"
+        ],
+        "properties": {
+          "port": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxPortNumber"
+              }
+            ],
+            "description": "port value."
+          },
+          "path": {
+            "type": "string",
+            "nullable": true,
+            "description": "path value."
+          },
+          "host": {
+            "type": "string",
+            "nullable": true,
+            "description": "host value."
+          },
+          "scheme": {
+            "type": "string",
+            "nullable": true,
+            "description": "scheme value."
+          },
+          "httpHeaders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProbeHttpHeader"
+            },
+            "nullable": true,
+            "description": "httpHeaders value."
+          }
+        },
+        "description": "HTTP GET probe handler executed from inside the container VM."
+      },
+      "ProbeHttpHeader": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name value."
+          },
+          "value": {
+            "type": "string",
+            "description": "value value."
+          }
+        },
+        "description": "HTTP header sent with a probe HTTP GET request."
+      },
+      "ProbeTcpSocketAction": {
+        "type": "object",
+        "required": [
+          "port"
+        ],
+        "properties": {
+          "port": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxPortNumber"
+              }
+            ],
+            "description": "port value."
+          },
+          "host": {
+            "type": "string",
+            "nullable": true,
+            "description": "host value."
+          }
+        },
+        "description": "TCP socket probe handler that checks whether a port accepts connections."
+      },
+      "ProjectId": {
+        "type": "string",
+        "description": "ProjectId wire value."
+      },
+      "SandboxAgentIdentityRef": {
+        "type": "object",
+        "required": [
+          "tenantId",
+          "agentId"
+        ],
+        "properties": {
+          "tenantId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenantId"
+              }
+            ],
+            "description": "Tenant ID where the agent identity is registered."
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Unique identifier for the agent identity."
+          }
+        },
+        "description": "Reference to an agent identity for assigning to a sandbox."
+      },
+      "SandboxAutoDeletePolicy": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "enabled value."
+          },
+          "deleteIntervalInDays": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "deleteIntervalInDays value."
+          },
+          "deleteIntervalInSeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int64"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "deleteIntervalInSeconds value."
+          },
+          "trigger": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoDeleteTrigger"
+              }
+            ],
+            "nullable": true,
+            "description": "trigger value."
+          }
+        },
+        "description": "SandboxAutoDeletePolicy wire model."
+      },
+      "SandboxAutoSuspendPolicy": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "enabled value."
+          },
+          "interval": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "interval value."
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSuspendMode"
+              }
+            ],
+            "nullable": true,
+            "description": "mode value."
+          }
+        },
+        "description": "SandboxAutoSuspendPolicy wire model."
+      },
+      "SandboxContentPackageDownload": {
+        "type": "object",
+        "required": [
+          "contentPackageId",
+          "targetPath"
+        ],
+        "properties": {
+          "contentPackageId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentPackageId"
+              }
+            ],
+            "description": "The content package ID to download."
+          },
+          "targetPath": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AbsoluteFilePath"
+              }
+            ],
+            "description": "The target path in the sandbox where the content package will be downloaded. Must be an absolute path. Parent directories will be created if they don't exist."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentPackageAction"
+              }
+            ],
+            "description": "How the content package should be delivered: Download (default) or Mount. Mount presents the package contents as a read-only FUSE filesystem at the target path. Currently only supported for zip content packages."
+          }
+        },
+        "description": "Represents a content package to be downloaded onto a sandbox during creation."
+      },
+      "SandboxEgressPolicy": {
+        "type": "object",
+        "properties": {
+          "http": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HttpEgressSection"
+              }
+            ],
+            "nullable": true,
+            "description": "http value."
+          },
+          "defaultAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyAction"
+              }
+            ],
+            "nullable": true,
+            "description": "defaultAction value."
+          },
+          "hostRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressHostRule"
+            },
+            "description": "hostRules value."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressPolicyRule"
+            },
+            "nullable": true,
+            "description": "Rich egress policy rules supporting Allow, Deny, and Transform actions with header mutations. Rules are evaluated after connector-generated rules, in order (first match wins)."
+          },
+          "tds": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TdsEgressSection"
+              }
+            ],
+            "nullable": true,
+            "description": "tds value."
+          },
+          "transportRules": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransportEgressSection"
+              }
+            ],
+            "nullable": true,
+            "description": "transportRules value."
+          },
+          "trafficInspection": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrafficInspection"
+              }
+            ],
+            "description": "Controls the scope of TLS inspection for the egress proxy. Defaults to Full (all HTTPS is MITM'd and non-HTTP TCP/UDP is blocked). Legacy is no longer accepted on sandbox creation (issue #6420) but remains valid as a stored value for sandboxes created before the deprecation."
+          },
+          "enforcementMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyEnforcementMode"
+              }
+            ],
+            "description": "enforcementMode value."
+          },
+          "validationWarnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationWarning"
+            },
+            "nullable": true,
+            "description": "validationWarnings value."
+          }
+        },
+        "description": "Sandbox egress policy wire model."
+      },
+      "SandboxExecutionTokenResponse": {
+        "type": "object",
+        "required": [
+          "token",
+          "expiresAt"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "token value."
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "expiresAt value."
+          }
+        },
+        "description": "Sandbox execution token response wire model."
+      },
+      "SandboxExecutionTokensRequest": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "accounts value."
+          }
+        },
+        "description": "Sandbox execution tokens request wire model."
+      },
+      "SandboxFields": {
+        "type": "object",
+        "required": [
+          "id",
+          "vmmType",
+          "sourcesRef",
+          "resources"
+        ],
+        "properties": {
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxId"
+              }
+            ],
+            "description": "id value."
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "labels value."
+          },
+          "vmmType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VmmType"
+              }
+            ],
+            "description": "vmmType value."
+          },
+          "entrypoint": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Entrypoint override for the sandbox container."
+          },
+          "cmd": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Cmd override for the sandbox container."
+          },
+          "sourcesRef": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSource"
+              }
+            ],
+            "description": "sourcesRef value."
+          },
+          "resources": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxResources"
+              }
+            ],
+            "description": "resources value."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "createdAt value."
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxState"
+              }
+            ],
+            "nullable": true,
+            "description": "state value."
+          },
+          "stateDetails": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxStateDetails"
+              }
+            ],
+            "nullable": true,
+            "description": "stateDetails value."
+          },
+          "snapshotId": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SnapshotId"
+              }
+            ],
+            "nullable": true,
+            "description": "snapshotId value."
+          },
+          "coldStorageSizeInMB": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MegaBytes"
+              }
+            ],
+            "nullable": true,
+            "description": "coldStorageSizeInMB value."
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxPort"
+            },
+            "description": "ports value."
+          },
+          "connections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of connection IDs associated with this sandbox."
+          },
+          "gatewayConnections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GatewayConnection"
+            },
+            "nullable": true,
+            "description": "AI Gateway connections associated with this sandbox (3P flow)."
+          },
+          "credentialRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Sandbox-group credential names associated with this sandbox."
+          },
+          "egressPolicy": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxEgressPolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "egressPolicy value."
+          },
+          "sandboxGroupId": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxGroupId"
+              }
+            ],
+            "nullable": true,
+            "description": "sandboxGroupId value."
+          },
+          "region": {
+            "type": "string",
+            "nullable": true,
+            "description": "The Azure region where this sandbox is running (extracted from cluster hostname)."
+          },
+          "lifecycle": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxLifecyclePolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "lifecycle value."
+          },
+          "debug": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DebugInfo"
+              }
+            ],
+            "nullable": true,
+            "description": "debug value."
+          },
+          "appUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "The apps domain URL for sandboxes with type=app label. Only populated when the sandbox has the type=app label and AppsDnsSuffix is configured."
+          },
+          "managementUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "The base URL for data plane operations (exec, files, ports, etc.). Client SDKs should use this URL for all data plane calls. Currently points to the Global API, but may be redirected to cluster-direct URLs in the future."
+          },
+          "tokens": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SandboxExecutionTokenResponse"
+            },
+            "nullable": true,
+            "description": "Sandbox execution tokens issued as part of the create or resume request, keyed by account."
+          },
+          "agentIdentity": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxAgentIdentityRef"
+              }
+            ],
+            "nullable": true,
+            "description": "agentIdentity value."
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxVolume"
+            },
+            "description": "Volume mounts attached to this sandbox."
+          },
+          "contentPackageDownloads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxContentPackageDownload"
+            },
+            "description": "Content packages that were downloaded to this sandbox during creation."
+          },
+          "vnetConnectionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the vnet connection used when creating this sandbox, if any."
+          },
+          "customerVnetConnectionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Legacy alias for string? SandboxFields.VnetConnectionName. Emits the historical `customerVnetConnectionName` wire field so deployed SDKs and CLIs that parse it keep working."
+          },
+          "systemVnetConnectionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the system vnet connection used when creating this sandbox, if any."
+          },
+          "identitySettings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentitySetting"
+            },
+            "nullable": true,
+            "description": "Optional identity settings that control which managed identities from the group are available to this sandbox and in which lifecycle phases."
+          },
+          "outboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Static outbound (egress) IP addresses for the cluster hosting this sandbox. Populated when live cluster data is available (sandbox is running). Null when the sandbox is stopped or cluster data is unavailable. Customers can use these to configure IP-based allowlists on downstream resources."
+          },
+          "containerStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerStatus"
+            },
+            "nullable": true,
+            "description": "Live per-container runtime statuses for pod sandboxes. Omitted when unavailable."
+          }
+        },
+        "description": "Sandbox response fields wire model."
+      },
+      "SandboxGpu": {
+        "type": "object",
+        "required": [
+          "sku",
+          "quantity"
+        ],
+        "properties": {
+          "sku": {
+            "type": "string",
+            "description": "sku value."
+          },
+          "quantity": {
+            "type": "string",
+            "description": "quantity value."
+          }
+        },
+        "description": "Sandbox GPU wire model."
+      },
+      "SandboxGroupId": {
+        "type": "string",
+        "description": "SandboxGroupId wire value."
+      },
+      "SandboxId": {
+        "type": "string",
+        "description": "SandboxId wire value."
+      },
+      "SandboxLifecyclePolicy": {
+        "type": "object",
+        "required": [
+          "autoSuspendPolicy",
+          "autoDeletePolicy"
+        ],
+        "properties": {
+          "autoSuspendPolicy": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxAutoSuspendPolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "autoSuspendPolicy value."
+          },
+          "autoDeletePolicy": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxAutoDeletePolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "autoDeletePolicy value."
+          }
+        },
+        "description": "SandboxLifecyclePolicy wire model."
+      },
+      "SandboxPort": {
+        "type": "object",
+        "required": [
+          "port",
+          "url"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional name for the port (must be unique per sandbox if provided)."
+          },
+          "port": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxPortNumber"
+              }
+            ],
+            "description": "The port number exposed on the sandbox (required, must be unique per sandbox)."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL to access the port on the sandbox (required)."
+          },
+          "auth": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortAuthConfig"
+              }
+            ],
+            "nullable": true,
+            "description": "auth value."
+          },
+          "activationMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortActivationMode"
+              }
+            ],
+            "nullable": true,
+            "description": "activationMode value."
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortProtocol"
+              }
+            ],
+            "description": "The HTTP protocol version to use when forwarding requests to this port. Defaults to Http (HTTP/1.1)."
+          },
+          "ipAccessControl": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IpAccessControl"
+              }
+            ],
+            "nullable": true,
+            "description": "ipAccessControl value."
+          },
+          "cors": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PortCorsConfig"
+              }
+            ],
+            "nullable": true,
+            "description": "cors value."
+          }
+        },
+        "description": "Represents a port exposed on a sandbox."
+      },
+      "SandboxPortNumber": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "maximum": 65535,
+        "description": "Represents a valid TCP/UDP port number on an instance (inside the VM)."
+      },
+      "SandboxPresetProperties": {
+        "type": "object",
+        "properties": {
+          "isWorkIqConnectionEnabled": {
+            "type": "boolean",
+            "description": "Whether to enable the WorkIQ (m365-mihshah) connection for the GitHubCopilot preset. When true, the WorkIQ managed API must be available in the region."
+          }
+        },
+        "description": "Preset-specific properties for sandbox creation. These properties configure optional features for specific preset types."
+      },
+      "SandboxRequest": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "labels value."
+          },
+          "vmmType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VmmType"
+              }
+            ],
+            "nullable": true,
+            "description": "vmmType value."
+          },
+          "entrypoint": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "entrypoint value."
+          },
+          "cmd": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "cmd value."
+          },
+          "environment": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Optional environment variables to set in the sandbox container. These variables will override any environment variables with the same key from the image. Cannot be specified when creating from a snapshot. The combined UTF-8 size of the environment entries in KEY=VALUE format must not exceed 1.75 MiB. Entries above the Linux 128 KiB per-entry limit are logged for compatibility monitoring."
+          },
+          "sourcesRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSource"
+              }
+            ],
+            "nullable": true,
+            "description": "sourcesRef value."
+          },
+          "resources": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxResources"
+              }
+            ],
+            "nullable": true,
+            "description": "resources value."
+          },
+          "connections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Optional list of connection IDs to associate with the sandbox (1P flow)."
+          },
+          "gatewayConnections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GatewayConnection"
+            },
+            "nullable": true,
+            "description": "Optional list of AI Gateway connections for 3P sandbox creation. Each entry contains the MCP server config resource ID, MCP runtime URL, and identity configuration. Mutually exclusive with IReadOnlyList&lt;ConnectionId&gt;? SandboxRequest.Connections — do not provide both. Maximum of 10 entries."
+          },
+          "credentialRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Optional list of sandbox-group credential names to associate with the sandbox. Each name must reference a credential configured on the parent sandbox group."
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddPortRequest"
+            },
+            "nullable": true,
+            "description": "Optional list of ports to expose on the sandbox during creation."
+          },
+          "egressPolicy": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxEgressPolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "egressPolicy value."
+          },
+          "egressPolicyId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional reference to a named egress policy. When specified, the named policy's rules are resolved and merged with any inline rules (inline rules take precedence). The named policy must exist in the sandbox's sandbox group."
+          },
+          "sandboxGroupId": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxGroupId"
+              }
+            ],
+            "nullable": true,
+            "description": "sandboxGroupId value."
+          },
+          "presetSandboxType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PresetSandboxType"
+              }
+            ],
+            "nullable": true,
+            "description": "presetSandboxType value."
+          },
+          "anthropicApiKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude."
+          },
+          "presetProperties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxPresetProperties"
+              }
+            ],
+            "nullable": true,
+            "description": "presetProperties value."
+          },
+          "lifecycle": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxLifecyclePolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "lifecycle value."
+          },
+          "agentIdentity": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxAgentIdentityRef"
+              }
+            ],
+            "nullable": true,
+            "description": "agentIdentity value."
+          },
+          "identitySettings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentitySetting"
+            },
+            "nullable": true,
+            "description": "Optional identity settings that control which managed identities from the group are available to this sandbox and in which lifecycle phases. When null or empty, the default delegation behavior applies (delegated-only when any delegated identity exists)."
+          },
+          "telemetryConfig": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryConfig"
+              }
+            ],
+            "nullable": true,
+            "description": "telemetryConfig value."
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxVolume"
+            },
+            "nullable": true,
+            "description": "Optional list of volumes to mount in the sandbox. When SandboxSource? SandboxRequest.SourcesRef.Snapshot is set, the listed volumes are attached after the sandbox is restored from the snapshot — semantically equivalent to restoring the sandbox first and then calling the dynamic add-volume-mount API. In that mode the volumes must all be data disks, the snapshot must be non-pod, and the snapshot must not already have its own attached volumes; cluster placement is constrained to a cluster that already holds the referenced data disks (cross-cluster download is not supported). Those rules are enforced downstream after the snapshot/volume Cosmos lookups."
+          },
+          "projectId": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProjectId"
+              }
+            ],
+            "nullable": true,
+            "description": "projectId value."
+          },
+          "contentPackageDownloads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxContentPackageDownload"
+            },
+            "nullable": true,
+            "description": "Optional list of content packages to download onto the sandbox during creation. Each entry specifies a content package ID and target path where it will be downloaded."
+          },
+          "vnetConnectionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional vnet connection name to use for VNET injection. When specified, the sandbox traffic will be routed through the VNET identified by this connection. Requires the sandbox to be created within an ARM-managed sandbox group that has the named vnet connection."
+          },
+          "customerVnetConnectionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Legacy alias for string? SandboxRequest.VnetConnectionName. Accepts and emits the historical `customerVnetConnectionName` wire field so deployed SDKs and CLIs keep working. Prefer string? SandboxRequest.VnetConnectionName for new callers."
+          },
+          "systemVnetConnectionName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional system vnet connection name for system-managed VNET injection. Works identically to string? SandboxRequest.VnetConnectionName but references a system VNet connection."
+          },
+          "executionTokens": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxExecutionTokensRequest"
+              }
+            ],
+            "nullable": true,
+            "description": "executionTokens value."
+          },
+          "isDelegationBackingResource": {
+            "type": "boolean",
+            "description": "Indicates this sandbox is created within a sandbox group that has resource delegations. Resolved from the sandbox group at the controller level and forwarded to the cluster so the Identity Proxy can suppress non-delegated identities even when no delegated identities exist yet."
+          }
+        },
+        "description": "Sandbox request wire model."
+      },
+      "SandboxResources": {
+        "type": "object",
+        "required": [
+          "cpu",
+          "memory"
+        ],
+        "properties": {
+          "cpu": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CpuQuantity"
+              }
+            ],
+            "description": "cpu value."
+          },
+          "memory": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryQuantity"
+              }
+            ],
+            "description": "memory value."
+          },
+          "disk": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StorageQuantity"
+              }
+            ],
+            "nullable": true,
+            "description": "disk value."
+          },
+          "gpu": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxGpu"
+              }
+            ],
+            "nullable": true,
+            "description": "gpu value."
+          }
+        },
+        "description": "SandboxResources wire model."
+      },
+      "SandboxSource": {
+        "type": "object",
+        "properties": {
+          "diskImage": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSourceDiskImage"
+              }
+            ],
+            "nullable": true,
+            "description": "diskImage value."
+          },
+          "snapshot": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSourceSnapshot"
+              }
+            ],
+            "nullable": true,
+            "description": "snapshot value."
+          },
+          "pod": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SandboxSourcePod"
+              }
+            ],
+            "nullable": true,
+            "description": "pod value."
+          }
+        },
+        "description": "SandboxSource wire model."
+      },
+      "SandboxSourceDiskImage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiskImageId"
+              }
+            ],
+            "nullable": true,
+            "description": "id value."
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Disk image name for public disk images (e.g., \"nginx\", \"python3.12\"). Mutually exclusive with Id."
+          },
+          "isPublic": {
+            "type": "boolean",
+            "description": "Indicates whether this references a public disk image. Must be true when using Name, must be false when using Id."
+          }
+        },
+        "description": "Sandbox source disk image wire model."
+      },
+      "SandboxSourcePod": {
+        "type": "object",
+        "required": [
+          "containers"
+        ],
+        "properties": {
+          "containers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerSpec"
+            },
+            "description": "containers value."
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PodVolume"
+            },
+            "nullable": true,
+            "description": "volumes value."
+          },
+          "contentPackages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PodContentPackage"
+            },
+            "nullable": true,
+            "description": "contentPackages value."
+          },
+          "securityContext": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PodSecurityContext"
+              }
+            ],
+            "nullable": true,
+            "description": "securityContext value."
+          },
+          "restartPolicy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContainerRestartPolicy"
+              }
+            ],
+            "nullable": true,
+            "description": "restartPolicy value."
+          }
+        },
+        "description": "Pod source for sandbox creation."
+      },
+      "SandboxSourceSnapshot": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SnapshotId"
+              }
+            ],
+            "description": "id value."
+          }
+        },
+        "description": "Sandbox source snapshot wire model."
+      },
+      "SandboxState": {
+        "type": "string",
+        "enum": [
+          "Running",
+          "Stopped",
+          "Idle",
+          "Creating",
+          "Stopping",
+          "StopFailed"
+        ],
+        "description": "SandboxState values."
+      },
+      "SandboxStateDetails": {
+        "type": "object",
+        "required": [
+          "stoppedReason",
+          "stoppedAt"
+        ],
+        "properties": {
+          "stoppedReason": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StoppedReason"
+              }
+            ],
+            "description": "Why the sandbox is stopped."
+          },
+          "stoppedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Wall-clock time the stop transition was recorded."
+          }
+        },
+        "description": "Companion document to SandboxState. Populated when a sandbox transitions to SandboxState.Stopped; null on SandboxState.Running sandboxes (and on legacy stopped documents written before this field existed)."
+      },
+      "SandboxSuspendMode": {
+        "type": "string",
+        "enum": [
+          "Memory",
+          "Disk",
+          "None"
+        ],
+        "description": "SandboxSuspendMode values."
+      },
+      "SandboxVolume": {
+        "type": "object",
+        "required": [
+          "volumeName",
+          "mountpoint"
+        ],
+        "properties": {
+          "volumeName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VolumeName"
+              }
+            ],
+            "description": "volumeName value."
+          },
+          "mountpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AbsoluteDirectoryPath"
+              }
+            ],
+            "description": "mountpoint value."
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "readOnly value.",
+            "default": false
+          }
+        },
+        "description": "Volume configuration for a sandbox."
+      },
+      "SeccompProfile": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SeccompProfileType"
+              }
+            ],
+            "description": "type value."
+          }
+        },
+        "description": "Seccomp profile configuration for a container."
+      },
+      "SeccompProfileType": {
+        "type": "string",
+        "enum": [
+          "RuntimeDefault",
+          "Unconfined"
+        ],
+        "description": "Seccomp profile type for container syscall filtering."
+      },
+      "SecretId": {
+        "type": "string",
+        "description": "Represents a validated secret identifier. Must be 3-64 characters, containing only ASCII letters (upper/lower), digits, and hyphens."
+      },
+      "SnapshotId": {
+        "type": "string",
+        "description": "SnapshotId wire value."
+      },
+      "StoppedReason": {
+        "type": "string",
+        "enum": [
+          "Idle",
+          "Disabled",
+          "UserStopped"
+        ],
+        "description": "Reason a sandbox is in SandboxState.Stopped. Carried inside SandboxStateDetails. Distinguishes operator policy (StoppedReason.Disabled) from system-driven idle suspends (StoppedReason.Idle) and user-initiated stops (StoppedReason.UserStopped). Used by the OnDemand auto-resume gate: only StoppedReason.Disabled blocks auto-resume."
+      },
+      "StorageQuantity": {
+        "type": "string",
+        "description": "Kubernetes-style storage/disk resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
+      },
+      "TdsAuthKind": {
+        "type": "string",
+        "enum": [
+          "SqlPassword",
+          "EntraToken"
+        ],
+        "description": "Credential kind for a TDS egress connection. Managed identity is deferred (v1)."
+      },
+      "TdsCredential": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name value."
+          },
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TdsAuthKind"
+              }
+            ],
+            "description": "kind value."
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "description": "username value."
+          },
+          "secretRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicySecretRef"
+              }
+            ],
+            "nullable": true,
+            "description": "secretRef value."
+          },
+          "secret": {
+            "type": "string",
+            "nullable": true,
+            "description": "secret value."
+          }
+        },
+        "description": "A declared TDS credential. string TdsCredential.Name uniquely identifies the credential within its TdsEgressSection and is what rules (string? TdsEgressAction.Credential) and webhook responses reference. On the API/contract path EgressPolicySecretRef? TdsCredential.SecretRef is set and string? TdsCredential.Secret is null. On the runtime path (after Global API resolution) string? TdsCredential.Secret holds the resolved material and flows (encrypted) to NodeAgent."
+      },
+      "TdsEgressAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyActionType"
+              }
+            ],
+            "description": "type value."
+          },
+          "credential": {
+            "type": "string",
+            "nullable": true,
+            "description": "credential value."
+          }
+        },
+        "description": "Static action for a TDS rule. EgressPolicyActionType TdsEgressAction.Type must be Allow or Deny (Transform/Rewrite are HTTP-only and rejected by validation). string? TdsEgressAction.Credential names a declared credential and is only valid on Allow."
+      },
+      "TdsEgressMatch": {
+        "type": "object",
+        "required": [
+          "host"
+        ],
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "host value."
+          },
+          "databases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "databases value."
+          }
+        },
+        "description": "Match criteria for a TDS egress rule (AND logic). Host is a glob over the SNI / original-dst server."
+      },
+      "TdsEgressRule": {
+        "type": "object",
+        "required": [
+          "name",
+          "match"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "name value."
+          },
+          "match": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TdsEgressMatch"
+              }
+            ],
+            "description": "match value."
+          },
+          "action": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TdsEgressAction"
+              }
+            ],
+            "nullable": true,
+            "description": "action value."
+          },
+          "hookRef": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyHookRef"
+              }
+            ],
+            "nullable": true,
+            "description": "hookRef value."
+          }
+        },
+        "description": "A single TDS egress rule. Rules are evaluated in order; first match wins. A rule has exactly one of TdsEgressAction? TdsEgressRule.Action (static) or EgressPolicyHookRef? TdsEgressRule.HookRef (dynamic webhook), never both — same XOR as HTTP."
+      },
+      "TdsEgressSection": {
+        "type": "object",
+        "required": [
+          "defaultAction",
+          "credentials",
+          "rules"
+        ],
+        "properties": {
+          "defaultAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyActionType"
+              }
+            ],
+            "description": "defaultAction value."
+          },
+          "credentials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TdsCredential"
+            },
+            "description": "credentials value."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TdsEgressRule"
+            },
+            "description": "rules value."
+          }
+        },
+        "description": "The TDS section of an egress policy. IReadOnlyList&lt;TdsCredential&gt; TdsEgressSection.Credentials is a list of named credentials (each string TdsCredential.Name unique within the section), declared once and referenced by name from static rules and webhook responses. The array-of-named-objects shape matches the rest of the ADC API (for example Connections); the runtime resolves it into a by-name map. On the runtime path each credential's string? TdsCredential.Secret is resolved."
+      },
+      "TelemetryAppSecretRef": {
+        "type": "object",
+        "required": [
+          "kind",
+          "secretRef"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "AppSecret"
+            ],
+            "description": "Secret-reference kind."
+          },
+          "secretRef": {
+            "type": "string",
+            "description": "Name of the secret in the parent artifact app's secret bundle."
+          }
+        },
+        "description": "Reference to a secret in the parent artifact app."
+      },
+      "TelemetryApplicationInsightsAuth": {
+        "type": "object",
+        "required": [
+          "secretId",
+          "secretKey"
+        ],
+        "properties": {
+          "secretId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretId"
+              }
+            ],
+            "description": "Reference to a user-managed secret containing key-value pairs."
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "The key within the secret whose value is the Application Insights connection string."
+          }
+        },
+        "description": "Authentication for an ApplicationInsights telemetry endpoint via secret reference. The connection string is resolved at runtime from the referenced user-managed secret."
+      },
+      "TelemetryAuth": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryAuthTelemetryManagedIdentityAuth"
+          },
+          {
+            "$ref": "#/components/schemas/TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "ManagedIdentity": "#/components/schemas/TelemetryAuthTelemetryManagedIdentityAuth",
+            "SystemAssignedManagedIdentity": "#/components/schemas/TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth"
+          }
+        },
+        "description": "Base type for telemetry authentication that uses a `kind` discriminator. Supports user-assigned and system-assigned managed identity; designed for future auth kinds (e.g., workload identity)."
+      },
+      "TelemetryAuthTelemetryManagedIdentityAuth": {
+        "type": "object",
+        "required": [
+          "identity"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "ManagedIdentity"
+            ],
+            "description": "kind value."
+          },
+          "identity": {
+            "type": "string",
+            "description": "Full ARM resource ID of a user-assigned managed identity             (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{name})."
+          }
+        },
+        "description": "User-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the specified user-assigned MI."
+      },
+      "TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "SystemAssignedManagedIdentity"
+            ],
+            "description": "kind value."
+          }
+        },
+        "description": "System-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the sandbox group's system-assigned MI. No explicit identity resource ID is needed — the Identity Proxy defaults to the system-assigned identity."
+      },
+      "TelemetryConfig": {
+        "type": "object",
+        "required": [
+          "endpoints"
+        ],
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryEndpoint"
+            },
+            "description": "One or more telemetry endpoints to route data to."
+          },
+          "metricsIntervalSeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Optional metrics collection interval in seconds. Must be &gt;= 2. Defaults to 15 if not specified."
+          }
+        },
+        "description": "Configures telemetry collection for a sandbox. Passed in sandbox creation requests."
+      },
+      "TelemetryData": {
+        "type": "string",
+        "enum": [
+          "ContainerStdoutStderr",
+          "ContainerOtel",
+          "Metrics",
+          "NetworkEgressDecisions"
+        ],
+        "description": "Specifies which category of telemetry data to route to an endpoint."
+      },
+      "TelemetryEndpoint": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointOtlpTelemetryEndpoint"
+          },
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointApplicationInsightsTelemetryEndpoint"
+          },
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointLogAnalyticsTelemetryEndpoint"
+          },
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "OTLP": "#/components/schemas/TelemetryEndpointOtlpTelemetryEndpoint",
+            "ApplicationInsights": "#/components/schemas/TelemetryEndpointApplicationInsightsTelemetryEndpoint",
+            "LogAnalytics": "#/components/schemas/TelemetryEndpointLogAnalyticsTelemetryEndpoint",
+            "LogAnalyticsLegacy": "#/components/schemas/TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint"
+          }
+        },
+        "description": "Base type for telemetry endpoint configuration. Polymorphic on `kind` discriminator."
+      },
+      "TelemetryEndpointApplicationInsightsTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "auth",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "ApplicationInsights"
+            ],
+            "description": "kind value."
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryApplicationInsightsAuth"
+              }
+            ],
+            "description": "auth value."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryData"
+            },
+            "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed."
+          },
+          "columns": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/LogColumnDef"
+            },
+            "nullable": true,
+            "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields."
+          },
+          "dynamicJsonColumns": {
+            "type": "boolean",
+            "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
+            "default": false
+          }
+        },
+        "description": "Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints."
+      },
+      "TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "workspaceId",
+          "tableName",
+          "auth",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "LogAnalyticsLegacy"
+            ],
+            "description": "kind value."
+          },
+          "workspaceId": {
+            "type": "string",
+            "description": "The Log Analytics workspace ID."
+          },
+          "tableName": {
+            "type": "string",
+            "description": "The custom log table name (e.g., \"ContainerAppConsoleLogs\")."
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetrySecretReference"
+              }
+            ],
+            "description": "Polymorphic secret reference for the shared key. Resolved at runtime             from Key Vault. May be a TelemetrySecretRef (sandboxGroup-scoped legacy             secret) or a TelemetryAppSecretRef (artifactApp-local inline secret)."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryData"
+            },
+            "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed."
+          },
+          "columns": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/LogColumnDef"
+            },
+            "nullable": true,
+            "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields."
+          },
+          "dynamicJsonColumns": {
+            "type": "boolean",
+            "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
+            "default": false
+          }
+        },
+        "description": "Log Analytics Legacy (Data Collector API) telemetry endpoint configuration."
+      },
+      "TelemetryEndpointLogAnalyticsTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "dceEndpoint",
+          "dcrImmutableId",
+          "tableName",
+          "auth",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "LogAnalytics"
+            ],
+            "description": "kind value."
+          },
+          "dceEndpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "Data Collection Endpoint URL."
+          },
+          "dcrImmutableId": {
+            "type": "string",
+            "description": "Data Collection Rule immutable ID."
+          },
+          "tableName": {
+            "type": "string",
+            "description": "Target stream name in the DCR."
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryAuth"
+              }
+            ],
+            "description": "Required managed identity authentication. The identity must be assigned to the sandbox group."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryData"
+            },
+            "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed."
+          },
+          "columns": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/LogColumnDef"
+            },
+            "nullable": true,
+            "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields."
+          },
+          "dynamicJsonColumns": {
+            "type": "boolean",
+            "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
+            "default": false
+          }
+        },
+        "description": "Azure Monitor Log Analytics telemetry endpoint configuration. Uses the Logs Ingestion API via Data Collection Endpoint (DCE) and Data Collection Rule (DCR). Authentication is handled by the customer's managed identity (user-assigned or system-assigned) via Identity Proxy."
+      },
+      "TelemetryEndpointOtlpTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "endpoint",
+          "protocol",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ],
+            "description": "kind value."
+          },
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "OTLP endpoint URL (e.g., \"https://customer.monitor.azure.com/otlp\")."
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryProtocol"
+              }
+            ],
+            "description": "`Grpc` or `Http`."
+          },
+          "auth": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryHeaderAuth"
+              }
+            ],
+            "nullable": true,
+            "description": "auth value."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryData"
+            },
+            "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed."
+          },
+          "columns": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/LogColumnDef"
+            },
+            "nullable": true,
+            "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields."
+          },
+          "dynamicJsonColumns": {
+            "type": "boolean",
+            "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
+            "default": false
+          }
+        },
+        "description": "OTLP telemetry endpoint configuration."
+      },
+      "TelemetryHeaderAuth": {
+        "type": "object",
+        "required": [
+          "headerName",
+          "secretId",
+          "secretKey"
+        ],
+        "properties": {
+          "headerName": {
+            "type": "string",
+            "description": "HTTP header to inject (e.g., \"x-api-key\", \"Authorization\")."
+          },
+          "secretId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretId"
+              }
+            ],
+            "description": "Reference to a user-managed secret containing key-value pairs."
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "The key within the secret whose value should be used as the header value."
+          }
+        },
+        "description": "Authentication configuration for an OTLP telemetry endpoint. The egress proxy injects the resolved secret value as an HTTP header."
+      },
+      "TelemetryProtocol": {
+        "type": "string",
+        "enum": [
+          "Grpc",
+          "Http"
+        ],
+        "description": "Specifies the protocol used to send telemetry data to an OTLP endpoint."
+      },
+      "TelemetrySecretRef": {
+        "type": "object",
+        "required": [
+          "secretId",
+          "secretKey"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "GlobalSecret"
+            ],
+            "description": "Secret-reference kind. Optional for compatibility with legacy payloads."
+          },
+          "secretId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SecretId"
+              }
+            ],
+            "description": "Identifier of the sandbox-group secret."
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "Key within the secret whose value should be used."
+          }
+        },
+        "description": "Reference to a sandbox-group GlobalSecret."
+      },
+      "TelemetrySecretReference": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TelemetrySecretRef"
+          },
+          {
+            "$ref": "#/components/schemas/TelemetryAppSecretRef"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "GlobalSecret": "#/components/schemas/TelemetrySecretRef",
+            "AppSecret": "#/components/schemas/TelemetryAppSecretRef"
+          }
+        },
+        "description": "Base type for telemetry endpoint secret references."
+      },
+      "TenantId": {
+        "type": "string",
+        "description": "TenantId wire value."
+      },
+      "TrafficInspection": {
+        "type": "string",
+        "enum": [
+          "Legacy",
+          "Partial",
+          "Full",
+          "None"
+        ],
+        "description": "Controls the scope of TLS inspection for the egress proxy on a per-sandbox basis."
+      },
+      "TransportEgressRule": {
+        "type": "object",
+        "required": [
+          "action",
+          "protocol",
+          "destination",
+          "port"
+        ],
+        "properties": {
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyActionType"
+              }
+            ],
+            "description": "action value."
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransportProtocol"
+              }
+            ],
+            "description": "protocol value."
+          },
+          "destination": {
+            "type": "string",
+            "description": "destination value."
+          },
+          "port": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true,
+            "description": "port value."
+          }
+        },
+        "description": "A single L3/L4 transport egress rule. Rules are evaluated in declared order; first match wins. EgressPolicyActionType TransportEgressRule.Action must be Allow or Deny (Transform/Rewrite are HTTP-only and rejected by validation). string TransportEgressRule.Destination is an IPv4 CIDR (v1). int? TransportEgressRule.Port is a single destination port (`1..65535`) or `null` to match every port on the destination (any-port wildcard)."
+      },
+      "TransportEgressSection": {
+        "type": "object",
+        "required": [
+          "defaultAction",
+          "rules"
+        ],
+        "properties": {
+          "defaultAction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyActionType"
+              }
+            ],
+            "description": "defaultAction value."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransportEgressRule"
+            },
+            "description": "rules value."
+          }
+        },
+        "description": "The transport (L3/L4 TCP/UDP) section of an egress policy. Distinct from HTTP and TDS policy and enforced by NodeAgent at the network layer (`iptables`). EgressPolicyActionType TransportEgressSection.DefaultAction is the terminal action applied to raw TCP/UDP flows that match no rule; IReadOnlyList&lt;TransportEgressRule&gt; TransportEgressSection.Rules is capped at 10 entries. DNS (port 53) is always carved out and never constrained by these rules in v1."
+      },
+      "TransportProtocol": {
+        "type": "string",
+        "enum": [
+          "Tcp",
+          "Udp"
+        ],
+        "description": "L4 transport protocol for an L3 egress rule."
+      },
+      "ValidationWarning": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "code value."
+          },
+          "message": {
+            "type": "string",
+            "description": "message value."
+          }
+        },
+        "description": "ValidationWarning wire model."
+      },
+      "VmmType": {
+        "type": "string",
+        "enum": [
+          "cloudhypervisor",
+          "hcs",
+          "firecracker"
+        ],
+        "description": "VmmType values."
+      },
+      "VolumeName": {
+        "type": "string",
+        "description": "VolumeName wire value."
+      }
+    },
+    "securitySchemes": {
+      "AzureDataPlaneS2SAuth": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+            "scopes": {
+              "https://management.azuredevcompute.io/.default": ""
+            }
+          }
+        },
+        "description": "Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations."
+      },
+      "UserEntraAuth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+            "scopes": {
+              "https://management.azuredevcompute.io/.default": ""
+            }
+          }
+        },
+        "description": "Microsoft Entra ID authorization-code authentication for user-scoped operations."
+      },
+      "UserBearerAuth": {
+        "type": "http",
+        "scheme": "Bearer",
+        "description": "ADC bearer token authentication for user-scoped operations."
+      },
+      "UserGitHubAuth": {
+        "type": "http",
+        "scheme": "GitHub",
+        "description": "GitHub token authentication using the Authorization header."
+      },
+      "UserApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-ms-api-key",
+        "description": "ADC API key authentication."
+      },
+      "UserPortalCookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "adc_portal_auth",
+        "description": "ADC portal authentication cookie."
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{endpoint}",
+      "description": "ADC Data Plane API endpoint.",
+      "variables": {
+        "endpoint": {
+          "default": ""
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "operationId": "Sandboxes_create",
+  "title": "Sandboxes_create - snapshot",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "request": {
+      "labels": {
+        "environment": "example"
+      },
+      "resources": {
+        "cpu": "1",
+        "memory": "1Gi"
+      },
+      "sourcesRef": {
+        "snapshot": {
+          "id": "example-snapshot"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "example-sandbox",
+        "vmmType": "cloudhypervisor",
+        "sourcesRef": {},
+        "resources": {
+          "cpu": "example-cpu",
+          "memory": "example-memory"
+        }
+      }
+    }
+  }
+}
