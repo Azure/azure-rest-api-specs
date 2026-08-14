@@ -23,22 +23,15 @@ options:
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/playwright-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/playwrightworkspaces"
     title: PlaywrightServiceClient
     description: Microsoft Playwright Service Client
     generate-metadata: true
-    is-modular-library: false
     generate-test: false
     package-details:
-      name: "@azure-rest/playwrightworkspaces"
+      name: "@azure/playwrightworkspaces"
       description: "This package contains Microsoft Playwright Service client library."
       version: 1.0.0
-    flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.Developer.PlaywrightWorkspaces"
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwrightworkspaces"
@@ -47,3 +40,7 @@ options:
     generate-tests: false
     service-name: Microsoft Playwright Service
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Developer.Playwright
+    model-namespace: false

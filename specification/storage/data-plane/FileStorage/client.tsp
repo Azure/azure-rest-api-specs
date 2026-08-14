@@ -78,6 +78,9 @@ interface ServiceClient extends Storage.File.Service {}
 )
 interface ShareClient extends Storage.File.Share {}
 
+@@access(StorageErrorCode, Access.public, "go");
+@@usage(StorageErrorCode, Usage.output, "go");
+
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
@@ -177,6 +180,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@clientName(ShareItemInternal, "Share", "go");
 @@clientName(ShareNfsSettings, "ShareNFSSettings", "go");
+@@clientName(
+  ShareNfsSettingsEncryptionInTransit,
+  "ShareNFSSettingsEncryptionInTransit",
+  "go"
+);
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");
 @@clientName(
   SharePropertiesInternal.enableSmbDirectoryLease,
@@ -211,6 +219,36 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(HandleItem, "omitSerdeMethods", "all", "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  Directory.listFilesAndDirectoriesSegment,
+  "preserveContentTypeHeader",
+  true,
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Directory.listHandles, "preserveContentTypeHeader", true, "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  Storage.File.File.download,
+  "preserveContentTypeHeader",
+  true,
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  Storage.File.File.getProperties,
+  "preserveContentTypeHeader",
+  true,
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  Storage.File.File.listHandles,
+  "preserveContentTypeHeader",
+  true,
+  "go"
+);
 
 @@alternateType(Storage.File.AccessPolicy.start, string, "javascript,python");
 @@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript,python");
@@ -410,6 +448,12 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "python,javascript,csharp,go"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
+@@Legacy.disablePageable(
+  Storage.File.File.listAllRanges,
+  "python,javascript,csharp,go"
+);
+
 @@alternateType(Storage.File.FileProperty.creationTime, string, "python");
 @@alternateType(Storage.File.FileProperty.lastWriteTime, string, "python");
 @@alternateType(Storage.File.FileProperty.changeTime, string, "python");
@@ -431,6 +475,7 @@ model FileClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowSourceTrailingDot?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   fileRangeWriteFromUrl: FileRangeWriteFromUrlType;
 }
 

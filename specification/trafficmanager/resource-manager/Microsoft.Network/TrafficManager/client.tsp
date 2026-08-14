@@ -10,7 +10,9 @@ using TypeSpec.Rest;
 /**
  * override for HeatMapModels.get
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getReplace(
   ...ApiVersionParameter,
@@ -53,7 +55,11 @@ op getReplace(
   | Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel>
   | Microsoft.Network.CloudError;
 
-@@alternateType(HeatMapOpsResourceParameters.heatMapType, "default", "java");
+@@alternateType(
+  HeatMapOpsResourceParameters.heatMapType,
+  "default",
+  "java,javascript"
+);
 @@override(HeatMapModels.get, getReplace, "go");
 @@alternateType(getReplace::parameters.heatMapType, "default", "go");
 @@clientName(
@@ -165,6 +171,9 @@ op getReplace(
   "csharp"
 );
 @@clientName(ProfileStatus, "TrafficManagerProfileStatus", "csharp");
+@@clientName(RecordType, "TrafficManagerRecordType", "csharp");
+@@clientName(RecordType.AAAA, "Aaaa", "csharp");
+@@clientName(RecordType.CNAME, "Cname", "csharp");
 @@clientName(MonitorProtocol.HTTP, "Http", "csharp");
 @@clientName(MonitorProtocol.HTTPS, "Https", "csharp");
 @@clientName(MonitorProtocol.TCP, "Tcp", "csharp");

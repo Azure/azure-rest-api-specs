@@ -12,6 +12,7 @@ import "./models/language.detection.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/sentiment.analysis.tsp";
 import "./models/summarization.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -60,8 +61,8 @@ enum Versions {
   /** Version 2026-05-01 */
   v2026_05_01: "2026-05-01",
 
-  /** Version 2025-11-15-preview */
-  v2025_11_15_preview: "2025-11-15-preview",
+  /** Version 2026-05-15-preview */
+  v2026_05_15_preview: "2026-05-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &

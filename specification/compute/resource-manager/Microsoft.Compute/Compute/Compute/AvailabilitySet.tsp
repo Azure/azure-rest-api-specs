@@ -84,6 +84,7 @@ interface AvailabilitySets {
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("vmSizes")
   @list
@@ -129,7 +130,8 @@ interface AvailabilitySets {
   convertToVirtualMachineScaleSet is ArmResourceActionAsyncBase<
     AvailabilitySet,
     Request = ConvertToVirtualMachineScaleSetInput,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>,
     Error = CloudError,
     OptionalRequestBody = true

@@ -528,6 +528,7 @@ model InnerErrorDetails {
 }
 
 /** Error response from the service. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @clientName("ModelErrorResponse")
 model ErrorResponse {
   /** The error code. */
@@ -726,6 +727,15 @@ model Model {
 
   /** The asset identifier. */
   assetId?: string;
+
+  /** List of allowed deployment templates for the model. */
+  allowedDeploymentTemplates?: ModelDeploymentTemplateDetails[];
+}
+
+/** Details of a deployment template reference. */
+model ModelDeploymentTemplateDetails {
+  /** The asset ID of the deployment template. */
+  assetId?: string;
 }
 
 /** A service response. */
@@ -909,6 +919,7 @@ model FeedIndexEntityRequestDto {
 }
 
 /** Request body for listing models. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListModelsRequest {
   /** Filter by model name. */
   name?: string;
@@ -963,6 +974,7 @@ model ListModelsRequest {
 }
 
 /** Paginated response of models. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ModelPagedResponse {
   /** The list of models. */
   @pageItems
@@ -976,6 +988,7 @@ model ModelPagedResponse {
 }
 
 /** Paginated response of models with next request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ModelListModelsRequestPagedResponse {
   /** The list of models. */
   @pageItems
@@ -1004,6 +1017,7 @@ model ModelBatchResponseDto {
 }
 
 /** Model container request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ModelContainerRequest {
   /** The container name. */
   name: string;

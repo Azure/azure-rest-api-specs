@@ -28,9 +28,12 @@ model VirtualMachineExtension
 
 @armResourceOperations
 interface VirtualMachineExtensionOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...Azure.ResourceManager.Legacy.BasePath,
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         @doc("The name of the virtual machine.")
         @path
@@ -44,7 +47,8 @@ interface VirtualMachineExtensionOps
           KeyName = "vmExtensionName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
 @armResourceOperations

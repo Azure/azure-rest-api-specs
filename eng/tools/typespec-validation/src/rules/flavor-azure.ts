@@ -1,7 +1,7 @@
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { parse } from "../tsp-config.js";
-import { readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { readTspConfig } from "../utils.ts";
 
 export class FlavorAzureRule implements Rule {
   readonly name = "FlavorAzure";

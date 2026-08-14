@@ -28,7 +28,152 @@ review comments from tens of thousands of PRs across both repos.
 2. In the agent picker at the top of the chat, select **ARM API Reviewer**.
 3. Type your request in the chat input.
 
-## Reviewing a PR
+## Automated Review (GitHub Actions)
+
+The ARM API Reviewer also runs automatically as a GitHub Actions workflow
+(`.github/workflows/arm-api-review.md`) so that authors get feedback the
+moment an eligible PR event occurs -- no human reviewer needs to invoke the
+VS Code agent manually.
+
+### When reviews run automatically
+
+| Trigger                          | Condition                                                                                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PR opened                        | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
+| PR synchronized (new push)       | Same conditions as opened; prior in-progress run is cancelled automatically (debounce). External-author pushes require a maintainer to run `/arm-review` again     |
+| PR marked ready for review       | Same conditions as opened; no additional push is needed                                                                                                            |
+| `WaitForARMFeedback` label added | Applying the label triggers a review directly when added by a write-access user or the trusted `github-actions[bot]` repository automation                         |
+| `/arm-review` comment            | On-demand: posted by a user with write access or above; runs on drafts and without `WaitForARMFeedback`, unless `skip-arm-review` is present                       |
+| `workflow_dispatch`              | On-demand: repository maintainer triggers manually with a PR number; skipped when `skip-arm-review` is present                                                     |
+
+> **Automated vs. on-demand:** The automated triggers (`opened` /
+> `synchronize` / `labeled` / `ready_for_review`) only run when the PR is not a
+> draft and carries the `WaitForARMFeedback` label -- this keeps automated
+> reviews scoped to PRs that are actually awaiting ARM feedback. Adding the
+> label is itself a trigger, so a review starts as soon as a maintainer applies
+> it to a non-draft PR. The on-demand triggers (`/arm-review`,
+> `workflow_dispatch`) do not require `WaitForARMFeedback` and can run on drafts,
+> but all GitHub Actions triggers honor `skip-arm-review`.
+
+**Fork PRs and permissions:** The workflow **supports PRs from forks**
+(`forks: ["*"]`), matching the other PR workflows in this repo. gh-aw's
+built-in role check only lets users with **write access or above** trigger it,
+with one explicit exception for `github-actions[bot]`, which lets the trusted
+summarize-checks automation trigger the review when it applies
+`WaitForARMFeedback`. An externally-authored fork PR is reviewed only after a
+maintainer applies the label or runs `/arm-review`; later pushes by the external
+author require another maintainer-triggered review. Fork PRs are handled safely
+because the agent never checks out untrusted PR head code (`checkout: false`),
+reads spec files only through the read-only GitHub MCP toolset (which
+additionally runs at `approved` integrity for defense in depth), and writes only
+through gh-aw `safe-outputs`.
+
+### On-demand review with `/arm-review`
+
+Post `/arm-review` as a comment on any PR to request a fresh review. This is
+useful after pushing fixes to address earlier findings:
+
+```text
+/arm-review
+```
+
+**Who can use it:** repository collaborators with write access or higher
+(enforced by gh-aw's built-in role check). Posting `/arm-review` without
+sufficient permissions is silently ignored.
+
+The command body must be exactly `/arm-review`. Eligible runs create one
+updateable status comment on the PR with a link to the Actions run. This is the
+authoritative progress signal for comment-triggered runs, which execute against
+the default branch and may not appear in the PR Checks tab.
+
+### Labels
+
+| Label                 | Effect                                                                                                                                               |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                     |
+| `ARMChangesRequested` | Added by the workflow when blocking findings are found; `WaitForARMFeedback` is removed at the same time                                             |
+| `WaitForARMFeedback`  | Gates automated reviews. A clean automated review leaves it unchanged because only a human ARM reviewer can advance or sign off the ARM review queue |
+
+### Opting out
+
+Add the `skip-arm-review` label to a PR to permanently disable automated ARM
+API review for that PR. The label can be removed later to re-enable it.
+
+> **Note:** `skip-arm-review` prevents all GitHub Actions review triggers,
+> including `/arm-review` and `workflow_dispatch`. It does not prevent a
+> repository collaborator from running a manual review via VS Code.
+
+### Large pull requests
+
+Very large PRs are reviewed with a reduced scope rather than skipped. If a PR
+changes more than **50** files or more than **5,000** lines under
+`specification/`, the workflow defaults to a **scoped review**: it reviews the
+highest-risk subset of the changed files (new API version directories first,
+then `resource-manager` JSON and TypeSpec sources, then configuration files,
+with example files dropped first) and states in the review summary how many
+files were covered and what was left out. **No action is required from the
+author**. The assigned Azure API reviewer covers the remaining files as part of
+the standard review process.
+
+### What the automated review covers
+
+The GitHub Actions workflow applies the same rules as the VS Code agent:
+
+- OpenAPI v2 (Swagger) JSON specifications under `specification/**`
+- TypeSpec (`.tsp`) source files and `tspconfig.yaml`
+- Example files under `specification/**/examples/`
+- `readme.md` AutoRest configuration and suppressions
+
+Files outside `specification/**` are skipped.
+
+### Bot identity and comment deduplication
+
+The automated workflow posts review comments under a stable bot identity.
+Every standalone finding, review summary, and consolidated top-level
+clarification carries a hidden `posted-by: arm-api-reviewer-agent` marker, so the
+[Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) logic
+(Scenarios A–F plus conflict clarification) works end-to-end for all three entry
+points. Reply-only reconciliation messages stay inside their existing thread
+and do not need a finding marker. Repeat runs do not duplicate comments.
+
+### Cross-session reconciliation
+
+The same reconciliation rules apply regardless of how a review starts:
+
+1. A human runs the ARM API Reviewer from Copilot Chat and approves posting.
+2. The GitHub Actions workflow runs when the PR is ready for ARM review.
+3. An authorized collaborator posts `/arm-review`.
+
+Before posting, each session inventories inline review threads, top-level PR
+conversation comments, and pull request review bodies. Feedback from humans and
+all prior agent sessions participates in matching, including resolved,
+outdated, and marker-free comments. The agent marker controls whether the agent
+may resolve a thread; it does not determine whether prior feedback counts.
+
+Findings are matched by rule or topic, affected API element, and corrective
+outcome rather than exact wording or line number. When an actionable comment
+already covers a finding, no duplicate finding is posted. When the new session
+would contradict existing guidance, it replies in the existing inline thread
+or posts one consolidated top-level clarification. That clarification states
+the prior position, current evidence, current guidance, and why the conclusion
+changed. Human-authored threads are never resolved automatically.
+
+### Approval-label awareness
+
+Every review records the exact API-review approval labels observed on the PR
+next to the reviewed commit. The recognized labels are
+`BreakingChange-Approved-*`, `Versioning-Approved-*`,
+`Approved-Suppression`, and `Approved-TypeSpecSuppression`; the review states
+`none` when no matching label is present.
+
+Breaking-change and suppression findings are still posted when a matching
+PR-level label exists because the label may cover only some changes. Each such
+comment names the matching label and asks the author to confirm that the
+approval covers that specific finding. If it does, the only remaining action
+for that comment is to resolve the conversation. Otherwise, the author must
+obtain the appropriate approval or address the finding.
+
+## Reviewing a PR (VS Code, Interactive)
 
 In the agent chat, type your request directly:
 
@@ -50,23 +195,116 @@ Review specs-pr#23440
 
 **How the agent resolves PR references:**
 
-| Input                      | Resolved repository                                                                                                                                         |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bare number (e.g. `41405`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                         |
-| `specs#<number>`           | `Azure/azure-rest-api-specs`                                                                                                                                |
-| `specs-pr#<number>`        | `Azure/azure-rest-api-specs-pr`                                                                                                                             |
-| Full URL                   | Extracted from the URL. Must be `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork. URLs pointing to other repositories are declined. |
+| Input                      | Resolved repository                                                                                                                                                                                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bare number (e.g. `41405`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                                                                                                                                               |
+| `specs#<number>`           | `Azure/azure-rest-api-specs`                                                                                                                                                                                                                                                      |
+| `specs-pr#<number>`        | `Azure/azure-rest-api-specs-pr`                                                                                                                                                                                                                                                   |
+| Full URL                   | Extracted from the URL. Must be `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork of either. URLs pointing to other repositories are declined.                                                                                                             |
+| Fork URL                   | Treated as a recognized fork if the repo's `parent.full_name` (resolvable via `gh repo view <owner>/<repo> --json parent` or the PR payload's `head.repo.parent.full_name`) equals `Azure/azure-rest-api-specs` or `Azure/azure-rest-api-specs-pr`. Otherwise the agent declines. |
 
 If the PR is not found in the resolved repository, the agent will ask you to
 clarify or confirm before trying the other repo. If the PR is not found in
 either repository, the agent reports the error and stops.
 
+## Agent Topology
+
+The ARM API review workflow uses two agents, but **users only ever invoke
+the `ARM API Reviewer`.** The second agent (`ARM API Review Critic`) is an
+internal subagent invoked automatically by the Reviewer at Step 7 as a
+safety gate before findings are presented for posting. On the happy path the
+Critic is invisible in chat; it becomes visible only when it materially
+changed a finding (downgrade, reclassification, drop) or could not run.
+
+| Agent                 | Who invokes it                         | Why it exists                                                                                                                                                                                                                                                                  |
+| --------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ARM API Reviewer      | You                                    | Optimized for **recall**: find every spec violation that should be flagged.                                                                                                                                                                                                    |
+| ARM API Review Critic | The Reviewer (automatically at Step 7) | Optimized for **precision**: independently re-fetch files, re-quote rule text verbatim, and re-classify `[NEW]`/`[EXISTING]` for every finding before it is posted. A separate agent with a narrower tool surface (read-only) is what makes the verification non-rubber-stamp. |
+
+In VS Code the Critic is hidden from the agents picker via `user-invocable: false`.
+In IDEs that don't honor that flag (Claude Code, github.com Copilot), the
+Critic may appear in pickers but is still not intended for direct invocation;
+if you do invoke it directly, it will tell you to switch to the Reviewer.
+
+In GitHub Actions, gh-aw exposes the Critic through the workflow's inline
+`arm-api-review-critic-runtime` subagent. That runtime loads the canonical
+Critic agent and Reviewer-to-Critic protocol from `.github/agents/` before
+verifying findings. Importing the protocol into the Reviewer prompt alone does
+not make the Critic callable.
+
 The agent will:
 
 1. Fetch the PR metadata and changed files from GitHub.
-2. Load the applicable rule sets (OpenAPI, ARM, TypeSpec).
-3. Compare against the previous API version to detect breaking changes.
-4. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+2. **Choose a review track** based on the changed files (see [Review Tracks](#review-tracks) below).
+3. Load the applicable rule sets (OpenAPI, ARM, TypeSpec).
+4. Compare against the previous API version to detect breaking changes (full-review track only).
+5. **Run a downstream-CI impact check** on any finding whose proposed fix
+   would add or tighten a type, format, decorator, `x-ms-*` extension, or
+   schema constraint. If the fix would trigger a required LintDiff rule
+   (for example, `R3017 GuidUsage` on ARM control-plane GUIDs), the
+   finding is phrased as a multi-option recommendation -- not a directive --
+   and carries a `downstream-rule:` field in its telemetry marker. The
+   conflict-aware rule catalog lives in
+   [`linter-rule-coverage.md`](../.github/skills/azure-api-review/references/linter-rule-coverage.md).
+6. **Run an independent critic pass** that re-verifies every finding's rule citation, line number, and
+   classification before anything is shown to you. This happens silently on the happy path; you only see
+   critic activity when a finding was downgraded, reclassified, dropped, or the critic could not run.
+7. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+
+### When the session is invalidated mid-review
+
+If the PR head commit SHA changes after the agent pinned the session
+(typically because the PR author pushed new commits while the review
+was in flight), the critic returns `Finding accuracy = INVALIDATED`.
+The report drafted against the prior SHA is unsafe to post -- the file
+content the agent judged no longer matches the PR -- so the agent
+emits a `SESSION INVALIDATED` message instead and asks you to choose:
+
+- **(a) Restart** -- re-run the review against the new head SHA,
+  pinning a fresh session.
+- **(b) Abandon** -- stop without posting anything.
+
+The agent does not silently re-pin and continue; auditable SHAs are
+the whole point of pinning the session.
+
+### When structural (Step 3.5) graph derivation fails
+
+On the full-review track the agent builds resource, operation, and
+data-flow graphs as a structural pass that catches findings nothing
+else in the review surfaces (orphan resources, asymmetric CRUD,
+secret-in-LIST, `$ref` cycles, silent breaking changes via reference
+removal). If graph derivation fails -- typically a context-budget
+overrun on a very large spec or a `$ref` resolver error -- the agent
+follows a three-step fallback:
+
+1. **Retry with smaller scope** (per-namespace partitioning, then
+   merge). This is the default and resolves most failures silently.
+2. **Continue with a visible failure banner.** If retry fails, the
+   agent renders a `[!CAUTION]` block at the top of the report stating
+   "Step 3.5 graph derivation failed; structural findings unavailable"
+   plus a one-line cause, and proceeds with the remaining steps. The
+   review is **not** mistaken for complete -- the banner makes the
+   gap explicit so you can decide whether to merge as-is, ask for a
+   human structural spot-check, or hold the PR. The Critic input uses
+   `Graphs: false`; the caution banner distinguishes "attempted and failed"
+   from a fast path where graph derivation was skipped by design.
+3. **Abort** only if you explicitly direct the agent to stop, usually
+   when the PR touches secret-bearing properties or LIST operations
+   where Step 3.5 is the primary detection mechanism.
+
+The agent never silently continues a full-review PR without
+structural analysis -- the banner is the contract.
+
+## Review Tracks
+
+The agent classifies each PR into one of two tracks to avoid spending full-review effort on trivial changes:
+
+| Track           | When it applies                                                                                                                                                                                                                                | What's skipped                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Fast path**   | The PR modifies _only_ example files, description-only edits inside specs, or non-AutoRest sections of `readme.md`, AND is under 200 lines total.                                                                                              | Breaking-change comparison and cross-file consistency checks. The critic still runs. |
+| **Full review** | Any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, or any PR with 200 or more lines changed. | Nothing. Every step runs.                                                            |
+
+When the agent is uncertain whether a PR qualifies for the fast path, it defaults to the full review.
 
 ## Understanding the Report
 
@@ -100,16 +338,52 @@ Post the approved review comments on PR #41405
 The agent will always present findings in chat first and wait for your
 explicit approval before posting anything to the PR.
 
-## Comment Tracking Marker
+## Comment Tracking Markers
 
-Every comment posted by the agent includes a hidden HTML marker at the end
-of the comment body:
+Standalone findings and summaries carry the per-finding marker below.
+Consolidated top-level conflict clarifications use the reconciliation marker
+shown afterward. Reply-only reconciliation messages remain inside an existing
+thread and do not need a marker.
+
+<!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
 ```
 
-This marker is invisible in the rendered PR view but is present in the raw
+<!-- markdownlint-enable MD013 -->
+
+**Fields:**
+
+- `rule` -- the rule ID of the finding (e.g., `RPC-Put-V1-11`, `SEC-SECRET-DETECT`).
+  Use `summary` for comments that don't flag a single rule.
+- `severity` -- one of `blocking`, `warning`, or `suggestion`.
+- `classification` -- `new` (introduced in this PR) or `existing` (pre-existing technical debt).
+- `critic` -- the Critic's per-finding verdict (`pass`, `warn`, or `override`).
+  `override` means a Critic `FAIL` was overridden by a human reviewer.
+  `unknown` means the Critic was unavailable and no independent per-finding
+  verdict exists.
+- `head-sha` -- the Reviewer-pinned session SHA used for the review. When the
+  Critic runs, it independently re-fetches against this same SHA; when
+  `critic: unknown`, the value still anchors the Reviewer session.
+- `downstream-rule` -- present when the finding's suggested fix interacts
+  with a conflict-aware required CI rule (for example, `R3017 GuidUsage`).
+- `override-reason` -- required only when `critic: override`;
+  must be a non-empty, specific justification of at least 20 characters and
+  include either an instruction-file line anchor or a verbatim counter-quote
+  from the cited rule.
+
+Consolidated top-level conflict clarifications end with:
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- posted-by: arm-api-reviewer-agent | reconciliation: clarification | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+The marker is invisible in the rendered PR view but is present in the raw
 comment body returned by the GitHub API. It serves two purposes:
 
 1. **Reconciliation** -- on repeat reviews, the agent uses the marker to
@@ -117,6 +391,9 @@ comment body returned by the GitHub API. It serves two purposes:
    This determines whether the agent can resolve an outdated comment
    (Scenario B) or must reply instead (Scenario C). See
    [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) below.
+   The reconciliation check uses a **substring match on
+   `posted-by: arm-api-reviewer-agent`**, so the queries below work
+   regardless of which marker fields are present.
 
 2. **Telemetry and querying** -- the marker enables querying all
    agent-posted comments across PRs via the GitHub API. This is useful for
@@ -152,22 +429,61 @@ Then iterate over the returned PR numbers with the per-PR query above.
 
 ## Comment Reconciliation on Repeat Reviews
 
-When the agent reviews a PR that already has review comments (from a prior run
-of the agent, another ARM reviewer, or automated checks), it reconciles its
-findings against the existing comments before posting anything. This prevents
-duplicate noise and keeps the PR thread clean.
+When the agent reviews a PR that already has comments or review bodies (from a
+prior run of the agent, another ARM reviewer, or automated checks), it
+reconciles its findings before posting anything. This prevents duplicate or
+contradictory noise and keeps the PR discussion useful.
 
-The agent builds an inventory of **all** existing review comment threads --
-including resolved, outdated, and collapsed ones -- and handles each finding
-according to these scenarios:
+The agent builds a paginated inventory of inline review threads, top-level PR
+conversation comments, and pull request review bodies. It includes resolved,
+outdated, and collapsed threads and handles each finding according to these
+scenarios:
 
-| Scenario                                   | Condition                                                                                                   | What happens                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A -- Already covered**                   | Same rule, same file, same line                                                                             | Finding is skipped. No new comment posted.                                                                                                                                                                                                                                                                                    |
-| **B -- Line shifted (same author)**        | Same rule, but the code moved to a different line. The old comment was from the agent or the same engineer. | The outdated comment is **resolved** and a new comment is posted at the correct line, with a link back to the old thread.                                                                                                                                                                                                     |
-| **C -- Line shifted (different reviewer)** | Same rule, code moved, but the old comment was from a different human reviewer.                             | The agent **does not** resolve the other reviewer's comment or post a duplicate. Instead, it **adds a reply** to the existing thread noting the new line number, so the author and reviewer can find the right code.                                                                                                          |
-| **D -- No new findings**                   | Every finding is already covered by existing comments.                                                      | No new comments are posted. The agent reports: _"All findings are already covered by existing comments on the PR."_ It lists each matching existing thread with its **clickable comment URL** so the reviewer can navigate directly to verify.                                                                                |
-| **E -- Violation fixed**                   | An existing unresolved comment flags a violation that no longer exists in the latest code.                  | The agent reports which comments have been addressed -- each with its **clickable comment URL** so the reviewer can navigate and verify the fix -- and **proposes resolving** them, but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
+- **A -- Already covered:** the same semantic finding (rule or topic, affected
+  API element, and corrective outcome) is already actionable on any discussion
+  surface. The finding is skipped and no new comment is posted. Exact wording,
+  line number, author, or marker presence does not make it new.
+- **B -- Line shifted (agent-origin):** same rule, code moved, and the old
+  comment contains `posted-by: arm-api-reviewer-agent`. The outdated agent
+  comment is resolved and a replacement comment is posted at the correct line,
+  with a link back to the old thread.
+- **C -- Line shifted (human-origin):** same rule, code moved, but the old
+  comment does not contain the agent marker. The agent does not resolve the
+  human reviewer's comment or post a duplicate; it plans a reply to the
+  existing thread noting the new line number.
+- **D -- No standalone new findings:** all findings are SKIP-COVERED,
+  REPLY-LINE-SHIFT, or CLARIFY-CONFLICT. No duplicate standalone finding is
+  posted. The agent lists each matching existing item with its clickable URL
+  and executes only the planned replies, consolidated clarifications, or
+  fix-verified resolutions.
+- **E -- Agent-origin violation fixed:** an existing unresolved agent comment
+  flags a violation that no longer exists in the latest code. The agent plans
+  to thank the author and resolve its own thread. **Important:** approval of
+  the overall plan is **bulk consent** that auto-resolves every Scenario E
+  thread without a separate per-thread prompt. The plan-approval prompt makes
+  this scope explicit by stating:
+  - the **count** of Scenario E rows (auto-resolved) and Scenario F rows
+    (per-thread approval),
+  - the **URLs** of the agent threads that will be auto-resolved (first 5
+    inline, rest in the plan table),
+  - the **alternative**: choose **Execute selectively** to keep specific
+    Scenario E rows unresolved, or **Cancel** to leave every existing
+    thread untouched,
+  - the **rollback cost**: a thread auto-resolved in error can be reopened
+    manually on github.com. Later sessions treat the resolved thread as prior
+    coverage and do not duplicate it elsewhere, so reopen that thread to
+    restore its unresolved state.
+- **F -- Human-origin violation fixed:** an existing unresolved human-authored
+  comment flags a violation that is no longer present. The interactive agent
+  surfaces the thread for explicit per-thread consent before replying or
+  resolving; the automated workflow may reply that the fix is present but
+  never resolves a human-owned thread.
+- **Conflict clarification:** when the new session would give materially
+  incompatible guidance for the same semantic finding, it does not post a
+  competing finding. It replies in the existing inline thread or posts one
+  consolidated top-level clarification linking the conflicting top-level
+  comments/review bodies. The clarification states the prior position, current
+  evidence, current guidance, and why the conclusion changed.
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 
@@ -188,7 +504,8 @@ You confirm the plan before any comments are posted, resolved, or replied to.
 
 After posting review comments, the agent can also propose label changes on the PR:
 
-- **Add** `ARMChangesRequested` to signal the PR author needs to address feedback.
+- **Add** `ARMChangesRequested` only when at least one Blocking finding was
+  posted. Warning/suggestion-only and clarification-only reviews do not add it.
 - **Remove** `WaitForARMFeedback` (if present) since ARM feedback has been provided.
 
 The agent will propose these changes and wait for your explicit approval
@@ -197,15 +514,21 @@ before modifying any labels.
 ## Suppression Continuity Analysis
 
 When a PR adds or modifies a `readme.md` containing `directive` / `suppress`
-entries, the agent performs a **suppression continuity analysis** by comparing
-the new version's suppressions against the previous API version's `readme.md`:
+entries, or modifies a service-scoped `suppressions.yaml`, the agent performs
+a **suppression continuity analysis** by comparing the new version's
+suppressions against the base-branch version (the previous API version's
+`readme.md`, or the prior `suppressions.yaml` on the base branch):
 
 | Scenario                                                                 | What the agent does                                                                                                                                                                                                                                |
 | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Carried-over suppression** -- same rule ID exists in both versions     | Acceptable. No action needed.                                                                                                                                                                                                                      |
 | **Dropped suppression** -- exists in previous version but missing in new | Investigates whether the PR's spec changes fix the underlying violation. If yes, notes it as a positive finding. If not, flags a **warning** that the author may have accidentally dropped a required suppression (which would cause CI failures). |
 | **New suppression** -- exists in new version but not previous            | Checks for a clear, specific `reason`. Flags suppressions with missing/vague reasons, security-related rule suppressions (`secret-prop`, `security-definition-missing`), or suppressions that mask issues the spec should fix.                     |
-| **First version** -- no previous `readme.md` exists                      | All suppressions are treated as new and validated per the rules above.                                                                                                                                                                             |
+| **First version** -- no previous `readme.md` or `suppressions.yaml`      | All suppressions are treated as new and validated per the rules above.                                                                                                                                                                             |
+
+For `suppressions.yaml`, the inventory key is the `tool` + `path` + `rule` (or
+`code`) tuple rather than the rule ID alone, since the same rule can be
+suppressed independently for different paths.
 
 This analysis helps catch accidentally dropped suppressions that would break CI,
 as well as unjustified new suppressions that mask real compliance issues.
@@ -221,6 +544,7 @@ as well as unjustified new suppressions that mask real compliance issues.
 | `specification/**/examples/*.json`            | Validated against the spec they reference                                     |
 | `specification/**/*.json`                     | Any other OpenAPI JSON -- generic rules                                       |
 | `specification/**/readme.md`                  | AutoRest config -- tag configurations, input file lists, and **suppressions** |
+| `specification/**/suppressions.yaml`          | Service-scoped suppression entries; continuity analysis vs. the base branch   |
 
 ### Key Rule Areas
 
@@ -230,7 +554,8 @@ as well as unjustified new suppressions that mask real compliance issues.
 - **TypeSpec** -- project structure, decorators, doc comments, ARM resource patterns, `union` vs `enum`
 - **Security** -- no secrets in GET responses, `x-ms-secret` annotations, proper auth definitions
 - **LRO** -- correct `x-ms-long-running-operation` usage, response schemas, polling headers
-- **Suppressions** -- `readme.md` suppression continuity across API versions (carried-over, dropped, and new suppressions)
+- **Suppressions** -- `readme.md` and `suppressions.yaml` continuity across API versions
+  (carried-over, dropped, and new suppressions)
 
 ## Tips
 
@@ -256,7 +581,7 @@ The agent **does**:
 
 The agent **does not**:
 
-- Modify specification files -- it is read-only
+- Modify specification files -- its review of API specs is read-only
 - Review local files or uncommitted changes -- it operates on PRs only
 - Generate SDKs
 - Author new TypeSpec projects from scratch
@@ -277,27 +602,28 @@ The agent **does not**:
 
 ### Agent Files (under `.github/`)
 
-| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                   |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                              |
-| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                          |
-| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                              |
-| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                     |
-| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                 |
-| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                     |
-| `skills/azure-api-review/references/*.md`       | 15 cross-cutting rule references (secret detection, property mutability, provisioning state, naming conventions, enum best practices, tracked resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight compliance, LRO final-state-via, suppression review criteria, linter rule coverage, design decisions) |
-| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                            |
+| File                                            | Purpose                                                                                                                                                                                 |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                            |
+| `instructions/arm-api-review.instructions.md`   | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                        |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                            |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                   |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                               |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                   |
+| `skills/azure-api-review/references/*.md`       | 29 shared references covering cross-cutting, ARM control-plane, and data-plane review areas. The ARM reviewer loads only the cross-cutting and ARM references applicable to its review. |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                          |
+| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                                          |
 
 ### Evaluation Suite
 
-The agent is validated by an automated evaluation suite of 28 test stimuli
-covering ARM resource structure, property design, operations, breaking
-changes, suppressions, example files, TypeSpec review, and more. The tests
-run against fixture files with seeded violations and verify the agent
-detects each issue.
+The agent is validated by an automated evaluation suite covering ARM resource structure, property design,
+operations, breaking changes, suppressions (both `readme.md` and
+`suppressions.yaml`), example files, TypeSpec review, fast-path triage,
+report format, and more. The tests run against fixture files with seeded
+violations and verify the agent detects each issue.
 
 To run the eval suite after making changes to the agent, instruction files,
-or skills:
+skills, **or the automated workflow configuration** (`.github/workflows/arm-api-review.md`):
 
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
@@ -305,13 +631,16 @@ cd .github/skills/evals/arm-api-reviewer
 ```
 
 The script automatically clones and builds the
-[evaluate](https://github.com/microsoft/evaluate) framework, runs all
-tests, and prints a pass/fail summary. Pass `-EvaluateRepo` to point to an
+
+<!-- cspell:words vally -->
+
+[vally](https://github.com/microsoft/vally) framework, runs all
+tests, and prints a pass/fail summary. Pass `-VallyRepo` to point to an
 existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip
 rebuilding. Run `Get-Help .\run-evals.ps1 -Detailed` for all options.
 
-Include the eval results in any PR that modifies the agent or its rules so
-reviewers can assess the impact.
+Include the eval results in any PR that modifies the agent, its rules, or the
+automated workflow configuration so reviewers can assess the impact.
 
 See [`.github/skills/evals/arm-api-reviewer/README.md`](../.github/skills/evals/arm-api-reviewer/README.md)
 for full documentation on test categories, fixtures, graders, and adding

@@ -140,8 +140,23 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  ConfigurationStoresOperationGroup.listDeleted,
+  "GetDeletedAppConfigurationStores",
+  "csharp"
+);
+@@clientName(
   OperationsOperationGroup.regionalCheckNameAvailability,
   "CheckAppConfigurationRegionalNameAvailability",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.get,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.listByConfigurationStore,
+  "GetNetworkSecurityPerimeterConfigurations",
   "csharp"
 );
 @@alternateType(
@@ -176,6 +191,11 @@ using Azure.ClientGenerator.Core;
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration,
   "AppConfigurationManagedOnBehalfOfConfiguration",
@@ -184,5 +204,15 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "AppConfigurationMoboBrokerResourceInfo",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
+  "AppConfigurationSeverity",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
+  "AppConfigurationIssueType",
   "csharp"
 );

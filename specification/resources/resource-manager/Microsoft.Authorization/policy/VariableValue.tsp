@@ -18,6 +18,7 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @subscriptionResource
 @parentResource(Variable)
 model VariableValue
@@ -26,7 +27,7 @@ model VariableValue
     Resource = VariableValue,
     KeyName = "variableValueName",
     SegmentName = "values",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -45,7 +46,7 @@ alias VariableValueOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   },
   {},
@@ -54,7 +55,7 @@ alias VariableValueOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("values")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableValueName: string;
   }
 >;
@@ -82,7 +83,7 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   },
   {
@@ -92,19 +93,20 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
 
     /** The name of the variable value to operate on. */
     @path
     @segment("values")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableValueName: string;
   }
 >;
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface VariableValues {
   /**

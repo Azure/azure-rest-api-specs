@@ -17,13 +17,14 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 model PolicyExemption
   is Azure.ResourceManager.ExtensionResource<PolicyExemptionProperties> {
   ...ResourceNameParameter<
     Resource = PolicyExemption,
     KeyName = "policyExemptionName",
     SegmentName = "policyExemptions",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -32,6 +33,7 @@ alias PolicyExemptionListParameters = {
    * The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the scope, including those that apply directly or apply from containing scopes. If $filter=atScope() is provided, the returned list only includes all policy exemptions that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy exemptions that at the given scope. If $filter=excludeExpired() is provided, the returned list only includes all policy exemptions that either haven't expired or didn't set expiration date. If $filter=policyAssignmentId eq '{value}' is provided. the returned list only includes all policy exemptions that are associated with the give policyAssignmentId.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-skip-url-encoding is required on $filter to match legacy swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-skip-url-encoding' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @path/@query with allowReserved."
   @extension("x-ms-skip-url-encoding", true)
   @query("$filter")
   $filter?: string;
@@ -39,6 +41,7 @@ alias PolicyExemptionListParameters = {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 interface PolicyExemptionGenericOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -83,6 +86,7 @@ interface PolicyExemptionGenericOps
     > {}
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface PolicyExemptions {
   /**

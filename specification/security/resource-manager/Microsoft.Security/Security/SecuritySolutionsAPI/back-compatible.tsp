@@ -9,7 +9,7 @@ using Common;
 @@Legacy.flattenProperty(CloudError.error);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(securitySolutionsReferenceData.properties);
+@@Legacy.flattenProperty(securitySolutionsReferenceData.properties, "!csharp");
 
 @@clientLocation(AllowedConnectionsResources.get, "AllowedConnections");
 @@clientLocation(
@@ -51,8 +51,14 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerVulnerabilityAssessment.properties);
 
-@@clientLocation(TopologyResources.get, "Topology");
-@@clientLocation(TopologyResources.listByHomeRegion, "Topology");
+@@clientLocation(TopologyResources.get, "TopologyResources", "csharp");
+@@clientLocation(
+  TopologyResources.listByHomeRegion,
+  "TopologyResources",
+  "csharp"
+);
+@@clientLocation(TopologyResources.get, "Topology", "javascript");
+@@clientLocation(TopologyResources.listByHomeRegion, "Topology", "javascript");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TopologyResource.properties);
 
@@ -81,11 +87,13 @@ using Common;
 
 @@clientLocation(
   SecuritySolutionsReferenceDataOperationGroup.list,
-  "SecuritySolutionsReferenceData"
+  "SecuritySolutionsReferenceData",
+  "!csharp"
 );
 @@clientLocation(
   SecuritySolutionsReferenceDataOperationGroup.listByHomeRegion,
-  "SecuritySolutionsReferenceData"
+  "SecuritySolutionsReferenceData",
+  "!csharp"
 );
 
 @@clientLocation(TopologyOperationGroup.list, "Topology");

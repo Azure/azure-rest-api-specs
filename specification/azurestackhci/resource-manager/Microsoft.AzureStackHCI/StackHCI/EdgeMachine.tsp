@@ -14,8 +14,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * EdgeMachine details.
  */
-@added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
+@added(Versions.v2026_05_01_preview)
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
   ...ResourceNameParameter<
@@ -27,8 +26,7 @@ model EdgeMachine
   ...ManagedServiceIdentityProperty;
 }
 
-@added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
+@added(Versions.v2026_05_01_preview)
 @armResourceOperations
 interface EdgeMachines {
   /**
@@ -61,6 +59,16 @@ interface EdgeMachines {
    * List all edge machines in a subscription.
    */
   listBySubscription is ArmListBySubscription<EdgeMachine>;
+
+  /**
+   * A long-running resource action to validate the edge machine.
+   */
+  @added(Versions.v2026_05_01_preview)
+  validate is ArmResourceActionAsync<
+    EdgeMachine,
+    EdgeMachineValidateRequest,
+    EdgeMachineValidateResponse
+  >;
 }
 
 @@doc(EdgeMachine.name, "Name of Device");

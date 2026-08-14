@@ -17,13 +17,14 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2026_01_01_preview)
+@removed(Versions.v2026_06_01)
 model PolicyEnrollment
   is Azure.ResourceManager.ExtensionResource<PolicyEnrollmentProperties> {
   ...ResourceNameParameter<
     Resource = PolicyEnrollment,
     KeyName = "policyEnrollmentName",
     SegmentName = "policyEnrollments",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 
   /**
@@ -38,6 +39,7 @@ alias PolicyEnrollmentListParameters = {
    * The filter to apply on the operation. Valid values for $filter are: 'atScope()' or 'atExactScope()'. If $filter is not provided, no filtering is performed. If $filter is not provided, the unfiltered list includes all policy enrollments associated with the scope, including those that apply directly or from containing scopes. If $filter=atScope() is provided, the returned list includes all policy enrollments that apply to the scope, which is everything in the unfiltered list except those applied to sub-scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy enrollments that apply at the given scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-skip-url-encoding is required on $filter to match legacy swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-skip-url-encoding' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @path/@query with allowReserved."
   @extension("x-ms-skip-url-encoding", true)
   @query("$filter")
   $filter?: string;
@@ -45,6 +47,7 @@ alias PolicyEnrollmentListParameters = {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 @added(Versions.v2026_01_01_preview)
+@removed(Versions.v2026_06_01)
 interface PolicyEnrollmentGenericOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -89,6 +92,7 @@ interface PolicyEnrollmentGenericOps
     > {}
 
 @added(Versions.v2026_01_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface PolicyEnrollments {
   /**

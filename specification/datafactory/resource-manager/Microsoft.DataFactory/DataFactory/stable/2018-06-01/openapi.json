@@ -16164,35 +16164,35 @@
           "description": "Properties of the factory.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "identity": {
+          "$ref": "#/definitions/FactoryIdentity",
+          "description": "Managed service identity of the factory."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "The resource location.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "eTag": {
           "type": "string",
           "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
-        },
-        "identity": {
-          "$ref": "#/definitions/FactoryIdentity",
-          "description": "Managed service identity of the factory."
         }
       },
       "additionalProperties": {},
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },

@@ -8,6 +8,7 @@ using Microsoft.Maintenance;
   "MaintenanceManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.Maintenance, "MaintenanceManagementClient", "python");
 
 // csharp configurations
 @@clientName(
@@ -75,8 +76,13 @@ using Microsoft.Maintenance;
 );
 @@clientName(InputLinuxParameters, "MaintenanceLinuxPatchSettings", "csharp");
 @@clientName(
-  ScheduledEventApproveResponse,
+  ScheduledEventsApproveResponse,
   "MaintenanceScheduledEventApproveResult",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsIdList,
+  "MaintenanceScheduledEventIdList",
   "csharp"
 );
 @@clientName(RebootOptions, "MaintenanceRebootOption", "csharp");

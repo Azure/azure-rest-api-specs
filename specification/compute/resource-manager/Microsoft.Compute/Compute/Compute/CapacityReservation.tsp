@@ -34,11 +34,12 @@ model CapacityReservation
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CapacityReservations {
   /**
    * The operation that retrieves information about the capacity reservation.
    */
+  @tag("CapacityReservations")
   get is ComputeResourceRead<
     CapacityReservation,
     Parameters = {
@@ -53,15 +54,22 @@ interface CapacityReservations {
   /**
    * The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  @tag("CapacityReservations")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     CapacityReservation,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response =
+      | ArmResponse<CapacityReservation>
+      | ArmResourceCreatedResponse<
+          CapacityReservation,
+          LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
    * The operation to update a capacity reservation.
    */
+  @tag("CapacityReservations")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     CapacityReservation,
@@ -71,10 +79,11 @@ interface CapacityReservations {
   >;
 
   /**
-   * The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted after it has been successfully allocated until the schedule end time.
+   * The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted after they have been successfully allocated until the schedule end time. Future capacity reservations (Minimum API version: 2026-04-01) can be deleted if their reservation state is one of: Pending, Declined, FulfillmentFailed, or Approved. Otherwise, Future capacity reservations in the Committed, Live, or PartiallyFulfilled state cannot be deleted until minimumCommitmentDays have elapsed since their scheduled start date.
    */
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("CapacityReservations")
   delete is ComputeResourceDeleteAsync<
     CapacityReservation,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -83,6 +92,7 @@ interface CapacityReservations {
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
+  @tag("CapacityReservation")
   listByCapacityReservationGroup is ComputeResourceListByParent<
     CapacityReservation,
     Parameters = {

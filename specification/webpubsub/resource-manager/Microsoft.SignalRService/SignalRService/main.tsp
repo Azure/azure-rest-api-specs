@@ -20,7 +20,9 @@ import "./WebPubSubHub.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./SharedPrivateLinkResource.tsp";
+import "./PersistentStorage.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -50,6 +52,11 @@ enum Versions {
    * The 2025-08-01-preview API version.
    */
   v2025_08_01_preview: "2025-08-01-preview",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
 
 /**
@@ -59,7 +66,9 @@ enum Versions {
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")

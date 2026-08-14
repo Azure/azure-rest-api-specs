@@ -13,17 +13,17 @@ namespace Microsoft.Network;
 /**
  * Describes a virtual network link.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(DnsForwardingRuleset)
-model VirtualNetworkLink
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkLinkProperties, false> {
+model VirtualNetworkLink is Azure.ResourceManager.ProxyResource<
+  VirtualNetworkLinkProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkLink,
     KeyName = "virtualNetworkLinkName",
     SegmentName = "virtualNetworkLinks",
     NamePattern = ""
   >;
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Legacy.EntityTagProperty;
 }

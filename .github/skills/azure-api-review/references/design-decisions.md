@@ -118,7 +118,7 @@ When a PATCH operation takes variable time, should it be synchronous
 - **Synchronous** if: P99 latency ≤1 second for all property updates
 - **Asynchronous** if: P99 latency >1 second for any update scenario
 - **Note**: PATCH is NOT required to be async. Do not flag synchronous
-  PATCH as a violation (armapi-review §4.6)
+  PATCH as a violation (arm-api-review §4.6)
 
 ### Questions to Ask
 

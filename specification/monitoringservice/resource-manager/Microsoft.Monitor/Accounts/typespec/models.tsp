@@ -141,6 +141,8 @@ namespace Microsoft.Monitor {
       NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
     >;
     ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserving lowercase 'etag' from original swagger to avoid breaking change"
+    ...Azure.ResourceManager.Legacy.EntityTagProperty;
   }
 }
 

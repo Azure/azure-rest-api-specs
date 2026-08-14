@@ -42,7 +42,8 @@ interface CertificateOps
         @segment("certificates")
         @key
         name: string,
-      }
+      },
+      ResourceName = "AppCertificate"
     > {}
 
 @armResourceOperations
@@ -138,7 +139,8 @@ interface SiteCertificateOps
         @key
         @pattern("^[A-z][A-z0-9]*$")
         certificateName: string,
-      }
+      },
+      ResourceName = "SiteCertificate"
     > {}
 
 @armResourceOperations
@@ -220,7 +222,8 @@ interface CertificateOperationGroupOps
         @key
         @pattern("^[A-z][A-z0-9]*$")
         certificateName: string,
-      }
+      },
+      ResourceName = "SiteSlotCertificate"
     > {}
 
 @tag("SiteCertificates")

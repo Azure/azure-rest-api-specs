@@ -2,11 +2,11 @@
 // TODO: Enable eslint, fix errors
 
 import { join } from "path";
-import { Suppression } from "suppressions";
+import { type Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.ts";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -776,6 +776,36 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- Legacy CSharp emitter rule -----
+const LEGACY_CSHARP_EMITTER = "@azure-tools/typespec-csharp";
+
+export class TspConfigLegacyCsharpEmitterForbiddenSubRule extends TspconfigSubRuleBase {
+  constructor() {
+    super("emit", LEGACY_CSHARP_EMITTER);
+  }
+
+  protected validate(config: any): RuleResult {
+    const emit: string[] | undefined = config?.emit;
+    const options: Record<string, any> | undefined = config?.options;
+
+    const hasLegacyEmitter =
+      emit?.includes(LEGACY_CSHARP_EMITTER) || options?.[LEGACY_CSHARP_EMITTER] !== undefined;
+
+    if (hasLegacyEmitter) {
+      return this.createFailedResult(
+        `TypeSpec projects must not use the legacy "${LEGACY_CSHARP_EMITTER}" emitter`,
+        `Please use "@azure-typespec/http-client-csharp" for data plane or "@azure-typespec/http-client-csharp-mgmt" for management plane instead`,
+      );
+    }
+
+    return { success: true };
+  }
+
+  public getPathOfKeyToValidate(): string {
+    return `emit.${LEGACY_CSHARP_EMITTER}`;
+  }
+}
+
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -784,6 +814,7 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
  */
 export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
+  new TspConfigLegacyCsharpEmitterForbiddenSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
@@ -807,6 +838,8 @@ export const requiredRules = [
   new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
+  new TspConfigCsharpMgmtNamespaceSubRule(),
+  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
 /**
@@ -819,8 +852,6 @@ export const requiredRules = [
 export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpDpEmitterOutputDirSubRule(),
   new TspConfigCsharpDpNamespaceSubRule(),
-  new TspConfigCsharpMgmtNamespaceSubRule(),
-  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
   new TspConfigGoDpServiceDirMatchPatternSubRule(),
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),

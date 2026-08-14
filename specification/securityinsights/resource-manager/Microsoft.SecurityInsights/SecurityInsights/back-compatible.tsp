@@ -319,7 +319,8 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(AutomationRule.properties);
 
 @@clientName(Bookmarks.createOrUpdate::parameters.resource, "bookmark");
-@@clientLocation(Bookmarks.expand, "Bookmark");
+@@clientLocation(Bookmarks.expand, "Bookmark", "!javascript");
+@@clientLocation(Bookmarks.expand, "BookmarkOperations", "javascript");
 @@clientName(Bookmarks.expand::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Bookmark.properties);
@@ -560,10 +561,25 @@ using Microsoft.SecurityInsights;
 
 @@clientLocation(
   DataConnectorsCheckRequirementsOperationGroup.post,
-  "DataConnectorsCheckRequirements"
+  "DataConnectorsCheckRequirements",
+  "!javascript"
+);
+@@clientLocation(
+  DataConnectorsCheckRequirementsOperationGroup.post,
+  "DataConnectorsCheckRequirementsOperations",
+  "javascript"
 );
 
-@@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControl");
+@@clientLocation(
+  SourceControlOperationGroup.listRepositories,
+  "SourceControl",
+  "!javascript"
+);
+@@clientLocation(
+  SourceControlOperationGroup.listRepositories,
+  "SourceControlOperations",
+  "javascript"
+);
 @@clientName(SourceControlOperationGroup.listRepositories, "listRepositories");
 
 @@clientLocation(
@@ -718,11 +734,29 @@ using Microsoft.SecurityInsights;
   "productTemplateAdditionalProperties"
 );
 @@visibility(RelationList.nextLink, Lifecycle.Read);
+@@visibility(AlertRulesList.nextLink, Lifecycle.Read);
+@@visibility(ActionsList.nextLink, Lifecycle.Read);
+@@visibility(AlertRuleTemplatesList.nextLink, Lifecycle.Read);
+@@visibility(BookmarkList.nextLink, Lifecycle.Read);
+@@visibility(PackageList.nextLink, Lifecycle.Read);
+@@visibility(ProductPackageList.nextLink, Lifecycle.Read);
+@@visibility(ProductTemplateList.nextLink, Lifecycle.Read);
+@@visibility(TemplateList.nextLink, Lifecycle.Read);
+@@visibility(DataConnectorList.nextLink, Lifecycle.Read);
+@@visibility(IncidentList.nextLink, Lifecycle.Read);
+@@visibility(IncidentCommentList.nextLink, Lifecycle.Read);
+@@visibility(MetadataList.nextLink, Lifecycle.Read);
+@@visibility(SecurityMLAnalyticsSettingsList.nextLink, Lifecycle.Read);
+@@visibility(RepoList.nextLink, Lifecycle.Read);
+@@visibility(SourceControlList.nextLink, Lifecycle.Read);
+@@visibility(ThreatIntelligenceInformationList.nextLink, Lifecycle.Read);
+@@visibility(WatchlistList.nextLink, Lifecycle.Read);
+@@visibility(WatchlistItemList.nextLink, Lifecycle.Read);
 @@clientName(
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
   "ThreatIntelligenceFilteringCriteria"
 );
-@@clientName(AatpCheckRequirements, "AATPCheckRequirements");
+@@clientName(AatpCheckRequirements, "AATPCheckRequirements", "!csharp");
 @@clientName(
   AatpCheckRequirementsProperties,
   "AATPCheckRequirementsProperties"

@@ -15,6 +15,7 @@ using Common;
 namespace Compute;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("Usage")
 interface UsageOperationGroup {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
@@ -28,11 +29,12 @@ interface UsageOperationGroup {
   list is ComputeProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("VirtualMachineSizes")
 interface VirtualMachineSizesOperationGroup {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
@@ -46,11 +48,12 @@ interface VirtualMachineSizesOperationGroup {
   list is ComputeProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("VirtualMachineScaleSets")
 interface VirtualMachineScaleSetsOperationGroup {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
@@ -64,11 +67,12 @@ interface VirtualMachineScaleSetsOperationGroup {
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineScaleSetListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("VirtualMachines")
 interface VirtualMachinesOperationGroup {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
@@ -82,16 +86,18 @@ interface VirtualMachinesOperationGroup {
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("VirtualMachineImages")
 interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
   @autoRoute
   @get
@@ -100,7 +106,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -114,6 +120,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImagesEdgeZone_ListOffers")
   @autoRoute
   @get
@@ -122,7 +129,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -143,6 +150,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImagesEdgeZone_ListSkus")
   @autoRoute
   @get
@@ -151,7 +159,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -186,6 +194,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImagesEdgeZone_List")
   @autoRoute
   @get
@@ -194,7 +203,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -254,6 +263,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    * Gets a virtual machine image in an edge zone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImagesEdgeZone_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
@@ -296,11 +306,13 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("VirtualMachineImages")
 interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of all virtual machine image versions for the specified edge zone
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImages_ListByEdgeZone")
   @autoRoute
   @get
@@ -309,7 +321,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = VmImagesInEdgeZoneListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -330,12 +342,13 @@ interface VirtualMachineImagesOperationGroup {
   listPublishers is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Gets a list of virtual machine image offers for the specified location and publisher.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImages_ListOffers")
   @autoRoute
   @get
@@ -344,7 +357,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * A valid image publisher.
@@ -358,6 +371,7 @@ interface VirtualMachineImagesOperationGroup {
    * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImages_ListSkus")
   @autoRoute
   @get
@@ -366,7 +380,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * A valid image publisher.
@@ -394,6 +408,7 @@ interface VirtualMachineImagesOperationGroup {
    * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImages_List")
   @autoRoute
   @get
@@ -402,7 +417,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * A valid image publisher.
@@ -455,7 +470,7 @@ interface VirtualMachineImagesOperationGroup {
   @get
   listWithProperties(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SubscriptionActionScope>,
-    ...LocationParameter,
+    ...LocationResourceParameter,
 
     /**
      * A valid image publisher.
@@ -497,6 +512,7 @@ interface VirtualMachineImagesOperationGroup {
    * Gets a virtual machine image.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineImages_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
@@ -533,6 +549,7 @@ interface VirtualMachineImagesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("LogAnalytics")
 interface LogAnalyticsOperationGroup {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
@@ -548,7 +565,7 @@ interface LogAnalyticsOperationGroup {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Request = RequestRateByIntervalInput
   >;
   /**
@@ -564,17 +581,19 @@ interface LogAnalyticsOperationGroup {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Request = ThrottledRequestsInput
   >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("VirtualMachineRunCommands")
 interface VirtualMachineRunCommandsOperationGroup {
   /**
    * Lists all available run commands for a subscription in a location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineRunCommands_List")
   @autoRoute
   @get
@@ -583,12 +602,13 @@ interface VirtualMachineRunCommandsOperationGroup {
   list is ComputeProviderActionSync<
     Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Gets specific run command for a subscription in a location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @operationId("VirtualMachineRunCommands_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}")
   @get
