@@ -340,7 +340,11 @@ interface VirtualConnectionsConfigs {
   @summary("Creates or replaces the Virtual Connections configuration for an app.")
   createOrUpdateVirtualConnections is VirtualConnectionsOps.CreateOrUpdateSync<
     VirtualConnections,
-    Response = ArmResourceUpdatedResponse<VirtualConnections>,
+    Response =
+      | ArmResourceUpdatedResponse<VirtualConnections>
+      | (CreatedResponse & {
+          @bodyRoot body: VirtualConnections;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -351,6 +355,7 @@ interface VirtualConnectionsConfigs {
    */
   @summary("Validates a Virtual Connections configuration without applying it.")
   @action("validate")
+  @actionSeparator(":")
   validateVirtualConnections is VirtualConnectionsOps.ActionSync<
     VirtualConnections,
     VirtualConnectionsProperties,
@@ -410,7 +415,11 @@ interface VirtualConnectionsSlotConfigs {
   @summary("Creates or replaces the Virtual Connections configuration for a deployment slot.")
   createOrUpdateVirtualConnectionsSlot is VirtualConnectionsSlotOps.CreateOrUpdateSync<
     VirtualConnections,
-    Response = ArmResourceUpdatedResponse<VirtualConnections>,
+    Response =
+      | ArmResourceUpdatedResponse<VirtualConnections>
+      | (CreatedResponse & {
+          @bodyRoot body: VirtualConnections;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -420,6 +429,7 @@ interface VirtualConnectionsSlotConfigs {
    */
   @summary("Validates a Virtual Connections configuration for a deployment slot.")
   @action("validate")
+  @actionSeparator(":")
   validateVirtualConnectionsSlot is VirtualConnectionsSlotOps.ActionSync<
     VirtualConnections,
     VirtualConnectionsProperties,
