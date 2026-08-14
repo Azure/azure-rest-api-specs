@@ -35,10 +35,7 @@ model ScenarioProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * Resource ID of the scenario template version this scenario was created from (optional).
-   * Supply it on create to record that the scenario originated from a published template
-   * version; it is immutable thereafter, so a scenario's lineage cannot be re-pointed by a
-   * later update.
+   * Resource ID of the template version this scenario was created from (optional).
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   createdFrom?: string;
