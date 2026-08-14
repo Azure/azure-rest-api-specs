@@ -1,0 +1,88 @@
+{
+  "operationId": "AzureSandboxes_Create",
+  "title": "AzureSandboxes_create - pod",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "api-version": "2026-08-01-preview",
+    "request": {
+      "labels": {
+        "environment": "example"
+      },
+      "resources": {
+        "cpu": "1",
+        "memory": "1Gi"
+      },
+      "sourcesRef": {
+        "pod": {
+          "containers": [
+            {
+              "name": "main",
+              "diskImage": {
+                "id": "example-disk-image"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "example-sandbox",
+        "vmmType": "cloudhypervisor",
+        "sourcesRef": {},
+        "resources": {
+          "cpu": "example-cpu",
+          "memory": "example-memory"
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "title": "Invalid request",
+        "status": 400,
+        "detail": "The sandbox creation request is invalid."
+      }
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "Authentication is required to access this resource."
+      }
+    },
+    "404": {
+      "body": {
+        "title": "Source not found",
+        "status": 404,
+        "detail": "A source referenced by the sandbox creation request does not exist."
+      }
+    },
+    "409": {
+      "body": {
+        "title": "Conflict",
+        "status": 409,
+        "detail": "The sandbox cannot be created because the request conflicts with the current state."
+      }
+    },
+    "429": {
+      "body": {
+        "title": "Too many requests",
+        "status": 429,
+        "detail": "The sandbox creation rate limit has been exceeded. Retry the request later."
+      }
+    },
+    "500": {},
+    "503": {
+      "body": {
+        "title": "Service unavailable",
+        "status": 503,
+        "detail": "The service is temporarily unavailable. Retry the request later."
+      }
+    }
+  }
+}
