@@ -6,17 +6,14 @@ on:
       - main
     paths:
       - .github/**
-      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
-      - package.json
   pull_request:
     paths:
       - .github/**
-      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
-      - package.json
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   test:
@@ -37,6 +34,32 @@ jobs:
         with:
           sparse-checkout: |
             .github
+
+      - if: ${{ github.event_name == 'pull_request' && matrix.folder == '.github' && matrix.os == 'ubuntu' }}
+        name: Require compiled agentic workflow locks
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              ...context.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+            const changed = new Set(files.map(({ filename }) => filename));
+            const sources = [...changed].filter((file) =>
+              /^\.github\/workflows\/[^/]+\.md$/.test(file),
+            );
+            const missing = sources.filter(
+              (source) => !changed.has(source.replace(/\.md$/, ".lock.yml")),
+            );
+
+            if (missing.length > 0) {
+              core.setFailed(
+                `Recompile the changed agentic workflow source(s):\n${missing
+                  .map((source) => `  - ${source}`)
+                  .join("\n")}`,
+              );
+            }
 
       - if: ${{ matrix.folder == '.github' }}
         name: Install dependencies for github-script actions
