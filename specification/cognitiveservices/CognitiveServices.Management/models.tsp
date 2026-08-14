@@ -1685,7 +1685,7 @@ model AccountProperties {
   capabilitySettings?: CapabilitySettings;
 
   /**
-   * Customer-owned AKS hosting configurations for Foundry agents. This API version supports exactly one configuration. Once set, the configuration is immutable; subsequent requests may only repeat the same value.
+   * Customer-owned AKS hosting configurations for Foundry agents. This property can only be specified when the account is created; an existing account without a hosting configuration cannot add one later. This API version supports exactly one configuration, while the array shape is reserved for future API versions that may support multiple configurations. Once set, the configuration cannot be changed, removed, or reordered. Account update requests should omit this property or send the complete existing value unchanged. Responses only include hosting configuration types defined by the requested API version.
    */
   @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
