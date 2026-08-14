@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const RoutineRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.routines_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.routines_v2_preview],
 };
 
 @doc("The discriminator values supported for routine triggers.")
@@ -438,18 +438,11 @@ model ListRoutinesParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor returned as last_id by the previous list response.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.")
   @query
-  @continuationToken
   after?: string;
 
-  @doc("Unsupported. Reserved for future backward pagination support.")
-  @query
-  before?: string;
-
-  @doc("The ordering direction. Supported values are asc and desc.")
-  @query
-  order?: string;
+  ...PageOrderQueryParameter;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -475,18 +468,11 @@ model ListRoutineRunsParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor returned as last_id by the previous list-runs response.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.")
   @query
-  @continuationToken
   after?: string;
 
-  @doc("Unsupported. Reserved for future backward pagination support.")
-  @query
-  before?: string;
-
-  @doc("The ordering direction. Supported values are asc and desc.")
-  @query
-  order?: string;
+  ...PageOrderQueryParameter;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")

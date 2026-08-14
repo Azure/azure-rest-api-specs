@@ -27084,7 +27084,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27095,10 +27095,14 @@
             "$ref": "#/components/parameters/ListRoutinesParameters.after"
           },
           {
-            "$ref": "#/components/parameters/ListRoutinesParameters.before"
-          },
-          {
-            "$ref": "#/components/parameters/ListRoutinesParameters.order"
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -27119,8 +27123,7 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "data",
-                    "has_more"
+                    "data"
                   ],
                   "properties": {
                     "data": {
@@ -27130,20 +27133,13 @@
                       },
                       "description": "The requested list of items."
                     },
-                    "first_id": {
+                    "next_link": {
                       "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
+                      "format": "uri",
+                      "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
                     }
                   },
-                  "description": "The response data for a requested list of items."
+                  "description": "A page of items with a URL cursor to the next page."
                 }
               }
             }
@@ -27174,7 +27170,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -27193,7 +27189,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27258,7 +27254,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -27275,7 +27271,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27330,7 +27326,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -27347,7 +27343,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27395,7 +27391,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -27414,7 +27410,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27431,10 +27427,14 @@
             "$ref": "#/components/parameters/ListRoutineRunsParameters.after"
           },
           {
-            "$ref": "#/components/parameters/ListRoutineRunsParameters.before"
-          },
-          {
-            "$ref": "#/components/parameters/ListRoutineRunsParameters.order"
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -27455,8 +27455,7 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "data",
-                    "has_more"
+                    "data"
                   ],
                   "properties": {
                     "data": {
@@ -27466,20 +27465,13 @@
                       },
                       "description": "The requested list of items."
                     },
-                    "first_id": {
+                    "next_link": {
                       "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
+                      "format": "uri",
+                      "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
                     }
                   },
-                  "description": "The response data for a requested list of items."
+                  "description": "A page of items with a URL cursor to the next page."
                 }
               }
             }
@@ -27510,7 +27502,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -27529,7 +27521,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27584,7 +27576,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -27603,7 +27595,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27668,7 +27660,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -27687,7 +27679,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27742,7 +27734,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -31812,17 +31804,7 @@
         "name": "after",
         "in": "query",
         "required": false,
-        "description": "An opaque cursor returned as last_id by the previous list-runs response.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
-      "ListRoutineRunsParameters.before": {
-        "name": "before",
-        "in": "query",
-        "required": false,
-        "description": "Unsupported. Reserved for future backward pagination support.",
+        "description": "An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.",
         "schema": {
           "type": "string"
         },
@@ -31849,16 +31831,6 @@
         },
         "explode": false
       },
-      "ListRoutineRunsParameters.order": {
-        "name": "order",
-        "in": "query",
-        "required": false,
-        "description": "The ordering direction. Supported values are asc and desc.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
       "ListRoutineRunsParameters.routine_name": {
         "name": "routine_name",
         "in": "path",
@@ -31873,17 +31845,7 @@
         "name": "after",
         "in": "query",
         "required": false,
-        "description": "An opaque cursor returned as last_id by the previous list response.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
-      "ListRoutinesParameters.before": {
-        "name": "before",
-        "in": "query",
-        "required": false,
-        "description": "Unsupported. Reserved for future backward pagination support.",
+        "description": "An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.",
         "schema": {
           "type": "string"
         },
@@ -31897,16 +31859,6 @@
         "schema": {
           "type": "integer",
           "format": "int32"
-        },
-        "explode": false
-      },
-      "ListRoutinesParameters.order": {
-        "name": "order",
-        "in": "query",
-        "required": false,
-        "description": "The ordering direction. Supported values are asc and desc.",
-        "schema": {
-          "type": "string"
         },
         "explode": false
       },
@@ -38087,7 +38039,7 @@
         "description": "A custom event routine trigger.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -39179,7 +39131,7 @@
         "description": "Request body for the public dispatch_async route.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -39202,7 +39154,7 @@
         "description": "Identifiers returned after a routine dispatch is queued.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -42689,7 +42641,7 @@
         "description": "Known GitHub issue events that can fire a routine.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -42738,7 +42690,7 @@
         "description": "A GitHub issue routine trigger.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -43441,7 +43393,7 @@
         "description": "A manual payload used to test an invocations API routine dispatch.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -43485,7 +43437,7 @@
         "description": "Dispatches a routine through the raw invocations API. Exactly one of agent_name or agent_endpoint_id must be provided.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -43515,7 +43467,7 @@
         "description": "A manual payload used to test a responses API routine dispatch.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -43559,7 +43511,7 @@
         "description": "Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84307,7 +84259,7 @@
         "description": "A routine definition returned by the service.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84332,7 +84284,7 @@
         "description": "Base model for a routine action.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84352,7 +84304,7 @@
         "description": "The discriminator values supported for routine actions.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84375,7 +84327,7 @@
         "description": "Known source paths that can produce a routine run.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84406,7 +84358,7 @@
         "description": "The request body used to create or update a routine.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84431,7 +84383,7 @@
         "description": "Base model for a manual dispatch payload.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84451,7 +84403,7 @@
         "description": "The discriminator values supported for manual routine dispatch payloads.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84560,7 +84512,7 @@
         "description": "A single routine run returned from the run history API.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84582,7 +84534,7 @@
         "description": "Known lifecycle phases recorded for a routine run.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84591,7 +84543,7 @@
         "description": "The status of a routine run.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84618,7 +84570,7 @@
         "description": "Base model for a routine trigger.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84640,7 +84592,7 @@
         "description": "The discriminator values supported for routine triggers.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -84985,7 +84937,7 @@
         "description": "A recurring cron-based routine trigger.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -86268,7 +86220,7 @@
         "description": "A one-shot timer routine trigger.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
