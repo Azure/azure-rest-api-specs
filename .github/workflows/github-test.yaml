@@ -45,18 +45,21 @@ jobs:
               pull_number: context.payload.pull_request.number,
               per_page: 100,
             });
-            const changed = new Set(files.map(({ filename }) => filename));
-            const sources = [...changed].filter((file) =>
-              /^\.github\/workflows\/[^/]+\.md$/.test(file),
+            const changed = new Map(files.map(({ filename, status }) => [filename, status]));
+            const sources = files.filter(({ filename }) =>
+              /^\.github\/workflows\/[^/]+\.md$/.test(filename),
             );
-            const missing = sources.filter(
-              (source) => !changed.has(source.replace(/\.md$/, ".lock.yml")),
-            );
+            const invalid = sources.filter(({ filename, status }) => {
+              const lockStatus = changed.get(filename.replace(/\.md$/, ".lock.yml"));
+              return status === "removed"
+                ? lockStatus !== "removed"
+                : !lockStatus || lockStatus === "removed";
+            });
 
-            if (missing.length > 0) {
+            if (invalid.length > 0) {
               core.setFailed(
-                `Recompile the changed agentic workflow source(s):\n${missing
-                  .map((source) => `  - ${source}`)
+                `Update the compiled lock for each changed agentic workflow source:\n${invalid
+                  .map(({ filename, status }) => `  - ${filename} (${status})`)
                   .join("\n")}`,
               );
             }
