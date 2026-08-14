@@ -223,6 +223,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 @@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
+@@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
 
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
