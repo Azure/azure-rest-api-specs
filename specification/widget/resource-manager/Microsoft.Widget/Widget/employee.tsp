@@ -15,7 +15,6 @@ namespace Microsoft.Widget;
 /** Employee resource */
 model Employee is TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<Employee>;
-
   ...ResourceSkuProperty;
 }
 
