@@ -24,8 +24,6 @@ To see additional help and options, run:
 
 ``` yaml
 directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: The default package intentionally composes the latest API version for each Microsoft.Security resource type.
   - suppress: ValidFormats
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
