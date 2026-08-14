@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "recommendationTypeId": "18745007-438b-4c68-bfa3-b6576d85a831",
+    "api-version": "2026-08-12-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Advisor/remediations/18745007-438b-4c68-bfa3-b6576d85a831",
+        "name": "18745007-438b-4c68-bfa3-b6576d85a831",
+        "type": "Microsoft.Advisor/remediations",
+        "properties": {
+          "recommendationTypeId": "18745007-438b-4c68-bfa3-b6576d85a831",
+          "outputType": "executable",
+          "destructive": false,
+          "reversible": true,
+          "grounded": true,
+          "confidence": "medium",
+          "version": 1,
+          "artifacts": [
+            {
+              "artifactType": "remediationSteps",
+              "contentType": "text/markdown",
+              "confidence": "high",
+              "content": "# Upgrade the App Service runtime\n\nReview the current runtime, apply one of the approved executable artifacts, and verify the configured runtime after deployment."
+            },
+            {
+              "artifactType": "cli",
+              "contentType": "text/x-shellscript",
+              "confidence": "high",
+              "content": "az webapp config set --name <app-name> --resource-group <resource-group> --linux-fx-version <target-runtime>"
+            },
+            {
+              "artifactType": "powershell",
+              "contentType": "application/x-powershell",
+              "confidence": "medium",
+              "content": "Set-AzWebApp -Name <app-name> -ResourceGroupName <resource-group> -LinuxFxVersion <target-runtime>"
+            },
+            {
+              "artifactType": "bicep",
+              "contentType": "text/plain",
+              "confidence": "medium",
+              "content": "resource webApp 'Microsoft.Web/sites@2024-11-01' existing = {\n  name: appName\n}\n\nresource webConfig 'Microsoft.Web/sites/config@2024-11-01' = {\n  parent: webApp\n  name: 'web'\n  properties: {\n    linuxFxVersion: targetRuntime\n  }\n}"
+            },
+            {
+              "artifactType": "arm",
+              "contentType": "application/json",
+              "confidence": "medium",
+              "content": "{\"$schema\":\"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\"contentVersion\":\"1.0.0.0\",\"parameters\":{\"appName\":{\"type\":\"string\"},\"targetRuntime\":{\"type\":\"string\"}},\"resources\":[{\"type\":\"Microsoft.Web/sites/config\",\"apiVersion\":\"2024-11-01\",\"name\":\"[format('{0}/web', parameters('appName'))]\",\"properties\":{\"linuxFxVersion\":\"[parameters('targetRuntime')]\"}}]}"
+            }
+          ],
+          "methods": [
+            {
+              "heading": "Azure CLI",
+              "method": "cli",
+              "relation": "alternative",
+              "executable": true,
+              "parameters": [
+                {
+                  "name": "app-name",
+                  "description": "The App Service name.",
+                  "example": "my-web-app",
+                  "required": true
+                },
+                {
+                  "name": "resource-group",
+                  "description": "The resource group of the web app.",
+                  "example": "my-rg",
+                  "required": true
+                },
+                {
+                  "name": "target-runtime",
+                  "description": "The supported target runtime.",
+                  "example": "PHP|8.4",
+                  "required": true
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "text": "Apply the remediation command.",
+                  "kind": "command",
+                  "command": "az webapp config set --name <app-name> --resource-group <resource-group> --linux-fx-version <target-runtime>"
+                }
+              ],
+              "verification": "az webapp config show --name <app-name> --resource-group <resource-group> --query linuxFxVersion -o tsv"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Remediations_Get",
+  "title": "GetRemediation"
+}

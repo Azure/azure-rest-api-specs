@@ -20,6 +20,7 @@ import "./AssessmentResult.tsp";
 import "./ResiliencyReview.tsp";
 import "./TriageRecommendation.tsp";
 import "./TriageResource.tsp";
+import "./Remediation.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";

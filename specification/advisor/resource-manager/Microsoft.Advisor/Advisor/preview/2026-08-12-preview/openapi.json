@@ -59,6 +59,9 @@
     },
     {
       "name": "ResiliencyReviews"
+    },
+    {
+      "name": "Remediations"
     }
   ],
   "paths": {
@@ -451,6 +454,54 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Advisor/remediations/{recommendationTypeId}": {
+      "get": {
+        "operationId": "Remediations_Get",
+        "tags": [
+          "Remediations"
+        ],
+        "description": "Gets the approved remediation information for a recommendation type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "recommendationTypeId",
+            "in": "path",
+            "description": "The recommendation type identifier.",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An optional OData filter for executable artifacts. The filter supports `artifactType`, the `eq` operator, and `or`, with values `cli`, `powershell`, `bicep`, and `arm`. The `remediationSteps` artifact is always returned. When omitted, all approved executable artifacts are returned. A partially fulfilled filter returns 200 with details in `filterResult`; an entirely invalid filter, unsupported field, or unsupported operator returns `InvalidRequest` through the default error response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRemediation": {
+            "$ref": "./examples/GetRemediation.json"
+          }
         }
       }
     },
@@ -2499,6 +2550,462 @@
           {
             "name": "Completed",
             "value": "Completed"
+          }
+        ]
+      }
+    },
+    "Remediation": {
+      "type": "object",
+      "description": "The remediation information for an Advisor recommendation type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemediationProperties",
+          "description": "The remediation properties for the recommendation type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RemediationArtifact": {
+      "type": "object",
+      "description": "An inline artifact that can apply a remediation.",
+      "properties": {
+        "artifactType": {
+          "$ref": "#/definitions/RemediationArtifactType",
+          "description": "The artifact format."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The media type of the inline artifact content."
+        },
+        "confidence": {
+          "$ref": "#/definitions/RemediationConfidence",
+          "description": "The confidence assigned to the artifact."
+        },
+        "content": {
+          "type": "string",
+          "description": "The complete artifact content to apply the remediation."
+        }
+      },
+      "required": [
+        "artifactType",
+        "contentType",
+        "confidence",
+        "content"
+      ]
+    },
+    "RemediationArtifactType": {
+      "type": "string",
+      "description": "The type of an inline remediation artifact.",
+      "enum": [
+        "remediationSteps",
+        "cli",
+        "powershell",
+        "bicep",
+        "arm"
+      ],
+      "x-ms-enum": {
+        "name": "RemediationArtifactType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RemediationSteps",
+            "value": "remediationSteps",
+            "description": "Markdown guidance that is always included in a successful response."
+          },
+          {
+            "name": "Cli",
+            "value": "cli",
+            "description": "An Azure CLI script."
+          },
+          {
+            "name": "PowerShell",
+            "value": "powershell",
+            "description": "An Azure PowerShell script."
+          },
+          {
+            "name": "Bicep",
+            "value": "bicep",
+            "description": "A Bicep template."
+          },
+          {
+            "name": "Arm",
+            "value": "arm",
+            "description": "An Azure Resource Manager template."
+          }
+        ]
+      }
+    },
+    "RemediationConfidence": {
+      "type": "string",
+      "description": "The confidence assigned to remediation guidance.",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "x-ms-enum": {
+        "name": "RemediationConfidence",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "high",
+            "description": "The remediation has high confidence."
+          },
+          {
+            "name": "Medium",
+            "value": "medium",
+            "description": "The remediation has medium confidence."
+          },
+          {
+            "name": "Low",
+            "value": "low",
+            "description": "The remediation has low confidence."
+          }
+        ]
+      }
+    },
+    "RemediationFilterRejectionReason": {
+      "type": "string",
+      "description": "The reason an executable artifact filter value was rejected.",
+      "enum": [
+        "UnsupportedArtifactType",
+        "ArtifactUnavailable"
+      ],
+      "x-ms-enum": {
+        "name": "RemediationFilterRejectionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UnsupportedArtifactType",
+            "value": "UnsupportedArtifactType",
+            "description": "The requested artifact type is not supported."
+          },
+          {
+            "name": "ArtifactUnavailable",
+            "value": "ArtifactUnavailable",
+            "description": "The requested artifact type is supported but is not available."
+          }
+        ]
+      }
+    },
+    "RemediationFilterResult": {
+      "type": "object",
+      "description": "Details about how an executable artifact filter was fulfilled.",
+      "properties": {
+        "requestedValues": {
+          "type": "array",
+          "description": "The executable artifact types requested by the client.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fulfilledValues": {
+          "type": "array",
+          "description": "The requested executable artifact types included in the response.",
+          "items": {
+            "$ref": "#/definitions/RemediationArtifactType"
+          }
+        },
+        "rejectedValues": {
+          "type": "array",
+          "description": "The requested executable artifact types that were not included.",
+          "items": {
+            "$ref": "#/definitions/RemediationRejectedFilterValue"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        }
+      },
+      "required": [
+        "requestedValues",
+        "fulfilledValues",
+        "rejectedValues"
+      ]
+    },
+    "RemediationMethod": {
+      "type": "object",
+      "description": "A method for applying a remediation.",
+      "properties": {
+        "heading": {
+          "type": "string",
+          "description": "The display heading for the method."
+        },
+        "method": {
+          "type": "string",
+          "description": "The remediation method identifier."
+        },
+        "relation": {
+          "$ref": "#/definitions/RemediationMethodRelation",
+          "description": "The method's relationship to the primary remediation."
+        },
+        "executable": {
+          "type": "boolean",
+          "description": "Whether the method can be executed directly."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The inputs used by the method.",
+          "items": {
+            "$ref": "#/definitions/RemediationMethodParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "description": "The ordered steps for applying the method.",
+          "items": {
+            "$ref": "#/definitions/RemediationStep"
+          },
+          "x-ms-identifiers": [
+            "number"
+          ]
+        },
+        "verification": {
+          "type": "string",
+          "description": "The command that verifies the remediation result."
+        }
+      },
+      "required": [
+        "heading",
+        "method",
+        "relation",
+        "executable",
+        "parameters",
+        "steps"
+      ]
+    },
+    "RemediationMethodParameter": {
+      "type": "object",
+      "description": "A parameter used by a remediation method.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The parameter name."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the parameter's purpose."
+        },
+        "example": {
+          "type": "string",
+          "description": "An example value for the parameter."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the customer must provide the parameter."
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "example",
+        "required"
+      ]
+    },
+    "RemediationMethodRelation": {
+      "type": "string",
+      "description": "The relationship of a method to the primary remediation.",
+      "enum": [
+        "primary",
+        "alternative",
+        "prerequisite",
+        "followUp"
+      ],
+      "x-ms-enum": {
+        "name": "RemediationMethodRelation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "primary",
+            "description": "The primary remediation method."
+          },
+          {
+            "name": "Alternative",
+            "value": "alternative",
+            "description": "An alternative remediation method."
+          },
+          {
+            "name": "Prerequisite",
+            "value": "prerequisite",
+            "description": "A prerequisite for another remediation method."
+          },
+          {
+            "name": "FollowUp",
+            "value": "followUp",
+            "description": "A method to perform after the primary remediation."
+          }
+        ]
+      }
+    },
+    "RemediationOutputType": {
+      "type": "string",
+      "description": "The kind of remediation output.",
+      "enum": [
+        "executable"
+      ],
+      "x-ms-enum": {
+        "name": "RemediationOutputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Executable",
+            "value": "executable",
+            "description": "The remediation can be applied by using an executable artifact."
+          }
+        ]
+      }
+    },
+    "RemediationProperties": {
+      "type": "object",
+      "description": "The remediation details for an Advisor recommendation type.",
+      "properties": {
+        "recommendationTypeId": {
+          "type": "string",
+          "description": "The recommendation type identifier associated with the remediation."
+        },
+        "outputType": {
+          "$ref": "#/definitions/RemediationOutputType",
+          "description": "The kind of remediation output."
+        },
+        "destructive": {
+          "type": "boolean",
+          "description": "Whether applying the remediation can delete or replace customer data."
+        },
+        "reversible": {
+          "type": "boolean",
+          "description": "Whether the remediation can be reverted."
+        },
+        "grounded": {
+          "type": "boolean",
+          "description": "Whether the remediation is grounded in the target resource's current state."
+        },
+        "confidence": {
+          "$ref": "#/definitions/RemediationConfidence",
+          "description": "The overall confidence assigned to the remediation."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of the remediation content.",
+          "minimum": 1
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "The approved inline artifacts available for the remediation.",
+          "items": {
+            "$ref": "#/definitions/RemediationArtifact"
+          },
+          "x-ms-identifiers": [
+            "artifactType"
+          ]
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods available for applying the remediation.",
+          "items": {
+            "$ref": "#/definitions/RemediationMethod"
+          },
+          "x-ms-identifiers": []
+        },
+        "filterResult": {
+          "$ref": "#/definitions/RemediationFilterResult",
+          "description": "Details about partially fulfilled executable artifact filters."
+        }
+      },
+      "required": [
+        "recommendationTypeId",
+        "outputType",
+        "destructive",
+        "reversible",
+        "grounded",
+        "confidence",
+        "version",
+        "artifacts",
+        "methods"
+      ]
+    },
+    "RemediationRejectedFilterValue": {
+      "type": "object",
+      "description": "An executable artifact filter value that could not be fulfilled.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The rejected filter value."
+        },
+        "reason": {
+          "$ref": "#/definitions/RemediationFilterRejectionReason",
+          "description": "The reason the filter value was rejected."
+        }
+      },
+      "required": [
+        "value",
+        "reason"
+      ]
+    },
+    "RemediationStep": {
+      "type": "object",
+      "description": "An ordered action in a remediation method.",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The one-based position of the step.",
+          "minimum": 1
+        },
+        "text": {
+          "type": "string",
+          "description": "The instruction for completing the step."
+        },
+        "kind": {
+          "$ref": "#/definitions/RemediationStepKind",
+          "description": "The type of action represented by the step."
+        },
+        "command": {
+          "type": "string",
+          "description": "The command to run for a command step."
+        }
+      },
+      "required": [
+        "number",
+        "text",
+        "kind"
+      ]
+    },
+    "RemediationStepKind": {
+      "type": "string",
+      "description": "The kind of an individual remediation step.",
+      "enum": [
+        "command",
+        "instruction",
+        "validation"
+      ],
+      "x-ms-enum": {
+        "name": "RemediationStepKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Command",
+            "value": "command",
+            "description": "A command that can be run by the customer."
+          },
+          {
+            "name": "Instruction",
+            "value": "instruction",
+            "description": "A manual instruction for the customer."
+          },
+          {
+            "name": "Validation",
+            "value": "validation",
+            "description": "A validation step that confirms the remediation result."
           }
         ]
       }

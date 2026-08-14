@@ -24,12 +24,13 @@ To see additional help and options, run:
 
 These are the global settings for the Advisor API.
 
-``` yaml
+```yaml
 openapi-type: arm
 tag: package-2026-08-preview
 ```
 
 ### Tag: package-2026-08-preview
+
 These settings apply only when `--tag=package-2026-08-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-08-preview'
@@ -49,9 +50,30 @@ suppressions:
     where:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
+  - code: ParametersInPointGet
+    reason: The remediation point GET requires the optional OData $filter for executable artifact types. This exception requires ARM API Modeling approval.
+    from:
+      - openapi.json
+    where:
+      - $.paths["/providers/Microsoft.Advisor/remediations/{recommendationTypeId}"].get.parameters
+  - code: EnumInsteadOfBoolean
+    reason: These properties represent independent yes-or-no remediation facts rather than extensible states.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["RemediationMethod"].properties["executable"]
+      - $.definitions["RemediationMethodParameter"].properties["required"]
+      - $.definitions["RemediationProperties"].properties["destructive"]
+      - $.definitions["RemediationProperties"].properties["reversible"]
+      - $.definitions["RemediationProperties"].properties["grounded"]
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    reason: This version uses the project's existing v4 common-types configuration to preserve the inherited March API surface.
+    from:
+      - openapi.json
 ```
 
 ### Tag: package-2026-03-preview
+
 These settings apply only when `--tag=package-2026-03-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-03-preview'
@@ -72,7 +94,9 @@ suppressions:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
 ```
+
 ### Tag: package-2026-02-preview
+
 These settings apply only when `--tag=package-2026-02-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-02-preview'
@@ -95,6 +119,7 @@ suppressions:
 ```
 
 ### Tag: package-2025-05-preview
+
 These settings apply only when `--tag=package-2025-05-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-05-preview'
@@ -117,6 +142,7 @@ suppressions:
 ```
 
 ### Tag: package-2024-11-preview
+
 These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-11-preview'
@@ -141,6 +167,7 @@ suppressions:
 ```
 
 ### Tag: package-2025-01
+
 These settings apply only when `--tag=package-2025-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-01'
@@ -172,7 +199,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-10'
+```yaml $(tag) == 'package-2022-10'
 input-file:
   - stable/2022-10-01/advisor.json
 ```
@@ -181,7 +208,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09'
+```yaml $(tag) == 'package-2022-09'
 input-file:
   - stable/2022-09-01/advisor.json
 ```
@@ -190,7 +217,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-02-preview'
+```yaml $(tag) == 'package-2022-02-preview'
 input-file:
   - preview/2022-02-01-preview/predictRecommendation.json
 ```
@@ -199,7 +226,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-07-preview'
+```yaml $(tag) == 'package-2020-07-preview'
 input-file:
   - preview/2020-07-01-preview/advisor.json
 ```
@@ -208,7 +235,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+```yaml $(tag) == 'package-2020-01'
 input-file:
   - stable/2020-01-01/advisor.json
 ```
@@ -217,27 +244,27 @@ input-file:
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04'
+```yaml $(tag) == 'package-2017-04'
 input-file:
-- stable/2017-04-19/advisor.json
+  - stable/2017-04-19/advisor.json
 ```
 
 ### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-03'
+```yaml $(tag) == 'package-2017-03'
 input-file:
-- stable/2017-03-31/advisor.json
+  - stable/2017-03-31/advisor.json
 ```
 
 ### Tag: package-2016-07-preview
 
 These settings apply only when `--tag=package-2016-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-07-preview'
+```yaml $(tag) == 'package-2016-07-preview'
 input-file:
-- preview/2016-07-12-preview/advisor.json
+  - preview/2016-07-12-preview/advisor.json
 ```
 
 ---
@@ -249,7 +276,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
