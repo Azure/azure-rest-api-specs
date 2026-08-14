@@ -69,6 +69,7 @@ interface VirtualMachineInstances {
   >;
   /** The operation to update a virtual machine instance. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -80,6 +81,7 @@ interface VirtualMachineInstances {
   >;
   /** The operation to delete a virtual machine instance. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",

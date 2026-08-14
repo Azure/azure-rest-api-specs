@@ -31,6 +31,7 @@ model RecoveryServicesProvider
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RecoveryServicesProviderAcceptedLroResponse<FinalResult extends
   | TypeSpec.Reflection.Model
   | unknown
@@ -90,9 +91,8 @@ interface RecoveryServicesProviders {
   refreshProvider is ArmResourceActionAsyncBase<
     RecoveryServicesProvider,
     void,
-
-      | ArmResponse<RecoveryServicesProvider>
-      | RecoveryServicesProviderAcceptedLroResponse,
+    | ArmResponse<RecoveryServicesProvider>
+    | RecoveryServicesProviderAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryServicesProvider>,
     Error = never
   >;
