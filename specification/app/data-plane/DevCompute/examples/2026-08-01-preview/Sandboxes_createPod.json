@@ -1,11 +1,8 @@
 {
-  "operationId": "AzureSandboxes_Create",
-  "title": "AzureSandboxes_create - from a disk image",
+  "operationId": "Sandboxes_Create",
+  "title": "Sandboxes_create - pod",
   "parameters": {
     "endpoint": "https://example.azuredevcompute.io",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "example-resource-group",
-    "sandboxGroupName": "example-sandbox-group",
     "api-version": "2026-08-01-preview",
     "request": {
       "labels": {
@@ -16,30 +13,12 @@
         "memory": "1Gi"
       },
       "sourcesRef": {
-        "diskImage": {
-          "id": "example-disk-image"
-        }
-      },
-      "egressPolicy": {
-        "http": {
-          "defaultAction": "Allow",
-          "defaultForward": {
-            "url": "https://default-proxy.example.com",
-            "ca": "example-ca-certificate"
-          },
-          "rules": [
+        "pod": {
+          "containers": [
             {
-              "name": "route-api-through-proxy",
-              "match": {
-                "host": "api.example.com"
-              },
-              "action": {
-                "type": "Allow",
-                "forward": "proxy",
-                "forwardProxy": {
-                  "url": "https://api-proxy.example.com",
-                  "ca": "example-ca-certificate"
-                }
+              "name": "main",
+              "diskImage": {
+                "id": "example-disk-image"
               }
             }
           ]
@@ -71,6 +50,20 @@
         "title": "Unauthorized",
         "status": 401,
         "detail": "Authentication is required to access this resource."
+      }
+    },
+    "404": {
+      "body": {
+        "title": "Source not found",
+        "status": 404,
+        "detail": "A source referenced by the sandbox creation request does not exist."
+      }
+    },
+    "409": {
+      "body": {
+        "title": "Conflict",
+        "status": 409,
+        "detail": "The sandbox cannot be created because the request conflicts with the current state."
       }
     },
     "429": {
