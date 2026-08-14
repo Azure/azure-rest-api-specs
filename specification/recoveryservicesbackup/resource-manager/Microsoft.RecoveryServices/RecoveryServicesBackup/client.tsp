@@ -444,7 +444,7 @@ using Microsoft.RecoveryServices;
   "ResourceGuardProxyOperation",
   "java"
 );
-@@clientName(ResourceGuardProxies.get, "list", "java,javascript");
+@@clientName(ResourceGuardProxies.get, "list", "java");
 @@clientLocation(ResourceGuardProxy.get, "ResourceGuardProxyOperation", "java");
 @@clientLocation(
   ResourceGuardProxy.delete,
@@ -3627,3 +3627,370 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(SourceSideScanStatus, "BackupSourceSideScanStatus", "csharp");
 @@clientName(SourceSideScanSummary, "BackupSourceSideScanSummary", "csharp");
 @@clientName(VMWorkloadPolicyType, "VmWorkloadPolicyType", "csharp");
+
+// JavaScript backward compatibility with the last stable SDK.
+@@clientLocation(
+  BMSPrepareDataMoveOperationResult.get,
+  "bMSPrepareDataMoveOperationResult",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnectionResources.get,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnectionResources.put,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnectionResources.delete,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointOperationStatuses.getOperationStatus,
+  "PrivateEndpointOperations",
+  "javascript"
+);
+@@clientLocation(
+  ProtectionIntentResources.get,
+  "ProtectionIntentOperations",
+  "javascript"
+);
+@@clientLocation(
+  ProtectionIntentResources.createOrUpdate,
+  "ProtectionIntentOperations",
+  "javascript"
+);
+@@clientLocation(
+  ProtectionIntentResources.delete,
+  "ProtectionIntentOperations",
+  "javascript"
+);
+
+@@usage(BackupEngineBaseResourceList, Usage.input | Usage.output, "javascript");
+@@usage(BackupManagementUsageList, Usage.input | Usage.output, "javascript");
+@@usage(BMSBackupEngineQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(BMSBackupEnginesQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(
+  BMSBackupSummariesQueryObject,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(BMSContainerQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(
+  BMSContainersInquiryQueryObject,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(BmspoQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(
+  BMSRefreshContainersQueryObject,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(BmsrpQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(BMSWorkloadItemQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(ClientDiscoveryResponse, Usage.input | Usage.output, "javascript");
+@@usage(CloudError, Usage.input | Usage.output, "javascript");
+@@usage(CloudErrorBody, Usage.input | Usage.output, "javascript");
+@@usage(GetProtectedItemQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(JobQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(JobResourceList, Usage.input | Usage.output, "javascript");
+@@usage(
+  ProtectableContainerResourceList,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(ProtectedItemQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(ProtectedItemResourceList, Usage.input | Usage.output, "javascript");
+@@usage(
+  ProtectionContainerResourceList,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(ProtectionIntentQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(ProtectionIntentResourceList, Usage.input | Usage.output, "javascript");
+@@usage(ProtectionPolicyQueryObject, Usage.input | Usage.output, "javascript");
+@@usage(ProtectionPolicyResourceList, Usage.input | Usage.output, "javascript");
+@@usage(RecoveryPointResourceList, Usage.input | Usage.output, "javascript");
+@@usage(
+  ResourceGuardProxyBaseResourceList,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(WorkloadItemResourceList, Usage.input | Usage.output, "javascript");
+@@usage(
+  WorkloadProtectableItemResourceList,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(ContainerType, Usage.input | Usage.output, "javascript");
+@@usage(HealthState, Usage.input | Usage.output, "javascript");
+@@usage(IntentItemType, Usage.input | Usage.output, "javascript");
+@@usage(JobOperationType, Usage.input | Usage.output, "javascript");
+@@usage(JobStatus, Usage.input | Usage.output, "javascript");
+@@usage(RestorePointQueryType, Usage.input | Usage.output, "javascript");
+@@usage(Type, Usage.input | Usage.output, "javascript");
+
+@@alternateType(
+  BackupEngineBase.backupEngineType,
+  "AzureBackupServerEngine" | "DpmBackupEngine",
+  "javascript"
+);
+@@alternateType(
+  BackupRequest.objectType,
+
+    | "AzureFileShareBackupRequest"
+    | "AzureWorkloadBackupRequest"
+    | "IaasVMBackupRequest",
+  "javascript"
+);
+@@alternateType(
+  FeatureSupportRequest.featureType,
+  "AzureBackupGoals" | "AzureVMResourceBackup",
+  "javascript"
+);
+@@alternateType(
+  FetchTieringCostInfoRequest.objectType,
+
+    | "FetchTieringCostInfoForRehydrationRequest"
+    | "FetchTieringCostSavingsInfoForPolicyRequest"
+    | "FetchTieringCostSavingsInfoForProtectedItemRequest"
+    | "FetchTieringCostSavingsInfoForVaultRequest",
+  "javascript"
+);
+@@alternateType(
+  ILRRequest.objectType,
+  "AzureFileShareProvisionILRRequest" | "IaasVMILRRegistrationRequest",
+  "javascript"
+);
+@@alternateType(
+  Job.jobType,
+
+    | "AzureIaaSVMJob"
+    | "AzureIaaSVMJobV2"
+    | "AzureStorageJob"
+    | "AzureWorkloadJob"
+    | "DpmJob"
+    | "MabJob"
+    | "VaultJob",
+  "javascript"
+);
+@@alternateType(
+  OperationResultInfoBase.objectType,
+  "ExportJobsOperationResultInfo" | "OperationResultInfo",
+  "javascript"
+);
+@@alternateType(
+  OperationStatusExtendedInfo.objectType,
+
+    | "OperationStatusJobExtendedInfo"
+    | "OperationStatusJobsExtendedInfo"
+    | "OperationStatusProvisionILRExtendedInfo"
+    | "OperationStatusValidateOperationExtendedInfo",
+  "javascript"
+);
+@@alternateType(
+  ProtectableContainer.protectableContainerType,
+  "StorageContainer" | "VMAppContainer",
+  "javascript"
+);
+@@alternateType(
+  ProtectedItem.protectedItemType,
+
+    | "AzureFileShareProtectedItem"
+    | "AzureIaaSVMProtectedItem"
+    | "Microsoft.ClassicCompute/virtualMachines"
+    | "Microsoft.Compute/virtualMachines"
+    | "Microsoft.Sql/servers/databases"
+    | "AzureVmWorkloadProtectedItem"
+    | "AzureVmWorkloadSAPAseDatabase"
+    | "AzureVmWorkloadSAPHanaDatabase"
+    | "AzureVmWorkloadSAPHanaDBInstance"
+    | "AzureVmWorkloadSQLDatabase"
+    | "DPMProtectedItem"
+    | "GenericProtectedItem"
+    | "MabFileFolderProtectedItem",
+  "javascript"
+);
+@@alternateType(
+  ProtectionContainer.containerType,
+
+    | "DPMContainer"
+    | "AzureBackupServerContainer"
+    | "IaasVMContainer"
+    | "Microsoft.ClassicCompute/virtualMachines"
+    | "Microsoft.Compute/virtualMachines"
+    | "AzureWorkloadContainer"
+    | "SQLAGWorkLoadContainer"
+    | "AzureSqlContainer"
+    | "StorageContainer"
+    | "VMAppContainer"
+    | "GenericContainer"
+    | "Windows",
+  "javascript"
+);
+@@alternateType(
+  ProtectionIntent.protectionIntentItemType,
+
+    | "RecoveryServiceVaultItem"
+    | "AzureResourceItem"
+    | "AzureWorkloadContainerAutoProtectionIntent"
+    | "AzureWorkloadAutoProtectionIntent"
+    | "AzureWorkloadSQLAutoProtectionIntent",
+  "javascript"
+);
+@@alternateType(
+  ProtectionPolicy.backupManagementType,
+
+    | "AzureWorkload"
+    | "AzureStorage"
+    | "AzureIaasVM"
+    | "AzureSql"
+    | "GenericProtectionPolicy"
+    | "MAB",
+  "javascript"
+);
+@@alternateType(
+  RecoveryPoint.objectType,
+
+    | "AzureFileShareRecoveryPoint"
+    | "AzureWorkloadRecoveryPoint"
+    | "AzureWorkloadPointInTimeRecoveryPoint"
+    | "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
+    | "AzureWorkloadSAPHanaRecoveryPoint"
+    | "AzureWorkloadSAPAsePointInTimeRecoveryPoint"
+    | "AzureWorkloadSAPAseRecoveryPoint"
+    | "AzureWorkloadSQLRecoveryPoint"
+    | "AzureWorkloadSQLPointInTimeRecoveryPoint"
+    | "GenericRecoveryPoint"
+    | "IaasVMRecoveryPoint",
+  "javascript"
+);
+@@alternateType(
+  RestoreRequest.objectType,
+
+    | "AzureFileShareRestoreRequest"
+    | "AzureWorkloadRestoreRequest"
+    | "AzureWorkloadPointInTimeRestoreRequest"
+    | "AzureWorkloadSAPHanaRestoreRequest"
+    | "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
+    | "AzureWorkloadSAPAseRestoreRequest"
+    | "AzureWorkloadSAPAsePointInTimeRestoreRequest"
+    | "AzureWorkloadSQLRestoreRequest"
+    | "AzureWorkloadSQLPointInTimeRestoreRequest"
+    | "IaasVMRestoreRequest"
+    | "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest"
+    | "AzureWorkloadSAPHanaRestoreWithRehydrateRequest"
+    | "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest"
+    | "AzureWorkloadSQLRestoreWithRehydrateRequest"
+    | "IaasVMRestoreWithRehydrationRequest",
+  "javascript"
+);
+@@alternateType(
+  RetentionPolicy.retentionPolicyType,
+  "LongTermRetentionPolicy" | "SimpleRetentionPolicy",
+  "javascript"
+);
+@@alternateType(
+  SchedulePolicy.schedulePolicyType,
+
+    | "LogSchedulePolicy"
+    | "LongTermSchedulePolicy"
+    | "SimpleSchedulePolicy"
+    | "SimpleSchedulePolicyV2",
+  "javascript"
+);
+@@alternateType(
+  TieringCostInfo.objectType,
+  "TieringCostRehydrationInfo" | "TieringCostSavingInfo",
+  "javascript"
+);
+@@alternateType(
+  ValidateOperationRequest.objectType,
+  "ValidateRestoreOperationRequest" | "ValidateIaasVMRestoreOperationRequest",
+  "javascript"
+);
+@@alternateType(
+  VaultStorageConfigOperationResultResponse.objectType,
+  "PrepareDataMoveResponse",
+  "javascript"
+);
+@@alternateType(
+  WorkloadItem.workloadItemType,
+
+    | "AzureVmWorkloadItem"
+    | "SAPAseDatabase"
+    | "SAPAseSystem"
+    | "SAPHanaDatabase"
+    | "SAPHanaSystem"
+    | "SQLDataBase"
+    | "SQLInstance",
+  "javascript"
+);
+@@alternateType(
+  WorkloadProtectableItem.protectableItemType,
+
+    | "AzureFileShare"
+    | "IaaSVMProtectableItem"
+    | "Microsoft.ClassicCompute/virtualMachines"
+    | "Microsoft.Compute/virtualMachines"
+    | "AzureVmWorkloadProtectableItem"
+    | "SAPAseDatabase"
+    | "SAPAseSystem"
+    | "SAPHanaDatabase"
+    | "SAPHanaSystem"
+    | "SAPHanaDBInstance"
+    | "HanaHSRContainer"
+    | "SQLAvailabilityGroupContainer"
+    | "SQLDataBase"
+    | "SQLInstance",
+  "javascript"
+);
+
+namespace JavaScriptCompatibility {
+  model NewErrorResponse {
+    error?: NewErrorResponseError;
+  }
+
+  model NewErrorResponseError {
+    @visibility(Lifecycle.Read)
+    additionalInfo?: ErrorAdditionalInfo[];
+
+    @visibility(Lifecycle.Read)
+    code?: string;
+
+    @visibility(Lifecycle.Read)
+    details?: NewErrorResponse[];
+
+    @visibility(Lifecycle.Read)
+    message?: string;
+
+    @visibility(Lifecycle.Read)
+    target?: string;
+  }
+}
+
+@@clientName(
+  JavaScriptCompatibility.NewErrorResponse,
+  "NewErrorResponse",
+  "javascript"
+);
+@@clientName(
+  JavaScriptCompatibility.NewErrorResponseError,
+  "NewErrorResponseError",
+  "javascript"
+);
+@@usage(
+  JavaScriptCompatibility.NewErrorResponse,
+  Usage.input | Usage.output,
+  "javascript"
+);
+@@usage(
+  JavaScriptCompatibility.NewErrorResponseError,
+  Usage.input | Usage.output,
+  "javascript"
+);
