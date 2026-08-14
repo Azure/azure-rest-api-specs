@@ -124,6 +124,15 @@ directive:
     reason: >-
       Connection names and setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of
       model properties. These dictionaries retain typed values for each customer-defined key.
+  - suppress: PathForResourceAction
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualConnections:validate"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualConnections:validate"]
+    reason: >-
+      virtualConnections is a Microsoft.Web sites/config singleton, so validate is a POST action on the singleton itself
+      rather than on a resource collection with a resource-name parameter. The path intentionally ends with the fixed
+      singleton name plus the :validate action.
 ```
 
 ### Tag: package-2026-09
