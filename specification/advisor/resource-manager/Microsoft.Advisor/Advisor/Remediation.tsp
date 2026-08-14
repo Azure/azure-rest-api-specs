@@ -90,15 +90,19 @@ union RemediationStepKind {
 @added(Versions.v2026_08_12_preview)
 model RemediationArtifact {
   /** The artifact format. */
+  @visibility(Lifecycle.Read)
   artifactType: RemediationArtifactType;
 
   /** The media type of the inline artifact content. */
+  @visibility(Lifecycle.Read)
   contentType: string;
 
   /** The confidence assigned to the artifact. */
+  @visibility(Lifecycle.Read)
   confidence: RemediationConfidence;
 
   /** The complete artifact content to apply the remediation. */
+  @visibility(Lifecycle.Read)
   content: string;
 }
 
@@ -118,9 +122,11 @@ union RemediationFilterRejectionReason {
 @added(Versions.v2026_08_12_preview)
 model RemediationRejectedFilterValue {
   /** The rejected filter value. */
+  @visibility(Lifecycle.Read)
   value: string;
 
   /** The reason the filter value was rejected. */
+  @visibility(Lifecycle.Read)
   reason: RemediationFilterRejectionReason;
 }
 
@@ -128,13 +134,16 @@ model RemediationRejectedFilterValue {
 @added(Versions.v2026_08_12_preview)
 model RemediationFilterResult {
   /** The executable artifact types requested by the client. */
+  @visibility(Lifecycle.Read)
   requestedValues: string[];
 
   /** The requested executable artifact types included in the response. */
+  @visibility(Lifecycle.Read)
   fulfilledValues: RemediationArtifactType[];
 
   /** The requested executable artifact types that were not included. */
   @identifiers(#["value"])
+  @visibility(Lifecycle.Read)
   rejectedValues: RemediationRejectedFilterValue[];
 }
 
@@ -142,15 +151,19 @@ model RemediationFilterResult {
 @added(Versions.v2026_08_12_preview)
 model RemediationMethodParameter {
   /** The parameter name. */
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** A description of the parameter's purpose. */
+  @visibility(Lifecycle.Read)
   description: string;
 
   /** An example value for the parameter. */
+  @visibility(Lifecycle.Read)
   example: string;
 
   /** Whether the customer must provide the parameter. */
+  @visibility(Lifecycle.Read)
   required: boolean;
 }
 
@@ -159,15 +172,19 @@ model RemediationMethodParameter {
 model RemediationStep {
   /** The one-based position of the step. */
   @minValue(1)
+  @visibility(Lifecycle.Read)
   number: int32;
 
   /** The instruction for completing the step. */
+  @visibility(Lifecycle.Read)
   text: string;
 
   /** The type of action represented by the step. */
+  @visibility(Lifecycle.Read)
   kind: RemediationStepKind;
 
   /** The command to run for a command step. */
+  @visibility(Lifecycle.Read)
   command?: string;
 }
 
@@ -175,26 +192,33 @@ model RemediationStep {
 @added(Versions.v2026_08_12_preview)
 model RemediationMethod {
   /** The display heading for the method. */
+  @visibility(Lifecycle.Read)
   heading: string;
 
   /** The remediation method identifier. */
+  @visibility(Lifecycle.Read)
   method: string;
 
   /** The method's relationship to the primary remediation. */
+  @visibility(Lifecycle.Read)
   relation: RemediationMethodRelation;
 
   /** Whether the method can be executed directly. */
+  @visibility(Lifecycle.Read)
   executable: boolean;
 
   /** The inputs used by the method. */
   @identifiers(#["name"])
+  @visibility(Lifecycle.Read)
   parameters: RemediationMethodParameter[];
 
   /** The ordered steps for applying the method. */
   @identifiers(#["number"])
+  @visibility(Lifecycle.Read)
   steps: RemediationStep[];
 
   /** The command that verifies the remediation result. */
+  @visibility(Lifecycle.Read)
   verification?: string;
 }
 
@@ -203,36 +227,46 @@ model RemediationMethod {
 @added(Versions.v2026_08_12_preview)
 model RemediationProperties {
   /** The recommendation type identifier associated with the remediation. */
+  @visibility(Lifecycle.Read)
   recommendationTypeId: string;
 
   /** The kind of remediation output. */
+  @visibility(Lifecycle.Read)
   outputType: RemediationOutputType;
 
   /** Whether applying the remediation can delete or replace customer data. */
+  @visibility(Lifecycle.Read)
   destructive: boolean;
 
   /** Whether the remediation can be reverted. */
+  @visibility(Lifecycle.Read)
   reversible: boolean;
 
   /** Whether the remediation is grounded in the target resource's current state. */
+  @visibility(Lifecycle.Read)
   grounded: boolean;
 
   /** The overall confidence assigned to the remediation. */
+  @visibility(Lifecycle.Read)
   confidence: RemediationConfidence;
 
   /** The version of the remediation content. */
   @minValue(1)
+  @visibility(Lifecycle.Read)
   version: int32;
 
   /** The approved inline artifacts available for the remediation. */
   @identifiers(#["artifactType"])
+  @visibility(Lifecycle.Read)
   artifacts: RemediationArtifact[];
 
   /** The methods available for applying the remediation. */
   @identifiers(#[])
+  @visibility(Lifecycle.Read)
   methods: RemediationMethod[];
 
   /** Details about partially fulfilled executable artifact filters. */
+  @visibility(Lifecycle.Read)
   filterResult?: RemediationFilterResult;
 }
 
@@ -245,7 +279,7 @@ model Remediation
     Resource = Remediation,
     KeyName = "recommendationTypeId",
     SegmentName = "remediations",
-    NamePattern = "[^/]+"
+    NamePattern = "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
   >;
 }
 

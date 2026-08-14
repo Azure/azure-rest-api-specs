@@ -56,20 +56,6 @@ suppressions:
       - openapi.json
     where:
       - $.paths["/providers/Microsoft.Advisor/remediations/{recommendationTypeId}"].get.parameters
-  - code: EnumInsteadOfBoolean
-    reason: These properties represent independent yes-or-no remediation facts rather than extensible states.
-    from:
-      - openapi.json
-    where:
-      - $.definitions["RemediationMethod"].properties["executable"]
-      - $.definitions["RemediationMethodParameter"].properties["required"]
-      - $.definitions["RemediationProperties"].properties["destructive"]
-      - $.definitions["RemediationProperties"].properties["reversible"]
-      - $.definitions["RemediationProperties"].properties["grounded"]
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    reason: This version uses the project's existing v4 common-types configuration to preserve the inherited March API surface.
-    from:
-      - openapi.json
 ```
 
 ### Tag: package-2026-03-preview

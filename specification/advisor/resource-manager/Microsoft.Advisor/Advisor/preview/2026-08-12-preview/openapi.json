@@ -474,7 +474,7 @@
             "description": "The recommendation type identifier.",
             "required": true,
             "type": "string",
-            "pattern": "[^/]+"
+            "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
           },
           {
             "name": "$filter",
@@ -2575,19 +2575,23 @@
       "properties": {
         "artifactType": {
           "$ref": "#/definitions/RemediationArtifactType",
-          "description": "The artifact format."
+          "description": "The artifact format.",
+          "readOnly": true
         },
         "contentType": {
           "type": "string",
-          "description": "The media type of the inline artifact content."
+          "description": "The media type of the inline artifact content.",
+          "readOnly": true
         },
         "confidence": {
           "$ref": "#/definitions/RemediationConfidence",
-          "description": "The confidence assigned to the artifact."
+          "description": "The confidence assigned to the artifact.",
+          "readOnly": true
         },
         "content": {
           "type": "string",
-          "description": "The complete artifact content to apply the remediation."
+          "description": "The complete artifact content to apply the remediation.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2702,14 +2706,16 @@
           "description": "The executable artifact types requested by the client.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "fulfilledValues": {
           "type": "array",
           "description": "The requested executable artifact types included in the response.",
           "items": {
             "$ref": "#/definitions/RemediationArtifactType"
-          }
+          },
+          "readOnly": true
         },
         "rejectedValues": {
           "type": "array",
@@ -2717,6 +2723,7 @@
           "items": {
             "$ref": "#/definitions/RemediationRejectedFilterValue"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "value"
           ]
@@ -2734,19 +2741,23 @@
       "properties": {
         "heading": {
           "type": "string",
-          "description": "The display heading for the method."
+          "description": "The display heading for the method.",
+          "readOnly": true
         },
         "method": {
           "type": "string",
-          "description": "The remediation method identifier."
+          "description": "The remediation method identifier.",
+          "readOnly": true
         },
         "relation": {
           "$ref": "#/definitions/RemediationMethodRelation",
-          "description": "The method's relationship to the primary remediation."
+          "description": "The method's relationship to the primary remediation.",
+          "readOnly": true
         },
         "executable": {
           "type": "boolean",
-          "description": "Whether the method can be executed directly."
+          "description": "Whether the method can be executed directly.",
+          "readOnly": true
         },
         "parameters": {
           "type": "array",
@@ -2754,6 +2765,7 @@
           "items": {
             "$ref": "#/definitions/RemediationMethodParameter"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -2764,13 +2776,15 @@
           "items": {
             "$ref": "#/definitions/RemediationStep"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "number"
           ]
         },
         "verification": {
           "type": "string",
-          "description": "The command that verifies the remediation result."
+          "description": "The command that verifies the remediation result.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2788,19 +2802,23 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The parameter name."
+          "description": "The parameter name.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "A description of the parameter's purpose."
+          "description": "A description of the parameter's purpose.",
+          "readOnly": true
         },
         "example": {
           "type": "string",
-          "description": "An example value for the parameter."
+          "description": "An example value for the parameter.",
+          "readOnly": true
         },
         "required": {
           "type": "boolean",
-          "description": "Whether the customer must provide the parameter."
+          "description": "Whether the customer must provide the parameter.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2870,33 +2888,40 @@
       "properties": {
         "recommendationTypeId": {
           "type": "string",
-          "description": "The recommendation type identifier associated with the remediation."
+          "description": "The recommendation type identifier associated with the remediation.",
+          "readOnly": true
         },
         "outputType": {
           "$ref": "#/definitions/RemediationOutputType",
-          "description": "The kind of remediation output."
+          "description": "The kind of remediation output.",
+          "readOnly": true
         },
         "destructive": {
           "type": "boolean",
-          "description": "Whether applying the remediation can delete or replace customer data."
+          "description": "Whether applying the remediation can delete or replace customer data.",
+          "readOnly": true
         },
         "reversible": {
           "type": "boolean",
-          "description": "Whether the remediation can be reverted."
+          "description": "Whether the remediation can be reverted.",
+          "readOnly": true
         },
         "grounded": {
           "type": "boolean",
-          "description": "Whether the remediation is grounded in the target resource's current state."
+          "description": "Whether the remediation is grounded in the target resource's current state.",
+          "readOnly": true
         },
         "confidence": {
           "$ref": "#/definitions/RemediationConfidence",
-          "description": "The overall confidence assigned to the remediation."
+          "description": "The overall confidence assigned to the remediation.",
+          "readOnly": true
         },
         "version": {
           "type": "integer",
           "format": "int32",
           "description": "The version of the remediation content.",
-          "minimum": 1
+          "minimum": 1,
+          "readOnly": true
         },
         "artifacts": {
           "type": "array",
@@ -2904,6 +2929,7 @@
           "items": {
             "$ref": "#/definitions/RemediationArtifact"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "artifactType"
           ]
@@ -2914,11 +2940,13 @@
           "items": {
             "$ref": "#/definitions/RemediationMethod"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "filterResult": {
           "$ref": "#/definitions/RemediationFilterResult",
-          "description": "Details about partially fulfilled executable artifact filters."
+          "description": "Details about partially fulfilled executable artifact filters.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2939,11 +2967,13 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "The rejected filter value."
+          "description": "The rejected filter value.",
+          "readOnly": true
         },
         "reason": {
           "$ref": "#/definitions/RemediationFilterRejectionReason",
-          "description": "The reason the filter value was rejected."
+          "description": "The reason the filter value was rejected.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2959,19 +2989,23 @@
           "type": "integer",
           "format": "int32",
           "description": "The one-based position of the step.",
-          "minimum": 1
+          "minimum": 1,
+          "readOnly": true
         },
         "text": {
           "type": "string",
-          "description": "The instruction for completing the step."
+          "description": "The instruction for completing the step.",
+          "readOnly": true
         },
         "kind": {
           "$ref": "#/definitions/RemediationStepKind",
-          "description": "The type of action represented by the step."
+          "description": "The type of action represented by the step.",
+          "readOnly": true
         },
         "command": {
           "type": "string",
-          "description": "The command to run for a command step."
+          "description": "The command to run for a command step.",
+          "readOnly": true
         }
       },
       "required": [
