@@ -1,13 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -53,11 +51,12 @@ interface ServiceEntitlements {
   listBySubscription is ArmListBySubscription<ServiceEntitlement>;
 
   /** Lists service entitlements in the tenant. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for this manually-routed tenant list operation; a standard ArmResourceList template is not used here."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Static tenant-scoped route is required; ResourceListResult natively emits x-ms-pageable."
+  @list
+  @listsResource(ServiceEntitlement)
   @route("/providers/Microsoft.Security/serviceEntitlements")
   @get
   @armResourceList(ServiceEntitlement)
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   listByTenant(...ApiVersionParameter):
     | ArmResponse<ResourceListResult<ServiceEntitlement>>
     | ErrorResponse;
