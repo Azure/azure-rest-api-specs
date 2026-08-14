@@ -905,7 +905,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GetOperationStatusResponse"
+              "$ref": "#/definitions/BulkCreateCustomOperationStatusListResult"
             }
           },
           "default": {
@@ -919,6 +919,10 @@
           "BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet": {
             "$ref": "./examples/BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "results"
         }
       }
     },
@@ -3539,6 +3543,30 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "BulkCreateCustomOperationStatusListResult": {
+      "type": "object",
+      "description": "The paged response for virtual machine operation statuses in a BulkCreateCustom operation.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "The virtual machine operation statuses on this page.",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of operation statuses."
+        }
+      },
+      "required": [
+        "results"
       ]
     },
     "BulkCreateCustomOverride": {
