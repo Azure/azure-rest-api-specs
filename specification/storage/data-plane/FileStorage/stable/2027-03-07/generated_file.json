@@ -5251,7 +5251,11 @@
                 "Timestamps",
                 "Etag",
                 "Attributes",
-                "PermissionKey"
+                "PermissionKey",
+                "Permissions",
+                "LinkCount",
+                "NfsAttributes",
+                "All"
               ],
               "x-ms-enum": {
                 "name": "ListFilesIncludeType",
@@ -5276,6 +5280,26 @@
                     "name": "PermissionKey",
                     "value": "PermissionKey",
                     "description": "PermissionKey"
+                  },
+                  {
+                    "name": "Permissions",
+                    "value": "Permissions",
+                    "description": "Permissions"
+                  },
+                  {
+                    "name": "LinkCount",
+                    "value": "LinkCount",
+                    "description": "LinkCount"
+                  },
+                  {
+                    "name": "NfsAttributes",
+                    "value": "NfsAttributes",
+                    "description": "NfsAttributes"
+                  },
+                  {
+                    "name": "All",
+                    "value": "All",
+                    "description": "All"
                   }
                 ]
               }
@@ -10372,6 +10396,122 @@
         "name": "eTag"
       }
     },
+    "BlockDeviceItem": {
+      "type": "object",
+      "description": "A listed block device item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The block device name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the block device.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "deviceMajor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The major device number of the block device.",
+          "xml": {
+            "name": "DeviceMajor"
+          }
+        },
+        "deviceMinor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minor device number of the block device.",
+          "xml": {
+            "name": "DeviceMinor"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "BlockDevice"
+      }
+    },
+    "CharDeviceItem": {
+      "type": "object",
+      "description": "A listed character device item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The character device name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the character device.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "deviceMajor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The major device number of the character device.",
+          "xml": {
+            "name": "DeviceMajor"
+          }
+        },
+        "deviceMinor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minor device number of the character device.",
+          "xml": {
+            "name": "DeviceMinor"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "CharDevice"
+      }
+    },
     "ClearRange": {
       "type": "object",
       "description": "A clear range.",
@@ -10545,6 +10685,14 @@
           "xml": {
             "name": "PermissionKey"
           }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the directory.",
+          "xml": {
+            "name": "LinkCount"
+          }
         }
       },
       "required": [
@@ -10596,6 +10744,48 @@
         }
       }
     },
+    "FifoItem": {
+      "type": "object",
+      "description": "A listed FIFO item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The FIFO name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the FIFO.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "Fifo"
+      }
+    },
     "FileItem": {
       "type": "object",
       "description": "A listed file item.",
@@ -10633,6 +10823,21 @@
           "description": "The permission key.",
           "xml": {
             "name": "PermissionKey"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the file.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "fileType": {
+          "$ref": "#/definitions/FileType",
+          "description": "Type of the file.",
+          "xml": {
+            "name": "FileType"
           }
         }
       },
@@ -10750,6 +10955,27 @@
           "xml": {
             "name": "Etag"
           }
+        },
+        "owner": {
+          "type": "string",
+          "description": "NFS only. The owner user identifier (UID) of the file.",
+          "xml": {
+            "name": "Uid"
+          }
+        },
+        "group": {
+          "type": "string",
+          "description": "NFS only. The owner group identifier (GID) of the file.",
+          "xml": {
+            "name": "Gid"
+          }
+        },
+        "fileMode": {
+          "type": "string",
+          "description": "NFS only. The mode of the file.",
+          "xml": {
+            "name": "Mode"
+          }
         }
       },
       "required": [
@@ -10851,6 +11077,60 @@
         ]
       }
     },
+    "FileType": {
+      "type": "string",
+      "description": "Type of the file.",
+      "enum": [
+        "Regular",
+        "Directory",
+        "SymLink",
+        "BlockDevice",
+        "CharacterDevice",
+        "Socket",
+        "Fifo"
+      ],
+      "x-ms-enum": {
+        "name": "FileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "Regular"
+          },
+          {
+            "name": "Directory",
+            "value": "Directory",
+            "description": "Directory"
+          },
+          {
+            "name": "SymLink",
+            "value": "SymLink",
+            "description": "SymLink"
+          },
+          {
+            "name": "BlockDevice",
+            "value": "BlockDevice",
+            "description": "BlockDevice"
+          },
+          {
+            "name": "CharacterDevice",
+            "value": "CharacterDevice",
+            "description": "CharacterDevice"
+          },
+          {
+            "name": "Socket",
+            "value": "Socket",
+            "description": "Socket"
+          },
+          {
+            "name": "Fifo",
+            "value": "Fifo",
+            "description": "Fifo"
+          }
+        ]
+      }
+    },
     "FilesAndDirectoriesListSegment": {
       "type": "object",
       "description": "Abstract for entries that can be listed from Directory.",
@@ -10874,6 +11154,61 @@
           },
           "xml": {
             "name": "File",
+            "wrapped": false
+          }
+        },
+        "symLinkItems": {
+          "type": "array",
+          "description": "The symbolic link items.",
+          "items": {
+            "$ref": "#/definitions/SymLinkItem"
+          },
+          "xml": {
+            "name": "SymLink",
+            "wrapped": false
+          }
+        },
+        "blockDeviceItems": {
+          "type": "array",
+          "description": "The block device items.",
+          "items": {
+            "$ref": "#/definitions/BlockDeviceItem"
+          },
+          "xml": {
+            "name": "BlockDevice",
+            "wrapped": false
+          }
+        },
+        "charDeviceItems": {
+          "type": "array",
+          "description": "The character device items.",
+          "items": {
+            "$ref": "#/definitions/CharDeviceItem"
+          },
+          "xml": {
+            "name": "CharDevice",
+            "wrapped": false
+          }
+        },
+        "fifoItems": {
+          "type": "array",
+          "description": "The FIFO items.",
+          "items": {
+            "$ref": "#/definitions/FifoItem"
+          },
+          "xml": {
+            "name": "Fifo",
+            "wrapped": false
+          }
+        },
+        "socketItems": {
+          "type": "array",
+          "description": "The socket items.",
+          "items": {
+            "$ref": "#/definitions/SocketItem"
+          },
+          "xml": {
+            "name": "Socket",
             "wrapped": false
           }
         }
@@ -11206,7 +11541,11 @@
         "Timestamps",
         "Etag",
         "Attributes",
-        "PermissionKey"
+        "PermissionKey",
+        "Permissions",
+        "LinkCount",
+        "NfsAttributes",
+        "All"
       ],
       "x-ms-enum": {
         "name": "ListFilesIncludeType",
@@ -11231,6 +11570,26 @@
             "name": "PermissionKey",
             "value": "PermissionKey",
             "description": "PermissionKey"
+          },
+          {
+            "name": "Permissions",
+            "value": "Permissions",
+            "description": "Permissions"
+          },
+          {
+            "name": "LinkCount",
+            "value": "LinkCount",
+            "description": "LinkCount"
+          },
+          {
+            "name": "NfsAttributes",
+            "value": "NfsAttributes",
+            "description": "NfsAttributes"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
           }
         ]
       }
@@ -12130,6 +12489,48 @@
         "name": "Multichannel"
       }
     },
+    "SocketItem": {
+      "type": "object",
+      "description": "A listed socket item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The socket name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the socket.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "Socket"
+      }
+    },
     "StorageErrorCode": {
       "type": "string",
       "description": "Error codes returned by the service",
@@ -12661,6 +13062,55 @@
             "x-ms-text": true
           }
         }
+      }
+    },
+    "SymLinkItem": {
+      "type": "object",
+      "description": "A listed symbolic link item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The symbolic link name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the symbolic link.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "linkText": {
+          "type": "string",
+          "description": "The path to the original file, the symbolic link is pointing to.",
+          "xml": {
+            "name": "LinkText"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "SymLink"
       }
     },
     "UserDelegationKey": {

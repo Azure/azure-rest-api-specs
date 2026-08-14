@@ -286,6 +286,33 @@ union NfsFileType {
   SymLink: "SymLink",
 }
 
+/** Type of the file. */
+@added(Versions.v2027_03_07)
+union FileType {
+  string,
+
+  /** Regular */
+  Regular: "Regular",
+
+  /** Directory */
+  Directory: "Directory",
+
+  /** SymLink */
+  SymLink: "SymLink",
+
+  /** BlockDevice */
+  BlockDevice: "BlockDevice",
+
+  /** CharacterDevice */
+  CharacterDevice: "CharacterDevice",
+
+  /** Socket */
+  Socket: "Socket",
+
+  /** Fifo */
+  Fifo: "Fifo",
+}
+
 /** The file property semantics. */
 union FilePropertySemantics {
   string,
@@ -389,6 +416,22 @@ enum ListFilesIncludeType {
 
   /** PermissionKey */
   PermissionKey,
+
+  /** Permissions */
+  @added(Versions.v2027_03_07)
+  Permissions,
+
+  /** LinkCount */
+  @added(Versions.v2027_03_07)
+  LinkCount,
+
+  /** NfsAttributes */
+  @added(Versions.v2027_03_07)
+  NfsAttributes,
+
+  /** All */
+  @added(Versions.v2027_03_07)
+  All,
 }
 
 /** The type of share information to include in the listing. */
@@ -525,6 +568,36 @@ model FilesAndDirectoriesListSegment {
   @Xml.unwrapped
   @Xml.name("File")
   fileItems: FileItem[];
+
+  /** The symbolic link items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("SymLink")
+  symLinkItems?: SymLinkItem[];
+
+  /** The block device items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("BlockDevice")
+  blockDeviceItems?: BlockDeviceItem[];
+
+  /** The character device items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("CharDevice")
+  charDeviceItems?: CharDeviceItem[];
+
+  /** The FIFO items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("Fifo")
+  fifoItems?: FifoItem[];
+
+  /** The socket items. */
+  @added(Versions.v2027_03_07)
+  @Xml.unwrapped
+  @Xml.name("Socket")
+  socketItems?: SocketItem[];
 }
 
 /** A listed directory item. */
@@ -544,6 +617,11 @@ model DirectoryItem {
 
   /** The permission key. */
   @Xml.name("PermissionKey") permissionKey?: string;
+
+  /** The link count of the directory. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("LinkCount")
+  linkCount?: int64;
 }
 
 /** An encoded string value. */
@@ -590,6 +668,21 @@ model FileProperty {
 
   /** The ETag of the file. */
   @Xml.name("Etag") eTag?: Azure.Core.eTag;
+
+  /** NFS only. The owner user identifier (UID) of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("Uid")
+  owner?: string;
+
+  /** NFS only. The owner group identifier (GID) of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("Gid")
+  group?: string;
+
+  /** NFS only. The mode of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("Mode")
+  fileMode?: string;
 }
 
 /** A listed file item. */
@@ -609,6 +702,116 @@ model FileItem {
 
   /** The permission key. */
   @Xml.name("PermissionKey") permissionKey?: string;
+
+  /** The link count of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("LinkCount")
+  linkCount?: int64;
+
+  /** Type of the file. */
+  @added(Versions.v2027_03_07)
+  @Xml.name("FileType")
+  fileType?: FileType;
+}
+
+/** A listed symbolic link item. */
+@added(Versions.v2027_03_07)
+@Xml.name("SymLink")
+model SymLinkItem {
+  /** The symbolic link name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the symbolic link. */
+  @Xml.name("LinkCount") linkCount?: int64;
+
+  /** The path to the original file, the symbolic link is pointing to. */
+  @Xml.name("LinkText") linkText?: string;
+}
+
+/** A listed block device item. */
+@added(Versions.v2027_03_07)
+@Xml.name("BlockDevice")
+model BlockDeviceItem {
+  /** The block device name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the block device. */
+  @Xml.name("LinkCount") linkCount?: int64;
+
+  /** The major device number of the block device. */
+  @Xml.name("DeviceMajor") deviceMajor?: int64;
+
+  /** The minor device number of the block device. */
+  @Xml.name("DeviceMinor") deviceMinor?: int64;
+}
+
+/** A listed character device item. */
+@added(Versions.v2027_03_07)
+@Xml.name("CharDevice")
+model CharDeviceItem {
+  /** The character device name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the character device. */
+  @Xml.name("LinkCount") linkCount?: int64;
+
+  /** The major device number of the character device. */
+  @Xml.name("DeviceMajor") deviceMajor?: int64;
+
+  /** The minor device number of the character device. */
+  @Xml.name("DeviceMinor") deviceMinor?: int64;
+}
+
+/** A listed FIFO item. */
+@added(Versions.v2027_03_07)
+@Xml.name("Fifo")
+model FifoItem {
+  /** The FIFO name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the FIFO. */
+  @Xml.name("LinkCount") linkCount?: int64;
+}
+
+/** A listed socket item. */
+@added(Versions.v2027_03_07)
+@Xml.name("Socket")
+model SocketItem {
+  /** The socket name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
+
+  /** File properties. */
+  @Xml.name("Properties") properties: FileProperty;
+
+  /** The link count of the socket. */
+  @Xml.name("LinkCount") linkCount?: int64;
 }
 
 /** A listed Azure Storage handle item. */

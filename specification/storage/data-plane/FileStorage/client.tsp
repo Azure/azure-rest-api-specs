@@ -539,6 +539,7 @@ model DirectoryClientParameters {
 @@access(ListFilesIncludeType, Access.internal, "csharp");
 @@access(DeleteSnapshotsOptionType, Access.internal, "csharp");
 @@access(AccessRight, Access.internal, "csharp");
+@@access(FileType, Access.public, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
