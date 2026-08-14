@@ -295,6 +295,12 @@ union OSSKU {
    */
   @added(Versions.v2026_03_01)
   AzureContainerLinux: "AzureContainerLinux",
+
+  /**
+   * Use Ubuntu2604 as the OS for node images. For limitations and supported Kubernetes versions, see https://aka.ms/aks/supported-ubuntu-versions
+   */
+  @added(Versions.v2026_06_02_preview)
+  Ubuntu2604: "Ubuntu2604",
 }
 
 /**
