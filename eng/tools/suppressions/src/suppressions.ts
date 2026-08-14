@@ -104,6 +104,28 @@ export async function getSuppressions(
 }
 
 /**
+ * Returns the suppressions for any of the specified tools applicable to a path.
+ *
+ * Tool names are evaluated in the order provided. Duplicate names are ignored.
+ *
+ * @param tools Names of tools. Matched against property "tool" in suppressions.yaml.
+ * @param path Path to file or directory under analysis.
+ * @param context Values made available to conditional suppressions.
+ * @returns Array of suppressions matching any tool and path (may be empty).
+ */
+export async function getSuppressionsForTools(
+  tools: readonly string[],
+  path: string,
+  context: Record<string, unknown> = {},
+): Promise<Suppression[]> {
+  return (
+    await Promise.all(
+      [...new Set(tools)].map(async (tool) => await getSuppressions(tool, path, context)),
+    )
+  ).flat();
+}
+
+/**
  * Returns the suppressions for a tool applicable to a path, given the path and content of the suppressions.yaml.
  * Extracted for unit testing.
  *
