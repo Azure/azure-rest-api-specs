@@ -134,7 +134,7 @@ interface AgentServerTaskStorage {
   @route("/tasks")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
   createAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     CreateAgentServerTaskRequest,
     ResourceCreatedResponse<AgentServerTaskRecord>
   >;
@@ -147,7 +147,7 @@ interface AgentServerTaskStorage {
   @route("/tasks/{task_id}")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
   getAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     GetAgentServerTaskRequest,
     AgentServerTaskRecord
   >;
@@ -160,7 +160,7 @@ interface AgentServerTaskStorage {
   @route("/tasks/{task_id}")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
   patchAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     PatchAgentServerTaskRequest,
     AgentServerTaskRecord
   >;
@@ -173,7 +173,7 @@ interface AgentServerTaskStorage {
   @route("/tasks/{task_id}")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
   deleteAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     DeleteAgentServerTaskRequest,
     NoContentResponse
   >;
@@ -187,7 +187,7 @@ interface AgentServerTaskStorage {
   @route("/tasks")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
   listAgentServerTasks is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     ListAgentServerTasksRequest,
     AgentServerTaskListResponse
   >;

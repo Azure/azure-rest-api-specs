@@ -26503,7 +26503,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -26599,7 +26599,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -26616,7 +26616,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -26797,7 +26797,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -26816,7 +26816,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -26879,7 +26879,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -26896,7 +26896,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27008,7 +27008,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -27025,7 +27025,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27101,7 +27101,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -80873,6 +80873,32 @@
           ]
         }
       },
+      "SimulationSeedDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "simulation_seed"
+            ],
+            "description": "The data generation job type, which is SimulationSeed for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
       "Skill": {
         "type": "object",
         "required": [
@@ -81331,32 +81357,6 @@
           }
         },
         "description": "Base class for targets with discriminator support."
-      },
-      "SimulationSeedDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "simulation_seed"
-            ],
-            "description": "The data generation job type, which is SimulationSeed for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
       },
       "TaxonomyCategory": {
         "type": "object",
@@ -82091,8 +82091,8 @@
           },
           "redact_private_content": {
             "type": "boolean",
-            "default": true,
-            "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction."
+            "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.",
+            "default": true
           }
         },
         "allOf": [
