@@ -51,6 +51,19 @@ alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+/**
+ * Azure-AsyncOperation header returned by .NET Component operations starting in 2026-07-01.
+ */
+model DotNetComponentAzureAsyncOperationHeader {
+  /** A link to the status monitor. */
+  @added(Versions.v2026_07_01)
+  @header("Azure-AsyncOperation")
+  @Azure.Core.pollingLocation(
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>
+  )
+  azureAsyncOperation?: string;
+}
+
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_07_01)
 @armResourceOperations
@@ -74,14 +87,26 @@ interface DotNetComponents {
   @summary("Update properties of a .NET Component")
   update is DotNetComponentOps.CustomPatchAsync<
     DotNetComponent,
-    PatchModel = DotNetComponent
+    PatchModel = DotNetComponent,
+    LroHeaders = ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      DotNetComponent,
+      string
+    > &
+      DotNetComponentAzureAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a .NET component from a managed environment.
    */
   @summary("Delete a .NET Component.")
-  delete is DotNetComponentOps.DeleteWithoutOkAsync<DotNetComponent>;
+  delete is DotNetComponentOps.DeleteWithoutOkAsync<
+    DotNetComponent,
+    LroHeaders = ArmLroLocationHeader &
+      DotNetComponentAzureAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Lists the .NET components in a managed environment.
