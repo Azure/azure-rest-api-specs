@@ -264,7 +264,7 @@ These settings apply only when `--tag=package-2026-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2026-06'
 input-file:
-  - stable/2025-06-01/deployments.json
+  - stable/2026-06-01/deployments.json
 ```
 
 ## Suppression
