@@ -12244,6 +12244,7 @@ model ExpressRouteProviderPortProperties {
  * Parameters for updating ExpressRouteLag tags or identity.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRouteLag Update Tags or Identity Request")
@@ -12513,6 +12514,7 @@ model ExpressRouteLagMemberPropertiesFormat {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "LOA is the standard acronym for 'Letter of Authorization' and is used consistently in service operations."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @added(Versions.v2025_09_01)
 model GenerateExpressRouteLagsLOARequest {
@@ -16854,6 +16856,7 @@ model NetworkVirtualAppliancePrepareMigrationProperties {
  * Parameters supplied to prepare the migration of a Network Virtual Appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualAppliancePrepareMigrationRequest {
@@ -16880,6 +16883,7 @@ model NetworkVirtualApplianceExecuteMigrationProperties {
  * Parameters supplied to execute the migration of a Network Virtual Appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceExecuteMigrationRequest {
@@ -16906,6 +16910,7 @@ model NetworkVirtualApplianceCommitMigrationProperties {
  * Parameters supplied to commit the migration of a Network Virtual Appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceCommitMigrationRequest {
@@ -20406,6 +20411,7 @@ model VirtualNetworkDdosProtectionStatusResult
  * Request body for the MoveIpConfigurations operation.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model MoveIpConfigurationsRequest {

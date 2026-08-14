@@ -1,14 +1,10 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-07-30
+     Upstream alignment: 2026-08-13
      Verified against:
-       - @azure-tools/typespec-azure-core 0.70.0
-       - @azure-tools/typespec-azure-rulesets 0.70.0 (data-plane ruleset)
+       - @azure-tools/typespec-azure-core 0.71.0
+       - @azure-tools/typespec-azure-rulesets 0.71.0 (data-plane ruleset)
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
-       - Azure/typespec-azure#5055, as reworked after architect review
-         (2026-07-30): reduced from three rules to one. See the
-         "🚷 Not a rule" section for the measurements behind the two
-         withdrawals; do not restore them to a linted state.
      The pinned version above MUST match the `@azure-tools/typespec-azure-core`
      version in the repository root `package.json`. The
      `data-plane-review-alignment` CI check enforces this: when the package is
@@ -76,7 +72,7 @@ extends `@azure-tools/typespec-azure-rulesets/data-plane`. The agent is
 | `no-query-explode` / `no-header-explode`                             | Query/header parameters serialize without `explode: true`.                                                                                                                                         | URLs / headers          |
 | `no-enum`                                                            | `union`, not `enum`.                                                                                                                                                                               | Enums & SDKs            |
 | `no-closed-literal-union`                                            | Literal unions include the base scalar (open enum).                                                                                                                                                | Enums & SDKs            |
-| `no-unnamed-union`                                                   | Unions are declared, not inline expressions.                                                                                                                                                       | Enums & SDKs            |
+| `no-unnamed-types`                                                   | Models, unions, enums, and scalars are declared rather than anonymous inline expressions.                                                                                                          | SDK surface             |
 | `no-string-discriminator`                                            | Discriminator property is an extensible union.                                                                                                                                                     | Polymorphism            |
 | `no-multiple-discriminator`                                          | At most one discriminator per model.                                                                                                                                                               | Polymorphism            |
 | `spread-discriminated-model`                                         | Discriminated models are not spread into compositions.                                                                                                                                             | Polymorphism            |
@@ -102,6 +98,7 @@ extends `@azure-tools/typespec-azure-rulesets/data-plane`. The agent is
 | `byos`                                                               | Bring-Your-Own-Storage pattern.                                                                                                                                                                    | Storage                 |
 | `require-versioned`                                                  | Service uses the versioning library.                                                                                                                                                               | Versioning              |
 | `no-openapi`                                                         | No `@typespec/openapi` / `typespec-autorest` decorators.                                                                                                                                           | Authoring hygiene       |
+| `no-openapi-client-extensions`                                       | Client-altering OpenAPI extensions use first-class TypeSpec constructs rather than raw `@extension`.                                                                                               | Authoring hygiene       |
 | `no-rest-library-interfaces`                                         | No `TypeSpec.Rest.Resource` interfaces.                                                                                                                                                            | Authoring hygiene       |
 | `no-private-usage` / `no-legacy-usage`                               | No `Private` / `Legacy` namespace usage.                                                                                                                                                           | Authoring hygiene       |
 | `@azure-tools/typespec-client-generator-core/require-client-suffix`  | Client naming.                                                                                                                                                                                     | SDK surface             |
@@ -122,42 +119,14 @@ of these is a place a reviewer would otherwise wrongly stay silent.
 ### ❓ Unresolved names
 
 These names are enabled by the `data-plane` ruleset in `typespec-azure-rulesets`
-0.70.0 but no rule with that exact name is registered by `typespec-azure-core`
-0.70.0. Until a maintainer confirms what they resolve to, treat the underlying
+0.71.0 but no rule with that exact name is registered by `typespec-azure-core`
+0.71.0. Until a maintainer confirms what they resolve to, treat the underlying
 concern as **agent-owned**.
 
 | Name                          | Concern it appears to cover                                       |
 | ----------------------------- | ----------------------------------------------------------------- |
 | `use-extensible-enum`         | Extensible-union modeling (overlaps `no-enum`).                   |
 | `no-fixed-enum-discriminator` | Discriminator extensibility (overlaps `no-string-discriminator`). |
-
----
-
-## ⏳ Landing -- merged upstream, not yet running here
-
-These rules are merged in `Azure/typespec-azure` but are **not** in
-`typespec-azure-core` 0.70.0, which is the version this repository pins. Until
-the version bump lands, nothing enforces them in CI and **the agent owns them**.
-
-| Rule                              | What it enforces                       | Upstream            |
-| --------------------------------- | -------------------------------------- | ------------------- |
-| `no-dollar-prefixed-query-params` | No `$`-prefixed query parameter names. | typespec-azure#5055 |
-
-`#5055` originally proposed three rules. The other two were measured against the
-spec corpus during architect review and **withdrawn** -- see the "🚷 Not a rule"
-section below. Do not re-add them here.
-
-`no-dollar-prefixed-query-params` survived the same scrutiny because its 81
-existing sites are **legacy OData-derived services** (search, batch, cosmos-db
-Tables), not an ongoing pattern: a _new_ data-plane API using `$filter` is
-unambiguously wrong. That is the shape of a rule worth having -- a one-time
-suppression sweep, after which it earns its keep.
-
-**When the bump lands:** move this row to 🔒, update the pinned version and
-`Upstream alignment` date in the header comment, and -- in the same PR -- add a
-true-negative eval stimulus asserting the agent no longer reports it. The CI
-check described below will fail until the header is updated, which is what
-forces this to happen.
 
 ---
 
