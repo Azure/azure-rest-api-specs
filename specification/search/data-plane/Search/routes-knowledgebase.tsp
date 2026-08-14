@@ -53,7 +53,6 @@ interface KnowledgeRetrieval {
   @sharedRoute
   @post
   @route("/knowledgebases('{knowledgeBaseName}')/retrieve")
-  @Azure.ClientGenerator.Core.convenientAPI(false)
   retrieveStream is Foundations.Operation<
     {
       /** The Accept header. */
