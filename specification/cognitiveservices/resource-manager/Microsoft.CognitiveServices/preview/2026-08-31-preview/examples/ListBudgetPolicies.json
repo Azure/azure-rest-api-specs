@@ -1,0 +1,61 @@
+{
+  "operationId": "BudgetPolicies_List",
+  "parameters": {
+    "accountName": "foundryAccount",
+    "api-version": "2026-08-31-preview",
+    "resourceGroupName": "foundry-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List budget policies",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "monthly-project-budget",
+            "type": "Microsoft.CognitiveServices/accounts/budgetPolicies",
+            "etag": "\"00000000-0000-0000-0000-000000000001\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget",
+            "properties": {
+              "displayName": "Monthly project budget",
+              "rules": [
+                {
+                  "name": "project-spend",
+                  "counterKey": [
+                    {
+                      "type": "project"
+                    }
+                  ],
+                  "unit": "usd",
+                  "amount": 200,
+                  "period": "month",
+                  "recurring": true,
+                  "match": {
+                    "foundry.caller.project.id": [
+                      "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/projects/customer-support"
+                    ]
+                  },
+                  "thresholds": [
+                    {
+                      "type": "percentage",
+                      "value": 80,
+                      "action": "alert"
+                    }
+                  ]
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2026-08-13T18:00:00Z",
+              "createdBy": "00000000-0000-0000-0000-000000000001",
+              "createdByType": "User",
+              "lastModifiedAt": "2026-08-13T18:00:00Z",
+              "lastModifiedBy": "00000000-0000-0000-0000-000000000001",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

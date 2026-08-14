@@ -1,0 +1,47 @@
+{
+  "operationId": "Deployments_Update",
+  "parameters": {
+    "accountName": "foundryAccount",
+    "api-version": "2026-08-31-preview",
+    "deployment": {
+      "properties": {
+        "budgetPolicyIds": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget"
+        ]
+      }
+    },
+    "deploymentName": "customer-support-model",
+    "resourceGroupName": "foundry-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Attach a budget policy to a deployment",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "customer-support-model",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/deployments/customer-support-model",
+        "properties": {
+          "budgetPolicyIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget"
+          ],
+          "model": {
+            "format": "OpenAI",
+            "name": "gpt-4.1",
+            "version": "2025-04-14"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "capacity": 1,
+          "name": "GlobalStandard"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000004?api-version=2026-08-31-preview"
+      }
+    }
+  }
+}

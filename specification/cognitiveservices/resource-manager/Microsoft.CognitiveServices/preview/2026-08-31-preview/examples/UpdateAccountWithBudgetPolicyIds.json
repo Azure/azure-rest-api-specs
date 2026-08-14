@@ -1,0 +1,43 @@
+{
+  "operationId": "Accounts_Update",
+  "parameters": {
+    "account": {
+      "properties": {
+        "budgetPolicyIds": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget"
+        ]
+      }
+    },
+    "accountName": "foundryAccount",
+    "api-version": "2026-08-31-preview",
+    "resourceGroupName": "foundry-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Attach a budget policy to an account",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "foundryAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "etag": "\"00000000-0000-0000-0000-000000000002\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount",
+        "kind": "AIServices",
+        "location": "eastus",
+        "properties": {
+          "budgetPolicyIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "S0"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000003?api-version=2026-08-31-preview"
+      }
+    }
+  }
+}
