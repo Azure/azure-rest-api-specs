@@ -43,6 +43,7 @@ import "./ManagedComputeUsages.tsp";
 import "./Compute.tsp";
 import "./Workbench.tsp";
 import "./ManagedComputeCapacity.tsp";
+import "./BudgetPolicy.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -104,6 +105,12 @@ enum Versions {
    * The 2026-07-01 API version.
    */
   v2026_07_01: "2026-07-01",
+
+  /**
+   * The 2026-08-31-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_08_31_preview: "2026-08-31-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

@@ -1,0 +1,140 @@
+{
+  "operationId": "BudgetPolicies_CreateOrUpdate",
+  "parameters": {
+    "accountName": "foundryAccount",
+    "api-version": "2026-08-31-preview",
+    "budgetPolicyName": "monthly-project-budget",
+    "resource": {
+      "properties": {
+        "displayName": "Monthly project budget",
+        "rules": [
+          {
+            "name": "project-spend",
+            "counterKey": [
+              {
+                "type": "project"
+              }
+            ],
+            "unit": "usd",
+            "amount": 200,
+            "period": "month",
+            "recurring": true,
+            "match": {
+              "foundry.caller.project.id": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/projects/customer-support"
+              ]
+            },
+            "thresholds": [
+              {
+                "type": "percentage",
+                "value": 80,
+                "action": "alert"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "foundry-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Create or replace a budget policy",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000002\""
+      },
+      "body": {
+        "name": "monthly-project-budget",
+        "type": "Microsoft.CognitiveServices/accounts/budgetPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000002\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget",
+        "properties": {
+          "displayName": "Monthly project budget",
+          "rules": [
+            {
+              "name": "project-spend",
+              "counterKey": [
+                {
+                  "type": "project"
+                }
+              ],
+              "unit": "usd",
+              "amount": 200,
+              "period": "month",
+              "recurring": true,
+              "match": {
+                "foundry.caller.project.id": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/projects/customer-support"
+                ]
+              },
+              "thresholds": [
+                {
+                  "type": "percentage",
+                  "value": 80,
+                  "action": "alert"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2026-08-13T18:00:00Z",
+          "createdBy": "00000000-0000-0000-0000-000000000001",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-08-13T18:30:00Z",
+          "lastModifiedBy": "00000000-0000-0000-0000-000000000001",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000001\""
+      },
+      "body": {
+        "name": "monthly-project-budget",
+        "type": "Microsoft.CognitiveServices/accounts/budgetPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/budgetPolicies/monthly-project-budget",
+        "properties": {
+          "displayName": "Monthly project budget",
+          "rules": [
+            {
+              "name": "project-spend",
+              "counterKey": [
+                {
+                  "type": "project"
+                }
+              ],
+              "unit": "usd",
+              "amount": 200,
+              "period": "month",
+              "recurring": true,
+              "match": {
+                "foundry.caller.project.id": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/foundry-rg/providers/Microsoft.CognitiveServices/accounts/foundryAccount/projects/customer-support"
+                ]
+              },
+              "thresholds": [
+                {
+                  "type": "percentage",
+                  "value": 80,
+                  "action": "alert"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2026-08-13T18:00:00Z",
+          "createdBy": "00000000-0000-0000-0000-000000000001",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-08-13T18:00:00Z",
+          "lastModifiedBy": "00000000-0000-0000-0000-000000000001",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

@@ -1666,6 +1666,17 @@ model AccountProperties {
    * Specifies the projects, by project name, that are associated with this resource.
    */
   associatedProjects?: string[];
+
+  /**
+   * The full resource IDs of budget policies directly attached to this account.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @maxItems(20)
+  budgetPolicyIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/budgetPolicies";
+    }
+  ]>[];
 }
 
 /**
@@ -3170,6 +3181,17 @@ model DeploymentProperties {
    * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
+
+  /**
+   * The full resource IDs of budget policies directly attached to this deployment.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @maxItems(20)
+  budgetPolicyIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/budgetPolicies";
+    }
+  ]>[];
 }
 
 /**
