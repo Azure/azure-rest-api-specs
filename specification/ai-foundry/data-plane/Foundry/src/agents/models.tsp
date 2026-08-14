@@ -569,6 +569,9 @@ union ContainerLogKind {
 union VersionSelectorType {
   string,
   FixedRatio: "FixedRatio",
+
+  /** Selects a version for a specific agent instance. */
+  Instance: "Instance",
 }
 
 model VersionSelector {
@@ -590,6 +593,14 @@ model FixedRatioVersionSelectionRule extends VersionSelectionRule {
   @minValue(0)
   @maxValue(100)
   traffic_percentage: int32;
+}
+
+@doc("A routing rule that selects an agent version for a specific agent instance.")
+model InstanceVersionSelectionRule extends VersionSelectionRule {
+  type: VersionSelectorType.Instance;
+
+  @doc("The agent instance identifier matched by this rule.")
+  instance_id: string;
 }
 
 @discriminator("type")

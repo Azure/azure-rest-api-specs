@@ -38978,6 +38978,31 @@
           ]
         }
       },
+      "InstanceVersionSelectionRule": {
+        "type": "object",
+        "required": [
+          "type",
+          "instance_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Instance"
+            ]
+          },
+          "instance_id": {
+            "type": "string",
+            "description": "The agent instance identifier matched by this rule."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VersionSelectionRule"
+          }
+        ],
+        "description": "A routing rule that selects an agent version for a specific agent instance."
+      },
       "InvocationsProtocolConfiguration": {
         "type": "object",
         "description": "Configuration specific to the invocations protocol."
@@ -82460,7 +82485,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "FixedRatio": "#/components/schemas/FixedRatioVersionSelectionRule"
+            "FixedRatio": "#/components/schemas/FixedRatioVersionSelectionRule",
+            "Instance": "#/components/schemas/InstanceVersionSelectionRule"
           }
         }
       },
@@ -82486,7 +82512,8 @@
           {
             "type": "string",
             "enum": [
-              "FixedRatio"
+              "FixedRatio",
+              "Instance"
             ]
           }
         ]
