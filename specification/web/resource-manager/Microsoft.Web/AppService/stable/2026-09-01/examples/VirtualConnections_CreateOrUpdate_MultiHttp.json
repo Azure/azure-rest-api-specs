@@ -12,19 +12,31 @@
         "connections": {
           "cache": {
             "settings": {
-              "REDIS_HOST": { "role": "host" },
-              "REDIS_KEY": { "role": "credential" }
+              "REDIS_HOST": {
+                "role": "host"
+              },
+              "REDIS_KEY": {
+                "role": "credential"
+              }
             },
             "protocol": "redis",
             "auth": "managedIdentity"
           },
           "docs-storage": {
-            "settings": { "STORAGE_URL": { "role": "value" } },
+            "settings": {
+              "STORAGE_URL": {
+                "role": "value"
+              }
+            },
             "protocol": "http",
             "auth": "managedIdentity"
           },
           "keyvault": {
-            "settings": { "KEYVAULT_URI": { "role": "host" } },
+            "settings": {
+              "KEYVAULT_URI": {
+                "role": "host"
+              }
+            },
             "protocol": "http",
             "auth": "managedIdentity"
           }
@@ -43,19 +55,74 @@
           "connections": {
             "cache": {
               "settings": {
-                "REDIS_HOST": { "role": "host" },
-                "REDIS_KEY": { "role": "credential" }
+                "REDIS_HOST": {
+                  "role": "host"
+                },
+                "REDIS_KEY": {
+                  "role": "credential"
+                }
               },
               "protocol": "redis",
               "auth": "managedIdentity"
             },
             "docs-storage": {
-              "settings": { "STORAGE_URL": { "role": "value" } },
+              "settings": {
+                "STORAGE_URL": {
+                  "role": "value"
+                }
+              },
               "protocol": "http",
               "auth": "managedIdentity"
             },
             "keyvault": {
-              "settings": { "KEYVAULT_URI": { "role": "host" } },
+              "settings": {
+                "KEYVAULT_URI": {
+                  "role": "host"
+                }
+              },
+              "protocol": "http",
+              "auth": "managedIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/virtualConnections",
+        "name": "virtualConnections",
+        "type": "Microsoft.Web/sites/config",
+        "properties": {
+          "enabled": "Enabled",
+          "connections": {
+            "cache": {
+              "settings": {
+                "REDIS_HOST": {
+                  "role": "host"
+                },
+                "REDIS_KEY": {
+                  "role": "credential"
+                }
+              },
+              "protocol": "redis",
+              "auth": "managedIdentity"
+            },
+            "docs-storage": {
+              "settings": {
+                "STORAGE_URL": {
+                  "role": "value"
+                }
+              },
+              "protocol": "http",
+              "auth": "managedIdentity"
+            },
+            "keyvault": {
+              "settings": {
+                "KEYVAULT_URI": {
+                  "role": "host"
+                }
+              },
               "protocol": "http",
               "auth": "managedIdentity"
             }
