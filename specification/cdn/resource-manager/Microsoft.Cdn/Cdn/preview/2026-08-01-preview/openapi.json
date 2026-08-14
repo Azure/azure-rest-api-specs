@@ -10396,6 +10396,23 @@
         }
       }
     },
+    "CapacityDistributionSettingsParameters": {
+      "type": "object",
+      "description": "Capacity based round-robin load balancing settings for a backend pool",
+      "properties": {
+        "capacityConsciousThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Threshold at which additional backends are added for capacity based load balancing. Default is 80.",
+          "minimum": 20,
+          "maximum": 100
+        },
+        "distributionType": {
+          "$ref": "#/definitions/DistributionType",
+          "description": "Type of distribution used in capacity based load balancing."
+        }
+      }
+    },
     "CdnCertificateSourceParameters": {
       "type": "object",
       "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
@@ -12608,6 +12625,30 @@
         }
       }
     },
+    "DistributionType": {
+      "type": "string",
+      "description": "Type of distribution used in capacity based load balancing.",
+      "enum": [
+        "StaticWeights",
+        "DynamicWeights"
+      ],
+      "x-ms-enum": {
+        "name": "DistributionType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "StaticWeights",
+            "value": "StaticWeights",
+            "description": "Uses static backend weights for load balancing."
+          },
+          {
+            "name": "DynamicWeights",
+            "value": "DynamicWeights",
+            "description": "Dynamically adjusts weights based on backend capacity."
+          }
+        ]
+      }
+    },
     "DomainValidationProperties": {
       "type": "object",
       "description": "The JSON object that contains the properties to validate a domain.",
@@ -13701,34 +13742,8 @@
           "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket"
         },
         "capacityDistributionSettings": {
-          "type": "object",
-          "description": "Capacity based round-robin load balancing settings",
-          "$ref": "#/definitions/CapacityDistributionSettingsParameters"
-        }
-      }
-    },
-    "CapacityDistributionSettingsParameters": {
-      "description": "Capacity based round-robin load balancing settings for a backend pool",
-      "type": "object",
-      "properties": {
-        "capacityConsciousThreshold": {
-          "description": "Threshold at which additional backends are added for capacity based load balancing. Default is 80.",
-          "type": "integer",
-          "format": "int32",
-          "maximum": 100,
-          "minimum": 20
-        },
-        "distributionType": {
-          "description": "Type of distribution used in capacity based load balancing.",
-          "enum": [
-            "StaticWeights",
-            "DynamicWeights"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DistributionType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CapacityDistributionSettingsParameters",
+          "description": "Capacity based round-robin load balancing settings"
         }
       }
     },

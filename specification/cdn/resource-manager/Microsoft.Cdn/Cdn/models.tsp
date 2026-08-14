@@ -3076,6 +3076,47 @@ model LoadBalancingSettingsParameters {
    * The additional latency in milliseconds for probes to fall into the lowest latency bucket
    */
   additionalLatencyInMilliseconds?: int32;
+
+  /**
+   * Capacity based round-robin load balancing settings
+   */
+  @added(Versions.v2026_08_01_preview)
+  capacityDistributionSettings?: CapacityDistributionSettingsParameters;
+}
+
+/**
+ * Capacity based round-robin load balancing settings for a backend pool
+ */
+@added(Versions.v2026_08_01_preview)
+model CapacityDistributionSettingsParameters {
+  /**
+   * Threshold at which additional backends are added for capacity based load balancing. Default is 80.
+   */
+  @maxValue(100)
+  @minValue(20)
+  capacityConsciousThreshold?: int32;
+
+  /**
+   * Type of distribution used in capacity based load balancing.
+   */
+  distributionType?: DistributionType;
+}
+
+/**
+ * Type of distribution used in capacity based load balancing.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "The service contract defines a closed set of supported distribution types."
+@added(Versions.v2026_08_01_preview)
+enum DistributionType {
+  /**
+   * Uses static backend weights for load balancing.
+   */
+  StaticWeights,
+
+  /**
+   * Dynamically adjusts weights based on backend capacity.
+   */
+  DynamicWeights,
 }
 
 /**
