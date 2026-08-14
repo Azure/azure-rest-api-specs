@@ -3964,7 +3964,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AutocompleteResult.value, "results", "!autorest");
 @@clientName(AutocompleteRequest.search, "searchText", "!autorest");
 @@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching", "!autorest");
-@@clientName(ListDataSourcesResult.value, "dataSources", "!autorest");
+@@clientName(ListDataSourcesResult.value, "dataSources", "!autorest,!csharp");
 @@clientName(
   SearchResourceEncryptionKey.keyVaultKeyName,
   "keyName",
@@ -3978,7 +3978,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri", "!autorest");
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUrl", "java");
 @@clientName(SearchIndexer.disabled, "isDisabled", "!autorest");
-@@clientName(ListIndexersResult.value, "indexers", "!autorest");
+@@clientName(ListIndexersResult.value, "indexers", "!autorest,!csharp");
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount", "!autorest");
 @@clientName(
   IndexerExecutionResult.itemsFailed,
@@ -3995,8 +3995,8 @@ namespace KnowledgeBaseRetrievalClient {
   "indexProjection",
   "!autorest"
 );
-@@clientName(ListSkillsetsResult.value, "skillsets", "!autorest");
-@@clientName(ListSynonymMapsResult.value, "synonymMaps", "!autorest");
+@@clientName(ListSkillsetsResult.value, "skillsets", "!autorest,!csharp");
+@@clientName(ListSynonymMapsResult.value, "synonymMaps", "!autorest,!csharp");
 @@clientName(AnalyzeRequest, "AnalyzeTextOptions", "!autorest");
 @@clientName(AnalyzeRequest.analyzer, "analyzerName", "!autorest");
 @@clientName(AnalyzeRequest.tokenizer, "tokenizerName", "!autorest");

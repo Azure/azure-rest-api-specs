@@ -526,6 +526,9 @@
           "SearchServiceListDataSourcesNextPage": {
             "$ref": "./examples/SearchServiceListDataSourcesNextPage.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -910,6 +913,9 @@
           "SearchServiceListIndexersNextPage": {
             "$ref": "./examples/SearchServiceListIndexersNextPage.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -3361,7 +3367,9 @@
             "description": "User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "queryWorkIQSourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "queryWorkIQSourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -4097,7 +4105,7 @@
     "/knowledgesources('{sourceName}')/files('{fileId}')": {
       "put": {
         "operationId": "KnowledgeSources_UpdateFile",
-        "description": "Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name, custom metadata, and optional extraction override) and a 'content' part with the raw file bytes.",
+        "description": "Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -4421,6 +4429,9 @@
           "SearchServiceListSkillsetsNextPage": {
             "$ref": "./examples/SearchServiceListSkillsetsNextPage.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -4873,6 +4884,9 @@
           "SearchServiceListSynonymMapsNextPage": {
             "$ref": "./examples/SearchServiceListSynonymMapsNextPage.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -5301,7 +5315,9 @@
             "description": "User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "queryWorkIQSourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "queryWorkIQSourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -5340,7 +5356,7 @@
     "/knowledgesources('{sourceName}')/files?_overload=uploadFileMultipart": {
       "post": {
         "operationId": "KnowledgeSources_UploadFileMultipart",
-        "description": "Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name, custom metadata, and optional parsing/extraction overrides) and a 'content' part with the raw file bytes.",
+        "description": "Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -12553,7 +12569,10 @@
             "$ref": "#/definitions/KnowledgeBaseActivityRecord"
           }
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "KnowledgeBaseWebActivityArguments": {
       "type": "object",

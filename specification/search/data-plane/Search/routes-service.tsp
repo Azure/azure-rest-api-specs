@@ -70,6 +70,7 @@ interface DataSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/datasources")
+  @list
   @get
   list is SearchOperation<
     {
@@ -246,6 +247,7 @@ interface Indexers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/indexers")
+  @list
   @get
   list is SearchOperation<
     {
@@ -357,6 +359,7 @@ interface Skillsets {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/skillsets")
+  @list
   @get
   list is SearchOperation<
     {
@@ -461,6 +464,7 @@ interface SynonymMaps {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/synonymmaps")
+  @list
   @get
   list is SearchOperation<
     {
@@ -989,7 +993,7 @@ interface KnowledgeSources {
     }
   >;
 
-  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name, custom metadata, and optional parsing/extraction overrides) and a 'content' part with the raw file bytes. */
+  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
   @added(Versions.v2026_08_01_preview)
@@ -1048,7 +1052,7 @@ interface KnowledgeSources {
     }
   >;
 
-  /** Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name, custom metadata, and optional extraction override) and a 'content' part with the raw file bytes. */
+  /** Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"

@@ -11,6 +11,15 @@
 
 Applies to data-plane TypeSpec.
 
+> **Authoritative upstream:** [clear and consistent naming](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-clear-naming),
+> [units in duration names](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json-durations-use-fixed-time-intervals),
+> [string constraints](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json-specify-string-constraints),
+> [action names are verbs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions-action-name-is-verb),
+> and
+> [document extensible enums](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json-document-extensible-enums)
+> in the Azure REST API Guidelines. Clarity and documentation-quality judgments
+> below are reviewer synthesis; the upstream Guidelines take precedence.
+
 The mechanical half of naming -- casing of properties, models, headers, query
 parameters, JSON fields -- is owned by `@azure-tools/typespec-azure-core/casing-style`
 and the batch of casing rules tracked in
