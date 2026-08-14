@@ -66,8 +66,8 @@ union VirtualConnectionsEnabledState {
 }
 
 /** The resource provisioning state. */
-@added(Versions.v2026_09_01)
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "The OpenAPI validator requires readOnly on the referenced provisioning-state definition; TypeSpec lifecycle visibility cannot be applied to a union."
+@added(Versions.v2026_09_01)
 @extension("readOnly", true)
 union VirtualConnectionsProvisioningState {
   ResourceProvisioningState,
@@ -115,12 +115,12 @@ model VirtualConnection {
   /**
    * Authentication strategy for the backend connection.
    * "credential" — proxy injects the original secret (from setting value).
-    * "managedIdentity" — proxy acquires a managed identity token for upstream auth.
+   * "managedIdentity" — proxy acquires a managed identity token for upstream auth.
    */
   auth: VirtualConnectionAuthType;
 
   /**
-    * Managed Identity scope for token acquisition. Only relevant when auth=managedIdentity.
+   * Managed Identity scope for token acquisition. Only relevant when auth=managedIdentity.
    * Optional — the platform infers a default scope from protocol + host.
    * Specify explicitly for custom hosts or non-standard resource URIs.
    */
@@ -136,7 +136,7 @@ model VirtualConnection {
   /**
    * How to inject a standalone credential into upstream HTTP requests.
    * Required when protocol=http + auth=credential and the credential is a
-    * separate setting. Not needed for role="value" or auth=managedIdentity.
+   * separate setting. Not needed for role="value" or auth=managedIdentity.
    */
   credentialInjection?: HttpCredentialInjection;
 }
