@@ -1233,7 +1233,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An Azure Function tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model AzureFunctionToolCall extends OpenAI.OutputItem {
     type: "azure_function_call";
 
