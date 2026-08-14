@@ -533,12 +533,16 @@ model DirectoryClientParameters {
 @@clientName(LeaseDurationType, "ShareLeaseDuration", "csharp");
 @@clientName(LeaseStateType, "ShareLeaseState", "csharp");
 @@clientName(LeaseStatusType, "ShareLeaseStatus", "csharp");
+@@clientName(FileProperty.uid, "Owner", "csharp");
+@@clientName(FileProperty.gid, "Group", "csharp");
+@@clientName(FileProperty.mode, "FileMode", "csharp");
 
 @@access(FileRangeWriteFromUrlType, Access.internal, "csharp");
 @@access(ListSharesIncludeType, Access.internal, "csharp");
 @@access(ListFilesIncludeType, Access.internal, "csharp");
 @@access(DeleteSnapshotsOptionType, Access.internal, "csharp");
 @@access(AccessRight, Access.internal, "csharp");
+@@access(FileType, Access.public, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
