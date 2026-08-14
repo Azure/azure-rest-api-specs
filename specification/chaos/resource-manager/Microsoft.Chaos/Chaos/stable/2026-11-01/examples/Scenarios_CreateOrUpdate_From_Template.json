@@ -7,15 +7,18 @@
     "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
     "resource": {
       "properties": {
-        "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.1",
-        "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone.",
+        "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
+        "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
         "parameters": [
           {
             "name": "duration",
             "type": "string",
-            "default": "PT30M",
+            "default": "PT15M",
             "required": false,
-            "description": "The duration of the zone down scenario."
+            "description": "The duration of the zone down scenario.",
+            "format": {
+              "formatType": "Duration"
+            }
           }
         ],
         "actions": [
@@ -27,7 +30,7 @@
             "parameters": [
               {
                 "key": "Zones",
-                "value": "%%{filters.zones}%%"
+                "value": "%%{resourceTargeting.include.zones}%%"
               }
             ]
           },
@@ -49,16 +52,19 @@
         "type": "Microsoft.Chaos/workspaces/scenarios",
         "properties": {
           "provisioningState": "Succeeded",
-          "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.1",
+          "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
           "version": "1.0",
-          "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone.",
+          "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
           "parameters": [
             {
               "name": "duration",
               "type": "string",
-              "default": "PT30M",
+              "default": "PT15M",
               "required": false,
-              "description": "The duration of the zone down scenario."
+              "description": "The duration of the zone down scenario.",
+              "format": {
+                "formatType": "Duration"
+              }
             }
           ],
           "actions": [
@@ -70,7 +76,7 @@
               "parameters": [
                 {
                   "key": "Zones",
-                  "value": "%%{filters.zones}%%"
+                  "value": "%%{resourceTargeting.include.zones}%%"
                 }
               ]
             },
@@ -100,16 +106,19 @@
         "type": "Microsoft.Chaos/workspaces/scenarios",
         "properties": {
           "provisioningState": "Creating",
-          "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.1",
+          "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
           "version": "1.0",
-          "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone.",
+          "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
           "parameters": [
             {
               "name": "duration",
               "type": "string",
-              "default": "PT30M",
+              "default": "PT15M",
               "required": false,
-              "description": "The duration of the zone down scenario."
+              "description": "The duration of the zone down scenario.",
+              "format": {
+                "formatType": "Duration"
+              }
             }
           ],
           "actions": [
@@ -121,7 +130,7 @@
               "parameters": [
                 {
                   "key": "Zones",
-                  "value": "%%{filters.zones}%%"
+                  "value": "%%{resourceTargeting.include.zones}%%"
                 }
               ]
             },
