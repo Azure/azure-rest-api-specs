@@ -672,17 +672,17 @@ model FileProperty {
   /** NFS only. The owner user identifier (UID) of the file. */
   @added(Versions.v2027_03_07)
   @Xml.name("Uid")
-  uid?: string;
+  owner?: string;
 
   /** NFS only. The owner group identifier (GID) of the file. */
   @added(Versions.v2027_03_07)
   @Xml.name("Gid")
-  gid?: string;
+  group?: string;
 
   /** NFS only. The mode of the file. */
   @added(Versions.v2027_03_07)
   @Xml.name("Mode")
-  mode?: string;
+  fileMode?: string;
 }
 
 /** A listed file item. */
