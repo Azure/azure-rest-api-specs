@@ -8,7 +8,7 @@ using Microsoft.DatabaseFleetManager;
 @@clientName(Fleet, "DatabaseFleet", "csharp");
 @@clientName(Fleetspace, "DatabaseFleetspace", "csharp");
 
-@@clientName(Identity, "IdentityProperties", "csharp");
+@@clientName(Identity, "FleetDatabaseIdentityProperties", "csharp");
 @@clientName(IdentityType, "DatabaseFleetManagerIdentityType", "csharp");
 @@clientName(PrincipalType, "DatabaseFleetManagerPrincipalType", "csharp");
 @@clientName(ResourceType, "DatabaseFleetResourceKind", "csharp");
@@ -23,6 +23,7 @@ using Microsoft.DatabaseFleetManager;
 @@clientName(DatabaseRenameDefinition, "DatabaseRenameContent", "csharp");
 
 @@clientName(FleetDatabaseProperties.recoverable, "IsRecoverable", "csharp");
+@@clientName(FleetTierProperties.disabled, "IsDisabled", "csharp");
 @@clientName(FleetTierProperties.serverless, "IsServerless", "csharp");
 @@clientName(FleetTierProperties.pooled, "IsPooled", "csharp");
 
