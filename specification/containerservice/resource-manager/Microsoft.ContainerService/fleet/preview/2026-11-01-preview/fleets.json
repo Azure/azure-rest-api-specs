@@ -4340,11 +4340,11 @@
     },
     "FleetMemberCredentialRequest": {
       "type": "object",
-      "description": "The request for Fleet member credentials. Specify either memberNames for an initial request or continuationToken for a subsequent request, but not both.",
+      "description": "The request for Fleet member credentials. Specify memberNames to retrieve credentials for up to 100 explicitly selected members in one response. Omit memberNames to retrieve credentials for all applicable members with continuationToken used for subsequent pages.",
       "properties": {
         "memberNames": {
           "type": "array",
-          "description": "The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. When omitted from an initial request, all applicable Fleet members are selected. This property must be omitted when continuationToken is provided.",
+          "description": "The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. Requests that specify memberNames are not paginated. When omitted from an initial request, all applicable Fleet members are selected using server-side pagination. This property must be omitted when continuationToken is provided.",
           "minItems": 1,
           "maxItems": 100,
           "uniqueItems": true,
@@ -4355,7 +4355,7 @@
         "continuationToken": {
           "type": "string",
           "format": "password",
-          "description": "The opaque continuation token from a previous request. When provided, this must be the only field in the request body because it preserves the original member selection and cursor state.",
+          "description": "The opaque continuation token from a previous request that omitted memberNames. When provided, this must be the only field in the request body because it preserves the resource scope and cursor state for the all-members enumeration.",
           "x-ms-secret": true
         }
       }
@@ -4410,7 +4410,7 @@
         "continuationToken": {
           "type": "string",
           "format": "password",
-          "description": "The opaque continuation token to use in a subsequent request. This property is omitted when there are no more results.",
+          "description": "The opaque continuation token to use in a subsequent request when the initial request omitted memberNames. This property is omitted for explicit memberNames requests and when there are no more results.",
           "readOnly": true,
           "x-ms-secret": true
         }

@@ -220,16 +220,16 @@ model FleetMemberCredentialResult {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("The request for Fleet member credentials. Specify either memberNames for an initial request or continuationToken for a subsequent request, but not both.")
+@doc("The request for Fleet member credentials. Specify memberNames to retrieve credentials for up to 100 explicitly selected members in one response. Omit memberNames to retrieve credentials for all applicable members with continuationToken used for subsequent pages.")
 model FleetMemberCredentialRequest {
   @minItems(1)
   @maxItems(100)
   @uniqueItems
-  @doc("The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. When omitted from an initial request, all applicable Fleet members are selected. This property must be omitted when continuationToken is provided.")
+  @doc("The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. Requests that specify memberNames are not paginated. When omitted from an initial request, all applicable Fleet members are selected using server-side pagination. This property must be omitted when continuationToken is provided.")
   memberNames?: string[];
 
   @secret
-  @doc("The opaque continuation token from a previous request. When provided, this must be the only field in the request body because it preserves the original member selection and cursor state.")
+  @doc("The opaque continuation token from a previous request that omitted memberNames. When provided, this must be the only field in the request body because it preserves the resource scope and cursor state for the all-members enumeration.")
   continuationToken?: string;
 }
 
@@ -243,7 +243,7 @@ model FleetMemberCredentialResults {
 
   @secret
   @visibility(Lifecycle.Read)
-  @doc("The opaque continuation token to use in a subsequent request. This property is omitted when there are no more results.")
+  @doc("The opaque continuation token to use in a subsequent request when the initial request omitted memberNames. This property is omitted for explicit memberNames requests and when there are no more results.")
   continuationToken?: string;
 }
 
