@@ -54,7 +54,8 @@ interface StaticSiteLinkedBackendARMResourceOps
         @segment("linkedBackends")
         @key
         linkedBackendName: string,
-      }
+      },
+      ResourceName = "StaticSiteLinkedBackend"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -153,7 +154,8 @@ interface StaticSiteLinkedBackendARMResourceOperationGroupOps
         @segment("linkedBackends")
         @key
         linkedBackendName: string,
-      }
+      },
+      ResourceName = "StaticSiteBuildLinkedBackend"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

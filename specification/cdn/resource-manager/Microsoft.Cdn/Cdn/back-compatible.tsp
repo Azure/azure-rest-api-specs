@@ -334,6 +334,15 @@ using Microsoft.Cdn;
 @@clientLocation(CdnWebApplicationFirewallPolicies.list, "Policies");
 @@clientLocation(ProfilesOperationGroup.canMigrate, Profiles);
 @@clientLocation(ProfilesOperationGroup.migrate, Profiles);
-@@clientLocation(ResourceUsageOperationGroup.list, "ResourceUsage");
+@@clientLocation(
+  ResourceUsageOperationGroup.list,
+  "ResourceUsage",
+  "!javascript"
+);
+@@clientLocation(
+  ResourceUsageOperationGroup.list,
+  "ResourceUsageOperations",
+  "javascript"
+);
 @@clientLocation(EdgeNodesOperationGroup.list, "EdgeNodes");
 @@clientLocation(ManagedRuleSetsOperationGroup.list, "ManagedRuleSets");

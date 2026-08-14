@@ -7,6 +7,12 @@ using Microsoft.GuestConfiguration;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
+@@clientName(
+  Microsoft.GuestConfiguration,
+  "GuestConfigurationClient",
+  "python"
+);
+
 // ============================================================================
 // Type alternate types - fix property types for backward compatibility
 // ============================================================================
@@ -300,7 +306,9 @@ using TypeSpec.Rest;
 );
 
 /** Get a report for the guest configuration assignment, by reportId. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 op guestConfigurationAssignmentReportsGetCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -327,7 +335,9 @@ op guestConfigurationAssignmentReportsGetCustomized(
   | ErrorResponse;
 
 /** List all reports for the guest configuration assignment, latest report first. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 op guestConfigurationAssignmentReportsListCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -358,7 +368,9 @@ op guestConfigurationAssignmentReportsListCustomized(
   | ErrorResponse;
 
 /** Creates an association between a VM and guest configuration */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 op guestConfigurationAssignmentsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -391,7 +403,9 @@ op guestConfigurationAssignmentsCreateOrUpdateCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Delete a guest configuration assignment */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Matches source delete operation response shape."
 op guestConfigurationAssignmentsDeleteCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -419,7 +433,9 @@ op guestConfigurationAssignmentsDeleteCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Get information about a guest configuration assignment */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 op guestConfigurationAssignmentsGetCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -446,7 +462,9 @@ op guestConfigurationAssignmentsGetCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Get a report for the guest configuration assignment, by reportId. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
 op guestConfigurationHCRPAssignmentReportsGetCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -475,7 +493,9 @@ op guestConfigurationHCRPAssignmentReportsGetCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** List all reports for the guest configuration assignment, latest report first. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
 op guestConfigurationHCRPAssignmentReportsListCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -510,7 +530,9 @@ op guestConfigurationHCRPAssignmentReportsListCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Creates an association between a ARC machine and guest configuration */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
 op guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -547,7 +569,9 @@ op guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Delete a guest configuration assignment */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Matches source delete operation response shape."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
 op guestConfigurationHCRPAssignmentsDeleteCustomized(
@@ -579,7 +603,9 @@ op guestConfigurationHCRPAssignmentsDeleteCustomized(
   | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Get information about a guest configuration assignment */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
 op guestConfigurationHCRPAssignmentsGetCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,

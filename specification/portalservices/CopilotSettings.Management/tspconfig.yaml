@@ -18,6 +18,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    service-dir: "sdk/portalservicescopilot"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-portalservicescopilot"
     namespace: "com.azure.resourcemanager.portalservicescopilot"
     service-name: "Portal Services Copilot"
@@ -45,3 +46,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

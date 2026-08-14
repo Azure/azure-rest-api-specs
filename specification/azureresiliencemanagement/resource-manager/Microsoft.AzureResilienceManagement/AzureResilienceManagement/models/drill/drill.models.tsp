@@ -1,4 +1,4 @@
-﻿import "@typespec/http";
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -104,6 +104,7 @@ model DrillProperties {
   lastResyncReadinessCheckTime?: utcDateTime;
 
   @doc("Managed RG v2 properties.")
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
@@ -286,6 +287,7 @@ model MetricsToTrack {
     }
   ]>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Destination AMW account where the time-series data of the metric lives.")
   destinationAmwAccountUrl: armResourceIdentifier<[
     {
@@ -538,7 +540,7 @@ model DrillStartRequest {
   @doc("Mode of starting the Drill")
   mode: DrillMode;
 
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Inputs needed for the Recovery Orchestration Plan")
   @removed(Versions.v2026_04_01_preview)
   recoveryPlanInputs: {
@@ -556,6 +558,7 @@ model DrillEndRequest {
   attestationNotes: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body of Drill actions")
 model DrillActionResponse {
   @doc("JobId of the Drill")
@@ -607,6 +610,7 @@ model IncludeOrUpdateResource {
   faultProperties?: FaultProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body of the AddOrUpdateResources API.")
 @removed(Versions.v2026_04_01_preview)
 model AddOrUpdateResourcesResponse {
@@ -690,9 +694,14 @@ model DrillPatchProperties {
 @doc("Additional properties for Failover.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionProperties {
+  @doc("Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.")
+  @added(Versions.v2026_06_01_preview)
+  operationName?: DrillRunTasks;
+
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
   @added(Versions.v2026_03_01_preview)
-  sourceLocations: string[];
+  @madeOptional(Versions.v2026_06_01_preview)
+  sourceLocations?: string[];
 }
 
 @doc("Request body of the Validate For Execute Action of Drill.")
@@ -821,6 +830,7 @@ model DrillResourceQualification {
   resourceQualificationDetails: ResourceQualificationDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("ValidateForExecution post action response.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionResponse {
@@ -832,18 +842,22 @@ model ValidateForExecutionResponse {
 }
 
 @doc("Configuration of the managed on behalf of resource.")
+@removed(Versions.v2026_06_01_preview)
 model ManagedOnBehalfOfConfiguration {
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
   moboBrokerResources?: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
+@removed(Versions.v2026_06_01_preview)
 model MoboBrokerResource {
   /**
    * The fully qualified resource ID of the MoboBroker resource.
    * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
    */
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   id?: string;
 }

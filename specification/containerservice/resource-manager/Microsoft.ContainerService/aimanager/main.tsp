@@ -6,6 +6,7 @@ import "./aimanagernamespace.tsp";
 import "./aimodel.tsp";
 import "./modelsource.tsp";
 import "./modeldeployment.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using Azure.Core;
@@ -27,6 +28,9 @@ enum Versions {
   v2026_04_02_preview: "2026-04-02-preview",
 
   @doc("Azure Kubernetes AI Manager api version 2026-05-02-preview.")
-  @previewVersion
   v2026_05_02_preview: "2026-05-02-preview",
+
+  @doc("Azure Kubernetes AI Manager api version 2026-08-02-preview.")
+  @previewVersion
+  v2026_08_02_preview: "2026-08-02-preview",
 }

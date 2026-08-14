@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -3279,6 +3279,7 @@ model ListDataSourcesResult {
 }
 
 /** The type of the keysOrIds. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DocumentKeysOrIds {
   /** document keys to be reset */
   documentKeys?: string[];
@@ -3903,6 +3904,7 @@ model ListSkillsetsResult {
 
 /** The type of the skill names. */
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SkillNames {
   /** the names of skills to be reset. */
   skillNames?: string[];
@@ -4015,6 +4017,7 @@ model SearchIndex {
 }
 
 /** Represents a search index definition, which describes the fields and search behavior of an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchIndexResponse {
   /** The name of the index. */
   name: string;
@@ -4138,6 +4141,7 @@ model SearchField {
   sourceDocumentId?: boolean;
 
   /** A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2026_05_01_preview)
   sharepointSiteUrl?: boolean;
 
@@ -4217,6 +4221,7 @@ model ScoringFunction {
 }
 
 /** Defines options to control Cross-Origin Resource Sharing (CORS) for an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CorsOptions {
   /** The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). */
   allowedOrigins: string[];
@@ -4421,6 +4426,7 @@ model VectorSearchCompression {
 }
 
 /** Contains the options for rescoring. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RescoringOptions {
   /** If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4495,6 +4501,7 @@ model GetIndexStatisticsResult {
 }
 
 /** Specifies some text and analysis components used to break that text into tokens. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeRequest {
   /** The text to break into tokens. */
   text: string;
@@ -6503,6 +6510,7 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   key: string;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
@@ -6518,6 +6526,7 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
   identity?: SearchIndexerDataIdentity | null;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */

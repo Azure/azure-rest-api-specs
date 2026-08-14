@@ -46,6 +46,7 @@ alias DatabaseMigrationSqlVmOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlVm>;
 
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key
@@ -66,9 +67,8 @@ interface DatabaseMigrationSqlVms {
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @query("migrationOperationId")
-      migrationOperationId?: string;
+      migrationOperationId?: Azure.Core.uuid;
 
       /**
        * Complete migration details be included in the response.
