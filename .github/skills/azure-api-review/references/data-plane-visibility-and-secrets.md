@@ -15,6 +15,16 @@ exposure and model reachability, not local decorator syntax.
 > and
 > [retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response).
 
+## TypeSpec mapping
+
+- `@visibility(Lifecycle.Read)` is response-only; `Lifecycle.Create` and
+  `Lifecycle.Update` permit request use. Excluding `Lifecycle.Read` makes a
+  property write-only.
+- Mark credential-bearing properties with `@secret` and write-only visibility:
+  `@visibility(Lifecycle.Create, Lifecycle.Update)`.
+- Evaluate effective visibility through every request, GET, and LIST model that
+  can reach the property.
+
 Use [`secret-detection.md`](secret-detection.md) to decide whether a property is
 credential-bearing.
 
@@ -31,6 +41,7 @@ whose effect is fully represented by a different readable property.
 ## DP-VIS-02: Credentials must not be readable
 
 - **Severity:** Blocking.
+- **Strength:** `DO NOT` return secrets from GET responses.
 
 Flag a credential-bearing property that is reachable from GET or ordinary
 resource responses. The fix should mark the value as secret, remove read

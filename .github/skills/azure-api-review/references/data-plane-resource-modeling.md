@@ -17,10 +17,21 @@ Do not restate local compiler or linter diagnostics.
 > and
 > [no versions in paths](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#versioning-no-version-in-path).
 
+## TypeSpec mapping
+
+- Model resource CRUD with `StandardResourceOperations.ResourceRead<T>`,
+  `ResourceList<T>`, `ResourceCreateOrUpdate<T>`, `ResourceUpdate<T>`, and
+  `ResourceDelete<T>`. Use `ResourceAction` only for non-CRUD behavior.
+- Express versioned additions, removals, and renames with `@added`, `@removed`,
+  and `@renamedFrom`; do not delete or rename published declarations in place.
+- Inspect `@route` values when deciding whether the PR introduces a
+  version-bearing path.
+
 ## DP-MODEL-01: Actions must not disguise CRUD
 
 - **Severity:** Warning; Blocking is permitted only for a new service's first
   stable version.
+- **Strength:** `DO NOT` use actions for standard CRUD behavior.
 
 A POST action is a defect when the caller could achieve the same result through
 PUT, PATCH, or DELETE on an addressable resource.
@@ -53,6 +64,7 @@ of a parent.
 ## DP-VERSION-01: Stable API changes must remain compatible
 
 - **Severity:** Blocking.
+- **Strength:** `DO NOT` introduce breaking changes in a stable API.
 
 Compare the changed surface with the most recent stable version. Flag:
 
@@ -83,6 +95,7 @@ renames something in a previously published version.
 
 - **Severity:** Blocking for a genuinely new route in a new service or new API
   version; Suggestion on a maintenance edit.
+- **Strength:** `DO NOT` include service-version segments in operation paths.
 
 Flag `/v1/`, `/v2.0/`, and similar version segments only when the PR introduces
 or changes that route. Existing shipped routes are out of scope because changing

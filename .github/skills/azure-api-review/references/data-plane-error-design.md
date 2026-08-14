@@ -14,6 +14,15 @@ the standard error-envelope shape when deterministic tooling already does.
 > and
 > [default error responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-error-use-default-response).
 
+## TypeSpec mapping
+
+- Use `Azure.Core.Foundations.ErrorResponse` or
+  `ErrorResponseBase<TError>` as the service error envelope.
+- The standard `Error` contract provides `code`, `message`, `target`, `details`,
+  and `innererror`. A plain `code: string` is intentionally extensible.
+- Use one compatible error envelope across the service; specialize its error
+  type rather than inventing unrelated response shapes per operation.
+
 ## DP-ERR-01: Error codes must be stable and distinguishable
 
 - **Severity:** Warning.

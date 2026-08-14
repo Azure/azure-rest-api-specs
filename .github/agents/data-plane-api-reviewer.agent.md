@@ -7,9 +7,7 @@ tools:
   - github/get_file_contents
   - github/pull_request_read
   - github/search_code
-  - search
   - search/codebase
-  - web/fetch
 ---
 
 # Azure Data-Plane API Specification Reviewer
@@ -65,6 +63,11 @@ Read only the references needed for the changed constructs:
 - [`secret-detection.md`](../skills/azure-api-review/references/secret-detection.md)
 - [`think-in-graphs.md`](../skills/azure-api-review/references/think-in-graphs.md)
 - [`downstream-ci-impact.md`](../skills/azure-api-review/references/downstream-ci-impact.md)
+
+The local references encode the rules and TypeSpec constructs needed for the
+review. Their external links are provenance and human-readable background; do
+not fetch those documents during routine review. If a local rule is incomplete
+or contradictory, drop the candidate.
 
 Do not load ARM-only references such as `property-mutability.md`,
 `tracked-resource-lifecycle.md`, `lro-final-state-via.md`,
@@ -140,9 +143,10 @@ For every surviving finding, immediately before emitting it:
    file.
 3. Confirm the rule ID exists in a retained reference and the evidence meets its
    stated trigger.
-4. Confirm the cited Guidelines section exists and supports the claim.
-5. Apply normative strength: `YOU SHOULD` / `YOU SHOULD NOT` cannot justify
-   Blocking severity.
+4. Confirm the retained reference's encoded rule and upstream anchor support
+   the claim. Do not fetch the linked document.
+5. Apply the rule's encoded severity and any stated normative strength:
+   `YOU SHOULD` / `YOU SHOULD NOT` cannot justify Blocking severity.
 6. If the spec states a rationale, verify both that the upstream rule permits an
    exception and that the rationale meets that exact condition.
 7. Apply the change-class ceiling: a maintenance edit is Suggestion at most,
@@ -155,13 +159,13 @@ into a speculative question.
 
 ## Severity
 
-- **Blocking:** secret exposure or a breaking change in a stable API. A severe
+- **🔴 Blocking:** secret exposure or a breaking change in a stable API. A severe
   CRUD-in-disguise defect may also be Blocking in a new service's first stable
   version, and a newly introduced version-bearing route may be Blocking in a new
   service or new API version, when the cited rule permits it.
-- **Warning:** a clear requirement or correctness defect that should be fixed
+- **🟡 Warning:** a clear requirement or correctness defect that should be fixed
   before shipping.
-- **Suggestion:** a well-supported improvement, including every non-security,
+- **💡 Suggestion:** a well-supported improvement, including every non-security,
   non-breaking finding on a maintenance edit.
 
 Emit no Questions section. If author context is required to know whether a
@@ -177,7 +181,7 @@ Each finding uses:
 ```markdown
 **[RULE-ID] Short title** -- `path/file.tsp:42`
 
-**Severity:** Blocking | Warning | Suggestion
+**Severity:** <one of 🔴 Blocking, 🟡 Warning, or 💡 Suggestion>
 
 > Exact source text fetched at the pinned head SHA, or at the base SHA for a
 > deleted line.

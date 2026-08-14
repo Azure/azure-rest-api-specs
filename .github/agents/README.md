@@ -30,6 +30,6 @@ subdirectory keeps reference files out of Visual Studio Code's agent scan path.
 - Agents that run unattended (from a `.github/workflows/*.md` gh-aw workflow)
   get **no** mutating GitHub tools at all; `safe-outputs` is their only write
   channel. Behavioral gating in prose is not a substitute for an allowlist.
-- No emoji or non-ASCII chars except where required by an agent's output
-  contract. The ARM reviewer uses severity glyphs; the data-plane reviewer uses
-  severity words.
+- No emoji or non-ASCII chars except where required by agent output.
+  Both reviewers use severity glyphs: ARM uses 🔴 / 🟠 / 🔵; data-plane uses
+  🔴 / 🟡 / 💡.

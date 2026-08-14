@@ -64,10 +64,10 @@ safe-outputs:
     footer: "if-body"
     target: "${{ github.event.pull_request.number || inputs.item_number }}"
   messages:
-    footer: "> Automated data-plane API review by [{workflow_name}]({run_url}). Advisory only."
-    run-started: "[{workflow_name}]({run_url}) is reviewing the data-plane TypeSpec changes in this PR."
-    run-success: "[{workflow_name}]({run_url}) finished."
-    run-failure: "[{workflow_name}]({run_url}) {status}."
+    footer: "> 🔍 *Automated data-plane API review by [{workflow_name}]({run_url}). Advisory only.*"
+    run-started: "🔍 [{workflow_name}]({run_url}) is reviewing the data-plane TypeSpec changes in this PR."
+    run-success: "🔍 [{workflow_name}]({run_url}) finished. ✅"
+    run-failure: "🔍 [{workflow_name}]({run_url}) {status}. ❌"
   noop:
   threat-detection:
     engine:
@@ -135,9 +135,9 @@ safe-output tool.
 1. Always call `add_comment` exactly once.
    - For a clean review, use the agent's "No findings in the reviewed scope"
      form and call no review-comment tools.
-   - Otherwise include the automated-advisory introduction, counts by severity,
-     a compact index of the inline findings using bare rule IDs, and the
-     canonical `Not reviewed` footer.
+   - Otherwise include the automated-advisory introduction, counts by severity
+     using 🔴 / 🟡 / 💡, a compact index of the inline findings using bare rule
+     IDs, and the canonical `Not reviewed` footer.
 2. For each finding, call `create_pull_request_review_comment` with its complete
    finding body, `path`, and ending `line`.
    - Prefer the default RIGHT side.

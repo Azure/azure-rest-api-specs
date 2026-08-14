@@ -15,13 +15,28 @@ repeat basic missing-link, missing-status, or invalid-template diagnostics.
 > and
 > [consistent paging options](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-consistent-options-with-pagination).
 
+## TypeSpec mapping
+
+- Data-plane LROs use `Operation-Location` and a status-monitor operation.
+  `@pollingOperation(op)` links the initiating operation to that monitor;
+  `@finalOperation(op)` links a final resource or result operation.
+- `@lroStatus` marks the status property.
+  `@lroSucceeded`, `@lroFailed`, and `@lroCanceled` mark terminal variants.
+  `@lroResult` and `@lroErrorResult` mark success and failure payloads.
+- Paged response models mark the item collection with `@pageItems` and the
+  continuation URL with `@nextLink`.
+- Missing or invalid required LRO/paging metadata is a compiler/linter concern.
+  Review the semantic relationships described below.
+
 ## DP-LRO-01: A status monitor must expose failure and result semantics
 
 - **Severity:** Warning.
 
-Flag a monitor that can reach failure but exposes no error result, or reaches
-success but provides no result or documented result resource when the operation
-produces one.
+The monitor contract is status plus an error on failure and a result or result
+resource on success. Flag a monitor that can reach failure but exposes no error
+payload, or reaches success but provides neither a result payload nor a
+documented final resource when the operation produces one. For a custom monitor,
+`@lroErrorResult` and `@lroResult` identify those payloads.
 
 Do not report missing status properties, terminal-state values, or other basic
 metadata already diagnosed by TypeSpec tooling.
@@ -29,10 +44,12 @@ metadata already diagnosed by TypeSpec tooling.
 ## DP-LRO-03: Cancellation must be coherent
 
 - **Severity:** Suggestion.
+- **Strength:** `YOU SHOULD` represent cancellation coherently when the API
+  exposes a cancel operation.
 
-Flag a cancellation operation with no canceled terminal state, or a canceled
-state with a newly introduced public cancel operation mismatch. This is a
-cross-operation consistency check.
+Flag a public cancel operation whose monitor has no `@lroCanceled` terminal
+state. Do not infer that callers need a cancel operation merely because a
+standard or custom status union includes an `@lroCanceled` state.
 
 Do not speculate about whether runtime cancellation is supported when the
 surface contains no evidence.
@@ -41,23 +58,23 @@ surface contains no evidence.
 
 - **Severity:** Warning.
 
-Confirm the linked polling operation returns the intended status monitor and a
-final operation returns the intended result. A link that exists but points to
-the wrong operation can produce an SDK poller that never completes correctly.
+Confirm `@pollingOperation` targets the operation returning the intended status
+monitor and `@finalOperation`, when present, targets the operation returning the
+intended final result.
 
 ## DP-LRO-05: Custom monitors need SDK-readable result and error members
 
 - **Severity:** Suggestion.
 
-For a hand-rolled monitor, flag result or error properties whose semantics are
-not identified for generated pollers with `@lroResult` or `@lroErrorResult`.
-Use `@lroCanceled` when a custom terminal value represents cancellation. Do not
-report status, success, or failure markers that deterministic tooling already
-requires.
+For a hand-rolled monitor, flag result or error properties missing `@lroResult`
+or `@lroErrorResult`, and a custom canceled terminal value missing
+`@lroCanceled`. Do not report status, success, or failure markers that
+deterministic tooling already requires.
 
 ## DP-PAGE-01: Potentially large collections must be paged
 
 - **Severity:** Warning.
+- **Strength:** `YOU SHOULD` page a collection if it can ever grow very large.
 
 The upstream condition is whether the collection can ever grow very large.
 Flag customer-populated collections and search/query results that are unbounded
