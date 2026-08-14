@@ -28,9 +28,6 @@ enum Versions {
   /** 2025-03-01 preview version */
   v2025_03_01_preview: "2025-03-01-preview",
 
-  /** 2025-10-01 preview version */
-  v2025_10_01_preview: "2025-10-01-preview",
-
   /** 2026-03-01 stable version */
   v2026_03_01: "2026-03-01",
 }
@@ -61,11 +58,11 @@ model FrontendProperties {
   fqdn?: string;
 
   /** Whether public network access is allowed for the frontend. Enabled indicates a public frontend; Disabled indicates a private frontend. */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_03_01)
   publicNetworkAccess?: PublicNetworkAccess;
 
   /** Reference to an Association resource that contains the subnet where the private frontend should be deployed. */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_03_01)
   association?: FrontendAssociation;
 
   /** Frontend Security Policy Configuration */
@@ -78,7 +75,7 @@ model FrontendProperties {
 }
 
 /** Whether public network access is allowed for the frontend. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 union PublicNetworkAccess {
   string,
 
@@ -90,14 +87,14 @@ union PublicNetworkAccess {
 }
 
 /** Reference to an Association resource. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 model FrontendAssociation {
   /** Resource ID of the Association. */
   id: string;
 }
 
 /** Reference to an Association resource. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 model FrontendAssociationUpdate {
   /** Resource ID of the Association. */
   id?: string;
@@ -309,7 +306,7 @@ model TrafficControllerProperties {
 
   /** Private Endpoint Connections List */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_03_01)
   privateEndpointConnections?: ResourceId[];
 
   /** Security Policy Configuration */
@@ -356,7 +353,7 @@ model ResourceId {
 
 //----------------------- PrivateEndpointConnection -----------------------
 /** Private Endpoint Connection resource of Traffic Controller. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 @parentResource(TrafficController)
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
@@ -370,7 +367,7 @@ model PrivateEndpointConnection
 }
 
 /** Properties of a Private Endpoint Connection. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 model PrivateEndpointConnectionProperties {
   /** The private endpoint resource. */
   @visibility(Lifecycle.Read)
@@ -385,7 +382,7 @@ model PrivateEndpointConnectionProperties {
 }
 
 /** Reference to a private endpoint resource. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 model PrivateEndpointReference {
   /** Resource ID of the private endpoint. */
   @visibility(Lifecycle.Read)
@@ -393,7 +390,7 @@ model PrivateEndpointReference {
 }
 
 /** The state of a private link service connection. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 model PrivateLinkServiceConnectionState {
   /** Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. */
   status?: PrivateLinkServiceConnectionStatus;
@@ -406,7 +403,7 @@ model PrivateLinkServiceConnectionState {
 }
 
 /** The private endpoint connection status. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 union PrivateLinkServiceConnectionStatus {
   string,
 
@@ -425,7 +422,7 @@ union PrivateLinkServiceConnectionStatus {
 
 //----------------------- PrivateLinkResource -----------------------
 /** A private link resource. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 @parentResource(TrafficController)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   /** Private Link Resource */
@@ -438,7 +435,7 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 }
 
 /** Properties of a private link resource. */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 model PrivateLinkResourceProperties {
   /** The private link resource group ID. */
   @visibility(Lifecycle.Read)
@@ -540,7 +537,7 @@ interface TrafficControllerInterface {
   listBySubscription is ArmListBySubscription<TrafficController>;
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 @armResourceOperations
 interface PrivateEndpointConnectionsInterface {
   get is ArmResourceRead<PrivateEndpointConnection>;
@@ -549,7 +546,7 @@ interface PrivateEndpointConnectionsInterface {
   listByTrafficController is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_03_01)
 @armResourceOperations
 interface PrivateLinkResourcesInterface {
   get is ArmResourceRead<PrivateLinkResource>;

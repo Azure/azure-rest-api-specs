@@ -192,11 +192,6 @@ using Microsoft.ServiceNetworking;
   "javascript"
 );
 @@clientName(
-  Versions.v2025_10_01_preview,
-  "$DO_NOT_NORMALIZE$V2025_10_01_preview",
-  "javascript"
-);
-@@clientName(
   Versions.v2026_03_01,
   "$DO_NOT_NORMALIZE$V2026_03_01",
   "javascript"
