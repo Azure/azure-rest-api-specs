@@ -15,6 +15,7 @@ import "./FirewallRule.tsp";
 import "./Fleet.tsp";
 import "./Fleetspace.tsp";
 import "./FleetTier.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
