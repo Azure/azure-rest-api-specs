@@ -1,0 +1,159 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "computeZoneDownScenario",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resource": {
+      "properties": {
+        "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
+        "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
+        "parameters": [
+          {
+            "name": "duration",
+            "type": "string",
+            "default": "PT15M",
+            "required": false,
+            "description": "The duration of the zone down scenario.",
+            "format": {
+              "formatType": "Duration"
+            }
+          }
+        ],
+        "actions": [
+          {
+            "name": "vmssZoneShutdown",
+            "actionId": "urn:csci:microsoft:virtualMachineScaleSet:shutdown/1.0.0",
+            "description": "Shut down VMSS instances in target zone",
+            "duration": "%%{parameters.duration}%%",
+            "parameters": [
+              {
+                "key": "Zones",
+                "value": "%%{resourceTargeting.include.zones}%%"
+              }
+            ]
+          },
+          {
+            "name": "vmZoneShutdown",
+            "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+            "description": "Shut down VMs in target zone",
+            "duration": "%%{parameters.duration}%%"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/computeZoneDownScenario",
+        "name": "computeZoneDownScenario",
+        "type": "Microsoft.Chaos/workspaces/scenarios",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
+          "version": "1.0",
+          "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
+          "parameters": [
+            {
+              "name": "duration",
+              "type": "string",
+              "default": "PT15M",
+              "required": false,
+              "description": "The duration of the zone down scenario.",
+              "format": {
+                "formatType": "Duration"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "vmssZoneShutdown",
+              "actionId": "urn:csci:microsoft:virtualMachineScaleSet:shutdown/1.0.0",
+              "description": "Shut down VMSS instances in target zone",
+              "duration": "%%{parameters.duration}%%",
+              "parameters": [
+                {
+                  "key": "Zones",
+                  "value": "%%{resourceTargeting.include.zones}%%"
+                }
+              ]
+            },
+            {
+              "name": "vmZoneShutdown",
+              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "description": "Shut down VMs in target zone",
+              "duration": "%%{parameters.duration}%%"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2025-01-15T10:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/computeZoneDownScenario",
+        "name": "computeZoneDownScenario",
+        "type": "Microsoft.Chaos/workspaces/scenarios",
+        "properties": {
+          "provisioningState": "Creating",
+          "createdFrom": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
+          "version": "1.0",
+          "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
+          "parameters": [
+            {
+              "name": "duration",
+              "type": "string",
+              "default": "PT15M",
+              "required": false,
+              "description": "The duration of the zone down scenario.",
+              "format": {
+                "formatType": "Duration"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "vmssZoneShutdown",
+              "actionId": "urn:csci:microsoft:virtualMachineScaleSet:shutdown/1.0.0",
+              "description": "Shut down VMSS instances in target zone",
+              "duration": "%%{parameters.duration}%%",
+              "parameters": [
+                {
+                  "key": "Zones",
+                  "value": "%%{resourceTargeting.include.zones}%%"
+                }
+              ]
+            },
+            {
+              "name": "vmZoneShutdown",
+              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "description": "Shut down VMs in target zone",
+              "duration": "%%{parameters.duration}%%"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2025-01-15T10:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Scenarios_CreateOrUpdate",
+  "title": "Create a scenario from a built-in scenario template version."
+}

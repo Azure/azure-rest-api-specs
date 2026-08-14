@@ -7,6 +7,7 @@ import "./common.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -36,7 +37,7 @@ model ScenarioProperties {
   /**
    * Resource ID of the template version this scenario was created from (optional).
    */
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   createdFrom?: string;
 
   /**
@@ -99,6 +100,61 @@ model ScenarioParameter {
    * Description of the parameter.
    */
   description?: string;
+
+  /**
+   * Format validation applied to the parameter's value, and examples of values that satisfy it.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  format?: ScenarioParameterFormat;
+}
+
+/**
+ * Model that represents the format validation applied to a scenario parameter's value.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioParameterFormat {
+  /**
+   * The built-in format the value is validated against.
+   */
+  formatType?: ParameterFormatType;
+
+  /**
+   * Human-readable examples of values that satisfy the format.
+   */
+  examples?: string[];
+}
+
+/**
+ * Enum of the built-in formats a scenario parameter's value can be validated against.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union ParameterFormatType {
+  string,
+
+  /**
+   * The value must be an Azure resource ID.
+   */
+  AzureResourceId: "AzureResourceId",
+
+  /**
+   * The value must be an Azure region name.
+   */
+  AzureRegion: "AzureRegion",
+
+  /**
+   * The value must be an Azure availability zone.
+   */
+  AzureZone: "AzureZone",
+
+  /**
+   * The value must be an ISO 8601 duration.
+   */
+  Duration: "Duration",
+
+  /**
+   * The value must be well-formed JSON.
+   */
+  Json: "Json",
 }
 
 /**

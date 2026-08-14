@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "scenarioTemplateName": "ComputeZoneDown"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.2",
+            "name": "1.2",
+            "type": "Microsoft.Chaos/scenarioTemplates/versions",
+            "properties": {
+              "displayName": "Compute Zone Down",
+              "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
+              "resourceSelectors": [
+                {
+                  "name": "virtualMachineScaleSets",
+                  "resourceType": "Microsoft.Compute/virtualMachineScaleSets"
+                },
+                {
+                  "name": "virtualMachines",
+                  "resourceType": "Microsoft.Compute/virtualMachines"
+                }
+              ],
+              "parameters": [
+                {
+                  "name": "duration",
+                  "type": "string",
+                  "default": "PT15M",
+                  "required": false,
+                  "description": "The duration of the zone down scenario.",
+                  "format": {
+                    "formatType": "Duration"
+                  }
+                }
+              ],
+              "actions": [
+                {
+                  "name": "vmssZoneShutdown",
+                  "actionId": "urn:csci:microsoft:virtualMachineScaleSet:shutdown/1.0.0",
+                  "description": "Shut down VMSS instances in target zone",
+                  "duration": "%%{parameters.duration}%%",
+                  "parameters": [
+                    {
+                      "key": "Zones",
+                      "value": "%%{resourceTargeting.include.zones}%%"
+                    }
+                  ]
+                },
+                {
+                  "name": "vmZoneShutdown",
+                  "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+                  "description": "Shut down VMs in target zone",
+                  "duration": "%%{parameters.duration}%%"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Chaos/scenarioTemplates/ComputeZoneDown/versions/1.1",
+            "name": "1.1",
+            "type": "Microsoft.Chaos/scenarioTemplates/versions",
+            "properties": {
+              "displayName": "Compute Zone Down",
+              "description": "Simulates a datacenter/availability zone failure by shutting down VMSS instances and standalone VMs in the target zone. Zone failures account for ~25% of all cloud incidents — this scenario validates your application's cross-zone resilience.",
+              "resourceSelectors": [
+                {
+                  "name": "virtualMachineScaleSets",
+                  "resourceType": "Microsoft.Compute/virtualMachineScaleSets"
+                },
+                {
+                  "name": "virtualMachines",
+                  "resourceType": "Microsoft.Compute/virtualMachines"
+                }
+              ],
+              "parameters": [
+                {
+                  "name": "duration",
+                  "type": "string",
+                  "default": "PT15M",
+                  "required": false,
+                  "description": "The duration of the zone down scenario.",
+                  "format": {
+                    "formatType": "Duration"
+                  }
+                }
+              ],
+              "actions": [
+                {
+                  "name": "vmssZoneShutdown",
+                  "actionId": "urn:csci:microsoft:virtualMachineScaleSet:shutdown/1.0.0",
+                  "description": "Shut down VMSS instances in target zone",
+                  "duration": "%%{parameters.duration}%%",
+                  "parameters": [
+                    {
+                      "key": "Zones",
+                      "value": "%%{resourceTargeting.include.zones}%%"
+                    }
+                  ]
+                },
+                {
+                  "name": "vmZoneShutdown",
+                  "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+                  "description": "Shut down VMs in target zone",
+                  "duration": "%%{parameters.duration}%%"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ScenarioTemplateVersions_List",
+  "title": "List the published versions of a built-in scenario template."
+}
