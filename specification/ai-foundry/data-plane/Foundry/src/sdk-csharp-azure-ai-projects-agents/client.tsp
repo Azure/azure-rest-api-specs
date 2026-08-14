@@ -414,7 +414,7 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.AzureFunctionDefinitionFunction,
+    Azure.AI.Projects.AzureFunctionDefinition.function,
     {
       identity: "Azure.AI.Extensions.OpenAI.AzureFunctionDefinitionFunction",
       package: "Azure.AI.Extensions.OpenAI",
@@ -422,6 +422,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
   @@alternateType(
     Azure.AI.Projects.AzureFunctionStorageQueue,
     {
@@ -450,6 +451,15 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
+    Azure.AI.Projects.BingCustomSearchConfiguration,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchOptions",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-alpha.20260809.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
     Azure.AI.Projects.BingGroundingTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingGroundingTool",
@@ -461,7 +471,7 @@ namespace Azure.AI.Projects {
   @@alternateType(
     Azure.AI.Projects.BingCustomSearchConfiguration,
     {
-      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchConfiguration",
+      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchOptions",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -479,7 +489,7 @@ namespace Azure.AI.Projects {
   @@alternateType(
     Azure.AI.Projects.BingGroundingSearchConfiguration,
     {
-      identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchConfiguration",
+      identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchOptions",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -621,14 +631,15 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.OpenApiFunctionDefinitionFunction,
+    Azure.AI.Projects.OpenApiFunctionDefinition.functions,
     {
-      identity: "Azure.AI.Extensions.OpenAI.OpenApiFunctionDefinitionFunction",
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiFunctionDefinitionFunction"[],
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
     "csharp"
   );
+
   @@alternateType(
     Azure.AI.Projects.OpenApiManagedAuthDetails,
     {
@@ -824,13 +835,56 @@ namespace Azure.AI.Projects {
     OpenAI.ImageGenTool,
     {
       identity: "OpenAI.Responses.ImageGenerationTool",
+      package: "OpenAI",
+      minVersion: "2.12.0",
     },
     "csharp"
   );
+
   @@alternateType(
-    OpenAI.ImageGenTool,
+    OpenAI.ImageGenTool.background,
     {
-      identity: "OpenAI.Responses.ImageGenerationTool",
+      identity: "OpenAI.ImageGenerationToolBackground",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.input_image_mask,
+    {
+      identity: "OpenAI.ImageGenToolInputImageMask",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.moderation,
+    {
+      identity: "OpenAI.ImageGenToolModeration",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.quality,
+    {
+      identity: "OpenAI.ImageGenToolQuality",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.size,
+    {
+      identity: "OpenAI.ImageGenToolSize",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
@@ -1212,6 +1266,15 @@ namespace Azure.AI.Projects {
     OpenAI.MCPToolFilter,
     {
       identity: "OpenAI.Responses.McpToolFilter",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.FunctionToolParam,
+    {
+      identity: "OpenAI.FunctionToolParam",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
