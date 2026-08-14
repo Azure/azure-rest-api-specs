@@ -208,22 +208,19 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
-@@clientName(Storage.Blob.Container.listBlobs, "listBlobsXml", "rust");
-@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@scope(Storage.Blob.Container.listBlobs, "!rust");
 @@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
 
-@@clientName(
-  Storage.Blob.Container.listBlobHierarchySegment,
-  "listBlobsHierarchicalXml",
-  "rust"
-);
-@@access(
-  Storage.Blob.Container.listBlobHierarchySegment,
-  Access.internal,
-  "rust"
-);
+@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
 @@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
+@@usage(Storage.Blob.BlobItem, Usage.output, "rust");
+@@usage(Storage.Blob.BlobProperties, Usage.output, "rust");
+@@usage(Storage.Blob.BlobPrefix, Usage.output, "rust");
+@@usage(Storage.Blob.BlobHierarchyList, Usage.output, "rust");
+@@usage(Storage.Blob.ObjectReplicationMetadata, Usage.output, "rust");
+@@usage(Storage.Blob.ListBlobsResponse, Usage.output, "rust");
+@@usage(Storage.Blob.ListBlobsHierarchicalResponse, Usage.output, "rust");
 
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
