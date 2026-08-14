@@ -14,7 +14,7 @@ namespace Microsoft.AppConfiguration;
 @parentResource(ConfigurationStore)
 @added(Versions.v2025_08_01_preview)
 model NetworkSecurityPerimeterConfiguration
-  is CommonTypes.NetworkSecurityPerimeterConfiguration {
+  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = NetworkSecurityPerimeterConfiguration,
     KeyName = "networkSecurityPerimeterConfigurationName",
@@ -22,6 +22,12 @@ model NetworkSecurityPerimeterConfiguration
     NamePattern = ""
   >;
 }
+
+// Before 2026-09-01-preview the NSP configuration used the ARM common-types v5 shape.
+@@typeChangedFrom(NetworkSecurityPerimeterConfiguration.properties,
+  Versions.v2026_09_01_preview,
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties
+);
 
 @armResourceOperations
 @added(Versions.v2025_08_01_preview)
