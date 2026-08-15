@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
+import "@azure-tools/openai-typespec/models/realtime";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";
@@ -20,7 +21,7 @@ namespace Azure.AI.Projects;
 // `../agents/models.tsp` via property spreads to avoid drift.
 // ============================================================================
 
-const PromptVoiceAgentRequiredPreview = #{
+const VoiceAgentRequiredPreview = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
@@ -29,7 +30,7 @@ const PromptVoiceAgentRequiredPreview = #{
   managed speech-to-speech experience. The realtime voice session is established through a separate connect operation
   that is not defined in this specification. Every create or update produces a new immutable version.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: "voice";
@@ -86,7 +87,7 @@ model VoiceAgentDefinition {
   How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
   which the service derives from the selected model.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceModelType {
   string,
 
@@ -102,13 +103,13 @@ union VoiceModelType {
   service-managed `system` controls, and `toolbox` references. Server-side tools such as `web_search` and
   `azure_ai_search` are provided through a toolbox.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentTool {
   @doc("A native function tool, executed by the client.")
-  function: OpenAI.FunctionTool,
+  function: OpenAI.RealtimeFunctionTool,
 
   @doc("An MCP tool executed by the service. The agent resolves authentication, for example through a Foundry connection.")
-  mcp: OpenAI.MCPTool,
+  mcp: VoiceAgentMcpTool,
 
   @doc("A service-managed control that acts on the active voice session.")
   system: VoiceSystemTool,
@@ -117,8 +118,20 @@ union VoiceAgentTool {
   toolbox: VoiceToolboxTool,
 }
 
+@doc("An MCP tool available to a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentMcpTool {
+  ...OmitProperties<
+    OpenAI.MCPTool,
+    "authorization" | "connector_id" | "tunnel_id" | "server_url"
+  >;
+
+  @doc("The URL for the MCP server.")
+  server_url?: url;
+}
+
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceSystemTool {
   @doc("The type of the tool. Always `system`.")
   type: "system";
@@ -131,7 +144,7 @@ model VoiceSystemTool {
 }
 
 @doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceSystemToolName {
   string,
 
@@ -140,7 +153,7 @@ union VoiceSystemToolName {
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceToolboxTool {
   @doc("The type of the tool. Always `toolbox`.")
   type: "toolbox";
@@ -155,7 +168,7 @@ model VoiceToolboxTool {
 @doc("""
   The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioConfig {
   @doc("Input (microphone) audio configuration.")
   input?: VoiceAudioInputConfig;
@@ -165,7 +178,7 @@ model VoiceAudioConfig {
 }
 
 @doc("Input audio configuration for a voice agent.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioInputConfig {
   @doc("The input audio format.")
   format?: VoiceAudioFormat;
@@ -173,15 +186,15 @@ model VoiceAudioInputConfig {
   @doc("Input noise reduction. Set to null to disable.")
   noise_reduction?: VoiceNoiseReduction | null;
 
-  @doc("Turn (end-of-speech) detection. Set to null to disable server-side turn detection.")
+  @doc("Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually.")
   turn_detection?: VoiceTurnDetection | null;
 
-  @doc("Optional asynchronous input-audio transcription configuration.")
-  transcription?: VoiceInputTranscription;
+  @doc("Asynchronous input-audio transcription. Set to null to disable transcription.")
+  transcription?: VoiceInputTranscription | null;
 }
 
 @doc("Output audio configuration for a voice agent.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioOutputConfig {
   @doc("The output audio format.")
   format?: VoiceAudioFormat;
@@ -189,14 +202,27 @@ model VoiceAudioOutputConfig {
   @doc("The typed voice configuration.")
   voice?: VoiceAgentVoice;
 
-  @doc("The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.")
+  @doc("""
+    The OpenAI-compatible speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.
+    For Azure synthesized voices, use `audio.output.voice.rate` instead.
+    """)
   @minValue(0.25)
   @maxValue(1.5)
   speed?: float32 = 1;
+
+  @doc("Timestamp kinds to include with output audio.")
+  output_audio_timestamp_types?: VoiceAudioTimestampType[];
+}
+
+@doc("An output-audio timestamp kind supported by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAudioTimestampType {
+  @doc("Word-level timestamps.")
+  word: "word",
 }
 
 @doc("An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioFormat {
   @doc("The audio format type, e.g. 'audio/pcm' (16-bit PCM), 'audio/pcmu' (G.711 mu-law), or 'audio/pcma' (G.711 A-law).")
   type: VoiceAudioFormatType;
@@ -206,7 +232,7 @@ model VoiceAudioFormat {
 }
 
 @doc("The audio format type. Values follow the OpenAI Realtime wire schema and are exempt from the snake_case enum-value rule.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioFormatType {
   string,
 
@@ -221,14 +247,14 @@ union VoiceAudioFormatType {
 }
 
 @doc("Input audio noise reduction configuration.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceNoiseReduction {
   @doc("The noise reduction mode.")
   type: VoiceNoiseReductionType;
 }
 
 @doc("The input audio noise reduction mode.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceNoiseReductionType {
   string,
   near_field: "near_field",
@@ -238,72 +264,218 @@ union VoiceNoiseReductionType {
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
 }
 
-@doc("Turn (end-of-speech) detection configuration.")
+@doc("The turn-detection strategy. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceTurnDetectionType {
+  string,
+
+  @doc("Server-side voice activity detection.")
+  server_vad: "server_vad",
+
+  @doc("Semantic voice activity detection.")
+  semantic_vad: "semantic_vad",
+
+  @doc("Azure semantic voice activity detection.")
+  azure_semantic_vad: "azure_semantic_vad",
+
+  @doc("English-optimized Azure semantic voice activity detection.")
+  azure_semantic_vad_en: "azure_semantic_vad_en",
+
+  @doc("Multilingual Azure semantic voice activity detection.")
+  azure_semantic_vad_multilingual: "azure_semantic_vad_multilingual",
+}
+
+@doc("Turn-detection configuration for a voice agent.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceTurnDetection {
-  @doc("The turn detection strategy.")
+  @doc("The turn-detection strategy.")
   type: VoiceTurnDetectionType;
 }
 
-@doc("The turn detection strategy. Values follow the OpenAI Realtime wire schema.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceTurnDetectionType {
-  string,
-  server_vad: "server_vad",
-  semantic_vad: "semantic_vad",
+@doc("Server-side voice activity detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceServerVadTurnDetection extends VoiceTurnDetection {
+  ...OmitProperties<OpenAI.RealtimeTurnDetectionServerVad, "type">;
+  type: VoiceTurnDetectionType.server_vad;
 }
 
-@doc("Server-side voice activity detection (silence-based).")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model ServerVadTurnDetection extends VoiceTurnDetection {
-  type: VoiceTurnDetectionType.server_vad;
+@doc("Semantic voice activity detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceSemanticVadTurnDetection extends VoiceTurnDetection {
+  ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
+  type: VoiceTurnDetectionType.semantic_vad;
+}
 
-  @doc("Activation threshold (0-1). Higher requires louder audio to trigger.")
+@doc("The semantic end-of-utterance detection model.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceEndOfUtteranceDetectionModel {
+  string,
+
+  @doc("The default semantic detection model.")
+  semantic_detection_v1: "semantic_detection_v1",
+
+  @doc("The English-optimized semantic detection model.")
+  semantic_detection_v1_en: "semantic_detection_v1_en",
+
+  @doc("The multilingual semantic detection model.")
+  semantic_detection_v1_multilingual: "semantic_detection_v1_multilingual",
+}
+
+@doc("The sensitivity threshold for semantic end-of-utterance detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceEndOfUtteranceThresholdLevel {
+  string,
+
+  @doc("The low sensitivity threshold.")
+  low: "low",
+
+  @doc("The medium sensitivity threshold.")
+  medium: "medium",
+
+  @doc("The high sensitivity threshold.")
+  high: "high",
+
+  @doc("The service-selected sensitivity threshold.")
+  default: "default",
+}
+
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
+@doc("Semantic end-of-utterance detection configuration.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceEndOfUtteranceDetection {
+  @doc("The semantic detection model.")
+  `model`: VoiceEndOfUtteranceDetectionModel;
+
+  @doc("The sensitivity threshold.")
+  threshold_level?: VoiceEndOfUtteranceThresholdLevel;
+
+  @doc("The detection timeout in milliseconds.")
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  timeout_ms?: duration;
+}
+
+/** Options shared by Azure semantic voice activity detection configurations. */
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
+alias VoiceAzureSemanticVadOptions = {
+  @doc("Activation threshold for voice activity detection, from 0 to 1.")
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
-  @doc("Audio (ms) to include before detected speech start.")
-  prefix_padding_ms?: int32;
+  @doc("Audio to include before detected speech, in milliseconds.")
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  prefix_padding_ms?: duration;
 
-  @doc("Silence (ms) used to detect speech stop.")
-  silence_duration_ms?: int32;
+  @doc("Silence required to end speech detection, in milliseconds.")
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  silence_duration_ms?: duration;
 
-  @doc("Whether the server automatically creates a response when a turn ends. Defaults to true.")
+  @doc("Semantic end-of-utterance detection configuration.")
+  end_of_utterance_detection?: VoiceEndOfUtteranceDetection;
+
+  @doc("Minimum speech duration required to trigger detection, in milliseconds.")
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  speech_duration_ms?: duration;
+
+  @doc("Whether filler words are removed from transcription.")
+  remove_filler_words?: boolean = false;
+
+  @doc("Whether the input audio buffer is truncated automatically when speech stops.")
+  auto_truncate?: boolean = false;
+
+  @doc("Whether a response is created automatically when speech stops.")
   create_response?: boolean = true;
+
+  @doc("Whether user speech may interrupt the agent's response.")
+  interrupt_response?: boolean = true;
+};
+
+@doc("Azure semantic voice activity detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAzureSemanticVadTurnDetection extends VoiceTurnDetection {
+  type: VoiceTurnDetectionType.azure_semantic_vad;
+  ...VoiceAzureSemanticVadOptions;
+
+  @doc("BCP-47 language codes used for speech detection.")
+  languages?: string[];
 }
 
-@doc("Semantic (model-based) turn detection.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model SemanticVadTurnDetection extends VoiceTurnDetection {
-  type: VoiceTurnDetectionType.semantic_vad;
-
-  @doc("How eagerly the model ends the user's turn.")
-  eagerness?: VoiceTurnDetectionEagerness;
+@doc("English-optimized Azure semantic voice activity detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAzureSemanticVadEnTurnDetection extends VoiceTurnDetection {
+  type: VoiceTurnDetectionType.azure_semantic_vad_en;
+  ...VoiceAzureSemanticVadOptions;
 }
 
-@doc("How eagerly semantic turn detection ends the user's turn.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceTurnDetectionEagerness {
+@doc("Multilingual Azure semantic voice activity detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAzureSemanticVadMultilingualTurnDetection
+  extends VoiceTurnDetection {
+  type: VoiceTurnDetectionType.azure_semantic_vad_multilingual;
+  ...VoiceAzureSemanticVadOptions;
+
+  @doc("BCP-47 language codes used for speech detection.")
+  languages?: string[];
+}
+
+@doc("""
+  The input-audio transcription model. Mirrors the transcription models supported by the managed
+  voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
+  Additional values may be added over time.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceInputTranscriptionModel {
   string,
-  auto: "auto",
-  low: "low",
-  medium: "medium",
-  high: "high",
+
+  @doc("OpenAI Whisper.")
+  whisper_1: "whisper-1",
+
+  @doc("OpenAI GPT Realtime Whisper.")
+  gpt_realtime_whisper: "gpt-realtime-whisper",
+
+  @doc("OpenAI GPT-4o transcribe.")
+  gpt_4o_transcribe: "gpt-4o-transcribe",
+
+  @doc("OpenAI GPT-4o mini transcribe.")
+  gpt_4o_mini_transcribe: "gpt-4o-mini-transcribe",
+
+  @doc("OpenAI GPT-4o transcribe with speaker diarization.")
+  gpt_4o_transcribe_diarize: "gpt-4o-transcribe-diarize",
+
+  @doc("OpenAI GPT Transcribe.")
+  gpt_transcribe: "gpt-transcribe",
+
+  @doc("OpenAI GPT Live Transcribe.")
+  gpt_live_transcribe: "gpt-live-transcribe",
+
+  @doc("MAI transcription.")
+  mai_transcribe: "mai-transcribe",
+
+  @doc("Azure AI Speech to text.")
+  azure_speech: "azure-speech",
 }
 
-@doc("Asynchronous input-audio transcription configuration.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@doc("""
+  Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
+  options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceInputTranscription {
-  @doc("The transcription model deployment to use.")
-  `model`?: string;
+  ...OmitProperties<OpenAI.AudioTranscription, "model">;
 
-  @doc("The expected input language as a BCP-47 code (e.g. 'en-US'). Auto-detected when omitted.")
-  language?: string;
+  @doc("The transcription model to use.")
+  `model`: VoiceInputTranscriptionModel;
 
-  @doc("Optional prompt to bias transcription toward domain terms.")
-  prompt?: string;
+  @doc("Optional custom speech model configuration, keyed by locale.")
+  custom_speech?: Record<string>;
+
+  @doc("Optional phrase hints that bias recognition toward domain terms.")
+  phrase_list?: string[];
 }
 
 @doc("A typed voice configuration accepted by a voice agent.")
@@ -324,7 +496,7 @@ model OpenAIVoice {
 
 @doc("Base configuration shared by Azure synthesized voices.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model AzureVoice {
   @doc("The Azure voice kind.")
   type: AzureVoiceType;
@@ -360,7 +532,7 @@ model AzureVoice {
 }
 
 @doc("The Azure synthesized voice kind. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union AzureVoiceType {
   string,
 
@@ -442,10 +614,11 @@ model AzureRealtimeNativeVoice {
   type: "azure-realtime-native";
 
   @doc("The Azure realtime-native voice name.")
+  @minLength(1)
   name: AzureRealtimeNativeVoiceName;
 }
 
-@doc("A known Azure realtime-native voice name. Additional values may be added over time.")
+@doc("An Azure realtime-native voice name. Use one of the known names or another realtime-native voice supported by the selected model.")
 union AzureRealtimeNativeVoiceName {
   string,
 
@@ -555,7 +728,7 @@ union AzureRealtimeNativeVoiceName {
 @doc("""
   Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAvatarConfig {
   @doc("The avatar type.")
   type: VoiceAvatarType;
@@ -574,15 +747,15 @@ model VoiceAvatarConfig {
 }
 
 @doc("The avatar type.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAvatarType {
   string,
-  video_avatar: "video-avatar",
-  photo_avatar: "photo-avatar",
+  video_avatar: "video_avatar",
+  photo_avatar: "photo_avatar",
 }
 
 @doc("The transport used to deliver the avatar video stream.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAvatarOutputProtocol {
   string,
   webrtc: "webrtc",
@@ -590,7 +763,7 @@ union VoiceAvatarOutputProtocol {
 }
 
 @doc("An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceOutputModality {
   string,
   text: "text",
@@ -600,7 +773,7 @@ union VoiceOutputModality {
 }
 
 @doc("The persona/tone a guided-authoring request steers the generated voice agent toward.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentType {
   string,
 
@@ -615,7 +788,7 @@ union VoiceAgentType {
   The scenario-template catalog entry a guided-authoring request specializes the generated voice agent for.
   Extensible: additional use cases may be added over time.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentUseCase {
   string,
   customer_support: "customer_support",
@@ -639,7 +812,7 @@ union VoiceAgentUseCase {
 // ============================================================================
 
 @doc("A voice agent version. Mirrors `AgentVersionObject`, but its `definition` is always a `VoiceAgentDefinition`.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentVersionObject {
   ...OmitProperties<AgentVersionObject, "definition" | "error">;
 
@@ -648,7 +821,7 @@ model VoiceAgentVersionObject {
 }
 
 @doc("A voice agent. Mirrors `AgentObject`, but its latest version is a `VoiceAgentVersionObject`.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentObject {
   ...OmitProperties<AgentObject, "versions">;
 
@@ -659,7 +832,7 @@ model VoiceAgentObject {
 }
 
 @doc("The request to create a new version of a voice agent.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model CreateVoiceAgentVersionRequest {
   ...OmitProperties<CreateAgentVersionRequest, "definition">;
 
@@ -668,7 +841,7 @@ model CreateVoiceAgentVersionRequest {
 }
 
 @doc("The request to create a voice agent.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model CreateVoiceAgentRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -692,7 +865,7 @@ model CreateVoiceAgentRequest {
 }
 
 @doc("The request to update a voice agent by adding a new version.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model UpdateVoiceAgentRequest {
   ...OmitProperties<CreateVoiceAgentVersionRequest, "draft">;
 }
@@ -703,7 +876,7 @@ model UpdateVoiceAgentRequest {
   agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
   resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model GenerateVoiceAgentRequest {
   @doc("The unique name for the agent to create.")
   @maxLength(63)

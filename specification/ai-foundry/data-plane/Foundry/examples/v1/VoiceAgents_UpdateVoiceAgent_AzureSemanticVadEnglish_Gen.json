@@ -1,0 +1,80 @@
+{
+  "title": "VoiceAgents_UpdateVoiceAgent_AzureSemanticVadEnglish",
+  "operationId": "VoiceAgents_updateVoiceAgent",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "english-semantic-vad-agent",
+    "description": "Updates the agent to use English-optimized Azure semantic voice activity detection.",
+    "definition": {
+      "kind": "voice",
+      "model_type": "managed",
+      "model": "gpt-realtime",
+      "audio": {
+        "input": {
+          "turn_detection": {
+            "type": "azure_semantic_vad_en",
+            "threshold": 0.6,
+            "prefix_padding_ms": 250,
+            "silence_duration_ms": 450,
+            "end_of_utterance_detection": {
+              "model": "semantic_detection_v1_en",
+              "threshold_level": "high",
+              "timeout_ms": 1500
+            },
+            "speech_duration_ms": 120,
+            "remove_filler_words": true,
+            "auto_truncate": true,
+            "create_response": true,
+            "interrupt_response": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_azure_semantic_vad_en",
+        "name": "english-semantic-vad-agent",
+        "state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_azure_semantic_vad_en:2",
+            "name": "english-semantic-vad-agent",
+            "version": "2",
+            "created_at": 1785776400,
+            "definition": {
+              "kind": "voice",
+              "model_type": "managed",
+              "model": "gpt-realtime",
+              "audio": {
+                "input": {
+                  "turn_detection": {
+                    "type": "azure_semantic_vad_en",
+                    "threshold": 0.6,
+                    "prefix_padding_ms": 250,
+                    "silence_duration_ms": 450,
+                    "end_of_utterance_detection": {
+                      "model": "semantic_detection_v1_en",
+                      "threshold_level": "high",
+                      "timeout_ms": 1500
+                    },
+                    "speech_duration_ms": 120,
+                    "remove_filler_words": true,
+                    "auto_truncate": true,
+                    "create_response": true,
+                    "interrupt_response": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
