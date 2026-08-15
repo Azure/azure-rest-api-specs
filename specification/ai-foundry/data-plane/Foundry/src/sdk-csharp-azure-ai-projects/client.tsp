@@ -281,6 +281,8 @@ namespace Azure.AI.Projects;
 @@clientName(Routines.deleteRoutine, "Delete");
 @@clientName(Routines.dispatchRoutineAsync, "Dispatch", "csharp");
 @@access(Routines.dispatchRoutineAsync, Access.internal);
+@@access(Routines.listRoutines, Access.internal);
+@@access(Routines.listRoutineRuns, Access.internal);
 
 @@clientName(Routine, "ProjectsRoutine");
 @@clientName(Routine.enabled, "IsEnabled");
