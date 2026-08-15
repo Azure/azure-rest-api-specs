@@ -28,7 +28,7 @@ model ContextCache is Azure.ResourceManager.TrackedResource<
   @path
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
