@@ -19,7 +19,7 @@
       "body": {
         "clientScripts": [
           {
-            "scriptContent": "@ECHO OFF\nREM iSCSI mount script for Instant Item Recovery",
+            "scriptContent": "# iSCSI mount script for Instant Item Recovery\nStart-Service -Name MSiSCSI\nConnect-IscsiTarget -NodeAddress '<target-iqn>' -TargetPortalAddress '<portal-ip>'",
             "scriptExtension": ".ps1",
             "osType": "Windows",
             "scriptNameSuffix": "38823086363464"
