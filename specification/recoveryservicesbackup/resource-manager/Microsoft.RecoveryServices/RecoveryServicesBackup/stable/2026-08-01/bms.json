@@ -2088,7 +2088,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstantItemRecoveryOperationResultRequest"
+              "$ref": "#/definitions/InstantItemRecoveryOperationResultRequestResource"
             }
           }
         ],
@@ -10593,6 +10593,16 @@
       "required": [
         "operationId"
       ]
+    },
+    "InstantItemRecoveryOperationResultRequestResource": {
+      "type": "object",
+      "description": "Request wrapping the parameters for the fetchInstantItemRecoveryOperationResult action.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InstantItemRecoveryOperationResultRequest",
+          "description": "InstantItemRecoveryOperationResultRequestResource properties"
+        }
+      }
     },
     "InstantItemRecoveryTarget": {
       "type": "object",
