@@ -187,10 +187,7 @@ model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
    */
   type: "container_auto";
 
-  ...OmitProperties<
-    OpenAI.ContainerAutoParam,
-    "type" | "network_policy"
-  >;
+  ...OmitProperties<OpenAI.ContainerAutoParam, "type" | "network_policy">;
 
   /**
    * The network access policy for the container.
