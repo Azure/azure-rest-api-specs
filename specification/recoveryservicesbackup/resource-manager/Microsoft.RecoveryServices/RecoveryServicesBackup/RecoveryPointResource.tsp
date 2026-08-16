@@ -147,7 +147,6 @@ interface ItemLevelRecoveryConnections {
    * This dedicated, RBAC-gated action returns the scripts that were previously embedded inline in the
    * operationsStatus (ILR provision) response, and must be used to retrieve them from API version 2026-08-01 onwards.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Synchronous action that returns the mount scripts in the 200 response body."
   @added(Versions.v2026_08_01)
   @action("fetchInstantItemRecoveryOperationResult")
   fetchInstantItemRecoveryOperationResult is ArmResourceActionSync<
