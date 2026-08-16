@@ -3115,21 +3115,6 @@ model ILRRequest {
 }
 
 /**
- * Request resource wrapping the parameters for the fetchInstantItemRecoveryOperationResult action.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Mirrors the sibling ILRRequestResource ARM request envelope."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Mirrors the sibling ILRRequestResource ARM request envelope."
-@added(Versions.v2026_08_01)
-model InstantItemRecoveryOperationResultRequestResource extends Resource {
-  ...ResourceProperties;
-
-  /**
-   * InstantItemRecoveryOperationResultRequestResource properties
-   */
-  properties?: InstantItemRecoveryOperationResultRequest;
-}
-
-/**
  * Parameters for the fetchInstantItemRecoveryOperationResult action.
  */
 @added(Versions.v2026_08_01)

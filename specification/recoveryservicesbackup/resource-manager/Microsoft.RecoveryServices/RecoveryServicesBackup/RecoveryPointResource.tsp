@@ -151,7 +151,7 @@ interface ItemLevelRecoveryConnections {
   @action("fetchInstantItemRecoveryOperationResult")
   fetchInstantItemRecoveryOperationResult is ArmResourceActionSync<
     RecoveryPointResource,
-    InstantItemRecoveryOperationResultRequestResource,
+    InstantItemRecoveryOperationResultRequest,
     ArmResponse<InstantItemRecoveryTarget>
   >;
 }
