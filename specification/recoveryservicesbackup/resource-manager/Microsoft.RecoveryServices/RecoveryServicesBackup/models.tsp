@@ -3122,7 +3122,7 @@ model InstantItemRecoveryOperationResultRequestResource {
   /**
    * InstantItemRecoveryOperationResultRequestResource properties
    */
-  properties?: InstantItemRecoveryOperationResultRequest;
+  properties: InstantItemRecoveryOperationResultRequest;
 }
 
 /**
@@ -8348,6 +8348,7 @@ model ClientScriptForConnect {
   /**
    * File content of the client script for file / folder restore.
    */
+  @secret
   scriptContent?: string;
 
   /**
