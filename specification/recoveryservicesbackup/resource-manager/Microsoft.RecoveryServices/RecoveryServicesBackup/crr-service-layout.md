@@ -116,6 +116,7 @@ All Markdown files from the first CRR project have been retained on this branch.
 | Suppression analysis | `D:\github\azure-rest-api-specs\specification\recoveryservicesbackupcrr\resource-manager\Microsoft.RecoveryServices\RecoveryServicesBackupCrr\suppressions-vs-active-stamp.md` | Detailed TypeSpec and emitted-Swagger suppression analysis, including validation experiments. |
 | CRR AutoRest configuration | `D:\github\azure-rest-api-specs\specification\recoveryservicesbackupcrr\resource-manager\Microsoft.RecoveryServices\RecoveryServicesBackupCrr\readme.md` | Package configuration and curated LintDiff suppression reasons for the faithful CRR contract. |
 | Consolidated layout guide | `D:\github\azure-rest-api-specs\specification\recoveryservicesbackup\resource-manager\Microsoft.RecoveryServices\RecoveryServicesBackup\crr-service-layout.md` | This investigation and the recommended second-migration layout. |
+| Python SDK lineage | `D:\github\azure-rest-api-specs\specification\recoveryservicesbackup\resource-manager\Microsoft.RecoveryServices\RecoveryServicesBackup\recoveryservicesbackup-sdk-lineage.md` | Pre-TypeSpec Active/Passive batch generation, the 2025 package split, TypeSpec SDK generation, and Azure CLI compatibility impact. |
 
 Repository-relative paths should be used in reviews and pull-request descriptions:
 
@@ -124,6 +125,7 @@ specification/recoveryservicesbackupcrr/resource-manager/Microsoft.RecoveryServi
 specification/recoveryservicesbackupcrr/resource-manager/Microsoft.RecoveryServices/RecoveryServicesBackupCrr/suppressions-vs-active-stamp.md
 specification/recoveryservicesbackupcrr/resource-manager/Microsoft.RecoveryServices/RecoveryServicesBackupCrr/readme.md
 specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/RecoveryServicesBackup/crr-service-layout.md
+specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/RecoveryServicesBackup/recoveryservicesbackup-sdk-lineage.md
 ```
 
 ## Recommended CRR implementation
