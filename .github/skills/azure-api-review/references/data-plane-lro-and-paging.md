@@ -18,6 +18,18 @@ Applies to data-plane TypeSpec. The ARM control-plane equivalents --
 Data-plane services poll via `Operation-Location` and a status monitor
 (`openapi-review.instructions.md` §21).
 
+> **Authoritative upstream:** [LRO response time](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#lro-response-time),
+> [status monitor structure](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#lro-status-monitor-structure),
+> [polling behavior](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#lro-poll),
+> [server-driven paging](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-support-server-driven-paging),
+> [consistent paging options](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-consistent-options-with-pagination),
+> and
+> [`maxpagesize`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-maxpagesize-param)
+> in the Azure REST API Guidelines. TypeSpec-specific status-monitor metadata is
+> defined by the
+> [Azure.Core LRO decorators](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference/decorators/#Azure.Core.lroErrorResult).
+> The upstream wire contract and TypeSpec decorator reference take precedence.
+
 `@azure-tools/typespec-azure-core/long-running-polling-operation-required`
 enforces that an LRO _has_ a linked polling operation. It does not judge whether
 the status monitor is usable, whether terminal states are complete, or whether
@@ -89,6 +101,9 @@ that it is correct.
 
 - **Rule ID:** `DP-LRO-05`
 - **Severity:** Suggestion
+- **Upstream:** [status monitor structure](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#lro-status-monitor-structure)
+  in the Azure REST API Guidelines and the
+  [Azure.Core LRO decorators](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference/decorators/#Azure.Core.lroErrorResult)
 
 A service with a hand-rolled status monitor -- typically a grandfathered LRO --
 must tell the emitters how to read it, or the shape is legible to a human and
@@ -202,6 +217,9 @@ graph pass.
 
 - **Rule ID:** `DP-PAGE-03`
 - **Severity:** Suggestion
+- **Upstream:** [`maxpagesize` parameter](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-maxpagesize-param)
+  and
+  [`maxpagesize` definition](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections-maxpagesize-definition)
 
 - `maxpagesize` is the Guidelines-sanctioned page-size parameter; flag
   `pageSize`, `limit`, `count`, `top` as alternatives that will read as

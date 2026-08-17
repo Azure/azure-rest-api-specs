@@ -55,16 +55,9 @@ namespace Azure.AI.Projects {
     "ContainerApplicationAgentDefinition",
     "!autorest"
   );
-  //  @@clientName(CreatedBy, "AgentResponseItemSource", "!autorest");
-
-  @@clientName(OpenApiTool, "OpenAPITool", "!autorest");
+  @@clientName(OpenApiTool, "OpenApiTool", "!autorest");
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
 
-  @@clientName(
-    OpenApiManagedAuthDetails,
-    "OpenAPIManagedAuthenticationDetails",
-    "!csharp"
-  );
   @@clientName(
     OpenApiProjectConnectionAuthDetails,
     "OpenApiProjectConnectionAuthenticationDetails",
@@ -357,8 +350,6 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
 
-  @@clientName(OptimizationDatasetItem.desired_num_turns, "DesiredTurnCount");
-
   @@alternateType(
     Azure.AI.Projects.A2APreviewTool,
     {
@@ -414,16 +405,6 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.AzureFunctionDefinition.function,
-    {
-      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionDefinitionFunction",
-      package: "Azure.AI.Extensions.OpenAI",
-      minVersion: "3.0.0-alpha.20260809.1",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
     Azure.AI.Projects.AzureFunctionStorageQueue,
     {
       identity: "Azure.AI.Extensions.OpenAI.AzureFunctionStorageQueue",
@@ -445,15 +426,6 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.BingCustomSearchPreviewTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchPreviewTool",
-      package: "Azure.AI.Extensions.OpenAI",
-      minVersion: "3.0.0-alpha.20260809.1",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    Azure.AI.Projects.BingCustomSearchConfiguration,
-    {
-      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchOptions",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -604,18 +576,9 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.OpenApiAuthType,
-    {
-      identity: "Azure.AI.Extensions.OpenAI.OpenApiAuthenticationKind",
-      package: "Azure.AI.Extensions.OpenAI",
-      minVersion: "3.0.0-alpha.20260809.1",
-    },
-    "csharp"
-  );
-  @@alternateType(
     Azure.AI.Projects.OpenApiTool,
     {
-      identity: "Azure.AI.Extensions.OpenAI.OpenAPITool",
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiTool",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -639,7 +602,6 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-
   @@alternateType(
     Azure.AI.Projects.OpenApiManagedAuthDetails,
     {
@@ -688,7 +650,7 @@ namespace Azure.AI.Projects {
   @@alternateType(
     Azure.AI.Projects.SharepointPreviewTool,
     {
-      identity: "Azure.AI.Extensions.OpenAI.SharepointPreviewTool",
+      identity: "Azure.AI.Extensions.OpenAI.SharePointPreviewTool",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -704,9 +666,9 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.ToolConfig,
+    Azure.AI.Projects.WebSearchConfiguration,
     {
-      identity: "Azure.AI.Extensions.OpenAI.ToolConfig",
+      identity: "Azure.AI.Extensions.OpenAI.WebSearchConfiguration",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -722,9 +684,9 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.WebSearchConfiguration,
+    Azure.AI.Projects.ToolConfig,
     {
-      identity: "Azure.AI.Extensions.OpenAI.WebSearchConfiguration",
+      identity: "Azure.AI.Extensions.OpenAI.ToolConfig",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
@@ -740,17 +702,6 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-
-  @@alternateType(
-    Azure.AI.Projects.OpenApiManagedAuthDetails,
-    {
-      identity: "Azure.AI.Extensions.OpenAI.OpenAPIManagedAuthenticationDetails",
-      package: "Azure.AI.Extensions.OpenAI",
-      minVersion: "3.0.0-alpha.20260805.1",
-    },
-    "csharp"
-  );
-
   // Move all the OpenAI TYpes out:
   // Now take the OpenAI models, and ensure that they are emitted as consumption points from the OpenAI SDK instead of re-emitting them here.
   // This is to ensure that the OpenAI SDK is the source of truth for these models, and we don't have duplicate definitions.
@@ -1032,6 +983,42 @@ namespace Azure.AI.Projects {
     OpenAI.ResponseErrorCode,
     {
       identity: "OpenAI.Responses.ResponseErrorCode",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.WebSearchTool.search_context_size,
+    {
+      identity: "OpenAI.Responses.WebSearchToolContextSize",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ApproximateLocation,
+    {
+      identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.WebSearchApproximateLocation,
+    {
+      identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.WebSearchToolFilters,
+    {
+      identity: "OpenAI.Responses.WebSearchToolFilters",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
@@ -1420,5 +1407,10 @@ namespace Azure.AI.Projects {
       identity: "System.Object",
     },
     "csharp"
+  );
+
+  @@clientName(
+    AgentOptimizationDatasetItem.desired_num_turns,
+    "DesiredTurnCount"
   );
 }

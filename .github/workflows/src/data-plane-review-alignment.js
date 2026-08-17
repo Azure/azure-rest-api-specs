@@ -58,11 +58,11 @@ export const WORKFLOW_FILE = ".github/workflows/data-plane-api-review.md";
 export const EVAL_DIR = ".github/skills/evals/data-plane-api-reviewer/vally";
 
 /**
- * The eval file that defines the phase-2 promotion gate. Production must run
- * the model this file measures, or the gate certifies a configuration that is
- * never shipped.
+ * The primary false-positive regression eval. Production must run the model
+ * this file measures, or its results describe a configuration that is never
+ * shipped.
  */
-export const GATE_EVAL_FILE = "eval-true-negatives.yaml";
+export const TRUE_NEGATIVE_EVAL_FILE = "eval-true-negatives.yaml";
 
 /**
  * The judge model is deliberately frozen. It does not need to match production;
@@ -884,11 +884,10 @@ export async function checkLinterAlignment({ core, rootDir }) {
  * the eval suite measures, or when an eval file drifts from the frozen judge
  * model.
  *
- * The promotion gate for enabling inline review comments is "zero blocking
- * false positives across three runs of the true-negative suite". That statement
- * is only meaningful if production runs the model the suite measured. Nothing
- * in the two files makes the coupling visible to someone editing one of them
- * six months from now, so it is asserted here instead.
+ * Eval results are useful as a rollout regression signal only when production
+ * runs the model the suite measured. Nothing in the two files makes that
+ * coupling visible to someone editing one of them six months from now, so it is
+ * asserted here instead.
  *
  * @param {object} options
  * @param {typeof import("@actions/core")} options.core
@@ -904,10 +903,10 @@ export async function checkModelAlignment({ core, rootDir }) {
     (f) => f.startsWith("eval-") && f.endsWith(".yaml"),
   );
 
-  if (!evalFiles.includes(GATE_EVAL_FILE)) {
+  if (!evalFiles.includes(TRUE_NEGATIVE_EVAL_FILE)) {
     core.setFailed(
-      `${EVAL_DIR}/${GATE_EVAL_FILE} is missing. It defines the phase-2 promotion gate; ` +
-        "without it there is nothing holding the reviewer's false-positive rate.",
+      `${EVAL_DIR}/${TRUE_NEGATIVE_EVAL_FILE} is missing. It is the primary false-positive ` +
+        "regression suite for the reviewer.",
     );
     return false;
   }
@@ -952,9 +951,9 @@ export async function checkModelAlignment({ core, rootDir }) {
       "",
       "Why this is enforced:",
       "",
-      "  The phase-2 promotion gate is measured by",
-      `  ${EVAL_DIR}/${GATE_EVAL_FILE}. If production runs a different model,`,
-      "  the gate certifies a configuration that is never shipped.",
+      `  ${EVAL_DIR}/${TRUE_NEGATIVE_EVAL_FILE} tracks false-positive regressions. If`,
+      "  production runs a different model, the results describe a configuration",
+      "  that is never shipped.",
       "",
       "  judge_model is frozen separately. It does not need to match production, it needs",
       "  to be stable -- changing it invalidates comparison against every historical run,",

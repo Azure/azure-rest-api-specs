@@ -5,11 +5,10 @@
 #      between the agent-owned and linter-enforced sets; when that happens the coverage map
 #      must be re-verified or the agent starts double-reporting findings CI already surfaces.
 #
-#   2. The workflow's pinned model must match the model the eval suite measures. The phase-2
-#      promotion gate is "zero blocking false positives across three runs of the true-negative
-#      suite" - a statement that means nothing if production runs a different model. The judge
-#      model is checked separately and is frozen, because changing it invalidates comparison
-#      against every historical run.
+#   2. The workflow's pinned model must match the model the eval suite measures. Eval trends
+#      describe production only when both run the same model. The judge model is checked
+#      separately and is frozen, because changing it invalidates comparison against every
+#      historical run.
 #
 #   3. No eval fixture may tell the agent what it is or what the correct review output is. The
 #      agent reads the fixture; a true negative that announces itself measures instruction-

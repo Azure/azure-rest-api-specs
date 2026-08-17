@@ -68,7 +68,7 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@usage(OAuthConsentRequestOutputItem, Usage.input | Usage.output);
-  // The ResponsesOutputItem that OpenAI.OutputItem maps to in C# already has a id proeprty...
+  // The ResponsesOutputItem that OpenAI.OutputItem maps to in C# already has a id property...
   @@withoutOmittedProperties(OAuthConsentRequestOutputItem, "id");
   @@alternateType(OAuthConsentRequestOutputItem.consent_link, url);
 
@@ -553,6 +553,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.AutoCodeInterpreterToolParam,
+    {
+      identity: "OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
@@ -618,6 +627,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
   @@alternateType(
     OpenAI.ToolChoiceOptions,
     {
@@ -727,11 +737,21 @@ namespace Azure.AI.Projects {
   @@access(BingGroundingToolCallOutput, Access.public);
   @@usage(BingGroundingToolCallOutput, Usage.input | Usage.output);
 
+  @@clientName(
+    SharepointGroundingToolCall,
+    "SharePointGroundingToolCall",
+    "!autorest"
+  );
   @@access(SharepointGroundingToolCall, Access.public);
   @@usage(SharepointGroundingToolCall, Usage.input | Usage.output);
 
   @@access(SharepointGroundingToolCallOutput, Access.public);
   @@usage(SharepointGroundingToolCallOutput, Usage.input | Usage.output);
+  @@clientName(
+    SharepointGroundingToolCallOutput,
+    "SharePointGroundingToolCallOutput",
+    "!autorest"
+  );
 
   @@clientName(
     SharepointGroundingToolParameters,
@@ -851,7 +871,7 @@ namespace Azure.AI.Projects {
 
   @@clientName(
     OpenApiAnonymousAuthDetails,
-    "OpenAPIAnonymousAuthenticationDetails",
+    "OpenApiAnonymousAuthenticationDetails",
     "!autorest"
   );
 
@@ -891,7 +911,6 @@ namespace Azure.AI.Projects {
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@usage(OpenApiFunctionDefinition, Usage.input | Usage.output);
 
-  @@clientName(OpenApiTool, "OpenAPITool", "!autorest");
   @@usage(OpenApiTool, Usage.input | Usage.output);
   @@access(OpenApiTool, Access.public);
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
