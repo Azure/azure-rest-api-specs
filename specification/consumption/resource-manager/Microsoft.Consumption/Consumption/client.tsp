@@ -532,3 +532,11 @@ model ConsumptionModernReservationRecommendation
   ModernChargeSummary.properties,
   "csharp"
 );
+
+// Preserve Java enum value names from the released SDK.
+@@clientName(Metrictype.ActualCostMetricType, "ACTUALCOST", "java");
+@@clientName(Metrictype.AmortizedCostMetricType, "AMORTIZEDCOST", "java");
+@@clientName(Metrictype.UsageMetricType, "USAGE", "java");
+@@clientName(Datagrain.DailyGrain, "DAILY", "java");
+@@clientName(Datagrain.MonthlyGrain, "MONTHLY", "java");
+@@clientName(LookBackPeriod.Last07Days, "LAST7DAYS", "java");
