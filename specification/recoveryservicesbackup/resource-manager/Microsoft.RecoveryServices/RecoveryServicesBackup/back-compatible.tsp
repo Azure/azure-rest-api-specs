@@ -146,7 +146,7 @@ using Microsoft.RecoveryServices;
 @@clientLocation(
   ProtectionIntentOperationGroup.validate,
   "ProtectionIntent",
-  "!csharp"
+  "!csharp,!javascript"
 );
 
 @@clientLocation(OperationOperationGroup.validate, "Operation", "!csharp");

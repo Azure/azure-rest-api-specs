@@ -3781,3 +3781,8 @@ op protectionPolicyOperationStatusesGet(
   "ProtectionIntentOperations",
   "javascript"
 );
+@@clientLocation(
+  ProtectionIntentOperationGroup.validate,
+  "ProtectionIntentOperations",
+  "javascript"
+);
