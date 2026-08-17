@@ -642,6 +642,9 @@ using Microsoft.Batch;
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@usage(BatchAccount, Usage.input, "csharp");
+// TODO: Replace this legacy hierarchy override with a custom base type after
+// https://github.com/Azure/azure-sdk-for-net/issues/62140 is fixed. Narrowing the
+// generated base through custom code currently drops the Location and Tags properties.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the BatchAccount base type back to ResourceData for backward compatibility"
 @@hierarchyBuilding(
   BatchAccount,
