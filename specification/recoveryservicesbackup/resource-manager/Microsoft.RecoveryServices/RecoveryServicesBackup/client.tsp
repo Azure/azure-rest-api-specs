@@ -3146,32 +3146,32 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(
   AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInVault,
-  "OldestRecoverOnInVault",
+  "OldestRecoveryPointInVaultOn",
   "csharp"
 );
 @@clientName(
   AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPointInVault,
-  "OldestRecoverOnInVault",
+  "OldestRecoveryPointInVaultOn",
   "csharp"
 );
 @@clientName(
   AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInArchive,
-  "OldestRecoverOnInArchive",
+  "OldestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
   AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPointInArchive,
-  "OldestRecoverOnInArchive",
+  "OldestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
   AzureIaaSVMProtectedItemExtendedInfo.newestRecoveryPointInArchive,
-  "NewestRecoverOnInArchive",
+  "NewestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
   AzureVmWorkloadProtectedItemExtendedInfo.newestRecoveryPointInArchive,
-  "NewestRecoverOnInArchive",
+  "NewestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
