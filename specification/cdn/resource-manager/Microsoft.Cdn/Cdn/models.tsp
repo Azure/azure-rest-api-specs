@@ -3090,7 +3090,7 @@ model LoadBalancingSettingsParameters {
 @added(Versions.v2026_08_01_preview)
 model CapacityDistributionSettingsParameters {
   /**
-   * Threshold at which additional backends are added for capacity based load balancing. Default is 80.
+   * Threshold at which additional backends are added for capacity based load balancing. Default is 80 percent.
    */
   @maxValue(100)
   @minValue(20)
@@ -3105,18 +3105,19 @@ model CapacityDistributionSettingsParameters {
 /**
  * Type of distribution used in capacity based load balancing.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "The service contract defines a closed set of supported distribution types."
 @added(Versions.v2026_08_01_preview)
-enum DistributionType {
+union DistributionType {
+  string,
+
   /**
    * Uses static backend weights for load balancing.
    */
-  StaticWeights,
+  StaticWeights: "StaticWeights",
 
   /**
    * Dynamically adjusts weights based on backend capacity.
    */
-  DynamicWeights,
+  DynamicWeights: "DynamicWeights",
 }
 
 /**
