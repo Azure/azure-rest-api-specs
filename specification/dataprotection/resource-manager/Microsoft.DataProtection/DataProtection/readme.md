@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2026-03-01
+tag: package-2026-06-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -60,6 +60,19 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: dataprotection.json
     reason: DPP list models compose value + DppResourceList.nextLink via allOf and satisfy the value+nextLink condition; the LintDiff rule does not follow the allOf composition (tool false-positive). Consistent with the existing suppression on prior DPP tags (package-preview-2024-02).
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - stable/2026-06-01/dataprotection.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    reason: There are objects that need a generic key-value pair in contract.
 ```
 
 ### Tag: package-2026-04-01-preview

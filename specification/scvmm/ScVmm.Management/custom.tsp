@@ -16,7 +16,9 @@ using Azure.ResourceManager.Foundations;
  * @template Error Optional. The error response, if non-standard.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" ""
 op CustomizedArmResourceActionNoResponseContentAsync<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
@@ -47,7 +49,9 @@ op CustomizedArmResourceActionNoResponseContentAsync<
  * @template Parameters Optional. Additional parameters after the path parameters
  * @template Error Optional. The error response, if non-standard.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" ""
 @autoRoute
 @armResourceAction(Resource)
 @post
