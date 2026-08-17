@@ -5299,6 +5299,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/checkMigrationEligibility": {
+      "post": {
+        "operationId": "ManagedEnvironments_CheckMigrationEligibility",
+        "tags": [
+          "ManagedEnvironments"
+        ],
+        "summary": "Checks whether a Managed Environment can be migrated to a target mode.",
+        "description": "Checks whether a Managed Environment can be migrated to a target mode.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The migration eligibility check request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckMigrationEligibilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckMigrationEligibilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check migration eligibility for an eligible managed environment": {
+            "$ref": "./examples/ManagedEnvironments_CheckMigrationEligibility.json"
+          },
+          "Check migration eligibility for an ineligible managed environment": {
+            "$ref": "./examples/ManagedEnvironments_CheckMigrationEligibility_Ineligible.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/checkNameAvailability": {
       "post": {
         "operationId": "Namespaces_CheckNameAvailability",
@@ -8924,6 +8984,58 @@
           }
         ]
       }
+    },
+    "CheckMigrationEligibilityRequest": {
+      "type": "object",
+      "description": "Request body for checking whether a managed environment can migrate to a target mode.",
+      "properties": {
+        "targetMode": {
+          "type": "string",
+          "description": "The target environment mode to check migration eligibility against."
+        }
+      },
+      "required": [
+        "targetMode"
+      ]
+    },
+    "CheckMigrationEligibilityResponse": {
+      "type": "object",
+      "description": "Result of a read-only managed environment migration eligibility check.",
+      "properties": {
+        "isEligible": {
+          "type": "boolean",
+          "description": "Whether the managed environment can migrate to the requested target mode."
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "The name of the managed environment that was checked."
+        },
+        "currentMode": {
+          "type": "string",
+          "description": "The current mode of the managed environment."
+        },
+        "targetMode": {
+          "type": "string",
+          "description": "The requested target mode."
+        },
+        "failureReasons": {
+          "type": "array",
+          "description": "The blocking reasons preventing migration. Empty when the managed environment is eligible.",
+          "items": {
+            "$ref": "#/definitions/MigrationEligibilityFailureReason"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "isEligible",
+        "environmentName",
+        "currentMode",
+        "targetMode",
+        "failureReasons"
+      ]
     },
     "ClientRegistration": {
       "type": "object",
@@ -13158,6 +13270,42 @@
         }
       ]
     },
+    "ManagedEnvironmentMode": {
+      "type": "string",
+      "description": "Mode of the managed environment.",
+      "enum": [
+        "ConsumptionOnly",
+        "WorkloadProfiles",
+        "Express",
+        "Archived"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedEnvironmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConsumptionOnly",
+            "value": "ConsumptionOnly",
+            "description": "The environment supports consumption-only workloads."
+          },
+          {
+            "name": "WorkloadProfiles",
+            "value": "WorkloadProfiles",
+            "description": "The environment supports workload profiles."
+          },
+          {
+            "name": "Express",
+            "value": "Express",
+            "description": "The environment uses the Express mode."
+          },
+          {
+            "name": "Archived",
+            "value": "Archived",
+            "description": "The environment is archived."
+          }
+        ]
+      }
+    },
     "ManagedEnvironmentProperties": {
       "type": "object",
       "description": "Managed environment resource specific properties",
@@ -13256,6 +13404,10 @@
         "ingressConfiguration": {
           "$ref": "#/definitions/IngressConfiguration",
           "description": "Ingress configuration for the Managed Environment."
+        },
+        "environmentMode": {
+          "$ref": "#/definitions/ManagedEnvironmentMode",
+          "description": "Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -13403,6 +13555,24 @@
       },
       "required": [
         "identity"
+      ]
+    },
+    "MigrationEligibilityFailureReason": {
+      "type": "object",
+      "description": "A blocking reason that prevents a managed environment migration.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code identifying the blocker."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the blocker."
+        }
+      },
+      "required": [
+        "code",
+        "message"
       ]
     },
     "Mtls": {
