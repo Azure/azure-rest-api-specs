@@ -39,7 +39,6 @@ using Microsoft.ContainerRegistry;
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
-@@clientName(Registry, "ContainerRegistryService", "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
