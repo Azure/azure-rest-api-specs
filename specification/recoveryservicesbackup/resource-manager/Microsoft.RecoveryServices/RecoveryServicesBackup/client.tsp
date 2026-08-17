@@ -3739,3 +3739,45 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(SourceSideScanStatus, "BackupSourceSideScanStatus", "csharp");
 @@clientName(SourceSideScanSummary, "BackupSourceSideScanSummary", "csharp");
 @@clientName(VMWorkloadPolicyType, "VmWorkloadPolicyType", "csharp");
+
+// JavaScript backward compatibility with the last stable SDK.
+@@clientLocation(
+  BMSPrepareDataMoveOperationResult.get,
+  "$DO_NOT_NORMALIZE$BMSPrepareDataMoveOperationResult",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnectionResources.get,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnectionResources.put,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnectionResources.delete,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
+);
+@@clientLocation(
+  PrivateEndpointOperationStatuses.getOperationStatus,
+  "PrivateEndpointOperations",
+  "javascript"
+);
+@@clientLocation(
+  ProtectionIntentResources.get,
+  "ProtectionIntentOperations",
+  "javascript"
+);
+@@clientLocation(
+  ProtectionIntentResources.createOrUpdate,
+  "ProtectionIntentOperations",
+  "javascript"
+);
+@@clientLocation(
+  ProtectionIntentResources.delete,
+  "ProtectionIntentOperations",
+  "javascript"
+);
