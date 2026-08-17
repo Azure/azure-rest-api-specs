@@ -3231,6 +3231,12 @@ model DeploymentProperties {
   `model`?: DeploymentModel;
 
   /**
+   * The resource ID of the context cache container associated with this deployment.
+   */
+  @added(Versions.v2026_07_15_preview)
+  contextCacheContainerId?: string;
+
+  /**
    * Speculative decoding settings for the deployment. This configuration applies to Fireworks model formats.
    */
   @added(Versions.v2026_05_15_preview)
