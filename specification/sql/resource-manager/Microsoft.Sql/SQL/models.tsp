@@ -7676,6 +7676,27 @@ model DistributedAvailabilityGroupProperties {
   linkMode?: LinkModeType;
 
   /**
+   * Most recent error code for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentError?: string;
+
+  /**
+   * Time of the most recent error for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentErrorTime?: utcDateTime;
+
+  /**
+   * Most recent error message for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentErrorMessage?: string;
+
+  /**
    * Databases in the distributed availability group
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
