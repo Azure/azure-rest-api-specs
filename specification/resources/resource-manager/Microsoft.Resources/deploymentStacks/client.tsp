@@ -13,52 +13,9 @@ using TypeSpec.Versioning;
 @@alternateType(ResourceReference.identifiers, unknown, "go");
 
 // Java SDK: Mitigate breaks from TypeSpec migration
-/**
- * Specifies whether to delete or detach a resource from the deployment stack.
- */
-@scope("java")
-union DeploymentStacksDeleteDetachEnum {
-  string,
-
-  /**
-   * Delete the resource from Azure.
-   */
-  Delete: "delete",
-
-  /**
-   * Keep the resource in Azure.
-   */
-  Detach: "detach",
-}
-
 @@alternateType(DeploymentStackProperties.template, unknown, "java");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "java");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Flattening preserves the existing Java SDK surface."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DeploymentStack.properties,
-  "java"
-);
-@@clientName(
-  Microsoft.Resources.DeploymentStacks,
-  "DeploymentStacksManagementClient",
-  "java"
-);
-@@alternateType(
-  ActionOnUnmanage.resources,
-  DeploymentStacksDeleteDetachEnum,
-  "java"
-);
-@@alternateType(
-  ActionOnUnmanage.resourceGroups,
-  DeploymentStacksDeleteDetachEnum,
-  "java"
-);
-@@alternateType(
-  ActionOnUnmanage.managementGroups,
-  DeploymentStacksDeleteDetachEnum,
-  "java"
-);
 
 // CSharp SDK: Generate scoped resources, and make it backwards compatible with existing patterns
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
