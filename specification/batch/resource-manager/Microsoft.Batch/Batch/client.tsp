@@ -659,6 +659,7 @@ using Microsoft.Batch;
 );
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
 namespace Microsoft.Batch {
   /**
    * Contains information about an Azure Batch account.

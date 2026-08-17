@@ -16,6 +16,7 @@ using Microsoft.Migrate;
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Migrate namespace"
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
 namespace Microsoft.Migrate {
   // ===== Task create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"

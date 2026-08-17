@@ -265,7 +265,7 @@ using Microsoft.ServiceBus;
 // C# SDK backward-compatibility replacement models
 // =============================================================================
 
-namespace Microsoft.ServiceBus {
+namespace Customizations {
   /**
    * Parameters supplied to the Patch Namespace operation.
    */
@@ -295,32 +295,40 @@ namespace Microsoft.ServiceBus {
 
 @@alternateType(
   SBNamespaceUpdateParameters,
-  SBNamespaceUpdateParametersReplacement,
+  Customizations.SBNamespaceUpdateParametersReplacement,
   "csharp"
 );
 @@clientName(
-  SBNamespaceUpdateParametersReplacement,
+  Customizations.SBNamespaceUpdateParametersReplacement,
   "ServiceBusNamespacePatch",
   "csharp"
 );
 @@usage(
-  SBNamespaceUpdateParametersReplacement,
+  Customizations.SBNamespaceUpdateParametersReplacement,
   Usage.input | Usage.output,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  SBNamespaceUpdateParametersReplacement.properties
+  Customizations.SBNamespaceUpdateParametersReplacement.properties
 );
 
-@@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
+@@alternateType(
+  PrivateLinkResource,
+  Customizations.PrivateLinkResourceReplacement,
+  "csharp"
+);
 @@clientName(
-  PrivateLinkResourceReplacement,
+  Customizations.PrivateLinkResourceReplacement,
   "ServiceBusPrivateLinkResource",
   "csharp"
 );
-@@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
+@@usage(
+  Customizations.PrivateLinkResourceReplacement,
+  Usage.input | Usage.output,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateLinkResourceReplacement.properties
+  Customizations.PrivateLinkResourceReplacement.properties
 );

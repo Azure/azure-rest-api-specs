@@ -2,8 +2,9 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.AppLink;
 
-namespace Microsoft.AppLink;
+namespace Customizations;
 
 @@clientName(Microsoft.AppLink, "AppNetworkMgmtClient", "python");
 

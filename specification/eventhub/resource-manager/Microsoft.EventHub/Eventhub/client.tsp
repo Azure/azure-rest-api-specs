@@ -497,6 +497,7 @@ using Microsoft.EventHub;
 );
 
 // Custom models to ensure C# resource classes inherit TrackedResourceData
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
 namespace Microsoft.EventHub {
   /**
    * Single Event Hubs Cluster resource in List or Get operations.

@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
-namespace Microsoft.Subscription;
+using Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 

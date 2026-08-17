@@ -106,6 +106,7 @@ using TypeSpec.Rest;
 @@alternateType(HardwareSettingProperties.deviceId, uuid, "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
 namespace Microsoft.Edge {
   @doc("Disconnected operation resource for create or update.")
   model DisconnectedOperationCreateOrUpdate
