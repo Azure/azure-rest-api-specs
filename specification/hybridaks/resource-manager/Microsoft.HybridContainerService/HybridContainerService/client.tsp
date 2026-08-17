@@ -243,5 +243,5 @@ union VirtualNetworkProvisioningState {
   Access.internal,
   "csharp"
 );
-@@usage(OsType, Usage.input, "csharp");
-@@usage(OSSKU, Usage.input, "csharp");
+
+@@usage(AgentPoolProfile, Usage.input, "csharp");
