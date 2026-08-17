@@ -2,12 +2,10 @@ import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
 import { getSuppressionsForTools } from "@azure-tools/suppressions";
 import { writeFile } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { resolve } from "node:path";
 import { inspect, parseArgs, type ParseArgsConfig } from "node:util";
 import { correlateRuns } from "./correlateResults.ts";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.ts";
-import { type ReadmeAffectedTags } from "./lintdiff-types.ts";
-import { getDefaultTag } from "./markdown-utils.ts";
 import { getRunList } from "./processChanges.ts";
 import { getAutorestErrors, runChecks } from "./runChecks.ts";
 import { getDependencyVersion, getPathToDependency, pathExists } from "./util.ts";
@@ -135,18 +133,7 @@ async function runLintDiff(
     throw error;
   }
 
-  const originalAffectedSwaggers = affectedSwaggers;
   affectedSwaggers = await getUnsuppressedSwaggers(afterPath, affectedSwaggers);
-
-  if (originalAffectedSwaggers.size > 0) {
-    afterList = await filterRunList(
-      afterPath,
-      afterList,
-      originalAffectedSwaggers,
-      affectedSwaggers,
-    );
-    beforeList = filterBeforeRunList(beforeList, afterList);
-  }
 
   if (beforeList.size === 0 && afterList.size === 0) {
     await writeFile(outFile, "No changes found. Exiting.");
@@ -229,66 +216,4 @@ export async function getUnsuppressedSwaggers(
   }
 
   return result;
-}
-
-export async function filterRunList(
-  rootPath: string,
-  runList: Map<string, ReadmeAffectedTags>,
-  affectedSwaggers: Set<string>,
-  unsuppressedSwaggers: Set<string>,
-): Promise<Map<string, ReadmeAffectedTags>> {
-  const result = new Map<string, ReadmeAffectedTags>();
-  const normalizedAffectedSwaggers = new Set(
-    [...affectedSwaggers].map((swaggerPath) => swaggerPath.replaceAll("\\", "/")),
-  );
-  const normalizedUnsuppressedSwaggers = new Set(
-    [...unsuppressedSwaggers].map((swaggerPath) => swaggerPath.replaceAll("\\", "/")),
-  );
-
-  for (const [readmePath, affectedTags] of runList) {
-    const allTags = await affectedTags.readme.getTags();
-    const retainedTags = new Set<string>();
-
-    for (const changedTag of affectedTags.changedTags) {
-      const effectiveTag = changedTag || (await getDefaultTag(affectedTags.readme));
-      const tag = allTags.get(effectiveTag);
-
-      if (!tag) {
-        retainedTags.add(changedTag);
-        continue;
-      }
-
-      const inputFiles = [...tag.inputFiles.keys()].map((inputFile) =>
-        relative(rootPath, inputFile).replaceAll("\\", "/"),
-      );
-      const hasAffectedSwagger = inputFiles.some((inputFile) =>
-        normalizedAffectedSwaggers.has(inputFile),
-      );
-      const hasUnsuppressedSwagger = inputFiles.some((inputFile) =>
-        normalizedUnsuppressedSwaggers.has(inputFile),
-      );
-
-      if (!hasAffectedSwagger || hasUnsuppressedSwagger) {
-        retainedTags.add(changedTag);
-      } else {
-        console.log(`Skipping fully suppressed LintDiff tag: ${readmePath}#${effectiveTag}`);
-      }
-    }
-
-    if (retainedTags.size > 0) {
-      result.set(readmePath, {
-        readme: affectedTags.readme,
-        changedTags: retainedTags,
-      });
-    }
-  }
-
-  return result;
-}
-
-export function filterBeforeRunList(
-  beforeList: Map<string, ReadmeAffectedTags>,
-  afterList: Map<string, ReadmeAffectedTags>,
-): Map<string, ReadmeAffectedTags> {
-  return new Map([...beforeList].filter(([readmePath]) => afterList.has(readmePath)));
 }
