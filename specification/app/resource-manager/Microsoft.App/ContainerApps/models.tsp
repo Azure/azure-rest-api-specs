@@ -4805,12 +4805,12 @@ union SessionProbeType {
   string,
 
   /**
-   * Liveness
+   * Checks whether the session is still running and healthy.
    */
   Liveness: "Liveness",
 
   /**
-   * Startup
+   * Checks whether the session has started successfully.
    */
   Startup: "Startup",
 }
