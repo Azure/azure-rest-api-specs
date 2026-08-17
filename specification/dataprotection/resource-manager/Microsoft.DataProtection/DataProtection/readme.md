@@ -60,6 +60,12 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: dataprotection.json
     reason: DPP list models compose value + DppResourceList.nextLink via allOf and satisfy the value+nextLink condition; the LintDiff rule does not follow the allOf composition (tool false-positive). Consistent with the existing suppression on prior DPP tags (package-preview-2024-02).
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    reason: There are objects that need a generic key-value pair in contract.
+  - code: PostResponseCodes
+    from: dataprotection.json
+    reason: Synchronous remove action returns 200 with no body, matching the frozen BMS wire.
 ```
 
 ### Tag: package-2026-06-01

@@ -602,6 +602,9 @@
           },
           "Get BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/GetBackupVaultWithMSI.json"
+          },
+          "Get BackupVault with Cost Management Settings": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithCostManagementSettings.json"
           }
         }
       },
@@ -688,6 +691,9 @@
           },
           "Create BackupVault With CMK": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
+          },
+          "Create BackupVault With Cost Management Settings": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithCostManagementSettings.json"
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
@@ -778,6 +784,9 @@
           },
           "Patch BackupVault with CMK": {
             "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCMK.json"
+          },
+          "Patch BackupVault with Cost Management Settings": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCostManagementSettings.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1072,11 +1081,11 @@
           "Create BackupInstance With KubernetesClusterBackupDatasourceParameters": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_KubernetesClusterBackupDatasourceParameters.json"
           },
-          "Create BackupInstance With PostgreSqlFlexibleServerBackupDatasourceParameters": {
-            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_PostgreSqlFlexibleServerBackupDatasourceParameters.json"
-          },
           "Create BackupInstance to perform critical operation With MUA": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ResourceGuardEnabled.json"
+          },
+          "Create BackupInstance with GenericBackupDatasourceParameters": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstanceWithGenericParameters.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1673,6 +1682,9 @@
           },
           "Trigger Restore With Rehydration": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithRehydration.json"
+          },
+          "Trigger Restore with GenericRestoreDatasourceCriteria": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithGenericParameters.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1786,15 +1798,6 @@
             "description": "The name of the BackupInstanceResource",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ResumeProtectionRequest"
-            }
           }
         ],
         "responses": {
@@ -6602,30 +6605,6 @@
         "repeatingTimeIntervals"
       ]
     },
-    "BackupSolutionType": {
-      "type": "string",
-      "description": "Backup solution types for PostgreSQL Flexible Server.",
-      "enum": [
-        "LogicalBackup",
-        "PhysicalBackup"
-      ],
-      "x-ms-enum": {
-        "name": "BackupSolutionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LogicalBackup",
-            "value": "LogicalBackup",
-            "description": "Logical backup type"
-          },
-          {
-            "name": "PhysicalBackup",
-            "value": "PhysicalBackup",
-            "description": "Physical backup type"
-          }
-        ]
-      }
-    },
     "BackupVault": {
       "type": "object",
       "description": "Backup Vault",
@@ -6633,6 +6612,10 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
+        },
+        "costManagementSettings": {
+          "$ref": "#/definitions/CostManagementSettings",
+          "description": "Cost Management Settings of the vault"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7056,6 +7039,16 @@
       "required": [
         "objectType"
       ]
+    },
+    "CostManagementSettings": {
+      "type": "object",
+      "description": "Cost Management Settings of the vault",
+      "properties": {
+        "granularityLevel": {
+          "$ref": "#/definitions/GranularityLevel",
+          "description": "Settings for granularity level"
+        }
+      }
     },
     "CrossRegionRestoreDetails": {
       "type": "object",
@@ -7667,6 +7660,10 @@
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
         },
+        "costManagementSettings": {
+          "$ref": "#/definitions/CostManagementSettings",
+          "description": "Cost Management Settings of the vault"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the BackupVault resource",
@@ -8197,6 +8194,73 @@
           "type": "string",
           "description": "ARM Path of BackupInstance"
         }
+      }
+    },
+    "GenericBackupDatasourceParameters": {
+      "type": "object",
+      "description": "Generic parameters to be used during configuration of backup",
+      "properties": {
+        "resourceSelectors": {
+          "type": "array",
+          "description": "List of resource selectors to be backed up during configuration of backup",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "resourceSelectors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "GenericBackupDatasourceParameters"
+    },
+    "GenericRestoreDatasourceCriteria": {
+      "type": "object",
+      "description": "Generic criteria to be used during restore",
+      "properties": {
+        "resourceSelectors": {
+          "$ref": "#/definitions/ResourceListSelectionCriteria",
+          "description": "List of resource identifiers that need to be restored"
+        }
+      },
+      "required": [
+        "resourceSelectors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
+    },
+    "GranularityLevel": {
+      "type": "string",
+      "enum": [
+        "VaultLevel",
+        "ProtectedItemLevel",
+        "ProtectedItemWithParentTag"
+      ],
+      "x-ms-enum": {
+        "name": "GranularityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VaultLevel",
+            "value": "VaultLevel"
+          },
+          {
+            "name": "ProtectedItemLevel",
+            "value": "ProtectedItemLevel"
+          },
+          {
+            "name": "ProtectedItemWithParentTag",
+            "value": "ProtectedItemWithParentTag"
+          }
+        ]
       }
     },
     "IdentityDetails": {
@@ -8971,6 +9035,10 @@
           "$ref": "#/definitions/FeatureSettings",
           "description": "Feature Settings"
         },
+        "costManagementSettings": {
+          "$ref": "#/definitions/CostManagementSettings",
+          "description": "Cost Management Settings of the vault"
+        },
         "resourceGuardOperationRequests": {
           "type": "array",
           "description": "ResourceGuardOperationRequests on which LAC check will be performed",
@@ -9077,22 +9145,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "PostgreSqlFlexibleServerBackupDatasourceParameters": {
-      "type": "object",
-      "description": "Parameters to be used during configuration of backup of PostgreSQL Flexible Servers",
-      "properties": {
-        "backupSolutionType": {
-          "$ref": "#/definitions/BackupSolutionType",
-          "description": "Type of backup taken, Logical/Physical"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupDatasourceParameters"
-        }
-      ],
-      "x-ms-discriminator-value": "PostgreSqlFlexibleServerBackupDatasourceParameters"
     },
     "ProtectionStatusDetails": {
       "type": "object",
@@ -9485,6 +9537,34 @@
         }
       ]
     },
+    "ResourceListSelectionCriteria": {
+      "type": "object",
+      "description": "Specifies the list of resources to be restored",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "Type of the specific object - used for deserializing"
+        },
+        "resourceIdentifiers": {
+          "type": "array",
+          "description": "List of resource identifiers to restore from",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceNameOverrides": {
+          "type": "object",
+          "description": "This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "objectType",
+        "resourceIdentifiers"
+      ]
+    },
     "ResourceMoveDetails": {
       "type": "object",
       "description": "ResourceMoveDetails will be returned in response to GetResource call from ARM",
@@ -9741,42 +9821,6 @@
           {
             "name": "AzureFiles",
             "value": "AzureFiles"
-          }
-        ]
-      }
-    },
-    "ResumeProtectionRequest": {
-      "type": "object",
-      "description": "Request body of Resume protection when MSI is to be changed",
-      "properties": {
-        "objectType": {
-          "$ref": "#/definitions/ResumeProtectionRequestObjectType",
-          "description": "Type of Datasource object, used to initialize the right inherited type"
-        },
-        "identityDetails": {
-          "$ref": "#/definitions/IdentityDetails",
-          "description": "identity details of the MSI"
-        }
-      },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ]
-    },
-    "ResumeProtectionRequestObjectType": {
-      "type": "string",
-      "description": "Type of Datasource object, used to initialize the right inherited type",
-      "enum": [
-        "ResumeProtectionRequest"
-      ],
-      "x-ms-enum": {
-        "name": "ResumeProtectionRequestObjectType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ResumeProtectionRequest",
-            "value": "ResumeProtectionRequest",
-            "description": "Resume Protection Request Type."
           }
         ]
       }
