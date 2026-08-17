@@ -2122,6 +2122,13 @@ model BackupPolicy {
    * The object representing the state of the migration between the backup policies.
    */
   migrationState?: BackupPolicyMigrationState;
+
+  /**
+   * The UTC timestamp until which changes that reduce backup retention are locked.
+   * While active, this timestamp can only be extended.
+   */
+  @added(Versions.v2026_07_15)
+  backupRetentionLockExpirationTimestamp?: utcDateTime;
 }
 
 /**
