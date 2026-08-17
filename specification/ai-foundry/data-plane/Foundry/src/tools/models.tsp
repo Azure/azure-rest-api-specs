@@ -1,5 +1,4 @@
 import "../memory-stores/models.tsp";
-import "../toolboxes/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
@@ -885,11 +884,6 @@ namespace Azure.AI.Projects {
      * The label of the WebIQ MCP server to connect to.
      */
     server_label?: string;
-
-    /**
-     * The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
-     */
-    server_url?: url;
 
     /**
      * Whether the agent requires approval before executing actions. Default is always.

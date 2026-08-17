@@ -191,6 +191,7 @@ model NetworkDeviceResyncPasswordsResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncCertificates request on a Network Device.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceResyncCertificatesResponse {

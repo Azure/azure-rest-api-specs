@@ -68,6 +68,21 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@usage(OAuthConsentRequestOutputItem, Usage.input | Usage.output);
+  // The ResponsesOutputItem that OpenAI.OutputItem maps to in C# already has a id property...
+  @@withoutOmittedProperties(OAuthConsentRequestOutputItem, "id");
+  @@alternateType(OAuthConsentRequestOutputItem.consent_link, url);
+
+  @@clientName(OpenApiFunctionDefinition.auth, "authentication");
+  @@clientName(OpenApiFunctionDefinition.default_params, "DefaultParameters");
+  @@clientName(
+    OpenApiManagedAuthDetails,
+    "OpenApiManagedAuthenticationDetails"
+  );
+  @@clientName(OpenApiAuthType, "OpenApiAuthenticationKind");
+  @@clientName(OpenApiAuthDetails.type, "Kind");
+
+  @@clientName(BingCustomSearchConfiguration, "BingCustomSearchOptions");
+  @@clientName(BingGroundingSearchConfiguration, "BingGroundingSearchOptions");
 
   @@clientName(WorkflowActionOutputItem.kind, "CSDLActionKind");
 
@@ -538,6 +553,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.AutoCodeInterpreterToolParam,
+    {
+      identity: "OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
@@ -603,6 +627,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
   @@alternateType(
     OpenAI.ToolChoiceOptions,
     {
@@ -712,11 +737,21 @@ namespace Azure.AI.Projects {
   @@access(BingGroundingToolCallOutput, Access.public);
   @@usage(BingGroundingToolCallOutput, Usage.input | Usage.output);
 
+  @@clientName(
+    SharepointGroundingToolCall,
+    "SharePointGroundingToolCall",
+    "!autorest"
+  );
   @@access(SharepointGroundingToolCall, Access.public);
   @@usage(SharepointGroundingToolCall, Usage.input | Usage.output);
 
   @@access(SharepointGroundingToolCallOutput, Access.public);
   @@usage(SharepointGroundingToolCallOutput, Usage.input | Usage.output);
+  @@clientName(
+    SharepointGroundingToolCallOutput,
+    "SharePointGroundingToolCallOutput",
+    "!autorest"
+  );
 
   @@clientName(
     SharepointGroundingToolParameters,
@@ -836,10 +871,10 @@ namespace Azure.AI.Projects {
 
   @@clientName(
     OpenApiAnonymousAuthDetails,
-    "OpenAPIAnonymousAuthenticationDetails",
+    "OpenApiAnonymousAuthenticationDetails",
     "!autorest"
   );
-  
+
   @@usage(OpenApiManagedSecurityScheme, Usage.input | Usage.output);
   @@usage(OpenApiProjectConnectionAuthDetails, Usage.input | Usage.output);
 
@@ -874,7 +909,6 @@ namespace Azure.AI.Projects {
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@usage(OpenApiFunctionDefinition, Usage.input | Usage.output);
 
-  @@clientName(OpenApiTool, "OpenAPITool", "!autorest");
   @@usage(OpenApiTool, Usage.input | Usage.output);
   @@access(OpenApiTool, Access.public);
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");

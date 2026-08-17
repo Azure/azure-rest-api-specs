@@ -163,6 +163,11 @@ namespace Microsoft.ContainerRegistry {
   "ActionsRequiredForPrivateLinkServiceConsumer",
   "csharp"
 );
+@@clientName(
+  AdditionalAuthenticationProperties,
+  "ContainerRegistryCacheAuthentication",
+  "csharp"
+);
 @@clientName(Archive, "ContainerRegistryArchive", "csharp");
 @@clientName(
   ArchivePackageSourceProperties,
@@ -261,6 +266,11 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(
+  GarAuthenticationProperties,
+  "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
   GenerateCredentialsParameters,
   "ContainerRegistryGenerateCredentialsContent",
   "csharp"
@@ -313,7 +323,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(MetadataSearch, "ContainerRegistryMetadataSearch", "csharp");
 @@clientName(
   WritableCacheRepos,
-  "ContainerRegistryWritableCacheRepos",
+  "ContainerRegistryWritableCacheRepositories",
   "csharp"
 );
 @@clientName(
@@ -331,7 +341,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(PackageSourceType, "ContainerRegistryPackageSourceType", "csharp");
 @@clientName(ParentProperties, "ConnectedRegistryParent", "csharp");
 @@clientName(PasswordName, "ContainerRegistryPasswordName", "csharp");
-@@clientName(PipelineOptions, "PipelineOption", "csharp");
+@@clientName(PipelineOptions, "ContainerRegistryPipelineOption", "csharp");
 @@clientName(PipelineRun, "ContainerRegistryPipelineRun", "csharp");
 @@clientName(
   PipelineRunRequest,
@@ -377,7 +387,7 @@ namespace Microsoft.ContainerRegistry {
 );
 @@clientName(
   PipelineSourceTriggerDescriptor.timestamp,
-  "SourceTriggerTimestamp",
+  "SourceTriggerOn",
   "csharp"
 );
 @@clientName(PipelineSourceTriggerProperties.status, "Status", "csharp");
@@ -415,7 +425,11 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryCredentialRegenerateContent",
   "csharp"
 );
-@@clientName(RegionalEndpoints, "RegionalEndpoint", "csharp");
+@@clientName(
+  RegionalEndpoints,
+  "ContainerRegistryRegionalEndpointStatus",
+  "csharp"
+);
 @@clientName(
   Registries.checkNameAvailability,
   "CheckContainerRegistryNameAvailability",
@@ -559,6 +573,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(TrustPolicy, "ContainerRegistryTrustPolicy", "csharp");
 @@clientName(TrustPolicy.type, "PolicyType", "csharp");
 @@clientName(TrustPolicyType, "ContainerRegistryTrustPolicyType", "csharp");
+@@clientName(
+  VirtualNetworkRule,
+  "ContainerRegistryVirtualNetworkRule",
+  "csharp"
+);
 @@clientName(Webhook, "ContainerRegistryWebhook", "csharp");
 @@clientName(WebhookAction, "ContainerRegistryWebhookAction", "csharp");
 @@clientName(
