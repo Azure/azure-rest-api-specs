@@ -72,6 +72,11 @@ using Azure.Core;
 @@clientName(LinkDisplayText, "ResourceHealthEventLinkDisplayText", "csharp");
 @@clientName(LinkTypeValues, "ResourceHealthEventLinkTypeValue", "csharp");
 @@clientName(Scenario, "MetadataEntityScenario", "csharp");
+@@clientName(
+  MetadataEntityProperties.dependsOn,
+  "MetadataDependencies",
+  "csharp"
+);
 @@clientName(SeverityValues, "ResourceHealthEventSeverityLevel", "csharp");
 @@clientName(StageValues, "ResourceHealthEventStageValue", "csharp");
 @@clientName(StatusActiveEvent, "EmergingIssueActiveEventType", "csharp");
