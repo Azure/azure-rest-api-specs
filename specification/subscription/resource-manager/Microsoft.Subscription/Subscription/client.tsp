@@ -6,8 +6,6 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.Subscription;
 
-namespace Customizations;
-
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

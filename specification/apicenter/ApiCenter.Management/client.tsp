@@ -4,8 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ApiCenter;
 
-namespace Customizations;
-
 // Preserve legacy Java header property names for compatibility
 @@clientName(Azure.Core.EtagResponseEnvelope.etagHeader, "etag", "java");
 

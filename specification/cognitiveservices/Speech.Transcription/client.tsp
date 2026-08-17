@@ -5,8 +5,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.Ai.Speech.Transcription;
 
-namespace Customizations;
-
 @@clientNamespace(
   Azure.Ai.Speech.Transcription,
   "Azure.AI.Speech.Transcription",

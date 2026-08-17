@@ -5,8 +5,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.HybridConnectivity;
 
-namespace Customizations;
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ServiceConfigurationResourcePatch.properties

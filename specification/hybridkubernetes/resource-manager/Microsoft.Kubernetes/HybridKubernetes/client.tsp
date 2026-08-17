@@ -6,8 +6,6 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Kubernetes;
 
-namespace Customizations;
-
 // This RP is using common-types v3, in which the type of this id is still string.
 @@scope(Operations.list, "!csharp");
 @@alternateType(

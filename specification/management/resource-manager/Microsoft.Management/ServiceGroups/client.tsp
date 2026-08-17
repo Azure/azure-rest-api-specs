@@ -5,8 +5,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Management;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
-namespace Customizations;
-
 @@clientName(
   Microsoft.Management,
   "ServiceGroupsManagementClient",

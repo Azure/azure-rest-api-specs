@@ -5,8 +5,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.HealthcareApis;
 
-namespace Customizations;
-
 @@clientName(
   Microsoft.HealthcareApis,
   "HealthcareApisManagementClient",

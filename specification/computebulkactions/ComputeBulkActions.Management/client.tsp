@@ -5,8 +5,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ComputeBulkActions;
 
-namespace Customizations;
-
 @@clientName(ExecuteTypeRequest.correlationid, "correlationId", "java");
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");
 @@clientName(GetOperationStatusRequest.correlationid, "correlationId", "java");
