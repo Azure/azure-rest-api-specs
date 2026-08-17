@@ -11004,11 +11004,35 @@
           "description": "Programming language of the function.",
           "readOnly": true
         },
-        "isDisabled": {
-          "type": "boolean",
-          "description": "Indicates whether the function is disabled.",
+        "state": {
+          "$ref": "#/definitions/ContainerAppsFunctionState",
+          "description": "The state of the function.",
           "readOnly": true
         }
+      }
+    },
+    "ContainerAppsFunctionState": {
+      "type": "string",
+      "description": "The state of a Container App function.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerAppsFunctionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The function is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The function is disabled."
+          }
+        ]
       }
     },
     "ContainerResources": {

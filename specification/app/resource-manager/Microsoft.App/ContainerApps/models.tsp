@@ -8084,6 +8084,24 @@ model HttpGet {
 model ContainerAppsFunctionCollection is Azure.Core.Page<ContainerAppsFunction>;
 
 /**
+ * The state of a Container App function.
+ */
+@added(Versions.v2026_07_01)
+union ContainerAppsFunctionState {
+  string,
+
+  /**
+   * The function is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The function is disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Function resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8109,8 +8127,16 @@ model ContainerAppsFunctionProperties {
   /**
    * Indicates whether the function is disabled.
    */
+  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
+
+  /**
+   * The state of the function.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  state?: ContainerAppsFunctionState;
 }
 
 /**
