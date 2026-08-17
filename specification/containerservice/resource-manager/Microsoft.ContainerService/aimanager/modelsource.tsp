@@ -82,11 +82,11 @@ model CredentialValue {
   inline?: InlineCredential;
 
   @doc("""
-    A user-assigned managed identity the platform authenticates as. Required for `MicrosoftFoundry` sources and
-    the user must grant the `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d) on the Foundry project.
-    See https://aka.ms/aks/aim-modelsource for more details.
-    The platform federates this identity to an in-cluster puller ServiceAccount (Workload Identity) at deployment time.
-  """)
+      A user-assigned managed identity the platform authenticates as. Required for `MicrosoftFoundry` sources and
+      the user must grant the `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d) on the Foundry project.
+      See https://aka.ms/aks/aim-modelsource for more details.
+      The platform federates this identity to an in-cluster puller ServiceAccount (Workload Identity) at deployment time.
+    """)
   managedIdentity?: ManagedIdentityCredential;
 }
 
