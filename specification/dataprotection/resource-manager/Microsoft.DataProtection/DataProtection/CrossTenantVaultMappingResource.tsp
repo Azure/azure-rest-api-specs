@@ -258,8 +258,7 @@ interface RestoresFromDppCrossTenantVault {
     OperationJobExtendedInfo,
     Response =
       | OperationJobExtendedInfo
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
-    OverrideErrorType = CloudError
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>
   >;
 }
 
@@ -276,8 +275,7 @@ interface ValidateRestoreFromDppCrossTenantVault {
     OperationJobExtendedInfo,
     Response =
       | OperationJobExtendedInfo
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
-    OverrideErrorType = CloudError
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>
   >;
 }
 
