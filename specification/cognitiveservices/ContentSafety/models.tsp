@@ -321,6 +321,7 @@ model ProvenanceContent {
   uri: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ContentSafety.Versions.v2026_07_01_preview)
 @doc("Input describing the media to inspect using Content Provenance Detection.")
 model DetectProvenanceOptions {
