@@ -61,32 +61,27 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   logMessage("Found PR changes:");
   logMessage(JSON.stringify(diffs, null, 2));
 
-  let swaggersToProcess = diffs.modifications?.concat(diffs.additions || []) as Array<string>;
-
-  logMessage("Processing swaggers:");
-  logMessage(JSON.stringify(swaggersToProcess, null, 2));
-
   // switch pr to base branch
   changeBaseBranch(context);
   await context.prInfo?.checkout(context.prInfo.baseBranch);
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
-  const newSwaggers = await filterSuppressedSwaggers(
-    context,
-    context.localSpecRepoPath,
-    diffs.additions || [],
+  const swaggersToProcess = new Set(
+    await filterSuppressedSwaggers(context, [
+      ...diffs.additions,
+      ...diffs.modifications,
+      ...diffs.deletions,
+      ...diffs.renames.map((rename) => rename.to),
+    ]),
   );
-  const changedSwaggers = await filterSuppressedSwaggers(
-    context,
-    context.localSpecRepoPath,
-    diffs.modifications || [],
-  );
-  const deletedSwaggers = await filterSuppressedSwaggers(
-    context,
-    context.prInfo!.tempRepoFolder,
-    diffs.deletions || [],
-  );
-  const renamedSwaggers = diffs.renames || [];
+
+  logMessage("Processing swaggers:");
+  logMessage(JSON.stringify([...swaggersToProcess], null, 2));
+
+  const newSwaggers = diffs.additions.filter((swagger) => swaggersToProcess.has(swagger));
+  const changedSwaggers = diffs.modifications.filter((swagger) => swaggersToProcess.has(swagger));
+  const deletedSwaggers = diffs.deletions.filter((swagger) => swaggersToProcess.has(swagger));
+  const renamedSwaggers = diffs.renames.filter((rename) => swaggersToProcess.has(rename.to));
 
   const newExistingVersionDirs: string[] = [];
 
@@ -266,7 +261,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
 export async function filterSuppressedSwaggers(
   context: Context,
-  rootPath: string,
   swaggers: string[],
 ): Promise<string[]> {
   const tool =
@@ -276,7 +270,12 @@ export async function filterSuppressedSwaggers(
 
   const result = [];
   for (const swaggerPath of swaggers) {
-    if (!(await isSwaggerSuppressed(tool, path.resolve(rootPath, swaggerPath), swaggerPath))) {
+    const headPath = path.resolve(context.localSpecRepoPath, swaggerPath);
+    const swaggerPathToCheck = existsSync(headPath)
+      ? headPath
+      : path.resolve(context.prInfo!.tempRepoFolder, swaggerPath);
+
+    if (!(await isSwaggerSuppressed(tool, swaggerPathToCheck, swaggerPath))) {
       result.push(swaggerPath);
     }
   }

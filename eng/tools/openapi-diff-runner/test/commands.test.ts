@@ -433,20 +433,15 @@ describe("Swagger suppressions", () => {
       },
     };
 
-    const headResult = await filterSuppressedSwaggers(testContext, testContext.localSpecRepoPath, [
+    const result = await filterSuppressedSwaggers(testContext, [
       "specification/contoso/stable/one.json",
       "specification/contoso/stable/two.json",
       "specification/contoso/preview/three.json",
       "specification/contoso/rules/rule-scoped.json",
+      "specification/contoso/deleted/removed.json",
     ]);
-    const baseResult = await filterSuppressedSwaggers(
-      testContext,
-      testContext.prInfo.tempRepoFolder,
-      ["specification/contoso/deleted/removed.json"],
-    );
 
-    expect(headResult).toEqual(["specification/contoso/rules/rule-scoped.json"]);
-    expect(baseResult).toEqual([]);
+    expect(result).toEqual(["specification/contoso/rules/rule-scoped.json"]);
   });
 
   it("uses the cross-version suppression name independently", async () => {
@@ -456,8 +451,11 @@ describe("Swagger suppressions", () => {
         ...context,
         localSpecRepoPath: resolve(fixtureRoot, "head"),
         runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        prInfo: {
+          ...context.prInfo,
+          tempRepoFolder: resolve(fixtureRoot, "base"),
+        },
       },
-      resolve(fixtureRoot, "head"),
       [
         "specification/contoso/stable/one.json",
         "specification/contoso/preview/three.json",
