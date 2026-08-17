@@ -2,6 +2,13 @@
 # Pending TSV integration based on OAS3 emission; this area depends on external
 # API specifications that don't emit accurate OAS2 autorest output.
 
+- tool: SwaggerAll
+  reason: >
+     Foundry does not emit accurate OpenAPI 2 output.
+  paths:
+    - "."
+    - "**"
+
 - tool: TypeSpecValidation
   reason: >
      Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
