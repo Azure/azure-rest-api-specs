@@ -161,7 +161,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OptimizationJob'
+                $ref: '#/components/schemas/AgentOptimizationJob'
         4XX:
           description: Client error
           content:
@@ -181,7 +181,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OptimizationJob'
+              $ref: '#/components/schemas/AgentOptimizationJob'
         description: The job to create.
       x-ms-foundry-meta:
         conditional_previews:
@@ -274,7 +274,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/OptimizationJobListItem'
+                      $ref: '#/components/schemas/AgentOptimizationJobListItem'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -343,7 +343,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OptimizationJob'
+                $ref: '#/components/schemas/AgentOptimizationJob'
         4XX:
           description: Client error
           content:
@@ -440,7 +440,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OptimizationJob'
+                $ref: '#/components/schemas/AgentOptimizationJob'
         4XX:
           description: Client error
           content:
@@ -38483,11 +38483,18 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/ListRoutinesParameters.limit'
         - $ref: '#/components/parameters/ListRoutinesParameters.after'
-        - $ref: '#/components/parameters/ListRoutinesParameters.before'
-        - $ref: '#/components/parameters/ListRoutinesParameters.order'
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -38504,23 +38511,17 @@ paths:
                 type: object
                 required:
                   - data
-                  - has_more
                 properties:
                   data:
                     type: array
                     items:
                       $ref: '#/components/schemas/Routine'
                     description: The requested list of items.
-                  first_id:
+                  next_link:
                     type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                    format: uri
+                    description: The URL to fetch the next page of results, or absent if there are no additional pages.
+                description: A page of items with a URL cursor to the next page.
         4XX:
           description: Client error
           content:
@@ -38537,7 +38538,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:
     put:
       operationId: createOrUpdateRoutine
@@ -38551,7 +38552,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/CreateOrUpdateRoutineParameters.routine_name'
         - name: api-version
           in: query
@@ -38589,7 +38590,7 @@ paths:
               $ref: '#/components/schemas/RoutineCreateOrUpdateRequest'
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     get:
       operationId: getRoutine
       summary: Get a routine
@@ -38602,7 +38603,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/GetRoutineParameters'
         - name: api-version
           in: query
@@ -38634,7 +38635,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     delete:
       operationId: deleteRoutine
       summary: Delete a routine
@@ -38647,7 +38648,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/DeleteRoutineParameters'
         - name: api-version
           in: query
@@ -38675,7 +38676,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}/runs:
     get:
       operationId: listRoutineRuns
@@ -38689,13 +38690,20 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/ListRoutineRunsParameters.routine_name'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.limit'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.after'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.before'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.order'
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -38712,23 +38720,17 @@ paths:
                 type: object
                 required:
                   - data
-                  - has_more
                 properties:
                   data:
                     type: array
                     items:
                       $ref: '#/components/schemas/RoutineRun'
                     description: The requested list of items.
-                  first_id:
+                  next_link:
                     type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                    format: uri
+                    description: The URL to fetch the next page of results, or absent if there are no additional pages.
+                description: A page of items with a URL cursor to the next page.
         4XX:
           description: Client error
           content:
@@ -38745,7 +38747,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:disable:
     post:
       operationId: disableRoutine
@@ -38759,7 +38761,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/DisableRoutineParameters'
         - name: api-version
           in: query
@@ -38791,7 +38793,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:dispatch_async:
     post:
       operationId: dispatchRoutineAsync
@@ -38805,7 +38807,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/DispatchRoutineAsyncParameters.routine_name'
         - name: api-version
           in: query
@@ -38843,7 +38845,7 @@ paths:
               $ref: '#/components/schemas/DispatchRoutineRequest'
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /routines/{routine_name}:enable:
     post:
       operationId: enableRoutine
@@ -38857,7 +38859,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - $ref: '#/components/parameters/EnableRoutineParameters'
         - name: api-version
           in: query
@@ -38889,7 +38891,7 @@ paths:
         - Routines
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /schedules:
     get:
       operationId: Schedules_list
@@ -39928,7 +39930,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - name: lease_owner
           in: query
           required: false
@@ -39996,7 +39998,7 @@ paths:
         contract: agentserver-persistence
         usage: cross-language-sdk-persistence
         required_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     get:
       operationId: listAgentServerTasks
       summary: List tasks
@@ -40009,7 +40011,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - name: agent_name
           in: query
           required: false
@@ -40132,7 +40134,7 @@ paths:
         contract: agentserver-persistence
         usage: cross-language-sdk-persistence
         required_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /tasks/{task_id}:
     get:
       operationId: getAgentServerTask
@@ -40146,7 +40148,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - name: task_id
           in: path
           required: true
@@ -40185,7 +40187,7 @@ paths:
         contract: agentserver-persistence
         usage: cross-language-sdk-persistence
         required_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     patch:
       operationId: patchAgentServerTask
       summary: Patch a task
@@ -40198,7 +40200,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - name: task_id
           in: path
           required: true
@@ -40279,7 +40281,7 @@ paths:
         contract: agentserver-persistence
         usage: cross-language-sdk-persistence
         required_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     delete:
       operationId: deleteAgentServerTask
       summary: Delete a task
@@ -40292,7 +40294,7 @@ paths:
           schema:
             type: string
             enum:
-              - Routines=V1Preview
+              - Routines=V2Preview
         - name: task_id
           in: path
           required: true
@@ -40341,7 +40343,7 @@ paths:
         contract: agentserver-persistence
         usage: cross-language-sdk-persistence
         required_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
   /toolboxes:
     get:
       operationId: listToolboxes
@@ -41638,15 +41640,7 @@ components:
       name: after
       in: query
       required: false
-      description: An opaque cursor returned as last_id by the previous list-runs response.
-      schema:
-        type: string
-      explode: false
-    ListRoutineRunsParameters.before:
-      name: before
-      in: query
-      required: false
-      description: Unsupported. Reserved for future backward pagination support.
+      description: An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.
       schema:
         type: string
       explode: false
@@ -41667,14 +41661,6 @@ components:
         type: integer
         format: int32
       explode: false
-    ListRoutineRunsParameters.order:
-      name: order
-      in: query
-      required: false
-      description: The ordering direction. Supported values are asc and desc.
-      schema:
-        type: string
-      explode: false
     ListRoutineRunsParameters.routine_name:
       name: routine_name
       in: path
@@ -41687,15 +41673,7 @@ components:
       name: after
       in: query
       required: false
-      description: An opaque cursor returned as last_id by the previous list response.
-      schema:
-        type: string
-      explode: false
-    ListRoutinesParameters.before:
-      name: before
-      in: query
-      required: false
-      description: Unsupported. Reserved for future backward pagination support.
+      description: An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.
       schema:
         type: string
       explode: false
@@ -41707,14 +41685,6 @@ components:
       schema:
         type: integer
         format: int32
-      explode: false
-    ListRoutinesParameters.order:
-      name: order
-      in: query
-      required: false
-      description: The ordering direction. Supported values are asc and desc.
-      schema:
-        type: string
       explode: false
     UpdateToolboxRequest.name:
       name: name
@@ -42600,6 +42570,362 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
+    AgentOptimizationCandidate:
+      type: object
+      required:
+        - name
+        - avg_score
+        - avg_tokens
+      properties:
+        candidate_id:
+          type: string
+          description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
+        name:
+          type: string
+          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        mutations:
+          type: object
+          unevaluatedProperties: {}
+          description: "What was mutated from the baseline (e.g., {system_prompt: 'new prompt'})."
+        avg_score:
+          type: number
+          format: double
+          description: Average composite score across all tasks.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average token usage across all tasks.
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier for this candidate's scoring run.
+        promotion:
+          $ref: '#/components/schemas/PromotionInfo'
+          description: Promotion metadata. Null if the candidate has not been promoted.
+      description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationDatasetCriterion:
+      type: object
+      required:
+        - name
+        - instruction
+      properties:
+        name:
+          type: string
+          description: Criterion name.
+        instruction:
+          type: string
+          description: Criterion instruction / description.
+      description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationDatasetInput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationDatasetInputType'
+          description: Dataset input type discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          inline: '#/components/schemas/AgentOptimizationInlineDatasetInput'
+          reference: '#/components/schemas/AgentOptimizationReferenceDatasetInput'
+      description: Base discriminated model for dataset input. Either inline items or a registered reference.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationDatasetInputType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - inline
+            - reference
+      description: Discriminator values for the dataset input union.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationDatasetItem:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The user query / prompt.
+        ground_truth:
+          type: string
+          description: Expected ground truth answer.
+        desired_num_turns:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 20
+          description: Desired number of conversation turns for simulation mode (1-20).
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationDatasetCriterion'
+          description: Per-item evaluation criteria.
+      description: A single item in an inline dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationEvaluatorRef:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Evaluator name.
+        version:
+          type: string
+          description: Evaluator version. If not specified, the latest version is used.
+      description: Reference to a named evaluator, optionally pinned to a version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationInlineDatasetInput:
+      type: object
+      required:
+        - type
+        - items
+      properties:
+        type:
+          type: string
+          enum:
+            - inline
+          description: Dataset input type discriminator.
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationDatasetItem'
+          description: Dataset items.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+      description: Inline dataset — items supplied directly in the request body.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          $ref: '#/components/schemas/AgentOptimizationJobInputs'
+          description: Caller-supplied inputs.
+        result:
+          $ref: '#/components/schemas/AgentOptimizationJobResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was last updated, represented in Unix time.
+          readOnly: true
+        progress:
+          $ref: '#/components/schemas/AgentOptimizationJobProgress'
+          description: Progress snapshot. May be present in terminal states reflecting last-known progress.
+          readOnly: true
+        warnings:
+          type: array
+          items:
+            type: string
+          description: Non-fatal warnings emitted at any point during optimization.
+          readOnly: true
+      description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationJobInputs:
+      type: object
+      required:
+        - agent
+        - train_dataset
+        - evaluators
+      properties:
+        agent:
+          $ref: '#/components/schemas/OptimizedAgentIdentifier'
+          description: The agent (and pinned version) being optimized.
+        train_dataset:
+          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+          description: Training dataset — either inline items or a reference to a registered dataset. Required.
+        validation_dataset:
+          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+          description: Optional held-out validation dataset for measuring generalization of the final candidate.
+        evaluators:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationEvaluatorRef'
+          description: Job-level evaluators referenced by name and optional version. Required; at least one must be provided.
+        options:
+          $ref: '#/components/schemas/AgentOptimizationOptions'
+          description: Tuning knobs and run-mode.
+      description: Caller-supplied inputs for an optimization job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationJobListItem:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was last updated, represented in Unix time.
+          readOnly: true
+        progress:
+          $ref: '#/components/schemas/AgentOptimizationJobProgress'
+          description: Progress snapshot. May be present in terminal states reflecting last-known progress.
+          readOnly: true
+        agent:
+          $ref: '#/components/schemas/OptimizedAgentIdentifier'
+          description: The agent targeted by this optimization job.
+          readOnly: true
+      description: Slim job representation returned by the LIST endpoint.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationJobProgress:
+      type: object
+      required:
+        - candidates_completed
+        - best_score
+        - elapsed_seconds
+      properties:
+        candidates_completed:
+          type: integer
+          format: int32
+          description: Number of candidates whose evaluation has completed so far.
+        best_score:
+          type: number
+          format: double
+          description: Best score observed so far across all candidates.
+        elapsed_seconds:
+          type: number
+          format: double
+          description: Wall-clock time elapsed in seconds since the job began executing.
+      description: In-flight progress; only populated while status is queued or in_progress.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationJobResult:
+      type: object
+      properties:
+        baseline:
+          type: string
+          description: Candidate ID of the original (un-optimized) baseline evaluation.
+        best:
+          type: string
+          description: Candidate ID of the highest-scoring candidate found during optimization.
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationCandidate'
+          description: All evaluated candidates including baseline.
+      description: Terminal-state result body. Populated when status is succeeded or failed.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationOptions:
+      type: object
+      properties:
+        max_candidates:
+          type: integer
+          format: int32
+          minimum: 1
+          description: 'Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.'
+          default: 5
+        optimization_config:
+          type: object
+          unevaluatedProperties: {}
+          description: Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.
+        eval_model:
+          type: string
+          description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
+        optimization_model:
+          type: string
+          description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
+        evaluation_level:
+          $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
+        max_stalls:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.
+          default: 5
+      description: Tuning knobs and run-mode for an optimization job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
+    AgentOptimizationReferenceDatasetInput:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - reference
+          description: Dataset input type discriminator.
+        name:
+          type: string
+          description: Registered dataset name.
+        version:
+          type: string
+          description: Dataset version. If not specified, the latest version is used.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+      description: Reference to a registered Foundry dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     AgentReference:
       type: object
       required:
@@ -45047,6 +45373,16 @@ components:
           description: The container image for the hosted agent.
           examples:
             - my-registry.azurecr.io/my-hosted-agent:latest
+        registry_connection_id:
+          type: string
+          description: |-
+            The id (or name) of the Foundry project connection that provides the credentials used to
+            authenticate to the private container registry hosting `image`. The connection abstracts the
+            auth mechanism — for example a managed-identity-federated token exchange, or a username/token
+            secret — so registry credentials are never part of the agent definition. Omit for public images
+            or registries already reachable by the platform's default identity (for example, Azure Container Registry).
+          examples:
+            - my-registry-connection
       description: Container-based deployment configuration for a hosted agent.
     ContainerDetails:
       type: object
@@ -45760,7 +46096,7 @@ components:
       description: A custom event routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     DailyRecurrenceSchedule:
       type: object
       required:
@@ -45878,7 +46214,7 @@ components:
         mapping:
           simple_qna: '#/components/schemas/SimpleQnADataGenerationJobOptions'
           traces: '#/components/schemas/TracesDataGenerationJobOptions'
-          task_generation: '#/components/schemas/TaskGenerationDataGenerationJobOptions'
+          simulation_seed: '#/components/schemas/SimulationSeedDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
       description: Options for managing data generation jobs.
       x-ms-foundry-meta:
@@ -46006,7 +46342,7 @@ components:
             - simple_qna
             - traces
             - tool_use
-            - task_generation
+            - simulation_seed
       description: The supported data generation job types.
       x-ms-foundry-meta:
         conditional_previews:
@@ -46521,7 +46857,7 @@ components:
       description: Request body for the public dispatch_async route.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     DispatchRoutineResponse:
       type: object
       properties:
@@ -46537,7 +46873,7 @@ components:
       description: Identifiers returned after a routine dispatch is queued.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     EndpointBasedEvaluatorDefinition:
       type: object
       required:
@@ -49235,7 +49571,7 @@ components:
       description: Known GitHub issue events that can fire a routine.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     GitHubIssueRoutineTrigger:
       type: object
       required:
@@ -49270,7 +49606,7 @@ components:
       description: A GitHub issue routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -49751,7 +50087,7 @@ components:
       description: A manual payload used to test an invocations API routine dispatch.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     InvokeAgentInvocationsApiRoutineAction:
       type: object
       required:
@@ -49781,7 +50117,7 @@ components:
       description: Dispatches a routine through the raw invocations API. Exactly one of agent_name or agent_endpoint_id must be provided.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     InvokeAgentResponsesApiDispatchPayload:
       type: object
       required:
@@ -49800,7 +50136,7 @@ components:
       description: A manual payload used to test a responses API routine dispatch.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     InvokeAgentResponsesApiRoutineAction:
       type: object
       required:
@@ -49830,7 +50166,7 @@ components:
       description: Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     ItemGenerationParams:
       type: object
       required:
@@ -78422,7 +78758,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An OpenAPI tool stored in a toolbox.
-    OptimizationAgentIdentifier:
+    OptimizedAgentIdentifier:
       type: object
       required:
         - agent_name
@@ -78434,362 +78770,6 @@ components:
           type: string
           description: Pinned agent version. Defaults to latest if omitted.
       description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationCandidate:
-      type: object
-      required:
-        - name
-        - avg_score
-        - avg_tokens
-      properties:
-        candidate_id:
-          type: string
-          description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
-        name:
-          type: string
-          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
-        mutations:
-          type: object
-          unevaluatedProperties: {}
-          description: "What was mutated from the baseline (e.g., {system_prompt: 'new prompt'})."
-        avg_score:
-          type: number
-          format: double
-          description: Average composite score across all tasks.
-        avg_tokens:
-          type: number
-          format: double
-          description: Average token usage across all tasks.
-        eval_id:
-          type: string
-          description: Foundry evaluation identifier used to score this candidate.
-        eval_run_id:
-          type: string
-          description: Foundry evaluation run identifier for this candidate's scoring run.
-        promotion:
-          $ref: '#/components/schemas/PromotionInfo'
-          description: Promotion metadata. Null if the candidate has not been promoted.
-      description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationDatasetCriterion:
-      type: object
-      required:
-        - name
-        - instruction
-      properties:
-        name:
-          type: string
-          description: Criterion name.
-        instruction:
-          type: string
-          description: Criterion instruction / description.
-      description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationDatasetInput:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OptimizationDatasetInputType'
-          description: Dataset input type discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          inline: '#/components/schemas/OptimizationInlineDatasetInput'
-          reference: '#/components/schemas/OptimizationReferenceDatasetInput'
-      description: Base discriminated model for dataset input. Either inline items or a registered reference.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationDatasetInputType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - inline
-            - reference
-      description: Discriminator values for the dataset input union.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationDatasetItem:
-      type: object
-      properties:
-        query:
-          type: string
-          description: The user query / prompt.
-        ground_truth:
-          type: string
-          description: Expected ground truth answer.
-        desired_num_turns:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 20
-          description: Desired number of conversation turns for simulation mode (1-20).
-        criteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/OptimizationDatasetCriterion'
-          description: Per-item evaluation criteria.
-      description: A single item in an inline dataset.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationEvaluatorRef:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          description: Evaluator name.
-        version:
-          type: string
-          description: Evaluator version. If not specified, the latest version is used.
-      description: Reference to a named evaluator, optionally pinned to a version.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationInlineDatasetInput:
-      type: object
-      required:
-        - type
-        - items
-      properties:
-        type:
-          type: string
-          enum:
-            - inline
-          description: Dataset input type discriminator.
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OptimizationDatasetItem'
-          description: Dataset items.
-      allOf:
-        - $ref: '#/components/schemas/OptimizationDatasetInput'
-      description: Inline dataset — items supplied directly in the request body.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationJob:
-      type: object
-      required:
-        - id
-        - status
-        - created_at
-        - updated_at
-      properties:
-        id:
-          type: string
-          description: Server-assigned unique identifier.
-          readOnly: true
-        inputs:
-          $ref: '#/components/schemas/OptimizationJobInputs'
-          description: Caller-supplied inputs.
-        result:
-          $ref: '#/components/schemas/OptimizationJobResult'
-          description: Result produced on success.
-          readOnly: true
-        status:
-          $ref: '#/components/schemas/JobStatus'
-          description: Current lifecycle status.
-          readOnly: true
-        error:
-          $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
-          readOnly: true
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time.
-          readOnly: true
-        updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was last updated, represented in Unix time.
-          readOnly: true
-        progress:
-          $ref: '#/components/schemas/OptimizationJobProgress'
-          description: Progress snapshot. May be present in terminal states reflecting last-known progress.
-          readOnly: true
-        warnings:
-          type: array
-          items:
-            type: string
-          description: Non-fatal warnings emitted at any point during optimization.
-          readOnly: true
-      description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationJobInputs:
-      type: object
-      required:
-        - agent
-        - train_dataset
-        - evaluators
-      properties:
-        agent:
-          $ref: '#/components/schemas/OptimizationAgentIdentifier'
-          description: The agent (and pinned version) being optimized.
-        train_dataset:
-          $ref: '#/components/schemas/OptimizationDatasetInput'
-          description: Training dataset — either inline items or a reference to a registered dataset. Required.
-        validation_dataset:
-          $ref: '#/components/schemas/OptimizationDatasetInput'
-          description: Optional held-out validation dataset for measuring generalization of the final candidate.
-        evaluators:
-          type: array
-          items:
-            $ref: '#/components/schemas/OptimizationEvaluatorRef'
-          description: Job-level evaluators referenced by name and optional version. Required; at least one must be provided.
-        options:
-          $ref: '#/components/schemas/OptimizationOptions'
-          description: Tuning knobs and run-mode.
-      description: Caller-supplied inputs for an optimization job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationJobListItem:
-      type: object
-      required:
-        - id
-        - status
-        - created_at
-        - updated_at
-      properties:
-        id:
-          type: string
-          description: Server-assigned unique identifier.
-          readOnly: true
-        status:
-          $ref: '#/components/schemas/JobStatus'
-          description: Current lifecycle status.
-          readOnly: true
-        error:
-          $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
-          readOnly: true
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time.
-          readOnly: true
-        updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was last updated, represented in Unix time.
-          readOnly: true
-        progress:
-          $ref: '#/components/schemas/OptimizationJobProgress'
-          description: Progress snapshot. May be present in terminal states reflecting last-known progress.
-          readOnly: true
-        agent:
-          $ref: '#/components/schemas/OptimizationAgentIdentifier'
-          description: The agent targeted by this optimization job.
-          readOnly: true
-      description: Slim job representation returned by the LIST endpoint.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationJobProgress:
-      type: object
-      required:
-        - candidates_completed
-        - best_score
-        - elapsed_seconds
-      properties:
-        candidates_completed:
-          type: integer
-          format: int32
-          description: Number of candidates whose evaluation has completed so far.
-        best_score:
-          type: number
-          format: double
-          description: Best score observed so far across all candidates.
-        elapsed_seconds:
-          type: number
-          format: double
-          description: Wall-clock time elapsed in seconds since the job began executing.
-      description: In-flight progress; only populated while status is queued or in_progress.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationJobResult:
-      type: object
-      properties:
-        baseline:
-          type: string
-          description: Candidate ID of the original (un-optimized) baseline evaluation.
-        best:
-          type: string
-          description: Candidate ID of the highest-scoring candidate found during optimization.
-        candidates:
-          type: array
-          items:
-            $ref: '#/components/schemas/OptimizationCandidate'
-          description: All evaluated candidates including baseline.
-      description: Terminal-state result body. Populated when status is succeeded or failed.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationOptions:
-      type: object
-      properties:
-        max_candidates:
-          type: integer
-          format: int32
-          minimum: 1
-          description: 'Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.'
-          default: 5
-        optimization_config:
-          type: object
-          unevaluatedProperties: {}
-          description: Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.
-        eval_model:
-          type: string
-          description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
-        optimization_model:
-          type: string
-          description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
-        evaluation_level:
-          $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
-        max_stalls:
-          type: integer
-          format: int32
-          minimum: 1
-          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.
-          default: 5
-      description: Tuning knobs and run-mode for an optimization job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    OptimizationReferenceDatasetInput:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - reference
-          description: Dataset input type discriminator.
-        name:
-          type: string
-          description: Registered dataset name.
-        version:
-          type: string
-          description: Dataset version. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/OptimizationDatasetInput'
-      description: Reference to a registered Foundry dataset.
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V2Preview
@@ -79762,7 +79742,7 @@ components:
       description: A routine definition returned by the service.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineAction:
       type: object
       required:
@@ -79779,7 +79759,7 @@ components:
       description: Base model for a routine action.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineActionType:
       anyOf:
         - type: string
@@ -79790,7 +79770,7 @@ components:
       description: The discriminator values supported for routine actions.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineAttemptSource:
       anyOf:
         - type: string
@@ -79804,7 +79784,7 @@ components:
       description: Known source paths that can produce a routine run.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineCreateOrUpdateRequest:
       type: object
       properties:
@@ -79826,7 +79806,7 @@ components:
       description: The request body used to create or update a routine.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineDispatchPayload:
       type: object
       required:
@@ -79843,7 +79823,7 @@ components:
       description: Base model for a manual dispatch payload.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineDispatchPayloadType:
       anyOf:
         - type: string
@@ -79854,7 +79834,7 @@ components:
       description: The discriminator values supported for manual routine dispatch payloads.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineRun:
       type: object
       required:
@@ -79935,7 +79915,7 @@ components:
       description: A single routine run returned from the run history API.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineRunPhase:
       anyOf:
         - type: string
@@ -79948,13 +79928,13 @@ components:
       description: Known lifecycle phases recorded for a routine run.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineRunStatus:
       type: string
       description: The status of a routine run.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineTrigger:
       type: object
       required:
@@ -79973,7 +79953,7 @@ components:
       description: Base model for a routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RoutineTriggerType:
       anyOf:
         - type: string
@@ -79986,7 +79966,7 @@ components:
       description: The discriminator values supported for routine triggers.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     RubricBasedEvaluatorDefinition:
       type: object
       required:
@@ -80218,7 +80198,7 @@ components:
       description: A recurring cron-based routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     ScheduleRun:
       type: object
       required:
@@ -80566,6 +80546,22 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
+    SimulationSeedDataGenerationJobOptions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - simulation_seed
+          description: The data generation job type, which is SimulationSeed for this model.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOptions'
+      description: The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     Skill:
       type: object
       required:
@@ -80907,22 +80903,6 @@ components:
           azure_ai_model: '#/components/schemas/AzureAIModelTargetUpdate'
           azure_ai_agent: '#/components/schemas/AzureAIAgentTargetUpdate'
       description: Base class for targets with discriminator support.
-    TaskGenerationDataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - task_generation
-          description: The data generation job type, which is TaskGeneration for this model.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     TaxonomyCategory:
       type: object
       required:
@@ -81118,7 +81098,7 @@ components:
       description: A one-shot timer routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
-          - Routines=V1Preview
+          - Routines=V2Preview
     ToolCallOutputContent:
       anyOf:
         - type: object
@@ -81439,6 +81419,10 @@ components:
           enum:
             - traces
           description: The data generation job type, which is Traces for this model.
+        redact_private_content:
+          type: boolean
+          description: Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.
+          default: true
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.
@@ -83109,7 +83093,11 @@ components:
           description: The CSDL YAML definition of the workflow.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
-      description: The workflow agent definition.
+      description: |-
+        The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026.
+        If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
+        see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
+      deprecated: true
       x-ms-foundry-meta:
         required_previews:
           - WorkflowAgents=V1Preview

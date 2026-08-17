@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/myResourceGroup/providers/Microsoft.Relay/clusters/testCluster",
+            "location": "South Central US",
+            "name": "testCluster",
+            "properties": {
+              "metricId": "PROD-SN-VR51001",
+              "provisioningState": "Succeeded",
+              "status": "Active",
+              "supportsScaling": true,
+              "zoneRedundant": true
+            },
+            "sku": {
+              "name": "Dedicated",
+              "tier": "Dedicated",
+              "capacity": 3
+            },
+            "systemData": {
+              "createdAt": "2026-07-15T20:30:00Z",
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2026-07-15T20:35:00Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "environment": "production"
+            },
+            "type": "Microsoft.Relay/clusters"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Clusters_ListByResourceGroup",
+  "title": "ClustersListByResourceGroup"
+}

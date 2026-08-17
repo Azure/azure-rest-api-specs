@@ -20,13 +20,15 @@ missing a violation -- a human reviewer catches that. Its failure mode is
 crying wolf, being muted, and then catching nothing at all. A muted reviewer
 has zero value regardless of how good its true positives are.
 
-So the true-negative file is not an afterthought here. It is the gate.
+So the true-negative file is not an afterthought here. It is the load-bearing
+regression suite.
 
 ## Directory structure
 
 ```
 data-plane-api-reviewer/
   .vally.yaml                    # suite definitions: `all` and `true-negatives`
+  ROLLOUT.md                     # production rollout phases and decision criteria
   vally/
     eval-resource-modeling.yaml
     eval-error-design.yaml
@@ -34,7 +36,7 @@ data-plane-api-reviewer/
     eval-lro-and-paging.yaml
     eval-visibility-and-secrets.yaml
     eval-versioning.yaml
-    eval-true-negatives.yaml     # the gate -- see below
+    eval-true-negatives.yaml     # the regression suite -- see below
   fixtures/
     typespec-data-plane/         # single-version .tsp fixtures
     version-pairs/               # previous + new version, for versioning evals
@@ -99,7 +101,8 @@ most likely versioning false positive.
 
 ### Rules for this file that exist to be defended
 
-These are load-bearing. Changing any of them changes what the gate means.
+These are load-bearing. Changing any of them changes what the regression
+results mean.
 
 - **`runs: 3`**, not `runs: 1`. A single run cannot distinguish an
   intermittent false positive from a flake. Three can.
@@ -126,7 +129,7 @@ These are load-bearing. Changing any of them changes what the gate means.
 - **blocking false positives** -- 🔴 findings on true-negative stimuli;
 - **non-blocking false positives** -- 🟡 and 💡 findings on the same.
 
-Only the blocking count gates promotion. The non-blocking count is tracked
+The blocking count fails the regression run. The non-blocking count is tracked
 and trended because it is the number that actually predicts a reviewer being
 muted: nobody disables a bot over one wrong blocking finding, they disable it
 over forty low-value suggestions. Watch it climb _before_ reviewers start
@@ -143,19 +146,20 @@ The consequence is that the metric depends on the report format in
 [`data-plane-api-reviewer.agent.md`](../../../agents/data-plane-api-reviewer.agent.md)
 -- specifically on findings appearing under a `### 🔴 Blocking` heading or as
 glyph-led entries. If that format changes, change the anchoring in
-`run-evals.ps1` and in the graders in the same pull request, or the gate
+`run-evals.ps1` and in the graders in the same pull request, or the suite
 silently stops measuring anything.
 
-### Promotion gate
+### Rollout regression signal
 
-Rollout phase 2 -- switching on inline review comments in
-[`data-plane-api-review.md`](../../../workflows/data-plane-api-review.md) --
-requires **zero blocking false positives across three runs of the full
-true-negative suite**:
+[Rollout Phase 2](ROLLOUT.md) keeps the workflow manually label-gated while
+adding inline review comments. Human feedback on selected real pull requests is
+the primary rollout signal. The true-negative suite remains the repeatable
+regression check: run it after reviewer, prompt, rule, or model changes and
+investigate blocking false positives or rising non-blocking noise.
 
 ```powershell
 cd .github/skills/evals
-.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives" -Repeat 3
+.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives"
 ```
 
 ## Quick start
@@ -175,8 +179,8 @@ cd .github/skills/evals
 # Full data-plane suite
 .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer"
 
-# True negatives only, three times -- the phase-2 gate
-.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives" -Repeat 3
+# True-negative regression suite (`runs: 3` already executes each stimulus three times)
+.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives"
 
 # A single category
 .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "eval-error-design"
@@ -193,18 +197,19 @@ Run `Get-Help .\run-evals.ps1 -Detailed` for all parameters.
 one suite run_. `-Repeat 3` executes the whole suite three times. Setting both
 gives **nine** executions per stimulus, not three.
 
-The phase-2 gate wants three executions per stimulus, and `runs: 3` already
-provides that, so:
+The standard true-negative regression run wants three executions per stimulus,
+and `runs: 3` already provides that, so:
 
 | Goal                                  | Setting                           | Executions per stimulus |
 | ------------------------------------- | --------------------------------- | ----------------------- |
-| The phase-2 gate                      | `runs: 3` (default), no `-Repeat` | 3                       |
+| Standard true-negative regression run | `runs: 3` (default), no `-Repeat` | 3                       |
 | Stability _across_ suite runs         | `runs: 3` + `-Repeat 3`           | 9                       |
 | Fast iteration while editing a grader | `--runs 1`                        | 1                       |
 
 Earlier versions of this file and of `run-evals.ps1` showed
-`-Suite "eval-true-negatives" -Repeat 3` as _the_ gate command. That was wrong
-and invited a 9× run.
+`-Suite "eval-true-negatives" -Repeat 3` as the rollout command. That was wrong
+and invited a 9× run; `-Repeat` is only for an explicit cross-run stability
+study.
 
 ### Cost and duration
 
@@ -214,7 +219,7 @@ per trial, at `--workers 1`.
 
 It scales close to linearly with fixture count, so a 20-fixture true-negative
 suite is on the order of **1,400 AIU and 90 minutes**. That is affordable for a
-deliberate pre-merge gate run by a maintainer. It is _not_ affordable as
+deliberate pre-merge regression run by a maintainer. It is _not_ affordable as
 per-PR CI, and that constraint should be assumed by anyone proposing to wire
 the suite into a required check.
 
@@ -251,10 +256,11 @@ score.
    reported `Blocking FPs: 0 [GATING -- must be 0]` on a run containing a real
    invented finding. It now reconciles against a grader-derived count and
    prints `UNMEASURED` when the two disagree.
-3. **The runner exited 0 on a failed gate.** vally's `scoring.threshold` is an
+3. **The runner exited 0 when true-negative trials failed.** vally's
+   `scoring.threshold` is an
    aggregate, so a suite can clear it while individual stimuli fail. For a
-   true-negative gate whose stated rule is that a single failure is blocking,
-   that is wrong. `run-evals.ps1` now fails the run when any `tn-` trial fails.
+   true-negative regression suite, that hides the signal. `run-evals.ps1` now
+   fails the run when any `tn-` trial fails.
 
 **What the agent actually did:** mostly well. Of the five stimuli that failed
 at least one trial, four failed on grader artifacts rather than agent error —
@@ -448,11 +454,11 @@ severity-glyph grader. Measured precisely:
 | ---------------- | ---------------------------------------------- | ---------------------- |
 | All 7 TN stimuli | **caught** (glyph graders are family-agnostic) | 3 of 7 caught          |
 
-So the **phase-2 gating metric is fully covered** — a blocking false positive
-of any family is caught on every stimulus. What the _graders_ do not catch on
-those four is a non-blocking non-DP finding.
+So the **blocking false-positive regression metric is fully covered** — a
+blocking false positive of any family is caught on every stimulus. What the
+_graders_ do not catch on those four is a non-blocking non-DP finding.
 
-That is now **counted** even where it is not gated.
+That is now **counted** even where no specific grader covers it.
 `Get-TrueNegativeFindingCounts` in [`run-evals.ps1`](../run-evals.ps1) tallies
 every bracketed finding in finding position, at every severity,
 family-agnostically, charging each to the severity section it appears under.
@@ -528,7 +534,7 @@ zero counted false positives — which the reconciliation check reports as
 `UNMEASURED`, correctly telling you the two metrics disagree.
 
 **Unresolved.** Left as-is pending a decision on whether a contract violation
-of this shape should fail the gate.
+of this shape should fail the regression run.
 
 ### Unrun graders are untested hypotheses
 
@@ -587,13 +593,14 @@ re-reading either one has never once found a defect that running it did not.
 
 ### Suggestion budget on true negatives
 
-**At most 2 Suggestion-severity findings per true-negative trial. Gating.**
+**At most 2 Suggestion-severity findings per true-negative trial. Exceeding the
+budget fails the regression run.**
 
 Suggestions used to be free, and that was a hole in the measurement. TN graders
 are narrow by design — each names a specific trap — so a report could satisfy
 every grader while burying the author in individually-defensible 💡 findings.
-**Padding is precisely that pile.** A gate that prices suggestions at zero
-cannot measure the failure mode most likely to get the bot muted.
+**Padding is precisely that pile.** A regression metric that prices suggestions
+at zero cannot measure the failure mode most likely to get the bot muted.
 
 Banning them outright would be the opposite error, and would contradict the
 rubrics: `eval-true-negatives.yaml` explicitly permits asking, at 💡, whether a
@@ -618,7 +625,7 @@ Mechanics:
 Verified against 7 crafted reports whose correct score was known in advance
 (exactly-at-budget passes, three fails, Questions are free, Warnings are not
 Suggestions, retraction leaves the budget, Blocking does not leak in), plus 5
-regression probes proving the blocking gate is unchanged.
+regression probes proving the blocking detector is unchanged.
 
 ### Two changes that push in opposite directions — watch this in the next run
 
@@ -679,7 +686,7 @@ The counter-evidence is worth recording too, because the bias is narrower than
 it first looked: over the same period the corpus got measurably _harder_, not
 easier — TN prose blocks fell to 1.40/file against 0.92 for positives, from a
 12-to-1 separation — and the rule most often narrowed was the reviewer's own,
-under a newly gating Suggestion budget. The bias is in _attribution_, not in
+under a newly enforced Suggestion budget. The bias is in _attribution_, not in
 corpus difficulty.
 
 ### Removing a provocation requires a regression stimulus
@@ -740,15 +747,15 @@ Tolerance rescues glyph and position errors; it cannot rescue a dropped bracket
 without destroying the discriminator. That failure mode remains, and the honest
 position is that ~1 trial in 20 will fail on presentation.
 
-**Graders are tolerant; the gate is not.** The counter matches a Blocking
+**Graders are tolerant; the regression counter is not.** The counter matches a Blocking
 heading by glyph **or word**, so a bracketless finding under `### 🚫 Blocking`
 escapes the graders — correctly, it is a format failure — but is still charged
-to the blocking gate, which asks only whether the reviewer declared something
+to the blocking metric, which asks only whether the reviewer declared something
 blocking on a clean spec. Verified by probe in both directions.
 
 **Unsectioned findings are reported, not silently absorbed.** A flat
 `### Findings` list with no severity heading has genuinely unknowable severity,
-so it is charged to neither the gate nor the suggestion budget — but it is now
+so it is charged to neither the blocking metric nor the suggestion budget — but it is now
 counted and printed as a format failure. This closes the budget blind spot in
 the right place: an unsectioned pile is a formatting violation, not a budgeting
 problem.
@@ -783,7 +790,7 @@ the right rule family, every grader match verified by position rather than
 taken on trust. Suite scores 75–100%. This answered the question the project
 had been unable to answer: the reviewer does detect violations.
 
-### The gate fails
+### The historical rollout bar fails
 
 | Metric           | Value          | Verdict               |
 | ---------------- | -------------- | --------------------- |
@@ -803,7 +810,7 @@ is intentionally closed, but the Guidelines do not permit this"_ and raised it
 Blocking. Both halves were wrong — the Guidelines say
 `YOU SHOULD ... unless you are positive the symbol set will NEVER change`, and
 a `SHOULD` cannot support a Blocking finding. It appeared in **1 of 3** trials,
-the worst profile for a gate.
+the worst profile for a regression.
 
 ### Two failures were not the agent's fault
 
@@ -1032,8 +1039,7 @@ a compile error — hits all three at once. Their _graders_ are distinct, so the
 do not necessarily pass or fail together (in the first run,
 `tn-closed-union-justified` passed 3/3 while the other two failed 0/3), but
 they share a single input and a single author's idea of what a legitimate
-deviation looks like. Six distinct fixtures is still a thin base for a promotion
-gate.
+deviation looks like. Six distinct fixtures is still a thin regression corpus.
 
 ### Suppression coverage is narrow
 
@@ -1047,15 +1053,15 @@ suppression, and no coverage of suppression review outside union
 extensibility. This rebuild did not add one because prose confounding and
 padding were the higher-risk measurement failures.
 
-### Consequence for the promotion gate
+### Consequence for rollout decisions
 
 Because of these gaps, and because the new stimuli have not yet had an
 authorized vally run, the synthetic suite cannot bound a production
-false-positive rate or qualify the reviewer for phase 2 by itself. It can catch
-specific regressions. See the phase 0 dark launch in
-[`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md):
-real merged data-plane pull requests provide the distribution the synthetic
-corpus cannot.
+false-positive rate or decide a rollout phase by itself. It can catch specific
+regressions. During the manually controlled
+[Phase 2 canary](ROLLOUT.md#phase-2-is-a-human-feedback-canary), real author
+feedback is the primary signal because merged data-plane pull requests provide
+the distribution the synthetic corpus cannot.
 
 ## Model pinning
 
@@ -1065,19 +1071,17 @@ Two separate pins, with two separate rules.
 
 `model` in every eval file **must** stay equal to the top-level `model:` in
 [`.github/workflows/data-plane-api-review.md`](../../../workflows/data-plane-api-review.md).
-Both are currently `claude-opus-4.6`.
+Both are currently `gpt-5.6-sol`.
 
 This coupling is the whole reason the workflow pins a model at all. The
-false-positive rate is the promotion criterion for rollout phases 2 and 3;
-measuring it on one model and running production on another certifies a
-configuration that is never shipped.
+false-positive trend is useful only when the eval and production run the same
+model; otherwise the measurement describes a configuration that is never
+shipped.
 
 `vally`'s `model:` and gh-aw's are nominally different namespaces — gh-aw
 passes its pin through to the Copilot CLI as `COPILOT_MODEL` without validating
-it. `claude-opus-4.6` was verified to be a valid Copilot CLI model identifier,
-so for this value the two namespaces coincide and no mapping is needed. If a
-future model's identifiers differ between the two, document the mapping next to
-both pins.
+it. Both use `gpt-5.6-sol`, so no mapping is needed. If a future model's
+identifiers differ between the two, document the mapping next to both pins.
 
 The workflow pin was spelled `engine.model` until gh-aw v0.83.1 deprecated that
 form in favor of a top-level `model:`. The alignment check accepts both, so a
@@ -1134,7 +1138,7 @@ threat-detection decisions, and the alignment check does not constrain it.
    `environment.skills: ["../../../azure-api-review"]`. **Without it the
    stimulus runs against a bare model** — see the first-run notes above.
 5. Prefix a true-negative **stimulus name** with `tn-` too, so it counts toward
-   the false-positive metric and the blocking gate.
+   the false-positive and blocking regression metrics.
 6. Keep the true-negative share at or above 40%, and prefer a **new** fixture
    over a fourth stimulus against an existing one — see "The true-negative
    denominator is 6, not 8".

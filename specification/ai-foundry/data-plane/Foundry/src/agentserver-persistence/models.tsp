@@ -14,7 +14,7 @@ const AgentServerPersistenceContract = #{
 const AgentServerPersistenceRequiredPreviews = #{
   contract: "agentserver-persistence",
   usage: "cross-language-sdk-persistence",
-  required_previews: #[FoundryFeaturesOptInKeys.routines_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.routines_v2_preview],
 };
 
 // ---------------------------------------------------------------------------
