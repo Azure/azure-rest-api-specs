@@ -54,6 +54,7 @@ union ProvisioningState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is unreachable"
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   ExtensionUnreachable: "ExtensionUnreachable",
 }
 
@@ -1663,6 +1664,7 @@ model AccountProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1685,6 +1687,7 @@ model AccountProperties {
    */
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   capabilitySettings?: CapabilitySettings;
 
   /**
@@ -1692,6 +1695,7 @@ model AccountProperties {
    */
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(1)
@@ -1704,6 +1708,7 @@ model AccountProperties {
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model CapabilitySettings {
   /**
    * Azure resource ID of the document store used by agent runtime state.
@@ -1738,6 +1743,7 @@ model CapabilitySettings {
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @discriminator("hostingType")
 model AgentHostingConfiguration {
   /**
@@ -1758,6 +1764,7 @@ model AgentHostingConfiguration {
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedClusterAgentHostingConfiguration
   extends AgentHostingConfiguration {
   /**
@@ -1807,6 +1814,7 @@ model ManagedClusterAgentHostingConfiguration
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union AgentHostingType {
   string,
 
@@ -1827,6 +1835,7 @@ union AgentHostingType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1853,6 +1862,7 @@ union FoundryAutoUpgradeMode {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -3253,6 +3263,7 @@ model DeploymentProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   speculativeDecoding?: DeploymentSpeculativeDecoding;
 
   /**
@@ -3339,6 +3350,7 @@ model DeploymentProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model DeploymentSpeculativeDecoding {
   /**
    * Draft model used to generate speculative decoding tokens.
@@ -3461,6 +3473,7 @@ model SkuResource {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model PatchResourceSku {
   /**
    * The resource model definition representing SKU
@@ -3626,6 +3639,7 @@ model RaiPolicyProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   egressPolicy?: RaiEgressPolicyConfig;
 }
 
@@ -4318,6 +4332,7 @@ model ProjectProperties {
    */
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilitySettings?: CapabilitySettings;
 }
@@ -5903,6 +5918,7 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
@@ -5940,6 +5956,7 @@ model ManagedComputeDeploymentProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
@@ -5995,6 +6012,7 @@ model ManagedComputeDeploymentProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -6017,6 +6035,7 @@ model ManagedComputeDeploymentProvisioningDetails {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
@@ -6043,6 +6062,7 @@ model ManagedComputeDeploymentRoutes {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentListResult {
   /**
    * The link used to get the next page of managed compute deployments.
@@ -6067,6 +6087,7 @@ model ManagedComputeDeploymentListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ComputeProvisioningState {
   string,
 
@@ -6113,6 +6134,7 @@ union ComputeProvisioningState {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union VmPriority {
   string,
 
@@ -6132,6 +6154,7 @@ union VmPriority {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model Pool {
   /**
    * The name of the pool.
@@ -6163,6 +6186,7 @@ model Pool {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ComputeType {
   string,
 
@@ -6183,6 +6207,7 @@ union ComputeType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @discriminator("computeType")
 model ComputeProperties {
   /**
@@ -6224,6 +6249,7 @@ model ComputeProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ClusterComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -6250,6 +6276,7 @@ model ClusterComputeProperties extends ComputeProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -6292,6 +6319,7 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model SshSettings {
   /**
    * The SSH public key for authenticating to the compute instance.
@@ -6313,6 +6341,7 @@ model SshSettings {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ConnectivityEndpoints {
   /**
    * The public IP address of the compute instance.
@@ -6337,6 +6366,7 @@ model ConnectivityEndpoints {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute list.
@@ -6360,6 +6390,7 @@ model ComputeListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model WorkbenchProperties {
   /**
    * ARM resource ID of the parent cluster that hosts this workbench.
@@ -6426,6 +6457,7 @@ model WorkbenchProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model WorkbenchListResult {
   /**
    * The link used to get the next page of workbench list.
@@ -6449,6 +6481,7 @@ model WorkbenchListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentInfo {
   /**
    * Full ARM resource ID of the deployment.
@@ -6485,6 +6518,7 @@ model ManagedComputeDeploymentInfo {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeUsage {
   /**
    * Fully qualified resource ID for the managed compute usage.
@@ -6540,6 +6574,7 @@ model ManagedComputeUsage {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeUsageListResult {
   /**
    * The link used to get the next page of managed compute usages.
@@ -6564,6 +6599,7 @@ model ManagedComputeUsageListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesRequest {
   /**
    * The list of hypothetical deployments to evaluate against Azure Policy.
@@ -6580,6 +6616,7 @@ model EvaluateDeploymentPoliciesRequest {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesDeployment {
   /**
    * The name of the hypothetical deployment.
@@ -6601,6 +6638,7 @@ model EvaluateDeploymentPoliciesDeployment {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesDeploymentProperties {
   /**
    * The model to evaluate.
@@ -6622,6 +6660,7 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesResponse {
   /**
    * Per-deployment policy evaluation results, keyed by deployment name.
@@ -6639,6 +6678,7 @@ model EvaluateDeploymentPoliciesResponse {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union PolicyEvaluationOutcome {
   string,
 
@@ -6661,6 +6701,7 @@ union PolicyEvaluationOutcome {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model DeploymentPolicyEvaluationResult {
   /**
    * The evaluation outcome.
@@ -6688,6 +6729,7 @@ model DeploymentPolicyEvaluationResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model PolicyAssignmentEvaluationDetails {
   /**
    * The policy assignment ID.
@@ -6735,6 +6777,7 @@ model PolicyAssignmentEvaluationDetails {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model PolicyExpressionEvaluationDetails {
   /**
    * The policy expression.
@@ -6777,6 +6820,7 @@ model PolicyExpressionEvaluationDetails {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
@@ -6814,6 +6858,7 @@ model ManagedComputeCapacityProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model DeploymentSizeCapacity {
   /**
    * The number of accelerators required per model instance.
@@ -6843,6 +6888,7 @@ model DeploymentSizeCapacity {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeCapacityListResult {
   /**
    * The link used to get the next page of managed compute capacities.
@@ -6867,6 +6913,7 @@ model ManagedComputeCapacityListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union RaiEgressMode {
   string,
 
@@ -6888,6 +6935,7 @@ union RaiEgressMode {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union RaiEgressDefaultAction {
   string,
 
@@ -6905,6 +6953,7 @@ union RaiEgressDefaultAction {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union RaiEgressScheme {
   string,
 
@@ -6922,6 +6971,7 @@ union RaiEgressScheme {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union RaiEgressRuleActionType {
   string,
 
@@ -6945,6 +6995,7 @@ union RaiEgressRuleActionType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union RaiEgressHeaderOperation {
   string,
 
@@ -6965,6 +7016,7 @@ union RaiEgressHeaderOperation {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressSecretRef {
   /** Identifier of the secret to inject. */
   secretId: string;
@@ -6984,6 +7036,7 @@ model RaiEgressSecretRef {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressManagedIdentityRef {
   /** The resource/audience the token is requested for. */
   resource: string;
@@ -6999,6 +7052,7 @@ model RaiEgressManagedIdentityRef {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressHeaderValueRef {
   /** Resolve the value from a stored secret. */
   secretRef?: RaiEgressSecretRef;
@@ -7016,6 +7070,7 @@ model RaiEgressHeaderValueRef {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressHeaderTransform {
   /** The operation to perform on this header. */
   operation: RaiEgressHeaderOperation;
@@ -7045,6 +7100,7 @@ model RaiEgressHeaderTransform {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressRewriteTarget {
   /** Target scheme. Original scheme is kept if omitted. */
   scheme?: RaiEgressScheme;
@@ -7067,6 +7123,7 @@ model RaiEgressRewriteTarget {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressRuleAction {
   /** The kind of action. */
   actionType: RaiEgressRuleActionType;
@@ -7089,6 +7146,7 @@ model RaiEgressRuleAction {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union RaiEgressRuleType {
   string,
 
@@ -7107,6 +7165,7 @@ union RaiEgressRuleType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressRuleMatch {
   /**
    * Host pattern to match using DNS wildcard syntax (e.g., "\*.openai.com").
@@ -7129,6 +7188,7 @@ model RaiEgressRuleMatch {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressRule {
   /**
    * Name of the rule. Must be unique within the policy.
@@ -7166,6 +7226,7 @@ model RaiEgressRule {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model RaiEgressPolicyConfig {
   /**
    * The enforcement mode for egress rules.
