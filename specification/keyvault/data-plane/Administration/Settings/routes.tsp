@@ -20,6 +20,7 @@ op updateSetting is KeyVaultOperation<
      * The parameters to update an account setting.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
     @OpenAPI.extension("x-ms-client-flatten", true)
     @body
     parameters: UpdateSettingRequest;
