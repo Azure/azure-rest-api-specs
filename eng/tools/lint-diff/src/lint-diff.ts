@@ -1,5 +1,8 @@
 import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
+import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
+import { getSuppressionsForTools } from "@azure-tools/suppressions";
 import { writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { inspect, parseArgs, type ParseArgsConfig } from "node:util";
 import { correlateRuns } from "./correlateResults.ts";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.ts";
@@ -130,6 +133,8 @@ async function runLintDiff(
     throw error;
   }
 
+  affectedSwaggers = await getUnsuppressedSwaggers(afterPath, affectedSwaggers);
+
   if (beforeList.size === 0 && afterList.size === 0) {
     await writeFile(outFile, "No changes found. Exiting.");
     console.log("No changes found. Exiting.");
@@ -186,4 +191,29 @@ async function runLintDiff(
       `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
     );
   }
+}
+
+export async function getUnsuppressedSwaggers(
+  afterPath: string,
+  affectedSwaggers: Set<string>,
+): Promise<Set<string>> {
+  const result = new Set<string>();
+
+  for (const swaggerPath of affectedSwaggers) {
+    const suppressions = await getSuppressionsForTools(
+      [SWAGGER_SUPPRESSION_TOOLS.lintDiff, SWAGGER_SUPPRESSION_TOOLS.all],
+      resolve(afterPath, swaggerPath),
+    );
+    const isSuppressed = suppressions.some(
+      (suppression) => !suppression.rules?.length && !suppression.subRules?.length,
+    );
+
+    if (isSuppressed) {
+      console.log(`Skipping suppressed Swagger file: ${swaggerPath}`);
+    } else {
+      result.add(swaggerPath);
+    }
+  }
+
+  return result;
 }
