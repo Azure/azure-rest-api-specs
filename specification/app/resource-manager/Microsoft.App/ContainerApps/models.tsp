@@ -2547,6 +2547,85 @@ model SmbStorage {
 model ManagedEnvironmentsCollection is Azure.Core.Page<ManagedEnvironment>;
 
 /**
+ * Mode of the managed environment.
+ */
+@added(Versions.v2026_07_01)
+union ManagedEnvironmentMode {
+  string,
+
+  /** The environment supports consumption-only workloads. */
+  ConsumptionOnly: "ConsumptionOnly",
+
+  /** The environment supports workload profiles. */
+  WorkloadProfiles: "WorkloadProfiles",
+
+  /** The environment uses the Express mode. */
+  Express: "Express",
+
+  /** The environment is archived. */
+  Archived: "Archived",
+}
+
+/**
+ * Request body for checking whether a managed environment can migrate to a target mode.
+ */
+@added(Versions.v2026_07_01)
+model CheckMigrationEligibilityRequest {
+  /**
+   * The target environment mode to check migration eligibility against.
+   */
+  targetMode: string;
+}
+
+/**
+ * A blocking reason that prevents a managed environment migration.
+ */
+@added(Versions.v2026_07_01)
+model MigrationEligibilityFailureReason {
+  /**
+   * The error code identifying the blocker.
+   */
+  code: string;
+
+  /**
+   * A human-readable description of the blocker.
+   */
+  message: string;
+}
+
+/**
+ * Result of a read-only managed environment migration eligibility check.
+ */
+@added(Versions.v2026_07_01)
+model CheckMigrationEligibilityResponse {
+  /**
+   * Whether the managed environment can migrate to the requested target mode.
+   */
+  isEligible: boolean;
+
+  /**
+   * The name of the managed environment that was checked.
+   */
+  environmentName: string;
+
+  /**
+   * The current mode of the managed environment.
+   */
+  currentMode: string;
+
+  /**
+   * The requested target mode.
+   */
+  targetMode: string;
+
+  /**
+   * The blocking reasons preventing migration. Empty when the managed environment is eligible.
+   */
+  @identifiers(#["code"])
+  failureReasons: MigrationEligibilityFailureReason[];
+}
+
+/**
  * Managed environment resource specific properties
  */
 model ManagedEnvironmentProperties {
@@ -2680,6 +2759,12 @@ model ManagedEnvironmentProperties {
    * Ingress configuration for the Managed Environment.
    */
   ingressConfiguration?: IngressConfiguration;
+
+  /**
+   * Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'.
+   */
+  @added(Versions.v2026_07_01)
+  environmentMode?: ManagedEnvironmentMode;
 
   /**
    * Private endpoint connections to the resource.
