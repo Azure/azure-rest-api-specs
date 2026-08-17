@@ -761,6 +761,22 @@
           "$ref": "./common.json#/definitions/LinkModeType",
           "description": "Specifies whether the link operates in single-database or multi-database mode."
         },
+        "mostRecentError": {
+          "type": "string",
+          "description": "Most recent error code for the distributed availability group.",
+          "readOnly": true
+        },
+        "mostRecentErrorTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the most recent error for the distributed availability group.",
+          "readOnly": true
+        },
+        "mostRecentErrorMessage": {
+          "type": "string",
+          "description": "Most recent error message for the distributed availability group.",
+          "readOnly": true
+        },
         "databases": {
           "type": "array",
           "description": "Databases in the distributed availability group",
