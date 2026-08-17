@@ -2808,10 +2808,9 @@
           "maxLength": 256
         },
         "dimensionFilter": {
-          "type": "string",
+          "$ref": "#/definitions/string256",
           "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
-          "minLength": 1,
-          "maxLength": 256
+          "minLength": 1
         }
       },
       "required": [
@@ -3109,6 +3108,11 @@
       "type": "string",
       "description": "Type for signal definition resource name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "string256": {
+      "type": "string",
+      "description": "String with max length validation of 256 characters",
+      "maxLength": 256
     },
     "string4096": {
       "type": "string",

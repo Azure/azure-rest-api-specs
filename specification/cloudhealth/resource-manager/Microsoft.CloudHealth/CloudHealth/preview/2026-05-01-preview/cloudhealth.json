@@ -2499,10 +2499,9 @@
           "description": "Type of aggregation to apply to the metric"
         },
         "dimensionFilter": {
-          "type": "string",
+          "$ref": "#/definitions/string2048",
           "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
-          "minLength": 1,
-          "maxLength": 256
+          "minLength": 1
         },
         "displayName": {
           "type": "string",
@@ -4241,10 +4240,9 @@
           "description": "Type of aggregation to apply to the metric"
         },
         "dimensionFilter": {
-          "type": "string",
+          "$ref": "#/definitions/string2048",
           "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
-          "minLength": 1,
-          "maxLength": 256
+          "minLength": 1
         }
       },
       "required": [
@@ -4299,10 +4297,9 @@
           "maxLength": 100
         },
         "dimensionFilter": {
-          "type": "string",
+          "$ref": "#/definitions/string2048",
           "description": "Optional dimension filter to apply to the metric.",
-          "minLength": 1,
-          "maxLength": 256
+          "minLength": 1
         },
         "evaluationRules": {
           "$ref": "#/definitions/EvaluationRule",
@@ -4766,6 +4763,11 @@
       "type": "string",
       "description": "Type for signal name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "string2048": {
+      "type": "string",
+      "description": "String with max length validation of 2048 characters",
+      "maxLength": 2048
     },
     "string256": {
       "type": "string",
