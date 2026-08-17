@@ -744,7 +744,7 @@ interface Route {
    * ------------------|-----------------------|-----------------------------|-------------------
    *  2500             | 1000                  | 1000                        | All
    * origins and destinations should be contained in an axis-aligned 400 km x 400 km
-   * bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.  
+   * bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.
    *  50,000           | 10,000                | 10,000                      | -
    * `departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>-
    * `optimizeRoute` must be fastest.<br/>- `travelMode` must be
