@@ -9,6 +9,3 @@ using Azure.ClientGenerator.Core;
   "DataboundariesManegementClient",
   "javascript"
 );
-
-@@clientName(Microsoft.Resources, "DataBoundariesManagementClient", "java");
-@@scope(Microsoft.Resources.Operations.list, "!java");

@@ -24,38 +24,11 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    service-dir: "sdk/resources"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources"
-    namespace: "com.azure.resourcemanager.resources"
-    service-name: "Resource"
-    premium: true
-    generate-tests: false
-    client-side-validations: true
-    enable-sync-stack: false
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-deployments"
+    namespace: "com.azure.resourcemanager.deployments"
+    service-name: "Deployments" # human-readable service name, whitespace allowed
     flavor: azure
     use-object-for-unknown: true
-    uuid-as-string: false
-    add-inner:
-      - Deployment
-      - Provider
-    remove-model:
-      - ProviderInner
-      - Alias
-      - AliasPath
-      - AliasPathAttributes
-      - AliasPathMetadata
-      - AliasPathTokenType
-      - AliasPattern
-      - AliasPatternType
-      - AliasType
-      - ApiProfile
-      - ProviderAuthorizationConsentState
-      - ProviderExtendedLocation
-      - ProviderResourceType
-      - ZoneMapping
-    customization-class: customization/src/main/java/DeploymentsCustomization.java
-    metadata-suffix: deployments
-    api-version: "2025-04-01"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeployments"
     service-dir: "sdk/resources"

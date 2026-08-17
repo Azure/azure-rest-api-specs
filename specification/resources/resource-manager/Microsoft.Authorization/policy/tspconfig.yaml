@@ -21,31 +21,10 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    service-dir: "sdk/resources"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources"
-    namespace: "com.azure.resourcemanager.resources"
-    service-name: "Resource"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources-policy"
+    namespace: "com.azure.resourcemanager.resources.policy"
+    service-name: "Policy"
     flavor: azure
-    premium: true
-    generate-tests: false
-    client-side-validations: true
-    enable-sync-stack: false
-    metadata-suffix: policy
-    api-version: "2025-11-01"
-    use-object-for-unknown: true
-    remove-model:
-      - Alias
-      - AliasPath
-      - AliasPathAttributes
-      - AliasPathMetadata
-      - AliasPathTokenType
-      - AliasPattern
-      - AliasPatternType
-      - AliasType
-      - Identity
-      - IdentityUserAssignedIdentitiesValue
-      - ResourceIdentityType
-    customization-class: customization/src/main/java/PolicyCustomization.java
   "@azure-tools/typespec-ts":
     compatibility-lro: true
     service-dir: "sdk/policy"

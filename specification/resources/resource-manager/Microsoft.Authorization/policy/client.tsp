@@ -87,12 +87,7 @@ namespace Microsoft.Authorization {
     ...Azure.Core.Foundations.ApiVersionParameter,
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
 }
-@@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python,java");
-@@clientName(
-  Microsoft.Authorization.UserAssignedIdentitiesValue,
-  "IdentityUserAssignedIdentitiesValue",
-  "java"
-);
+@@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
 
 // Rename models with forbidden suffixes for C# naming conventions
 @@clientName(
