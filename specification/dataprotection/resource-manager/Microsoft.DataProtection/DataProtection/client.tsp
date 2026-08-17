@@ -1007,3 +1007,15 @@ model BackupFindRestorableTimeRangesResponse
 @@usage(JobExtendedInfo, Usage.input, "csharp");
 @@usage(JobSubTask, Usage.input, "csharp");
 @@usage(RestoreJobRecoveryPointDetails, Usage.input, "csharp");
+
+// CSharp SDK: cross-tenant restore response models — satisfy csharp-model-suffix (Response -> Result)
+@@clientName(
+  CrossTenantVaultMappingStatusResponse,
+  "CrossTenantVaultMappingStatusResult",
+  "csharp"
+);
+@@clientName(
+  CrossTenantOperationResultAcceptedResponse,
+  "CrossTenantOperationResultAcceptedResult",
+  "csharp"
+);
