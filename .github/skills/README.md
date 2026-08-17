@@ -131,8 +131,8 @@ not by the agent's judgment. That file is version-pinned to the
 [`.github/workflows/data-plane-review-alignment.yaml`](../workflows/data-plane-review-alignment.yaml)
 fails the build if the two drift apart -- so every linter bump forces a human
 to re-verify the table. The same check asserts that the model the workflow runs
-in production equals the model the true-negative eval suite measures, since the
-promotion gate is meaningless otherwise.
+in production equals the model the true-negative eval suite measures, so its
+regression results describe the configuration that actually ships.
 
 The reviewer's **report format** — the bracketed `[DP-XXX-NN]` finding syntax
 and the 🔴/🟡/💡 severity glyphs — is defined in
@@ -148,8 +148,9 @@ which hunts false positives only.
 
 The unattended entry point is the gh-aw workflow
 [`.github/workflows/data-plane-api-review.md`](../workflows/data-plane-api-review.md),
-which is label-gated and rolls out in phases. It grants the agent **no**
-mutating GitHub tools; `safe-outputs` is the only write channel.
+which is label-gated and [rolls out in phases](evals/data-plane-api-reviewer/ROLLOUT.md).
+It grants the agent **no** mutating GitHub tools; `safe-outputs` is the only
+write channel.
 
 ### Evaluation suite
 
@@ -159,15 +160,15 @@ See
 Unlike the ARM suite, the center of gravity is false-positive resistance:
 true-negative stimuli are at least 40% of the suite, they run three times,
 and a single true-negative failure is treated as a regression rather than a
-flake. Promotion from summary comments to inline review comments is gated on
-zero blocking false positives across three runs of the true-negative suite.
+flake. During the manually label-gated Phase 2 rollout, real author feedback is
+the primary signal and the suite guards against repeatable regressions.
 
 ```powershell
 cd .github/skills/evals
 .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer"
 
-# The promotion gate
-.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives" -Repeat 3
+# The true-negative regression suite (`runs: 3` is already configured)
+.\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives"
 ```
 
 `run-evals.ps1` is shared by every suite and lives at the evals root; select

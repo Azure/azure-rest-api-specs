@@ -123,14 +123,35 @@ If you prefer to invoke the CLI directly (e.g., on Linux/macOS or in CI),
 clone [microsoft/vally](https://github.com/microsoft/vally) and
 run `npm install && npm run build`.
 
-The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
-auto-discovery (via `paths.skills`), eval file location, and a named suite for
-running the full eval suite in a single command. (The file is named
-`.vally.yaml` because that is the filename the vally CLI looks
-for; do not rename it.) Execution config (`model`, `judge_model`, `runs`,
-`timeout`) is set in each individual eval YAML file. Skills are discovered
-automatically -- individual eval files do not need to declare
-`environment.skills`.
+The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures the eval
+file location and a named suite for running the full eval suite in a single
+command. (The file is named `.vally.yaml` because that is the filename the vally
+CLI looks for; do not rename it.) Execution config (`model`, `judge_model`,
+`runs`, `timeout`) is set in each individual eval YAML file.
+
+Each eval file declares the skill under test **once**, at the file root:
+
+```yaml
+environment:
+  skills:
+    - "../../../azure-api-review"
+```
+
+vally merges the root environment into every stimulus environment (skills, files
+and commands are concatenated), so individual stimuli only carry their own
+`files` mappings. The path is resolved relative to the eval file, not to the
+working directory or to `.vally.yaml`.
+
+This block is required -- `paths.skills` in `.vally.yaml` does **not** load
+skills on its own; vally only performs skill discovery when `--skill-dir` is
+passed on the command line, and neither `run-evals.ps1` nor the CI shard runner
+(`eng/common/scripts/eval/invoke-eval-shard.ts`) passes it. Declaring it in the
+eval file is also fail-loud: vally aborts the run when a declared skill directory
+has no `SKILL.md`, so a typo cannot silently produce a skill-free run. Do not
+remove it when adding stimuli to a file, and include it when adding a new eval
+file -- a file without `environment.skills` runs against a bare model and
+measures general model knowledge rather than the reviewer's guidance and rule
+definitions.
 
 ```bash
 cd .github/skills/evals/arm-api-reviewer
@@ -204,7 +225,10 @@ to complete. There are three levels, applied in priority order:
 | `prompt`             | LLM-as-judge evaluation of agent output against `rubric` criteria |
 
 Vally eval files also use `constraints.expect_skills` to verify the
-`azure-api-review` skill is activated during each stimulus.
+`azure-api-review` skill is activated during each stimulus. That constraint is an
+assertion about the result, not a loader -- the skill itself is loaded by the
+eval file's root `environment.skills` (see
+[Running Manually with the vally CLI](#running-manually-with-the-vally-cli)).
 
 ## Including Test Reports in PRs
 
@@ -217,6 +241,12 @@ results in your PR description or as a comment:
    `results/<timestamp>/` directory to your PR.
 3. Summarize pass/fail counts in the PR description so reviewers can quickly
    assess the impact of your changes.
+
+> **Baseline:** results recorded before the eval files declared
+> `environment.skills` were produced without the `azure-api-review` skill loaded
+> and describe bare-model behaviour on the stimulus prompts. They are not
+> comparable to skill-loaded results -- the first skill-loaded run establishes a
+> new baseline rather than showing a regression or improvement.
 
 ## Non-Deterministic Tests
 
