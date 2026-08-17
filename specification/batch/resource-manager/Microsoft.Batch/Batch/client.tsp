@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Batch;
 
 @@clientName(Microsoft.Batch, "BatchManagementClient", "javascript, python");
@@ -641,6 +642,12 @@ using Microsoft.Batch;
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@usage(BatchAccount, Usage.input, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the BatchAccount base type back to ResourceData for backward compatibility"
+@@hierarchyBuilding(
+  BatchAccount,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@alternateType(
   BatchAccount.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
