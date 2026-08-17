@@ -641,44 +641,13 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(BatchAccount, BatchAccountData, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  BatchAccountData.properties,
-  "csharp"
-);
 @@alternateType(
   BatchAccount.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 
-// added to solve the problem that the c# resource class can inherit the `resource data` class
 namespace Microsoft.Batch {
-  /**
-   * Contains information about an Azure Batch account.
-   */
-  @usage(Usage.input, "csharp")
-  @clientName("BatchAccount", "csharp")
-  model BatchAccountData
-    is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = BatchAccount,
-      KeyName = "accountName",
-      SegmentName = "batchAccounts",
-      NamePattern = "^[a-zA-Z0-9]+$"
-    >;
-    ...OmitProperties<
-      BatchAccount,
-      "id" | "name" | "type" | "properties" | "location"
-    >;
-
-    /** The geo-location where the resource lives */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read, Lifecycle.Create)
-    location?: Azure.Core.azureLocation;
-  }
-
   /**
    * The provisioned state of the resource
    */
