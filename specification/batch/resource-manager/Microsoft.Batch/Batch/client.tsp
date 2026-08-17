@@ -640,6 +640,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@usage(BatchAccount, Usage.input, "csharp");
 @@alternateType(
   BatchAccount.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
