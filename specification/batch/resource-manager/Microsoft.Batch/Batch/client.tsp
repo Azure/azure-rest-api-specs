@@ -123,7 +123,7 @@ using Microsoft.Batch;
 @@clientName(CertificateFormat, "BatchAccountCertificateFormat", "csharp");
 @@alternateType(
   CertificateProvisioningState,
-  Customizations.BatchAccountCertificateProvisioningState,
+  BatchAccountCertificateProvisioningState,
   "csharp"
 );
 @@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
@@ -337,7 +337,7 @@ using Microsoft.Batch;
   "BatchIPAddressProvisioningType",
   "csharp"
 );
-@@alternateType(IPRuleAction, Customizations.BatchIPRuleAction, "csharp");
+@@alternateType(IPRuleAction, BatchIPRuleAction, "csharp");
 @@clientName(NetworkConfiguration, "BatchNetworkConfiguration", "csharp");
 @@clientName(
   NetworkConfiguration.dynamicVnetAssignmentScope,
@@ -433,24 +433,16 @@ using Microsoft.Batch;
 @@clientName(StorageAccountType.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(StorageAccountType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(StorageAccountType, "BatchStorageAccountType", "csharp");
-@@alternateType(
-  ProvisioningState,
-  Customizations.BatchProvisioningState,
-  "csharp"
-);
+@@alternateType(ProvisioningState, BatchProvisioningState, "csharp");
 @@alternateType(
   PoolProvisioningState,
-  Customizations.BatchAccountPoolProvisioningState,
+  BatchAccountPoolProvisioningState,
   "csharp"
 );
-@@alternateType(
-  DiffDiskPlacement,
-  Customizations.BatchDiffDiskPlacement,
-  "csharp"
-);
+@@alternateType(DiffDiskPlacement, BatchDiffDiskPlacement, "csharp");
 @@alternateType(
   PrivateEndpointConnectionProvisioningState,
-  Customizations.BatchPrivateEndpointConnectionProvisioningState,
+  BatchPrivateEndpointConnectionProvisioningState,
   "csharp"
 );
 @@clientName(
@@ -654,10 +646,10 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(BatchAccount, Customizations.BatchAccountData, "csharp");
+@@alternateType(BatchAccount, BatchAccountData, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Customizations.BatchAccountData.properties,
+  BatchAccountData.properties,
   "csharp"
 );
 @@alternateType(
@@ -667,11 +659,8 @@ using Microsoft.Batch;
 );
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Client-only customization namespace has no service operations."
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
-@Azure.ResourceManager.armProviderNamespace("Microsoft.Batch")
-namespace Customizations {
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
+namespace Microsoft.Batch {
   /**
    * Contains information about an Azure Batch account.
    */

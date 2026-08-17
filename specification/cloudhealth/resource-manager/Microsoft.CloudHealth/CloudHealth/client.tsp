@@ -116,10 +116,8 @@ using Microsoft.CloudHealth;
 // JS SDK users are not forced to supply server-computed values.
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Write-only helper models for JS SDK alternate types; operations are defined on the original resources in main.tsp"
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
-@armProviderNamespace(ProviderName)
-namespace Customizations {
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
+namespace Microsoft.CloudHealth {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   @doc("Discovery rule properties for create/update operations, omitting server-side read-only fields (entityName is required+read-only in the canonical model).")
   model DiscoveryRulePropertiesCreate {
@@ -166,11 +164,11 @@ namespace Customizations {
 
 @@alternateType(
   DiscoveryRules.createOrUpdateV1::parameters.resource,
-  Customizations.DiscoveryRuleResourceCreate,
+  DiscoveryRuleResourceCreate,
   "javascript"
 );
 @@alternateType(
   DiscoveryRules.createOrUpdate::parameters.resource,
-  Customizations.DiscoveryRuleResourceCreate,
+  DiscoveryRuleResourceCreate,
   "javascript"
 );

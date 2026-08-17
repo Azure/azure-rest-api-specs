@@ -141,10 +141,8 @@ using Microsoft.Monitor;
 // provide write-specific models that omit those fields so SDK users see a clean API.
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/40791
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
-@armProviderNamespace("Microsoft.Monitor")
-namespace Customizations {
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
+namespace Microsoft.Monitor {
   // ===== Issue create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
   @doc("Issue properties for create/update operations, omitting server-side read-only fields (investigations, investigationsCount, provisioningState).")
@@ -221,21 +219,21 @@ namespace Customizations {
 
 @@alternateType(
   Issue.create::parameters.resource,
-  Customizations.IssueResourceCreate,
+  IssueResourceCreate,
   "javascript"
 );
 @@alternateType(
   Issue.setBackgroundVisualization::parameters.body,
-  Customizations.BackgroundVisualizationCreate,
+  BackgroundVisualizationCreate,
   "javascript"
 );
 @@alternateType(
   Issue.addOrUpdateAlerts::parameters.body,
-  Customizations.RelatedAlertsCreate,
+  RelatedAlertsCreate,
   "javascript"
 );
 @@alternateType(
   Issue.addOrUpdateResources::parameters.body,
-  Customizations.RelatedResourcesCreate,
+  RelatedResourcesCreate,
   "javascript"
 );

@@ -312,7 +312,7 @@ using Microsoft.EventHub;
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
 @@clientOption(
-  Customizations.EventHubsCluster,
+  EventHubsCluster,
   "resource-name-constraint",
   #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
@@ -320,7 +320,7 @@ using Microsoft.EventHub;
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
 @@clientOption(
-  Customizations.EventHubsNamespace,
+  EventHubsNamespace,
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9._-]+$" },
   "csharp"
@@ -474,38 +474,31 @@ using Microsoft.EventHub;
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(Cluster, Customizations.EventHubsCluster, "csharp");
-@@alternateType(EHNamespace, Customizations.EventHubsNamespace, "csharp");
-@@alternateType(EntityStatus, Customizations.EventHubEntityStatus, "csharp");
-@@alternateType(NspAccessRule, Customizations.EventHubsNspAccessRule, "csharp");
+@@alternateType(Cluster, EventHubsCluster, "csharp");
+@@alternateType(EHNamespace, EventHubsNamespace, "csharp");
+@@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
+@@alternateType(NspAccessRule, EventHubsNspAccessRule, "csharp");
 @@alternateType(
   PrivateLinkResource,
-  Customizations.EventHubsPrivateLinkResourceData,
+  EventHubsPrivateLinkResourceData,
   "csharp"
 );
-@@alternateType(
-  Encryption.keySource,
-  Customizations.EventHubsKeySource,
-  "csharp"
-);
+@@alternateType(Encryption.keySource, EventHubsKeySource, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Customizations.EventHubsCluster.properties,
+  EventHubsCluster.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Customizations.EventHubsNamespace.properties,
+  EventHubsNamespace.properties,
   "csharp"
 );
 
 // Custom models to ensure C# resource classes inherit TrackedResourceData
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Client-only customization namespace has no service operations."
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
-@Azure.ResourceManager.armProviderNamespace("Microsoft.EventHub")
-namespace Customizations {
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
+namespace Microsoft.EventHub {
   /**
    * Single Event Hubs Cluster resource in List or Get operations.
    */
@@ -633,7 +626,7 @@ namespace Customizations {
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 @@clientOption(
-  Customizations.EventHubsCluster,
+  EventHubsCluster,
   "resource-rbac-roles",
   #{
     AzureEventHubsDataOwner: "f526a384-b230-433a-b45c-95f59c4a2dec",
@@ -646,7 +639,7 @@ namespace Customizations {
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 @@clientOption(
-  Customizations.EventHubsNamespace,
+  EventHubsNamespace,
   "resource-rbac-roles",
   #{
     AzureEventHubsDataOwner: "f526a384-b230-433a-b45c-95f59c4a2dec",

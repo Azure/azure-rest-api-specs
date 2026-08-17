@@ -12,10 +12,8 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
-@armProviderNamespace("Microsoft.Relationships")
-namespace Customizations {
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
+namespace Microsoft.Relationships {
   @doc("DependencyOf relationship resource for create or update.")
   model DependencyOfRelationshipCreateOrUpdate
     is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {
@@ -78,12 +76,12 @@ namespace Customizations {
 // which omits server-side read-only fields (sourceId, originInformation, metadata, etc.)
 @@alternateType(
   DependencyOfRelationships.createOrUpdate::parameters.resource,
-  Customizations.DependencyOfRelationshipCreateOrUpdate,
+  DependencyOfRelationshipCreateOrUpdate,
   "javascript"
 );
 @@alternateType(
   ServiceGroupMemberRelationships.createOrUpdate::parameters.resource,
-  Customizations.ServiceGroupMemberRelationshipCreateOrUpdate,
+  ServiceGroupMemberRelationshipCreateOrUpdate,
   "javascript"
 );
 

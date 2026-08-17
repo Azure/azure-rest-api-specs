@@ -16,10 +16,8 @@ using Microsoft.Migrate;
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/42784
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Migrate namespace"
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "Client-only customization namespace shares the service versions."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Client-only customization namespace shares the service common-types version."
-@armProviderNamespace("Microsoft.Migrate")
-namespace Customizations {
+#suppress "@azure-tools/typespec-client-generator-core/no-service-ns-in-client" "Existing client customization models require the service ARM namespace."
+namespace Microsoft.Migrate {
   // ===== Task create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
   @doc("Task properties for create operations, omitting server-side read-only fields (taskType, isEditable, completionDate, provisioningState).")
@@ -67,8 +65,4 @@ namespace Customizations {
   }
 }
 
-@@alternateType(
-  Tasks.create::parameters.resource,
-  Customizations.TaskCreate,
-  "javascript"
-);
+@@alternateType(Tasks.create::parameters.resource, TaskCreate, "javascript");
