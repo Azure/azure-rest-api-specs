@@ -1208,12 +1208,6 @@ union ServiceType {
   GraphAPICompute: "GraphAPICompute",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MaterializedViewsBuilder: "MaterializedViewsBuilder",
-
-  /**
-   * Embedding Generator service type.
-   */
-  @added(Versions.v2026_04_01_preview)
-  EmbeddingGenerator: "EmbeddingGenerator",
 }
 
 /**
@@ -9598,102 +9592,6 @@ model MaterializedViewsBuilderServiceResourceCreateUpdateProperties
    * ServiceType for the service.
    */
   serviceType: "MaterializedViewsBuilder";
-}
-
-/**
- * Describes the service response property for EmbeddingGenerator.
- */
-@added(Versions.v2026_04_01_preview)
-model EmbeddingGeneratorServiceResource {
-  /**
-   * Properties for EmbeddingGeneratorServiceResource.
-   */
-  properties?: EmbeddingGeneratorServiceResourceProperties;
-}
-
-/**
- * Properties for EmbeddingGeneratorServiceResource.
- */
-@added(Versions.v2026_04_01_preview)
-model EmbeddingGeneratorServiceResourceProperties
-  extends ServiceResourceProperties {
-  /**
-   * An array that contains all of the locations for the service.
-   */
-  @visibility(Lifecycle.Read)
-  locations?: EmbeddingGeneratorRegionalServiceResource[];
-
-  /**
-   * ServiceType for the service.
-   */
-  serviceType: "EmbeddingGenerator";
-}
-
-/**
- * Resource for a regional service location.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
-model EmbeddingGeneratorRegionalServiceResource
-  extends RegionalServiceResource {}
-
-/**
- * Instance type for the Embedding Generator service.
- */
-@added(Versions.v2026_04_01_preview)
-union EmbeddingGeneratorServiceSize {
-  string,
-
-  /**
-   * Cosmos.D2s instance size.
-   */
-  CosmosD2S: "Cosmos.D2s",
-
-  /**
-   * Cosmos.D4s instance size.
-   */
-  CosmosD4S: "Cosmos.D4s",
-
-  /**
-   * Cosmos.D8s instance size.
-   */
-  CosmosD8S: "Cosmos.D8s",
-
-  /**
-   * Cosmos.D16s instance size.
-   */
-  CosmosD16S: "Cosmos.D16s",
-
-  /**
-   * Cosmos.D32s instance size.
-   */
-  CosmosD32S: "Cosmos.D32s",
-}
-
-/**
- * Properties for Create or Update request for EmbeddingGeneratorServiceResource
- */
-@added(Versions.v2026_04_01_preview)
-model EmbeddingGeneratorServiceResourceCreateUpdateProperties
-  extends ServiceResourceCreateUpdateProperties {
-  /**
-   * Instance type for the Embedding Generator service.
-   */
-  instanceSize: EmbeddingGeneratorServiceSize;
-
-  /**
-   * Instance count for the Embedding Generator service. Counts above five require
-   * the increased instance count subscription capability.
-   */
-  @minValue(1)
-  @maxValue(20)
-  instanceCount: int32;
-
-  /**
-   * ServiceType for the service.
-   */
-  serviceType: "EmbeddingGenerator";
 }
 
 /**

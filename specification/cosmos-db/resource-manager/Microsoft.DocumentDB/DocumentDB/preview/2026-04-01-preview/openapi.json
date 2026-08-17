@@ -13417,9 +13417,6 @@
           "DataTransferServiceGet": {
             "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
           },
-          "EmbeddingGeneratorServiceGet": {
-            "$ref": "./examples/CosmosDBEmbeddingGeneratorServiceGet.json"
-          },
           "GraphAPIComputeServiceGet": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
           },
@@ -13511,9 +13508,6 @@
           "DataTransferServiceCreate": {
             "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
           },
-          "EmbeddingGeneratorServiceCreate": {
-            "$ref": "./examples/CosmosDBEmbeddingGeneratorServiceCreate.json"
-          },
           "GraphAPIComputeServiceCreate": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
           },
@@ -13600,9 +13594,6 @@
         "x-ms-examples": {
           "DataTransferServiceDelete": {
             "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
-          },
-          "EmbeddingGeneratorServiceDelete": {
-            "$ref": "./examples/CosmosDBEmbeddingGeneratorServiceDelete.json"
           },
           "GraphAPIComputeServiceDelete": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
@@ -25838,104 +25829,6 @@
         ]
       }
     },
-    "EmbeddingGeneratorRegionalServiceResource": {
-      "type": "object",
-      "description": "Resource for a regional service location.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegionalServiceResource"
-        }
-      ]
-    },
-    "EmbeddingGeneratorServiceResourceCreateUpdateProperties": {
-      "type": "object",
-      "description": "Properties for Create or Update request for EmbeddingGeneratorServiceResource",
-      "properties": {
-        "instanceSize": {
-          "$ref": "#/definitions/EmbeddingGeneratorServiceSize",
-          "description": "Instance type for the Embedding Generator service."
-        },
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Instance count for the Embedding Generator service. Counts above five require\nthe increased instance count subscription capability.",
-          "minimum": 1,
-          "maximum": 20
-        }
-      },
-      "required": [
-        "instanceSize",
-        "instanceCount"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "EmbeddingGenerator"
-    },
-    "EmbeddingGeneratorServiceResourceProperties": {
-      "type": "object",
-      "description": "Properties for EmbeddingGeneratorServiceResource.",
-      "properties": {
-        "locations": {
-          "type": "array",
-          "description": "An array that contains all of the locations for the service.",
-          "items": {
-            "$ref": "#/definitions/EmbeddingGeneratorRegionalServiceResource"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "EmbeddingGenerator"
-    },
-    "EmbeddingGeneratorServiceSize": {
-      "type": "string",
-      "description": "Instance type for the Embedding Generator service.",
-      "enum": [
-        "Cosmos.D2s",
-        "Cosmos.D4s",
-        "Cosmos.D8s",
-        "Cosmos.D16s",
-        "Cosmos.D32s"
-      ],
-      "x-ms-enum": {
-        "name": "EmbeddingGeneratorServiceSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CosmosD2S",
-            "value": "Cosmos.D2s",
-            "description": "Cosmos.D2s instance size."
-          },
-          {
-            "name": "CosmosD4S",
-            "value": "Cosmos.D4s",
-            "description": "Cosmos.D4s instance size."
-          },
-          {
-            "name": "CosmosD8S",
-            "value": "Cosmos.D8s",
-            "description": "Cosmos.D8s instance size."
-          },
-          {
-            "name": "CosmosD16S",
-            "value": "Cosmos.D16s",
-            "description": "Cosmos.D16s instance size."
-          },
-          {
-            "name": "CosmosD32S",
-            "value": "Cosmos.D32s",
-            "description": "Cosmos.D32s instance size."
-          }
-        ]
-      }
-    },
     "EmbeddingSource": {
       "type": "object",
       "description": "Represents the embedding source configuration for the Embedding Generator service.\nWhen specified on a vector embedding, the service will automatically generate embeddings from source document fields.",
@@ -31651,8 +31544,7 @@
         "SqlDedicatedGateway",
         "DataTransfer",
         "GraphAPICompute",
-        "MaterializedViewsBuilder",
-        "EmbeddingGenerator"
+        "MaterializedViewsBuilder"
       ],
       "x-ms-enum": {
         "name": "ServiceType",
@@ -31673,11 +31565,6 @@
           {
             "name": "MaterializedViewsBuilder",
             "value": "MaterializedViewsBuilder"
-          },
-          {
-            "name": "EmbeddingGenerator",
-            "value": "EmbeddingGenerator",
-            "description": "Embedding Generator service type."
           }
         ]
       }
