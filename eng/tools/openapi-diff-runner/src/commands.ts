@@ -67,7 +67,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
   const swaggersToProcess = new Set(
-    await filterSuppressedSwaggers(context, [
+    await excludeSuppressedSwaggers(context, [
       ...diffs.additions,
       ...diffs.modifications,
       ...diffs.deletions,
@@ -259,7 +259,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   return statusCode;
 }
 
-export async function filterSuppressedSwaggers(
+export async function excludeSuppressedSwaggers(
   context: Context,
   swaggers: string[],
 ): Promise<string[]> {

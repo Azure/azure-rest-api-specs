@@ -5,7 +5,7 @@ import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createDummySwagger } from "../src/command-helpers.ts";
-import { filterSuppressedSwaggers, validateBreakingChange } from "../src/commands.ts";
+import { excludeSuppressedSwaggers, validateBreakingChange } from "../src/commands.ts";
 import { runOad } from "../src/run-oad.ts";
 
 const serviceParent = "specification/foo/data-plane/";
@@ -433,7 +433,7 @@ describe("Swagger suppressions", () => {
       },
     };
 
-    const result = await filterSuppressedSwaggers(testContext, [
+    const result = await excludeSuppressedSwaggers(testContext, [
       "specification/contoso/stable/one.json",
       "specification/contoso/stable/two.json",
       "specification/contoso/preview/three.json",
@@ -446,7 +446,7 @@ describe("Swagger suppressions", () => {
 
   it("uses the cross-version suppression name independently", async () => {
     const fixtureRoot = resolve(__dirname, "suppression-fixtures");
-    const result = await filterSuppressedSwaggers(
+    const result = await excludeSuppressedSwaggers(
       {
         ...context,
         localSpecRepoPath: resolve(fixtureRoot, "head"),
