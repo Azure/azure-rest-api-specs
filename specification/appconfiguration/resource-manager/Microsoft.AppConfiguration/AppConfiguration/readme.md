@@ -255,6 +255,12 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ``` yaml
 directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: appconfiguration.json
+    reason: provisioningState is marked read-only in TypeSpec via @visibility(Lifecycle.Read), but the autorest emitter places readOnly as a sibling of $ref rather than in the type definition itself. The linter does not follow $ref siblings per OpenAPI 2.0 spec. Known issue https://github.com/Azure/azure-openapi-validator/issues/637
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile"].post.responses["200"].schema
   - suppress: EnumInsteadOfBoolean
     from: appconfiguration.json
     where: $.definitions.NameAvailabilityStatus.properties.nameAvailable
