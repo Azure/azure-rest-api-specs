@@ -3074,6 +3074,7 @@ op protectionPolicyOperationStatusesGet(
   "SourceVmStorageType",
   "csharp"
 );
+@@clientName(SecuredVMDetails, "SecuredVmDetails", "csharp");
 @@clientName(
   SecuredVMDetails.securedVMOsDiskEncryptionSetId,
   "SecuredVmOSDiskEncryptionSetId",
