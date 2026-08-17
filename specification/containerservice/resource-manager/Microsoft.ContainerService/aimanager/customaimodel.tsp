@@ -13,7 +13,6 @@ using Azure.ResourceManager;
 namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_08_02_preview)
 @doc("""
   A custom AI model registered by the user and scoped to a specific
   AIManager.
@@ -31,7 +30,6 @@ model CustomAIModel is ProxyResource<CustomAIModelProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_08_02_preview)
 @doc("Custom AI model properties.")
 model CustomAIModelProperties {
   @visibility(Lifecycle.Read)
@@ -65,11 +63,9 @@ model CustomAIModelProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_08_02_preview)
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only. Reserved so custom-model-specific fields can be added without changing the SDK surface.")
 model CustomAIModelSpec is ModelSpec;
 
-@added(Versions.v2026_08_02_preview)
 @doc("The base model a custom model was trained from. A HuggigFace repository supplied by the user because the platform may lack access to private source repositories.")
 model BaseModelReference {
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -87,7 +83,6 @@ model BaseModelReference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_08_02_preview)
 @doc("Provisioning state of a CustomAIModel resource.")
 union CustomAIModelProvisioningState {
   string,
@@ -104,7 +99,6 @@ union CustomAIModelProvisioningState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_08_02_preview)
 @armResourceOperations
 interface CustomAIModels {
   get is ArmResourceRead<CustomAIModel>;

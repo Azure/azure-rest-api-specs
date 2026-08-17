@@ -2708,7 +2708,7 @@
         },
         "managedIdentity": {
           "$ref": "#/definitions/ManagedIdentityCredential",
-          "description": "A user-assigned managed identity the platform authenticates as. Required for `MicrosoftFoundry` sources. No secret is stored; the platform federates this identity to an in-cluster puller ServiceAccount (Workload Identity) at deployment time."
+          "description": "  A user-assigned managed identity the platform authenticates as. Required for `MicrosoftFoundry` sources and\n  the user must grant the `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d) on the Foundry project.\n  See https://aka.ms/aks/aim-modelsource for more details.\n  The platform federates this identity to an in-cluster puller ServiceAccount (Workload Identity) at deployment time."
         }
       }
     },
@@ -3013,7 +3013,7 @@
     },
     "MicrosoftFoundrySource": {
       "type": "object",
-      "description": "Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`\nModelSource. Only the project Azure id is required; the Foundry account and its\ndata-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform\nfrom the project (the account is the project's parent resource).\n\nAuthentication uses the user-assigned managed identity referenced in the\nModelSource `credential.managedIdentity`, which the user must grant the\n`Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)\non this project.",
+      "description": "Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`\nModelSource. Only the project Azure id is required; the Foundry account and its\ndata-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform\nfrom the project (the account is the project's parent resource).\n\nAuthentication uses the user-assigned managed identity referenced in the\nModelSource `credential.managedIdentity`, which the user must grant the\n`Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)\non this project. See https://aka.ms/aks/aim-modelsource for more details.",
       "properties": {
         "projectResourceId": {
           "$ref": "#/definitions/FoundryProjectResourceId",

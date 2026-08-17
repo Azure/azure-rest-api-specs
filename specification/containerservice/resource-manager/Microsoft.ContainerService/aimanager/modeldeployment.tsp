@@ -27,19 +27,6 @@ scalar AIModelResourceId
     }
   ]>;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_08_02_preview)
-@doc("The ARM resource id of an AIModel or CustomAIModel.")
-scalar DeployableModelResourceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ContainerService/aiModels",
-    },
-    {
-      type: "Microsoft.ContainerService/aiManagers/customAIModels",
-    }
-  ]>;
-
 @doc("The ARM resource id of a ModelSource.")
 scalar ModelSourceResourceId
   extends Azure.Core.armResourceIdentifier<[
