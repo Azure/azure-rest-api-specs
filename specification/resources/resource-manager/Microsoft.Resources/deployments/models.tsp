@@ -1503,7 +1503,7 @@ model DeploymentWhatIfProperties extends DeploymentProperties {
    * Resource predictions that can be utilized by what-if to produce potential modification changes.
    */
   @added(Versions.v2026_06_01)
-  @identifiers(#["symbolicNamePath"])
+  @identifiers(#[])
   resourcePredictions?: DeploymentResourceWhatIfPrediction[];
 }
 
