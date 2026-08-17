@@ -2374,11 +2374,11 @@ model ExpansionJobProperties {
   status?: ExpansionJobPropertiesStatus;
 
   /**
-   * When true, expansion creates a RebalanceJob after completing. Optional, defaults to false.
+   * When true, expansion creates a RebalanceJob after completing. Optional, defaults to true.
    */
   @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  runRebalanceJob?: boolean = false;
+  runRebalanceJob?: boolean = true;
 
   /**
    * Fully qualified ARM resource ID of the child rebalance job created by this expansion. Populated after RebalanceJob is created.
