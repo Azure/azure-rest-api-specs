@@ -45,10 +45,7 @@
           "processCountPerInstance": 4
         },
         "resources": {
-          "instanceCount": 2,
-          "instanceType": "Standard_NC6s_v3",
-          "shmSize": "2g",
-          "dockerArgs": "--privileged"
+          "instanceCount": 2
         },
         "limits": {
           "jobLimitsType": "Command",
@@ -64,6 +61,7 @@
           }
         },
         "queueSettings": { "jobTier": "Standard" },
+        "priority": "High",
         "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
         "gpuCount": 4,
         "isArchived": false
@@ -139,6 +137,7 @@
             }
           },
           "queueSettings": { "jobTier": "Standard" },
+          "priority": "High",
           "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
           "gpuCount": 4,
           "status": "Running",
@@ -220,6 +219,7 @@
             }
           },
           "queueSettings": { "jobTier": "Standard" },
+          "priority": "High",
           "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
           "gpuCount": 4,
           "status": "NotStarted",

@@ -15281,6 +15281,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/QueueSettings'
           description: Queue settings for the job.
+        priority:
+          allOf:
+            - $ref: '#/components/schemas/JobPriority'
+          description: Priority of the job. If omitted, the service defaults to Low.
         userAssignedIdentityId:
           type: string
           description: user-assigned managed identity
@@ -20068,6 +20072,15 @@ components:
           type: string
           description: Component name where the error originated or was encountered.
       description: The error response returned for a job's service instance.
+    JobPriority:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Low
+            - Mid
+            - High
+      description: Priority of the job.
     JobProperties:
       type: object
       required:
@@ -20091,16 +20104,20 @@ components:
         instanceType:
           type: string
           description: Optional type of VM used as supported by the compute target.
+          readOnly: true
         properties:
           type: object
           additionalProperties: {}
           description: Additional properties bag.
+          readOnly: true
         shmSize:
           type: string
           description: Size of the docker container's shared memory block.
+          readOnly: true
         dockerArgs:
           type: string
           description: Extra arguments to pass to the Docker run command.
+          readOnly: true
       description: Compute Resource configuration for the job.
     JobService:
       type: object

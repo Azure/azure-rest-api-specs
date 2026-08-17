@@ -192,15 +192,19 @@ model JobResourceConfiguration {
   instanceCount?: int32;
 
   @doc("Optional type of VM used as supported by the compute target.")
+  @visibility(Lifecycle.Read)
   instanceType?: string;
 
   @doc("Additional properties bag.")
+  @visibility(Lifecycle.Read)
   properties?: Record<unknown>;
 
   @doc("Size of the docker container's shared memory block.")
+  @visibility(Lifecycle.Read)
   shmSize?: string;
 
   @doc("Extra arguments to pass to the Docker run command.")
+  @visibility(Lifecycle.Read)
   dockerArgs?: string;
 }
 
@@ -252,6 +256,20 @@ union JobType {
 
   @doc("Command job.")
   Command: "Command",
+}
+
+@doc("Priority of the job.")
+union JobPriority {
+  string,
+
+  @doc("Low priority.")
+  Low: "Low",
+
+  @doc("Medium priority.")
+  Mid: "Mid",
+
+  @doc("High priority.")
+  High: "High",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
@@ -316,6 +334,9 @@ model CommandJob extends JobProperties {
 
   @doc("Queue settings for the job.")
   queueSettings?: QueueSettings;
+
+  @doc("Priority of the job. If omitted, the service defaults to Low.")
+  priority?: JobPriority;
 
   @doc("user-assigned managed identity")
   userAssignedIdentityId?: string;
