@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01",
+    "resourceGroupName": "rg1",
+    "expressRouteLagName": "lagName",
+    "linkName": "linkName",
+    "memberName": "memberName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "memberName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName/links/linkName/members/memberName",
+        "etag": "W/\"f6c63a53-9734-4731-8fd1-ef3ca14bd6b6\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "interfaceName": "Ethernet0/0",
+          "patchPanelId": "patchPanelId1",
+          "rackId": "rackId1",
+          "coloLocation": "",
+          "connectorType": "LC",
+          "adminState": "Enabled"
+        },
+        "type": "Microsoft.Network/expressRouteLags/links/members"
+      }
+    }
+  },
+  "operationId": "ExpressRouteLags_MembersGet",
+  "title": "Get express route lag member"
+}
