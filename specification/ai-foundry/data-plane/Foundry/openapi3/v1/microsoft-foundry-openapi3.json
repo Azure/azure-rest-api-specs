@@ -27716,7 +27716,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -27812,7 +27812,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -27829,7 +27829,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -28010,7 +28010,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -28029,7 +28029,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -28092,7 +28092,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -28109,7 +28109,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -28221,7 +28221,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       },
@@ -28238,7 +28238,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "Routines=V1Preview"
+                "Routines=V2Preview"
               ]
             }
           },
@@ -28314,7 +28314,7 @@
           "contract": "agentserver-persistence",
           "usage": "cross-language-sdk-persistence",
           "required_previews": [
-            "Routines=V1Preview"
+            "Routines=V2Preview"
           ]
         }
       }
@@ -34976,6 +34976,13 @@
             "description": "The container image for the hosted agent.",
             "examples": [
               "my-registry.azurecr.io/my-hosted-agent:latest"
+            ]
+          },
+          "registry_connection_id": {
+            "type": "string",
+            "description": "The id (or name) of the Foundry project connection that provides the credentials used to\nauthenticate to the private container registry hosting `image`. The connection abstracts the\nauth mechanism — for example a managed-identity-federated token exchange, or a username/token\nsecret — so registry credentials are never part of the agent definition. Omit for public images\nor registries already reachable by the platform's default identity (for example, Azure Container Registry).",
+            "examples": [
+              "my-registry-connection"
             ]
           }
         },
@@ -82139,6 +82146,32 @@
           ]
         }
       },
+      "SimulationSeedDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "simulation_seed"
+            ],
+            "description": "The data generation job type, which is SimulationSeed for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
       "Skill": {
         "type": "object",
         "required": [
@@ -82841,32 +82874,6 @@
           }
         },
         "description": "Base class for targets with discriminator support."
-      },
-      "SimulationSeedDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "simulation_seed"
-            ],
-            "description": "The data generation job type, which is SimulationSeed for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
       },
       "TaxonomyCategory": {
         "type": "object",
@@ -83601,8 +83608,8 @@
           },
           "redact_private_content": {
             "type": "boolean",
-            "default": true,
-            "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction."
+            "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.",
+            "default": true
           }
         },
         "allOf": [
@@ -85862,7 +85869,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026. \nIf you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,\nsee the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).",
+        "description": "The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026.\nIf you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,\nsee the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).",
         "deprecated": true,
         "x-ms-foundry-meta": {
           "required_previews": [

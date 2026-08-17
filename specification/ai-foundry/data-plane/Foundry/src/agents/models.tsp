@@ -360,10 +360,10 @@ model PromptAgentDefinitionTextOptions {
 }
 
 /**
-* The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026. 
-* If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
-* see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
-*/
+ * The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026.
+ * If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
+ * see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
+ */
 #deprecated "deprecated"
 @extension(
   "x-ms-foundry-meta",
@@ -381,6 +381,16 @@ model ContainerConfiguration {
   @doc("The container image for the hosted agent.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image: string;
+
+  @doc("""
+    The id (or name) of the Foundry project connection that provides the credentials used to
+    authenticate to the private container registry hosting `image`. The connection abstracts the
+    auth mechanism — for example a managed-identity-federated token exchange, or a username/token
+    secret — so registry credentials are never part of the agent definition. Omit for public images
+    or registries already reachable by the platform's default identity (for example, Azure Container Registry).
+    """)
+  @example("my-registry-connection")
+  registry_connection_id?: string;
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")

@@ -33,3 +33,33 @@
     - "options.@azure-tools/typespec-java.emitter-output-dir"
   paths:
     - "./sdk-python-js-azure-ai-projects/tspconfig.yaml"
+- tool: TypeSpecValidation
+  reason: >
+     TS client library config does not include Java/Python config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - "options.@azure-tools/typespec-java.emitter-output-dir"
+    - "options.@azure-tools/typespec-python.emitter-output-dir"
+  paths:
+    - "./sdk-js-azure-ai-voice-agents/tspconfig.yaml"
+- tool: TypeSpecValidation
+  reason: >
+     TS client library config does not include Java/Python config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - "options.@azure-tools/typespec-java.emitter-output-dir"
+    - "options.@azure-tools/typespec-ts.emitter-output-dir"
+    - "options.@azure-tools/typespec-ts.package-details.name"
+  paths:
+    - "./sdk-python-azure-ai-voice-agents/tspconfig.yaml"
+- tool: TypeSpecValidation
+  reason: >
+     TS client library config does not include Java/Python config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - "options.@azure-tools/typespec-java.emitter-output-dir"
+    - "options.@azure-tools/typespec-ts.emitter-output-dir"
+    - "options.@azure-tools/typespec-ts.package-details.name"
+    - "options.@azure-tools/typespec-python.emitter-output-dir"
+  paths:
+    - "./sdk-csharp-azure-ai-voice-agents/tspconfig.yaml"
