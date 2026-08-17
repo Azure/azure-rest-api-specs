@@ -104,8 +104,8 @@ interface Restores {
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPointResource>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "x-ms-authorization-auxiliary is a standard ARM cross-tenant auxiliary-token header defined by ARM; it carries no service-specific semantics to document."
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "x-ms-authorization-auxiliary is a fixed ARM wire header; its casing is mandated by ARM and must not be altered."
       @header
       `x-ms-authorization-auxiliary`?: string;
     }
@@ -119,8 +119,8 @@ interface ItemLevelRecoveryConnections {
    * explorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of
    * provisioning, call GetProtectedItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "provisionInstantItemRecovery returns 202 Accepted without a Location/Azure-AsyncOperation header; provisioning status is polled via GetProtectedItemOperationResult, so the LRO location-header requirement does not apply to this legacy action."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "This action is accepted-only (returns 202 with no synchronous 200 body); the standard POST 200+default response-code set does not apply to this legacy asynchronous action."
   @action("provisionInstantItemRecovery")
   provision is ArmResourceActionSync<
     RecoveryPointResource,
@@ -132,8 +132,8 @@ interface ItemLevelRecoveryConnections {
    * Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer
    * displaying all recoverable files and folders. This is an asynchronous operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "revokeInstantItemRecovery returns 202 Accepted without a Location/Azure-AsyncOperation header; revoke status is polled via GetProtectedItemOperationResult, so the LRO location-header requirement does not apply to this legacy action."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "This action is accepted-only (returns 202 with no synchronous 200 body); the standard POST 200+default response-code set does not apply to this legacy asynchronous action."
   @action("revokeInstantItemRecovery")
   revoke is ArmResourceActionSync<
     RecoveryPointResource,
