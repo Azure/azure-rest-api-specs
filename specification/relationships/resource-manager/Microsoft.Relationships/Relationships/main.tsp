@@ -25,6 +25,10 @@ enum Versions {
   /** 2026-03-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2026-03-01-preview`,
+
+  /** 2026-08-01 version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2026-08-01`,
 }
 
 // Relationship resource name constraint. In 2023-09-01-preview the name was
