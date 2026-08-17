@@ -245,3 +245,4 @@ union VirtualNetworkProvisioningState {
 );
 
 @@usage(AgentPoolProfile, Usage.input, "csharp");
+@@usage(ProvisionedClusterUpgradeProfileProperties, Usage.input, "csharp");
