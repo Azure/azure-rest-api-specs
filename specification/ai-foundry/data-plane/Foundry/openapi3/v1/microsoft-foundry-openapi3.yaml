@@ -77332,6 +77332,7 @@ components:
       type: object
       required:
         - type
+        - environment
       properties:
         type:
           type: string
@@ -77346,7 +77347,7 @@ components:
             - type: 'null'
         environment:
           $ref: '#/components/schemas/ToolboxShellEnvironment'
-          description: The environment in which shell commands are executed.
+          description: The environment in which shell commands are executed. Specify an automatically provisioned container or an existing container.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
@@ -78087,21 +78088,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxShellEnvironment'
       description: An existing container environment for a shell tool stored in a toolbox.
-    ToolboxShellDomainSecretReference:
-      type: object
-      required:
-        - name
-        - project_connection_id
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: The name of the secret to inject.
-        project_connection_id:
-          type: string
-          minLength: 1
-          description: The ID of the project connection that contains the secret value.
-      description: A project connection used to provide a secret to an allowlisted domain.
     ToolboxShellEnvironment:
       type: object
       required:
@@ -78128,34 +78114,7 @@ components:
         propertyName: type
         mapping:
           disabled: '#/components/schemas/ToolboxShellNetworkPolicyDisabled'
-          allowlist: '#/components/schemas/ToolboxShellNetworkPolicyAllowlist'
       description: Network access policy for an automatically provisioned toolbox shell container.
-    ToolboxShellNetworkPolicyAllowlist:
-      type: object
-      required:
-        - type
-        - allowed_domains
-      properties:
-        type:
-          type: string
-          enum:
-            - allowlist
-          description: The type of network access policy. Always `allowlist`.
-        allowed_domains:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: The domains to which the container can make outbound requests.
-        domain_secrets:
-          type: array
-          items:
-            $ref: '#/components/schemas/ToolboxShellDomainSecretReference'
-          minItems: 1
-          description: Optional project connections that provide secrets for allowlisted domains.
-      allOf:
-        - $ref: '#/components/schemas/ToolboxShellNetworkPolicy'
-      description: A network policy that permits outbound access only to specified domains.
     ToolboxShellNetworkPolicyDisabled:
       type: object
       required:

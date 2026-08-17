@@ -158,23 +158,6 @@ model ToolboxShellEnvironment {
 }
 
 /**
- * A project connection used to provide a secret to an allowlisted domain.
- */
-model ToolboxShellDomainSecretReference {
-  /**
-   * The name of the secret to inject.
-   */
-  @minLength(1)
-  name: string;
-
-  /**
-   * The ID of the project connection that contains the secret value.
-   */
-  @minLength(1)
-  project_connection_id: string;
-}
-
-/**
  * Network access policy for an automatically provisioned toolbox shell container.
  */
 @discriminator("type")
@@ -196,28 +179,6 @@ model ToolboxShellNetworkPolicyDisabled extends ToolboxShellNetworkPolicy {
 }
 
 /**
- * A network policy that permits outbound access only to specified domains.
- */
-model ToolboxShellNetworkPolicyAllowlist extends ToolboxShellNetworkPolicy {
-  /**
-   * The type of network access policy. Always `allowlist`.
-   */
-  type: "allowlist";
-
-  /**
-   * The domains to which the container can make outbound requests.
-   */
-  @minItems(1)
-  allowed_domains: string[];
-
-  /**
-   * Optional project connections that provide secrets for allowlisted domains.
-   */
-  @minItems(1)
-  domain_secrets?: ToolboxShellDomainSecretReference[];
-}
-
-/**
  * An automatically provisioned container environment for a shell tool stored in a toolbox.
  */
 model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
@@ -226,10 +187,7 @@ model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
    */
   type: "container_auto";
 
-  ...OmitProperties<
-    OpenAI.ContainerAutoParam,
-    "type" | "network_policy"
-  >;
+  ...OmitProperties<OpenAI.ContainerAutoParam, "type" | "network_policy">;
 
   /**
    * The network access policy for the container.
@@ -265,9 +223,9 @@ model ShellToolboxTool extends ToolboxTool {
   ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
 
   /**
-   * The environment in which shell commands are executed.
+   * The environment in which shell commands are executed. Specify an automatically provisioned container or an existing container.
    */
-  environment?: ToolboxShellEnvironment;
+  environment: ToolboxShellEnvironment;
 }
 
 /**
