@@ -60,6 +60,14 @@ using Microsoft.ContainerService;
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
+// .NET SDK acronym casing.
+@@clientName(
+  ManagedClusterNATGatewaySku,
+  "ManagedClusterNatGatewaySku",
+  "csharp"
+);
+@@clientName(DRANETMode, "DranetMode", "csharp");
+
 // Java specific renaming for backward compatibility
 @@clientName(
   ManagedClusterAPIServerAccessProfile,
