@@ -598,7 +598,6 @@ using Microsoft.Batch;
   "BatchAccountRegenerateKeyContent",
   "csharp"
 );
-@@clientName(BatchAccount, "BatchAccountRenamed", "csharp");
 @@clientName(
   LocationOperationGroup.checkNameAvailability,
   "CheckBatchNameAvailability",
