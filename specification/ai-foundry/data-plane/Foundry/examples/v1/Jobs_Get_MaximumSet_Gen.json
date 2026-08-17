@@ -19,8 +19,12 @@
           "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
           "displayName": "My Training Job",
           "description": "A sample command job for training",
-          "tags": { "framework": "pytorch" },
-          "properties": { "experimentName": "my-experiment" },
+          "tags": {
+            "framework": "pytorch"
+          },
+          "properties": {
+            "experimentName": "my-experiment"
+          },
           "codeId": "azureai:my-training-code:1",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
           "inputs": {
@@ -63,10 +67,18 @@
             "timeout": "PT2H30M"
           },
           "services": {
-            "Studio": { "jobServiceType": "Studio", "port": 8080, "endpoint": "https://studio.example.com" },
-            "Tracking": { "jobServiceType": "Tracking" }
+            "Studio": {
+              "jobServiceType": "Studio",
+              "port": 8080,
+              "endpoint": "https://studio.example.com"
+            },
+            "Tracking": {
+              "jobServiceType": "Tracking"
+            }
           },
-          "queueSettings": { "jobTier": "Standard" },
+          "queueSettings": {
+            "jobTier": "Standard"
+          },
           "priority": "High",
           "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
           "gpuCount": 4,
