@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -85,9 +87,28 @@ model ServiceGroupProperties {
   displayName?: string;
 
   /**
+   * The non-indexed attributes of the service group.
+   */
+  @added(Versions.v2026_03_01_preview)
+  attributes?: ServiceGroupAttributes;
+
+  /**
    * The details of the parent serviceGroup.
    */
   parent?: ParentServiceGroupProperties;
+}
+
+/**
+ * The non-indexed attributes of a service group.
+ */
+@added(Versions.v2026_03_01_preview)
+model ServiceGroupAttributes {
+  /**
+   * The criticality designation of the service group. The value must be an integer from 0 to 4.
+   */
+  @minValue(0)
+  @maxValue(4)
+  criticality?: float64;
 }
 
 /**
