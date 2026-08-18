@@ -467,6 +467,56 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
+/** The type of authentication required to create the session. The only type currently supported is HMAC. */
+@added(Versions.v2026_12_06)
+union AuthenticationType {
+  /** HMAC authentication. */
+  Hmac: "HMAC",
+
+  /** Extensible. */
+  string,
+}
+
+/** The configuration used to create a session. */
+@added(Versions.v2026_12_06)
+@Xml.name("CreateSessionRequest")
+model CreateSessionConfiguration {
+  /** The type of authentication required to create the session. The only type currently supported is HMAC. */
+  @Xml.name("AuthenticationType") authenticationType: AuthenticationType;
+}
+
+/** The response of the Create Session API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for consistency with the service API contract"
+@added(Versions.v2026_12_06)
+@Xml.name("CreateSessionResult")
+model CreateSessionResponse {
+  /** A unique identifier for the created session. */
+  @Xml.name("Id") id?: string;
+
+  /** The time when the session will expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("Expiration")
+  expiration?: utcDateTime;
+
+  /** The type of authentication required to create the session. The only type currently supported is HMAC. */
+  @Xml.name("AuthenticationType") authenticationType?: AuthenticationType;
+
+  /** The credentials used to authorize subsequent requests in the session. */
+  @Xml.name("Credentials") credentials?: SessionCredentials;
+}
+
+/** The credentials associated with a session. */
+@added(Versions.v2026_12_06)
+@Xml.name("Credentials")
+model SessionCredentials {
+  /** An opaque token used to authorize subsequent requests in the session. Must be treated as a security credential. */
+  @Xml.name("SessionToken") sessionToken?: string;
+
+  /** Only returned when AuthenticationType is HMAC. A symmetric encryption key used to sign requests in the session using the Shared Key protocol. */
+  @Xml.name("SessionKey") sessionKey?: string;
+}
+
 /** The result of the Find Blobs by Tags API. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
