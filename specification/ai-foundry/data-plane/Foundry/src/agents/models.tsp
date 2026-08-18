@@ -669,58 +669,58 @@ union ActivityProtocolAccessBoundary {
   string,
 
   @doc("Allows read access to one-on-one developer conversations.")
-  Read1on1Developers: "read.1on1.developers",
+  read_1on1_developers: "read.1on1.developers",
 
   @doc("Allows read access to one-on-one manager conversations.")
-  Read1on1Manager: "read.1on1.manager",
+  read_1on1_manager: "read.1on1.manager",
 
   @doc("Allows read access to allowlisted one-on-one conversations.")
-  Read1on1Allowlisted: "read.1on1.allowlisted",
+  read_1on1_allowlisted: "read.1on1.allowlisted",
 
   @doc("Allows read access to tenant-wide one-on-one conversations.")
-  Read1on1Tenant: "read.1on1.tenant",
+  read_1on1_tenant: "read.1on1.tenant",
 
   @doc("Allows write access to one-on-one developer conversations.")
-  Write1on1Developers: "write.1on1.developers",
+  write_1on1_developers: "write.1on1.developers",
 
   @doc("Allows write access to one-on-one manager conversations.")
-  Write1on1Manager: "write.1on1.manager",
+  write_1on1_manager: "write.1on1.manager",
 
   @doc("Allows write access to allowlisted one-on-one conversations.")
-  Write1on1Allowlisted: "write.1on1.allowlisted",
+  write_1on1_allowlisted: "write.1on1.allowlisted",
 
   @doc("Allows write access to tenant-wide one-on-one conversations.")
-  Write1on1Tenant: "write.1on1.tenant",
+  write_1on1_tenant: "write.1on1.tenant",
 
   @doc("Allows read access to developer group conversations.")
-  ReadGroupDevelopers: "read.group.developers",
+  read_group_developers: "read.group.developers",
 
   @doc("Allows read access to allowlisted group conversations.")
-  ReadGroupAllowlisted: "read.group.allowlisted",
+  read_group_allowlisted: "read.group.allowlisted",
 
   @doc("Allows read access to group conversations where a manager is invited.")
-  ReadGroupManagerInvited: "read.group.manager-invited",
+  read_group_manager_invited: "read.group.manager-invited",
 
   @doc("Allows read access to group conversations where a manager is present.")
-  ReadGroupManagerPresent: "read.group.manager-present",
+  read_group_manager_present: "read.group.manager-present",
 
   @doc("Allows read access to tenant-wide group conversations.")
-  ReadGroupTenant: "read.group.tenant",
+  read_group_tenant: "read.group.tenant",
 
   @doc("Allows write access to developer group conversations.")
-  WriteGroupDevelopers: "write.group.developers",
+  write_group_developers: "write.group.developers",
 
   @doc("Allows write access to allowlisted group conversations.")
-  WriteGroupAllowlisted: "write.group.allowlisted",
+  write_group_allowlisted: "write.group.allowlisted",
 
   @doc("Allows write access to group conversations where a manager is invited.")
-  WriteGroupManagerInvited: "write.group.manager-invited",
+  write_group_manager_invited: "write.group.manager-invited",
 
   @doc("Allows write access to group conversations where a manager is present.")
-  WriteGroupManagerPresent: "write.group.manager-present",
+  write_group_manager_present: "write.group.manager-present",
 
   @doc("Allows write access to tenant-wide group conversations.")
-  WriteGroupTenant: "write.group.tenant",
+  write_group_tenant: "write.group.tenant",
 }
 
 @doc("Configuration specific to the activity protocol.")
