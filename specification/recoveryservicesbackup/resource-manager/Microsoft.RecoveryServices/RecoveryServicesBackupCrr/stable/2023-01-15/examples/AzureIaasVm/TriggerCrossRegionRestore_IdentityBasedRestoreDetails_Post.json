@@ -1,11 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "azureRegion": "southeastasia",
     "api-version": "2023-01-15",
+    "azureRegion": "southeastasia",
     "parameters": {
       "crossRegionRestoreAccessDetails": {
-        "objectType": "WorkloadCrrAccessToken",
         "accessTokenString": "**********",
         "backupManagementType": "AzureIaasVM",
         "containerName": "iaasvmcontainerv2;srinivasccyrg;sriniccylinux",
@@ -15,6 +13,7 @@
         "datasourceId": "1142937031",
         "datasourceName": "sriniccylinux",
         "datasourceType": "VM",
+        "objectType": "WorkloadCrrAccessToken",
         "protectionServiceStampId": "90d98224-2ac6-4bda-9f35-33fb22841f2a",
         "protectionServiceStampUri": "https://pod01-prot1-int.ccy.backup.windowsazure.com",
         "recoveryPointId": "87178355392716",
@@ -31,12 +30,12 @@
         "encryptionDetails": {
           "encryptionEnabled": false
         },
+        "identityBasedRestoreDetails": {
+          "targetStorageAccountId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/00prjaiTestRg1/providers/Microsoft.Storage/storageAccounts/00prjaitestrg1disks993"
+        },
         "identityInfo": {
           "isSystemAssignedIdentity": false,
           "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/asmaskarRG1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/asmaskartestmsi"
-        },
-        "identityBasedRestoreDetails": {
-          "targetStorageAccountId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/00prjaiTestRg1/providers/Microsoft.Storage/storageAccounts/00prjaitestrg1disks993"
         },
         "objectType": "IaasVMRestoreRequest",
         "originalStorageAccountOption": false,
@@ -53,16 +52,19 @@
           "2"
         ]
       }
-    }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {},
     "202": {
       "headers": {
-        "Location": "location: https://centraluseuap.management.azure.com/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/providers/microsoft.recoveryservices/locations/eastus2euap/backupCrrOperationResults/MTMzMDgzNzkwNjQxODEzODE2MDtkMTY3MzM3Yy0yM2I1LTQ5ODgtODkwZC0xY2MyMmQ5MTYyZjA=?api-version=2023-01-15-preview",
         "Azure-AsyncOperation": "azure-asyncoperation: https://centraluseuap.management.azure.com/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/providers/microsoft.recoveryservices/locations/eastus2euap/backupCrrOperationsStatus/MTMzMDgzNzkwNjQxODEzODE2MDtkMTY3MzM3Yy0yM2I1LTQ5ODgtODkwZC0xY2MyMmQ5MTYyZjA=?api-version=2023-01-15-preview",
+        "Location": "location: https://centraluseuap.management.azure.com/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/providers/microsoft.recoveryservices/locations/eastus2euap/backupCrrOperationResults/MTMzMDgzNzkwNjQxODEzODE2MDtkMTY3MzM3Yy0yM2I1LTQ5ODgtODkwZC0xY2MyMmQ5MTYyZjA=?api-version=2023-01-15-preview",
         "Retry-After": 60
       }
     }
-  }
+  },
+  "operationId": "CrossRegionRestore_Trigger",
+  "title": "Trigger Cross Region Restore with identityBasedRestoreDetails"
 }

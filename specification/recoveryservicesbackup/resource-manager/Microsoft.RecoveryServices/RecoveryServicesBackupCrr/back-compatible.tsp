@@ -8,41 +8,40 @@ using Microsoft.RecoveryServices;
 
 
 
-@@clientLocation(BackupResourceConfigResources.get, "BackupResourceStorageConfigs")
-@@clientLocation(BackupResourceConfigResources.update, "BackupResourceStorageConfigs")
-@@clientName(BackupResourceConfigResources.update::parameters.resource, "parameters")
-@@clientLocation(BackupResourceConfigResources.patch, "BackupResourceStorageConfigs")
-@@clientName(BackupResourceConfigResources.patch, "patch")
-@@clientName(BackupResourceConfigResources.patch::parameters.properties, "parameters")
+@@clientLocation(BackupResourceConfigResources.get, "BackupResourceStorageConfigs");
+@@clientLocation(BackupResourceConfigResources.update, "BackupResourceStorageConfigs");
+@@clientName(BackupResourceConfigResources.update::parameters.resource, "parameters");
+@@clientLocation(BackupResourceConfigResources.patch, "BackupResourceStorageConfigs");
+@@clientName(BackupResourceConfigResources.patch, "patch");
+@@clientName(BackupResourceConfigResources.patch::parameters.properties, "parameters");
 
-@@clientLocation(RecoveryPointResources.get, "RecoveryPointsCrr")
-@@clientLocation(RecoveryPointResources.list, "RecoveryPointsCrr")
-@@clientLocation(RecoveryPointResources.getAccessToken, "RecoveryPoints")
-@@clientName(RecoveryPointResources.getAccessToken::parameters.body, "parameters")
-
-
-
-@@clientLocation(BackupUsageSummariesCRROperationGroup.list, "BackupUsageSummariesCRR")
+@@clientLocation(RecoveryPointResources.get, "RecoveryPointsCrr");
+@@clientLocation(RecoveryPointResources.list, "RecoveryPointsCrr");
+@@clientLocation(RecoveryPointResources.getAccessToken, "RecoveryPoints");
+@@clientName(RecoveryPointResources.getAccessToken::parameters.body, "parameters");
 
 
-@@clientLocation(AadPropertiesOperationGroup.get, "AadProperties")
+
+@@clientLocation(BackupUsageSummariesCRROperationGroup.list, "BackupUsageSummariesCRR");
 
 
-@@clientLocation(CrossRegionRestoreOperationGroup.trigger, "CrossRegionRestore")
+@@clientLocation(AadPropertiesOperationGroup.get, "AadProperties");
 
 
-@@clientLocation(BackupCrrJobDetailsOperationGroup.get, "BackupCrrJobDetails")
+@@clientLocation(CrossRegionRestoreOperationGroup.trigger, "CrossRegionRestore");
 
 
-@@clientLocation(BackupCrrJobsOperationGroup.list, "BackupCrrJobs")
+@@clientLocation(BackupCrrJobDetailsOperationGroup.get, "BackupCrrJobDetails");
 
 
-@@clientLocation(CrrOperationResultsOperationGroup.get, "CrrOperationResults")
+@@clientLocation(BackupCrrJobsOperationGroup.list, "BackupCrrJobs");
 
 
-@@clientLocation(CrrOperationStatusOperationGroup.get, "CrrOperationStatus")
+@@clientLocation(CrrOperationResultsOperationGroup.get, "CrrOperationResults");
 
 
-@@clientLocation(BackupProtectedItemsCrrOperationGroup.list, "BackupProtectedItemsCrr")
+@@clientLocation(CrrOperationStatusOperationGroup.get, "CrrOperationStatus");
 
+
+@@clientLocation(BackupProtectedItemsCrrOperationGroup.list, "BackupProtectedItemsCrr");
 

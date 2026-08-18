@@ -17,7 +17,7 @@ namespace Microsoft.RecoveryServices;
 */
 @singleton("vaultstorageconfig")
 model BackupResourceConfigResource is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<BackupResourceConfig> {
-...ResourceNameParameter<Resource = BackupResourceConfigResource,KeyName = "backupstorageconfig",SegmentName = "backupstorageconfig",NamePattern = "">
+...ResourceNameParameter<Resource = BackupResourceConfigResource,KeyName = "backupstorageconfig",SegmentName = "backupstorageconfig",NamePattern = "">;
 /**
 * Optional ETag.
 */
@@ -61,7 +61,7 @@ patch is ArmCustomPatchSync<BackupResourceConfigResource, PatchModel = BackupRes
 }
 
 
-@@doc(BackupResourceConfigResource.name, "")
-@@doc(BackupResourceConfigResource.properties, "BackupResourceConfigResource properties")
+@@doc(BackupResourceConfigResource.name, "");
+@@doc(BackupResourceConfigResource.properties, "BackupResourceConfigResource properties");
 @@doc(BackupResourceConfigResources.`update`::parameters.resource, "Vault storage config request");
 @@doc(BackupResourceConfigResources.`patch`::parameters.properties, "Vault storage config request");

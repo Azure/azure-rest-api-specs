@@ -16,7 +16,7 @@ namespace Microsoft.RecoveryServices;
 * Base class for backup copies. Workload-specific backup copies are derived from this class.
 */
 model RecoveryPointResource is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RecoveryPoint> {
-...ResourceNameParameter<Resource = RecoveryPointResource,KeyName = "recoveryPointId",SegmentName = "recoveryPoints",NamePattern = "">
+...ResourceNameParameter<Resource = RecoveryPointResource,KeyName = "recoveryPointId",SegmentName = "recoveryPoints",NamePattern = "">;
 /**
 * Optional ETag.
 */
@@ -62,6 +62,6 @@ getAccessToken is ArmResourceActionSync<RecoveryPointResource, AADPropertiesReso
 }
 
 
-@@doc(RecoveryPointResource.name, "RecoveryPointID represents the backed up data to be fetched.")
-@@doc(RecoveryPointResource.properties, "RecoveryPointResource properties")
+@@doc(RecoveryPointResource.name, "RecoveryPointID represents the backed up data to be fetched.");
+@@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPointResources.`getAccessToken`::parameters.body, "Get Access Token request");
