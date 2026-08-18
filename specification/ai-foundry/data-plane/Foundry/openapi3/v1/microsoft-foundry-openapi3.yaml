@@ -84002,6 +84002,9 @@ components:
             - session.created
           description: The event type, must be `session.created`.
           x-stainless-const: true
+        conversation_id:
+          type: string
+          description: The id of the persisted conversation. Only present when conversation persistence is enabled for the session.
         session:
           $ref: '#/components/schemas/VoiceAgentSessionResponseConfig'
           description: The initial effective voice-agent session configuration.
