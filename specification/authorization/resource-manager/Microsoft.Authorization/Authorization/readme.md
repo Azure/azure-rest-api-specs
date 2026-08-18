@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-12-01-preview
+tag: package-2026-07-01-preview
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -102,6 +102,23 @@ directive:
   - suppress: RepeatedPathInfo
     from: authorization-DenyAssignmentCalls.json
     reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
+```
+
+### Tag: package-2026-07-01-preview
+
+These settings apply only when `--tag=package-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01-preview'
+input-file:
+  - stable/2015-07-01/ClassicAdmin.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - preview/2026-07-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2024-09-01-preview/openapi.json
+  - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - preview/2022-08-01-preview/RoleManagementAlerts.json
+  - preview/2025-12-01-preview/AttributeNamespaces.json
 ```
 
 ### Tag: package-2025-12-01-preview
