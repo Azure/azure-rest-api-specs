@@ -120,8 +120,9 @@ for the failures that are safe to suppress.
 - Never modify or delete an existing suppression, in either mechanism. Only add new ones, or add
   paths to an existing `suppressions.yaml` entry that already has the exact same `tool`, `rules`,
   `sub-rules`, and `reason`.
-- Every line you add must be either a `#suppress` directive or a `suppressions.yaml` entry. If a
-  diff of your change contains anything else, you have gone too far — revert it.
+- Every line you add must be either a `#suppress` directive or a `suppressions.yaml` entry, or the
+  result of running `tsp format` on a folder you edited (see Step 3). If a diff of your change
+  contains anything else, you have gone too far — revert it.
 - Never modify the TSV-All workflow. It is the authoritative gate and this pipeline only reads it.
 - If nothing is safe to suppress, emit a `noop` and stop. An empty PR is worse than no PR.
 
@@ -207,7 +208,16 @@ op example(...): void;
 ```
 
 - The directive must sit immediately above the declaration the diagnostic points at — above its
-  decorators, not between them.
+  decorators and above any `#suppress` directives already attached to it, but **not above anything
+  that belongs to a different declaration**. When walking upward from the reported line to find the
+  insertion point, stop as soon as you hit a blank line, a `;`, a closing `}`, or a statement that
+  terminates on its own line such as an `@@augment`-style call (`@@override(...)`, `@@clientName(...)`).
+  Those belong to the previous declaration, not yours. Overshooting strands the directive on the
+  wrong target: the original diagnostic keeps firing and you may accidentally suppress a rule on an
+  unrelated declaration.
+- After inserting, confirm the lines between your directive and the declaration are **only**
+  decorators, doc comments, or other `#suppress` directives. If anything else sits in between, you
+  have overshot — move the directive down.
 - **Apply multiple suppressions to the same file bottom-up.** Every directive you insert adds a
   line, shifting everything below it down by one, so line numbers from the report go stale as soon
   as you edit above them. `diagnostics[]` is already sorted by descending line number within each
@@ -238,6 +248,27 @@ Match the existing style in `specification/suppressions.yaml` exactly.
   `<service>/<Service.Namespace>` folder. Do not introduce new `**` globs.
 - Keep the `reason` consistent with the existing entry you are extending.
 
+### Format every folder you touched
+
+TSV runs a `tsp format` check, so an inserted directive that does not match the formatter's preferred
+layout turns a suppression fix into a new formatting failure. After you finish editing a folder, run
+the formatter on it:
+
+```
+npx tsp format "<specification-folder>/**/*.tsp"
+```
+
+- Run this **once per folder, after all suppressions for that folder are in place** — not after each
+  individual edit.
+- Only format folders you actually edited. Formatting an untouched folder pulls unrelated churn into
+  the PR and makes the diff hard to review.
+- The formatter may reflow a long `#suppress` line or adjust its indentation. That is expected and
+  correct. What it must **not** do is alter a model, operation, property, decorator, or doc comment
+  that you did not touch — if it does, that folder had a pre-existing formatting failure. Revert the
+  formatting for that folder and drop it from this PR; a spec-wide reformat is a separate change.
+- Re-read each file after formatting and confirm every directive still sits directly above the
+  declaration it targets.
+
 ## Step 4: verify before opening the PR
 
 Verification is mandatory. Do not open a PR on an unverified edit.
@@ -257,23 +288,34 @@ Verification is mandatory. Do not open a PR on an unverified edit.
    npx tsv <specification-folder>
    ```
 
-   A folder that still reports the same diagnostic is the signature of a line-drift mistake: the
-   directive landed on the wrong declaration. Re-read the file and fix the placement — do not add a
-   second directive to compensate.
+   A folder that still reports the same diagnostic is the signature of a line-drift or placement
+   mistake: the directive landed on the wrong declaration. Re-read the file and fix the placement —
+   do not add a second directive to compensate.
+
+   A folder that reports a **different, previously unseen** diagnostic is normal and is not a
+   mistake. The compiler stops reporting after certain failures, so fixing the harvested set can
+   reveal diagnostics that were masked underneath them. If the newly revealed diagnostic is itself
+   inline-suppressible, you may suppress it in the same PR; note in the PR body that it was not in
+   the harvest report. If it is not inline-suppressible, leave the folder in whatever state still
+   compiles, revert your changes to it if it no longer does, and note that the folder needs a second
+   pass. The next scheduled run will harvest the newly surfaced diagnostic.
 
    Also confirm the number of `#suppress` lines you added to each file matches the number of
    diagnostics you set out to suppress in it. A mismatch means an insertion landed in the wrong
    place:
 
    ```
-   git diff -U0 -- specification | grep -c '^+.*#suppress'
+   git diff -U0 -- specification | grep -c '^+.*#suppress' || true
    ```
 
+   If `tsp format` wrapped a long directive across lines, count the directives by reading the diff
+   instead — the grep undercounts a wrapped `#suppress`.
+
 3. Run `git diff` and confirm every changed file is either `specification/suppressions.yaml` or a
-   `.tsp` file under `specification/`. Then read the diff line by line and confirm that **every
-   added line is a `#suppress` directive or a `suppressions.yaml` entry**, and that no line was
-   removed or rewritten. If the diff changes a model, operation, property, decorator, or doc
-   comment, undo it — that is a spec change, not a suppression.
+   `.tsp` file under `specification/`. Then read the diff line by line. Every change must be either a
+   `#suppress` directive, a `suppressions.yaml` entry, or a pure reformatting of one of those by
+   `tsp format`. If the diff changes a model, operation, property, decorator, or doc comment, undo
+   it — that is a spec change, not a suppression.
 
 If verification fails, fix your edit and verify again. If you cannot get it to pass, emit a `noop`
 rather than opening a broken PR.
