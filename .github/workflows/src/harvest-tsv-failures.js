@@ -34,19 +34,19 @@ function stripTimestamp(line) {
 }
 
 /**
- * Rules that may be suppressed inline, with a `#suppress` directive placed directly above the
- * offending declaration in the `.tsp` source.
+ * Decide whether a diagnostic can be suppressed inline with a `#suppress` directive.
  *
- * These are linter-style style/convention rules with an established precedent in this repo. A rule
- * qualifies only if suppressing it changes nothing about the emitted API -- it merely records that
- * the deviation is intentional. Compiler errors and correctness rules are deliberately excluded.
+ * Any warning from a TypeSpec linter package qualifies. Warnings are advisory by definition -- they
+ * flag a convention the spec deviates from, not a broken API -- and `#suppress` simply records that
+ * the deviation is intentional.
+ *
+ * Severity is the real gate. Errors are never inline-suppressible no matter which package emitted
+ * them: an error means the spec does not compile or is genuinely invalid, and that is a human's
+ * problem to fix rather than to silence.
  */
-const INLINE_SUPPRESSIBLE_RULES = new Set([
-  "@azure-tools/typespec-azure-core/casing-style",
-  "@azure-tools/typespec-azure-core/documentation-required",
-  "@azure-tools/typespec-azure-core/no-openapi",
-  "@azure-tools/typespec-azure-core/no-openapi-client-extensions",
-]);
+function isInlineSuppressible(severity, rule) {
+  return severity === "warning" && /^(@azure-tools|@typespec)\//.test(rule);
+}
 
 /**
  * Extract individual TypeSpec diagnostics from a folder's log output.
@@ -86,7 +86,7 @@ function extractDiagnostics(body) {
       severity,
       rule,
       message: message.trim(),
-      inlineSuppressible: INLINE_SUPPRESSIBLE_RULES.has(rule),
+      inlineSuppressible: isInlineSuppressible(severity, rule),
     });
   }
 

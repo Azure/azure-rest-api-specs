@@ -144,20 +144,27 @@ field tells you which the harvest step chose; confirm it against the `excerpt` b
 ### `suppressionStyle: "inline"` — a `#suppress` directive in the `.tsp` source
 
 Preferred whenever the compiler reported a specific location, because it is scoped to the single
-declaration that deviates rather than an entire folder. Eligible rules:
+declaration that deviates rather than an entire folder.
 
-- `@azure-tools/typespec-azure-core/casing-style`
-- `@azure-tools/typespec-azure-core/documentation-required`
-- `@azure-tools/typespec-azure-core/no-openapi`
-- `@azure-tools/typespec-azure-core/no-openapi-client-extensions`
+A diagnostic is inline-suppressible when **both** hold:
 
-Each is a style or convention rule with thousands of existing precedents in this repo, and
-suppressing one changes nothing about the emitted API — it only records that the deviation is
-intentional.
+- Its severity is `warning`, not `error`.
+- Its rule comes from a TypeSpec linter package — the rule id starts with `@azure-tools/` or
+  `@typespec/`.
+
+Severity is the real gate. A warning is advisory by definition: it flags a convention the spec
+deviates from, and `#suppress` records that the deviation is intentional. An error means the spec
+does not compile or is genuinely invalid, so it is never inline-suppressible regardless of which
+package emitted it.
 
 A folder is only inline-eligible if **every** diagnostic in it is inline-suppressible. If a folder
-mixes a suppressible warning with a real compiler error, suppressing the warning would leave the
-folder failing anyway, so the whole folder goes to a human.
+mixes a suppressible warning with an error, suppressing the warning would leave the folder failing
+anyway, so the whole folder goes to a human.
+
+Even when a warning qualifies mechanically, you still own the judgment call. If a warning appears to
+report a genuine API design problem rather than a convention deviation — for example something about
+ARM resource shape, provisioning state, envelope properties, or API versioning — leave it for a
+human and list it under "Not suppressed" in the PR body.
 
 ### `suppressionStyle: "file"` — an entry in `specification/suppressions.yaml`
 
@@ -169,9 +176,11 @@ Used when the failure belongs to the folder as a whole and has no single source 
 
 ### Never eligible
 
-- Any `tsp compile` error in the TypeSpec source itself (syntax, type, or unknown-identifier errors).
-- Any correctness rule — anything about ARM resource shape, provisioning state, envelope properties,
-  or API versioning. These signal a real design problem.
+- Any diagnostic with severity `error` — whether a compile error in the TypeSpec source (syntax,
+  type, unknown identifier) or a linter rule raised as an error. Errors mean the spec is broken or
+  invalid, and fixing that is a human's job.
+- Any warning that appears to report a genuine API design problem rather than a convention
+  deviation — ARM resource shape, provisioning state, envelope properties, or API versioning.
 - Any failure whose message you cannot confidently attribute to one of the categories above.
 - Any failure that appears to be infrastructure flake (network, npm install, runner timeout). These
   should be reported in the PR body as "needs a rerun", not suppressed.
