@@ -75,6 +75,7 @@ alias ToolboxWebSearchToolType = "web_search";
 alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
+alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
@@ -94,6 +95,7 @@ union ToolboxToolType {
   mcp: ToolboxMCPToolType,
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
+  a2a: ToolboxA2AToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
@@ -166,6 +168,14 @@ model AzureAISearchToolboxTool extends ToolboxTool {
 model OpenApiToolboxTool extends ToolboxTool {
   type: ToolboxOpenApiToolType;
   ...ToolFields<OpenApiTool>;
+}
+
+/**
+ * An A2A tool stored in a toolbox.
+ */
+model A2AToolboxTool extends ToolboxTool {
+  type: ToolboxA2AToolType;
+  ...ToolFields<A2ATool>;
 }
 
 /**
