@@ -26,6 +26,18 @@ model Scenario is Azure.ResourceManager.ProxyResource<ScenarioProperties> {
 
 /**
  * Model that represents the properties of the scenario.
+ *
+ * A scenario's structure comes from exactly one of two sources, and they are
+ * mutually exclusive:
+ *
+ * - **Template-based**: `createdFrom` references a scenario template version,
+ *   and that template is the authoritative source for the scenario's structure.
+ *   Inline `parameters` and `actions` are not used.
+ * - **Inline**: `createdFrom` is absent, and the scenario's structure is taken
+ *   from the `parameters` and `actions` supplied in the request.
+ *
+ * Supplying neither source is rejected. This constraint cannot be expressed in
+ * the schema and is enforced at request validation.
  */
 model ScenarioProperties {
   /**
@@ -41,9 +53,10 @@ model ScenarioProperties {
   createdFrom?: string;
 
   /**
-   * Version of the scenario.
+   * Version of the scenario, supplied by the author. Defaults to `1.0` when not
+   * supplied on create. This is the scenario's own version and is independent of
+   * the version of any template it was created from.
    */
-  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
@@ -52,17 +65,25 @@ model ScenarioProperties {
   description?: string;
 
   /**
-   * Parameter definitions for the scenario.
+   * Parameter definitions for the scenario. Used as the scenario's parameter
+   * definitions when `createdFrom` is not supplied; not used when it is,
+   * because the referenced template is then the authoritative source for the
+   * scenario's structure.
    */
+  @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @identifiers(#["name"])
-  parameters: ScenarioParameter[];
+  parameters?: ScenarioParameter[];
 
   /**
-   * Array of actions that define the scenario's orchestration.
+   * Array of actions that define the scenario's orchestration. Used as the
+   * scenario's actions when `createdFrom` is not supplied; not used when it is,
+   * because the referenced template is then the authoritative source for the
+   * scenario's structure. When supplied, at least one action must be present.
    */
+  @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @minItems(1)
   @identifiers(#["name"])
-  actions: ScenarioAction[];
+  actions?: ScenarioAction[];
 
   /**
    * The recommendation information for this scenario.
