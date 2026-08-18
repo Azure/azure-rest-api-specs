@@ -91,6 +91,7 @@ interface RecoveryPointGetAccessToken {
 */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("RecoveryPoints_GetAccessToken")
+@summary("Returns the Access token for communication between BMS and Protection service")
 @action("accessToken")
 getAccessToken is ArmResourceActionSync<RecoveryPointResource, AADPropertiesResource, ArmResponse<CrrAccessTokenResource>>;
 
