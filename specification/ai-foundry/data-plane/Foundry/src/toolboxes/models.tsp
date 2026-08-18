@@ -103,8 +103,6 @@ union ToolboxToolType {
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
-
-  @removed(Versions.v1)
   web_iq_preview: ToolboxWebIQPreviewToolType,
 }
 
@@ -225,7 +223,6 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
 /**
  * A WebIQ tool stored in a toolbox.
  */
-@removed(Versions.v1)
 @extension("x-ms-foundry-meta", PreviewTool)
 model WebIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxWebIQPreviewToolType;
