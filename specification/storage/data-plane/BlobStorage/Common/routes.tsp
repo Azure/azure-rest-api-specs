@@ -446,6 +446,28 @@ interface Container {
     {}
   >;
 
+  /** The Create Session operation enables users to create a session scoped to a container. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @added(Versions.v2026_12_06)
+  @post
+  @route("?restype=container&comp=session")
+  createSession is StorageOperation<
+    {
+      ...TimeoutParameter;
+
+      /** The configuration used to create the session. */
+      @body
+      createSessionConfiguration: CreateSessionConfiguration;
+    },
+    {
+      @statusCode statusCode: 201;
+
+      /** The created session. */
+      @body
+      createSessionResponse: CreateSessionResponse;
+    }
+  >;
+
   /** Allows multiple API calls to be embedded into a single HTTP request. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
