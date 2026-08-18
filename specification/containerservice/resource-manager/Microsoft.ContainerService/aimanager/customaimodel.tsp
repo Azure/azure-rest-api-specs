@@ -73,12 +73,12 @@ model BaseModelReference {
   id: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The total size of the model weights. eg `28.7Gi`. Required if the base model is not publically accessible on HuggingFace.")
+  @doc("The total size of the model weights. eg `28.7Gi`. Required if the base model is not publicly accessible on HuggingFace.")
   totalWeightSize?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "config.json is opaque upstream JSON"
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The verbatim `config.json` of the base model, supplied by the user. Required if the base model is not publically accessible on HuggingFace.")
+  @doc("The verbatim `config.json` of the base model, supplied by the user. Required if the base model is not publicly accessible on HuggingFace.  For more information on CustomAIModel configuration see https://aka.ms/aks/aim-customaimodel.")
   config?: Record<unknown>;
 }
 
