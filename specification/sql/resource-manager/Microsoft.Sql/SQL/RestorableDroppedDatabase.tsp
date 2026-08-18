@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -70,7 +71,17 @@ interface RestorableDroppedDatabases {
   /**
    * Gets a list of restorable dropped databases.
    */
-  listByServer is ArmResourceListByParent<RestorableDroppedDatabase>;
+  listByServer is ArmResourceListByParent<
+    RestorableDroppedDatabase,
+    Parameters = {
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2026_08_01_preview)
+      $skiptoken?: string;
+    }
+  >;
 }
 
 @@doc(RestorableDroppedDatabase.name, "");
