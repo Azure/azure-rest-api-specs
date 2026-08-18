@@ -1696,6 +1696,11 @@ union ProvisioningStateUnion {
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AZFWVnet", "go");
 
 // C# management-plane migration naming compatibility.
+@@clientName(
+  Microsoft.Network.ConnectionAnalyzer.type,
+  "ResourceType",
+  "csharp"
+);
 @@clientName(Commit, "NetworkManagerConfigurationCommit", "csharp");
 @@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
 @@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
