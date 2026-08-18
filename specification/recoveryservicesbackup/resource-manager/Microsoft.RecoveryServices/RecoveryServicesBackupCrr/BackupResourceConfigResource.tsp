@@ -28,7 +28,8 @@ model BackupResourceConfigResource is Azure.ResourceManager.Legacy.TrackedResour
 
 
 
-@armResourceOperations
+@tag("BackupResourceStorageConfigs")
+@armResourceOperations(#{ omitTags: true })
 interface BackupResourceConfigResources {
 /**
 * Fetches resource storage config.

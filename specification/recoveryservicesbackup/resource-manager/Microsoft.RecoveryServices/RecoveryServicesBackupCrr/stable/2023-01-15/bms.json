@@ -40,16 +40,46 @@
   },
   "tags": [
     {
-      "name": "BackupResourceConfigResources"
+      "name": "BackupResourceStorageConfigs"
     },
     {
-      "name": "RecoveryPointResources"
+      "name": "RecoveryPoints_Crr"
+    },
+    {
+      "name": "RecoveryPoints_GetAccessToken"
+    },
+    {
+      "name": "BackupUsageSummaries_CRR"
+    },
+    {
+      "name": "AadProperties"
+    },
+    {
+      "name": "CrossRegionRestore"
+    },
+    {
+      "name": "CrrJobDetails"
+    },
+    {
+      "name": "BackupCrrJobs"
+    },
+    {
+      "name": "CrrOperationResults"
+    },
+    {
+      "name": "CrrOperationStatus"
+    },
+    {
+      "name": "BackupProtectedItems_Crr"
     }
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties": {
       "get": {
         "operationId": "AadProperties_Get",
+        "tags": [
+          "AadProperties"
+        ],
         "summary": "Fetches the AAD properties from target region BCM stamp.",
         "description": "Fetches the AAD properties from target region BCM stamp.",
         "parameters": [
@@ -98,6 +128,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore": {
       "post": {
         "operationId": "CrossRegionRestore_Trigger",
+        "tags": [
+          "CrossRegionRestore"
+        ],
         "summary": "Restores the specified backed up data in a different region as compared to where the data is backed up.",
         "description": "Restores the specified backed up data in a different region as compared to where the data is backed up.",
         "parameters": [
@@ -166,6 +199,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob": {
       "post": {
         "operationId": "BackupCrrJobDetails_Get",
+        "tags": [
+          "CrrJobDetails"
+        ],
         "summary": "Get CRR job details from target region.",
         "description": "Get CRR job details from target region.",
         "parameters": [
@@ -216,6 +252,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJobs": {
       "post": {
         "operationId": "BackupCrrJobs_List",
+        "tags": [
+          "BackupCrrJobs"
+        ],
         "summary": "Gets the list of CRR jobs from the target region.",
         "description": "Gets the list of CRR jobs from the target region.",
         "parameters": [
@@ -280,6 +319,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}": {
       "get": {
         "operationId": "CrrOperationResults_Get",
+        "tags": [
+          "CrrOperationResults"
+        ],
         "parameters": [
           {
             "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -332,6 +374,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}": {
       "get": {
         "operationId": "CrrOperationStatus_Get",
+        "tags": [
+          "CrrOperationStatus"
+        ],
         "parameters": [
           {
             "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -378,7 +423,7 @@
       "get": {
         "operationId": "RecoveryPointsCrr_Get",
         "tags": [
-          "RecoveryPointResources"
+          "RecoveryPoints_Crr"
         ],
         "description": "Provides the information of the backed up data identified using RecoveryPointID.",
         "parameters": [
@@ -452,7 +497,7 @@
       "post": {
         "operationId": "RecoveryPoints_GetAccessToken",
         "tags": [
-          "RecoveryPointResources"
+          "RecoveryPoints_GetAccessToken"
         ],
         "description": "Returns the Access token for communication between BMS and Protection service",
         "parameters": [
@@ -535,7 +580,7 @@
       "get": {
         "operationId": "RecoveryPointsCrr_List",
         "tags": [
-          "RecoveryPointResources"
+          "RecoveryPoints_Crr"
         ],
         "description": "Lists the backup copies for the backed up item.",
         "parameters": [
@@ -608,6 +653,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems/": {
       "get": {
         "operationId": "BackupProtectedItemsCrr_List",
+        "tags": [
+          "BackupProtectedItems_Crr"
+        ],
         "description": "Provides a pageable list of all items that are backed up within a vault.",
         "parameters": [
           {
@@ -665,6 +713,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries": {
       "get": {
         "operationId": "BackupUsageSummariesCRR_List",
+        "tags": [
+          "BackupUsageSummaries_CRR"
+        ],
         "description": "Fetches the backup management usage summaries of the vault.",
         "parameters": [
           {
@@ -726,7 +777,7 @@
       "get": {
         "operationId": "BackupResourceStorageConfigs_Get",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigs"
         ],
         "description": "Fetches resource storage config.",
         "parameters": [
@@ -770,7 +821,7 @@
       "put": {
         "operationId": "BackupResourceStorageConfigs_Update",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigs"
         ],
         "description": "Updates vault storage model type.",
         "parameters": [
@@ -823,7 +874,7 @@
       "patch": {
         "operationId": "BackupResourceStorageConfigs_patch",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigs"
         ],
         "description": "Updates vault storage model type.",
         "parameters": [

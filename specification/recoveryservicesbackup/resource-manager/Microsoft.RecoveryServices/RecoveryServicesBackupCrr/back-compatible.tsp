@@ -17,8 +17,8 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(RecoveryPointResources.get, "RecoveryPointsCrr");
 @@clientLocation(RecoveryPointResources.list, "RecoveryPointsCrr");
-@@clientLocation(RecoveryPointResources.getAccessToken, "RecoveryPoints");
-@@clientName(RecoveryPointResources.getAccessToken::parameters.body, "parameters");
+@@clientLocation(RecoveryPointGetAccessToken.getAccessToken, "RecoveryPoints");
+@@clientName(RecoveryPointGetAccessToken.getAccessToken::parameters.body, "parameters");
 
 
 
@@ -44,4 +44,3 @@ using Microsoft.RecoveryServices;
 
 
 @@clientLocation(BackupProtectedItemsCrrOperationGroup.list, "BackupProtectedItemsCrr");
-

@@ -27,7 +27,8 @@ model RecoveryPointResource is Azure.ResourceManager.Legacy.TrackedResourceWithO
 
 
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("RecoveryPoints_Crr")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface RecoveryPointResources {
 /**
 * Provides the information of the backed up data identified using RecoveryPointID.
@@ -79,6 +80,12 @@ list(
 ): ArmResponse<RecoveryPointResourceList> | ErrorResponse;
 
 
+}
+
+
+@tag("RecoveryPoints_GetAccessToken")
+@armResourceOperations(#{ omitTags: true })
+interface RecoveryPointGetAccessToken {
 /**
 * Returns the Access token for communication between BMS and Protection service
 */
@@ -93,4 +100,4 @@ getAccessToken is ArmResourceActionSync<RecoveryPointResource, AADPropertiesReso
 
 @@doc(RecoveryPointResource.name, "RecoveryPointID represents the backed up data to be fetched.");
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
-@@doc(RecoveryPointResources.`getAccessToken`::parameters.body, "Get Access Token request");
+@@doc(RecoveryPointGetAccessToken.`getAccessToken`::parameters.body, "Get Access Token request");

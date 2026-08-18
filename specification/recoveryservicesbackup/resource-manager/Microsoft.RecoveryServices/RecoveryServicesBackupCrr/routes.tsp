@@ -18,6 +18,7 @@ namespace Microsoft.RecoveryServices;
 
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("BackupUsageSummaries_CRR")
 interface BackupUsageSummariesCRROperationGroup {
 /**
 * Fetches the backup management usage summaries of the vault.
@@ -44,6 +45,7 @@ list is ArmProviderActionSync<Response = BackupManagementUsageList,Scope = Exten
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("AadProperties")
 interface AadPropertiesOperationGroup {
 @summary("Fetches the AAD properties from target region BCM stamp.")
 /**
@@ -67,6 +69,7 @@ get is ArmProviderActionSync<Response = AADPropertiesResource,Scope = Subscripti
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("CrossRegionRestore")
 interface CrossRegionRestoreOperationGroup {
 @summary("Restores the specified backed up data in a different region as compared to where the data is backed up.")
 /**
@@ -86,6 +89,7 @@ trigger is ArmProviderActionAsync<Request = CrossRegionRestoreRequest,Response =
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("CrrJobDetails")
 interface BackupCrrJobDetailsOperationGroup {
 @summary("Get CRR job details from target region.")
 /**
@@ -104,6 +108,7 @@ get is ArmProviderActionSync<Request = CrrJobRequest,Response = JobResource,Scop
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("BackupCrrJobs")
 interface BackupCrrJobsOperationGroup {
 @summary("Gets the list of CRR jobs from the target region.")
 /**
@@ -130,6 +135,7 @@ list is ArmProviderActionSync<Request = CrrJobRequest,Response = JobResourceList
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("CrrOperationResults")
 interface CrrOperationResultsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -154,6 +160,7 @@ interface CrrOperationResultsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("CrrOperationStatus")
 interface CrrOperationStatusOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -178,6 +185,7 @@ interface CrrOperationStatusOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("BackupProtectedItems_Crr")
 interface BackupProtectedItemsCrrOperationGroup {
 /**
 * Provides a pageable list of all items that are backed up within a vault.
