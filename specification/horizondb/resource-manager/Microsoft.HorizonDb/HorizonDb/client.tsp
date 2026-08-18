@@ -31,6 +31,36 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministrator,
+  "HorizonDBAdministrator",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorProperties,
+  "HorizonDBAdministratorProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorPropertiesForAdd,
+  "HorizonDBAdministratorPropertiesForAdd",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorAdd,
+  "HorizonDBAdministratorAdd",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministrators,
+  "HorizonDBAdministrators",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrincipalTypes,
+  "HorizonDBPrincipalType",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
   "HorizonDBClusterPatch",
   "csharp"
@@ -115,6 +145,11 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.update,
   "updatePrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.updateStatus,
+  "updateStatusPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(
