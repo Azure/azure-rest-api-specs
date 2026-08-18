@@ -29,6 +29,7 @@ model Error {
 }
 
 /** An error response with an HTTP status code and error body. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "This generic model is an HTTP response wrapper, not an emitted SDK data model; its C# client name is configured as ErrorResult in client.tsp."
 @error
 model ErrorResponse<Status extends int32> {
   /** HTTP status code. */
