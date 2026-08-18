@@ -39,4 +39,3 @@ message-format: json
 input-file:
   - stable/2023-01-15/bms.json
 ```
-
