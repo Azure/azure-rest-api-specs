@@ -95,25 +95,14 @@ suppressions:
     from: openapi.json
     where: $.definitions.UserAssignedIdentitiesProfileUpdate.properties.dataPlaneOperators
     reason: This is a Record<UserAssignedIdentityResourceId> where the string keys are data plane operator names. The intention is to pair a data plane operator with a user-assigned managed identity resource ID. The set of valid data plane operator names varies by OpenShift version, and will be discoverable through a forthcoming proxy resource that models a supported OpenShift version.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
-    where: $.definitions.NodePoolProperties.properties.autoRepair
-    reason: Evaluated and decided to stay with a boolean.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
-    where: $.definitions.NodePoolPlatformProfile.properties.enableEncryptionAtHost
-    reason: Evaluated and decided to stay with a boolean.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
-    where: $.definitions.HcpOpenShiftVersionProperties.properties.enabled
-    reason: Evaluated and decided to stay with a boolean.
   - code: PostResponseCodes
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/revokeCredentials"].post
     reason: False positive from validator on ArmResourceActionNoResponseContentAsync pattern. See https://github.com/Azure/azure-openapi-validator/issues/809
   - code: PreviewVersionOverOneYear
     from: openapi.json
-    reason: API version will be deprecated when 2025-12-23-preview is deployed to Azure regions.
+    where: $.definitions.Versions.v2024_06_10_preview
+    reason: We will remove this old private preview version once internal and external users have migrated to a public preview version.
 ```
 
 
