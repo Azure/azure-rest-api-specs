@@ -4364,7 +4364,7 @@ model JobExecutionProperties {
    * Detailed status of the job execution.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   detailedStatus?: ExecutionStatus;
 
   /**
@@ -4372,7 +4372,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   reason?: string;
 
   /**
@@ -4380,7 +4380,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   message?: string;
 }
 
