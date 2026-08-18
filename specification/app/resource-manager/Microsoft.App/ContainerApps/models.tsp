@@ -4890,12 +4890,12 @@ union SessionProbeType {
   string,
 
   /**
-   * Liveness
+   * Checks whether the session is still running and healthy.
    */
   Liveness: "Liveness",
 
   /**
-   * Startup
+   * Checks whether the session has started successfully.
    */
   Startup: "Startup",
 }
@@ -6284,7 +6284,7 @@ model SessionContainer {
    */
   @identifiers(#["type"])
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   probes?: SessionProbe[];
 }
 
