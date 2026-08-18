@@ -6,6 +6,12 @@ using Azure.ClientGenerator.Core;
 @TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_07_01_preview)
 namespace Customizations;
 
+@@clientName(
+  ContentSafety.DetectProvenanceOptions,
+  "DetectProvenanceContent",
+  "csharp"
+);
+
 @client({
   name: "ContentSafetyClient",
   service: ContentSafety,
