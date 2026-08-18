@@ -1,0 +1,140 @@
+name: TypeSpec Auto-Suppression - Scan
+
+# Deterministic half of the auto-suppression pipeline.
+#
+# Runs the same `tsv` compile over all specs that "TypeSpec Validation - All" runs, sharded for
+# speed, and publishes each shard's failure log as an artifact. It never edits the repo.
+#
+# The agentic half (typespec-auto-suppression.md) is dispatched once per ref after every shard for
+# that ref finishes, so a single agent run sees all shards and opens one PR per branch.
+
+on:
+  schedule:
+    # Weekly, Monday 03:00 UTC. Offset from TypeSpec Validation - All (0,6,12,18) so the two
+    # workflows don't contend for runners.
+    - cron: "0 3 * * 1"
+
+  workflow_dispatch:
+    inputs:
+      refs:
+        description: Branches to scan
+        type: choice
+        default: both
+        options:
+          - both
+          - default
+          - next
+      dispatch-agent:
+        description: Dispatch the agentic suppression workflow after scanning
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    # Use short name to maximize space for parameters in UI
+    name: Scan
+
+    strategy:
+      # Scan every shard, even if one fails early
+      fail-fast: false
+      matrix:
+        # "default" is the placeholder for the repo default branch; "" is dropped by the Jobs UI.
+        ref: ${{ fromJSON(inputs.refs == 'default' && '["default"]' || inputs.refs == 'next' && '["next"]' || '["default", "next"]') }}
+        # shards must start at 0 and increment by 1
+        shard: [0, 1, 2]
+        # total-shards must be an accurate count of the number of shards
+        total-shards: [3]
+
+    # Ubuntu only. This scan feeds suppression suggestions, not merge gating, and Windows-only
+    # failures should be fixed rather than auto-suppressed.
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
+          ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Validate All Specs
+        id: validate
+        # Failures are the payload of this workflow, not an error condition, so the job continues
+        # and publishes the log for the agent to consume.
+        continue-on-error: true
+        run: |
+          $ErrorActionPreference = 'Continue'
+
+          # Run in a child pwsh process so the script's own `exit 1` cannot terminate this step
+          # before the log is written, and so $LASTEXITCODE is reliably the script's exit code.
+          pwsh -NoProfile -File ./eng/scripts/TypeSpec-Validation.ps1 `
+            -Shard ${{ matrix.shard }} `
+            -TotalShards ${{ matrix.total-shards }} `
+            -CheckAll `
+            -GitClean `
+            -Verbose 2>&1 | Tee-Object -FilePath tsv-log.txt
+
+          $exitCode = $LASTEXITCODE
+          Write-Host "TypeSpec-Validation.ps1 exited with $exitCode"
+          "exit-code=$exitCode" >> $env:GITHUB_OUTPUT
+        shell: pwsh
+
+      - name: Write scan metadata
+        run: |
+          cat > tsv-meta.json <<EOF
+          {
+            "ref": "${{ matrix.ref == 'next' && 'typespec-next' || github.event.repository.default_branch }}",
+            "refKey": "${{ matrix.ref }}",
+            "shard": ${{ matrix.shard }},
+            "totalShards": ${{ matrix.total-shards }},
+            "exitCode": "${{ steps.validate.outputs.exit-code }}",
+            "runUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
+
+      - name: Upload scan results
+        uses: actions/upload-artifact@v7
+        with:
+          name: tsv-scan-${{ matrix.ref }}-${{ matrix.shard }}
+          path: |
+            tsv-log.txt
+            tsv-meta.json
+          retention-days: 7
+
+  # One dispatch per ref, gated on every shard for that ref completing, so the agent always sees a
+  # complete picture and produces exactly one PR per branch.
+  dispatch:
+    name: Dispatch agent (${{ matrix.ref }})
+    needs: scan
+    if: always() && inputs.dispatch-agent != false
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ${{ fromJSON(inputs.refs == 'default' && '["default"]' || inputs.refs == 'next' && '["next"]' || '["default", "next"]') }}
+
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      actions: write
+
+    steps:
+      - name: Dispatch agentic suppression workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_REF: ${{ matrix.ref == 'next' && 'typespec-next' || github.event.repository.default_branch }}
+        # NOTE: `--ref` requires typespec-auto-suppression.lock.yml to already exist on the target
+        # branch. Until this lands on `typespec-next`, the "next" dispatch will fail with
+        # "workflow not found" — that is expected and does not affect the "default" dispatch.
+        run: |
+          gh workflow run typespec-auto-suppression.lock.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref "$TARGET_REF" \
+            --field target-ref="$TARGET_REF" \
+            --field scan-run-id="$GITHUB_RUN_ID" \
+            --field ref-key="${{ matrix.ref }}"
