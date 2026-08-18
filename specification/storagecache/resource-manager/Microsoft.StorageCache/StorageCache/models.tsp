@@ -2360,6 +2360,7 @@ model AmlFilesystemCheckSubnetError {
   filesystemSubnet?: AmlFilesystemCheckSubnetErrorFilesystemSubnet;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BadRequestResponse is AmlFilesystemCheckSubnetError {
   ...Response<400>;
 }

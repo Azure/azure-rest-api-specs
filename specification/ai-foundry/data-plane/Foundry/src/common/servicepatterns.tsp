@@ -106,7 +106,7 @@ union FoundryFeaturesOptInKeys {
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
-  routines_v1_preview: "Routines=V1Preview",
+  routines_v2_preview: "Routines=V2Preview",
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
@@ -169,6 +169,7 @@ op FoundryDataPlaneRequiredPreviewOperation<
 // Pagination
 // ============================================================================
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response data for a requested list of items.")
 model AgentsPagedResult<T> {
   /** The requested list of items. */
@@ -184,6 +185,17 @@ model AgentsPagedResult<T> {
 
   /** A value indicating whether there are additional values available not captured in this list. */
   has_more: boolean;
+}
+
+@doc("A page of items with a URL cursor to the next page.")
+model PagedResultWithNextLink<T> {
+  /** The requested list of items. */
+  @pageItems
+  data: T[];
+
+  /** The URL to fetch the next page of results, or absent if there are no additional pages. */
+  @nextLink
+  next_link?: url;
 }
 
 alias PageLimitQueryParameter = {

@@ -694,12 +694,12 @@ interface AgentTelephony {
     TelephonyCallRecord
   >;
 
-  /** Applies a command to an active inbound call owned by the voice agent named in the path. */
-  @summary("Manage an active agent telephony call")
+  /** Transfers an active inbound call to a configured target for the voice agent named in the path. */
+  @summary("Transfer an active agent telephony call")
   @post
-  @route("/agents/{agent_name}/telephony/calls/{call_id}/manage")
+  @route("/agents/{agent_name}/telephony/calls/{call_id}:transfer")
   @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-  manageTelephonyCall is FoundryDataPlanePreviewOperation<
+  transferTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent that owns the active call. */
@@ -708,7 +708,24 @@ interface AgentTelephony {
       /** The service-generated call identifier. */
       @path call_id: string;
 
-      ...TelephonyCallManageRequest;
+      ...TelephonyCallTransferRequest;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Ends an active inbound call owned by the voice agent named in the path. */
+  @summary("End an active agent telephony call")
+  @post
+  @route("/agents/{agent_name}/telephony/calls/{call_id}:end")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  endTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the active call. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: string;
     },
     TelephonyCallRecord
   >;
