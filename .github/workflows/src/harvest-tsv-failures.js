@@ -225,17 +225,17 @@ for (const file of logFiles) {
   for (const { folder, body } of parseLog(content)) {
     foldersSeen++;
 
-    // Already covered by an existing suppression; nothing to do.
-    if (body.some((l) => l.includes("Suppressed:"))) {
-      suppressedAlready++;
-      continue;
-    }
-
     const failed = body.some(
       (l) =>
         l.includes("TypeSpec Validation failed for project") ||
         /^##\[error\]/.test(l),
     );
+
+    const hasSuppression = body.some((l) => l.includes("Suppressed:"));
+
+    // A folder can carry an existing suppression for one rule and still fail on another, so the
+    // failure check must come first. Checking `Suppressed:` first would silently discard those.
+    if (hasSuppression) suppressedAlready++;
     if (!failed) continue;
 
     // Keep the log excerpt bounded so the agent prompt stays a reasonable size.
@@ -282,7 +282,7 @@ const md = [
   "",
   `- Job logs parsed: ${logFiles.length}`,
   `- Spec folders seen: ${foldersSeen}`,
-  `- Already suppressed: ${suppressedAlready}`,
+  `- Folders carrying an existing suppression: ${suppressedAlready}`,
   `- Failures: ${failures.length} (${eligible.length} eligible for auto-suppression)`,
   "",
   "## Eligible for auto-suppression",
