@@ -730,7 +730,6 @@ model ActivityProtocolConfiguration {
 
   @doc("The access boundaries for the activity protocol.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v1)
   access_boundaries?: ActivityProtocolAccessBoundary[];
 }
 
