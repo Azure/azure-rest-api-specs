@@ -28,6 +28,20 @@ const targetRef = process.env.TARGET_REF ?? "";
 const repo = process.env.GITHUB_REPOSITORY ?? "";
 const serverUrl = process.env.GITHUB_SERVER_URL ?? "https://github.com";
 
+/**
+ * Strip ANSI color escape sequences.
+ *
+ * The TypeSpec compiler colorizes diagnostics, so a line like `<file>:<line>:<col> - error <rule>`
+ * arrives with escape codes interleaved between every field. Without stripping them first, the
+ * diagnostic pattern never matches real log output.
+ */
+// eslint-disable-next-line no-control-regex
+const ANSI_PATTERN = /\u001b\[[0-9;]*m/g;
+
+function stripAnsi(line) {
+  return line.replace(ANSI_PATTERN, "");
+}
+
 /** Strip the GitHub Actions ISO-8601 timestamp prefix from a raw log line. */
 function stripTimestamp(line) {
   return line.replace(/^\S+Z\s?/, "");
@@ -36,23 +50,30 @@ function stripTimestamp(line) {
 /**
  * Decide whether a diagnostic can be suppressed inline with a `#suppress` directive.
  *
- * Any warning from a TypeSpec linter package qualifies. Warnings are advisory by definition -- they
- * flag a convention the spec deviates from, not a broken API -- and `#suppress` simply records that
- * the deviation is intentional.
+ * TSV compiles with `--warn-as-error`, so linter warnings are printed with severity `error` and the
+ * severity field carries no information -- everything is an error. What actually distinguishes a
+ * linter rule from a genuine compile failure is the presence of a namespaced rule id:
  *
- * Severity is the real gate. Errors are never inline-suppressible no matter which package emitted
- * them: an error means the spec does not compile or is genuinely invalid, and that is a human's
- * problem to fix rather than to silence.
+ *   ...tsp:76:3 - error @azure-tools/typespec-azure-core/no-openapi-client-extensions: ...
+ *   ...tsp:9:1  - error Cannot find name 'Widget'.          <- no rule id, a real compile error
+ *
+ * A diagnostic is inline-suppressible when it carries a rule id from a TypeSpec linter package,
+ * because `#suppress` takes that rule id as its argument. A diagnostic with no rule id cannot be
+ * suppressed inline even in principle, and is left for a human.
  */
-function isInlineSuppressible(severity, rule) {
-  return severity === "warning" && /^(@azure-tools|@typespec)\//.test(rule);
+function isInlineSuppressible(rule) {
+  return rule !== null && /^(@azure-tools|@typespec)\//.test(rule);
 }
 
 /**
  * Extract individual TypeSpec diagnostics from a folder's log output.
  *
- * The compiler emits `<file>:<line>:<col> - error|warning <rule-id>: <message>`, which is what makes
+ * The compiler emits `<file>:<line>:<col> - <severity> [<rule-id>: ]<message>`, which is what makes
  * an inline suppression possible: it pins the exact declaration that needs the `#suppress`.
+ *
+ * The rule id is optional -- a genuine compile error has none -- so it is captured separately and
+ * left null in that case rather than skipping the diagnostic. Those still need to be seen, because
+ * a folder containing one is not eligible for auto-suppression at all.
  *
  * Diagnostics are deduplicated and returned sorted by descending line number within each file. That
  * ordering matters: inserting a `#suppress` directive adds a line, shifting every later line in the
@@ -64,11 +85,12 @@ function extractDiagnostics(body) {
 
   for (const line of body) {
     const m = line.match(
-      /^\s*(\S+?\.tsp):(\d+):(\d+)\s+-\s+(error|warning)\s+([@\w./-]+)\s*:\s*(.*)$/,
+      /^\s*(\S+?\.tsp):(\d+):(\d+)\s+-\s+(error|warning)\s+(?:([@\w][\w./-]*\/[\w./-]+)\s*:\s*)?(.*)$/,
     );
     if (!m) continue;
 
-    const [, rawFile, lineNo, col, severity, rule, message] = m;
+    const [, rawFile, lineNo, col, severity, rawRule, message] = m;
+    const rule = rawRule ?? null;
 
     // Logs carry absolute runner paths; the agent works in a normal checkout.
     const file = rawFile.replace(/^.*?(?=specification\/)/, "");
@@ -86,7 +108,7 @@ function extractDiagnostics(body) {
       severity,
       rule,
       message: message.trim(),
-      inlineSuppressible: isInlineSuppressible(severity, rule),
+      inlineSuppressible: isInlineSuppressible(rule),
     });
   }
 
@@ -155,7 +177,7 @@ function parseLog(content) {
   let current = null;
 
   for (const raw of content.split(/\r?\n/)) {
-    const line = stripTimestamp(raw);
+    const line = stripAnsi(stripTimestamp(raw));
 
     const start = line.match(/^##\[group\]Validating (\S+)/);
     if (start) {
@@ -197,7 +219,8 @@ let foldersSeen = 0;
 let suppressedAlready = 0;
 
 for (const file of logFiles) {
-  const content = readFileSync(join(LOG_DIR, file), "utf8");
+  // GitHub serves job logs as UTF-8 with a BOM; strip it so the first line parses normally.
+  const content = readFileSync(join(LOG_DIR, file), "utf8").replace(/^\uFEFF/, "");
 
   for (const { folder, body } of parseLog(content)) {
     foldersSeen++;

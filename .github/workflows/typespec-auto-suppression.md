@@ -146,22 +146,27 @@ field tells you which the harvest step chose; confirm it against the `excerpt` b
 Preferred whenever the compiler reported a specific location, because it is scoped to the single
 declaration that deviates rather than an entire folder.
 
-A diagnostic is inline-suppressible when **both** hold:
+A diagnostic is inline-suppressible when it carries a **rule id from a TypeSpec linter package** —
+the id starts with `@azure-tools/` or `@typespec/`:
 
-- Its severity is `warning`, not `error`.
-- Its rule comes from a TypeSpec linter package — the rule id starts with `@azure-tools/` or
-  `@typespec/`.
+```
+...privateAccess.tsp:76:3 - error @azure-tools/typespec-azure-core/no-openapi-client-extensions: ...
+...main.tsp:9:1 - error Cannot find name 'Widget'.
+```
 
-Severity is the real gate. A warning is advisory by definition: it flags a convention the spec
-deviates from, and `#suppress` records that the deviation is intentional. An error means the spec
-does not compile or is genuinely invalid, so it is never inline-suppressible regardless of which
-package emitted it.
+The first is suppressible; the second is not. Note that **severity tells you nothing here**: TSV
+compiles with `--warn-as-error`, so linter warnings are printed as `error` and every diagnostic in
+the log says `error`. Do not treat that word as evidence the spec is broken.
+
+The presence of a rule id is the real signal, for a concrete reason: `#suppress` takes a rule id as
+its argument, so a diagnostic without one cannot be suppressed inline even in principle. Those are
+genuine compile failures — the harvest step reports them with `rule: null` — and they go to a human.
 
 A folder is only inline-eligible if **every** diagnostic in it is inline-suppressible. If a folder
-mixes a suppressible warning with an error, suppressing the warning would leave the folder failing
-anyway, so the whole folder goes to a human.
+mixes a suppressible linter rule with a rule-less compile error, suppressing the linter rule would
+leave the folder failing anyway, so the whole folder goes to a human.
 
-Even when a warning qualifies mechanically, you still own the judgment call. If a warning appears to
+Even when a diagnostic qualifies mechanically, you still own the judgment call. If a rule appears to
 report a genuine API design problem rather than a convention deviation — for example something about
 ARM resource shape, provisioning state, envelope properties, or API versioning — leave it for a
 human and list it under "Not suppressed" in the PR body.
@@ -176,10 +181,9 @@ Used when the failure belongs to the folder as a whole and has no single source 
 
 ### Never eligible
 
-- Any diagnostic with severity `error` — whether a compile error in the TypeSpec source (syntax,
-  type, unknown identifier) or a linter rule raised as an error. Errors mean the spec is broken or
-  invalid, and fixing that is a human's job.
-- Any warning that appears to report a genuine API design problem rather than a convention
+- Any diagnostic with **no rule id** — a genuine compile error (syntax, type, unknown identifier).
+  These appear as `rule: null` in the harvest report and cannot be suppressed inline at all.
+- Any linter rule that appears to report a real API design problem rather than a convention
   deviation — ARM resource shape, provisioning state, envelope properties, or API versioning.
 - Any failure whose message you cannot confidently attribute to one of the categories above.
 - Any failure that appears to be infrastructure flake (network, npm install, runner timeout). These
