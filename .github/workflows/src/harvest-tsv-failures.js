@@ -34,26 +34,99 @@ function stripTimestamp(line) {
 }
 
 /**
+ * Rules that may be suppressed inline, with a `#suppress` directive placed directly above the
+ * offending declaration in the `.tsp` source.
+ *
+ * These are linter-style style/convention rules with an established precedent in this repo. A rule
+ * qualifies only if suppressing it changes nothing about the emitted API -- it merely records that
+ * the deviation is intentional. Compiler errors and correctness rules are deliberately excluded.
+ */
+const INLINE_SUPPRESSIBLE_RULES = new Set([
+  "@azure-tools/typespec-azure-core/casing-style",
+  "@azure-tools/typespec-azure-core/documentation-required",
+  "@azure-tools/typespec-azure-core/no-openapi",
+  "@azure-tools/typespec-azure-core/no-openapi-client-extensions",
+]);
+
+/**
+ * Extract individual TypeSpec diagnostics from a folder's log output.
+ *
+ * The compiler emits `<file>:<line>:<col> - error|warning <rule-id>: <message>`, which is what makes
+ * an inline suppression possible: it pins the exact declaration that needs the `#suppress`.
+ */
+function extractDiagnostics(body) {
+  const diagnostics = [];
+
+  for (const line of body) {
+    const m = line.match(
+      /^\s*(\S+?\.tsp):(\d+):(\d+)\s+-\s+(error|warning)\s+([@\w./-]+)\s*:\s*(.*)$/,
+    );
+    if (!m) continue;
+
+    const [, file, lineNo, col, severity, rule, message] = m;
+    diagnostics.push({
+      file,
+      line: Number(lineNo),
+      column: Number(col),
+      severity,
+      rule,
+      message: message.trim(),
+      inlineSuppressible: INLINE_SUPPRESSIBLE_RULES.has(rule),
+    });
+  }
+
+  return diagnostics;
+}
+
+/**
  * Classify a failure into a suppression category.
  *
  * Only categories with a well-understood, mechanical cause are marked eligible. Anything else --
  * notably real `tsp compile` errors -- is deliberately left for a human.
  */
-function classify(body) {
+function classify(body, diagnostics) {
   const text = body.join("\n");
 
+  // Infrastructure problems must be rerun, never suppressed. Checked first so a flaky run is
+  // never mistaken for a suppressible diagnostic.
+  if (
+    /(ETIMEDOUT|ECONNRESET|ENOTFOUND|socket hang up|npm ERR!|The runner has received a shutdown signal)/i.test(
+      text,
+    )
+  ) {
+    return { rule: "Infrastructure", subRule: null, eligible: false, infrastructure: true };
+  }
+
+  // Inline-suppressible diagnostics: every diagnostic must be individually suppressible, otherwise
+  // suppressing only some of them would leave the folder failing anyway.
+  if (diagnostics.length > 0 && diagnostics.every((d) => d.inlineSuppressible)) {
+    const rules = [...new Set(diagnostics.map((d) => d.rule))];
+    return {
+      rule: "InlineSuppressible",
+      subRule: rules.join(", "),
+      eligible: true,
+      suppressionStyle: "inline",
+    };
+  }
+
   if (/FolderStructure/i.test(text) && /MustUseV2/i.test(text)) {
-    return { rule: "FolderStructure", subRule: "MustUseV2", eligible: true };
+    return {
+      rule: "FolderStructure",
+      subRule: "MustUseV2",
+      eligible: true,
+      suppressionStyle: "file",
+    };
   }
   if (/ExtraSwagger/i.test(text)) {
-    return { rule: "Compile", subRule: "ExtraSwagger", eligible: true };
+    return { rule: "Compile", subRule: "ExtraSwagger", eligible: true, suppressionStyle: "file" };
   }
   if (/SdkTspConfigValidation/i.test(text)) {
-    return { rule: "SdkTspConfigValidation", subRule: null, eligible: true };
-  }
-  // Infrastructure problems must be rerun, never suppressed.
-  if (/(ETIMEDOUT|ECONNRESET|ENOTFOUND|socket hang up|npm ERR!|The runner has received a shutdown signal)/i.test(text)) {
-    return { rule: "Infrastructure", subRule: null, eligible: false, infrastructure: true };
+    return {
+      rule: "SdkTspConfigValidation",
+      subRule: null,
+      eligible: true,
+      suppressionStyle: "file",
+    };
   }
   return { rule: "Unclassified", subRule: null, eligible: false };
 }
@@ -130,7 +203,15 @@ for (const file of logFiles) {
       .slice(-40)
       .join("\n");
 
-    failures.push({ folder, ...classify(body), excerpt, sourceLog: file });
+    const diagnostics = extractDiagnostics(body);
+
+    failures.push({
+      folder,
+      ...classify(body, diagnostics),
+      diagnostics,
+      excerpt,
+      sourceLog: file,
+    });
   }
 }
 
@@ -167,10 +248,14 @@ const md = [
   "",
   eligible.length
     ? eligible
-        .map(
-          (f) =>
-            `### \`${f.folder}\`\n\n- Rule: \`${f.rule}\`${f.subRule ? ` / \`${f.subRule}\`` : ""}\n\n\`\`\`\n${f.excerpt}\n\`\`\``,
-        )
+        .map((f) => {
+          const locations = f.diagnostics?.length
+            ? `\n- Suppress at:\n${f.diagnostics
+                .map((d) => `  - \`${d.file}:${d.line}\` — \`${d.rule}\``)
+                .join("\n")}`
+            : "";
+          return `### \`${f.folder}\`\n\n- Rule: \`${f.rule}\`${f.subRule ? ` / \`${f.subRule}\`` : ""}\n- Style: **${f.suppressionStyle === "inline" ? "inline `#suppress` in the .tsp source" : "entry in specification/suppressions.yaml"}**${locations}\n\n\`\`\`\n${f.excerpt}\n\`\`\``;
+        })
         .join("\n\n")
     : "_None._",
   "",
