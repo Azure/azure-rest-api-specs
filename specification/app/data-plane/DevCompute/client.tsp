@@ -25,3 +25,42 @@ namespace AzureDevCompute;
   "csharp"
 );
 @@clientName(UserAuthorizationCodeFlow.tokenUrl, "tokenUri", "csharp");
+@@clientName(ErrorResponse, "ErrorResult", "csharp");
+@@clientName(AddPortRequest, "AddPortContent", "csharp");
+@@clientName(PatchSandboxRequest, "PatchSandboxContent", "csharp");
+@@clientName(
+  SandboxExecutionTokenResponse,
+  "SandboxExecutionTokenResult",
+  "csharp"
+);
+@@clientName(
+  SandboxExecutionTokensRequest,
+  "SandboxExecutionTokensContent",
+  "csharp"
+);
+@@clientName(SandboxRequest, "SandboxContent", "csharp");
+@@clientName(
+  AzureDevCompute.SandboxOperations.SandboxListResponse,
+  "SandboxListResult",
+  "csharp"
+);
+@@clientName(
+  AzureDevCompute.SandboxOperations.SandboxCreatedResponse,
+  "SandboxCreatedResult",
+  "csharp"
+);
+@@clientName(
+  AzureDevCompute.SandboxOperations.SandboxResponse,
+  "SandboxResult",
+  "csharp"
+);
+@@clientName(
+  AzureDevCompute.SandboxOperations.SandboxDeletedResponse,
+  "SandboxDeletedResult",
+  "csharp"
+);
+@@clientName(
+  AzureDevCompute.SandboxOperations.SandboxDeletedNoContentResponse,
+  "SandboxDeletedNoContentResult",
+  "csharp"
+);
