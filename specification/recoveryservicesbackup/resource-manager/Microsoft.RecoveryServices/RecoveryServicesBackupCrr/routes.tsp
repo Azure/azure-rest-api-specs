@@ -80,7 +80,7 @@ interface CrossRegionRestoreOperationGroup {
 @operationId("CrossRegionRestore_Trigger")
 @autoRoute
 @action("backupCrossRegionRestore")
-trigger is ArmProviderActionAsync<Request = CrossRegionRestoreRequest,Response = void,Scope = SubscriptionActionScope,Parameters = {/**
+trigger is ArmProviderActionAsync<Request = CrossRegionRestoreRequest,Response = OkResponse,Scope = SubscriptionActionScope,Parameters = {/**
 * Azure region to hit Api
 */
 @path
