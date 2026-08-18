@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    "default": "sdk/servicefabricmanagedclusters"
+    "default": "sdk/servicefabricmigration"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,6 +12,38 @@ options:
     output-file: "{version-status}/{version}/servicefabricmigration.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ServiceFabricMigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-06-01-preview"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicefabricmigration"
+    namespace: "azure.mgmt.servicefabricmigration"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicefabricmigration"
+    package-details:
+      name: "@azure/arm-servicefabricmigration"
+    flavor: azure
+    experimental-extensible-enums: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/servicefabricmigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicefabricmigration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicefabricmigration"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicefabricmigration"
+    namespace: com.azure.resourcemanager.servicefabricmigration
+    flavor: azure
+    service-name: Service Fabric Migration
+    use-object-for-unknown: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
