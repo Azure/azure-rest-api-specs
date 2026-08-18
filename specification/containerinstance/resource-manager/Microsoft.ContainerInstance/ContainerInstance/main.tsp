@@ -18,6 +18,7 @@ import "./ContainerGroup.tsp";
 import "./NGroup.tsp";
 import "./ContainerGroupProfile.tsp";
 import "./SandboxGroup.tsp";
+import "./ManagedVirtualNodePool.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 

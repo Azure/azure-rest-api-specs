@@ -1,0 +1,33 @@
+{
+  "operationId": "ManagedVirtualNodePools_ListBySubscription",
+  "title": "List managed virtual node pools by subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/managedVirtualNodePools/demo-pool",
+            "name": "demo-pool",
+            "type": "Microsoft.ContainerInstance/managedVirtualNodePools",
+            "location": "eastus",
+            "tags": {
+              "env": "prod"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "aksClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerService/managedClusters/demo-aks",
+              "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo-mi",
+              "sandboxGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/sandboxGroups/demo-sbg",
+              "minNodes": 1,
+              "maxNodes": 5
+            }
+          }
+        ]
+      }
+    }
+  }
+}
