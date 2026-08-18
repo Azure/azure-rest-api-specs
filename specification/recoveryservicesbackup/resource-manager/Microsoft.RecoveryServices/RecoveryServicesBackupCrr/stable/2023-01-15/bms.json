@@ -1314,10 +1314,6 @@
       "type": "object",
       "description": "IaaS VM workload-specific backup item.",
       "properties": {
-        "protectedItemType": {
-          "type": "string",
-          "description": "Discriminator property for AzureIaaSVMProtectedItem."
-        },
         "friendlyName": {
           "type": "string",
           "description": "Friendly name of the VM represented by this backup item."
@@ -1374,15 +1370,12 @@
           "description": "Extended Properties for Azure IaasVM Backup."
         }
       },
-      "discriminator": "protectedItemType",
-      "required": [
-        "protectedItemType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ProtectedItem"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureIaaSVMProtectedItem"
     },
     "AzureIaaSVMProtectedItemExtendedInfo": {
       "type": "object",
@@ -1555,10 +1548,6 @@
       "type": "object",
       "description": "Azure VM workload-specific protected item.",
       "properties": {
-        "protectedItemType": {
-          "type": "string",
-          "description": "Discriminator property for AzureVmWorkloadProtectedItem."
-        },
         "friendlyName": {
           "type": "string",
           "description": "Friendly name of the DB represented by this backup item."
@@ -1616,15 +1605,12 @@
           }
         }
       },
-      "discriminator": "protectedItemType",
-      "required": [
-        "protectedItemType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ProtectedItem"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
     },
     "AzureVmWorkloadProtectedItemExtendedInfo": {
       "type": "object",
@@ -1787,10 +1773,6 @@
       "type": "object",
       "description": "Recovery point specific to PointInTime",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureWorkloadPointInTimeRecoveryPoint."
-        },
         "timeRanges": {
           "type": "array",
           "description": "List of log ranges",
@@ -1799,15 +1781,12 @@
           }
         }
       },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRecoveryPoint"
     },
     "AzureWorkloadPointInTimeRestoreRequest": {
       "type": "object",
@@ -1830,10 +1809,6 @@
       "type": "object",
       "description": "Workload specific recovery point, specifically encapsulates full/diff recovery point",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureWorkloadRecoveryPoint."
-        },
         "recoveryPointTimeInUTC": {
           "type": "string",
           "format": "date-time",
@@ -1864,24 +1839,17 @@
           "description": "Properties of Recovery Point"
         }
       },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/RecoveryPoint"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
     },
     "AzureWorkloadRestoreRequest": {
       "type": "object",
       "description": "AzureWorkload-specific restore.",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureWorkloadRestoreRequest."
-        },
         "recoveryType": {
           "$ref": "#/definitions/RecoveryType",
           "description": "Type of this recovery."
@@ -1910,15 +1878,12 @@
           "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/RestoreRequest"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
     },
     "AzureWorkloadSAPHanaPointInTimeRecoveryPoint": {
       "type": "object",
@@ -1960,21 +1925,12 @@
     "AzureWorkloadSAPHanaRestoreRequest": {
       "type": "object",
       "description": "AzureWorkload SAP Hana-specific restore.",
-      "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureWorkloadSAPHanaRestoreRequest."
-        }
-      },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
     "AzureWorkloadSQLPointInTimeRecoveryPoint": {
       "type": "object",
@@ -2016,24 +1972,17 @@
       "type": "object",
       "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureWorkloadSQLRecoveryPoint."
-        },
         "extendedInfo": {
           "$ref": "#/definitions/AzureWorkloadSQLRecoveryPointExtendedInfo",
           "description": "Extended Info that provides data directory details. Will be populated in two cases:\nWhen a specific recovery point is accessed using GetRecoveryPoint\nOr when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter"
         }
       },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSQLRecoveryPoint"
     },
     "AzureWorkloadSQLRecoveryPointExtendedInfo": {
       "type": "object",
@@ -2059,10 +2008,6 @@
       "type": "object",
       "description": "AzureWorkload SQL -specific restore. Specifically for full/diff restore",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureWorkloadSQLRestoreRequest."
-        },
         "shouldUseAlternateTargetLocation": {
           "type": "boolean",
           "description": "Default option set to true. If this is set to false, alternate data directory must be provided"
@@ -2079,15 +2024,12 @@
           }
         }
       },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSQLRestoreRequest"
     },
     "BEKDetails": {
       "type": "object",
