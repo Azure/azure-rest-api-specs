@@ -828,7 +828,7 @@ model KnowledgeBaseIndexedSqlActivityArguments {
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseActivityRecordModel {
   /** The name of the model used for the activity. */
-  modelName?: string;
+  modelName: string;
 
   /** The deployment identifier of the model used for the activity. */
   deploymentId?: string;
