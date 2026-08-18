@@ -6984,7 +6984,7 @@
     },
     "ScenarioProperties": {
       "type": "object",
-      "description": "Model that represents the properties of the scenario.",
+      "description": "Model that represents the properties of the scenario.\n\nA scenario's structure comes from exactly one of two sources, and they are\nmutually exclusive:\n\n- **Template-based**: `createdFrom` references a scenario template version,\nand that template is the authoritative source for the scenario's structure.\nInline `parameters` and `actions` are not used.\n- **Inline**: `createdFrom` is absent, and the scenario's structure is taken\nfrom the `parameters` and `actions` supplied in the request.\n\nSupplying neither source is rejected. This constraint cannot be expressed in\nthe schema and is enforced at request validation.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7001,8 +7001,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version of the scenario.",
-          "readOnly": true
+          "description": "Version of the scenario, supplied by the author. Defaults to `1.0` when not\nsupplied on create. This is the scenario's own version and is independent of\nthe version of any template it was created from."
         },
         "description": {
           "type": "string",
@@ -7010,7 +7009,7 @@
         },
         "parameters": {
           "type": "array",
-          "description": "Parameter definitions for the scenario.",
+          "description": "Parameter definitions for the scenario. Used as the scenario's parameter\ndefinitions when `createdFrom` is not supplied; not used when it is,\nbecause the referenced template is then the authoritative source for the\nscenario's structure.",
           "items": {
             "$ref": "#/definitions/ScenarioParameter"
           },
@@ -7020,7 +7019,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "Array of actions that define the scenario's orchestration.",
+          "description": "Array of actions that define the scenario's orchestration. Used as the\nscenario's actions when `createdFrom` is not supplied; not used when it is,\nbecause the referenced template is then the authoritative source for the\nscenario's structure. When supplied, at least one action must be present.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
