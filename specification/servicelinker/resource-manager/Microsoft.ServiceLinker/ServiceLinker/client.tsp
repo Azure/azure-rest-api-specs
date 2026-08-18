@@ -376,7 +376,3 @@ op dryrunResourcesListDryrun(
   LinkerProperties.vNetSolution,
   "csharp"
 );
-
-@@usage(ConfigurationResult, Usage.output, "csharp");
-@@usage(ValidateResult, Usage.output, "csharp");
-@@usage(ValidationResultItem, Usage.output, "csharp");
