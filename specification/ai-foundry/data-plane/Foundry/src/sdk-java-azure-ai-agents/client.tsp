@@ -697,3 +697,28 @@ union WebSearchToolSearchContextSizeExpandable {
   DocumentationMode.replace,
   "java"
 );
+
+// --------------------------------------------------------------------------------
+// Enum ordering overrides
+// --------------------------------------------------------------------------------
+
+// Re-order enum to insert new value at the end.
+union ToolboxToolTypeJava {
+  code_interpreter: "code_interpreter",
+  file_search: "file_search",
+  web_search: "web_search",
+  mcp: "mcp",
+  azure_ai_search: "azure_ai_search",
+  openapi: "openapi",
+  a2a_preview: "a2a_preview",
+  browser_automation_preview: "browser_automation_preview",
+  reminder_preview: "reminder_preview",
+  work_iq_preview: "work_iq_preview",
+  fabric_iq_preview: "fabric_iq_preview",
+  toolbox_search: "toolbox_search",
+  toolbox_search_preview: "toolbox_search_preview",
+  a2a: "a2a",
+}
+
+@@clientName(ToolboxToolTypeJava, "ToolboxToolType", "java");
+@@alternateType(ToolboxToolType, ToolboxToolTypeJava, "java");
