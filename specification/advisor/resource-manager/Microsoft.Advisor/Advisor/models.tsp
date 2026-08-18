@@ -17,7 +17,7 @@ namespace Microsoft.Advisor;
  */
 union Scenario {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "test: changed justification to validate typespec-suppressions changed-justification reporting"
   Alerts: "Alerts",
 }
 
