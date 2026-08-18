@@ -47,7 +47,7 @@ union ScheduledActionType {
   @doc("Deallocates the targeted resources.")
   Deallocate: "Deallocate",
 
-  @doc("Hibernates and deallocates the targeted resources.")
+  @doc("Hibernates the targeted resources.")
   Hibernate: "Hibernate",
 
   string,
@@ -143,13 +143,13 @@ union OccurrenceState {
   @doc("The scheduled time for the occurrence is being updated.")
   Rescheduling: "Rescheduling",
 
-  @doc("The occurrence is waiting for its scheduled time.")
+  @doc("The occurrence has been scheduled.")
   Scheduled: "Scheduled",
 
-  @doc("The occurrence completed successfully.")
+  @doc("The occurrence operations completed successfully.")
   Succeeded: "Succeeded",
 
-  @doc("The occurrence failed.")
+  @doc("One or more of the occurrence operations failed.")
   Failed: "Failed",
 
   @doc("Cancellation of the occurrence is in progress.")
@@ -204,7 +204,7 @@ union Language {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Current status of a scheduled action operation for a targeted resource.")
+@doc("Current status of an operation for the specific occurrence and resource")
 union ResourceOperationStatus {
   @doc("The operation completed successfully for the resource.")
   Succeeded: "Succeeded",
@@ -375,7 +375,7 @@ model ScheduledActionsSchedule {
   @doc("The calendar days when the action runs. An empty array means every day of the month.")
   requestedDaysOfTheMonth?: DayOfTheMonth[];
 
-  @doc("Settings that control execution and retries.")
+  @doc("Settings that control operation execution and retries.")
   executionParameters?: ScheduledActionsExecutionParameters;
 
   @doc("How the scheduled time is interpreted. The default is `InitiateAt`.")
@@ -412,7 +412,7 @@ model ScheduledActionResource {
   @visibility(Lifecycle.Read)
   id: armResourceIdentifier;
 
-  @doc("Read-only. The Azure resource type of the association resource.")
+  @doc("Read-only. The Azure resource type of the associated resource.")
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -443,9 +443,9 @@ model ScheduledActionResourceInput {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Resources to add to a scheduled action.")
+@doc("Resources to attach to a scheduled action.")
 model ResourceAttachRequest {
-  @doc("The resources (VMs) to add.")
+  @doc("The list of resources to attach to the scheduled action.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resources: Array<ScheduledActionResourceInput>;
 }
@@ -468,7 +468,7 @@ model ResourcePatchRequest {
 @added(Versions.`2026-07-06-preview`)
 @doc("Request body for canceling a scheduled action occurrence.")
 model CancelOccurrenceRequest {
-  @doc("The resources to cancel. An empty array cancels the occurrence for all resources.")
+  @doc("The resources for which operations should be canceled. An empty array cancels all operations for all resources for the occurrence.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
 
