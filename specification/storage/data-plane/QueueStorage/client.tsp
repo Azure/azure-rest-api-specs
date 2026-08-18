@@ -430,3 +430,5 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
+@@access(ListQueuesResponse, Access.public, "java");
+@@usage(ListQueuesResponse, Usage.output, "java");
