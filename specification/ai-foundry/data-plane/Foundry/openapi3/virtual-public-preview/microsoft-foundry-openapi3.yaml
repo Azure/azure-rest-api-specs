@@ -82909,13 +82909,13 @@ components:
           description: The ID of the WebIQ project connection.
         server_label:
           type: string
-          description: The label of the WebIQ MCP server to connect to.
+          description: The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
             - type: string
             - type: 'null'
-          description: Whether the agent requires approval before executing actions. Default is always.
+          description: Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
           default: always
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -82938,13 +82938,13 @@ components:
           description: The ID of the WebIQ project connection.
         server_label:
           type: string
-          description: The label of the WebIQ MCP server to connect to.
+          description: The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
             - type: string
             - type: 'null'
-          description: Whether the agent requires approval before executing actions. Default is always.
+          description: Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
           default: always
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
