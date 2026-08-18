@@ -880,12 +880,12 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     /**
-     * The label of the WebIQ MCP server to connect to.
+     * The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
      */
     server_label?: string;
 
     /**
-     * Whether the agent requires approval before executing actions. Default is always.
+     * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
