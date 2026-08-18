@@ -344,14 +344,6 @@ op dryrunResourcesListDryrun(
 @@clientName(VNetSolution.type, "SolutionType", "csharp");
 @@clientName(VNetSolutionType, "VnetSolutionType", "csharp");
 
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@clientOption(
-  LinkerResources.get,
-  "resource-name",
-  "LinkerConnector",
-  "csharp"
-);
-
 @@alternateType(AzureResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(
   SecretStore.keyVaultId,
@@ -373,12 +365,6 @@ op dryrunResourcesListDryrun(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
-@@clientLocation(DryrunResources.createDryrun, "ConnectorDryrun", "csharp");
-@@clientLocation(DryrunResources.deleteDryrun, "ConnectorDryrun", "csharp");
-@@clientLocation(DryrunResources.getDryrun, "ConnectorDryrun", "csharp");
-@@clientLocation(DryrunResources.listDryrun, "ConnectorDryrun", "csharp");
-@@clientLocation(DryrunResources.updateDryrun, "ConnectorDryrun", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
