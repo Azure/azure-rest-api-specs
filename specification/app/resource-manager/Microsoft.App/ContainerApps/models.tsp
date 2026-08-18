@@ -2689,14 +2689,14 @@ model ManagedEnvironmentProperties {
    * Environment level Application Insights configuration
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
