@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerInstance;
 
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 scalar AksClusterResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -22,7 +22,7 @@ scalar AksClusterResourceId
     }
   ]>;
 
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 scalar ManagedIdentityResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -30,7 +30,7 @@ scalar ManagedIdentityResourceId
     }
   ]>;
 
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 scalar SandboxGroupResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -41,7 +41,7 @@ scalar SandboxGroupResourceId
 /**
  * Properties of a managed virtual node pool.
  */
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ManagedVirtualNodePoolProperties {
   /**
    * The status of the last provisioning operation on the resource.
@@ -83,7 +83,7 @@ model ManagedVirtualNodePoolProperties {
 /**
  * A managed virtual node pool resource.
  */
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ManagedVirtualNodePool
   is TrackedResource<ManagedVirtualNodePoolProperties> {
   ...ResourceNameParameter<
@@ -97,7 +97,7 @@ model ManagedVirtualNodePool
 /**
  * Updatable resource-specific properties for `ManagedVirtualNodePool` PATCH.
  */
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ManagedVirtualNodePoolPatchProperties {
   /**
    * Minimum number of nodes maintained by the pool.
@@ -115,7 +115,7 @@ model ManagedVirtualNodePoolPatchProperties {
 /**
  * PATCH envelope for `ManagedVirtualNodePool`. Only tags and a limited set of properties are updatable.
  */
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ManagedVirtualNodePoolUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
@@ -125,7 +125,7 @@ model ManagedVirtualNodePoolUpdate {
   properties?: ManagedVirtualNodePoolPatchProperties;
 }
 
-@added(Versions.v2026_08_01_preview)
+@added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface ManagedVirtualNodePools {
   /**
