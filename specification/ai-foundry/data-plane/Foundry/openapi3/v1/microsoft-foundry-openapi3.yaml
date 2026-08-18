@@ -46791,6 +46791,9 @@ components:
           type: string
           enum:
             - hosted
+        sub_type:
+          $ref: '#/components/schemas/HostedAgentSubtype'
+          description: The subtype of the hosted agent. The currently supported value is `DigitalWorker`.
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -46831,6 +46834,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
+    HostedAgentSubtype:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - DigitalWorker
+      description: The subtype of a hosted agent.
     HourlyRecurrenceSchedule:
       type: object
       required:
