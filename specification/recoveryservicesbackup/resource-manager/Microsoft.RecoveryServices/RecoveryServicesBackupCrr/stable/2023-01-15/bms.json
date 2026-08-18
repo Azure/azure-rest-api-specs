@@ -313,6 +313,10 @@
           "List Cross Region Restore Jobs in the secondary region": {
             "$ref": "./examples/AzureIaasVm/ListCrrJobs_Post.json"
           }
+        },
+        "x-ms-odata": "#/definitions/JobQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -647,6 +651,10 @@
           "Get Protected Azure Vm Recovery Points": {
             "$ref": "./examples/AzureIaasVm/RecoveryPoints_List.json"
           }
+        },
+        "x-ms-odata": "#/definitions/BMSRPQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -707,6 +715,10 @@
           "List protected items with backupManagementType filter as AzureIaasVm": {
             "$ref": "./examples/AzureIaasVm/BackupProtectedItems_List.json"
           }
+        },
+        "x-ms-odata": "#/definitions/ProtectedItemQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -770,6 +782,10 @@
           "Get Protected Items Usages Summary": {
             "$ref": "./examples/Common/BackupProtectedItem_UsageSummary_Get.json"
           }
+        },
+        "x-ms-odata": "#/definitions/BMSBackupSummariesQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },

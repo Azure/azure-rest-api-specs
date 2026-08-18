@@ -101,3 +101,5 @@ getAccessToken is ArmResourceActionSync<RecoveryPointResource, AADPropertiesReso
 @@doc(RecoveryPointResource.name, "RecoveryPointID represents the backed up data to be fetched.");
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPointGetAccessToken.`getAccessToken`::parameters.body, "Get Access Token request");
+@@TypeSpec.list(RecoveryPointResources.list);
+@@TypeSpec.OpenAPI.extension(RecoveryPointResources.list, "x-ms-odata", "#/definitions/BMSRPQueryObject");

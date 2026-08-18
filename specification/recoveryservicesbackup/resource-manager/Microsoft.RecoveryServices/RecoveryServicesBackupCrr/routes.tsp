@@ -210,3 +210,30 @@ list is ArmProviderActionSync<Response = ProtectedItemResourceList,Scope = Exten
 @query("$skipToken")
 "$skipToken"?: string}>
 }
+
+@@TypeSpec.OpenAPI.extension(
+  BackupUsageSummariesCRROperationGroup.list,
+  "x-ms-odata",
+  "#/definitions/BMSBackupSummariesQueryObject"
+);
+@@TypeSpec.OpenAPI.extension(
+  BackupUsageSummariesCRROperationGroup.list,
+  "x-ms-pageable",
+  #{ nextLinkName: null }
+);
+
+@@TypeSpec.nextLink(ResourceList.nextLink);
+
+@@TypeSpec.list(BackupCrrJobsOperationGroup.list);
+@@TypeSpec.OpenAPI.extension(
+  BackupCrrJobsOperationGroup.list,
+  "x-ms-odata",
+  "#/definitions/JobQueryObject"
+);
+
+@@TypeSpec.list(BackupProtectedItemsCrrOperationGroup.list);
+@@TypeSpec.OpenAPI.extension(
+  BackupProtectedItemsCrrOperationGroup.list,
+  "x-ms-odata",
+  "#/definitions/ProtectedItemQueryObject"
+);
