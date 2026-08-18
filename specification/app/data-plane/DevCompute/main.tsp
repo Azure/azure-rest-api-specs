@@ -32,7 +32,8 @@ namespace AzureDevCompute;
 /** Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations. */
 model AzureDataPlaneClientCredentialsFlow {
   /** OAuth2 client-credentials flow type. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension supplies SDK metadata without changing the authentication wire contract."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension preserves the existing authentication wire contract."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension preserves the existing authentication wire contract."
   @TypeSpec.OpenAPI.extension(
     "x-ms-enum",
     #{ name: "DevComputeOAuth2FlowType", modelAsString: false }
@@ -53,7 +54,8 @@ model AzureDataPlaneS2sAuth
 /** Microsoft Entra ID authorization-code authentication for user-scoped operations. */
 model UserAuthorizationCodeFlow {
   /** OAuth2 authorization-code flow type. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension supplies SDK metadata without changing the authentication wire contract."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension preserves the existing authentication wire contract."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension preserves the existing authentication wire contract."
   @TypeSpec.OpenAPI.extension(
     "x-ms-enum",
     #{ name: "DevComputeAuthorizationCodeFlowType", modelAsString: false }
