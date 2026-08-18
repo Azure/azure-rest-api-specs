@@ -6947,6 +6947,12 @@ model ContainerAppProperties {
   environmentId?: string;
 
   /**
+   * Networking configuration for the Container App.
+   */
+  @added(Versions.v2026_07_01)
+  networking?: ContainerAppNetworkingConfiguration;
+
+  /**
    * Workload profile name to pin for container app execution.
    */
   workloadProfileName?: string;
@@ -7003,6 +7009,18 @@ model ContainerAppProperties {
    */
   @visibility(Lifecycle.Read)
   eventStreamEndpoint?: string;
+}
+
+/**
+ * Networking configuration for a Container App. Only supported for Container Apps deployed into an Express managed environment.
+ */
+@added(Versions.v2026_07_01)
+model ContainerAppNetworkingConfiguration {
+  /**
+   * Resource ID of a subnet used for outbound (egress) traffic from this Container App. Only supported for Container Apps in an Express managed environment. Mutually exclusive with the environment-level VNet configuration and immutable after the Container App is created.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  outboundVnetSubnetId?: string;
 }
 
 /**
