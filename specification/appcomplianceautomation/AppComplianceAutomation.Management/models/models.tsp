@@ -1032,6 +1032,7 @@ model WebhookProperties {
   /**
    * webhook payload url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @pattern("^(http(s)?://)[\\S]{0,64994}$")
   payloadUrl?: string;
 

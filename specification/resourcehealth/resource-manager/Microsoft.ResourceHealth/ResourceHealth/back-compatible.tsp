@@ -12,7 +12,8 @@ using Microsoft.ResourceHealth;
 @@Legacy.flattenProperty(MetadataEntity.properties);
 
 @@clientLocation(EventImpactedResources.get, ImpactedResources);
-@@clientLocation(EventImpactedResources.listBySubscriptionIdAndEventId,
+@@clientLocation(
+  EventImpactedResources.listBySubscriptionIdAndEventId,
   ImpactedResources
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -20,30 +21,38 @@ using Microsoft.ResourceHealth;
 
 @@clientLocation(EventOperationGroup.getBySubscriptionIdAndTrackingId, "Event");
 @@clientLocation(EventOperationGroup.listBySubscriptionId, "Events");
-@@clientLocation(EventOperationGroup.listBySubscriptionIdAndEventId,
+@@clientLocation(
+  EventOperationGroup.listBySubscriptionIdAndEventId,
   "SecurityAdvisoryImpactedResources"
 );
-@@clientLocation(EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
+@@clientLocation(
+  EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
   "Event"
 );
-@@clientName(EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
+@@clientName(
+  EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
   "fetchDetailsBySubscriptionIdAndTrackingId"
 );
-@@clientLocation(EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
+@@clientLocation(
+  EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
   "Event"
 );
-@@clientName(EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
+@@clientName(
+  EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
   "fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId"
 );
 @@clientLocation(TenantEventOperationGroup.getByTenantIdAndTrackingId, "Event");
 @@clientLocation(TenantEventOperationGroup.listByTenantId, "Events");
-@@clientLocation(TenantEventOperationGroup.listByTenantIdAndEventId,
+@@clientLocation(
+  TenantEventOperationGroup.listByTenantIdAndEventId,
   "SecurityAdvisoryImpactedResources"
 );
-@@clientLocation(TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
+@@clientLocation(
+  TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
   "Event"
 );
-@@clientName(TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
+@@clientName(
+  TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
   "fetchDetailsByTenantIdAndTrackingId"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -80,15 +89,18 @@ using Microsoft.ResourceHealth;
 
 // Keep pre-migration Go names for typo'd wire names introduced by conversion.
 @@clientName(AvailabilityStatusProperties.occuredTime, "OccurredTime", "go");
-@@clientName(AvailabilityStatusPropertiesRecentlyResolved.unavailableOccuredTime,
+@@clientName(
+  AvailabilityStatusPropertiesRecentlyResolved.unavailableOccuredTime,
   "UnavailableOccurredTime",
   "go"
 );
-@@clientName(AvailabilityStatusPropertiesRecentlyResolved.unavailableSummary,
+@@clientName(
+  AvailabilityStatusPropertiesRecentlyResolved.unavailableSummary,
   "UnavailabilitySummary",
   "go"
 );
-@@clientName(EventPropertiesRecommendedActionsActionsItem,
+@@clientName(
+  EventPropertiesRecommendedActionsActionsItem,
   "EventPropertiesRecommendedActionsItem",
   "go,javascript,python"
 );

@@ -32,7 +32,7 @@ model ReplicationEligibilityResultsParentParam {
 
   /** Virtual Machine name. */
   @path
-  @segment("providers/microsoft.Compute/virtualMachines")
+  @segment("providers/Microsoft.Compute/virtualMachines")
   virtualMachineName: string;
 }
 
@@ -62,6 +62,7 @@ interface ReplicationEligibilityResultsOperationGroup {
 }
 
 @@doc(ReplicationEligibilityResults.name, "");
-@@doc(ReplicationEligibilityResults.properties,
+@@doc(
+  ReplicationEligibilityResults.properties,
   "Gets properties model for replication eligibility results API."
 );

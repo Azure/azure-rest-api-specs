@@ -124,4 +124,8 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
     dataPlane: true,
     managementPlane: true,
   },
+  "azure-sdk-for-rust": {
+    dataPlane: false,
+    managementPlane: false,
+  },
 };

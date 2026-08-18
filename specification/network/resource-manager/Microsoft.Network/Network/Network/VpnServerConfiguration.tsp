@@ -73,7 +73,10 @@ interface VpnServerConfigurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnServerConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -108,15 +111,19 @@ interface VpnServerConfigurations {
   >;
 }
 
-@@doc(VpnServerConfiguration.name,
+@@doc(
+  VpnServerConfiguration.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(VpnServerConfiguration.properties,
+@@doc(
+  VpnServerConfiguration.properties,
   "Properties of the P2SVpnServer configuration."
 );
-@@doc(VpnServerConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  VpnServerConfigurations.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VpnServerConfiguration."
 );
-@@doc(VpnServerConfigurations.updateTags::parameters.properties,
+@@doc(
+  VpnServerConfigurations.updateTags::parameters.properties,
   "Parameters supplied to update VpnServerConfiguration tags."
 );

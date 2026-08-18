@@ -73,7 +73,10 @@ interface VolumeGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VolumeGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -119,9 +122,11 @@ interface VolumeGroups {
 @@doc(VolumeGroup.properties, "Properties of VolumeGroup.");
 @@doc(VolumeGroups.create::parameters.resource, "Volume Group object.");
 @@doc(VolumeGroups.update::parameters.properties, "Volume Group object.");
-@@doc(VolumeGroups.preBackup::parameters.body,
+@@doc(
+  VolumeGroups.preBackup::parameters.body,
   "Volume Name List (currently only one volume name in the list is supported. Server would return error if list is bigger)"
 );
-@@doc(VolumeGroups.preRestore::parameters.body,
+@@doc(
+  VolumeGroups.preRestore::parameters.body,
   "Disk Snapshot List (currently only one Disk Snapshot in the list is supported and that the Disk Snapshot must be in same azure region as the ElasticSan. Server would return error if list is bigger)"
 );

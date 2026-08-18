@@ -153,6 +153,12 @@ describe("generate-lease-files", () => {
       expect(() => validateOrgName("storage")).not.toThrow();
       expect(() => validateOrgName("compute")).not.toThrow();
       expect(() => validateOrgName("test123")).not.toThrow();
+      expect(() => validateOrgName("datalake-analytics")).not.toThrow();
+    });
+
+    it("normalizes uppercase to lowercase", () => {
+      expect(validateOrgName("EnterpriseKnowledgeGraph")).toBe("enterpriseknowledgegraph");
+      expect(validateOrgName("Storage")).toBe("storage");
     });
 
     it("rejects empty org name", () => {

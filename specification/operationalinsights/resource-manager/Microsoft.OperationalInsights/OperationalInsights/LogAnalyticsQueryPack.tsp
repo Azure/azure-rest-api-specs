@@ -13,11 +13,10 @@ namespace Microsoft.OperationalInsights;
 /**
  * An Log Analytics QueryPack definition.
  */
-model LogAnalyticsQueryPack
-  is Azure.ResourceManager.TrackedResource<
-    LogAnalyticsQueryPackProperties,
-    false
-  > {
+model LogAnalyticsQueryPack is Azure.ResourceManager.TrackedResource<
+  LogAnalyticsQueryPackProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LogAnalyticsQueryPack,
     KeyName = "queryPackName",
@@ -97,18 +96,23 @@ interface LogAnalyticsQueryPacks {
   >;
 }
 
-@@doc(LogAnalyticsQueryPack.name,
+@@doc(
+  LogAnalyticsQueryPack.name,
   "The name of the Log Analytics QueryPack resource."
 );
-@@doc(LogAnalyticsQueryPack.properties,
+@@doc(
+  LogAnalyticsQueryPack.properties,
   "Properties that define a Log Analytics QueryPack resource."
 );
-@@doc(LogAnalyticsQueryPacks.createOrUpdate::parameters.resource,
+@@doc(
+  LogAnalyticsQueryPacks.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create or update a Log Analytics QueryPack."
 );
-@@doc(LogAnalyticsQueryPacks.updateTags::parameters.properties,
+@@doc(
+  LogAnalyticsQueryPacks.updateTags::parameters.properties,
   "Updated tag information to set into the QueryPack instance."
 );
-@@doc(LogAnalyticsQueryPacks.search::parameters.body,
+@@doc(
+  LogAnalyticsQueryPacks.search::parameters.body,
   "Properties by which to search queries in the given Log Analytics QueryPack."
 );

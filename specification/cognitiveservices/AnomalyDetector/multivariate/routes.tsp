@@ -13,9 +13,9 @@ namespace AnomalyDetector.Multivariate;
 
 @post
 @doc("Operation template for multivariate anomaly detection service action.")
-op MultivariateServiceAction<TParams, TResponse>(
-  ...TParams,
-): TResponse | ResponseError;
+op MultivariateServiceAction<TParams, TResponse>(...TParams):
+  | TResponse
+  | ResponseError;
 
 // Operations
 
@@ -83,10 +83,9 @@ op trainMultivariateModel is MultivariateServiceAction<
 @summary("List Multivariate Models")
 @doc("List models of a resource.")
 @list
-op listMultivariateModels(
-  ...SkipQueryParameter,
-  ...TopQueryParameter,
-): ModelList | ResponseError;
+op listMultivariateModels(...SkipQueryParameter, ...TopQueryParameter):
+  | ModelList
+  | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -100,11 +99,13 @@ op deleteMultivariateModel(
   @doc("Model identifier.")
   @path
   modelId: string,
-): {
-  @doc("Delete model successfully.")
-  @statusCode
-  statusCode: 204;
-} | ResponseError;
+):
+  | {
+      @doc("Delete model successfully.")
+      @statusCode
+      statusCode: 204;
+    }
+  | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -146,19 +147,21 @@ op detectMultivariateBatchAnomaly(
   @doc("Request of multivariate anomaly detection.")
   @bodyRoot
   options: MultivariateBatchDetectionOptions,
-): {
-  @statusCode statusCode: 202;
+):
+  | {
+      @statusCode statusCode: 202;
 
-  @doc("ID of the detection result.")
-  @header("Operation-Id")
-  operationId: string;
+      @doc("ID of the detection result.")
+      @header("Operation-Id")
+      operationId: string;
 
-  @doc("Location of the detection result.")
-  @header("Operation-Location")
-  operationLocation: string;
+      @doc("Location of the detection result.")
+      @header("Operation-Location")
+      operationLocation: string;
 
-  @bodyRoot result: MultivariateDetectionResult;
-} | ResponseError;
+      @bodyRoot result: MultivariateDetectionResult;
+    }
+  | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.

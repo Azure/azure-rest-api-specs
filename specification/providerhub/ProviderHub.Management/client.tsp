@@ -10,111 +10,135 @@ using Microsoft.ProviderHub;
 @@clientLocation(ProviderRegistrations.generateManifest, "Client", "go");
 
 @@clientName(LocalizedOperationDefinitionDisplay.ptPT, "pt", "go,java");
-@@clientName(LocalizedOperationDisplayDefinitionPtPT,
+@@clientName(
+  LocalizedOperationDisplayDefinitionPtPT,
   "LocalizedOperationDisplayDefinitionPt",
   "go,java"
 );
 
 @@alternateType(AuthorizedApplication.name, Azure.Core.uuid, "java");
-@@clientName(SubscriptionLifecycleNotificationSpecifications.softDeleteTTL,
+@@clientName(
+  SubscriptionLifecycleNotificationSpecifications.softDeleteTTL,
   "softDeleteTtl",
   "java"
 );
 
-@@clientName(AdditionalAuthorization,
+@@clientName(
+  AdditionalAuthorization,
   "ProviderAdditionalAuthorization",
   "csharp"
 );
 @@clientName(AdditionalOptions, "AdditionalOptionResourceType", "csharp");
-@@clientName(AdditionalOptionsAsyncOperation,
+@@clientName(
+  AdditionalOptionsAsyncOperation,
   "AdditionalOptionAsyncOperation",
   "csharp"
 );
-@@clientName(AdditionalOptionsResourceTypeRegistration,
+@@clientName(
+  AdditionalOptionsResourceTypeRegistration,
   "AdditionalOptionResourceTypeRegistration",
   "csharp"
 );
 @@clientName(ApiProfile, "ResourceTypeRegistrationApiProfile", "csharp");
 @@clientName(AuthenticationScheme, "ProviderAuthenticationScheme", "csharp");
 @@clientName(AuthorizedApplication, "ProviderAuthorizedApplication", "csharp");
-@@clientName(AuthorizedApplicationProperties,
+@@clientName(
+  AuthorizedApplicationProperties,
   "ProviderAuthorizedApplicationProperties",
   "csharp"
 );
-@@alternateType(CanaryTrafficRegionRolloutConfiguration.regions,
+@@alternateType(
+  CanaryTrafficRegionRolloutConfiguration.regions,
   Azure.Core.azureLocation[],
   "csharp"
 );
-@@alternateType(CanaryTrafficRegionRolloutConfiguration.skipRegions,
+@@alternateType(
+  CanaryTrafficRegionRolloutConfiguration.skipRegions,
   Azure.Core.azureLocation[],
   "csharp"
 );
-@@clientName(CapacityPolicy,
+@@clientName(
+  CapacityPolicy,
   "ResourceTypeRegistrationCapacityPolicy",
   "csharp"
 );
 @@clientName(CheckinManifestParams, "CheckinManifestContent", "csharp");
-@@alternateType(CheckinManifestParams.baselineArmManifestLocation,
+@@alternateType(
+  CheckinManifestParams.baselineArmManifestLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@clientName(CheckNameAvailabilitySpecifications.enableDefaultValidation,
+@@clientName(
+  CheckNameAvailabilitySpecifications.enableDefaultValidation,
   "IsDefaultValidationEnabled",
   "csharp"
 );
-@@clientName(CustomRolloutArrayResponseWithContinuation,
+@@clientName(
+  CustomRolloutArrayResponseWithContinuation,
   "CustomRolloutListResult",
   "csharp"
 );
-@@clientName(CustomRolloutSpecificationAutoProvisionConfig,
+@@clientName(
+  CustomRolloutSpecificationAutoProvisionConfig,
   "CustomRolloutAutoProvisionConfig",
   "csharp"
 );
-@@clientName(CustomRolloutSpecificationAutoProvisionConfig.resourceGraph,
+@@clientName(
+  CustomRolloutSpecificationAutoProvisionConfig.resourceGraph,
   "IsResourceGraphEnabled",
   "csharp"
 );
-@@clientName(CustomRolloutSpecificationAutoProvisionConfig.storage,
+@@clientName(
+  CustomRolloutSpecificationAutoProvisionConfig.storage,
   "IsStorageEnabled",
   "csharp"
 );
-@@alternateType(CustomRolloutStatus.completedRegions,
+@@alternateType(
+  CustomRolloutStatus.completedRegions,
   Azure.Core.azureLocation[],
   "csharp"
 );
 @@clientName(DataBoundary, "ResourceTypeDataBoundary", "csharp");
-@@clientName(DefaultRolloutArrayResponseWithContinuation,
+@@clientName(
+  DefaultRolloutArrayResponseWithContinuation,
   "DefaultRolloutListResult",
   "csharp"
 );
-@@clientName(DefaultRolloutSpecificationAutoProvisionConfig,
+@@clientName(
+  DefaultRolloutSpecificationAutoProvisionConfig,
   "DefaultRolloutAutoProvisionConfig",
   "csharp"
 );
-@@clientName(DefaultRolloutSpecificationAutoProvisionConfig.resourceGraph,
+@@clientName(
+  DefaultRolloutSpecificationAutoProvisionConfig.resourceGraph,
   "IsResourceGraphEnabled",
   "csharp"
 );
-@@clientName(DefaultRolloutSpecificationAutoProvisionConfig.storage,
+@@clientName(
+  DefaultRolloutSpecificationAutoProvisionConfig.storage,
   "IsStorageEnabled",
   "csharp"
 );
-@@clientName(DeleteDependency,
+@@clientName(
+  DeleteDependency,
   "ResourceTypeRegistrationDeleteDependency",
   "csharp"
 );
 @@clientName(DstsConfiguration, "ProviderDstsConfiguration", "csharp");
 @@clientName(EndpointInformation, "ProviderEndpointInformation", "csharp");
 @@clientName(EndpointType, "ProviderEndpointType", "csharp");
-@@clientName(EndpointTypeResourceType,
+@@clientName(
+  EndpointTypeResourceType,
   "ProviderEndpointTypeResourceType",
   "csharp"
 );
-@@clientName(ExpeditedRolloutDefinition.enabled,
+@@clientName(
+  ExpeditedRolloutDefinition.enabled,
   "IsExpeditedRolloutEnabled",
   "csharp"
 );
-@@clientName(ExtendedLocationOptions.supportedPolicy,
+@@clientName(
+  ExtendedLocationOptions.supportedPolicy,
   "SupportedLocationPolicy",
   "csharp"
 );
@@ -125,7 +149,8 @@ using Microsoft.ProviderHub;
 @@clientName(FilterOption, "ProviderResourceQueryFilterOption", "csharp");
 @@clientName(FilterRule, "ProviderFilterRule", "csharp");
 @@clientName(FrontloadPayload, "ProviderFrontloadPayload", "csharp");
-@@clientName(FrontloadPayloadProperties,
+@@clientName(
+  FrontloadPayloadProperties,
   "ProviderFrontloadPayloadProperties",
   "csharp"
 );
@@ -137,30 +162,36 @@ using Microsoft.ProviderHub;
 @@alternateType(LocationQuotaRule.location, Azure.Core.azureLocation, "csharp");
 @@clientName(LoggingHiddenPropertyPath, "LoggingHiddenPropertyPaths", "csharp");
 @@clientName(Notification, "ProviderNotification", "csharp");
-@@alternateType(NotificationEndpoint.locations,
+@@alternateType(
+  NotificationEndpoint.locations,
   Azure.Core.azureLocation[],
   "csharp"
 );
-@@alternateType(NotificationEndpoint.notificationDestination,
+@@alternateType(
+  NotificationEndpoint.notificationDestination,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(NotificationEndpointType,
+@@clientName(
+  NotificationEndpointType,
   "ProviderNotificationEndpointType",
   "csharp"
 );
 @@clientName(NotificationOptions, "ProviderNotificationOption", "csharp");
-@@clientName(NotificationRegistrationArrayResponseWithContinuation,
+@@clientName(
+  NotificationRegistrationArrayResponseWithContinuation,
   "NotificationRegistrationListResult",
   "csharp"
 );
 @@clientName(NotificationType, "ProviderNotificationType", "csharp");
-@@clientName(OpenApiValidation.allowNoncompliantCollectionResponse,
+@@clientName(
+  OpenApiValidation.allowNoncompliantCollectionResponse,
   "IsNoncompliantCollectionResponseAllowed",
   "csharp"
 );
 @@clientName(Policy, "ResourceConcurrencyPolicy", "csharp");
-@@clientName(ProviderRegistrationArrayResponseWithContinuation,
+@@clientName(
+  ProviderRegistrationArrayResponseWithContinuation,
   "ProviderRegistrationListResult",
   "csharp"
 );
@@ -171,150 +202,185 @@ using Microsoft.ProviderHub;
 @@clientName(ReRegisterSubscriptionMetadata.enabled, "IsEnabled", "csharp");
 @@clientName(RequestHeaderOptions, "ProviderRequestHeaderOptions", "csharp");
 @@clientName(ResourceGraphConfiguration.enabled, "IsEnabled", "csharp");
-@@clientName(ResourceMovePolicy.crossResourceGroupMoveEnabled,
+@@clientName(
+  ResourceMovePolicy.crossResourceGroupMoveEnabled,
   "IsCrossResourceGroupMoveEnabled",
   "csharp"
 );
-@@clientName(ResourceMovePolicy.crossSubscriptionMoveEnabled,
+@@clientName(
+  ResourceMovePolicy.crossSubscriptionMoveEnabled,
   "IsCrossSubscriptionMoveEnabled",
   "csharp"
 );
-@@clientName(ResourceMovePolicy.validationRequired,
+@@clientName(
+  ResourceMovePolicy.validationRequired,
   "IsValidationRequired",
   "csharp"
 );
-@@clientName(ResourceProviderAuthorizationManagedByAuthorization,
+@@clientName(
+  ResourceProviderAuthorizationManagedByAuthorization,
   "ResourceProviderManagedByAuthorization",
   "csharp"
 );
-@@clientName(ResourceProviderAuthorizationManagedByAuthorization.allowManagedByInheritance,
+@@clientName(
+  ResourceProviderAuthorizationManagedByAuthorization.allowManagedByInheritance,
   "DoesAllowManagedByInheritance",
   "csharp"
 );
 @@clientName(ResourceProviderEndpoint.enabled, "IsEnabled", "csharp");
-@@alternateType(ResourceProviderEndpoint.locations,
+@@alternateType(
+  ResourceProviderEndpoint.locations,
   Azure.Core.azureLocation[],
   "csharp"
 );
 @@clientName(ResourceProviderManagement.pcCode, "ProfitCenterCode", "csharp");
-@@clientName(ResourceProviderManagement.resourceAccessRoles,
+@@clientName(
+  ResourceProviderManagement.resourceAccessRoles,
   "ResourceAccessRoleList",
   "csharp"
 );
-@@clientName(ResourceProviderManagementErrorResponseMessageOptions,
+@@clientName(
+  ResourceProviderManagementErrorResponseMessageOptions,
   "ResourceProviderErrorResponseMessageOptions",
   "csharp"
 );
-@@clientName(ResourceProviderManagementExpeditedRolloutMetadata,
+@@clientName(
+  ResourceProviderManagementExpeditedRolloutMetadata,
   "ExpeditedRolloutMetadata",
   "csharp"
 );
-@@clientName(ResourceProviderManagementExpeditedRolloutMetadata.enabled,
+@@clientName(
+  ResourceProviderManagementExpeditedRolloutMetadata.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(ResourceProviderManifest.enableTenantLinkedNotification,
+@@clientName(
+  ResourceProviderManifest.enableTenantLinkedNotification,
   "IsTenantLinkedNotificationEnabled",
   "csharp"
 );
-@@clientName(ResourceProviderManifestPropertiesNotificationSettings,
+@@clientName(
+  ResourceProviderManifestPropertiesNotificationSettings,
   "ResourceProviderManifestNotificationSettings",
   "csharp"
 );
-@@clientName(ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove,
+@@clientName(
+  ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove,
   "ResourceProviderManifestResourceGroupLockOptionDuringMove",
   "csharp"
 );
-@@clientName(ResourceProviderManifestPropertiesResponseOptions,
+@@clientName(
+  ResourceProviderManifestPropertiesResponseOptions,
   "ResourceProviderManifestResponseOptions",
   "csharp"
 );
 @@clientName(ResourceSubType, "ProviderResourceSubType", "csharp");
 @@clientName(ResourceType, "ProviderResourceType", "csharp");
 @@clientName(ResourceTypeEndpoint.enabled, "IsEnabled", "csharp");
-@@alternateType(ResourceTypeEndpoint.locations,
+@@alternateType(
+  ResourceTypeEndpoint.locations,
   Azure.Core.azureLocation[],
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationArrayResponseWithContinuation,
+@@clientName(
+  ResourceTypeRegistrationArrayResponseWithContinuation,
   "ResourceTypeRegistrationListResult",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationProperties.addResourceListTargetLocations,
+@@clientName(
+  ResourceTypeRegistrationProperties.addResourceListTargetLocations,
   "IsAddResourceListTargetLocationsAllowed",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationProperties.allowEmptyRoleAssignments,
+@@clientName(
+  ResourceTypeRegistrationProperties.allowEmptyRoleAssignments,
   "IsEmptyRoleAssignmentsAllowed",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationProperties.enableAsyncOperation,
+@@clientName(
+  ResourceTypeRegistrationProperties.enableAsyncOperation,
   "IsAsyncOperationEnabled",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationProperties.enableThirdPartyS2S,
+@@clientName(
+  ResourceTypeRegistrationProperties.enableThirdPartyS2S,
   "IsThirdPartyS2SEnabled",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationProperties.supportsTags,
+@@clientName(
+  ResourceTypeRegistrationProperties.supportsTags,
   "AreTagsSupported",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesAvailabilityZoneRule,
+@@clientName(
+  ResourceTypeRegistrationPropertiesAvailabilityZoneRule,
   "ResourceTypeRegistrationAvailabilityZoneRule",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesCapacityRule,
+@@clientName(
+  ResourceTypeRegistrationPropertiesCapacityRule,
   "ResourceTypeRegistrationCapacityRule",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesLegacyPolicy,
+@@clientName(
+  ResourceTypeRegistrationPropertiesLegacyPolicy,
   "ResourceTypeRegistrationLegacyPolicy",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesMarketplaceOptions,
+@@clientName(
+  ResourceTypeRegistrationPropertiesMarketplaceOptions,
   "ResourceTypeRegistrationMarketplaceOptions",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesMarketplaceOptions.addOnPlanConversionAllowed,
+@@clientName(
+  ResourceTypeRegistrationPropertiesMarketplaceOptions.addOnPlanConversionAllowed,
   "IsAddOnPlanConversionAllowed",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceCache,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceCache,
   "ResourceTypeRegistrationResourceCache",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceCache.enableResourceCache,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceCache.enableResourceCache,
   "IsResourceCacheEnabled",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceManagementOptions,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceManagementOptions,
   "ResourceTypeRegistrationResourceManagementOptions",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceManagementOptionsBatchProvisioningSupport,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceManagementOptionsBatchProvisioningSupport,
   "BatchProvisioningSupport",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceManagementOptionsNestedProvisioningSupport,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceManagementOptionsNestedProvisioningSupport,
   "NestedProvisioningSupport",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceQueryManagement,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceQueryManagement,
   "ProviderResourceQueryManagement",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesResourceTypeCommonAttributeManagement,
+@@clientName(
+  ResourceTypeRegistrationPropertiesResourceTypeCommonAttributeManagement,
   "ResourceTypeCommonAttributeManagement",
   "csharp"
 );
-@@clientName(ResourceTypeRegistrationPropertiesRoutingRule,
+@@clientName(
+  ResourceTypeRegistrationPropertiesRoutingRule,
   "ResourceTypeRegistrationRoutingRule",
   "csharp"
 );
 @@clientName(ResourceTypeSku, "ResourceTypeSkuProperties", "csharp");
 @@clientName(Role, "ApplicationOwnershipRole", "csharp");
-@@alternateType(RolloutStatusBase.completedRegions,
+@@alternateType(
+  RolloutStatusBase.completedRegions,
   Azure.Core.azureLocation[],
   "csharp"
 );
@@ -326,7 +392,8 @@ using Microsoft.ProviderHub;
 @@clientName(SkuLocationInfo, "ResourceTypeSkuLocationInfo", "csharp");
 @@clientName(SkuLocationInfo.type, "LocationType", "csharp");
 @@clientName(SkuResource, "ResourceTypeSku", "csharp");
-@@clientName(SkuResourceArrayResponseWithContinuation,
+@@clientName(
+  SkuResourceArrayResponseWithContinuation,
   "ResourceTypeSkuListResult",
   "csharp"
 );
@@ -335,11 +402,13 @@ using Microsoft.ProviderHub;
 @@clientName(SkuZoneDetail, "ResourceTypeSkuZoneDetail", "csharp");
 @@clientName(SubscriptionState, "ProviderSubscriptionState", "csharp");
 @@clientName(SubscriptionStateRule, "ProviderSubscriptionStateRule", "csharp");
-@@clientName(SupportedOperations,
+@@clientName(
+  SupportedOperations,
   "ResourceManagementSupportedOperation",
   "csharp"
 );
-@@clientName(TemplateDeploymentOptions.preflightSupported,
+@@clientName(
+  TemplateDeploymentOptions.preflightSupported,
   "IsPreflightSupported",
   "csharp"
 );
@@ -349,66 +418,80 @@ using Microsoft.ProviderHub;
 @@alternateType(ResourceTypeExtension.endpointUri, url, "csharp");
 @@alternateType(SwaggerSpecification.swaggerSpecFolderUri, url, "csharp");
 @@alternateType(ResourceTypeEndpointBase.endpointUri, url, "csharp");
-@@clientName(ExtendedLocationOptions,
+@@clientName(
+  ExtendedLocationOptions,
   "ProviderHubExtendedLocationOptions",
   "csharp"
 );
 @@clientName(ProvisioningState, "ProviderHubProvisioningState", "csharp");
 @@clientName(IdentityManagementTypes, "IdentityManagementType", "csharp");
-@@clientName(TemplateDeploymentCapabilities,
+@@clientName(
+  TemplateDeploymentCapabilities,
   "TemplateDeploymentCapability",
   "csharp"
 );
-@@clientName(TemplateDeploymentPreflightOptions,
+@@clientName(
+  TemplateDeploymentPreflightOptions,
   "TemplateDeploymentPreflightOption",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.providerAuthentication,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceProviderManifestProperties.providerAuthentication,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.featuresRule,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceProviderManifestProperties.featuresRule,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.resourceProviderAuthorizationRules,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceProviderManifestProperties.resourceProviderAuthorizationRules,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.notificationSettings,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceProviderManifestProperties.notificationSettings,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.resourceGroupLockOptionDuringMove,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceProviderManifestProperties.resourceGroupLockOptionDuringMove,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.responseOptions,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceProviderManifestProperties.responseOptions,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceType.identityManagement,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceType.identityManagement,
   "csharp"
 );
 @@access(ResourceProviderAuthentication, Access.internal, "csharp");
 
-@@clientName(ResourceProviderAuthentication.allowedAudiences,
+@@clientName(
+  ResourceProviderAuthentication.allowedAudiences,
   "ProviderAuthenticationAllowedAudiences",
   "csharp"
 );
-@@clientName(ResourceProviderManifestPropertiesNotificationSettings.subscriberSettings,
+@@clientName(
+  ResourceProviderManifestPropertiesNotificationSettings.subscriberSettings,
   "NotificationSubscriberSettings",
   "csharp"
 );
-@@clientName(ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove.blockActionVerb,
+@@clientName(
+  ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove.blockActionVerb,
   "ResourceGroupLockOptionDuringMoveBlockActionVerb",
   "csharp"
 );
 @@clientName(IdentityManagement.type, "ManagementType", "csharp");
 @@clientName(Intent.DEFERRED_ACCESS_CHECK, "DeferredAccessCheck", "csharp");
 @@clientName(Intent.RP_CONTRACT, "RPContract", "csharp");
-@@clientName(SubscriptionLifecycleNotificationSpecifications.softDeleteTTL,
+@@clientName(
+  SubscriptionLifecycleNotificationSpecifications.softDeleteTTL,
   "SoftDeleteTtl",
   "csharp"
 );
@@ -416,7 +499,8 @@ using Microsoft.ProviderHub;
 @@clientName(LoggingDetails, "LoggingDetail", "csharp");
 @@clientName(LoggingDirections, "LoggingDirection", "csharp");
 @@clientName(SkipNotifications, "SkipNotification", "csharp");
-@@clientName(TemplateDeploymentPreflightNotifications,
+@@clientName(
+  TemplateDeploymentPreflightNotifications,
   "TemplateDeploymentPreflightNotification",
   "csharp"
 );
@@ -425,7 +509,8 @@ using Microsoft.ProviderHub;
 @@clientName(Skus, "NestedResourceTypeFirstSku", "csharp");
 @@clientName(SkuResourceOperations, "NestedResourceTypeSecondSku", "csharp");
 @@clientName(SkuResourceOperationGroup, "NestedResourceTypeThirdSku", "csharp");
-@@clientName(NewRegionFrontloadRelease,
+@@clientName(
+  NewRegionFrontloadRelease,
   "RegistrationNewRegionFrontloadReleases",
   "csharp"
 );
@@ -436,16 +521,19 @@ using Microsoft.ProviderHub;
 
 @@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
 
-@@alternateType(ResourceManagementEntity.location,
+@@alternateType(
+  ResourceManagementEntity.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
-@@clientName(ProviderRegistrations.deleteResources,
+@@clientName(
+  ProviderRegistrations.deleteResources,
   "DeleteResourcesResourceAction",
   "csharp"
 );
-@@clientName(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
+@@clientName(
+  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
   "GenerateManifestNewRegionFrontloadRelease",
   "csharp"
 );
@@ -454,117 +542,143 @@ using Microsoft.ProviderHub;
 @@clientName(ThrottlingMetric.type, "MetricType", "csharp");
 @@clientName(TypedErrorInfo.type, "TypedErrorInfoType", "csharp");
 
-@@alternateType(DefaultRolloutSpecificationExpeditedRollout,
+@@alternateType(
+  DefaultRolloutSpecificationExpeditedRollout,
   ExpeditedRolloutDefinition,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationCanary,
+@@alternateType(
+  DefaultRolloutSpecificationCanary,
   CanaryTrafficRegionRolloutConfiguration,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationLowTraffic,
+@@alternateType(
+  DefaultRolloutSpecificationLowTraffic,
   TrafficRegionRolloutConfiguration,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationMediumTraffic,
+@@alternateType(
+  DefaultRolloutSpecificationMediumTraffic,
   TrafficRegionRolloutConfiguration,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationHighTraffic,
+@@alternateType(
+  DefaultRolloutSpecificationHighTraffic,
   TrafficRegionRolloutConfiguration,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationRestOfTheWorldGroupOne,
+@@alternateType(
+  DefaultRolloutSpecificationRestOfTheWorldGroupOne,
   TrafficRegionRolloutConfiguration,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationRestOfTheWorldGroupTwo,
+@@alternateType(
+  DefaultRolloutSpecificationRestOfTheWorldGroupTwo,
   TrafficRegionRolloutConfiguration,
   "csharp"
 );
-@@alternateType(DefaultRolloutSpecificationProviderRegistration,
+@@alternateType(
+  DefaultRolloutSpecificationProviderRegistration,
   ProviderRegistration,
   "csharp"
 );
 
-@@alternateType(CustomRolloutPropertiesSpecification,
+@@alternateType(
+  CustomRolloutPropertiesSpecification,
   CustomRolloutSpecification,
   "csharp"
 );
 @@alternateType(CustomRolloutPropertiesStatus, CustomRolloutStatus, "csharp");
 
-@@alternateType(DefaultRolloutPropertiesSpecification,
+@@alternateType(
+  DefaultRolloutPropertiesSpecification,
   DefaultRolloutSpecification,
   "csharp"
 );
 @@alternateType(DefaultRolloutPropertiesStatus, DefaultRolloutStatus, "csharp");
 
 @@alternateType(CustomRolloutSpecificationCanary, TrafficRegions, "csharp");
-@@alternateType(CustomRolloutSpecificationProviderRegistration,
+@@alternateType(
+  CustomRolloutSpecificationProviderRegistration,
   ProviderRegistration,
   "csharp"
 );
 
-@@alternateType(CustomRolloutStatusManifestCheckinStatus,
+@@alternateType(
+  CustomRolloutStatusManifestCheckinStatus,
   CheckinManifestInfo,
   "csharp"
 );
 
-@@alternateType(DefaultRolloutStatusManifestCheckinStatus,
+@@alternateType(
+  DefaultRolloutStatusManifestCheckinStatus,
   CheckinManifestInfo,
   "csharp"
 );
 
-@@alternateType(ResourceTypeRegistrationPropertiesExtensionOptions,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesExtensionOptions,
   ResourceTypeExtensionOptions,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesFeaturesRule,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesFeaturesRule,
   FeaturesRule,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications,
   SubscriptionLifecycleNotificationSpecifications,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesIdentityManagement,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesIdentityManagement,
   IdentityManagementProperties,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesCheckNameAvailabilitySpecifications,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesCheckNameAvailabilitySpecifications,
   CheckNameAvailabilitySpecifications,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesRequestHeaderOptions,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesRequestHeaderOptions,
   RequestHeaderOptions,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesTemplateDeploymentOptions,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesTemplateDeploymentOptions,
   TemplateDeploymentOptions,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesResourceMovePolicy,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesResourceMovePolicy,
   ResourceMovePolicy,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesResourceGraphConfiguration,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesResourceGraphConfiguration,
   ResourceGraphConfiguration,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesManagement,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesManagement,
   ResourceProviderManagement,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesTemplateDeploymentPolicy,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesTemplateDeploymentPolicy,
   TemplateDeploymentPolicy,
   "csharp"
 );
-@@alternateType(ResourceTypeRegistrationPropertiesDstsConfiguration,
+@@alternateType(
+  ResourceTypeRegistrationPropertiesDstsConfiguration,
   DstsConfiguration,
   "csharp"
 );
 
-@@alternateType(LoggingRuleHiddenPropertyPaths,
+@@alternateType(
+  LoggingRuleHiddenPropertyPaths,
   LoggingHiddenPropertyPath,
   "csharp"
 );
@@ -572,193 +686,238 @@ using Microsoft.ProviderHub;
 @@usage(ResourceProviderAuthentication, Usage.input | Usage.output, "csharp");
 @@usage(FeaturesRule, Usage.input | Usage.output, "csharp");
 @@access(FeaturesRule, Access.public, "csharp");
-@@usage(PrivateResourceProviderConfiguration,
+@@usage(
+  PrivateResourceProviderConfiguration,
   Usage.input | Usage.output,
   "csharp"
 );
 @@usage(IdentityManagement, Usage.input | Usage.output, "csharp");
 
-@@alternateType(ProviderRegistrationPropertiesProviderHubMetadata,
+@@alternateType(
+  ProviderRegistrationPropertiesProviderHubMetadata,
   ProviderHubMetadata,
   "csharp"
 );
-@@alternateType(ProviderHubMetadataProviderAuthentication,
+@@alternateType(
+  ProviderHubMetadataProviderAuthentication,
   ResourceProviderAuthentication,
   "csharp"
 );
-@@alternateType(ProviderHubMetadataThirdPartyProviderAuthorization,
+@@alternateType(
+  ProviderHubMetadataThirdPartyProviderAuthorization,
   ThirdPartyProviderAuthorization,
   "csharp"
 );
-@@alternateType(ProviderRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications,
+@@alternateType(
+  ProviderRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications,
   SubscriptionLifecycleNotificationSpecifications,
   "csharp"
 );
-@@alternateType(ProviderRegistrationPropertiesPrivateResourceProviderConfiguration,
+@@alternateType(
+  ProviderRegistrationPropertiesPrivateResourceProviderConfiguration,
   PrivateResourceProviderConfiguration,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestPropertiesProviderAuthentication,
+@@alternateType(
+  ResourceProviderManifestPropertiesProviderAuthentication,
   ResourceProviderAuthentication,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestPropertiesFeaturesRule,
+@@alternateType(
+  ResourceProviderManifestPropertiesFeaturesRule,
   FeaturesRule,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestPropertiesRequestHeaderOptions,
+@@alternateType(
+  ResourceProviderManifestPropertiesRequestHeaderOptions,
   RequestHeaderOptions,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestPropertiesManagement,
+@@alternateType(
+  ResourceProviderManifestPropertiesManagement,
   ResourceProviderManagement,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestPropertiesTemplateDeploymentOptions,
+@@alternateType(
+  ResourceProviderManifestPropertiesTemplateDeploymentOptions,
   TemplateDeploymentOptions,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestPropertiesDstsConfiguration,
+@@alternateType(
+  ResourceProviderManifestPropertiesDstsConfiguration,
   DstsConfiguration,
   "csharp"
 );
 @@alternateType(ResourceProviderEndpointFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(FanoutLinkedNotificationRuleDstsConfiguration,
+@@alternateType(
+  FanoutLinkedNotificationRuleDstsConfiguration,
   DstsConfiguration,
   "csharp"
 );
 @@alternateType(ResourceTypeEndpointFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(ResourceTypeEndpointDstsConfiguration,
+@@alternateType(
+  ResourceTypeEndpointDstsConfiguration,
   DstsConfiguration,
   "csharp"
 );
-@@alternateType(ResourceTypeExtensionOptionsResourceCreationBegin,
+@@alternateType(
+  ResourceTypeExtensionOptionsResourceCreationBegin,
   ExtensionOptions,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestProviderAuthentication,
+@@alternateType(
+  ResourceProviderManifestProviderAuthentication,
   ResourceProviderAuthentication,
   "csharp"
 );
 @@alternateType(ResourceProviderManifestFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(ResourceProviderManifestRequestHeaderOptions,
+@@alternateType(
+  ResourceProviderManifestRequestHeaderOptions,
   RequestHeaderOptions,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestManagement,
+@@alternateType(
+  ResourceProviderManifestManagement,
   ResourceProviderManagement,
   "csharp"
 );
-@@alternateType(ResourceProviderManifestReRegisterSubscriptionMetadata,
+@@alternateType(
+  ResourceProviderManifestReRegisterSubscriptionMetadata,
   ReRegisterSubscriptionMetadata,
   "csharp"
 );
 @@alternateType(ResourceTypeIdentityManagement, IdentityManagement, "csharp");
 @@alternateType(ResourceTypeFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(ResourceTypeRequestHeaderOptions,
+@@alternateType(
+  ResourceTypeRequestHeaderOptions,
   RequestHeaderOptions,
   "csharp"
 );
-@@alternateType(ResourceTypeTemplateDeploymentPolicy,
+@@alternateType(
+  ResourceTypeTemplateDeploymentPolicy,
   TemplateDeploymentPolicy,
   "csharp"
 );
-@@alternateType(OperationsDefinitionDisplay,
+@@alternateType(
+  OperationsDefinitionDisplay,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(OperationsPutContentProperties,
+@@alternateType(
+  OperationsPutContentProperties,
   OperationsContentProperties,
   "csharp"
 );
-@@alternateType(LocalizedOperationDefinitionDisplay,
+@@alternateType(
+  LocalizedOperationDefinitionDisplay,
   LocalizedOperationDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionDefault,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionDefault,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionEn,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionEn,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionCs,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionCs,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionDe,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionDe,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionEs,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionEs,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionFr,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionFr,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionHu,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionHu,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionIt,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionIt,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionJa,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionJa,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionKo,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionKo,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionNl,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionNl,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionPl,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionPl,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionPtBR,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionPtBR,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionPtPT,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionPtPT,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionRu,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionRu,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionSv,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionSv,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionZhHans,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionZhHans,
   OperationsDisplayDefinition,
   "csharp"
 );
-@@alternateType(LocalizedOperationDisplayDefinitionZhHant,
+@@alternateType(
+  LocalizedOperationDisplayDefinitionZhHant,
   OperationsDisplayDefinition,
   "csharp"
 );
 @@alternateType(SkuResourceProperties, ResourceTypeSku, "csharp");
 @@alternateType(SkuSettingCapacity, SkuCapacity, "csharp");
-@@alternateType(FrontloadPayloadPropertiesOverrideManifestLevelFields,
+@@alternateType(
+  FrontloadPayloadPropertiesOverrideManifestLevelFields,
   ManifestLevelPropertyBag,
   "csharp"
 );
-@@alternateType(FrontloadPayloadPropertiesOverrideEndpointLevelFields,
+@@alternateType(
+  FrontloadPayloadPropertiesOverrideEndpointLevelFields,
   ResourceTypeEndpointBase,
   "csharp"
 );
 @@alternateType(ResourceTypeEndpointBaseFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(ResourceTypeEndpointBaseDstsConfiguration,
+@@alternateType(
+  ResourceTypeEndpointBaseDstsConfiguration,
   DstsConfiguration,
   "csharp"
 );

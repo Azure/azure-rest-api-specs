@@ -342,16 +342,25 @@ describe("detectNewResourceTypes", () => {
     const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
 
     const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    // Resource types must have PUT or PATCH to be counted
     const newSwagger = JSON.stringify({
       swagger: "2.0",
       paths: {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}":
           {
             get: { operationId: "SuperDisks_Get", responses: { 200: { description: "OK" } } },
+            put: {
+              operationId: "SuperDisks_CreateOrUpdate",
+              responses: { 200: { description: "OK" } },
+            },
           },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}/metrics/{metricName}":
           {
             get: { operationId: "SuperDiskMetrics_Get", responses: { 200: { description: "OK" } } },
+            patch: {
+              operationId: "SuperDiskMetrics_Update",
+              responses: { 200: { description: "OK" } },
+            },
           },
       },
     });
@@ -373,17 +382,18 @@ describe("detectNewResourceTypes", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0].rpNamespace).toBe("Microsoft.Compute");
-    // superDisks should be detected
+    // superDisks should be detected (has PUT)
     const superDisksType = result[0].newResourceTypes.find(
       (t) => t.resourceType === "Microsoft.Compute/superDisks",
     );
     expect(superDisksType).toBeDefined();
-    expect(superDisksType?.operations).toContain("GET");
-    // superDisks/metrics is also new
+    expect(superDisksType?.operations).toContain("PUT");
+    // superDisks/metrics is also new (has PATCH)
     const metricsType = result[0].newResourceTypes.find(
       (t) => t.resourceType === "Microsoft.Compute/superDisks/metrics",
     );
     expect(metricsType).toBeDefined();
+    expect(metricsType?.operations).toContain("PATCH");
   });
 
   it("excludes operations-only paths", async () => {
@@ -416,6 +426,189 @@ describe("detectNewResourceTypes", () => {
       core,
     });
 
+    expect(result).toEqual([]);
+  });
+
+  it("excludes POST-only action paths", async () => {
+    // POST-only paths are actions on existing resources, not new resource types.
+    // Only paths with PUT or PATCH are considered resource types.
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}":
+          {
+            get: { operationId: "Disks_Get", responses: { 200: { description: "OK" } } },
+            put: { operationId: "Disks_CreateOrUpdate", responses: { 200: { description: "OK" } } },
+          },
+      },
+    });
+
+    // New file adds a POST action path - should NOT be detected (POST-only is an action)
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}":
+          {
+            get: { operationId: "Disks_Get", responses: { 200: { description: "OK" } } },
+            put: { operationId: "Disks_CreateOrUpdate", responses: { 200: { description: "OK" } } },
+          },
+        // POST-only path is an action, not a resource type
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/beginGetAccess":
+          {
+            post: {
+              operationId: "Disks_BeginGetAccess",
+              responses: { 200: { description: "OK" } },
+            },
+          },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`HEAD^:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    const result = await detectNewResourceTypes({
+      rmFiles: [newFile],
+      core,
+    });
+
+    // POST-only action path should NOT be detected as new resource type
+    expect(result).toEqual([]);
+  });
+
+  it("does not detect existing resource types with added operations", async () => {
+    // If a resource type already existed in base with PUT/PATCH, adding new operations doesn't make it new
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}":
+          {
+            get: { operationId: "Disks_Get", responses: { 200: { description: "OK" } } },
+            put: { operationId: "Disks_CreateOrUpdate", responses: { 200: { description: "OK" } } },
+          },
+      },
+    });
+
+    // New file adds POST to existing resource type - not a new resource type
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}":
+          {
+            get: { operationId: "Disks_Get", responses: { 200: { description: "OK" } } },
+            put: { operationId: "Disks_CreateOrUpdate", responses: { 200: { description: "OK" } } },
+            post: { operationId: "Disks_SomeAction", responses: { 200: { description: "OK" } } },
+          },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`HEAD^:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    const result = await detectNewResourceTypes({
+      rmFiles: [newFile],
+      core,
+    });
+
+    // Path already existed in base, so no new resource type detected
+    expect(result).toEqual([]);
+  });
+
+  it("detects GET-only on single resource paths", async () => {
+    // GET on a single resource path (ending with {param}) is considered a resource type
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    // GET-only on single resource path (ends with {diskName})
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}":
+          {
+            get: { operationId: "Snapshots_Get", responses: { 200: { description: "OK" } } },
+          },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`HEAD^:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    const result = await detectNewResourceTypes({
+      rmFiles: [newFile],
+      core,
+    });
+
+    // GET on single resource path should be detected
+    expect(result).toHaveLength(1);
+    expect(result[0].newResourceTypes).toHaveLength(1);
+    expect(result[0].newResourceTypes[0].resourceType).toBe("Microsoft.Compute/snapshots");
+    expect(result[0].newResourceTypes[0].operations).toContain("GET");
+  });
+
+  it("excludes GET-only on list operation paths", async () => {
+    // GET on a list operation path (NOT ending with {param}) should NOT be counted
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    // GET-only on list operation path (ends with resource type name, not parameter)
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots":
+          {
+            get: { operationId: "Snapshots_List", responses: { 200: { description: "OK" } } },
+          },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`HEAD^:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    const result = await detectNewResourceTypes({
+      rmFiles: [newFile],
+      core,
+    });
+
+    // GET on list operation path should NOT be detected
     expect(result).toEqual([]);
   });
 });

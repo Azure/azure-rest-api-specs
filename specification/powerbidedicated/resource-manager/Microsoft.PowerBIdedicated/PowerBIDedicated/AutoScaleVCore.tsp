@@ -14,8 +14,10 @@ namespace Microsoft.PowerBIDedicated;
  * Represents an instance of an auto scale v-core resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AutoScaleVCore
-  is Azure.ResourceManager.TrackedResource<AutoScaleVCoreProperties, true> {
+model AutoScaleVCore is Azure.ResourceManager.TrackedResource<
+  AutoScaleVCoreProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = AutoScaleVCore,
     KeyName = "vcoreName",
@@ -84,15 +86,19 @@ interface AutoScaleVCores {
 
 @@maxLength(AutoScaleVCore.name, 63);
 @@minLength(AutoScaleVCore.name, 3);
-@@doc(AutoScaleVCore.name,
+@@doc(
+  AutoScaleVCore.name,
   "The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63."
 );
-@@doc(AutoScaleVCore.properties,
+@@doc(
+  AutoScaleVCore.properties,
   "Properties of an auto scale v-core resource."
 );
-@@doc(AutoScaleVCores.create::parameters.resource,
+@@doc(
+  AutoScaleVCores.create::parameters.resource,
   "Contains the information used to provision the auto scale v-core."
 );
-@@doc(AutoScaleVCores.update::parameters.properties,
+@@doc(
+  AutoScaleVCores.update::parameters.properties,
   "Request object that contains the updated information for the auto scale v-core."
 );

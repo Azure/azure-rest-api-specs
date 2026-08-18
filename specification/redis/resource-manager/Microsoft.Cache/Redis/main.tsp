@@ -21,6 +21,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./RedisCacheAccessPolicy.tsp";
 import "./RedisCacheAccessPolicyAssignment.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

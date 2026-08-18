@@ -1,0 +1,120 @@
+{
+  "title": "Entities_Get",
+  "operationId": "Entities_Get",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "orders-db"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "Orders Database",
+          "canvasPosition": {
+            "x": 480,
+            "y": 360
+          },
+          "icon": {
+            "iconName": "SQLDatabase"
+          },
+          "healthObjective": 99.5,
+          "impact": "Standard",
+          "tags": {
+            "environment": "production",
+            "team": "online-store"
+          },
+          "signalGroups": {
+            "azureResource": {
+              "authenticationSetting": "default-auth",
+              "azureResourceId": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.Sql/servers/online-store-sql/databases/orders",
+              "signals": [
+                {
+                  "signalKind": "AzureResourceMetric",
+                  "name": "sql-cpu",
+                  "signalDefinitionName": "sql-cpu-percent",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 38.5,
+                    "reportedAt": "2026-05-04T09:30:00.000Z"
+                  },
+                  "displayName": "CPU utilization",
+                  "refreshInterval": "PT1M",
+                  "dataUnit": "Percent",
+                  "metricNamespace": "Microsoft.Sql/servers/databases",
+                  "metricName": "cpu_percent",
+                  "timeGrain": "PT5M",
+                  "aggregationType": "Average",
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 70
+                    },
+                    "unhealthyRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 90
+                    }
+                  }
+                },
+                {
+                  "signalKind": "AzureResourceMetric",
+                  "name": "sql-dtu",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 52.1,
+                    "reportedAt": "2026-05-04T09:30:00.000Z"
+                  },
+                  "displayName": "DTU consumption",
+                  "refreshInterval": "PT1M",
+                  "dataUnit": "Percent",
+                  "metricNamespace": "Microsoft.Sql/servers/databases",
+                  "metricName": "dtu_consumption_percent",
+                  "timeGrain": "PT5M",
+                  "aggregationType": "Average",
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 75
+                    },
+                    "unhealthyRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 90
+                    }
+                  }
+                }
+              ],
+              "resourceHealth": {
+                "enabled": "Enabled",
+                "signalName": "resourcehealth-availabilitystate",
+                "status": {
+                  "healthState": "Healthy",
+                  "reportedAt": "2026-05-04T09:30:00.000Z",
+                  "availabilityState": "Available",
+                  "summary": "The database is available."
+                }
+              }
+            },
+            "dependencies": {
+              "aggregationType": "WorstOf"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "healthState": "Healthy"
+        },
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/entities/orders-db",
+        "name": "orders-db",
+        "type": "Microsoft.CloudHealth/healthmodels/entities",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+        }
+      }
+    }
+  }
+}

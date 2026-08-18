@@ -70,15 +70,19 @@ interface Configurations {
 
 @@maxLength(Configuration.name, 256);
 @@minLength(Configuration.name, 1);
-@@doc(Configuration.name,
+@@doc(
+  Configuration.name,
   "Name of the configuration (also known as server parameter)."
 );
-@@doc(Configuration.properties,
+@@doc(
+  Configuration.properties,
   "Properties of a configuration (also known as server parameter)."
 );
-@@doc(Configurations.put::parameters.resource,
+@@doc(
+  Configurations.put::parameters.resource,
   "Parameters required to update the value of a specific modifiable configuration (also known as server parameter)."
 );
-@@doc(Configurations.update::parameters.properties,
+@@doc(
+  Configurations.update::parameters.properties,
   "Parameters required to update the value of a specific modifiable configuration (also known as server parameter)."
 );

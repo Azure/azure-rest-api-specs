@@ -73,9 +73,11 @@ interface Credentials {
 
 @@doc(Credential.name, "The name of credential.");
 @@doc(Credential.properties, "Gets or sets the properties of the credential.");
-@@doc(Credentials.createOrUpdate::parameters.resource,
+@@doc(
+  Credentials.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update credential operation."
 );
-@@doc(Credentials.update::parameters.properties,
+@@doc(
+  Credentials.update::parameters.properties,
   "The parameters supplied to the Update credential operation."
 );

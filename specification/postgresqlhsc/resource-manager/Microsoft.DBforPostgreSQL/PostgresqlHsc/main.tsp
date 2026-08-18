@@ -22,6 +22,7 @@ import "./PrivateLinkResource.tsp";
 import "./Role.tsp";
 import "./ClusterServer.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -45,7 +45,10 @@ interface TopicSpaces {
   @summary("Delete a topic space.")
   delete is ArmResourceDeleteWithoutOkAsync<
     TopicSpace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -75,6 +78,7 @@ interface TopicSpaces {
 @@minLength(TopicSpace.name, 3);
 @@doc(TopicSpace.name, "Name of the Topic space.");
 @@doc(TopicSpace.properties, "The properties of topic space.");
-@@doc(TopicSpaces.createOrUpdate::parameters.resource,
+@@doc(
+  TopicSpaces.createOrUpdate::parameters.resource,
   "Topic space information."
 );

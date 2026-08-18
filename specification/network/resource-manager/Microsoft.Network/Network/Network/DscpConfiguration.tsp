@@ -64,7 +64,10 @@ interface DscpConfigurations {
   @tag("DscpConfiguration")
   delete is ArmResourceDeleteWithoutOkAsync<
     DscpConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -83,6 +86,7 @@ interface DscpConfigurations {
 
 @@doc(DscpConfiguration.name, "The name of the resource.");
 @@doc(DscpConfiguration.properties, "Properties of the network interface.");
-@@doc(DscpConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DscpConfigurations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update DscpConfiguration operation."
 );

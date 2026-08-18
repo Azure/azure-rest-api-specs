@@ -9,50 +9,61 @@ using Microsoft.Devices;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
 @@clientName(Microsoft.Devices, "IotDpsClient", "python");
-@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
   "certificate_name1",
   "python"
 );
-@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
   "certificate_name1",
   "python"
 );
-@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
   "certificateName1",
   "go"
 );
-@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
   "certificateName1",
   "go"
 );
-@@clientName(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
+@@clientName(
+  IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
   "CheckDeviceProvisioningServicesNameAvailability",
   "csharp"
 );
 
-@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
   "certificateCommonName",
   "csharp"
 );
-@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
   "certificateCommonName",
   "csharp"
 );
-@@clientName(Microsoft.Devices.CertificateNameQuery3.certificateCreated,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery3.certificateCreated,
   "certificateCreatedOn",
   "csharp"
 );
-@@clientName(Microsoft.Devices.CertificateNameQuery4.certificateLastUpdated,
+@@clientName(
+  Microsoft.Devices.CertificateNameQuery4.certificateLastUpdated,
   "certificateLastUpdatedOn",
   "csharp"
 );
-@@clientName(CertificateResponse,
+@@clientName(
+  CertificateResponse,
   "DeviceProvisioningServicesCertificate",
   "csharp"
 );
 @@alternateType(CertificateResponse.etag, eTag, "csharp");
 
-@@clientName(CertificateProperties,
+@@clientName(
+  CertificateProperties,
   "DeviceProvisioningServicesCertificateProperties",
   "csharp"
 );
@@ -64,166 +75,203 @@ using Microsoft.Devices;
 @@clientName(CertificateProperties.expiry, "ExpireOn", "csharp");
 @@clientName(CertificateProperties.created, "CreatedOn", "csharp");
 @@clientName(CertificateProperties.updated, "UpdatedOn", "csharp");
-@@clientName(VerificationCodeResponse,
+@@clientName(
+  VerificationCodeResponse,
   "CertificateVerificationCodeResult",
   "csharp"
 );
-@@clientName(PrivateEndpoint,
+@@clientName(
+  PrivateEndpoint,
   "DeviceProvisioningServicesPrivateEndpoint",
   "csharp"
 );
 @@alternateType(VerificationCodeResponse.etag, eTag, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VerificationCodeResponse,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VerificationCodeResponse,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
-@@alternateType(VerificationCodeResponseProperties.certificate,
+@@alternateType(
+  VerificationCodeResponseProperties.certificate,
   unknown,
   "csharp"
 );
-@@alternateType(VerificationCodeResponseProperties.created,
+@@alternateType(
+  VerificationCodeResponseProperties.created,
   offsetDateTime,
   "csharp"
 );
-@@alternateType(VerificationCodeResponseProperties.expiry,
+@@alternateType(
+  VerificationCodeResponseProperties.expiry,
   offsetDateTime,
   "csharp"
 );
-@@alternateType(VerificationCodeResponseProperties.thumbprint,
+@@alternateType(
+  VerificationCodeResponseProperties.thumbprint,
   unknown,
   "csharp"
 );
-@@alternateType(VerificationCodeResponseProperties.updated,
+@@alternateType(
+  VerificationCodeResponseProperties.updated,
   offsetDateTime,
   "csharp"
 );
 @@clientName(VerificationCodeResponseProperties.expiry, "ExpireOn", "csharp");
 @@clientName(VerificationCodeResponseProperties.created, "CreatedOn", "csharp");
 @@clientName(VerificationCodeResponseProperties.updated, "UpdatedOn", "csharp");
-@@clientName(VerificationCodeResponseProperties,
+@@clientName(
+  VerificationCodeResponseProperties,
   "CertificateVerificationCodeProperties",
   "csharp"
 );
-@@clientName(VerificationCodeRequest,
+@@clientName(
+  VerificationCodeRequest,
   "CertificateVerificationCodeContent",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "DeviceProvisioningServicesPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "DeviceProvisioningServicesPrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@clientName(GroupIdInformation,
+@@clientName(
+  GroupIdInformation,
   "DeviceProvisioningServicesPrivateLinkResource",
   "csharp"
 );
-@@clientName(GroupIdInformationProperties,
+@@clientName(
+  GroupIdInformationProperties,
   "DeviceProvisioningServicesPrivateLinkResourceProperties",
   "csharp"
 );
-@@clientName(ProvisioningServiceDescription,
+@@clientName(
+  ProvisioningServiceDescription,
   "DeviceProvisioningService",
   "csharp"
 );
 @@alternateType(ProvisioningServiceDescription.etag, eTag, "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@clientName(IotDpsPropertiesDescription,
+@@clientName(
+  IotDpsPropertiesDescription,
   "DeviceProvisioningServiceProperties",
   "csharp"
 );
-@@clientName(IotDpsPropertiesDescription.ipFilterRules,
+@@clientName(
+  IotDpsPropertiesDescription.ipFilterRules,
   "IPFilterRules",
   "csharp"
 );
-@@clientName(IotDpsPropertiesDescription.enableDataResidency,
+@@clientName(
+  IotDpsPropertiesDescription.enableDataResidency,
   "IsDataResidencyEnabled",
   "csharp"
 );
 @@clientName(IotDpsSkuInfo, "DeviceProvisioningServicesSkuInfo", "csharp");
 @@clientName(IotDpsSku, "DeviceProvisioningServicesSku", "csharp");
-@@clientName(IotDpsSkuDefinition,
+@@clientName(
+  IotDpsSkuDefinition,
   "DeviceProvisioningServicesSkuDefinition",
   "csharp"
 );
-@@clientName(SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
+@@clientName(
+  SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
   "DeviceProvisioningServicesSharedAccessKey",
   "csharp"
 );
-@@clientName(OperationInputs,
+@@clientName(
+  OperationInputs,
   "DeviceProvisioningServicesNameAvailabilityContent",
   "csharp"
 );
-@@clientName(NameAvailabilityInfo,
+@@clientName(
+  NameAvailabilityInfo,
   "DeviceProvisioningServicesNameAvailabilityResult",
   "csharp"
 );
 @@clientName(NameAvailabilityInfo.nameAvailable, "IsNameAvailable", "csharp");
-@@clientName(NameUnavailabilityReason,
+@@clientName(
+  NameUnavailabilityReason,
   "DeviceProvisioningServicesNameUnavailableReason",
   "csharp"
 );
-@@clientName(AccessRightsDescription,
+@@clientName(
+  AccessRightsDescription,
   "DeviceProvisioningServicesAccessKeyRight",
   "csharp"
 );
-@@clientName(AllocationPolicy,
+@@clientName(
+  AllocationPolicy,
   "DeviceProvisioningServicesAllocationPolicy",
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnectionStatus,
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
   "DeviceProvisioningServicesPrivateLinkServiceConnectionStatus",
   "csharp"
 );
 @@clientName(IpFilterRule, "DeviceProvisioningServicesIPFilterRule", "csharp");
 @@clientName(IpFilterRule.ipMask, "IPMask", "csharp");
-@@clientName(IpFilterActionType,
+@@clientName(
+  IpFilterActionType,
   "DeviceProvisioningServicesIPFilterActionType",
   "csharp"
 );
-@@clientName(IpFilterTargetType,
+@@clientName(
+  IpFilterTargetType,
   "DeviceProvisioningServicesIPFilterTargetType",
   "csharp"
 );
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "DeviceProvisioningServicesPublicNetworkAccess",
   "csharp"
 );
 @@clientName(State, "DeviceProvisioningServicesState", "csharp");
-@@clientName(CertificatePurpose,
+@@clientName(
+  CertificatePurpose,
   "DeviceProvisioningServicesCertificatePurpose",
   "csharp"
 );
 @@scope(ProvisioningServiceDescriptionOperations.getOperationResult, "!csharp");
 @@scope(Operations.list, "!csharp");
 @@alternateType(IotHubDefinitionDescription.location, azureLocation, "csharp");
-@@clientName(ProvisioningServiceDescriptions.listKeysForKeyName,
+@@clientName(
+  ProvisioningServiceDescriptions.listKeysForKeyName,
   "GetKey",
   "csharp"
 );
-@@clientName(ProvisioningServiceDescription.subscriptionid,
+@@clientName(
+  ProvisioningServiceDescription.subscriptionid,
   "subscriptionId",
   "csharp"
 );
-@@clientName(ProvisioningServiceDescription.resourcegroup,
+@@clientName(
+  ProvisioningServiceDescription.resourcegroup,
   "resourceGroup",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -237,18 +285,21 @@ op IotDpsResourceDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(ProvisioningServiceDescriptions.delete,
+@@override(
+  ProvisioningServiceDescriptions.delete,
   IotDpsResourceDeleteCustomized,
-  "python,go,java"
+  "python,go"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@markAsPageable(CertificateResponses.list, "csharp");
+@@markAsPageable(CertificateResponses.list, "csharp,java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp");
+@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp,java");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceListKeysCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -263,13 +314,16 @@ op IotDpsResourceListKeysCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): SharedAccessSignatureAuthorizationRuleListResult;
 
-@@override(ProvisioningServiceDescriptions.listKeys,
+@@override(
+  ProvisioningServiceDescriptions.listKeys,
   IotDpsResourceListKeysCustomized,
   "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceGetOperationResultCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -289,13 +343,16 @@ op IotDpsResourceGetOperationResultCustomized(
   ...GetOperationResultParameters,
 ): AsyncOperationResult;
 
-@@override(ProvisioningServiceDescriptionOperations.getOperationResult,
+@@override(
+  ProvisioningServiceDescriptionOperations.getOperationResult,
   IotDpsResourceGetOperationResultCustomized,
   "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceListKeysForKeyNameCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -314,13 +371,16 @@ op IotDpsResourceListKeysForKeyNameCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): SharedAccessSignatureAuthorizationRuleAccessRightsDescription;
 
-@@override(ProvisioningServiceDescriptions.listKeysForKeyName,
+@@override(
+  ProvisioningServiceDescriptions.listKeysForKeyName,
   IotDpsResourceListKeysForKeyNameCustomized,
   "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceListValidSkusCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -335,13 +395,16 @@ op IotDpsResourceListValidSkusCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): IotDpsSkuDefinitionListResult;
 
-@@override(ProvisioningServiceDescriptions.listValidSkus,
+@@override(
+  ProvisioningServiceDescriptions.listValidSkus,
   IotDpsResourceListValidSkusCustomized,
   "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -355,13 +418,16 @@ op IotDpsResourceGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): ProvisioningServiceDescription;
 
-@@override(ProvisioningServiceDescriptions.get,
+@@override(
+  ProvisioningServiceDescriptions.get,
   IotDpsResourceGetCustomized,
-  "python,go,java"
+  "python,go"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -405,13 +471,16 @@ op CertificateResponseDeleteCustomized(
   certificateNonce?: string,
 ): void;
 
-@@override(CertificateResponses.delete,
+@@override(
+  CertificateResponses.delete,
   CertificateResponseDeleteCustomized,
   "python,go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseGenerateVerificationCodeCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -469,13 +538,16 @@ op CertificateResponseGenerateVerificationCodeCustomized(
   body: void,
 ): VerificationCodeResponse;
 
-@@override(CertificateResponses.generateVerificationCode,
+@@override(
+  CertificateResponses.generateVerificationCode,
   CertificateResponseGenerateVerificationCodeCustomized,
   "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseVerifyCertificateCustomized(
   ...Azure.ResourceManager.ProviderNamespace<CertificateResponse>,
@@ -533,13 +605,16 @@ op CertificateResponseVerifyCertificateCustomized(
   request: VerificationCodeRequest,
 ): CertificateListDescription;
 
-@@override(CertificateResponses.verifyCertificate,
+@@override(
+  CertificateResponses.verifyCertificate,
   CertificateResponseVerifyCertificateCustomized,
   "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
@@ -563,25 +638,30 @@ op CertificateResponseGetCustomized(
   ifMatch?: string,
 ): CertificateResponse;
 
-@@override(CertificateResponses.get,
+@@override(
+  CertificateResponses.get,
   CertificateResponseGetCustomized,
   "python,go,java,javascript"
 );
 
 // Java-specific client name fixes to mitigate TypeSpec migration breaks
-@@clientName(Microsoft.Devices.IotDpsPropertiesDescription.deviceProvisioningHostName,
+@@clientName(
+  Microsoft.Devices.IotDpsPropertiesDescription.deviceProvisioningHostName,
   "deviceProvisioningHostname",
   "java"
 );
-@@clientName(Microsoft.Devices.IotDpsPropertiesDescription.serviceOperationsHostName,
+@@clientName(
+  Microsoft.Devices.IotDpsPropertiesDescription.serviceOperationsHostName,
   "serviceOperationsHostname",
   "java"
 );
-@@clientName(Microsoft.Devices.ProvisioningServiceDescription.resourcegroup,
+@@clientName(
+  Microsoft.Devices.ProvisioningServiceDescription.resourcegroup,
   "resourceGroup",
   "java"
 );
-@@clientName(SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
+@@clientName(
+  SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
   "SharedAccessSignatureAuthorizationRule",
   "java"
 );

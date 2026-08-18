@@ -197,6 +197,7 @@ interface DenyAssignments {
 
 @@doc(DenyAssignment.name, "The ID of the deny assignment to get.");
 @@doc(DenyAssignment.properties, "Deny assignment properties.");
-@@doc(DenyAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  DenyAssignments.createOrUpdate::parameters.resource,
   "Parameters for the deny assignment."
 );

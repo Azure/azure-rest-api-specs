@@ -13,6 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataFactory;
 
+alias LocationIdParameter = {
+  /**
+   * The location identifier.
+   */
+  @path
+  @segment("locations")
+  locationId: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FactoriesOperationGroup {
   /**
@@ -24,14 +33,7 @@ interface FactoriesOperationGroup {
     Request = FactoryRepoUpdate,
     Response = Factory,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * The location identifier.
-       */
-      @path
-      @segment("locations")
-      locationId: string;
-    },
+    Parameters = LocationIdParameter,
     Error = CloudError
   >;
 }
@@ -47,14 +49,7 @@ interface ExposureControlOperationGroup {
     Request = ExposureControlRequest,
     Response = ExposureControlResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * The location identifier.
-       */
-      @path
-      @segment("locations")
-      locationId: string;
-    },
+    Parameters = LocationIdParameter,
     Error = CloudError
   >;
 }

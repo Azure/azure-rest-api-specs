@@ -655,6 +655,7 @@ model AdmCredentialProperties {
   /**
    * Gets or sets the URL of the authorization token.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @minLength(1)
   @secret
   authTokenUrl: string;
@@ -1440,6 +1441,7 @@ model ConnectionDetails {
   /**
    * IP address of the Private Endpoint. This is not used by Notification Hubs.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
 

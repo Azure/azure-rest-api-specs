@@ -130,6 +130,7 @@ alias AssociatedTenantsListByBillingAccountParameters = {
 
 @@doc(AssociatedTenant.name, "The ID that uniquely identifies a tenant.");
 @@doc(AssociatedTenant.properties, "An associated tenant.");
-@@doc(AssociatedTenants.createOrUpdate::parameters.resource,
+@@doc(
+  AssociatedTenants.createOrUpdate::parameters.resource,
   "An associated tenant."
 );

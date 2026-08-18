@@ -24,6 +24,7 @@ import "./ProjectTask.tsp";
 import "./Project.tsp";
 import "./ProjectFile.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

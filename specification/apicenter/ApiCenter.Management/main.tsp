@@ -16,6 +16,7 @@ import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -44,68 +45,78 @@ enum Versions {
 }
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Apis.createOrUpdate::parameters.resource,
+@@encodedName(
+  Apis.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
+@@encodedName(
+  ApiDefinitions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(ApiVersions.createOrUpdate::parameters.resource,
+@@encodedName(
+  ApiVersions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Deployments.createOrUpdate::parameters.resource,
+@@encodedName(
+  Deployments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Environments.createOrUpdate::parameters.resource,
+@@encodedName(
+  Environments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Environments.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
+@@encodedName(
+  MetadataSchemas.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Services.update::parameters.properties,
+@@encodedName(
+  Services.update::parameters.properties,
   "application/json",
   "payload"
 );
 @@clientName(Services.update::parameters.properties, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Workspaces.createOrUpdate::parameters.resource,
+@@encodedName(
+  Workspaces.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(ApiDefinitions.importSpecification::parameters.body,
+@@encodedName(
+  ApiDefinitions.importSpecification::parameters.body,
   "application/json",
   "payload"
 );
 
-@@encodedName(ApiDefinitions.exportSpecification::parameters.body,
+@@encodedName(
+  ApiDefinitions.exportSpecification::parameters.body,
   "application/json",
   "payload"
 );
@@ -113,7 +124,8 @@ enum Versions {
 @@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(Services.exportMetadataSchema::parameters.body,
+@@encodedName(
+  Services.exportMetadataSchema::parameters.body,
   "application/json",
   "payload"
 );
@@ -129,7 +141,9 @@ enum Versions {
  * @template TParentName Optional. The name of the parent resource
  * @template TParentFriendlyName Optional. The friendly name of the parent resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @get
 @autoRoute
@@ -152,7 +166,9 @@ op ArmResourceListByParent<
  * @template TResource the resource being patched
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @autoRoute
 @doc("Get a {name}", TResource)
@@ -161,16 +177,18 @@ op ArmResourceListByParent<
 op ArmResourceRead<
   TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponseWithEtag<TResource> | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmResponseWithEtag<TResource>
+  | ErrorResponse;
 
 /**
  * Synchronous PUT operation for ARM resources
  * @template TResource the resource being patched
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @autoRoute
 @doc("Create a {name}", TResource)
@@ -185,7 +203,10 @@ op ArmResourceCreateOrReplaceSync<
   @doc("Resource create parameters.")
   @bodyRoot
   resource: TResource,
-): ArmResourceUpdatedResponseWithEtag<TResource> | ArmResourceCreatedSyncResponseWithEtag<TResource> | ErrorResponse;
+):
+  | ArmResourceUpdatedResponseWithEtag<TResource>
+  | ArmResourceCreatedSyncResponseWithEtag<TResource>
+  | ErrorResponse;
 
 @doc("Resource '{name}' create operation succeeded", TResource)
 model ArmResourceCreatedSyncResponseWithEtag<TResource extends Foundations.Resource>

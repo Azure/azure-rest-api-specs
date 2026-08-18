@@ -79,9 +79,11 @@ interface BackupResourceEncryptionConfigs {
 }
 
 @@doc(BackupResourceEncryptionConfigExtendedResource.name, "");
-@@doc(BackupResourceEncryptionConfigExtendedResource.properties,
+@@doc(
+  BackupResourceEncryptionConfigExtendedResource.properties,
   "The properties of the backup resource encryption config extended resource"
 );
-@@doc(BackupResourceEncryptionConfigs.update::parameters.resource,
+@@doc(
+  BackupResourceEncryptionConfigs.update::parameters.resource,
   "Vault encryption input config request"
 );

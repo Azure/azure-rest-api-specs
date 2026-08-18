@@ -57,7 +57,10 @@ interface ProviderInstances {
   @summary("Deletes a provider instance.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ProviderInstance,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -72,6 +75,7 @@ interface ProviderInstances {
 
 @@doc(ProviderInstance.name, "Name of the provider instance.");
 @@doc(ProviderInstance.properties, "Provider Instance properties");
-@@doc(ProviderInstances.create::parameters.resource,
+@@doc(
+  ProviderInstances.create::parameters.resource,
   "Request body representing a provider instance"
 );

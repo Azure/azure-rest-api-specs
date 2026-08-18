@@ -59,9 +59,11 @@ interface FleetspaceAccountResources {
 @@maxLength(FleetspaceAccountResource.name, 50);
 @@minLength(FleetspaceAccountResource.name, 3);
 @@doc(FleetspaceAccountResource.name, "Cosmos DB fleetspace account name.");
-@@doc(FleetspaceAccountResource.properties,
+@@doc(
+  FleetspaceAccountResource.properties,
   "An Azure Cosmos DB Global Database Account which is part of a Fleetspace Account."
 );
-@@doc(FleetspaceAccountResources.create::parameters.resource,
+@@doc(
+  FleetspaceAccountResources.create::parameters.resource,
   "The parameters to provide for the current fleetspace account."
 );

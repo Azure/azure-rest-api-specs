@@ -82,6 +82,7 @@ model OfferProperties {
   @doc("The content version")
   contentVersion?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The content url")
   contentUrl?: string;
 
@@ -248,6 +249,7 @@ model MarketplaceSkuVersion {
   launchType?: OfferLaunchType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Access token request object")
 model AccessTokenRequest {
   @doc("The name of the publisher.")
@@ -288,6 +290,7 @@ model DiskAccessToken {
   accessToken: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Access token request object")
 model AccessTokenReadRequest {
   @doc("The name of the publisher.")

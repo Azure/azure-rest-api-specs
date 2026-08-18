@@ -51,6 +51,7 @@ alias NamespaceDevicePropertiesUpdate = {
   enabled?: boolean;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
@@ -59,6 +60,7 @@ model DeviceCredentialsRevokeRequest {
   disable?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
@@ -78,6 +80,7 @@ interface NamespaceDevices {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceDevice,
@@ -89,6 +92,7 @@ interface NamespaceDevices {
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;
   listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
 
+  @doc("A long-running resource action.")
   @added(Versions.v2026_03_01_preview)
   @removed(Versions.v2026_04_01)
   revoke is ArmResourceActionAsync<

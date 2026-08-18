@@ -9,7 +9,8 @@ using Microsoft.VirtualMachineImages;
 @@clientLocation(ImageTemplates.update, "VirtualMachineImageTemplates");
 @@clientName(ImageTemplates.update::parameters.properties, "parameters");
 @@clientLocation(ImageTemplates.delete, "VirtualMachineImageTemplates");
-@@clientLocation(ImageTemplates.listByResourceGroup,
+@@clientLocation(
+  ImageTemplates.listByResourceGroup,
   "VirtualMachineImageTemplates"
 );
 @@clientLocation(ImageTemplates.list, "VirtualMachineImageTemplates");
@@ -25,9 +26,11 @@ using Microsoft.VirtualMachineImages;
 
 @@clientName(Triggers.createOrUpdate::parameters.resource, "parameters");
 
-@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
+@@doc(
+  Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
   "The URL to query for the status of the asynchronous operation."
 );
-@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+@@doc(
+  Azure.ResourceManager.ArmCombinedLroHeaders.location,
   "The URL to query for the result of the asynchronous operation."
 );

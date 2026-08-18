@@ -1,8 +1,8 @@
 import { join } from "path";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { parse } from "../tsp-config.js";
-import { fileExists, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { fileExists, readTspConfig } from "../utils.ts";
 
 // Maps deprecated rulesets to the replacement rulesets
 const deprecatedRulesets = new Map<string, string>([

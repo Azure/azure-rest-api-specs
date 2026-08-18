@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./operations.tsp";
 import "./offer.tsp";
 import "./publisher.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

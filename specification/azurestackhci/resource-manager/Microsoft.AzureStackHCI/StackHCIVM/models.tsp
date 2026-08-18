@@ -917,6 +917,7 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -954,6 +955,7 @@ model LogicalNetworkProperties {
   networkType?: LogicalNetworkTypeEnum;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
 model LogicalNetworkPropertiesDhcpOptions {
   @doc("The list of DNS servers IP addresses.")
@@ -1336,6 +1338,7 @@ model LogicalNetworkStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1367,6 +1370,7 @@ model VirtualNetworkAddressSpace {
   addressPrefixes: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 @doc("DHCP options for virtual networks")
 model VirtualNetworkDhcpOptions {
@@ -1823,6 +1827,7 @@ model LoadBalancerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual network subnet resource patch definition.")
 @added(Versions.v2025_09_01_preview)
 model VirtualNetworkSubnetUpdateRequest {
@@ -1909,6 +1914,7 @@ model MarketplaceGalleryImageStatusDownloadStatus {
   downloadSizeInMB?: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1916,6 +1922,7 @@ model MarketplaceGalleryImagesUpdateRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1992,6 +1999,7 @@ model StorageContainerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2092,6 +2100,7 @@ model VirtualHardDiskProperties {
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2024_05_01_preview)
   @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
   @secret
@@ -2210,6 +2219,7 @@ model VirtualHardDiskUploadStatus {
   errorMessage?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2232,6 +2242,7 @@ model VirtualHardDisksUpdateProperties {
 @added(Versions.v2024_05_01_preview)
 @doc("Request for uploading virtual hard disk.")
 model VirtualHardDiskUploadRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
   @secret
   azureManagedDiskUploadUrl: string;
@@ -2644,6 +2655,7 @@ model Identity {
   type?: "SystemAssigned";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual machine instance resource patch definition.")
 model VirtualMachineInstanceUpdateRequest {
   @doc("Defines the resource properties for the update.")
@@ -2824,6 +2836,7 @@ model GuestCredential {
   password?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_04_01_preview)
 @doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
 model PowerOffVirtualMachineOptions {

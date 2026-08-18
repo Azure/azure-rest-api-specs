@@ -130,6 +130,7 @@ interface UserSessions {
 /**
  * Request body for sending a message to a UserSession.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SendMessageRequest {
   /**
    * Represents message sent to a UserSession.
@@ -139,7 +140,8 @@ model SendMessageRequest {
 
 @@maxLength(UserSession.name, 24);
 @@minLength(UserSession.name, 1);
-@@doc(UserSession.name,
+@@doc(
+  UserSession.name,
   "The name of the user session within the specified session host"
 );
 @@doc(UserSession.properties, "Detailed properties for UserSession");

@@ -57,7 +57,9 @@ interface RaiExternalSafetyProviderSchemas {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>
+    Response =
+      | ArmResourceUpdatedResponse<RaiExternalSafetyProviderSchema>
+      | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>
   >;
 
   /**
@@ -80,13 +82,16 @@ interface RaiExternalSafetyProviderSchemas {
   >;
 }
 
-@@doc(RaiExternalSafetyProviderSchema.name,
+@@doc(
+  RaiExternalSafetyProviderSchema.name,
   "The name of the Rai External Safety Provider associated with the Cognitive Services Account"
 );
 @@encodedName(RaiExternalSafetyProviderSchema.etag, "application/json", "etag");
-@@doc(RaiExternalSafetyProviderSchema.properties,
+@@doc(
+  RaiExternalSafetyProviderSchema.properties,
   "Properties of Cognitive Services Rai External Safety provider."
 );
-@@doc(RaiExternalSafetyProviderSchemas.createOrUpdate::parameters.resource,
+@@doc(
+  RaiExternalSafetyProviderSchemas.createOrUpdate::parameters.resource,
   "Properties describing the rai external safety provider."
 );

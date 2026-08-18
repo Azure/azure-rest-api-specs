@@ -269,18 +269,23 @@ interface EventHubs {
 
 @@minLength(AuthorizationRule.name, 1);
 @@doc(AuthorizationRule.name, "The authorization rule name.");
-@@doc(AuthorizationRule.properties,
+@@doc(
+  AuthorizationRule.properties,
   "Properties supplied to create or update AuthorizationRule"
 );
-@@doc(AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access AuthorizationRule."
 );
-@@doc(AuthorizationRules.regenerateKeys::parameters.body,
+@@doc(
+  AuthorizationRules.regenerateKeys::parameters.body,
   "Parameters required to regenerate the connection string."
 );
-@@doc(EventHubs.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  EventHubs.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access AuthorizationRule."
 );
-@@doc(EventHubs.regenerateKeys::parameters.body,
+@@doc(
+  EventHubs.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey)."
 );

@@ -83,16 +83,20 @@ interface ServiceConfigurationResources {
 }
 
 @@doc(ServiceConfigurationResource.name, "The service name.");
-@@doc(ServiceConfigurationResource.properties,
+@@doc(
+  ServiceConfigurationResource.properties,
   "The service configuration properties."
 );
-@@doc(ServiceConfigurationResources.createOrupdate::parameters.resource,
+@@doc(
+  ServiceConfigurationResources.createOrupdate::parameters.resource,
   "Service details"
 );
-@@doc(ServiceConfigurationResources.update::parameters.properties,
+@@doc(
+  ServiceConfigurationResources.update::parameters.properties,
   "Service details"
 );
-@@summary(ServiceConfigurationResources.listByEndpointResource,
+@@summary(
+  ServiceConfigurationResources.listByEndpointResource,
   "Lists of all the services associated with endpoint resource."
 );
 @@path(ServiceConfigurationResource.name, #{ allowReserved: true });

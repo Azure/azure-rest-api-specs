@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.OperationalInsights;
 /**
@@ -21,6 +23,13 @@ model SummaryLogs
     SegmentName = "summaryLogs",
     NamePattern = "[^/]+"
   >;
+
+  /**
+   * The managed identity of the summary logs resource. Only user-assigned identity is supported.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SummaryLogs uses a purpose-built identity envelope that supports only None and UserAssigned; the common-types ManagedServiceIdentity always includes SystemAssigned, which this resource does not support."
+  @added(Versions.v2026_03_01)
+  identity?: SummaryLogsIdentity;
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -38,9 +47,11 @@ interface SummaryLogsOperationGroup {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
     SummaryLogs,
-    Response = (ArmResourceUpdatedResponse<SummaryLogs> &
-      ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<SummaryLogs>
+    Response =
+      | (ArmResourceUpdatedResponse<SummaryLogs> &
+          ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<SummaryLogs>
   >;
 
   /**
@@ -126,9 +137,11 @@ alias SummaryLogsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @@doc(SummaryLogs.name, "The name of the summary logs. Must not contain '/'.");
 @@doc(SummaryLogs.properties, "Summary rule properties.");
-@@doc(SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
   "The parameters required to update summary rules properties."
 );
-@@doc(SummaryLogsOperationGroup.retryBin::parameters.body,
+@@doc(
+  SummaryLogsOperationGroup.retryBin::parameters.body,
   "The parameters required to retry a Summary rule bin."
 );

@@ -34,6 +34,7 @@ import "./CdnWebApplicationFirewallPolicy.tsp";
 import "./WebAgent.tsp";
 import "./KnowledgeSource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -65,6 +66,11 @@ enum Versions {
    * The 2025-12-01 API version.
    */
   v2025_12_01: "2025-12-01",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  v2026_04_01_preview: "2026-04-01-preview",
 }
 
 interface Operations

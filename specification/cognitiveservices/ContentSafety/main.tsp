@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -12,14 +13,16 @@ using Azure.Core;
 @service(#{ title: "ContentSafety Service" })
 @versioned(ContentSafety.Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.clientCredentials,
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-      refreshUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.clientCredentials,
+          tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+          refreshUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @server(
   "{endpoint}/contentsafety",
@@ -38,4 +41,8 @@ namespace ContentSafety;
 enum Versions {
   v2023_10_01: "2023-10-01",
   v2024_09_01: "2024-09-01",
+
+  @doc("Public preview that adds asynchronous Content Provenance Detection operations.")
+  @Azure.Core.previewVersion
+  v2026_07_01_preview: "2026-07-01-preview",
 }

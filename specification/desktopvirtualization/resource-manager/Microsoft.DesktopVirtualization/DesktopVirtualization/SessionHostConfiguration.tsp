@@ -21,11 +21,10 @@ namespace Microsoft.DesktopVirtualization;
 @added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
-model SessionHostConfiguration
-  is Azure.ResourceManager.ProxyResource<
-    SessionHostConfigurationProperties,
-    false
-  > {
+model SessionHostConfiguration is Azure.ResourceManager.ProxyResource<
+  SessionHostConfigurationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SessionHostConfiguration,
     KeyName = "SessionHostConfigurations",
@@ -70,12 +69,15 @@ interface SessionHostConfigurations {
 
 @@maxLength(SessionHostConfiguration.name, 24);
 @@minLength(SessionHostConfiguration.name, 3);
-@@doc(SessionHostConfiguration.name,
+@@doc(
+  SessionHostConfiguration.name,
   "The name of the SessionHostConfiguration"
 );
-@@doc(SessionHostConfiguration.properties,
+@@doc(
+  SessionHostConfiguration.properties,
   "Detailed properties for SessionHostConfiguration"
 );
-@@clientName(SessionHostConfigurations.update::parameters.body,
+@@clientName(
+  SessionHostConfigurations.update::parameters.body,
   "sessionHostConfiguration"
 );

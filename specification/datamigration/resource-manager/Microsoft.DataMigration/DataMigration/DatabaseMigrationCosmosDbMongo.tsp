@@ -13,6 +13,7 @@ namespace Microsoft.DataMigration;
 /**
  * Database Migration Resource for Mongo to CosmosDb.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationCosmosDbMongo
   is Azure.ResourceManager.ProxyResource<DatabaseMigrationPropertiesCosmosDbMongo> {
   ...ResourceNameParameter<
@@ -177,12 +178,15 @@ interface DatabaseMigrationsMongoToCosmosDbvCoreMongo {
 }
 
 @@doc(DatabaseMigrationCosmosDbMongo.name, "Name of the migration.");
-@@doc(DatabaseMigrationCosmosDbMongo.properties,
+@@doc(
+  DatabaseMigrationCosmosDbMongo.properties,
   "Database Migration Resource properties for CosmosDb for Mongo."
 );
-@@doc(DatabaseMigrationCosmosDbMongos.create::parameters.resource,
+@@doc(
+  DatabaseMigrationCosmosDbMongos.create::parameters.resource,
   "Details of CosmosDB for Mongo API Migration resource."
 );
-@@doc(DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
+@@doc(
+  DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
   "Details of CosmosDB for Mongo API Migration resource."
 );
