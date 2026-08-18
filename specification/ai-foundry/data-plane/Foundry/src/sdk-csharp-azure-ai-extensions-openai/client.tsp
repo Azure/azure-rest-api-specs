@@ -906,6 +906,7 @@ namespace Azure.AI.Projects {
   @@clientName(BingGroundingSearchConfiguration.set_lang, "Language");
 
   @@clientName(MemorySearchPreviewTool.update_delay, "UpdateDelayInSeconds");
+  @@clientName(MemorySearchOptions, "MemorySearchResultOptions");
   @@alternateType(Azure.AI.Projects.OpenApiFunctionDefinition.spec, unknown);
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@usage(OpenApiFunctionDefinition, Usage.input | Usage.output);

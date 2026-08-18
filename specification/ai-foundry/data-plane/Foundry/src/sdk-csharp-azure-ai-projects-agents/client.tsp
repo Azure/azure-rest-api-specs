@@ -55,16 +55,9 @@ namespace Azure.AI.Projects {
     "ContainerApplicationAgentDefinition",
     "!autorest"
   );
-  //  @@clientName(CreatedBy, "AgentResponseItemSource", "!autorest");
-  
   @@clientName(OpenApiTool, "OpenApiTool", "!autorest");
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
 
-  @@clientName(
-    OpenApiManagedAuthDetails,
-    "OpenAPIManagedAuthenticationDetails",
-    "!autorest"
-  );
   @@clientName(
     OpenApiProjectConnectionAuthDetails,
     "OpenApiProjectConnectionAuthenticationDetails",
@@ -412,15 +405,6 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    Azure.AI.Projects.AzureFunctionDefinition.function,
-    {
-      identity: "Azure.AI.Extensions.OpenAI.AzureFunctionDefinitionFunction",
-      package: "Azure.AI.Extensions.OpenAI",
-      minVersion: "3.0.0-alpha.20260809.1",
-    },
-    "csharp"
-  );
-  @@alternateType(
     Azure.AI.Projects.AzureFunctionStorageQueue,
     {
       identity: "Azure.AI.Extensions.OpenAI.AzureFunctionStorageQueue",
@@ -459,13 +443,13 @@ namespace Azure.AI.Projects {
   @@alternateType(
     Azure.AI.Projects.BingCustomSearchConfiguration,
     {
-      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchConfiguration",
+      identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchOptions",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BingCustomSearchToolParameters,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolOptions",
@@ -474,16 +458,16 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BingGroundingSearchConfiguration,
     {
-      identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchConfiguration",
+      identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchOptions",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260809.1",
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BingGroundingSearchToolParameters,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchToolOptions",
@@ -492,7 +476,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-@@alternateType(
+  @@alternateType(
     Azure.AI.Projects.BrowserAutomationPreviewTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool",
@@ -708,6 +692,16 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
+  @@alternateType(
+    Azure.AI.Projects.OpenApiProjectConnectionAuthDetails,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OpenApiProjectConnectionAuthenticationDetails",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-alpha.20260805.1",
+    },
+    "csharp"
+  );
   // Move all the OpenAI TYpes out:
   // Now take the OpenAI models, and ensure that they are emitted as consumption points from the OpenAI SDK instead of re-emitting them here.
   // This is to ensure that the OpenAI SDK is the source of truth for these models, and we don't have duplicate definitions.
@@ -792,13 +786,56 @@ namespace Azure.AI.Projects {
     OpenAI.ImageGenTool,
     {
       identity: "OpenAI.Responses.ImageGenerationTool",
+      package: "OpenAI",
+      minVersion: "2.12.0",
     },
     "csharp"
   );
+
   @@alternateType(
-    OpenAI.ImageGenTool,
+    OpenAI.ImageGenTool.background,
     {
-      identity: "OpenAI.Responses.ImageGenerationTool",
+      identity: "OpenAI.ImageGenerationToolBackground",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.input_image_mask,
+    {
+      identity: "OpenAI.ImageGenToolInputImageMask",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.moderation,
+    {
+      identity: "OpenAI.ImageGenToolModeration",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.quality,
+    {
+      identity: "OpenAI.ImageGenToolQuality",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ImageGenTool.size,
+    {
+      identity: "OpenAI.ImageGenToolSize",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
@@ -1121,6 +1158,24 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.WebSearchApproximateLocation,
+    {
+      identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.WebSearchToolFilters,
+    {
+      identity: "OpenAI.Responses.WebSearchToolFilters",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
 
   @@alternateType(
     OpenAI.MCPTool,
@@ -1203,7 +1258,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-
+  @@alternateType(
+    OpenAI.FunctionToolParam,
+    {
+      identity: "OpenAI.FunctionToolParam",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
     OpenAI.InputTextContent,
