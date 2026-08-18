@@ -76285,6 +76285,7 @@
               "work_iq_preview",
               "fabric_iq_preview",
               "toolbox_search_preview",
+              "web_iq_preview",
               "a2a",
               "azure_ai_search",
               "azure_function",
@@ -84238,7 +84239,7 @@
           },
           "server_label": {
             "type": "string",
-            "description": "The label of the WebIQ MCP server to connect to."
+            "description": "The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id."
           },
           "require_approval": {
             "anyOf": [
@@ -84252,7 +84253,7 @@
                 "type": "null"
               }
             ],
-            "description": "Whether the agent requires approval before executing actions. Default is always.",
+            "description": "Whether the agent requires approval before executing actions. When omitted, the service defaults to \"always\".",
             "default": "always"
           }
         },
@@ -84287,7 +84288,7 @@
           },
           "server_label": {
             "type": "string",
-            "description": "The label of the WebIQ MCP server to connect to."
+            "description": "The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id."
           },
           "require_approval": {
             "anyOf": [
@@ -84301,7 +84302,7 @@
                 "type": "null"
               }
             ],
-            "description": "Whether the agent requires approval before executing actions. Default is always.",
+            "description": "Whether the agent requires approval before executing actions. When omitted, the service defaults to \"always\".",
             "default": "always"
           }
         },
