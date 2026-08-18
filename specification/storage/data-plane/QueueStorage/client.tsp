@@ -424,3 +424,9 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 // instead of reading HttpHeaders directly (typespec#11420, typespec-java >= 0.45.11).
 @@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
 @@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
+
+// Generate the error-code enum and the list-queues response model for Java (the hand-written layer consumes them),
+// matching the go/csharp shape.
+@@access(StorageErrorCode, Access.public, "java");
+@@usage(StorageErrorCode, Usage.output, "java");
+@@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
