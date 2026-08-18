@@ -123,6 +123,10 @@ for the failures that are safe to suppress.
 - Every line you add must be either a `#suppress` directive or a `suppressions.yaml` entry, or the
   result of running `tsp format` on a folder you edited (see Step 3). If a diff of your change
   contains anything else, you have gone too far — revert it.
+- Only suppress a diagnostic the compiler actually reported to you, from the harvest report or from
+  a `npx tsv` run you just did. At most three suppress-and-revalidate passes per folder (see
+  Step 3); a folder still failing after that belongs to a human. Never widen a directive's scope to
+  force a stubborn folder to pass.
 - Never modify the TSV-All workflow. It is the authoritative gate and this pipeline only reads it.
 - If nothing is safe to suppress, emit a `noop` and stop. An empty PR is worse than no PR.
 
@@ -269,6 +273,47 @@ npx tsp format "<specification-folder>/**/*.tsp"
 - Re-read each file after formatting and confirm every directive still sits directly above the
   declaration it targets.
 
+### Settle each folder: suppress, format, re-validate, repeat
+
+Work **one folder at a time** and bring it to a settled state before moving on. For each folder:
+
+1. Apply all the suppressions the report lists for it (following the placement rules above).
+2. Run `npx tsp format "<specification-folder>/**/*.tsp"`.
+3. Run `npx tsv <specification-folder>` and read the result.
+
+Then react to what step 3 reports:
+
+- **It passes (exit 0).** The folder is settled. Move on.
+- **It reports a diagnostic you already tried to suppress.** This is a placement or line-drift
+  mistake, not a new problem. Fix the placement of that directive — do not add a second one to
+  compensate — and repeat from step 2. This does not count as a pass against the limit below.
+- **It reports a different diagnostic you have not seen before.** This is expected. The compiler
+  stops after certain failures, so clearing the harvested set can reveal diagnostics that were
+  masked underneath them. If it is inline-suppressible by the Step 2 rule, suppress it and repeat
+  from step 2.
+
+**Do at most three suppress-and-revalidate passes per folder.** A folder still failing after three
+passes is unusually tangled and belongs to a human. Stop there, leave it in the best state that still
+compiles, and record it — do not keep going.
+
+The limit exists to stop a folder turning into "make this pass at any cost". That pressure is what
+produces over-broad suppressions, and it builds with every pass. Three passes clears the ordinary
+masked-diagnostic case without ever getting there.
+
+Two rules hold across every pass:
+
+- Only ever suppress a diagnostic the compiler **just reported to you**. Never suppress a rule
+  because you expect it to fire next, and never widen a directive's scope to make a stubborn folder
+  pass. Each pass starts from real `npx tsv` output or it does not happen.
+- The Step 2 eligibility rule applies unchanged to revealed diagnostics. A revealed diagnostic that
+  is not inline-suppressible ends the folder immediately: revert your changes to it if it no longer
+  compiles, otherwise leave the suppressions that did apply, and record it.
+
+Record any folder that hits the limit or ends on a non-suppressible diagnostic, along with its
+remaining diagnostics. Step 5 requires you to list these in the PR body. A partially suppressed
+folder is a fine outcome; a silently partially suppressed one is not, because a reviewer would
+otherwise approve the change and then watch CI fail it with no explanation.
+
 ## Step 4: verify before opening the PR
 
 Verification is mandatory. Do not open a PR on an unverified edit.
@@ -280,25 +325,17 @@ Verification is mandatory. Do not open a PR on an unverified edit.
    npm exec --no -- get-suppressions TypeSpecValidation specification
    ```
 
-2. Re-run validation for **every** folder you touched and confirm it now passes or is reported as
-   suppressed. This matters more for inline suppressions than for file-level ones, since a
-   misplaced `#suppress` can fail to apply or, worse, break compilation:
+2. Confirm every folder you touched reached a state you decided on in Step 3 — either passing, or
+   recorded as needing a human. Step 3 already ran `npx tsv` per folder, so this is a final
+   reconciliation rather than a fresh round of fixing: check that each touched folder appears in
+   exactly one of those two buckets, and that nothing was left half-edited and unverified.
 
    ```
    npx tsv <specification-folder>
    ```
 
-   A folder that still reports the same diagnostic is the signature of a line-drift or placement
-   mistake: the directive landed on the wrong declaration. Re-read the file and fix the placement —
-   do not add a second directive to compensate.
-
-   A folder that reports a **different, previously unseen** diagnostic is normal and is not a
-   mistake. The compiler stops reporting after certain failures, so fixing the harvested set can
-   reveal diagnostics that were masked underneath them. If the newly revealed diagnostic is itself
-   inline-suppressible, you may suppress it in the same PR; note in the PR body that it was not in
-   the harvest report. If it is not inline-suppressible, leave the folder in whatever state still
-   compiles, revert your changes to it if it no longer does, and note that the folder needs a second
-   pass. The next scheduled run will harvest the newly surfaced diagnostic.
+   If a folder you believed was passing now fails, something you changed later disturbed it — most
+   likely a suppression in a shared file. Re-check it before continuing.
 
    Also confirm the number of `#suppress` lines you added to each file matches the number of
    diagnostics you set out to suppress in it. A mismatch means an insertion landed in the wrong
@@ -332,6 +369,13 @@ Open a single draft PR targeting `${{ inputs.target-ref }}`. The body must conta
   `file:line` locations touched so a reviewer can jump straight to them.
 - A "Not suppressed" section listing every remaining failure and why it needs human attention,
   including anything flagged as an infrastructure failure that simply needs a rerun.
+- A "Needs a second pass" section listing every folder you recorded in Step 3: those that hit the
+  three-pass limit and those that ended on a diagnostic that was not inline-suppressible. Give each
+  one's remaining diagnostics and say plainly that the folder is expected to still fail validation.
+  A reviewer must be able to see this without reading the diff — approving a folder that then fails
+  CI with no explanation is the specific outcome this section prevents.
+- For any diagnostic you suppressed that was **not** in the harvest report, say so and note that it
+  was revealed once the harvested diagnostics were cleared.
 - A reminder that **TypeSpec Validation - All** is the authoritative gate: all three shards on both
   Ubuntu and Windows must pass before this PR merges, and a green result on one shard proves
   nothing about the others.
