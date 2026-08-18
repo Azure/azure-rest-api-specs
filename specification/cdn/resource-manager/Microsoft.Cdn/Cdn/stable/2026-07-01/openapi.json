@@ -8405,6 +8405,17 @@
           "$ref": "#/definitions/AFDDomainHttpsCustomizedCipherSuiteSet",
           "description": "Customized cipher suites object that will be used for Https when cipherSuiteSetType is Customized."
         },
+        "serverTlsGroupPolicy": {
+          "$ref": "#/definitions/AfdServerTlsGroupPolicy",
+          "description": "Server TLS group policy that will be used for Https."
+        },
+        "serverTlsGroups": {
+          "type": "array",
+          "description": "Server TLS groups that will be used for Https when serverTlsGroupPolicy is Custom.",
+          "items": {
+            "$ref": "#/definitions/AfdServerTlsGroup"
+          }
+        },
         "secret": {
           "$ref": "#/definitions/ResourceReference",
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret"
@@ -9355,6 +9366,90 @@
         }
       ],
       "x-ms-discriminator-value": "MtlsCertificateChain"
+    },
+    "AfdServerTlsGroup": {
+      "type": "string",
+      "description": "Supported key-exchange groups and curves. The ML-KEM groups are hybrid post-quantum groups.",
+      "enum": [
+        "SecP256r1MLKEM768",
+        "SecP384r1MLKEM1024",
+        "X25519MLKEM768",
+        "prime256v1",
+        "X25519",
+        "secp384r1",
+        "secp521r1"
+      ],
+      "x-ms-enum": {
+        "name": "AfdServerTlsGroup",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SecP256r1MLKEM768",
+            "value": "SecP256r1MLKEM768",
+            "description": "Hybrid post-quantum group combining secp256r1 with ML-KEM-768."
+          },
+          {
+            "name": "SecP384r1MLKEM1024",
+            "value": "SecP384r1MLKEM1024",
+            "description": "Hybrid post-quantum group combining secp384r1 with ML-KEM-1024."
+          },
+          {
+            "name": "X25519MLKEM768",
+            "value": "X25519MLKEM768",
+            "description": "Hybrid post-quantum group combining X25519 with ML-KEM-768."
+          },
+          {
+            "name": "prime256v1",
+            "value": "prime256v1",
+            "description": "The prime256v1 elliptic curve group."
+          },
+          {
+            "name": "X25519",
+            "value": "X25519",
+            "description": "The X25519 elliptic curve group."
+          },
+          {
+            "name": "secp384r1",
+            "value": "secp384r1",
+            "description": "The secp384r1 elliptic curve group."
+          },
+          {
+            "name": "secp521r1",
+            "value": "secp521r1",
+            "description": "The secp521r1 elliptic curve group."
+          }
+        ]
+      }
+    },
+    "AfdServerTlsGroupPolicy": {
+      "type": "string",
+      "description": "Server TLS group policy that will be used for Https. Standard and Enhanced are service-managed sets; Custom allows specifying serverTlsGroups explicitly.",
+      "enum": [
+        "Standard",
+        "Enhanced",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AfdServerTlsGroupPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Uses the standard service-managed set of server TLS groups."
+          },
+          {
+            "name": "Enhanced",
+            "value": "Enhanced",
+            "description": "Uses the enhanced service-managed set of server TLS groups."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Uses the server TLS groups specified by serverTlsGroups."
+          }
+        ]
+      }
     },
     "AfdUrlSigningAction": {
       "type": "object",
