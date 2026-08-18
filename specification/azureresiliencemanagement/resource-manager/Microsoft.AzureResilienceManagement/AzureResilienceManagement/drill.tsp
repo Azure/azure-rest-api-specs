@@ -36,7 +36,7 @@ interface Drills {
     >,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = Drill> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -60,7 +60,7 @@ interface Drills {
     ValidateForExecutionResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = ValidateForExecutionResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -77,7 +77,7 @@ interface Drills {
     DrillActionResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = DrillActionResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -91,7 +91,7 @@ interface Drills {
     DrillActionResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = DrillActionResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -108,7 +108,7 @@ interface Drills {
     AddOrUpdateResourcesResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = AddOrUpdateResourcesResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
