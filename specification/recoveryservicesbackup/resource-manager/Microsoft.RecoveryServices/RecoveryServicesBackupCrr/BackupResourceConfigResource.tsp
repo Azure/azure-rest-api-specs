@@ -15,6 +15,7 @@ namespace Microsoft.RecoveryServices;
 /**
 * The resource storage details.
 */
+@parentResource(VaultResource)
 @singleton("vaultstorageconfig")
 model BackupResourceConfigResource is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<BackupResourceConfig> {
 ...ResourceNameParameter<Resource = BackupResourceConfigResource,KeyName = "backupstorageconfig",SegmentName = "backupstorageconfig",NamePattern = "">;

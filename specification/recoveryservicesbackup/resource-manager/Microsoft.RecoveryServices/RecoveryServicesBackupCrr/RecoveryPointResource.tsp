@@ -15,6 +15,7 @@ namespace Microsoft.RecoveryServices;
 /**
 * Base class for backup copies. Workload-specific backup copies are derived from this class.
 */
+@parentResource(ProtectedItemVirtualResource)
 model RecoveryPointResource is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RecoveryPoint> {
 ...ResourceNameParameter<Resource = RecoveryPointResource,KeyName = "recoveryPointId",SegmentName = "recoveryPoints",NamePattern = "">;
 /**
@@ -26,7 +27,7 @@ model RecoveryPointResource is Azure.ResourceManager.Legacy.TrackedResourceWithO
 
 
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface RecoveryPointResources {
 /**
 * Provides the information of the backed up data identified using RecoveryPointID.
@@ -42,12 +43,40 @@ get is ArmResourceRead<RecoveryPointResource
 */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("RecoveryPointsCrr_List")
-list is ArmResourceListByParent<RecoveryPointResource, Parameters = { /**
-* OData filter options.
-*/
-@query("$filter")
-"$filter"?: string }, Response = ArmResponse<RecoveryPointResourceList>
-        >;
+@armResourceList(RecoveryPointResource)
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/")
+@get
+list(
+  ...ApiVersionParameter,
+
+  /**
+   * The name of the recovery services vault.
+   */
+  @path vaultName: string,
+
+  ...ResourceGroupParameter,
+  ...SubscriptionIdParameter,
+
+  /**
+   * Fabric name associated with backed up item.
+   */
+  @path fabricName: string,
+
+  /**
+   * Container name associated with backed up item.
+   */
+  @path containerName: string,
+
+  /**
+   * Backed up item whose backup copies are to be fetched.
+   */
+  @path protectedItemName: string,
+
+  /**
+   * OData filter options.
+   */
+  @query("$filter") "$filter"?: string,
+): ArmResponse<RecoveryPointResourceList> | ErrorResponse;
 
 
 /**
