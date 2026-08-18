@@ -59,7 +59,7 @@ interface DeploymentVersions {
     DeploymentVersion,
     void,
     ArmResponse<DeploymentVersion>,
-    LroHeaders = ArmLroLocationHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DeploymentVersion>
   >;
 
   /**
