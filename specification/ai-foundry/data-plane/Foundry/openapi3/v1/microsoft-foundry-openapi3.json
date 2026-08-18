@@ -30451,18 +30451,12 @@
       "DataGenerationJobOptions": {
         "type": "object",
         "required": [
-          "type",
-          "max_samples"
+          "type"
         ],
         "properties": {
           "type": {
             "$ref": "#/components/schemas/DataGenerationJobType",
             "description": "The data generation job type."
-          },
-          "max_samples": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of samples to generate."
           },
           "train_split": {
             "type": "number",
@@ -30534,6 +30528,10 @@
               "type": "string"
             },
             "description": "Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs."
+          },
+          "write_mode": {
+            "$ref": "#/components/schemas/DataGenerationJobOutputWriteMode",
+            "description": "Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows."
           }
         },
         "description": "Output options for data generation job.",
@@ -30557,6 +30555,26 @@
           }
         ],
         "description": "The supported output file types for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
+      "DataGenerationJobOutputWriteMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "overwrite",
+              "merge"
+            ]
+          }
+        ],
+        "description": "The supported write modes for data generation job outputs.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "DataGenerationJobs=V1Preview"
@@ -76077,7 +76095,8 @@
       "SimpleQnADataGenerationJobOptions": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "max_samples"
         ],
         "properties": {
           "type": {
@@ -76086,6 +76105,11 @@
               "simple_qna"
             ],
             "description": "The data generation job type, which is SimpleQnA for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate, up to service-defined limits."
           },
           "question_types": {
             "type": "array",
@@ -76969,7 +76993,8 @@
       "ToolUseFineTuningDataGenerationJobOptions": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "max_samples"
         ],
         "properties": {
           "type": {
@@ -76978,6 +77003,11 @@
               "tool_use"
             ],
             "description": "The data generation job type, which is ToolUse for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate, up to service-defined limits."
           }
         },
         "allOf": [
@@ -77314,6 +77344,11 @@
               "traces"
             ],
             "description": "The data generation job type, which is Traces for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off."
           }
         },
         "allOf": [
@@ -77365,6 +77400,17 @@
           "end_time": {
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional explicit list of trace IDs to include. Mutually exclusive with `kql_where_clause`."
+          },
+          "kql_where_clause": {
+            "type": "string",
+            "description": "Optional KQL where clause used to filter traces. Mutually exclusive with `trace_ids`."
           }
         },
         "allOf": [
