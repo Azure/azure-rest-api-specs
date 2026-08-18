@@ -131,6 +131,8 @@ async function runLintDiff(
     throw error;
   }
 
+  // Suppress Swagger files discovered by SpecModel, including files affected through references.
+  // Directly changed Swagger files are also filtered before SpecModel processing in getRunList().
   affectedSwaggers = await getUnsuppressedSwaggers(beforePath, afterPath, affectedSwaggers);
 
   if (beforeList.size === 0 && afterList.size === 0) {
