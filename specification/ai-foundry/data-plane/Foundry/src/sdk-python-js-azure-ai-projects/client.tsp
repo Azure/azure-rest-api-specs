@@ -114,6 +114,7 @@ using Azure.AI.Projects;
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
+@@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
