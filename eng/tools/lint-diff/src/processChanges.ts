@@ -31,7 +31,7 @@ export async function getRunList(
     }
     return true;
   });
-  // Suppress directly changed Swagger files before SpecModel processing. A second filter in
+  // Filter directly changed Swagger files before SpecModel processing. A second filter in
   // runLintDiff() removes suppressed files discovered indirectly through references.
   const unsuppressedChangedSwaggers = await getUnsuppressedSwaggers(
     beforePath,
