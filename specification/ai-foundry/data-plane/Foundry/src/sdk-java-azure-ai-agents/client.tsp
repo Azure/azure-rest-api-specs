@@ -685,3 +685,15 @@ union WebSearchToolSearchContextSizeExpandable {
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
+
+// --------------------------------------------------------------------------------
+// JavaDoc overrides
+// --------------------------------------------------------------------------------
+
+// Replace markdown link syntax with an HTML anchor tag
+@@clientDoc(
+  WorkflowAgentDefinition,
+  "The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026. If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows, see the <a href=\"https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide\">Migration guide</a>.",
+  DocumentationMode.replace,
+  "java"
+);
