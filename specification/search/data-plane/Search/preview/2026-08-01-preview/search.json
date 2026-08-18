@@ -12255,19 +12255,6 @@
         }
       }
     },
-    "KnowledgeBaseRetrievalEventStreamResponse": {
-      "type": "object",
-      "description": "Server-sent events response for streaming knowledge base retrieval, added in version\n2026-08-01-preview. The response schema documents the aggregate retrieval response carried by\nthe terminal `response.completed` event; the connection stays open and emits other event types\nbefore the stream ends.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalResponse",
-          "description": "The aggregate retrieval response carried by the terminal `response.completed` event."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "KnowledgeBaseRetrievalPartialResponse": {
       "type": "object",
       "description": "Partial retrieval response.",
@@ -21088,7 +21075,11 @@
           "format": "int64",
           "description": "The size in bytes of this image as sent to the model."
         }
-      }
+      },
+      "required": [
+        "imagePath",
+        "sizeBytes"
+      ]
     },
     "ServiceIndexersRuntime": {
       "type": "object",

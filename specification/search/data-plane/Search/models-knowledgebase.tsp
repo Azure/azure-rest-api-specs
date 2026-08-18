@@ -1287,10 +1287,10 @@ model ServedImage {
   imageId?: string;
 
   /** The relative path to the image within the asset store. */
-  imagePath?: string;
+  imagePath: string;
 
   /** The size in bytes of this image as sent to the model. */
-  sizeBytes?: int64;
+  sizeBytes: int64;
 }
 
 /** The error details. */
@@ -1350,28 +1350,6 @@ model KnowledgeBaseRetrievalPartialResponse {
   code: 206;
 
   /** The partial retrieval response body. */
-  @body
-  body: KnowledgeBaseRetrievalResponse;
-}
-
-/**
- * Server-sent events response for streaming knowledge base retrieval, added in version
- * 2026-08-01-preview. The response schema documents the aggregate retrieval response carried by
- * the terminal `response.completed` event; the connection stays open and emits other event types
- * before the stream ends.
- */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2026_08_01_preview)
-model KnowledgeBaseRetrievalEventStreamResponse {
-  /** The retrieval response is successfully returned. */
-  @statusCode
-  code: 200;
-
-  /** The response is streamed as server-sent events. */
-  @header("Content-Type")
-  contentType: "text/event-stream";
-
-  /** The aggregate retrieval response carried by the terminal `response.completed` event. */
   @body
   body: KnowledgeBaseRetrievalResponse;
 }
