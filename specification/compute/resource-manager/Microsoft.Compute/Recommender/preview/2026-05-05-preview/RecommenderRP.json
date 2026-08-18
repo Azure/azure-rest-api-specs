@@ -259,93 +259,12 @@
         "x-ms-examples": {
           "Generates SkuMixPlacement scores for VM SKU mix placement with explicit VM sizes.": {
             "$ref": "./examples/GenerateSkuMixPlacementScores.json"
-          },
-          "Generates SkuMixPlacement scores using VM attribute-based selection.": {
-            "$ref": "./examples/GenerateSkuMixPlacementScoresWithAttributes.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AcceleratorManufacturer": {
-      "type": "string",
-      "description": "Accelerator manufacturer.",
-      "enum": [
-        "AMD",
-        "Nvidia",
-        "Xilinx"
-      ],
-      "x-ms-enum": {
-        "name": "AcceleratorManufacturer",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AMD",
-            "value": "AMD",
-            "description": "AMD accelerator."
-          },
-          {
-            "name": "Nvidia",
-            "value": "Nvidia",
-            "description": "Nvidia accelerator."
-          },
-          {
-            "name": "Xilinx",
-            "value": "Xilinx",
-            "description": "Xilinx accelerator."
-          }
-        ]
-      }
-    },
-    "AcceleratorType": {
-      "type": "string",
-      "description": "Accelerator type.",
-      "enum": [
-        "GPU",
-        "FPGA"
-      ],
-      "x-ms-enum": {
-        "name": "AcceleratorType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GPU",
-            "value": "GPU",
-            "description": "GPU accelerator."
-          },
-          {
-            "name": "FPGA",
-            "value": "FPGA",
-            "description": "FPGA accelerator."
-          }
-        ]
-      }
-    },
-    "ArchitectureType": {
-      "type": "string",
-      "description": "Architecture type of the VM.",
-      "enum": [
-        "ARM64",
-        "X64"
-      ],
-      "x-ms-enum": {
-        "name": "ArchitectureType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ARM64",
-            "value": "ARM64",
-            "description": "ARM64 architecture."
-          },
-          {
-            "name": "X64",
-            "value": "X64",
-            "description": "x64 architecture."
-          }
-        ]
-      }
-    },
     "ComputeDiagnosticBase": {
       "type": "object",
       "description": "Contains metadata of a diagnostic type",
@@ -361,42 +280,6 @@
         }
       ]
     },
-    "CpuManufacturer": {
-      "type": "string",
-      "description": "CPU manufacturer.",
-      "enum": [
-        "Intel",
-        "AMD",
-        "Microsoft",
-        "Ampere"
-      ],
-      "x-ms-enum": {
-        "name": "CpuManufacturer",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Intel",
-            "value": "Intel",
-            "description": "Intel CPU."
-          },
-          {
-            "name": "AMD",
-            "value": "AMD",
-            "description": "AMD CPU."
-          },
-          {
-            "name": "Microsoft",
-            "value": "Microsoft",
-            "description": "Microsoft CPU."
-          },
-          {
-            "name": "Ampere",
-            "value": "Ampere",
-            "description": "Ampere CPU."
-          }
-        ]
-      }
-    },
     "DiagnosticProperties": {
       "type": "object",
       "description": "Contains additional properties of a diagnostic",
@@ -408,54 +291,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "HyperVGeneration": {
-      "type": "string",
-      "description": "Hyper-V generation.",
-      "enum": [
-        "Gen1",
-        "Gen2"
-      ],
-      "x-ms-enum": {
-        "name": "HyperVGeneration",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Gen1",
-            "value": "Gen1",
-            "description": "Generation 1."
-          },
-          {
-            "name": "Gen2",
-            "value": "Gen2",
-            "description": "Generation 2."
-          }
-        ]
-      }
-    },
-    "LocalStorageDiskType": {
-      "type": "string",
-      "description": "Local storage disk type.",
-      "enum": [
-        "HDD",
-        "SSD"
-      ],
-      "x-ms-enum": {
-        "name": "LocalStorageDiskType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "HDD",
-            "value": "HDD",
-            "description": "HDD local storage."
-          },
-          {
-            "name": "SSD",
-            "value": "SSD",
-            "description": "SSD local storage."
-          }
-        ]
       }
     },
     "PlacementScore": {
@@ -576,8 +411,7 @@
       "required": [
         "capacity",
         "capacityType",
-        "priority",
-        "allocationStrategy"
+        "priority"
       ]
     },
     "SkuMixPlacementCapacityType": {
@@ -613,11 +447,11 @@
           "description": "Unique identifier for this deployment choice."
         },
         "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Placement score from 1 to 10 (inclusive). Higher is better.",
-          "minimum": 1,
-          "maximum": 10
+          "type": "integer",
+          "format": "int32",
+          "description": "Placement score from 0 to 9 (inclusive). Higher is better.",
+          "minimum": 0,
+          "maximum": 9
         },
         "skuSplit": {
           "type": "array",
@@ -639,54 +473,22 @@
     },
     "SkuMixPlacementInstanceDescription": {
       "type": "object",
-      "description": "Describes which VM sizes (or VM attributes) to consider.",
+      "description": "Describes which VM sizes to consider.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/SkuMixPlacementInstanceDescriptionType",
-          "description": "The type of instance description."
-        },
         "vmSizes": {
           "type": "array",
-          "description": "The list of VM sizes. Required when type is VMSizes.",
+          "description": "The list of VM sizes to consider for placement.",
           "items": {
             "$ref": "#/definitions/SkuMixPlacementVMSize"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "vmAttributes": {
-          "$ref": "#/definitions/VmAttributes",
-          "description": "VM attribute constraints. Required when type is VMAttributes."
         }
       },
       "required": [
-        "type"
+        "vmSizes"
       ]
-    },
-    "SkuMixPlacementInstanceDescriptionType": {
-      "type": "string",
-      "description": "The type of instance description provided in the request.",
-      "enum": [
-        "VMSizes",
-        "VMAttributes"
-      ],
-      "x-ms-enum": {
-        "name": "SkuMixPlacementInstanceDescriptionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "VMSizes",
-            "value": "VMSizes",
-            "description": "Instance description is a list of explicit VM sizes."
-          },
-          {
-            "name": "VMAttributes",
-            "value": "VMAttributes",
-            "description": "Instance description is a set of VM attribute constraints."
-          }
-        ]
-      }
     },
     "SkuMixPlacementItem": {
       "type": "object",
@@ -703,7 +505,12 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Recommended allocation capacity."
+          "description": "Lower range of recommended allocation capacity."
+        },
+        "capacityMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Upper range of recommended allocation capacity."
         },
         "zone": {
           "type": "string",
@@ -846,6 +653,11 @@
             "id"
           ]
         },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time until which the recommendations are valid. Callers should request fresh recommendations after this time."
+        },
         "partialFulfillmentReason": {
           "$ref": "#/definitions/SkuMixPlacementPartialFulfillmentReason",
           "description": "Indicates whether the response is a complete or partial fulfillment."
@@ -890,7 +702,8 @@
       "description": "Strategy for distributing capacity across availability zones.",
       "enum": [
         "BestEffortBalanced",
-        "Prioritized"
+        "Prioritized",
+        "BestEffortSingleZone"
       ],
       "x-ms-enum": {
         "name": "SkuMixPlacementZonalDistributionStrategy",
@@ -905,6 +718,11 @@
             "name": "Prioritized",
             "value": "Prioritized",
             "description": "Zones filled based on zone preferences/rank. Higher priority zones filled first."
+          },
+          {
+            "name": "BestEffortSingleZone",
+            "value": "BestEffortSingleZone",
+            "description": "Capacity allocated within a single zone on a best-effort basis; may spill across zones if single-zone capacity is insufficient."
           }
         ]
       }
@@ -941,6 +759,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Rank of the zone. Lower values = higher priority (0 is highest)."
+        },
+        "targetMaxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Best-effort limit to avoid allocating more than this count within the zone. Used with the Prioritized strategy."
         }
       },
       "required": [
@@ -1010,248 +833,6 @@
             "$ref": "#/definitions/PlacementScore"
           }
         }
-      }
-    },
-    "VmAttributeMinMaxDouble": {
-      "type": "object",
-      "description": "Double min/max range for VM attributes.",
-      "properties": {
-        "min": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum value."
-        },
-        "max": {
-          "type": "number",
-          "format": "double",
-          "description": "Maximum value."
-        }
-      }
-    },
-    "VmAttributeMinMaxInteger": {
-      "type": "object",
-      "description": "Integer min/max range for VM attributes.",
-      "properties": {
-        "min": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum value."
-        },
-        "max": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum value."
-        }
-      }
-    },
-    "VmAttributeSupport": {
-      "type": "string",
-      "description": "Whether a VM capability should be excluded, included, or required.",
-      "enum": [
-        "Excluded",
-        "Included",
-        "Required"
-      ],
-      "x-ms-enum": {
-        "name": "VmAttributeSupport",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Excluded",
-            "value": "Excluded",
-            "description": "Exclude VM sizes that have the capability."
-          },
-          {
-            "name": "Included",
-            "value": "Included",
-            "description": "Allow VM sizes with and without the capability."
-          },
-          {
-            "name": "Required",
-            "value": "Required",
-            "description": "Only allow VM sizes that have the capability."
-          }
-        ]
-      }
-    },
-    "VmAttributes": {
-      "type": "object",
-      "description": "VM attribute constraints for attribute-based VM selection.",
-      "properties": {
-        "vCpuCount": {
-          "$ref": "#/definitions/VmAttributeMinMaxInteger",
-          "description": "vCPU count range. Required."
-        },
-        "memoryInGiB": {
-          "$ref": "#/definitions/VmAttributeMinMaxDouble",
-          "description": "Memory range in GiB. Required."
-        },
-        "architectureTypes": {
-          "type": "array",
-          "description": "Supported VM architectures. Required.",
-          "items": {
-            "$ref": "#/definitions/ArchitectureType"
-          }
-        },
-        "memoryInGiBPerVCpu": {
-          "$ref": "#/definitions/VmAttributeMinMaxDouble",
-          "description": "Memory-per-vCPU range in GiB."
-        },
-        "dataDiskCount": {
-          "$ref": "#/definitions/VmAttributeMinMaxInteger",
-          "description": "Data disk count range."
-        },
-        "networkInterfaceCount": {
-          "$ref": "#/definitions/VmAttributeMinMaxInteger",
-          "description": "NIC count range."
-        },
-        "networkBandwidthInMbps": {
-          "$ref": "#/definitions/VmAttributeMinMaxDouble",
-          "description": "Network bandwidth range in Mbps."
-        },
-        "localStorageSupport": {
-          "$ref": "#/definitions/VmAttributeSupport",
-          "description": "Whether local storage support should be excluded, included, or required."
-        },
-        "localStorageInGiB": {
-          "$ref": "#/definitions/VmAttributeMinMaxDouble",
-          "description": "Local storage capacity range in GiB."
-        },
-        "localStorageDiskTypes": {
-          "type": "array",
-          "description": "Allowed local storage disk types.",
-          "items": {
-            "$ref": "#/definitions/LocalStorageDiskType"
-          }
-        },
-        "rdmaSupport": {
-          "$ref": "#/definitions/VmAttributeSupport",
-          "description": "Whether RDMA support should be excluded, included, or required."
-        },
-        "rdmaNetworkInterfaceCount": {
-          "$ref": "#/definitions/VmAttributeMinMaxInteger",
-          "description": "RDMA NIC count range."
-        },
-        "acceleratorSupport": {
-          "$ref": "#/definitions/VmAttributeSupport",
-          "description": "Whether accelerator support should be excluded, included, or required."
-        },
-        "acceleratorManufacturers": {
-          "type": "array",
-          "description": "Allowed accelerator manufacturers.",
-          "items": {
-            "$ref": "#/definitions/AcceleratorManufacturer"
-          }
-        },
-        "acceleratorTypes": {
-          "type": "array",
-          "description": "Allowed accelerator types.",
-          "items": {
-            "$ref": "#/definitions/AcceleratorType"
-          }
-        },
-        "acceleratorCount": {
-          "$ref": "#/definitions/VmAttributeMinMaxInteger",
-          "description": "Accelerator count range."
-        },
-        "vmCategories": {
-          "type": "array",
-          "description": "Allowed VM categories.",
-          "items": {
-            "$ref": "#/definitions/VmCategory"
-          }
-        },
-        "cpuManufacturers": {
-          "type": "array",
-          "description": "Allowed CPU manufacturers.",
-          "items": {
-            "$ref": "#/definitions/CpuManufacturer"
-          }
-        },
-        "burstableSupport": {
-          "$ref": "#/definitions/VmAttributeSupport",
-          "description": "Whether burstable SKUs should be excluded, included, or required."
-        },
-        "hyperVGenerations": {
-          "type": "array",
-          "description": "Allowed Hyper-V generations.",
-          "items": {
-            "$ref": "#/definitions/HyperVGeneration"
-          }
-        },
-        "excludedVMSizes": {
-          "type": "array",
-          "description": "VM sizes to explicitly exclude.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "allowedVMSizes": {
-          "type": "array",
-          "description": "VM sizes to explicitly allow; attribute filtering applied only to this set.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "vCpuCount",
-        "memoryInGiB",
-        "architectureTypes"
-      ]
-    },
-    "VmCategory": {
-      "type": "string",
-      "description": "VM category classification.",
-      "enum": [
-        "GeneralPurpose",
-        "ComputeOptimized",
-        "MemoryOptimized",
-        "StorageOptimized",
-        "GpuAccelerated",
-        "FpgaAccelerated",
-        "HighPerformanceCompute"
-      ],
-      "x-ms-enum": {
-        "name": "VmCategory",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GeneralPurpose",
-            "value": "GeneralPurpose",
-            "description": "General purpose VMs."
-          },
-          {
-            "name": "ComputeOptimized",
-            "value": "ComputeOptimized",
-            "description": "Compute optimized VMs."
-          },
-          {
-            "name": "MemoryOptimized",
-            "value": "MemoryOptimized",
-            "description": "Memory optimized VMs."
-          },
-          {
-            "name": "StorageOptimized",
-            "value": "StorageOptimized",
-            "description": "Storage optimized VMs."
-          },
-          {
-            "name": "GpuAccelerated",
-            "value": "GpuAccelerated",
-            "description": "GPU accelerated VMs."
-          },
-          {
-            "name": "FpgaAccelerated",
-            "value": "FpgaAccelerated",
-            "description": "FPGA accelerated VMs."
-          },
-          {
-            "name": "HighPerformanceCompute",
-            "value": "HighPerformanceCompute",
-            "description": "High performance compute VMs."
-          }
-        ]
       }
     }
   },

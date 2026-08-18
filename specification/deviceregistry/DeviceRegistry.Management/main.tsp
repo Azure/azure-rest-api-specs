@@ -16,6 +16,7 @@ import "./ns_devices.tsp";
 import "./ns_discoveredAssets.tsp";
 import "./ns_discoveredDevices.tsp";
 import "./schemaRegistries.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

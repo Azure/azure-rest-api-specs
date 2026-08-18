@@ -42,7 +42,8 @@ interface ThreatIntelligenceInformationOperations {
   get is Extension.Read<
     OperationalInsights,
     ThreatIntelligenceInformation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -55,7 +56,8 @@ interface ThreatIntelligenceInformationOperations {
     Response =
       | ArmResourceUpdatedResponse<ThreatIntelligenceInformation>
       | ArmResourceCreatedSyncResponse<ThreatIntelligenceInformation>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -65,7 +67,8 @@ interface ThreatIntelligenceInformationOperations {
   delete is Extension.DeleteSync<
     OperationalInsights,
     ThreatIntelligenceInformation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -101,7 +104,8 @@ interface ThreatIntelligenceInformationOperations {
       $orderby?: string;
     },
     Response = ArmResponse<ThreatIntelligenceInformationList>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -113,7 +117,8 @@ interface ThreatIntelligenceInformationOperations {
     ThreatIntelligenceInformation,
     ThreatIntelligenceAppendTags,
     OkResponse,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 
   /**
@@ -125,7 +130,8 @@ interface ThreatIntelligenceInformationOperations {
     ThreatIntelligenceInformation,
     ThreatIntelligenceIndicatorModel,
     ArmResponse<ThreatIntelligenceInformation>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsThreatIntelligenceIndicator"
   >;
 }
 

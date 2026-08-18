@@ -13,19 +13,16 @@ using Azure.Core;
 @@clientName(ManagedHsmKeyAttributes.exp, "Expires");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateEndpointConnectionItem.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MhsmPrivateEndpointConnectionItem.properties
 );
@@ -33,13 +30,11 @@ using Azure.Core;
 @@clientName(Error.innererror, "innerError");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MhsmPrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "operationProperties");
 
@@ -191,7 +186,6 @@ using Azure.Core;
   "!java,!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "OperationProperties");
 
@@ -212,6 +206,7 @@ using Azure.Core;
 
 @@clientName(JsonWebKeyType.`EC-HSM`, "EC_HSM", "python");
 @@clientName(JsonWebKeyType.`RSA-HSM`, "RSA_HSM", "python");
+@@clientName(JsonWebKeyType.`oct-HSM`, "oct_HSM", "python");
 
 // Override the order of path parameters
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"

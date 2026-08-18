@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the details of the private endpoint connection to the search service in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   get is ArmResourceRead<
     PrivateEndpointConnection,
@@ -38,7 +38,7 @@ interface PrivateEndpointConnections {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -54,8 +54,8 @@ interface PrivateEndpointConnections {
   /**
    * Updates a private endpoint connection to the search service in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Pre-existing API contract: fixed response codes."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   update is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
@@ -63,7 +63,7 @@ interface PrivateEndpointConnections {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -82,8 +82,8 @@ interface PrivateEndpointConnections {
    * Returns 200 (OK) with the deleted connection details on successful deletion, or 404 (Not Found) if the connection does not exist.
    * NOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Pre-existing API contract: retains 200/404 response."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   delete is ArmResourceDeleteSync<
     PrivateEndpointConnection,
@@ -91,7 +91,7 @@ interface PrivateEndpointConnections {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -108,7 +108,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets a list of all private endpoint connections in the given service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   listByService is ArmResourceListByParent<
     PrivateEndpointConnection,
@@ -116,7 +116,7 @@ interface PrivateEndpointConnections {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(

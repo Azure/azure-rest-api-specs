@@ -27,7 +27,7 @@ model VirtualMachineExtensionImage
 alias ImageTypePath = {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
-  ...LocationParameter;
+  ...LocationResourceParameter;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @path @segment("publishers") publisherName: string;
 };

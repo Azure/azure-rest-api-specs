@@ -14,7 +14,7 @@ import {
 import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { inspect } from "util";
-import { ReportableOavError } from "./formatting.js";
+import { type ReportableOavError } from "./formatting.ts";
 
 export async function preCheckFiltering(
   rootDirectory: string,
@@ -58,13 +58,13 @@ export async function checkExamples(
         errors.push({
           message: e.message,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       } else {
         console.log(`Error validating examples for ${swaggerFile}: ${inspect(e)}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${inspect(e)}`,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       }
     }
   }
@@ -94,7 +94,7 @@ export async function checkSpecs(
             file: swaggerFile,
             line: error.position?.line,
             column: error.position?.column,
-          } as ReportableOavError);
+          });
         }
       }
     } catch (e) {
@@ -103,13 +103,13 @@ export async function checkSpecs(
         errors.push({
           message: e.message,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       } else {
         console.log(`Error validating ${swaggerFile}: ${inspect(e)}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${inspect(e)}`,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       }
     }
   }

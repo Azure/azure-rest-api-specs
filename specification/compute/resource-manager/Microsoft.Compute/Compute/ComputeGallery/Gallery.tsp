@@ -162,15 +162,14 @@ interface Galleries {
   gallerySharingProfileUpdate is ComputeResourceActionAsyncBase<
     Gallery,
     SharingUpdate,
-
-      | ArmResponse<SharingUpdate>
-      | (ArmAcceptedLroResponse<
-          "Resource operation accepted.",
-          ArmLroLocationHeader<FinalResult = SharingUpdate> &
-            Azure.Core.Foundations.RetryAfterHeader
-        > & {
-          @bodyRoot _: SharingUpdate;
-        })
+    | ArmResponse<SharingUpdate>
+    | (ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        ArmLroLocationHeader<FinalResult = SharingUpdate> &
+          Azure.Core.Foundations.RetryAfterHeader
+      > & {
+        @bodyRoot _: SharingUpdate;
+      })
   >;
 }
 

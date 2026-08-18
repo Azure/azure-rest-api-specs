@@ -275,7 +275,7 @@ interface DocumentTranslationOperations {
     {
       @doc("the type of format like document or glossary ")
       @query("type")
-      type?: FileFormatType;
+      type: FileFormatType;
     },
     SupportedFileFormats
   >;

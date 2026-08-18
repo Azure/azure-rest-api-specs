@@ -17,6 +17,7 @@ import "./ResourceGroup.tsp";
 import "./TagsResource.tsp";
 import "./GenericResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

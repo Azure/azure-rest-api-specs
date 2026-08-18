@@ -1,0 +1,118 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "dryrunName": "dryrunName",
+    "location": "westus",
+    "parameters": {
+      "properties": {
+        "parameters": {
+          "actionName": "createOrUpdate",
+          "authInfo": {
+            "name": "name",
+            "authType": "secret",
+            "secretInfo": {
+              "secretType": "rawValue",
+              "value": "secret"
+            }
+          },
+          "targetService": {
+            "type": "AzureResource",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dryrunName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ServiceLinker/locations/westus/dryruns/dryrunName",
+        "properties": {
+          "operationPreviews": [
+            {
+              "name": "configFirewallRule",
+              "description": "Config firewall rule for target service to allow source service access",
+              "action": "Microsoft.DocumentDb/databaseAccounts/write",
+              "operationType": "configNetwork",
+              "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc"
+            }
+          ],
+          "parameters": {
+            "actionName": "createOrUpdate",
+            "authInfo": {
+              "name": "name",
+              "authType": "secret"
+            },
+            "targetService": {
+              "type": "AzureResource",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+            }
+          },
+          "prerequisiteResults": [
+            {
+              "type": "basicError",
+              "code": "ResourceNotFound",
+              "message": "Target resource is not found"
+            },
+            {
+              "type": "permissionsMissing",
+              "permissions": [
+                "Microsoft.DocumentDb/databaseAccounts/write"
+              ],
+              "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "dryrunName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ServiceLinker/locations/westus/dryruns/dryrunName",
+        "properties": {
+          "operationPreviews": [
+            {
+              "name": "configFirewallRule",
+              "description": "Config firewall rule for target service to allow source service access",
+              "action": "Microsoft.DocumentDb/databaseAccounts/write",
+              "operationType": "configNetwork",
+              "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc"
+            }
+          ],
+          "parameters": {
+            "actionName": "createOrUpdate",
+            "authInfo": {
+              "name": "name",
+              "authType": "secret"
+            },
+            "targetService": {
+              "type": "AzureResource",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+            }
+          },
+          "prerequisiteResults": [
+            {
+              "type": "basicError",
+              "code": "ResourceNotFound",
+              "message": "Target resource is not found"
+            },
+            {
+              "type": "permissionsMissing",
+              "permissions": [
+                "Microsoft.DocumentDb/databaseAccounts/write"
+              ],
+              "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc"
+            }
+          ],
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "operationId": "Connector_CreateDryrun",
+  "title": "ConnectorDryrunCreate"
+}

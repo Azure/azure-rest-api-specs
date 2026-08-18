@@ -3,11 +3,11 @@ import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import deepEqual from "deep-eql";
 import { readFile } from "fs/promises";
 import { join, relative, resolve, sep } from "path";
-import { ReadmeAffectedTags } from "./lintdiff-types.js";
-import { pathExists } from "./util.js";
+import { type ReadmeAffectedTags } from "./lintdiff-types.ts";
+import { pathExists } from "./util.ts";
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { deduplicateTags, getDefaultTag } from "./markdown-utils.js";
+import { deduplicateTags, getDefaultTag } from "./markdown-utils.ts";
 
 export async function getRunList(
   beforePath: string,

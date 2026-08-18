@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./JobResource.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

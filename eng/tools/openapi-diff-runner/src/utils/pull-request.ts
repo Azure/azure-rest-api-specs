@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { simpleGit } from "simple-git";
-import { logError, logMessage } from "../log.js";
-import { Context } from "../types/breaking-change.js";
+import { logError, logMessage } from "../log.ts";
+import { type Context } from "../types/breaking-change.ts";
 
 /**
  * Properties of Pull Request in Azure DevOps CI.

@@ -1,8 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@typespec/http";
 import "@typespec/rest";
 
-using TypeSpec.Http;
+using Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
@@ -71,7 +72,7 @@ op checkSkuAvailabilityCustom(
   ...SubscriptionIdParameter,
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
-  location: string,
+  ...LocationParameter,
   skus: string[],
   type: string,
   kind: string,
@@ -151,6 +152,33 @@ op regenerateKeyCustom(
 );
 
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  Account,
+  "resource-rbac-roles",
+  #{
+    AzureAIDeveloper: "64702f94-c441-49e6-a78b-ef80e0188fee",
+    AzureAIEnterpriseNetworkConnectionApprover: "b556d68e-0be0-4f35-a333-ad7ee1ce17ea",
+    AzureAIInferenceDeploymentOperator: "3afb7f49-54cb-416e-8c09-6dc049efa503",
+    CognitiveServicesContributor: "25fbc0a9-bd7c-42a3-aa1a-3b75d497ee68",
+    CognitiveServicesCustomVisionContributor: "c1ff6cc2-c111-46fe-8896-e0ef812ad9f3",
+    CognitiveServicesCustomVisionDeployment: "5c4089e1-6d96-4d2f-b296-c1bc7137275f",
+    CognitiveServicesCustomVisionLabeler: "88424f51-ebe7-446f-bc41-7fa16989e96c",
+    CognitiveServicesCustomVisionReader: "93586559-c37d-4a6b-ba08-b9f0940c2d73",
+    CognitiveServicesCustomVisionTrainer: "0a5ae4ab-0d65-4eeb-be61-29fc9b54394b",
+    CognitiveServicesDataReader: "b59867f0-fa02-499b-be73-45a86b5b3e1c",
+    CognitiveServicesFaceRecognizer: "9894cab4-e18a-44aa-828b-cb588cd6f2d7",
+    CognitiveServicesMetricsAdvisorAdministrator: "cb43c632-a144-4ec5-977c-e80c4affc34a",
+    CognitiveServicesOpenAIContributor: "a001fd3d-188f-4b5d-821b-7da978bf7442",
+    CognitiveServicesOpenAIUser: "5e0bd9bd-7b93-4f28-af87-19fc36ad61bd",
+    CognitiveServicesQnAMakerEditor: "f4cc2bf9-21be-47a1-bdf1-5c5804381025",
+    CognitiveServicesQnAMakerReader: "466ccd10-b268-4a11-b098-b4849f024126",
+    CognitiveServicesUsagesReader: "bba48692-92b0-4667-a9ad-c31c7b334ac2",
+    CognitiveServicesUser: "a97b65f3-24c7-4388-baec-2e87135dc908",
+  },
+  "csharp"
+);
 @@alternateType(Account.location, azureLocation, "csharp");
 @@alternateType(Account.etag, eTag, "csharp");
 @@alternateType(
@@ -685,7 +713,12 @@ op regenerateKeyCustom(
 );
 @@clientName(
   ManagedNetworkProvisionOptions,
-  "CognitiveServicesManagedNetworkProvisionOptions",
+  "CognitiveServicesManagedNetworkProvisionConfig",
+  "csharp"
+);
+@@clientName(
+  FoundryAutoUpgrade.plannedByMicrosoft,
+  "IsPlannedByMicrosoft",
   "csharp"
 );
 @@clientName(
@@ -848,7 +881,11 @@ op regenerateKeyCustom(
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ReplacementConfig, "ModelReplacementConfiguration", "csharp");
+@@clientName(
+  ReplacementConfig,
+  "CognitiveServicesModelReplacementConfiguration",
+  "csharp"
+);
 @@clientName(RoutingMode, "CognitiveServicesRoutingMode", "csharp");
 @@clientName(RuleAction, "ServiceTagOutboundRuleAction", "csharp");
 @@clientName(RuleCategory, "ServiceTagOutboundRuleCategory", "csharp");
@@ -1012,3 +1049,161 @@ op regenerateKeyCustom(
 @@access(SkuChangeInfo, Access.public, "csharp");
 @@access(UserOwnedAmlWorkspace, Access.public, "csharp");
 @@access(UserOwnedStorage, Access.public, "csharp");
+
+// --- C# SDK review comment resolutions ---
+
+// Resource renames: add service context to generic names
+@@clientName(Compute, "CognitiveServicesCompute", "csharp");
+@@clientName(ComputeProperties, "CognitiveServicesComputeProperties", "csharp");
+@@clientName(Workbench, "CognitiveServicesWorkbench", "csharp");
+@@clientName(
+  WorkbenchProperties,
+  "CognitiveServicesWorkbenchProperties",
+  "csharp"
+);
+
+// Model renames: suffix fixes and generic name resolution
+@@clientName(
+  EvaluateDeploymentPoliciesRequest,
+  "EvaluateDeploymentPoliciesContent",
+  "csharp"
+);
+@@clientName(
+  EvaluateDeploymentPoliciesResponse,
+  "EvaluateDeploymentPoliciesResult",
+  "csharp"
+);
+@@clientName(Identity, "CognitiveServicesComputeIdentity", "csharp");
+@@clientName(
+  ResourceIdentityType,
+  "CognitiveServicesComputeIdentityType",
+  "csharp"
+);
+@@clientName(Pool, "CognitiveServicesComputePool", "csharp");
+@@clientName(
+  ConnectivityEndpoints,
+  "CognitiveServicesComputeConnectivityEndpoints",
+  "csharp"
+);
+@@clientName(SshSettings, "CognitiveServicesComputeSshSettings", "csharp");
+@@clientName(SafetyProviderConfig, "RaiSafetyProviderSourceConfig", "csharp");
+
+// Property renames: boolean prefix and DateTimeOffset suffix conventions
+@@clientName(
+  AccountProperties.storedCompletionsDisabled,
+  "IsStoredCompletionsDisabled",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProvisioningDetails.lastOperationTimestamp,
+  "LastOperationOn",
+  "csharp"
+);
+@@clientName(SshSettings.adminEnabled, "IsAdminEnabled", "csharp");
+
+// Type changes: use standard ARM types for etag, location, identity
+@@alternateType(Compute.etag, eTag, "csharp");
+@@alternateType(Compute.location, azureLocation, "csharp");
+@@alternateType(
+  Compute.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Workbench.etag, eTag, "csharp");
+@@alternateType(Workbench.location, azureLocation, "csharp");
+
+// Prefix generic type names with service context (2026-05-15-preview)
+@@clientName(VmPriority, "CognitiveServicesVmPriority", "csharp");
+@@clientName(
+  ManagedComputeCapacity,
+  "CognitiveServicesManagedComputeCapacity",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeCapacityProperties,
+  "CognitiveServicesManagedComputeCapacityProperties",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeUsage,
+  "CognitiveServicesManagedComputeUsage",
+  "csharp"
+);
+@@clientName(
+  PolicyEvaluationOutcome,
+  "DeploymentPolicyEvaluationOutcome",
+  "csharp"
+);
+@@clientName(
+  PolicyAssignmentEvaluationDetails,
+  "DeploymentPolicyAssignmentEvaluationDetails",
+  "csharp"
+);
+@@clientName(
+  PolicyExpressionEvaluationDetails,
+  "DeploymentPolicyExpressionEvaluationDetails",
+  "csharp"
+);
+@@clientName(
+  ApplicationAuthorizationPolicy,
+  "CognitiveServicesApplicationAuthorizationPolicy",
+  "csharp"
+);
+@@clientName(
+  ApplicationTrafficRoutingPolicy,
+  "CognitiveServicesApplicationTrafficRoutingPolicy",
+  "csharp"
+);
+@@clientName(
+  ClusterComputeProperties,
+  "CognitiveServicesClusterComputeProperties",
+  "csharp"
+);
+@@clientName(
+  RoleBasedBuiltInAuthorizationPolicy,
+  "CognitiveServicesRoleBasedBuiltInAuthorizationPolicy",
+  "csharp"
+);
+@@alternateType(
+  Workbench.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ManagedComputeDeployment.etag, eTag, "csharp");
+@@alternateType(
+  ManagedComputeCapacityProperties.location,
+  azureLocation,
+  "csharp"
+);
+
+// Additional renames: add CognitiveServices prefix for consistency
+@@clientName(
+  ManagedComputeDeployment,
+  "CognitiveServicesManagedComputeDeployment",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProperties,
+  "CognitiveServicesManagedComputeDeploymentProperties",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentInfo,
+  "CognitiveServicesManagedComputeDeploymentInfo",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProvisioningDetails,
+  "CognitiveServicesManagedComputeDeploymentProvisioningDetails",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentRoutes,
+  "CognitiveServicesManagedComputeDeploymentRoutes",
+  "csharp"
+);
+@@clientName(
+  ComputeProvisioningState,
+  "CognitiveServicesComputeProvisioningState",
+  "csharp"
+);

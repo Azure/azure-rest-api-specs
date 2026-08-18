@@ -93,6 +93,7 @@ interface VirtualNetworks {
       /**
        * The private IP address to be verified.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("ipAddress")
       ipAddress: string;
     },

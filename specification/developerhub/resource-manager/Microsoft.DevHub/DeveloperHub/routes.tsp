@@ -22,7 +22,7 @@ namespace Microsoft.DevHub;
 op generatePreviewArtifacts(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  ...LocationParameter,
+  ...LocationResourceParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @body parameters: ArtifactGenerationProperties,
 ): ArmResponse<Record<string>> | ErrorResponse;

@@ -19,6 +19,7 @@ import "./EventImpactedResource.tsp";
 import "./Event.tsp";
 import "./EmergingIssuesGetResult.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

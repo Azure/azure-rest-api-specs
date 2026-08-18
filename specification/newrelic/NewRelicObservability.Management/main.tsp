@@ -17,6 +17,7 @@ import "./NewRelicMonitorResource.tsp";
 import "./TagRule.tsp";
 import "./MonitoredSubscriptionProperties.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

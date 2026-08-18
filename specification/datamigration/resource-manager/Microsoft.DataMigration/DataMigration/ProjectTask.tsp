@@ -63,7 +63,8 @@ alias ProjectTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     taskName: string;
   },
-  ApiError
+  ApiError,
+  "DataMigrationServiceTask"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -197,7 +198,8 @@ alias ServiceTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     taskName: string;
   },
-  ApiError
+  ApiError,
+  "ServiceServiceTask"
 >;
 
 @armResourceOperations(#{ omitTags: true })

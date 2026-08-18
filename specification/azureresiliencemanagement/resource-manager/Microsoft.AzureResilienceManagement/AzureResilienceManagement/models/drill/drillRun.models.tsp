@@ -102,6 +102,13 @@ model DrillRunFailoverRequest {
   failoverProperties: FailoverRequest;
 }
 
+@added(Versions.v2026_06_01_preview)
+@doc("Request body for Reprotect API.")
+model DrillRunReprotectRequest {
+  @doc("The reprotect properties.")
+  reprotectProperties: ReprotectRequest;
+}
+
 @doc("Request body for TestFailover API.")
 @removed(Versions.v2026_04_01_preview)
 model DrillRunTestFailoverRequest {
@@ -116,6 +123,7 @@ model DrillRunTestFailoverCleanupRequest {
   comments?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for TestFailoverCleanup API.")
 model DrillRunActionResponse {
   @doc("JobId of the RO job.")
@@ -133,6 +141,7 @@ model MarkAsCompleteRequest {
   drillRunStage: DrillRunSubtasks;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for MarkAsComplete API.")
 model MarkAsCompleteResponse {
   @doc("Matrix of Actions supported on Operations.")

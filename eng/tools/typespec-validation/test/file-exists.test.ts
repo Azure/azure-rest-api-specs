@@ -3,7 +3,7 @@ import { strict as assert } from "node:assert";
 import os from "os";
 import path from "path";
 import { afterEach, beforeEach, describe, it } from "vitest";
-import { fileExists } from "../src/utils.js";
+import { fileExists } from "../src/utils.ts";
 
 describe("fileExists", function () {
   let tmpDir: string;

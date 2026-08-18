@@ -7,6 +7,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using ContentUnderstanding;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace ClientCustomizations;
 
@@ -23,6 +24,12 @@ interface ContentUnderstandingClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   analyzeBinary is ContentAnalyzers.analyzeBinary;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  analyzeInline is ContentAnalyzers.analyzeInline;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  analyzeBinaryInline is ContentAnalyzers.analyzeBinaryInline;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   copyAnalyzer is ContentAnalyzers.copy;
@@ -65,24 +72,24 @@ interface ContentUnderstandingClient {
 // ============================================================================
 
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
-@@clientName(ArrayField.type, "fieldType");
-@@clientName(BooleanField.type, "fieldType");
-@@clientName(DateField.type, "fieldType");
-@@clientName(IntegerField.type, "fieldType");
-@@clientName(NumberField.type, "fieldType");
-@@clientName(ObjectField.type, "fieldType");
-@@clientName(StringField.type, "fieldType");
-@@clientName(TimeField.type, "fieldType");
-@@clientName(JsonField.type, "fieldType");
+@@clientName(ArrayField.type, "fieldType", "!autorest");
+@@clientName(BooleanField.type, "fieldType", "!autorest");
+@@clientName(DateField.type, "fieldType", "!autorest");
+@@clientName(IntegerField.type, "fieldType", "!autorest");
+@@clientName(NumberField.type, "fieldType", "!autorest");
+@@clientName(ObjectField.type, "fieldType", "!autorest");
+@@clientName(StringField.type, "fieldType", "!autorest");
+@@clientName(TimeField.type, "fieldType", "!autorest");
+@@clientName(JsonField.type, "fieldType", "!autorest");
 
 // Rename 'items' to avoid conflict with built-in 'items' method.
-@@clientName(ContentFieldDefinition.items, "itemDefinition");
+@@clientName(ContentFieldDefinition.items, "itemDefinition", "!autorest");
 
-@@clientName(AnalyzeBinaryRequest.input, "binaryInput");
+@@clientName(AnalyzeBinaryRequest.input, "binaryInput", "!autorest");
 
 // Rename 'range' to 'contentRange' for clarity that it specifies content range.
-@@clientName(AnalysisInput.range, "contentRange");
-@@clientName(AnalyzeBinaryRequest.range, "contentRange");
+@@clientName(AnalysisInput.range, "contentRange", "!autorest");
+@@clientName(AnalyzeBinaryRequest.range, "contentRange", "!autorest");
 
 // TCGC infers request-body-only types as internal; override to public for the convenience API.
 @@access(AnalysisInput, Access.public);
@@ -116,7 +123,6 @@ op analyzeBinaryCustomSignature(
   @query
   range?: RangeExpression,
 
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Conflicts with @typespec/http/content-type-string"
   @doc("Request content type.")
   @header
   contentType: string = "application/octet-stream",
@@ -124,6 +130,11 @@ op analyzeBinaryCustomSignature(
   @doc("The location where the data may be processed. Defaults to global.")
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
+  @query
+  allowInputTruncation?: boolean,
 
   @doc("The API version to use for this operation.")
   @query("api-version")
@@ -158,12 +169,99 @@ op analyzeCustomSignature(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
+  @added(Versions.v2026_06_01_preview)
+  @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
+  @query
+  allowInputTruncation?: boolean,
+
   @doc("The API version to use for this operation.")
   @query("api-version")
   apiVersion: string,
 ): AnalysisResult;
 
 @@override(ContentUnderstandingClient.analyze, analyzeCustomSignature);
+
+// Custom parameter order for analyzeInline: same as analyze but returns result directly.
+// stringEncoding is required - each SDK will set the appropriate default via language-specific customization.
+/** Analyzes content inline using the specified analyzer. The analysis result is embedded directly in the JSON response body, without creating a long-running operation. Intended for lightweight analysis scenarios (e.g., document analyzers without field extraction, small page counts). See service documentation for current constraints. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom parameter order for SDK ergonomics"
+op analyzeInlineCustomSignature(
+  @doc("The unique identifier of the analyzer.")
+  @path
+  analyzerId: string,
+
+  @doc("Inputs to analyze.")
+  inputs: AnalysisInput[],
+
+  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'.")
+  @query
+  stringEncoding: string,
+
+  @doc("Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.")
+  modelDeployments?: Record<string>,
+
+  @doc("The location where the data may be processed. Defaults to global.")
+  @query
+  processingLocation?: ProcessingLocation = ProcessingLocation.global,
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
+  @query
+  allowInputTruncation?: boolean,
+
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  apiVersion: string,
+): AnalysisResult;
+
+@@override(
+  ContentUnderstandingClient.analyzeInline,
+  analyzeInlineCustomSignature
+);
+
+// Custom parameter order for analyzeBinaryInline: same as analyzeBinary but returns result directly.
+// stringEncoding is required - each SDK will set the appropriate default via language-specific customization.
+/** Analyzes binary document content inline using the specified analyzer. The analysis result is embedded directly in the JSON response body, without creating a long-running operation. Intended for lightweight analysis scenarios (e.g., document analyzers without field extraction, small page counts). See service documentation for current constraints. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom parameter order for SDK ergonomics"
+op analyzeBinaryInlineCustomSignature(
+  @doc("The unique identifier of the analyzer.")
+  @path
+  analyzerId: string,
+
+  @doc("The binary content of the document to analyze.")
+  @bodyRoot
+  input: bytes,
+
+  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'.")
+  @query
+  stringEncoding: string,
+
+  @doc("Range of the input to analyze (ex. `1-3,5,9-`). Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.")
+  @query
+  range?: RangeExpression,
+
+  @doc("Request content type.")
+  @header
+  contentType: string = "application/octet-stream",
+
+  @doc("The location where the data may be processed. Defaults to global.")
+  @query
+  processingLocation?: ProcessingLocation = ProcessingLocation.global,
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
+  @query
+  allowInputTruncation?: boolean,
+
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  apiVersion: string,
+): AnalysisResult;
+
+@@override(
+  ContentUnderstandingClient.analyzeBinaryInline,
+  analyzeBinaryInlineCustomSignature
+);
 
 // ============================================================================
 // .NET-specific customizations

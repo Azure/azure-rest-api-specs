@@ -23,6 +23,7 @@ import "./IotConnector.tsp";
 import "./IotFhirDestination.tsp";
 import "./FhirService.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

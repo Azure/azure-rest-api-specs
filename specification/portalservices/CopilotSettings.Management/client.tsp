@@ -29,3 +29,9 @@ using Microsoft.PortalServices;
   "PortalServicesCopilotSettingsProperties",
   "csharp"
 );
+
+@@clientName(
+  CopilotSettingsProperties.accessControlEnabled,
+  "IsAccessControlEnabled",
+  "csharp"
+);

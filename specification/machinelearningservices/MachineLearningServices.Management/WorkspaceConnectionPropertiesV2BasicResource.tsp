@@ -35,11 +35,10 @@ alias WorkspaceConnectionListParameters = {
 };
 
 @parentResource(Workspace)
-model WorkspaceConnectionPropertiesV2BasicResource
-  is Azure.ResourceManager.ProxyResource<
-    WorkspaceConnectionPropertiesV2,
-    false
-  > {
+model WorkspaceConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource<
+  WorkspaceConnectionPropertiesV2,
+  false
+> {
   ...ResourceNameParameter<
     Resource = WorkspaceConnectionPropertiesV2BasicResource,
     KeyName = "connectionName",
@@ -112,6 +111,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -129,6 +130,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get

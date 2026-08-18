@@ -1,11 +1,11 @@
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
 import { join } from "path";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { EmitAutorestRule } from "../src/rules/emit-autorest.ts";
 
-import * as utils from "../src/utils.js";
-import { mockFolder } from "./mocks.js";
+import * as utils from "../src/utils.ts";
+import { mockFolder } from "./mocks.ts";
 
 describe("emit-autorest", function () {
   let fileExistsSpy: MockInstance;

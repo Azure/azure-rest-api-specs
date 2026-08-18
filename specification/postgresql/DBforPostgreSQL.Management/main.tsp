@@ -27,6 +27,7 @@ import "./Server.tsp";
 import "./TuningOptions.tsp";
 import "./VirtualEndpoint.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

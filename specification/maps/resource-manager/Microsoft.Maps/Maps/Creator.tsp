@@ -15,8 +15,10 @@ namespace Microsoft.Maps;
  * An Azure resource which represents Maps Creator product and provides ability to manage private location data.
  */
 @parentResource(MapsAccount)
-model Creator
-  is Azure.ResourceManager.TrackedResource<CreatorProperties, false> {
+model Creator is Azure.ResourceManager.TrackedResource<
+  CreatorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Creator,
     KeyName = "creatorName",

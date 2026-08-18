@@ -1,15 +1,15 @@
-import { mockAll, mockFolder } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.ts";
 mockAll();
 
-import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import * as fsPromises from "fs/promises";
 import * as globby from "globby";
 import path from "path";
-import { RuleResult } from "../src/rule-result.js";
-import { CompileRule } from "../src/rules/compile.js";
+import { type RuleResult } from "../src/rule-result.ts";
+import { CompileRule } from "../src/rules/compile.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";

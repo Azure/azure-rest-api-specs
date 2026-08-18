@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model ComponentContainer
-  is Azure.ResourceManager.ProxyResource<ComponentContainerProperties, false> {
+model ComponentContainer is Azure.ResourceManager.ProxyResource<
+  ComponentContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ComponentContainer,
     KeyName = "componentName",
@@ -48,7 +50,9 @@ interface ComponentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         componentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearninRegistryComponentContainer"
     > {}
 
 @armResourceOperations
@@ -137,7 +141,9 @@ interface ComponentContainerOperationGroupOps
         @segment("components")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningComponentContainer"
     > {}
 
 @armResourceOperations

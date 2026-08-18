@@ -151,6 +151,7 @@ union BringYourOwnRootStatus {
   ActiveButPendingRenewal: "ActiveButPendingRenewal",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("Request payload for activating a Bring Your Own Root policy with a customer-provided signed certificate.")
@@ -182,6 +183,7 @@ interface Policies {
   @sharedRoute
   listByResourceGroup is ArmResourceListByParent<Policy>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
+  @doc("A long-running resource action.")
   revokeIssuer is ArmResourceActionNoContentAsync<Policy, void>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
   @doc("Activates or renews a Bring Your Own Root policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.")

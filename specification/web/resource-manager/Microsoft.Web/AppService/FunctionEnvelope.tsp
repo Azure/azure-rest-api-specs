@@ -52,7 +52,8 @@ interface FunctionEnvelopeOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteFunction"
     > {}
 
 alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -112,7 +113,8 @@ interface FunctionEnvelopeSlotOperationGroupOps
         @segment("keys")
         @key
         keyName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunctionKey"
     > {}
 
 @armResourceOperations
@@ -142,7 +144,8 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
 @tag("WebApps")
@@ -282,7 +285,8 @@ interface FunctionEnvelopeOperationGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
 @tag("WebApps")
