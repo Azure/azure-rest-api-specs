@@ -53,8 +53,13 @@ const INLINE_SUPPRESSIBLE_RULES = new Set([
  *
  * The compiler emits `<file>:<line>:<col> - error|warning <rule-id>: <message>`, which is what makes
  * an inline suppression possible: it pins the exact declaration that needs the `#suppress`.
+ *
+ * Diagnostics are deduplicated and returned sorted by descending line number within each file. That
+ * ordering matters: inserting a `#suppress` directive adds a line, shifting every later line in the
+ * file down by one. Applying edits bottom-up keeps every not-yet-applied line number valid.
  */
 function extractDiagnostics(body) {
+  const seen = new Set();
   const diagnostics = [];
 
   for (const line of body) {
@@ -63,7 +68,17 @@ function extractDiagnostics(body) {
     );
     if (!m) continue;
 
-    const [, file, lineNo, col, severity, rule, message] = m;
+    const [, rawFile, lineNo, col, severity, rule, message] = m;
+
+    // Logs carry absolute runner paths; the agent works in a normal checkout.
+    const file = rawFile.replace(/^.*?(?=specification\/)/, "");
+
+    // The same diagnostic can be emitted more than once (e.g. by multiple emitters). Collapsing
+    // duplicates keeps the suppression count honest and avoids inserting the same directive twice.
+    const key = `${file}:${lineNo}:${col}:${rule}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
     diagnostics.push({
       file,
       line: Number(lineNo),
@@ -74,6 +89,9 @@ function extractDiagnostics(body) {
       inlineSuppressible: INLINE_SUPPRESSIBLE_RULES.has(rule),
     });
   }
+
+  // Group by file, then order by descending line so edits can be applied bottom-up.
+  diagnostics.sort((a, b) => (a.file === b.file ? b.line - a.line : a.file.localeCompare(b.file)));
 
   return diagnostics;
 }
@@ -250,7 +268,7 @@ const md = [
     ? eligible
         .map((f) => {
           const locations = f.diagnostics?.length
-            ? `\n- Suppress at:\n${f.diagnostics
+            ? `\n- Suppress at (descending line order — apply bottom-up so earlier edits do not shift later line numbers):\n${f.diagnostics
                 .map((d) => `  - \`${d.file}:${d.line}\` — \`${d.rule}\``)
                 .join("\n")}`
             : "";

@@ -195,8 +195,18 @@ op example(...): void;
 
 - The directive must sit immediately above the declaration the diagnostic points at — above its
   decorators, not between them.
-- Reported line numbers can drift slightly. Always read the surrounding source and place the
-  directive against the declaration the message actually describes, not blindly at the given line.
+- **Apply multiple suppressions to the same file bottom-up.** Every directive you insert adds a
+  line, shifting everything below it down by one, so line numbers from the report go stale as soon
+  as you edit above them. `diagnostics[]` is already sorted by descending line number within each
+  file — follow that order and each remaining line number stays correct. If you work top-down
+  instead, you must add one to every subsequent line number for each directive already inserted;
+  the risk of an off-by-N there is exactly why bottom-up is required.
+- Reported line numbers can drift slightly even before your edits. Always read the surrounding
+  source and confirm the declaration matches the diagnostic message before inserting. If the line
+  does not look like what the message describes, re-read the file rather than trusting the number.
+- After editing a file, re-read it and confirm each directive landed above the intended declaration
+  and that no directive ended up stranded above another `#suppress`, a blank line, or a closing
+  brace.
 - Give a specific, factual justification explaining why the deviation is intentional. Never write a
   filler reason like "suppressing lint error".
 - Suppress the single declaration, never a whole namespace or file, when a narrower placement works.
@@ -232,6 +242,18 @@ Verification is mandatory. Do not open a PR on an unverified edit.
 
    ```
    npx tsv <specification-folder>
+   ```
+
+   A folder that still reports the same diagnostic is the signature of a line-drift mistake: the
+   directive landed on the wrong declaration. Re-read the file and fix the placement — do not add a
+   second directive to compensate.
+
+   Also confirm the number of `#suppress` lines you added to each file matches the number of
+   diagnostics you set out to suppress in it. A mismatch means an insertion landed in the wrong
+   place:
+
+   ```
+   git diff -U0 -- specification | grep -c '^+.*#suppress'
    ```
 
 3. Run `git diff` and confirm every changed file is either `specification/suppressions.yaml` or a
