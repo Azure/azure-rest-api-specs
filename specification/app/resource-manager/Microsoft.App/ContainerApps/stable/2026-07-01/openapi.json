@@ -5851,6 +5851,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/checkMigrationEligibility": {
+      "post": {
+        "operationId": "ManagedEnvironments_CheckMigrationEligibility",
+        "tags": [
+          "ManagedEnvironments"
+        ],
+        "summary": "Checks whether a Managed Environment can be migrated to a target mode.",
+        "description": "Checks whether a Managed Environment can be migrated to a target mode.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The migration eligibility check request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckMigrationEligibilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckMigrationEligibilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check migration eligibility for an eligible managed environment": {
+            "$ref": "./examples/ManagedEnvironments_CheckMigrationEligibility.json"
+          },
+          "Check migration eligibility for an ineligible managed environment": {
+            "$ref": "./examples/ManagedEnvironments_CheckMigrationEligibility_Ineligible.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/checkNameAvailability": {
       "post": {
         "operationId": "Namespaces_CheckNameAvailability",
@@ -10104,6 +10164,58 @@
           }
         ]
       }
+    },
+    "CheckMigrationEligibilityRequest": {
+      "type": "object",
+      "description": "Request body for checking whether a managed environment can migrate to a target mode.",
+      "properties": {
+        "targetMode": {
+          "type": "string",
+          "description": "The target environment mode to check migration eligibility against."
+        }
+      },
+      "required": [
+        "targetMode"
+      ]
+    },
+    "CheckMigrationEligibilityResponse": {
+      "type": "object",
+      "description": "Result of a read-only managed environment migration eligibility check.",
+      "properties": {
+        "isEligible": {
+          "type": "boolean",
+          "description": "Whether the managed environment can migrate to the requested target mode."
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "The name of the managed environment that was checked."
+        },
+        "currentMode": {
+          "type": "string",
+          "description": "The current mode of the managed environment."
+        },
+        "targetMode": {
+          "type": "string",
+          "description": "The requested target mode."
+        },
+        "failureReasons": {
+          "type": "array",
+          "description": "The blocking reasons preventing migration. Empty when the managed environment is eligible.",
+          "items": {
+            "$ref": "#/definitions/MigrationEligibilityFailureReason"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "isEligible",
+        "environmentName",
+        "currentMode",
+        "targetMode",
+        "failureReasons"
+      ]
     },
     "ClientRegistration": {
       "type": "object",
@@ -14809,6 +14921,42 @@
         }
       ]
     },
+    "ManagedEnvironmentMode": {
+      "type": "string",
+      "description": "Mode of the managed environment.",
+      "enum": [
+        "ConsumptionOnly",
+        "WorkloadProfiles",
+        "Express",
+        "Archived"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedEnvironmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConsumptionOnly",
+            "value": "ConsumptionOnly",
+            "description": "The environment supports consumption-only workloads."
+          },
+          {
+            "name": "WorkloadProfiles",
+            "value": "WorkloadProfiles",
+            "description": "The environment supports workload profiles."
+          },
+          {
+            "name": "Express",
+            "value": "Express",
+            "description": "The environment uses the Express mode."
+          },
+          {
+            "name": "Archived",
+            "value": "Archived",
+            "description": "The environment is archived."
+          }
+        ]
+      }
+    },
     "ManagedEnvironmentProperties": {
       "type": "object",
       "description": "Managed environment resource specific properties",
@@ -14907,6 +15055,10 @@
         "ingressConfiguration": {
           "$ref": "#/definitions/IngressConfiguration",
           "description": "Ingress configuration for the Managed Environment."
+        },
+        "environmentMode": {
+          "$ref": "#/definitions/ManagedEnvironmentMode",
+          "description": "Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -15054,6 +15206,24 @@
       },
       "required": [
         "identity"
+      ]
+    },
+    "MigrationEligibilityFailureReason": {
+      "type": "object",
+      "description": "A blocking reason that prevents a managed environment migration.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code identifying the blocker."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the blocker."
+        }
+      },
+      "required": [
+        "code",
+        "message"
       ]
     },
     "Mtls": {
@@ -16281,6 +16451,16 @@
         "resources": {
           "$ref": "#/definitions/SessionContainerResources",
           "description": "Container resource requirements."
+        },
+        "probes": {
+          "type": "array",
+          "description": "List of probes for the container.",
+          "items": {
+            "$ref": "#/definitions/SessionProbe"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     },
@@ -16587,6 +16767,150 @@
           "$ref": "#/definitions/SessionNetworkConfiguration",
           "description": "The network configuration of the sessions in the session pool."
         }
+      }
+    },
+    "SessionProbe": {
+      "type": "object",
+      "description": "Session probe configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SessionProbeType",
+          "description": "Denotes the type of probe. Can be Liveness or Startup, Readiness probe is not supported in sessions. Type must be unique for each probe within the context of a list of probes (SessionProbes)."
+        },
+        "httpGet": {
+          "$ref": "#/definitions/SessionProbeHttpGet",
+          "description": "HTTPGet specifies the http request to perform."
+        },
+        "tcpSocket": {
+          "$ref": "#/definitions/SessionProbeTcpSocket",
+          "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported."
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10."
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after the container has started before liveness probes are initiated. Minimum value is 1. Maximum value is 60."
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value is 240."
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1. Maximum value is 10."
+        },
+        "terminationGracePeriodSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is an alpha field and requires enabling ProbeTerminationGracePeriod feature gate. Maximum value is 3600 seconds (1 hour)"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 240."
+        }
+      }
+    },
+    "SessionProbeHttpGet": {
+      "type": "object",
+      "description": "HTTPGet specifies the http request to perform.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP. You probably want to set \"Host\" in httpHeaders instead."
+        },
+        "httpHeaders": {
+          "type": "array",
+          "description": "Custom headers to set in the request. HTTP allows repeated headers.",
+          "items": {
+            "$ref": "#/definitions/SessionProbeHttpGetHttpHeadersItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "Path to access on the HTTP server."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME."
+        },
+        "scheme": {
+          "$ref": "#/definitions/Scheme",
+          "description": "Scheme to use for connecting to the host. Defaults to HTTP."
+        }
+      },
+      "required": [
+        "port"
+      ]
+    },
+    "SessionProbeHttpGetHttpHeadersItem": {
+      "type": "object",
+      "description": "HTTPHeader describes a custom header to be used in HTTP probes",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The header field name"
+        },
+        "value": {
+          "type": "string",
+          "description": "The header field value"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "SessionProbeTcpSocket": {
+      "type": "object",
+      "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Optional: Host name to connect to, defaults to the pod IP."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME."
+        }
+      },
+      "required": [
+        "port"
+      ]
+    },
+    "SessionProbeType": {
+      "type": "string",
+      "description": "Denotes the type of probe. Can be Liveness or Startup, Readiness probe is not supported in sessions. Type must be unique for each probe within the context of a list of probes (SessionProbes).",
+      "enum": [
+        "Liveness",
+        "Startup"
+      ],
+      "x-ms-enum": {
+        "name": "SessionProbeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Liveness",
+            "value": "Liveness",
+            "description": "Checks whether the session is still running and healthy."
+          },
+          {
+            "name": "Startup",
+            "value": "Startup",
+            "description": "Checks whether the session has started successfully."
+          }
+        ]
       }
     },
     "SessionRegistryCredentials": {
