@@ -311,7 +311,7 @@ op dryrunResourcesListDryrun(
 @@clientName(DeleteOrUpdateBehavior, "LinkerDeleteOrUpdateBehavior", "csharp");
 @@clientName(DryrunParameters, "DryrunContent", "csharp");
 @@clientName(DryrunResource, "LinkerDryrun", "csharp");
-@@clientName(DryrunResources, "ConnectorDryrunResources", "csharp");
+@@clientName(DryrunResources, "ConnectorDryruns", "csharp");
 @@clientName(
   EasyAuthMicrosoftEntraIDAuthInfo,
   "EasyAuthMicrosoftEntraIdAuthInfo",
@@ -321,7 +321,7 @@ op dryrunResourcesListDryrun(
 @@clientName(FirewallRules, "LinkerFirewallRules", "csharp");
 @@clientName(Linker, "LinkerResources", "csharp");
 @@clientName(LinkerPatch, "LinkerResourcePatch", "csharp");
-@@clientName(LinkerResources, "LinkerConnectorResources", "csharp");
+@@clientName(LinkerResources, "LinkerConnectors", "csharp");
 @@clientName(Linkers, "LinkerDryruns", "csharp");
 @@clientName(PublicNetworkSolution, "LinkerPublicNetworkSolution", "csharp");
 @@clientName(SecretInfoBase, "SecretBaseInfo", "csharp");
