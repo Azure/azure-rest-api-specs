@@ -27,7 +27,9 @@ using TypeSpec.Versioning;
 @@clientName(ActionType, "ActionTypeFlag", "!autorest");
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesGet(
   ...ApiVersionParameter,
 
@@ -46,7 +48,9 @@ op linkerResourcesGet(
 @@override(LinkerResources.get, linkerResourcesGet);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesCreateOrUpdate(
   ...ApiVersionParameter,
 
@@ -67,7 +71,9 @@ op linkerResourcesCreateOrUpdate(
 @@override(LinkerResources.createOrUpdate, linkerResourcesCreateOrUpdate);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesUpdate(
   ...ApiVersionParameter,
 
@@ -88,7 +94,9 @@ op linkerResourcesUpdate(
 @@override(LinkerResources.update, linkerResourcesUpdate);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesDelete(
   ...ApiVersionParameter,
 
@@ -107,7 +115,9 @@ op linkerResourcesDelete(
 @@override(LinkerResources.delete, linkerResourcesDelete);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesList(
   ...ApiVersionParameter,
 
@@ -124,7 +134,9 @@ op linkerResourcesList(
 @@override(LinkerResources.list, linkerResourcesList);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesValidate(
   ...ApiVersionParameter,
 
@@ -145,7 +157,9 @@ op linkerResourcesValidate(
 @@override(LinkerResources.validate, linkerResourcesValidate);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op linkerResourcesGenerateConfigurations(
   ...ApiVersionParameter,
 
@@ -172,7 +186,9 @@ op linkerResourcesGenerateConfigurations(
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op dryrunResourcesGetDryrun(
   ...ApiVersionParameter,
 
@@ -191,7 +207,9 @@ op dryrunResourcesGetDryrun(
 @@override(DryrunResources.getDryrun, dryrunResourcesGetDryrun);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op dryrunResourcesCreateDryrun(
   ...ApiVersionParameter,
 
@@ -212,7 +230,9 @@ op dryrunResourcesCreateDryrun(
 @@override(DryrunResources.createDryrun, dryrunResourcesCreateDryrun);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op dryrunResourcesUpdateDryrun(
   ...ApiVersionParameter,
 
@@ -233,7 +253,9 @@ op dryrunResourcesUpdateDryrun(
 @@override(DryrunResources.updateDryrun, dryrunResourcesUpdateDryrun);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op dryrunResourcesDeleteDryrun(
   ...ApiVersionParameter,
 
@@ -252,7 +274,9 @@ op dryrunResourcesDeleteDryrun(
 @@override(DryrunResources.deleteDryrun, dryrunResourcesDeleteDryrun);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 op dryrunResourcesListDryrun(
   ...ApiVersionParameter,
 

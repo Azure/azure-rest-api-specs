@@ -162,6 +162,7 @@ model AgentObject {
   @visibility(Lifecycle.Read)
   state_source?: AgentStateSource;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("The latest version of the agent.")
   versions: {
     latest: AgentVersionObject;
@@ -335,7 +336,7 @@ model PromptAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @doc("""
     How the model should select which tool (or tools) to use when generating a response.
     See the `tools` parameter to see how to specify which tools the model can call.
