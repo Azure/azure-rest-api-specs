@@ -525,7 +525,7 @@ union GcpTemplateFormat {
 /**
  * The HybridConnectivity post operation response
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This API version acknowledges successful GCP template generation with an empty response object and does not return generated template content."
 @added(Versions.v2027_01_01)
 model GenerateGcpTemplateResponse {}
 
