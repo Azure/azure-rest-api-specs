@@ -691,6 +691,9 @@ union WebSearchToolSearchContextSizeExpandable {
 // --------------------------------------------------------------------------------
 
 // Re-order enum to insert new value at the end.
+/**
+ * Supported tool types for tools stored in a toolbox.
+ */
 union ToolboxToolTypeJava {
   code_interpreter: "code_interpreter",
   file_search: "file_search",
