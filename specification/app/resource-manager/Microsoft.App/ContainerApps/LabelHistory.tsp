@@ -16,7 +16,7 @@ namespace Microsoft.App;
  * Container App Label History.
  */
 @removed(Versions.v2026_01_01)
-@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model LabelHistory
   is Azure.ResourceManager.ProxyResource<LabelHistoryProperties> {
@@ -54,23 +54,23 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @removed(Versions.v2026_01_01)
-@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsLabelHistory {
   /**
-   * Get the history of a label.
+   * Gets the revision history associated with a Container App label.
    */
   @summary("Get the history of a label.")
   getLabelHistory is LabelHistoryOps.Read<LabelHistory>;
 
   /**
-   * Delete the history of a label.
+   * Deletes the revision history associated with a Container App label.
    */
   @summary("Delete the history of a label.")
   deleteLabelHistory is LabelHistoryOps.DeleteSync<LabelHistory>;
 
   /**
-   * Get the Label History for a given Container App.
+   * Lists the label revision histories for a Container App.
    */
   @summary("Get the Label History for a given Container App.")
   listLabelHistory is LabelHistoryOps.List<
