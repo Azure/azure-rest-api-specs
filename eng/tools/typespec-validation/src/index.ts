@@ -9,6 +9,7 @@ import { FlavorAzureRule } from "./rules/flavor-azure.ts";
 import { FolderStructureRule } from "./rules/folder-structure.ts";
 import { FormatRule } from "./rules/format.ts";
 import { LinterRulesetRule } from "./rules/linter-ruleset.ts";
+import { MultipleNewApiVersionsRule } from "./rules/multiple-new-api-versions.ts";
 import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
@@ -120,6 +121,10 @@ export async function main() {
     new CompileRule(),
     new FormatRule(),
     new SdkTspConfigValidationRule(),
+    new MultipleNewApiVersionsRule({
+      baseCommitish: typeof context.baseCommitish === "string" ? context.baseCommitish : undefined,
+      headCommitish: typeof context.headCommitish === "string" ? context.headCommitish : undefined,
+    }),
   ];
 
   const result = await runRules(rules, absolutePath, suppressions);
