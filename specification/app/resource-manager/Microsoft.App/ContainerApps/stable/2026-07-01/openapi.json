@@ -8784,11 +8784,20 @@
         "sasUrlSettingName": {
           "type": "string",
           "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens."
+        },
+        "blobContainerUri": {
+          "type": "string",
+          "description": "The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId."
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId."
         }
-      },
-      "required": [
-        "sasUrlSettingName"
-      ]
+      }
     },
     "Certificate": {
       "type": "object",
