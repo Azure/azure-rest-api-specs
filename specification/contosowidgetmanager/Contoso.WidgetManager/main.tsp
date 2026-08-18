@@ -16,6 +16,7 @@ using Azure.Core;
 namespace Azure.Contoso.WidgetManager;
 
 @doc("Versions info.")
+#suppress "@azure-tools/typespec-azure-core/no-enum" "test: checked rule suppression with justification for workflow validation"
 enum Versions {
   @doc("The 2022-11-01-preview version.")
   v2022_11_01_Preview: "2022-11-01-preview",
@@ -26,15 +27,18 @@ enum Versions {
 
 @doc("A widget.")
 @resource("widgets")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "test: unchecked rule suppression with justification (not in check-rules.json)"
 model WidgetSuite {
   @key("widgetName")
   @doc("The widget name.")
   @visibility(Lifecycle.Read)
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "test: checked rule suppression with justification for workflow validation"
   @doc("The ID of the widget's manufacturer.")
   manufacturerId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
 }
