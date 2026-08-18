@@ -1,11 +1,12 @@
 import { Octokit } from "@octokit/rest";
-import { execSync } from "node:child_process";
+import { execSync, spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join, posix } from "node:path";
 import type {
   CommitProjectInfoResult,
   OctokitLike,
   PullRequestChangedFile,
+  TypeSpecMetadataResult,
   TypeSpecProjectInfo,
 } from "./types.ts";
 
@@ -21,13 +22,14 @@ export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
  * Returns null when no specification files were modified, or when zero/multiple projects found.
+ * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @param params Object containing PR details, owner, repo, workspace, and Octokit instance
  * @param params.prNumber Pull request number
  * @param params.owner Repository owner
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or no API version detected
+ * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or API version detection fails
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -63,30 +65,21 @@ export async function getTypeSpecProjectInfoFromPr(params: {
     return null;
   }
 
-  const tspProjectPath = tspProjectPaths[0];
-  const versionResult = detectApiVersions(
-    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
-    tspProjectPath,
-    workspace,
-  );
+  const tspProjectRelPath = tspProjectPaths[0];
+  const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
-  if (versionResult.apiVersions.length === 0) {
-    console.log(
-      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
-    );
+  try {
+    return getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
+  } catch {
+    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
     return null;
   }
-
-  return {
-    tspProjectPath,
-    apiVersion: versionResult.apiVersions[0],
-    isPreview: versionResult.isPreview,
-  };
 }
 
 /**
  * Identifies TypeSpec project info from a commit SHA.
  * Attempts to resolve an associated PR first; if not found, inspects commit file changes directly.
+ * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @returns TypeSpec project info and optional associated PR number
  */
 export async function getTypeSpecProjectInfoFromCommit(params: {
@@ -166,28 +159,19 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
     return { projectInfo: null, hasNewApiVersionLabel: false };
   }
 
-  const tspProjectPath = tspProjectPaths[0];
-  const versionResult = detectApiVersions(
-    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
-    tspProjectPath,
-    workspace,
-  );
+  const tspProjectRelPath = tspProjectPaths[0];
+  const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
-  if (versionResult.apiVersions.length === 0) {
-    console.log(
-      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
-    );
+  try {
+    const projectInfo = getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
+    return {
+      projectInfo,
+      hasNewApiVersionLabel: false,
+    };
+  } catch {
+    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
     return { projectInfo: null, hasNewApiVersionLabel: false };
   }
-
-  return {
-    projectInfo: {
-      tspProjectPath,
-      apiVersion: versionResult.apiVersions[0],
-      isPreview: versionResult.isPreview,
-    },
-    hasNewApiVersionLabel: false,
-  };
 }
 
 /**
@@ -365,6 +349,202 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
   }
 
   return null;
+}
+
+/**
+ * Runs TypeSpec metadata emitter to generate metadata JSON output.
+ * Checks for main.tsp first, then falls back to client.tsp.
+ * @param tspProjectPath Absolute path to TypeSpec project directory
+ * @returns Metadata result with apiVersion and sdkType
+ * @throws Error if tsp compile fails or if main.tsp and client.tsp don't exist
+ */
+export function runTypeSpecMetadataEmitter(tspProjectPath: string): TypeSpecMetadataResult {
+  const mainTspPath = join(tspProjectPath, "main.tsp");
+  const clientTspPath = join(tspProjectPath, "client.tsp");
+
+  let compileCommand: string;
+  if (existsSync(mainTspPath)) {
+    compileCommand =
+      'npm exec -- tsp compile . --emit @azure-tools/typespec-metadata --output-dir "./tsp-output" --option @azure-tools/typespec-metadata.format="json"';
+  } else if (existsSync(clientTspPath)) {
+    compileCommand =
+      'npm exec -- tsp compile ./client.tsp --emit @azure-tools/typespec-metadata --output-dir "./tsp-output" --option @azure-tools/typespec-metadata.format="json"';
+  } else {
+    throw new Error(
+      `Neither main.tsp nor client.tsp found in ${tspProjectPath}. Cannot generate TypeSpec metadata.`,
+    );
+  }
+
+  console.log(`Running TypeSpec metadata emitter in ${tspProjectPath}`);
+  console.log(`Command: ${compileCommand}`);
+  const tspCommand = process.platform === "win32" ? "tsp.cmd" : "tsp";
+  const result = spawnSync(
+    tspCommand,
+    [
+      "compile",
+      existsSync(mainTspPath) ? "." : "./client.tsp",
+      "--emit",
+      "@azure-tools/typespec-metadata",
+      "--output-dir",
+      "./tsp-output",
+      "--option",
+      "@azure-tools/typespec-metadata.format=json",
+    ],
+    {
+      cwd: tspProjectPath,
+      encoding: "utf8",
+      shell: true,
+    },
+  );
+
+  console.log(result);
+  if (result.status !== 0) {
+    const errorMsg = `TypeSpec metadata emitter failed with exit code ${result.status}\nStderr: ${result.stderr || "N/A"}\nStdout: ${result.stdout || "N/A"}`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
+  }
+
+  console.log("TypeSpec metadata emitter completed successfully");
+  const metadata = parseTypeSpecMetadata(tspProjectPath);
+  return metadata;
+}
+
+/**
+ * Parses the generated TypeSpec metadata JSON file.
+ * Extracts and validates apiVersion and sdkType from all language configurations.
+ * @param tspProjectPath Absolute path to TypeSpec project directory
+ * @returns Metadata result with apiVersion and sdkType, or throws error if validation fails
+ * @throws Error if metadata file cannot be read, parsed, or if sdkType conflicts detected
+ */
+export function parseTypeSpecMetadata(tspProjectPath: string): TypeSpecMetadataResult {
+  const metadataPath = join(
+    tspProjectPath,
+    "tsp-output",
+    "@azure-tools",
+    "typespec-metadata",
+    "typespec-metadata.json",
+  );
+
+  console.log(`Reading TypeSpec metadata from ${metadataPath}`);
+
+  if (!existsSync(metadataPath)) {
+    throw new Error(`TypeSpec metadata file not found at ${metadataPath}`);
+  }
+
+  interface LanguageConfig {
+    apiVersion?: string;
+    sdkType?: string;
+  }
+
+  interface TypeSpecMetadataFile {
+    languages?: Record<string, LanguageConfig[]>;
+  }
+
+  let metadata: TypeSpecMetadataFile;
+  try {
+    const content = readFileSync(metadataPath, "utf8");
+    metadata = JSON.parse(content) as TypeSpecMetadataFile;
+  } catch (error) {
+    throw new Error(
+      `Failed to parse TypeSpec metadata JSON: ${error instanceof Error ? error.message : String(error)}`,
+      { cause: error },
+    );
+  }
+
+  if (!metadata.languages || typeof metadata.languages !== "object") {
+    throw new Error("TypeSpec metadata does not contain 'languages' object");
+  }
+
+  const versionAndTypeMap = new Map<string, Set<string>>();
+
+  for (const [, langConfigs] of Object.entries(metadata.languages)) {
+    if (!Array.isArray(langConfigs)) {
+      continue;
+    }
+
+    for (const config of langConfigs) {
+      const apiVersion = config.apiVersion;
+      const sdkType = config.sdkType;
+
+      if (!apiVersion || !sdkType) {
+        console.warn(
+          `Skipping language config with missing apiVersion or sdkType: ${JSON.stringify(config)}`,
+        );
+        continue;
+      }
+
+      if (!versionAndTypeMap.has(apiVersion)) {
+        versionAndTypeMap.set(apiVersion, new Set());
+      }
+      versionAndTypeMap.get(apiVersion)!.add(sdkType);
+    }
+  }
+
+  if (versionAndTypeMap.size === 0) {
+    throw new Error("No valid language configurations found in TypeSpec metadata");
+  }
+
+  // We expect exactly one unique API version
+  if (versionAndTypeMap.size > 1) {
+    const versions = Array.from(versionAndTypeMap.keys()).join(", ");
+    throw new Error(
+      `Multiple API versions found in TypeSpec metadata: ${versions}. Expected single version.`,
+    );
+  }
+
+  const apiVersion = Array.from(versionAndTypeMap.keys())[0];
+  const sdkTypes = versionAndTypeMap.get(apiVersion)!;
+
+  // Validate that all language configurations have consistent sdkType
+  if (sdkTypes.size > 1) {
+    const types = Array.from(sdkTypes).join(", ");
+    const message = `TypeSpec code generator output suggests that this project contains conflicting SDK release type based on TypeSpec configuration (found: ${types}) hence a release plan cannot be created automatically. Create a release plan using azsdk agent.`;
+    console.error(message);
+    throw new Error(message);
+  }
+
+  if (sdkTypes.size === 0) {
+    throw new Error("No sdkType information found in TypeSpec metadata");
+  }
+
+  const sdkType = Array.from(sdkTypes)[0] as "stable" | "preview";
+
+  const message = `Parsed API version ${apiVersion} (${sdkType}) from TypeSpec metadata. SDK will be generated using this API version. If SDK needs to be generated using a different version, submit a spec PR to update the API version in tspconfig.yaml.`;
+
+  return { apiVersion, sdkType, message };
+}
+
+/**
+ * Gets TypeSpec project version info using TypeSpec metadata emitter.
+ * Runs the metadata emitter on the given project and extracts version/sdkType info.
+ * @param tspProjectAbsPath Absolute path to TypeSpec project
+ * @param tspProjectRelPath Relative path to TypeSpec project (for logging)
+ * @returns TypeSpecProjectInfo with apiVersion and isPreview, or throws error
+ */
+export function getTypeSpecProjectVersionFromMetadata(
+  tspProjectAbsPath: string,
+  tspProjectRelPath: string,
+): TypeSpecProjectInfo {
+  try {
+    const metadata = runTypeSpecMetadataEmitter(tspProjectAbsPath);
+    const isPreview = metadata.sdkType === "preview";
+
+    console.log(
+      `Found TypeSpec project at ${tspProjectRelPath} with API version ${metadata.apiVersion} (${metadata.sdkType})`,
+    );
+
+    return {
+      tspProjectPath: tspProjectRelPath,
+      apiVersion: metadata.apiVersion,
+      isPreview,
+    };
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error(
+      `Failed to extract version from TypeSpec project at ${tspProjectRelPath}: ${errorMsg}`,
+    );
+    throw error;
+  }
 }
 
 /**
