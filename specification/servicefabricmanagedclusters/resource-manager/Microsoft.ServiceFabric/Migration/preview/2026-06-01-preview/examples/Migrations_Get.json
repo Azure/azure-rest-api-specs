@@ -1,0 +1,83 @@
+{
+  "title": "Get a migration",
+  "operationId": "Migrations_Get",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "migrationName": "myMigration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/migrations/myMigration",
+        "name": "myMigration",
+        "type": "Microsoft.ServiceFabric/migrations",
+        "location": "eastus",
+        "tags": {
+          "wave": "1"
+        },
+        "properties": {
+          "migrationId": "11111111-2222-3333-4444-555555555555",
+          "sourceClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusters/mySourceCluster",
+          "targetClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myTargetCluster",
+          "nodeTypes": [
+            {
+              "name": "nt1",
+              "isPrimary": true,
+              "vmInstanceCount": 5
+            },
+            {
+              "name": "nt2",
+              "isPrimary": false,
+              "vmInstanceCount": 3
+            }
+          ],
+          "retryPolicy": {
+            "maxRetry": 10,
+            "retryInterval": "PT1M",
+            "maxRetryInterval": "PT1H"
+          },
+          "rollbackOnFailure": false,
+          "startMode": "Auto",
+          "provisioningState": "Succeeded",
+          "status": "InProgress",
+          "migrationMode": "Forward",
+          "stages": [
+            {
+              "name": "PrepareTargetCluster",
+              "index": 1,
+              "forward": {
+                "status": "Completed",
+                "result": "Succeeded",
+                "startedTime": "2026-06-01T18:00:00Z",
+                "completedTime": "2026-06-01T18:12:00Z",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "MigrateNodeTypes",
+              "index": 2,
+              "forward": {
+                "status": "InProgress",
+                "startedTime": "2026-06-01T18:12:00Z",
+                "retryCount": 0,
+                "lastAttemptTime": "2026-06-01T18:12:00Z"
+              }
+            }
+          ],
+          "createdTime": "2026-06-01T17:55:00Z",
+          "lastUpdatedTime": "2026-06-01T18:12:00Z"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-06-01T17:55:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-06-01T18:12:00Z"
+        }
+      }
+    }
+  }
+}

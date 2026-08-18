@@ -1,0 +1,1054 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricMigrationManagementClient",
+    "version": "2026-06-01-preview",
+    "description": "Service Fabric migration management client. Provides the migration resource used to move a\nclassic Service Fabric cluster to a Service Fabric managed cluster.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Migrations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ServiceFabric/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/migrations": {
+      "get": {
+        "operationId": "Migrations_ListBySubscription",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Gets all Service Fabric migration resources in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List migrations in a subscription": {
+            "$ref": "./examples/Migrations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations": {
+      "get": {
+        "operationId": "Migrations_ListByResourceGroup",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Gets all Service Fabric migration resources in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List migrations in a resource group": {
+            "$ref": "./examples/Migrations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations/{migrationName}": {
+      "get": {
+        "operationId": "Migrations_Get",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Get a Service Fabric migration resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "migrationName",
+            "in": "path",
+            "description": "The name of the Migration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a migration": {
+            "$ref": "./examples/Migrations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Migrations_CreateOrUpdate",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Create or update a Service Fabric migration resource. The source cluster, the target cluster, and\nthe set of node types cannot be changed after the migration is created.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "migrationName",
+            "in": "path",
+            "description": "The name of the Migration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Migration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "201": {
+            "description": "Resource 'Migration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a migration": {
+            "$ref": "./examples/Migrations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Migration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Migrations_Update",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Update the tags of a Service Fabric migration resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "migrationName",
+            "in": "path",
+            "description": "The name of the Migration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the tags of a migration": {
+            "$ref": "./examples/Migrations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Migration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Migrations_Delete",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Delete a Service Fabric migration resource. The migration must be in the NotStarted, Succeeded, or\nRolledBack state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "migrationName",
+            "in": "path",
+            "description": "The name of the Migration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a migration": {
+            "$ref": "./examples/Migrations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations/{migrationName}/rollback": {
+      "post": {
+        "operationId": "Migrations_Rollback",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Roll back a migration, undoing the stages that already ran. The migration must be in the\nInProgress, Failed, or RollingBack state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "migrationName",
+            "in": "path",
+            "description": "The name of the Migration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Roll back a migration": {
+            "$ref": "./examples/Migrations_Rollback.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Migration"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations/{migrationName}/start": {
+      "post": {
+        "operationId": "Migrations_Start",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Start a migration that was created with the Manual start mode. The migration must be in the\nNotStarted state and provisioning must have succeeded.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "migrationName",
+            "in": "path",
+            "description": "The name of the Migration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a migration": {
+            "$ref": "./examples/Migrations_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Migration"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Migration": {
+      "type": "object",
+      "description": "Describes the migration of a classic Service Fabric cluster to a Service Fabric managed cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MigrationListResult": {
+      "type": "object",
+      "description": "The response of a Migration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Migration items on this page",
+          "items": {
+            "$ref": "#/definitions/Migration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MigrationMode": {
+      "type": "string",
+      "description": "The direction in which the migration stages are currently executing.",
+      "enum": [
+        "Forward",
+        "RollingBack"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Forward",
+            "value": "Forward",
+            "description": "Stages are executing in roll forward order."
+          },
+          {
+            "name": "RollingBack",
+            "value": "RollingBack",
+            "description": "Stages are executing in rollback order."
+          }
+        ]
+      }
+    },
+    "MigrationNodeTypeDescription": {
+      "type": "object",
+      "description": "Describes a node type that participates in the migration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the node type. The name cannot be changed, added, or removed after the migration is created.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "Indicates whether the node type hosts the system services of the cluster. This value cannot be\nchanged after the migration is created."
+        },
+        "vmInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of virtual machine instances to provision for this node type on the target managed cluster.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "isPrimary",
+        "vmInstanceCount"
+      ]
+    },
+    "MigrationProperties": {
+      "type": "object",
+      "description": "The properties of a migration resource.",
+      "properties": {
+        "migrationId": {
+          "type": "string",
+          "description": "The service generated identifier of the migration.",
+          "readOnly": true
+        },
+        "sourceClusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the classic Service Fabric cluster to migrate from. The source and the\ntarget cluster must belong to the same subscription. This value cannot be changed after the\nmigration is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceFabric/clusters"
+              }
+            ]
+          }
+        },
+        "targetClusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the Service Fabric managed cluster to migrate to. The source and the\ntarget cluster must belong to the same subscription. This value cannot be changed after the\nmigration is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceFabric/managedClusters"
+              }
+            ]
+          }
+        },
+        "nodeTypes": {
+          "type": "array",
+          "description": "The node types that are migrated to the target managed cluster. At least one node type is required.\nNode types cannot be added or removed after the migration is created.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/MigrationNodeTypeDescription"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "retryPolicy": {
+          "$ref": "#/definitions/MigrationRetryPolicy",
+          "description": "The policy applied when a migration stage fails."
+        },
+        "rollbackOnFailure": {
+          "type": "boolean",
+          "description": "Indicates whether the migration automatically rolls back when a stage fails.",
+          "default": false
+        },
+        "startMode": {
+          "type": "string",
+          "description": "Controls how the migration is started once provisioning completes.",
+          "default": "Auto",
+          "enum": [
+            "Auto",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationStartMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Auto",
+                "value": "Auto",
+                "description": "The migration starts automatically once provisioning succeeds."
+              },
+              {
+                "name": "Manual",
+                "value": "Manual",
+                "description": "The migration stays in NotStarted until the start action is invoked."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/MigrationProvisioningState",
+          "description": "The provisioning state of the migration resource.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MigrationStatus",
+          "description": "The current state of the migration.",
+          "readOnly": true
+        },
+        "migrationMode": {
+          "$ref": "#/definitions/MigrationMode",
+          "description": "The direction in which the migration stages are currently executing.",
+          "readOnly": true
+        },
+        "stages": {
+          "type": "array",
+          "description": "The status of every stage of the migration plan, ordered from the first stage to the last.",
+          "items": {
+            "$ref": "#/definitions/MigrationStage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the migration resource was created, in UTC.",
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the migration resource was last updated, in UTC.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceClusterResourceId",
+        "targetClusterResourceId",
+        "nodeTypes"
+      ]
+    },
+    "MigrationProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the migration resource.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource has been provisioned successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning of the resource failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning of the resource was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "MigrationRetryPolicy": {
+      "type": "object",
+      "description": "Describes how a failed migration stage is retried before the migration is considered failed.",
+      "properties": {
+        "maxRetry": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of times a stage is retried before the migration fails.",
+          "default": 10,
+          "minimum": 0
+        },
+        "retryInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The initial interval waited between two attempts of the same stage, in ISO 8601 duration format.",
+          "default": "PT1M"
+        },
+        "maxRetryInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The upper bound applied to the retry interval as it backs off, in ISO 8601 duration format.",
+          "default": "PT1H"
+        }
+      }
+    },
+    "MigrationStage": {
+      "type": "object",
+      "description": "The status of a single stage of the migration plan.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the stage.",
+          "readOnly": true
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The execution order group of the stage, starting at 1. Stages are returned in ascending order and\nstages that share an index execute in parallel. The index is a grouping hint rather than a stable\nidentifier across service versions.",
+          "minimum": 1,
+          "readOnly": true
+        },
+        "forward": {
+          "$ref": "#/definitions/MigrationStageProgress",
+          "description": "The progress of the roll forward execution of the stage. Not reported until the stage runs.",
+          "readOnly": true
+        },
+        "rollback": {
+          "$ref": "#/definitions/MigrationStageProgress",
+          "description": "The progress of the rollback execution of the stage. Not reported until the stage is rolled back.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "index"
+      ]
+    },
+    "MigrationStageProgress": {
+      "type": "object",
+      "description": "The progress of a migration stage in one direction.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/MigrationStageStatus",
+          "description": "The execution state of the stage in this direction.",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/MigrationStageResult",
+          "description": "The outcome of the stage. Reported only once the stage finished running.",
+          "readOnly": true
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason the stage failed. Reported only when the stage failed.",
+          "readOnly": true
+        },
+        "startedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the stage started running, in UTC.",
+          "readOnly": true
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the stage finished running, in UTC.",
+          "readOnly": true
+        },
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the stage has been retried.",
+          "readOnly": true
+        },
+        "lastAttemptTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the most recent attempt of the stage, in UTC.",
+          "readOnly": true
+        },
+        "nextRetryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the stage is retried next, in UTC.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "MigrationStageResult": {
+      "type": "string",
+      "description": "The outcome of a migration stage that finished running.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationStageResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The stage completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The stage failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "MigrationStageStatus": {
+      "type": "string",
+      "description": "The execution state of a migration stage in a single direction.",
+      "enum": [
+        "None",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationStageStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The stage has not run in this direction."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The stage is currently running."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The stage finished running."
+          }
+        ]
+      }
+    },
+    "MigrationStatus": {
+      "type": "string",
+      "description": "The observable state of a migration.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "RollingBack",
+        "RolledBack"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The migration is provisioned but has not started executing yet."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The migration is executing its stages."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "All migration stages completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The migration stopped because a stage failed."
+          },
+          {
+            "name": "RollingBack",
+            "value": "RollingBack",
+            "description": "The migration is undoing the stages that already ran."
+          },
+          {
+            "name": "RolledBack",
+            "value": "RolledBack",
+            "description": "The migration finished undoing the stages that already ran."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "MigrationTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Migration resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

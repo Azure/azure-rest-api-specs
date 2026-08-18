@@ -1,0 +1,56 @@
+{
+  "title": "Start a migration",
+  "operationId": "Migrations_Start",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "migrationName": "myMigration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/migrations/myMigration",
+        "name": "myMigration",
+        "type": "Microsoft.ServiceFabric/migrations",
+        "location": "eastus",
+        "properties": {
+          "migrationId": "11111111-2222-3333-4444-555555555555",
+          "sourceClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusters/mySourceCluster",
+          "targetClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myTargetCluster",
+          "nodeTypes": [
+            {
+              "name": "nt1",
+              "isPrimary": true,
+              "vmInstanceCount": 5
+            }
+          ],
+          "rollbackOnFailure": false,
+          "startMode": "Manual",
+          "provisioningState": "Succeeded",
+          "status": "InProgress",
+          "migrationMode": "Forward",
+          "stages": [
+            {
+              "name": "PrepareTargetCluster",
+              "index": 1,
+              "forward": {
+                "status": "InProgress",
+                "startedTime": "2026-06-01T18:00:00Z",
+                "retryCount": 0
+              }
+            }
+          ],
+          "createdTime": "2026-06-01T17:55:00Z",
+          "lastUpdatedTime": "2026-06-01T18:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/migrationOperations/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/migrationOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview"
+      }
+    }
+  }
+}

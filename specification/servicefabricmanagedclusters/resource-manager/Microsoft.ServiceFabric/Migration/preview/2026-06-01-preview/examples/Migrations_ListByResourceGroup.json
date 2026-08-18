@@ -1,0 +1,42 @@
+{
+  "title": "List migrations in a resource group",
+  "operationId": "Migrations_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/migrations/myMigration",
+            "name": "myMigration",
+            "type": "Microsoft.ServiceFabric/migrations",
+            "location": "eastus",
+            "properties": {
+              "migrationId": "11111111-2222-3333-4444-555555555555",
+              "sourceClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusters/mySourceCluster",
+              "targetClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myTargetCluster",
+              "nodeTypes": [
+                {
+                  "name": "nt1",
+                  "isPrimary": true,
+                  "vmInstanceCount": 5
+                }
+              ],
+              "rollbackOnFailure": false,
+              "startMode": "Auto",
+              "provisioningState": "Succeeded",
+              "status": "NotStarted",
+              "createdTime": "2026-06-01T17:55:00Z",
+              "lastUpdatedTime": "2026-06-01T17:56:00Z"
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}
