@@ -36,7 +36,7 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 **New operations**:
 
 - **Streaming knowledge retrieval**: `KnowledgeRetrieval_RetrieveStream` (POST `.../knowledgebases('{knowledgeBaseName}')/retrieve` with `Accept: text/event-stream`) streams retrieval progress and results as server-sent events on the same route as `KnowledgeRetrieval_Retrieve`. The current OpenAPI 2.0 projection exposes the `200` response as an untyped string, so generated C# provides a buffered protocol `Response` without typed per-event parsing; typed SSE code generation remains deferred before GA.
-- **File knowledge source file management**: `KnowledgeSources_UpdateFile` (PUT `.../files('{fileId}')`) and `KnowledgeSources_UploadFileMultipart` (POST `.../files`, `multipart/form-data`).
+- **File knowledge source file management**: `KnowledgeSources_UpdateFile` (PUT `.../files('{fileId}')`) and `KnowledgeSources_UploadFileMultipart` (POST `.../files`, `multipart/form-data`). Their `UpdateKnowledgeSourceFileRequest` and `UploadKnowledgeSourceFileMultipartRequest` bodies require both the structured `metadata` part and raw `content` part.
 
 **Server-driven listing pagination**:
 
@@ -44,7 +44,7 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 
 **Streaming event model**:
 
-- The TypeSpec source defines `KnowledgeBaseRetrievalStreamEvents` (`@events` server-sent-event union) with events `retrieval.started`, `activity.started`, `activity.completed`, `answer.completed`, `references.completed`, `error`, and the terminal `response.completed`. New event payloads: `KnowledgeBaseRetrievalStartedEvent`, `KnowledgeBaseActivityStartedEvent`, `KnowledgeBaseAnswerCompletedEvent`, `KnowledgeBaseStreamErrorEvent` (terminal `error`), and `KnowledgeBaseResponseCompletedEvent` (terminal `response.completed`, carrying `KnowledgeBaseRetrievalStatusCode`: `200` OK / `206` PartialContent); `activity.completed` reuses the existing `KnowledgeBaseActivityRecord` and `references.completed` reuses `KnowledgeBaseReference[]`. The per-event SSE data envelope is `KnowledgeBaseRetrievalEventStreamResponse`. These event types are not currently referenced by the generated OpenAPI response because upstream OpenAPI 2.0 and C# SSE code generation does not yet project `SSEStream<T>` as a typed event stream.
+- The TypeSpec source defines `KnowledgeBaseRetrievalStreamEvents` (`@events` server-sent-event union) with events `retrieval.started`, `activity.started`, `activity.completed`, `answer.completed`, `references.completed`, `error`, and the terminal `response.completed`. New event payloads: `KnowledgeBaseRetrievalStartedEvent`, `KnowledgeBaseActivityStartedEvent`, `KnowledgeBaseAnswerCompletedEvent`, `KnowledgeBaseStreamErrorEvent` (terminal `error`), and `KnowledgeBaseResponseCompletedEvent` (terminal `response.completed`, carrying `KnowledgeBaseRetrievalStatusCode`: `200` OK / `206` PartialContent); `activity.completed` reuses the existing `KnowledgeBaseActivityRecord` and `references.completed` reuses `KnowledgeBaseReference[]`.These event types are not currently referenced by the generated OpenAPI response because upstream OpenAPI 2.0 and C# SSE code generation does not yet project `SSEStream<T>` as a typed event stream.
 
 **New reasoning effort tier**:
 
@@ -52,7 +52,7 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 
 **Query hints for search-index knowledge sources**:
 
-- Optional `queryHints` defaults (`SearchIndexKnowledgeSourceQueryHints`) on search-index-backed knowledge source parameters (`searchIndex`, `azureBlob`, `indexedSharePoint`, `indexedOneLake`, `indexedSql`, `file`), with `filters` (`SearchIndexKnowledgeSourceFilterHint`) and `boosts` (`SearchIndexKnowledgeSourceBoost` with optional `boostInstructions`, discriminated by `SearchIndexKnowledgeSourceBoostKind` into `fieldValue` (`SearchIndexKnowledgeSourceFieldValueBoost`: a required `field` plus optional representative `fieldValues`) and `multiWordExpression` (`SearchIndexKnowledgeSourceMultiWordExpressionBoost`: optional representative `fieldValues`, no `field`), each with a positive `boost` score multiplier).
+- Optional `queryHints` defaults (`SearchIndexKnowledgeSourceQueryHints`) on search-index-backed knowledge source parameters (`searchIndex`, `azureBlob`, `indexedSharePoint`, `indexedOneLake`, `indexedSql`, `file`), with `filters` (`SearchIndexKnowledgeSourceFilterHint`: required `field` and `fieldValues`, optional `filterInstructions`) and `boosts` (`SearchIndexKnowledgeSourceBoost` with optional `boostInstructions`, discriminated by `SearchIndexKnowledgeSourceBoostKind` into `fieldValue` (`SearchIndexKnowledgeSourceFieldValueBoost`: required `field` and `boost`, optional representative `fieldValues`) and `multiWordExpression` (`SearchIndexKnowledgeSourceMultiWordExpressionBoost`: required `boost`, optional representative `fieldValues`, no `field`)).
 - Request-time `queryHintOverrides` on the corresponding knowledge source runtime params; an override replaces the stored hint object as a complete object.
 - `queryType` on search-index activity arguments, and `queryHintProcessing` (`KnowledgeBaseQueryHintProcessing`) on index-backed retrieval activity records reporting the aggregate search clause and filter expression generated from the hints.
 
@@ -73,15 +73,15 @@ All items below are **wire-compatible** (a live caller is unaffected); they are 
 
 **WorkIQ authentication**:
 
-- `WorkIQKnowledgeSource.workIQParameters` (`WorkIQKnowledgeSourceParameters`) and `EntraAppAuthentication` (`applicationId`, `federatedCredentialId`, optional `tenantId`) for federated-credential on-behalf-of auth; `x-ms-query-work-iq-source-authorization` request header (`queryWorkIQSourceAuthorization`).
+- Required `WorkIQKnowledgeSource.workIQParameters` (`WorkIQKnowledgeSourceParameters`), whose required `entraAppAuthentication` contains required `applicationId` and `federatedCredentialId` plus optional `tenantId`, for federated-credential on-behalf-of auth; `x-ms-query-work-iq-source-authorization` request header (`queryWorkIQSourceAuthorization`).
 - `KnowledgeBaseWorkIQReference.searchSensitivityLabelInfo` (`PurviewSensitivityLabelInfo`) added as part of the WorkIQ reference payload restructure (see Preview-to-Preview breaking changes for the removed `attributions`).
 
 **New optional fields on existing models**:
 
-- `KnowledgeBase`: `retrieveDefaults` (`KnowledgeBaseRetrieveDefaults`: `maxRuntimeInSeconds`, `maxOutputDocuments`), `tags` (`Record<string>`, up to 10 user-defined key-value pairs for categorizing a knowledge base and attributing usage/costs).
+- `KnowledgeBase`: `retrieveDefaults` (`KnowledgeBaseRetrieveDefaults`: optional `maxRuntimeInSeconds`, `maxOutputDocuments`, and `maxOutputSizeInTokens`), `tags` (`Record<string>`, up to 10 user-defined key-value pairs for categorizing a knowledge base and attributing usage/costs).
 - `KnowledgeBaseAgenticReasoningActivityRecord`: `logicalReasoningEffort`, reporting the requested logical effort when it differs from the execution or billing tier in `retrievalReasoningEffort`.
 - `FileKnowledgeSource`: `corsOptions`; `FileKnowledgeSourceParameters`: `queryHints`.
-- File upload/metadata: `FileUploadMetadata` (`fileName`, `metadata` — the service chooses parsing and extraction mode; the caller does not supply them), `FileKnowledgeSourceExtractionMode` (`minimal`, `standard`); `KnowledgeSourceFile`: `prefix`, `metadata`, `parsingMode`, `extractionMode`.
+- File upload/metadata: `FileUploadMetadata` (optional `fileName` and `metadata` — the service chooses parsing and extraction mode; the caller does not supply them), `FileKnowledgeSourceExtractionMode` (`minimal`, `standard`); `KnowledgeSourceFile`: `prefix`, `metadata`, `parsingMode`, `extractionMode`.
 - Service limits: `maxVectorIndexSizePerIndexInBytes` (per-index vector index memory quota, in bytes).
 - `AzureOpenAIModelName`: `Gpt56Sol` (`gpt-5.6-sol`), `Gpt56Terra` (`gpt-5.6-terra`), and `Gpt56Luna` (`gpt-5.6-luna`).
 
@@ -215,14 +215,14 @@ _Re-introduced (preview-only):_
 
 **Knowledge base activity and reference types**:
 
-- **WorkIQ**: `KnowledgeBaseWorkIQActivityRecord`, `KnowledgeBaseWorkIQActivityArguments`, `KnowledgeBaseWorkIQReference` (`WorkIQAttribution[]`, `searchSensitivityLabelInfo`), `WorkIQAttribution` (`seeMoreWebUrl`).
+- **WorkIQ**: `KnowledgeBaseWorkIQActivityRecord`, `KnowledgeBaseWorkIQActivityArguments`, `KnowledgeBaseWorkIQReference` (`WorkIQAttribution[]`), `WorkIQAttribution` (`seeMoreWebUrl`).
 - **MCP Server**: `KnowledgeBaseMcpServerActivityRecord`, `KnowledgeBaseMcpServerActivityArguments` (`toolName`, `toolArguments`), `KnowledgeBaseMcpServerReference` (`toolName`, `title`).
 - **LLM web summarization**: `KnowledgeBaseModelWebSummarizationActivityRecord` (`inputTokens`, `outputTokens`, `modelName`).
 - **New enum values**: `modelWebSummarization`, `workIQ`, `fabricDataAgent`, `fabricOntology`, `mcpServer` → `KnowledgeBaseActivityRecordType`; `workIQ`, `fabricDataAgent`, `fabricOntology`, `mcpServer` → `KnowledgeBaseReferenceType`.
 
 **Sensitivity label model**:
 
-- `PurviewSensitivityLabelInfo` (replaces `SharePointSensitivityLabelInfo`): `displayName`, `sensitivityLabelId`, `toolTip`, `priority`, `color`, `isEncrypted`; added to `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, `KnowledgeBaseIndexedOneLakeReference`, `KnowledgeBaseWorkIQReference`.
+- `PurviewSensitivityLabelInfo` (replaces `SharePointSensitivityLabelInfo`): `displayName`, `sensitivityLabelId`, `toolTip`, `priority`, `color`, `isEncrypted`; added to `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, and `KnowledgeBaseIndexedOneLakeReference`.
 
 ### Preview-to-Preview Changes (2025-11-01-preview → 2026-05-01-preview)
 
