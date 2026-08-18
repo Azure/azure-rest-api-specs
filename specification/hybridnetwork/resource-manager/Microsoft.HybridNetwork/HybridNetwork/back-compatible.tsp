@@ -4,72 +4,90 @@ using Azure.ClientGenerator.Core;
 using Microsoft.HybridNetwork;
 
 @@clientName(ResourceElementTemplate.type, "ResourceElementType");
-@@clientName(NetworkFunctionDefinitionResourceElementTemplateDetails.type,
+@@clientName(
+  NetworkFunctionDefinitionResourceElementTemplateDetails.type,
   "ResourceElementType",
   "go, javascript"
 );
-@@clientName(ArmResourceDefinitionResourceElementTemplateDetails.type,
+@@clientName(
+  ArmResourceDefinitionResourceElementTemplateDetails.type,
   "ResourceElementType",
   "go, javascript"
 );
 
-@@clientName(ConfigurationGroupSchemas.createOrUpdate::parameters.resource,
+@@clientName(
+  ConfigurationGroupSchemas.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ConfigurationGroupSchemas.update::parameters.properties,
+@@clientName(
+  ConfigurationGroupSchemas.update::parameters.properties,
   "parameters"
 );
 @@clientName(ConfigurationGroupSchemas.updateState, "updateState");
-@@clientName(ConfigurationGroupSchemas.updateState::parameters.body,
+@@clientName(
+  ConfigurationGroupSchemas.updateState::parameters.body,
   "parameters"
 );
 
-@@clientName(ConfigurationGroupValues.createOrUpdate::parameters.resource,
+@@clientName(
+  ConfigurationGroupValues.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ConfigurationGroupValues.updateTags::parameters.properties,
+@@clientName(
+  ConfigurationGroupValues.updateTags::parameters.properties,
   "parameters"
 );
 
-@@clientName(NetworkFunctions.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkFunctions.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(NetworkFunctions.updateTags::parameters.properties, "parameters");
 @@clientName(NetworkFunctions.executeRequest::parameters.body, "parameters");
 
-@@clientName(NetworkFunctionDefinitionGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkFunctionDefinitionGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkFunctionDefinitionGroups.update::parameters.properties,
+@@clientName(
+  NetworkFunctionDefinitionGroups.update::parameters.properties,
   "parameters"
 );
 
-@@clientName(NetworkFunctionDefinitionVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkFunctionDefinitionVersions.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkFunctionDefinitionVersions.update::parameters.properties,
+@@clientName(
+  NetworkFunctionDefinitionVersions.update::parameters.properties,
   "parameters"
 );
 @@clientName(NetworkFunctionDefinitionVersions.updateState, "updateState");
-@@clientName(NetworkFunctionDefinitionVersions.updateState::parameters.body,
+@@clientName(
+  NetworkFunctionDefinitionVersions.updateState::parameters.body,
   "parameters"
 );
 
-@@clientName(NetworkServiceDesignGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkServiceDesignGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkServiceDesignGroups.update::parameters.properties,
+@@clientName(
+  NetworkServiceDesignGroups.update::parameters.properties,
   "parameters"
 );
 
-@@clientName(NetworkServiceDesignVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkServiceDesignVersions.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkServiceDesignVersions.update::parameters.properties,
+@@clientName(
+  NetworkServiceDesignVersions.update::parameters.properties,
   "parameters"
 );
 @@clientName(NetworkServiceDesignVersions.updateState, "updateState");
-@@clientName(NetworkServiceDesignVersions.updateState::parameters.body,
+@@clientName(
+  NetworkServiceDesignVersions.updateState::parameters.body,
   "parameters"
 );
 
@@ -78,22 +96,27 @@ using Microsoft.HybridNetwork;
 
 @@clientName(ArtifactStores.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ArtifactStores.update::parameters.properties, "parameters");
-@@clientName(ArtifactStores.addNetworkFabricControllerEndPoints::parameters.body,
+@@clientName(
+  ArtifactStores.addNetworkFabricControllerEndPoints::parameters.body,
   "parameters"
 );
-@@clientName(ArtifactStores.deleteNetworkFabricControllerEndPoints::parameters.body,
+@@clientName(
+  ArtifactStores.deleteNetworkFabricControllerEndPoints::parameters.body,
   "parameters"
 );
-@@clientName(ArtifactStores.approvePrivateEndPoints::parameters.body,
+@@clientName(
+  ArtifactStores.approvePrivateEndPoints::parameters.body,
   "parameters"
 );
-@@clientName(ArtifactStores.removePrivateEndPoints::parameters.body,
+@@clientName(
+  ArtifactStores.removePrivateEndPoints::parameters.body,
   "parameters"
 );
-@@clientName(ProxyArtifact.proxyArtifactGet, "Get");
+@@clientName(ProxyArtifact.proxyArtifactGet, "Get", "!csharp");
 @@clientName(ProxyArtifact.updateState::parameters.body, "parameters");
 
-@@clientName(ArtifactManifests.createOrUpdate::parameters.resource,
+@@clientName(
+  ArtifactManifests.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ArtifactManifests.update::parameters.properties, "parameters");
@@ -102,17 +125,21 @@ using Microsoft.HybridNetwork;
 @@clientName(Sites.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Sites.updateTags::parameters.properties, "parameters");
 
-@@clientName(SiteNetworkServices.createOrUpdate::parameters.resource,
+@@clientName(
+  SiteNetworkServices.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(SiteNetworkServices.updateTags::parameters.properties,
+@@clientName(
+  SiteNetworkServices.updateTags::parameters.properties,
   "parameters"
 );
 
-@@clientLocation(SiteNetworkServicesOperationGroup.cancelOperation,
+@@clientLocation(
+  SiteNetworkServicesOperationGroup.cancelOperation,
   SiteNetworkServices
 );
 
-@@clientName(SiteNetworkServicesOperationGroup.cancelOperation::parameters.body,
+@@clientName(
+  SiteNetworkServicesOperationGroup.cancelOperation::parameters.body,
   "parameters"
 );
