@@ -4178,6 +4178,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(SkuInfoCollection, "AppServicePoolSkuInfoListResult", "csharp");
 @@clientName(SkuInfos, "AppServiceSkuResult", "csharp");
 @@clientName(SlotDifferenceCollection, "SlotDifferenceListResult", "csharp");
+@@clientName(SlotConfigNames, "SlotConfigNamesProperties", "csharp");
 @@clientName(Snapshot, "AppSnapshot", "csharp");
 @@clientName(SnapshotCollection, "AppSnapshotListResult", "csharp");
 @@clientName(Solution, "DiagnosticSolution", "csharp");
