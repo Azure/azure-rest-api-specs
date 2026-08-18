@@ -210,7 +210,7 @@ model CommunityBaseModel {
   @identifiers(#[])
   governedServiceList?: GovernedServiceItem[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility - Existing union"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
   policyOverride?: "Enclave" | "None" | string;
