@@ -3887,7 +3887,7 @@
       "properties": {
         "resourceIds": {
           "type": "array",
-          "description": "The resources to cancel. An empty array cancels the occurrence for all resources.",
+          "description": "The resources for which operations should be canceled. An empty array cancels all operations for all resources for the occurrence.",
           "items": {
             "$ref": "#/definitions/ValidScheduledActionResourceId"
           }
@@ -6069,7 +6069,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Read-only. The Azure resource type of the association resource.",
+          "description": "Read-only. The Azure resource type of the associated resource.",
           "readOnly": true
         },
         "resourceId": {
@@ -6186,17 +6186,17 @@
           {
             "name": "Scheduled",
             "value": "Scheduled",
-            "description": "The occurrence is waiting for its scheduled time."
+            "description": "The occurrence has been scheduled."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The occurrence completed successfully."
+            "description": "The occurrence operations completed successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The occurrence failed."
+            "description": "One or more of the occurrence operations failed."
           },
           {
             "name": "Cancelling",
@@ -6775,11 +6775,11 @@
     },
     "ResourceAttachRequest": {
       "type": "object",
-      "description": "Resources to add to a scheduled action.",
+      "description": "Resources to attach to a scheduled action.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "The resources (VMs) to add.",
+          "description": "The list of resources to attach to the scheduled action.",
           "items": {
             "$ref": "#/definitions/ScheduledActionResourceInput"
           },
@@ -7132,7 +7132,7 @@
     },
     "ResourceOperationStatus": {
       "type": "string",
-      "description": "Current status of a scheduled action operation for a targeted resource.",
+      "description": "Current status of an operation for the specific occurrence and resource",
       "enum": [
         "Succeeded",
         "Failed"
@@ -7563,7 +7563,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Read-only. The Azure resource type of the association resource.",
+          "description": "Read-only. The Azure resource type of the associated resource.",
           "readOnly": true
         },
         "resourceId": {
@@ -7671,7 +7671,7 @@
           {
             "name": "Hibernate",
             "value": "Hibernate",
-            "description": "Hibernates and deallocates the targeted resources."
+            "description": "Hibernates the targeted resources."
           }
         ]
       }
@@ -7848,7 +7848,7 @@
         },
         "executionParameters": {
           "$ref": "#/definitions/RecurringScheduledActionsExecutionParameters",
-          "description": "Settings that control execution and retries."
+          "description": "Settings that control operation execution and retries."
         },
         "deadlineType": {
           "$ref": "#/definitions/RecurringScheduledActionsDeadlineType",
@@ -7896,7 +7896,7 @@
         },
         "executionParameters": {
           "$ref": "#/definitions/RecurringScheduledActionsExecutionParameters",
-          "description": "Settings that control execution and retries."
+          "description": "Settings that control operation execution and retries."
         },
         "deadlineType": {
           "$ref": "#/definitions/RecurringScheduledActionsDeadlineType",
