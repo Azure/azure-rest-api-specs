@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @parentResource(Namespace)
 @doc("A Registry Device resource is a tracked resource with a provisioning lifecycle. The different capabilities of the device are defined through child Device Capability resources.")
 model RegistryDevice is TrackedResource<RegistryDeviceProperties> {
@@ -34,7 +34,7 @@ model RegistryDevice is TrackedResource<RegistryDeviceProperties> {
   etag?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The properties of a registry device.")
 model RegistryDeviceProperties {
   ...RegistryDevicePropertiesBase;
@@ -44,10 +44,10 @@ model RegistryDeviceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@@added(RegistryDevicePropertiesBase, Versions.v2026_11_01_preview);
-@@added(RegistryDeviceEnablementState, Versions.v2026_11_01_preview);
+@@added(RegistryDevicePropertiesBase, Versions.v2026_11_01);
+@@added(RegistryDeviceEnablementState, Versions.v2026_11_01);
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface RegistryDevices {
   get is ArmResourceRead<RegistryDevice>;

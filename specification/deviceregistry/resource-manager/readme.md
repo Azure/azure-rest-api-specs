@@ -137,13 +137,13 @@ suppressions:
     reason: enabled is a genuine boolean toggle for namespace observability with documented tri-state PATCH semantics (omitted preserves the current value; true and false explicitly set it). An enum would not improve clarity.
 ```
 
-### Tag: package-preview-2026-11-01
+### Tag: package-2026-11
 
-These settings apply only when `--tag=package-preview-2026-11-01` is specified on the command line.
+These settings apply only when `--tag=package-2026-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-11-01'
+```yaml $(tag) == 'package-2026-11'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2026-11-01-preview/deviceregistry.json
+  - Microsoft.DeviceRegistry/stable/2026-11-01/deviceregistry.json
 suppressions:
   - code: AvoidAdditionalProperties
     from:

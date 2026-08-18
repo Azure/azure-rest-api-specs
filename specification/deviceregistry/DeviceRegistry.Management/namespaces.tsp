@@ -61,11 +61,11 @@ model NamespaceProperties {
   management?: Management;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the provisioning endpoints dictionary."
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The provisioning endpoints associated with this namespace.")
   provisioning?: NamespaceProvisioning;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The identity used for outbound calls from the ADR namespace. If not specified and the namespace has a system-assigned identity enabled, the system-assigned identity is used by default.")
   outboundIdentity?: OutboundIdentity;
 
@@ -95,33 +95,33 @@ model MessagingEndpoint {
   @doc("Type of connection used for messaging endpoint.")
   endpointType?: string;
 
-  @madeOptional(Versions.v2026_11_01_preview)
+  @madeOptional(Versions.v2026_11_01)
   @doc("The endpoint address to connect to.")
   address?: string;
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The endpoint address used by devices.")
   @visibility(Lifecycle.Read)
   deviceAddress?: string;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The identity the linked resource uses to call the ADR namespace.")
   inboundCallerIdentity?: InboundCallerIdentity;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The linking state of this messaging endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The error detail surfaced when this messaging endpoint is in the Failed linking state.")
   @visibility(Lifecycle.Read)
   linkingError?: NamespaceLinkingError;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_01)
   @doc("The provisioning configuration for this messaging endpoint.")
   provisioning?: MessagingEndpointProvisioning;
 }
@@ -247,7 +247,7 @@ union ObservabilityEndpointType {
   EventGridNamespace: "Microsoft.EventGrid/namespaces",
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The provisioning configuration for a messaging endpoint.")
 model MessagingEndpointProvisioning {
   @doc("The availability status of the messaging endpoint.")
@@ -257,7 +257,7 @@ model MessagingEndpointProvisioning {
   allocationWeight?: int32;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The availability status of a messaging endpoint.")
 union MessagingEndpointAvailability {
   string,
@@ -269,7 +269,7 @@ union MessagingEndpointAvailability {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The provisioning endpoints associated with this namespace.")
 model NamespaceProvisioning {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
@@ -285,7 +285,7 @@ model NamespaceUpdating {
   endpoints?: Record<UpdatingEndpoint>;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("A provisioning service endpoint linked to this namespace.")
 model ProvisioningEndpoint {
   @doc("Type of provisioning resource.")
@@ -341,7 +341,7 @@ model UpdatingEndpoint {
   serviceAddress?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The type of provisioning resource that can be linked to a namespace.")
 union ProvisioningEndpointType {
   string,
@@ -359,7 +359,7 @@ union UpdatingEndpointType {
   ADU: "Microsoft.DeviceUpdate/updateInstances",
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The linking state values for namespace endpoint entries.")
 union NamespaceLinkingStateValue {
   string,
@@ -374,7 +374,7 @@ union NamespaceLinkingStateValue {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("Error detail for an endpoint whose linking state is Failed. Present only while the linking state is Failed and removed when the endpoint recovers.")
 model NamespaceLinkingError {
   @doc("Error code that classifies the linking failure.")
@@ -386,7 +386,7 @@ model NamespaceLinkingError {
   message?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The identity a linked resource uses for inbound calls to the ADR namespace.")
 model InboundCallerIdentity {
   @doc("The identity type.")
@@ -396,7 +396,7 @@ model InboundCallerIdentity {
   userAssignedIdentity?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The type of identity used for inbound calls to the ADR namespace.")
 union InboundCallerIdentityType {
   string,
@@ -408,7 +408,7 @@ union InboundCallerIdentityType {
   UserAssigned: "UserAssigned",
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The identity the ADR namespace uses for outbound calls. If this property is null and the namespace has a system-assigned identity enabled, the namespace defaults to using the system-assigned identity for outbound calls.")
 model OutboundIdentity {
   @doc("The identity type.")
@@ -418,7 +418,7 @@ model OutboundIdentity {
   userAssignedIdentity?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The type of identity used for outbound calls from the ADR namespace.")
 union OutboundIdentityType {
   string,

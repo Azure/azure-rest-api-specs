@@ -74,9 +74,9 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_04_01: "2026-04-01",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-01-preview.")
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2026_11_01_preview: "2026-11-01-preview",
+  v2026_11_01: "2026-11-01",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-02-preview.")
   @Azure.Core.previewVersion
@@ -107,7 +107,7 @@ interface OperationStatus {
 @@segment(OperationStatus.get::parameters.operationId, "operationStatuses");
 
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "consistent with existing OperationStatus interface"
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AsyncOperationStatus {
   @doc("Returns the current status of an async operation.")

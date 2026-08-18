@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("A Certificate Policy resource.")
 @parentResource(CertificateAuthority)
 model CertificatePolicy
@@ -27,7 +27,7 @@ model CertificatePolicy
   name: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("Details of the Certificate Policy resource.")
 model CertificatePolicyProperties {
   @visibility(Lifecycle.Read)
@@ -42,7 +42,7 @@ model CertificatePolicyProperties {
   certificate?: CertificatePolicyConfiguration;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @doc("The Certificate Policy certificate configuration.")
 model CertificatePolicyConfiguration {
   @doc("The validity period in days.")
@@ -59,7 +59,7 @@ alias CertificatePolicyPropertiesUpdate = {
   certificate?: OptionalProperties<CertificatePolicyConfiguration>;
 };
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface CertificatePolicies {
   get is ArmResourceRead<CertificatePolicy>;

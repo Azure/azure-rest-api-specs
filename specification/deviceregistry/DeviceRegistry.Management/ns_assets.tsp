@@ -108,7 +108,7 @@ interface NamespaceAssets {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAsset>;
-  @renamedFrom(Versions.v2026_11_01_preview, "listByResourceGroup")
+  @renamedFrom(Versions.v2026_11_01, "listByResourceGroup")
   listByNamespace is ArmResourceListByParent<NamespaceAsset>;
   @doc("A long-running resource action.")
   @added(Versions.v2026_04_01)
