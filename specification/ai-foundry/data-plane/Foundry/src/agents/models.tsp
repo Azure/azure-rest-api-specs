@@ -284,6 +284,14 @@ union AgentKind {
   container_app: "container_app",
 }
 
+@doc("A capability supported by an agent.")
+union AgentCapability {
+  string,
+
+  @doc("The agent can act as a digital worker.")
+  DigitalWorker: "DigitalWorker",
+}
+
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
 model RaiConfig {
   @doc("The name of the RAI policy to apply.")
@@ -293,6 +301,10 @@ model RaiConfig {
 @discriminator("kind")
 model AgentDefinition {
   kind: AgentKind;
+
+  @doc("The capabilities supported by the agent.")
+  @added(Versions.v1)
+  capabilities?: AgentCapability[];
 
   @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
   rai_config?: RaiConfig;
@@ -451,10 +463,6 @@ model ExternalAgentDefinition extends AgentDefinition {
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
 
-  @doc("The subtype of the hosted agent. The currently supported value is `DigitalWorker`.")
-  @added(Versions.v1)
-  sub_type?: HostedAgentSubtype;
-
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
    * See [vCPU and memory allocation requirements](https://learn.microsoft.com/azure/container-apps/containers#allocations).
@@ -486,14 +494,6 @@ model HostedAgentDefinition extends AgentDefinition {
 
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
   telemetry_config?: TelemetryConfig;
-}
-
-@doc("The subtype of a hosted agent.")
-union HostedAgentSubtype {
-  string,
-
-  @doc("A digital worker hosted agent.")
-  DigitalWorker: "DigitalWorker",
 }
 
 @doc("The container app agent definition.")

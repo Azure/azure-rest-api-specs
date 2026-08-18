@@ -40102,6 +40102,13 @@ components:
         - type: string
           enum:
             - ManagedAgentIdentityBlueprint
+    AgentCapability:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - DigitalWorker
+      description: A capability supported by an agent.
     AgentCard:
       type: object
       required:
@@ -40257,6 +40264,11 @@ components:
       properties:
         kind:
           $ref: '#/components/schemas/AgentKind'
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCapability'
+          description: The capabilities supported by the agent.
         rai_config:
           $ref: '#/components/schemas/RaiConfig'
           description: Configuration for Responsible AI (RAI) content filtering and safety features.
@@ -46791,9 +46803,6 @@ components:
           type: string
           enum:
             - hosted
-        sub_type:
-          $ref: '#/components/schemas/HostedAgentSubtype'
-          description: The subtype of the hosted agent. The currently supported value is `DigitalWorker`.
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -46834,13 +46843,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
-    HostedAgentSubtype:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - DigitalWorker
-      description: The subtype of a hosted agent.
     HourlyRecurrenceSchedule:
       type: object
       required:

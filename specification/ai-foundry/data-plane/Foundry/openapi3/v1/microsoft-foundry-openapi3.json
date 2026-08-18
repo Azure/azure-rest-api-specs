@@ -29419,6 +29419,20 @@
           }
         ]
       },
+      "AgentCapability": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "DigitalWorker"
+            ]
+          }
+        ],
+        "description": "A capability supported by an agent."
+      },
       "AgentCard": {
         "type": "object",
         "required": [
@@ -29636,6 +29650,13 @@
         "properties": {
           "kind": {
             "$ref": "#/components/schemas/AgentKind"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
           },
           "rai_config": {
             "$ref": "#/components/schemas/RaiConfig",
@@ -38585,10 +38606,6 @@
               "hosted"
             ]
           },
-          "sub_type": {
-            "$ref": "#/components/schemas/HostedAgentSubtype",
-            "description": "The subtype of the hosted agent. The currently supported value is `DigitalWorker`."
-          },
           "cpu": {
             "type": "string",
             "description": "The CPU configuration for the hosted agent.",
@@ -38654,20 +38671,6 @@
           }
         ],
         "description": "The hosted agent definition."
-      },
-      "HostedAgentSubtype": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "DigitalWorker"
-            ]
-          }
-        ],
-        "description": "The subtype of a hosted agent."
       },
       "HourlyRecurrenceSchedule": {
         "type": "object",
