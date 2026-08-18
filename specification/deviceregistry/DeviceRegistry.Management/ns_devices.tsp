@@ -100,7 +100,7 @@ interface NamespaceDevices {
     DeviceCredentialsRevokeRequest,
     DeviceCredentialsRevokeResponse,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = DeviceCredentialsRevokeResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
