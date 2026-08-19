@@ -2208,7 +2208,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BackupManagementUsageList"
+              "$ref": "#/definitions/CrossTenantBackupManagementUsageList"
             }
           },
           "default": {
@@ -11528,6 +11528,24 @@
             "value": "Recover"
           }
         ]
+      }
+    },
+    "CrossTenantBackupManagementUsageList": {
+      "type": "object",
+      "description": "List of backup management usage summaries for cross-tenant restore operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of backup management usage summaries.",
+          "items": {
+            "$ref": "#/definitions/BackupManagementUsage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
       }
     },
     "CrossTenantJobResourceList": {

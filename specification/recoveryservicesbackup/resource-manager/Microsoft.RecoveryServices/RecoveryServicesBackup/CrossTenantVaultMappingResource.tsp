@@ -764,7 +764,7 @@ interface BackupUsageSummariesFromCrossTenantVault {
       ...ListFilterParameter;
       ...ListSkipTokenParameter;
     },
-    Response = ArmResponse<BackupManagementUsageList>
+    Response = ArmResponse<CrossTenantBackupManagementUsageList>
   >;
 }
 
@@ -943,6 +943,25 @@ model CrossTenantJobResourceList {
   @pageItems
   @identifiers(#[])
   value?: JobResource[];
+
+  /**
+   * The uri to fetch the next page of resources.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of backup management usage summaries for cross-tenant restore operations.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantBackupManagementUsageList {
+  /**
+   * List of backup management usage summaries.
+   */
+  @pageItems
+  @identifiers(#[])
+  value?: BackupManagementUsage[];
 
   /**
    * The uri to fetch the next page of resources.
