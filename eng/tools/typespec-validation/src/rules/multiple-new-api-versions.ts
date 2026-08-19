@@ -3,6 +3,7 @@ import {
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
 import { join } from "node:path";
+import { context } from "../index.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parseServiceYaml } from "../service-yaml.ts";
@@ -21,15 +22,8 @@ const SDK_EMITTERS = new Set([
 // every emitter, overriding the api-version each emitter is actually configured with.
 const MULTIPLE_SERVICE_API_VERSION = "multiple-versions";
 
-type ReadFileAtCommit = typeof readFileAtCommit;
-type GenerateMetadata = (folder: string) => Promise<TypeSpecMetadata>;
-
-export interface MultipleNewApiVersionsRuleOptions {
-  baseCommitish?: string;
-  headCommitish?: string;
-  readFileAtCommit?: ReadFileAtCommit;
-  generateMetadata?: GenerateMetadata;
-}
+const WIKI_LINK =
+  "https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation#multiplenewapiversions";
 
 function parseApiVersion(version: string) {
   const match = version.match(/^(\d{4})-(\d{2})-(\d{2})(-preview)?$/);
@@ -69,10 +63,18 @@ export function evaluateApiVersionPolicy(
 ): RuleResult {
   const sdkEmitters = getSdkLanguageMetadata(metadata);
 
+  if (sdkEmitters.length === 0) {
+    return {
+      success: true,
+      stdOutput:
+        "Warning: No SDK language emitters are configured; skipping API-version validation.",
+    };
+  }
+
   if (sdkEmitters.some((emitter) => emitter.apiVersion === MULTIPLE_SERVICE_API_VERSION)) {
     return {
       success: true,
-      stdOutput: "This rule does not support multiple-service project scenarios.",
+      stdOutput: "Warning: This rule does not support multiple-service project scenarios.",
     };
   }
 
@@ -101,12 +103,6 @@ export function evaluateApiVersionPolicy(
   }
 
   const oldestNewApiVersion = [...newApiVersions].sort(compareApiVersionsAsc)[0];
-  if (sdkEmitters.length === 0) {
-    return {
-      success: false,
-      errorOutput: "TypeSpec metadata did not report any configured SDK language emitters.",
-    };
-  }
 
   // Known gap: an emitter pinned to "all" is reported here as invalid; no spec uses that value yet.
   const invalidEmitters = sdkEmitters.filter(
@@ -122,7 +118,8 @@ export function evaluateApiVersionPolicy(
       success: false,
       errorOutput:
         `This pull request adds multiple API versions. Every SDK language emitter must target ` +
-        `the oldest newly added version, ${oldestNewApiVersion}:\n${details.join("\n")}`,
+        `the oldest newly added version, ${oldestNewApiVersion}:\n${details.join("\n")}\n` +
+        `\nPlease refer to ${WIKI_LINK} for detailed guidance.`,
     };
   }
 
@@ -136,52 +133,53 @@ export class MultipleNewApiVersionsRule implements Rule {
   readonly name = "MultipleNewApiVersions";
   readonly description = "Validate SDK API-version selection when a PR adds API versions";
 
-  private readonly baseCommitish: string;
-  private readonly headCommitish: string;
-  private readonly readFileAtCommit: ReadFileAtCommit;
-  private readonly generateMetadata: GenerateMetadata;
-
-  constructor(options: MultipleNewApiVersionsRuleOptions = {}) {
-    this.baseCommitish = options.baseCommitish ?? "HEAD^";
-    this.headCommitish = options.headCommitish ?? "HEAD";
-    this.readFileAtCommit = options.readFileAtCommit ?? readFileAtCommit;
-    this.generateMetadata = options.generateMetadata ?? generateTypeSpecMetadata;
-  }
-
   async execute(folder: string): Promise<RuleResult> {
+    const baseCommitish =
+      typeof context.baseCommitish === "string" ? context.baseCommitish : "HEAD^";
+    const headCommitish =
+      typeof context.headCommitish === "string" ? context.headCommitish : "HEAD";
+
+    // Validating all specs has no pull request to diff, and runs on a shallow clone without HEAD^.
+    if (context.checkingAllSpecs === true) {
+      return {
+        success: true,
+        stdOutput: "Validating all specs; skipping comparison of newly added API versions.",
+      };
+    }
+
     const serviceYamlPath = join(folder, "service.yaml");
     let baseSource: string | undefined;
     let headSource: string | undefined;
 
     try {
       [baseSource, headSource] = await Promise.all([
-        this.readFileAtCommit(folder, this.baseCommitish, serviceYamlPath),
-        this.readFileAtCommit(folder, this.headCommitish, serviceYamlPath),
+        readFileAtCommit(folder, baseCommitish, serviceYamlPath),
+        readFileAtCommit(folder, headCommitish, serviceYamlPath),
       ]);
     } catch (error) {
       return {
         success: false,
         errorOutput:
-          `Unable to compare service.yaml between ${this.baseCommitish} and ` +
-          `${this.headCommitish}: ${String(error)}`,
+          `Unable to compare service.yaml between ${baseCommitish} and ` +
+          `${headCommitish}: ${String(error)}`,
       };
     }
 
     if (headSource === undefined) {
       return {
         success: true,
-        stdOutput: `service.yaml does not exist at ${this.headCommitish}; validation skipped.`,
+        stdOutput: `Warning: service.yaml does not exist at ${headCommitish}; validation skipped.`,
       };
     }
 
     const headService = parseServiceYaml(headSource);
     if (!headService.success) {
-      return { success: false, errorOutput: `${this.headCommitish}: ${headService.error}` };
+      return { success: false, errorOutput: `${headCommitish}: ${headService.error}` };
     }
 
     const baseService = baseSource === undefined ? undefined : parseServiceYaml(baseSource);
     if (baseService && !baseService.success) {
-      return { success: false, errorOutput: `${this.baseCommitish}: ${baseService.error}` };
+      return { success: false, errorOutput: `${baseCommitish}: ${baseService.error}` };
     }
 
     const baseVersions = new Set(
@@ -202,7 +200,7 @@ export class MultipleNewApiVersionsRule implements Rule {
     }
 
     try {
-      const metadata = await this.generateMetadata(folder);
+      const metadata = await generateTypeSpecMetadata(folder);
       return evaluateApiVersionPolicy(metadata, newApiVersions);
     } catch (error) {
       return { success: false, errorOutput: String(error) };

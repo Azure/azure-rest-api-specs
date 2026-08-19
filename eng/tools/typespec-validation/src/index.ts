@@ -121,10 +121,7 @@ export async function main() {
     new CompileRule(),
     new FormatRule(),
     new SdkTspConfigValidationRule(),
-    new MultipleNewApiVersionsRule({
-      baseCommitish: typeof context.baseCommitish === "string" ? context.baseCommitish : undefined,
-      headCommitish: typeof context.headCommitish === "string" ? context.headCommitish : undefined,
-    }),
+    new MultipleNewApiVersionsRule(),
   ];
 
   const result = await runRules(rules, absolutePath, suppressions);
