@@ -55,153 +55,12 @@ namespace Azure.AI.Projects {
     "ContainerApplicationAgentDefinition",
     "!autorest"
   );
-  @@clientName(OpenApiTool, "OpenApiTool", "!autorest");
-  @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
-
-  @@clientName(
-    OpenApiProjectConnectionAuthDetails,
-    "OpenApiProjectConnectionAuthenticationDetails",
-    "!autorest"
-  );
-  @@clientName(
-    OpenApiProjectConnectionSecurityScheme,
-    "OpenApiProjectConnectionSecurityScheme",
-    "!autorest"
-  );
-  @@clientName(
-    OpenApiManagedSecurityScheme,
-    "OpenAPIManagedSecurityScheme",
-    "!autorest"
-  );
-
   @@clientName(RaiConfig, "ContentFilterConfiguration", "!autorest");
-  @@clientName(
-    SharepointGroundingToolParameters,
-    "SharePointGroundingToolOptions",
-    "!autorest"
-  );
-  @@clientName(
-    ToolArgumentBinding,
-    "StructuredInputToolArgumentBinding",
-    "!autorest"
-  );
-  @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
+  
+  // The renamings denoted here are attributed to ToolBox tool,
+  // because its class is not reusing tool, defined in OpenAI or Azure.AI.Projects.OpenAI
+  @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
-  @@clientName(FabricIQPreviewToolboxTool.server_url, "ServerUri");
-  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
-  //@@clientName(WebIQPreviewToolboxTool.server_url, "ServerUri");
-
-  // --------------------------------------------------------------------------------
-  // Renames and visibility changes for targeted suppressions
-  // --------------------------------------------------------------------------------
-
-  @@access(OpenAI.LocalShellToolParam, Access.internal);
-  @@clientName(
-    OpenAI.LocalShellToolParam,
-    "InternalLocalShellTool",
-    "!autorest"
-  );
-
-  @@access(OpenAI.ApplyPatchToolParam, Access.internal);
-  @@clientName(
-    OpenAI.ApplyPatchToolParam,
-    "InternalApplyPatchToolParam",
-    "!autorest"
-  );
-
-  @@access(OpenAI.CustomToolParam, Access.internal);
-  @@clientName(OpenAI.CustomToolParam, "InternalCustomToolParam", "!autorest");
-
-  @@access(OpenAI.FunctionShellToolParam, Access.internal);
-  @@clientName(
-    OpenAI.FunctionShellToolParam,
-    "InternalFunctionShellToolParam",
-    "!autorest"
-  );
-
-  @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
-  @@clientName(
-    OpenAI.AutoCodeInterpreterToolParam,
-    "InternalAutoCodeInterpreterToolParam",
-    "!autorest"
-  );
-
-  @@access(OpenAI.MCPToolFilter, Access.internal);
-  @@clientName(OpenAI.MCPToolFilter, "InternalMCPToolFilter", "!autorest");
-
-  @@access(OpenAI.MCPToolRequireApproval, Access.internal);
-  @@clientName(
-    OpenAI.MCPToolRequireApproval,
-    "InternalMCPToolRequireApproval",
-    "!autorest"
-  );
-
-  @@access(OpenAI.WebSearchActionFind, Access.internal);
-  @@clientName(
-    OpenAI.WebSearchActionFind,
-    "InternalWebSearchActionFind",
-    "!autorest"
-  );
-
-  @@access(OpenAI.CodeInterpreterTool, Access.internal);
-  @@clientName(
-    OpenAI.CodeInterpreterTool,
-    "InternalCodeInterpreterTool",
-    "!autorest"
-  );
-
-  @@access(OpenAI.ComparisonFilter, Access.internal);
-  @@clientName(
-    OpenAI.ComparisonFilter,
-    "InternalComparisonFilter",
-    "!autorest"
-  );
-
-  @@access(OpenAI.CompoundFilter, Access.internal);
-  @@clientName(OpenAI.CompoundFilter, "InternalCompoundFilter", "!autorest");
-
-  @@access(OpenAI.ComputerUsePreviewTool, Access.internal);
-  @@clientName(
-    OpenAI.ComputerUsePreviewTool,
-    "InternalComputerUsePreviewTool",
-    "!autorest"
-  );
-  @@access(OpenAI.FileSearchTool, Access.internal);
-  @@clientName(OpenAI.FileSearchTool, "InternalFileSearchTool", "!autorest");
-
-  @@access(OpenAI.FunctionTool, Access.internal);
-  @@clientName(OpenAI.FunctionTool, "InternalFunctionTool", "!autorest");
-
-  @@access(OpenAI.ImageGenTool, Access.internal);
-  @@clientName(OpenAI.ImageGenTool, "InternalImageGenTool", "!autorest");
-
-  @@access(OpenAI.MCPTool, Access.internal);
-  @@clientName(OpenAI.MCPTool, "InternalMCPTool", "!autorest");
-
-  @@access(AgentObjectType, Access.internal);
-  @@clientName(AgentObjectType, "InternalAgentObjectType", "!autorest");
-
-  @@access(OpenAI.ToolChoiceParam, Access.internal);
-  @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam", "!autorest");
-
-  @@access(OpenAI.WebSearchPreviewTool, Access.internal);
-  @@clientName(
-    OpenAI.WebSearchPreviewTool,
-    "InternalWebSearchPreviewTool",
-    "!autorest"
-  );
-
-  @@access(OpenAI.WebSearchTool, Access.internal);
-  @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool", "!autorest");
-
-  @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
-
-  @@clientName(
-    BingGroundingSearchConfiguration.set_lang,
-    "BingUserInterfaceLanguage",
-    "csharp"
-  );
-  @@clientName(BingGroundingTool.bing_grounding, "SearchToolOptions", "csharp");
   @@clientName(
     BrowserAutomationPreviewTool.browser_automation_preview,
     "ToolParameters",
@@ -212,26 +71,23 @@ namespace Azure.AI.Projects {
     "ToolConnectionParameters",
     "csharp"
   );
+  // --------------------------------------------------------------------------------
+  // Renames and visibility changes for targeted suppressions
+  // --------------------------------------------------------------------------------
+  @@access(OpenAI.ApplyPatchToolParam, Access.internal);
   @@clientName(
-    CaptureStructuredOutputsTool.outputs,
-    "OutputDefinition",
-    "csharp"
+    OpenAI.ApplyPatchToolParam,
+    "InternalApplyPatchToolParam",
+    "!autorest"
   );
-  @@clientName(
-    MemorySearchPreviewTool.update_delay,
-    "UpdateDelayInSecs",
-    "csharp"
-  );
-  @@clientName(
-    MicrosoftFabricPreviewTool.fabric_dataagent_preview,
-    "ToolOptions",
-    "csharp"
-  );
-  @@clientName(
-    SharepointPreviewTool.sharepoint_grounding_preview,
-    "ToolOptions",
-    "csharp"
-  );
+
+  @@access(AgentObjectType, Access.internal);
+  @@clientName(AgentObjectType, "InternalAgentObjectType", "!autorest");
+  @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
+
+  // The renamings denoted here are attributed to ToolBox tool,
+  // because its class is not reusing tool, defined in OpenAI or Azure.AI.Projects.OpenAI
+  
   @@clientName(AgentEndpointConfig, "AgentEndpointConfiguration");
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
@@ -350,6 +206,9 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
 
+  // --------------------------------------------------------------------------------
+  // Externalization of classes, defined in Azure.AI.Extensions.OpenAI and OpenAI.
+  // --------------------------------------------------------------------------------
   @@alternateType(
     Azure.AI.Projects.A2APreviewTool,
     {
@@ -952,7 +811,6 @@ namespace Azure.AI.Projects {
   );
 
   // Computer tool
-  // @@alternateType(OpenAI.ComputerActionType, {  identity: "OpenAI.Responses.ComputerCallActionKind",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
   @@alternateType(
     OpenAI.ComputerCallSafetyCheckParam,
     {
@@ -962,10 +820,6 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
-
-  // Message item
-  //@@alternateType(OpenAI.MessageRole, {  identity: "OpenAI.Responses.MessageRole",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
-  //@@alternateType(OpenAI.MessageStatus, {  identity: "OpenAI.Responses.MessageStatus",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
 
   // Annotations
   @@alternateType(
