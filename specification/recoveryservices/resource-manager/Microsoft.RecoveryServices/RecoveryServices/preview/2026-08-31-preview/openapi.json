@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RecoveryServicesClient",
-    "version": "2026-05-31-preview",
+    "version": "2026-08-31-preview",
     "description": "Recovery Services Client",
     "x-typespec-generated": [
       {
@@ -2632,6 +2632,16 @@
         }
       }
     },
+    "RegionOfChoiceSettings": {
+      "type": "object",
+      "description": "Region of choice settings at vault level.\nThis setting allows customers to configure backups for datasources from different region.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "The status of region of choice settings - Enabled or Disabled."
+        }
+      }
+    },
     "ReplicationUsage": {
       "type": "object",
       "description": "Replication usages of a vault.",
@@ -3525,6 +3535,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "regionOfChoiceSettings": {
+          "$ref": "#/definitions/RegionOfChoiceSettings",
+          "description": "Region of choice settings for this vault."
         }
       }
     },

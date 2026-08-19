@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Recovery Services Backup Client",
-    "version": "2026-05-31-preview",
+    "version": "2026-08-31-preview",
     "description": "Open API 2.0 Specs for Azure RecoveryServices Backup service",
     "x-typespec-generated": [
       {
@@ -71,6 +71,9 @@
     },
     {
       "name": "Backups"
+    },
+    {
+      "name": "ConfigureSourceScan"
     },
     {
       "name": "RecoveryPointsRecommendedForMove"
@@ -3353,6 +3356,99 @@
             "$ref": "./examples/Common/TriggerBackup_Post.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/configureSourceScan": {
+      "post": {
+        "operationId": "ConfigureSourceScan_Execute",
+        "tags": [
+          "ConfigureSourceScan"
+        ],
+        "description": "Configures source scan for a protected item. This is an asynchronous operation. To know the status of the\noperation, call GetProtectedItemOperationResult API.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the BackupFabricResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Name of the container whose details need to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemConfigureSourceScanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
@@ -11022,6 +11118,58 @@
         }
       }
     },
+    "DataDiskDetails": {
+      "type": "object",
+      "description": "Data disk details",
+      "properties": {
+        "encryptedDataDisks": {
+          "type": "array",
+          "description": "List of data disks in the VM which are encrypted at the time of backup. This will be used to provide Disk Encryption Set Id for each data disk.",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataDiskEncryptionSettings": {
+      "type": "object",
+      "description": "Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk.",
+      "properties": {
+        "perDiskEncryptionSetIds": {
+          "type": "array",
+          "description": "Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.",
+          "items": {
+            "$ref": "#/definitions/PerDiskEncryptionSetId"
+          },
+          "x-ms-identifiers": []
+        },
+        "dataDiskEncryptionSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          }
+        },
+        "dataDiskEncryptionIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Managed Identity resource Id used to encrypt the data disk during restore.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
     "DataMoveLevel": {
       "type": "string",
       "description": "DataMove Level",
@@ -11211,6 +11359,21 @@
             "value": "Disabled"
           }
         ]
+      }
+    },
+    "DiskDetails": {
+      "type": "object",
+      "description": "Disk details",
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "LUN of the disk"
+        },
+        "diskName": {
+          "type": "string",
+          "description": "Disk name of the disk"
+        }
       }
     },
     "DiskExclusionProperties": {
@@ -12301,6 +12464,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Extended location of the VM recovery point,\nshould be null if VM is in public cloud"
+        },
+        "dataDiskMetadata": {
+          "$ref": "#/definitions/DataDiskDetails",
+          "description": "Data disk metadata for the VM recovery point"
         }
       },
       "allOf": [
@@ -13941,6 +14108,29 @@
         }
       }
     },
+    "PerDiskEncryptionSetId": {
+      "type": "object",
+      "description": "Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.",
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "LUN for Secured VM Data Disk"
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Disk Encryption Set Id for Secured VM Data Disk",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          }
+        }
+      }
+    },
     "PointInTimeRange": {
       "type": "object",
       "description": "Provides details for log ranges",
@@ -14445,6 +14635,11 @@
           "format": "int32",
           "description": "Soft delete retention period in days"
         },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Source location of the protected item datasource.",
+          "readOnly": true
+        },
         "vaultId": {
           "type": "string",
           "description": "ID of the vault which protects this item",
@@ -14459,6 +14654,16 @@
       "required": [
         "protectedItemType"
       ]
+    },
+    "ProtectedItemConfigureSourceScanRequest": {
+      "type": "object",
+      "description": "Request to configure source scan for a protected item",
+      "properties": {
+        "sourceScanAction": {
+          "$ref": "#/definitions/SourceScanAction",
+          "description": "Source scan action to perform"
+        }
+      }
     },
     "ProtectedItemHealthStatus": {
       "type": "string",
@@ -14665,6 +14870,11 @@
         "protectableObjectType": {
           "type": "string",
           "description": "Type of the protectable object associated with this container"
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Source location of the container",
+          "readOnly": true
         }
       },
       "discriminator": "containerType",
@@ -16064,6 +16274,10 @@
         "securedVMOsDiskEncryptionSetId": {
           "type": "string",
           "description": "Gets or Sets Disk Encryption Set Id for Secured VM OS Disk"
+        },
+        "dataDiskEncryptionSettings": {
+          "$ref": "#/definitions/DataDiskEncryptionSettings",
+          "description": "Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk."
         }
       }
     },
@@ -16243,6 +16457,30 @@
         ]
       }
     },
+    "SourceScanAction": {
+      "type": "string",
+      "description": "Source scan configuration status for enabling or disabling source scan",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SourceScanAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable source scan"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable source scan"
+          }
+        ]
+      }
+    },
     "SourceSideScanInfo": {
       "type": "object",
       "description": "Source side threat information",
@@ -16263,7 +16501,8 @@
       "enum": [
         "Configured",
         "NotConfigured",
-        "NotApplicable"
+        "NotApplicable",
+        "ConfigurationFailed"
       ],
       "x-ms-enum": {
         "name": "SourceSideScanStatus",
@@ -16283,6 +16522,11 @@
             "name": "NotApplicable",
             "value": "NotApplicable",
             "description": "Source side scan is not applicable"
+          },
+          {
+            "name": "ConfigurationFailed",
+            "value": "ConfigurationFailed",
+            "description": "Source side scan configuration failed"
           }
         ]
       }
@@ -16294,7 +16538,8 @@
         "Unknown",
         "NotApplicable",
         "Suspicious",
-        "Healthy"
+        "Healthy",
+        "NoThreatsReported"
       ],
       "x-ms-enum": {
         "name": "SourceSideScanSummary",
@@ -16319,6 +16564,11 @@
             "name": "Healthy",
             "value": "Healthy",
             "description": "Scan summary indicates healthy state"
+          },
+          {
+            "name": "NoThreatsReported",
+            "value": "NoThreatsReported",
+            "description": "No threats reported"
           }
         ]
       }

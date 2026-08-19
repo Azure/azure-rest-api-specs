@@ -28,6 +28,7 @@ namespace Microsoft.RecoveryServices;
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @parentResource(VaultResource)
 model CrossTenantVaultMapping
   is ProxyResource<CrossTenantVaultMappingProperties> {
@@ -47,6 +48,7 @@ model CrossTenantVaultMapping
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultMappings {
   /**
@@ -92,6 +94,7 @@ interface CrossTenantVaultMappings {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultMappingStatus {
   /**
@@ -224,6 +227,7 @@ alias BackupProtectedItemsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface BackupProtectedItemsFromCrossTenantVault {
   /**
@@ -244,6 +248,7 @@ interface BackupProtectedItemsFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ProtectedItemFromCrossTenantVault {
   /**
@@ -290,6 +295,7 @@ alias CrossTenantVaultRecoveryPointsOps = Azure.ResourceManager.Legacy.LegacyOpe
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultRecoveryPoints {
   /**
@@ -309,6 +315,7 @@ interface CrossTenantVaultRecoveryPoints {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultRecoveryPoint {
   /**
@@ -323,6 +330,7 @@ interface CrossTenantVaultRecoveryPoint {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface RestoresFromCrossTenantVault {
   /**
@@ -360,6 +368,7 @@ alias ProtectedItemOperationResultsFromCrossTenantVaultOps = Azure.ResourceManag
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ProtectedItemOperationResultsFromCrossTenantVault {
   /**
@@ -402,6 +411,7 @@ alias ProtectedItemOperationStatusesFromCrossTenantVaultOps = Azure.ResourceMana
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ProtectedItemOperationStatusesFromCrossTenantVault {
   /**
@@ -434,6 +444,7 @@ alias BackupJobsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOpe
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface BackupJobsFromCrossTenantVault {
   /**
@@ -454,6 +465,7 @@ interface BackupJobsFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface JobDetailsFromCrossTenantVault {
   /**
@@ -467,6 +479,7 @@ interface JobDetailsFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface OperationFromCrossTenantVault {
   /**
@@ -486,6 +499,7 @@ interface OperationFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ValidateOperationFromCrossTenantVault {
   /**
@@ -522,6 +536,7 @@ alias ValidateOperationResultFromCrossTenantVaultOps = Azure.ResourceManager.Leg
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ValidateOperationResultFromCrossTenantVault {
   /**
@@ -564,6 +579,7 @@ alias ValidateOperationStatusFromCrossTenantVaultOps = Azure.ResourceManager.Leg
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ValidateOperationStatusFromCrossTenantVault {
   /**
@@ -580,6 +596,7 @@ interface ValidateOperationStatusFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantProtectedItemResourceList {
   /**
    * List of resources.
@@ -602,6 +619,7 @@ model CrossTenantProtectedItemResourceList {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantRecoveryPointResourceList {
   /**
    * List of resources.
@@ -624,6 +642,7 @@ model CrossTenantRecoveryPointResourceList {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantJobResourceList {
   /**
    * List of resources.
@@ -679,6 +698,7 @@ alias CrossTenantVaultCredentialOps = Azure.ResourceManager.Legacy.LegacyOperati
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultCredential {
   /**
@@ -718,6 +738,7 @@ alias CrossTenantVaultCredentialOperationResultsOps = Azure.ResourceManager.Lega
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultCredentialOperationResults {
   /**
@@ -761,6 +782,7 @@ alias CrossTenantVaultCredentialOperationStatusesOps = Azure.ResourceManager.Leg
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultCredentialOperationStatuses {
   /**
