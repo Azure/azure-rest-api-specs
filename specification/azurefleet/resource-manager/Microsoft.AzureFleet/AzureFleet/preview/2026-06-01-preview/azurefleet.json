@@ -465,70 +465,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachines": {
-      "get": {
-        "operationId": "Fleets_ListVirtualMachines",
-        "tags": [
-          "Fleets"
-        ],
-        "description": "List VirtualMachine resources of a Launch mode Fleet.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the Fleet",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter expression to filter the virtual machines.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "in": "query",
-            "description": "Skip token for pagination. Uses the token from a previous response to fetch the next page of results.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Fleets_ListVirtualMachines_MaximumSet_Gen": {
-            "$ref": "./examples/Fleets_ListVirtualMachines_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -902,30 +838,6 @@
           "$ref": "#/definitions/SubResource",
           "description": "Specifies the capacity reservation group resource id that should be used for\nallocating the virtual machine or scaleset vm instances provided enough\ncapacity has been reserved. Please refer to https://aka.ms/CapacityReservation\nfor more details."
         }
-      }
-    },
-    "CapacityType": {
-      "type": "string",
-      "description": "Capacity types for Compute Fleet.",
-      "enum": [
-        "VM",
-        "VCpu"
-      ],
-      "x-ms-enum": {
-        "name": "CapacityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "VM",
-            "value": "VM",
-            "description": "Default. VM is the default capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VMs."
-          },
-          {
-            "name": "VCpu",
-            "value": "VCpu",
-            "description": "VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus.\nIf VCpu capacity is not exactly divisible by VCpu count in VMSizes, Fleet capacity in VCpus will be overprovisioned by default."
-          }
-        ]
       }
     },
     "ComputeProfile": {
@@ -1310,30 +1222,6 @@
         "value"
       ]
     },
-    "FleetMode": {
-      "type": "string",
-      "description": "Modes for Compute Fleet.",
-      "enum": [
-        "Managed",
-        "Launch"
-      ],
-      "x-ms-enum": {
-        "name": "FleetMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "managed",
-            "value": "Managed",
-            "description": "Default. Managed is the default mode for Compute Fleet where VMs are provisioned via virtual machine scale sets."
-          },
-          {
-            "name": "launch",
-            "value": "Launch",
-            "description": "Launch mode for Compute Fleet will directly launch VM instances to be managed by the customer."
-          }
-        ]
-      }
-    },
     "FleetProperties": {
       "type": "object",
       "description": "Details of the Compute Fleet.",
@@ -1381,23 +1269,6 @@
           "type": "string",
           "description": "Specifies the ID which uniquely identifies a Compute Fleet.",
           "readOnly": true
-        },
-        "mode": {
-          "$ref": "#/definitions/FleetMode",
-          "description": "Mode of the Fleet."
-        },
-        "vmNamePrefix": {
-          "type": "string",
-          "description": "VirtualMachine prefix to be used for the virtual machines launched by Fleet. Can be used only with Launch mode.",
-          "pattern": "^[^_\\W][\\w\\-._]{0,64}(?<![-.])$"
-        },
-        "capacityType": {
-          "$ref": "#/definitions/CapacityType",
-          "description": "Specifies capacity type for Fleet Regular and Spot priority profiles.\ncapacityType is an immutable property. Once set during Fleet creation, it cannot be updated.\nSpecifying different capacity type for Fleet Regular and Spot priority profiles is not allowed."
-        },
-        "zoneAllocationPolicy": {
-          "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "Zone Allocation Policy for Fleet."
         }
       },
       "required": [
@@ -3814,71 +3685,6 @@
           }
         ]
       }
-    },
-    "ZoneAllocationPolicy": {
-      "type": "object",
-      "description": "ZoneAllocationPolicy for Compute Fleet.",
-      "properties": {
-        "distributionStrategy": {
-          "$ref": "#/definitions/ZoneDistributionStrategy",
-          "description": "Distribution strategy used for zone allocation policy."
-        },
-        "zonePreferences": {
-          "type": "array",
-          "description": "Zone preferences, required when zone distribution strategy is Prioritized.",
-          "items": {
-            "$ref": "#/definitions/ZonePreference"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "distributionStrategy"
-      ]
-    },
-    "ZoneDistributionStrategy": {
-      "type": "string",
-      "description": "Distribution strategies for Compute Fleet zone allocation policy.",
-      "enum": [
-        "BestEffortSingleZone",
-        "Prioritized"
-      ],
-      "x-ms-enum": {
-        "name": "ZoneDistributionStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BestEffortSingleZone",
-            "value": "BestEffortSingleZone",
-            "description": "Default. Compute Fleet allocates all Fleet capacity within a single zone based on best effort.\nIf capacity is not available, Compute Fleet can allocate capacity in different zones."
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Compute Fleet allocates capacity based on zone preferences.\nHigher priority zones are filled first before allocating to lower priority zones."
-          }
-        ]
-      }
-    },
-    "ZonePreference": {
-      "type": "object",
-      "description": "Zone preferences for Compute Fleet zone allocation policy.",
-      "properties": {
-        "zone": {
-          "type": "string",
-          "description": "Name of the zone."
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The rank of the zone. This is used with 'Prioritized' ZoneDistributionStrategy.\nThe lower the number, the higher the priority, starting with 0.\n0 is the highest rank. If not specified, defaults to lowest rank.",
-          "minimum": 0,
-          "maximum": 65535
-        }
-      },
-      "required": [
-        "zone"
-      ]
     }
   },
   "parameters": {}
