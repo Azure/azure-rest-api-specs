@@ -45,6 +45,7 @@ import "./StaticSiteCustomDomainOverviewARMResource.tsp";
 import "./StaticSiteLinkedBackendARMResource.tsp";
 import "./Site.tsp";
 import "./AIGateway.tsp";
+import "./BuilderApp.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";
@@ -116,6 +117,12 @@ enum Versions {
    * The 2026-03-01-preview API version.
    */
   v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-09-01-preview API version.
+   */
+  @previewVersion
+  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 @tag("Provider")
