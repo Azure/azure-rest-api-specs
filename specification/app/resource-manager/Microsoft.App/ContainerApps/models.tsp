@@ -1834,11 +1834,13 @@ model AvailableEnvironmentModeProperties {
   /**
    * The display name of the environment mode.
    */
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * The description of the environment mode.
    */
+  @visibility(Lifecycle.Read)
   description?: string;
 }
 
