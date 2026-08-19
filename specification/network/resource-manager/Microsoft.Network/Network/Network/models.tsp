@@ -13610,18 +13610,16 @@ model IpamPoolUpdateProperties {
   displayName?: string;
 
   /**
-   * Minimum number of IP addresses required for allocations from this IpamPool to be compliant. Must be less than or equal to the maximum allocation size. Omit to leave the current value unchanged; set to null or an empty string to clear it.
+   * Minimum number of IP addresses required for allocations from this IpamPool to be compliant. Must be less than or equal to the maximum allocation size. Omit to leave the current value unchanged; set to an empty string to clear it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH follows ARM merge-patch semantics: an absent bound is preserved, while an explicit null clears it, so null must be distinguishable from absent."
   @added(Versions.v2026_01_01)
-  minAllocationSize?: string | null;
+  minAllocationSize?: string;
 
   /**
-   * Maximum number of IP addresses allowed for allocations from this IpamPool to be compliant. Must be greater than or equal to the minimum allocation size. Omit to leave the current value unchanged; set to null or an empty string to clear it.
+   * Maximum number of IP addresses allowed for allocations from this IpamPool to be compliant. Must be greater than or equal to the minimum allocation size. Omit to leave the current value unchanged; set to an empty string to clear it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH follows ARM merge-patch semantics: an absent bound is preserved, while an explicit null clears it, so null must be distinguishable from absent."
   @added(Versions.v2026_01_01)
-  maxAllocationSize?: string | null;
+  maxAllocationSize?: string;
 }
 
 /**
