@@ -1631,11 +1631,7 @@ using Azure.ClientGenerator.Core.Legacy;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  JobItem.resourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(JobItem.resourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(
   AssignmentItem.resourceId,
   Azure.Core.armResourceIdentifier,
