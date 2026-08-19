@@ -2507,6 +2507,12 @@
           },
           "Create Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperPut.json"
+          },
+          "Create or Update Bastion Host With System Assigned Identity for Session Recording Configuration": {
+            "$ref": "./examples/BastionHostPutWithSystemAssignedIdentityForSRConfig.json"
+          },
+          "Create or Update Bastion Host With User Assigned Identity for Session Recording Configuration": {
+            "$ref": "./examples/BastionHostPutWithUserAssignedIdentityForSRConfig.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15179,6 +15185,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of this Bastion Host."
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity assigned to the Bastion Host resource"
         }
       },
       "allOf": [
@@ -15337,6 +15347,10 @@
           "type": "boolean",
           "description": "Enable/Disable Private Only feature of the Bastion Host resource.",
           "default": false
+        },
+        "sessionRecordingConfiguration": {
+          "$ref": "#/definitions/BastionSessionRecordingConfiguration",
+          "description": "The storage account and identity to use for session recording"
         }
       }
     },
@@ -15371,6 +15385,25 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "BastionSessionRecordingConfiguration": {
+      "type": "object",
+      "description": "Bastion Session Recording Configuration.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SessionRecordingIdentity",
+          "description": "The identity to use for accessing the blob container where recordings will be stored"
+        },
+        "blobContainerUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The blob container to store the recordings. Ex: https://contosostorage.blob.core.windows.net/contosorecordings."
+        }
+      },
+      "required": [
+        "identity",
+        "blobContainerUri"
       ]
     },
     "BastionSessionState": {
@@ -20692,6 +20725,24 @@
           }
         }
       }
+    },
+    "SessionRecordingIdentity": {
+      "type": "object",
+      "description": "The identity to use for accessing the blob container where recordings will be stored",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/SessionRecordingIdentityType",
+          "description": "The type of identity to use"
+        },
+        "userAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing blob container Uri. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identity type systemAssigned."
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "Sku": {
       "type": "object",

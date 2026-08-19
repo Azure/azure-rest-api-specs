@@ -10171,6 +10171,12 @@ model BastionHostPropertiesFormat {
    * Enable/Disable Private Only feature of the Bastion Host resource.
    */
   enablePrivateOnlyBastion?: boolean = false;
+
+  /**
+   * The storage account and identity to use for session recording
+   */
+  @added(Versions.v2026_01_01)
+  sessionRecordingConfiguration?: BastionSessionRecordingConfiguration;
 }
 
 /**
@@ -10308,6 +10314,46 @@ model BastionShareableLink {
    */
   @visibility(Lifecycle.Read)
   message?: string;
+}
+
+/** The type of identity to use */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+union SessionRecordingIdentityType {
+  string,
+
+  /** System assigned identity */
+  SystemAssigned: "SystemAssigned",
+
+  /** User assigned identity */
+  UserAssigned: "UserAssigned",
+}
+
+/** The identity to use for accessing the blob container where recordings will be stored */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+model SessionRecordingIdentity {
+  /** The type of identity to use */
+  type: SessionRecordingIdentityType;
+
+  /** User assigned identity to use for accessing blob container Uri. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identity type systemAssigned. */
+  userAssignedIdentityId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Bastion Session Recording Configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+model BastionSessionRecordingConfiguration {
+  /** The identity to use for accessing the blob container where recordings will be stored */
+  identity: SessionRecordingIdentity;
+
+  /** The blob container to store the recordings. Ex: https://contosostorage.blob.core.windows.net/contosorecordings. */
+  blobContainerUri: url;
 }
 
 /**
