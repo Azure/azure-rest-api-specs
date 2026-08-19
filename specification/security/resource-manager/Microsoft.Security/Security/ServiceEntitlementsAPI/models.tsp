@@ -43,7 +43,7 @@ union ServiceEntitlementProvisioningState {
 
 /** Properties of a service entitlement. */
 model ServiceEntitlementProperties {
-  /** The service associated with the service entitlement. */
+  /** The service associated with the service entitlement. Current supported Value is Perception. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   serviceType: string;
 
