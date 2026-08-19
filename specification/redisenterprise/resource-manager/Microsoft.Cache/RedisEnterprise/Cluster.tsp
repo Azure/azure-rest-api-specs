@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Cache;
 /**
@@ -104,6 +106,20 @@ interface Clusters {
     Cluster,
     void,
     ArmResponse<SkuDetailsList>
+  >;
+
+  /**
+   * Unlinks the migrated endpoint from a Redis Enterprise cluster that was migrated from Azure Cache for Redis, removing the source cache endpoint that was redirected to this cluster during migration.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per the Spectral PostResponseCodes rule, an LRO POST with no final body must return 202, 204 and default. This TSP ARM library rule conflicts with that requirement; we follow the Azure REST API guideline."
+  @added(Versions.v2026_09_01)
+  @action("unlinkMigratedEndpoint")
+  unlinkMigratedEndpoint is ArmResourceActionAsyncBase<
+    Cluster,
+    void,
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    | ArmNoContentResponse<"Action completed successfully.">,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
   /**
