@@ -9879,6 +9879,29 @@
         }
       }
     },
+    "ContainerExecutionStatus": {
+      "type": "object",
+      "description": "Container Apps Job execution container status. Contains status code and reason",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Container Name."
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exit code"
+        },
+        "additionalInformation": {
+          "type": "string",
+          "description": "Additional information for the container status"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the container"
+        }
+      }
+    },
     "ContainerResources": {
       "type": "object",
       "description": "Container App container resource requirements.",
@@ -11170,6 +11193,22 @@
         "message": {
           "type": "string",
           "description": "Any details of the error."
+        }
+      }
+    },
+    "ExecutionStatus": {
+      "type": "object",
+      "description": "Container Apps Job execution status.",
+      "properties": {
+        "replicas": {
+          "type": "array",
+          "description": "Replicas in the execution.",
+          "items": {
+            "$ref": "#/definitions/ReplicaExecutionStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -12496,6 +12535,20 @@
         "template": {
           "$ref": "#/definitions/JobExecutionTemplate",
           "description": "Job's execution container."
+        },
+        "detailedStatus": {
+          "$ref": "#/definitions/ExecutionStatus",
+          "description": "Detailed status of the job execution."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the current condition of job execution.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable message indicating details about the current condition of the job execution.",
+          "readOnly": true
         }
       }
     },
@@ -14194,6 +14247,26 @@
           "type": "string",
           "description": "Container exec endpoint",
           "readOnly": true
+        }
+      }
+    },
+    "ReplicaExecutionStatus": {
+      "type": "object",
+      "description": "Container Apps Job execution replica status.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Replica Name."
+        },
+        "containers": {
+          "type": "array",
+          "description": "Containers in the execution replica",
+          "items": {
+            "$ref": "#/definitions/ContainerExecutionStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
