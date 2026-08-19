@@ -30,6 +30,9 @@ model CreateAgentVersionRequest {
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
 
+  @doc("The capabilities supported by the agent.")
+  capabilities?: AgentCapability[];
+
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
     "x-ms-foundry-meta",
@@ -101,7 +104,7 @@ model CreateAgentRequest {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
-  ...OmitProperties<CreateAgentVersionRequest, "draft">;
+  ...OmitProperties<CreateAgentVersionRequest, "draft" | "capabilities">;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -157,6 +160,9 @@ model AgentObject {
   @doc("The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.")
   @visibility(Lifecycle.Read)
   state: AgentState;
+
+  @doc("The capabilities supported by the agent.")
+  capabilities?: AgentCapability[];
 
   @doc("The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.")
   @visibility(Lifecycle.Read)
@@ -301,10 +307,6 @@ model RaiConfig {
 @discriminator("kind")
 model AgentDefinition {
   kind: AgentKind;
-
-  @doc("The capabilities supported by the agent.")
-  @added(Versions.v1)
-  capabilities?: AgentCapability[];
 
   @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
   rai_config?: RaiConfig;

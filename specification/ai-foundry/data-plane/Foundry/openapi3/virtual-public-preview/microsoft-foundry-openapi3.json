@@ -32225,6 +32225,20 @@
           }
         ]
       },
+      "AgentCapability": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "DigitalWorker"
+            ]
+          }
+        ],
+        "description": "A capability supported by an agent."
+      },
       "AgentCard": {
         "type": "object",
         "required": [
@@ -33157,6 +33171,13 @@
             "$ref": "#/components/schemas/AgentState",
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
           },
           "state_source": {
             "$ref": "#/components/schemas/AgentStateSource",
@@ -37570,6 +37591,13 @@
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
           },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
+          },
           "draft": {
             "type": "boolean",
             "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
@@ -37724,6 +37752,13 @@
           "blueprint_reference": {
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
           },
           "draft": {
             "type": "boolean",
@@ -37933,6 +37968,13 @@
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
           },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
+          },
           "draft": {
             "type": "boolean",
             "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
@@ -37985,6 +38027,13 @@
           "blueprint_reference": {
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
           },
           "draft": {
             "type": "boolean",
@@ -87527,6 +87576,13 @@
             "$ref": "#/components/schemas/AgentState",
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCapability"
+            },
+            "description": "The capabilities supported by the agent."
           },
           "state_source": {
             "$ref": "#/components/schemas/AgentStateSource",
