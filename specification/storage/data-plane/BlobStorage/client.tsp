@@ -207,6 +207,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+@@access(Storage.Blob.Container.createSession, Access.internal, "rust");
+@@access(CreateSessionConfiguration, Access.internal, "rust");
+@@access(CreateSessionResponse, Access.internal, "rust");
+@@access(SessionCredentials, Access.internal, "rust");
+@@access(AuthenticationType, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
