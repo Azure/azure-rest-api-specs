@@ -316,7 +316,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsModes": {
       "get": {
-        "operationId": "AvailableEnvironmentModes_Get",
+        "operationId": "AvailableEnvironmentModes_List",
         "tags": [
           "AvailableEnvironmentModes"
         ],
@@ -335,14 +335,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AvailableEnvironmentModesCollection"
             }
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -352,9 +348,12 @@
           }
         },
         "x-ms-examples": {
-          "AvailableEnvironmentModes_Get": {
-            "$ref": "./examples/AvailableEnvironmentModes_Get.json"
+          "AvailableEnvironmentModes_List": {
+            "$ref": "./examples/AvailableEnvironmentModes_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8416,7 +8415,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The Azure region in which the environment mode is available."
+          "description": "The Azure region in which the environment mode is available.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/AvailableEnvironmentModeProperties",
@@ -8449,10 +8452,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The available environment modes.",
+          "description": "The AvailableEnvironmentMode items on this page",
           "items": {
             "$ref": "#/definitions/AvailableEnvironmentMode"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [

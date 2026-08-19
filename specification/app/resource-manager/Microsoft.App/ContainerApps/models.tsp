@@ -1804,12 +1804,8 @@ model AvailableWorkloadProfileProperties {
  * Collection of environment modes available in the location.
  */
 @added(Versions.v2026_07_01)
-model AvailableEnvironmentModesCollection {
-  /**
-   * The available environment modes.
-   */
-  value: AvailableEnvironmentMode[];
-}
+model AvailableEnvironmentModesCollection
+  is Azure.Core.Page<AvailableEnvironmentMode>;
 
 /**
  * An environment mode available to the subscription.
@@ -1821,6 +1817,7 @@ model AvailableEnvironmentMode
   /**
    * The Azure region in which the environment mode is available.
    */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   /**

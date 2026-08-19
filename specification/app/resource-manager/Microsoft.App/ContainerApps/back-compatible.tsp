@@ -219,7 +219,7 @@ using Microsoft.App;
 );
 
 @@clientLocation(
-  AvailableEnvironmentModesOperationGroup.get,
+  AvailableEnvironmentModesOperationGroup.list,
   "AvailableEnvironmentModes"
 );
 

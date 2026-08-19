@@ -51,12 +51,11 @@ interface AvailableEnvironmentModesOperationGroup {
   @summary("Get available environment modes by location.")
   @autoRoute
   @get
+  @list
   @action("availableManagedEnvironmentsModes")
   @tag("AvailableEnvironmentModes")
-  get is ArmProviderActionSync<
-    Response =
-      | ArmResponse<AvailableEnvironmentModesCollection>
-      | ContainerAppsNotFoundError,
+  list is ArmProviderActionSync<
+    Response = AvailableEnvironmentModesCollection,
     Scope = SubscriptionActionScope,
     Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
