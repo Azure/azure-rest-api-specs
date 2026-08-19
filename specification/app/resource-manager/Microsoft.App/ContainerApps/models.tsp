@@ -1623,28 +1623,27 @@ model BlobStorageTokenStore {
   /**
    * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
    */
-  @madeRequired(Versions.v2026_01_01)
-  sasUrlSettingName: string;
+  sasUrlSettingName?: string;
 
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   managedIdentityResourceId?: string;
 }
 
