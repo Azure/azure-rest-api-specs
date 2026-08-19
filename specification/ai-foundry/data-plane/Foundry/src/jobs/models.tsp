@@ -131,7 +131,7 @@ model Output {
   mode?: InputOutputModes;
 
   @doc("Name of the output data asset to register.")
-  assetName?: string;
+  assetName: string;
 
   @doc("Version of the output data asset to register.")
   assetVersion?: string;
