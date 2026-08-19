@@ -14,21 +14,17 @@
           "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.Web/sites/MyWebApp",
           "highAvailabilityGoalParticipation": "Included",
           "highAvailabilityAttestationStatus": "ManuallyAttested",
-          "zonalResiliency": {
-            "goalParticipation": "Excluded",
-            "attestationStatus": "ManuallyAttested",
-            "userConfirmation": [
-              {
-                "solutionDisplayName": "ZonePinnedVmWithZrsDisk",
-                "confirmationStatus": "ApprovedByUser",
-                "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
-              }
-            ]
-          },
           "disasterRecoveryGoalParticipation": "Included",
           "disasterRecoveryAttestationStatus": "NotAttested",
           "exclusionReasonForHighAvailabilityGoals": null,
           "exclusionReasonForDisasterRecoveryGoals": null,
+          "userConfirmationForHighAvailability": [
+            {
+              "solutionDisplayName": "ZonePinnedVmWithZrsDisk",
+              "confirmationStatus": "ApprovedByUser",
+              "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
+            }
+          ],
           "serviceGroupMemberships": [
             {
               "serviceGroupId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.AzureResilienceManagement/serviceGroups/production-sg",
@@ -39,14 +35,7 @@
               "membershipType": "ThroughSubscription"
             }
           ],
-          "provisioningState": "Succeeded",
-          "userConfirmationForHighAvailability": [
-            {
-              "solutionDisplayName": "ZonePinnedVmWithZrsDisk",
-              "confirmationStatus": "ApprovedByUser",
-              "reasonForRequestingConfirmation": "ZonePinnedZrsDataDisksConditional"
-            }
-          ]
+          "provisioningState": "Succeeded"
         },
         "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.AzureResilienceManagement/goalAssignments/resiliency-goal-assignment/goalResources/web-app-resource",
         "name": "web-app-resource",

@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureResilienceManagement;
 
 // Define the main model
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_06_01_preview)
 @doc("Resiliency posture for a goal resource.")
 model ResiliencyProperties {
   @doc("Flag which depicts whether the Arm resource is excluded for resiliency recommendation.")
@@ -41,15 +41,15 @@ model GoalResourceProperties {
   resourceArmId: armResourceIdentifier;
 
   @doc("Flag which depicts whether the Arm resource is excluded for high availability recommendation.")
-  @madeOptional(Versions.v2026_03_01_preview)
+  @madeOptional(Versions.v2026_06_01_preview)
   highAvailabilityGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for high availability recommendation.")
-  @madeOptional(Versions.v2026_03_01_preview)
+  @madeOptional(Versions.v2026_06_01_preview)
   highAvailabilityAttestationStatus?: AttestationState;
 
   @doc("Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.")
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_06_01_preview)
   zonalResiliency?: ResiliencyProperties;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
