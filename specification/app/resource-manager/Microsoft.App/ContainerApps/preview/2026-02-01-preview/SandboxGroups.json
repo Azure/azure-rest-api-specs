@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2026-02-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "SandboxGroupNameParameter": {
+      "name": "sandboxGroupName",
+      "in": "path",
+      "description": "Name of the sandbox group.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/sandboxGroups": {
+      "get": {
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "Get the sandbox groups in a given subscription.",
+        "operationId": "SandboxGroups_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Sandbox Groups by subscription": {
+            "$ref": "./examples/SandboxGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups": {
+      "get": {
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "Get the sandbox groups in a given resource group of a subscription.",
+        "operationId": "SandboxGroups_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Sandbox Groups by resource group": {
+            "$ref": "./examples/SandboxGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}": {
+      "get": {
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "Get the properties of a sandbox group.",
+        "operationId": "SandboxGroups_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Sandbox Group": {
+            "$ref": "./examples/SandboxGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "Create or update a sandbox group.",
+        "description": "Create or update a sandbox group with the given properties.",
+        "operationId": "SandboxGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupEnvelope",
+            "in": "body",
+            "description": "Properties used to create a sandbox group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "201": {
+            "description": "Sandbox group creation has started.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Sandbox Group": {
+            "$ref": "./examples/SandboxGroups_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "Update properties of a sandbox group.",
+        "description": "Patches a sandbox group using JSON merge patch.",
+        "operationId": "SandboxGroups_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupEnvelope",
+            "in": "body",
+            "description": "Properties used to update a sandbox group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Sandbox Group": {
+            "$ref": "./examples/SandboxGroups_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "Delete a sandbox group.",
+        "description": "Delete the sandbox group with the given name.",
+        "operationId": "SandboxGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Sandbox group delete has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Sandbox group does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Sandbox Group": {
+            "$ref": "./examples/SandboxGroups_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SandboxGroupCollection": {
+      "description": "Collection of sandbox groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SandboxGroup"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SandboxGroup": {
+      "description": "A sandbox group resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Sandbox group resource specific properties.",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the sandbox group.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SandboxGroupProvisioningState",
+                "modelAsString": true
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SandboxGroupUpdate": {
+      "description": "Properties used to update a sandbox group.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
