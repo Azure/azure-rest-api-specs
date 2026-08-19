@@ -118,7 +118,10 @@ union ReasonForRequestingConfirmation {
 }
 
 @added(Versions.v2026_03_01_preview)
-@renamedFrom(Versions.v2026_06_01_preview, "UserConfirmationForHighAvailabilityItem")
+@renamedFrom(
+  Versions.v2026_06_01_preview,
+  "UserConfirmationForHighAvailabilityItem"
+)
 @doc("Represents a user confirmation for a high availability solution.")
 model UserConfirmationItem {
   @doc("The solution display name of the high availability solution.")
