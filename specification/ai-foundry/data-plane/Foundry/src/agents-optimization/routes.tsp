@@ -104,7 +104,7 @@ interface AgentOptimizationJobs {
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination. Each item is a AgentOptimizationCandidateSummary — mutation payloads and per-task results are excluded from bulk-read paths; fetch them via GET /candidates/{candidateId}.
+   * Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — mutation *keys* identify which agent attributes changed, but the customer-supplied mutation *values* are returned as `null` unless the client passes `expand=mutations`. Per-task result files are always fetched via GET /candidates/{candidateId}.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
@@ -115,13 +115,16 @@ interface AgentOptimizationJobCandidates {
       /** The ID of the parent optimization job. */
       @path jobId: string;
 
+      /** Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews. */
+      @query expand?: string;
+
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<AgentOptimizationCandidateSummary>
+    AgentsPagedResult<AgentOptimizationCandidate>
   >;
 
   /**
-   * Retrieves a single candidate including mutation payload and file manifest.
+   * Retrieves a single candidate. Mutation values are always included when a client hits the GET endpoint directly; the `expand` parameter exists for consistency with LIST but is optional here.
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
@@ -134,8 +137,11 @@ interface AgentOptimizationJobCandidates {
 
       /** The candidate identifier. */
       @path candidateId: string;
+
+      /** Comma-separated list of expand keys. Provided for consistency with LIST; mutations values are populated on this endpoint regardless of the parameter. */
+      @query expand?: string;
     },
-    AgentOptimizationCandidateDetail
+    AgentOptimizationCandidate
   >;
 
   /**

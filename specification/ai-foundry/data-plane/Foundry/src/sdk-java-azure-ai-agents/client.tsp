@@ -102,10 +102,10 @@ using Azure.AI.Projects;
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
 
-@@clientName(AgentOptimizationCandidateSummary.avg_score, "averageScore");
-@@clientName(AgentOptimizationCandidateSummary.avg_tokens, "averageTokens");
-@@clientName(AgentOptimizationCandidateSummary.eval_id, "evaluationId");
-@@clientName(AgentOptimizationCandidateSummary.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationCandidate.avg_score, "averageScore");
+@@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
+@@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
+@@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 

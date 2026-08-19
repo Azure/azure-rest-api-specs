@@ -411,7 +411,7 @@ paths:
     get:
       operationId: AgentOptimizationJobCandidates_listCandidates
       summary: List candidates for an agent optimization job
-      description: Lists candidates for the given optimization job with cursor pagination. Each item is a AgentOptimizationCandidateSummary — mutation payloads and per-task results are excluded from bulk-read paths; fetch them via GET /candidates/{candidateId}.
+      description: Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — mutation *keys* identify which agent attributes changed, but the customer-supplied mutation *values* are returned as `null` unless the client passes `expand=mutations`. Per-task result files are always fetched via GET /candidates/{candidateId}.
       parameters:
         - name: Foundry-Features
           in: header
@@ -427,6 +427,13 @@ paths:
           description: The ID of the parent optimization job.
           schema:
             type: string
+        - name: expand
+          in: query
+          required: false
+          description: Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews.
+          schema:
+            type: string
+          explode: false
         - name: limit
           in: query
           required: false
@@ -488,7 +495,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AgentOptimizationCandidateSummary'
+                      $ref: '#/components/schemas/AgentOptimizationCandidate'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -521,7 +528,7 @@ paths:
     get:
       operationId: AgentOptimizationJobCandidates_getCandidate
       summary: Get a candidate for an agent optimization job
-      description: Retrieves a single candidate including mutation payload and file manifest.
+      description: Retrieves a single candidate. Mutation values are always included when a client hits the GET endpoint directly; the `expand` parameter exists for consistency with LIST but is optional here.
       parameters:
         - name: Foundry-Features
           in: header
@@ -543,6 +550,13 @@ paths:
           description: The candidate identifier.
           schema:
             type: string
+        - name: expand
+          in: query
+          required: false
+          description: Comma-separated list of expand keys. Provided for consistency with LIST; mutations values are populated on this endpoint regardless of the parameter.
+          schema:
+            type: string
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -556,7 +570,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentOptimizationCandidateDetail'
+                $ref: '#/components/schemas/AgentOptimizationCandidate'
         4XX:
           description: Client error
           content:
@@ -42883,30 +42897,36 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-    AgentOptimizationCandidateDetail:
+    AgentOptimizationCandidate:
       type: object
       required:
         - candidate_id
-        - name
         - job_id
+        - name
+        - mutations
       properties:
         candidate_id:
           type: string
           description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
+        job_id:
+          type: string
+          description: Identifier of the parent optimization job.
         name:
           type: string
           description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
-        optimizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetAttribute'
-          description: Which agent attributes were mutated on this candidate relative to the baseline. Empty for the baseline candidate itself.
+        mutations:
+          type: object
+          unevaluatedProperties:
+            anyOf:
+              - {}
+              - type: 'null'
+          description: The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (e.g., `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. In LIST contexts (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when `expand=mutations` is requested. Always empty for the baseline candidate.
         agent_version:
           type: string
           description: Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the candidate was created, represented in Unix time. Populated on candidate detail; may be omitted from list contexts.
+          description: Timestamp when the candidate was created, represented in Unix time.
         avg_score:
           type: number
           format: double
@@ -42928,19 +42948,12 @@ components:
         promotion:
           $ref: '#/components/schemas/PromotionInfo'
           description: Promotion metadata. Null if this candidate has not been promoted.
-        job_id:
-          type: string
-          description: Identifier of the parent optimization job.
-        mutations:
-          type: object
-          unevaluatedProperties: {}
-          description: "The mutation payload applied to the baseline to produce this candidate (e.g., {system_prompt: 'new prompt'}). May contain customer-supplied prompt content."
         files:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationCandidateFileInfo'
-          description: Manifest of artifact files stored for this candidate.
-      description: Full candidate view returned by GET /candidates/{id}. Includes all AgentOptimizationCandidateSummary fields plus the mutation payload and file manifest.
+          description: Manifest of artifact files stored for this candidate (config, results, diagnostics).
+      description: 'A single candidate produced by an optimization job. Represents both LIST and detail views: the LIST context populates aggregate scoring fields and the mutation keys (with values null), and a client can request the full mutation payload via the `expand=mutations` query parameter or a `GET /candidates/{id}` call.'
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V3Preview
@@ -42962,54 +42975,6 @@ components:
           format: int64
           description: File size in bytes.
       description: A single candidate file artifact stored in the job's output blob.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V3Preview
-    AgentOptimizationCandidateSummary:
-      type: object
-      required:
-        - candidate_id
-        - name
-      properties:
-        candidate_id:
-          type: string
-          description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
-        name:
-          type: string
-          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
-        optimizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetAttribute'
-          description: Which agent attributes were mutated on this candidate relative to the baseline. Empty for the baseline candidate itself.
-        agent_version:
-          type: string
-          description: Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the candidate was created, represented in Unix time. Populated on candidate detail; may be omitted from list contexts.
-        avg_score:
-          type: number
-          format: double
-          description: Average composite score across all evaluated tasks.
-        avg_tokens:
-          type: number
-          format: double
-          description: Average total tokens consumed per task.
-        avg_latency_ms:
-          type: number
-          format: double
-          description: Average end-to-end latency per task in milliseconds.
-        eval_id:
-          type: string
-          description: Foundry evaluation identifier used to score this candidate.
-        eval_run_id:
-          type: string
-          description: Foundry evaluation run identifier for this candidate's scoring run.
-        promotion:
-          $ref: '#/components/schemas/PromotionInfo'
-          description: Promotion metadata. Null if this candidate has not been promoted.
-      description: Slim candidate view returned in bulk-read contexts (candidate LIST). Excludes mutations to keep customer-supplied prompt content off bulk-read paths. Fetch full detail via GET /agent_optimization_jobs/{jobId}/candidates/{candidateId}.
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V3Preview
@@ -43462,6 +43427,9 @@ components:
           - AgentsOptimization=V3Preview
     AgentOptimizationJobResult:
       type: object
+      required:
+        - token_usage
+        - latency_usage
       properties:
         baseline:
           type: string
@@ -43478,12 +43446,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationTokenUsageEntry'
-          description: Aggregate token usage per layer × model.
+          description: Aggregate token usage per layer × model. Always present; empty array when no calls were measured.
         latency_usage:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationLatencyUsageEntry'
-          description: Aggregate latency per layer × model.
+          description: Aggregate latency per layer × model, from server-measured sources only. Always present; empty array when no server-measured latency signals were surfaced (e.g. an early-failure run or an all-hosted judge run whose evaluators do not report latency_ms).
       description: Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed).
       x-ms-foundry-meta:
         conditional_previews:
@@ -43498,7 +43466,7 @@ components:
       properties:
         layer:
           $ref: '#/components/schemas/AgentOptimizationLayer'
-          description: Which layer of the optimization loop generated these calls.
+          description: Which layer of the optimization loop generated these calls. See `AgentOptimizationLayer` for per-layer population status.
         model:
           type: string
           description: Model deployment name that served the calls.
@@ -43509,16 +43477,16 @@ components:
         p50_latency_ms:
           type: number
           format: double
-          description: p50 (median) per-call latency in milliseconds.
+          description: p50 (median) per-call latency in milliseconds. Omitted when the sample was too small to compute.
         p95_latency_ms:
           type: number
           format: double
-          description: p95 per-call latency in milliseconds.
+          description: p95 per-call latency in milliseconds. Omitted when the sample was too small to compute.
         call_count:
           type: integer
           format: int64
           description: Total number of calls contributing to this entry.
-      description: Aggregated wall-clock latency attributable to a single layer of the optimization loop.
+      description: Aggregated wall-clock latency attributable to a single layer of the optimization loop. Sourced from server-measured signals (Foundry's `sample.latency_ms` on the target rollout and evaluator responses). Layers without a server-measured source are omitted from the array rather than populated with client-observed timings that would conflate real model latency with local retry/network overhead.
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V3Preview
@@ -43530,7 +43498,20 @@ components:
             - agent
             - judge
             - reflection
-      description: Which layer of the optimization loop generated a token/latency usage entry.
+      description: |-
+        Which layer of the optimization loop generated a token/latency usage entry.
+
+        Population status for `latency_usage` (as of the initial GA of this contract):
+        - `agent`     — populated when Foundry's agent runtime surfaces `sample.latency_ms`
+        (server-measured on the target rollout).
+        - `judge`     — populated when a Foundry evaluator surfaces `sample.latency_ms`
+        (server-measured on the evaluator call).
+        - `reflection`— **not currently populated**. The optimizer's reflection/mutation
+        model calls are not yet reported with a server-measured latency
+        source; this member is reserved so consumers can begin filtering
+        for it today without a breaking change when the signal ships.
+
+        `token_usage` populates all three layers.
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V3Preview
