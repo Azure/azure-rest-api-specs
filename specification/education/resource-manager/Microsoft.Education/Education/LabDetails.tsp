@@ -189,9 +189,11 @@ interface Labs {
 
 @@doc(LabDetails.name, "");
 @@doc(LabDetails.properties, "Get lab response properties.");
-@@doc(Labs.createOrUpdate::parameters.resource,
+@@doc(
+  Labs.createOrUpdate::parameters.resource,
   "Request parameters that are provided to create lab resource."
 );
-@@doc(Labs.generateInviteCode::parameters.body,
+@@doc(
+  Labs.generateInviteCode::parameters.body,
   "Request parameters that are provided to generate invite code."
 );

@@ -29,10 +29,12 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
 @@minLength(Snapshot.name, 1);
 @@doc(Snapshot.name, "The name of the managed cluster resource.");
 @@doc(Snapshot.properties, "Properties of a snapshot.");
-@@doc(Snapshots.createOrUpdate::parameters.resource,
+@@doc(
+  Snapshots.createOrUpdate::parameters.resource,
   "The snapshot to create or update."
 );
-@@doc(Snapshots.updateTags::parameters.properties,
+@@doc(
+  Snapshots.updateTags::parameters.properties,
   "Parameters supplied to the Update snapshot Tags operation."
 );
 

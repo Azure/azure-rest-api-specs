@@ -24,7 +24,7 @@ union EmbeddingInputType {
   Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and 
   `binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the
   model doesn't support the value or parameter. Read the model's documentation to know the values supported by
-  the your model.
+  your model.
   """)
 union EmbeddingEncodingFormat {
   string,

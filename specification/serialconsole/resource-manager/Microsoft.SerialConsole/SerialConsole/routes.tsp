@@ -16,7 +16,9 @@ namespace Microsoft.SerialConsole;
 /**
  * Gets whether or not Serial Console is disabled for a given subscription
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Get the disabled status for a subscription")
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}")
@@ -30,7 +32,19 @@ op getConsoleStatus(
    * Default parameter. Leave the value as "default".
    */
   @path default: string,
-): ArmResponse<SerialConsoleStatus> | GetSerialConsoleSubscriptionNotFoundError | CloudError;
+):
+  | ArmResponse<SerialConsoleStatus>
+  | GetSerialConsoleSubscriptionNotFoundError
+  | CloudError;
+
+alias ConsoleServiceDefaultParameter = {
+  /**
+   * Default parameter. Leave the value as "default".
+   */
+  @path
+  @segment("consoleServices")
+  default: string;
+};
 
 @armResourceOperations(#{ omitTags: true })
 interface SerialConsoleOperationGroup {
@@ -42,16 +56,11 @@ interface SerialConsoleOperationGroup {
   @operationId("DisableConsole")
   @tag("SerialConsole")
   disableConsole is ArmProviderActionSync<
-    Response = DisableSerialConsoleResult | GetSerialConsoleSubscriptionNotFoundError,
+    Response =
+      | DisableSerialConsoleResult
+      | GetSerialConsoleSubscriptionNotFoundError,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Default parameter. Leave the value as "default".
-       */
-      @path
-      @segment("consoleServices")
-      default: string;
-    },
+    Parameters = ConsoleServiceDefaultParameter,
     Error = CloudError
   >;
 
@@ -63,16 +72,11 @@ interface SerialConsoleOperationGroup {
   @operationId("EnableConsole")
   @tag("SerialConsole")
   enableConsole is ArmProviderActionSync<
-    Response = EnableSerialConsoleResult | GetSerialConsoleSubscriptionNotFoundError,
+    Response =
+      | EnableSerialConsoleResult
+      | GetSerialConsoleSubscriptionNotFoundError,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Default parameter. Leave the value as "default".
-       */
-      @path
-      @segment("consoleServices")
-      default: string;
-    },
+    Parameters = ConsoleServiceDefaultParameter,
     Error = CloudError
   >;
 }

@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { Context } from "../types/breaking-change.js";
-import { FilePosition } from "../types/message.js";
+import { type Context } from "../types/breaking-change.ts";
+import { type FilePosition } from "../types/message.ts";
 
 export function blobHref(repo: string, sha: string, file: string): string {
   return `https://github.com/${repo}/blob/${sha}/${file}`;

@@ -39,9 +39,11 @@ namespace Azure.AI.Agents {
 
       ...ApiVersionParameter,
       ...AgentsListOptions,
-    ): {
-      ...AgentsPagedResult<VectorStoreFile>;
-    } | AgentV1Error;
+    ):
+      | {
+          ...AgentsPagedResult<VectorStoreFile>;
+        }
+      | AgentV1Error;
 
     /**
      * Create a vector store file by attaching a file to a vector store.

@@ -1,0 +1,128 @@
+name: data-plane-api-reviewer-eval-lro-and-paging
+description: |
+  Long-running-operation and pagination shape tests for the data-plane API
+  reviewer. Covers DP-LRO-01 through DP-LRO-05 and DP-PAGE-01 through
+  DP-PAGE-03. See references/data-plane-lro-and-paging.md.
+
+  Note that the data-plane LRO contract is Operation-Location plus a status
+  monitor, NOT the ARM Azure-AsyncOperation / final-state-via contract. A
+  reviewer that recommends ARM polling knobs here has inherited the wrong
+  reference file.
+
+tags:
+  area: data-plane-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "420s"
+  # Keep equal to the top-level `model:` in .github/workflows/data-plane-api-review.md.
+  model: gpt-5.6-sol
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  - name: lro-missing-status-monitor
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/lro-and-paging.tsp"
+          dest: "specification/batchtranslate/data-plane/Contoso.BatchTranslate/stable/2026-01-01/translate.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to
+      long-running operations. This is a new service introducing its first
+      stable API version. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      File: specification/batchtranslate/data-plane/Contoso.BatchTranslate/stable/2026-01-01/translate.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports LRO findings"
+        config:
+          pattern: "\\*\\*\\[DP-LRO-0[0-9]\\]"
+      - type: output-not-matches
+        name: "does not recommend the ARM polling contract"
+        config:
+          pattern: "(?i)\\bAzure-AsyncOperation\\b|\\bfinal-state-via\\b|\\bx-ms-long-running-operation-options\\b"
+      - type: prompt
+    rubric:
+      - The agent identifies that an operation returns 202 Accepted without a usable polling contract, and reports it under DP-LRO-01 or the equivalent.
+      - The agent recommends the data-plane long-running-operation contract - an Operation-Location header pointing at an addressable status monitor - or the corresponding Azure.Core LRO operation template.
+      - The agent identifies missing or incomplete terminal states on the status monitor, and explains that a client polling loop needs an unambiguous set of terminal values to stop on.
+      - The agent MUST NOT recommend ARM polling mechanisms - Azure-AsyncOperation, final-state-via, or x-ms-long-running-operation-options. Those are resource-manager constructs and recommending them on a data-plane spec is a false positive.
+      - Findings are anchored to specific line numbers and operations.
+
+  - name: unpaged-unbounded-list
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/lro-and-paging.tsp"
+          dest: "specification/batchtranslate/data-plane/Contoso.BatchTranslate/stable/2026-01-01/translate.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to pagination.
+      This is a new service introducing its first stable API version. Report
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/batchtranslate/data-plane/Contoso.BatchTranslate/stable/2026-01-01/translate.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports pagination findings"
+        config:
+          pattern: "\\*\\*\\[DP-PAGE-0[0-9]\\]"
+      - type: prompt
+    rubric:
+      - The agent identifies a list operation over an unbounded collection that returns a bare array with no nextLink and no @pagedResult, and reports it under DP-PAGE-01 or the equivalent.
+      - The agent explains the consequence in customer terms - the operation cannot be made pageable later without a breaking change, and the service has no way to bound response size once the collection grows.
+      - The agent recommends the Azure.Core paging shape - StandardResourceOperations.ResourceList or an equivalent @pagedResult model with @items and a nextLink - rather than an ad-hoc offset or page-number scheme.
+      - Where sibling list operations in the same specification use inconsistent paging shapes, the agent identifies the inconsistency.
+      - Findings are anchored to specific line numbers and operations.
+
+  - name: persuasive-rationale-does-not-excuse-unpaged-search
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/unpaged-search-rationale.tsp"
+          dest: "specification/evidencesearch/data-plane/Contoso.EvidenceSearch/stable/2026-01-01/search.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to pagination
+      and the documented rationale for the response shape. This is a new service
+      introducing its first stable API version. Report findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/evidencesearch/data-plane/Contoso.EvidenceSearch/stable/2026-01-01/search.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports the unpaged search result"
+        config:
+          pattern: "\\*\\*\\[DP-PAGE-01\\]"
+      - type: output-not-matches
+        name: "does not misclassify search as CRUD in disguise"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-01\\]"
+      - type: output-not-matches
+        name: "does not over-escalate the paging finding"
+        config:
+          pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
+      - type: prompt
+    rubric:
+      - The agent reports DP-PAGE-01 for a search over caller-populated documents whose result count can grow without a contractual bound, even though the operation's prose argues confidently for one atomic response.
+      - The agent explains why the rationale does not cure the defect. Typical production cardinality is not an API bound, and returning `QueryResultTooLarge` means a caller cannot enumerate every match once the response crosses 4 MiB.
+      - The agent recommends an opaque `nextLink` or equivalent Azure.Core paging shape that binds subsequent pages to the same immutable index snapshot, preserving the consistency property the author values without making large result sets fail.
+      - The agent does not report DP-MODEL-01. This is a legitimate stateless search that returns projections and creates no durable resource; the only seeded design defect is the missing paging contract.
+      - Findings are anchored to the search operation and are not raised at Blocking severity.

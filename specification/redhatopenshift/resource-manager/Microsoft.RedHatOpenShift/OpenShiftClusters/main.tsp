@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./OpenShiftVersion.tsp";
 import "./PlatformWorkloadIdentityRoleSet.tsp";
 import "./OpenShiftCluster.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

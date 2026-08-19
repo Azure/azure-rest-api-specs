@@ -126,6 +126,7 @@ interface TemplateModels {
 
 @@doc(TemplateModel.name, "template Id");
 @@doc(TemplateModel.properties, "template properties");
-@@doc(TemplateModels.install::parameters.resource,
+@@doc(
+  TemplateModels.install::parameters.resource,
   "Template installation properties"
 );

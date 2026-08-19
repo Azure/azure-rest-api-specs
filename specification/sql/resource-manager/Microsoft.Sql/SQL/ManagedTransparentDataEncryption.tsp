@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A managed database transparent data encryption state.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedDatabaseTransparentDataEncryption
+)
 model ManagedTransparentDataEncryption
   is Azure.ResourceManager.ProxyResource<ManagedTransparentDataEncryptionProperties> {
   ...ResourceNameParameter<
@@ -27,7 +31,11 @@ model ManagedTransparentDataEncryption
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedDatabaseTransparentDataEncryption
+)
 interface ManagedTransparentDataEncryptions {
   /**
    * Gets a managed database's transparent data encryption.
@@ -48,10 +56,12 @@ interface ManagedTransparentDataEncryptions {
   listByDatabase is ArmResourceListByParent<ManagedTransparentDataEncryption>;
 }
 
-@@doc(ManagedTransparentDataEncryption.name,
+@@doc(
+  ManagedTransparentDataEncryption.name,
   "The name of the transparent data encryption configuration."
 );
 @@doc(ManagedTransparentDataEncryption.properties, "Resource properties.");
-@@doc(ManagedTransparentDataEncryptions.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedTransparentDataEncryptions.createOrUpdate::parameters.resource,
   "The database transparent data encryption."
 );

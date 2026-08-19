@@ -77,27 +77,24 @@ alias FacetsRequestParameters = FacetsParameter &
 @doc("Serves a user experience with search and filter results on Marketplace public products.")
 @get
 @route("/search")
-op search(
-  ...ApiVersionParameter,
-  ...SearchRequestParameters,
-): SearchResponse | DiscoveryErrorPayload;
+op search(...ApiVersionParameter, ...SearchRequestParameters):
+  | SearchResponse
+  | DiscoveryErrorPayload;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
 @doc("Make suggestions while user is typing a search query for products.")
 @get
 @route("/suggestions")
-op suggestions(
-  ...ApiVersionParameter,
-  ...SuggestionsRequestParameters,
-): SuggestionsResponse | DiscoveryErrorPayload;
+op suggestions(...ApiVersionParameter, ...SuggestionsRequestParameters):
+  | SuggestionsResponse
+  | DiscoveryErrorPayload;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
 @doc("Get counts of Marketplace public products with requested properties.")
 @get
 @route("/facets")
-op facets(
-  ...ApiVersionParameter,
-  ...FacetsRequestParameters,
-): FacetsResponse | DiscoveryErrorPayload;
+op facets(...ApiVersionParameter, ...FacetsRequestParameters):
+  | FacetsResponse
+  | DiscoveryErrorPayload;

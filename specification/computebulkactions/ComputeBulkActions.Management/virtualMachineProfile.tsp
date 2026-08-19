@@ -17,6 +17,7 @@ model VirtualMachineProfile {
   @doc("Specifies additional capabilities enabled or disabled on the virtual machine.")
   additionalCapabilities?: AdditionalCapabilities;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
   osProfile?: OSProfile;
 
@@ -101,6 +102,7 @@ model StorageProfile {
   @doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.")
   imageReference?: ImageReference;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
   osDisk?: OSDisk;
 
@@ -136,6 +138,7 @@ model ImageReference extends SubResource {
 
 @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
 model OSDisk {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
@@ -315,6 +318,7 @@ model DiskEncryptionSettings {
  * Describes a reference to Key Vault Key
  */
 model KeyVaultKeyReference {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL referencing a key encryption key in Key Vault.")
   keyUrl: string;
 
@@ -629,6 +633,7 @@ model WinRMListener {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 }
 
@@ -847,6 +852,7 @@ model VaultSecretGroup {
 
 @doc("Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.")
 model VaultCertificate {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  'data':'<Base64-encoded-certificate>',<br>  'dataType':'pfx',<br>  'password':'<pfx-file-password>'<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).")
   certificateUrl?: string;
 
@@ -923,6 +929,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   @doc("The dns settings to be applied on the network interfaces.")
   dnsSettings?: VirtualMachineNetworkInterfaceDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the IP configurations of the network interface.")
   @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
@@ -1009,6 +1016,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   @doc("The dns settings to be applied on the publicIP addresses .")
   dnsSettings?: VirtualMachinePublicIPAddressDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of IP tags associated with the public IP address.")
   @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
@@ -1036,8 +1044,10 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
   domainNameLabelScope?: DomainNameLabelScopeTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Contains the IP tag associated with the public IP address.")
 model VirtualMachineIpTag {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP tag type. Example: FirstPartyUsage.")
   ipTagType?: string;
 
@@ -1222,6 +1232,7 @@ model ScheduledEventsProfile {
   @doc("Specifies Terminate Scheduled Event related configurations.")
   terminateNotificationProfile?: TerminateNotificationProfile;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies OS Image Scheduled Event related configurations.")
   osImageNotificationProfile?: OSImageNotificationProfile;
 }

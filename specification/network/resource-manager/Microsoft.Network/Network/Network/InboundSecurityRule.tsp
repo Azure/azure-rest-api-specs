@@ -61,12 +61,15 @@ interface InboundSecurityRuleOperationGroup {
 }
 
 @@doc(InboundSecurityRule.name, "The name of security rule collection.");
-@@doc(InboundSecurityRule.name,
+@@doc(
+  InboundSecurityRule.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(InboundSecurityRule.properties,
+@@doc(
+  InboundSecurityRule.properties,
   "The properties of the Inbound Security Rules."
 );
-@@doc(InboundSecurityRuleOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  InboundSecurityRuleOperationGroup.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Network Virtual Appliance Inbound Security Rules operation."
 );

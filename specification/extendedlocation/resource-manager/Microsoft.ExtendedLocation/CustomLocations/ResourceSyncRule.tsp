@@ -81,12 +81,15 @@ interface ResourceSyncRules {
 @@maxLength(resourceSyncRule.name, 63);
 @@minLength(resourceSyncRule.name, 1);
 @@doc(resourceSyncRule.name, "Resource Sync Rule name.");
-@@doc(resourceSyncRule.properties,
+@@doc(
+  resourceSyncRule.properties,
   "The set of properties specific to a Resource Sync Rule"
 );
-@@doc(ResourceSyncRules.createOrUpdate::parameters.resource,
+@@doc(
+  ResourceSyncRules.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a Resource Sync Rule."
 );
-@@doc(ResourceSyncRules.update::parameters.properties,
+@@doc(
+  ResourceSyncRules.update::parameters.properties,
   "The updatable fields of an existing Resource Sync Rule."
 );

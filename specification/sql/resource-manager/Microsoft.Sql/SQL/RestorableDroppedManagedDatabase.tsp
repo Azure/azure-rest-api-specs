@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A restorable dropped managed database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.RestorableDroppedManagedDatabases
+)
 model RestorableDroppedManagedDatabase
   is Azure.ResourceManager.TrackedResource<RestorableDroppedManagedDatabaseProperties> {
   ...ResourceNameParameter<
@@ -25,7 +29,11 @@ model RestorableDroppedManagedDatabase
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.RestorableDroppedManagedDatabases
+)
 interface RestorableDroppedManagedDatabases {
   /**
    * Gets a restorable dropped managed database.

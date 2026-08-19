@@ -37,7 +37,9 @@ interface StorageSyncServicesOperationGroup {
 /**
  * Get Operation status
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}")
 @get
 op locationOperationStatusGet(
@@ -55,15 +57,17 @@ op locationOperationStatusGet(
    */
   @path
   operationId: string,
-): (ArmResponse<LocationOperationStatus> & {
-  @header("x-ms-correlation-request-id")
-  @doc("correlation request id.")
-  correlationRequestId?: string;
+):
+  | (ArmResponse<LocationOperationStatus> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      xMsCorrelationRequestId?: string;
 
-  @header("x-ms-request-id")
-  @doc("request id.")
-  requestId?: string;
-}) | StorageSyncError;
+      @header("x-ms-request-id")
+      @doc("request id.")
+      xMsRequestId?: string;
+    })
+  | StorageSyncError;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
@@ -94,13 +98,15 @@ interface OperationStatusOperationGroup {
      */
     @path
     operationId: string,
-  ): (ArmResponse<OperationStatus> & {
-    @header("x-ms-correlation-request-id")
-    @doc("correlation request id.")
-    correlationRequestId?: string;
+  ):
+    | (ArmResponse<OperationStatus> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-    @header("x-ms-request-id")
-    @doc("request id.")
-    requestId?: string;
-  }) | StorageSyncError;
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      })
+    | StorageSyncError;
 }

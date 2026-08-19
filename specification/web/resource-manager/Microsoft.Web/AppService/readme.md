@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2025-05
+tag: package-2026-07
 ```
 
 ### Suppression
@@ -109,6 +109,24 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
     - preview/2026-09-01-preview/openapi.json
+```
+
+### Tag: package-2026-07
+
+These settings apply only when `--tag=package-2026-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07'
+input-file:
+    - stable/2026-07-15/openapi.json
+```
+
+### Tag: package-2026-03
+
+These settings apply only when `--tag=package-2026-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03'
+input-file:
+    - stable/2026-03-15/openapi.json
 ```
 
 ### Tag: package-2026-03-01-preview

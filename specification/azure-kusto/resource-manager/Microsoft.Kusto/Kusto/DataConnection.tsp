@@ -58,16 +58,19 @@ interface DataConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DataConnection,
-    Response = ArmResourceUpdatedResponse<DataConnection> | (CreatedResponse & {
-      @body body: DataConnection;
-    }) | (ArmAcceptedLroResponse<
-      "Create or update accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DataConnection> &
-        ArmAsyncOperationHeader<FinalResult = DataConnection>
-    > & {
-      @bodyRoot
-      _: DataConnection;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DataConnection>
+      | (CreatedResponse & {
+          @body body: DataConnection;
+        })
+      | (ArmAcceptedLroResponse<
+          "Create or update accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = DataConnection> &
+            ArmAsyncOperationHeader<FinalResult = DataConnection>
+        > & {
+          @bodyRoot
+          _: DataConnection;
+        })
   >;
 
   /**
@@ -78,20 +81,23 @@ interface DataConnections {
   update is ArmCustomPatchAsync<
     DataConnection,
     PatchModel = DataConnection,
-    Response = ArmResponse<DataConnection> | ArmResourceCreatedResponse<
-      DataConnection,
-      LroHeaders = ArmLroLocationHeader<FinalResult = DataConnection> &
-        ArmAsyncOperationHeader<FinalResult = DataConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<
-      "Update accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DataConnection> &
-        ArmAsyncOperationHeader<FinalResult = DataConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: DataConnection;
-    })
+    Response =
+      | ArmResponse<DataConnection>
+      | ArmResourceCreatedResponse<
+          DataConnection,
+          LroHeaders = ArmLroLocationHeader<FinalResult = DataConnection> &
+            ArmAsyncOperationHeader<FinalResult = DataConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<
+          "Update accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = DataConnection> &
+            ArmAsyncOperationHeader<FinalResult = DataConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: DataConnection;
+        })
   >;
 
   /**
@@ -100,9 +106,12 @@ interface DataConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DataConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -115,9 +124,11 @@ interface DataConnections {
 }
 
 @@doc(DataConnection.name, "The name of the data connection.");
-@@doc(DataConnections.createOrUpdate::parameters.resource,
+@@doc(
+  DataConnections.createOrUpdate::parameters.resource,
   "The data connection parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DataConnections.update::parameters.properties,
+@@doc(
+  DataConnections.update::parameters.properties,
   "The data connection parameters supplied to the Update operation."
 );

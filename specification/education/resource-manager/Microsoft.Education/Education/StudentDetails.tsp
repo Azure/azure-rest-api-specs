@@ -116,6 +116,7 @@ interface Students {
 
 @@doc(StudentDetails.name, "Student alias.");
 @@doc(StudentDetails.properties, "Get student response properties.");
-@@doc(Students.createOrUpdate::parameters.resource,
+@@doc(
+  Students.createOrUpdate::parameters.resource,
   "Request parameters that are provided to update student properties."
 );

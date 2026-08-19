@@ -82,7 +82,7 @@ interface GatewayContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -96,7 +96,7 @@ interface GatewayContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -113,19 +113,21 @@ interface GatewayContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GatewayContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<GatewayContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GatewayContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<GatewayContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -148,7 +150,7 @@ interface GatewayContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -207,7 +209,7 @@ interface GatewayContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -302,28 +304,34 @@ interface GatewayContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
   /**
    * Adds an API to the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}")
   gatewayApiCreateOrUpdate is GatewayApiOps.ActionSync<
     GatewayContract,
     AssociationContract,
-    Response = ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
+    Response =
+      | ArmResponse<ApiContract>
+      | ArmResourceCreatedSyncResponse<ApiContract>,
     OptionalRequestBody = true
   >;
 
   /**
    * Deletes the specified API from the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}")
   gatewayApiDelete is GatewayApiOps.ActionSync<
@@ -335,7 +343,8 @@ interface GatewayContracts {
 
 @@maxLength(GatewayContract.name, 80);
 @@minLength(GatewayContract.name, 1);
-@@doc(GatewayContract.name,
+@@doc(
+  GatewayContract.name,
   "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
 );
 @@doc(GatewayContract.properties, "Gateway details.");
@@ -343,7 +352,8 @@ interface GatewayContracts {
 @@doc(GatewayContracts.update::parameters.properties, "");
 @@doc(GatewayContracts.regenerateKey::parameters.body, "");
 @@doc(GatewayContracts.generateToken::parameters.body, "");
-@@doc(GatewayContracts.listDebugCredentials::parameters.body,
+@@doc(
+  GatewayContracts.listDebugCredentials::parameters.body,
   "List debug credentials properties."
 );
 @@doc(GatewayContracts.listTrace::parameters.body, "List trace properties.");

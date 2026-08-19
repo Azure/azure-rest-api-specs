@@ -53,7 +53,7 @@ export default async function setStatus(
  * @param {string} params.head_sha
  * @param {number} params.issue_number
  * @param {string} params.target_url
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  * @param {string} params.monitoredWorkflowName
  * @param {string} params.requiredStatusName

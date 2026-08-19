@@ -91,7 +91,10 @@ interface PrivateEndpointConnectionDescriptions {
   @tag("PrivateEndpointConnections")
   delete is PrivateEndpointConnectionDescriptionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnectionDescription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -153,7 +156,10 @@ interface WorkspacePrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is WorkspacePrivateEndpointConnectionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnectionDescription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -165,12 +171,15 @@ interface WorkspacePrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnectionDescription.name,
+@@doc(
+  PrivateEndpointConnectionDescription.name,
   "The name of the private endpoint connection associated with the Azure resource"
 );
-@@doc(PrivateEndpointConnectionDescriptions.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionDescriptions.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );
-@@doc(WorkspacePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspacePrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );

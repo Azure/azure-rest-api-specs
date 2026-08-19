@@ -26,7 +26,16 @@ These are the global settings for the AppConfiguration API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2024-09-01
+tag: package-2026-04-01
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+- stable/2026-04-01/appconfiguration.json
 ```
 
 ### Tag: package-2024-09-01
@@ -36,6 +45,15 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 ``` yaml $(tag) == 'package-2024-09-01'
 input-file:
 - stable/2024-09-01/appconfiguration.json
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+- preview/2026-05-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2023-11-01
@@ -152,6 +170,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2026-05-01-preview/appconfiguration.json
+  - $(this-folder)/stable/2024-09-01/appconfiguration.json
   - $(this-folder)/stable/2023-11-01/appconfiguration.json
   - $(this-folder)/stable/2023-10-01/appconfiguration.json
   - $(this-folder)/stable/1.0/appconfiguration.json

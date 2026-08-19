@@ -57,8 +57,11 @@ interface WebAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebAgent,
-    Response = ArmResourceUpdatedResponse<WebAgent> | ArmResourceCreatedResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent>> &
-      WebAgentAcceptedBody)
+    Response =
+      | ArmResourceUpdatedResponse<WebAgent>
+      | ArmResourceCreatedResponse<WebAgent>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent>> &
+          WebAgentAcceptedBody)
   >;
 
   /**
@@ -69,9 +72,11 @@ interface WebAgents {
   update is ArmCustomPatchAsync<
     WebAgent,
     PatchModel = WebAgentUpdateParameters,
-    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent> & // ← add FinalResult!
-      Azure.Core.Foundations.RetryAfterHeader> &
-      WebAgentAcceptedBody)
+    Response =
+      | ArmResponse<WebAgent>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent> & // ← add FinalResult!
+          Azure.Core.Foundations.RetryAfterHeader> &
+          WebAgentAcceptedBody)
   >;
 
   /**
@@ -80,7 +85,10 @@ interface WebAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     WebAgent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,9 +112,11 @@ interface WebAgents {
 @@minLength(WebAgent.name, 1);
 @@doc(WebAgent.name, "The name of the web agent.");
 @@doc(WebAgent.properties, "Properties of the web agent.");
-@@doc(WebAgents.createOrUpdate::parameters.resource,
+@@doc(
+  WebAgents.createOrUpdate::parameters.resource,
   "Web agent to be created or updated."
 );
-@@doc(WebAgents.update::parameters.properties,
+@@doc(
+  WebAgents.update::parameters.properties,
   "Web agent parameters to be updated."
 );

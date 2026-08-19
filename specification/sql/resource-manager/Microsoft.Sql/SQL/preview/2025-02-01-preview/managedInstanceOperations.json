@@ -1,0 +1,414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedInstanceOperations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/operations": {
+      "get": {
+        "operationId": "ManagedInstanceOperations_ListByManagedInstance",
+        "tags": [
+          "ManagedInstanceOperations"
+        ],
+        "description": "Gets a list of operations performed on the managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the managed instance management operations": {
+            "$ref": "./examples/ListManagedInstanceOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/operations/{operationId}": {
+      "get": {
+        "operationId": "ManagedInstanceOperations_Get",
+        "tags": [
+          "ManagedInstanceOperations"
+        ],
+        "description": "Gets a management operation on a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the managed instance management operation": {
+            "$ref": "./examples/GetManagedInstanceOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/operations/{operationId}/cancel": {
+      "post": {
+        "operationId": "ManagedInstanceOperations_Cancel",
+        "tags": [
+          "ManagedInstanceOperations"
+        ],
+        "description": "Cancels the asynchronous operation on the managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel the managed instance management operation": {
+            "$ref": "./examples/CancelManagedInstanceOperation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceOperation": {
+      "type": "object",
+      "description": "A managed instance operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedInstanceOperationListResult": {
+      "type": "object",
+      "description": "The response of a ManagedInstanceOperation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedInstanceOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedInstanceOperationParametersPair": {
+      "type": "object",
+      "description": "The parameters of a managed instance operation.",
+      "properties": {
+        "currentParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The current parameters.",
+          "readOnly": true
+        },
+        "requestedParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The requested parameters.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationProperties": {
+      "type": "object",
+      "description": "The properties of a managed instance operation.",
+      "properties": {
+        "managedInstanceName": {
+          "type": "string",
+          "description": "The name of the managed instance the operation is being performed on.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The name of operation.",
+          "readOnly": true
+        },
+        "operationFriendlyName": {
+          "type": "string",
+          "description": "The friendly name of operation.",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the operation completed.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The operation start time.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/ManagementOperationState",
+          "description": "The operation state.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The operation error code.",
+          "readOnly": true
+        },
+        "errorDescription": {
+          "type": "string",
+          "description": "The operation error description.",
+          "readOnly": true
+        },
+        "errorSeverity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The operation error severity.",
+          "readOnly": true
+        },
+        "isUserError": {
+          "type": "boolean",
+          "description": "Whether or not the error is a user error.",
+          "readOnly": true
+        },
+        "estimatedCompletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The estimated completion time of the operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The operation description.",
+          "readOnly": true
+        },
+        "isCancellable": {
+          "type": "boolean",
+          "description": "Whether the operation can be cancelled.",
+          "readOnly": true
+        },
+        "operationParameters": {
+          "$ref": "#/definitions/ManagedInstanceOperationParametersPair",
+          "description": "The operation parameters.",
+          "readOnly": true
+        },
+        "operationSteps": {
+          "$ref": "#/definitions/ManagedInstanceOperationSteps",
+          "description": "The operation steps.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationSteps": {
+      "type": "object",
+      "description": "The steps of a managed instance operation.",
+      "properties": {
+        "totalSteps": {
+          "type": "string",
+          "description": "The total number of operation steps.",
+          "readOnly": true
+        },
+        "currentStep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of current operation steps.",
+          "readOnly": true
+        },
+        "stepsList": {
+          "type": "array",
+          "description": "The operation steps list.",
+          "items": {
+            "$ref": "#/definitions/UpsertManagedServerOperationStepWithEstimatesAndDuration"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "UpsertManagedServerOperationParameters": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "storageSizeInGB": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "UpsertManagedServerOperationStepWithEstimatesAndDuration": {
+      "type": "object",
+      "properties": {
+        "stepStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "stepEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeElapsed": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/UpsertManagedServerOperationStepWithEstimatesAndDurationStatus"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

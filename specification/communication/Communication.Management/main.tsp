@@ -20,6 +20,7 @@ import "./SenderUsernameResource.tsp";
 import "./SmtpUsernameResource.tsp";
 import "./SuppressionListResource.tsp";
 import "./SuppressionListAddressResource.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -53,7 +54,8 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.Communication provider."
 );
 @@summary(Operations.list, "List Operations");

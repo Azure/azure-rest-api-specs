@@ -69,16 +69,20 @@ interface QuotaTiers {
 
 @@doc(QuotaTier.name, "Default parameter. Leave the value as default.");
 @@doc(QuotaTier.properties, "Properties of quota tier resource.");
-@@doc(QuotaTiers.createOrUpdate::parameters.resource,
+@@doc(
+  QuotaTiers.createOrUpdate::parameters.resource,
   "The parameters to provide for the quota tier resource."
 );
-@@doc(QuotaTiers.update::parameters.properties,
+@@doc(
+  QuotaTiers.update::parameters.properties,
   "The parameters to provide for the quota tier resource."
 );
 @@summary(QuotaTiers.get, "Gets the Quota Tier for a subscription");
-@@summary(QuotaTiers.createOrUpdate,
+@@summary(
+  QuotaTiers.createOrUpdate,
   "Updates the Quota Tier resource for a subscription."
 );
-@@summary(QuotaTiers.update,
+@@summary(
+  QuotaTiers.update,
   "Updates the Quota Tier resource for a subscription. The only properties that can be updated are  \"tierUpgradePolicy\""
 );

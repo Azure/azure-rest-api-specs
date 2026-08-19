@@ -53,9 +53,11 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-@@doc(NetworkSecurityPerimeterConfiguration.name,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.name,
   "The name, in the format {perimeterGuid}.{associationName}, of the Network Security Perimeter resource."
 );
-@@doc(NetworkSecurityPerimeterConfiguration.properties,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.properties,
   "Properties that define a Network Security Perimeter resource."
 );

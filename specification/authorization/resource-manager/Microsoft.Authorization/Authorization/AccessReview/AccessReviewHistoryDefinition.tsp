@@ -236,15 +236,19 @@ interface ScopeAccessReviewHistoryDefinitions {
   >;
 }
 
-@@doc(AccessReviewHistoryDefinition.name,
+@@doc(
+  AccessReviewHistoryDefinition.name,
   "The id of the access review history definition."
 );
-@@doc(AccessReviewHistoryDefinition.properties,
+@@doc(
+  AccessReviewHistoryDefinition.properties,
   "Access Review History Definition properties."
 );
-@@doc(AccessReviewHistoryDefinitions.create::parameters.resource,
+@@doc(
+  AccessReviewHistoryDefinitions.create::parameters.resource,
   "Access review history definition properties."
 );
-@@doc(ScopeAccessReviewHistoryDefinitions.create::parameters.resource,
+@@doc(
+  ScopeAccessReviewHistoryDefinitions.create::parameters.resource,
   "Access review history definition properties."
 );

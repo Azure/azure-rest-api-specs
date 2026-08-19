@@ -16,7 +16,9 @@ namespace Microsoft.Cdn;
 /**
  * Check the availability of a resource name. This is needed for resources where name is globally unique, such as a afdx endpoint.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/checkEndpointNameAvailability")
 @post
@@ -81,8 +83,11 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     canMigrateParameters: CanMigrateParameters,
-  ): ArmResponse<CanMigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> &
-    Azure.Core.Foundations.RetryAfterHeader) | ErrorResponse;
+  ):
+    | ArmResponse<CanMigrateResult>
+    | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> &
+        Azure.Core.Foundations.RetryAfterHeader)
+    | ErrorResponse;
 
   /**
    * Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.
@@ -100,9 +105,12 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     migrationParameters: MigrationParameters,
-  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = MigrateResult>> & {
-    @bodyRoot _: MigrateResult;
-  }) | ErrorResponse;
+  ):
+    | ArmResponse<MigrateResult>
+    | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = MigrateResult>> & {
+        @bodyRoot _: MigrateResult;
+      })
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

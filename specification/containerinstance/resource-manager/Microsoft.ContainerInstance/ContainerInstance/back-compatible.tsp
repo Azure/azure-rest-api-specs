@@ -27,13 +27,15 @@ using Microsoft.ContainerInstance;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(NGroupPatch.properties);
 
-@@clientName(ContainerGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  ContainerGroups.createOrUpdate::parameters.resource,
   "containerGroup"
 );
 @@clientName(ContainerGroups.update::parameters.properties, "Resource");
 @@clientLocation(ContainerGroups.listLogs, "Containers");
 @@clientLocation(ContainerGroups.executeCommand, "Containers");
-@@clientName(ContainerGroups.executeCommand::parameters.body,
+@@clientName(
+  ContainerGroups.executeCommand::parameters.body,
   "containerExecRequest"
 );
 @@clientLocation(ContainerGroups.attach, "Containers");
@@ -45,7 +47,8 @@ using Microsoft.ContainerInstance;
 
 @@clientLocation(ContainerGroupProfiles.get, CGProfile);
 @@clientLocation(ContainerGroupProfiles.createOrUpdate, CGProfile);
-@@clientName(ContainerGroupProfiles.createOrUpdate::parameters.resource,
+@@clientName(
+  ContainerGroupProfiles.createOrUpdate::parameters.resource,
   "ContainerGroupProfile"
 );
 @@clientLocation(ContainerGroupProfiles.update, CGProfile);
@@ -56,7 +59,8 @@ using Microsoft.ContainerInstance;
 @@Legacy.flattenProperty(ContainerGroupProfile.properties);
 
 @@clientLocation(ContainerGroupsOperationGroup.list, ContainerGroups);
-@@clientLocation(ContainerGroupsOperationGroup.listByResourceGroup,
+@@clientLocation(
+  ContainerGroupsOperationGroup.listByResourceGroup,
   ContainerGroups
 );
 
@@ -64,6 +68,7 @@ using Microsoft.ContainerInstance;
 @@clientLocation(LocationOperationGroup.listCachedImages, "Location");
 @@clientLocation(LocationOperationGroup.listCapabilities, "Location");
 
-@@clientLocation(SubnetServiceAssociationLinkOperationGroup.delete,
+@@clientLocation(
+  SubnetServiceAssociationLinkOperationGroup.delete,
   "SubnetServiceAssociationLink"
 );

@@ -41,30 +41,36 @@ using Microsoft.Impact;
 
 @@clientName(ProvisioningState, "ImpactReportingProvisioningState", "csharp");
 
-@@alternateType(ImpactDetails.impactedResourceId,
+@@alternateType(
+  ImpactDetails.impactedResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ImpactedResource.impactedResourceId,
+@@alternateType(
+  ImpactedResource.impactedResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(WorkloadImpactProperties.impactedResourceId,
+@@alternateType(
+  WorkloadImpactProperties.impactedResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(InsightProperties.additionalDetails, Record<unknown>, "csharp");
-@@alternateType(SourceOrTarget.azureResourceId,
+@@alternateType(
+  SourceOrTarget.azureResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(InsightCustomResourceCommonParameters.azureResourceId,
+@@alternateType(
+  InsightCustomResourceCommonParameters.azureResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ImpactDetails.impactId, armResourceIdentifier, "csharp");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

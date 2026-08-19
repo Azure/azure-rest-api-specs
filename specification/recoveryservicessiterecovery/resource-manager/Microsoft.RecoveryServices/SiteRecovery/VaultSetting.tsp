@@ -88,6 +88,7 @@ interface VaultSettings {
 
 @@doc(VaultSetting.name, "Vault setting name.");
 @@doc(VaultSetting.properties, "The vault setting properties.");
-@@doc(VaultSettings.create::parameters.resource,
+@@doc(
+  VaultSettings.create::parameters.resource,
   "Vault setting creation input."
 );

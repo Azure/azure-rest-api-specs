@@ -62,9 +62,11 @@ interface SenderUsernames {
 @@maxLength(SenderUsernameResource.name, 253);
 @@minLength(SenderUsernameResource.name, 1);
 @@doc(SenderUsernameResource.name, "The valid sender Username.");
-@@doc(SenderUsernameResource.properties,
+@@doc(
+  SenderUsernameResource.properties,
   "The properties of a SenderUsername resource."
 );
-@@doc(SenderUsernames.createOrUpdate::parameters.resource,
+@@doc(
+  SenderUsernames.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );

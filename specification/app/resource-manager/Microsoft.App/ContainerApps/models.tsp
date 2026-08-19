@@ -1,13 +1,16 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
@@ -1618,23 +1621,27 @@ model TokenStore {
  */
 model BlobStorageTokenStore {
   /**
-   * The name of the app secrets containing the SAS URL of the blob storage containing the tokens. Should not be used along with blobContainerUri.
+   * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
    */
-  sasUrlSettingName?: string;
+  @madeRequired(Versions.v2026_01_01)
+  sasUrlSettingName: string;
 
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
+  @removed(Versions.v2026_01_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
+  @removed(Versions.v2026_01_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
+  @removed(Versions.v2026_01_01)
   managedIdentityResourceId?: string;
 }
 
@@ -1967,6 +1974,7 @@ model BuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   baseOs?: string;
 
   /**
@@ -2121,6 +2129,7 @@ model CertificateKeyVaultProperties {
   /**
    * URL pointing to the Azure Key Vault secret that holds the certificate.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyVaultUrl?: url;
 }
 
@@ -2236,6 +2245,7 @@ model CertificateProperties {
   /**
    * The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`
    */
+  @removed(Versions.v2026_01_01)
   certificateType?: CertificateType;
 }
 
@@ -2304,6 +2314,7 @@ model DaprComponentProperties {
   /**
    * List of container app services that are bound to the Dapr component
    */
+  @removed(Versions.v2026_01_01)
   @identifiers(#["name"])
   serviceComponentBind?: DaprComponentServiceBinding[];
 
@@ -2440,6 +2451,7 @@ model ConnectedEnvironmentStorageProperties {
   /**
    * SMB storage properties
    */
+  @removed(Versions.v2026_01_01)
   smb?: SmbStorage;
 }
 
@@ -2486,6 +2498,7 @@ model SecretKeyVaultProperties {
   /**
    * URL pointing to the Azure Key Vault secret.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyVaultUrl?: string;
 }
 
@@ -2575,6 +2588,7 @@ model ManagedEnvironmentProperties {
    * Private Link Default Domain Name for the environment
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01)
   privateLinkDefaultDomain?: string;
 
   /**
@@ -2591,11 +2605,13 @@ model ManagedEnvironmentProperties {
   /**
    * Environment level Application Insights configuration
    */
+  @removed(Versions.v2026_01_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
+  @removed(Versions.v2026_01_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
@@ -2607,6 +2623,7 @@ model ManagedEnvironmentProperties {
   /**
    * The list of availability zones to use for managed environment
    */
+  @removed(Versions.v2026_01_01)
   availabilityZones?: string[];
 
   /**
@@ -2671,6 +2688,7 @@ model ManagedEnvironmentProperties {
   /**
    * Disk encryption configuration for the Managed Environment.
    */
+  @removed(Versions.v2026_01_01)
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 }
 
@@ -2744,6 +2762,7 @@ model LogAnalyticsConfiguration {
   /**
    * Boolean indicating whether to parse json string log into dynamic json columns
    */
+  @removed(Versions.v2026_01_01)
   dynamicJsonColumns?: boolean;
 }
 
@@ -2908,6 +2927,7 @@ model WorkloadProfile {
   /**
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
+  @removed(Versions.v2026_01_01)
   enableFips?: boolean = false;
 
   /**
@@ -3088,6 +3108,7 @@ model DiskEncryptionConfigurationKeyVaultConfiguration {
   /**
    * Key URL pointing to a key in KeyVault. Version segment of the Url is required.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: url;
 
   /**
@@ -3257,6 +3278,19 @@ model PrivateLinkResourceProperties {
    * The private link resource private link DNS zone name.
    */
   requiredZoneNames?: string[];
+}
+
+/**
+ * List of private link resources for a managed environment.
+ */
+model PrivateLinkResourceListResult {
+  /** The PrivateLinkResource items on this page */
+  @pageItems
+  value: PrivateLinkResource[];
+
+  /** The link to the next page of items */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3497,7 +3531,7 @@ model HttpRouteConfigProperties {
 }
 
 /**
- * List of provisioning errors for a http route config object
+ * List of provisioning errors for a Http Route Config object
  */
 model HttpRouteProvisioningErrors {
   /**
@@ -3515,7 +3549,7 @@ model HttpRouteProvisioningErrors {
 }
 
 /**
- * Http Route rule.
+ * A set of routing conditions and targets.
  */
 model HttpRouteRule {
   /**
@@ -3553,20 +3587,21 @@ model HttpRouteTarget {
   revision?: string;
 
   /**
-   * Label/Revision to route requests to
+   * Label to route requests to
    */
   label?: string;
 
   /**
    * Weighted routing
    */
+  @removed(Versions.v2026_01_01)
   @minValue(0)
   @maxValue(100)
   weight?: int32;
 }
 
 /**
- * Http Routes configuration, including paths to match on and whether or not rewrites are to be done.
+ * Http Routes, including paths to match on and whether or not rewrites are to be done.
  */
 model HttpRoute {
   /**
@@ -3616,7 +3651,7 @@ model HttpRouteAction {
 }
 
 /**
- * Collection of Advanced Ingress Routing Config resources.
+ * Collection of rule based Http Route Config resources.
  */
 model HttpRouteConfigCollection is Azure.Core.Page<HttpRouteConfig>;
 
@@ -3691,7 +3726,7 @@ model ManagedEnvironmentStorageProperties {
  */
 model NfsAzureFileProperties {
   /**
-   * Server for NFS azure file.
+   * Server for NFS azure file. Specify the Azure storage account server address.
    */
   server?: string;
 
@@ -3725,6 +3760,7 @@ model JobProperties {
    * Current running state of the job
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01)
   runningState?: JobRunningState;
 
   /**
@@ -4078,6 +4114,7 @@ model JobPatchProperties {
   /**
    * The complex type of the extended location.
    */
+  @removed(Versions.v2026_01_01)
   extendedLocation?: ExtendedLocation;
 
   /**
@@ -4229,18 +4266,21 @@ model JobExecutionProperties {
   /**
    * Detailed status of the job execution.
    */
+  @removed(Versions.v2026_01_01)
   detailedStatus?: ExecutionStatus;
 
   /**
    * Reason for the current condition of job execution.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01)
   reason?: string;
 
   /**
    * Human readable message indicating details about the current condition of the job execution.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01)
   message?: string;
 }
 
@@ -4697,11 +4737,13 @@ union ContainerType {
   /**
    * Shell
    */
+  @removed(Versions.v2026_01_01)
   Shell: "Shell",
 
   /**
    * NodeLTS
    */
+  @removed(Versions.v2026_01_01)
   NodeLTS: "NodeLTS",
 }
 
@@ -4823,30 +4865,47 @@ union SessionPoolProvisioningState {
 }
 
 /**
- * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
+ * Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.
  */
 union IdentitySettingsLifeCycle {
   string,
 
   /**
-   * None
+   * Do not use managed identity during any lifecycle stage.
    */
   None: "None",
 
   /**
-   * Main
+   * Use managed identity during the main stage of the Container App lifecycle.
    */
   Main: "Main",
 
   /**
-   * Init
+   * Use managed identity during the init stage of the Container App lifecycle.
    */
   Init: "Init",
 
   /**
-   * All
+   * Use managed identity during all lifecycle stages of the Container App.
    */
   All: "All",
+}
+
+/**
+ * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
+ */
+union SessionPoolIdentityLifeCycle {
+  string,
+
+  /**
+   * Do not use managed identity during any lifecycle stage.
+   */
+  None: "None",
+
+  /**
+   * Use managed identity during the main stage of the Container App lifecycle.
+   */
+  Main: "Main",
 }
 
 /**
@@ -5020,7 +5079,7 @@ union PatchingMode {
 
 /**
  * ActiveRevisionsMode controls how active revisions are handled for the Container app:
- * <list><item>Single: Only one revision can be active at a time. Traffic weights cannot be used. This is the default.</item><item>Multiple: Multiple revisions can be active, including optional traffic weights and labels.</item><item>Labels: Only revisions with labels are active. Traffic weights can be applied to labels.</item></list>
+ * <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
  */
 union ActiveRevisionsMode {
   string,
@@ -5038,6 +5097,7 @@ union ActiveRevisionsMode {
   /**
    * Labels
    */
+  @removed(Versions.v2026_01_01)
   Labels: "Labels",
 }
 
@@ -5312,6 +5372,7 @@ union StorageType {
   /**
    * Smb
    */
+  @removed(Versions.v2026_01_01)
   Smb: "Smb",
 }
 
@@ -5711,11 +5772,13 @@ union JavaComponentType {
   /**
    * SpringCloudGateway
    */
+  @removed(Versions.v2026_01_01)
   SpringCloudGateway: "SpringCloudGateway",
 
   /**
    * Nacos
    */
+  @removed(Versions.v2026_01_01)
   Nacos: "Nacos",
 }
 
@@ -5936,6 +5999,7 @@ model SessionPoolProperties {
   /**
    * The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.
    */
+  @removed(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   templateUpdateStatus?: TemplateUpdateStatus;
 
@@ -5960,6 +6024,7 @@ model SessionPoolProperties {
   /**
    * The MCP (Model Context Protocol) server settings of the session pool.
    */
+  @removed(Versions.v2026_01_01)
   mcpServerSettings?: McpServerSettings;
 }
 
@@ -6110,6 +6175,7 @@ model SessionContainer {
    * List of probes for the container.
    */
   @identifiers(#["type"])
+  @removed(Versions.v2026_01_01)
   probes?: SessionProbe[];
 }
 
@@ -6371,7 +6437,8 @@ model ManagedIdentitySetting {
   /**
    * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
    */
-  lifecycle?: IdentitySettingsLifeCycle = "None";
+  @typeChangedFrom(Versions.v2026_01_01, IdentitySettingsLifeCycle)
+  lifecycle?: SessionPoolIdentityLifeCycle = "None";
 }
 
 /**
@@ -6479,6 +6546,7 @@ model SourceControlProperties {
   /**
    * The repo url which will be integrated to ContainerApp.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repoUrl?: string;
 
   /**
@@ -6516,6 +6584,7 @@ model GithubActionConfiguration {
   /**
    * Dockerfile path
    */
+  @removed(Versions.v2026_01_01)
   dockerfilePath?: string;
 
   /**
@@ -6553,6 +6622,7 @@ model GithubActionConfiguration {
   /**
    * List of environment variables to be passed to the build.
    */
+  @removed(Versions.v2026_01_01)
   @identifiers(#["name"])
   buildEnvironmentVariables?: EnvironmentVariable[];
 }
@@ -6564,6 +6634,7 @@ model RegistryInfo {
   /**
    * registry server Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   registryUrl?: string;
 
   /**
@@ -6574,8 +6645,9 @@ model RegistryInfo {
   /**
    * registry secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Original swagger does not use format:password for this field"
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   registryPassword?: string;
 }
 
@@ -6634,6 +6706,7 @@ model EnvironmentVariable {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -6749,6 +6822,7 @@ model ContainerAppProperties {
    * Any errors that occurred during deployment
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01)
   deploymentErrors?: string;
 
   /**
@@ -6771,6 +6845,7 @@ model ContainerAppProperties {
   /**
    * Container App auto patch configuration.
    */
+  @removed(Versions.v2026_01_01)
   patchingConfiguration?: ContainerAppPropertiesPatchingConfiguration;
 
   /**
@@ -6842,13 +6917,14 @@ model Configuration {
 
   /**
    * ActiveRevisionsMode controls how active revisions are handled for the Container app:
-   * <list><item>Single: Only one revision can be active at a time. Traffic weights cannot be used. This is the default.</item><item>Multiple: Multiple revisions can be active, including optional traffic weights and labels.</item><item>Labels: Only revisions with labels are active. Traffic weights can be applied to labels.</item></list>
+   * <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
    */
   activeRevisionsMode?: ActiveRevisionsMode = ActiveRevisionsMode.Single;
 
   /**
    * Required in labels revisions mode. Label to apply to newly created revision.
    */
+  @removed(Versions.v2026_01_01)
   targetLabel?: string;
 
   /**
@@ -6880,6 +6956,7 @@ model Configuration {
   /**
    * Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given. Value must be greater than 0 and less than or equal to 100.
    */
+  @removed(Versions.v2026_01_01)
   @maxValue(100)
   @minValue(1)
   revisionTransitionThreshold?: int32;
@@ -6920,6 +6997,7 @@ model Secret {
   /**
    * Azure Key Vault URL pointing to the secret referenced by the container app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyVaultUrl?: string;
 }
 
@@ -7000,6 +7078,7 @@ model Ingress {
   /**
    * Whether an http app listens on http or https
    */
+  @removed(Versions.v2026_01_01)
   targetPortHttpScheme?: IngressTargetPortHttpScheme;
 }
 
@@ -7238,6 +7317,7 @@ model Runtime {
   /**
    * .NET app configuration
    */
+  @removed(Versions.v2026_01_01)
   dotnet?: RuntimeDotnet;
 }
 
@@ -7253,6 +7333,7 @@ model RuntimeJava {
   /**
    * Diagnostic capabilities achieved by java agent
    */
+  @removed(Versions.v2026_01_01)
   javaAgent?: RuntimeJavaJavaAgent;
 }
 
@@ -7351,6 +7432,7 @@ model BaseContainer {
   /**
    * The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.
    */
+  @removed(Versions.v2026_01_01)
   imageType?: ImageType;
 
   /**
@@ -7409,6 +7491,7 @@ model ContainerResources {
   /**
    * Required GPU in cores for GPU based app, e.g. 1.0
    */
+  @removed(Versions.v2026_01_01)
   gpu?: float64;
 }
 
@@ -7505,12 +7588,12 @@ model Scale {
   maxReplicas?: int32 = 10;
 
   /**
-   * Optional. KEDA Cooldown Period. Defaults to 300 seconds if not set.
+   * Optional. KEDA Cooldown Period in seconds. Defaults to 300 seconds if not set.
    */
   cooldownPeriod?: int32;
 
   /**
-   * Optional. KEDA Polling Interval. Defaults to 30 seconds if not set.
+   * Optional. KEDA Polling Interval in seconds. Defaults to 30 seconds if not set.
    */
   pollingInterval?: int32;
 
@@ -7620,12 +7703,14 @@ model ServiceBind {
   /**
    * Type of the client to be used to connect to the service
    */
+  @removed(Versions.v2026_01_01)
   clientType?: string;
 
   /**
    * Customized keys for customizing injected values to the app
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_01)
   customizedKeys?: Record<string>;
 }
 
@@ -7792,6 +7877,7 @@ model ContainerAppSecret {
   /**
    * Azure Key Vault URL pointing to the secret referenced by the container app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   keyVaultUrl?: string;
 }
@@ -7890,6 +7976,7 @@ model ContainerAppsBuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   baseOs?: string;
 
@@ -8169,6 +8256,7 @@ model PatchDetailsNewLayer {
   /**
    * The OS name and its version in the new run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 
@@ -8189,6 +8277,7 @@ model PatchDetailsOldLayer {
   /**
    * The OS name and its version in the old run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 
@@ -8261,6 +8350,7 @@ model RevisionProperties {
   /**
    * List of labels assigned to this revision.
    */
+  @removed(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   labels?: string[];
 
@@ -8383,6 +8473,7 @@ model ReplicaContainer {
    * Container debug endpoint
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_01_01)
   debugEndpoint?: string;
 }
 
@@ -8597,7 +8688,15 @@ model JavaComponentServiceBind {
 /**
  * Collection of workflow information elements.
  */
-model WorkflowEnvelopeCollection is Azure.Core.Page<WorkflowEnvelope>;
+model WorkflowEnvelopeCollection {
+  /** The WorkflowEnvelope items on this page */
+  @pageItems
+  value: WorkflowEnvelope[];
+
+  /** The link to the next page of items */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The properties of logic apps extension.
@@ -8614,7 +8713,9 @@ model WorkflowEnvelopeProperties {
   /**
    * Gets or sets the files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @typeChangedFrom(Versions.v2026_01_01, unknown)
   files?: unknown;
 
   /**
@@ -8716,6 +8817,7 @@ model WorkflowArtifacts {
 /**
  * Spring Cloud Gateway route definition
  */
+@removed(Versions.v2026_01_01)
 model ScgRoute {
   /**
    * Id of the route
@@ -8757,6 +8859,7 @@ model JavaComponentIngress {
 /**
  * Spring Cloud Gateway properties.
  */
+@removed(Versions.v2026_01_01)
 model SpringCloudGatewayComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.
@@ -8793,6 +8896,7 @@ model SpringBootAdminComponent extends JavaComponentProperties {
 /**
  * Nacos properties.
  */
+@removed(Versions.v2026_01_01)
 model NacosComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.

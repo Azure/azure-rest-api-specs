@@ -3,10 +3,10 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { parse } from "../tsp-config.js";
-import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -14,19 +14,8 @@ debug.enable("simple-git");
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
+  readonly suppressable = true;
   async execute(folder: string): Promise<RuleResult> {
-    const suppressions = (await getSuppressions(folder)).filter((s) =>
-      s.rules?.includes(this.name),
-    );
-
-    const suppressAll = suppressions.find(
-      (s) => s.subRules === undefined || s.subRules.length === 0,
-    );
-
-    if (suppressAll) {
-      return { success: true, stdOutput: `suppressed: ${suppressAll.reason}` };
-    }
-
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -39,6 +28,9 @@ export class FolderStructureRule implements Rule {
       relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 
     if (structureVersion === 1) {
+      const suppressions = (await getSuppressions(folder)).filter((s) =>
+        s.rules?.includes(this.name),
+      );
       const suppressMustUseV2 = suppressions.find((s) => s.subRules?.includes("MustUseV2"));
 
       if (suppressMustUseV2) {

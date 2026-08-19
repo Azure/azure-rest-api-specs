@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./ImageTemplate.tsp";
 import "./RunOutput.tsp";
 import "./Trigger.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -48,6 +49,7 @@ interface Operations
       Error = ErrorResponse
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists available operations for the Microsoft.VirtualMachineImages provider"
 );

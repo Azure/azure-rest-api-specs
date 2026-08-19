@@ -15,8 +15,10 @@ namespace Microsoft.KeyVault;
  * The key resource.
  */
 @parentResource(ManagedHsm)
-model ManagedHsmKey
-  is Azure.ResourceManager.ProxyResource<ManagedHsmKeyProperties, false> {
+model ManagedHsmKey is Azure.ResourceManager.ProxyResource<
+  ManagedHsmKeyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ManagedHsmKey,
     KeyName = "keyName",
@@ -139,10 +141,12 @@ interface ManagedHsmKeyOperationGroup {
   >;
 }
 
-@@doc(ManagedHsmKey.name,
+@@doc(
+  ManagedHsmKey.name,
   "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
 );
 @@doc(ManagedHsmKey.properties, "The properties of the key.");
-@@doc(ManagedHsmKeys.createIfNotExist::parameters.resource,
+@@doc(
+  ManagedHsmKeys.createIfNotExist::parameters.resource,
   "The parameters used to create the specified key."
 );

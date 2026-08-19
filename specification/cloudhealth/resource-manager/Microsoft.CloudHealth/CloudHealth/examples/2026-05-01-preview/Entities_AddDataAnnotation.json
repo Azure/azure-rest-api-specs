@@ -1,0 +1,33 @@
+{
+  "title": "Entities_AddDataAnnotation",
+  "operationId": "Entities_AddDataAnnotation",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "web-frontend",
+    "body": {
+      "annotationDetails": {
+        "environment": "production",
+        "deploymentId": "deploy-2026-05-04-001",
+        "changedBy": "release-pipeline"
+      },
+      "description": "Deployed release 2.4.1 to the web frontend."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "annotationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "annotationDetails": {
+          "environment": "production",
+          "deploymentId": "deploy-2026-05-04-001",
+          "changedBy": "release-pipeline"
+        },
+        "description": "Deployed release 2.4.1 to the web frontend.",
+        "createdAt": "2026-05-04T14:30:00Z"
+      }
+    }
+  }
+}

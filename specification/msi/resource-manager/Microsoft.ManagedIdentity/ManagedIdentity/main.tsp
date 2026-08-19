@@ -17,6 +17,7 @@ import "./SystemAssignedIdentity.tsp";
 import "./Identity.tsp";
 import "./FederatedIdentityCredential.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

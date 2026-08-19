@@ -52,7 +52,10 @@ interface SqlVirtualMachineGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SqlVirtualMachineGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -80,9 +83,11 @@ interface SqlVirtualMachineGroups {
 
 @@doc(SqlVirtualMachineGroup.name, "Name of the SQL virtual machine group.");
 @@doc(SqlVirtualMachineGroup.properties, "Resource properties.");
-@@doc(SqlVirtualMachineGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SqlVirtualMachineGroups.createOrUpdate::parameters.resource,
   "The SQL virtual machine group."
 );
-@@doc(SqlVirtualMachineGroups.update::parameters.properties,
+@@doc(
+  SqlVirtualMachineGroups.update::parameters.properties,
   "The SQL virtual machine group."
 );

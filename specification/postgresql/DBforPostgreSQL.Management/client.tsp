@@ -5,7 +5,8 @@ using Microsoft.DBforPostgreSQL;
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.DBforPostgreSQL, "PostgreSQLManagementClient", "python");
-@@clientName(Microsoft.DBforPostgreSQL,
+@@clientName(
+  Microsoft.DBforPostgreSQL,
   "PostgreSQLManagementFlexibleServerClient",
   "javascript"
 );
@@ -18,29 +19,35 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`17`, "SEVENTEEN", "python,javascript");
 @@clientName(PostgresMajorVersion.`18`, "EIGHTEEN", "python,javascript");
 
-@@clientName(Microsoft.DBforPostgreSQL.ServerProperties.pointInTimeUTC,
+@@clientName(
+  Microsoft.DBforPostgreSQL.ServerProperties.pointInTimeUTC,
   "pointInTimeUtc",
   "java"
 );
-@@clientName(Microsoft.DBforPostgreSQL.DataEncryption.primaryKeyURI,
+@@clientName(
+  Microsoft.DBforPostgreSQL.DataEncryption.primaryKeyURI,
   "primaryKeyUri",
   "java"
 );
-@@clientName(Microsoft.DBforPostgreSQL.DataEncryption.geoBackupKeyURI,
+@@clientName(
+  Microsoft.DBforPostgreSQL.DataEncryption.geoBackupKeyURI,
   "geoBackupKeyUri",
   "java"
 );
 @@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java,go");
 
-@@clientName(Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
+@@clientName(
+  Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
   "HighAvailabilityMode",
   "java,go"
 );
-@@clientName(Microsoft.DBforPostgreSQL.HighAvailabilityMode,
+@@clientName(
+  Microsoft.DBforPostgreSQL.HighAvailabilityMode,
   "SupportedHighAvailabilityMode",
   "java,go"
 );
-@@alternateType(Microsoft.DBforPostgreSQL.ServerSkuCapability.supportedHaMode,
+@@alternateType(
+  Microsoft.DBforPostgreSQL.ServerSkuCapability.supportedHaMode,
   PostgreSqlFlexibleServerHighAvailabilityMode[],
   "java,go"
 );
@@ -57,16 +64,19 @@ using Azure.ClientGenerator.Core;
 // C# configuration
 @@clientName(Cluster, "PostgreSqlFlexibleServerClusterProperties", "csharp");
 @@clientName(Configuration, "PostgreSqlFlexibleServerConfiguration", "csharp");
-@@clientName(ConfigurationDataType,
+@@clientName(
+  ConfigurationDataType,
   "PostgreSqlFlexibleServerConfigurationDataType",
   "csharp"
 );
-@@clientName(CreateModeForPatch,
+@@clientName(
+  CreateModeForPatch,
   "PostgreSqlFlexibleServerCreateModeForUpdate",
   "csharp"
 );
 @@clientName(FailoverMode, "PostgreSqlFlexibleServerFailoverMode", "csharp");
-@@clientName(GeographicallyRedundantBackup,
+@@clientName(
+  GeographicallyRedundantBackup,
   "PostgreSqlFlexibleServerGeoRedundantBackupEnum",
   "csharp"
 );
@@ -74,7 +84,8 @@ using Azure.ClientGenerator.Core;
 @@clientName(FirewallRule, "PostgreSqlFlexibleServerFirewallRule", "csharp");
 @@clientName(Server, "PostgreSqlFlexibleServer", "csharp");
 @@clientName(PostgresMajorVersion, "PostgreSqlFlexibleServerVersion", "csharp");
-@@clientName(MaintenanceWindow,
+@@clientName(
+  MaintenanceWindow,
   "PostgreSqlFlexibleServerMaintenanceWindow",
   "csharp"
 );
@@ -82,185 +93,226 @@ using Azure.ClientGenerator.Core;
 @@clientName(Storage, "PostgreSqlFlexibleServerStorage", "csharp");
 @@clientName(Sku, "PostgreSqlFlexibleServerSku", "csharp");
 @@clientName(Network, "PostgreSqlFlexibleServerNetwork", "csharp");
-@@clientName(HighAvailability,
+@@clientName(
+  HighAvailability,
   "PostgreSqlFlexibleServerHighAvailability",
   "csharp"
 );
 @@clientName(ServerState, "PostgreSqlFlexibleServerState", "csharp");
-@@clientName(VirtualNetworkSubnetUsageParameter,
+@@clientName(
+  VirtualNetworkSubnetUsageParameter,
   "PostgreSqlFlexibleServerVirtualNetworkSubnetUsageParameter",
   "csharp"
 );
-@@clientName(DelegatedSubnetUsage,
+@@clientName(
+  DelegatedSubnetUsage,
   "PostgreSqlFlexibleServerDelegatedSubnetUsage",
   "csharp"
 );
-@@clientName(VirtualNetworkSubnetUsageModel,
+@@clientName(
+  VirtualNetworkSubnetUsageModel,
   "PostgreSqlFlexibleServerVirtualNetworkSubnetUsageResult",
   "csharp"
 );
-@@clientName(ServerVersionCapability,
+@@clientName(
+  ServerVersionCapability,
   "PostgreSqlFlexibleServerServerVersionCapability",
   "csharp"
 );
-@@clientName(StorageEditionCapability,
+@@clientName(
+  StorageEditionCapability,
   "PostgreSqlFlexibleServerStorageEditionCapability",
   "csharp"
 );
-@@clientName(ServerEditionCapability,
+@@clientName(
+  ServerEditionCapability,
   "PostgreSqlFlexibleServerEditionCapability",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "PostgreSqlFlexibleServerNameAvailabilityContent",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "PostgreSqlFlexibleServerNameAvailabilityResponse",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityReason,
+@@clientName(
+  CheckNameAvailabilityReason,
   "PostgreSqlFlexibleServerNameUnavailableReason",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.reason,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.reason,
   CheckNameAvailabilityReason,
   "csharp"
 );
-@@clientName(NameAvailabilityModel,
+@@clientName(
+  NameAvailabilityModel,
   "PostgreSqlFlexibleServerNameAvailabilityResult",
   "csharp"
 );
 @@clientName(CreateMode, "PostgreSqlFlexibleServerCreateMode", "csharp");
 @@clientName(SkuTier, "PostgreSqlFlexibleServerSkuTier", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
 @@clientName(Storage.storageSizeGB, "StorageSizeInGB", "csharp");
 @@clientName(StorageMbCapability.storageSizeMb, "StorageSizeInMB", "csharp");
-@@clientName(StorageMbCapability,
+@@clientName(
+  StorageMbCapability,
   "PostgreSqlFlexibleServerStorageCapability",
   "csharp"
 );
-@@clientName(RestartParameter,
+@@clientName(
+  RestartParameter,
   "PostgreSqlFlexibleServerRestartParameter",
   "csharp"
 );
-@@clientName(HighAvailabilityState,
+@@clientName(
+  HighAvailabilityState,
   "PostgreSqlFlexibleServerHAState",
   "csharp"
 );
-@@clientName(ServerPublicNetworkAccessState,
+@@clientName(
+  ServerPublicNetworkAccessState,
   "PostgreSqlFlexibleServerPublicNetworkAccessState",
   "csharp"
 );
-@@clientName(StorageEditionCapability.supportedStorageMb,
+@@clientName(
+  StorageEditionCapability.supportedStorageMb,
   "SupportedStorageCapabilities",
   "csharp"
 );
 @@alternateType(StorageMbCapability.supportedIops, int64, "csharp");
 @@alternateType(StorageTierCapability.iops, int64, "csharp");
 @@clientName(ServerProperties.pointInTimeUTC, "PointInTimeUtc", "csharp");
-@@clientName(MicrosoftEntraAuth,
+@@clientName(
+  MicrosoftEntraAuth,
   "PostgreSqlFlexibleServerActiveDirectoryAuthEnum",
   "csharp"
 );
 @@clientName(DataEncryptionType, "PostgreSqlFlexibleServerKeyType", "csharp");
 @@clientName(AuthConfig, "PostgreSqlFlexibleServerAuthConfig", "csharp");
-@@clientName(DataEncryption,
+@@clientName(
+  DataEncryption,
   "PostgreSqlFlexibleServerDataEncryption",
   "csharp"
 );
-@@clientName(FastProvisioningEditionCapability,
+@@clientName(
+  FastProvisioningEditionCapability,
   "PostgreSqlFlexibleServerFastProvisioningEditionCapability",
   "csharp"
 );
 @@clientName(IdentityType, "PostgreSqlFlexibleServerIdentityType", "csharp");
 @@clientName(BackupType, "PostgreSqlFlexibleServerBackupOrigin", "csharp");
-@@clientName(PasswordBasedAuth,
+@@clientName(
+  PasswordBasedAuth,
   "PostgreSqlFlexibleServerPasswordAuthEnum",
   "csharp"
 );
 @@clientName(PrincipalType, "PostgreSqlFlexibleServerPrincipalType", "csharp");
-@@clientName(ReplicationRole,
+@@clientName(
+  ReplicationRole,
   "PostgreSqlFlexibleServerReplicationRole",
   "csharp"
 );
-@@clientName(BackupAutomaticAndOnDemand,
+@@clientName(
+  BackupAutomaticAndOnDemand,
   "PostgreSqlFlexibleServerBackup",
   "csharp"
 );
-@@clientName(StorageTierCapability,
+@@clientName(
+  StorageTierCapability,
   "PostgreSqlFlexibleServerStorageTierCapability",
   "csharp"
 );
 @@clientName(AdminCredentials, "PostgreSqlMigrationAdminCredentials", "csharp");
-@@clientName(BackupSettings,
+@@clientName(
+  BackupSettings,
   "PostgreSqlFlexibleServerBackupSettings",
   "csharp"
 );
-@@clientName(BackupStoreDetails,
+@@clientName(
+  BackupStoreDetails,
   "PostgreSqlFlexibleServerBackupStoreDetails",
   "csharp"
 );
 @@clientName(Cancel, "PostgreSqlMigrationCancel", "csharp");
-@@clientName(LogicalReplicationOnSourceServer,
+@@clientName(
+  LogicalReplicationOnSourceServer,
   "PostgreSqlMigrationLogicalReplicationOnSourceDb",
   "csharp"
 );
-@@clientName(OverwriteDatabasesOnTargetServer,
+@@clientName(
+  OverwriteDatabasesOnTargetServer,
   "PostgreSqlMigrationOverwriteDbsInTarget",
   "csharp"
 );
-@@clientName(StartDataMigration,
+@@clientName(
+  StartDataMigration,
   "PostgreSqlMigrationStartDataMigration",
   "csharp"
 );
 @@clientName(TriggerCutover, "PostgreSqlMigrationTriggerCutover", "csharp");
-@@clientName(CapabilityStatus,
+@@clientName(
+  CapabilityStatus,
   "PostgreSqlFlexbileServerCapabilityStatus",
   "csharp"
 );
 @@clientName(DbServerMetadata, "PostgreSqlServerMetadata", "csharp");
-@@clientName(FastProvisioningSupport,
+@@clientName(
+  FastProvisioningSupport,
   "PostgreSqlFlexibleServerFastProvisioningSupported",
   "csharp"
 );
-@@clientName(Capability.fastProvisioningSupported,
+@@clientName(
+  Capability.fastProvisioningSupported,
   "SupportFastProvisioning",
   "csharp"
 );
-@@clientName(Capability,
+@@clientName(
+  Capability,
   "PostgreSqlFlexibleServerCapabilityProperties",
   "csharp"
 );
 @@clientName(CapturedLog, "PostgreSqlFlexibleServerLogFile", "csharp");
-@@clientName(GeographicallyRedundantBackupSupport,
+@@clientName(
+  GeographicallyRedundantBackupSupport,
   "PostgreSqlFlexibleServerGeoBackupSupported",
   "csharp"
 );
-@@clientName(ZoneRedundantHighAvailabilitySupport,
+@@clientName(
+  ZoneRedundantHighAvailabilitySupport,
   "PostgreSqlFlexibleServerZoneRedundantHaSupported",
   "csharp"
 );
-@@clientName(ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport,
+@@clientName(
+  ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport,
   "PostgreSqlFlexibleServerZoneRedundantHaAndGeoBackupSupported",
   "csharp"
 );
-@@clientName(StorageAutoGrowthSupport,
+@@clientName(
+  StorageAutoGrowthSupport,
   "PostgreSqlFlexibleServerStorageAutoGrowthSupported",
   "csharp"
 );
-@@clientName(OnlineStorageResizeSupport,
+@@clientName(
+  OnlineStorageResizeSupport,
   "PostgreSqlFlexibleServerOnlineResizeSupported",
   "csharp"
 );
-@@clientName(LocationRestricted,
+@@clientName(
+  LocationRestricted,
   "PostgreSqlFlexibleServerZoneRedundantRestricted",
   "csharp"
 );
-@@clientName(ServerSkuCapability,
+@@clientName(
+  ServerSkuCapability,
   "PostgreSqlFlexibleServerSkuCapability",
   "csharp"
 );
@@ -268,137 +320,169 @@ using Azure.ClientGenerator.Core;
 @@clientName(CapabilityBase, "PostgreSqlBaseCapability", "csharp");
 @@clientName(ExecutionStatus, "PostgreSqlExecutionStatus", "csharp");
 @@clientName(EncryptionKeyStatus, "PostgreSqlKeyStatus", "csharp");
-@@clientName(BackupsLongTermRetentionResponse,
+@@clientName(
+  BackupsLongTermRetentionResponse,
   "PostgreSqlFlexibleServerLtrBackupResult",
   "csharp"
 );
-@@clientName(LtrPreBackupResponse,
+@@clientName(
+  LtrPreBackupResponse,
   "PostgreSqlFlexibleServerLtrPreBackupResult",
   "csharp"
 );
 @@clientName(MigrationListFilter, "PostgreSqlMigrationListFilter", "csharp");
 @@clientName(MigrationMode, "PostgreSqlMigrationMode", "csharp");
-@@clientName(MigrationNameAvailabilityReason,
+@@clientName(
+  MigrationNameAvailabilityReason,
   "PostgreSqlMigrationNameUnavailableReason",
   "csharp"
 );
-@@clientName(MigrationNameAvailability,
+@@clientName(
+  MigrationNameAvailability,
   "PostgreSqlCheckMigrationNameAvailabilityContent",
   "csharp"
 );
-@@clientName(MigrationNameAvailability.nameAvailable,
+@@clientName(
+  MigrationNameAvailability.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(MigrationSecretParameters,
+@@clientName(
+  MigrationSecretParameters,
   "PostgreSqlMigrationSecretParameters",
   "csharp"
 );
 @@clientName(MigrationState, "PostgreSqlMigrationState", "csharp");
 @@clientName(MigrationStatus, "PostgreSqlMigrationStatus", "csharp");
 @@clientName(MigrationSubstate, "PostgreSqlMigrationSubState", "csharp");
-@@clientName(MigrationSubstateDetails,
+@@clientName(
+  MigrationSubstateDetails,
   "PostgreSqlMigrationSubStateDetails",
   "csharp"
 );
 @@clientName(BackupRequestBase, "PostgreSqlBackupContent", "csharp");
-@@clientName(AzureManagedDiskPerformanceTier,
+@@clientName(
+  AzureManagedDiskPerformanceTier,
   "PostgreSqlManagedDiskPerformanceTier",
   "csharp"
 );
-@@clientName(BackupsLongTermRetentionRequest,
+@@clientName(
+  BackupsLongTermRetentionRequest,
   "PostgreSqlFlexibleServerLtrBackupContent",
   "csharp"
 );
-@@clientName(LtrPreBackupRequest,
+@@clientName(
+  LtrPreBackupRequest,
   "PostgreSqlFlexibleServerLtrPreBackupContent",
   "csharp"
 );
 @@clientName(Migration, "PostgreSqlMigration", "csharp");
-@@alternateType(AdministratorMicrosoftEntraProperties.objectId,
+@@alternateType(
+  AdministratorMicrosoftEntraProperties.objectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(DataEncryption.primaryUserAssignedIdentityId,
+@@alternateType(
+  DataEncryption.primaryUserAssignedIdentityId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // IPAddress type mappings
-@@alternateType(FirewallRuleProperties.startIpAddress,
+@@alternateType(
+  FirewallRuleProperties.startIpAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(FirewallRuleProperties.endIpAddress,
+@@alternateType(
+  FirewallRuleProperties.endIpAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
 
 // Guid type mappings
 @@alternateType(AuthConfig.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(AdministratorMicrosoftEntraProperties.tenantId,
+@@alternateType(
+  AdministratorMicrosoftEntraProperties.tenantId,
   Azure.Core.uuid,
   "csharp"
 );
 @@alternateType(UserAssignedIdentity.principalId, Azure.Core.uuid, "csharp");
 @@alternateType(UserAssignedIdentity.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  UserAssignedIdentity.userAssignedIdentities,
+  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  "csharp"
+);
 
 // Uri type mappings
 @@alternateType(DataEncryption.primaryKeyURI, TypeSpec.url, "csharp");
 @@alternateType(DataEncryption.geoBackupKeyURI, TypeSpec.url, "csharp");
 
 // ResourceIdentifier type mappings
-@@alternateType(VirtualNetworkSubnetUsageParameter.virtualNetworkArmResourceId,
+@@alternateType(
+  VirtualNetworkSubnetUsageParameter.virtualNetworkArmResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MigrationProperties.sourceDbServerResourceId,
+@@alternateType(
+  MigrationProperties.sourceDbServerResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MigrationProperties.targetDbServerResourceId,
+@@alternateType(
+  MigrationProperties.targetDbServerResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MigrationPropertiesForPatch.sourceDbServerResourceId,
+@@alternateType(
+  MigrationPropertiesForPatch.sourceDbServerResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // AzureLocation type mappings
-@@alternateType(VirtualNetworkSubnetUsageModel.location,
+@@alternateType(
+  VirtualNetworkSubnetUsageModel.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@alternateType(DbServerMetadata.location, Azure.Core.azureLocation, "csharp");
 
 // ResourceType type mappings
-@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(MigrationNameAvailability.type,
+@@alternateType(
+  MigrationNameAvailability.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(NameAvailabilityModel.type,
+@@alternateType(
+  NameAvailabilityModel.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 
-@@clientName(AdvancedThreatProtectionSettingsModel,
+@@clientName(
+  AdvancedThreatProtectionSettingsModel,
   "ServerThreatProtectionSettingsModel",
   "csharp"
 );
-@@clientName(AdministratorMicrosoftEntra,
+@@clientName(
+  AdministratorMicrosoftEntra,
   "PostgreSqlFlexibleServerMicrosoftEntraAdministrator",
   "csharp"
 );
-@@clientName(LtrServerBackupOperationList,
+@@clientName(
+  LtrServerBackupOperationList,
   "PostgreSqlLtrServerBackupOperationList",
   "csharp"
 );
-@@clientName(BackupsLongTermRetentionOperation,
+@@clientName(
+  BackupsLongTermRetentionOperation,
   "PostgreSqlLtrServerBackupOperation",
   "csharp"
 );
@@ -407,7 +491,8 @@ using Azure.ClientGenerator.Core;
 @@clientName(MigrationDatabaseState, "MigrationDbState", "csharp");
 @@clientName(MigrateRolesAndPermissions, "MigrateRolesEnum", "csharp");
 @@clientName(DatabaseMigrationState, "DbMigrationStatus", "csharp");
-@@clientName(UserAssignedIdentity,
+@@clientName(
+  UserAssignedIdentity,
   "PostgreSqlFlexibleServerUserAssignedIdentity",
   "csharp"
 );
@@ -416,73 +501,88 @@ using Azure.ClientGenerator.Core;
 @@clientName(FeatureStatus, "PostgreSqlFlexibleServerFeatureStatus", "csharp");
 @@clientName(ImpactRecord, "RecommendationImpactRecord", "csharp");
 @@clientName(NameProperty, "QuotaUsageNameProperty", "csharp");
-@@clientName(ObjectRecommendationPropertiesAnalyzedWorkload,
+@@clientName(
+  ObjectRecommendationPropertiesAnalyzedWorkload,
   "ObjectRecommendationAnalyzedWorkload",
   "csharp"
 );
-@@clientName(ObjectRecommendationPropertiesImplementationDetails,
+@@clientName(
+  ObjectRecommendationPropertiesImplementationDetails,
   "ObjectRecommendationImplementationDetails",
   "csharp"
 );
 @@clientName(QuotaUsage, "PostgreSqlFlexibleServerQuotaUsage", "csharp");
-@@clientName(RecommendationTypeEnum,
+@@clientName(
+  RecommendationTypeEnum,
   "PostgreSqlFlexibleServerRecommendationType",
   "csharp"
 );
-@@clientName(RecommendationTypeParameterEnum,
+@@clientName(
+  RecommendationTypeParameterEnum,
   "PostgreSqlFlexibleServerRecommendationFilterType",
   "csharp"
 );
-@@clientName(SupportedFeature,
+@@clientName(
+  SupportedFeature,
   "PostgreSqlFlexibleServerSupportedFeature",
   "csharp"
 );
-@@clientName(TuningOptionParameterEnum,
+@@clientName(
+  TuningOptionParameterEnum,
   "PostgreSqlFlexibleServerTuningOptionType",
   "csharp"
 );
 
 // Preserve backward-compatible operation names for subscription-level operations
-@@clientName(CapabilitiesByLocationOperationGroup.list,
+@@clientName(
+  CapabilitiesByLocationOperationGroup.list,
   "ExecuteLocationBasedCapabilities",
   "csharp"
 );
 @@clientName(QuotaUsagesOperationGroup.list, "GetQuotaUsages", "csharp");
-@@clientName(NameAvailabilityOperationGroup.checkGlobally,
+@@clientName(
+  NameAvailabilityOperationGroup.checkGlobally,
   "CheckPostgreSqlFlexibleServerNameAvailability",
   "csharp"
 );
-@@clientName(NameAvailabilityOperationGroup.checkWithLocation,
+@@clientName(
+  NameAvailabilityOperationGroup.checkWithLocation,
   "CheckPostgreSqlFlexibleServerNameAvailabilityWithLocation",
   "csharp"
 );
-@@clientName(VirtualNetworkSubnetUsageOperationGroup.list,
+@@clientName(
+  VirtualNetworkSubnetUsageOperationGroup.list,
   "ExecuteVirtualNetworkSubnetUsage",
   "csharp"
 );
-@@clientName(PrivateDnsZoneSuffixOperationGroup.get,
+@@clientName(
+  PrivateDnsZoneSuffixOperationGroup.get,
   "ExecuteGetPrivateDnsZoneSuffix",
   "csharp"
 );
 
 // Preserve backward-compatible operation names for server-level operations
-@@clientName(Servers.listByServer,
+@@clientName(
+  Servers.listByServer,
   "GetPostgreSqlFlexibleServerLogFiles",
   "csharp"
 );
 @@clientName(Servers.replicasListByServer, "GetReplicas", "csharp");
 @@clientName(Servers.list, "GetServerCapabilities", "csharp");
-@@clientName(Servers.checkNameAvailability,
+@@clientName(
+  Servers.checkNameAvailability,
   "CheckPostgreSqlMigrationNameAvailability",
   "csharp"
 );
 @@clientName(Servers.start, "StartLtrBackupFlexibleServer", "csharp");
-@@clientName(Servers.checkPrerequisites,
+@@clientName(
+  Servers.checkPrerequisites,
   "TriggerLtrPreBackupFlexibleServer",
   "csharp"
 );
 @@clientName(Replica, "PostgreSqlFlexibleServersReplica", "csharp");
-@@clientName(ReplicationState,
+@@clientName(
+  ReplicationState,
   "PostgreSqlFlexibleServersReplicationState",
   "csharp"
 );
@@ -490,15 +590,18 @@ using Azure.ClientGenerator.Core;
 @@clientName(SourceType, "PostgreSqlFlexibleServersSourceType", "csharp");
 @@clientName(SslMode, "PostgreSqlFlexibleServersSslMode", "csharp");
 @@clientName(StorageType, "PostgreSqlFlexibleServersStorageType", "csharp");
-@@clientName(ValidationDetails,
+@@clientName(
+  ValidationDetails,
   "PostgreSqlFlexibleServersValidationDetails",
   "csharp"
 );
-@@clientName(ValidationMessage,
+@@clientName(
+  ValidationMessage,
   "PostgreSqlFlexibleServersValidationMessage",
   "csharp"
 );
-@@clientName(ValidationState,
+@@clientName(
+  ValidationState,
   "PostgreSqlFlexibleServersValidationState",
   "csharp"
 );
@@ -508,7 +611,8 @@ using Azure.ClientGenerator.Core;
 // Restore public constructors and property setters for models treated as output-only
 @@usage(ObjectRecommendation, Usage.input, "csharp");
 @@usage(ObjectRecommendationPropertiesAnalyzedWorkload, Usage.input, "csharp");
-@@usage(ObjectRecommendationPropertiesImplementationDetails,
+@@usage(
+  ObjectRecommendationPropertiesImplementationDetails,
   Usage.input,
   "csharp"
 );
@@ -528,7 +632,8 @@ using Azure.ClientGenerator.Core;
 @@clientName(FirewallRuleProperties.endIpAddress, "EndIPAddress", "csharp");
 @@clientName(Storage.type, "StorageType", "csharp");
 @@clientName(UserAssignedIdentity.type, "IdentityType", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
@@ -538,17 +643,18 @@ using Azure.ClientGenerator.Core;
 @@clientName(ValidationSummaryItem.type, "ValidationSummaryItemType", "csharp");
 
 // Rename resource types to have proper service prefix
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "PostgreSqlFlexibleServersPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "PostgreSqlFlexibleServersPrivateLinkResource",
   "csharp"
 );
 
-// Make BackupStoreDetails public (was internal in new generator)
-@@access(BackupStoreDetails, Access.public, "csharp");
+// Restore BackupStoreDetails input usage.
 @@usage(BackupStoreDetails, Usage.input, "csharp");
 
 // Preserve backward-compatible enum member names
@@ -561,37 +667,59 @@ using Azure.ClientGenerator.Core;
 @@usage(ServerForPatch, Usage.input, "csharp");
 @@usage(DataEncryption, Usage.input, "csharp");
 @@usage(MigrationResourceForPatch, Usage.input, "csharp");
-@@usage(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@usage(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   Usage.input,
   "csharp"
 );
 
-// Make ForPatch sub-models public (used in public ModelFactory methods)
-@@access(SkuForPatch, Access.public, "csharp");
+// Restore ForPatch sub-model input usage.
 @@usage(SkuForPatch, Usage.input, "csharp");
-@@access(BackupForPatch, Access.public, "csharp");
 @@usage(BackupForPatch, Usage.input, "csharp");
-@@access(HighAvailabilityForPatch, Access.public, "csharp");
 @@usage(HighAvailabilityForPatch, Usage.input, "csharp");
-@@access(MaintenanceWindowForPatch, Access.public, "csharp");
 @@usage(MaintenanceWindowForPatch, Usage.input, "csharp");
-@@access(AuthConfigForPatch, Access.public, "csharp");
 @@usage(AuthConfigForPatch, Usage.input, "csharp");
-@@access(MigrationSecretParametersForPatch, Access.public, "csharp");
 @@usage(MigrationSecretParametersForPatch, Usage.input, "csharp");
-@@access(AdminCredentialsForPatch, Access.public, "csharp");
 @@usage(AdminCredentialsForPatch, Usage.input, "csharp");
 
-// Make UserIdentity public (it's used in public ModelFactory method)
-@@access(UserIdentity, Access.public, "csharp");
-
 // Preserve backward-compatible version enum member names
+@@clientName(
+  PostgresMajorVersion.`11`,
+  Azure.ClientGenerator.Core.exact("Ver11"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`12`,
+  Azure.ClientGenerator.Core.exact("Ver12"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`13`,
+  Azure.ClientGenerator.Core.exact("Ver13"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`14`,
+  Azure.ClientGenerator.Core.exact("Ver14"),
+  "csharp"
+);
+@@clientName(
+  PostgresMajorVersion.`15`,
+  Azure.ClientGenerator.Core.exact("Ver15"),
+  "csharp"
+);
 @@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
 @@clientName(PostgresMajorVersion.`17`, "Seventeen", "csharp");
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 
 // Rename AdministratorMicrosoftEntraAdd to preserve backward-compatible C# name
-@@clientName(AdministratorMicrosoftEntraAdd,
+@@clientName(
+  AdministratorMicrosoftEntraAdd,
   "PostgreSqlFlexibleServerMicrosoftEntraAdministratorCreateOrUpdateContent",
   "csharp"
 );
@@ -602,7 +730,8 @@ using Azure.ClientGenerator.Core;
 // for backward compatibility with the 1.4.1 API contract.
 
 // Fix TenantId type on AdministratorMicrosoftEntraPropertiesForAdd (string → Guid?)
-@@alternateType(AdministratorMicrosoftEntraPropertiesForAdd.tenantId,
+@@alternateType(
+  AdministratorMicrosoftEntraPropertiesForAdd.tenantId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -622,19 +751,106 @@ using Azure.ClientGenerator.Core;
 @@usage(MigrationSecretParametersForPatch, Usage.input, "csharp");
 @@usage(AdminCredentialsForPatch, Usage.input, "csharp");
 
-@@alternateType(LocationParameter.locationName,
+@@alternateType(
+  LocationParameter.locationName,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@alternateType(MigrateNetworkStatus.subscriptionId, Azure.Core.uuid, "csharp");
 @@alternateType(ServerForPatch.sku, Sku, "csharp");
 @@alternateType(ServerPropertiesForPatch.backup, Backup, "csharp");
-@@alternateType(ServerPropertiesForPatch.highAvailability,
+@@alternateType(
+  ServerPropertiesForPatch.highAvailability,
   HighAvailability,
   "csharp"
 );
-@@alternateType(ServerPropertiesForPatch.maintenanceWindow,
+@@alternateType(
+  ServerPropertiesForPatch.maintenanceWindow,
   MaintenanceWindow,
   "csharp"
 );
 @@alternateType(ServerPropertiesForPatch.authConfig, AuthConfig, "csharp");
+
+// --- Blocking: Type suffix violations (SUFFIX003/SUFFIX005) ---
+@@clientName(
+  MaintenanceEventActionResponse,
+  "MaintenanceEventActionResult",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventRescheduleRequest,
+  "MaintenanceEventRescheduleContent",
+  "csharp"
+);
+@@clientName(
+  StartMajorVersionUpgradePrecheckRequest,
+  "StartMajorVersionUpgradePrecheckContent",
+  "csharp"
+);
+@@clientName(
+  StartMajorVersionUpgradePrecheckResponse,
+  "StartMajorVersionUpgradePrecheckResult",
+  "csharp"
+);
+
+// --- Blocking: Boolean property naming (verb prefix) ---
+@@clientName(
+  MaintenanceEventResourceProperties.deferrable,
+  "IsDeferrable",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventActionResponse.appliedNow,
+  "IsAppliedNow",
+  "csharp"
+);
+@@clientName(PolicyDetail.passed, "IsPassed", "csharp");
+
+// --- Non-blocking: Resource infix in Data/Collection types (RESINFIX001) ---
+@@clientName(MaintenanceEventResource, "MaintenanceEvent", "csharp");
+@@clientName(
+  MajorVersionUpgradePrecheckResource,
+  "MajorVersionUpgradePrecheck",
+  "csharp"
+);
+
+// --- Non-blocking: DateTimeOffset property suffixes (DATE001) ---
+@@clientName(
+  MaintenanceEventResourceProperties.deferralDeadline,
+  "DeferralDeadlineOn",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventResourceProperties.rescheduledFrom,
+  "RescheduledFromOn",
+  "csharp"
+);
+
+// --- Non-blocking: Generic/ambiguous type names (contextual naming) ---
+@@clientName(PolicyDetail, "MajorVersionUpgradePrecheckPolicyDetail", "csharp");
+@@clientName(
+  PrecheckErrorInfo,
+  "MajorVersionUpgradePrecheckErrorInfo",
+  "csharp"
+);
+@@clientName(PrecheckResult, "MajorVersionUpgradePrecheckResult", "csharp");
+@@clientName(
+  UpgradeSequence,
+  "PostgreSqlMajorVersionUpgradeSequence",
+  "csharp"
+);
+@@clientName(
+  MaintenanceType,
+  "PostgreSqlFlexibleServerMaintenanceType",
+  "csharp"
+);
+@@clientName(
+  MaintenanceEventResourceProperties,
+  "MaintenanceEventProperties",
+  "csharp"
+);
+@@clientName(
+  MajorVersionUpgradePrecheckResourceProperties,
+  "MajorVersionUpgradePrecheckProperties",
+  "csharp"
+);

@@ -14,10 +14,8 @@ namespace Microsoft.Automation;
 /**
  * Definition of the watcher type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AutomationAccount)
-model Watcher
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<WatcherProperties> {
+model Watcher is Azure.ResourceManager.ProxyResource<WatcherProperties> {
   ...ResourceNameParameter<
     Resource = Watcher,
     KeyName = "watcherName",
@@ -30,6 +28,17 @@ model Watcher
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 }
 
 @tag("Watcher")
@@ -99,9 +108,11 @@ interface Watchers {
 
 @@doc(Watcher.name, "The watcher name.");
 @@doc(Watcher.properties, "Gets or sets the watcher properties.");
-@@doc(Watchers.createOrUpdate::parameters.resource,
+@@doc(
+  Watchers.createOrUpdate::parameters.resource,
   "The create or update parameters for watcher."
 );
-@@doc(Watchers.update::parameters.properties,
+@@doc(
+  Watchers.update::parameters.properties,
   "The update parameters for watcher."
 );

@@ -42,11 +42,13 @@ interface ScopeMaps {
   update is ArmCustomPatchAsync<
     ScopeMap,
     PatchModel = ScopeMapUpdateParameters,
-    Response = ArmResponse<ScopeMap> | ArmResourceCreatedResponse<
-      ScopeMap,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ScopeMap> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<ScopeMap>
+      | ArmResourceCreatedResponse<
+          ScopeMap,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ScopeMap> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -55,7 +57,10 @@ interface ScopeMaps {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ScopeMap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -72,9 +77,11 @@ interface ScopeMaps {
 @@minLength(ScopeMap.name, 5);
 @@doc(ScopeMap.name, "The name of the scope map.");
 @@doc(ScopeMap.properties, "The properties of the scope map.");
-@@doc(ScopeMaps.create::parameters.resource,
+@@doc(
+  ScopeMaps.create::parameters.resource,
   "The parameters for creating a scope map."
 );
-@@doc(ScopeMaps.update::parameters.properties,
+@@doc(
+  ScopeMaps.update::parameters.properties,
   "The parameters for updating a scope map."
 );

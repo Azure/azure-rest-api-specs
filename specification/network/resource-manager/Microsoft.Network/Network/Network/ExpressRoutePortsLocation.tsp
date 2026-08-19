@@ -57,9 +57,11 @@ interface ExpressRoutePortsLocations {
   >;
 }
 
-@@doc(ExpressRoutePortsLocation.name,
+@@doc(
+  ExpressRoutePortsLocation.name,
   "Name of the requested ExpressRoutePort peering location."
 );
-@@doc(ExpressRoutePortsLocation.properties,
+@@doc(
+  ExpressRoutePortsLocation.properties,
   "ExpressRoutePort peering location properties."
 );

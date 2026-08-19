@@ -1,0 +1,51 @@
+# Vally project config for the per-skill evals under .github/skills/. Filename is fixed by the
+# vally CLI (it looks for exactly `.vally.yaml`). See: https://vally.dev/reference/vally-config
+#
+# Modeled on azure-sdk-tools' own `.github/skills/.vally.yaml` (same relative path, same
+# environments), pared down to the skill folders that exist in this repo.
+
+paths:
+  # "." is the root for skill *discovery*, which vally only performs when `--skill-dir` is passed
+  # on the command line -- `paths.skills` alone does not load anything. Neither the local runner
+  # (evals/arm-api-reviewer/run-evals.ps1) nor the CI shard runner
+  # (eng/common/scripts/eval/invoke-eval-shard.ts) passes `--skill-dir`, so every eval file here
+  # declares the skill it exercises via `environment.skills` -- once at the file root, which vally
+  # merges into each of its stimuli (fail-loud: vally aborts when a declared skill directory has
+  # no SKILL.md).
+  skills: "."
+  evals:
+    - azsdk-common-apiview-feedback-resolution/evals/
+    - azsdk-common-generate-sdk-locally/evals/
+    - azsdk-common-pipeline-analysis/evals/
+    - azsdk-common-pipeline-fixer/evals/
+    - azsdk-common-prepare-release-plan/evals/
+    - azsdk-common-sdk-release/evals/
+    - azure-api-review/evals/
+    - openai-typespec-update/evals/
+    - evals/arm-api-reviewer/vally/
+  results: results/
+  evalFilenames: ["eval.yaml", "*.eval.yaml"]
+
+environments:
+  # Launch the pre-built DLLs via `dotnet <dll>`, NOT `dotnet run` -- avoids the MSBuild boot race
+  # under parallel workers (azure-sdk-tools#15948). The DLLs are emitted to a TFM-agnostic path via
+  # `dotnet build -o`. CI builds them in eval-mcp-setup.yml; locally, run
+  # `dotnet build ../../azure-sdk-tools/tools/azsdk-cli/Azure.Sdk.Tools.Cli -c Debug -o ../../artifacts/mcp/cli`
+  # (and `... .Mock ... -o ../../artifacts/mcp/mock`) from this directory.
+  azsdk-mcp:
+    mcpServers:
+      azure-sdk-mcp:
+        type: stdio
+        command: dotnet
+        args: ["../../artifacts/mcp/cli/azsdk.dll", "start"]
+        timeout: "60s"
+        env:
+          AZSDKTOOLS_AGENT_TESTING: "true"
+          AZSDKTOOLS_COLLECT_TELEMETRY: "false"
+  azsdk-mcp-mock:
+    mcpServers:
+      azure-sdk-mcp:
+        type: stdio
+        command: dotnet
+        args: ["../../artifacts/mcp/mock/azsdk-mock.dll"]
+        timeout: "60s"

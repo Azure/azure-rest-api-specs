@@ -60,6 +60,7 @@ interface DataExports {
 
 @@doc(DataExport.name, "The data export rule name.");
 @@doc(DataExport.properties, "data export properties.");
-@@doc(DataExports.createOrUpdate::parameters.resource,
+@@doc(
+  DataExports.createOrUpdate::parameters.resource,
   "The parameters required to create or update a data export."
 );

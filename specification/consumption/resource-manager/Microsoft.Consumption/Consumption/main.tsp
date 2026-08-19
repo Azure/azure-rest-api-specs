@@ -17,6 +17,7 @@ import "./PriceSheetResult.tsp";
 import "./Budget.tsp";
 import "./CreditSummary.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -42,6 +43,11 @@ enum Versions {
    * The 2024-08-01 API version.
    */
   v2024_08_01: "2024-08-01",
+
+  /**
+   * The 2026-06-01 API version.
+   */
+  v2026_06_01: "2026-06-01",
 }
 
 interface Operations

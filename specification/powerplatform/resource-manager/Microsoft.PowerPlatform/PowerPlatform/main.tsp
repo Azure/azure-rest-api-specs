@@ -17,6 +17,7 @@ import "./Account.tsp";
 import "./EnterprisePolicy.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -45,6 +46,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available PowerPlatform REST API operations."
 );

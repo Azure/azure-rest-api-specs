@@ -7,7 +7,7 @@ using Microsoft.ExtendedLocation;
 @@Legacy.flattenProperty(customLocationOperation.display);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(patchableCustomLocations.properties);
+@@Legacy.flattenProperty(patchableCustomLocations.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EnabledResourceType.properties);
@@ -16,17 +16,19 @@ using Microsoft.ExtendedLocation;
 @@Legacy.flattenProperty(ResourceSyncRulePropertiesSelector.matchExpressions);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(patchableResourceSyncRule.properties);
+@@Legacy.flattenProperty(patchableResourceSyncRule.properties, "!javascript");
 
 @@clientName(CustomLocations.createOrUpdate::parameters.resource, "parameters");
 @@clientName(CustomLocations.update::parameters.properties, "parameters");
-@@clientName(CustomLocations.findTargetResourceGroup::parameters.body,
+@@clientName(
+  CustomLocations.findTargetResourceGroup::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(customLocation.properties);
 
-@@clientName(ResourceSyncRules.createOrUpdate::parameters.resource,
+@@clientName(
+  ResourceSyncRules.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ResourceSyncRules.update::parameters.properties, "parameters");

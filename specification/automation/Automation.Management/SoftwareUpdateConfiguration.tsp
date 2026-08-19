@@ -17,11 +17,10 @@ namespace Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AutomationAccount)
-model softwareUpdateConfiguration
-  is Azure.ResourceManager.ProxyResource<
-    softwareUpdateConfigurationProperties,
-    false
-  > {
+model softwareUpdateConfiguration is Azure.ResourceManager.ProxyResource<
+  softwareUpdateConfigurationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = softwareUpdateConfiguration,
     KeyName = "softwareUpdateConfigurationName",
@@ -82,12 +81,15 @@ interface SoftwareUpdateConfigurations {
   >;
 }
 
-@@doc(softwareUpdateConfiguration.name,
+@@doc(
+  softwareUpdateConfiguration.name,
   "The name of the software update configuration to be created."
 );
-@@doc(softwareUpdateConfiguration.properties,
+@@doc(
+  softwareUpdateConfiguration.properties,
   "Software update configuration properties."
 );
-@@doc(SoftwareUpdateConfigurations.create::parameters.resource,
+@@doc(
+  SoftwareUpdateConfigurations.create::parameters.resource,
   "Request body."
 );

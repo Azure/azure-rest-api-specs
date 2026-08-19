@@ -249,7 +249,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -295,7 +295,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -341,7 +341,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -387,7 +387,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -522,7 +522,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -640,7 +640,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -705,7 +705,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -6668,7 +6668,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Cache"
         },
         "x-ms-long-running-operation": true
       }
@@ -6753,7 +6754,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Cache"
         },
         "x-ms-long-running-operation": true
       }
@@ -10986,6 +10988,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_List": {
             "$ref": "./examples/Subvolumes_List.json"
@@ -11066,6 +11069,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Get": {
             "$ref": "./examples/Subvolumes_Get.json"
@@ -11077,7 +11081,7 @@
         "tags": [
           "SubvolumeInfos"
         ],
-        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath",
+        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath\nDeprecated. This operation will be removed in a future API version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -11181,6 +11185,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Create": {
             "$ref": "./examples/Subvolumes_Create.json"
@@ -11284,6 +11289,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Update": {
             "$ref": "./examples/Subvolumes_Update.json"
@@ -11378,6 +11384,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Delete": {
             "$ref": "./examples/Subvolumes_Delete.json"
@@ -11473,6 +11480,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Metadata": {
             "$ref": "./examples/Subvolumes_Metadata.json"
@@ -13163,13 +13171,13 @@
           "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
           "x-nullable": true
         },
-        "ldapConfiguration": {
-          "$ref": "#/definitions/LdapConfiguration",
-          "description": "LDAP Configuration for the account."
-        },
         "entraIdConfig": {
           "$ref": "#/definitions/EntraIdConfigPatch",
           "description": "Entra ID configuration for the account."
+        },
+        "ldapConfiguration": {
+          "$ref": "#/definitions/LdapConfigurationPatch",
+          "description": "LDAP Configuration for the account."
         }
       }
     },
@@ -15015,7 +15023,8 @@
         "certificateKeyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate."
+          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate.",
+          "example": "https://<REDACTED>.vault.azure.net/"
         },
         "certificateName": {
           "type": "string",
@@ -15321,11 +15330,13 @@
       "properties": {
         "clusterPeeringCommand": {
           "type": "string",
-          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>."
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.",
+          "example": "cluster peer create -peer-addresses 10.0.0.1,10.0.0.2"
         },
         "passphrase": {
           "type": "string",
-          "description": "Passphrase for use with cluster peer command"
+          "description": "Passphrase for use with cluster peer command",
+          "example": "SecurePassphrase123"
         }
       }
     },
@@ -15385,7 +15396,8 @@
         "credentialsKeyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials."
+          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials.",
+          "example": "https://<REDACTED>.vault.azure.net/"
         },
         "secretName": {
           "type": "string",
@@ -16840,14 +16852,16 @@
           "format": "int32",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "minimum": 0,
-          "maximum": 23
+          "maximum": 23,
+          "example": 11
         },
         "minute": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59
+          "maximum": 59,
+          "example": 30
         }
       }
     },
@@ -16867,7 +16881,8 @@
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59
+          "maximum": 59,
+          "example": 30
         }
       }
     },
@@ -16909,21 +16924,28 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "example": [
+            1,
+            11,
+            21
+          ]
         },
         "hour": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "minimum": 0,
-          "maximum": 23
+          "maximum": 23,
+          "example": 11
         },
         "minute": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59
+          "maximum": 59,
+          "example": 30
         }
       }
     },
@@ -17038,21 +17060,27 @@
           "description": "Indicates which weekday(s) snapshot(s) should be taken, accepts a list of week day names in english",
           "items": {
             "$ref": "#/definitions/DayOfWeek"
-          }
+          },
+          "example": [
+            "Sunday",
+            "Monday"
+          ]
         },
         "hour": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "minimum": 0,
-          "maximum": 23
+          "maximum": 23,
+          "example": 11
         },
         "minute": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59
+          "maximum": 59,
+          "example": 30
         }
       }
     },
@@ -18226,6 +18254,43 @@
     "LdapConfiguration": {
       "type": "object",
       "description": "LDAP configuration",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Name of the LDAP configuration domain",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
+        },
+        "ldapServers": {
+          "type": "array",
+          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ldapOverTLS": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
+        },
+        "serverCACertificate": {
+          "type": "string",
+          "format": "password",
+          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
+          "minLength": 1,
+          "maxLength": 10240,
+          "x-ms-secret": true
+        },
+        "certificateCNHost": {
+          "type": "string",
+          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
+          "x-nullable": true
+        }
+      }
+    },
+    "LdapConfigurationPatch": {
+      "type": "object",
+      "description": "LDAP configuration for PATCH operations (no default values)",
       "properties": {
         "domain": {
           "type": "string",
@@ -20793,7 +20858,7 @@
     },
     "SubvolumeInfo": {
       "type": "object",
-      "description": "Subvolume Information properties",
+      "description": "Subvolume Information properties\nDeprecated. This resource type will be removed in a future API version.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubvolumeProperties",
@@ -21999,7 +22064,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -22117,7 +22182,7 @@
           "description": "A unique file path for the volume. Used when creating mount targets",
           "minLength": 1,
           "maxLength": 80,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -22180,7 +22245,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -22640,7 +22705,7 @@
         },
         "enableSubvolumes": {
           "type": "string",
-          "description": "Flag indicating whether subvolume operations are enabled on the volume",
+          "description": "Flag indicating whether subvolume operations are enabled on the volume\nDeprecated. Subvolume operations and this flag will be removed in a future API version.",
           "default": "Disabled",
           "enum": [
             "Enabled",

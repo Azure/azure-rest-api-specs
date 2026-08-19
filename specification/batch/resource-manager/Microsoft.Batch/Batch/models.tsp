@@ -1248,7 +1248,9 @@ model BatchAccountProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Legacy desgin"
   @summary("The network interface type for accessing Azure Batch service and Batch account operations.")
-  publicNetworkAccess?: PublicNetworkAccessType | null = PublicNetworkAccessType.Enabled;
+  publicNetworkAccess?:
+    | PublicNetworkAccessType
+    | null = PublicNetworkAccessType.Enabled;
 
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
@@ -1629,6 +1631,7 @@ model ApplicationPackageProperties {
   /**
    * The URL for the application package in Azure Storage.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   storageUrl?: string;
 
@@ -2534,6 +2537,7 @@ model DiskCustomerManagedKey {
   /**
    * Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: url;
 
   /**
@@ -3303,12 +3307,14 @@ model ResourceFile {
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the blob container within Azure Blob Storage.")
   storageContainerUrl?: string;
 
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the file to download.")
   httpUrl?: string;
 
@@ -3717,6 +3723,7 @@ model AzureFileShareConfiguration {
   /**
    * This is of the form 'https://{account}.file.core.windows.net/'.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The Azure Files URL.")
   azureFileUrl: string;
 
@@ -3918,18 +3925,22 @@ model OperationListResult is Azure.Core.Page<Operation>;
 
 model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
 @@identifiers(BatchAccountListResult.value, #["/properties/accountEndpoint"]);
-@@summary(OperationListResult.value,
+@@summary(
+  OperationListResult.value,
   "The list of operations supported by the resource provider."
 );
-@@summary(OperationListResult.nextLink,
+@@summary(
+  OperationListResult.nextLink,
   "The URL to get the next set of operation list results if there are any."
 );
-@@summary(OperationListResult,
+@@summary(
+  OperationListResult,
   "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results."
 );
 @@identifiers(OperationListResult.value, #["name"]);
 @@visibility(OutboundEnvironmentEndpointCollection.value, Lifecycle.Read);
 @@identifiers(SupportedSkusResult.value, #["name"]);
-@@Azure.ClientGenerator.Core.clientName(CifsMountConfiguration,
+@@Azure.ClientGenerator.Core.clientName(
+  CifsMountConfiguration,
   "CIFSMountConfiguration"
 );

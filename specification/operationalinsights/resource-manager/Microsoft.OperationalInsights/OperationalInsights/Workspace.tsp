@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.OperationalInsights;
 /**
@@ -81,16 +83,18 @@ alias GatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
     workspaceName: string;
   },
-  {
-    /**
-     * The Log Analytics gateway Id.
-     */
-    @path
-    @segment("gateways")
-    @key("gatewayId")
-    gatewayId: string;
-  }
+  GatewayNameParameter
 >;
+
+alias GatewayNameParameter = {
+  /**
+   * The Log Analytics gateway Id.
+   */
+  @path
+  @segment("gateways")
+  @key("gatewayId")
+  gatewayId: string;
+};
 
 alias PurgeOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -169,11 +173,14 @@ interface Workspaces {
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
-      Workspace,
-      ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | ArmResourceCreatedResponse<
+          Workspace,
+          ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -199,7 +206,10 @@ interface Workspaces {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -245,7 +255,9 @@ interface Workspaces {
   /**
    * Disables an intelligence pack for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
   @tag("IntelligencePacks")
   @post
@@ -259,7 +271,9 @@ interface Workspaces {
   /**
    * Enables an intelligence pack for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
   @tag("IntelligencePacks")
   @post
@@ -378,6 +392,25 @@ interface Workspaces {
   >;
 
   /**
+   * Purges data lake data in a Log Analytics workspace for a table over a specified time range.
+   *
+   * This operation deletes data lake data (Auxiliary tables, or Analytics tables mirrored to the data lake) for the specified table within the given time range. The operation is long-running; poll the URL returned in the Azure-AsyncOperation response header to track its status.
+   */
+  // The 204 is required by openapi-validator PostResponseCodes (RPC-Async-V1-11/14) for a no-content async POST, which this TypeSpec rule flags.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Final 204 is required by ARM RPC PostResponseCodes for a no-content LRO POST."
+  @added(Versions.v2026_03_01)
+  @tag("Workspaces")
+  @autoRoute
+  purgeLakeData is ArmResourceActionAsyncBase<
+    Workspace,
+    WorkspacePurgeLakeDataBody,
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmNoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
+  >;
+
+  /**
    * Deactivates failover for the specified workspace.
    *
    * The failback operation is asynchronous and can take up to 30 minutes to complete. The status of the operation can be checked using the operationId returned in the response.
@@ -397,12 +430,19 @@ interface Workspaces {
 @@minLength(Workspace.name, 4);
 @@doc(Workspace.name, "The name of the workspace.");
 @@doc(Workspace.properties, "Workspace properties.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "The parameters required to create or update a workspace."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "The parameters required to patch a workspace."
 );
-@@doc(Workspaces.purge::parameters.body,
+@@doc(
+  Workspaces.purge::parameters.body,
   "Describes the body of a request to purge data in a single table of an Log Analytics Workspace"
+);
+@@doc(
+  Workspaces.purgeLakeData::parameters.body,
+  "Describes the body of a request to purge data lake data in a single table of an Log Analytics Workspace"
 );
