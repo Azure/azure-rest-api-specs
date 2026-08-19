@@ -1,0 +1,38 @@
+parameters:
+  python-sdk-folder:
+    default: "{cwd}/azure-sdk-for-python/"
+  java-sdk-folder:
+    default: "{cwd}/azure-sdk-for-java/"
+  js-sdk-folder:
+    default: "{cwd}/azure-sdk-for-js/"
+  csharp-sdk-folder:
+    default: "{cwd}/azure-sdk-for-csharp/"
+  service-directory-name:
+    default: "Contoso"
+emit:
+  - "@azure-tools/cadl-autorest"
+options:
+  "@azure-tools/cadl-autorest":
+    output-file: "azure.template.contoso.json"
+    azure-resource-provider-folder: ../../../../data-plane
+    examples-directory: ./examples
+  "@azure-tools/cadl-python":
+    package-name: "azure-template-contoso"
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: dataplane
+  "@azure-tools/cadl-csharp":
+    namespace: "Azure.Template.Contoso"
+    clear-output-folder: true
+    model-namespace: false
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+  "@azure-tools/cadl-typescript":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/azure-template-contoso-rest"
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    packageDetails:
+      name: "@azure-rest/azure-template-contoso-rest"
+      description: "Azure.Template.Contoso Service"
+  "@azure-tools/cadl-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-template-contoso"
+    namespace: com.azure.template.contoso
