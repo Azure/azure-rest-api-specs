@@ -19,7 +19,14 @@
               "TLS_AES_256_GCM_SHA384"
             ]
           },
-          "minimumTlsVersion": "TLS12"
+          "minimumTlsVersion": "TLS12",
+          "serverTlsGroupPolicy": "Custom",
+          "serverTlsGroups": [
+            "X25519MLKEM768",
+            "SecP256r1MLKEM768",
+            "X25519",
+            "prime256v1"
+          ]
         }
       }
     },
@@ -58,6 +65,13 @@
               ]
             },
             "minimumTlsVersion": "TLS12",
+            "serverTlsGroupPolicy": "Custom",
+            "serverTlsGroups": [
+              "X25519MLKEM768",
+              "SecP256r1MLKEM768",
+              "X25519",
+              "prime256v1"
+            ],
             "secret": {
               "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
             }
@@ -99,6 +113,13 @@
               ]
             },
             "minimumTlsVersion": "TLS12",
+            "serverTlsGroupPolicy": "Custom",
+            "serverTlsGroups": [
+              "X25519MLKEM768",
+              "SecP256r1MLKEM768",
+              "X25519",
+              "prime256v1"
+            ],
             "secret": {
               "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
             }

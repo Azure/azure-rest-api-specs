@@ -299,6 +299,56 @@ union AfdCipherSuiteSetType {
   TLS12_2023: "TLS12_2023",
 }
 
+/**
+ * Server TLS group policy that will be used for Https. Standard and Enhanced are service-managed sets; Custom allows specifying serverTlsGroups explicitly.
+ */
+@added(Versions.v2026_07_01)
+union AfdServerTlsGroupPolicy {
+  string,
+
+  /** Uses the standard service-managed set of server TLS groups. */
+  Standard: "Standard",
+
+  /** Uses the enhanced service-managed set of server TLS groups. */
+  Enhanced: "Enhanced",
+
+  /** Uses the server TLS groups specified by serverTlsGroups. */
+  Custom: "Custom",
+}
+
+/**
+ * Supported key-exchange groups and curves. The ML-KEM groups are hybrid post-quantum groups.
+ */
+@added(Versions.v2026_07_01)
+union AfdServerTlsGroup {
+  string,
+
+  /** Hybrid post-quantum group combining secp256r1 with ML-KEM-768. */
+  SecP256r1MLKEM768: "SecP256r1MLKEM768",
+
+  /** Hybrid post-quantum group combining secp384r1 with ML-KEM-1024. */
+  SecP384r1MLKEM1024: "SecP384r1MLKEM1024",
+
+  /** Hybrid post-quantum group combining X25519 with ML-KEM-768. */
+  X25519MLKEM768: "X25519MLKEM768",
+
+  /** The prime256v1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  prime256v1: "prime256v1",
+
+  /** The X25519 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  X25519: "X25519",
+
+  /** The secp384r1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  secp384r1: "secp384r1",
+
+  /** The secp521r1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  secp521r1: "secp521r1",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AfdCustomizedCipherSuiteForTls12 {
   string,
@@ -2765,6 +2815,18 @@ model AFDDomainHttpsParameters {
    * Customized cipher suites object that will be used for Https when cipherSuiteSetType is Customized.
    */
   customizedCipherSuiteSet?: AFDDomainHttpsCustomizedCipherSuiteSet;
+
+  /**
+   * Server TLS group policy that will be used for Https.
+   */
+  @added(Versions.v2026_07_01)
+  serverTlsGroupPolicy?: AfdServerTlsGroupPolicy;
+
+  /**
+   * Server TLS groups that will be used for Https when serverTlsGroupPolicy is Custom.
+   */
+  @added(Versions.v2026_07_01)
+  serverTlsGroups?: AfdServerTlsGroup[];
 
   /**
    * Resource reference to the secret. ie. subs/rg/profile/secret
