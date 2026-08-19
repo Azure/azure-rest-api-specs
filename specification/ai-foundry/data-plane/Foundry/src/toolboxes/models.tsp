@@ -105,6 +105,7 @@ union ToolboxToolType {
 
   @removed(Versions.v1)
   web_iq_preview: ToolboxWebIQPreviewToolType,
+
   a2a: ToolboxA2AToolType,
 }
 
