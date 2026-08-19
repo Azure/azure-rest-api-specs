@@ -95,7 +95,6 @@ union ToolboxToolType {
   mcp: ToolboxMCPToolType,
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
-  a2a: ToolboxA2AToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
@@ -106,6 +105,7 @@ union ToolboxToolType {
 
   @removed(Versions.v1)
   web_iq_preview: ToolboxWebIQPreviewToolType,
+  a2a: ToolboxA2AToolType,
 }
 
 /**
