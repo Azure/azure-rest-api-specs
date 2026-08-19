@@ -3945,7 +3945,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -3984,7 +3984,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Budget=V1Preview
   /connections:
     get:

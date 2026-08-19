@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 namespace Azure.AI.Projects;
 
 const BudgetRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.budget_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.budget_v1_preview],
 };
 
 /** Operations for reading budget policy usage. */
@@ -21,7 +21,7 @@ interface Budget {
   @get
   @list
   @extension("x-ms-foundry-meta", BudgetRequiredPreviews)
-  list is FoundryDataPlanePreviewOperation<
+  list is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.budget_v1_preview,
     BudgetUsageListRequest,
     BudgetUsageListResult
