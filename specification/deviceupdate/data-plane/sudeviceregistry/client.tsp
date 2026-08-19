@@ -35,6 +35,6 @@ using DeviceRegistrySoftwareUpdateClient;
 @@clientName(Step, "SoftwareUpdateStep", "csharp");
 @@clientName(
   DeviceRegistrySoftwareUpdateClient.Update,
-  "SoftwareUpdate",
+  "DeviceRegistryUpdate",
   "csharp"
 );
