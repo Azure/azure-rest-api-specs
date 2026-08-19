@@ -112,6 +112,9 @@
       "name": "AvailableWorkloadProfiles"
     },
     {
+      "name": "AvailableEnvironmentModes"
+    },
+    {
       "name": "BillingMeters"
     },
     {
@@ -308,6 +311,50 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsModes": {
+      "get": {
+        "operationId": "AvailableEnvironmentModes_Get",
+        "tags": [
+          "AvailableEnvironmentModes"
+        ],
+        "summary": "Get available environment modes by location.",
+        "description": "Gets the environment modes available to a subscription in a location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableEnvironmentModesCollection"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableEnvironmentModes_Get": {
+            "$ref": "./examples/AvailableEnvironmentModes_Get.json"
+          }
         }
       }
     },
@@ -8362,6 +8409,55 @@
           "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\nThe setting in this value can control the behavior of certain features in the Authentication / Authorization module."
         }
       }
+    },
+    "AvailableEnvironmentMode": {
+      "type": "object",
+      "description": "An environment mode available to the subscription.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The Azure region in which the environment mode is available."
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableEnvironmentModeProperties",
+          "description": "The environment mode details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableEnvironmentModeProperties": {
+      "type": "object",
+      "description": "Details that describe an available environment mode.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the environment mode."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the environment mode."
+        }
+      }
+    },
+    "AvailableEnvironmentModesCollection": {
+      "type": "object",
+      "description": "Collection of environment modes available in the location.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The available environment modes.",
+          "items": {
+            "$ref": "#/definitions/AvailableEnvironmentMode"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AvailableOperations": {
       "type": "object",

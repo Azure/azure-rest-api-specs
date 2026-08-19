@@ -1801,6 +1801,51 @@ model AvailableWorkloadProfileProperties {
 }
 
 /**
+ * Collection of environment modes available in the location.
+ */
+@added(Versions.v2026_07_01)
+model AvailableEnvironmentModesCollection {
+  /**
+   * The available environment modes.
+   */
+  value: AvailableEnvironmentMode[];
+}
+
+/**
+ * An environment mode available to the subscription.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The service returns the standard proxy resource envelope for each available environment mode."
+@added(Versions.v2026_07_01)
+model AvailableEnvironmentMode
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * The Azure region in which the environment mode is available.
+   */
+  location?: string;
+
+  /**
+   * The environment mode details.
+   */
+  properties?: AvailableEnvironmentModeProperties;
+}
+
+/**
+ * Details that describe an available environment mode.
+ */
+@added(Versions.v2026_07_01)
+model AvailableEnvironmentModeProperties {
+  /**
+   * The display name of the environment mode.
+   */
+  displayName?: string;
+
+  /**
+   * The description of the environment mode.
+   */
+  description?: string;
+}
+
+/**
  * Collection of billing meters.
  */
 model BillingMeterCollection {
