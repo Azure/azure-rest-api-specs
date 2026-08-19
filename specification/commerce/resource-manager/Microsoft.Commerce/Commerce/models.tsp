@@ -26,9 +26,8 @@ enum AggregationGranularity {
 /**
  * Name of the offer term
  */
-union OfferTermInfoName {
-  string,
-
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum OfferTermInfoName {
   /**
    * Recurring Charge
    */

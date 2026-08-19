@@ -13,6 +13,23 @@ using Microsoft.Commerce;
 );
 @@clientName(RecurringCharge.RecurringCharge, "Amount", "csharp");
 
+/** Name of the offer term. */
+union OfferTermInfoNameForCSharp {
+  string,
+
+  /** Recurring Charge. */
+  RecurringCharge: "Recurring Charge",
+
+  /** Monetary Commitment. */
+  MonetaryCommitment: "Monetary Commitment",
+
+  /** Monetary Credit. */
+  MonetaryCredit: "Monetary Credit",
+}
+
+@@clientName(OfferTermInfoNameForCSharp, "OfferTermInfoName", "csharp");
+@@alternateType(OfferTermInfoName, OfferTermInfoNameForCSharp, "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
   UsageAggregatesOperationGroupListParameters.aggregationGranularity,
