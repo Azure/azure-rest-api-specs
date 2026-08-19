@@ -400,10 +400,11 @@ model SessionConfiguration {
     unset, the server default of 900 seconds is used. Must be between 300 and 3600 seconds
     (inclusive).
     """)
-  @minValue(300)
-  @maxValue(3600)
-  @example(300)
-  idle_timeout_seconds?: int32 = 900;
+  @minValue(duration.fromISO("PT300S"))
+  @maxValue(duration.fromISO("PT3600S"))
+  @example(duration.fromISO("PT300S"))
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
@@ -497,7 +498,7 @@ model HostedAgentDefinition extends AgentDefinition {
   telemetry_config?: TelemetryConfig;
 
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
-  @example(#{ idle_timeout_seconds: 300 })
+  @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
 }
 
