@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -28,6 +30,26 @@ interface AvailableWorkloadProfilesOperationGroup {
     Response = AvailableWorkloadProfilesCollection,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface exposes a subscription-level provider operation rather than operations on an ARM resource."
+@added(Versions.v2026_03_02_preview)
+interface AvailableEnvironmentModesOperationGroup {
+  /**
+   * Gets the environment modes available to a subscription in a location.
+   */
+  @summary("Get available environment modes by location.")
+  @autoRoute
+  @get
+  @list
+  @action("availableManagedEnvironmentsModes")
+  @tag("AvailableEnvironmentModes")
+  list is ArmProviderActionSync<
+    Response = AvailableEnvironmentModesCollection,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter,
+    Error = DefaultErrorResponse
   >;
 }
 
