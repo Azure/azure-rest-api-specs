@@ -54,9 +54,10 @@ model VoiceAgentInterimResponseConfig {
     VoiceAgentInterimResponseTrigger.latency
   ];
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
   @doc("The latency threshold in milliseconds.")
-  @minValue(0)
-  latency_threshold_ms?: int32 = 2000;
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  latency_threshold_ms?: duration = duration.fromISO("PT2S");
 }
 
 @doc("A static interim response selected from configured text.")
@@ -150,7 +151,7 @@ model VoiceAgentDefinition extends AgentDefinition {
     `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
     Defaults to `auto`.
     """)
-  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.auto;
+  tool_choice?: VoiceAgentToolChoice = VoiceAgentToolChoice.auto;
 
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
@@ -197,7 +198,7 @@ model LlmGeneratedVoiceGreetingConfig extends VoiceGreetingConfig {
   prompt: string;
 
   @doc("The tool-selection policy for the opening response. Defaults to `none`.")
-  tool_choice?: VoiceAgentToolChoice = OpenAI.ToolChoiceOptions.none;
+  tool_choice?: VoiceAgentToolChoice = VoiceAgentToolChoice.none;
 }
 
 @doc("""
@@ -238,7 +239,9 @@ model VoiceAgentFunctionTool extends VoiceAgentTool {
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentToolChoice {
-  mode: OpenAI.ToolChoiceOptions,
+  none: "none",
+  auto: "auto",
+  required: "required",
   function: OpenAI.ToolChoiceFunction,
   mcp: OpenAI.ToolChoiceMCP,
 }
@@ -346,6 +349,30 @@ model VoiceAudioInputConfig {
   transcription?: VoiceInputTranscription | null;
 }
 
+@doc("The voice implementation. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceType {
+  string,
+
+  @doc("An OpenAI voice.")
+  openai: "openai",
+
+  @doc("An Azure standard voice.")
+  azure_standard: "azure-standard",
+
+  @doc("An Azure custom voice.")
+  azure_custom: "azure-custom",
+
+  @doc("An Azure personal voice.")
+  azure_personal: "azure-personal",
+
+  @doc("A voice synchronized with an avatar.")
+  avatar_voice_sync: "avatar-voice-sync",
+
+  @doc("An Azure native realtime voice.")
+  azure_realtime_native: "azure-realtime-native",
+}
+
 @doc("""
   Output audio configuration for a voice agent.
   Provider-specific fields are selected by `voice_type`:
@@ -366,8 +393,8 @@ model VoiceAudioOutputConfig {
   @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.")
   voice?: string;
 
-  @doc("The voice implementation. Known values are `openai`, `azure-standard`, `azure-custom`, `azure-personal`, `avatar-voice-sync`, and `azure-realtime-native`. The string is extensible so future values do not require SDK type changes.")
-  voice_type?: string;
+  @doc("The voice implementation.")
+  voice_type?: VoiceType;
 
   @doc("The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   voice_locale?: string;
@@ -499,8 +526,7 @@ model VoiceServerVadTurnDetection extends VoiceTurnDetection {
   type: VoiceTurnDetectionType.server_vad;
 
   @doc("Minimum speech duration required to trigger detection, in milliseconds.")
-  @minValue(0)
-  speech_duration_ms?: int32;
+  speech_duration_ms?: FoundryDurationMilliseconds;
 
   @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
   end_of_utterance_detection?: VoiceEndOfUtteranceDetection | null;
@@ -542,7 +568,6 @@ union VoiceEndOfUtteranceThresholdLevel {
   default: "default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
 @doc("Semantic end-of-utterance detection configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceEndOfUtteranceDetection {
@@ -553,13 +578,10 @@ model VoiceEndOfUtteranceDetection {
   threshold_level?: VoiceEndOfUtteranceThresholdLevel;
 
   @doc("The detection timeout in milliseconds.")
-  @encode(DurationKnownEncoding.milliseconds, int32)
-  @minValue(duration.fromISO("PT0S"))
-  timeout_ms?: duration;
+  timeout_ms?: FoundryDurationMilliseconds;
 }
 
 /** Options shared by Azure semantic voice activity detection configurations. */
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
 alias VoiceAzureSemanticVadOptions = {
   @doc("Activation threshold for voice activity detection, from 0 to 1.")
   @minValue(0)
@@ -567,27 +589,19 @@ alias VoiceAzureSemanticVadOptions = {
   threshold?: float32;
 
   @doc("Audio to include before detected speech, in milliseconds.")
-  @encode(DurationKnownEncoding.milliseconds, int32)
-  @minValue(duration.fromISO("PT0S"))
-  prefix_padding_ms?: duration;
+  prefix_padding_ms?: FoundryDurationMilliseconds;
 
   @doc("Silence required to end speech detection, in milliseconds.")
-  @encode(DurationKnownEncoding.milliseconds, int32)
-  @minValue(duration.fromISO("PT0S"))
-  silence_duration_ms?: duration;
+  silence_duration_ms?: FoundryDurationMilliseconds;
 
   @doc("Maximum idle time before the detector ends the turn, in milliseconds.")
-  @encode(DurationKnownEncoding.milliseconds, int32)
-  @minValue(duration.fromISO("PT0S"))
-  idle_timeout_ms?: duration;
+  idle_timeout_ms?: FoundryDurationMilliseconds;
 
   @doc("Semantic end-of-utterance detection configuration. Set to null to disable it.")
   end_of_utterance_detection?: VoiceEndOfUtteranceDetection | null;
 
   @doc("Minimum speech duration required to trigger detection, in milliseconds.")
-  @encode(DurationKnownEncoding.milliseconds, int32)
-  @minValue(duration.fromISO("PT0S"))
-  speech_duration_ms?: duration;
+  speech_duration_ms?: FoundryDurationMilliseconds;
 
   @doc("Whether filler words are removed from transcription.")
   remove_filler_words?: boolean = false;
@@ -666,7 +680,7 @@ model VoiceAgentEchoCancellation {
 }
 
 @doc("""
-  The input-audio transcription model. Mirrors the transcription models supported by the managed
+  The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
   Additional values may be added over time.
   """)
@@ -710,10 +724,10 @@ union VoiceInputTranscriptionModel {
 model VoiceInputTranscription {
   ...OmitProperties<OpenAI.AudioTranscription, "model">;
 
-  @doc("The transcription model to use.")
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.")
   `model`: VoiceInputTranscriptionModel;
 
-  @doc("Optional custom speech model configuration, keyed by locale.")
+  @doc("Optional customer custom speech deployment configuration, keyed by locale.")
   custom_speech?: Record<string>;
 
   @doc("Optional phrase hints that bias recognition toward domain terms.")
@@ -749,7 +763,6 @@ model VoiceAgentAvatarVideoBackground {
 @doc("Avatar video encoder and presentation settings.")
 model VoiceAgentAvatarVideoParams {
   bitrate?: int32 = 2000000;
-  codec?: "h264" = "h264";
   crop?: VoiceAgentAvatarVideoCrop;
   resolution?: VoiceAgentAvatarVideoResolution;
   background?: VoiceAgentAvatarVideoBackground;

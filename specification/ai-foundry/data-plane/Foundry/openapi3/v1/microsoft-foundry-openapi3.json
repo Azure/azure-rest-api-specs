@@ -36970,6 +36970,11 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryDurationMilliseconds": {
+        "type": "integer",
+        "format": "int32",
+        "description": "A duration encoded as an integer number of milliseconds."
+      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -81018,13 +81023,6 @@
             "format": "int32",
             "default": 2000000
           },
-          "codec": {
-            "type": "string",
-            "enum": [
-              "h264"
-            ],
-            "default": "h264"
-          },
           "crop": {
             "$ref": "#/components/schemas/VoiceAgentAvatarVideoCrop"
           },
@@ -81274,9 +81272,8 @@
           "latency_threshold_ms": {
             "type": "integer",
             "format": "int32",
-            "minimum": 0,
             "description": "The latency threshold in milliseconds.",
-            "default": 2000
+            "default": "PT2S"
           }
         },
         "discriminator": {
@@ -81608,7 +81605,12 @@
       "VoiceAgentToolChoice": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+            "type": "string",
+            "enum": [
+              "none",
+              "auto",
+              "required"
+            ]
           },
           {
             "$ref": "#/components/schemas/OpenAI.ToolChoiceFunction"
@@ -81901,8 +81903,8 @@
             "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
           },
           "voice_type": {
-            "type": "string",
-            "description": "The voice implementation. Known values are `openai`, `azure-standard`, `azure-custom`, `azure-personal`, `avatar-voice-sync`, and `azure-realtime-native`. The string is extensible so future values do not require SDK type changes."
+            "$ref": "#/components/schemas/VoiceType",
+            "description": "The voice implementation."
           },
           "voice_locale": {
             "type": "string",
@@ -82121,18 +82123,15 @@
             "description": "Activation threshold for voice activity detection, from 0 to 1."
           },
           "prefix_padding_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Audio to include before detected speech, in milliseconds."
           },
           "silence_duration_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Silence required to end speech detection, in milliseconds."
           },
           "idle_timeout_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Maximum idle time before the detector ends the turn, in milliseconds."
           },
           "end_of_utterance_detection": {
@@ -82147,8 +82146,7 @@
             "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
           },
           "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "remove_filler_words": {
@@ -82199,18 +82197,15 @@
             "description": "Activation threshold for voice activity detection, from 0 to 1."
           },
           "prefix_padding_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Audio to include before detected speech, in milliseconds."
           },
           "silence_duration_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Silence required to end speech detection, in milliseconds."
           },
           "idle_timeout_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Maximum idle time before the detector ends the turn, in milliseconds."
           },
           "end_of_utterance_detection": {
@@ -82225,8 +82220,7 @@
             "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
           },
           "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "remove_filler_words": {
@@ -82284,18 +82278,15 @@
             "description": "Activation threshold for voice activity detection, from 0 to 1."
           },
           "prefix_padding_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Audio to include before detected speech, in milliseconds."
           },
           "silence_duration_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Silence required to end speech detection, in milliseconds."
           },
           "idle_timeout_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Maximum idle time before the detector ends the turn, in milliseconds."
           },
           "end_of_utterance_detection": {
@@ -82310,8 +82301,7 @@
             "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
           },
           "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "remove_filler_words": {
@@ -82490,11 +82480,6 @@
           ]
         }
       },
-      "VoiceDurationMilliseconds": {
-        "type": "integer",
-        "format": "int32",
-        "description": "A duration encoded as an integer number of milliseconds."
-      },
       "VoiceEndOfUtteranceDetection": {
         "type": "object",
         "required": [
@@ -82510,8 +82495,7 @@
             "description": "The sensitivity threshold."
           },
           "timeout_ms": {
-            "type": "integer",
-            "format": "int32",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "The detection timeout in milliseconds."
           }
         },
@@ -82738,14 +82722,14 @@
           },
           "model": {
             "$ref": "#/components/schemas/VoiceInputTranscriptionModel",
-            "description": "The transcription model to use."
+            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
           },
           "custom_speech": {
             "type": "object",
             "unevaluatedProperties": {
               "type": "string"
             },
-            "description": "Optional custom speech model configuration, keyed by locale."
+            "description": "Optional customer custom speech deployment configuration, keyed by locale."
           },
           "phrase_list": {
             "type": "array",
@@ -82782,7 +82766,7 @@
             ]
           }
         ],
-        "description": "The input-audio transcription model. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -82827,11 +82811,11 @@
             "description": "The number of audio channels."
           },
           "start_offset_ms": {
-            "$ref": "#/components/schemas/VoiceDurationMilliseconds",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "The offset from the session start at which this segment begins."
           },
           "duration_ms": {
-            "$ref": "#/components/schemas/VoiceDurationMilliseconds",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "The duration of the audio segment."
           },
           "blob_uri": {
@@ -83234,7 +83218,7 @@
             "description": "The role assigned to each stereo channel."
           },
           "duration_ms": {
-            "$ref": "#/components/schemas/VoiceDurationMilliseconds",
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "The total duration of the recording."
           },
           "blob_uri": {
@@ -83395,7 +83379,7 @@
             "description": "The voice name used for the response's audio output."
           },
           "voice_type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceType",
             "description": "The extensible provider/type of the voice used for the response's audio output."
           },
           "voice_locale": {
@@ -83454,9 +83438,7 @@
             ]
           },
           "speech_duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
             "description": "Minimum speech duration required to trigger detection, in milliseconds."
           },
           "end_of_utterance_detection": {
@@ -83682,6 +83664,30 @@
           }
         ],
         "description": "The turn-detection strategy. Additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "openai",
+              "azure-standard",
+              "azure-custom",
+              "azure-personal",
+              "avatar-voice-sync",
+              "azure-realtime-native"
+            ]
+          }
+        ],
+        "description": "The voice implementation. Additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

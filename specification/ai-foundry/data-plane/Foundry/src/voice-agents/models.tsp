@@ -84,7 +84,7 @@ model VoiceResponseAudioOutput {
   voice?: string;
 
   @doc("The extensible provider/type of the voice used for the response's audio output.")
-  voice_type?: string;
+  voice_type?: VoiceType;
 
   @doc("The BCP-47 locale of the voice used for the response's audio output.")
   voice_locale?: string;
@@ -320,11 +320,6 @@ union VoiceAudioCodec {
   pcma: "pcma",
 }
 
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice recording contract requires integer-millisecond durations."
-@doc("A duration encoded as an integer number of milliseconds.")
-@encode(DurationKnownEncoding.milliseconds, int32)
-scalar VoiceDurationMilliseconds extends duration;
-
 @doc("""
   Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
@@ -355,10 +350,10 @@ model VoiceItemAudioResponse {
   channels?: int32;
 
   @doc("The offset from the session start at which this segment begins.")
-  start_offset_ms?: VoiceDurationMilliseconds;
+  start_offset_ms?: FoundryDurationMilliseconds;
 
   @doc("The duration of the audio segment.")
-  duration_ms?: VoiceDurationMilliseconds;
+  duration_ms?: FoundryDurationMilliseconds;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
   blob_uri?: url;
@@ -413,7 +408,7 @@ model VoiceRecordingResponse {
   channel_layout: VoiceRecordingChannelLayout;
 
   @doc("The total duration of the recording.")
-  duration_ms: VoiceDurationMilliseconds;
+  duration_ms: FoundryDurationMilliseconds;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
   blob_uri?: url;

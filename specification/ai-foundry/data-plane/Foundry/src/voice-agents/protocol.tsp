@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
-import "../openai/realtime/models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -211,8 +210,7 @@ model VoiceAgentSessionResponseConfig {
   `model`: string;
 
   @doc("The session expiration time as a Unix timestamp in seconds.")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
-  expires_at?: utcDateTime | null;
+  expires_at?: FoundryTimestamp | null;
 }
 
 @doc("Parameters accepted by a voice-agent `response.create` event.")
@@ -265,19 +263,19 @@ model VoiceAgentTranscriptionWord {
   text: string;
 
   @doc("The word offset from the beginning of the audio, in milliseconds.")
-  offset_milliseconds: int32;
+  offset_milliseconds: FoundryDurationMilliseconds;
 
   @doc("The word duration in milliseconds.")
-  duration_milliseconds: int32;
+  duration_milliseconds: FoundryDurationMilliseconds;
 }
 
 @doc("A transcribed phrase with timing information.")
 model VoiceAgentTranscriptionPhrase {
   @doc("The phrase offset from the beginning of the audio, in milliseconds.")
-  offset_milliseconds: int32;
+  offset_milliseconds: FoundryDurationMilliseconds;
 
   @doc("The phrase duration in milliseconds.")
-  duration_milliseconds: int32;
+  duration_milliseconds: FoundryDurationMilliseconds;
 
   @doc("The transcribed phrase text.")
   text: string;
@@ -716,8 +714,8 @@ model VoiceAgentServerEventResponseAudioTimestampDelta {
   item_id: string;
   output_index: int32;
   content_index: int32;
-  audio_offset_ms: int32;
-  audio_duration_ms: int32;
+  audio_offset_ms: FoundryDurationMilliseconds;
+  audio_duration_ms: FoundryDurationMilliseconds;
   text: string;
   timestamp_type: "word";
 }
@@ -769,7 +767,7 @@ model VoiceAgentServerEventResponseAnimationVisemeDelta {
   item_id: string;
   output_index: int32;
   content_index: int32;
-  audio_offset_ms: int32;
+  audio_offset_ms: FoundryDurationMilliseconds;
   viseme_id: int32;
 }
 
