@@ -58,18 +58,32 @@ union AgentOptimizationCompletionStatus {
   stopped_early: "stopped_early",
 }
 
-/** Which layer of the optimization loop generated a token/latency usage entry. */
+/**
+ * Which layer of the optimization loop generated a token/latency usage entry.
+ *
+ * Population status for `latency_usage` (as of the initial GA of this contract):
+ * - `agent`     — populated when Foundry's agent runtime surfaces `sample.latency_ms`
+ *                 (server-measured on the target rollout).
+ * - `judge`     — populated when a Foundry evaluator surfaces `sample.latency_ms`
+ *                 (server-measured on the evaluator call).
+ * - `reflection`— **not currently populated**. The optimizer's reflection/mutation
+ *                 model calls are not yet reported with a server-measured latency
+ *                 source; this member is reserved so consumers can begin filtering
+ *                 for it today without a breaking change when the signal ships.
+ *
+ * `token_usage` populates all three layers.
+ */
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 union AgentOptimizationLayer {
   string,
 
-  @doc("Agent inference calls (the agent being optimized).")
+  @doc("Agent inference calls (the agent being optimized). Populated on latency_usage from Foundry-reported sample.latency_ms.")
   agent: "agent",
 
-  @doc("Judge / evaluator model calls.")
+  @doc("Judge / evaluator model calls. Populated on latency_usage when the evaluator surfaces sample.latency_ms.")
   judge: "judge",
 
-  @doc("Reflection / optimization strategy model calls.")
+  @doc("Reflection / optimization strategy model calls. Populated on token_usage; NOT yet populated on latency_usage — reserved until a server-measured latency source is wired.")
   reflection: "reflection",
 }
 
@@ -480,10 +494,10 @@ model AgentOptimizationTokenUsageEntry {
   reasoning_tokens?: int64;
 }
 
-@doc("Aggregated wall-clock latency attributable to a single layer of the optimization loop.")
+@doc("Aggregated wall-clock latency attributable to a single layer of the optimization loop. Sourced from server-measured signals (Foundry's `sample.latency_ms` on the target rollout and evaluator responses). Layers without a server-measured source are omitted from the array rather than populated with client-observed timings that would conflate real model latency with local retry/network overhead.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model AgentOptimizationLatencyUsageEntry {
-  @doc("Which layer of the optimization loop generated these calls.")
+  @doc("Which layer of the optimization loop generated these calls. See `AgentOptimizationLayer` for per-layer population status.")
   layer: AgentOptimizationLayer;
 
   @doc("Model deployment name that served the calls.")
@@ -492,10 +506,10 @@ model AgentOptimizationLatencyUsageEntry {
   @doc("Average per-call latency in milliseconds.")
   avg_latency_ms: float64;
 
-  @doc("p50 (median) per-call latency in milliseconds.")
+  @doc("p50 (median) per-call latency in milliseconds. Omitted when the sample was too small to compute.")
   p50_latency_ms?: float64;
 
-  @doc("p95 per-call latency in milliseconds.")
+  @doc("p95 per-call latency in milliseconds. Omitted when the sample was too small to compute.")
   p95_latency_ms?: float64;
 
   @doc("Total number of calls contributing to this entry.")
@@ -514,11 +528,11 @@ model AgentOptimizationJobResult {
   @doc("All candidate IDs produced by this job, in evaluation order. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.")
   candidate_ids?: string[];
 
-  @doc("Aggregate token usage per layer × model.")
-  token_usage?: AgentOptimizationTokenUsageEntry[];
+  @doc("Aggregate token usage per layer × model. Always present; empty array when no calls were measured.")
+  token_usage: AgentOptimizationTokenUsageEntry[];
 
-  @doc("Aggregate latency per layer × model.")
-  latency_usage?: AgentOptimizationLatencyUsageEntry[];
+  @doc("Aggregate latency per layer × model, from server-measured sources only. Always present; empty array when no server-measured latency signals were surfaced (e.g. an early-failure run or an all-hosted judge run whose evaluators do not report latency_ms).")
+  latency_usage: AgentOptimizationLatencyUsageEntry[];
 }
 
 // ---------------------------------------------------------------------------
