@@ -148,8 +148,9 @@ model BudgetUsageListResult {
   asOf: utcDateTime;
 
   /** The maximum documented lag of this view, in seconds. */
-  @minValue(0)
-  stalenessBoundSeconds: int32;
+  @minValue(duration.fromISO("PT0S"))
+  @encode(DurationKnownEncoding.seconds, int32)
+  stalenessBoundSeconds: duration;
 
   /** The budget usage rows in this page. */
   @pageItems
