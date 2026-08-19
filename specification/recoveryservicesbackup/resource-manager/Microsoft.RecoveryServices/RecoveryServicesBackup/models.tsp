@@ -6602,6 +6602,163 @@ model IaasVMRestoreRequest extends RestoreRequest {
 }
 
 /**
+ * Base class for bulk restore requests. Workload-specific bulk restore requests are derived from this class.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request follows the existing RestoreRequest polymorphic contract."
+@added(Versions.v2026_08_31_preview)
+model BulkRestoreRequestBase extends RestoreRequest {
+  /**
+   * Type of this recovery.
+   */
+  recoveryType: RecoveryType;
+
+  /**
+   * Restore details for each protected item included in the bulk restore request.
+   */
+  @identifiers(#[])
+  protectedItemRestoreDetails: ProtectedItemRestoreDetailsBase[];
+}
+
+/**
+ * IaaS VM workload-specific bulk restore request.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses IaaSVM acronym in the discriminator value."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request intentionally extends the intermediate RestoreRequest subtype shared by bulk workloads."
+@added(Versions.v2026_08_31_preview)
+model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "IaaSVMBulkRestoreRequest";
+
+  /**
+   * This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.
+   */
+  targetResourceGroupId: string;
+
+  /**
+   * Fully qualified ARM ID of the storage account to which the VMs have to be restored.
+   */
+  storageAccountId: string;
+
+  /**
+   * Region in which the virtual machines are restored.
+   */
+  region?: string;
+
+  /**
+   * Managed Identity information required to access customer storage account.
+   */
+  identityInfo?: IdentityInfo;
+
+  /**
+   * Flag to denote if unmanaged disk VMs should be restored with managed disks.
+   */
+  restoreWithManagedDisks?: boolean;
+
+  /**
+   * This is the virtual network Id of the vnet that will be attached to the restored virtual machines.
+   */
+  virtualNetworkId?: string;
+
+  /**
+   * Subnet ID associated with the restored virtual machines.
+   */
+  subnetId?: string;
+
+  /**
+   * Target extended location where the VMs should be restored.
+   */
+  extendedLocation?: ExtendedLocation;
+
+  /**
+   * Prefix to use for target VM names created by the bulk restore.
+   */
+  targetVmNamePrefix?: string;
+
+  /**
+   * Specifies target network access settings for disks of VMs to be restored.
+   */
+  targetDiskNetworkAccessSettings?: TargetDiskNetworkAccessSettings;
+
+  /**
+   * DiskEncryptionSet's ID needed if the VMs need to be encrypted at rest during restore with customer managed key.
+   */
+  diskEncryptionSetId?: string;
+
+  /**
+   * Target zones where the VMs and their disks should be restored.
+   */
+  zones?: string[];
+
+  /**
+   * IaaS VM workload specific restore details for restores using managed identity.
+   */
+  identityBasedRestoreDetails?: IdentityBasedRestoreDetails;
+
+  /**
+   * Target subscription ID for the bulk restore operation.
+   */
+  targetSubscriptionId?: string;
+
+  /**
+   * Flag to skip pre-OLR backup before restore.
+   */
+  skipPreOLRBackup?: boolean;
+}
+
+/**
+ * Per protected item restore details for bulk restore.
+ */
+@added(Versions.v2026_08_31_preview)
+model ProtectedItemRestoreDetailsBase {
+  /**
+   * ID of the backup copy to be recovered.
+   */
+  recoveryPointId: string;
+
+  /**
+   * Fully qualified ARM ID of the VM which is being recovered.
+   */
+  sourceResourceId: string;
+
+  /**
+   * This is the complete ARM Id of the VM that will be created.
+   */
+  targetVirtualMachineId?: string;
+
+  /**
+   * DiskEncryptionSet's ID needed if the VM needs to be encrypted at rest during restore with customer managed key.
+   */
+  diskEncryptionSetId?: string;
+
+  /**
+   * Stores Secured VM Details.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses VM acronym in property name."
+  securedVMDetails?: SecuredVMDetails;
+}
+
+/**
+ * Request body for fetching recovery points for bulk restore.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses RP acronym in the request name."
+@added(Versions.v2026_08_31_preview)
+model FetchRPForBulkRestoreRequest {
+  /**
+   * Protected item IDs for which recovery points should be fetched.
+   */
+  protectedItemIds?: string[];
+}
+
+/**
+ * Recovery point discovery result keyed by protected item ID.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The service returns a dynamic map from protected item ID to RecoveryPointResource for bulk restore recovery point discovery."
+@added(Versions.v2026_08_31_preview)
+model BulkRestoreRecoveryPointsResponse is Record<RecoveryPointResource>;
+
+/**
  * Filters to list the jobs.
  */
 model JobQueryObject {

@@ -163,6 +163,21 @@
       "name": "RestoresFromCrossTenantVault"
     },
     {
+      "name": "BulkRestoresFromCrossTenantVault"
+    },
+    {
+      "name": "RecoveryPointsFromCrossTenantVault"
+    },
+    {
+      "name": "RecoveryPointOperationResultsFromCrossTenantVault"
+    },
+    {
+      "name": "BulkRestoreOperationStatusesFromCrossTenantVault"
+    },
+    {
+      "name": "BulkRestorePreCheckOperationStatusesFromCrossTenantVault"
+    },
+    {
       "name": "ProtectedItemOperationResultsFromCrossTenantVault"
     },
     {
@@ -173,6 +188,15 @@
     },
     {
       "name": "JobDetailsFromCrossTenantVault"
+    },
+    {
+      "name": "BackupChildJobsFromCrossTenantVault"
+    },
+    {
+      "name": "ChildJobDetailsFromCrossTenantVault"
+    },
+    {
+      "name": "BackupUsageSummariesFromCrossTenantVault"
     },
     {
       "name": "OperationFromCrossTenantVault"
@@ -673,6 +697,247 @@
             "$ref": "./examples/CrossTenantVaultMappingOperations/CreateCrossTenantVaultMapping.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/getRecoveryPoints": {
+      "post": {
+        "operationId": "RecoveryPointsFromCrossTenantVault_List",
+        "tags": [
+          "RecoveryPointsFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Triggers recovery point discovery for bulk restore from the source vault in a different tenant. This is an asynchronous operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the bulk restore operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FetchRPForBulkRestoreRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Recovery Points For Cross-Tenant Bulk Restore": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetRecoveryPointsForCrossTenantBulkRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/operationsStatus/{operationId}": {
+      "get": {
+        "operationId": "BulkRestoreOperationStatusesFromCrossTenantVault_Get",
+        "tags": [
+          "BulkRestoreOperationStatusesFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Fetches the status of a bulk restore operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID represents the bulk restore operation whose status needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Bulk Restore Operation Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantBulkRestoreOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/preCheckRestore": {
+      "post": {
+        "operationId": "BulkRestoresFromCrossTenantVault_PreCheck",
+        "tags": [
+          "BulkRestoresFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Triggers a bulk restore pre-check from the source vault in a different tenant. This is an asynchronous operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the bulk restore operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pre-Check Cross-Tenant Bulk Restore": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/PreCheckCrossTenantBulkRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
@@ -1208,6 +1473,244 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/recoveryPointOperationResults/{operationId}": {
+      "get": {
+        "operationId": "RecoveryPointOperationResultsFromCrossTenantVault_Get",
+        "tags": [
+          "RecoveryPointOperationResultsFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Fetches the result of a bulk recovery point discovery operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the recovery point discovery operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BulkRestoreRecoveryPointsResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Recovery Point Operation Result": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantRecoveryPointOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/restore": {
+      "post": {
+        "operationId": "BulkRestoresFromCrossTenantVault_Trigger",
+        "tags": [
+          "BulkRestoresFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Triggers a bulk restore from the source vault in a different tenant. This is an asynchronous operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the bulk restore operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger Cross-Tenant Bulk Restore": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/TriggerCrossTenantBulkRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/validateBulkRestoreOperationsStatus/{operationId}": {
+      "get": {
+        "operationId": "BulkRestorePreCheckOperationStatusesFromCrossTenantVault_Get",
+        "tags": [
+          "BulkRestorePreCheckOperationStatusesFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Fetches the status of a bulk restore pre-check operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID represents the bulk restore pre-check operation whose status needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Bulk Restore Pre-Check Operation Status": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantBulkRestorePreCheckOperationStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs": {
       "get": {
         "operationId": "BackupJobsFromCrossTenantVault_List",
@@ -1340,6 +1843,156 @@
         "x-ms-examples": {
           "Get Cross-Tenant Job Details": {
             "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantJobDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs/{jobName}/backupChildJobs": {
+      "get": {
+        "operationId": "BackupChildJobsFromCrossTenantVault_List",
+        "tags": [
+          "BackupChildJobsFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Provides a pageable list of cross-tenant backup child jobs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Name of the parent cross-tenant backup job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantJobResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cross-Tenant Backup Child Jobs": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ListCrossTenantBackupChildJobs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs/{jobName}/backupChildJobs/{childJobName}": {
+      "get": {
+        "operationId": "ChildJobDetailsFromCrossTenantVault_Get",
+        "tags": [
+          "ChildJobDetailsFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Gets extended information associated with a cross-tenant backup child job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Name of the parent cross-tenant backup job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childJobName",
+            "in": "path",
+            "description": "Name of the child job whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross-Tenant Backup Child Job Details": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantBackupChildJobDetails.json"
           }
         }
       }
@@ -1499,6 +2152,80 @@
           "final-state-schema": "#/definitions/ValidateOperationsResponse"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupUsageSummaries": {
+      "get": {
+        "operationId": "BackupUsageSummariesFromCrossTenantVault_List",
+        "tags": [
+          "BackupUsageSummariesFromCrossTenantVault",
+          "CrossTenant"
+        ],
+        "description": "Fetches backup management usage summaries from the source vault in a different tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupManagementUsageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cross-Tenant Backup Usage Summaries": {
+            "$ref": "./examples/CrossTenantVaultMappingOperations/ListCrossTenantBackupUsageSummaries.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperation": {
@@ -3443,6 +4170,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Configure Source Scan for Protected Item": {
+            "$ref": "./examples/AzureIaasVm/ConfigureSourceScan.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10389,6 +11121,40 @@
         }
       }
     },
+    "BulkRestoreRecoveryPointsResponse": {
+      "type": "object",
+      "description": "Recovery point discovery result keyed by protected item ID.",
+      "additionalProperties": {
+        "$ref": "#/definitions/RecoveryPointResource"
+      }
+    },
+    "BulkRestoreRequestBase": {
+      "type": "object",
+      "description": "Base class for bulk restore requests. Workload-specific bulk restore requests are derived from this class.",
+      "properties": {
+        "recoveryType": {
+          "$ref": "#/definitions/RecoveryType",
+          "description": "Type of this recovery."
+        },
+        "protectedItemRestoreDetails": {
+          "type": "array",
+          "description": "Restore details for each protected item included in the bulk restore request.",
+          "items": {
+            "$ref": "#/definitions/ProtectedItemRestoreDetailsBase"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "recoveryType",
+        "protectedItemRestoreDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreRequest"
+        }
+      ]
+    },
     "ClientDiscoveryDisplay": {
       "type": "object",
       "description": "Localized display information of an operation.",
@@ -11807,6 +12573,19 @@
         "featureType"
       ]
     },
+    "FetchRPForBulkRestoreRequest": {
+      "type": "object",
+      "description": "Request body for fetching recovery points for bulk restore.",
+      "properties": {
+        "protectedItemIds": {
+          "type": "array",
+          "description": "Protected item IDs for which recovery points should be fetched.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "FetchTieringCostInfoForRehydrationRequest": {
       "type": "object",
       "description": "Request parameters for fetching cost info of rehydration",
@@ -12280,6 +13059,96 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
+    },
+    "IaaSVMBulkRestoreRequest": {
+      "type": "object",
+      "description": "IaaS VM workload-specific bulk restore request.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "enum": [
+            "IaaSVMBulkRestoreRequest"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "targetResourceGroupId": {
+          "type": "string",
+          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "Fully qualified ARM ID of the storage account to which the VMs have to be restored."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region in which the virtual machines are restored."
+        },
+        "identityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Managed Identity information required to access customer storage account."
+        },
+        "restoreWithManagedDisks": {
+          "type": "boolean",
+          "description": "Flag to denote if unmanaged disk VMs should be restored with managed disks."
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "This is the virtual network Id of the vnet that will be attached to the restored virtual machines."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Subnet ID associated with the restored virtual machines."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Target extended location where the VMs should be restored."
+        },
+        "targetVmNamePrefix": {
+          "type": "string",
+          "description": "Prefix to use for target VM names created by the bulk restore."
+        },
+        "targetDiskNetworkAccessSettings": {
+          "$ref": "#/definitions/TargetDiskNetworkAccessSettings",
+          "description": "Specifies target network access settings for disks of VMs to be restored."
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "DiskEncryptionSet's ID needed if the VMs need to be encrypted at rest during restore with customer managed key."
+        },
+        "zones": {
+          "type": "array",
+          "description": "Target zones where the VMs and their disks should be restored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identityBasedRestoreDetails": {
+          "$ref": "#/definitions/IdentityBasedRestoreDetails",
+          "description": "IaaS VM workload specific restore details for restores using managed identity."
+        },
+        "targetSubscriptionId": {
+          "type": "string",
+          "description": "Target subscription ID for the bulk restore operation."
+        },
+        "skipPreOLRBackup": {
+          "type": "boolean",
+          "description": "Flag to skip pre-OLR backup before restore."
+        }
+      },
+      "required": [
+        "objectType",
+        "targetResourceGroupId",
+        "storageAccountId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BulkRestoreRequestBase"
+        }
+      ],
+      "x-ms-discriminator-value": "IaaSVMBulkRestoreRequest"
     },
     "IaaSVMContainer": {
       "type": "object",
@@ -14794,6 +15663,36 @@
         {
           "$ref": "#/definitions/ResourceList"
         }
+      ]
+    },
+    "ProtectedItemRestoreDetailsBase": {
+      "type": "object",
+      "description": "Per protected item restore details for bulk restore.",
+      "properties": {
+        "recoveryPointId": {
+          "type": "string",
+          "description": "ID of the backup copy to be recovered."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Fully qualified ARM ID of the VM which is being recovered."
+        },
+        "targetVirtualMachineId": {
+          "type": "string",
+          "description": "This is the complete ARM Id of the VM that will be created."
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "DiskEncryptionSet's ID needed if the VM needs to be encrypted at rest during restore with customer managed key."
+        },
+        "securedVMDetails": {
+          "$ref": "#/definitions/SecuredVMDetails",
+          "description": "Stores Secured VM Details."
+        }
+      },
+      "required": [
+        "recoveryPointId",
+        "sourceResourceId"
       ]
     },
     "ProtectedItemState": {
