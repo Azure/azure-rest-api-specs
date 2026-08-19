@@ -1021,6 +1021,120 @@ namespace Azure.AI.Projects;
   },
   "csharp"
 );
+
+@@alternateType(
+  OpenAI.ComputerAction,
+  {
+    identity: "OpenAI.Responses.ComputerCallAction",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.ImageGenTool.background,
+  {
+    identity: "OpenAI.ImageGenerationToolBackground",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  OpenAI.ImageGenTool.input_image_mask,
+  {
+    identity: "OpenAI.ImageGenToolInputImageMask",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  OpenAI.ImageGenTool.moderation,
+  {
+    identity: "OpenAI.ImageGenToolModeration",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  OpenAI.ImageGenTool.quality,
+  {
+    identity: "OpenAI.ImageGenToolQuality",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  OpenAI.ImageGenTool.size,
+  {
+    identity: "OpenAI.ImageGenToolSize",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+//-
+@@alternateType(
+  OpenAI.LogProb,
+  {
+    identity: "OpenAI.Responses.ResponseTokenLogProbabilityDetails",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.MCPListToolsTool,
+  {
+    identity: "OpenAI.Responses.McpToolDefinition",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.TopLogProb,
+  {
+    identity: "OpenAI.Responses.ResponseTokenTopLogProbabilityDetails",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.WebSearchActionFind,
+  {
+    identity: "OpenAI.Responses.WebSearchFindInPageAction",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.WebSearchActionSearch,
+  {
+    identity: "OpenAI.Responses.WebSearchSearchAction",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.WebSearchActionOpenPage,
+  {
+    identity: "OpenAI.Responses.WebSearchActionOpenPage",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
 // And now drop classes that aren't referenced, and aren't pruned.
 @@alternateType(
   OpenAI.InputTextContent,
@@ -1078,6 +1192,73 @@ namespace Azure.AI.Projects;
   },
   "csharp"
 );
+// Memory Stores search/update operations are the only Foundry operations that define
+// OpenAI.InputItem as inputs, which otherwise pulls in the entire OpenAI input-item
+// hierarchy (InputItem -> InputItemComputerToolCall -> ComputerAction -> ClickParam, etc.).
+// Map it to the OpenAI .NET library's ResponseItem, consistent with OutputItem above.
+@@alternateType(
+  OpenAI.InputItem,
+  {
+    identity: "OpenAI.Responses.ResponseItem",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.InputItemType,
+  {
+    identity: "OpenAI.Responses.ResponseItemKind",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+
+// Just disappear it.
+@@alternateType(
+  OpenAI.EasyInputMessage,
+  {
+    identity: "System.Object",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.FunctionToolParam,
+  {
+    identity: "OpenAI.FunctionToolParam",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.MCPToolRequireApproval,
+  {
+    identity: "OpenAI.Responses.McpToolCallApprovalPolicy",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.MCPToolFilter,
+  {
+    identity: "OpenAI.Responses.McpToolFilter",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.Tool,
+  {
+    identity: "OpenAI.Responses.ResponseTool",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
+  "csharp"
+);
 // GAP (FD-2): The Foundry service accepts `memory_limit` and `network_policy` on the code-interpreter
 // "auto" container config (see AutoCodeInterpreterToolParam in the compiled openapi3), but OpenAI's
 // .NET type `OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration` (2.12.0) models only
@@ -1085,6 +1266,34 @@ namespace Azure.AI.Projects;
 // omits these fields while openai-openapi-pr defines them, so no richer OpenAI type exists to map to.
 // Dropping to System.Object intentionally leaves the gap unfilled (file_ids and container-id selection are
 // unaffected). Revisit once the OpenAI .NET SDK models memory_limit/network_policy. See CHANGELOG 3.0.0-beta.1.
+@@alternateType(
+  OpenAI.CustomToolParam,
+  {
+    identity: "System.Object",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.CustomTextFormatParam,
+  {
+    identity: "System.Object",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.CustomToolParamFormat,
+  {
+    identity: "System.Object",
+  },
+  "csharp"
+);
+@@alternateType(
+  OpenAI.CustomGrammarFormatParam,
+  {
+    identity: "System.Object",
+  },
+  "csharp"
+);
 @@alternateType(
   OpenAI.AutoCodeInterpreterToolParam,
   {
