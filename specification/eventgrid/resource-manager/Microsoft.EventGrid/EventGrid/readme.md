@@ -37,6 +37,928 @@ These settings apply only when `--tag=package-2026-06-preview` is specified on t
 ```yaml $(tag) == 'package-2026-06-preview'
 input-file:
 - preview/2026-06-15-preview/EventGrid.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'eventSubscriptionName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'destination' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[3].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'eventSubscriptionName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'eventSubscriptionName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}"].get.responses[200].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventTypes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'verifiedPartnerName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/providers/Microsoft.EventGrid/verifiedPartners/{verifiedPartnerName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/providers/Microsoft.EventGrid/verifiedPartners/{verifiedPartnerName}"].get.responses[200].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/locations/{location}/topicTypes/{topicTypeName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'resourceTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'resourceTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventTypes"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"]
+
+  - code: PathResourceTypeNameCamelCase
+    reason: "Resource type naming must follow camel case. Path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}'"
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"].get.responses[200].schema
+
+  - code: PathForResourceAction
+    reason: "Path for 'post' method on a resource type MUST follow valid resource naming."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"]
+
+  - code: PathResourceTypeNameCamelCase
+    reason: "Resource type naming must follow camel case. Path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile'"
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"].post.responses[200].schema
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'parentName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code: EvenSegmentedPathForPutOperation
+    reason: "API path with PUT operation defined MUST have even number of segments (i.e. end in {resourceType}/{resourceName} segments)."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'parentName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses[201].schema
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'parentName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'parentName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'destination' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/listKeys"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/regenerateKey"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{domainTopicName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{domainTopicName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{domainTopicName}"].put.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'destination' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[6].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'domainName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/providers/Microsoft.EventGrid/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/locations/{location}/topicTypes/{topicTypeName}/eventSubscriptions"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.responses[202].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/caCertificates/{caCertificateName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/caCertificates/{caCertificateName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/caCertificates/{caCertificateName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/clientGroups/{clientGroupName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/clientGroups/{clientGroupName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/clientGroups/{clientGroupName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/clients/{clientName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/clients/{clientName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/clients/{clientName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/permissionBindings/{permissionBindingName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/permissionBindings/{permissionBindingName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/permissionBindings/{permissionBindingName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topicSpaces/{topicSpaceName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topicSpaces/{topicSpaceName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topicSpaces/{topicSpaceName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}"].patch.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}"].patch.responses[202].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[202].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'properties.defaultMaximumExpirationTimeInDays' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default"].patch.parameters[3].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default"].patch.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default"].patch.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default/authorizePartner"].post.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default/unauthorizePartner"].post.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].put.responses[201].schema
+
+  - code: PatchResponseCodes
+    reason: "Long-running PATCH operations must have responses with 200, 202 and default return codes. They also must not have other response codes."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch.responses[202].schema
+
+  - code: DeleteResponseCodes
+    reason: "Long-running delete operations must have responses with 202, 204 and default return codes. They also must have no other response codes."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].delete
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}/activate"].post.responses[200].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerNamespaceName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerNamespaceName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerNamespaceName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}"].put.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerNamespaceName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerNamespaceName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/listKeys"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerNamespaceName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/regenerateKey"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerRegistrationName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}"].put.responses[202].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/activate"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/activate"].post.responses[200].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/deactivate"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/deactivate"].post.responses[200].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'destination' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'partnerTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'systemTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}"].patch.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'systemTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'systemTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'destination' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'systemTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'systemTopicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicTypeName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"].put.responses[201].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].get.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[200].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].put.responses[201].schema
+
+  - code: ConsistentPatchProperties
+    reason: "The property 'destination' in the request body either not apppear in the resource model or has the wrong level."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.responses[201].schema
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/listKeys"]
+
+  - code: ResourceNameRestriction
+    reason: "The resource name parameter 'topicName' should be defined with a 'pattern' restriction."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/regenerateKey"]
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.FederatedIdentityCredentialInfo.properties.federatedClientId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.Partner.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerDestinationProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerRegistrationProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerTopicProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: DescriptionMustNotBeNodeName
+    reason: "Description must not match the name of the node it is supposed to describe. Node name:'1.3' Description:'1.3'"
+    from: EventGrid.json
+    where: $.definitions.TlsVersion.x-ms-enum.values[3].description
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.VerifiedPartnerProperties.properties.partnerRegistrationImmutableId.format
+
 ```
 
 ### Tag: package-2025-11-preview
