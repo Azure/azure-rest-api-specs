@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "version": "2021-10-01",
+    "billingAccountName": "{billingAccountName}",
+    "enrollmentAccountName": "789012",
+    "parameters": {
+      "targetEnrollmentAccountName": "345678",
+      "transferSubscriptionTenant": "false",
+      "billingSubscriptionId": "9dfd08c2-62a3-4d47-85bd-1cdba1408402"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "transferTrackingGuid": "22bd364f-9a7c-45bb-a5c1-3f56add77ab0",
+        "billingSubscriptionId": "9dfd08c2-62a3-4d47-85bd-1cdba1408402",
+        "status": "Initiated",
+        "errorCode": "None",
+        "errorMessage": "None",
+        "initiationDate": "2021-04-23 10:25:15.1666667"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationResults/transferBillingSubscriptions_f9bd2643-e786-4c93-9978-3c7f2d574580?api-version=2020-12-15-privatepreview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}
