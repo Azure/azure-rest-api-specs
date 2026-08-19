@@ -45194,7 +45194,7 @@ components:
         - value
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/BudgetCounterKeyType'
           description: The counter key dimension type.
         attribute:
           type: string
@@ -45211,6 +45211,16 @@ components:
             - active
             - unavailable
       description: The availability state of a budget counter key.
+    BudgetCounterKeyType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent
+            - identity
+            - session
+            - project
+      description: The type of a dimension in a resolved budget counter key.
     BudgetPeriod:
       anyOf:
         - type: string

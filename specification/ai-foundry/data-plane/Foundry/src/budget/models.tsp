@@ -18,6 +18,23 @@ union BudgetUsageDimension {
   Project: "project",
 }
 
+/** The type of a dimension in a resolved budget counter key. */
+union BudgetCounterKeyType {
+  string,
+
+  /** A counter key component identifying a Foundry agent. */
+  Agent: "agent",
+
+  /** A counter key component identifying an identity. */
+  Identity: "identity",
+
+  /** A counter key component identifying a session. */
+  Session: "session",
+
+  /** A counter key component identifying a Foundry project. */
+  Project: "project",
+}
+
 /** The unit used for budget values. */
 union BudgetUnit {
   string,
@@ -60,7 +77,7 @@ union BudgetCounterKeyState {
 /** A component of a potentially composite budget counter key. */
 model BudgetCounterKeyPart {
   /** The counter key dimension type. */
-  type: string;
+  type: BudgetCounterKeyType;
 
   /** The canonical attribute used to resolve the counter key. */
   attribute: string;
