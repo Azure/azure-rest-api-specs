@@ -108,23 +108,27 @@ model BudgetUsage {
   counterKeyState: BudgetCounterKeyState;
 }
 
-/** The query parameters for listing budget policy usage. */
-model BudgetUsageListOptions {
+/** The parameters for listing usage for a budget policy. */
+model BudgetUsageListRequest {
+  /** The stable name of the budget policy under the owning account. */
+  @path
+  policyName: string;
+
   /** The dimension used to select budget usage counters. */
   @query
   dimension: BudgetUsageDimension;
 
-  /** A specific resolved value of the selected dimension. */
+  /** A specific resolved value of the selected dimension. If omitted, the response reports every value of dimension that has consumption. */
   @query
   value?: string;
 
-  /** The caller-accepted maximum number of rows to return across all pages. */
+  /** The caller-accepted maximum number of rows to return across all pages. If omitted, the service defaults to returning all rows. */
   @query
   @minValue(1)
   @maxValue(1000)
   top?: int32;
 
-  /** The maximum number of rows to return in one page. */
+  /** The maximum number of rows to return in one page. If omitted, the service defaults to 100. */
   @query
   @minValue(1)
   @maxValue(1000)
@@ -133,15 +137,6 @@ model BudgetUsageListOptions {
   /** The opaque continuation token from a previous response. */
   @query
   skipToken?: string;
-}
-
-/** The parameters for listing usage for a budget policy. */
-model BudgetUsageListRequest {
-  /** The stable name of the budget policy under the owning account. */
-  @path
-  policyName: string;
-
-  ...BudgetUsageListOptions;
 }
 
 /** A page of budget policy usage. */

@@ -5685,19 +5685,19 @@
             "$ref": "#/components/parameters/BudgetUsageListRequest.policyName"
           },
           {
-            "$ref": "#/components/parameters/BudgetUsageListOptions.dimension"
+            "$ref": "#/components/parameters/BudgetUsageListRequest.dimension"
           },
           {
-            "$ref": "#/components/parameters/BudgetUsageListOptions.value"
+            "$ref": "#/components/parameters/BudgetUsageListRequest.value"
           },
           {
-            "$ref": "#/components/parameters/BudgetUsageListOptions.top"
+            "$ref": "#/components/parameters/BudgetUsageListRequest.top"
           },
           {
-            "$ref": "#/components/parameters/BudgetUsageListOptions.maxpagesize"
+            "$ref": "#/components/parameters/BudgetUsageListRequest.maxpagesize"
           },
           {
-            "$ref": "#/components/parameters/BudgetUsageListOptions.skipToken"
+            "$ref": "#/components/parameters/BudgetUsageListRequest.skipToken"
           },
           {
             "name": "api-version",
@@ -31809,7 +31809,7 @@
         },
         "explode": false
       },
-      "BudgetUsageListOptions.dimension": {
+      "BudgetUsageListRequest.dimension": {
         "name": "dimension",
         "in": "query",
         "required": true,
@@ -31819,50 +31819,17 @@
         },
         "explode": false
       },
-      "BudgetUsageListOptions.maxpagesize": {
+      "BudgetUsageListRequest.maxpagesize": {
         "name": "maxpagesize",
         "in": "query",
         "required": false,
-        "description": "The maximum number of rows to return in one page.",
+        "description": "The maximum number of rows to return in one page. If omitted, the service defaults to 100.",
         "schema": {
           "type": "integer",
           "format": "int32",
           "minimum": 1,
           "maximum": 1000,
           "default": 100
-        },
-        "explode": false
-      },
-      "BudgetUsageListOptions.skipToken": {
-        "name": "skipToken",
-        "in": "query",
-        "required": false,
-        "description": "The opaque continuation token from a previous response.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
-      "BudgetUsageListOptions.top": {
-        "name": "top",
-        "in": "query",
-        "required": false,
-        "description": "The caller-accepted maximum number of rows to return across all pages.",
-        "schema": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "explode": false
-      },
-      "BudgetUsageListOptions.value": {
-        "name": "value",
-        "in": "query",
-        "required": false,
-        "description": "A specific resolved value of the selected dimension.",
-        "schema": {
-          "type": "string"
         },
         "explode": false
       },
@@ -31874,6 +31841,39 @@
         "schema": {
           "type": "string"
         }
+      },
+      "BudgetUsageListRequest.skipToken": {
+        "name": "skipToken",
+        "in": "query",
+        "required": false,
+        "description": "The opaque continuation token from a previous response.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "BudgetUsageListRequest.top": {
+        "name": "top",
+        "in": "query",
+        "required": false,
+        "description": "The caller-accepted maximum number of rows to return across all pages. If omitted, the service defaults to returning all rows.",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "explode": false
+      },
+      "BudgetUsageListRequest.value": {
+        "name": "value",
+        "in": "query",
+        "required": false,
+        "description": "A specific resolved value of the selected dimension. If omitted, the response reports every value of dimension that has consumption.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
       },
       "CreateOrUpdateRoutineParameters.routine_name": {
         "name": "routine_name",
