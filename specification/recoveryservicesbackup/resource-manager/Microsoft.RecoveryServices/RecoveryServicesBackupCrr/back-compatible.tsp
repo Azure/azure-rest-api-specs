@@ -29,12 +29,15 @@ using Microsoft.RecoveryServices;
 
 
 @@clientLocation(CrossRegionRestoreOperationGroup.trigger, "CrossRegionRestore");
+@@clientName(CrossRegionRestoreOperationGroup.trigger::parameters.body, "parameters");
 
 
 @@clientLocation(BackupCrrJobDetailsOperationGroup.get, "BackupCrrJobDetails");
+@@clientName(BackupCrrJobDetailsOperationGroup.get::parameters.body, "parameters");
 
 
 @@clientLocation(BackupCrrJobsOperationGroup.list, "BackupCrrJobs");
+@@clientName(BackupCrrJobsOperationGroup.list::parameters.body, "parameters");
 
 
 @@clientLocation(CrrOperationResultsOperationGroup.get, "CrrOperationResults");
