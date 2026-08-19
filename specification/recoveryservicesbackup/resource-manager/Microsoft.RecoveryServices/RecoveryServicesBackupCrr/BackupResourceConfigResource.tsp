@@ -37,6 +37,7 @@ interface BackupResourceConfigResources {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("BackupResourceStorageConfigs_Get")
 get is ArmResourceRead<BackupResourceConfigResource
+        , Error = NewErrorResponse
         >;
 
 
@@ -46,7 +47,7 @@ get is ArmResourceRead<BackupResourceConfigResource
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("BackupResourceStorageConfigs_Update")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-update is ArmResourceCreateOrReplaceSync<BackupResourceConfigResource, Response = ArmResourceUpdatedResponse<BackupResourceConfigResource>
+update is ArmResourceCreateOrReplaceSync<BackupResourceConfigResource, Response = ArmResourceUpdatedResponse<BackupResourceConfigResource>, Error = NewErrorResponse
         >;
 
 
@@ -56,7 +57,7 @@ update is ArmResourceCreateOrReplaceSync<BackupResourceConfigResource, Response 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("BackupResourceStorageConfigs_patch")
 @patch(#{ implicitOptionality: false })
-patch is ArmCustomPatchSync<BackupResourceConfigResource, PatchModel = BackupResourceConfigResource, Response = ArmNoContentResponse
+patch is ArmCustomPatchSync<BackupResourceConfigResource, PatchModel = BackupResourceConfigResource, Response = ArmNoContentResponse, Error = NewErrorResponse
         >;
 
 

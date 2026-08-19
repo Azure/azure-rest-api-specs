@@ -41,7 +41,7 @@ list is ArmProviderActionSync<Response = BackupManagementUsageList,Scope = Exten
 * skipToken Filter.
 */
 @query("$skipToken")
-"$skipToken"?: string}>
+"$skipToken"?: string},Error = NewErrorResponse>
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -65,7 +65,7 @@ get is ArmProviderActionSync<Response = AADPropertiesResource,Scope = Subscripti
 * OData filter options.
 */
 @query("$filter")
-"$filter"?: string}>
+"$filter"?: string},Error = NewErrorResponse>
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -85,7 +85,7 @@ trigger is ArmProviderActionAsync<Request = CrossRegionRestoreRequest,Response =
 */
 @path
 @segment("locations")
-"azureRegion": string},LroHeaders = ArmAsyncOperationHeader<FinalResult = void> & Azure.Core.Foundations.RetryAfterHeader>
+"azureRegion": string},LroHeaders = ArmAsyncOperationHeader<FinalResult = void> & Azure.Core.Foundations.RetryAfterHeader,Error = NewErrorResponse>
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -104,7 +104,7 @@ get is ArmProviderActionSync<Request = CrrJobRequest,Response = JobResource,Scop
 */
 @path
 @segment("locations")
-"azureRegion": string}>
+"azureRegion": string},Error = NewErrorResponse>
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -131,7 +131,7 @@ list is ArmProviderActionSync<Request = CrrJobRequest,Response = JobResourceList
 * skipToken Filter.
 */
 @query("$skipToken")
-"$skipToken"?: string}>
+"$skipToken"?: string},Error = NewErrorResponse>
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -153,7 +153,7 @@ interface CrrOperationResultsOperationGroup {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @path
 "operationId": string
-        ): | OkResponse|ArmAcceptedResponse | ErrorResponse;
+        ): | OkResponse|ArmAcceptedResponse | NewErrorResponse;
 
 
 
@@ -178,7 +178,7 @@ interface CrrOperationStatusOperationGroup {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @path
 "operationId": string
-        ): ArmResponse<OperationStatus> | ErrorResponse;
+        ): ArmResponse<OperationStatus> | NewErrorResponse;
 
 
 
@@ -208,13 +208,18 @@ list is ArmProviderActionSync<Response = ProtectedItemResourceList,Scope = Exten
 * skipToken Filter.
 */
 @query("$skipToken")
-"$skipToken"?: string}>
+"$skipToken"?: string},Error = NewErrorResponse>
 }
 
 @@TypeSpec.OpenAPI.extension(
   BackupUsageSummariesCRROperationGroup.list,
   "x-ms-odata",
   "#/definitions/BMSBackupSummariesQueryObject"
+);
+@@TypeSpec.OpenAPI.extension(
+  AadPropertiesOperationGroup.get,
+  "x-ms-odata",
+  "#/definitions/BMSAADPropertiesQueryObject"
 );
 @@TypeSpec.OpenAPI.extension(
   BackupUsageSummariesCRROperationGroup.list,

@@ -2455,7 +2455,8 @@ model BEKDetails {
 /**
 * Filters to list backup copies.
 */
-model BmsrpQueryObject {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the historical Swagger definition name"
+model BMSRPQueryObject {
 /**
 * Backup copies created after this time.
 */
@@ -3114,7 +3115,8 @@ model InstantItemRecoveryTarget {
 /**
 * Filters to list backup items.
 */
-model BmsaadPropertiesQueryObject {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the historical Swagger definition name"
+model BMSAADPropertiesQueryObject {
 /**
 * Backup management type for the backed up item.
 */

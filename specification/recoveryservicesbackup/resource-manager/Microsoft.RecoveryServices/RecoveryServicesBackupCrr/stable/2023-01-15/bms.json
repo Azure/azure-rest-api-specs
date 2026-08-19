@@ -114,7 +114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -122,7 +122,8 @@
           "Get AAD Properties for authentication in the third region": {
             "$ref": "./examples/AzureIaasVm/BackupAadProperties_Get.json"
           }
-        }
+        },
+        "x-ms-odata": "#/definitions/BMSAADPropertiesQueryObject"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore": {
@@ -178,7 +179,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -238,7 +239,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -305,7 +306,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -364,7 +365,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -412,7 +413,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -486,7 +487,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -574,7 +575,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -648,7 +649,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -712,7 +713,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -776,7 +777,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -829,7 +830,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -882,7 +883,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -932,7 +933,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -2054,6 +2055,72 @@
         }
       }
     },
+    "BMSAADPropertiesQueryObject": {
+      "type": "object",
+      "description": "Filters to list backup items.",
+      "properties": {
+        "backupManagementType": {
+          "$ref": "#/definitions/BackupManagementType",
+          "description": "Backup management type for the backed up item."
+        }
+      }
+    },
+    "BMSBackupSummariesQueryObject": {
+      "type": "object",
+      "description": "Query parameters to fetch backup summaries.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "Backup management type for this container."
+        }
+      }
+    },
+    "BMSRPQueryObject": {
+      "type": "object",
+      "description": "Filters to list backup copies.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Backup copies created after this time."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Backup copies created before this time."
+        },
+        "restorePointQueryType": {
+          "$ref": "#/definitions/RestorePointQueryType",
+          "description": "RestorePoint type"
+        },
+        "extendedInfo": {
+          "type": "boolean",
+          "description": "In Get Recovery Point, it tells whether extended information about recovery point is asked."
+        },
+        "moveReadyRPOnly": {
+          "type": "boolean",
+          "description": "Whether the RP can be moved to another tier"
+        },
+        "includeSoftDeletedRP": {
+          "type": "boolean",
+          "description": "Flag to indicate whether Soft Deleted RPs should be included/excluded from result."
+        }
+      }
+    },
+    "BackupFabricResource": {
+      "type": "object",
+      "description": "Backup Fabric virtual resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Fabric name associated with the container.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "BackupManagementType": {
       "type": "string",
       "description": "Backup management type to execute the current job.",
@@ -2992,6 +3059,42 @@
       ],
       "x-ms-discriminator-value": "GenericRecoveryPoint"
     },
+    "HealthState": {
+      "type": "string",
+      "description": "Health State for the backed up item.",
+      "enum": [
+        "Passed",
+        "ActionRequired",
+        "ActionSuggested",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "Passed"
+          },
+          {
+            "name": "ActionRequired",
+            "value": "ActionRequired",
+            "description": "ActionRequired"
+          },
+          {
+            "name": "ActionSuggested",
+            "value": "ActionSuggested",
+            "description": "ActionSuggested"
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          }
+        ]
+      }
+    },
     "HealthStatus": {
       "type": "string",
       "description": "backups running status for this backup item.",
@@ -3303,6 +3406,116 @@
         "jobType"
       ]
     },
+    "JobOperationType": {
+      "type": "string",
+      "description": "Type of operation.",
+      "enum": [
+        "Invalid",
+        "Register",
+        "UnRegister",
+        "ConfigureBackup",
+        "Backup",
+        "Restore",
+        "DisableBackup",
+        "DeleteBackupData",
+        "CrossRegionRestore",
+        "Undelete",
+        "UpdateCustomerManagedKey"
+      ],
+      "x-ms-enum": {
+        "name": "JobOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          },
+          {
+            "name": "Register",
+            "value": "Register",
+            "description": "Register"
+          },
+          {
+            "name": "UnRegister",
+            "value": "UnRegister",
+            "description": "UnRegister"
+          },
+          {
+            "name": "ConfigureBackup",
+            "value": "ConfigureBackup",
+            "description": "ConfigureBackup"
+          },
+          {
+            "name": "Backup",
+            "value": "Backup",
+            "description": "Backup"
+          },
+          {
+            "name": "Restore",
+            "value": "Restore",
+            "description": "Restore"
+          },
+          {
+            "name": "DisableBackup",
+            "value": "DisableBackup",
+            "description": "DisableBackup"
+          },
+          {
+            "name": "DeleteBackupData",
+            "value": "DeleteBackupData",
+            "description": "DeleteBackupData"
+          },
+          {
+            "name": "CrossRegionRestore",
+            "value": "CrossRegionRestore",
+            "description": "CrossRegionRestore"
+          },
+          {
+            "name": "Undelete",
+            "value": "Undelete",
+            "description": "Undelete"
+          },
+          {
+            "name": "UpdateCustomerManagedKey",
+            "value": "UpdateCustomerManagedKey",
+            "description": "UpdateCustomerManagedKey"
+          }
+        ]
+      }
+    },
+    "JobQueryObject": {
+      "type": "object",
+      "description": "Filters to list the jobs.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of the job."
+        },
+        "backupManagementType": {
+          "$ref": "#/definitions/BackupManagementType",
+          "description": "Type of backup management for the job."
+        },
+        "operation": {
+          "$ref": "#/definitions/JobOperationType",
+          "description": "Type of operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "JobID represents the job uniquely."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Job has started at this time. Value is in UTC."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Job has ended at this time. Value is in UTC."
+        }
+      }
+    },
     "JobResource": {
       "type": "object",
       "description": "Defines workload agnostic properties for a job.",
@@ -3335,6 +3548,60 @@
           "$ref": "#/definitions/ResourceList"
         }
       ]
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Status of the job.",
+      "enum": [
+        "Invalid",
+        "InProgress",
+        "Completed",
+        "Failed",
+        "CompletedWithWarnings",
+        "Cancelled",
+        "Cancelling"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "CompletedWithWarnings"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Cancelled"
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "Cancelling"
+          }
+        ]
+      }
     },
     "JobSupportedAction": {
       "type": "string",
@@ -3752,6 +4019,53 @@
         }
       }
     },
+    "NewErrorResponse": {
+      "type": "object",
+      "description": "The resource management error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/NewErrorResponseError",
+          "description": "The error object."
+        }
+      }
+    },
+    "NewErrorResponseError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/NewErrorResponse"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "OperationStatus": {
       "type": "object",
       "description": "Operation status.",
@@ -4099,6 +4413,48 @@
         ]
       }
     },
+    "ProtectedItemQueryObject": {
+      "type": "object",
+      "description": "Filters to list backup items.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health State for the backed up item."
+        },
+        "backupManagementType": {
+          "$ref": "#/definitions/BackupManagementType",
+          "description": "Backup management type for the backed up item."
+        },
+        "itemType": {
+          "$ref": "#/definitions/DataSourceType",
+          "description": "Type of workload this item represents."
+        },
+        "policyName": {
+          "type": "string",
+          "description": "Backup policy name associated with the backup item."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Name of the container."
+        },
+        "backupEngineName": {
+          "type": "string",
+          "description": "Backup Engine name"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of protected item"
+        },
+        "fabricName": {
+          "type": "string",
+          "description": "Name of the fabric."
+        },
+        "backupSetName": {
+          "type": "string",
+          "description": "Name of the backup set."
+        }
+      }
+    },
     "ProtectedItemResource": {
       "type": "object",
       "description": "Base class for backup items.",
@@ -4179,6 +4535,34 @@
           }
         ]
       }
+    },
+    "ProtectedItemVirtualResource": {
+      "type": "object",
+      "description": "Protected Item virtual resource. Routing parent for recovery points.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Protected Item.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ProtectionContainerResource": {
+      "type": "object",
+      "description": "Protection Container virtual resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the container.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ProtectionState": {
       "type": "string",
@@ -4301,6 +4685,10 @@
           }
         }
       }
+    },
+    "RecoveryPointGetAccessTokenBadRequest": {
+      "type": "object",
+      "description": "BadRequest"
     },
     "RecoveryPointMoveReadinessInfo": {
       "type": "object",
@@ -4666,6 +5054,60 @@
         }
       }
     },
+    "RestorePointQueryType": {
+      "type": "string",
+      "description": "RestorePoint type",
+      "enum": [
+        "Invalid",
+        "Full",
+        "Log",
+        "Differential",
+        "FullAndDifferential",
+        "All",
+        "Incremental"
+      ],
+      "x-ms-enum": {
+        "name": "RestorePointQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          },
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "Full"
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Log"
+          },
+          {
+            "name": "Differential",
+            "value": "Differential",
+            "description": "Differential"
+          },
+          {
+            "name": "FullAndDifferential",
+            "value": "FullAndDifferential",
+            "description": "FullAndDifferential"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
+          },
+          {
+            "name": "Incremental",
+            "value": "Incremental",
+            "description": "Incremental"
+          }
+        ]
+      }
+    },
     "RestorePointType": {
       "type": "string",
       "description": "Type of restore point",
@@ -4930,6 +5372,36 @@
         }
       }
     },
+    "Type": {
+      "type": "string",
+      "description": "Backup management type for this container.",
+      "enum": [
+        "Invalid",
+        "BackupProtectedItemCountSummary",
+        "BackupProtectionContainerCountSummary"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          },
+          {
+            "name": "BackupProtectedItemCountSummary",
+            "value": "BackupProtectedItemCountSummary",
+            "description": "BackupProtectedItemCountSummary"
+          },
+          {
+            "name": "BackupProtectionContainerCountSummary",
+            "value": "BackupProtectionContainerCountSummary",
+            "description": "BackupProtectionContainerCountSummary"
+          }
+        ]
+      }
+    },
     "UsagesUnit": {
       "type": "string",
       "description": "Unit of the usage.",
@@ -4977,6 +5449,20 @@
           }
         ]
       }
+    },
+    "VaultResource": {
+      "type": "object",
+      "description": "Vault resource in Recovery Service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the recovery services vault.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "WorkloadCrrAccessToken": {
       "type": "object",

@@ -36,6 +36,7 @@ interface RecoveryPointResources {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("RecoveryPointsCrr_Get")
 get is ArmResourceRead<RecoveryPointResource
+        , Error = NewErrorResponse
         >;
 
 
@@ -77,7 +78,7 @@ list(
    * OData filter options.
    */
   @query("$filter") "$filter"?: string,
-): ArmResponse<RecoveryPointResourceList> | ErrorResponse;
+): ArmResponse<RecoveryPointResourceList> | NewErrorResponse;
 
 
 }
@@ -104,7 +105,8 @@ interface RecoveryPointGetAccessToken {
 getAccessToken is ArmResourceActionSync<
   RecoveryPointResource,
   AADPropertiesResource,
-  ArmResponse<CrrAccessTokenResource> | RecoveryPointGetAccessTokenBadRequest
+  ArmResponse<CrrAccessTokenResource> | RecoveryPointGetAccessTokenBadRequest,
+  Error = NewErrorResponse
 >;
 
 
