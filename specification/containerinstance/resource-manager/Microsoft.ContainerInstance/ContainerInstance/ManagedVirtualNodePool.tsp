@@ -85,44 +85,19 @@ model ManagedVirtualNodePoolProperties {
  */
 @added(Versions.v2026_09_01_preview)
 model ManagedVirtualNodePool
-  is TrackedResource<ManagedVirtualNodePoolProperties> {
-  ...ResourceNameParameter<
-    Resource = ManagedVirtualNodePool,
-    KeyName = "managedVirtualNodePoolName",
-    SegmentName = "managedVirtualNodePools",
-    NamePattern = "^[a-zA-Z0-9][-a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
-  >;
-}
-
-/**
- * Updatable resource-specific properties for `ManagedVirtualNodePool` PATCH.
- */
-@added(Versions.v2026_09_01_preview)
-model ManagedVirtualNodePoolPatchProperties {
-  /**
-   * Minimum number of nodes maintained by the pool.
-   */
-  @minValue(0)
-  minNodes?: int32;
+  is Azure.ResourceManager.TrackedResource<ManagedVirtualNodePoolProperties> {
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   /**
-   * Maximum number of nodes the pool can scale to.
+   * The name of the managed virtual node pool.
    */
-  @minValue(1)
-  maxNodes?: int32;
-}
-
-/**
- * PATCH envelope for `ManagedVirtualNodePool`. Only tags and a limited set of properties are updatable.
- */
-@added(Versions.v2026_09_01_preview)
-model ManagedVirtualNodePoolUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * Resource-specific properties that can be updated via PATCH.
-   */
-  properties?: ManagedVirtualNodePoolPatchProperties;
+  @maxLength(63)
+  @minLength(1)
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  @key("managedVirtualNodePoolName")
+  @segment("managedVirtualNodePools")
+  @path
+  name: string;
 }
 
 @added(Versions.v2026_09_01_preview)
@@ -142,48 +117,18 @@ interface ManagedVirtualNodePools {
   >;
 
   /**
-   * Update a managed virtual node pool. Only tags and a limited set of properties can be updated.
-   */
-  update is ArmCustomPatchAsync<
-    ManagedVirtualNodePool,
-    PatchModel = ManagedVirtualNodePoolUpdate,
-    Error = CloudError
-  >;
-
-  /**
    * Delete a managed virtual node pool.
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedVirtualNodePool,
     Error = CloudError
   >;
-
-  /**
-   * List managed virtual node pools within a resource group.
-   */
-  listByResourceGroup is ArmResourceListByParent<
-    ManagedVirtualNodePool,
-    Error = CloudError
-  >;
-
-  /**
-   * List managed virtual node pools within a subscription.
-   */
-  listBySubscription is ArmListBySubscription<
-    ManagedVirtualNodePool,
-    Error = CloudError
-  >;
 }
 
-@@maxLength(ManagedVirtualNodePool.name, 63);
-@@minLength(ManagedVirtualNodePool.name, 1);
 @@doc(ManagedVirtualNodePool.name, "The name of the managed virtual node pool.");
 @@doc(ManagedVirtualNodePool.properties,
   "The properties of the managed virtual node pool."
 );
 @@doc(ManagedVirtualNodePools.createOrUpdate::parameters.resource,
   "The managed virtual node pool to create or update."
-);
-@@doc(ManagedVirtualNodePools.update::parameters.properties,
-  "The managed virtual node pool patch object."
 );
