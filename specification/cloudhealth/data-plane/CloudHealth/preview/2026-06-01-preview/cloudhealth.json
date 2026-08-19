@@ -1,0 +1,1705 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Health Models Data Plane",
+    "version": "2026-06-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://data.cloudhealth.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://data.cloudhealth.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/api": {
+      "get": {
+        "operationId": "Model_Status",
+        "description": "Return whether the health model exists and its current health state.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryEchoResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get health model status": {
+            "$ref": "./examples/Model_Status.json"
+          }
+        }
+      }
+    },
+    "/api/entities/{entityName}": {
+      "get": {
+        "operationId": "Entity_Get",
+        "description": "Return the current diagnostic snapshot for an entity.",
+        "parameters": [
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The entity to return a diagnostic snapshot for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticSnapshot"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/NotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get entity diagnostic snapshot": {
+            "$ref": "./examples/Entity_Get.json"
+          }
+        }
+      }
+    },
+    "/api/entities/{entityName}/dataAnnotations": {
+      "get": {
+        "operationId": "DataAnnotations_List",
+        "description": "Return the data annotations recorded for an entity, newest first.",
+        "parameters": [
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The entity to return data annotations for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "startAt",
+            "in": "query",
+            "description": "Start of the requested window (UTC); defaults to 24 hours before now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endAt",
+            "in": "query",
+            "description": "End of the requested window (UTC); defaults to now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of annotations to return; defaults to 100 when omitted.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "nextMarker",
+            "in": "query",
+            "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation.",
+            "required": false,
+            "type": "string",
+            "maxLength": 4096
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataAnnotationsResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List entity data annotations": {
+            "$ref": "./examples/DataAnnotations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/api/entities/{entityName}/healthReports": {
+      "post": {
+        "operationId": "HealthReportIngestion_IngestHealthReport",
+        "description": "Ingest a health report for a specific signal on an entity.",
+        "parameters": [
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity that the health report targets.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Health report payload. Must not exceed 32 KiB (32768 bytes).",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HealthReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Health-report ingestion request was accepted.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "413": {
+            "description": "The health-report ingestion request payload exceeded the size limit of 32 KiB (32768 bytes).",
+            "schema": {
+              "$ref": "#/definitions/PayloadTooLargeResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "415": {
+            "description": "Returned when the ingestion request's Content-Type is not supported.",
+            "schema": {
+              "$ref": "#/definitions/UnsupportedMediaTypeResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many health-report ingestion requests were received.",
+            "schema": {
+              "$ref": "#/definitions/TooManyRequestsResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Health-report ingestion service is temporarily unavailable; the client may retry after the given delay.",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailableResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ingest an entity health report": {
+            "$ref": "./examples/HealthReportIngestion_IngestHealthReport.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/api/entities/{entityName}/healthStateHistory": {
+      "get": {
+        "operationId": "EntityHealthStateHistory_List",
+        "description": "Return the health-state periods active during the requested window for an entity.",
+        "parameters": [
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The entity to return health-state history for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "startAt",
+            "in": "query",
+            "description": "Start of the requested window (UTC); defaults to 24 hours before now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endAt",
+            "in": "query",
+            "description": "End of the requested window (UTC); defaults to now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityHealthStateHistoryResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List entity health-state history": {
+            "$ref": "./examples/EntityHealthStateHistory_List.json"
+          }
+        }
+      }
+    },
+    "/api/entities/{entityName}/signals/{signalName}/history": {
+      "get": {
+        "operationId": "SignalHistory_List",
+        "description": "Return the data points recorded for an entity's signal, newest first.",
+        "parameters": [
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The entity that owns the signal to return history for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "signalName",
+            "in": "path",
+            "description": "The signal to return history for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "startAt",
+            "in": "query",
+            "description": "Start of the requested window (UTC); defaults to 24 hours before now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endAt",
+            "in": "query",
+            "description": "End of the requested window (UTC); defaults to now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of data points to return; defaults to 1000 when omitted.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "nextMarker",
+            "in": "query",
+            "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation.",
+            "required": false,
+            "type": "string",
+            "maxLength": 4096
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SignalDataPointHistoryResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List entity signal history": {
+            "$ref": "./examples/SignalHistory_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/api/entities/{entityName}/transitions": {
+      "get": {
+        "operationId": "EntityTransitionHistory_List",
+        "description": "Return the health-state transitions recorded for an entity, newest first.",
+        "parameters": [
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The entity to return health-state transitions for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "startAt",
+            "in": "query",
+            "description": "Start of the requested window (UTC); defaults to 24 hours before now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endAt",
+            "in": "query",
+            "description": "End of the requested window (UTC); defaults to now when omitted.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of transitions to return; defaults to 1000 when omitted.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "nextMarker",
+            "in": "query",
+            "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation.",
+            "required": false,
+            "type": "string",
+            "maxLength": 4096
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityTransitionHistoryResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List entity health-state transition history": {
+            "$ref": "./examples/EntityTransitionHistory_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AggregationType": {
+      "type": "string",
+      "description": "Strategy used to combine a set of health inputs. The service emits documented values; the open string form lets clients retain future named values.",
+      "enum": [
+        "WorstOf",
+        "BestOf",
+        "MinHealthy",
+        "MaxNotHealthy"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorstOf",
+            "value": "WorstOf",
+            "description": "Select the greatest-severity member health state, where severity order is Unknown, then Healthy, then Degraded, then Unhealthy."
+          },
+          {
+            "name": "BestOf",
+            "value": "BestOf",
+            "description": "Select the least-severe non-Unknown member health state; Unknown is always excluded."
+          },
+          {
+            "name": "MinHealthy",
+            "value": "MinHealthy",
+            "description": "Apply Healthy-count/percentage thresholds over included inputs: at or below the unhealthy threshold yields Unhealthy; otherwise at or below the degraded threshold yields Degraded; otherwise Healthy."
+          },
+          {
+            "name": "MaxNotHealthy",
+            "value": "MaxNotHealthy",
+            "description": "Apply non-Healthy-count/percentage thresholds over included inputs: at or above the unhealthy threshold yields Unhealthy; otherwise at or above the degraded threshold yields Degraded; otherwise Healthy."
+          }
+        ]
+      }
+    },
+    "AggregationUnit": {
+      "type": "string",
+      "description": "Unit applied to threshold-bearing aggregation strategies. The service emits documented values; the open string form lets clients retain future named values.",
+      "enum": [
+        "Absolute",
+        "Percentage"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Absolute",
+            "value": "Absolute",
+            "description": "Thresholds are interpreted as absolute counts of included inputs."
+          },
+          {
+            "name": "Percentage",
+            "value": "Percentage",
+            "description": "Thresholds are interpreted as percentages of included inputs."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BadRequestResponse": {
+      "type": "object",
+      "description": "Returned when the request is malformed, or a query parameter is invalid.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "DataAnnotation": {
+      "type": "object",
+      "description": "A data annotation recorded for an entity.",
+      "properties": {
+        "annotationId": {
+          "type": "string",
+          "description": "Unique identifier of the annotation."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the annotation was created (UTC)."
+        },
+        "description": {
+          "$ref": "#/definitions/string4096",
+          "description": "Description of the annotation; omitted when none is recorded."
+        },
+        "annotationDetails": {
+          "type": "object",
+          "description": "Additional details for the annotation; omitted when none is recorded.",
+          "additionalProperties": {
+            "$ref": "#/definitions/string4096"
+          }
+        }
+      },
+      "required": [
+        "annotationId",
+        "createdAt"
+      ]
+    },
+    "DataAnnotationsResponse": {
+      "type": "object",
+      "description": "Data annotations recorded for an entity, newest first.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The data annotations, ordered newest first.",
+          "items": {
+            "$ref": "#/definitions/DataAnnotation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The full URI to fetch the next page of results; absent when there is no next page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityDiagnosticAggregationConfiguration": {
+      "type": "object",
+      "description": "Aggregation configuration used by diagnostics for a dependency or signal group.",
+      "properties": {
+        "aggregationType": {
+          "$ref": "#/definitions/AggregationType",
+          "description": "Aggregation algorithm used to combine member health states."
+        },
+        "degradedThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Optional degraded threshold used when the aggregation algorithm supports thresholds."
+        },
+        "unhealthyThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Optional unhealthy threshold used when the aggregation algorithm supports thresholds."
+        },
+        "unit": {
+          "$ref": "#/definitions/AggregationUnit",
+          "description": "Optional threshold unit used when thresholds are provided."
+        },
+        "ignoreUnknown": {
+          "type": "boolean",
+          "description": "Unknown-input handling flag for threshold strategies: inert for WorstOf, always ignored for BestOf, and for MinHealthy/MaxNotHealthy controls Unknown inclusion in counts/percentages (and their denominator)."
+        }
+      },
+      "required": [
+        "aggregationType",
+        "ignoreUnknown"
+      ]
+    },
+    "EntityDiagnosticAggregationResolution": {
+      "type": "string",
+      "description": "How the effective aggregation configuration was resolved for diagnostics.",
+      "enum": [
+        "ImplicitDefault",
+        "Configured",
+        "Fallback"
+      ],
+      "x-ms-enum": {
+        "name": "EntityDiagnosticAggregationResolution",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ImplicitDefault",
+            "value": "ImplicitDefault",
+            "description": "The service applied an implicit default because no explicit configuration was present."
+          },
+          {
+            "name": "Configured",
+            "value": "Configured",
+            "description": "The service used an explicitly configured aggregation."
+          },
+          {
+            "name": "Fallback",
+            "value": "Fallback",
+            "description": "The service used a fallback aggregation because configuration could not be applied directly."
+          }
+        ]
+      }
+    },
+    "EntityDiagnosticDefaultErrorResponse": {
+      "type": "object",
+      "description": "Returned when entity diagnostics fail for reasons outside the explicit user-fault contract.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "EntityDiagnosticEffectiveAggregation": {
+      "type": "object",
+      "description": "Effective aggregation details applied by the service.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/EntityDiagnosticAggregationConfiguration",
+          "description": "Aggregation configuration that was applied."
+        },
+        "resolution": {
+          "$ref": "#/definitions/EntityDiagnosticAggregationResolution",
+          "description": "How the effective aggregation was resolved."
+        }
+      },
+      "required": [
+        "configuration",
+        "resolution"
+      ]
+    },
+    "EntityDiagnosticHealthInput": {
+      "type": "object",
+      "description": "Name and effective health state of a diagnostic input member.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the contributing entity or signal."
+        },
+        "effectiveHealthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Effective health state contributed by this input."
+        }
+      },
+      "required": [
+        "name",
+        "effectiveHealthState"
+      ]
+    },
+    "EntityDiagnosticSignalAggregationGroup": {
+      "type": "object",
+      "description": "Diagnostic details for one signal-aggregation group.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the signal-aggregation group."
+        },
+        "members": {
+          "type": "array",
+          "description": "Configured signal names for this group, preserving names exactly as configured (including spelling and occurrences).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "effectiveAggregation": {
+          "$ref": "#/definitions/EntityDiagnosticEffectiveAggregation",
+          "description": "Effective aggregation applied to this group."
+        },
+        "aggregatedHealthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Aggregated health state produced for this group."
+        },
+        "unresolvedMembers": {
+          "type": "array",
+          "description": "Configured signal names that could not be resolved; names are preserved as configured (including spelling and occurrences) and are absent from active signals.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "members",
+        "effectiveAggregation",
+        "aggregatedHealthState",
+        "unresolvedMembers"
+      ]
+    },
+    "EntityDiagnosticSnapshot": {
+      "type": "object",
+      "description": "Current diagnostic snapshot for an entity.",
+      "properties": {
+        "entityName": {
+          "$ref": "#/definitions/entityName",
+          "description": "Name of the entity represented by this diagnostic snapshot."
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Current health state of the entity."
+        },
+        "lastHealthTransitionAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the current health state became active (UTC), when known."
+        },
+        "lastHealthTransitionReason": {
+          "$ref": "#/definitions/EntityTransitionReason",
+          "description": "Typed reason for the current health-state transition, when available."
+        },
+        "impact": {
+          "$ref": "#/definitions/EntityImpact",
+          "description": "Current impact classification of the entity."
+        },
+        "signalInputs": {
+          "type": "array",
+          "description": "Signal inputs currently contributing to the entity health evaluation.",
+          "items": {
+            "$ref": "#/definitions/EntityDiagnosticHealthInput"
+          }
+        },
+        "dependencyInputs": {
+          "type": "array",
+          "description": "Dependency inputs currently contributing to the entity health evaluation.",
+          "items": {
+            "$ref": "#/definitions/EntityDiagnosticHealthInput"
+          }
+        },
+        "effectiveDependencyAggregation": {
+          "$ref": "#/definitions/EntityDiagnosticEffectiveAggregation",
+          "description": "Effective dependency aggregation currently applied to dependency inputs."
+        },
+        "signalAggregationGroups": {
+          "type": "array",
+          "description": "Signal-aggregation groups considered in the current health evaluation.",
+          "items": {
+            "$ref": "#/definitions/EntityDiagnosticSignalAggregationGroup"
+          }
+        }
+      },
+      "required": [
+        "entityName",
+        "healthState",
+        "impact",
+        "signalInputs",
+        "dependencyInputs",
+        "effectiveDependencyAggregation",
+        "signalAggregationGroups"
+      ]
+    },
+    "EntityHealthStateHistoryResponse": {
+      "type": "object",
+      "description": "Health-state periods overlapping the requested window, newest first.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The health-state periods, ordered newest first.",
+          "items": {
+            "$ref": "#/definitions/EntityHealthStatePeriod"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityHealthStatePeriod": {
+      "type": "object",
+      "description": "A contiguous interval during which the entity held a single health state.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state held during this period."
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this state became active (UTC). Omitted when the state was already active at the\nearliest point observable from retained data — i.e. its true start is older than the\n~30-day data-retention window, predates the entity's first recorded transition, or lies\nbeyond the result cap."
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the entity transitioned away from this state (UTC). Omitted when the state is still\nactive now (no later transition recorded)."
+        }
+      },
+      "required": [
+        "healthState"
+      ]
+    },
+    "EntityImpact": {
+      "type": "string",
+      "description": "How an entity's health is transformed when propagated to its parent. The service emits documented values; the open string form lets clients retain future named values.",
+      "enum": [
+        "Standard",
+        "Limited",
+        "Suppressed"
+      ],
+      "x-ms-enum": {
+        "name": "EntityImpact",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Propagate the entity health state unchanged."
+          },
+          {
+            "name": "Limited",
+            "value": "Limited",
+            "description": "Reduce Degraded to Healthy and Unhealthy to Degraded before propagation; Healthy and Unknown remain unchanged."
+          },
+          {
+            "name": "Suppressed",
+            "value": "Suppressed",
+            "description": "Propagate Degraded or Unhealthy as Healthy; Healthy and Unknown remain unchanged."
+          }
+        ]
+      }
+    },
+    "EntityTransitionHistoryResponse": {
+      "type": "object",
+      "description": "Health-state transitions recorded for an entity, returned as a pageable result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The health-state transitions, ordered newest first.",
+          "items": {
+            "$ref": "#/definitions/HealthStateTransition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The full URI to fetch the next page of results; absent when there is no next page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityTransitionReason": {
+      "type": "string",
+      "description": "Reason recorded for the current entity's most recent composite health-state transition. The service emits documented values; the open string form lets clients retain future named values.",
+      "enum": [
+        "SignalTransition",
+        "SignalExpiration",
+        "SignalDeletion",
+        "ChildEntityTransition",
+        "ChildEntityDeletion",
+        "DependencyConfigChanged",
+        "SignalAggregationConfigChanged"
+      ],
+      "x-ms-enum": {
+        "name": "EntityTransitionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SignalTransition",
+            "value": "SignalTransition",
+            "description": "Transition caused by an inbound signal transition."
+          },
+          {
+            "name": "SignalExpiration",
+            "value": "SignalExpiration",
+            "description": "Transition caused by signal expiration."
+          },
+          {
+            "name": "SignalDeletion",
+            "value": "SignalDeletion",
+            "description": "Transition caused by signal deletion."
+          },
+          {
+            "name": "ChildEntityTransition",
+            "value": "ChildEntityTransition",
+            "description": "Transition caused by a child-entity transition."
+          },
+          {
+            "name": "ChildEntityDeletion",
+            "value": "ChildEntityDeletion",
+            "description": "Transition caused by child-entity deletion."
+          },
+          {
+            "name": "DependencyConfigChanged",
+            "value": "DependencyConfigChanged",
+            "description": "Transition caused by dependency aggregation configuration changes."
+          },
+          {
+            "name": "SignalAggregationConfigChanged",
+            "value": "SignalAggregationConfigChanged",
+            "description": "Transition caused by signal-aggregation configuration changes."
+          }
+        ]
+      }
+    },
+    "EvaluationRule": {
+      "type": "object",
+      "description": "Evaluation rules used to derive a health state.",
+      "properties": {
+        "degradedRule": {
+          "$ref": "#/definitions/ThresholdRule",
+          "description": "Rule used to determine degraded state."
+        },
+        "unhealthyRule": {
+          "$ref": "#/definitions/ThresholdRule",
+          "description": "Rule used to determine unhealthy state."
+        }
+      },
+      "required": [
+        "unhealthyRule"
+      ]
+    },
+    "HealthReportEvaluationRule": {
+      "type": "object",
+      "description": "Evaluation rules for the health report.",
+      "properties": {
+        "degradedRule": {
+          "$ref": "#/definitions/ThresholdRule",
+          "description": "Rule used to determine degraded state."
+        },
+        "unhealthyRule": {
+          "$ref": "#/definitions/ThresholdRule",
+          "description": "Rule used to determine unhealthy state."
+        }
+      },
+      "required": [
+        "unhealthyRule"
+      ]
+    },
+    "HealthReportRequest": {
+      "type": "object",
+      "description": "Health report submitted for a specific signal.",
+      "properties": {
+        "signalName": {
+          "$ref": "#/definitions/signalName",
+          "description": "Name of the entity signal to report health for."
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state to report for the signal."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Reported value of the signal."
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/HealthReportEvaluationRule",
+          "description": "Evaluation rules that were used to determine the reported health state."
+        },
+        "expiresInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.",
+          "default": 60,
+          "minimum": 1,
+          "maximum": 10080
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Optional additional context or description for the health report."
+        }
+      },
+      "required": [
+        "signalName",
+        "healthState"
+      ]
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "Health state",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unhealthy",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy status"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded status"
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Unhealthy status"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown status"
+          }
+        ]
+      }
+    },
+    "HealthStateTransition": {
+      "type": "object",
+      "description": "A health state transition record",
+      "properties": {
+        "previousState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Previous health state before the transition"
+        },
+        "newState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "New health state after the transition"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the transition occurred"
+        },
+        "reason": {
+          "$ref": "#/definitions/string4096",
+          "description": "Opaque historical transition text recorded at event time; clients must treat this as descriptive history, not a typed current-state reason."
+        }
+      },
+      "required": [
+        "previousState",
+        "newState",
+        "occurredAt"
+      ]
+    },
+    "IngestHealthReportAcceptedResponse": {
+      "type": "object",
+      "description": "Health-report ingestion request was accepted."
+    },
+    "ModelNotFoundResponse": {
+      "type": "object",
+      "description": "Returned when the requested health model does not exist.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "NotFoundResponse": {
+      "type": "object",
+      "description": "Returned when the requested resource does not exist.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "PayloadTooLargeResponse": {
+      "type": "object",
+      "description": "The health-report ingestion request payload exceeded the size limit of 32 KiB (32768 bytes).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "QueryEchoResponse": {
+      "type": "object",
+      "description": "Health state of the requested health model, echoed by data-plane operations.",
+      "properties": {
+        "rootEntityName": {
+          "$ref": "#/definitions/entityName",
+          "description": "Persisted resource name of the health model root entity.\nAlways use this field directly and never parse the model identifier to derive entity identity."
+        },
+        "healthModelExists": {
+          "type": "boolean",
+          "description": "True when a health model exists for the requested id."
+        },
+        "healthModelState": {
+          "type": "string",
+          "description": "Health state of the health model; omitted when the health model does not exist."
+        }
+      },
+      "required": [
+        "rootEntityName",
+        "healthModelExists"
+      ]
+    },
+    "ServiceUnavailableResponse": {
+      "type": "object",
+      "description": "Health-report ingestion service is temporarily unavailable; the client may retry after the given delay.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "SignalDataPointHistoryResponse": {
+      "type": "object",
+      "description": "Signal data points recorded for an entity's signal, newest first.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The signal data points, ordered newest first.",
+          "items": {
+            "$ref": "#/definitions/SignalHistoryDataPoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The full URI to fetch the next page of results; absent when there is no next page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SignalHistoryDataPoint": {
+      "type": "object",
+      "description": "A single recorded signal data point.",
+      "properties": {
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the data point occurred (UTC)."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Value of the signal at this point; omitted when the signal has no numeric value at this point."
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of the signal at this point."
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Additional context for this data point; omitted when none is recorded."
+        }
+      },
+      "required": [
+        "occurredAt",
+        "healthState"
+      ]
+    },
+    "SignalOperator": {
+      "type": "string",
+      "description": "Comparison operators accepted by threshold rules.",
+      "enum": [
+        "LessThan",
+        "LessThanOrEqual",
+        "GreaterThan",
+        "GreaterThanOrEqual",
+        "Equal",
+        "NotEqual",
+        "Dynamic"
+      ],
+      "x-ms-enum": {
+        "name": "SignalOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "Less than."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "Less than or equal."
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "Greater than."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
+            "description": "Greater than or equal."
+          },
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Equal."
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual",
+            "description": "Not equal."
+          },
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "Dynamic operator."
+          }
+        ]
+      }
+    },
+    "ThresholdRule": {
+      "type": "object",
+      "description": "Threshold-based rule used to evaluate health state.",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/SignalOperator",
+          "description": "Comparison operator for the threshold rule."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Threshold value used with the selected operator."
+        }
+      },
+      "required": [
+        "operator"
+      ]
+    },
+    "TooManyRequestsResponse": {
+      "type": "object",
+      "description": "Too many health-report ingestion requests were received.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "UnsupportedMediaTypeResponse": {
+      "type": "object",
+      "description": "Returned when the ingestion request's Content-Type is not supported.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "entityName": {
+      "type": "string",
+      "description": "Entity resource name; matches the control-plane proxy-resource naming contract.",
+      "maxLength": 260,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "signalName": {
+      "type": "string",
+      "description": "Signal resource name; matches the control-plane proxy-resource naming contract.",
+      "maxLength": 260,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "string4096": {
+      "type": "string",
+      "description": "String with max length validation of 4096 characters",
+      "maxLength": 4096
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

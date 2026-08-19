@@ -1,0 +1,39 @@
+{
+  "operationId": "Model_Status",
+  "title": "Get health model status",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "rootEntityName": "contoso-health-model",
+        "healthModelExists": true,
+        "healthModelState": "Healthy"
+      }
+    },
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidApiVersion"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidApiVersion",
+          "message": "The api-version query parameter is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "HealthModelNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "HealthModelNotFound",
+          "message": "The requested health model was not found."
+        }
+      }
+    }
+  }
+}
