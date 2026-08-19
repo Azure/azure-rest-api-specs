@@ -3792,10 +3792,9 @@ model PrivateLinkServiceConnectionProperties {
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 
   /**
-   * A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time. Set at create and cannot be changed afterward.
+   * A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time.
    */
   @added(Versions.v2026_01_01)
-  @visibility(Lifecycle.Read, Lifecycle.Create)
   approvalReference?: ApprovalReference;
 }
 
