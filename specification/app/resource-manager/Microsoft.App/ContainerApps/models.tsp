@@ -6105,7 +6105,6 @@ model SessionPoolProperties {
    * The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   templateUpdateStatus?: TemplateUpdateStatus;
 
@@ -8594,7 +8593,7 @@ model ReplicaContainer {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   debugEndpoint?: string;
 }
 
