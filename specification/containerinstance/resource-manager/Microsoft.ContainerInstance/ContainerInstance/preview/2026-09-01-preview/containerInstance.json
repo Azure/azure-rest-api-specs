@@ -1682,6 +1682,76 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "ManagedVirtualNodePools_Update",
+        "tags": [
+          "ManagedVirtualNodePools"
+        ],
+        "description": "Update a managed virtual node pool. Only tags and a limited set of properties can be updated.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedVirtualNodePoolName",
+            "in": "path",
+            "description": "The name of the managed virtual node pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The managed virtual node pool patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNodePoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNodePool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedVirtualNodePool"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "ManagedVirtualNodePools_Delete",
         "tags": [
@@ -4829,6 +4899,45 @@
         }
       ]
     },
+    "ManagedVirtualNodePoolContainerGroup": {
+      "type": "object",
+      "description": "A container group associated with a managed virtual node pool.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the container group.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the container group.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the container group.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedVirtualNodePoolPatchProperties": {
+      "type": "object",
+      "description": "Updatable resource-specific properties for `ManagedVirtualNodePool` PATCH.",
+      "properties": {
+        "minNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of nodes maintained by the pool.",
+          "minimum": 0
+        },
+        "maxNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of nodes the pool can scale to.",
+          "minimum": 1
+        }
+      }
+    },
     "ManagedVirtualNodePoolProperties": {
       "type": "object",
       "description": "Properties of a managed virtual node pool.",
@@ -4873,6 +4982,29 @@
           "format": "int32",
           "description": "Maximum number of nodes the pool can scale to.",
           "minimum": 1
+        },
+        "targetCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The desired number of container groups for the node pool.",
+          "readOnly": true
+        },
+        "readyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of container groups that are ready in the node pool.",
+          "readOnly": true
+        },
+        "containerGroups": {
+          "type": "array",
+          "description": "The container groups associated with the node pool.",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNodePoolContainerGroup"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       },
       "required": [
@@ -4880,6 +5012,27 @@
         "managedIdentityResourceId",
         "sandboxGroupResourceId"
       ]
+    },
+    "ManagedVirtualNodePoolUpdate": {
+      "type": "object",
+      "description": "The type used for updating a `ManagedVirtualNodePool` resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedVirtualNodePoolPatchProperties",
+          "description": "Resource-specific properties that can be updated via PATCH."
+        }
+      }
     },
     "NGroup": {
       "type": "object",

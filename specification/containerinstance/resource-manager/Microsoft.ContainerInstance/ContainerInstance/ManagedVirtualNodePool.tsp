@@ -78,6 +78,49 @@ model ManagedVirtualNodePoolProperties {
    */
   @minValue(1)
   maxNodes?: int32;
+
+  /**
+   * The desired number of container groups for the node pool.
+   */
+  @visibility(Lifecycle.Read)
+  targetCount?: int32;
+
+  /**
+   * The number of container groups that are ready in the node pool.
+   */
+  @visibility(Lifecycle.Read)
+  readyCount?: int32;
+
+  /**
+   * The container groups associated with the node pool.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["resourceId"])
+  containerGroups?: ManagedVirtualNodePoolContainerGroup[];
+}
+
+/**
+ * A container group associated with a managed virtual node pool.
+ */
+@added(Versions.v2026_09_01_preview)
+model ManagedVirtualNodePoolContainerGroup {
+  /**
+   * The ARM resource ID of the container group.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+
+  /**
+   * The type of the container group.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The state of the container group.
+   */
+  @visibility(Lifecycle.Read)
+  state?: string;
 }
 
 /**
@@ -100,6 +143,43 @@ model ManagedVirtualNodePool
   name: string;
 }
 
+/**
+ * Updatable resource-specific properties for `ManagedVirtualNodePool` PATCH.
+ */
+@added(Versions.v2026_09_01_preview)
+model ManagedVirtualNodePoolPatchProperties {
+  /**
+   * Minimum number of nodes maintained by the pool.
+   */
+  @minValue(0)
+  minNodes?: int32;
+
+  /**
+   * Maximum number of nodes the pool can scale to.
+   */
+  @minValue(1)
+  maxNodes?: int32;
+}
+
+/**
+ * The type used for updating a `ManagedVirtualNodePool` resource.
+ */
+@added(Versions.v2026_09_01_preview)
+model ManagedVirtualNodePoolUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use of Record for PATCH update envelopes."
+  tags?: Record<string>;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * Resource-specific properties that can be updated via PATCH.
+   */
+  properties?: ManagedVirtualNodePoolPatchProperties;
+}
+
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface ManagedVirtualNodePools {
@@ -113,6 +193,15 @@ interface ManagedVirtualNodePools {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedVirtualNodePool,
+    Error = CloudError
+  >;
+
+  /**
+   * Update a managed virtual node pool. Only tags and a limited set of properties can be updated.
+   */
+  update is ArmCustomPatchAsync<
+    ManagedVirtualNodePool,
+    PatchModel = ManagedVirtualNodePoolUpdate,
     Error = CloudError
   >;
 
@@ -131,4 +220,7 @@ interface ManagedVirtualNodePools {
 );
 @@doc(ManagedVirtualNodePools.createOrUpdate::parameters.resource,
   "The managed virtual node pool to create or update."
+);
+@@doc(ManagedVirtualNodePools.update::parameters.properties,
+  "The managed virtual node pool patch object."
 );
