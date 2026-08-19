@@ -23,6 +23,17 @@ model SandboxGroup is TrackedResource<SandboxGroupProperties> {
 
 /** SandboxGroup resource specific properties. */
 model SandboxGroupProperties {
+  /** The resource ID of the Azure Container Apps managed environment to associate with the sandbox group. A sandbox group can be associated after creation, but the association cannot then be changed or removed. For subsequent create-or-update (PUT) requests, specify the same environment ID; omitting or changing it returns 409 Conflict. Omitting it from an update (PATCH) request leaves the existing association unchanged. */
+  environmentId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.App/managedEnvironments";
+    }
+  ]>;
+
+  /** The default domain of the associated Azure Container Apps managed environment. Sandbox endpoints use subdomains of this domain. This read-only property is populated by the service and is omitted when no managed environment is associated. */
+  @visibility(Lifecycle.Read)
+  defaultDomain?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description is on the referenced type to avoid emitting a sibling of $ref."
   @visibility(Lifecycle.Read)
   provisioningState?: SandboxGroupProvisioningState;
@@ -52,7 +63,7 @@ interface SandboxGroups {
   /** Create or update a SandboxGroup. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SandboxGroup>;
 
-  /** Patches a SandboxGroup. Only patching of tags is supported. */
+  /** Patches a SandboxGroup. */
   update is ArmCustomPatchAsync<
     SandboxGroup,
     SandboxGroupPatch,
@@ -77,4 +88,12 @@ model SandboxGroupPatch {
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are defined as an open key/value map per ARM contract."
   tags?: Record<string>;
+
+  /** SandboxGroup properties that can be updated. */
+  properties?: SandboxGroupPatchProperties;
+}
+
+/** SandboxGroup resource specific properties for patch requests. */
+model SandboxGroupPatchProperties {
+  ...PickProperties<SandboxGroupProperties, "environmentId">;
 }
