@@ -11123,9 +11123,19 @@
     },
     "BulkRestoreRecoveryPointsResponse": {
       "type": "object",
-      "description": "Recovery point discovery result keyed by protected item ID.",
-      "additionalProperties": {
-        "$ref": "#/definitions/RecoveryPointResource"
+      "description": "Recovery point discovery result for bulk cross-tenant restore, keyed by protected item ID.",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Map of the source protected item's ARM ID to its discovered recovery point.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of results, if any."
+        }
       }
     },
     "BulkRestoreRequestBase": {

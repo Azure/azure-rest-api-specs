@@ -614,6 +614,14 @@ directive:
     from: bms.json
     where: $.definitions.RecoveryPointResource
     reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: bms.json
+    where: $.definitions.JobResource
+    reason: JobResource is an existing resource present across API versions. The cross-tenant child-jobs pass-through API (backupCrossTenantVaultMappings/{name}/backupJobs/{jobName}/backupChildJobs) reads jobs from the source vault at a deeper nesting level; no new tracked resource is introduced. This mirrors the existing RecoveryPointResource suppression for the CRR recovery-points API.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: bms.json
+    where: $.definitions.IaaSVMBulkRestoreRequest.properties.skipPreOLRBackup
+    reason: skipPreOLRBackup preserves the exact wire property name used by the service's IaaS VM restore requests (OLR = Original Location Restore, an established Azure Backup domain acronym). Renaming the acronym to satisfy strict camelCase would break wire compatibility with the service and existing clients.
   - suppress: LroErrorContent
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from exceptions to custom error CloudError. Changing this would be breaking change for our service.

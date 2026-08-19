@@ -6752,11 +6752,21 @@ model FetchRPForBulkRestoreRequest {
 }
 
 /**
- * Recovery point discovery result keyed by protected item ID.
+ * Recovery point discovery result for bulk cross-tenant restore, keyed by protected item ID.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The service returns a dynamic map from protected item ID to RecoveryPointResource for bulk restore recovery point discovery."
 @added(Versions.v2026_08_31_preview)
-model BulkRestoreRecoveryPointsResponse is Record<RecoveryPointResource>;
+model BulkRestoreRecoveryPointsResponse {
+  /**
+   * Map of the source protected item's ARM ID to its discovered recovery point.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The bulk recovery-point discovery result is a dynamic map keyed by the source protected item's ARM ID, mirroring the service's ResourceDictionary<RecoveryPoint> wire contract. The key set is caller-supplied and unbounded, so there is no fixed property set to model this as a typed object."
+  value?: Record<RecoveryPointResource>;
+
+  /**
+   * The URI to fetch the next page of results, if any.
+   */
+  nextLink?: string;
+}
 
 /**
  * Filters to list the jobs.
