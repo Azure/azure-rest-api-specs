@@ -2,11 +2,17 @@
   "parameters": {
     "api-version": "2026-01-01",
     "networkManagerName": "TestNetworkManager",
+    "parameters": {
+      "properties": {
+        "maxAllocationSize": null,
+        "minAllocationSize": null
+      }
+    },
     "poolName": "TestPool",
     "resourceGroupName": "rg1",
     "subscriptionId": "11111111-1111-1111-1111-111111111111"
   },
-  "title": "IpamPools_Get",
+  "title": "Clear the allocation size bounds on a Pool resource",
   "responses": {
     "200": {
       "body": {
@@ -23,7 +29,7 @@
           "ipAddressType": [
             "IPv4"
           ],
-          "parentPoolName": "",
+          "parentPoolName": "test-ipam-pool",
           "provisioningState": "Succeeded"
         },
         "systemData": {
@@ -38,5 +44,5 @@
       }
     }
   },
-  "operationId": "IpamPools_Get"
+  "operationId": "IpamPools_Update"
 }
