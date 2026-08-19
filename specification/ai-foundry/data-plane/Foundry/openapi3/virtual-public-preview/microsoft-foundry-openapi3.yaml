@@ -42903,7 +42903,6 @@ components:
         - candidate_id
         - job_id
         - name
-        - mutations
       properties:
         candidate_id:
           type: string
@@ -42920,7 +42919,7 @@ components:
             anyOf:
               - {}
               - type: 'null'
-          description: The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (e.g., `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. In LIST contexts (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when `expand=mutations` is requested. Always empty for the baseline candidate.
+          description: The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (for example `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. On LIST (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when the caller passes `expand=mutations` or on GET candidate detail. Omitted entirely for the baseline candidate, which has no mutations to describe.
         agent_version:
           type: string
           description: Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.
@@ -42962,7 +42961,7 @@ components:
       required:
         - path
         - type
-        - size_bytes
+        - size_in_bytes
       properties:
         path:
           type: string
@@ -42970,7 +42969,7 @@ components:
         type:
           type: string
           description: File type / role (e.g., 'config', 'results', 'diagnostics').
-        size_bytes:
+        size_in_bytes:
           type: integer
           format: int64
           description: File size in bytes.

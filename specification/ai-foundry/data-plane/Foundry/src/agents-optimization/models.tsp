@@ -416,8 +416,8 @@ model AgentOptimizationCandidate {
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
 
-  @doc("The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (e.g., `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. In LIST contexts (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when `expand=mutations` is requested. Always empty for the baseline candidate.")
-  mutations: Record<unknown | null>;
+  @doc("The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (for example `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. On LIST (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when the caller passes `expand=mutations` or on GET candidate detail. Omitted entirely for the baseline candidate, which has no mutations to describe.")
+  mutations?: Record<unknown | null>;
 
   @doc("Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.")
   agent_version?: string;
@@ -457,7 +457,7 @@ model AgentOptimizationCandidateFileInfo {
   type: string;
 
   @doc("File size in bytes.")
-  size_bytes: int64;
+  size_in_bytes: int64;
 }
 
 /** Vocabulary for the `expand` query parameter on candidate LIST/GET endpoints. Open string so the SDK stays usable when new expand keys ship server-side; known values are enumerated as members. Multiple expand keys may be combined in a comma-separated string. */

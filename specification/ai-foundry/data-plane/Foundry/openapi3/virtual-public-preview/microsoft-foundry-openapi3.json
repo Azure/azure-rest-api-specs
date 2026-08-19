@@ -33590,8 +33590,7 @@
         "required": [
           "candidate_id",
           "job_id",
-          "name",
-          "mutations"
+          "name"
         ],
         "properties": {
           "candidate_id": {
@@ -33616,7 +33615,7 @@
                 }
               ]
             },
-            "description": "The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (e.g., `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. In LIST contexts (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when `expand=mutations` is requested. Always empty for the baseline candidate."
+            "description": "The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (for example `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. On LIST (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when the caller passes `expand=mutations` or on GET candidate detail. Omitted entirely for the baseline candidate, which has no mutations to describe."
           },
           "agent_version": {
             "type": "string",
@@ -33673,7 +33672,7 @@
         "required": [
           "path",
           "type",
-          "size_bytes"
+          "size_in_bytes"
         ],
         "properties": {
           "path": {
@@ -33684,7 +33683,7 @@
             "type": "string",
             "description": "File type / role (e.g., 'config', 'results', 'diagnostics')."
           },
-          "size_bytes": {
+          "size_in_bytes": {
             "type": "integer",
             "format": "int64",
             "description": "File size in bytes."
