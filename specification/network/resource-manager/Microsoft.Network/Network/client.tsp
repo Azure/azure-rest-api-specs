@@ -1701,6 +1701,51 @@ union ProvisioningStateUnion {
   "ResourceType",
   "csharp"
 );
+@@clientName(
+  Microsoft.Network.FirewallPolicyPropertiesFormat.afcManaged,
+  "IsAfcManaged",
+  "csharp"
+);
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat.upgradedToV2,
+  "IsUpgradedToV2",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat.upgradedToV2,
+  "IsUpgradedToV2",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ConnectivityCheckSettings.generatePath,
+  "ShouldGeneratePath",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.MoveIpConfigurationsRequest,
+  "MoveIpConfigurationsContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.NetworkVirtualApplianceCommitMigrationRequest,
+  "NetworkVirtualApplianceCommitMigrationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.NetworkVirtualAppliancePrepareMigrationRequest,
+  "NetworkVirtualAppliancePrepareMigrationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.NetworkVirtualApplianceExecuteMigrationRequest,
+  "NetworkVirtualApplianceExecuteMigrationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.GenerateExpressRouteLagsLOARequest,
+  "GenerateExpressRouteLagsLoaContent",
+  "csharp"
+);
 @@clientName(Commit, "NetworkManagerConfigurationCommit", "csharp");
 @@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
 @@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
