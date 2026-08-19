@@ -1,0 +1,32 @@
+parameters:
+  "service-dir":
+    default: "sdk/devcompute"
+  "dependencies":
+    default: ""
+emit:
+  - "@typespec/openapi3"
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/DevCompute.json"
+    file-type: json
+    openapi-versions:
+      - "3.1.0"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/documentation-required": "The source OpenAPI lacks descriptions for many existing schemas; this migration preserves the published contract without inventing documentation."
+    "@azure-tools/typespec-azure-core/no-nullable": "The OpenAPI 3.1 source explicitly permits null on these wire properties."
+    "@azure-tools/typespec-azure-core/no-unknown": "The source uses empty schemas and integer-or-string compatibility schemas that cannot be narrowed during a horizontal migration."
+    "@azure-tools/typespec-azure-core/no-error-status-codes": "The converted contract uses anonymous media-type-specific error responses; naming and consolidating them would change the generated OpenAPI structure."
+    "@azure-tools/typespec-azure-core/response-schema-problem": "The source OpenAPI intentionally publishes media-type-specific success and error response schemas."
+    "@azure-tools/typespec-azure-core/no-openapi": "OpenAPI oneOf decorators are retained where required to preserve the source OpenAPI 3.1 schema composition."
+    "@azure-tools/typespec-azure-core/casing-style": "Existing path and query parameter wire names are preserved for compatibility."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "The source OpenAPI publishes closed enum schemas; opening them would change the contract."
+    "@azure-tools/typespec-azure-core/use-standard-operations": "The existing operation response shapes cannot be replaced with Azure.Core templates without changing the published contract."
+    "@azure-tools/typespec-azure-core/use-standard-names": "Generated operation identifiers mirror existing routes because the source OpenAPI omits operationId."
+    "@azure-tools/typespec-azure-core/operation-missing-api-version": "The custom ApiVersionParameter preserves the preview contract where api-version was optional and makes it required in the stable version."
+    "@azure-tools/typespec-azure-core/no-response-body": "The existing service contract includes response bodies on these status codes."
+    "@azure-tools/typespec-azure-core/bad-record-type": "The source OpenAPI uses free-form objects for these properties."
+    "@azure-tools/typespec-azure-core/preview-version-last-member": "The preview contract chronologically precedes the stable contract and contains members removed in the stable version."
