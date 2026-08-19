@@ -466,12 +466,12 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(FileImportProperties.createdTimeUTC, "CreatedOn", "csharp");
 @@clientName(
   FileImportProperties.filesValidUntilTimeUTC,
-  "FilesExpireOn",
+  "FilesExpirationOn",
   "csharp"
 );
 @@clientName(
   FileImportProperties.importValidUntilTimeUTC,
-  "ImportExpiresOn",
+  "ImportExpirationOn",
   "csharp"
 );
 @@clientName(FileImport, "SecurityInsightsFileImport", "csharp");
