@@ -436,13 +436,88 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(
   AdditionalCapabilities.ultraSSDEnabled,
-  "UltraSsdEnabled",
+  "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(
+  AdditionalCapabilities.hibernationEnabled,
+  "IsHibernationEnabled",
+  "csharp"
+);
+@@clientName(
+  BulkActionVmExtensionProperties.autoUpgradeMinorVersion,
+  "IsAutoUpgradeMinorVersionEnabled",
+  "csharp"
+);
+@@clientName(
+  BulkActionVmExtensionProperties.suppressFailures,
+  "ShouldSuppressFailures",
+  "csharp"
+);
+@@clientName(
+  LinuxConfiguration.provisionVMAgent,
+  "ShouldProvisionVmAgent",
+  "csharp"
+);
 @@clientName(
   WindowsConfiguration.provisionVMAgent,
-  "ProvisionVmAgent",
+  "ShouldProvisionVmAgent",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "ShouldBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+  "ShouldBypassPlatformSafetyChecksOnUserSchedule",
+  "csharp"
+);
+@@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
+  "ShouldAddProxyAgentExtension",
+  "csharp"
+);
+@@clientName(
+  SecurityProfile.encryptionAtHost,
+  "IsEncryptionAtHostEnabled",
+  "csharp"
+);
+@@clientName(DataDisk.toBeDetached, "IsToBeDetached", "csharp");
+@@clientName(
+  DataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(
+  OSDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+  "IsPrimary",
+  "csharp"
+);
+@@clientName(
+  OSProfile.requireGuestProvisionSignal,
+  "IsGuestProvisionSignalRequired",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication.treatFailureAsDeploymentFailure,
+  "ShouldTreatFailureAsDeploymentFailure",
   "csharp"
 );
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
@@ -531,6 +606,10 @@ model ResourcePatchRequestInput {
 );
 @@clientName(FallbackOperationInfo, "ScheduledActionFallbackInfo", "csharp");
 @@clientName(Modes, "HostEndpointSettingsMode", "csharp");
+@@clientName(DeleteOptions, "DeleteConfig", "csharp");
+@@clientName(DiffDiskOptions, "DiffDiskConfig", "csharp");
+@@clientName(Mode, "ProxyAgentMode", "csharp");
+@@clientName(Placement, "VirtualMachinePlacement", "csharp");
 
 // =====================================================================
 // C# enum renames: Singular names to match Compute SDK conventions
@@ -547,7 +626,7 @@ model ResourcePatchRequestInput {
 @@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
 @@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
 @@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
-@@clientName(SettingNames, "SettingName", "csharp");
+@@clientName(SettingNames, "AdditionalUnattendContentSettingName", "csharp");
 
 // =====================================================================
 // C# property renames: Match Compute SDK property names
@@ -595,6 +674,46 @@ namespace Azure.ResourceManager.Models {
 );
 @@alternateType(
   VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineNetworkInterfaceConfigurationProperties.networkSecurityGroup,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineNetworkInterfaceConfigurationProperties.dscpConfiguration,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.subnet,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationSecurityGroups,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationGatewayBackendAddressPools,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.loadBalancerBackendAddressPools,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(
+  VirtualMachinePublicIPAddressConfigurationProperties.publicIPPrefix,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(
+  CapacityReservationProfile.capacityReservationGroup,
   Azure.ResourceManager.Models.WritableSubResource,
   "csharp"
 );
