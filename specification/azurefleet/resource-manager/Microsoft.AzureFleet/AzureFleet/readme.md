@@ -26,7 +26,7 @@ These are the global settings for the computefleet.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-08-01
+tag: package-2024-11-01
 suppressions:
   - code: PatchBodyParametersSchema
     from: azurefleet.json

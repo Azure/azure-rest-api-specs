@@ -43,7 +43,7 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_06_01_preview: "2026-06-01-preview",
 
-  /** Fleet Managed mode stable Api Version */
+  /** Fleet stable Api version with mode, vmNamePrefix, capacityType properties */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_08_01: "2026-08-01",
 }
