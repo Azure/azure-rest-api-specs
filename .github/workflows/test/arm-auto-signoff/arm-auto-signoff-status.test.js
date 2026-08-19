@@ -290,7 +290,7 @@ describe("getLabelActionImpl", () => {
 
   it.each([
     { labels: ["ARMAutoSignedOff-IncrementalTSP"] },
-    { labels: ["ARMAutoSignedOff-IncrementalTSP", "ARMReview", "NotReadyForARMReview"] },
+    // NotReadyForARMReview check removed - no longer blocks auto-signoff
     { labels: ["ARMAutoSignedOff-IncrementalTSP", "ARMReview", "SuppressionReviewRequired"] },
   ])("removes label if not all labels match ($labels)", async ({ labels }) => {
     const github = createMockGithub({ incrementalTypeSpec: true });
