@@ -36930,13 +36930,13 @@
             "type": "number",
             "format": "double",
             "minimum": 0,
-            "description": "The reconciled consumption at the response watermark, if available."
+            "description": "The reconciled consumption at the response watermark, if available. Omitted when no durable counter can exist for the rule. Zero is reserved for a counter genuinely known to be unwritten."
           },
           "limit": {
             "type": "number",
             "format": "double",
             "minimum": 0,
-            "description": "The configured budget ceiling for this counter and window."
+            "description": "The configured budget ceiling for this counter and window, as it stood when the counter was written"
           },
           "remaining": {
             "type": "number",
@@ -36960,7 +36960,7 @@
           "periodEnd": {
             "type": "string",
             "format": "date-time",
-            "description": "The exclusive UTC end of the active window, if the budget recurs."
+            "description": "The exclusive UTC end of the active window. Omitted when recurring is `false`."
           },
           "counterKeyState": {
             "$ref": "#/components/schemas/BudgetCounterKeyState",

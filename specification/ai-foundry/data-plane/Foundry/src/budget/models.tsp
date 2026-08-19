@@ -22,7 +22,7 @@ union BudgetUsageDimension {
 union BudgetUnit {
   string,
 
-  /** Budget values expressed in United States dollars. */
+  /** Budget values expressed in United States Dollars. */
   Usd: "usd",
 }
 
@@ -80,11 +80,11 @@ model BudgetUsage {
   /** The unit used by the consumed, limit, and remaining values. */
   unit: BudgetUnit;
 
-  /** The reconciled consumption at the response watermark, if available. */
+  /** The reconciled consumption at the response watermark, if available. Omitted when no durable counter can exist for the rule. Zero is reserved for a counter genuinely known to be unwritten. */
   @minValue(0)
   consumed?: float64;
 
-  /** The configured budget ceiling for this counter and window. */
+  /** The configured budget ceiling for this counter and window, as it stood when the counter was written */
   @minValue(0)
   limit: float64;
 
@@ -101,7 +101,7 @@ model BudgetUsage {
   /** The inclusive UTC start of the active window, if available. */
   periodStart?: utcDateTime;
 
-  /** The exclusive UTC end of the active window, if the budget recurs. */
+  /** The exclusive UTC end of the active window. Omitted when recurring is `false`. */
   periodEnd?: utcDateTime;
 
   /** Indicates whether this row contains a durable counter measurement. */
