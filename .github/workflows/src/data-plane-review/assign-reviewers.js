@@ -206,8 +206,24 @@ async function completeReviewOnSignOff({ github, core, owner, repo, prNumber, pa
     }
   }
 
-  const currentLabels = (payload.pull_request.labels ?? []).map((label) => label.name);
-  if (!currentLabels.includes(TRIGGER_LABEL)) {
+  // Read the labels live rather than from the cached event payload.
+  const currentLabels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner,
+    repo,
+    issue_number: prNumber,
+    per_page: 100,
+  });
+  const currentLabelNames = currentLabels.map((label) => label.name);
+
+  if (!currentLabelNames.includes(SIGNOFF_LABEL)) {
+    core.info(
+      `'${SIGNOFF_LABEL}' is no longer present on PR #${prNumber}; sign-off was retracted before ` +
+        `this ran, leaving '${TRIGGER_LABEL}' in place.`,
+    );
+    return;
+  }
+
+  if (!currentLabelNames.includes(TRIGGER_LABEL)) {
     core.info(`'${TRIGGER_LABEL}' not present on PR #${prNumber}; nothing to clear on sign-off.`);
     return;
   }

@@ -27,6 +27,19 @@ function setupConfigMock() {
 }
 
 /**
+ * Set the labels returned by the live `listLabelsOnIssue` read (paginated). The sign-off path
+ * reads labels live rather than from the cached event payload.
+ *
+ * @param {ReturnType<typeof createMockGithub>} github
+ * @param {string[]} names
+ */
+function setLiveLabels(github, names) {
+  /** @type {any} */ (github.rest.issues).listLabelsOnIssue = vi
+    .fn()
+    .mockResolvedValue({ data: names.map((name) => ({ name })) });
+}
+
+/**
  * @param {object} opts
  * @param {string} opts.action - "labeled" | "unlabeled"
  * @param {string} opts.labelName
@@ -125,8 +138,8 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "username1",
-        labels: [{ name: TRIGGER_LABEL }, { name: "data-plane" }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL, "data-plane"]);
 
       await assignReviewers(args());
 
@@ -147,8 +160,8 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "username1",
-        labels: [{ name: TRIGGER_LABEL }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
 
       await assignReviewers(args());
 
@@ -160,8 +173,8 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "username1",
-        labels: [{ name: TRIGGER_LABEL }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
 
       await assignReviewers(args());
 
@@ -173,8 +186,23 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "username1",
-        labels: [{ name: "data-plane" }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, "data-plane"]);
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.issues).removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    });
+
+    it("does not clear the request label when the sign-off was retracted before this ran", async () => {
+      // The event fired on sign-off, but a live read shows it is already gone.
+      context.payload = createPayload({
+        action: "labeled",
+        labelName: SIGNOFF_LABEL,
+        sender: "username1",
+      });
+      setLiveLabels(github, [TRIGGER_LABEL, "data-plane"]);
 
       await assignReviewers(args());
 
@@ -187,8 +215,8 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "random-user",
-        labels: [{ name: TRIGGER_LABEL }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
 
       await assignReviewers(args());
 
@@ -200,8 +228,8 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "azure-sdk",
-        labels: [{ name: TRIGGER_LABEL }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
 
       await assignReviewers(args());
 
@@ -218,8 +246,8 @@ describe("assign-reviewers", () => {
         action: "labeled",
         labelName: SIGNOFF_LABEL,
         sender: "username1",
-        labels: [{ name: TRIGGER_LABEL }],
       });
+      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
 
       await expect(assignReviewers(args())).resolves.toBeUndefined();
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
