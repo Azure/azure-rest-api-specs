@@ -5,11 +5,13 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Subscription;
 
@@ -29,6 +31,7 @@ interface SubscriptionOperationGroup {
    * The operation to cancel a subscription
    */
   @autoRoute
+  @removed(Versions.v2026_08_01_preview)
   cancel is ArmProviderActionSync<
     Response = CanceledSubscriptionId,
     Scope = SubscriptionActionScope
@@ -37,6 +40,7 @@ interface SubscriptionOperationGroup {
    * The operation to rename a subscription
    */
   @autoRoute
+  @removed(Versions.v2026_08_01_preview)
   rename is ArmProviderActionSync<
     Request = SubscriptionName,
     Response = RenamedSubscriptionId,
@@ -46,6 +50,7 @@ interface SubscriptionOperationGroup {
    * The operation to enable a subscription
    */
   @autoRoute
+  @removed(Versions.v2026_08_01_preview)
   enable is ArmProviderActionSync<
     Response = EnabledSubscriptionId,
     Scope = SubscriptionActionScope
@@ -106,6 +111,7 @@ interface SubscriptionOperationOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_08_01_preview)
 interface SubscriptionsOperationGroup {
   /**
    * The operation to accept Subscription Changed Request
