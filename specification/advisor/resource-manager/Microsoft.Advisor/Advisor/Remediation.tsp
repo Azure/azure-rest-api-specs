@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Advisor;
 
 /** The type of an inline remediation artifact. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 union RemediationArtifactType {
   string,
 
@@ -30,7 +30,7 @@ union RemediationArtifactType {
 }
 
 /** The confidence assigned to remediation guidance. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 union RemediationConfidence {
   string,
 
@@ -45,7 +45,7 @@ union RemediationConfidence {
 }
 
 /** The kind of remediation output. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 union RemediationOutputType {
   string,
 
@@ -54,7 +54,7 @@ union RemediationOutputType {
 }
 
 /** The relationship of a method to the primary remediation. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 union RemediationMethodRelation {
   string,
 
@@ -72,7 +72,7 @@ union RemediationMethodRelation {
 }
 
 /** The kind of an individual remediation step. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 union RemediationStepKind {
   string,
 
@@ -87,7 +87,7 @@ union RemediationStepKind {
 }
 
 /** An inline artifact that can apply a remediation. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationArtifact {
   /** The artifact format. */
   @visibility(Lifecycle.Read)
@@ -107,7 +107,7 @@ model RemediationArtifact {
 }
 
 /** The reason an executable artifact filter value was rejected. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 union RemediationFilterRejectionReason {
   string,
 
@@ -119,7 +119,7 @@ union RemediationFilterRejectionReason {
 }
 
 /** An executable artifact filter value that could not be fulfilled. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationRejectedFilterValue {
   /** The rejected filter value. */
   @visibility(Lifecycle.Read)
@@ -131,7 +131,7 @@ model RemediationRejectedFilterValue {
 }
 
 /** Details about how an executable artifact filter was fulfilled. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationFilterResult {
   /** The executable artifact types requested by the client. */
   @visibility(Lifecycle.Read)
@@ -148,7 +148,7 @@ model RemediationFilterResult {
 }
 
 /** A parameter used by a remediation method. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationMethodParameter {
   /** The parameter name. */
   @visibility(Lifecycle.Read)
@@ -168,7 +168,7 @@ model RemediationMethodParameter {
 }
 
 /** An ordered action in a remediation method. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationStep {
   /** The one-based position of the step. */
   @minValue(1)
@@ -189,7 +189,7 @@ model RemediationStep {
 }
 
 /** A method for applying a remediation. */
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationMethod {
   /** The display heading for the method. */
   @visibility(Lifecycle.Read)
@@ -224,7 +224,7 @@ model RemediationMethod {
 
 /** The remediation details for an Advisor recommendation type. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This read-only metadata resource describes remediation content and has no provisioning lifecycle."
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model RemediationProperties {
   /** The recommendation type identifier associated with the remediation. */
   @visibility(Lifecycle.Read)
@@ -272,7 +272,7 @@ model RemediationProperties {
 
 /** The remediation information for an Advisor recommendation type. */
 @tenantResource
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 model Remediation
   is Azure.ResourceManager.ProxyResource<RemediationProperties> {
   ...ResourceNameParameter<
@@ -284,7 +284,7 @@ model Remediation
 }
 
 @armResourceOperations
-@added(Versions.v2026_08_12_preview)
+@added(Versions.v2026_09_01_preview)
 interface Remediations {
   /** Gets the approved remediation information for a recommendation type. */
   get is ArmResourceRead<
