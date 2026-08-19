@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model ComponentContainer
-  is Azure.ResourceManager.ProxyResource<ComponentContainerProperties, false> {
+model ComponentContainer is Azure.ResourceManager.ProxyResource<
+  ComponentContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ComponentContainer,
     KeyName = "componentName",

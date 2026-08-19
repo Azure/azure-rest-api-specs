@@ -23,6 +23,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     apiVersion: string;
 
     /** Direct URL to callback for updating validation status */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     callbackUrl: url;
   }
 }

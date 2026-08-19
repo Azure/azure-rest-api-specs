@@ -115,6 +115,7 @@ model MdsResourceProperties {
   @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$")
   aksAdminGroupId?: string = "00000000-0000-0000-0000-000000000000";
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @doc("Service Url")
   serviceUrl?: string;
@@ -402,7 +403,9 @@ interface ManufacturingDataServices {
 
 // note this is a template for an empty body resource action, which will be added to the library at some point
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "This is a template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is a template"
 @armResourceAction(TResource)
 @post
 op ArmResourceListActionSync<

@@ -14,8 +14,10 @@ namespace Microsoft.NetApp;
  * Backup policy information
  */
 @parentResource(NetAppAccount)
-model BackupPolicy
-  is Azure.ResourceManager.TrackedResource<BackupPolicyProperties, false> {
+model BackupPolicy is Azure.ResourceManager.TrackedResource<
+  BackupPolicyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = BackupPolicy,
     KeyName = "backupPolicyName",

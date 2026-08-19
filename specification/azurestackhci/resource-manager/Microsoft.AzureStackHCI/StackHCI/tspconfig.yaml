@@ -8,7 +8,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/azurestackhci
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci/v3
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -46,6 +46,7 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 parameters:
   service-dir:
     default: sdk/azurestackhci

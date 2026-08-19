@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 namespace Search;
 
 /** The input contract for the retrieval request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
   @added(Versions.v2026_05_01_preview)
@@ -55,6 +56,7 @@ model KnowledgeBaseRetrievalRequest {
 }
 
 /** The output contract for the retrieval response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalResponse {
   /** The response messages. */
   response?: KnowledgeBaseMessage[];
@@ -893,6 +895,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.azureBlob;
 
   /** The blob URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   blobUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -909,6 +912,7 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSharePoint;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -923,6 +927,7 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedOneLake;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 
   /** The sensitivity label information for the reference. */
@@ -952,6 +957,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   /** The url the reference data originated from. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
@@ -982,6 +988,7 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
 @added(Versions.v2026_05_01_preview)
 model WorkIQAttribution {
   /** The URL for the attribution. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   seeMoreWebUrl?: url;
 }
 
@@ -1046,6 +1053,7 @@ model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedSql;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   docUrl?: string;
 }
 
@@ -1147,6 +1155,7 @@ model KnowledgeBaseErrorAdditionalInfo {
 }
 
 /** Successful retrieval response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalSuccessResponse {
   /** The retrieval response is successfully returned. */
   @statusCode
@@ -1158,6 +1167,7 @@ model KnowledgeBaseRetrievalSuccessResponse {
 }
 
 /** Partial retrieval response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalPartialResponse {
   /** A partial retrieval response is returned. */
   @statusCode
