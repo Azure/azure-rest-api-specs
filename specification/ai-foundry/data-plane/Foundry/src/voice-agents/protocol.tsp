@@ -215,28 +215,11 @@ model VoiceAgentSessionResponseConfig {
   expires_at?: utcDateTime | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The service request item spans OpenAI's disconnected message-role and item-type roots."
-@doc("A conversation item accepted as inline response input.")
-union VoiceAgentRequestConversationItem {
-  OpenAI.RealtimeConversationItemMessageSystem,
-  OpenAI.RealtimeConversationItemMessageUser,
-  OpenAI.RealtimeConversationItemMessageAssistant,
-  OpenAI.RealtimeConversationItemFunctionCall,
-  OpenAI.RealtimeConversationItemFunctionCallOutput,
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Conversation item creation additionally accepts an MCP approval response."
-@doc("A conversation item accepted by `conversation.item.create`.")
-union VoiceAgentCreateConversationItem {
-  VoiceAgentRequestConversationItem,
-  OpenAI.RealtimeMCPApprovalResponse,
-}
-
 @doc("Parameters accepted by a voice-agent `response.create` event.")
 model VoiceAgentResponseCreateParams {
   ...OmitProperties<
     OpenAI.RealtimeResponseCreateParams,
-    "prompt" | "output_modalities" | "audio"
+    "prompt" | "output_modalities" | "audio" | "input"
   >;
 
   @doc("Modalities that the response may return.")
@@ -245,10 +228,11 @@ model VoiceAgentResponseCreateParams {
   @doc("Response-specific audio settings.")
   audio?: PickProperties<VoiceAudioConfig, "output">;
 
+  @doc("Conversation items used as inline response input.")
+  input?: VoiceConversationItem[];
+
   @doc("A pre-generated assistant message used to begin the response.")
-  pre_generated_assistant_message?:
-    | OpenAI.RealtimeConversationItemMessageAssistant
-    | null;
+  pre_generated_assistant_message?: VoiceAssistantMessageItem | null;
 
   @doc("Interim-response settings for this response.")
   interim_response?: VoiceAgentInterimResponse | null;
@@ -262,27 +246,6 @@ model VoiceAgentResponseEventContentPart {
   format?: VoiceAudioFormat;
 }
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Message items are selected by their `role` property."
-@doc("A role-specific message item returned by the voice-agent runtime.")
-@oneOf
-union VoiceAgentResponseMessageItem {
-  system: OpenAI.RealtimeConversationItemMessageSystem,
-  user: OpenAI.RealtimeConversationItemMessageUser,
-  assistant: OpenAI.RealtimeConversationItemMessageAssistant,
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The runtime response spans the OpenAI item roots plus Foundry tool output kinds."
-@doc("An item returned in a voice-agent response or item event.")
-union VoiceAgentResponseItem {
-  VoiceAgentResponseMessageItem,
-  VoiceFunctionCallItem,
-  VoiceFunctionCallOutputItem,
-  VoiceMcpListToolsItem,
-  VoiceMcpCallItem,
-  VoiceMcpApprovalRequestItem,
-  VoiceMcpApprovalResponseItem,
-}
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract, including conversation_id, while replacing audio and output."
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 model VoiceAgentRealtimeResponse extends OmitProperties<
@@ -293,7 +256,7 @@ model VoiceAgentRealtimeResponse extends OmitProperties<
   audio?: VoiceResponseAudio;
 
   @doc("The items produced by the live response.")
-  output?: VoiceAgentResponseItem[];
+  output?: VoiceConversationItem[];
 }
 
 @doc("A time-stamped word in an input-audio transcription.")
@@ -335,7 +298,7 @@ model VoiceAgentClientEventConversationItemCreate {
   ...OmitProperties<OpenAI.RealtimeClientEventConversationItemCreate, "item">;
 
   @doc("The conversation item to create.")
-  item: VoiceAgentCreateConversationItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `conversation.item.delete` client event.")
@@ -410,7 +373,7 @@ model VoiceAgentServerEventConversationItemAdded {
   ...OmitProperties<OpenAI.RealtimeServerEventConversationItemAdded, "item">;
 
   @doc("The item added to the conversation.")
-  item: VoiceAgentResponseItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `conversation.item.created` server event.")
@@ -419,7 +382,7 @@ model VoiceAgentServerEventConversationItemCreated {
   ...OmitProperties<OpenAI.RealtimeServerEventConversationItemCreated, "item">;
 
   @doc("The created conversation item.")
-  item: VoiceAgentResponseItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `conversation.item.deleted` server event.")
@@ -434,7 +397,7 @@ model VoiceAgentServerEventConversationItemDone {
   ...OmitProperties<OpenAI.RealtimeServerEventConversationItemDone, "item">;
 
   @doc("The completed conversation item.")
-  item: VoiceAgentResponseItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `conversation.item.input_audio_transcription.completed` server event.")
@@ -473,7 +436,7 @@ model VoiceAgentServerEventConversationItemRetrieved {
   >;
 
   @doc("The retrieved conversation item.")
-  item: VoiceAgentResponseItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `conversation.item.truncated` server event.")
@@ -482,7 +445,7 @@ model VoiceAgentServerEventConversationItemTruncated {
   ...OpenAI.RealtimeServerEventConversationItemTruncated;
 
   @doc("The assistant message after truncation, when the service returns the updated item.")
-  item?: OpenAI.RealtimeConversationItemMessageAssistant;
+  item?: VoiceAssistantMessageItem;
 }
 
 @doc("The `input_audio_buffer.cleared` server event.")
@@ -644,7 +607,7 @@ model VoiceAgentServerEventResponseOutputItemAdded {
   ...OmitProperties<OpenAI.RealtimeServerEventResponseOutputItemAdded, "item">;
 
   @doc("The output item that was added.")
-  item: VoiceAgentResponseItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `response.output_item.done` server event.")
@@ -653,7 +616,7 @@ model VoiceAgentServerEventResponseOutputItemDone {
   ...OmitProperties<OpenAI.RealtimeServerEventResponseOutputItemDone, "item">;
 
   @doc("The output item that finished streaming.")
-  item: VoiceAgentResponseItem;
+  item: VoiceConversationItem;
 }
 
 @doc("The `response.output_text.delta` server event.")

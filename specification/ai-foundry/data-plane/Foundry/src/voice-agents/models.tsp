@@ -187,9 +187,11 @@ model VoiceConversationItem {
   type: VoiceConversationItemType;
 
   @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  @visibility(Lifecycle.Read)
   created_at?: FoundryTimestamp;
 
   @doc("The id of the response that produced this item, when applicable.")
+  @visibility(Lifecycle.Read)
   response_id?: string;
 }
 

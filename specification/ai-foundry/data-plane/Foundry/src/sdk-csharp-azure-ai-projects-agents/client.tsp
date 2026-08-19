@@ -394,4 +394,13 @@ namespace Azure.AI.Projects {
     AgentOptimizationDatasetItem.desired_num_turns,
     "DesiredTurnCount"
   );
+
+  // Keep the Voice Agent wire hierarchy local while aligning its generated C#
+  // root with the OpenAI Realtime conversation-item hierarchy.
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The upstream OpenAI package has disconnected message and conversation-item roots; rebase the Voice extension root until that hierarchy is normalized upstream."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    VoiceConversationItem,
+    OpenAI.RealtimeConversationItem,
+    "csharp"
+  );
 }
