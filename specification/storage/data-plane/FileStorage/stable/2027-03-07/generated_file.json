@@ -6497,6 +6497,14 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "enableSmbDirectoryLease"
+          },
+          {
+            "name": "x-ms-file-enable-change-feed",
+            "in": "header",
+            "description": "Optional. Used to enable change feed on the share.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableChangeFeed"
           }
         ],
         "responses": {
@@ -6853,6 +6861,10 @@
               "x-ms-enabled-protocols": {
                 "type": "string",
                 "description": "The enabled protocols for the share."
+              },
+              "x-ms-file-enable-change-feed": {
+                "type": "boolean",
+                "description": "Whether change feed is enabled."
               },
               "x-ms-lease-duration": {
                 "type": "string",
@@ -8570,6 +8582,14 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "enableSmbDirectoryLease"
+          },
+          {
+            "name": "x-ms-file-enable-change-feed",
+            "in": "header",
+            "description": "Optional. Used to enable change feed on the share.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableChangeFeed"
           }
         ],
         "responses": {

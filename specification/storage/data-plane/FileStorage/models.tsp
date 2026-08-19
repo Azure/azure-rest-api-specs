@@ -1755,6 +1755,14 @@ alias EnableSmbDirectoryLeaseHeader = {
   enableSmbDirectoryLease?: boolean;
 };
 
+/** Enable change feed header. */
+alias EnableChangeFeedHeader = {
+  /** Optional. Used to enable change feed on the share. */
+  @added(Versions.v2027_03_07)
+  @header("x-ms-file-enable-change-feed")
+  enableChangeFeed?: boolean;
+};
+
 /** Destination lease ID parameter. */
 alias DestinationLeaseIdParameter = {
   /** Required if the destination has an active lease. */
