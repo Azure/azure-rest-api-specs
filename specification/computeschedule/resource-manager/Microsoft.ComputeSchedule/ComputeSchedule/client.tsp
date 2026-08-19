@@ -626,11 +626,7 @@ model ResourcePatchRequestInput {
 @@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
 @@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
 @@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
-@@clientName(
-  SettingNames,
-  "AdditionalUnattendContentSettingName",
-  "csharp"
-);
+@@clientName(SettingNames, "AdditionalUnattendContentSettingName", "csharp");
 
 // =====================================================================
 // C# property renames: Match Compute SDK property names
