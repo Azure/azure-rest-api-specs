@@ -858,7 +858,7 @@ union VoiceOutputModality {
   definition, so the caller can edit or override any of them afterward via standard agent versioning.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model GenerateVoiceAgentRequest extends GenerateAgentRequest {
+model GenerateVoiceAgentRequest {
   @doc("The agent kind. Always `voice`.")
   kind: AgentKind.voice;
 
@@ -897,4 +897,10 @@ model GenerateVoiceAgentRequest extends GenerateAgentRequest {
     }
   )
   draft?: boolean = false;
+}
+
+@doc("The kind-specific inputs for generating and creating an agent.")
+@oneOf
+union GenerateAgentRequest {
+  voice: GenerateVoiceAgentRequest,
 }

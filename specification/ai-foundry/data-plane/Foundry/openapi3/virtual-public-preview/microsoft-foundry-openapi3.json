@@ -5948,7 +5948,8 @@
                 "$ref": "#/components/schemas/GenerateAgentRequest"
               }
             }
-          }
+          },
+          "description": "The kind-specific inputs for generating and creating an agent."
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -41574,23 +41575,8 @@
         "description": "Details of a function tool call."
       },
       "GenerateAgentRequest": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "$ref": "#/components/schemas/AgentKind",
-            "description": "The kind of agent to generate."
-          }
-        },
-        "discriminator": {
-          "propertyName": "kind",
-          "mapping": {
-            "voice": "#/components/schemas/GenerateVoiceAgentRequest"
-          }
-        },
-        "description": "The inputs for generating and creating an agent. The `kind` discriminator selects the kind-specific authoring contract."
+        "$ref": "#/components/schemas/GenerateVoiceAgentRequest",
+        "description": "The kind-specific inputs for generating and creating an agent."
       },
       "GenerateVoiceAgentRequest": {
         "type": "object",
@@ -41654,11 +41640,6 @@
             "default": false
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GenerateAgentRequest"
-          }
-        ],
         "description": "The inputs for generating a voice agent. Only `kind` and `name` are always required.\nThe authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.\nThe generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent\ndefinition, so the caller can edit or override any of them afterward via standard agent versioning.",
         "x-ms-foundry-meta": {
           "required_previews": [

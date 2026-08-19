@@ -56,7 +56,10 @@ interface Agents {
   @tag("Agents")
   generateAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    GenerateAgentRequest,
+    {
+      /** The kind-specific inputs for generating and creating an agent. */
+      @body body: GenerateAgentRequest;
+    },
     AgentObject
   >;
 
