@@ -8186,6 +8186,18 @@
         }
       }
     },
+    "AppInsightsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Application Insights",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "format": "password",
+          "description": "Application Insights connection string",
+          "x-ms-secret": true
+        }
+      }
+    },
     "AppLogsConfiguration": {
       "type": "object",
       "description": "Configuration of application logs",
@@ -10597,6 +10609,22 @@
         "value"
       ]
     },
+    "DataDogConfiguration": {
+      "type": "object",
+      "description": "Configuration of datadog",
+      "properties": {
+        "site": {
+          "type": "string",
+          "description": "The data dog site"
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "The data dog api key",
+          "x-ms-secret": true
+        }
+      }
+    },
     "DefaultAuthorizationPolicy": {
       "type": "object",
       "description": "The configuration settings of the Azure Active Directory default authorization policy.",
@@ -10679,6 +10707,26 @@
           "type": "string",
           "description": "Detailed error description and debugging information.",
           "readOnly": true
+        }
+      }
+    },
+    "DestinationsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry destinations",
+      "properties": {
+        "dataDogConfiguration": {
+          "$ref": "#/definitions/DataDogConfiguration",
+          "description": "Open telemetry datadog destination configuration"
+        },
+        "otlpConfigurations": {
+          "type": "array",
+          "description": "Open telemetry otlp configurations",
+          "items": {
+            "$ref": "#/definitions/OtlpConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -11381,6 +11429,20 @@
         "validation": {
           "$ref": "#/definitions/AllowedAudiencesValidation",
           "description": "The configuration settings of the Azure Active Directory token validation flow."
+        }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "description": "Header of otlp configuration",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of otlp configuration header"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of otlp configuration header"
         }
       }
     },
@@ -13101,6 +13163,19 @@
         }
       }
     },
+    "LogsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry logs",
+      "properties": {
+        "destinations": {
+          "type": "array",
+          "description": "Open telemetry logs destinations",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "MaintenanceConfigurationCollection": {
       "type": "object",
       "description": "The response of list maintenance configuration resources.",
@@ -13304,165 +13379,6 @@
             "description": "The environment is archived."
           }
         ]
-      }
-    },
-    "AppInsightsConfiguration": {
-      "type": "object",
-      "description": "Configuration of Application Insights",
-      "properties": {
-        "connectionString": {
-          "type": "string",
-          "format": "password",
-          "description": "Application Insights connection string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "DataDogConfiguration": {
-      "type": "object",
-      "description": "Configuration of datadog",
-      "properties": {
-        "site": {
-          "type": "string",
-          "description": "The data dog site"
-        },
-        "key": {
-          "type": "string",
-          "format": "password",
-          "description": "The data dog api key",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "DestinationsConfiguration": {
-      "type": "object",
-      "description": "Configuration of Open Telemetry destinations",
-      "properties": {
-        "dataDogConfiguration": {
-          "$ref": "#/definitions/DataDogConfiguration",
-          "description": "Open telemetry datadog destination configuration"
-        },
-        "otlpConfigurations": {
-          "type": "array",
-          "description": "Open telemetry otlp configurations",
-          "items": {
-            "$ref": "#/definitions/OtlpConfiguration"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "Header": {
-      "type": "object",
-      "description": "Header of otlp configuration",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key of otlp configuration header"
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of otlp configuration header"
-        }
-      }
-    },
-    "LogsConfiguration": {
-      "type": "object",
-      "description": "Configuration of Open Telemetry logs",
-      "properties": {
-        "destinations": {
-          "type": "array",
-          "description": "Open telemetry logs destinations",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MetricsConfiguration": {
-      "type": "object",
-      "description": "Configuration of Open Telemetry metrics",
-      "properties": {
-        "includeKeda": {
-          "type": "boolean",
-          "description": "Boolean indicating if including keda metrics"
-        },
-        "destinations": {
-          "type": "array",
-          "description": "Open telemetry metrics destinations",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "OpenTelemetryConfiguration": {
-      "type": "object",
-      "description": "Configuration of Open Telemetry",
-      "properties": {
-        "destinationsConfiguration": {
-          "$ref": "#/definitions/DestinationsConfiguration",
-          "description": "Open telemetry destinations configuration"
-        },
-        "tracesConfiguration": {
-          "$ref": "#/definitions/TracesConfiguration",
-          "description": "Open telemetry trace configuration"
-        },
-        "logsConfiguration": {
-          "$ref": "#/definitions/LogsConfiguration",
-          "description": "Open telemetry logs configuration"
-        },
-        "metricsConfiguration": {
-          "$ref": "#/definitions/MetricsConfiguration",
-          "description": "Open telemetry metrics configuration"
-        }
-      }
-    },
-    "OtlpConfiguration": {
-      "type": "object",
-      "description": "Configuration of otlp",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of otlp configuration"
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "The endpoint of otlp configuration"
-        },
-        "insecure": {
-          "type": "boolean",
-          "description": "Boolean indicating if otlp configuration is insecure"
-        },
-        "headers": {
-          "type": "array",
-          "description": "Headers of otlp configurations",
-          "items": {
-            "$ref": "#/definitions/Header"
-          },
-          "x-ms-identifiers": [
-            "key"
-          ]
-        }
-      }
-    },
-    "TracesConfiguration": {
-      "type": "object",
-      "description": "Configuration of Open Telemetry traces",
-      "properties": {
-        "includeDapr": {
-          "type": "boolean",
-          "description": "Boolean indicating if including dapr traces"
-        },
-        "destinations": {
-          "type": "array",
-          "description": "Open telemetry traces destinations",
-          "items": {
-            "type": "string"
-          }
-        }
       }
     },
     "ManagedEnvironmentProperties": {
@@ -13724,6 +13640,23 @@
         "identity"
       ]
     },
+    "MetricsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry metrics",
+      "properties": {
+        "includeKeda": {
+          "type": "boolean",
+          "description": "Boolean indicating if including keda metrics"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Open telemetry metrics destinations",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "MigrationEligibilityFailureReason": {
       "type": "object",
       "description": "A blocking reason that prevents a managed environment migration.",
@@ -13865,6 +13798,28 @@
         }
       }
     },
+    "OpenTelemetryConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry",
+      "properties": {
+        "destinationsConfiguration": {
+          "$ref": "#/definitions/DestinationsConfiguration",
+          "description": "Open telemetry destinations configuration"
+        },
+        "tracesConfiguration": {
+          "$ref": "#/definitions/TracesConfiguration",
+          "description": "Open telemetry trace configuration"
+        },
+        "logsConfiguration": {
+          "$ref": "#/definitions/LogsConfiguration",
+          "description": "Open telemetry logs configuration"
+        },
+        "metricsConfiguration": {
+          "$ref": "#/definitions/MetricsConfiguration",
+          "description": "Open telemetry metrics configuration"
+        }
+      }
+    },
     "OperationDetail": {
       "type": "object",
       "description": "Operation detail payload",
@@ -13906,6 +13861,34 @@
         "description": {
           "type": "string",
           "description": "Localized friendly description for the operation"
+        }
+      }
+    },
+    "OtlpConfiguration": {
+      "type": "object",
+      "description": "Configuration of otlp",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of otlp configuration"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint of otlp configuration"
+        },
+        "insecure": {
+          "type": "boolean",
+          "description": "Boolean indicating if otlp configuration is insecure"
+        },
+        "headers": {
+          "type": "array",
+          "description": "Headers of otlp configurations",
+          "items": {
+            "$ref": "#/definitions/Header"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -15573,6 +15556,23 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/BlobStorageTokenStore",
           "description": "The configuration settings of the storage of the tokens if blob storage is used."
+        }
+      }
+    },
+    "TracesConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry traces",
+      "properties": {
+        "includeDapr": {
+          "type": "boolean",
+          "description": "Boolean indicating if including dapr traces"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Open telemetry traces destinations",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
