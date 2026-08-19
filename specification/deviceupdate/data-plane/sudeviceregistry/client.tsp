@@ -33,4 +33,4 @@ using DeviceRegistrySoftwareUpdateClient;
 @@clientName(Compatibility, "SoftwareUpdateCompatibility", "csharp");
 @@clientName(Instructions, "SoftwareUpdateInstructions", "csharp");
 @@clientName(Step, "SoftwareUpdateStep", "csharp");
-@@clientName(Update, "SoftwareUpdate", "csharp");
+@@clientName(DeviceRegistrySoftwareUpdateClient.Update, "SoftwareUpdate", "csharp");
