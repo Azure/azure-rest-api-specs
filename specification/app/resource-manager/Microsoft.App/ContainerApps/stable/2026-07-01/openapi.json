@@ -1920,6 +1920,9 @@
           "Create or Update Container App": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate.json"
           },
+          "Create or Update Container App with per-app outbound VNet subnet": {
+            "$ref": "./examples/ContainerApps_CreateOrUpdate_Networking.json"
+          },
           "Create or Update FunctionApp Kind": {
             "$ref": "./examples/ContainerApps_Kind_FunctionApp_CreateOrUpdate.json"
           },
@@ -9561,6 +9564,20 @@
         "value"
       ]
     },
+    "ContainerAppNetworkingConfiguration": {
+      "type": "object",
+      "description": "Networking configuration for a Container App. Only supported for Container Apps deployed into an Express managed environment.",
+      "properties": {
+        "outboundVnetSubnetId": {
+          "type": "string",
+          "description": "Resource ID of a subnet used for outbound (egress) traffic from this Container App. Only supported for Container Apps in an Express managed environment. Mutually exclusive with the environment-level VNet configuration and immutable after the Container App is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
     "ContainerAppProbe": {
       "type": "object",
       "description": "Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.",
@@ -9710,6 +9727,10 @@
             "read",
             "create"
           ]
+        },
+        "networking": {
+          "$ref": "#/definitions/ContainerAppNetworkingConfiguration",
+          "description": "Networking configuration for the Container App."
         },
         "workloadProfileName": {
           "type": "string",
