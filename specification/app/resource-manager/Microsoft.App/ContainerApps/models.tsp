@@ -1623,28 +1623,27 @@ model BlobStorageTokenStore {
   /**
    * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
    */
-  @madeRequired(Versions.v2026_01_01)
-  sasUrlSettingName: string;
+  sasUrlSettingName?: string;
 
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   managedIdentityResourceId?: string;
 }
 
@@ -2689,14 +2688,14 @@ model ManagedEnvironmentProperties {
    * Environment level Application Insights configuration
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
@@ -4364,7 +4363,7 @@ model JobExecutionProperties {
    * Detailed status of the job execution.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   detailedStatus?: ExecutionStatus;
 
   /**
@@ -4372,7 +4371,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   reason?: string;
 
   /**
@@ -4380,7 +4379,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   message?: string;
 }
 

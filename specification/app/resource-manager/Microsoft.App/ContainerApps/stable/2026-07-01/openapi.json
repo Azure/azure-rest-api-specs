@@ -8257,6 +8257,18 @@
         }
       }
     },
+    "AppInsightsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Application Insights",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "format": "password",
+          "description": "Application Insights connection string",
+          "x-ms-secret": true
+        }
+      }
+    },
     "AppLogsConfiguration": {
       "type": "object",
       "description": "Configuration of application logs",
@@ -8855,11 +8867,20 @@
         "sasUrlSettingName": {
           "type": "string",
           "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens."
+        },
+        "blobContainerUri": {
+          "type": "string",
+          "description": "The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId."
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId."
         }
-      },
-      "required": [
-        "sasUrlSettingName"
-      ]
+      }
     },
     "Certificate": {
       "type": "object",
@@ -9950,6 +9971,29 @@
         }
       }
     },
+    "ContainerExecutionStatus": {
+      "type": "object",
+      "description": "Container Apps Job execution container status. Contains status code and reason",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Container Name."
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exit code"
+        },
+        "additionalInformation": {
+          "type": "string",
+          "description": "Additional information for the container status"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the container"
+        }
+      }
+    },
     "ContainerResources": {
       "type": "object",
       "description": "Container App container resource requirements.",
@@ -10668,6 +10712,22 @@
         "value"
       ]
     },
+    "DataDogConfiguration": {
+      "type": "object",
+      "description": "Configuration of datadog",
+      "properties": {
+        "site": {
+          "type": "string",
+          "description": "The data dog site"
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "The data dog api key",
+          "x-ms-secret": true
+        }
+      }
+    },
     "DefaultAuthorizationPolicy": {
       "type": "object",
       "description": "The configuration settings of the Azure Active Directory default authorization policy.",
@@ -10750,6 +10810,26 @@
           "type": "string",
           "description": "Detailed error description and debugging information.",
           "readOnly": true
+        }
+      }
+    },
+    "DestinationsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry destinations",
+      "properties": {
+        "dataDogConfiguration": {
+          "$ref": "#/definitions/DataDogConfiguration",
+          "description": "Open telemetry datadog destination configuration"
+        },
+        "otlpConfigurations": {
+          "type": "array",
+          "description": "Open telemetry otlp configurations",
+          "items": {
+            "$ref": "#/definitions/OtlpConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -11244,6 +11324,22 @@
         }
       }
     },
+    "ExecutionStatus": {
+      "type": "object",
+      "description": "Container Apps Job execution status.",
+      "properties": {
+        "replicas": {
+          "type": "array",
+          "description": "Replicas in the execution.",
+          "items": {
+            "$ref": "#/definitions/ReplicaExecutionStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The complex type of the extended location.",
@@ -11452,6 +11548,20 @@
         "validation": {
           "$ref": "#/definitions/AllowedAudiencesValidation",
           "description": "The configuration settings of the Azure Active Directory token validation flow."
+        }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "description": "Header of otlp configuration",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of otlp configuration header"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of otlp configuration header"
         }
       }
     },
@@ -12567,6 +12677,20 @@
         "template": {
           "$ref": "#/definitions/JobExecutionTemplate",
           "description": "Job's execution container."
+        },
+        "detailedStatus": {
+          "$ref": "#/definitions/ExecutionStatus",
+          "description": "Detailed status of the job execution."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the current condition of job execution.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable message indicating details about the current condition of the job execution.",
+          "readOnly": true
         }
       }
     },
@@ -13172,6 +13296,19 @@
         }
       }
     },
+    "LogsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry logs",
+      "properties": {
+        "destinations": {
+          "type": "array",
+          "description": "Open telemetry logs destinations",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "MaintenanceConfigurationCollection": {
       "type": "object",
       "description": "The response of list maintenance configuration resources.",
@@ -13421,6 +13558,14 @@
           "$ref": "#/definitions/AppLogsConfiguration",
           "description": "Cluster configuration which enables the log daemon to export app logs to configured destination"
         },
+        "appInsightsConfiguration": {
+          "$ref": "#/definitions/AppInsightsConfiguration",
+          "description": "Environment level Application Insights configuration"
+        },
+        "openTelemetryConfiguration": {
+          "$ref": "#/definitions/OpenTelemetryConfiguration",
+          "description": "Environment Open Telemetry configuration"
+        },
         "zoneRedundant": {
           "type": "boolean",
           "description": "Whether or not this Managed Environment is zone-redundant.",
@@ -13628,6 +13773,23 @@
         "identity"
       ]
     },
+    "MetricsConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry metrics",
+      "properties": {
+        "includeKeda": {
+          "type": "boolean",
+          "description": "Boolean indicating if including keda metrics"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Open telemetry metrics destinations",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "MigrationEligibilityFailureReason": {
       "type": "object",
       "description": "A blocking reason that prevents a managed environment migration.",
@@ -13769,6 +13931,28 @@
         }
       }
     },
+    "OpenTelemetryConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry",
+      "properties": {
+        "destinationsConfiguration": {
+          "$ref": "#/definitions/DestinationsConfiguration",
+          "description": "Open telemetry destinations configuration"
+        },
+        "tracesConfiguration": {
+          "$ref": "#/definitions/TracesConfiguration",
+          "description": "Open telemetry trace configuration"
+        },
+        "logsConfiguration": {
+          "$ref": "#/definitions/LogsConfiguration",
+          "description": "Open telemetry logs configuration"
+        },
+        "metricsConfiguration": {
+          "$ref": "#/definitions/MetricsConfiguration",
+          "description": "Open telemetry metrics configuration"
+        }
+      }
+    },
     "OperationDetail": {
       "type": "object",
       "description": "Operation detail payload",
@@ -13810,6 +13994,34 @@
         "description": {
           "type": "string",
           "description": "Localized friendly description for the operation"
+        }
+      }
+    },
+    "OtlpConfiguration": {
+      "type": "object",
+      "description": "Configuration of otlp",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of otlp configuration"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint of otlp configuration"
+        },
+        "insecure": {
+          "type": "boolean",
+          "description": "Boolean indicating if otlp configuration is insecure"
+        },
+        "headers": {
+          "type": "array",
+          "description": "Headers of otlp configurations",
+          "items": {
+            "$ref": "#/definitions/Header"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -14265,6 +14477,26 @@
           "type": "string",
           "description": "Container exec endpoint",
           "readOnly": true
+        }
+      }
+    },
+    "ReplicaExecutionStatus": {
+      "type": "object",
+      "description": "Container Apps Job execution replica status.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Replica Name."
+        },
+        "containers": {
+          "type": "array",
+          "description": "Containers in the execution replica",
+          "items": {
+            "$ref": "#/definitions/ContainerExecutionStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -15635,6 +15867,23 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/BlobStorageTokenStore",
           "description": "The configuration settings of the storage of the tokens if blob storage is used."
+        }
+      }
+    },
+    "TracesConfiguration": {
+      "type": "object",
+      "description": "Configuration of Open Telemetry traces",
+      "properties": {
+        "includeDapr": {
+          "type": "boolean",
+          "description": "Boolean indicating if including dapr traces"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Open telemetry traces destinations",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
