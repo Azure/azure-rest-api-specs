@@ -83,6 +83,13 @@ list(
 }
 
 
+/** The request is invalid. */
+@error
+@doc("BadRequest")
+model RecoveryPointGetAccessTokenBadRequest {
+  ...TypeSpec.Http.Response<400>;
+}
+
 @tag("RecoveryPoints_GetAccessToken")
 @armResourceOperations(#{ omitTags: true })
 interface RecoveryPointGetAccessToken {
@@ -90,10 +97,15 @@ interface RecoveryPointGetAccessToken {
 * Returns the Access token for communication between BMS and Protection service
 */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Preserves the existing 400 response for backward compatibility"
 @operationId("RecoveryPoints_GetAccessToken")
 @summary("Returns the Access token for communication between BMS and Protection service")
 @action("accessToken")
-getAccessToken is ArmResourceActionSync<RecoveryPointResource, AADPropertiesResource, ArmResponse<CrrAccessTokenResource>>;
+getAccessToken is ArmResourceActionSync<
+  RecoveryPointResource,
+  AADPropertiesResource,
+  ArmResponse<CrrAccessTokenResource> | RecoveryPointGetAccessTokenBadRequest
+>;
 
 
 }
