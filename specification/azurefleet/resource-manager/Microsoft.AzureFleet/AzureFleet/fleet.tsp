@@ -104,11 +104,11 @@ model FleetProperties {
   uniqueId?: string;
 
   /** Mode of the Fleet. */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_04_01_preview)
   mode?: FleetMode;
 
   /** VirtualMachine prefix to be used for the virtual machines launched by Fleet. Can be used only with Launch mode. */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_04_01_preview)
   @pattern("^[^_\\W][\\w\\-._]{0,64}(?<![-.])$")
   vmNamePrefix?: string;
 
@@ -117,8 +117,12 @@ model FleetProperties {
    * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
    * Specifying different capacity type for Fleet Regular and Spot priority profiles is not allowed.
    */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_04_01_preview)
   capacityType?: CapacityType;
+
+  /** Zone Allocation Policy for Fleet. */
+  @added(Versions.v2026_04_01_preview)
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
 @doc("Compute Profile to use for running user's workloads.")
@@ -535,7 +539,7 @@ model AdditionalLocationsProfile {
 }
 
 /** Modes for Compute Fleet. */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_04_01_preview)
 union FleetMode {
   string,
 
@@ -547,7 +551,7 @@ union FleetMode {
 }
 
 /** Capacity types for Compute Fleet. */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_04_01_preview)
 union CapacityType {
   string,
 
@@ -562,7 +566,7 @@ union CapacityType {
 }
 
 /** ZoneAllocationPolicy for Compute Fleet. */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_04_01_preview)
 model ZoneAllocationPolicy {
   /** Distribution strategy used for zone allocation policy. */
   distributionStrategy: ZoneDistributionStrategy;
@@ -573,7 +577,7 @@ model ZoneAllocationPolicy {
 }
 
 /** Distribution strategies for Compute Fleet zone allocation policy. */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_04_01_preview)
 union ZoneDistributionStrategy {
   string,
 
@@ -591,7 +595,7 @@ union ZoneDistributionStrategy {
 }
 
 /** Zone preferences for Compute Fleet zone allocation policy. */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_04_01_preview)
 model ZonePreference {
   /** Name of the zone. */
   zone: string;
@@ -654,7 +658,7 @@ interface Fleets {
   >;
 
   /** List VirtualMachine resources of a Launch mode Fleet. */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_04_01_preview)
   @action("virtualMachines")
   @list
   @get
