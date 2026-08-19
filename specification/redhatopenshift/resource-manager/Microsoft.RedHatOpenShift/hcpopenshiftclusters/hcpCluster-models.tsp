@@ -1023,6 +1023,13 @@ scalar DiskEncryptionSetResourceId
  * =======================================
  */
 
+/** HCP cluster admin credential request body */
+@added(Versions.v2026_09_01_preview)
+model HcpOpenShiftClusterAdminCredentialRequest {
+  /** PEM encoded certificate request */
+  certificateSigningRequest?: string;
+}
+
 /** HCP cluster admin credential */
 model HcpOpenShiftClusterAdminCredential {
   /** Admin kubeconfig with a temporary client certificate */
