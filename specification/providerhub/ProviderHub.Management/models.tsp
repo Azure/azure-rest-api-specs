@@ -5560,51 +5560,16 @@ model ManifestInfoProperties {
   manifest?: string;
 
   /**
+   * The URI the manifest content is read from when the manifest is not supplied inline.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  manifestUri?: string;
+
+  /**
    * The manifest commit identifier.
    */
+  @visibility(Lifecycle.Read)
   commitId?: string;
-
-  /**
-   * The manifest status.
-   */
-  status?: ManifestStatusProperties;
-}
-
-/**
- * The manifest status.
- */
-@added(Versions.v2025_10_01)
-model ManifestStatusProperties {
-  /**
-   * Whether the manifest is checked in.
-   */
-  isCheckedIn?: boolean;
-
-  /**
-   * The status message.
-   */
-  statusMessage?: string;
-
-  /**
-   * The pull request.
-   */
-  pullRequest?: string;
-}
-
-/**
- * The manifests content properties supplied to the CreateOrUpdate manifests.
- */
-@added(Versions.v2025_10_01)
-model ManifestPutContent {
-  /**
-   * The manifest.
-   */
-  manifest?: string;
-
-  /**
-   * The manifest URI.
-   */
-  manifestUri?: string;
 }
 
 /**

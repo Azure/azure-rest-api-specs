@@ -1413,10 +1413,10 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The manifests content properties supplied to the CreateOrUpdate manifests.",
+            "description": "The manifest supplied to the CreateOrUpdate manifests operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManifestPutContent"
+              "$ref": "#/definitions/ManifestInfo"
             }
           }
         ],
@@ -6271,13 +6271,18 @@
           "type": "string",
           "description": "The manifest."
         },
+        "manifestUri": {
+          "type": "string",
+          "description": "The URI the manifest content is read from when the manifest is not supplied inline.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
         "commitId": {
           "type": "string",
-          "description": "The manifest commit identifier."
-        },
-        "status": {
-          "$ref": "#/definitions/ManifestStatusProperties",
-          "description": "The manifest status."
+          "description": "The manifest commit identifier.",
+          "readOnly": true
         }
       }
     },
@@ -6293,38 +6298,6 @@
           "x-ms-identifiers": [
             "accountName"
           ]
-        }
-      }
-    },
-    "ManifestPutContent": {
-      "type": "object",
-      "description": "The manifests content properties supplied to the CreateOrUpdate manifests.",
-      "properties": {
-        "manifest": {
-          "type": "string",
-          "description": "The manifest."
-        },
-        "manifestUri": {
-          "type": "string",
-          "description": "The manifest URI."
-        }
-      }
-    },
-    "ManifestStatusProperties": {
-      "type": "object",
-      "description": "The manifest status.",
-      "properties": {
-        "isCheckedIn": {
-          "type": "boolean",
-          "description": "Whether the manifest is checked in."
-        },
-        "statusMessage": {
-          "type": "string",
-          "description": "The status message."
-        },
-        "pullRequest": {
-          "type": "string",
-          "description": "The pull request."
         }
       }
     },

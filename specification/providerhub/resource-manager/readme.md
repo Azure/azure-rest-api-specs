@@ -48,16 +48,11 @@ directive:
       - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
       - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
     reason: This version requires metadata to be defined as an additional property or has already been there which will break customers if we change now.
-  - suppress: PutRequestResponseSchemeArm
-    from: providerhub.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
-    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
   - suppress: PutResponseCodes
     from: providerhub.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
-    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+    reason: The manifest is checked in to the manifest repository rather than persisted as an ARM resource, so the service only ever returns 200. Declaring a 201 would document a response the service never sends.
   - suppress: DeleteResponseCodes
     from: providerhub.json
     where:
@@ -77,7 +72,7 @@ directive:
     from: providerhub.json
     where:
       - $.definitions.ManifestInfo
-    reason: The GET manifest operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}" returns a manifest information. The name of the operation cannot be changed at this point.
+    reason: The service exposes the manifest only for a specific environment; there is no API to enumerate manifests across environments, so a collection GET cannot be documented.
 ```
 
 ### Tag: package-2025-10-01
@@ -96,16 +91,11 @@ directive:
       - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
       - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
     reason: This version requires metadata to be defined as an additional property or has already been there which will break customers if we change now.
-  - suppress: PutRequestResponseSchemeArm
-    from: providerhub.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
-    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
   - suppress: PutResponseCodes
     from: providerhub.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
-    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+    reason: The manifest is checked in to the manifest repository rather than persisted as an ARM resource, so the service only ever returns 200. Declaring a 201 would document a response the service never sends.
   - suppress: DeleteResponseCodes
     from: providerhub.json
     where:
@@ -125,7 +115,7 @@ directive:
     from: providerhub.json
     where:
       - $.definitions.ManifestInfo
-    reason: The GET manifest operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}" returns a manifest information. The name of the operation cannot be changed at this point.
+    reason: The service exposes the manifest only for a specific environment; there is no API to enumerate manifests across environments, so a collection GET cannot be documented.
   - suppress: AddedRequiredProperty
     from: providerhub.json
     where:

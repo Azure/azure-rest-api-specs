@@ -62,10 +62,9 @@ interface Manifests {
   /**
    * Creates or Updates a manifest in manifest repository.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service returns only 200 for this operation; changing it would break existing clients."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The manifest is checked in to the manifest repository rather than persisted as an ARM resource, so the service only ever returns 200; it never returns 201."
   createOrUpdate is ManifestOps.CreateOrUpdateSync<
     ManifestInfo,
-    Request = ManifestPutContent,
     Response = ArmResponse<ManifestInfo>
   >;
 }
@@ -74,5 +73,5 @@ interface Manifests {
 @@doc(ManifestInfo.properties, "The manifest properties.");
 @@doc(
   Manifests.createOrUpdate::parameters.resource,
-  "The manifests content properties supplied to the CreateOrUpdate manifests."
+  "The manifest supplied to the CreateOrUpdate manifests operation."
 );
