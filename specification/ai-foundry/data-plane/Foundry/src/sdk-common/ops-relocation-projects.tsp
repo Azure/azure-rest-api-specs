@@ -7,6 +7,9 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
 
+interface Budget {}
+@@clientLocation(Azure.AI.Projects.Budget.list, Budget);
+
 interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.listVersions, Models);
 @@clientLocation(Azure.AI.Projects.Models.listLatest, Models);

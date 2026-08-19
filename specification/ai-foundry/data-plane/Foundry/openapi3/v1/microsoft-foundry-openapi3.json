@@ -4638,6 +4638,75 @@
         }
       }
     },
+    "/budget-policies/{policyName}/usage": {
+      "get": {
+        "operationId": "Budget_list",
+        "summary": "List budget policy usage",
+        "description": "Lists the current usage counters for the specified budget policy.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/BudgetUsageListRequest.policyName"
+          },
+          {
+            "$ref": "#/components/parameters/BudgetUsageListOptions.dimension"
+          },
+          {
+            "$ref": "#/components/parameters/BudgetUsageListOptions.value"
+          },
+          {
+            "$ref": "#/components/parameters/BudgetUsageListOptions.top"
+          },
+          {
+            "$ref": "#/components/parameters/BudgetUsageListOptions.maxpagesize"
+          },
+          {
+            "$ref": "#/components/parameters/BudgetUsageListOptions.skipToken"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetUsageListResult"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections": {
       "get": {
         "operationId": "Connections_list",
@@ -28934,6 +29003,72 @@
         },
         "explode": false
       },
+      "BudgetUsageListOptions.dimension": {
+        "name": "dimension",
+        "in": "query",
+        "required": true,
+        "description": "The dimension used to select budget usage counters.",
+        "schema": {
+          "$ref": "#/components/schemas/BudgetUsageDimension"
+        },
+        "explode": false
+      },
+      "BudgetUsageListOptions.maxpagesize": {
+        "name": "maxpagesize",
+        "in": "query",
+        "required": false,
+        "description": "The maximum number of rows to return in one page.",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 100
+        },
+        "explode": false
+      },
+      "BudgetUsageListOptions.skipToken": {
+        "name": "skipToken",
+        "in": "query",
+        "required": false,
+        "description": "The opaque continuation token from a previous response.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "BudgetUsageListOptions.top": {
+        "name": "top",
+        "in": "query",
+        "required": false,
+        "description": "The caller-accepted maximum number of rows to return across all pages.",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "explode": false
+      },
+      "BudgetUsageListOptions.value": {
+        "name": "value",
+        "in": "query",
+        "required": false,
+        "description": "A specific resolved value of the selected dimension.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "BudgetUsageListRequest.policyName": {
+        "name": "policyName",
+        "in": "path",
+        "required": true,
+        "description": "The stable name of the budget policy under the owning account.",
+        "schema": {
+          "type": "string"
+        }
+      },
       "CreateOrUpdateRoutineParameters.routine_name": {
         "name": "routine_name",
         "in": "path",
@@ -33433,6 +33568,194 @@
             "preview_tool"
           ]
         }
+      },
+      "BudgetCounterKeyPart": {
+        "type": "object",
+        "required": [
+          "type",
+          "attribute",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The counter key dimension type."
+          },
+          "attribute": {
+            "type": "string",
+            "description": "The canonical attribute used to resolve the counter key."
+          },
+          "value": {
+            "type": "string",
+            "description": "The resolved value of the counter key attribute."
+          }
+        },
+        "description": "A component of a potentially composite budget counter key."
+      },
+      "BudgetCounterKeyState": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "active",
+              "unavailable"
+            ]
+          }
+        ],
+        "description": "The availability state of a budget counter key."
+      },
+      "BudgetPeriod": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "minute",
+              "hour",
+              "day",
+              "week",
+              "month"
+            ]
+          }
+        ],
+        "description": "The recurrence period for budget evaluation."
+      },
+      "BudgetUnit": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "usd"
+            ]
+          }
+        ],
+        "description": "The unit used for budget values."
+      },
+      "BudgetUsage": {
+        "type": "object",
+        "required": [
+          "ruleName",
+          "counterKey",
+          "unit",
+          "limit",
+          "recurring",
+          "period",
+          "counterKeyState"
+        ],
+        "properties": {
+          "ruleName": {
+            "type": "string",
+            "description": "The stable name of the budget policy rule."
+          },
+          "counterKey": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BudgetCounterKeyPart"
+            },
+            "description": "The resolved counter key associated with this usage."
+          },
+          "unit": {
+            "$ref": "#/components/schemas/BudgetUnit",
+            "description": "The unit used by the consumed, limit, and remaining values."
+          },
+          "consumed": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "The reconciled consumption at the response watermark, if available."
+          },
+          "limit": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "The configured budget ceiling for this counter and window."
+          },
+          "remaining": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "The non-negative difference between the limit and consumed values, if available."
+          },
+          "recurring": {
+            "type": "boolean",
+            "description": "Whether the budget replenishes on a recurring window."
+          },
+          "period": {
+            "$ref": "#/components/schemas/BudgetPeriod",
+            "description": "The calendar-aligned period used by the budget rule."
+          },
+          "periodStart": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The inclusive UTC start of the active window, if available."
+          },
+          "periodEnd": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The exclusive UTC end of the active window, if the budget recurs."
+          },
+          "counterKeyState": {
+            "$ref": "#/components/schemas/BudgetCounterKeyState",
+            "description": "Indicates whether this row contains a durable counter measurement."
+          }
+        },
+        "description": "The consumption recorded for a budget rule, counter key, and window."
+      },
+      "BudgetUsageDimension": {
+        "type": "string",
+        "enum": [
+          "agent",
+          "identity",
+          "session",
+          "project"
+        ],
+        "description": "The dimension used to select budget usage counters."
+      },
+      "BudgetUsageListResult": {
+        "type": "object",
+        "required": [
+          "policyId",
+          "asOf",
+          "stalenessBoundSeconds",
+          "value"
+        ],
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "description": "The canonical Azure resource identifier of the budget policy."
+          },
+          "asOf": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The oldest UTC watermark represented by the usage rows."
+          },
+          "stalenessBoundSeconds": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "The maximum documented lag of this view, in seconds."
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BudgetUsage"
+            },
+            "description": "The budget usage rows in this page."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The path-relative link to the next page of results."
+          }
+        },
+        "description": "A page of budget policy usage."
       },
       "CaptureStructuredOutputsTool": {
         "type": "object",
