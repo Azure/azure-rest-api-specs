@@ -3811,27 +3811,6 @@
         ]
       }
     },
-    "ZoneAllocationPolicy": {
-      "type": "object",
-      "description": "ZoneAllocationPolicy for Compute Fleet.",
-      "properties": {
-        "distributionStrategy": {
-          "$ref": "#/definitions/ZoneDistributionStrategy",
-          "description": "Distribution strategy used for zone allocation policy."
-        },
-        "zonePreferences": {
-          "type": "array",
-          "description": "Zone preferences, required when zone distribution strategy is Prioritized.",
-          "items": {
-            "$ref": "#/definitions/ZonePreference"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "distributionStrategy"
-      ]
-    },
     "ZoneDistributionStrategy": {
       "type": "string",
       "description": "Distribution strategies for Compute Fleet zone allocation policy.",
