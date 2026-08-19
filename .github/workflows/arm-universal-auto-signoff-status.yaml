@@ -1,0 +1,94 @@
+# Pilot workflow for universal ARM auto-signoff. Once enforcement is enabled, rename this workflow
+# to "ARM Auto SignOff - Set Status" and remove the legacy workflow with that name.
+name: ARM Universal Auto SignOff - Set Status
+
+on:
+  # These events run the workflow definition from the base/default branch. Do not execute PR-head code.
+  pull_request_target:
+    types:
+      # Re-evaluate immediately when the PR head or its policy-relevant labels change.
+      - opened
+      - synchronize
+      - reopened
+      - edited
+      - labeled
+      - unlabeled
+  workflow_run:
+    # Re-evaluate as each mandatory status producer completes.
+    workflows: ["Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+  pull-requests: read
+  statuses: read
+
+jobs:
+  arm-universal-auto-signoff-status:
+    name: ARM Universal Auto SignOff - Status
+    # workflow_run is already filtered above. For pull_request_target, run for PR-head changes
+    # and only for labels that can affect eligibility.
+    if: |
+      github.event_name == 'workflow_run' ||
+      (github.event_name == 'pull_request_target' &&
+       (github.event.action == 'opened' ||
+        github.event.action == 'synchronize' ||
+        github.event.action == 'reopened' ||
+        github.event.action == 'edited' ||
+        ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
+         (github.event.label.name == 'Approved-Suppression' ||
+          github.event.label.name == 'ARMAutoSignedOff-Test' ||
+          github.event.label.name == 'ARMReviewerSignoffRequired' ||
+          github.event.label.name == 'ARMReview' ||
+          github.event.label.name == 'NotReadyForARMReview' ||
+          github.event.label.name == 'SuppressionReviewRequired'))))
+
+    runs-on: ubuntu-slim
+
+    steps:
+      # This workflow runs with trusted events. Never check out or execute PR-head code here.
+      - uses: actions/checkout@v7
+        with:
+          # Only the base/default branch automation is needed.
+          sparse-checkout: |
+            .github
+
+      - id: get-label-action
+        name: ARM Universal Auto SignOff - Status
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: getLabelAction } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff-status.js');
+            return await getLabelAction({ github, context, core });
+
+      # Pilot mode owns only the test label; it never changes ARMSignedOff.
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff-Test label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-Test"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] == 'add' }}"
+
+      # The label updater uses these trusted artifacts to associate this workflow run with its PR.
+      - if: |
+          always() &&
+          github.event_name == 'workflow_run' &&
+          fromJson(steps.get-label-action.outputs.result).headSha
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
+
+      - if: |
+          always() &&
+          github.event_name == 'workflow_run' &&
+          fromJson(steps.get-label-action.outputs.result).issueNumber > 0
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
