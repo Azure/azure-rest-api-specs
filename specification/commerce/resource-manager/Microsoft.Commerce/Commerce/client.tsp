@@ -12,6 +12,7 @@ using Microsoft.Commerce;
   "csharp"
 );
 @@clientName(RecurringCharge.RecurringCharge, "Amount", "csharp");
+@@clientName(OfferTermInfoName, "KnownOfferTermInfoName", "csharp");
 
 /** Name of the offer term. */
 union OfferTermInfoNameForCSharp {
