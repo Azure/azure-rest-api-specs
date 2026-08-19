@@ -24289,8 +24289,6 @@ model HubVirtualNetworkConnectionProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the NRP wire contract property casing."
   @added(Versions.v2025_09_01)
-  @renamedFrom(Versions.v2026_01_01, "enableOnlyIpv6Peering")
-  @typeChangedFrom(Versions.v2026_01_01, EnableOnlyIpv6PeeringState)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableOnlyIPv6Peering?: boolean;
 
@@ -24299,23 +24297,6 @@ model HubVirtualNetworkConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-/**
- * The state of IPv6 peering.
- */
-union EnableOnlyIpv6PeeringState {
-  string,
-
-  /**
-   * IPv6 peering is enabled.
-   */
-  Enabled: "Enabled",
-
-  /**
-   * IPv6 peering is disabled.
-   */
-  Disabled: "Disabled",
 }
 
 /**
