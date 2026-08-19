@@ -3,22 +3,19 @@
     "api-version": "2026-09-01",
     "clusterName": "cache1",
     "databaseName": "default",
-    "parameters": {
-      "ids": [
-        "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default"
-      ]
-    },
     "resourceGroupName": "rg1",
-    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f",
+    "body": {
+      "rollbackReason": "performance"
+    }
   },
   "responses": {
-    "200": {},
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus..."
       }
     }
   },
-  "operationId": "Databases_Flush",
-  "title": "How to flush all the keys in the database"
+  "operationId": "Migrations_Undo",
+  "title": "RedisEnterpriseMigrationUndo"
 }
