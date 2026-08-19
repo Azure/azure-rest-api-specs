@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -1789,6 +1791,50 @@ model AvailableWorkloadProfileProperties {
    * The everyday name of the workload profile.
    */
   displayName?: string;
+}
+
+/**
+ * Collection of environment modes available in the location.
+ */
+@added(Versions.v2026_03_02_preview)
+model AvailableEnvironmentModesCollection
+  is Azure.Core.Page<AvailableEnvironmentMode>;
+
+/**
+ * An environment mode available to the subscription.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The service returns the standard proxy resource envelope for each available environment mode."
+@added(Versions.v2026_03_02_preview)
+model AvailableEnvironmentMode
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * The Azure region in which the environment mode is available.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * The environment mode details.
+   */
+  properties?: AvailableEnvironmentModeProperties;
+}
+
+/**
+ * Details that describe an available environment mode.
+ */
+@added(Versions.v2026_03_02_preview)
+model AvailableEnvironmentModeProperties {
+  /**
+   * The display name of the environment mode.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The description of the environment mode.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**

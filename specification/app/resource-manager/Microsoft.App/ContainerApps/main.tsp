@@ -59,7 +59,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ContainerApps API Client" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.App;
 
 /**
@@ -69,7 +68,15 @@ enum Versions {
   /**
    * The 2025-10-02-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_10_02_preview: "2025-10-02-preview",
+
+  /**
+   * The 2026-03-02-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_03_02_preview: "2026-03-02-preview",
 }
 
 interface Operations

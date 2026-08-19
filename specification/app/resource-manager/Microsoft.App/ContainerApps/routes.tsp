@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -27,7 +29,27 @@ interface AvailableWorkloadProfilesOperationGroup {
   get is ArmProviderActionSync<
     Response = AvailableWorkloadProfilesCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface exposes a subscription-level provider operation rather than operations on an ARM resource."
+@added(Versions.v2026_03_02_preview)
+interface AvailableEnvironmentModesOperationGroup {
+  /**
+   * Gets the environment modes available to a subscription in a location.
+   */
+  @summary("Get available environment modes by location.")
+  @autoRoute
+  @get
+  @list
+  @action("availableManagedEnvironmentsModes")
+  @tag("AvailableEnvironmentModes")
+  list is ArmProviderActionSync<
+    Response = AvailableEnvironmentModesCollection,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter,
+    Error = DefaultErrorResponse
   >;
 }
 
@@ -44,7 +66,7 @@ interface BillingMetersOperationGroup {
   get is ArmProviderActionSync<
     Response = BillingMeterCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }
@@ -77,7 +99,7 @@ interface UsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }
