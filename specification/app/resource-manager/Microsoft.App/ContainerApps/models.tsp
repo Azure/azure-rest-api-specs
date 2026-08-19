@@ -8588,7 +8588,6 @@ model ReplicaContainer {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
   debugEndpoint?: string;
 }
 
