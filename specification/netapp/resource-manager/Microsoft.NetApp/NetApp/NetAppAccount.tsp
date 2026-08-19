@@ -126,6 +126,7 @@ alias PatchModel<
 /**
  * NetApp account patch resource
  */
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Preserve the stable schema name across preview-only versions."
 @removed(Versions.v2026_01_15_preview)
 @renamedFrom(Versions.v2026_01_15_preview, "NetAppAccountPatch")
 @added(Versions.v2026_03_01)
@@ -141,7 +142,6 @@ alias PatchModel<
 @removed(Versions.v2026_06_15_preview)
 @renamedFrom(Versions.v2026_06_15_preview, "NetAppAccountPatch")
 @added(Versions.v2026_08_01)
-#suppress "@azure-tools/typespec-azure-core/friendly-name" "Preserve the stable schema name across preview-only versions."
 @friendlyName("NetAppAccountPatch")
 model NetAppAccountPatchStable {
   /**
@@ -936,6 +936,7 @@ interface NetAppAccounts {
    * Patch the specified NetApp account
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the stable operation ID across preview-only versions."
   @patch(#{ implicitOptionality: false })
   @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_12_15_preview, "update")
@@ -955,7 +956,6 @@ interface NetAppAccounts {
   @removed(Versions.v2026_06_15_preview)
   @renamedFrom(Versions.v2026_06_15_preview, "update")
   @added(Versions.v2026_08_01)
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the stable operation ID across preview-only versions."
   @TypeSpec.OpenAPI.operationId("Accounts_Update")
   @sharedRoute
   updatePrevious is ArmCustomPatchAsync<
