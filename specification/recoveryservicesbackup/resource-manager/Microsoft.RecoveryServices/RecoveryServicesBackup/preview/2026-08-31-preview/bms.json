@@ -13104,11 +13104,27 @@
         },
         "targetResourceGroupId": {
           "type": "string",
-          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts."
+          "format": "arm-id",
+          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/resourceGroups"
+              }
+            ]
+          }
         },
         "storageAccountId": {
           "type": "string",
-          "description": "Fully qualified ARM ID of the storage account to which the VMs have to be restored."
+          "format": "arm-id",
+          "description": "Fully qualified ARM ID of the storage account to which the VMs have to be restored.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "region": {
           "type": "string",
@@ -13124,11 +13140,27 @@
         },
         "virtualNetworkId": {
           "type": "string",
-          "description": "This is the virtual network Id of the vnet that will be attached to the restored virtual machines."
+          "format": "arm-id",
+          "description": "This is the virtual network Id of the vnet that will be attached to the restored virtual machines.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          }
         },
         "subnetId": {
           "type": "string",
-          "description": "Subnet ID associated with the restored virtual machines."
+          "format": "arm-id",
+          "description": "Subnet ID associated with the restored virtual machines.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -13144,7 +13176,15 @@
         },
         "diskEncryptionSetId": {
           "type": "string",
-          "description": "DiskEncryptionSet's ID needed if the VMs need to be encrypted at rest during restore with customer managed key."
+          "format": "arm-id",
+          "description": "DiskEncryptionSet's ID needed if the VMs need to be encrypted at rest during restore with customer managed key.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          }
         },
         "zones": {
           "type": "array",
@@ -15703,15 +15743,39 @@
         },
         "sourceResourceId": {
           "type": "string",
-          "description": "Fully qualified ARM ID of the VM which is being recovered."
+          "format": "arm-id",
+          "description": "Fully qualified ARM ID of the VM which is being recovered.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              }
+            ]
+          }
         },
         "targetVirtualMachineId": {
           "type": "string",
-          "description": "This is the complete ARM Id of the VM that will be created."
+          "format": "arm-id",
+          "description": "This is the complete ARM Id of the VM that will be created.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              }
+            ]
+          }
         },
         "diskEncryptionSetId": {
           "type": "string",
-          "description": "DiskEncryptionSet's ID needed if the VM needs to be encrypted at rest during restore with customer managed key."
+          "format": "arm-id",
+          "description": "DiskEncryptionSet's ID needed if the VM needs to be encrypted at rest during restore with customer managed key.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          }
         },
         "securedVMDetails": {
           "$ref": "#/definitions/SecuredVMDetails",

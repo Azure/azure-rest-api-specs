@@ -617,7 +617,7 @@ directive:
   - suppress: TrackedResourceBeyondsThirdLevel
     from: bms.json
     where: $.definitions.JobResource
-    reason: JobResource is an existing resource present across API versions. The cross-tenant child-jobs pass-through API (backupCrossTenantVaultMappings/{name}/backupJobs/{jobName}/backupChildJobs) reads jobs from the source vault at a deeper nesting level; no new tracked resource is introduced. This mirrors the existing RecoveryPointResource suppression for the CRR recovery-points API.
+    reason: JobResource is an existing resource whose shape and tracked-resource status are unchanged from prior API versions. The cross-tenant child-jobs pass-through API (backupCrossTenantVaultMappings/{name}/backupJobs/{jobName}/backupChildJobs) exposes this existing resource for read-only retrieval of jobs from the source vault; it does not introduce a new tracked resource or a new writable resource path beyond the third nesting level, so the constraint the rule enforces does not apply to this read-only pass-through.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: bms.json
     where: $.definitions.IaaSVMBulkRestoreRequest.properties.skipPreOLRBackup

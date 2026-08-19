@@ -6634,12 +6634,20 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.
    */
-  targetResourceGroupId: string;
+  targetResourceGroupId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/resourceGroups";
+    }
+  ]>;
 
   /**
    * Fully qualified ARM ID of the storage account to which the VMs have to be restored.
    */
-  storageAccountId: string;
+  storageAccountId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
 
   /**
    * Region in which the virtual machines are restored.
@@ -6659,12 +6667,20 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * This is the virtual network Id of the vnet that will be attached to the restored virtual machines.
    */
-  virtualNetworkId?: string;
+  virtualNetworkId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks";
+    }
+  ]>;
 
   /**
    * Subnet ID associated with the restored virtual machines.
    */
-  subnetId?: string;
+  subnetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 
   /**
    * Target extended location where the VMs should be restored.
@@ -6684,7 +6700,11 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * DiskEncryptionSet's ID needed if the VMs need to be encrypted at rest during restore with customer managed key.
    */
-  diskEncryptionSetId?: string;
+  diskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 
   /**
    * Target zones where the VMs and their disks should be restored.
@@ -6720,17 +6740,29 @@ model ProtectedItemRestoreDetailsBase {
   /**
    * Fully qualified ARM ID of the VM which is being recovered.
    */
-  sourceResourceId: string;
+  sourceResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
 
   /**
    * This is the complete ARM Id of the VM that will be created.
    */
-  targetVirtualMachineId?: string;
+  targetVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
 
   /**
    * DiskEncryptionSet's ID needed if the VM needs to be encrypted at rest during restore with customer managed key.
    */
-  diskEncryptionSetId?: string;
+  diskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 
   /**
    * Stores Secured VM Details.
