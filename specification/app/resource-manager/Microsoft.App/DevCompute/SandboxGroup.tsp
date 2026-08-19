@@ -23,14 +23,14 @@ model SandboxGroup is TrackedResource<SandboxGroupProperties> {
 
 /** SandboxGroup resource specific properties. */
 model SandboxGroupProperties {
-  /** The resource ID of the Azure Container Apps managed environment to associate with the sandbox group. A sandbox group can be associated after creation, but the association cannot then be changed or removed. For subsequent create-or-update (PUT) requests, specify the same environment ID; omitting or changing it returns 409 Conflict. Omitting it from an update (PATCH) request leaves the existing association unchanged. */
+  /** The resource ID of the Azure Container Apps environment to link to the sandbox group. A sandbox group can be linked after creation, but the link cannot then be changed or removed. For subsequent create-or-update (PUT) requests, specify the same environment ID; omitting or changing it returns 409 Conflict. Omitting it from an update (PATCH) request leaves the existing link unchanged. */
   environmentId?: armResourceIdentifier<[
     {
       type: "Microsoft.App/managedEnvironments";
     }
   ]>;
 
-  /** The default domain of the associated Azure Container Apps managed environment. Sandbox endpoints use subdomains of this domain. This read-only property is populated by the service and is omitted when no managed environment is associated. */
+  /** The default domain of the linked Azure Container Apps environment. Sandbox endpoints use subdomains of this domain. This read-only property is populated by the service and is omitted when no environment is linked. */
   @visibility(Lifecycle.Read)
   defaultDomain?: string;
 
