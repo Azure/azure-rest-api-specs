@@ -163,6 +163,12 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
+@@alternateType(
+  BlobStorageTokenStore.managedIdentityResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
 // C# @@clientName customizations.
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,
@@ -172,13 +178,13 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(BillingMetersOperationGroup.get, "GetBillingMeters", "csharp");
 
-@@clientName(BuilderResource, "Builder", "csharp");
+@@clientName(BuilderResource, "ContainerAppBuilder", "csharp");
 
-@@clientName(BuilderCollection, "BuilderList", "csharp");
+@@clientName(BuilderCollection, "ContainerAppBuilderList", "csharp");
 
-@@clientName(BuildResource, "Build", "csharp");
+@@clientName(BuildResource, "ContainerAppBuild", "csharp");
 
-@@clientName(BuildCollection, "BuildList", "csharp");
+@@clientName(BuildCollection, "ContainerAppBuildList", "csharp");
 
 @@clientName(BuildToken.expires, "ExpiresOn", "csharp");
 
@@ -207,6 +213,12 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(
   ContainerAppsLabelHistory.listLabelHistory,
   "ListLabelHistory",
+  "csharp"
+);
+
+@@clientName(
+  RuntimeDotnet.autoConfigureDataProtection,
+  "IsAutoConfigureDataProtectionEnabled",
   "csharp"
 );
 
