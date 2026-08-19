@@ -104,11 +104,11 @@ model FleetProperties {
   uniqueId?: string;
 
   /** Mode of the Fleet. */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_08_01)
   mode?: FleetMode;
 
   /** VirtualMachine prefix to be used for the virtual machines launched by Fleet. Can be used only with Launch mode. */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_08_01)
   @pattern("^[^_\\W][\\w\\-._]{0,64}(?<![-.])$")
   vmNamePrefix?: string;
 
@@ -117,11 +117,12 @@ model FleetProperties {
    * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
    * Specifying different capacity type for Fleet Regular and Spot priority profiles is not allowed.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_08_01)
   capacityType?: CapacityType;
 
   /** Zone Allocation Policy for Fleet. */
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_08_01)
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
@@ -539,19 +540,19 @@ model AdditionalLocationsProfile {
 }
 
 /** Modes for Compute Fleet. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_08_01)
 union FleetMode {
   string,
 
-  /** Default. Managed is the default mode for Compute Fleet where VMs are provisioned via virtual machine scale sets. */
+  /** Default. Managed mode where Compute Fleet provisions the VMs, manages them and their lifecycle. */
   managed: "Managed",
 
-  /** Launch mode for Compute Fleet will directly launch VM instances to be managed by the customer. */
+  /** Launch mode where Compute Fleet launches the VMs and the customer manages them and their lifecycle. */
   launch: "Launch",
 }
 
 /** Capacity types for Compute Fleet. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_08_01)
 union CapacityType {
   string,
 
@@ -658,7 +659,7 @@ interface Fleets {
   >;
 
   /** List VirtualMachine resources of a Launch mode Fleet. */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_08_01)
   @action("virtualMachines")
   @list
   @get

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Microsoft.AzureFleet;
 
 /** A Launch mode Fleet's virtual machine. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_08_01)
 model VirtualMachine {
   /** The name of the virtual machine. */
   @key("virtualMachineName")
@@ -39,23 +39,23 @@ model VirtualMachine {
   error?: ApiError;
 
   /** The VM size of the virtual machine. */
-  @added(Versions.v2026_06_01_preview)
+  @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read)
   vmSize?: string;
 
   /** The availability zone of the virtual machine. */
-  @added(Versions.v2026_06_01_preview)
+  @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read)
   zone?: string;
 
   /** The priority of the virtual machine. */
-  @added(Versions.v2026_06_01_preview)
+  @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read)
   priority?: string;
 }
 
 /** Virtual Machine operation status values. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_08_01)
 union VMOperationStatus {
   string,
 
@@ -73,7 +73,7 @@ union VMOperationStatus {
 }
 
 /** The response of a virtual machine list operation. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_08_01)
 model VirtualMachineListResult {
   /** The Virtual Machine items on this page. */
   @pageItems
