@@ -1,0 +1,36 @@
+{
+  "operationId": "GroupPolicy_Get",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "policyName": "mypolicyName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts/groupPolicies",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/groupPolicies/mypolicyName",
+        "name": "myGroupPolicyResourceDescription",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "status": "Creating",
+          "description": "User-friendly description of the resource.",
+          "quotas": [
+            {
+              "id": "The identifier for instance type series quota.",
+              "name": "User friendly description for the instance type series.",
+              "slaTier": "Premium",
+              "limit": 1,
+              "used": 1
+            }
+          ],
+          "maxSharedStorageIOPs": 1,
+          "maxSharedStorageBandwidth": 1
+        }
+      }
+    }
+  }
+}
