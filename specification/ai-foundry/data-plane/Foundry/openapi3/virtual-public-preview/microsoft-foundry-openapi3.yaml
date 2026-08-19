@@ -3943,6 +3943,14 @@ paths:
       summary: List budget policy usage
       description: Lists the current usage counters for the specified budget policy.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Budget=V1Preview
         - $ref: '#/components/parameters/BudgetUsageListRequest.policyName'
         - $ref: '#/components/parameters/BudgetUsageListRequest.dimension'
         - $ref: '#/components/parameters/BudgetUsageListRequest.value'
@@ -3975,6 +3983,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Budget=V1Preview
   /connections:
     get:
       operationId: Connections_list

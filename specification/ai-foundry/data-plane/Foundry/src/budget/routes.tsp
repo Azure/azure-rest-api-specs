@@ -3,9 +3,14 @@ import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 
 namespace Azure.AI.Projects;
+
+const BudgetRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.budget_v1_preview],
+};
 
 /** Operations for reading budget policy usage. */
 interface Budget {
@@ -15,5 +20,10 @@ interface Budget {
   @route("/budget-policies/{policyName}/usage")
   @get
   @list
-  list is FoundryDataPlaneOperation<BudgetUsageListRequest, BudgetUsageListResult>;
+  @extension("x-ms-foundry-meta", BudgetRequiredPreviews)
+  list is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.budget_v1_preview,
+    BudgetUsageListRequest,
+    BudgetUsageListResult
+  >;
 }
