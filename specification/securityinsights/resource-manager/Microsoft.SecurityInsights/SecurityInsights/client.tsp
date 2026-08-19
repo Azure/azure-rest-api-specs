@@ -416,7 +416,7 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 @@clientName(ElevationToken, "SecurityInsightsProcessElevationToken", "csharp");
 @@clientName(EnrichmentDomainBody, "EnrichmentDomainContent", "csharp");
-@@clientName(EnrichmentDomainWhois.expires, "ExpireOn", "csharp");
+@@clientName(EnrichmentDomainWhois.expires, "ExpiresOn", "csharp");
 @@clientName(EnrichmentDomainWhois.created, "CreatedOn", "csharp");
 @@clientName(EnrichmentDomainWhois.updated, "UpdatedOn", "csharp");
 @@clientName(EnrichmentIpAddressBody, "EnrichmentIPAddressContent", "csharp");
