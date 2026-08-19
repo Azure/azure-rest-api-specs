@@ -617,6 +617,23 @@ union PublicNetworkAccess {
 }
 
 /**
+ * Specifies the IP address type for the namespace.
+ */
+union IpAddressType {
+  string,
+
+  /**
+   * The namespace supports IPv4 only. This is the default.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The namespace supports both IPv4 and IPv6 (dual-stack).
+   */
+  DualStack: "DualStack",
+}
+
+/**
  * Action to perform based on the match or no match of the IpMask.
  */
 union IpActionType {
@@ -3568,6 +3585,11 @@ model NamespaceProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   /**
+   * This property specifies the IP address type for the namespace.
+   */
+  ipAddressType?: IpAddressType;
+
+  /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
   @identifiers(#[])
@@ -4018,6 +4040,11 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * This property specifies the IP address type for the namespace.
+   */
+  ipAddressType?: IpAddressType;
 
   /**
    * Auto-scale configuration for the namespace resource
