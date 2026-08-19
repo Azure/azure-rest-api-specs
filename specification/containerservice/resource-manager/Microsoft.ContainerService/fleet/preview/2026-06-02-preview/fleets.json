@@ -1503,7 +1503,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FleetCredentialResults"
+              "$ref": "#/definitions/FleetCredentialResultsWithSecrets"
             }
           },
           "default": {
@@ -3835,9 +3835,9 @@
         }
       ]
     },
-    "FleetCredentialResult": {
+    "FleetCredentialResultWithSecret": {
       "type": "object",
-      "description": "One credential result item.",
+      "description": "One credential result item containing a secret Kubernetes configuration file.",
       "properties": {
         "name": {
           "type": "string",
@@ -3846,21 +3846,22 @@
         },
         "value": {
           "type": "string",
-          "format": "byte",
+          "format": "password",
           "description": "Base64-encoded Kubernetes configuration file.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
-    "FleetCredentialResults": {
+    "FleetCredentialResultsWithSecrets": {
       "type": "object",
-      "description": "The Credential results response.",
+      "description": "The credential results response containing secret Kubernetes configuration files.",
       "properties": {
         "kubeconfigs": {
           "type": "array",
-          "description": "Array of base64-encoded Kubernetes configuration files.",
+          "description": "Array of Kubernetes configuration file credential results.",
           "items": {
-            "$ref": "#/definitions/FleetCredentialResult"
+            "$ref": "#/definitions/FleetCredentialResultWithSecret"
           },
           "readOnly": true,
           "x-ms-identifiers": [
