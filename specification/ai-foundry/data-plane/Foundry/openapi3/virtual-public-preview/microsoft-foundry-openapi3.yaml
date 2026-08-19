@@ -7,6 +7,7 @@ tags:
   - name: Voice Agents
   - name: Voice Agent Versions
   - name: AgentServer Task Storage
+  - name: Budget
   - name: EvaluationSuiteGenerationJobs
   - name: Responses Root
     description: Responses
@@ -3937,6 +3938,64 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentFromManifestRequest'
+  /budget-policies/{policyName}/usage:
+    get:
+      operationId: Budget_get
+      summary: Get budget usage
+      description: |-
+        Retrieves current consumption for the specified budget policy and counter-key dimension.
+        The returned values are a bounded, potentially stale view of the durable enforcement counters.
+      parameters:
+        - $ref: '#/components/parameters/BudgetUsageRequest.policyName'
+        - $ref: '#/components/parameters/BudgetUsageRequest.dimension'
+        - $ref: '#/components/parameters/BudgetUsageRequest.value'
+        - $ref: '#/components/parameters/BudgetUsageRequest.top'
+        - $ref: '#/components/parameters/BudgetUsageRequest.maxPageSize'
+        - $ref: '#/components/parameters/BudgetUsageRequest.skipToken'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetUsageResponse'
+        4XX:
+          description: Client error
+          headers:
+            Retry-After:
+              required: false
+              description: The recommended number of seconds to wait before retrying a temporarily unavailable usage store.
+              schema:
+                type: integer
+                format: int32
+                minimum: 0
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetUsageErrorResponse'
+        5XX:
+          description: Server error
+          headers:
+            Retry-After:
+              required: false
+              description: The recommended number of seconds to wait before retrying a temporarily unavailable usage store.
+              schema:
+                type: integer
+                format: int32
+                minimum: 0
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetUsageErrorResponse'
+      tags:
+        - Budget
   /connections:
     get:
       operationId: Connections_list
@@ -41588,6 +41647,60 @@ components:
         type: string
         minLength: 1
       explode: false
+    BudgetUsageRequest.dimension:
+      name: dimension
+      in: query
+      required: true
+      description: The counter-key dimension to query. The policy must contain a rule keyed on this dimension.
+      schema:
+        $ref: '#/components/schemas/BudgetUsageDimension'
+      explode: false
+    BudgetUsageRequest.maxPageSize:
+      name: maxpagesize
+      in: query
+      required: false
+      description: The maximum number of rows to return per page. The service defaults to 100.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 1000
+        default: 100
+      explode: false
+    BudgetUsageRequest.policyName:
+      name: policyName
+      in: path
+      required: true
+      description: The stable name of the budget policy under the account identified by the request host.
+      schema:
+        type: string
+    BudgetUsageRequest.skipToken:
+      name: skipToken
+      in: query
+      required: false
+      description: An opaque, time-limited continuation token that is bound to the query that produced it.
+      schema:
+        type: string
+      explode: false
+    BudgetUsageRequest.top:
+      name: top
+      in: query
+      required: false
+      description: The maximum total number of rows to return across all pages. Required for a session query that omits value.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 1000
+      explode: false
+    BudgetUsageRequest.value:
+      name: value
+      in: query
+      required: false
+      description: A specific resolved value of the requested dimension. When omitted, all recorded values are returned.
+      schema:
+        type: string
+      explode: false
     CreateOrUpdateRoutineParameters.routine_name:
       name: routine_name
       in: path
@@ -45094,6 +45207,154 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
+    BudgetCounterKey:
+      type: object
+      required:
+        - type
+        - attribute
+        - value
+      properties:
+        type:
+          $ref: '#/components/schemas/BudgetUsageDimension'
+          description: The semantic type of the resolved dimension.
+        attribute:
+          type: string
+          description: The canonical attribution-context path used to resolve the dimension value.
+        value:
+          type: string
+          description: The resolved value of the dimension.
+      description: A resolved dimension value that identifies a budget counter.
+    BudgetCounterKeyState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - active
+            - unavailable
+      description: The availability state of a budget counter.
+    BudgetUsage:
+      type: object
+      required:
+        - ruleName
+        - counterKey
+        - unit
+        - limit
+        - recurring
+        - period
+        - counterKeyState
+      properties:
+        ruleName:
+          type: string
+          description: The stable name of the budget policy rule.
+        counterKey:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetCounterKey'
+          minItems: 1
+          description: The resolved dimensions that identify the counter.
+        unit:
+          $ref: '#/components/schemas/BudgetUsageUnit'
+          description: The unit in which the limit and consumption values are measured.
+        consumed:
+          type: number
+          format: double
+          minimum: 0
+          description: The reconciled consumption at the response watermark. Omitted when the counter is not durably available.
+        limit:
+          type: number
+          format: double
+          description: The rule ceiling for this counter and window.
+          exclusiveMinimum: 0
+        remaining:
+          type: number
+          format: double
+          minimum: 0
+          description: The non-negative difference between the limit and consumed amount. Omitted when consumption is unavailable.
+        recurring:
+          type: boolean
+          description: Whether the budget replenishes at the start of each period.
+        period:
+          $ref: '#/components/schemas/BudgetUsagePeriod'
+          description: The calendar-aligned period for the budget counter.
+        periodStart:
+          type: string
+          format: date-time
+          description: The inclusive UTC start of the current counter window, if durably available.
+        periodEnd:
+          type: string
+          format: date-time
+          description: The exclusive UTC end of the current recurring counter window. Omitted for non-recurring budgets.
+        counterKeyState:
+          $ref: '#/components/schemas/BudgetCounterKeyState'
+          description: The availability state of the counter measurement.
+      description: Current consumption for one budget policy rule, counter key, and window.
+    BudgetUsageDimension:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent
+            - identity
+            - session
+            - project
+      description: A dimension used to partition budget consumption.
+    BudgetUsageErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: The error details.
+      description: An error response from a budget usage request.
+    BudgetUsagePeriod:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - minute
+            - hour
+            - day
+            - week
+            - month
+      description: The calendar-aligned period for a recurring budget counter.
+    BudgetUsageResponse:
+      type: object
+      required:
+        - policyId
+        - asOf
+        - stalenessBoundSeconds
+        - value
+      properties:
+        policyId:
+          type: string
+          description: The canonical Azure resource identifier of the budget policy.
+        asOf:
+          type: string
+          format: date-time
+          description: The oldest UTC watermark represented by the returned counters.
+        stalenessBoundSeconds:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The maximum documented lag, in seconds, between completed usage and this view.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetUsage'
+          description: The current budget consumption rows.
+        nextLink:
+          type: string
+          format: uri
+          description: The URL to retrieve the next page, if additional rows are available.
+      description: The current consumption view for a budget policy.
+    BudgetUsageUnit:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - usd
+      description: The unit in which budget consumption is measured.
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -82909,13 +83170,13 @@ components:
           description: The ID of the WebIQ project connection.
         server_label:
           type: string
-          description: The label of the WebIQ MCP server to connect to.
+          description: The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
             - type: string
             - type: 'null'
-          description: Whether the agent requires approval before executing actions. Default is always.
+          description: Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
           default: always
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -82938,13 +83199,13 @@ components:
           description: The ID of the WebIQ project connection.
         server_label:
           type: string
-          description: The label of the WebIQ MCP server to connect to.
+          description: The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
             - type: string
             - type: 'null'
-          description: Whether the agent requires approval before executing actions. Default is always.
+          description: Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
           default: always
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'

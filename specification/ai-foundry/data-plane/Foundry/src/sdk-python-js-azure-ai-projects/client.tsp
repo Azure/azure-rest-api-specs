@@ -13,6 +13,9 @@ import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
+// Beta operation available in v1
+import "../budget/routes.tsp";
+
 // Beta operations (preview routes, requiring opt-in request header)
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";

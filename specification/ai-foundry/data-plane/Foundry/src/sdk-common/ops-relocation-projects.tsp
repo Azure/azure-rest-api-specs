@@ -1,11 +1,14 @@
-// This file moves all beta operations (preview routes) from the Azure.AI.Projects namespace to
-// a new namespace Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
-// It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
+// This file moves operations intended for the beta SDK surface from the Azure.AI.Projects namespace
+// to Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
+// It is imported by the client.tsp files used to emit the language clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
 
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
+
+interface Budget {}
+@@clientLocation(Azure.AI.Projects.Budget.get, Budget);
 
 interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.listVersions, Models);

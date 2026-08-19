@@ -1,6 +1,7 @@
 import "../common/service.tsp";
 import "../sdk-common/error.default.tsp";
 
+import "../budget/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -33,6 +34,7 @@ namespace Azure.AI.Projects;
 // Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
 @@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!java");
 @@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!java");
+@@scope(Budget.get, "!java");
 
 // --------------------------------------------------------------------------------
 // Renames - operations
