@@ -1,0 +1,50 @@
+{
+  "operationId": "EntityHealthStateHistory_List",
+  "title": "List entity health-state history",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview",
+    "entityName": "frontend-web-app",
+    "startAt": "2026-06-01T00:00:00Z",
+    "endAt": "2026-06-07T00:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "healthState": "Healthy",
+            "startAt": "2026-06-05T12:00:00Z"
+          },
+          {
+            "healthState": "Degraded",
+            "startAt": "2026-06-03T08:30:00Z",
+            "endAt": "2026-06-05T12:00:00Z"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidQuery"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidQuery",
+          "message": "The requested time range is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "HealthModelNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "HealthModelNotFound",
+          "message": "The requested health model was not found."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "operationId": "EntityTransitionHistory_List",
+  "title": "List entity health-state transition history",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview",
+    "entityName": "frontend-web-app",
+    "startAt": "2026-06-01T00:00:00Z",
+    "endAt": "2026-06-07T00:00:00Z",
+    "top": 1000
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "previousState": "Degraded",
+            "newState": "Healthy",
+            "occurredAt": "2026-06-05T12:00:00Z",
+            "reason": "All dependent signals returned to healthy thresholds."
+          },
+          {
+            "previousState": "Healthy",
+            "newState": "Degraded",
+            "occurredAt": "2026-06-03T08:30:00Z",
+            "reason": "Request latency signal exceeded the degraded threshold."
+          }
+        ],
+        "nextLink": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com/api/entities/frontend-web-app/transitions?api-version=2026-06-01-preview&nextMarker=eyJwYWdlIjoyfQ"
+      }
+    },
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidQuery"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidQuery",
+          "message": "The requested time range is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "HealthModelNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "HealthModelNotFound",
+          "message": "The requested health model was not found."
+        }
+      }
+    }
+  }
+}
