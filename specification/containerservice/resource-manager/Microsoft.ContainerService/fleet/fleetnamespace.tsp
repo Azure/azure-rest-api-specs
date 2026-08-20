@@ -162,8 +162,9 @@ union DeletePolicy {
 @added(Versions.v2025_08_01_preview)
 @doc("The propagation to be used for provisioning the namespace among the fleet.")
 model PropagationPolicy {
+  @madeOptional(Microsoft.ContainerService.Versions.v2026_06_02_preview)
   @doc("The type of the policy to be used. Default is Placement.")
-  type: PropagationType;
+  type?: PropagationType;
 
   @doc("The profile to be used for propagation via placement.")
   placementProfile?: PlacementProfile;
