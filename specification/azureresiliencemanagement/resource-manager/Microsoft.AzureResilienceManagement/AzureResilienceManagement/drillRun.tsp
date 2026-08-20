@@ -170,7 +170,6 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_08_31_preview)
   @armResourceAction(DrillRun)
@@ -179,7 +178,7 @@ interface DrillRuns {
   generateReport is ArmResourceActionAsync<
     DrillRun,
     void,
-    ArmNoContentResponse,
+    DrillRunReport,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
