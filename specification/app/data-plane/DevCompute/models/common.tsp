@@ -11,7 +11,7 @@ alias DataPlaneStandardTraits = NoConditionalRequests &
 
 /** Azure Dev Compute error object. */
 @error
-model Error {
+model ProblemDetails {
   /** A URI reference identifying the problem type. */
   type?: string;
 
@@ -36,7 +36,7 @@ model ErrorResponse<Status extends int32> {
   @statusCode statusCode: Status;
 
   /** Error response body. */
-  @body body: Error;
+  @body body: ProblemDetails;
 }
 
 /** Response with a 500 status code and no guaranteed response body. */

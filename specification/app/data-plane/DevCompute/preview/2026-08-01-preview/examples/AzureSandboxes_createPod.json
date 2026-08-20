@@ -38,7 +38,24 @@
         "resources": {
           "cpu": "example-cpu",
           "memory": "example-memory"
-        }
+        },
+        "containerStatuses": [
+          {
+            "name": "main",
+            "state": "Running",
+            "ready": true,
+            "started": true,
+            "restartCount": 0,
+            "probes": {
+              "readiness": {
+                "lastResult": "Success",
+                "consecutiveFailures": 0,
+                "consecutiveSuccesses": 3,
+                "lastCheckedAt": "2026-08-20T12:00:00Z"
+              }
+            }
+          }
+        ]
       }
     },
     "400": {
@@ -55,20 +72,6 @@
         "detail": "Authentication is required to access this resource."
       }
     },
-    "404": {
-      "body": {
-        "title": "Source not found",
-        "status": 404,
-        "detail": "A source referenced by the sandbox creation request does not exist."
-      }
-    },
-    "409": {
-      "body": {
-        "title": "Conflict",
-        "status": 409,
-        "detail": "The sandbox cannot be created because the request conflicts with the current state."
-      }
-    },
     "429": {
       "body": {
         "title": "Too many requests",
@@ -76,13 +79,6 @@
         "detail": "The sandbox creation rate limit has been exceeded. Retry the request later."
       }
     },
-    "500": {},
-    "503": {
-      "body": {
-        "title": "Service unavailable",
-        "status": 503,
-        "detail": "The service is temporarily unavailable. Retry the request later."
-      }
-    }
+    "500": {}
   }
 }

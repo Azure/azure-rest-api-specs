@@ -1,6 +1,6 @@
 {
   "operationId": "AzureSandboxes_Create",
-  "title": "AzureSandboxes_create - pod",
+  "title": "AzureSandboxes_create - artifact version",
   "parameters": {
     "endpoint": "https://example.azuredevcompute.io",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -16,15 +16,11 @@
         "memory": "1Gi"
       },
       "sourcesRef": {
-        "pod": {
-          "containers": [
-            {
-              "name": "main",
-              "diskImage": {
-                "id": "example-disk-image"
-              }
-            }
-          ]
+        "artifactVersion": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.DevCenter/projects/example-project/catalogs/example-catalog/artifactDefinitions/example-artifact/versions/1.0.0",
+          "auth": {
+            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+          }
         }
       }
     }
@@ -34,28 +30,18 @@
       "body": {
         "id": "example-sandbox",
         "vmmType": "cloudhypervisor",
-        "sourcesRef": {},
+        "sourcesRef": {
+          "artifactVersion": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.DevCenter/projects/example-project/catalogs/example-catalog/artifactDefinitions/example-artifact/versions/1.0.0",
+            "auth": {
+              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+            }
+          }
+        },
         "resources": {
           "cpu": "example-cpu",
           "memory": "example-memory"
-        },
-        "containerStatuses": [
-          {
-            "name": "main",
-            "state": "Running",
-            "ready": true,
-            "started": true,
-            "restartCount": 0,
-            "probes": {
-              "readiness": {
-                "lastResult": "Success",
-                "consecutiveFailures": 0,
-                "consecutiveSuccesses": 3,
-                "lastCheckedAt": "2026-08-20T12:00:00Z"
-              }
-            }
-          }
-        ]
+        }
       }
     },
     "400": {

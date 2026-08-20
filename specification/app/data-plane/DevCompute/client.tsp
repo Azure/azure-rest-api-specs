@@ -14,20 +14,8 @@ namespace AzureDevCompute;
   "connectionRuntimeUri",
   "csharp"
 );
-@@clientName(
-  AzureDataPlaneClientCredentialsFlow.tokenUrl,
-  "tokenUri",
-  "csharp"
-);
-@@clientName(
-  UserAuthorizationCodeFlow.authorizationUrl,
-  "authorizationUri",
-  "csharp"
-);
-@@clientName(UserAuthorizationCodeFlow.tokenUrl, "tokenUri", "csharp");
 @@clientName(ErrorResponse, "ErrorResult", "csharp");
 @@clientName(AddPortRequest, "AddPortContent", "csharp");
-@@clientName(PatchSandboxRequest, "PatchSandboxContent", "csharp");
 @@clientName(
   SandboxExecutionTokenResponse,
   "SandboxExecutionTokenResult",
@@ -40,27 +28,23 @@ namespace AzureDevCompute;
 );
 @@clientName(SandboxRequest, "SandboxContent", "csharp");
 @@clientName(
-  AzureDevCompute.SandboxOperations.SandboxListResponse,
+  AzureDevCompute.SandboxListResponse,
   "SandboxListResult",
   "csharp"
 );
 @@clientName(
-  AzureDevCompute.SandboxOperations.SandboxCreatedResponse,
+  AzureDevCompute.SandboxCreatedResponse,
   "SandboxCreatedResult",
   "csharp"
 );
+@@clientName(AzureDevCompute.SandboxResponse, "SandboxResult", "csharp");
 @@clientName(
-  AzureDevCompute.SandboxOperations.SandboxResponse,
-  "SandboxResult",
-  "csharp"
-);
-@@clientName(
-  AzureDevCompute.SandboxOperations.SandboxDeletedResponse,
+  AzureDevCompute.SandboxDeletedResponse,
   "SandboxDeletedResult",
   "csharp"
 );
 @@clientName(
-  AzureDevCompute.SandboxOperations.SandboxDeletedNoContentResponse,
+  AzureDevCompute.SandboxDeletedNoContentResponse,
   "SandboxDeletedNoContentResult",
   "csharp"
 );
