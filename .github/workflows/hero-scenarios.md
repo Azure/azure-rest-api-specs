@@ -31,6 +31,7 @@ if: github.event.label.name == 'hero-scenarios-needed'
 description: "Hero Scenarios: Suggest hero scenarios for API specifications"
 permissions:
   contents: read
+  copilot-requests: write
   pull-requests: read
 # The agent reads PR files through the GitHub MCP toolsets, never from disk,
 # so no checkout is needed — and pull_request_target must not check out fork code.
