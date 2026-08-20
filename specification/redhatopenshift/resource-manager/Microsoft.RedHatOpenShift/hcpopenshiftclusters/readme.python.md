@@ -23,6 +23,16 @@ modelerfour:
   flatten-models: false
 ```
 
+### Tag: package-2026-09-01-preview and python
+
+These settings apply only when `--tag=package-2026-09-01-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2026-09-01-preview' && $(python)
+namespace: azure.mgmt.redhatopenshifthcp.v2026_09_01_preview
+output-folder: $(python-sdks-folder)/redhatopenshifthcp/azure-mgmt-redhatopenshifthcp/azure/mgmt/redhatopenshifthcp/v2026_09_01_preview
+```
+
 ### Tag: package-2026-06-30-preview and python
 
 These settings apply only when `--tag=package-2026-06-30-preview --python` is specified on the command line.
