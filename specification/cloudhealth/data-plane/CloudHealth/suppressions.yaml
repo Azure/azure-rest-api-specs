@@ -22,3 +22,12 @@
     intentional preview changes required for service parity.
   paths:
     - preview/2026-06-01-preview/cloudhealth.json
+- tool: LintDiff
+  reason: >
+    POST /api/entities/{entityName}/healthReports is asynchronous fire-and-forget:
+    202 means accepted for processing, the service exposes no polling endpoint or
+    operation status resource, and marking it as an LRO would misrepresent the
+    contract.
+  rules: [LroExtension]
+  paths:
+    - preview/2026-06-01-preview/cloudhealth.json
