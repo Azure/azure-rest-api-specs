@@ -667,6 +667,33 @@ model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
   item_id: string;
 }
 
+/**
+ * Sent when the user has remained silent longer than the configured
+ * `idle_timeout_ms`.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_15)
+@usage(ResponseUsage)
+model ServerEventInputAudioBufferTimeoutTriggered extends ServerEvent {
+  /** The event type, must be `input_audio_buffer.timeout_triggered`. */
+  type: ServerEventType.input_audio_buffer_timeout_triggered;
+
+  /** The ID of the user message item associated with the timeout. */
+  item_id: string;
+
+  /** The ID of the preceding conversation item, when available. */
+  previous_item_id?: string;
+}
+
+/** Sent when every input audio channel is idle. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_07_15)
+@usage(ResponseUsage)
+model ServerEventInputAudioBufferAllIdle extends ServerEvent {
+  /** The event type, must be `input_audio_buffer.all_idle`. */
+  type: ServerEventType.input_audio_buffer_all_idle;
+}
+
 // Tool customization (apply_discriminator): apply discriminated type
 /**
  * Returned when a conversation item is created. There are several scenarios that produce this event:

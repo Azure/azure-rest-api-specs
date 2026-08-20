@@ -872,6 +872,44 @@
       "type": "object",
       "description": "Server Speech Detection (Azure semantic VAD, default variant).",
       "properties": {
+        "profile": {
+          "type": "string",
+          "description": "Selects a bundled VAD configuration. Defaults to `classic` when omitted.\nSet to `null` to disable profile expansion and use explicit field values.",
+          "default": "classic",
+          "enum": [
+            "classic",
+            "eager",
+            "normal",
+            "patient"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSemanticVadProfile",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "classic",
+                "value": "classic",
+                "description": "Preserves the current default VAD behavior."
+              },
+              {
+                "name": "eager",
+                "value": "eager",
+                "description": "Prioritizes fast turn detection."
+              },
+              {
+                "name": "normal",
+                "value": "normal",
+                "description": "Balances turn-detection latency and tolerance for pauses."
+              },
+              {
+                "name": "patient",
+                "value": "patient",
+                "description": "Prioritizes tolerance for longer pauses."
+              }
+            ]
+          },
+          "x-nullable": true
+        },
         "threshold": {
           "type": "number",
           "format": "float",
@@ -888,6 +926,12 @@
           "type": "integer",
           "format": "int32",
           "description": "Duration of silence required to end speech detection, in milliseconds."
+        },
+        "idle_timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds.",
+          "minimum": 0
         },
         "end_of_utterance_detection": {
           "$ref": "#/definitions/EouDetection",
@@ -937,6 +981,44 @@
       "type": "object",
       "description": "Server Speech Detection (Azure semantic VAD, English-only).",
       "properties": {
+        "profile": {
+          "type": "string",
+          "description": "Selects a bundled VAD configuration. Defaults to `classic` when omitted.\nSet to `null` to disable profile expansion and use explicit field values.",
+          "default": "classic",
+          "enum": [
+            "classic",
+            "eager",
+            "normal",
+            "patient"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSemanticVadProfile",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "classic",
+                "value": "classic",
+                "description": "Preserves the current default VAD behavior."
+              },
+              {
+                "name": "eager",
+                "value": "eager",
+                "description": "Prioritizes fast turn detection."
+              },
+              {
+                "name": "normal",
+                "value": "normal",
+                "description": "Balances turn-detection latency and tolerance for pauses."
+              },
+              {
+                "name": "patient",
+                "value": "patient",
+                "description": "Prioritizes tolerance for longer pauses."
+              }
+            ]
+          },
+          "x-nullable": true
+        },
         "threshold": {
           "type": "number",
           "format": "float",
@@ -953,6 +1035,12 @@
           "type": "integer",
           "format": "int32",
           "description": "Duration of silence required to end speech detection, in milliseconds."
+        },
+        "idle_timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds.",
+          "minimum": 0
         },
         "end_of_utterance_detection": {
           "$ref": "#/definitions/EouDetection",
@@ -995,6 +1083,44 @@
       "type": "object",
       "description": "Server Speech Detection (Azure semantic VAD).",
       "properties": {
+        "profile": {
+          "type": "string",
+          "description": "Selects a bundled VAD configuration. Defaults to `classic` when omitted.\nSet to `null` to disable profile expansion and use explicit field values.",
+          "default": "classic",
+          "enum": [
+            "classic",
+            "eager",
+            "normal",
+            "patient"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSemanticVadProfile",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "classic",
+                "value": "classic",
+                "description": "Preserves the current default VAD behavior."
+              },
+              {
+                "name": "eager",
+                "value": "eager",
+                "description": "Prioritizes fast turn detection."
+              },
+              {
+                "name": "normal",
+                "value": "normal",
+                "description": "Balances turn-detection latency and tolerance for pauses."
+              },
+              {
+                "name": "patient",
+                "value": "patient",
+                "description": "Prioritizes tolerance for longer pauses."
+              }
+            ]
+          },
+          "x-nullable": true
+        },
         "threshold": {
           "type": "number",
           "format": "float",
@@ -1011,6 +1137,12 @@
           "type": "integer",
           "format": "int32",
           "description": "Duration of silence required to end speech detection, in milliseconds."
+        },
+        "idle_timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds.",
+          "minimum": 0
         },
         "end_of_utterance_detection": {
           "$ref": "#/definitions/EouDetection",
@@ -1055,6 +1187,43 @@
         }
       ],
       "x-ms-discriminator-value": "azure_semantic_vad_multilingual"
+    },
+    "AzureSemanticVadProfile": {
+      "type": "string",
+      "description": "Profile selectors for Voice Live-managed Azure semantic VAD.",
+      "enum": [
+        "classic",
+        "eager",
+        "normal",
+        "patient"
+      ],
+      "x-ms-enum": {
+        "name": "AzureSemanticVadProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "classic",
+            "value": "classic",
+            "description": "Preserves the current default VAD behavior."
+          },
+          {
+            "name": "eager",
+            "value": "eager",
+            "description": "Prioritizes fast turn detection."
+          },
+          {
+            "name": "normal",
+            "value": "normal",
+            "description": "Balances turn-detection latency and tolerance for pauses."
+          },
+          {
+            "name": "patient",
+            "value": "patient",
+            "description": "Prioritizes tolerance for longer pauses."
+          }
+        ]
+      },
+      "x-nullable": true
     },
     "AzureStandardVoice": {
       "type": "object",
@@ -4316,6 +4485,16 @@
         "message"
       ]
     },
+    "ServerEventInputAudioBufferAllIdle": {
+      "type": "object",
+      "description": "Sent when every input audio channel is idle.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.all_idle"
+    },
     "ServerEventInputAudioBufferCleared": {
       "type": "object",
       "description": "Returned when the input audio buffer is cleared by the client with a\n`input_audio_buffer.clear` event.",
@@ -4398,6 +4577,29 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio_buffer.speech_stopped"
+    },
+    "ServerEventInputAudioBufferTimeoutTriggered": {
+      "type": "object",
+      "description": "Sent when the user has remained silent longer than the configured\n`idle_timeout_ms`.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the user message item associated with the timeout."
+        },
+        "previous_item_id": {
+          "type": "string",
+          "description": "The ID of the preceding conversation item, when available."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.timeout_triggered"
     },
     "ServerEventMcpListToolsCompleted": {
       "type": "object",
@@ -5762,6 +5964,8 @@
         "input_audio_buffer.cleared",
         "input_audio_buffer.speech_started",
         "input_audio_buffer.speech_stopped",
+        "input_audio_buffer.timeout_triggered",
+        "input_audio_buffer.all_idle",
         "response.created",
         "response.done",
         "response.output_item.added",
@@ -5870,6 +6074,16 @@
           {
             "name": "input_audio_buffer_speech_stopped",
             "value": "input_audio_buffer.speech_stopped"
+          },
+          {
+            "name": "input_audio_buffer_timeout_triggered",
+            "value": "input_audio_buffer.timeout_triggered",
+            "description": "Sent after the configured input inactivity timeout elapses."
+          },
+          {
+            "name": "input_audio_buffer_all_idle",
+            "value": "input_audio_buffer.all_idle",
+            "description": "Sent when every input audio channel is idle."
           },
           {
             "name": "response_created",
@@ -6106,6 +6320,12 @@
           "type": "integer",
           "format": "int32",
           "description": "Duration of silence required to end speech detection, in milliseconds."
+        },
+        "idle_timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds.",
+          "minimum": 0
         },
         "end_of_utterance_detection": {
           "$ref": "#/definitions/EouDetection",
