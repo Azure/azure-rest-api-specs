@@ -79,6 +79,18 @@ using Azure.ClientGenerator.Core;
 );
 
 // Retired pre-GA PUT ops are create-or-update; name them accurately so the GA PATCH ops can be `update`.
-@@clientName(Microsoft.Discovery.Workspace.Conversations.update, "createOrUpdate", "java");
-@@clientName(Microsoft.Discovery.Workspace.Tasks.update, "createOrUpdate", "java");
-@@clientName(Microsoft.Discovery.Workspace.Tools.cancelRun, "cancelRunSync", "java");
+@@clientName(
+  Microsoft.Discovery.Workspace.Conversations.update,
+  "createOrUpdate",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tasks.update,
+  "createOrUpdate",
+  "java"
+);
+@@clientName(
+  Microsoft.Discovery.Workspace.Tools.cancelRun,
+  "cancelRunSync",
+  "java"
+);
