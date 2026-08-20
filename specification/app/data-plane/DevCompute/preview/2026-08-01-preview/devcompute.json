@@ -4195,22 +4195,6 @@
         "https://management.azuredevcompute.io/.default": ""
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-    },
-    "UserApiKeyAuth": {
-      "type": "apiKey",
-      "description": "ADC API key authentication.",
-      "name": "x-ms-api-key",
-      "in": "header"
-    },
-    "UserEntraAuth": {
-      "type": "oauth2",
-      "description": "Microsoft Entra ID authorization-code authentication for user-scoped operations.",
-      "flow": "accessCode",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      "scopes": {
-        "https://management.azuredevcompute.io/.default": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
     }
   },
   "tags": [
@@ -4219,590 +4203,6 @@
     }
   ],
   "paths": {
-    "/sandboxGroups/{sandboxGroupId}/sandboxes": {
-      "get": {
-        "operationId": "SandboxGroupSandboxes_List",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Lists sandboxes in a scope.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SandboxGroupScope"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "One-based page number.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Maximum number of sandboxes returned per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "labels",
-            "in": "query",
-            "description": "Comma-separated label selector.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox list response.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SandboxFields"
-              }
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "SandboxGroupSandboxes_list": {
-            "$ref": "./examples/SandboxGroupSandboxes_list.json"
-          }
-        }
-      }
-    },
-    "/sandboxGroups/{sandboxGroupId}/sandboxes/{id}": {
-      "get": {
-        "operationId": "SandboxGroupSandboxes_Get",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Gets a sandbox by identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SandboxGroupScope"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Sandbox identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox get or update response.",
-            "schema": {
-              "$ref": "#/definitions/SandboxFields"
-            }
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "SandboxGroupSandboxes_get": {
-            "$ref": "./examples/SandboxGroupSandboxes_get.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "SandboxGroupSandboxes_Update",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Updates mutable sandbox properties.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SandboxGroupScope"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Sandbox identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Sandbox merge-patch request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatchSandboxRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox get or update response.",
-            "schema": {
-              "$ref": "#/definitions/SandboxFields"
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "SandboxGroupSandboxes_update": {
-            "$ref": "./examples/SandboxGroupSandboxes_update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SandboxGroupSandboxes_Delete",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Deletes a sandbox by identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SandboxGroupScope"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Sandbox identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox delete response with an empty 200 body."
-          },
-          "204": {
-            "description": "Successful Sandbox delete response with no content."
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "SandboxGroupSandboxes_delete": {
-            "$ref": "./examples/SandboxGroupSandboxes_delete.json"
-          }
-        }
-      }
-    },
-    "/sandboxes": {
-      "get": {
-        "operationId": "Sandboxes_List",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Lists sandboxes in a scope.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "One-based page number.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Maximum number of sandboxes returned per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "labels",
-            "in": "query",
-            "description": "Comma-separated label selector.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox list response.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SandboxFields"
-              }
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Sandboxes_list": {
-            "$ref": "./examples/Sandboxes_list.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Sandboxes_Create",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Creates a sandbox in a scope.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "includeDebug",
-            "in": "query",
-            "description": "Includes server debug timing information in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Sandbox create request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SandboxRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Successful Sandbox create response.",
-            "schema": {
-              "$ref": "#/definitions/SandboxFields"
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Sandboxes_create - from a disk image": {
-            "$ref": "./examples/Sandboxes_create.json"
-          },
-          "Sandboxes_create - pod": {
-            "$ref": "./examples/Sandboxes_createPod.json"
-          },
-          "Sandboxes_create - snapshot": {
-            "$ref": "./examples/Sandboxes_createFromSnapshot.json"
-          }
-        }
-      }
-    },
-    "/sandboxes/{id}": {
-      "get": {
-        "operationId": "Sandboxes_Get",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Gets a sandbox by identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Sandbox identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox get or update response.",
-            "schema": {
-              "$ref": "#/definitions/SandboxFields"
-            }
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Sandboxes_get": {
-            "$ref": "./examples/Sandboxes_get.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Sandboxes_Update",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Updates mutable sandbox properties.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Sandbox identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Sandbox merge-patch request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatchSandboxRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox get or update response.",
-            "schema": {
-              "$ref": "#/definitions/SandboxFields"
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Sandboxes_update": {
-            "$ref": "./examples/Sandboxes_update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Sandboxes_Delete",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Deletes a sandbox by identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Sandbox identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Sandbox delete response with an empty 200 body."
-          },
-          "204": {
-            "description": "Successful Sandbox delete response with no content."
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Response with a 500 status code and no guaranteed response body.",
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Sandboxes_delete": {
-            "$ref": "./examples/Sandboxes_delete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes": {
       "get": {
         "operationId": "AzureSandboxes_List",
@@ -4860,14 +4260,14 @@
           "400": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
@@ -4929,51 +4329,33 @@
           "400": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
           "429": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
           "500": {
             "description": "Response with a 500 status code and no guaranteed response body.",
             "x-ms-error-response": true
-          },
-          "503": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
+          "AzureSandboxes_create - artifact version": {
+            "$ref": "./examples/AzureSandboxes_createFromArtifactVersion.json"
+          },
           "AzureSandboxes_create - from a disk image": {
             "$ref": "./examples/AzureSandboxes_create.json"
           },
@@ -5016,7 +4398,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Sandbox get or update response.",
+            "description": "Successful Sandbox get response.",
             "schema": {
               "$ref": "#/definitions/SandboxFields"
             }
@@ -5024,14 +4406,14 @@
           "401": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
           "404": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
@@ -5083,7 +4465,7 @@
           "401": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           },
@@ -5094,7 +4476,7 @@
           "503": {
             "description": "An error response with an HTTP status code and error body.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ProblemDetails"
             },
             "x-ms-error-response": true
           }
@@ -5365,12 +4747,14 @@
         "consecutiveFailures": {
           "type": "integer",
           "format": "int32",
-          "description": "consecutiveFailures value."
+          "description": "consecutiveFailures value.",
+          "default": 0
         },
         "consecutiveSuccesses": {
           "type": "integer",
           "format": "int32",
-          "description": "consecutiveSuccesses value."
+          "description": "consecutiveSuccesses value.",
+          "default": 0
         },
         "lastCheckedAt": {
           "type": "string",
@@ -5386,11 +4770,7 @@
           "type": "string",
           "description": "message value."
         }
-      },
-      "required": [
-        "consecutiveFailures",
-        "consecutiveSuccesses"
-      ]
+      }
     },
     "ContainerResources": {
       "type": "object",
@@ -5797,6 +5177,53 @@
       "type": "string",
       "description": "DiskImageId wire value."
     },
+    "EgressForwardMode": {
+      "type": "string",
+      "description": "Controls how egress traffic is forwarded.",
+      "enum": [
+        "default",
+        "direct",
+        "proxy"
+      ],
+      "x-ms-enum": {
+        "name": "EgressForwardMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "default",
+            "description": "Uses the default forwarding behavior."
+          },
+          {
+            "name": "Direct",
+            "value": "direct",
+            "description": "Forwards traffic directly."
+          },
+          {
+            "name": "Proxy",
+            "value": "proxy",
+            "description": "Forwards traffic through a proxy."
+          }
+        ]
+      }
+    },
+    "EgressForwardProxy": {
+      "type": "object",
+      "description": "Proxy configuration for forwarded egress traffic.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The proxy URL."
+        },
+        "ca": {
+          "type": "string",
+          "description": "The certificate authority data used to validate the proxy."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
     "EgressHostRule": {
       "type": "object",
       "description": "EgressHostRule wire model.",
@@ -6164,6 +5591,41 @@
         "routingMode": {
           "$ref": "#/definitions/EgressRuleRoutingMode",
           "description": "routingMode value."
+        },
+        "forward": {
+          "type": "string",
+          "description": "Controls how matching traffic is forwarded.",
+          "default": "default",
+          "enum": [
+            "default",
+            "direct",
+            "proxy"
+          ],
+          "x-ms-enum": {
+            "name": "EgressForwardMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "default",
+                "description": "Uses the default forwarding behavior."
+              },
+              {
+                "name": "Direct",
+                "value": "direct",
+                "description": "Forwards traffic directly."
+              },
+              {
+                "name": "Proxy",
+                "value": "proxy",
+                "description": "Forwards traffic through a proxy."
+              }
+            ]
+          }
+        },
+        "forwardProxy": {
+          "$ref": "#/definitions/EgressForwardProxy",
+          "description": "The proxy used to forward matching traffic."
         }
       },
       "required": [
@@ -6265,33 +5727,6 @@
             "description": "Serialized EgressRuleRoutingMode value."
           }
         ]
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "Azure Dev Compute error object.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "A URI reference identifying the problem type."
-        },
-        "title": {
-          "type": "string",
-          "description": "A short summary of the problem."
-        },
-        "status": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code generated by the origin server."
-        },
-        "detail": {
-          "type": "string",
-          "description": "A human-readable explanation of the problem."
-        },
-        "instance": {
-          "type": "string",
-          "description": "A URI reference identifying the specific problem occurrence."
-        }
       }
     },
     "FsGroupChangePolicy": {
@@ -6423,6 +5858,10 @@
         "enforcementMode": {
           "$ref": "#/definitions/EgressPolicyEnforcementMode",
           "description": "enforcementMode value."
+        },
+        "defaultForward": {
+          "$ref": "#/definitions/EgressForwardProxy",
+          "description": "The default proxy used to forward egress traffic."
         }
       },
       "required": [
@@ -6606,95 +6045,6 @@
         "name"
       ]
     },
-    "LogColumnDef": {},
-    "LogColumnDefRefLogColumnDef": {
-      "type": "object",
-      "description": "A column whose value is resolved from a well-known ADC attribute at runtime.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "Ref"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "refName": {
-          "$ref": "#/definitions/LogColumnRef",
-          "description": "The ADC attribute to resolve."
-        }
-      },
-      "required": [
-        "refName"
-      ]
-    },
-    "LogColumnDefValueLogColumnDef": {
-      "type": "object",
-      "description": "A column whose value is a literal string provided by the partner.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "Value"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "value": {
-          "type": "string",
-          "description": "The static value injected into every log record."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LogColumnRef": {
-      "type": "string",
-      "description": "Well-known ADC attributes that can be referenced by custom columns.",
-      "enum": [
-        "LogContent",
-        "LogStream",
-        "SandboxId",
-        "Region",
-        "ContainerName"
-      ],
-      "x-ms-enum": {
-        "name": "LogColumnRef",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LogContent",
-            "value": "LogContent",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "LogStream",
-            "value": "LogStream",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "SandboxId",
-            "value": "SandboxId",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "Region",
-            "value": "Region",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "ContainerName",
-            "value": "ContainerName",
-            "description": "Serialized LogColumnRef value."
-          }
-        ]
-      }
-    },
     "MegaBytes": {
       "type": "string",
       "description": "MegaBytes wire value."
@@ -6702,19 +6052,6 @@
     "MemoryQuantity": {
       "type": "string",
       "description": "Kubernetes-style memory resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
-    },
-    "PatchSandboxRequest": {
-      "type": "object",
-      "description": "Request body for `PATCH /sandboxes/{id}`. Uses JSON Merge Patch semantics for labels: keys with non-null values are set, keys with null values are removed, absent keys are unchanged.",
-      "properties": {
-        "labels": {
-          "type": "object",
-          "description": "labels value.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "PerfTrace": {
       "type": "object",
@@ -6990,10 +6327,7 @@
       "enum": [
         "None",
         "GitHubCopilot",
-        "Moltbot",
-        "UbuntuSystemd",
-        "Claude",
-        "OpenClaw"
+        "Claude"
       ],
       "x-ms-enum": {
         "name": "PresetSandboxType",
@@ -7010,23 +6344,8 @@
             "description": "Serialized PresetSandboxType value."
           },
           {
-            "name": "Moltbot",
-            "value": "Moltbot",
-            "description": "Serialized PresetSandboxType value."
-          },
-          {
-            "name": "UbuntuSystemd",
-            "value": "UbuntuSystemd",
-            "description": "Serialized PresetSandboxType value."
-          },
-          {
             "name": "Claude",
             "value": "Claude",
-            "description": "Serialized PresetSandboxType value."
-          },
-          {
-            "name": "OpenClaw",
-            "value": "OpenClaw",
             "description": "Serialized PresetSandboxType value."
           }
         ]
@@ -7114,6 +6433,33 @@
       "required": [
         "port"
       ]
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "description": "Azure Dev Compute error object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "A URI reference identifying the problem type."
+        },
+        "title": {
+          "type": "string",
+          "description": "A short summary of the problem."
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code generated by the origin server."
+        },
+        "detail": {
+          "type": "string",
+          "description": "A human-readable explanation of the problem."
+        },
+        "instance": {
+          "type": "string",
+          "description": "A URI reference identifying the specific problem occurrence."
+        }
+      }
     },
     "ProjectId": {
       "type": "string",
@@ -7207,6 +6553,27 @@
         "contentPackageId",
         "targetPath"
       ]
+    },
+    "SandboxCreatedResponse": {
+      "type": "object",
+      "description": "Successful Sandbox create response.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SandboxFields",
+          "description": "Created sandbox."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "SandboxDeletedNoContentResponse": {
+      "type": "object",
+      "description": "Successful Sandbox delete response with no content."
+    },
+    "SandboxDeletedResponse": {
+      "type": "object",
+      "description": "Successful Sandbox delete response with an empty 200 body."
     },
     "SandboxEgressPolicy": {
       "type": "object",
@@ -7472,7 +6839,6 @@
       },
       "required": [
         "id",
-        "vmmType",
         "sourcesRef",
         "resources"
       ]
@@ -7513,28 +6879,7 @@
         "autoDeletePolicy"
       ]
     },
-    "SandboxOperations.SandboxCreatedResponse": {
-      "type": "object",
-      "description": "Successful Sandbox create response.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SandboxFields",
-          "description": "Created sandbox."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "SandboxOperations.SandboxDeletedNoContentResponse": {
-      "type": "object",
-      "description": "Successful Sandbox delete response with no content."
-    },
-    "SandboxOperations.SandboxDeletedResponse": {
-      "type": "object",
-      "description": "Successful Sandbox delete response with an empty 200 body."
-    },
-    "SandboxOperations.SandboxListResponse": {
+    "SandboxListResponse": {
       "type": "object",
       "description": "Successful Sandbox list response.",
       "properties": {
@@ -7544,19 +6889,6 @@
           "items": {
             "$ref": "#/definitions/SandboxFields"
           }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "SandboxOperations.SandboxResponse": {
-      "type": "object",
-      "description": "Successful Sandbox get or update response.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SandboxFields",
-          "description": "Sandbox resource."
         }
       },
       "required": [
@@ -7734,10 +7066,6 @@
             "$ref": "#/definitions/IdentitySetting"
           }
         },
-        "telemetryConfig": {
-          "$ref": "#/definitions/TelemetryConfig",
-          "description": "telemetryConfig value."
-        },
         "volumes": {
           "type": "array",
           "description": "Optional list of volumes to mount in the sandbox. When SandboxSource? SandboxRequest.SourcesRef.Snapshot is set, the listed volumes are attached after the sandbox is restored from the snapshot — semantically equivalent to restoring the sandbox first and then calling the dynamic add-volume-mount API. In that mode the volumes must all be data disks, the snapshot must be non-pod, and the snapshot must not already have its own attached volumes; cluster placement is constrained to a cluster that already holds the referenced data disks (cross-cluster download is not supported). Those rules are enforced downstream after the snapshot/volume Cosmos lookups.",
@@ -7804,6 +7132,19 @@
         "memory"
       ]
     },
+    "SandboxResponse": {
+      "type": "object",
+      "description": "Successful Sandbox get response.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SandboxFields",
+          "description": "Sandbox resource."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "SandboxSource": {
       "type": "object",
       "description": "SandboxSource wire model.",
@@ -7819,8 +7160,43 @@
         "pod": {
           "$ref": "#/definitions/SandboxSourcePod",
           "description": "pod value."
+        },
+        "artifactVersion": {
+          "$ref": "#/definitions/SandboxSourceArtifactVersion",
+          "description": "The artifact version used as the sandbox source."
         }
       }
+    },
+    "SandboxSourceArtifactVersion": {
+      "type": "object",
+      "description": "An artifact version used as a sandbox source.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The artifact version identifier."
+        },
+        "auth": {
+          "$ref": "#/definitions/SandboxSourceAuth",
+          "description": "Authentication configuration used to access the artifact version."
+        }
+      },
+      "required": [
+        "id",
+        "auth"
+      ]
+    },
+    "SandboxSourceAuth": {
+      "type": "object",
+      "description": "Authentication configuration for a sandbox source.",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "description": "The identity used to access the sandbox source."
+        }
+      },
+      "required": [
+        "identity"
+      ]
     },
     "SandboxSourceDiskImage": {
       "type": "object",
@@ -8228,431 +7604,6 @@
         "rules"
       ]
     },
-    "TelemetryAppSecretRef": {
-      "type": "object",
-      "description": "Reference to a secret in the parent artifact app.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Secret-reference kind.",
-          "enum": [
-            "AppSecret"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "secretRef": {
-          "type": "string",
-          "description": "Name of the secret in the parent artifact app's secret bundle."
-        }
-      },
-      "required": [
-        "kind",
-        "secretRef"
-      ]
-    },
-    "TelemetryApplicationInsightsAuth": {
-      "type": "object",
-      "description": "Authentication for an ApplicationInsights telemetry endpoint via secret reference. The connection string is resolved at runtime from the referenced user-managed secret.",
-      "properties": {
-        "secretId": {
-          "type": "string",
-          "description": "Reference to a user-managed secret containing key-value pairs."
-        },
-        "secretKey": {
-          "type": "string",
-          "description": "The key within the secret whose value is the Application Insights connection string."
-        }
-      },
-      "required": [
-        "secretId",
-        "secretKey"
-      ]
-    },
-    "TelemetryAuth": {},
-    "TelemetryAuthTelemetryManagedIdentityAuth": {
-      "type": "object",
-      "description": "User-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the specified user-assigned MI.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "ManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "identity": {
-          "type": "string",
-          "description": "Full ARM resource ID of a user-assigned managed identity             (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{name})."
-        }
-      },
-      "required": [
-        "identity"
-      ]
-    },
-    "TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth": {
-      "type": "object",
-      "description": "System-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the sandbox group's system-assigned MI. No explicit identity resource ID is needed — the Identity Proxy defaults to the system-assigned identity.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "SystemAssignedManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "TelemetryConfig": {
-      "type": "object",
-      "description": "Configures telemetry collection for a sandbox. Passed in sandbox creation requests.",
-      "properties": {
-        "endpoints": {
-          "type": "array",
-          "description": "One or more telemetry endpoints to route data to.",
-          "items": {
-            "$ref": "#/definitions/TelemetryEndpoint"
-          }
-        },
-        "metricsIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Optional metrics collection interval in seconds. Must be &gt;= 2. Defaults to 15 if not specified.",
-          "minimum": 2
-        }
-      },
-      "required": [
-        "endpoints"
-      ]
-    },
-    "TelemetryData": {
-      "type": "string",
-      "description": "Specifies which category of telemetry data to route to an endpoint.",
-      "enum": [
-        "ContainerStdoutStderr",
-        "ContainerOtel",
-        "Metrics",
-        "NetworkEgressDecisions"
-      ],
-      "x-ms-enum": {
-        "name": "TelemetryData",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ContainerStdoutStderr",
-            "value": "ContainerStdoutStderr",
-            "description": "Serialized TelemetryData value."
-          },
-          {
-            "name": "ContainerOtel",
-            "value": "ContainerOtel",
-            "description": "Serialized TelemetryData value."
-          },
-          {
-            "name": "Metrics",
-            "value": "Metrics",
-            "description": "Serialized TelemetryData value."
-          },
-          {
-            "name": "NetworkEgressDecisions",
-            "value": "NetworkEgressDecisions",
-            "description": "Serialized TelemetryData value."
-          }
-        ]
-      }
-    },
-    "TelemetryEndpoint": {},
-    "TelemetryEndpointApplicationInsightsTelemetryEndpoint": {
-      "type": "object",
-      "description": "Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "ApplicationInsights"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetryApplicationInsightsAuth",
-          "description": "auth value."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "auth",
-        "data"
-      ]
-    },
-    "TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint": {
-      "type": "object",
-      "description": "Log Analytics Legacy (Data Collector API) telemetry endpoint configuration.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "LogAnalyticsLegacy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "The Log Analytics workspace ID."
-        },
-        "tableName": {
-          "type": "string",
-          "description": "The custom log table name (e.g., \"ContainerAppConsoleLogs\")."
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetrySecretReference",
-          "description": "Polymorphic secret reference for the shared key. Resolved at runtime             from Key Vault. May be a TelemetrySecretRef (sandboxGroup-scoped legacy             secret) or a TelemetryAppSecretRef (artifactApp-local inline secret)."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "workspaceId",
-        "tableName",
-        "auth",
-        "data"
-      ]
-    },
-    "TelemetryEndpointLogAnalyticsTelemetryEndpoint": {
-      "type": "object",
-      "description": "Azure Monitor Log Analytics telemetry endpoint configuration. Uses the Logs Ingestion API via Data Collection Endpoint (DCE) and Data Collection Rule (DCR). Authentication is handled by the customer's managed identity (user-assigned or system-assigned) via Identity Proxy.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "LogAnalytics"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "dceEndpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "Data Collection Endpoint URL."
-        },
-        "dcrImmutableId": {
-          "type": "string",
-          "description": "Data Collection Rule immutable ID."
-        },
-        "tableName": {
-          "type": "string",
-          "description": "Target stream name in the DCR."
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetryAuth",
-          "description": "Required managed identity authentication. The identity must be assigned to the sandbox group."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "dceEndpoint",
-        "dcrImmutableId",
-        "tableName",
-        "auth",
-        "data"
-      ]
-    },
-    "TelemetryEndpointOtlpTelemetryEndpoint": {
-      "type": "object",
-      "description": "OTLP telemetry endpoint configuration.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "OTLP"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "OTLP endpoint URL (e.g., \"https://customer.monitor.azure.com/otlp\")."
-        },
-        "protocol": {
-          "$ref": "#/definitions/TelemetryProtocol",
-          "description": "`Grpc` or `Http`."
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetryHeaderAuth",
-          "description": "auth value."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected             through this schema before being forwarded. Supported on all endpoint kinds for             `ContainerStdoutStderr` data. Per-kind semantics: OTLP — columns become log record             attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an             OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant             `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes             (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern — columns become the DCR             stream record fields; LogAnalyticsLegacy — columns become the HTTP Data Collector API record             fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level             keys are merged into the output record. Reserved keys (`message`, `time`,             `TimeGenerated`, anything starting with `adc.`) and any key already produced by             an explicit LogColumnDef are preserved (the parsed JSON does not override             them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "endpoint",
-        "protocol",
-        "data"
-      ]
-    },
-    "TelemetryHeaderAuth": {
-      "type": "object",
-      "description": "Authentication configuration for an OTLP telemetry endpoint. The egress proxy injects the resolved secret value as an HTTP header.",
-      "properties": {
-        "headerName": {
-          "type": "string",
-          "description": "HTTP header to inject (e.g., \"x-api-key\", \"Authorization\")."
-        },
-        "secretId": {
-          "type": "string",
-          "description": "Reference to a user-managed secret containing key-value pairs."
-        },
-        "secretKey": {
-          "type": "string",
-          "description": "The key within the secret whose value should be used as the header value."
-        }
-      },
-      "required": [
-        "headerName",
-        "secretId",
-        "secretKey"
-      ]
-    },
-    "TelemetryProtocol": {
-      "type": "string",
-      "description": "Specifies the protocol used to send telemetry data to an OTLP endpoint.",
-      "enum": [
-        "Grpc",
-        "Http"
-      ],
-      "x-ms-enum": {
-        "name": "TelemetryProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Grpc",
-            "value": "Grpc",
-            "description": "Serialized TelemetryProtocol value."
-          },
-          {
-            "name": "Http",
-            "value": "Http",
-            "description": "Serialized TelemetryProtocol value."
-          }
-        ]
-      }
-    },
-    "TelemetrySecretRef": {
-      "type": "object",
-      "description": "Reference to a sandbox-group GlobalSecret.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Secret-reference kind. Optional for compatibility with legacy payloads.",
-          "enum": [
-            "GlobalSecret"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "secretId": {
-          "type": "string",
-          "description": "Identifier of the sandbox-group secret."
-        },
-        "secretKey": {
-          "type": "string",
-          "description": "Key within the secret whose value should be used."
-        }
-      },
-      "required": [
-        "secretId",
-        "secretKey"
-      ]
-    },
-    "TelemetrySecretReference": {},
     "TenantId": {
       "type": "string",
       "description": "TenantId wire value."
@@ -8767,54 +7718,6 @@
         ]
       }
     },
-    "UserAuthorizationCodeFlow": {
-      "type": "object",
-      "description": "Microsoft Entra ID authorization-code authentication for user-scoped operations.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authorization-code flow type.",
-          "enum": [
-            "authorizationCode"
-          ],
-          "x-ms-enum": {
-            "name": "DevComputeAuthorizationCodeFlowType",
-            "modelAsString": false
-          }
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "description": "Microsoft Entra ID authorization endpoint.",
-          "enum": [
-            "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "tokenUrl": {
-          "type": "string",
-          "description": "Microsoft Entra ID token endpoint.",
-          "enum": [
-            "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "scopes": {
-          "type": "array",
-          "description": "OAuth2 scopes required by the service.",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "authorizationUrl",
-        "tokenUrl",
-        "scopes"
-      ]
-    },
     "ValidationWarning": {
       "type": "object",
       "description": "ValidationWarning wire model.",
@@ -8899,14 +7802,6 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure subscription identifier.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SandboxGroupScope": {
-      "name": "sandboxGroupId",
-      "in": "path",
-      "description": "Sandbox group identifier.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

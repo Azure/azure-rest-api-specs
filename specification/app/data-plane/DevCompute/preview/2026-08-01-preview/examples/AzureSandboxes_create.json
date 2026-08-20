@@ -19,6 +19,31 @@
         "diskImage": {
           "id": "example-disk-image"
         }
+      },
+      "egressPolicy": {
+        "http": {
+          "defaultAction": "Allow",
+          "defaultForward": {
+            "url": "https://default-proxy.example.com",
+            "ca": "example-ca-certificate"
+          },
+          "rules": [
+            {
+              "name": "route-api-through-proxy",
+              "match": {
+                "host": "api.example.com"
+              },
+              "action": {
+                "type": "Allow",
+                "forward": "proxy",
+                "forwardProxy": {
+                  "url": "https://api-proxy.example.com",
+                  "ca": "example-ca-certificate"
+                }
+              }
+            }
+          ]
+        }
       }
     }
   },
@@ -48,20 +73,6 @@
         "detail": "Authentication is required to access this resource."
       }
     },
-    "404": {
-      "body": {
-        "title": "Source not found",
-        "status": 404,
-        "detail": "A source referenced by the sandbox creation request does not exist."
-      }
-    },
-    "409": {
-      "body": {
-        "title": "Conflict",
-        "status": 409,
-        "detail": "The sandbox cannot be created because the request conflicts with the current state."
-      }
-    },
     "429": {
       "body": {
         "title": "Too many requests",
@@ -69,13 +80,6 @@
         "detail": "The sandbox creation rate limit has been exceeded. Retry the request later."
       }
     },
-    "500": {},
-    "503": {
-      "body": {
-        "title": "Service unavailable",
-        "status": 503,
-        "detail": "The service is temporarily unavailable. Retry the request later."
-      }
-    }
+    "500": {}
   }
 }

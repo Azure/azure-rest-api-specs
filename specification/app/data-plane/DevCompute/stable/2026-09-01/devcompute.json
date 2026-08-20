@@ -35,16 +35,16 @@
   ],
   "security": [
     {
-      "OAuth2Auth": [
+      "AzureDataPlaneS2sAuth": [
         "https://management.azuredevcompute.io/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "OAuth2Auth": {
+    "AzureDataPlaneS2sAuth": {
       "type": "oauth2",
-      "flow": "accessCode",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "description": "Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations.",
+      "flow": "application",
       "scopes": {
         "https://management.azuredevcompute.io/.default": ""
       },
@@ -466,6 +466,43 @@
       "required": [
         "fileCacheSizeLimit",
         "name"
+      ]
+    },
+    "AzureDataPlaneClientCredentialsFlow": {
+      "type": "object",
+      "description": "Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 client-credentials flow type.",
+          "enum": [
+            "clientCredentials"
+          ],
+          "x-ms-enum": {
+            "name": "DevComputeOAuth2FlowType",
+            "modelAsString": false
+          }
+        },
+        "tokenUrl": {
+          "type": "string",
+          "description": "Microsoft Entra ID token endpoint.",
+          "enum": [
+            "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth2 scopes required by the service.",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "tokenUrl",
+        "scopes"
       ]
     },
     "Base64": {
@@ -1859,95 +1896,6 @@
         "name"
       ]
     },
-    "LogColumnDef": {},
-    "LogColumnDefRefLogColumnDef": {
-      "type": "object",
-      "description": "A column whose value is resolved from a well-known ADC attribute at runtime.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "Ref"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "refName": {
-          "$ref": "#/definitions/LogColumnRef",
-          "description": "The ADC attribute to resolve."
-        }
-      },
-      "required": [
-        "refName"
-      ]
-    },
-    "LogColumnDefValueLogColumnDef": {
-      "type": "object",
-      "description": "A column whose value is a literal string provided by the partner.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "Value"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "value": {
-          "type": "string",
-          "description": "The static value injected into every log record."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LogColumnRef": {
-      "type": "string",
-      "description": "Well-known ADC attributes that can be referenced by custom columns.",
-      "enum": [
-        "LogContent",
-        "LogStream",
-        "SandboxId",
-        "Region",
-        "ContainerName"
-      ],
-      "x-ms-enum": {
-        "name": "LogColumnRef",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LogContent",
-            "value": "LogContent",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "LogStream",
-            "value": "LogStream",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "SandboxId",
-            "value": "SandboxId",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "Region",
-            "value": "Region",
-            "description": "Serialized LogColumnRef value."
-          },
-          {
-            "name": "ContainerName",
-            "value": "ContainerName",
-            "description": "Serialized LogColumnRef value."
-          }
-        ]
-      }
-    },
     "MegaBytes": {
       "type": "string",
       "description": "MegaBytes wire value."
@@ -2932,10 +2880,6 @@
             "$ref": "#/definitions/IdentitySetting"
           }
         },
-        "telemetryConfig": {
-          "$ref": "#/definitions/TelemetryConfig",
-          "description": "telemetryConfig value."
-        },
         "volumes": {
           "type": "array",
           "description": "Optional list of volumes to mount in the sandbox. When SandboxSource? SandboxRequest.SourcesRef.Snapshot is set, the listed volumes are attached after the sandbox is restored from the snapshot — semantically equivalent to restoring the sandbox first and then calling the dynamic add-volume-mount API. In that mode the volumes must all be data disks, the snapshot must be non-pod, and the snapshot must not already have its own attached volumes; cluster placement is constrained to a cluster that already holds the referenced data disks (cross-cluster download is not supported). Those rules are enforced downstream after the snapshot/volume Cosmos lookups.",
@@ -3462,431 +3406,6 @@
         "rules"
       ]
     },
-    "TelemetryAppSecretRef": {
-      "type": "object",
-      "description": "Reference to a secret in the parent artifact app.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Secret-reference kind.",
-          "enum": [
-            "AppSecret"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "secretRef": {
-          "type": "string",
-          "description": "Name of the secret in the parent artifact app's secret bundle."
-        }
-      },
-      "required": [
-        "kind",
-        "secretRef"
-      ]
-    },
-    "TelemetryApplicationInsightsAuth": {
-      "type": "object",
-      "description": "Authentication for an ApplicationInsights telemetry endpoint via secret reference. The connection string is resolved at runtime from the referenced user-managed secret.",
-      "properties": {
-        "secretId": {
-          "type": "string",
-          "description": "Reference to a user-managed secret containing key-value pairs."
-        },
-        "secretKey": {
-          "type": "string",
-          "description": "The key within the secret whose value is the Application Insights connection string."
-        }
-      },
-      "required": [
-        "secretId",
-        "secretKey"
-      ]
-    },
-    "TelemetryAuth": {},
-    "TelemetryAuthTelemetryManagedIdentityAuth": {
-      "type": "object",
-      "description": "User-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the specified user-assigned MI.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "ManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "identity": {
-          "type": "string",
-          "description": "Full ARM resource ID of a user-assigned managed identity (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{name})."
-        }
-      },
-      "required": [
-        "identity"
-      ]
-    },
-    "TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth": {
-      "type": "object",
-      "description": "System-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the sandbox group's system-assigned MI. No explicit identity resource ID is needed - the Identity Proxy defaults to the system-assigned identity.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "SystemAssignedManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "TelemetryConfig": {
-      "type": "object",
-      "description": "Configures telemetry collection for a sandbox. Passed in sandbox creation requests.",
-      "properties": {
-        "endpoints": {
-          "type": "array",
-          "description": "One or more telemetry endpoints to route data to.",
-          "items": {
-            "$ref": "#/definitions/TelemetryEndpoint"
-          }
-        },
-        "metricsIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Optional metrics collection interval in seconds. Must be &gt;= 2. Defaults to 15 if not specified.",
-          "minimum": 2
-        }
-      },
-      "required": [
-        "endpoints"
-      ]
-    },
-    "TelemetryData": {
-      "type": "string",
-      "description": "Specifies which category of telemetry data to route to an endpoint.",
-      "enum": [
-        "ContainerStdoutStderr",
-        "ContainerOtel",
-        "Metrics",
-        "NetworkEgressDecisions"
-      ],
-      "x-ms-enum": {
-        "name": "TelemetryData",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ContainerStdoutStderr",
-            "value": "ContainerStdoutStderr",
-            "description": "Serialized TelemetryData value."
-          },
-          {
-            "name": "ContainerOtel",
-            "value": "ContainerOtel",
-            "description": "Serialized TelemetryData value."
-          },
-          {
-            "name": "Metrics",
-            "value": "Metrics",
-            "description": "Serialized TelemetryData value."
-          },
-          {
-            "name": "NetworkEgressDecisions",
-            "value": "NetworkEgressDecisions",
-            "description": "Serialized TelemetryData value."
-          }
-        ]
-      }
-    },
-    "TelemetryEndpoint": {},
-    "TelemetryEndpointApplicationInsightsTelemetryEndpoint": {
-      "type": "object",
-      "description": "Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "ApplicationInsights"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetryApplicationInsightsAuth",
-          "description": "auth value."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "auth",
-        "data"
-      ]
-    },
-    "TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint": {
-      "type": "object",
-      "description": "Log Analytics Legacy (Data Collector API) telemetry endpoint configuration.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "LogAnalyticsLegacy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "The Log Analytics workspace ID."
-        },
-        "tableName": {
-          "type": "string",
-          "description": "The custom log table name (e.g., \"ContainerAppConsoleLogs\")."
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetrySecretReference",
-          "description": "Polymorphic secret reference for the shared key. Resolved at runtime from Key Vault. May be a TelemetrySecretRef (sandboxGroup-scoped legacy secret) or a TelemetryAppSecretRef (artifactApp-local inline secret)."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "workspaceId",
-        "tableName",
-        "auth",
-        "data"
-      ]
-    },
-    "TelemetryEndpointLogAnalyticsTelemetryEndpoint": {
-      "type": "object",
-      "description": "Azure Monitor Log Analytics telemetry endpoint configuration. Uses the Logs Ingestion API via Data Collection Endpoint (DCE) and Data Collection Rule (DCR). Authentication is handled by the customer's managed identity (user-assigned or system-assigned) via Identity Proxy.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "LogAnalytics"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "dceEndpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "Data Collection Endpoint URL."
-        },
-        "dcrImmutableId": {
-          "type": "string",
-          "description": "Data Collection Rule immutable ID."
-        },
-        "tableName": {
-          "type": "string",
-          "description": "Target stream name in the DCR."
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetryAuth",
-          "description": "Required managed identity authentication. The identity must be assigned to the sandbox group."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "dceEndpoint",
-        "dcrImmutableId",
-        "tableName",
-        "auth",
-        "data"
-      ]
-    },
-    "TelemetryEndpointOtlpTelemetryEndpoint": {
-      "type": "object",
-      "description": "OTLP telemetry endpoint configuration.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "kind value.",
-          "enum": [
-            "OTLP"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "OTLP endpoint URL (e.g., \"https://customer.monitor.azure.com/otlp\")."
-        },
-        "protocol": {
-          "$ref": "#/definitions/TelemetryProtocol",
-          "description": "`Grpc` or `Http`."
-        },
-        "auth": {
-          "$ref": "#/definitions/TelemetryHeaderAuth",
-          "description": "auth value."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data.",
-          "default": false
-        }
-      },
-      "required": [
-        "endpoint",
-        "protocol",
-        "data"
-      ]
-    },
-    "TelemetryHeaderAuth": {
-      "type": "object",
-      "description": "Authentication configuration for an OTLP telemetry endpoint. The egress proxy injects the resolved secret value as an HTTP header.",
-      "properties": {
-        "headerName": {
-          "type": "string",
-          "description": "HTTP header to inject (e.g., \"x-api-key\", \"Authorization\")."
-        },
-        "secretId": {
-          "type": "string",
-          "description": "Reference to a user-managed secret containing key-value pairs."
-        },
-        "secretKey": {
-          "type": "string",
-          "description": "The key within the secret whose value should be used as the header value."
-        }
-      },
-      "required": [
-        "headerName",
-        "secretId",
-        "secretKey"
-      ]
-    },
-    "TelemetryProtocol": {
-      "type": "string",
-      "description": "Specifies the protocol used to send telemetry data to an OTLP endpoint.",
-      "enum": [
-        "Grpc",
-        "Http"
-      ],
-      "x-ms-enum": {
-        "name": "TelemetryProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Grpc",
-            "value": "Grpc",
-            "description": "Serialized TelemetryProtocol value."
-          },
-          {
-            "name": "Http",
-            "value": "Http",
-            "description": "Serialized TelemetryProtocol value."
-          }
-        ]
-      }
-    },
-    "TelemetrySecretRef": {
-      "type": "object",
-      "description": "Reference to a sandbox-group GlobalSecret.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Secret-reference kind. Optional for compatibility with legacy payloads.",
-          "enum": [
-            "GlobalSecret"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "secretId": {
-          "type": "string",
-          "description": "Identifier of the sandbox-group secret."
-        },
-        "secretKey": {
-          "type": "string",
-          "description": "Key within the secret whose value should be used."
-        }
-      },
-      "required": [
-        "secretId",
-        "secretKey"
-      ]
-    },
-    "TelemetrySecretReference": {},
     "TenantId": {
       "type": "string",
       "description": "TenantId wire value."
