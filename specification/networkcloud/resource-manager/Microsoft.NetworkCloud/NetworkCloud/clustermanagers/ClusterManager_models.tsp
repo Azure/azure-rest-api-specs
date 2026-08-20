@@ -175,6 +175,13 @@ model ClusterManagerProperties {
   relayConfiguration?: ClusterManagerRelayConfiguration;
 
   /**
+   * The relative ordering group used to apply software updates to associated clusters. The minimum accepted value is 1; the service enforces the upper bound currently in effect, which may change over time.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @minValue(1)
+  rolloutRing?: int32;
+
+  /**
    * The size of the Azure virtual machines to use for hosting the cluster manager resource.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -225,7 +232,13 @@ model ClusterManagerPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  ...Foundations.ArmTagsProperty;
+  ...TagsParameter;
+
+  /**
+   * The list of cluster manager properties to patch.
+   */
+  @added(Versions.v2026_08_01_preview)
+  properties?: ClusterManagerPatchProperties;
 }
 
 /**
@@ -251,4 +264,16 @@ model ClusterManagerUpdateRelayPrivateEndpointConnectionParameters {
       type: "Microsoft.Network/privateEndpoints";
     }
   ]>;
+}
+
+/**
+ * ClusterManagerPatchProperties represents the cluster manager properties that may be patched.
+ */
+@added(Versions.v2026_08_01_preview)
+model ClusterManagerPatchProperties {
+  /**
+   * The relative ordering group used to apply software updates to associated clusters. The minimum accepted value is 1; the service enforces the upper bound currently in effect, which may change over time.
+   */
+  @minValue(1)
+  rolloutRing?: int32;
 }
