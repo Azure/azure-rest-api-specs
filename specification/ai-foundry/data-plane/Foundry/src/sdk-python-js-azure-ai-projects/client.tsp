@@ -31,6 +31,7 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -660,3 +661,17 @@ model AIProjectClientOptions {
   },
   "python"
 );
+
+// --------------------------------------------------------------------------------
+// Jobs (Foundry training jobs) sub-client
+// --------------------------------------------------------------------------------
+@@clientName(Jobs.get, "get", "python");
+@@clientName(Jobs.list, "list", "python");
+@@clientName(Jobs.createOrUpdate, "create_or_update", "python");
+@@clientName(Jobs.beginDelete, "begin_delete", "python");
+@@clientName(Jobs.beginCancel, "begin_cancel", "python");
+
+// Artifact reads (including log files) are not part of the initial public SDK
+// surface. They remain in the REST contract; the SDK shape is a follow-up.
+@@access(Jobs.listArtifacts, Access.internal);
+@@access(Jobs.getArtifactContentInformation, Access.internal);
