@@ -318,7 +318,9 @@ stages:
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
 
-            $openAsDraft = ('$(SpecRepoCommit)' -ne 'main') -or $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
+            $specRepoSourceBranch = '$(Build.SourceBranch)'
+            Write-Host "Spec repo source branch: '$specRepoSourceBranch'"
+            $openAsDraft = ($specRepoSourceBranch -ne 'refs/heads/main') -or $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
             Write-Host "Open SDK pull request as draft: $openAsDraft"
             Write-Host "##vso[task.setvariable variable=OpenSdkPullRequestAsDraft]$openAsDraft"
           workingDirectory: $(SdkRepoDirectory)
@@ -380,7 +382,7 @@ stages:
         - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
           - task: PowerShell@2
             displayName: Add auto-release label
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['SpecRepoCommit'], 'main'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(endsWith(variables['SdkRepoName'], '-pr')))
             inputs:
               pwsh: true
               workingDirectory: $(SdkRepoDirectory)
