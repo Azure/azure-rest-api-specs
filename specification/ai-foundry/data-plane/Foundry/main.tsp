@@ -20,6 +20,7 @@ import "./src/insights/routes.tsp";
 import "./src/managed-blueprints/routes.tsp";
 import "./src/models/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/state-stores/routes.tsp";
 import "./src/openai/assistants/main.tsp";
 import "./src/openai/audio/main.tsp";
 import "./src/openai/batch/main.tsp";
