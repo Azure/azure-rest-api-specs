@@ -425,18 +425,24 @@ const AgentTelephonyConditionalPreviews = #{
   conditional_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
-@doc("A telephony provider supported by an agent binding. The legacy input value `acs` is accepted for compatibility, but responses use `azure-communication-service`. Known values are stable; additional values may be added over time.")
+@doc("A telephony provider supported by an agent binding. New bindings use `teams-phone-extension` or `twilio`. Legacy provider values remain accepted so existing clients and stored bindings continue to work. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
 union TelephonyProvider {
   string,
 
-  @doc("Azure Communication Service, including Teams Phone Extensibility.")
-  azure_communication_service: "azure-communication-service",
+  @doc("Microsoft Teams Phone Extension.")
+  teams_phone_extension: "teams-phone-extension",
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
 
-  @doc("Infobip Voice and Calls API.")
+  @doc("Legacy Azure Communication Service provider value. New bindings use `teams-phone-extension`.")
+  azure_communication_service: "azure-communication-service",
+
+  @doc("Legacy shorthand for Azure Communication Service. New bindings use `teams-phone-extension`.")
+  acs: "acs",
+
+  @doc("Legacy Infobip Voice and Calls API provider value. New bindings cannot be created for this provider.")
   infobip: "infobip",
 }
 
@@ -480,20 +486,105 @@ model TelephonyTransferTarget {
   destination: TelephonyTransferDestination;
 }
 
-@doc("The request to bind a telephony identifier to the voice agent named in the request path.")
+@doc("Legacy provider configuration accepted as a compatibility input. New clients use the provider-specific top-level connection field.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyProviderConfig {
+  @doc("The Foundry connection name.")
+  connection_name?: string;
+
+  @doc("Legacy Azure Communication Service connection-name alias.")
+  acs_connection_name?: string;
+
+  @doc("Legacy Azure Communication Service resource identifier.")
+  acs_resource_id?: string;
+
+  @doc("Legacy Azure Communication Service endpoint.")
+  acs_endpoint?: url;
+
+  @doc("Legacy managed identity client identifier.")
+  mi_client_id?: string;
+
+  @doc("Legacy cognitive services customer identifier.")
+  cognitive_service_customer_id?: string;
+
+  @doc("Legacy provider account reference.")
+  account_ref?: string;
+
+  @doc("Legacy Foundry project connection reference.")
+  project_connection_id?: string;
+
+  @doc("Legacy credential secret reference.")
+  credential_secret_ref?: string;
+}
+
+@doc("The compatibility request to bind a telephony identifier to the voice agent named in the request path. New clients use a provider-specific request model selected by `provider`.")
+@discriminator("provider")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
 model CreateTelephonyBindingRequest {
-  @doc("The telephony provider.")
+  @doc("The telephony provider. New bindings use `teams-phone-extension` or `twilio`; legacy aliases remain accepted for existing clients.")
   provider: TelephonyProvider;
 
-  @doc("The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number.")
-  identifier: string;
+  @doc("Legacy provider identifier. New Teams Phone Extension requests use `resource_account_object_id`; new Twilio requests use `phone_number`.")
+  identifier?: string;
+
+  @doc("The Teams Phone Extension Foundry connection name. Required when `provider` is `teams-phone-extension`.")
+  azure_communication_service_connection_name?: string;
+
+  @doc("The Twilio Foundry connection name. Required when `provider` is `twilio`.")
+  twilio_connection_name?: string;
+
+  @doc("The provider-specific phone number. It is optional display metadata for Teams Phone Extension and a required E.164 number for Twilio.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("An optional display label for the binding.")
+  @maxLength(128)
+  label?: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID. Required when `provider` is `teams-phone-extension`.")
+  resource_account_object_id?: string;
+
+  @doc("Legacy optional display phone number alias. New clients use `phone_number`.")
+  @maxLength(64)
+  display_phone_number?: string;
 
   @doc("The destinations to which the voice agent may transfer calls. This compatibility field replaces the agent-scoped transfer-target configuration when supplied.")
   transfer_targets?: TelephonyTransferTarget[];
 
-  @doc("The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token.")
-  connection_name: string;
+  @doc("Legacy generic Foundry connection name. New clients use the provider-specific connection field.")
+  connection_name?: string;
+
+  @doc("Legacy nested provider configuration. New clients use the provider-specific top-level connection field.")
+  provider_config?: TelephonyProviderConfig;
+}
+
+@doc("The request to create a Microsoft Teams Phone Extension binding.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model CreateTeamsPhoneExtensionTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  @doc("The Microsoft Teams Phone Extension provider.")
+  provider: "teams-phone-extension";
+
+  @doc("The Teams Phone Extension Foundry connection name.")
+  azure_communication_service_connection_name: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
+  resource_account_object_id: string;
+}
+
+@doc("The request to create a Twilio binding. New clients supply the provider-specific fields; legacy `identifier` and connection aliases remain accepted.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model CreateTwilioTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  @doc("The Twilio provider.")
+  provider: "twilio";
+
+  @doc("The Twilio Foundry connection name. Required for new clients; legacy connection aliases remain accepted for compatibility.")
+  twilio_connection_name?: string;
+
+  @doc("The Twilio E.164 phone number. Required for new clients; the legacy `identifier` alias remains accepted for compatibility.")
+  @pattern("^\\+[1-9]\\d{6,14}$")
+  phone_number?: string;
 }
 
 @doc("The request to update an existing telephony binding.")
@@ -505,11 +596,35 @@ model UpdateTelephonyBindingRequest {
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
 
+  @doc("The replacement Teams Phone Extension Foundry connection name.")
+  azure_communication_service_connection_name?: string;
+
+  @doc("The Twilio Foundry connection name. It must match the existing immutable value when supplied.")
+  twilio_connection_name?: string;
+
+  @doc("The replacement Teams display phone number. For Twilio it must match the immutable binding number. Omit it to preserve the current value; use a blank Teams value to clear it.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The replacement display label. Omit it to preserve the current value; use a blank value to clear it.")
+  @maxLength(128)
+  label?: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID. It must match the immutable existing value when supplied.")
+  resource_account_object_id?: string;
+
+  @doc("Legacy optional display phone number alias. New clients use `phone_number`.")
+  @maxLength(64)
+  display_phone_number?: string;
+
   @doc("Replacement transfer targets. This compatibility field updates the agent-scoped configuration; an empty array clears all targets.")
   transfer_targets?: TelephonyTransferTarget[];
 
-  @doc("The replacement Foundry connection that configures provider access.")
+  @doc("Legacy replacement generic Foundry connection name. New clients use the provider-specific connection field.")
   connection_name?: string;
+
+  @doc("Legacy nested provider configuration. New clients use the provider-specific top-level connection field.")
+  provider_config?: TelephonyProviderConfig;
 }
 
 @doc("A telephony identifier bound to the voice agent named in the request path.")
@@ -521,11 +636,32 @@ model TelephonyBinding {
   @doc("The Foundry project that owns the binding.")
   project_id: string;
 
-  @doc("The telephony provider.")
+  @doc("The telephony provider. New bindings return `teams-phone-extension` or `twilio`; legacy bindings can return a legacy provider value.")
   provider: TelephonyProvider;
 
-  @doc("The provider-specific dialed identifier.")
+  @doc("The Teams Phone Extension Foundry connection name. Omitted for other providers.")
+  azure_communication_service_connection_name?: string;
+
+  @doc("The Twilio Foundry connection name. Omitted for other providers.")
+  twilio_connection_name?: string;
+
+  @doc("The provider-specific phone number. It is optional display metadata for Teams Phone Extension and the dialed E.164 number for Twilio.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The optional display label for the binding.")
+  @maxLength(128)
+  label?: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID. Omitted for other providers and older bindings that do not contain it.")
+  resource_account_object_id?: string;
+
+  @doc("The legacy provider-specific dialed identifier retained for existing clients.")
   identifier: string;
+
+  @doc("The legacy optional display phone number alias retained for existing clients.")
+  @maxLength(64)
+  display_phone_number?: string;
 
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
@@ -533,7 +669,7 @@ model TelephonyBinding {
   @doc("The agent-scoped destinations to which the voice agent may transfer calls.")
   transfer_targets: TelephonyTransferTarget[];
 
-  @doc("The Foundry connection that configures provider access. Secrets are referenced, not returned.")
+  @doc("The legacy generic Foundry connection name retained for existing clients. Secrets are referenced, not returned.")
   connection_name: string;
 
   @doc("The service-generated webhook URL to configure with the telephony provider.")
