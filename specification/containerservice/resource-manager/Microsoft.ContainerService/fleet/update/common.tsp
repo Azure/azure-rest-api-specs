@@ -130,7 +130,7 @@ model UpdateGroup {
         Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), 
         where p is the percentage as a decimal and N is the number of members in this group at scope start.
     Examples:
-      • "3"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure would cause the entire stage to fail.
+      • "3"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure causes the group to fail.
       • "25%" --> up to 25% of the members in this group can fail their upgrade before the group is considered failed.
     """)
   @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
