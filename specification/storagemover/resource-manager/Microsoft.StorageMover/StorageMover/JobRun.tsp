@@ -20,7 +20,7 @@ model JobRun is Azure.ResourceManager.ProxyResource<JobRunProperties> {
     Resource = JobRun,
     KeyName = "jobRunName",
     SegmentName = "jobRuns",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
   >;
 }
 
