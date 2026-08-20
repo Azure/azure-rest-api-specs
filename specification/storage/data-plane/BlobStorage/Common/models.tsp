@@ -583,6 +583,7 @@ enum SkuName {
 }
 
 /** The result of the List Containers API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListContainersResponse {
   /** The service endpoint. */
@@ -1292,6 +1293,7 @@ model RetentionPolicy {
 // List Blobs
 
 /** The result of the List Blobs API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListBlobsResponse {
   /** The service endpoint. */
@@ -1376,6 +1378,7 @@ enum QueryRequestType {
 }
 
 /** Groups the set of query request settings. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QueryRequest {
   /** Required. The type of the provided query expression. */
   @Xml.name("QueryType") queryType: QueryRequestType;
@@ -2543,6 +2546,7 @@ model BlobHierarchyList {
 }
 
 /** The result of the List Blobs Hierarchical API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchicalResponse {
   /** The service endpoint. */

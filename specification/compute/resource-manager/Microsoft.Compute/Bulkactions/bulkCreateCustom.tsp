@@ -60,6 +60,26 @@ alias BulkCreateCustomSubscriptionParams = {
   ...SubscriptionIdParameter;
 };
 
+@added(Versions.`2026-08-06-preview`)
+@doc("Information about a virtual machine resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomVirtualMachineInfo {
+  @doc("The resolved Azure virtual machine name.")
+  name?: string;
+
+  @doc("The virtual machine size selected for the virtual machine.")
+  vmSize?: string;
+
+  @doc("The subscription-relative logical availability zone selected for the virtual machine.")
+  zone?: string;
+}
+
+@added(Versions.`2026-08-06-preview`)
+@doc("A virtual machine resource resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomResource {
+  @doc("Information about the resolved virtual machine.")
+  virtualMachineInfo?: BulkCreateCustomVirtualMachineInfo;
+}
+
 // ============================================================
 // Resource: BulkCreateCustom
 //
@@ -213,6 +233,21 @@ model BulkCreateCustomProperties {
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
+  @added(Versions.`2026-08-06-preview`)
+  @doc("The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.")
+  @minValue(1)
+  minCapacity?: int32;
+
+  @added(Versions.`2026-08-06-preview`)
+  @doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
+  partialFulfillmentPolicy?: PartialFulfillmentPolicy;
+
+  @added(Versions.`2026-08-06-preview`)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @doc("The virtual machine resources resolved for the operation.")
+  resources?: Array<BulkCreateCustomResource>;
+
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
@@ -297,6 +332,16 @@ interface BulkCreateCustom {
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreateCustom,
     Request = void,
+    Parameters = BulkCreateCustomId
+  >;
+
+  @added(Versions.`2026-08-06-preview`)
+  @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
+  @list
+  virtualMachinesGetOperationStatus is ArmResourceActionSync<
+    Resource = LocationBasedBulkCreateCustom,
+    Request = void,
+    Response = ArmResponse<BulkCreateCustomOperationStatusListResult>,
     Parameters = BulkCreateCustomId
   >;
 

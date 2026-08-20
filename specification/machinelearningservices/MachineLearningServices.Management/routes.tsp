@@ -84,6 +84,7 @@ interface QuotasOperationGroup {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
