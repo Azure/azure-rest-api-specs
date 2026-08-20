@@ -1746,6 +1746,11 @@ union ProvisioningStateUnion {
   "GenerateExpressRouteLagsLoaContent",
   "csharp"
 );
+@@clientName(
+  Microsoft.Network.GenerateExpressRouteLagsLOAResult,
+  "GenerateExpressRouteLagsLoaResult",
+  "csharp"
+);
 @@clientName(Commit, "NetworkManagerConfigurationCommit", "csharp");
 @@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
 @@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
