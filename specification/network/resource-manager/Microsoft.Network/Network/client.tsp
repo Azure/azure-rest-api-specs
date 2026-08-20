@@ -5531,6 +5531,12 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@alternateType(
+  Microsoft.Network.ExpressRouteLag.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
   Common.LoadBalancer.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
