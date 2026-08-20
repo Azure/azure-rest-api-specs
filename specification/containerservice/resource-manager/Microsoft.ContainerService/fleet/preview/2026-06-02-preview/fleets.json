@@ -5990,7 +5990,7 @@
         },
         "maxAllowedFailures": {
           "type": "string",
-          "description": "Limits the number of member (cluster) upgrade failures tolerated within this group.\nFailures are evaluated over members within this group only. \nAccepts either:\n  • A fixed count n, where n >= 0\n  • A percentage p%, where 0 <= p <= 100\n    Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), \n    where p is the percentage as a decimal and N is the number of members in this group at scope start.\nExamples:\n  • \"3\"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure would cause the entire stage to fail.\n  • \"25%\" --> up to 25% of the members in this group can fail their upgrade before the group is considered failed.",
+          "description": "Limits the number of member (cluster) upgrade failures tolerated within this group.\nFailures are evaluated over members within this group only. \nAccepts either:\n  • A fixed count n, where n >= 0\n  • A percentage p%, where 0 <= p <= 100\n    Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), \n    where p is the percentage as a decimal and N is the number of members in this group at scope start.\nExamples:\n  • \"3\"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure causes the group to fail.\n  • \"25%\" --> up to 25% of the members in this group can fail their upgrade before the group is considered failed.",
           "pattern": "^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$"
         },
         "maxConcurrency": {
