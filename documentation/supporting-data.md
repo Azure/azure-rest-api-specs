@@ -58,15 +58,28 @@ This is the part most likely to be challenged, so the exact rules matter.
 
 **What the review does to the queue**
 
-- **A blocking finding is published:** the agent adds `ARMChangesRequested` and
-  removes `WaitForARMFeedback`. The PR leaves the feedback queue and goes back to
-  the author.
-- **No blocking finding:** the agent leaves `WaitForARMFeedback`,
-  `ARMChangesRequested`, and `ARMSignedOff` exactly as they were. A clean
-  automated review is advisory and deliberately does not advance the queue.
+The workflow is written to do this:
+
+- **A blocking finding is published:** add `ARMChangesRequested` and remove
+  `WaitForARMFeedback`, sending the change back to the author.
+- **No blocking finding:** leave `WaitForARMFeedback`, `ARMChangesRequested`, and
+  `ARMSignedOff` exactly as they were. A clean review is advisory and
+  deliberately does not advance the queue.
+
+**In practice, a person has moved every label so far.** Across 34 pull requests
+reviewed by the automated workflow, `ARMChangesRequested` was applied **24 times,
+every one by a reviewer and none by the automation**. Only one of those PRs
+carried a bot-posted blocking finding, and on that one the label was applied by a
+reviewer about seven hours after the finding was posted.
+
+**So do not claim the automatic transition on stage.** Describe the queue
+behavior as: the agent posts findings and never signs anything off, and the
+reviewer decides what moves. That is both accurate and the safer claim. The
+automatic path exists in the workflow and can be described as designed behavior
+if someone asks, but it has not been observed firing yet.
 
 **What the agent never does.** It never applies `ARMSignedOff`. Approval is
-human-only by design. The one-line version: the agent can return a change for
+human-only by design. The one-line version: the agent can flag a change for
 rework, but only a person can approve one.
 
 **One distinction worth having ready.** A separate, long-standing automation
@@ -81,6 +94,23 @@ path, not the reviewer.
 the agent's findings already on the PR, confirms they hold, and decides what
 moves next.
 
+**Verified demo candidates.** All four were reviewed by the automated workflow,
+with findings posted under the bot identity.
+
+| PR                                                                 | Files | What it shows                                                                       |
+| ------------------------------------------------------------------ | ----: | ----------------------------------------------------------------------------------- |
+| [#45650](https://github.com/Azure/azure-rest-api-specs/pull/45650) |     8 | Five new findings and one pre-existing; agent later confirms a fix and concedes one |
+| [#44986](https://github.com/Azure/azure-rest-api-specs/pull/44986) |    16 | A blocking finding citing ARM Section 2.5; PR now carries `ARMChangesRequested`     |
+| [#45604](https://github.com/Azure/azure-rest-api-specs/pull/45604) |     4 | Two findings citing `RPC-Schema-V1-26.0` and `ARM-8.6-Mutability`                   |
+| [#45618](https://github.com/Azure/azure-rest-api-specs/pull/45618) |   700 | A very large change reviewed at reduced scope rather than skipped                   |
+
+The exchange on #45650 is the strongest single artifact. The agent posted a
+warning about a new nullable property and a suggestion about a numeric type. On
+the next push it confirmed the nullable issue was fixed, and on the numeric type
+it accepted the author's reasoning that IPv6 allocation bounds exceed the range
+of any available numeric type and that the string was correct. It engaged with
+the argument instead of repeating the finding.
+
 **Worth knowing.** During the measured window the label transitions were entirely
 human. Of **491** `ARMChangesRequested` applications on agent-reviewed PRs, every
 one was applied by a person. That is consistent with the window predating routine
@@ -90,48 +120,159 @@ automated runs, and it is why slide 4 carries an attribution note.
 
 ## 3. Slide 4 figures
 
-### Row 1: review depth
+### Row 1: design comments per PR, human against agent
 
-| Measure                               |           2025 |                                      2026 |
-| ------------------------------------- | -------------: | ----------------------------------------: |
-| Human feedback items                  |          1,948 |                                     1,220 |
-| Human reviewed changes                |            529 |                                       602 |
-| Human items per change                |            3.7 |                                       2.0 |
-| Agent findings, duplicates removed    | not applicable |                                     1,470 |
-| Agent findings, before de-duplication | not applicable |                                     1,665 |
-| Changes with agent findings           | not applicable |                                       259 |
-| Combined reviewed changes             |            529 |                                       606 |
-| **Average per reviewed change**       |        **3.7** | **8.4** on agent-reviewed, 4.4 across all |
+This is a single-channel comparison. The 2025 column is what a human reviewer
+produced when no agent existed. The 2026 column is what the agent produced,
+with human comments excluded entirely.
 
-Arithmetic if challenged:
+| Measure                             | 2025 human | 2026 agent |
+| ----------------------------------- | ---------: | ---------: |
+| Changes reviewed                    |        529 |        262 |
+| Changes receiving at least one item |        529 |        259 |
+| Total items                         |      1,948 |      1,481 |
+| Design items                        |      1,740 |      1,359 |
+| Process items                       |        208 |        122 |
+| **Design items per change**         |    **3.3** |    **5.2** |
+| All items per change                |        3.7 |        5.7 |
 
-- 1,948 / 529 = **3.7**
-- (1,470 agent + 702 human on those same changes) / 259 = **8.4**
-- 8.4 / 3.7 = **2.3x**
-- Change coverage: 529 to 602 = **13.8 percent more**
-- Comments per change: 3.7 to 2.0 = **45 percent fewer**
+- Design: 1,740 / 529 = **3.3** against 1,359 / 262 = **5.2**, a **1.6x** increase
+- All items: 1,948 / 529 = **3.7** against 1,481 / 262 = **5.7**, a **1.5x** increase
+- The denominator choice barely matters. Only 3 of the 262 changes the agent
+  reviewed came back clean, so per-change-reviewed and per-change-with-findings
+  agree to one decimal.
 
-Reviewer headcount was **19 accounts in both windows**, so this is not a
-staffing change.
+**The selection caveat, and it is a real one.** Reviewers chose which changes to
+run the agent on, and they tended to choose the harder ones. The 2025 cohort is
+every change that went through human review. So this compares the agent on the
+work it was pointed at against humans on everything. State that plainly if
+challenged; it does not undo the result, but it is not a controlled trial.
 
-**Denominator.** 262 changes received an agent review; 259 received at least one
-actionable finding. 259 is the denominator for the 8.4 and 5.7 figures. The
-other 3 were clean.
+### Row 2: where each channel aims its feedback
 
-**If attribution is challenged.** The 8.4 figure is total depth the author
-receives, human and agent combined, against a human-only baseline. The cleanly
-agent-attributable number is **5.7 agent findings per agent-reviewed change**
-against the 3.7 human baseline. Use that with a skeptical audience, and note
-that human contribution per change fell over the same period, so none of the
-increase comes from reviewers writing more.
+Share of each channel own output, so the two columns are independent of volume.
 
-**Which entry point produced these numbers.** All **1,815** agent findings in the
-window were posted from reviewer-initiated sessions, where a person ran the agent
-and approved what went on the PR. None came from the automated workflow, which
-was introduced after the comparison window. If asked whether automation inflated
-the figures, the answer is that automation contributed nothing to them.
+| Theme                         | 2025 human | 2026 agent |
+| ----------------------------- | ---------: | ---------: |
+| Schema and property design    |      21.1% |      23.2% |
+| Resource modeling             |       8.0% |      16.8% |
+| Versioning and compatibility  |       6.1% |      15.9% |
+| Operations and HTTP semantics |       5.4% |      14.0% |
+| Long-running operations       |       3.0% |       9.6% |
+| Security and secrets          |       2.3% |       4.0% |
+| Review readiness and CI       |       8.1% |       6.6% |
+| Documentation and examples    |      10.7% |       3.6% |
+| Naming, enums, identifiers    |       9.4% |       3.3% |
+| Other, resists categorization |      23.3% |       0.7% |
 
-### Row 2: issue mix, rate per 100 reviewed changes
+**Contract risk** is resource modeling, versioning, operations and HTTP
+semantics, and long-running operations combined:
+
+- 2025 human: (156 + 118 + 106 + 58) / 1,948 = **22.5 percent**
+- 2026 agent: (249 + 236 + 208 + 142) / 1,481 = **56.4 percent**
+- Adding security and secrets moves these to 24.7 and 60.4 percent
+
+**Lower-severity feedback** is documentation, naming, and the bucket that resists
+categorization: **43.3 percent** of human output against **7.7 percent** of the
+agent output.
+
+The 23.3 percent human "other" bucket is not a classifier failure so much as a
+description of how people write review comments: terse, contextual, and often
+referring to a conversation the reader was part of. Agent findings carry an
+explicit rule ID, which is why almost none of them land in that bucket.
+
+### What the author actually receives
+
+The rows above isolate each channel. In practice the reviewer is still working
+alongside the agent, so on a change the agent reviewed the author receives both:
+
+| Measure                      |    2025 |    2026 |
+| ---------------------------- | ------: | ------: |
+| Agent findings per change    |       0 |     5.7 |
+| Reviewer comments per change |     3.7 |     2.7 |
+| **Total per change**         | **3.7** | **8.4** |
+
+- 2026: (1,470 agent + 702 reviewer) / 259 changes = **8.4**
+- Reviewer share fell from 3.7 to **2.7**, a **26 percent** reduction
+- Across every change reviewers touched in 2026, not just agent-reviewed ones,
+  they averaged 1,220 / 602 = **2.0** per change, a **45 percent** reduction,
+  while covering **13.8 percent more changes** with the same 19 people. That uses
+  a different denominator, so quote it separately.
+
+### Design feedback per PR, and the coverage caveat
+
+The 3.3 figure for 2025 covers every reviewed change in the window. The
+comparable 2026 number depends on which changes you count, and the gap between
+those two answers is the single most important caveat in this deck.
+
+| Cohort                             | Changes | Design items |  Per PR |
+| ---------------------------------- | ------: | -----------: | ------: |
+| **2025, all reviewed changes**     |     529 |        1,740 | **3.3** |
+| **2026, all reviewed changes**     |     606 |        2,299 | **3.8** |
+| 2026, changes the agent reviewed   |     259 |        1,894 |     7.3 |
+| 2026, changes with no agent review |     347 |          405 |     1.2 |
+
+So there are two true answers to "what is the 2026 number":
+
+- **3.8 across everything reviewed**, a 1.15x increase on 3.3. This is the
+  strictly like-for-like comparison.
+- **7.3 on the changes the agent actually reviewed**, a 2.2x increase. This is
+  what the agent delivers where it runs.
+
+The difference is coverage. The agent reviewed **259 of 606 reviewed changes, 43
+percent**. The slide is scoped to agent-reviewed PRs and its column header says
+so. If anyone asks what happened overall, give them 3.8 and explain the coverage
+gap rather than letting them find it.
+
+**The number worth noticing.** On 2026 changes the agent did not review, design
+feedback was **1.2 per PR, down from 3.3 in 2025**. Reviewers are spread thinner
+than they were, and where the agent is absent authors now get materially less
+design feedback than they used to. That is the strongest argument for expanding
+coverage, and it lines up with the roadmap on slide 5.
+
+**The pattern is not an artifact of trivial changes.** Excluding everything that
+was auto-signed off, so only substantive review remains, the shape holds and
+sharpens: 2025 stays at 3.3, 2026 rises to 4.1 overall, 7.6 on agent-reviewed
+changes and 1.1 where the agent was absent.
+
+### How design and process were separated
+
+The design figures above exclude two themes as process rather than design work:
+**Review readiness and CI** (chasing lint failures, PR templates, stale threads)
+and **Suppressions and tooling**.
+
+| Cohort                              | Design | Process | Design per change |
+| ----------------------------------- | -----: | ------: | ----------------: |
+| 2025 human, 529 changes             |  1,740 |     208 |           **3.3** |
+| 2026 agent, 262 changes             |  1,359 |     122 |           **5.2** |
+| 2026 reviewer on agent-reviewed PRs |    535 |     167 |               2.1 |
+| 2026 combined, 259 changes          |  1,894 |     289 |               7.3 |
+
+Classifying **Suppressions and tooling** as process is a judgment call. Moving it
+to design shifts the 2025 baseline from 3.3 to 3.4 and changes no conclusion.
+
+### Contract risk as a rate, an alternative to the share figure
+
+Slide 4 expresses contract risk as a share of each channel output, 22 percent
+against 56 percent. The same shift expressed as a rate per 100 reviewed changes:
+
+| Category                      | 2025 human | 2026 agent |
+| ----------------------------- | ---------: | ---------: |
+| Resource modeling             |       29.5 |       95.8 |
+| Versioning and compatibility  |       22.3 |       89.2 |
+| Operations and HTTP semantics |       20.0 |       80.3 |
+| Long-running operations       |       11.0 |       54.4 |
+| **Combined**                  |   **82.8** |  **319.7** |
+
+Use the share figure on the slide because it is independent of volume and
+therefore harder to argue with. Use the rate if someone specifically asks how
+many more findings there are per PR rather than how the mix shifted.
+
+### Full issue mix, if anyone wants it
+
+Rate per 100 reviewed changes. This was an earlier version of row 2 and was cut
+because five categories with five multipliers is difficult to deliver verbally.
+Keep it here for questions.
 
 | Issue type                    | 2025 human | 2026 agent | Multiplier |
 | ----------------------------- | ---------: | ---------: | ---------: |
@@ -280,6 +421,14 @@ works, so the emphasis shifts from building to sustaining: issues get logged and
 triaged, and Copilot increasingly handles the fixes. This frees engineering
 attention for the next area rather than signalling that the work is finished.
 
+**Widening coverage.** The agent reviewed 259 of 606 changes that went through
+ARM review, 43 percent. On the 347 it did not review, design feedback averaged
+1.2 per change against 3.3 in 2025. Closing that gap raises the floor for every
+author rather than only those whose reviewer invoked the agent, and it is the
+change most directly supported by the data. If asked how it gets closed, the
+automated workflow already runs on PRs carrying `WaitForARMFeedback`; the work is
+making that path the default rather than the exception.
+
 **Long-running operations.** Partners have been asking for deeper support here,
 and it is also the largest gap in the data at 4.9x. Picking it up next lines the
 roadmap up with both partner demand and the measured evidence, which is a useful
@@ -301,11 +450,12 @@ comment access. Raised as an idea; mention it only if asked about extensibility.
 ## 6. Anticipated questions
 
 **"Does the agent move the PR through the review queue by itself?"**
-Partly, and only in the conservative direction. When it publishes a blocking
-finding it adds `ARMChangesRequested` and removes `WaitForARMFeedback`, sending
-the change back to the author. When the review is clean it changes nothing. It
-never applies `ARMSignedOff`, so approval remains human. The weekly primary
-reviewer sees the findings already on the PR and decides what happens next.
+In practice, no. It posts findings and leaves the decision to a reviewer, and it
+never applies `ARMSignedOff`, so approval is always human. The workflow does
+contain a rule to add `ARMChangesRequested` and clear `WaitForARMFeedback` when a
+blocking finding is published, but across the automated reviews to date every
+label transition has been made by a person. Describe the reviewer as the one who
+moves the change.
 
 **"How do you tell an agent finding from a human comment?"**
 Every agent finding carries a hidden marker. The split uses that marker, not the
@@ -341,6 +491,35 @@ enters the review queue, the agent's median time to first feedback is 74.2 hours
 against 50.4 for humans. The agent is normally triggered on demand, so that
 number reflects when someone invoked it, not how long it takes to run. The
 argument is depth, coverage of hard categories, and consistency.
+
+**"What happened across all PRs, not just the ones the agent reviewed?"**
+Design feedback went from **3.3 per PR in 2025 to 3.8 in 2026**, a 15 percent
+increase. The slide is deliberately scoped to the changes the agent reviewed,
+where the figure is 7.3, and the column header says so. The difference is
+coverage: the agent reviewed 259 of 606 reviewed changes, 43 percent. Give the
+3.8 figure openly if asked. The follow-on point is that on changes the agent did
+not review, design feedback fell to 1.2 per PR from 3.3 in 2025, which is why
+expanding coverage is on the roadmap.
+
+**"Do PRs get through review faster?"**
+No, and be ready for this one because it sounds like it should be yes. Measured
+from queue entry to ARM sign-off, excluding changes that were auto-signed off:
+
+| Cohort               | PRs | Median days to sign-off | Average change rounds |
+| -------------------- | --: | ----------------------: | --------------------: |
+| 2025, human only     | 824 |                     4.9 |                  0.61 |
+| 2026, no agent       | 535 |                     1.1 |                  0.20 |
+| 2026, agent reviewed | 152 |                     8.4 |                  1.84 |
+
+The pattern holds when restricted to similarly sized pull requests of 5 to 50
+changed files: 4.7 days for 2025 human-only against 9.4 days for agent-reviewed.
+
+Two things are going on, and both are worth saying plainly. Reviewers invoke the
+agent on the harder changes, so the cohorts are not equivalent. And the agent
+finds more that needs fixing, 1.84 rounds of requested changes against 0.61, so
+the extra time is rework rather than waiting. Issues fixed before a version ships
+are far cheaper than issues fixed after. But the honest summary is that this
+process finds more and therefore takes longer, and no speed claim is made.
 
 **"How reliable is the categorization?"**
 Keyword heuristics, one theme per item. Coverage is 76.7 percent for human
