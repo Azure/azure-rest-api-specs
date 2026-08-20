@@ -1751,6 +1751,66 @@ union ProvisioningStateUnion {
   "GenerateExpressRouteLagsLoaResult",
   "csharp"
 );
+@@clientName(
+  Microsoft.Network.ConnectionAnalyzerQueryStatusResult.expiryInUtc,
+  "ExpiresOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DiagnosticOperation,
+  "ConnectionAnalyzerDiagnosticOperation",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DiagnosticOperationResult,
+  "ConnectionAnalyzerDiagnosticOperationResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DiagnosticOperationsSettings,
+  "ConnectionAnalyzerDiagnosticOperationsSettings",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProtocolSettings,
+  "ConnectionAnalyzerProtocolSettings",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.StorageAccountSettings,
+  "ConnectionAnalyzerStorageAccountSettings",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.KubeLabelSelector,
+  "FirewallPolicyKubeLabelSelector",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.LabelSelectorExpression,
+  "FirewallPolicyLabelSelectorExpression",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.LabelSelectorOperator,
+  "FirewallPolicyLabelSelectorOperator",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.MigrationType,
+  "NetworkVirtualApplianceMigrationType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ResiliencyLevel,
+  "ExpressRouteCircuitResiliencyLevel",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ServiceGatewayActionOkResponseBody,
+  "ServiceGatewayActionResult",
+  "csharp"
+);
 @@clientName(Commit, "NetworkManagerConfigurationCommit", "csharp");
 @@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
 @@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
