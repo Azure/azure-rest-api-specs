@@ -300,6 +300,9 @@ model CommandJob extends JobProperties {
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
 
+  @doc("Name of the experiment the job belongs to. If omitted, the service uses \"Default\".")
+  experimentName?: string;
+
   @doc("The asset property dictionary.")
   properties?: Record<string>;
 
