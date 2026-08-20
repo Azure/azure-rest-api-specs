@@ -475,8 +475,8 @@ model AgentOptimizationTokenUsageEntry {
   @doc("Which layer of the optimization loop generated these calls.")
   layer: AgentOptimizationLayer;
 
-  @doc("Model deployment name that served the calls. Null when unattributed.")
-  `model`?: string;
+  @doc("Model deployment name that served the calls. Empty string when the source sample didn't attribute a model.")
+  `model`: string;
 
   @doc("Total input tokens. Null when unmeasured.")
   input_tokens?: int64;
