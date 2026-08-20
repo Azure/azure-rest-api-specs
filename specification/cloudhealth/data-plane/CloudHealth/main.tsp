@@ -21,6 +21,15 @@ using Azure.Core.Foundations;
 )
 namespace Microsoft.CloudHealth.HealthIntelligence.DataPlane;
 
+alias NoResourceLifecycleTraits = Azure.Core.Traits.NoConditionalRequests &
+  Azure.Core.Traits.NoRepeatableRequests &
+  Azure.Core.Traits.NoClientRequestId;
+
+alias EntityReadOperations = Azure.Core.ResourceOperations<
+  NoResourceLifecycleTraits,
+  NotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+>;
+
 @doc("Service API versions.")
 enum Versions {
   @doc("The 2026-06-01-preview version.")
@@ -90,7 +99,7 @@ model QueryEchoResponse {
   healthModelExists: boolean;
 
   @doc("Health state of the health model; omitted when the health model does not exist.")
-  healthModelState?: string;
+  healthModelState?: HealthState;
 }
 
 @doc("How an entity's health is transformed when propagated to its parent. The service emits documented values; the open string form lets clients retain future named values.")
@@ -230,8 +239,11 @@ model EntityDiagnosticSignalAggregationGroup {
 }
 
 @doc("Current diagnostic snapshot for an entity.")
+@resource("api/entities")
 model EntityDiagnosticSnapshot {
   @doc("Name of the entity represented by this diagnostic snapshot.")
+  @key("entityName")
+  @visibility(Lifecycle.Read)
   entityName: entityName;
 
   @doc("Current health state of the entity.")
@@ -257,6 +269,16 @@ model EntityDiagnosticSnapshot {
 
   @doc("Signal-aggregation groups considered in the current health evaluation.")
   signalAggregationGroups: EntityDiagnosticSignalAggregationGroup[];
+}
+
+@doc("Routing resource that identifies a signal under an entity.")
+@resource("signals")
+@parentResource(EntityDiagnosticSnapshot)
+model EntitySignalRoute {
+  @doc("Name of the signal under an entity.")
+  @key("signalName")
+  @visibility(Lifecycle.Read)
+  signalName: signalName;
 }
 
 @error
@@ -328,6 +350,10 @@ model EntityHealthStateHistoryResponse {
   @doc("The health-state periods, ordered newest first.")
   @pageItems
   value: EntityHealthStatePeriod[];
+
+  @doc("The full URI to fetch the next page of results; absent when there is no next page.")
+  @nextLink
+  nextLink?: url;
 }
 
 @doc("A single recorded signal data point.")
@@ -457,7 +483,6 @@ model HealthReportRequest {
 @doc("Health-report ingestion request was accepted.")
 model IngestHealthReportAcceptedResponse {
   ...Azure.Core.Foundations.AcceptedResponse;
-  ...LongRunningStatusLocation;
 }
 
 @error
@@ -508,206 +533,175 @@ model ServiceUnavailableResponse is Azure.Core.Foundations.ErrorResponse {
 
 @route("/api")
 interface Model {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane status echo is a simple non-resource GET; it does not map to an Azure.Core resource operation template. To be revisited at API Stewardship review."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the implemented data-plane contract ('status'); renaming would diverge from the deployed service."
   @doc("Return whether the health model exists and its current health state.")
+  @route("/status")
   @get
-  status(...ApiVersionParameter):
-    | QueryEchoResponse
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse;
+  status is RpcOperation<
+    {},
+    QueryEchoResponse,
+    {},
+    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+  >;
 }
 
 @route("/api/entities/{entityName}/transitions")
 interface EntityTransitionHistory {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane history query is a simple non-resource GET; it does not map to an Azure.Core resource operation template. To be revisited at API Stewardship review."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Transition history must keep the deployed '/transitions' subpath and pageable history payload shape; no resource-lifecycle template preserves this wire contract."
   @doc("Return the health-state transitions recorded for an entity, newest first.")
   @list
   @get
-  list(
-    @doc("The entity to return health-state transitions for.")
-    @path
-    entityName: entityName,
+  list is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
+      @query
+      startAt?: utcDateTime;
 
-    @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
-    @query
-    startAt?: utcDateTime,
+      @doc("End of the requested window (UTC); defaults to now when omitted.")
+      @query
+      endAt?: utcDateTime;
 
-    @doc("End of the requested window (UTC); defaults to now when omitted.")
-    @query
-    endAt?: utcDateTime,
+      @doc("Maximum page size of transitions to return; defaults to 1000 when omitted.")
+      @query("maxpagesize")
+      @maxValue(1000)
+      @minValue(1)
+      maxPageSize?: int32;
 
-    @doc("Maximum number of transitions to return; defaults to 1000 when omitted.")
-    @query
-    @maxValue(1000)
-    @minValue(1)
-    top?: int32,
-
-    @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
-    @query
-    @continuationToken
-    nextMarker?: string4096,
-
-    ...ApiVersionParameter,
-  ):
-    | EntityTransitionHistoryResponse
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse;
+      @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
+      @query
+      @continuationToken
+      nextMarker?: string4096;
+    },
+    EntityTransitionHistoryResponse,
+    {},
+    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+  >;
 }
 
-@route("/api/entities/{entityName}")
+@route("/api")
 interface Entity {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane entity diagnostics query is a simple non-resource GET; it does not map to an Azure.Core resource operation template. This suppression is approved by API Stewardship."
   @doc("Return the current diagnostic snapshot for an entity.")
-  @get
-  get(
-    @doc("The entity to return a diagnostic snapshot for.")
-    @path
-    entityName: entityName,
-
-    ...ApiVersionParameter,
-  ):
-    | EntityDiagnosticSnapshot
-    | NotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse;
+  get is EntityReadOperations.ResourceRead<EntityDiagnosticSnapshot>;
 }
 
 @route("/api/entities/{entityName}/healthStateHistory")
 interface EntityHealthStateHistory {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane history query is a simple non-resource GET; it does not map to an Azure.Core resource operation template. To be revisited at API Stewardship review."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Health-state history must keep the deployed '/healthStateHistory' subpath and pageable history payload shape; no resource-lifecycle template preserves this wire contract."
   @doc("Return the health-state periods active during the requested window for an entity.")
   @list
   @get
-  list(
-    @doc("The entity to return health-state history for.")
-    @path
-    entityName: entityName,
+  list is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
+      @query
+      startAt?: utcDateTime;
 
-    @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
-    @query
-    startAt?: utcDateTime,
+      @doc("End of the requested window (UTC); defaults to now when omitted.")
+      @query
+      endAt?: utcDateTime;
 
-    @doc("End of the requested window (UTC); defaults to now when omitted.")
-    @query
-    endAt?: utcDateTime,
+      @doc("Maximum page size of history periods to return; defaults to 1000 when omitted.")
+      @query("maxpagesize")
+      @maxValue(1000)
+      @minValue(1)
+      maxPageSize?: int32;
 
-    ...ApiVersionParameter,
-  ):
-    | EntityHealthStateHistoryResponse
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse;
+      @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
+      @query
+      @continuationToken
+      nextMarker?: string4096;
+    },
+    EntityHealthStateHistoryResponse,
+    {},
+    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+  >;
 }
 
 @route("/api/entities/{entityName}/signals/{signalName}/history")
 interface SignalHistory {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane history query is a simple non-resource GET; it does not map to an Azure.Core resource operation template. To be revisited at API Stewardship review."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Signal history must keep the deployed '/signals/{signalName}/history' subpath and pageable time-series payload shape; no resource-lifecycle template preserves this wire contract."
   @doc("Return the data points recorded for an entity's signal, newest first.")
   @list
   @get
-  list(
-    @doc("The entity that owns the signal to return history for.")
-    @path
-    entityName: entityName,
+  list is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntitySignalRoute> & {
+      @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
+      @query
+      startAt?: utcDateTime;
 
-    @doc("The signal to return history for.")
-    @path
-    signalName: signalName,
+      @doc("End of the requested window (UTC); defaults to now when omitted.")
+      @query
+      endAt?: utcDateTime;
 
-    @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
-    @query
-    startAt?: utcDateTime,
+      @doc("Maximum page size of data points to return; defaults to 1000 when omitted.")
+      @query("maxpagesize")
+      @maxValue(1000)
+      @minValue(1)
+      maxPageSize?: int32;
 
-    @doc("End of the requested window (UTC); defaults to now when omitted.")
-    @query
-    endAt?: utcDateTime,
-
-    @doc("Maximum number of data points to return; defaults to 1000 when omitted.")
-    @query
-    @maxValue(1000)
-    @minValue(1)
-    top?: int32,
-
-    @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
-    @query
-    @continuationToken
-    nextMarker?: string4096,
-
-    ...ApiVersionParameter,
-  ):
-    | SignalDataPointHistoryResponse
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse;
+      @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
+      @query
+      @continuationToken
+      nextMarker?: string4096;
+    },
+    SignalDataPointHistoryResponse,
+    {},
+    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+  >;
 }
 
 @route("/api/entities/{entityName}/dataAnnotations")
 interface DataAnnotations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane history query is a simple non-resource GET; it does not map to an Azure.Core resource operation template. To be revisited at API Stewardship review."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data annotations must keep the deployed '/dataAnnotations' subpath and pageable annotation payload shape; no resource-lifecycle template preserves this wire contract."
   @doc("Return the data annotations recorded for an entity, newest first.")
   @list
   @get
-  list(
-    @doc("The entity to return data annotations for.")
-    @path
-    entityName: entityName,
+  list is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
+      @query
+      startAt?: utcDateTime;
 
-    @doc("Start of the requested window (UTC); defaults to 24 hours before now when omitted.")
-    @query
-    startAt?: utcDateTime,
+      @doc("End of the requested window (UTC); defaults to now when omitted.")
+      @query
+      endAt?: utcDateTime;
 
-    @doc("End of the requested window (UTC); defaults to now when omitted.")
-    @query
-    endAt?: utcDateTime,
+      @doc("Maximum page size of annotations to return; defaults to 100 when omitted.")
+      @query("maxpagesize")
+      @maxValue(100)
+      @minValue(1)
+      maxPageSize?: int32;
 
-    @doc("Maximum number of annotations to return; defaults to 100 when omitted.")
-    @query
-    @maxValue(100)
-    @minValue(1)
-    top?: int32,
-
-    @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
-    @query
-    @continuationToken
-    nextMarker?: string4096,
-
-    ...ApiVersionParameter,
-  ):
-    | DataAnnotationsResponse
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse;
+      @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation.")
+      @query
+      @continuationToken
+      nextMarker?: string4096;
+    },
+    DataAnnotationsResponse,
+    {},
+    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+  >;
 }
 
 @route("/api/entities/{entityName}/healthReports")
 interface HealthReportIngestion {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data-plane health-report ingestion is a simple non-resource POST; it does not map to an Azure.Core resource operation template. To be revisited at API Stewardship review."
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "The public contract requires Operation-Location metadata for HTTP 202 responses, but health-report ingestion does not expose a service polling operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Health report ingestion is an asynchronous fire-and-forget submission endpoint under '/healthReports'; no resource-lifecycle template preserves this wire contract."
   @doc("Ingest a health report for a specific signal on an entity.")
   @post
-  ingestHealthReport(
-    @doc("Name of the entity that the health report targets.")
-    @path
-    entityName: entityName,
-
-    // Must precede the @body parameter: the emitter renders this interface in declaration
-    // order but always renders the controller call site as (path params, apiVersion, body),
-    // so a body declared first here produces a mismatched, non-compiling signature.
-    ...ApiVersionParameter,
-
-    @doc("Health report payload. Must not exceed 32 KiB (32768 bytes).")
-    @body
-    body: HealthReportRequest,
-  ):
-    | IngestHealthReportAcceptedResponse
+  ingestHealthReport is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      @doc("Health report payload. Must not exceed 32 KiB (32768 bytes).")
+      @body
+      body: HealthReportRequest;
+    },
+    IngestHealthReportAcceptedResponse,
+    {},
     | BadRequestResponse
     | ModelNotFoundResponse
     | PayloadTooLargeResponse
     | UnsupportedMediaTypeResponse
     | TooManyRequestsResponse
     | ServiceUnavailableResponse
-    | EntityDiagnosticDefaultErrorResponse;
+    | EntityDiagnosticDefaultErrorResponse
+  >;
 }
