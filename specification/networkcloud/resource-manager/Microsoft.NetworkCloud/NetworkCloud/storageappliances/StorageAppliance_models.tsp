@@ -174,6 +174,12 @@ model StorageApplianceProperties {
  */
 model StorageApplianceSpec {
   /**
+   * The credentials of the administrative interface on this storage appliance.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  administratorCredentials: AdministrativeCredentials;
+
+  /**
    * The resource ID of the rack where this storage appliance resides.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -197,12 +203,6 @@ model StorageApplianceSpec {
    * The serial number for the storage appliance.
    */
   serialNumber: string;
-
-  /**
-   * The credentials of the administrative interface on this storage appliance.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  administratorCredentials: AdministrativeCredentials;
 }
 
 /**

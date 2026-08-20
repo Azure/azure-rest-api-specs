@@ -9697,6 +9697,7 @@
         },
         "extendedLocation": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location of the resource.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18576,6 +18577,14 @@
       "type": "object",
       "description": "StorageApplianceProperties represents the properties of the storage appliance.",
       "properties": {
+        "administratorCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials",
+          "description": "The credentials of the administrative interface on this storage appliance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "rackId": {
           "type": "string",
           "format": "arm-id",
@@ -18607,14 +18616,6 @@
         "serialNumber": {
           "type": "string",
           "description": "The serial number for the storage appliance."
-        },
-        "administratorCredentials": {
-          "$ref": "#/definitions/AdministrativeCredentials",
-          "description": "The credentials of the administrative interface on this storage appliance.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "caCertificate": {
           "$ref": "#/definitions/CertificateInfo",
@@ -18711,11 +18712,11 @@
         }
       },
       "required": [
+        "administratorCredentials",
         "rackId",
         "storageApplianceSkuId",
         "rackSlot",
-        "serialNumber",
-        "administratorCredentials"
+        "serialNumber"
       ]
     },
     "StorageApplianceProvisioningState": {
