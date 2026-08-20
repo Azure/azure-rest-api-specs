@@ -106,9 +106,9 @@ model SandboxGroupPatchProperties {
 
 /** The telemetry configuration for sandboxes in a sandbox group. */
 model TelemetryConfig {
-  /** The endpoints that sandbox telemetry is sent to. At least one endpoint must be specified. */
+  /** The endpoints that sandbox telemetry is sent to. */
   @identifiers(#[])
-  endpoints: TelemetryEndpoint[];
+  endpoints?: TelemetryEndpoint[];
 
   /** The interval, in seconds, at which sandbox metrics are collected. Defaults to 15 seconds when not specified. */
   @minValue(2)
@@ -138,9 +138,9 @@ model TelemetryEndpoint {
   /** The categories of telemetry sent to this endpoint. When empty, every category is sent. */
   data: TelemetryData[];
 
-  /** A custom output schema for log records, keyed by the name of the output column to produce. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Output column names are chosen by the customer, so the schema is an open key/value map."
-  columns?: Record<LogColumnDef>;
+  /** A custom output schema for log records. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape. */
+  @identifiers(#["name"])
+  columns?: LogColumn[];
 
   /** Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`. */
   dynamicJsonColumns?: boolean = false;
@@ -209,10 +209,10 @@ union TelemetryData {
 union TelemetryProtocol {
   string,
 
-  /** gRPC. */
+  /** Telemetry is sent over gRPC. */
   Grpc: "Grpc",
 
-  /** HTTP. */
+  /** Telemetry is sent over HTTP with a protobuf payload. */
   Http: "Http",
 }
 
@@ -225,8 +225,7 @@ model TelemetryHeaderAuth {
   secretId: string;
 
   /** The key within the sandbox group secret whose value is sent as the header value. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is the name of a key within the referenced secret, not the secret value, and it is returned in read responses."
-  secretKey: string;
+  secretKeyName: string;
 }
 
 /** Authentication for an Application Insights telemetry endpoint. */
@@ -235,8 +234,7 @@ model TelemetryApplicationInsightsAuth {
   secretId: string;
 
   /** The key within the sandbox group secret whose value is the Application Insights connection string. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is the name of a key within the referenced secret, not the secret value, and it is returned in read responses."
-  secretKey: string;
+  secretKeyName: string;
 }
 
 /** The kind of managed identity used to authenticate to a telemetry endpoint. */
@@ -277,7 +275,7 @@ model TelemetrySystemAssignedManagedIdentityAuth extends TelemetryAuth {
 }
 
 /** The kind of a custom log output column. */
-union LogColumnDefKind {
+union LogColumnKind {
   string,
 
   /** A column whose value is a literal string. */
@@ -289,13 +287,16 @@ union LogColumnDefKind {
 
 /** A single column in a custom log output schema. */
 @discriminator("kind")
-model LogColumnDef {
+model LogColumn {
+  /** The name of the output column to produce. */
+  name: string;
+
   /** The kind of the custom log output column. */
-  kind: LogColumnDefKind;
+  kind: LogColumnKind;
 }
 
 /** A custom log output column whose value is a literal string. */
-model ValueLogColumnDef extends LogColumnDef {
+model ValueLogColumn extends LogColumn {
   /** The kind of the custom log output column. */
   kind: "Value";
 
@@ -304,7 +305,7 @@ model ValueLogColumnDef extends LogColumnDef {
 }
 
 /** A custom log output column whose value is resolved from a sandbox attribute. */
-model RefLogColumnDef extends LogColumnDef {
+model RefLogColumn extends LogColumn {
   /** The kind of the custom log output column. */
   kind: "Ref";
 

@@ -679,21 +679,26 @@
       ],
       "x-ms-discriminator-value": "LogAnalytics"
     },
-    "LogColumnDef": {
+    "LogColumn": {
       "type": "object",
       "description": "A single column in a custom log output schema.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the output column to produce."
+        },
         "kind": {
-          "$ref": "#/definitions/LogColumnDefKind",
+          "$ref": "#/definitions/LogColumnKind",
           "description": "The kind of the custom log output column."
         }
       },
       "discriminator": "kind",
       "required": [
+        "name",
         "kind"
       ]
     },
-    "LogColumnDefKind": {
+    "LogColumnKind": {
       "type": "string",
       "description": "The kind of a custom log output column.",
       "enum": [
@@ -701,7 +706,7 @@
         "Ref"
       ],
       "x-ms-enum": {
-        "name": "LogColumnDefKind",
+        "name": "LogColumnKind",
         "modelAsString": true,
         "values": [
           {
@@ -788,7 +793,7 @@
       ],
       "x-ms-discriminator-value": "OTLP"
     },
-    "RefLogColumnDef": {
+    "RefLogColumn": {
       "type": "object",
       "description": "A custom log output column whose value is resolved from a sandbox attribute.",
       "properties": {
@@ -802,7 +807,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LogColumnDef"
+          "$ref": "#/definitions/LogColumn"
         }
       ],
       "x-ms-discriminator-value": "Ref"
@@ -970,14 +975,14 @@
           "type": "string",
           "description": "The name of the sandbox group secret that holds the Application Insights connection string."
         },
-        "secretKey": {
+        "secretKeyName": {
           "type": "string",
           "description": "The key within the sandbox group secret whose value is the Application Insights connection string."
         }
       },
       "required": [
         "secretId",
-        "secretKey"
+        "secretKeyName"
       ]
     },
     "TelemetryAuth": {
@@ -1024,7 +1029,7 @@
       "properties": {
         "endpoints": {
           "type": "array",
-          "description": "The endpoints that sandbox telemetry is sent to. At least one endpoint must be specified.",
+          "description": "The endpoints that sandbox telemetry is sent to.",
           "items": {
             "$ref": "#/definitions/TelemetryEndpoint"
           },
@@ -1036,10 +1041,7 @@
           "description": "The interval, in seconds, at which sandbox metrics are collected. Defaults to 15 seconds when not specified.",
           "minimum": 2
         }
-      },
-      "required": [
-        "endpoints"
-      ]
+      }
     },
     "TelemetryData": {
       "type": "string",
@@ -1093,11 +1095,14 @@
           }
         },
         "columns": {
-          "type": "object",
-          "description": "A custom output schema for log records, keyed by the name of the output column to produce. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
+          "type": "array",
+          "description": "A custom output schema for log records. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape.",
+          "items": {
+            "$ref": "#/definitions/LogColumn"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "dynamicJsonColumns": {
           "type": "boolean",
@@ -1153,7 +1158,7 @@
           "type": "string",
           "description": "The name of the sandbox group secret that holds the header value."
         },
-        "secretKey": {
+        "secretKeyName": {
           "type": "string",
           "description": "The key within the sandbox group secret whose value is sent as the header value."
         }
@@ -1161,7 +1166,7 @@
       "required": [
         "headerName",
         "secretId",
-        "secretKey"
+        "secretKeyName"
       ]
     },
     "TelemetryManagedIdentityAuth": {
@@ -1205,12 +1210,12 @@
           {
             "name": "Grpc",
             "value": "Grpc",
-            "description": "gRPC."
+            "description": "Telemetry is sent over gRPC."
           },
           {
             "name": "Http",
             "value": "Http",
-            "description": "HTTP."
+            "description": "Telemetry is sent over HTTP with a protobuf payload."
           }
         ]
       }
@@ -1225,7 +1230,7 @@
       ],
       "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
     },
-    "ValueLogColumnDef": {
+    "ValueLogColumn": {
       "type": "object",
       "description": "A custom log output column whose value is a literal string.",
       "properties": {
@@ -1239,7 +1244,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LogColumnDef"
+          "$ref": "#/definitions/LogColumn"
         }
       ],
       "x-ms-discriminator-value": "Value"
