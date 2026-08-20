@@ -77,6 +77,86 @@ model DrillRunProperties extends JobProperties {
   @doc("The currently active operationID on this Drill Run. There can be only one active.")
   @visibility(Lifecycle.Read)
   currentActiveOperationId?: string;
+
+  @doc("Report generated for this Drill Run.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Read)
+  report?: DrillRunReport;
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("Public, read-only view of the report generated for a Drill Run. Exposes status and pointers only - internal storage locations are never surfaced.")
+model DrillRunReport {
+  @doc("Overall report generation status for the Drill Run.")
+  @visibility(Lifecycle.Read)
+  generationStatus?: ReportGenerationStatus;
+
+  @doc("Per-stage report generation statuses.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  stageStatuses?: ReportStageStatus[];
+
+  @doc("Formats the report is currently available for download in.")
+  @visibility(Lifecycle.Read)
+  availableFormats?: ReportFormat[];
+
+  @doc("Timestamp of the last successful report generation.")
+  @visibility(Lifecycle.Read)
+  lastGeneratedTimestamp?: utcDateTime;
+
+  @doc("Schema version of the generated report content.")
+  @visibility(Lifecycle.Read)
+  schemaVersion?: string;
+
+  @doc("Indicates whether the report is finalized and immutable.")
+  @visibility(Lifecycle.Read)
+  isFinalized?: boolean;
+
+  @doc("Error from the last failed report generation attempt.")
+  @visibility(Lifecycle.Read)
+  lastError?: ErrorDetails;
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("Report generation status for a single Drill Run stage.")
+model ReportStageStatus {
+  @doc("Name of the Drill Run stage this status applies to.")
+  drillRunStage: DrillRunSubtasks;
+
+  @doc("Report generation status for this stage.")
+  @visibility(Lifecycle.Read)
+  generationStatus?: ReportGenerationStatus;
+
+  @doc("Timestamp of the last report generation attempt for this stage.")
+  @visibility(Lifecycle.Read)
+  lastAttemptTimestamp?: utcDateTime;
+
+  @doc("Error from the last failed report generation attempt for this stage.")
+  @visibility(Lifecycle.Read)
+  lastError?: ErrorDetails;
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("Request to mint a short-lived, read-only download URL for a Drill Run report.")
+model ReportDownloadUrlRequest {
+  @doc("Format of the report to download. Defaults to Html when not specified.")
+  format?: ReportFormat;
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("Response containing a short-lived, read-only download URL for a Drill Run report.")
+model ReportDownloadUrlResponse {
+  @doc("Format of the report the download URL refers to.")
+  @visibility(Lifecycle.Read)
+  format?: ReportFormat;
+
+  @doc("Short-lived, read-only URL to download the report.")
+  @visibility(Lifecycle.Read)
+  downloadUrl?: string;
+
+  @doc("Timestamp at which the download URL expires.")
+  @visibility(Lifecycle.Read)
+  expiryTimestamp?: utcDateTime;
 }
 
 @doc("Request body for AddNotes API.")
