@@ -10938,7 +10938,7 @@ model AuthorizationPropertiesFormat {
 /**
  * The authorization key.
  */
-@added(Versions.v2025_09_01)
+@added(Versions.v2026_01_01)
 model ExpressRouteAuthorizationKey {
   /**
    * The authorization key.

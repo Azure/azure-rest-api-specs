@@ -81,7 +81,7 @@ interface ExpressRouteCircuitAuthorizations {
   /**
    * Gets the authorization key associated with the specified express route circuit authorization.
    */
-  @added(Versions.v2025_09_01)
+  @added(Versions.v2026_01_01)
   @action("listkeys")
   listKeys is ArmResourceActionSync<
     ExpressRouteCircuitAuthorization,
