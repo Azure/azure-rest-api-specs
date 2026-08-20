@@ -58,12 +58,13 @@ describe("post-results", () => {
 
   /**
    * @param {string[]} labels
+   * @param {string} [headSha]
    * @returns {import("../mocks.js").GitHub}
    */
-  function githubWithLabels(labels) {
+  function githubWithLabels(labels, headSha = "abc123") {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
-      data: { labels: labels.map((name) => ({ name })) },
+      data: { head: { sha: headSha }, labels: labels.map((name) => ({ name })) },
     });
     return github;
   }
@@ -130,6 +131,15 @@ describe("post-results", () => {
 
     await postSuppressionsResults(args(github));
 
+    expect(commentOrUpdate).not.toHaveBeenCalled();
+  });
+
+  it("does not overwrite the comment with results from an older PR commit", async () => {
+    const github = githubWithLabels([], "newer456");
+
+    await postSuppressionsResults(args(github));
+
+    expect(buildSuppressionsComment).not.toHaveBeenCalled();
     expect(commentOrUpdate).not.toHaveBeenCalled();
   });
 });
