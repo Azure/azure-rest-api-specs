@@ -438,6 +438,61 @@ model LedgerWriteResult {
 }
 
 /**
+ * Returned as a result of writing to the Confidential Ledger.
+ */
+@added(Versions.v2026_07_31_preview)
+model LedgerWriteResultWithReceipt {
+  ...CCFTransactionIdHeader;
+
+  /**
+   * The response body.
+   */
+  @bodyRoot
+  body: LedgerWriteResultBody;
+}
+
+/**
+ * The result of writing a ledger entry.
+ */
+@added(Versions.v2026_07_31_preview)
+model LedgerWriteResultBody {
+  /**
+   * The collection identifier of the ledger entry.
+   */
+  collectionId: string;
+
+  /**
+   * The receipt certifying the committed transaction.
+   */
+  receipt?: ReceiptContents;
+
+  /**
+   * State of the write transaction.
+   */
+  state?: TransactionState;
+
+  /**
+   * The list of application claims.
+   */
+  applicationClaims?: ApplicationClaim[];
+}
+
+/**
+ * The transaction was rolled back before it could be committed.
+ */
+@added(Versions.v2026_07_31_preview)
+@error
+model TransactionRolledBackErrorResponse {
+  /**
+   * The HTTP status code.
+   */
+  @statusCode
+  statusCode: 503;
+
+  ...ConfidentialLedgerCommon.ConfidentialLedgerError;
+}
+
+/**
  * The result of querying for a ledger entry from an older transaction id. The
  * ledger entry is available in the response only if the returned state is Ready.
  */
