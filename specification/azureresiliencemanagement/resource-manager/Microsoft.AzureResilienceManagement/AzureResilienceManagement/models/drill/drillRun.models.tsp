@@ -152,7 +152,7 @@ model ReportDownloadUrlResponse {
 
   @doc("Short-lived, read-only URL to download the report.")
   @visibility(Lifecycle.Read)
-  downloadUrl?: string;
+  downloadUrl?: url;
 
   @doc("Timestamp at which the download URL expires.")
   @visibility(Lifecycle.Read)
