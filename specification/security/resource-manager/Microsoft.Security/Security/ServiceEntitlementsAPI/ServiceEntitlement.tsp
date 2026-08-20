@@ -50,17 +50,6 @@ interface ServiceEntitlements {
   /** Lists service entitlements in a subscription. */
   listBySubscription is ArmListBySubscription<ServiceEntitlement>;
 
-  /** Lists service entitlements in the tenant. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Static tenant-scoped route is required; ResourceListResult natively emits x-ms-pageable."
-  @list
-  @listsResource(ServiceEntitlement)
-  @route("/providers/Microsoft.Security/serviceEntitlements")
-  @get
-  @armResourceList(ServiceEntitlement)
-  listByTenant(...ApiVersionParameter):
-    | ArmResponse<ResourceListResult<ServiceEntitlement>>
-    | ErrorResponse;
-
   /** Gets the result of a long-running operation performed on a service entitlement. */
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlements/{serviceEntitlementName}/operationResults/{operationId}")

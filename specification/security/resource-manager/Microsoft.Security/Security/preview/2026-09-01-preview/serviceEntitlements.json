@@ -44,42 +44,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Security/serviceEntitlements": {
-      "get": {
-        "operationId": "ServiceEntitlements_ListByTenant",
-        "tags": [
-          "ServiceEntitlements"
-        ],
-        "description": "Lists service entitlements in the tenant.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServiceEntitlementListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Lists security entitlements in the tenant": {
-            "$ref": "./examples/ServiceEntitlements/ListServiceEntitlementsByTenant.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/serviceEntitlements": {
       "get": {
         "operationId": "ServiceEntitlements_ListBySubscription",
