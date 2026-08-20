@@ -25,6 +25,8 @@ const FormatValidationResultSchema = z.object({
 const NamespaceResultsSchema = z.object({
   namespacesFound: z.record(z.string(), z.string()),
   namespaces: z.record(z.string(), z.string()).optional().default({}),
+  allConfiguredPackageNames: z.record(z.string(), z.string()).optional().default({}),
+  allConfiguredNamespaces: z.record(z.string(), z.string()).optional().default({}),
   formatResults: z.array(FormatValidationResultSchema).optional().default([]),
   isMgmt: z.boolean(),
   isDataPlane: z.boolean(),
@@ -142,6 +144,8 @@ export function parseCommentTable(body) {
  * @param {import("./approvers.js").ApproversConfig} params.approversConfig
  * @param {Record<string, string>} params.namespacesFound
  * @param {Record<string, string>} [params.namespaces] - Language namespaces (distinct from package names).
+ * @param {Record<string, string>} [params.allConfiguredPackageNames] - All package names from PR head (pre-filter), for showing configured-but-unchanged languages.
+ * @param {Record<string, string>} [params.allConfiguredNamespaces] - All namespaces from PR head (pre-filter).
  * @param {z.infer<typeof FormatValidationResultSchema>[]} params.formatResults
  * @param {boolean} params.isMgmt
  * @param {string} params.baseRef
@@ -153,6 +157,8 @@ function buildCommentBody({
   approversConfig,
   namespacesFound,
   namespaces,
+  allConfiguredPackageNames,
+  allConfiguredNamespaces,
   formatResults,
   isMgmt,
   baseRef,
@@ -172,15 +178,36 @@ function buildCommentBody({
   }
 
   for (const language of allLanguages) {
-    const packageName = namespacesFound[language];
-    const isConfigured = packageName !== undefined;
-    const displayName = isConfigured ? `\`${packageName}\`` : "_(not yet configured)_";
-    const ns = isConfigured ? (namespaces?.[language] ?? "—") : "—";
-    const displayNs = isConfigured ? `\`${ns}\`` : "—";
+    const changedName = namespacesFound[language];
+    const configuredName = allConfiguredPackageNames?.[language];
+    const isChanged = changedName !== undefined;
+    const isConfigured = configuredName !== undefined;
+
+    // Three states:
+    // 1. Changed: show new name, pending approval
+    // 2. Configured but unchanged: show existing name, no approval needed
+    // 3. Not configured: show "(not yet configured)", pending approval
+    let displayName;
+    let displayNs;
+    let status;
+
+    if (isChanged) {
+      displayName = `\`${changedName}\``;
+      displayNs = `\`${namespaces?.[language] ?? "—"}\``;
+      const preserved = preservedApprovals?.get(language);
+      status = preserved?.status ?? "⏳ Pending";
+    } else if (isConfigured) {
+      displayName = `\`${configuredName}\``;
+      displayNs = `\`${allConfiguredNamespaces?.[language] ?? "—"}\``;
+      status = "✅ Unchanged";
+    } else {
+      displayName = "_(not yet configured)_";
+      displayNs = "—";
+      status = "⏳ Pending";
+    }
+
     const formatResult = formatMap.get(language);
-    const formatStatus = !isConfigured ? "—" : !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
-    const preserved = preservedApprovals?.get(language);
-    const status = preserved?.status ?? "⏳ Pending";
+    const formatStatus = !isChanged ? "—" : !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
     body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
       approversConfig,
       isMgmt,
@@ -292,12 +319,10 @@ export default async function postResults({ github, context, core }) {
     return;
   }
 
-  // Require approval from ALL Tier 1 language architects, not just languages with
-  // detected config changes. This prevents names being approved for a subset of
-  // languages without cross-language alignment (e.g., Discovery SDK was approved
-  // for TypeScript only, but .NET architect later flagged the name as problematic).
+  // Use Tier 1 order first for consistent table rendering, then any extra detected languages
   const tier1 = results.isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
-  const allLanguages = [...new Set([...tier1, ...languages])];
+  const extraLanguages = languages.filter((l) => !tier1.includes(l));
+  const allLanguages = [...tier1, ...extraLanguages];
 
   const labelsToAdd = new Set(["package-name-review-required"]);
   if (results.isMgmt) {
@@ -309,16 +334,26 @@ export default async function postResults({ github, context, core }) {
   for (const language of allLanguages) {
     // Skip adding pending label if language is already approved
     const approvedLabel = `package-name-${language}-approved`;
-    if (!existingLabels.includes(approvedLabel)) {
-      labelsToAdd.add(`package-name-${language}-pending`);
-    }
+    if (existingLabels.includes(approvedLabel)) continue;
+
+    // Skip pending for languages that are configured but unchanged (state 2)
+    const isChanged = language in results.namespacesFound;
+    const isConfigured = language in results.allConfiguredPackageNames;
+    if (isConfigured && !isChanged) continue;
+
+    labelsToAdd.add(`package-name-${language}-pending`);
   }
 
-  // Don't re-add package-name-review-required if everything is already approved
-  const allApproved = allLanguages.every((lang) =>
+  // Don't re-add package-name-review-required if everything needing approval is already approved
+  const languagesNeedingApproval = allLanguages.filter((lang) => {
+    const isChanged = lang in results.namespacesFound;
+    const isConfigured = lang in results.allConfiguredPackageNames;
+    return isChanged || !isConfigured;
+  });
+  const allApproved = languagesNeedingApproval.length > 0 && languagesNeedingApproval.every((lang) =>
     existingLabels.includes(`package-name-${lang}-approved`),
   );
-  if (allApproved && allLanguages.length > 0) {
+  if (allApproved) {
     labelsToAdd.delete("package-name-review-required");
   }
 
@@ -337,6 +372,8 @@ export default async function postResults({ github, context, core }) {
     approversConfig,
     namespacesFound: results.namespacesFound,
     namespaces: results.namespaces,
+    allConfiguredPackageNames: results.allConfiguredPackageNames,
+    allConfiguredNamespaces: results.allConfiguredNamespaces,
     formatResults: results.formatResults,
     isMgmt: results.isMgmt,
     baseRef: pr.base.ref,
