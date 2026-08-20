@@ -142,8 +142,19 @@ model TelemetryEndpoint {
   @identifiers(#["name"])
   columns?: LogColumn[];
 
-  /** Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`. */
-  dynamicJsonColumns?: boolean = false;
+  /** Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`. Defaults to `Disabled` when not specified. */
+  dynamicJsonColumns?: DynamicJsonColumnsMode;
+}
+
+/** Whether JSON log lines are parsed into additional output columns. */
+union DynamicJsonColumnsMode {
+  string,
+
+  /** Top-level keys of JSON log lines are merged into the output record. */
+  Enabled: "Enabled",
+
+  /** Log lines are written to the output record without JSON parsing. */
+  Disabled: "Disabled",
 }
 
 /** A telemetry endpoint that accepts the OpenTelemetry Protocol (OTLP). */

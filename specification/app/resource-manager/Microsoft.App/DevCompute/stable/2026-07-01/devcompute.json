@@ -644,6 +644,30 @@
       ],
       "x-ms-discriminator-value": "ApplicationInsights"
     },
+    "DynamicJsonColumnsMode": {
+      "type": "string",
+      "description": "Whether JSON log lines are parsed into additional output columns.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicJsonColumnsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Top-level keys of JSON log lines are merged into the output record."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Log lines are written to the output record without JSON parsing."
+          }
+        ]
+      }
+    },
     "LogAnalyticsTelemetryEndpoint": {
       "type": "object",
       "description": "A telemetry endpoint that sends telemetry to an Azure Monitor Log Analytics workspace through the Logs Ingestion API.",
@@ -1105,9 +1129,8 @@
           ]
         },
         "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`.",
-          "default": false
+          "$ref": "#/definitions/DynamicJsonColumnsMode",
+          "description": "Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`. Defaults to `Disabled` when not specified."
         }
       },
       "discriminator": "kind",
