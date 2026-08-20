@@ -65,15 +65,6 @@ union ServerEventType {
   input_audio_buffer_cleared: "input_audio_buffer.cleared",
   input_audio_buffer_speech_started: "input_audio_buffer.speech_started",
   input_audio_buffer_speech_stopped: "input_audio_buffer.speech_stopped",
-
-  /** Sent after the configured input inactivity timeout elapses. */
-  @added(Versions.v2026_07_15)
-  input_audio_buffer_timeout_triggered: "input_audio_buffer.timeout_triggered",
-
-  /** Sent when every input audio channel is idle. */
-  @added(Versions.v2026_07_15)
-  input_audio_buffer_all_idle: "input_audio_buffer.all_idle",
-
   response_created: "response.created",
   response_done: "response.done",
   response_output_item_added: "response.output_item.added",

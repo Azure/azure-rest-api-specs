@@ -90,12 +90,6 @@ using Azure.ClientGenerator.Core;
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventInputAudioBufferTimeoutTriggered,
-  Access.public,
-  "python"
-);
-@@access(VoiceLive.ServerEventInputAudioBufferAllIdle, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "python");
 @@access(
   VoiceLive.ServerEventResponseAudioTranscriptDelta,
@@ -301,16 +295,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   VoiceLive.ServerEventInputAudioBufferSpeechStopped,
   "SessionUpdateInputAudioBufferSpeechStopped",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferTimeoutTriggered,
-  "SessionUpdateInputAudioBufferTimeoutTriggered",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferAllIdle,
-  "SessionUpdateInputAudioBufferAllIdle",
   "csharp"
 );
 @@clientName(
@@ -719,12 +703,6 @@ using Azure.ClientGenerator.Core;
   Access.public,
   "java"
 );
-@@access(
-  VoiceLive.ServerEventInputAudioBufferTimeoutTriggered,
-  Access.public,
-  "java"
-);
-@@access(VoiceLive.ServerEventInputAudioBufferAllIdle, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "java");
 @@access(
   VoiceLive.ServerEventResponseAudioTranscriptDelta,
@@ -837,16 +815,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   VoiceLive.ServerEventInputAudioBufferSpeechStopped,
   "SessionUpdateInputAudioBufferSpeechStopped",
-  "java"
-);
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferTimeoutTriggered,
-  "SessionUpdateInputAudioBufferTimeoutTriggered",
-  "java"
-);
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferAllIdle,
-  "SessionUpdateInputAudioBufferAllIdle",
   "java"
 );
 @@clientName(
@@ -1190,11 +1158,6 @@ using Azure.ClientGenerator.Core;
   "silenceDurationInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerVad.idle_timeout_ms,
-  "idleTimeoutInMs",
-  "javascript"
-);
 
 @@clientName(
   VoiceLive.AzureSemanticVad.prefix_padding_ms,
@@ -1209,11 +1172,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   VoiceLive.AzureSemanticVad.speech_duration_ms,
   "speechDurationInMs",
-  "javascript"
-);
-@@clientName(
-  VoiceLive.AzureSemanticVad.idle_timeout_ms,
-  "idleTimeoutInMs",
   "javascript"
 );
 
@@ -1232,11 +1190,6 @@ using Azure.ClientGenerator.Core;
   "speechDurationInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadEn.idle_timeout_ms,
-  "idleTimeoutInMs",
-  "javascript"
-);
 
 @@clientName(
   VoiceLive.AzureSemanticVadMultilingual.prefix_padding_ms,
@@ -1251,11 +1204,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   VoiceLive.AzureSemanticVadMultilingual.speech_duration_ms,
   "speechDurationInMs",
-  "javascript"
-);
-@@clientName(
-  VoiceLive.AzureSemanticVadMultilingual.idle_timeout_ms,
-  "idleTimeoutInMs",
   "javascript"
 );
 

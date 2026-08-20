@@ -882,11 +882,6 @@ model ServerVad extends TurnDetection {
   /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
 
-  /** Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds. */
-  @added(Versions.v2026_07_15)
-  @minValue(0)
-  idle_timeout_ms?: int32;
-
   /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
 
@@ -924,11 +919,6 @@ model AzureSemanticVad extends TurnDetection {
 
   /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
-
-  /** Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds. */
-  @added(Versions.v2026_07_15)
-  @minValue(0)
-  idle_timeout_ms?: int32;
 
   /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
@@ -977,11 +967,6 @@ model AzureSemanticVadEn extends TurnDetection {
   /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
 
-  /** Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds. */
-  @added(Versions.v2026_07_15)
-  @minValue(0)
-  idle_timeout_ms?: int32;
-
   /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
 
@@ -1025,11 +1010,6 @@ model AzureSemanticVadMultilingual extends TurnDetection {
 
   /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
-
-  /** Duration of user inactivity before the server sends an input audio buffer timeout event, in milliseconds. */
-  @added(Versions.v2026_07_15)
-  @minValue(0)
-  idle_timeout_ms?: int32;
 
   /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
