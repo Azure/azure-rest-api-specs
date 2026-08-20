@@ -1,15 +1,35 @@
 parameters:
   "service-dir":
     default: "sdk/cloudhealth"
+  "dependencies":
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
+    emit-lro-options: "none"
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/cloudhealth.json"
     examples-dir: "{project-root}/examples"
     omit-unreachable-types: false
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-cloudhealth-healthintelligence"
+    namespace: "azure.cloudhealth.healthintelligence.dataplane"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/cloudhealth-health-intelligence"
+    package-details:
+      name: "@azure/cloudhealth-health-intelligence"
+    experimental-extensible-enums: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-cloudhealth-health-intelligence"
+    namespace: com.azure.cloudhealth.healthintelligence.dataplane
+    flavor: azure

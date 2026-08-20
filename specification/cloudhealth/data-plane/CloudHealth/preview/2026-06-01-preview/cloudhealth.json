@@ -53,88 +53,22 @@
   },
   "tags": [],
   "paths": {
-    "/api": {
-      "get": {
-        "operationId": "Model_Status",
-        "description": "Return whether the health model exists and its current health state.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryEchoResponse"
-            }
-          },
-          "400": {
-            "description": "Returned when the request is malformed, or a query parameter is invalid.",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Returned when the requested health model does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "string",
-                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get health model status": {
-            "$ref": "./examples/Model_Status.json"
-          }
-        }
-      }
-    },
-    "/api/entities/{entityName}": {
+    "/api/api/entities/{entityName}": {
       "get": {
         "operationId": "Entity_Get",
         "description": "Return the current diagnostic snapshot for an entity.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "entityName",
             "in": "path",
-            "description": "The entity to return a diagnostic snapshot for.",
+            "description": "Name of the entity represented by this diagnostic snapshot.",
             "required": true,
             "type": "string",
             "maxLength": 260,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -200,9 +134,12 @@
         "description": "Return the data annotations recorded for an entity, newest first.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "entityName",
             "in": "path",
-            "description": "The entity to return data annotations for.",
+            "description": "Name of the entity represented by this diagnostic snapshot.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -225,14 +162,15 @@
             "format": "date-time"
           },
           {
-            "name": "top",
+            "name": "maxpagesize",
             "in": "query",
-            "description": "Maximum number of annotations to return; defaults to 100 when omitted.",
+            "description": "Maximum page size of annotations to return; defaults to 100 when omitted.",
             "required": false,
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 100
+            "maximum": 100,
+            "x-ms-client-name": "maxPageSize"
           },
           {
             "name": "nextMarker",
@@ -241,9 +179,6 @@
             "required": false,
             "type": "string",
             "maxLength": 4096
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -312,16 +247,16 @@
         "description": "Ingest a health report for a specific signal on an entity.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "entityName",
             "in": "path",
-            "description": "Name of the entity that the health report targets.",
+            "description": "Name of the entity represented by this diagnostic snapshot.",
             "required": true,
             "type": "string",
             "maxLength": 260,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "body",
@@ -335,14 +270,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Health-report ingestion request was accepted.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
+            "description": "Health-report ingestion request was accepted."
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
@@ -451,11 +379,7 @@
           "Ingest an entity health report": {
             "$ref": "./examples/HealthReportIngestion_IngestHealthReport.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/api/entities/{entityName}/healthStateHistory": {
@@ -464,9 +388,12 @@
         "description": "Return the health-state periods active during the requested window for an entity.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "entityName",
             "in": "path",
-            "description": "The entity to return health-state history for.",
+            "description": "Name of the entity represented by this diagnostic snapshot.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -489,7 +416,23 @@
             "format": "date-time"
           },
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Maximum page size of history periods to return; defaults to 1000 when omitted.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000,
+            "x-ms-client-name": "maxPageSize"
+          },
+          {
+            "name": "nextMarker",
+            "in": "query",
+            "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation.",
+            "required": false,
+            "type": "string",
+            "maxLength": 4096
           }
         ],
         "responses": {
@@ -546,6 +489,9 @@
           "List entity health-state history": {
             "$ref": "./examples/EntityHealthStateHistory_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -555,9 +501,12 @@
         "description": "Return the data points recorded for an entity's signal, newest first.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "entityName",
             "in": "path",
-            "description": "The entity that owns the signal to return history for.",
+            "description": "Name of the entity represented by this diagnostic snapshot.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -566,7 +515,7 @@
           {
             "name": "signalName",
             "in": "path",
-            "description": "The signal to return history for.",
+            "description": "Name of the signal under an entity.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -589,14 +538,15 @@
             "format": "date-time"
           },
           {
-            "name": "top",
+            "name": "maxpagesize",
             "in": "query",
-            "description": "Maximum number of data points to return; defaults to 1000 when omitted.",
+            "description": "Maximum page size of data points to return; defaults to 1000 when omitted.",
             "required": false,
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 1000
+            "maximum": 1000,
+            "x-ms-client-name": "maxPageSize"
           },
           {
             "name": "nextMarker",
@@ -605,9 +555,6 @@
             "required": false,
             "type": "string",
             "maxLength": 4096
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -676,9 +623,12 @@
         "description": "Return the health-state transitions recorded for an entity, newest first.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "entityName",
             "in": "path",
-            "description": "The entity to return health-state transitions for.",
+            "description": "Name of the entity represented by this diagnostic snapshot.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -701,14 +651,15 @@
             "format": "date-time"
           },
           {
-            "name": "top",
+            "name": "maxpagesize",
             "in": "query",
-            "description": "Maximum number of transitions to return; defaults to 1000 when omitted.",
+            "description": "Maximum page size of transitions to return; defaults to 1000 when omitted.",
             "required": false,
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 1000
+            "maximum": 1000,
+            "x-ms-client-name": "maxPageSize"
           },
           {
             "name": "nextMarker",
@@ -717,9 +668,6 @@
             "required": false,
             "type": "string",
             "maxLength": 4096
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -779,6 +727,72 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/api/status": {
+      "get": {
+        "operationId": "Model_Status",
+        "description": "Return whether the health model exists and its current health state.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryEchoResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get health model status": {
+            "$ref": "./examples/Model_Status.json"
+          }
         }
       }
     }
@@ -1111,7 +1125,8 @@
       "properties": {
         "entityName": {
           "$ref": "#/definitions/entityName",
-          "description": "Name of the entity represented by this diagnostic snapshot."
+          "description": "Name of the entity represented by this diagnostic snapshot.",
+          "readOnly": true
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
@@ -1176,6 +1191,11 @@
           "items": {
             "$ref": "#/definitions/EntityHealthStatePeriod"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The full URI to fetch the next page of results; absent when there is no next page."
         }
       },
       "required": [
@@ -1234,6 +1254,20 @@
           }
         ]
       }
+    },
+    "EntitySignalRoute": {
+      "type": "object",
+      "description": "Routing resource that identifies a signal under an entity.",
+      "properties": {
+        "signalName": {
+          "$ref": "#/definitions/signalName",
+          "description": "Name of the signal under an entity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "signalName"
+      ]
     },
     "EntityTransitionHistoryResponse": {
       "type": "object",
@@ -1503,7 +1537,7 @@
           "description": "True when a health model exists for the requested id."
         },
         "healthModelState": {
-          "type": "string",
+          "$ref": "#/definitions/HealthState",
           "description": "Health state of the health model; omitted when the health model does not exist."
         }
       },

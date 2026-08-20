@@ -1,16 +1,3 @@
-- tool: TypeSpecValidation
-  reason: >
-    Not ready to generate SDKs from TypeSpec for the data-plane service.
-    SDK emitter configuration (Java, TypeScript, Python) will be added when
-    data-plane SDK generation is in scope.
-    Responsibility: Service team with SDK team collaboration.
-    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-ts.*
-    - options.@azure-tools/typespec-python.*
-  paths: [tspconfig.yaml]
 - tool: LintDiff
   reason: >
     healthModelExists and ignoreUnknown are intentional binary flags. Booleans
@@ -33,22 +20,5 @@
     CloudHealth data-plane contract before public release. The added endpoints,
     responses, diagnostics fields, and corrected operation identifiers are
     intentional preview changes required for service parity.
-  paths:
-    - preview/2026-06-01-preview/cloudhealth.json
-- tool: LintDiff
-  reason: >
-    Health report ingestion is a fire-and-forget submission endpoint. HTTP 202
-    means the report was accepted for asynchronous processing; clients do not
-    poll an operation resource, so LRO metadata and Operation-Location are not
-    part of this contract.
-  rules: [LroExtension, LroHeaders]
-  paths:
-    - preview/2026-06-01-preview/cloudhealth.json
-- tool: LintDiff
-  reason: >
-    Entity health-state history returns the complete bounded result for the
-    requested time window and does not expose continuation tokens. The value
-    wrapper is a list response, not a pageable service contract.
-  rules: [PageableOperation, PaginationResponse]
   paths:
     - preview/2026-06-01-preview/cloudhealth.json
