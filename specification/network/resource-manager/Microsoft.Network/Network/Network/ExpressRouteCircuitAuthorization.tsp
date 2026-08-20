@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -74,6 +75,18 @@ interface ExpressRouteCircuitAuthorizations {
   list is ArmResourceListByParent<
     ExpressRouteCircuitAuthorization,
     Response = AuthorizationListResult,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets the authorization key associated with the specified express route circuit authorization.
+   */
+  @added(Versions.v2025_09_01)
+  @action("listkeys")
+  listKeys is ArmResourceActionSync<
+    ExpressRouteCircuitAuthorization,
+    void,
+    ArmResponse<ExpressRouteAuthorizationKey>,
     Error = CloudError
   >;
 }

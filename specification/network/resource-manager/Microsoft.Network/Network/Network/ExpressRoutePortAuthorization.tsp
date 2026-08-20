@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -104,6 +105,18 @@ interface ExpressRoutePortAuthorizations {
   list is ExpressRoutePortAuthorizationOps.List<
     ExpressRoutePortAuthorization,
     Response = ExpressRoutePortAuthorizationListResult,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Gets the authorization key associated with the specified express route port authorization.
+   */
+  @added(Versions.v2025_09_01)
+  @action("listkeys")
+  listKeys is ExpressRoutePortAuthorizationOps.ActionSync<
+    ExpressRoutePortAuthorization,
+    void,
+    ArmResponse<ExpressRouteAuthorizationKey>,
     OverrideErrorType = CloudError
   >;
 }
