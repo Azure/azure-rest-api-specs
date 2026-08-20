@@ -1,0 +1,774 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SubscriptionClient",
+    "version": "2026-08-01-preview",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Subscription/aliases": {
+      "get": {
+        "operationId": "Alias_List",
+        "description": "List Alias Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAlias": {
+            "$ref": "./examples/listAlias.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/aliases/{aliasName}": {
+      "get": {
+        "operationId": "Alias_Get",
+        "description": "Get Alias Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "aliasName",
+            "in": "path",
+            "description": "AliasName is the name for the subscription creation request. Note that this is not the same as subscription name and this doesn’t have any other lifecycle need beyond the request for subscription creation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/getAlias.json"
+          },
+          "GetAliasSkipSettingSubscriptionOwner": {
+            "$ref": "./examples/getAliasSkipSettingSubscriptionOwner.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Alias_Create",
+        "description": "Create Alias Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "aliasName",
+            "in": "path",
+            "description": "AliasName is the name for the subscription creation request. Note that this is not the same as subscription name and this doesn’t have any other lifecycle need beyond the request for subscription creation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAliasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SubscriptionAliasResponse' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasResponse"
+            }
+          },
+          "201": {
+            "description": "Resource 'SubscriptionAliasResponse' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateAlias": {
+            "$ref": "./examples/createAlias.json"
+          },
+          "CreateAliasSkipSettingSubscriptionOwner": {
+            "$ref": "./examples/createAliasSkipSettingSubscriptionOwner.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SubscriptionAliasResponse"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Alias_Delete",
+        "description": "Delete Alias.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "aliasName",
+            "in": "path",
+            "description": "AliasName is the name for the subscription creation request. Note that this is not the same as subscription name and this doesn’t have any other lifecycle need beyond the request for subscription creation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAlias": {
+            "$ref": "./examples/deleteAlias.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getOperations": {
+            "$ref": "./examples/getOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
+      "get": {
+        "operationId": "SubscriptionOperation_Get",
+        "description": "Get the status of the pending Microsoft.Subscription API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getPendingSubscriptionOperations": {
+            "$ref": "./examples/getSubscriptionOperation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership": {
+      "post": {
+        "operationId": "Subscription_AcceptOwnership",
+        "description": "Accept subscription ownership.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptOwnershipRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcceptOwnership": {
+            "$ref": "./examples/acceptSubscriptionOwnership.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnershipStatus": {
+      "get": {
+        "operationId": "Subscription_AcceptOwnershipStatus",
+        "description": "Accept subscription ownership status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AcceptOwnershipStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcceptOwnershipStatus": {
+            "$ref": "./examples/acceptOwnershipStatus.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcceptOwnership": {
+      "type": "string",
+      "description": "The accept ownership state of the resource.",
+      "enum": [
+        "Pending",
+        "Completed",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "AcceptOwnership",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Expired"
+          }
+        ]
+      }
+    },
+    "AcceptOwnershipRequest": {
+      "type": "object",
+      "description": "The parameters required to accept subscription ownership.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AcceptOwnershipRequestProperties",
+          "description": "Accept subscription ownership request properties."
+        }
+      }
+    },
+    "AcceptOwnershipRequestProperties": {
+      "type": "object",
+      "description": "Accept subscription ownership request properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the subscription."
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "Management group Id for the subscription."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the subscription",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "displayName"
+      ]
+    },
+    "AcceptOwnershipStatusResponse": {
+      "type": "object",
+      "description": "Subscription Accept Ownership Response",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Newly created subscription Id.",
+          "readOnly": true
+        },
+        "acceptOwnershipState": {
+          "$ref": "#/definitions/AcceptOwnership",
+          "description": "The accept ownership state of the resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Provisioning",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "billingOwner": {
+          "type": "string",
+          "description": "UPN of the billing owner",
+          "readOnly": true
+        },
+        "subscriptionTenantId": {
+          "type": "string",
+          "description": "Tenant Id of the subscription"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the subscription."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the subscription",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Provisioning": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "Provisioning",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "PutAliasRequest": {
+      "type": "object",
+      "description": "The parameters required to create a new subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutAliasRequestProperties",
+          "description": "Put alias request properties."
+        }
+      }
+    },
+    "PutAliasRequestAdditionalProperties": {
+      "type": "object",
+      "description": "Put subscription additional properties.",
+      "properties": {
+        "managementGroupId": {
+          "type": "string",
+          "description": "Management group Id for the subscription."
+        },
+        "subscriptionTenantId": {
+          "type": "string",
+          "description": "Tenant Id of the subscription"
+        },
+        "subscriptionOwnerId": {
+          "type": "string",
+          "description": "Owner Id of the subscription"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the subscription",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "skipSettingSubscriptionOwner": {
+          "type": "boolean",
+          "description": "When set to true, no owner is assigned to the subscription during creation and the caller is\nresponsible for assigning ownership afterwards. When set to true, subscriptionOwnerId is\nignored. Defaults to false."
+        }
+      }
+    },
+    "PutAliasRequestProperties": {
+      "type": "object",
+      "description": "Put subscription properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the subscription."
+        },
+        "workload": {
+          "$ref": "#/definitions/Workload",
+          "description": "The workload type of the subscription. It can be either Production or DevTest."
+        },
+        "billingScope": {
+          "type": "string",
+          "description": "Billing scope of the subscription.\nFor CustomerLed and FieldLed - /billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}\nFor PartnerLed - /billingAccounts/{billingAccountName}/customers/{customerName}\nFor Legacy EA - /billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "This parameter can be used to create alias for existing subscription Id"
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Reseller Id"
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/PutAliasRequestAdditionalProperties",
+          "description": "Put alias request additional properties."
+        }
+      }
+    },
+    "SubscriptionAliasListResult": {
+      "type": "object",
+      "description": "The list of aliases.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of subscription aliases.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionAliasResponse"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionAliasResponse": {
+      "type": "object",
+      "description": "Subscription Information with the alias.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionAliasResponseProperties",
+          "description": "Subscription Alias response properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SubscriptionAliasResponseProperties": {
+      "type": "object",
+      "description": "Put subscription creation result properties.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Newly created subscription Id.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the subscription."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "acceptOwnershipUrl": {
+          "type": "string",
+          "description": "Url to accept ownership of the subscription.",
+          "readOnly": true
+        },
+        "acceptOwnershipState": {
+          "$ref": "#/definitions/AcceptOwnership",
+          "description": "The accept ownership state of the resource.",
+          "readOnly": true
+        },
+        "billingScope": {
+          "type": "string",
+          "description": "Billing scope of the subscription.\nFor CustomerLed and FieldLed - /billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}\nFor PartnerLed - /billingAccounts/{billingAccountName}/customers/{customerName}\nFor Legacy EA - /billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}"
+        },
+        "workload": {
+          "$ref": "#/definitions/Workload",
+          "description": "The workload type of the subscription. It can be either Production or DevTest."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Reseller Id"
+        },
+        "subscriptionOwnerId": {
+          "type": "string",
+          "description": "Owner Id of the subscription"
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "The Management Group Id."
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Created Time"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the subscription",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriptionCreationResult": {
+      "type": "object",
+      "description": "The created subscription object.",
+      "properties": {
+        "subscriptionLink": {
+          "type": "string",
+          "description": "The link to the new subscription. Use this link to check the status of subscription creation operation."
+        }
+      }
+    },
+    "Workload": {
+      "type": "string",
+      "description": "The workload type of the subscription. It can be either Production or DevTest.",
+      "enum": [
+        "Production",
+        "DevTest"
+      ],
+      "x-ms-enum": {
+        "name": "Workload",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production"
+          },
+          {
+            "name": "DevTest",
+            "value": "DevTest",
+            "description": "DevTest"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdPathParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
