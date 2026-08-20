@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -106,6 +108,29 @@ union PurgeState {
    * completed
    */
   completed: "completed",
+}
+
+/**
+ * Indicates the state of the OpenTelemetry ingestion into the Azure Monitor workspace that is linked to the Application Insights component.
+ */
+@added(Versions.v2025_01_23_preview)
+union AzureMonitorWorkspaceIngestionMode {
+  string,
+
+  /**
+   * The component has not been opted in to Azure Monitor workspace ingestion.
+   */
+  NotOptedIn: "NotOptedIn",
+
+  /**
+   * Azure Monitor workspace ingestion is enabled for the component.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Azure Monitor workspace ingestion is disabled for the component. This value is only set by the resource provider when the link to the Azure Monitor workspace is broken.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -283,6 +308,52 @@ model ApplicationInsightsComponentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ForceCustomerStorageForProfiler?: boolean;
+
+  /**
+   * Resource Id of the Azure Monitor workspace which the OpenTelemetry data will be ingested to.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
+  @added(Versions.v2025_01_23_preview)
+  AzureMonitorWorkspaceResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Indicates the state of the OpenTelemetry ingestion into the linked Azure Monitor workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
+  @added(Versions.v2025_01_23_preview)
+  AzureMonitorWorkspaceIngestionMode?: AzureMonitorWorkspaceIngestionMode;
+
+  /**
+   * Resource Id of the data collection rule that routes the OpenTelemetry data ingested through the OTLP endpoints of this component.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
+  @added(Versions.v2025_01_23_preview)
+  @visibility(Lifecycle.Read)
+  DataCollectionRuleResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The OTLP endpoint to which OpenTelemetry metrics for this component are sent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
+  @added(Versions.v2025_01_23_preview)
+  @visibility(Lifecycle.Read)
+  OTLPMetricsEndpoint?: url;
+
+  /**
+   * The OTLP endpoint to which OpenTelemetry logs for this component are sent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
+  @added(Versions.v2025_01_23_preview)
+  @visibility(Lifecycle.Read)
+  OTLPLogsEndpoint?: url;
+
+  /**
+   * The OTLP endpoint to which OpenTelemetry traces for this component are sent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
+  @added(Versions.v2025_01_23_preview)
+  @visibility(Lifecycle.Read)
+  OTLPTracesEndpoint?: url;
 }
 
 /**

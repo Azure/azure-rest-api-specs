@@ -257,6 +257,15 @@ directive:
     reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
 ```
 
+### Tag: package-2025-01-23-preview
+
+These settings apply only when `--tag=package-2025-01-23-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01-23-preview'
+input-file:
+  - preview/2025-01-23-preview/components_API.json
+```
+
 ### Tag: package-2024-08-01
 
 These settings apply only when `--tag=package-2024-08-01` is specified on the command line.
