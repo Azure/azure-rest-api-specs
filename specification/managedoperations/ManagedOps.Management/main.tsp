@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./managedOps.tsp";
-import "./client.tsp";
 
 using Versioning;
 using Azure.ResourceManager;
@@ -19,6 +18,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-07-28-preview")
   v2025_07_28_preview: "2025-07-28-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-01-06-preview")
+  v2026_01_06_preview: "2026-01-06-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
