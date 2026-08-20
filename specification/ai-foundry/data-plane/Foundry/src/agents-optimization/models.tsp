@@ -487,10 +487,10 @@ model AgentOptimizationTokenUsageEntry {
   @doc("Sum of input_tokens + output_tokens. Null when unmeasured.")
   total_tokens?: int64;
 
-  @doc("Input tokens served from the model's cache. Included in input_tokens (not additive). Null when the model did not report this metric.")
+  @doc("Input tokens served from the model's cache. Included in input_tokens (not additive). Defaults to 0 when the model did not report this metric.")
   cached_tokens?: int64;
 
-  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Null when the model did not report this metric.")
+  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Defaults to 0 when the model did not report this metric.")
   reasoning_tokens?: int64;
 }
 
