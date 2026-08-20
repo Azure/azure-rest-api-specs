@@ -3796,6 +3796,24 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 
 // --- Model renames ---
+// Preserve the App Service RBAC role helpers emitted by the reflection-based provisioning generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  AppServicePlan,
+  "resource-rbac-roles",
+  #{ WebPlanContributor: "2cc479cb-7b4d-49a8-b449-8c00fd0f0a4b" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  Site,
+  "resource-rbac-roles",
+  #{ WebsiteContributor: "de139f84-1756-47ae-9be6-808fbbe84772" },
+  "csharp"
+);
+
 @@clientName(AddressResponse, "AppServiceEnvironmentAddress", "csharp");
 @@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
 @@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
