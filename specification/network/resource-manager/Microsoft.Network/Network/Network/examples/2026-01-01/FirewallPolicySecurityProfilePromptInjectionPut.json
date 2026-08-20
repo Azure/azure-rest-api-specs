@@ -7,8 +7,10 @@
         "kind": "PromptInjectionProtection",
         "backend": {
           "auth": {
-            "type": "ManagedIdentity",
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+            "type": "UserAssignedManagedIdentity",
+            "userAssignedManagedIdentitySettings": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+            }
           },
           "endpoint": "https://myContentSafety.cognitiveservices.azure.com",
           "vendor": "AzureContentSafety"
@@ -35,11 +37,13 @@
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/promptInjectionDeny",
         "properties": {
-          "kind": "PromptInjectionProfile",
+          "kind": "PromptInjectionProtection",
           "backend": {
             "auth": {
-              "type": "ManagedIdentity",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+              "type": "UserAssignedManagedIdentity",
+              "userAssignedManagedIdentitySettings": {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+              }
             },
             "endpoint": "https://myContentSafety.cognitiveservices.azure.com",
             "vendor": "AzureContentSafety"
@@ -63,11 +67,13 @@
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/promptInjectionDeny",
         "properties": {
-          "kind": "PromptInjection",
+          "kind": "PromptInjectionProtection",
           "backend": {
             "auth": {
-              "type": "ManagedIdentity",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+              "type": "UserAssignedManagedIdentity",
+              "userAssignedManagedIdentitySettings": {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+              }
             },
             "endpoint": "https://myContentSafety.cognitiveservices.azure.com",
             "vendor": "AzureContentSafety"
@@ -91,5 +97,5 @@
     }
   },
   "operationId": "FirewallPolicySecurityProfiles_CreateOrUpdate",
-  "title": "Create FirewallPolicySecurityProfile of kind PromptInjectionProfile"
+  "title": "Create FirewallPolicySecurityProfile of kind PromptInjectionProtection"
 }

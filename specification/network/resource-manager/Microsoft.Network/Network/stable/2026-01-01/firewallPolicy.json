@@ -1816,7 +1816,7 @@
           "Create FirewallPolicySecurityProfile": {
             "$ref": "./examples/FirewallPolicySecurityProfilePut.json"
           },
-          "Create FirewallPolicySecurityProfile of kind PromptInjectionProfile": {
+          "Create FirewallPolicySecurityProfile of kind PromptInjectionProtection": {
             "$ref": "./examples/FirewallPolicySecurityProfilePromptInjectionPut.json"
           }
         },
@@ -2818,19 +2818,14 @@
         "type": {
           "$ref": "./common.json#/definitions/FirewallPolicyPromptInjectionBackendAuthType",
           "description": "The mechanism used to authenticate to the prompt inspection service."
-        },
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The user-assigned managed identity used to authenticate to the prompt inspection service. The identity must be granted the Cognitive Services User role on the target Azure AI Content Safety resources."
         }
       },
+      "discriminator": "type",
       "required": [
-        "type",
-        "resourceId"
+        "type"
       ]
     },
-    "FirewallPolicyPromptInjectionProfileProperties": {
+    "FirewallPolicyPromptInjectionProtectionProfileProperties": {
       "type": "object",
       "description": "Security profile that inspects large language model traffic for prompt injection attacks.",
       "properties": {
@@ -2885,7 +2880,26 @@
           "$ref": "#/definitions/FirewallPolicySecurityProfileProperties"
         }
       ],
-      "x-ms-discriminator-value": "PromptInjectionProfile"
+      "x-ms-discriminator-value": "PromptInjectionProtection"
+    },
+    "FirewallPolicyPromptInjectionUserAssignedIdentityAuth": {
+      "type": "object",
+      "description": "Authentication to the prompt inspection service using a user-assigned managed identity.",
+      "properties": {
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/FirewallPolicyUserAssignedManagedIdentitySettings",
+          "description": "The user-assigned managed identity used to authenticate to the prompt inspection service."
+        }
+      },
+      "required": [
+        "userAssignedManagedIdentitySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicyPromptInjectionBackendAuth"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
     },
     "FirewallPolicyPropertiesFormat": {
       "type": "object",
@@ -3410,6 +3424,27 @@
           "description": "The CA used for intermediate CA generation."
         }
       }
+    },
+    "FirewallPolicyUserAssignedManagedIdentitySettings": {
+      "type": "object",
+      "description": "A user-assigned managed identity used by a firewall policy.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The user-assigned managed identity. It must also be assigned to the parent firewall policy so that Azure Resource Manager can perform the linked access check, and it must be granted the Cognitive Services User role on the target Azure AI Content Safety resources.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
     },
     "IDPSQueryObject": {
       "type": "object",

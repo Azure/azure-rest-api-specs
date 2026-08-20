@@ -13251,7 +13251,7 @@ union FirewallPolicyPromptInjectionBackendAuthType {
   /**
    * Authenticate using a user-assigned managed identity.
    */
-  ManagedIdentity: "ManagedIdentity",
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 }
 
 /**
@@ -13508,16 +13508,48 @@ model FirewallPolicyPromptInjectionBackend {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionBackendAuth belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @added(Versions.v2026_01_01)
+@discriminator("type")
 model FirewallPolicyPromptInjectionBackendAuth {
   /**
    * The mechanism used to authenticate to the prompt inspection service.
    */
   type: FirewallPolicyPromptInjectionBackendAuthType;
+}
+
+/**
+ * Authentication to the prompt inspection service using a user-assigned managed identity.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionUserAssignedIdentityAuth belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyPromptInjectionUserAssignedIdentityAuth
+  extends FirewallPolicyPromptInjectionBackendAuth {
+  /**
+   * The mechanism used to authenticate to the prompt inspection service.
+   */
+  type: "UserAssignedManagedIdentity";
 
   /**
-   * The user-assigned managed identity used to authenticate to the prompt inspection service. The identity must be granted the Cognitive Services User role on the target Azure AI Content Safety resources.
+   * The user-assigned managed identity used to authenticate to the prompt inspection service.
    */
-  resourceId: Azure.Core.armResourceIdentifier;
+  userAssignedManagedIdentitySettings: FirewallPolicyUserAssignedManagedIdentitySettings;
+}
+
+/**
+ * A user-assigned managed identity used by a firewall policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyUserAssignedManagedIdentitySettings belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyUserAssignedManagedIdentitySettings {
+  /**
+   * The user-assigned managed identity. It must also be assigned to the parent firewall policy so that Azure Resource Manager can perform the linked access check, and it must be granted the Cognitive Services User role on the target Azure AI Content Safety resources.
+   */
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**

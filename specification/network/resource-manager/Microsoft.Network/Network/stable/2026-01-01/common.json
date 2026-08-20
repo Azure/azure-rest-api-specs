@@ -4330,15 +4330,15 @@
       "type": "string",
       "description": "The mechanism used to authenticate to the prompt inspection backend.",
       "enum": [
-        "ManagedIdentity"
+        "UserAssignedManagedIdentity"
       ],
       "x-ms-enum": {
         "name": "FirewallPolicyPromptInjectionBackendAuthType",
         "modelAsString": true,
         "values": [
           {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
+            "name": "UserAssignedManagedIdentity",
+            "value": "UserAssignedManagedIdentity",
             "description": "Authenticate using a user-assigned managed identity."
           }
         ]
@@ -4567,7 +4567,7 @@
         "DataLossPrevention",
         "AdvancedMalwareThreatProtection",
         "AdvancedApplicationThreatProtection",
-        "PromptInjectionProfile"
+        "PromptInjectionProtection"
       ],
       "x-ms-enum": {
         "name": "FirewallPolicySecurityProfileKind",
@@ -4589,8 +4589,8 @@
             "description": "Inspects traffic for application layer threats using advanced threat protection."
           },
           {
-            "name": "PromptInjectionProfile",
-            "value": "PromptInjectionProfile",
+            "name": "PromptInjectionProtection",
+            "value": "PromptInjectionProtection",
             "description": "Inspects large language model traffic for prompt injection attacks."
           }
         ]
