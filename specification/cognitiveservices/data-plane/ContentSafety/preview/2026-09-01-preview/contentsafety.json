@@ -918,7 +918,7 @@
     },
     "AcsHarmResult": {
       "type": "object",
-      "description": "The moderation and policy-attribution result for one harm category. The category name is the key in the harm_results map and is not restricted to a predefined set.",
+      "description": "The moderation and policy-attribution result for one harm category. The category name is the key in the harmResults map and is not restricted to a predefined set.",
       "properties": {
         "blocked": {
           "type": "boolean",
@@ -1010,13 +1010,12 @@
             "$ref": "#/definitions/AcsEvidence"
           }
         },
-        "harm_results": {
+        "harmResults": {
           "type": "object",
           "description": "Optional moderation results keyed by harm category. Category names come from the policy harm configuration and are not restricted to a predefined set. A policy deny that is unrelated to a configured harm can omit this property.",
           "additionalProperties": {
             "$ref": "#/definitions/AcsHarmResult"
-          },
-          "x-ms-client-name": "harmResults"
+          }
         }
       },
       "required": [

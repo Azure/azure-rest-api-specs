@@ -384,7 +384,7 @@ union AcsDecision {
 }
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
-@doc("The moderation and policy-attribution result for one harm category. The category name is the key in the harm_results map and is not restricted to a predefined set.")
+@doc("The moderation and policy-attribution result for one harm category. The category name is the key in the harmResults map and is not restricted to a predefined set.")
 model AcsHarmResult {
   @doc("Whether this harm contributed to the overall ACS verdict blocking the content.")
   blocked: boolean;
@@ -472,7 +472,6 @@ model AcsVerdict {
   @doc("Optional policy evidence and verification pointers.")
   evidence?: AcsEvidence[];
 
-  @encodedName("application/json", "harm_results")
   @doc("Optional moderation results keyed by harm category. Category names come from the policy harm configuration and are not restricted to a predefined set. A policy deny that is unrelated to a configured harm can omit this property.")
   harmResults?: Record<AcsHarmResult>;
 }
