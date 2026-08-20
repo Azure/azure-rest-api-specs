@@ -38,10 +38,6 @@ These settings apply only when `--tag=package-2026-06-02-preview` is specified o
 input-file:
   - preview/2026-06-02-preview/fleets.json
 suppressions:
-  - code: PostResponseCodes
-    from: fleets.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generateUpdateRun"].post
-    reason: The long-running operation returns 200 with GenerateResponse when an update run is created, or 204 with no body when no update run is needed.
   - code: AvoidAdditionalProperties
     from: fleets.json
     where: $.definitions.FleetMemberProperties.properties.labels
