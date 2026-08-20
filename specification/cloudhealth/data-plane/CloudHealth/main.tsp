@@ -541,7 +541,9 @@ interface Model {
     {},
     QueryEchoResponse,
     {},
-    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundResponse
+    | BadRequestResponse
+    | EntityDiagnosticDefaultErrorResponse
   >;
 }
 
@@ -574,7 +576,9 @@ interface EntityTransitionHistory {
     },
     EntityTransitionHistoryResponse,
     {},
-    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundResponse
+    | BadRequestResponse
+    | EntityDiagnosticDefaultErrorResponse
   >;
 }
 
@@ -613,7 +617,9 @@ interface EntityHealthStateHistory {
     },
     EntityHealthStateHistoryResponse,
     {},
-    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundResponse
+    | BadRequestResponse
+    | EntityDiagnosticDefaultErrorResponse
   >;
 }
 
@@ -646,7 +652,9 @@ interface SignalHistory {
     },
     SignalDataPointHistoryResponse,
     {},
-    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundResponse
+    | BadRequestResponse
+    | EntityDiagnosticDefaultErrorResponse
   >;
 }
 
@@ -679,7 +687,9 @@ interface DataAnnotations {
     },
     DataAnnotationsResponse,
     {},
-    ModelNotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundResponse
+    | BadRequestResponse
+    | EntityDiagnosticDefaultErrorResponse
   >;
 }
 
