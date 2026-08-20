@@ -106,8 +106,9 @@ model SandboxGroupPatchProperties {
 
 /** The telemetry configuration for sandboxes in a sandbox group. */
 model TelemetryConfig {
-  /** The endpoints that sandbox telemetry is sent to. */
+  /** The endpoints that sandbox telemetry is sent to. At least one endpoint must be specified. */
   @identifiers(#[])
+  @minItems(1)
   endpoints?: TelemetryEndpoint[];
 
   /** The interval, in seconds, at which sandbox metrics are collected. Defaults to 15 seconds when not specified. */
@@ -135,7 +136,8 @@ model TelemetryEndpoint {
   /** The kind of the telemetry endpoint. */
   kind: TelemetryEndpointKind;
 
-  /** The categories of telemetry sent to this endpoint. When empty, every category is sent. */
+  /** The categories of telemetry sent to this endpoint. At least one category must be specified. */
+  @minItems(1)
   data: TelemetryData[];
 
   /** A custom output schema for log records. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape. */

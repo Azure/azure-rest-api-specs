@@ -1053,7 +1053,8 @@
       "properties": {
         "endpoints": {
           "type": "array",
-          "description": "The endpoints that sandbox telemetry is sent to.",
+          "description": "The endpoints that sandbox telemetry is sent to. At least one endpoint must be specified.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/TelemetryEndpoint"
           },
@@ -1113,7 +1114,8 @@
         },
         "data": {
           "type": "array",
-          "description": "The categories of telemetry sent to this endpoint. When empty, every category is sent.",
+          "description": "The categories of telemetry sent to this endpoint. At least one category must be specified.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/TelemetryData"
           }
