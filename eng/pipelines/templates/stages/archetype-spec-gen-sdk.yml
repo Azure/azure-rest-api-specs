@@ -380,7 +380,7 @@ stages:
         - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
           - task: PowerShell@2
             displayName: Add auto-release label
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), eq(variables['Build.Reason'], 'IndividualCI'), eq(variables['SpecRepoCommit'], 'main'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['SpecRepoCommit'], 'main'), not(endsWith(variables['SdkRepoName'], '-pr')))
             inputs:
               pwsh: true
               workingDirectory: $(SdkRepoDirectory)
@@ -397,7 +397,7 @@ stages:
               $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
               Write-Host "Pull request created: $prUrl"
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-              $prStatus = if (('$(SpecRepoCommit)' -eq 'main') -and $${{ endsWith(parameters.TriggerSource, '-release') }}) { 'ready for review' } else { 'draft' }
+              $prStatus = if ($$(OpenSdkPullRequestAsDraft)) { 'draft' } else { 'ready for review' }
               Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
             condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
             displayName: "Set pull request URL variable"
