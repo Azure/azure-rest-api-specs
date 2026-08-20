@@ -127,6 +127,22 @@ describe("MultipleNewApiVersionsRule", function () {
     expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
   });
 
+  it("skips when no commits are provided", async function () {
+    delete context.baseCommitish;
+    delete context.headCommitish;
+    const readFileAtCommit = vi.spyOn(utils, "readFileAtCommit");
+
+    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+
+    expect(result.success).toBe(true);
+    expect(result.stdOutput).toContain("No commits to compare");
+    expect(result.stdOutput).toContain(
+      `npx tsv specification/foo/Foo '{"baseCommitish":"{commitShaOfMain}","headCommitish":"{headShaOfLocalBranch}"}'`,
+    );
+    expect(readFileAtCommit).not.toHaveBeenCalled();
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
+  });
+
   it("fails when metadata generation fails", async function () {
     vi.spyOn(utils, "readFileAtCommit")
       .mockResolvedValueOnce(serviceYaml("2025-01-01"))
@@ -215,6 +231,7 @@ describe("evaluateApiVersionPolicy", function () {
     );
 
     expect(result.success).toBe(false);
+    expect(result.errorOutput).toContain("ERROR: This pull request adds multiple API versions");
     expect(result.errorOutput).toContain(`${javaEmitter}: 2026-02-01-preview`);
     expect(result.errorOutput).toContain("expected 2026-01-01");
     expect(result.errorOutput).toContain(
