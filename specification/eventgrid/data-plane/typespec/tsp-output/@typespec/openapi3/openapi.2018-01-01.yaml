@@ -1,0 +1,286 @@
+openapi: 3.0.0
+info:
+  title: EventGridClient
+  version: '2018-01-01'
+  description: Azure EventGrid Client
+tags: []
+paths:
+  /send:
+    post:
+      operationId: send
+      description: Publish Events
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: aeg-channel-name
+          in: header
+          required: false
+          description: channel name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                x-typespec-name: '{}'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        description: Events being published.
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/EventGridEvent'
+                - $ref: '#/components/schemas/CloudEventEvent'
+              x-typespec-name: EventGridEvent | CloudEventEvent
+security:
+  - ApiKeyAuth: []
+  - OAuth2Auth:
+      - https://eventgrid.azure.net/.default
+components:
+  parameters:
+    Azure.Core.Foundations.ApiVersionParameter:
+      name: api-version
+      in: query
+      required: true
+      description: The API version to use for this operation.
+      schema:
+        type: string
+        minLength: 1
+  schemas:
+    Azure.Core.Foundations.Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        message:
+          type: string
+          description: A human-readable representation of the error.
+        target:
+          type: string
+          description: The target of the error.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          x-typespec-name: Azure.Core.Foundations.Error[]
+          description: >-
+            An array of details about specific errors that led to this reported
+            error.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.InnerError'
+          description: >-
+            An object containing more specific information than the current
+            object about the error.
+      description: The error object.
+      required:
+        - code
+        - message
+        - details
+    Azure.Core.Foundations.ErrorResponse:
+      type: object
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: The error object.
+      description: A response containing error details.
+      required:
+        - error
+    Azure.Core.Foundations.InnerError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.InnerError'
+          description: Inner error.
+      description: >-
+        An object containing more specific information about the error. As per
+        Microsoft One API guidelines -
+        https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+      required:
+        - code
+    CloudEventEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: >-
+            An identifier for the event. The combination of id and source must
+            be unique for each distinct event.
+        source:
+          type: string
+          description: >-
+            Identifies the context in which an event happened. The combination
+            of id and source must be unique for each distinct event.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/object'
+          description: Event data specific to the event type.
+        data_base64:
+          type: string
+          format: byte
+          description: Event data specific to the event type, encoded as a base64 string.
+        type:
+          type: string
+          description: Type of event related to the originating occurrence.
+        time:
+          type: string
+          format: date-time
+          description: The time (in UTC) the event was generated, in RFC3339 format.
+        specversion:
+          type: string
+          description: The version of the CloudEvents specification which the event uses.
+        dataschema:
+          type: string
+          description: Identifies the schema that data adheres to.
+        datacontenttype:
+          type: string
+          description: Content type of data value.
+        subject:
+          type: string
+          description: >-
+            This describes the subject of the event in the context of the event
+            producer (identified by source).
+      description: >-
+        Properties of an event published to an Event Grid topic using the
+        CloudEvent 1.0 Schema
+      required:
+        - id
+        - source
+        - type
+        - specversion
+    CustomEventEvent:
+      type: object
+      properties: {}
+      description: >-
+        Properties of an event published to an Event Grid topic using a custom
+        schema
+    EventGridEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: An unique identifier for the event.
+        topic:
+          type: string
+          description: The resource path of the event source.
+        subject:
+          type: string
+          description: A resource path relative to the topic path.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/object'
+          description: Event data specific to the event type.
+        eventType:
+          type: string
+          description: The type of the event that occurred.
+        eventTime:
+          type: string
+          format: date-time
+          description: The time (in UTC) the event was generated.
+        metadataVersion:
+          type: string
+          description: The schema version of the event metadata.
+          readOnly: true
+        dataVersion:
+          type: string
+          description: The schema version of the data object.
+      description: >-
+        Properties of an event published to an Event Grid topic using the
+        EventGrid Schema.
+      required:
+        - id
+        - subject
+        - data
+        - eventType
+        - eventTime
+        - dataVersion
+    SubscriptionDeletedEventData:
+      type: object
+      properties:
+        eventSubscriptionId:
+          type: string
+          description: The Azure resource ID of the deleted event subscription.
+          readOnly: true
+      description: >-
+        Schema of the Data property of an EventGridEvent for a
+        Microsoft.EventGrid.SubscriptionDeletedEvent event.
+    SubscriptionValidationEventData:
+      type: object
+      properties:
+        validationCode:
+          type: string
+          description: >-
+            The validation code sent by Azure Event Grid to validate an event
+            subscription. To complete the validation handshake, the subscriber
+            must either respond with this validation code as part of the
+            validation response, or perform a GET request on the validationUrl
+            (available starting version 2018-05-01-preview).
+          readOnly: true
+        validationUrl:
+          type: string
+          description: >-
+            The validation URL sent by Azure Event Grid (available starting
+            version 2018-05-01-preview). To complete the validation handshake,
+            the subscriber must either respond with the validationCode as part
+            of the validation response, or perform a GET request on the
+            validationUrl (available starting version 2018-05-01-preview).
+          readOnly: true
+      description: >-
+        Schema of the Data property of an EventGridEvent for a
+        Microsoft.EventGrid.SubscriptionValidationEvent event.
+    SubscriptionValidationResponse:
+      type: object
+      properties:
+        validationResponse:
+          type: string
+          description: >-
+            The validation response sent by the subscriber to Azure Event Grid
+            to complete the validation of an event subscription.
+      description: >-
+        To complete an event subscription validation handshake, a subscriber can
+        use either the validationCode or the validationUrl received in a
+        SubscriptionValidationEvent. When the validationCode is used, the
+        SubscriptionValidationResponse can be used to build the response.
+    object:
+      type: object
+      properties: {}
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: aeg-sas-key
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          scopes:
+            https://eventgrid.azure.net/.default: ''
+servers:
+  - url: '{endpoint}'
+    description: The host name of the topic
+    variables:
+      endpoint:
+        default: ''
+        description: The host name of the topic, e.g. topic1.westus2-1.eventgrid.azure.net
