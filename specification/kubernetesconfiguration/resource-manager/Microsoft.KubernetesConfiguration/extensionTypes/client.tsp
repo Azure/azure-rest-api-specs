@@ -59,11 +59,7 @@ using Microsoft.KubernetesConfiguration;
 );
 // C# fixes: rename interface to avoid namespace conflict (§4.9)
 @@clientName(ExtensionTypes, "ExtensionTypeInterface", "csharp");
-@@clientName(
-  ExtensionType,
-  "KubernetesConfigurationExtensionType",
-  "csharp"
-);
+@@clientName(ExtensionType, "KubernetesConfigurationExtensionType", "csharp");
 @@clientName(
   ExtensionTypeProperties,
   "KubernetesConfigurationExtensionTypeProperties",
