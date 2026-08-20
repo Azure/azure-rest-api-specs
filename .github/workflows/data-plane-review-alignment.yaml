@@ -1,0 +1,106 @@
+# Data-Plane Review Alignment - Guards the two pins the Data-Plane API Reviewer depends on:
+#
+#   1. The @azure-tools/typespec-azure-core version in package.json must match the version
+#      the data-plane linter coverage map was verified against. A linter bump can move rules
+#      between the agent-owned and linter-enforced sets; when that happens the coverage map
+#      must be re-verified or the agent starts double-reporting findings CI already surfaces.
+#
+#   2. The workflow's pinned model must match the model the eval suite measures. Eval trends
+#      describe production only when both run the same model. The judge model is checked
+#      separately and is frozen, because changing it invalidates comparison against every
+#      historical run.
+#
+#   3. No eval fixture may tell the agent what it is or what the correct review output is. The
+#      agent reads the fixture; a true negative that announces itself measures instruction-
+#      following, not false-positive resistance.
+#
+#   4. No mechanical grader may fire on an agent that is correctly declining to raise a finding.
+#      A correct answer cites the rule it considered, so a grader keyed on the bare rule ID
+#      punishes the right answer - and an agent that MISSES a violation still emits the rule ID
+#      in a "considered" table, so a bare substring match passes on a complete miss.
+#
+#   5. The report-format contract the graders match on must live in the SKILL, which the eval
+#      harness loads - not only in the agent file, which it does not. A format defined in the
+#      wrong place is invisible to every eval that grades it, and surfaces as a ~100%
+#      false-failure rate after a 30-minute run rather than as a failed check.
+#   6. Every eval fixture must compile. All 15 shipped carrying
+#      `@useDependency(Azure.Core.Versions.v1_0_Preview_2)` -- a namespace removed from
+#      typespec-azure-core, referenced by zero real specs in this repo -- so not one of them
+#      had ever compiled. vally never compiles fixtures, so nothing surfaced it. A fixture
+#      that does not compile cannot be trusted to mean what it says, and a true negative
+#      that is silently invalid measures nothing.
+name: "Data-Plane Review Alignment"
+
+on:
+  pull_request:
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - ".github/agents/data-plane-api-reviewer.agent.md"
+      - ".github/skills/azure-api-review/references/data-plane-linter-rule-coverage.md"
+      - ".github/skills/azure-api-review/references/data-plane-report-format.md"
+      - ".github/skills/evals/data-plane-api-reviewer/fixtures/**"
+      - ".github/skills/evals/data-plane-api-reviewer/vally/*.yaml"
+      - ".github/workflows/data-plane-api-review.md"
+      - ".github/workflows/data-plane-review-alignment.yaml"
+      - ".github/workflows/src/data-plane-review-alignment.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-alignment:
+    name: Check Data-Plane Review Alignment
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+            package.json
+          sparse-checkout-cone-mode: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Check linter and model pins
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: checkDataPlaneReviewAlignment } =
+              await import('${{ github.workspace }}/.github/workflows/src/data-plane-review-alignment.js');
+            await checkDataPlaneReviewAlignment({ core, rootDir: '${{ github.workspace }}' });
+
+  compile-fixtures:
+    name: Compile Data-Plane Eval Fixtures
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/actions/
+            .github/skills/evals/data-plane-api-reviewer/fixtures/
+            package.json
+            package-lock.json
+          sparse-checkout-cone-mode: false
+
+      - uses: ./.github/actions/setup-node-install-deps
+
+      # Errors fail the job; warnings are printed but tolerated, because some
+      # fixtures deliberately seed linter-owned defects for the interlock evals.
+      - name: Compile every fixture
+        run: |
+          failed=0
+          config=".github/skills/evals/data-plane-api-reviewer/fixtures/typespec-data-plane/tspconfig.yaml"
+          for f in $(git ls-files '.github/skills/evals/data-plane-api-reviewer/fixtures/**/*.tsp'); do
+            echo "::group::$f"
+            if npx tsp compile "$f" --config "$config" --no-emit --pretty false; then
+              echo "ok"
+            else
+              echo "::error file=$f::Eval fixture does not compile"
+              failed=1
+            fi
+            echo "::endgroup::"
+          done
+          exit $failed
