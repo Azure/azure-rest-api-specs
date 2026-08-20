@@ -39415,6 +39415,51 @@ components:
     A2AProtocolConfiguration:
       type: object
       description: Configuration specific to the A2A protocol.
+    A2AProtocolVersion:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - '1.0'
+      description: Supported A2A protocol versions.
+    A2ATool:
+      type: object
+      required:
+        - type
+        - a2a_version
+      properties:
+        type:
+          type: string
+          enum:
+            - a2a
+          description: The type of the tool. Always `"a2a"`.
+        base_url:
+          type: string
+          format: uri
+          description: Base URL of the agent.
+        agent_card_path:
+          type: string
+          description: |-
+            The path to the agent card relative to the `base_url`.
+            If not provided, defaults to  `/.well-known/agent-card.json`
+        project_connection_id:
+          type: string
+          description: |-
+            The connection ID in the project for the A2A server.
+            The connection stores authentication and other connection details needed to connect to the A2A server.
+        send_credentials_for_agent_card:
+          type: boolean
+          description: |-
+            When `true`, Foundry sends its credentials when fetching the remote
+            agent's Agent Card. The service defaults to `false` if a value is not
+            specified by the caller (anonymous fetch).
+          default: false
+        a2a_version:
+          $ref: '#/components/schemas/A2AProtocolVersion'
+          description: The A2A protocol version supported by the agent.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: An agent implementing the A2A protocol.
     A2AToolCall:
       type: object
       required:
@@ -39476,6 +39521,43 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
+    A2AToolboxTool:
+      type: object
+      required:
+        - type
+        - a2a_version
+      properties:
+        type:
+          type: string
+          enum:
+            - a2a
+        base_url:
+          type: string
+          format: uri
+          description: Base URL of the agent.
+        agent_card_path:
+          type: string
+          description: |-
+            The path to the agent card relative to the `base_url`.
+            If not provided, defaults to  `/.well-known/agent-card.json`
+        project_connection_id:
+          type: string
+          description: |-
+            The connection ID in the project for the A2A server.
+            The connection stores authentication and other connection details needed to connect to the A2A server.
+        send_credentials_for_agent_card:
+          type: boolean
+          description: |-
+            When `true`, Foundry sends its credentials when fetching the remote
+            agent's Agent Card. The service defaults to `false` if a value is not
+            specified by the caller (anonymous fetch).
+          default: false
+        a2a_version:
+          $ref: '#/components/schemas/A2AProtocolVersion'
+          description: The A2A protocol version supported by the agent.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: An A2A tool stored in a toolbox.
     AISearchIndexResource:
       type: object
       properties:
@@ -41632,9 +41714,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An Azure Function tool call.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     AzureFunctionToolCallOutput:
       type: object
       required:
@@ -45970,6 +46049,11 @@ components:
         telemetry_config:
           $ref: '#/components/schemas/TelemetryConfig'
           description: Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.
+        session_configuration:
+          $ref: '#/components/schemas/SessionConfiguration'
+          description: Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.
+          examples:
+            - idle_timeout_seconds: 300
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -72496,8 +72580,10 @@ components:
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
+          a2a: '#/components/schemas/A2ATool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
+          web_iq_preview: '#/components/schemas/WebIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           mcp: '#/components/schemas/OpenAI.MCPTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
@@ -72894,6 +72980,8 @@ components:
             - work_iq_preview
             - fabric_iq_preview
             - toolbox_search_preview
+            - web_iq_preview
+            - a2a
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -75901,6 +75989,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    SessionConfiguration:
+      type: object
+      properties:
+        idle_timeout_seconds:
+          type: integer
+          format: int32
+          minimum: 300
+          maximum: 3600
+          description: |-
+            The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
+            unset, the server default of 900 seconds is used. Must be between 300 and 3600 seconds
+            (inclusive).
+          examples:
+            - 300
+          default: 900
+      description: Session defaults applied to sessions created for a hosted agent version.
     SessionDirectoryEntry:
       type: object
       required:
@@ -76868,11 +76972,13 @@ components:
           mcp: '#/components/schemas/MCPToolboxTool'
           azure_ai_search: '#/components/schemas/AzureAISearchToolboxTool'
           openapi: '#/components/schemas/OpenApiToolboxTool'
+          a2a: '#/components/schemas/A2AToolboxTool'
           a2a_preview: '#/components/schemas/A2APreviewToolboxTool'
           browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewToolboxTool'
           reminder_preview: '#/components/schemas/ReminderPreviewToolboxTool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewToolboxTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewToolboxTool'
+          web_iq_preview: '#/components/schemas/WebIQPreviewToolboxTool'
           toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewToolboxTool'
           toolbox_search: '#/components/schemas/ToolSearchToolboxTool'
       description: An abstract representation of a tool stored in a toolbox.
@@ -76892,6 +76998,8 @@ components:
         - fabric_iq_preview
         - toolbox_search
         - toolbox_search_preview
+        - web_iq_preview
+        - a2a
       description: Supported tool types for tools stored in a toolbox.
     ToolboxVersionObject:
       type: object
@@ -79371,6 +79479,65 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    WebIQPreviewTool:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - web_iq_preview
+          description: The object type, which is always 'web_iq_preview'.
+        project_connection_id:
+          type: string
+          description: The ID of the WebIQ project connection.
+        server_label:
+          type: string
+          description: The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
+        require_approval:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+            - type: string
+            - type: 'null'
+          description: Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
+          default: always
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A WebIQ server-side tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
+    WebIQPreviewToolboxTool:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - web_iq_preview
+        project_connection_id:
+          type: string
+          description: The ID of the WebIQ project connection.
+        server_label:
+          type: string
+          description: The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
+        require_approval:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+            - type: string
+            - type: 'null'
+          description: Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
+          default: always
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A WebIQ tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     WebSearchConfiguration:
       type: object
       required:
