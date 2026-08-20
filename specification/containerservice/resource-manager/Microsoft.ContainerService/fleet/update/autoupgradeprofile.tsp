@@ -234,12 +234,14 @@ interface AutoUpgradeProfileOperations {
   generateUpdateRunWithNoContent is Azure.ResourceManager.ArmResourceActionAsyncBase<
     AutoUpgradeProfile,
     void,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
-        ArmLroLocationHeader<FinalResult = GenerateResponse> &
-        IfMatchParameters<AutoUpgradeProfile>
-    > | GenerateResponse | ArmNoContentResponse<"No update run was generated.">,
+    | ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
+          ArmLroLocationHeader<FinalResult = GenerateResponse> &
+          IfMatchParameters<AutoUpgradeProfile>
+      >
+    | GenerateResponse
+    | ArmNoContentResponse<"No update run was generated.">,
     BaseParameters<AutoUpgradeProfile>
   >;
 }
