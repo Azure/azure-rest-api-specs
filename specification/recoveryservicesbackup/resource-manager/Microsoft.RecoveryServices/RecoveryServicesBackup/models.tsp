@@ -162,7 +162,6 @@ union AcquireStorageAccountLock {
  * Whether access to the storage account is key-based or identity-based.
  */
 @added(Versions.v2026_05_31_preview)
-@removed(Versions.v2026_08_01)
 union AccessType {
   string,
 
@@ -3728,7 +3727,6 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
    * Managed identity information required to access the storage account.
    */
   @added(Versions.v2026_05_31_preview)
-  @removed(Versions.v2026_08_01)
   identityInfo?: IdentityInfo;
 
   /**
@@ -7759,14 +7757,12 @@ model AzureStorageContainer extends ProtectionContainer {
    * managed identity used to access the storage account.
    */
   @added(Versions.v2026_05_31_preview)
-  @removed(Versions.v2026_08_01)
   accessType?: AccessType;
 
   /**
    * Managed identity information required to access the storage account.
    */
   @added(Versions.v2026_05_31_preview)
-  @removed(Versions.v2026_08_01)
   identityInfo?: IdentityInfo;
 
   /**
