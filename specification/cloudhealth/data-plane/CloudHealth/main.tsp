@@ -307,8 +307,7 @@ model BadRequestError is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Returned when entity diagnostics fail for reasons outside the explicit user-fault contract.")
-model EntityDiagnosticDefaultError
-  is Azure.Core.Foundations.ErrorResponse {
+model EntityDiagnosticDefaultError is Azure.Core.Foundations.ErrorResponse {
   @doc("Retry guidance supplied by the service as an HTTP date or delay in seconds.")
   @header("Retry-After")
   retryAfter?: string;
@@ -541,9 +540,7 @@ interface Model {
     {},
     QueryEchoResult,
     {},
-    | ModelNotFoundError
-    | BadRequestError
-    | EntityDiagnosticDefaultError
+    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
   >;
 }
 
@@ -576,9 +573,7 @@ interface EntityTransitionHistory {
     },
     EntityTransitionHistoryPage,
     {},
-    | ModelNotFoundError
-    | BadRequestError
-    | EntityDiagnosticDefaultError
+    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
   >;
 }
 
@@ -617,9 +612,7 @@ interface EntityHealthStateHistory {
     },
     EntityHealthStateHistoryPage,
     {},
-    | ModelNotFoundError
-    | BadRequestError
-    | EntityDiagnosticDefaultError
+    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
   >;
 }
 
@@ -652,9 +645,7 @@ interface SignalHistory {
     },
     SignalDataPointHistoryPage,
     {},
-    | ModelNotFoundError
-    | BadRequestError
-    | EntityDiagnosticDefaultError
+    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
   >;
 }
 
@@ -687,9 +678,7 @@ interface DataAnnotations {
     },
     DataAnnotationsPage,
     {},
-    | ModelNotFoundError
-    | BadRequestError
-    | EntityDiagnosticDefaultError
+    ModelNotFoundError | BadRequestError | EntityDiagnosticDefaultError
   >;
 }
 
