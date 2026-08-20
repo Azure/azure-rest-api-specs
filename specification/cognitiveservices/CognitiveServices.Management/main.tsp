@@ -20,6 +20,8 @@ import "./CommitmentPlan.tsp";
 import "./CommitmentPlanAccountAssociation.tsp";
 import "./EncryptionScope.tsp";
 import "./RaiPolicy.tsp";
+import "./RaiRego.tsp";
+import "./RaiBinding.tsp";
 import "./RaiBlocklist.tsp";
 import "./RaiBlocklistItem.tsp";
 import "./RaiTopic.tsp";
