@@ -8917,6 +8917,18 @@
           "items": {
             "type": "string"
           }
+        },
+        "resourceFeasibilityReviews": {
+          "type": "array",
+          "description": "Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/ResourceFeasibilityReview"
+          },
+          "x-ms-identifiers": [
+            "feasibilityType",
+            "resourceType"
+          ]
         }
       },
       "required": [
@@ -10574,6 +10586,99 @@
       ],
       "x-ms-discriminator-value": "CustomRunbook"
     },
+    "ResourceFeasibilityReview": {
+      "type": "object",
+      "description": "Result of a single feasibility review performed against one resource in a recovery plan.",
+      "properties": {
+        "feasibilityType": {
+          "$ref": "#/definitions/ResourceFeasibilityReviewType",
+          "description": "The resource feasibility review type."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Fully qualified ARM resource type evaluated, e.g. `Microsoft.Compute/virtualMachines`.",
+          "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+(/[a-zA-Z0-9]+)+$"
+        },
+        "currentTargetSku": {
+          "$ref": "#/definitions/SkuDetails",
+          "description": "The SKU the resource is currently configured to recover into, enriched for comparison against the recommendations. Absent when it could not be resolved, and always absent on `Passed` and `NotApplicable` reviews."
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceFeasibilityReviewStatus",
+          "description": "Outcome of this feasibility review."
+        },
+        "recommendedTargetSkus": {
+          "type": "array",
+          "description": "Alternative SKUs surfaced for this review. Absent or empty means a `Flagged` review has no alternatives, an `Unavailable` review has no applicable recommendations to surface, or the review has a minimal `Passed` / `NotApplicable` outcome. Callers should treat an absent array and an empty array identically.",
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/SkuDetails"
+          },
+          "x-ms-identifiers": [
+            "sku"
+          ]
+        }
+      },
+      "required": [
+        "feasibilityType",
+        "resourceType",
+        "status"
+      ]
+    },
+    "ResourceFeasibilityReviewStatus": {
+      "type": "string",
+      "description": "Outcome of a resource feasibility review for a recovery resource.",
+      "enum": [
+        "Unavailable",
+        "Passed",
+        "Flagged",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceFeasibilityReviewStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The review could not complete. Advisory only; it never blocks failover."
+          },
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The review identified no risk."
+          },
+          {
+            "name": "Flagged",
+            "value": "Flagged",
+            "description": "The review identified a risk the operator should consider."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The review did not apply to this resource and was skipped."
+          }
+        ]
+      }
+    },
+    "ResourceFeasibilityReviewType": {
+      "type": "string",
+      "description": "The resource feasibility review category for a recovery resource.",
+      "enum": [
+        "SkuCapacity"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceFeasibilityReviewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SkuCapacity",
+            "value": "SkuCapacity",
+            "description": "SKU capacity availability check in the target region or zone."
+          }
+        ]
+      }
+    },
     "ResourceInclusionState": {
       "type": "string",
       "description": "A state type that indicates inclusion of the resource with respect to the resiliency support.",
@@ -11068,6 +11173,42 @@
       },
       "required": [
         "serviceLevelIndicatorResourceId"
+      ]
+    },
+    "SkuDetails": {
+      "type": "object",
+      "description": "SKU details for a resource feasibility review, used for both the current target SKU and the recommended alternate SKUs.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The Azure SKU name."
+        },
+        "vCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of virtual CPUs for the SKU. Absent when SKU specifications are unavailable."
+        },
+        "ram": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Memory in GiB for the SKU. Absent when SKU specifications are unavailable."
+        },
+        "monthlyPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "Estimated monthly price. Absent when pricing is unavailable."
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code for `monthlyPrice`."
+        },
+        "offeringId": {
+          "type": "string",
+          "description": "Identifier of the Azure offering used to estimate `monthlyPrice`."
+        }
+      },
+      "required": [
+        "sku"
       ]
     },
     "SliAttentionStatus": {
