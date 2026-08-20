@@ -60,32 +60,57 @@ using Microsoft.KubernetesConfiguration;
 // C# fixes: rename interface to avoid namespace conflict (§4.9)
 @@clientName(ExtensionTypes, "ExtensionTypeInterface", "csharp");
 @@clientName(
+  ExtensionType,
+  "KubernetesConfigurationExtensionType",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeProperties,
+  "KubernetesConfigurationExtensionTypeProperties",
+  "csharp"
+);
+@@clientName(
   ClusterScopeSettingsProperties.allowMultipleInstances,
   "IsMultipleInstancesAllowed",
   "csharp"
 );
 @@clientName(
   ClusterScopeSettings,
-  "ExtensionTypeClusterScopeSettings",
+  "KubernetesConfigurationExtensionTypeClusterScopeSettings",
   "csharp"
 );
 @@clientName(
   ClusterScopeSettingsProperties,
-  "ExtensionTypeClusterScopeSettingsProperties",
+  "KubernetesConfigurationExtensionTypeClusterScopeSettingsProperties",
   "csharp"
 );
 @@clientName(
   ExtensionTypePropertiesPlanInfo,
-  "ExtensionTypePlanInfo",
+  "KubernetesConfigurationExtensionTypePlanInfo",
   "csharp"
 );
 @@clientName(
   ExtensionTypePropertiesSupportedScopes,
-  "ExtensionTypeSupportedScopes",
+  "KubernetesConfigurationExtensionTypeSupportedScopes",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionForReleaseTrain,
+  "KubernetesConfigurationExtensionTypeVersionForReleaseTrain",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionForReleaseTrainProperties,
+  "KubernetesConfigurationExtensionTypeVersionForReleaseTrainProperties",
   "csharp"
 );
 @@clientName(
   ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions,
-  "ExtensionTypeUnsupportedKubernetesVersions",
+  "KubernetesConfigurationExtensionTypeUnsupportedKubernetesVersions",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionUnsupportedKubernetesMatrixItem,
+  "KubernetesConfigurationExtensionTypeVersionUnsupportedKubernetesMatrixItem",
   "csharp"
 );
