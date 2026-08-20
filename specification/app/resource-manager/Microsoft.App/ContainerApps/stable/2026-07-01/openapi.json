@@ -58,6 +58,9 @@
       "name": "ContainerAppsRevisions"
     },
     {
+      "name": "FunctionsExtension"
+    },
+    {
       "name": "ContainerAppsRevisionReplicas"
     },
     {
@@ -3292,6 +3295,74 @@
         "x-ms-examples": {
           "Deactivate Container App's revision": {
             "$ref": "./examples/Revisions_Deactivate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/providers/Microsoft.App/functions/{functionAppName}/invoke": {
+      "post": {
+        "operationId": "FunctionsExtension_InvokeFunctionsHost",
+        "tags": [
+          "FunctionsExtension"
+        ],
+        "summary": "Proxies a Functions host call to the function app backed by the container app.",
+        "description": "Proxies a Functions host call to the function app backed by the container app.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "functionAppName",
+            "in": "path",
+            "description": "Name of the Function.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invoke Functions host using Functions Extension API": {
+            "$ref": "./examples/FunctionsExtension_Post.json"
           }
         }
       }
@@ -14781,6 +14852,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional. KEDA Polling Interval in seconds. Defaults to 30 seconds if not set."
+        },
+        "allowScalingRuleOverride": {
+          "type": "boolean",
+          "description": "Optional. Whether custom scale rules can override the automatic scale rules. This property is only applicable to Function Apps."
         },
         "rules": {
           "type": "array",

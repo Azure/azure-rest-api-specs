@@ -7738,6 +7738,12 @@ model Scale {
   pollingInterval?: int32;
 
   /**
+   * Optional. Whether custom scale rules can override the automatic scale rules. This property is only applicable to Function Apps.
+   */
+  @added(Versions.v2026_07_01)
+  allowScalingRuleOverride?: boolean;
+
+  /**
    * Scaling rules.
    */
   @identifiers(#["name"])
