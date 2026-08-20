@@ -1,11 +1,11 @@
 {
   "title": "Update the tags of a migration",
-  "operationId": "Migrations_Update",
+  "operationId": "ClusterMigrationAgents_Update",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
-    "migrationName": "myMigration",
+    "clusterMigrationAgentName": "myClusterMigrationAgent",
     "properties": {
       "tags": {
         "wave": "2"
@@ -15,9 +15,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/migrations/myMigration",
-        "name": "myMigration",
-        "type": "Microsoft.ServiceFabric/migrations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusterMigrationAgents/myClusterMigrationAgent",
+        "name": "myClusterMigrationAgent",
+        "type": "Microsoft.ServiceFabric/clusterMigrationAgents",
         "location": "eastus",
         "tags": {
           "wave": "2"
@@ -44,7 +44,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/migrationOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/clusterMigrationAgentOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview",
         "Retry-After": 30
       }
     }

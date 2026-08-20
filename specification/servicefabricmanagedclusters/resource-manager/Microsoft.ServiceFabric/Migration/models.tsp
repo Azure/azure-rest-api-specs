@@ -252,9 +252,9 @@ model MigrationStage {
 }
 
 /**
- * The properties of a migration resource.
+ * The properties of a cluster migration agent resource.
  */
-model MigrationProperties {
+model ClusterMigrationAgentProperties {
   /**
    * The service generated identifier of the migration.
    */
@@ -309,10 +309,10 @@ model MigrationProperties {
   startMode?: MigrationStartMode = MigrationStartMode.Auto;
 
   /**
-   * The provisioning state of the migration resource.
+   * The provisioning state of the cluster migration agent resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: MigrationProvisioningState;
+  provisioningState?: ClusterMigrationAgentProvisioningState;
 
   /**
    * The current state of the migration.
@@ -334,22 +334,22 @@ model MigrationProperties {
   stages?: MigrationStage[];
 
   /**
-   * The time at which the migration resource was created, in UTC.
+   * The time at which the cluster migration agent resource was created, in UTC.
    */
   @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
 
   /**
-   * The time at which the migration resource was last updated, in UTC.
+   * The time at which the cluster migration agent resource was last updated, in UTC.
    */
   @visibility(Lifecycle.Read)
   lastUpdatedTime?: utcDateTime;
 }
 
 /**
- * The provisioning state of the migration resource.
+ * The provisioning state of the cluster migration agent resource.
  */
-union MigrationProvisioningState {
+union ClusterMigrationAgentProvisioningState {
   string,
 
   /**

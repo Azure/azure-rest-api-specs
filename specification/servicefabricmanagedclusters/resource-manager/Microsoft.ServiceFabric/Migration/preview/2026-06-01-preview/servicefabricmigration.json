@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricMigrationManagementClient",
     "version": "2026-06-01-preview",
-    "description": "Service Fabric migration management client. Provides the migration resource used to move a\nclassic Service Fabric cluster to a Service Fabric managed cluster.",
+    "description": "Service Fabric migration management client. Provides the cluster migration agent resource used to move a\nclassic Service Fabric cluster to a Service Fabric managed cluster.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "Migrations"
+      "name": "ClusterMigrationAgents"
     }
   ],
   "paths": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/migrations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusterMigrationAgents": {
       "get": {
-        "operationId": "Migrations_ListBySubscription",
+        "operationId": "ClusterMigrationAgents_ListBySubscription",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
-        "description": "Gets all Service Fabric migration resources in the specified subscription.",
+        "description": "Gets all Service Fabric cluster migration agent resources in the specified subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MigrationListResult"
+              "$ref": "#/definitions/ClusterMigrationAgentListResult"
             }
           },
           "default": {
@@ -114,7 +114,7 @@
         },
         "x-ms-examples": {
           "List migrations in a subscription": {
-            "$ref": "./examples/Migrations_ListBySubscription.json"
+            "$ref": "./examples/ClusterMigrationAgents_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusterMigrationAgents": {
       "get": {
-        "operationId": "Migrations_ListByResourceGroup",
+        "operationId": "ClusterMigrationAgents_ListByResourceGroup",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
-        "description": "Gets all Service Fabric migration resources in the specified resource group.",
+        "description": "Gets all Service Fabric cluster migration agent resources in the specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MigrationListResult"
+              "$ref": "#/definitions/ClusterMigrationAgentListResult"
             }
           },
           "default": {
@@ -156,7 +156,7 @@
         },
         "x-ms-examples": {
           "List migrations in a resource group": {
-            "$ref": "./examples/Migrations_ListByResourceGroup.json"
+            "$ref": "./examples/ClusterMigrationAgents_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations/{migrationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusterMigrationAgents/{clusterMigrationAgentName}": {
       "get": {
-        "operationId": "Migrations_Get",
+        "operationId": "ClusterMigrationAgents_Get",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
-        "description": "Get a Service Fabric migration resource.",
+        "description": "Get a Service Fabric cluster migration agent resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -182,9 +182,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "migrationName",
+            "name": "clusterMigrationAgentName",
             "in": "path",
-            "description": "The name of the Migration",
+            "description": "The name of the ClusterMigrationAgent",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             }
           },
           "default": {
@@ -206,16 +206,16 @@
         },
         "x-ms-examples": {
           "Get a migration": {
-            "$ref": "./examples/Migrations_Get.json"
+            "$ref": "./examples/ClusterMigrationAgents_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Migrations_CreateOrUpdate",
+        "operationId": "ClusterMigrationAgents_CreateOrUpdate",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
-        "description": "Create or update a Service Fabric migration resource. The source cluster, the target cluster, and\nthe set of node types cannot be changed after the migration is created.",
+        "description": "Create or update a Service Fabric cluster migration agent resource. The source cluster, the target\ncluster, and the set of node types cannot be changed after the resource is created.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -227,9 +227,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "migrationName",
+            "name": "clusterMigrationAgentName",
             "in": "path",
-            "description": "The name of the Migration",
+            "description": "The name of the ClusterMigrationAgent",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Migration' update operation succeeded",
+            "description": "Resource 'ClusterMigrationAgent' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             }
           },
           "201": {
-            "description": "Resource 'Migration' create operation succeeded",
+            "description": "Resource 'ClusterMigrationAgent' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -277,21 +277,21 @@
         },
         "x-ms-examples": {
           "Create or update a migration": {
-            "$ref": "./examples/Migrations_CreateOrUpdate.json"
+            "$ref": "./examples/ClusterMigrationAgents_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Migration"
+          "final-state-schema": "#/definitions/ClusterMigrationAgent"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "Migrations_Update",
+        "operationId": "ClusterMigrationAgents_Update",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
-        "description": "Update the tags of a Service Fabric migration resource.",
+        "description": "Update the tags of a Service Fabric cluster migration agent resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -303,9 +303,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "migrationName",
+            "name": "clusterMigrationAgentName",
             "in": "path",
-            "description": "The name of the Migration",
+            "description": "The name of the ClusterMigrationAgent",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
@@ -316,7 +316,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MigrationTagsUpdate"
+              "$ref": "#/definitions/ClusterMigrationAgentTagsUpdate"
             }
           }
         ],
@@ -324,7 +324,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             }
           },
           "202": {
@@ -350,21 +350,21 @@
         },
         "x-ms-examples": {
           "Update the tags of a migration": {
-            "$ref": "./examples/Migrations_Update.json"
+            "$ref": "./examples/ClusterMigrationAgents_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Migration"
+          "final-state-schema": "#/definitions/ClusterMigrationAgent"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Migrations_Delete",
+        "operationId": "ClusterMigrationAgents_Delete",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
-        "description": "Delete a Service Fabric migration resource. The migration must be in the NotStarted, Succeeded, or\nRolledBack state.",
+        "description": "Delete a Service Fabric cluster migration agent resource. The migration must be in the NotStarted,\nSucceeded, or RolledBack state.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -376,9 +376,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "migrationName",
+            "name": "clusterMigrationAgentName",
             "in": "path",
-            "description": "The name of the Migration",
+            "description": "The name of the ClusterMigrationAgent",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
@@ -411,7 +411,7 @@
         },
         "x-ms-examples": {
           "Delete a migration": {
-            "$ref": "./examples/Migrations_Delete.json"
+            "$ref": "./examples/ClusterMigrationAgents_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -420,11 +420,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations/{migrationName}/rollback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusterMigrationAgents/{clusterMigrationAgentName}/rollback": {
       "post": {
-        "operationId": "Migrations_Rollback",
+        "operationId": "ClusterMigrationAgents_Rollback",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
         "description": "Roll back a migration, undoing the stages that already ran. The migration must be in the\nInProgress, Failed, or RollingBack state.",
         "parameters": [
@@ -438,9 +438,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "migrationName",
+            "name": "clusterMigrationAgentName",
             "in": "path",
-            "description": "The name of the Migration",
+            "description": "The name of the ClusterMigrationAgent",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
@@ -450,7 +450,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             }
           },
           "202": {
@@ -476,21 +476,21 @@
         },
         "x-ms-examples": {
           "Roll back a migration": {
-            "$ref": "./examples/Migrations_Rollback.json"
+            "$ref": "./examples/ClusterMigrationAgents_Rollback.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Migration"
+          "final-state-schema": "#/definitions/ClusterMigrationAgent"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/migrations/{migrationName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusterMigrationAgents/{clusterMigrationAgentName}/start": {
       "post": {
-        "operationId": "Migrations_Start",
+        "operationId": "ClusterMigrationAgents_Start",
         "tags": [
-          "Migrations"
+          "ClusterMigrationAgents"
         ],
         "description": "Start a migration that was created with the Manual start mode. The migration must be in the\nNotStarted state and provisioning must have succeeded.",
         "parameters": [
@@ -504,9 +504,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "migrationName",
+            "name": "clusterMigrationAgentName",
             "in": "path",
-            "description": "The name of the Migration",
+            "description": "The name of the ClusterMigrationAgent",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])?$"
@@ -516,7 +516,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Migration"
+              "$ref": "#/definitions/ClusterMigrationAgent"
             }
           },
           "202": {
@@ -542,24 +542,24 @@
         },
         "x-ms-examples": {
           "Start a migration": {
-            "$ref": "./examples/Migrations_Start.json"
+            "$ref": "./examples/ClusterMigrationAgents_Start.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Migration"
+          "final-state-schema": "#/definitions/ClusterMigrationAgent"
         },
         "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "Migration": {
+    "ClusterMigrationAgent": {
       "type": "object",
-      "description": "Describes the migration of a classic Service Fabric cluster to a Service Fabric managed cluster.",
+      "description": "Describes an agent that migrates a classic Service Fabric cluster to a Service Fabric managed cluster.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MigrationProperties",
+          "$ref": "#/definitions/ClusterMigrationAgentProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -569,15 +569,15 @@
         }
       ]
     },
-    "MigrationListResult": {
+    "ClusterMigrationAgentListResult": {
       "type": "object",
-      "description": "The response of a Migration list operation.",
+      "description": "The response of a ClusterMigrationAgent list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Migration items on this page",
+          "description": "The ClusterMigrationAgent items on this page",
           "items": {
-            "$ref": "#/definitions/Migration"
+            "$ref": "#/definitions/ClusterMigrationAgent"
           }
         },
         "nextLink": {
@@ -590,60 +590,9 @@
         "value"
       ]
     },
-    "MigrationMode": {
-      "type": "string",
-      "description": "The direction in which the migration stages are currently executing.",
-      "enum": [
-        "Forward",
-        "RollingBack"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Forward",
-            "value": "Forward",
-            "description": "Stages are executing in roll forward order."
-          },
-          {
-            "name": "RollingBack",
-            "value": "RollingBack",
-            "description": "Stages are executing in rollback order."
-          }
-        ]
-      }
-    },
-    "MigrationNodeTypeDescription": {
+    "ClusterMigrationAgentProperties": {
       "type": "object",
-      "description": "Describes a node type that participates in the migration.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the node type. The name cannot be changed, added, or removed after the migration is created.",
-          "minLength": 1,
-          "maxLength": 1024
-        },
-        "isPrimary": {
-          "type": "boolean",
-          "description": "Indicates whether the node type hosts the system services of the cluster. This value cannot be\nchanged after the migration is created."
-        },
-        "vmInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of virtual machine instances to provision for this node type on the target managed cluster.",
-          "minimum": 1
-        }
-      },
-      "required": [
-        "name",
-        "isPrimary",
-        "vmInstanceCount"
-      ]
-    },
-    "MigrationProperties": {
-      "type": "object",
-      "description": "The properties of a migration resource.",
+      "description": "The properties of a cluster migration agent resource.",
       "properties": {
         "migrationId": {
           "type": "string",
@@ -728,8 +677,8 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/MigrationProvisioningState",
-          "description": "The provisioning state of the migration resource.",
+          "$ref": "#/definitions/ClusterMigrationAgentProvisioningState",
+          "description": "The provisioning state of the cluster migration agent resource.",
           "readOnly": true
         },
         "status": {
@@ -756,13 +705,13 @@
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the migration resource was created, in UTC.",
+          "description": "The time at which the cluster migration agent resource was created, in UTC.",
           "readOnly": true
         },
         "lastUpdatedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the migration resource was last updated, in UTC.",
+          "description": "The time at which the cluster migration agent resource was last updated, in UTC.",
           "readOnly": true
         }
       },
@@ -772,9 +721,9 @@
         "nodeTypes"
       ]
     },
-    "MigrationProvisioningState": {
+    "ClusterMigrationAgentProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of the migration resource.",
+      "description": "The provisioning state of the cluster migration agent resource.",
       "enum": [
         "Creating",
         "Updating",
@@ -784,7 +733,7 @@
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "MigrationProvisioningState",
+        "name": "ClusterMigrationAgentProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -820,6 +769,70 @@
         ]
       },
       "readOnly": true
+    },
+    "ClusterMigrationAgentTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ClusterMigrationAgent resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrationMode": {
+      "type": "string",
+      "description": "The direction in which the migration stages are currently executing.",
+      "enum": [
+        "Forward",
+        "RollingBack"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Forward",
+            "value": "Forward",
+            "description": "Stages are executing in roll forward order."
+          },
+          {
+            "name": "RollingBack",
+            "value": "RollingBack",
+            "description": "Stages are executing in rollback order."
+          }
+        ]
+      }
+    },
+    "MigrationNodeTypeDescription": {
+      "type": "object",
+      "description": "Describes a node type that participates in the migration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the node type. The name cannot be changed, added, or removed after the migration is created.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "Indicates whether the node type hosts the system services of the cluster. This value cannot be\nchanged after the migration is created."
+        },
+        "vmInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of virtual machine instances to provision for this node type on the target managed cluster.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "isPrimary",
+        "vmInstanceCount"
+      ]
     },
     "MigrationRetryPolicy": {
       "type": "object",
@@ -1035,19 +1048,6 @@
         ]
       },
       "readOnly": true
-    },
-    "MigrationTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in Migration resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     }
   },
   "parameters": {}

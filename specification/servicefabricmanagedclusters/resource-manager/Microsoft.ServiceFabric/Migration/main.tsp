@@ -3,14 +3,14 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./Migration.tsp";
+import "./ClusterMigrationAgent.tsp";
 
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 /**
- * Service Fabric migration management client. Provides the migration resource used to move a
+ * Service Fabric migration management client. Provides the cluster migration agent resource used to move a
  * classic Service Fabric cluster to a Service Fabric managed cluster.
  */
 @armProviderNamespace

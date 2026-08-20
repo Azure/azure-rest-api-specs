@@ -1,18 +1,18 @@
 {
   "title": "Start a migration",
-  "operationId": "Migrations_Start",
+  "operationId": "ClusterMigrationAgents_Start",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
-    "migrationName": "myMigration"
+    "clusterMigrationAgentName": "myClusterMigrationAgent"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/migrations/myMigration",
-        "name": "myMigration",
-        "type": "Microsoft.ServiceFabric/migrations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusterMigrationAgents/myClusterMigrationAgent",
+        "name": "myClusterMigrationAgent",
+        "type": "Microsoft.ServiceFabric/clusterMigrationAgents",
         "location": "eastus",
         "properties": {
           "migrationId": "11111111-2222-3333-4444-555555555555",
@@ -48,8 +48,8 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/migrationOperations/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/migrationOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/clusterMigrationAgentOperations/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/clusterMigrationAgentOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview"
       }
     }
   }
