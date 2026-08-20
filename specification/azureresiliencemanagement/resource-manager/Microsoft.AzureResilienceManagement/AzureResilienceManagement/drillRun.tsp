@@ -170,14 +170,16 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_08_31_preview)
   @armResourceAction(DrillRun)
   @post
   @doc("This generates, or regenerates, the report for this Drill Run. The action is idempotent and is safe to call at any time: a call that arrives while a generation is already running joins it, and a call made after a failed attempt retries it. A report that has been finalized is never regenerated.")
-  generateReport is ArmResourceActionNoResponseContentAsync<
+  generateReport is ArmResourceActionAsync<
     DrillRun,
     void,
+    ArmNoContentResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
