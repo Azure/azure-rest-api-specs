@@ -81,7 +81,7 @@
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -94,7 +94,7 @@
           "404": {
             "description": "Returned when the requested resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/NotFoundResponse"
+              "$ref": "#/definitions/NotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -107,7 +107,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -185,13 +185,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataAnnotationsResponse"
+              "$ref": "#/definitions/DataAnnotationsPage"
             }
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -204,7 +204,7 @@
           "404": {
             "description": "Returned when the requested health model does not exist.",
             "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
+              "$ref": "#/definitions/ModelNotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -217,7 +217,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -264,7 +264,7 @@
             "description": "Health report payload. Must not exceed 32 KiB (32768 bytes).",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HealthReportRequest"
+              "$ref": "#/definitions/HealthReportPayload"
             }
           }
         ],
@@ -275,7 +275,7 @@
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -288,7 +288,7 @@
           "404": {
             "description": "Returned when the requested health model does not exist.",
             "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
+              "$ref": "#/definitions/ModelNotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -301,7 +301,7 @@
           "413": {
             "description": "The health-report ingestion request payload exceeded the size limit of 32 KiB (32768 bytes).",
             "schema": {
-              "$ref": "#/definitions/PayloadTooLargeResponse"
+              "$ref": "#/definitions/PayloadTooLargeError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -314,7 +314,7 @@
           "415": {
             "description": "Returned when the ingestion request's Content-Type is not supported.",
             "schema": {
-              "$ref": "#/definitions/UnsupportedMediaTypeResponse"
+              "$ref": "#/definitions/UnsupportedMediaTypeError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -327,7 +327,7 @@
           "429": {
             "description": "Too many health-report ingestion requests were received.",
             "schema": {
-              "$ref": "#/definitions/TooManyRequestsResponse"
+              "$ref": "#/definitions/TooManyRequestsError"
             },
             "headers": {
               "Retry-After": {
@@ -344,7 +344,7 @@
           "503": {
             "description": "Health-report ingestion service is temporarily unavailable; the client may retry after the given delay.",
             "schema": {
-              "$ref": "#/definitions/ServiceUnavailableResponse"
+              "$ref": "#/definitions/ServiceUnavailableError"
             },
             "headers": {
               "Retry-After": {
@@ -361,7 +361,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -439,13 +439,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityHealthStateHistoryResponse"
+              "$ref": "#/definitions/EntityHealthStateHistoryPage"
             }
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -458,7 +458,7 @@
           "404": {
             "description": "Returned when the requested health model does not exist.",
             "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
+              "$ref": "#/definitions/ModelNotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -471,7 +471,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -561,13 +561,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SignalDataPointHistoryResponse"
+              "$ref": "#/definitions/SignalDataPointHistoryPage"
             }
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -580,7 +580,7 @@
           "404": {
             "description": "Returned when the requested health model does not exist.",
             "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
+              "$ref": "#/definitions/ModelNotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -593,7 +593,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -674,13 +674,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityTransitionHistoryResponse"
+              "$ref": "#/definitions/EntityTransitionHistoryPage"
             }
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -693,7 +693,7 @@
           "404": {
             "description": "Returned when the requested health model does not exist.",
             "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
+              "$ref": "#/definitions/ModelNotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -706,7 +706,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -743,13 +743,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QueryEchoResponse"
+              "$ref": "#/definitions/QueryEchoResult"
             }
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
             "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
+              "$ref": "#/definitions/BadRequestError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -762,7 +762,7 @@
           "404": {
             "description": "Returned when the requested health model does not exist.",
             "schema": {
-              "$ref": "#/definitions/ModelNotFoundResponse"
+              "$ref": "#/definitions/ModelNotFoundError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -775,7 +775,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultErrorResponse"
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
             },
             "headers": {
               "Retry-After": {
@@ -905,7 +905,7 @@
         }
       }
     },
-    "BadRequestResponse": {
+    "BadRequestError": {
       "type": "object",
       "description": "Returned when the request is malformed, or a query parameter is invalid.",
       "properties": {
@@ -948,7 +948,7 @@
         "createdAt"
       ]
     },
-    "DataAnnotationsResponse": {
+    "DataAnnotationsPage": {
       "type": "object",
       "description": "Data annotations recorded for an entity, newest first.",
       "properties": {
@@ -1031,7 +1031,7 @@
         ]
       }
     },
-    "EntityDiagnosticDefaultErrorResponse": {
+    "EntityDiagnosticDefaultError": {
       "type": "object",
       "description": "Returned when entity diagnostics fail for reasons outside the explicit user-fault contract.",
       "properties": {
@@ -1181,7 +1181,7 @@
         "signalAggregationGroups"
       ]
     },
-    "EntityHealthStateHistoryResponse": {
+    "EntityHealthStateHistoryPage": {
       "type": "object",
       "description": "Health-state periods overlapping the requested window, newest first.",
       "properties": {
@@ -1269,7 +1269,7 @@
         "signalName"
       ]
     },
-    "EntityTransitionHistoryResponse": {
+    "EntityTransitionHistoryPage": {
       "type": "object",
       "description": "Health-state transitions recorded for an entity, returned as a pageable result.",
       "properties": {
@@ -1378,7 +1378,7 @@
         "unhealthyRule"
       ]
     },
-    "HealthReportRequest": {
+    "HealthReportPayload": {
       "type": "object",
       "description": "Health report submitted for a specific signal.",
       "properties": {
@@ -1481,11 +1481,11 @@
         "occurredAt"
       ]
     },
-    "IngestHealthReportAcceptedResponse": {
+    "IngestHealthReportAcceptedResult": {
       "type": "object",
       "description": "Health-report ingestion request was accepted."
     },
-    "ModelNotFoundResponse": {
+    "ModelNotFoundError": {
       "type": "object",
       "description": "Returned when the requested health model does not exist.",
       "properties": {
@@ -1498,7 +1498,7 @@
         "error"
       ]
     },
-    "NotFoundResponse": {
+    "NotFoundError": {
       "type": "object",
       "description": "Returned when the requested resource does not exist.",
       "properties": {
@@ -1511,7 +1511,7 @@
         "error"
       ]
     },
-    "PayloadTooLargeResponse": {
+    "PayloadTooLargeError": {
       "type": "object",
       "description": "The health-report ingestion request payload exceeded the size limit of 32 KiB (32768 bytes).",
       "properties": {
@@ -1524,7 +1524,7 @@
         "error"
       ]
     },
-    "QueryEchoResponse": {
+    "QueryEchoResult": {
       "type": "object",
       "description": "Health state of the requested health model, echoed by data-plane operations.",
       "properties": {
@@ -1546,7 +1546,7 @@
         "healthModelExists"
       ]
     },
-    "ServiceUnavailableResponse": {
+    "ServiceUnavailableError": {
       "type": "object",
       "description": "Health-report ingestion service is temporarily unavailable; the client may retry after the given delay.",
       "properties": {
@@ -1559,7 +1559,7 @@
         "error"
       ]
     },
-    "SignalDataPointHistoryResponse": {
+    "SignalDataPointHistoryPage": {
       "type": "object",
       "description": "Signal data points recorded for an entity's signal, newest first.",
       "properties": {
@@ -1680,7 +1680,7 @@
         "operator"
       ]
     },
-    "TooManyRequestsResponse": {
+    "TooManyRequestsError": {
       "type": "object",
       "description": "Too many health-report ingestion requests were received.",
       "properties": {
@@ -1693,7 +1693,7 @@
         "error"
       ]
     },
-    "UnsupportedMediaTypeResponse": {
+    "UnsupportedMediaTypeError": {
       "type": "object",
       "description": "Returned when the ingestion request's Content-Type is not supported.",
       "properties": {

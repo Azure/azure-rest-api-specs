@@ -27,7 +27,7 @@ alias NoResourceLifecycleTraits = Azure.Core.Traits.NoConditionalRequests &
 
 alias EntityReadOperations = Azure.Core.ResourceOperations<
   NoResourceLifecycleTraits,
-  NotFoundResponse | BadRequestResponse | EntityDiagnosticDefaultErrorResponse
+  NotFoundError | BadRequestError | EntityDiagnosticDefaultError
 >;
 
 @doc("Service API versions.")
@@ -88,7 +88,7 @@ model HealthStateTransition {
 }
 
 @doc("Health state of the requested health model, echoed by data-plane operations.")
-model QueryEchoResponse {
+model QueryEchoResult {
   @doc("""
     Persisted resource name of the health model root entity.
     Always use this field directly and never parse the model identifier to derive entity identity.
@@ -283,7 +283,7 @@ model EntitySignalRoute {
 
 @error
 @doc("Returned when the requested health model does not exist.")
-model ModelNotFoundResponse is Azure.Core.Foundations.ErrorResponse {
+model ModelNotFoundError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the requested health model was not found.")
   @statusCode
   statusCode: 404;
@@ -291,7 +291,7 @@ model ModelNotFoundResponse is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Returned when the requested resource does not exist.")
-model NotFoundResponse is Azure.Core.Foundations.ErrorResponse {
+model NotFoundError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the requested resource was not found.")
   @statusCode
   statusCode: 404;
@@ -299,7 +299,7 @@ model NotFoundResponse is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Returned when the request is malformed, or a query parameter is invalid.")
-model BadRequestResponse is Azure.Core.Foundations.ErrorResponse {
+model BadRequestError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the request was invalid.")
   @statusCode
   statusCode: 400;
@@ -307,7 +307,7 @@ model BadRequestResponse is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Returned when entity diagnostics fail for reasons outside the explicit user-fault contract.")
-model EntityDiagnosticDefaultErrorResponse
+model EntityDiagnosticDefaultError
   is Azure.Core.Foundations.ErrorResponse {
   @doc("Retry guidance supplied by the service as an HTTP date or delay in seconds.")
   @header("Retry-After")
@@ -335,7 +335,7 @@ model EntityHealthStatePeriod {
 }
 
 @doc("Health-state transitions recorded for an entity, returned as a pageable result.")
-model EntityTransitionHistoryResponse {
+model EntityTransitionHistoryPage {
   @doc("The health-state transitions, ordered newest first.")
   @pageItems
   value: HealthStateTransition[];
@@ -346,7 +346,7 @@ model EntityTransitionHistoryResponse {
 }
 
 @doc("Health-state periods overlapping the requested window, newest first.")
-model EntityHealthStateHistoryResponse {
+model EntityHealthStateHistoryPage {
   @doc("The health-state periods, ordered newest first.")
   @pageItems
   value: EntityHealthStatePeriod[];
@@ -372,7 +372,7 @@ model SignalHistoryDataPoint {
 }
 
 @doc("Signal data points recorded for an entity's signal, newest first.")
-model SignalDataPointHistoryResponse {
+model SignalDataPointHistoryPage {
   @doc("The signal data points, ordered newest first.")
   @pageItems
   value: SignalHistoryDataPoint[];
@@ -398,7 +398,7 @@ model DataAnnotation {
 }
 
 @doc("Data annotations recorded for an entity, newest first.")
-model DataAnnotationsResponse {
+model DataAnnotationsPage {
   @doc("The data annotations, ordered newest first.")
   @pageItems
   value: DataAnnotation[];
@@ -458,7 +458,7 @@ model HealthReportEvaluationRule {
 }
 
 @doc("Health report submitted for a specific signal.")
-model HealthReportRequest {
+model HealthReportPayload {
   @doc("Name of the entity signal to report health for.")
   signalName: signalName;
 
@@ -481,13 +481,13 @@ model HealthReportRequest {
 }
 
 @doc("Health-report ingestion request was accepted.")
-model IngestHealthReportAcceptedResponse {
+model IngestHealthReportAcceptedResult {
   ...Azure.Core.Foundations.AcceptedResponse;
 }
 
 @error
 @doc("The health-report ingestion request payload exceeded the size limit of 32 KiB (32768 bytes).")
-model PayloadTooLargeResponse is Azure.Core.Foundations.ErrorResponse {
+model PayloadTooLargeError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the request payload was too large.")
   @statusCode
   statusCode: 413;
@@ -495,7 +495,7 @@ model PayloadTooLargeResponse is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Too many health-report ingestion requests were received.")
-model TooManyRequestsResponse is Azure.Core.Foundations.ErrorResponse {
+model TooManyRequestsError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the request rate limit was exceeded.")
   @statusCode
   statusCode: 429;
@@ -510,7 +510,7 @@ model TooManyRequestsResponse is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Returned when the ingestion request's Content-Type is not supported.")
-model UnsupportedMediaTypeResponse is Azure.Core.Foundations.ErrorResponse {
+model UnsupportedMediaTypeError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the request content type was unsupported.")
   @statusCode
   statusCode: 415;
@@ -518,7 +518,7 @@ model UnsupportedMediaTypeResponse is Azure.Core.Foundations.ErrorResponse {
 
 @error
 @doc("Health-report ingestion service is temporarily unavailable; the client may retry after the given delay.")
-model ServiceUnavailableResponse is Azure.Core.Foundations.ErrorResponse {
+model ServiceUnavailableError is Azure.Core.Foundations.ErrorResponse {
   @doc("HTTP status code indicating that the service was temporarily unavailable.")
   @statusCode
   statusCode: 503;
@@ -539,11 +539,11 @@ interface Model {
   @get
   status is RpcOperation<
     {},
-    QueryEchoResponse,
+    QueryEchoResult,
     {},
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundError
+    | BadRequestError
+    | EntityDiagnosticDefaultError
   >;
 }
 
@@ -574,11 +574,11 @@ interface EntityTransitionHistory {
       @continuationToken
       nextMarker?: string4096;
     },
-    EntityTransitionHistoryResponse,
+    EntityTransitionHistoryPage,
     {},
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundError
+    | BadRequestError
+    | EntityDiagnosticDefaultError
   >;
 }
 
@@ -615,11 +615,11 @@ interface EntityHealthStateHistory {
       @continuationToken
       nextMarker?: string4096;
     },
-    EntityHealthStateHistoryResponse,
+    EntityHealthStateHistoryPage,
     {},
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundError
+    | BadRequestError
+    | EntityDiagnosticDefaultError
   >;
 }
 
@@ -650,11 +650,11 @@ interface SignalHistory {
       @continuationToken
       nextMarker?: string4096;
     },
-    SignalDataPointHistoryResponse,
+    SignalDataPointHistoryPage,
     {},
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundError
+    | BadRequestError
+    | EntityDiagnosticDefaultError
   >;
 }
 
@@ -685,11 +685,11 @@ interface DataAnnotations {
       @continuationToken
       nextMarker?: string4096;
     },
-    DataAnnotationsResponse,
+    DataAnnotationsPage,
     {},
-    | ModelNotFoundResponse
-    | BadRequestResponse
-    | EntityDiagnosticDefaultErrorResponse
+    | ModelNotFoundError
+    | BadRequestError
+    | EntityDiagnosticDefaultError
   >;
 }
 
@@ -702,16 +702,16 @@ interface HealthReportIngestion {
     Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
       @doc("Health report payload. Must not exceed 32 KiB (32768 bytes).")
       @body
-      body: HealthReportRequest;
+      body: HealthReportPayload;
     },
-    IngestHealthReportAcceptedResponse,
+    IngestHealthReportAcceptedResult,
     {},
-    | BadRequestResponse
-    | ModelNotFoundResponse
-    | PayloadTooLargeResponse
-    | UnsupportedMediaTypeResponse
-    | TooManyRequestsResponse
-    | ServiceUnavailableResponse
-    | EntityDiagnosticDefaultErrorResponse
+    | BadRequestError
+    | ModelNotFoundError
+    | PayloadTooLargeError
+    | UnsupportedMediaTypeError
+    | TooManyRequestsError
+    | ServiceUnavailableError
+    | EntityDiagnosticDefaultError
   >;
 }
