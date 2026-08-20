@@ -83,6 +83,25 @@ interface ImageOperations {
   >;
 }
 
+@added(ContentSafety.Versions.v2026_09_01_preview)
+interface UnifiedOperations {
+  @summary("Unified Moderate")
+  @doc("A synchronous API that evaluates a prompt, completion, proposed tool call, or completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
+  @route("/unifiedModerate")
+  @post
+  unifiedModerate is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The unified moderation request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: UnifiedModerateOptions;
+    },
+    UnifiedModerateResult
+  >;
+}
+
 interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &

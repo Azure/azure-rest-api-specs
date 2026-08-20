@@ -275,6 +275,224 @@ model TextProtectedMaterialAnalysisResult {
   detected: boolean;
 }
 
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The workload event source evaluated by Unified Moderate.")
+union UnifiedModerateSource {
+  string,
+
+  @doc("A prompt submitted to a model or agent.")
+  Prompt: "Prompt",
+
+  @doc("A completion produced by a model or agent.")
+  Completion: "Completion",
+
+  @doc("A proposed tool invocation before it is executed.")
+  PreToolCall: "PreToolCall",
+
+  @doc("A tool result after the invocation completes.")
+  PostToolCall: "PostToolCall",
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("Optional agent, session, and request context supplied to policy evaluation.")
+model UnifiedModerateContext {
+  @doc("Caller-provided identifier of the agent associated with the event.")
+  agentId?: string;
+
+  @doc("Caller-provided identifier of the session associated with the event.")
+  sessionId?: string;
+
+  @doc("Zero-based event sequence within the session, when available.")
+  @minValue(0)
+  sequence?: int64;
+
+  @doc("Caller-provided end-to-end correlation identifier.")
+  correlationId?: string;
+
+  @doc("Caller-provided workload user identifier.")
+  userId?: string;
+
+  @doc("Caller-provided workload tenant identifier.")
+  tenantId?: string;
+
+  @doc("A JSON-encoded string containing validated host-specific context extensions.")
+  extensions?: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name follows existing Content Safety request model conventions."
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("A request to evaluate and enforce an applicable policy for one workload event.")
+model UnifiedModerateOptions {
+  @doc("An optional built-in or account-scoped policy identifier. Omit this property to resolve the policy bound to targetResourceId.")
+  policyId?: string;
+
+  @doc("The Azure resource identifier whose policy binding is resolved. Required when policyId is omitted. The target resource must already be bound under the Content Safety account serving the request.")
+  targetResourceId?: string;
+
+  @doc("The workload event source. The source selects the policy intervention point.")
+  source: UnifiedModerateSource;
+
+  @doc("The content to evaluate. Plain text is provided directly. Structured content is serialized as a JSON-encoded string and is deserialized and validated by the service.")
+  content: string;
+
+  @doc("The tool name. Required and nonempty for tool-call sources and not allowed for prompt or completion sources.")
+  @minLength(1)
+  toolName?: string;
+
+  @doc("An optional caller-provided tool-call identifier. The service generates one when omitted for a tool-call source.")
+  toolCallId?: string;
+
+  @doc("A JSON-encoded string containing the original arguments for a completed tool call. The service uses an empty object when omitted.")
+  toolArguments?: string;
+
+  @doc("Whether the completed tool call returned an error.")
+  toolResultIsError?: boolean;
+
+  @doc("The non-negative duration of the completed tool call, in milliseconds.")
+  @minValue(0)
+  toolDurationMs?: float64;
+
+  @doc("Optional agent, session, and request context supplied to policy evaluation.")
+  context?: UnifiedModerateContext;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The caller-facing enforcement result returned by Unified Moderate.")
+union UnifiedModerateVerdict {
+  string,
+
+  @doc("The content is allowed, including content modified by an allowed policy transform.")
+  Allowed: "allowed",
+
+  @doc("The content is blocked by policy.")
+  Blocked: "blocked",
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The canonical decision returned by Agent Control Specification policy evaluation.")
+union AcsDecision {
+  string,
+
+  @doc("Allow the original content.")
+  Allow: "allow",
+
+  @doc("Deny the content.")
+  Deny: "deny",
+
+  @doc("Apply an allowed canonical transform.")
+  Transform: "transform",
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The moderation and policy-attribution result for one harm category. The category name is the key in the harm_results map and is not restricted to a predefined set.")
+model AcsHarmResult {
+  @doc("Whether this harm contributed to the overall ACS verdict blocking the content.")
+  blocked: boolean;
+
+  @doc("Whether this harm was detected, regardless of whether it caused the overall verdict to block.")
+  detected: boolean;
+
+  @doc("An optional harm-specific severity value. The value is defined by the moderation model or policy that produced the result.")
+  severity?: string;
+
+  @doc("Optional blocklist results. Each item identifies one evaluated blocklist and whether it was detected.")
+  details?: AcsHarmDetail[];
+
+  @doc("An optional internet location associated with detected protected material.")
+  url?: url;
+
+  @doc("An optional license description associated with detected protected material.")
+  license?: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The detection result for one blocklist evaluated as part of a harm result.")
+model AcsHarmDetail {
+  @doc("Whether the blocklist was detected.")
+  detected: boolean;
+
+  @doc("The identifier of the evaluated blocklist.")
+  id: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("Approval metadata returned by an ACS deny decision. Unified Moderate does not invoke an approval workflow.")
+model AcsApproval {
+  @doc("The type of approval required by the policy.")
+  type: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("A canonical ACS transform applied by Unified Moderate.")
+model AcsTransform {
+  @doc("The canonical path of the value to replace.")
+  path: string;
+
+  @doc("A JSON-encoded string containing the replacement value.")
+  value: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("Evidence or a verification pointer returned by policy evaluation.")
+model AcsEvidence {
+  @doc("An optional evidence identifier.")
+  id?: string;
+
+  @doc("An optional evidence type.")
+  type?: string;
+
+  @doc("An optional location containing or describing the evidence.")
+  uri?: url;
+
+  @doc("An optional human-readable evidence description.")
+  description?: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The complete Agent Control Specification policy verdict.")
+model AcsVerdict {
+  @doc("The canonical policy decision.")
+  decision: AcsDecision;
+
+  @doc("An optional machine-readable reason for the decision.")
+  reason?: string;
+
+  @doc("An optional human-readable message for the decision.")
+  message?: string;
+
+  @doc("Optional non-blocking warnings produced by policy evaluation.")
+  warnings?: string[];
+
+  @doc("Optional approval metadata for a deny decision. Unified Moderate does not invoke an approval workflow, so the content remains blocked.")
+  approval?: AcsApproval;
+
+  @doc("Canonical transform metadata. Required when the decision is transform.")
+  transform?: AcsTransform;
+
+  @doc("Optional policy evidence and verification pointers.")
+  evidence?: AcsEvidence[];
+
+  @encodedName("application/json", "harm_results")
+  @doc("Optional moderation results keyed by harm category. Category names come from the policy harm configuration and are not restricted to a predefined set. A policy deny that is unrelated to a configured harm can omit this property.")
+  harmResults?: Record<AcsHarmResult>;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The enforced result of unified moderation.")
+model UnifiedModerateResult {
+  @doc("The caller-facing enforcement outcome.")
+  verdict: UnifiedModerateVerdict;
+
+  @doc("An optional machine-readable policy reason.")
+  reason?: string;
+
+  @doc("The original or transformed content when allowed. Structured content is returned as a JSON-encoded string. This property is omitted when blocked.")
+  content?: string;
+
+  @doc("The complete Agent Control Specification policy verdict.")
+  acsVerdict: AcsVerdict;
+}
+
 alias ProvenanceRetryAfterTrait = ResponseHeadersTrait<
   Azure.Core.Foundations.RetryAfterHeader,
   TraitContext.Read
