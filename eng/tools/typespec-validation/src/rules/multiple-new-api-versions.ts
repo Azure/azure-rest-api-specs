@@ -117,8 +117,8 @@ export function evaluateApiVersionPolicy(
     return {
       success: false,
       errorOutput:
-        `This pull request adds multiple API versions. Every SDK language emitter must target ` +
-        `the oldest newly added version, ${oldestNewApiVersion}:\n${details.join("\n")}\n` +
+        `ERROR: This pull request adds multiple API versions. Every SDK language emitter must ` +
+        `target the oldest newly added version, ${oldestNewApiVersion}:\n${details.join("\n")}\n` +
         `\nPlease refer to ${WIKI_LINK} for detailed guidance.`,
     };
   }
@@ -134,16 +134,23 @@ export class MultipleNewApiVersionsRule implements Rule {
   readonly description = "Validate SDK API-version selection when a PR adds API versions";
 
   async execute(folder: string): Promise<RuleResult> {
-    const baseCommitish =
-      typeof context.baseCommitish === "string" ? context.baseCommitish : "HEAD^";
-    const headCommitish =
-      typeof context.headCommitish === "string" ? context.headCommitish : "HEAD";
-
     // Validating all specs has no pull request to diff, and runs on a shallow clone without HEAD^.
     if (context.checkingAllSpecs === true) {
       return {
         success: true,
         stdOutput: "Validating all specs; skipping comparison of newly added API versions.",
+      };
+    }
+
+    // Only the pull request check supplies commits; a bare "npx tsv <folder>" has nothing to diff.
+    const { baseCommitish, headCommitish } = context;
+    if (typeof baseCommitish !== "string" || typeof headCommitish !== "string") {
+      return {
+        success: true,
+        stdOutput:
+          "No commits to compare; skipping. To run this rule locally, pass the commits to " +
+          `compare:\n  npx tsv ${folder} '{"baseCommitish":"{commitShaOfMain}",` +
+          `"headCommitish":"{headShaOfLocalBranch}"}'`,
       };
     }
 
@@ -201,7 +208,18 @@ export class MultipleNewApiVersionsRule implements Rule {
 
     try {
       const metadata = await generateTypeSpecMetadata(folder);
-      return evaluateApiVersionPolicy(metadata, newApiVersions);
+      const result = evaluateApiVersionPolicy(metadata, newApiVersions);
+      if (result.success) {
+        return result;
+      }
+
+      return {
+        ...result,
+        errorOutput:
+          `${result.errorOutput}\n\nTo reproduce locally:\n` +
+          `  npx tsv ${folder} '{"baseCommitish":"{commitShaOfMain}",` +
+          `"headCommitish":"{commitShaOfPRHead}"}'`,
+      };
     } catch (error) {
       return { success: false, errorOutput: String(error) };
     }
