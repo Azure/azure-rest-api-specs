@@ -42,6 +42,8 @@ import "./src/openai/video/main.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/routines/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/simulations/simulation_configuration/routes.tsp";
+import "./src/simulations/simulation_job/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";

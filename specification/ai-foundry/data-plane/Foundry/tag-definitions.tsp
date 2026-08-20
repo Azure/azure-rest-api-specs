@@ -76,6 +76,7 @@ using OpenAPI;
   #{ name: "Evaluation Rules", parent: "Evaluations" },
   #{ name: "Evaluators", parent: "Evaluations" },
   #{ name: "Evaluation Taxonomies", parent: "Evaluations" },
+  #{ name: "Simulations", parent: "Evaluations" },
   #{ name: "Redteams", parent: "Evaluations", summary: "Red Teaming" },
   #{ name: "Evalsuite", parent: "Evaluations" },
   #{ name: "Insights", parent: "Evaluations" }
