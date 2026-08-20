@@ -8,6 +8,12 @@ import { extractInputs } from "../context.js";
 import { loadApproversConfig } from "./approvers.js";
 import { removeLabelIfPresent } from "./labels.js";
 
+// All Tier 1 languages must approve package names regardless of which languages
+// have configuration in tspconfig.yaml. This prevents names being approved for a
+// subset of languages without cross-language alignment.
+const TIER1_DATA_PLANE = ["dotnet", "java", "python", "typescript"];
+const TIER1_MGMT = ["dotnet", "java", "python", "typescript", "go"];
+
 const FormatValidationResultSchema = z.object({
   valid: z.boolean(),
   namespace: z.string(),
@@ -141,6 +147,7 @@ export function parseCommentTable(body) {
  * @param {string} params.baseRef
  * @param {string[]} [params.resetLanguages] - Languages whose approvals were reset on this push.
  * @param {Map<string, { namespace: string, status: string }>} [params.preservedApprovals] - Approval statuses preserved from the previous comment for unchanged package names.
+ * @param {string[]} params.allLanguages - All Tier 1 languages that require approval.
  */
 function buildCommentBody({
   approversConfig,
@@ -151,6 +158,7 @@ function buildCommentBody({
   baseRef,
   resetLanguages,
   preservedApprovals,
+  allLanguages,
 }) {
   const planeType = isMgmt ? "Management Plane" : "Data Plane";
   let body = `## Package Name Review Required\n\n**Plane:** ${planeType}\n\n`;
@@ -163,13 +171,17 @@ function buildCommentBody({
     formatMap.set(r.language, r);
   }
 
-  for (const [language, packageName] of Object.entries(namespacesFound)) {
-    const ns = namespaces?.[language] ?? "—";
+  for (const language of allLanguages) {
+    const packageName = namespacesFound[language];
+    const isConfigured = packageName !== undefined;
+    const displayName = isConfigured ? `\`${packageName}\`` : "_(not yet configured)_";
+    const ns = isConfigured ? (namespaces?.[language] ?? "—") : "—";
+    const displayNs = isConfigured ? `\`${ns}\`` : "—";
     const formatResult = formatMap.get(language);
-    const formatStatus = !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
+    const formatStatus = !isConfigured ? "—" : !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
     const preserved = preservedApprovals?.get(language);
     const status = preserved?.status ?? "⏳ Pending";
-    body += `| ${language} | \`${packageName}\` | \`${ns}\` | ${formatStatus} | ${status} | ${getApprovers(
+    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
       approversConfig,
       isMgmt,
       language,
@@ -280,6 +292,13 @@ export default async function postResults({ github, context, core }) {
     return;
   }
 
+  // Require approval from ALL Tier 1 language architects, not just languages with
+  // detected config changes. This prevents names being approved for a subset of
+  // languages without cross-language alignment (e.g., Discovery SDK was approved
+  // for TypeScript only, but .NET architect later flagged the name as problematic).
+  const tier1 = results.isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
+  const allLanguages = [...new Set([...tier1, ...languages])];
+
   const labelsToAdd = new Set(["package-name-review-required"]);
   if (results.isMgmt) {
     labelsToAdd.add("Mgmt");
@@ -287,7 +306,7 @@ export default async function postResults({ github, context, core }) {
   if (results.isDataPlane) {
     labelsToAdd.add("data-plane");
   }
-  for (const language of languages) {
+  for (const language of allLanguages) {
     // Skip adding pending label if language is already approved
     const approvedLabel = `package-name-${language}-approved`;
     if (!existingLabels.includes(approvedLabel)) {
@@ -296,10 +315,10 @@ export default async function postResults({ github, context, core }) {
   }
 
   // Don't re-add package-name-review-required if everything is already approved
-  const allApproved = languages.every((lang) =>
+  const allApproved = allLanguages.every((lang) =>
     existingLabels.includes(`package-name-${lang}-approved`),
   );
-  if (allApproved && languages.length > 0) {
+  if (allApproved && allLanguages.length > 0) {
     labelsToAdd.delete("package-name-review-required");
   }
 
@@ -323,6 +342,7 @@ export default async function postResults({ github, context, core }) {
     baseRef: pr.base.ref,
     resetLanguages,
     preservedApprovals,
+    allLanguages,
   });
 
   await commentOrUpdate(github, core, owner, repo, issue_number, body, "package-name-review-bot");
