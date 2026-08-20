@@ -4026,6 +4026,30 @@
         ]
       }
     },
+    "FirewallPolicyDataLossPreventionMode": {
+      "type": "string",
+      "description": "The enforcement mode of a data loss prevention security profile.",
+      "enum": [
+        "Audit",
+        "Enforce"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyDataLossPreventionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Matching traffic is logged but allowed."
+          },
+          {
+            "name": "Enforce",
+            "value": "Enforce",
+            "description": "Matching traffic is blocked."
+          }
+        ]
+      }
+    },
     "FirewallPolicyFilterRuleCollectionActionType": {
       "type": "string",
       "description": "The action type of a rule.",
@@ -4302,6 +4326,126 @@
         ]
       }
     },
+    "FirewallPolicyPromptInjectionBackendAuthType": {
+      "type": "string",
+      "description": "The mechanism used to authenticate to the prompt inspection backend.",
+      "enum": [
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyPromptInjectionBackendAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Authenticate using a user-assigned managed identity."
+          }
+        ]
+      }
+    },
+    "FirewallPolicyPromptInjectionBackendVendor": {
+      "type": "string",
+      "description": "The vendor that performs prompt inspection.",
+      "enum": [
+        "AzureContentSafety"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyPromptInjectionBackendVendor",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureContentSafety",
+            "value": "AzureContentSafety",
+            "description": "Azure AI Content Safety."
+          }
+        ]
+      }
+    },
+    "FirewallPolicyPromptInjectionDirection": {
+      "type": "string",
+      "description": "The traffic direction a prompt injection security profile inspects.",
+      "enum": [
+        "Request",
+        "Response",
+        "RequestAndResponse"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyPromptInjectionDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "Inspect the client to large language model direction only."
+          },
+          {
+            "name": "Response",
+            "value": "Response",
+            "description": "Inspect the large language model to client direction only."
+          },
+          {
+            "name": "RequestAndResponse",
+            "value": "RequestAndResponse",
+            "description": "Inspect both directions."
+          }
+        ]
+      }
+    },
+    "FirewallPolicyPromptInjectionProvider": {
+      "type": "string",
+      "description": "A large language model API schema family that prompts can be extracted from.",
+      "enum": [
+        "OpenAI",
+        "AzureOpenAI",
+        "Anthropic"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyPromptInjectionProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OpenAI",
+            "value": "OpenAI",
+            "description": "OpenAI Chat Completions and Responses APIs."
+          },
+          {
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI",
+            "description": "Azure OpenAI Chat Completions API."
+          },
+          {
+            "name": "Anthropic",
+            "value": "Anthropic",
+            "description": "Anthropic Claude Messages API."
+          }
+        ]
+      }
+    },
+    "FirewallPolicyPromptInjectionProviderMode": {
+      "type": "string",
+      "description": "How the large language model API schema is determined when extracting prompts.",
+      "enum": [
+        "AutoDetect",
+        "Predefined"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyPromptInjectionProviderMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AutoDetect",
+            "value": "AutoDetect",
+            "description": "The firewall detects the schema from the destination FQDN and URL path at runtime, falling back to heuristic structural detection and then to a whole-body scan."
+          },
+          {
+            "name": "Predefined",
+            "value": "Predefined",
+            "description": "The firewall uses the built-in schema for the explicitly named provider family."
+          }
+        ]
+      }
+    },
     "FirewallPolicyRuleApplicationProtocolType": {
       "type": "string",
       "description": "The application protocol type of a Rule.",
@@ -4416,6 +4560,42 @@
         ]
       }
     },
+    "FirewallPolicySecurityProfileKind": {
+      "type": "string",
+      "description": "The kind of protection a firewall policy security profile provides.",
+      "enum": [
+        "DataLossPrevention",
+        "AdvancedMalwareThreatProtection",
+        "AdvancedApplicationThreatProtection",
+        "PromptInjectionProfile"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicySecurityProfileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataLossPrevention",
+            "value": "DataLossPrevention",
+            "description": "Inspects traffic for sensitive data using a data classification vendor."
+          },
+          {
+            "name": "AdvancedMalwareThreatProtection",
+            "value": "AdvancedMalwareThreatProtection",
+            "description": "Inspects traffic for malware using advanced threat protection."
+          },
+          {
+            "name": "AdvancedApplicationThreatProtection",
+            "value": "AdvancedApplicationThreatProtection",
+            "description": "Inspects traffic for application layer threats using advanced threat protection."
+          },
+          {
+            "name": "PromptInjectionProfile",
+            "value": "PromptInjectionProfile",
+            "description": "Inspects large language model traffic for prompt injection attacks."
+          }
+        ]
+      }
+    },
     "FirewallPolicySkuTier": {
       "type": "string",
       "description": "Tier of Firewall Policy.",
@@ -4442,6 +4622,36 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
+          }
+        ]
+      }
+    },
+    "FirewallPolicyThreatProtectionMode": {
+      "type": "string",
+      "description": "The enforcement mode of an advanced threat protection security profile.",
+      "enum": [
+        "AlertOnly",
+        "AlertAndDeny",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyThreatProtectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AlertOnly",
+            "value": "AlertOnly",
+            "description": "Matching traffic is alerted on but allowed."
+          },
+          {
+            "name": "AlertAndDeny",
+            "value": "AlertAndDeny",
+            "description": "Matching traffic is alerted on, and denied once the deny confidence level is reached."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Inspection is disabled and traffic is neither alerted on nor denied."
           }
         ]
       }
@@ -10087,6 +10297,11 @@
     },
     "stringApplicationJson": {
       "type": "string"
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     }
   },
   "parameters": {}

@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resource": {
+      "properties": {
+        "kind": "PromptInjectionProfile",
+        "backend": {
+          "auth": {
+            "type": "ManagedIdentity",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+          },
+          "endpoint": "https://myContentSafety.cognitiveservices.azure.com",
+          "vendor": "AzureContentSafety"
+        },
+        "direction": "RequestAndResponse",
+        "failAction": "FailOpen",
+        "mode": "AlertAndDeny",
+        "promptExtraction": {
+          "providerMode": "Predefined",
+          "providers": [
+            "AzureOpenAI"
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "securityProfileName": "promptInjectionDeny",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "promptInjectionDeny",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/promptInjectionDeny",
+        "properties": {
+          "kind": "PromptInjectionProfile",
+          "backend": {
+            "auth": {
+              "type": "ManagedIdentity",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+            },
+            "endpoint": "https://myContentSafety.cognitiveservices.azure.com",
+            "vendor": "AzureContentSafety"
+          },
+          "direction": "RequestAndResponse",
+          "failAction": "FailOpen",
+          "mode": "AlertAndDeny",
+          "promptExtraction": {
+            "providerMode": "Predefined",
+            "providers": [
+              "AzureOpenAI"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "promptInjectionDeny",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/promptInjectionDeny",
+        "properties": {
+          "kind": "PromptInjection",
+          "backend": {
+            "auth": {
+              "type": "ManagedIdentity",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myFirewallIdentity"
+            },
+            "endpoint": "https://myContentSafety.cognitiveservices.azure.com",
+            "vendor": "AzureContentSafety"
+          },
+          "direction": "RequestAndResponse",
+          "failAction": "FailOpen",
+          "mode": "AlertAndDeny",
+          "promptExtraction": {
+            "providerMode": "Predefined",
+            "providers": [
+              "AzureOpenAI"
+            ]
+          },
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FirewallPolicySecurityProfiles_CreateOrUpdate",
+  "title": "Create FirewallPolicySecurityProfile of kind PromptInjectionProfile"
+}
