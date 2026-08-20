@@ -13143,7 +13143,7 @@ union FirewallPolicySecurityProfileKind {
   /**
    * Inspects large language model traffic for prompt injection attacks.
    */
-  PromptInjectionProfile: "PromptInjectionProfile",
+  PromptInjectionProtection: "PromptInjectionProtection",
 }
 
 /**
@@ -13443,15 +13443,15 @@ model FirewallPolicyPurviewVendorSettings {
 /**
  * Security profile that inspects large language model traffic for prompt injection attacks.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionProtectionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @added(Versions.v2026_01_01)
-model FirewallPolicyPromptInjectionProfileProperties
+model FirewallPolicyPromptInjectionProtectionProfileProperties
   extends FirewallPolicySecurityProfileProperties {
   /**
    * The kind of protection this security profile provides.
    */
-  kind: "PromptInjectionProfile";
+  kind: "PromptInjectionProtection";
 
   /**
    * The enforcement mode applied to traffic that matches this profile.
