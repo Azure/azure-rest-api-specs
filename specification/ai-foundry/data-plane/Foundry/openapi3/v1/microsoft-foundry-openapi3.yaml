@@ -78803,6 +78803,124 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
+    TelephonyCallDurationBasis:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - answered
+            - received
+            - legacy_connected
+            - legacy_started
+      description: The timestamp used as the basis for call duration.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallLifecycleEvent:
+      type: object
+      required:
+        - sequence
+        - name
+        - source
+        - outcome
+        - observed_at_ms
+        - timestamp_source
+      properties:
+        sequence:
+          type: integer
+          format: int64
+          description: The service-assigned order of the event within the call record.
+        name:
+          type: string
+          description: The stable provider-neutral event name.
+        source:
+          $ref: '#/components/schemas/TelephonyCallLifecycleEventSource'
+          description: The component that supplied the observation.
+        outcome:
+          $ref: '#/components/schemas/TelephonyCallLifecycleEventOutcome'
+          description: The outcome of the observed lifecycle operation.
+        observed_at_ms:
+          type: integer
+          format: int64
+          description: When the service observed the event, as Unix time in milliseconds.
+        occurred_at_ms:
+          type: integer
+          format: int64
+          description: When the event occurred according to the provider, as Unix time in milliseconds.
+        timestamp_source:
+          $ref: '#/components/schemas/TelephonyCallTimestampSource'
+          description: The source of the event timestamp.
+        reason:
+          type: string
+          description: A stable service-generated reason associated with the event.
+        provider_event_id:
+          type: string
+          description: The provider event identifier used for idempotency, when supplied.
+        provider_sequence:
+          type: integer
+          format: int64
+          description: The provider event sequence, when supplied.
+        provider_status_code:
+          type: integer
+          format: int32
+          description: The provider status code associated with the event.
+        provider_sub_code:
+          type: integer
+          format: int32
+          description: The provider subcode associated with the event.
+      description: A bounded durable observation in the lifecycle of one telephony call.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallLifecycleEventOutcome:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - observed
+            - started
+            - succeeded
+            - failed
+            - rejected
+            - cancelled
+      description: The outcome of one telephony lifecycle observation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallLifecycleEventSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - gateway
+            - azure_communication_services
+            - twilio
+            - voice_agent
+      description: The component that supplied a telephony lifecycle observation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallPhase:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - received
+            - validated
+            - admitted
+            - answering
+            - answered
+            - media_connected
+            - agent_session_ready
+            - bridging
+            - managing
+            - completed
+            - rejected
+            - failed
+      description: The provider-neutral phase reached by an inbound telephony call.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
     TelephonyCallRecord:
       type: object
       required:
@@ -78810,6 +78928,7 @@ components:
         - agent_name
         - provider
         - status
+        - phase
         - started_at
       properties:
         id:
@@ -78833,12 +78952,24 @@ components:
         status:
           $ref: '#/components/schemas/TelephonyCallStatus'
           description: The lifecycle status of the call.
+        phase:
+          $ref: '#/components/schemas/TelephonyCallPhase'
+          description: The provider-neutral lifecycle phase reached by the call.
         started_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call started.
         connected_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call connected.
+        answered_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the provider reported the call as answered.
+        media_connected_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the provider media channel connected.
+        agent_session_ready_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the voice-agent session became ready.
         ended_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call ended.
@@ -78860,6 +78991,23 @@ components:
         provider_message:
           type: string
           description: The provider message associated with the terminal result.
+        trace_id:
+          type: string
+          description: The W3C trace identifier, when a customer-facing trace was recorded.
+        timing:
+          $ref: '#/components/schemas/TelephonyCallTiming'
+          description: Detailed provider-neutral call timing. Returned by the call detail operation.
+        trace:
+          $ref: '#/components/schemas/TelephonyCallTrace'
+          description: Correlation to the customer-facing Foundry trace. Returned by the call detail operation.
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyCallLifecycleEvent'
+          description: The bounded lifecycle timeline. Returned by the call detail operation.
+        events_truncated:
+          type: boolean
+          description: Whether older lifecycle events were omitted because the bounded event limit was reached. Returned by the call detail operation.
       description: A durable history record for an inbound call to a voice agent.
       x-ms-foundry-meta:
         conditional_previews:
@@ -78894,6 +79042,124 @@ components:
             - success
             - failed
       description: The lifecycle status of an inbound telephony call.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallTimestampSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - provider
+            - gateway
+            - derived
+            - legacy
+      description: The source of a telephony lifecycle timestamp.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallTiming:
+      type: object
+      required:
+        - timestamp_source
+      properties:
+        received_at_ms:
+          type: integer
+          format: int64
+          description: When the provider webhook was received, as Unix time in milliseconds.
+        validated_at_ms:
+          type: integer
+          format: int64
+          description: When webhook validation completed, as Unix time in milliseconds.
+        admitted_at_ms:
+          type: integer
+          format: int64
+          description: When the call was admitted to an agent binding, as Unix time in milliseconds.
+        answer_requested_at_ms:
+          type: integer
+          format: int64
+          description: When the service requested that the provider answer the call, as Unix time in milliseconds.
+        answered_at_ms:
+          type: integer
+          format: int64
+          description: When the provider reported that the call was answered, as Unix time in milliseconds.
+        media_connected_at_ms:
+          type: integer
+          format: int64
+          description: When the provider media channel connected, as Unix time in milliseconds.
+        agent_session_ready_at_ms:
+          type: integer
+          format: int64
+          description: When the voice-agent session became ready, as Unix time in milliseconds.
+        first_caller_audio_at_ms:
+          type: integer
+          format: int64
+          description: When caller audio was first observed, as Unix time in milliseconds.
+        first_agent_audio_at_ms:
+          type: integer
+          format: int64
+          description: When agent audio was first observed, as Unix time in milliseconds.
+        ended_at_ms:
+          type: integer
+          format: int64
+          description: When the call reached a terminal state, as Unix time in milliseconds.
+        duration_basis:
+          $ref: '#/components/schemas/TelephonyCallDurationBasis'
+          description: The timestamp used as the basis for duration.
+        timestamp_source:
+          $ref: '#/components/schemas/TelephonyCallTimestampSource'
+          description: The source of the lifecycle timestamps.
+      description: Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallTrace:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/TelephonyCallTraceStatus'
+          description: The trace availability status.
+        trace_id:
+          type: string
+          description: The W3C trace identifier, when a trace was recorded.
+        root_span_id:
+          type: string
+          description: The root span identifier, when a trace was recorded.
+        conversation_id:
+          type: string
+          description: The voice-agent conversation identifier, when a conversation was created.
+        mode:
+          $ref: '#/components/schemas/TelephonyCallTraceMode'
+          description: Whether the trace was emitted live or after the call ended.
+      description: Correlation from a durable telephony call record to its customer-facing Foundry trace.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallTraceMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - live
+            - post_call
+      description: The mode used to expose a telephony call as a customer-facing Foundry trace.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCallTraceStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - pending
+            - emitting
+            - available
+            - not_recorded
+            - not_applicable
+            - failed
+      description: The availability status of a customer-facing telephony call trace.
       x-ms-foundry-meta:
         conditional_previews:
           - VoiceAgents=V1Preview
