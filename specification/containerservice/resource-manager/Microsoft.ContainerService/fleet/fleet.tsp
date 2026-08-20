@@ -186,6 +186,26 @@ model FleetCredentialResults {
   kubeconfigs?: FleetCredentialResult[];
 }
 
+@doc("One credential result item containing a secret Kubernetes configuration file.")
+model FleetCredentialResultWithSecret {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the credential.")
+  name?: string;
+
+  @visibility(Lifecycle.Read)
+  @secret
+  @doc("Base64-encoded Kubernetes configuration file.")
+  value?: bytes;
+}
+
+@doc("The credential results response containing secret Kubernetes configuration files.")
+model FleetCredentialResultsWithSecrets {
+  @visibility(Lifecycle.Read)
+  @doc("Array of Kubernetes configuration file credential results.")
+  @identifiers(#["name"])
+  kubeconfigs?: FleetCredentialResultWithSecret[];
+}
+
 @added(Versions.v2025_03_01)
 @doc("Status information for the fleet.")
 model FleetStatus {
@@ -262,5 +282,13 @@ interface Fleets {
   >;
 
   @doc("Lists the user credentials of a Fleet.")
-  listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
+  @returnTypeChangedFrom(
+    Versions.v2026_06_02_preview,
+    ArmResponse<FleetCredentialResults> | ErrorResponse
+  )
+  listCredentials is ArmResourceActionSync<
+    Fleet,
+    void,
+    FleetCredentialResultsWithSecrets
+  >;
 }
