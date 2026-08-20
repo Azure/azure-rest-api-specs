@@ -11,7 +11,7 @@ months on both sides, so holidays and release cadence fall in the same place.
 
 ---
 
-## 1. Slide 2 facts
+## 1. Slides 1 and 2: what the agent is
 
 - **100+ codified rules**, including **58 ARM Resource Provider Contract rule
   IDs**, plus rules covering policy, template deployment, preflight, secrets,
@@ -37,14 +37,58 @@ months on both sides, so holidays and release cadence fall in the same place.
 - **67 percent of agent-raised threads were resolved** by authors, from 1,016
   resolved threads. This is the best signal that findings are actionable.
 - **Run duration.** An interactive review in VS Code takes **20 to 25 minutes**.
-  The automated GitHub Actions workflow is faster because it runs a narrower
-  path, at **8.8 minutes median** with a longest observed run of 19.5. Neither
-  fits inside a demo slot, which is why the demo shows how a review is started
-  and then switches to a session that already completed.
+  The automated workflow is faster because it runs a narrower path, at **8.8
+  minutes median** with a longest observed run of 19.5. Neither fits inside a
+  demo slot, which is why the demo shows how a review is started and then
+  switches to a session that already completed.
 
 ---
 
-## 2. Slide 3 figures
+## 2. Slide 3: how a review moves through the queue
+
+This is the part most likely to be challenged, so the exact rules matter.
+
+**How a review starts**
+
+| Entry point   | Who triggers it                                                               |
+| ------------- | ----------------------------------------------------------------------------- |
+| Automatic     | A non-draft PR carrying `WaitForARMFeedback`, on open, push, or label applied |
+| `/arm-review` | Any collaborator with write access, on demand, including on drafts            |
+| VS Code       | A reviewer working interactively, who approves each finding before it posts   |
+
+**What the review does to the queue**
+
+- **A blocking finding is published:** the agent adds `ARMChangesRequested` and
+  removes `WaitForARMFeedback`. The PR leaves the feedback queue and goes back to
+  the author.
+- **No blocking finding:** the agent leaves `WaitForARMFeedback`,
+  `ARMChangesRequested`, and `ARMSignedOff` exactly as they were. A clean
+  automated review is advisory and deliberately does not advance the queue.
+
+**What the agent never does.** It never applies `ARMSignedOff`. Approval is
+human-only by design. The one-line version: the agent can return a change for
+rework, but only a person can approve one.
+
+**One distinction worth having ready.** A separate, long-standing automation
+signs off low-risk changes such as incremental TypeSpec updates, and it posts
+under the same `github-actions` identity. On agent-reviewed PRs in the window it
+applied `ARMSignedOff` on 84 pull requests, and **all 84** also carried an
+`ARMAutoSignedOff` label, which is what that automation stamps. So if someone
+points at a bot sign-off on a PR the agent reviewed, that was the auto-signoff
+path, not the reviewer.
+
+**Who picks it up.** A primary ARM reviewer rotates weekly. That reviewer sees
+the agent's findings already on the PR, confirms they hold, and decides what
+moves next.
+
+**Worth knowing.** During the measured window the label transitions were entirely
+human. Of **491** `ARMChangesRequested` applications on agent-reviewed PRs, every
+one was applied by a person. That is consistent with the window predating routine
+automated runs, and it is why slide 4 carries an attribution note.
+
+---
+
+## 3. Slide 4 figures
 
 ### Row 1: review depth
 
@@ -81,6 +125,12 @@ against the 3.7 human baseline. Use that with a skeptical audience, and note
 that human contribution per change fell over the same period, so none of the
 increase comes from reviewers writing more.
 
+**Which entry point produced these numbers.** All **1,815** agent findings in the
+window were posted from reviewer-initiated sessions, where a person ran the agent
+and approved what went on the PR. None came from the automated workflow, which
+was introduced after the comparison window. If asked whether automation inflated
+the figures, the answer is that automation contributed nothing to them.
+
 ### Row 2: issue mix, rate per 100 reviewed changes
 
 | Issue type                    | 2025 human | 2026 agent | Multiplier |
@@ -101,7 +151,7 @@ roughly one quarter. **1,537 findings were newly introduced** by the PR and
 
 ---
 
-## 3. Issue types, with a real example each
+## 4. Issue types, with a real example each
 
 Use these when someone asks what a category means. Every example is an actual
 agent finding from the 2026 window.
@@ -221,7 +271,41 @@ attention moving from polish to correctness.
 
 ---
 
-## 4. Anticipated questions
+## 5. Slide 5: next steps detail
+
+Backing for the roadmap slide, in case anyone asks for specifics.
+
+**Maintenance mode.** The major components are built and automatic triggering
+works, so the emphasis shifts from building to sustaining: issues get logged and
+triaged, and Copilot increasingly handles the fixes. This frees engineering
+attention for the next area rather than signalling that the work is finished.
+
+**Long-running operations.** Partners have been asking for deeper support here,
+and it is also the largest gap in the data at 4.9x. Picking it up next lines the
+roadmap up with both partner demand and the measured evidence, which is a useful
+point to make if someone asks how priorities were chosen.
+
+**Feature flags next quarter.** The coming quarter is lighter. The plan is to
+check work in behind flags rather than enabling it immediately, so changes can be
+reviewed and tested well ahead of exposure.
+
+**Broader customer availability early next year.** Sequenced after the
+flagged work has had time to settle.
+
+**Under consideration, not committed.** Triggering a review from an additional
+dedicated label, which would give teams a way to request review without needing
+comment access. Raised as an idea; mention it only if asked about extensibility.
+
+---
+
+## 6. Anticipated questions
+
+**"Does the agent move the PR through the review queue by itself?"**
+Partly, and only in the conservative direction. When it publishes a blocking
+finding it adds `ARMChangesRequested` and removes `WaitForARMFeedback`, sending
+the change back to the author. When the review is clean it changes nothing. It
+never applies `ARMSignedOff`, so approval remains human. The weekly primary
+reviewer sees the findings already on the PR and decides what happens next.
 
 **"How do you tell an agent finding from a human comment?"**
 Every agent finding carries a hidden marker. The split uses that marker, not the
@@ -276,7 +360,7 @@ nothing posts without reviewer approval.
 
 ---
 
-## 5. Caveats
+## 7. Caveats
 
 1. **Units differ.** Agent findings are itemized, one issue each. Human comments
    are conversational, though most raise a single issue.
@@ -291,3 +375,6 @@ nothing posts without reviewer approval.
    cohorts have different maturity.
 6. **No causal claim.** The agent arrived alongside other process changes. This
    shows what authors received before and after, not a controlled experiment.
+7. **The comparison covers reviewer-initiated reviews only.** Automated review on
+   the pull request began after the window and contributed no findings to these
+   figures.
