@@ -14,6 +14,30 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerInstance;
 
+/**
+ * The provisioning state of a ManagedVirtualNodePool resource.
+ */
+@added(Versions.v2026_09_01_preview)
+union ManagedVirtualNodePoolProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * The resource is being updated.
+   */
+  Updating: "Updating",
+
+  /**
+   * The resource is being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The resource provisioning request was accepted but not yet started.
+   */
+  Accepted: "Accepted",
+}
+
 @added(Versions.v2026_09_01_preview)
 scalar AksClusterResourceId
   extends Azure.Core.armResourceIdentifier<[
@@ -47,7 +71,7 @@ model ManagedVirtualNodePoolProperties {
    * The status of the last provisioning operation on the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ManagedVirtualNodePoolProvisioningState;
 
   /**
    * The ARM resource ID of the backing AKS managed cluster. Set at create time and immutable thereafter.
