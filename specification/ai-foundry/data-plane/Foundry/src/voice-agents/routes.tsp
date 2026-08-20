@@ -622,6 +622,25 @@ interface AgentTelephony {
     TelephonyBinding
   >;
 
+  /** Updates an existing telephony binding owned by the voice agent named in the path using PUT. */
+  @summary("Put an agent telephony binding update")
+  @put
+  @route("/agents/{agent_name}/telephony/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  putTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The binding identifier in `{provider}:{identifier}` form. */
+      @path binding_id: string;
+
+      ...UpdateTelephonyBindingRequest;
+    },
+    TelephonyBinding
+  >;
+
   /** Deletes a telephony binding owned by the voice agent named in the path. */
   @summary("Delete an agent telephony binding")
   @delete

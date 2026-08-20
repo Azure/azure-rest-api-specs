@@ -4896,6 +4896,103 @@
           ]
         }
       },
+      "put": {
+        "operationId": "AgentTelephony_putTelephonyBinding",
+        "summary": "Put an agent telephony binding update",
+        "description": "Updates an existing telephony binding owned by the voice agent named in the path using PUT.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the binding.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "description": "The binding identifier in `{provider}:{identifier}` form.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyBinding"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTelephonyBindingRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "delete": {
         "operationId": "AgentTelephony_deleteTelephonyBinding",
         "summary": "Delete an agent telephony binding",
@@ -35480,21 +35577,82 @@
           "files"
         ]
       },
-      "CreateTelephonyBindingRequest": {
+      "CreateTeamsPhoneExtensionTelephonyBindingRequest": {
         "type": "object",
         "required": [
           "provider",
-          "identifier",
-          "connection_name"
+          "azure_communication_service_connection_name",
+          "resource_account_object_id"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "teams-phone-extension"
+            ],
+            "description": "The Microsoft Teams Phone Extension provider."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The Teams Phone Extension Foundry connection name."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
+        "description": "The request to create a Microsoft Teams Phone Extension binding.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "provider"
         ],
         "properties": {
           "provider": {
             "$ref": "#/components/schemas/TelephonyProvider",
-            "description": "The telephony provider."
+            "description": "The telephony provider. New bindings use `teams-phone-extension` or `twilio`; legacy aliases remain accepted for existing clients."
           },
           "identifier": {
             "type": "string",
-            "description": "The provider-specific dialed identifier, such as an Azure Communication Service resource-account identifier or E.164 phone number."
+            "description": "Legacy provider identifier. New Teams Phone Extension requests use `resource_account_object_id`; new Twilio requests use `phone_number`."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The Teams Phone Extension Foundry connection name. Required when `provider` is `teams-phone-extension`."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. Required when `provider` is `twilio`."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The provider-specific phone number. It is optional display metadata for Teams Phone Extension and a required E.164 number for Twilio."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "An optional display label for the binding."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID. Required when `provider` is `teams-phone-extension`."
+          },
+          "display_phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Legacy optional display phone number alias. New clients use `phone_number`."
           },
           "transfer_targets": {
             "type": "array",
@@ -35505,10 +35663,56 @@
           },
           "connection_name": {
             "type": "string",
-            "description": "The Foundry connection that configures provider access. Azure Communication Service connections own the resource endpoint and identity. Twilio connections use the Account SID as their target and an ApiKey credential for the Auth Token."
+            "description": "Legacy generic Foundry connection name. New clients use the provider-specific connection field."
+          },
+          "provider_config": {
+            "$ref": "#/components/schemas/TelephonyProviderConfig",
+            "description": "Legacy nested provider configuration. New clients use the provider-specific top-level connection field."
           }
         },
-        "description": "The request to bind a telephony identifier to the voice agent named in the request path.",
+        "discriminator": {
+          "propertyName": "provider",
+          "mapping": {
+            "teams-phone-extension": "#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest",
+            "twilio": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
+          }
+        },
+        "description": "The compatibility request to bind a telephony identifier to the voice agent named in the request path. New clients use a provider-specific request model selected by `provider`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTwilioTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "twilio"
+            ],
+            "description": "The Twilio provider."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. Required for new clients; legacy connection aliases remain accepted for compatibility."
+          },
+          "phone_number": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "The Twilio E.164 phone number. Required for new clients; the legacy `identifier` alias remains accepted for compatibility."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
+        "description": "The request to create a Twilio binding. New clients supply the provider-specific fields; legacy `identifier` and connection aliases remain accepted.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "VoiceAgents=V1Preview"
@@ -82738,11 +82942,38 @@
           },
           "provider": {
             "$ref": "#/components/schemas/TelephonyProvider",
-            "description": "The telephony provider."
+            "description": "The telephony provider. New bindings return `teams-phone-extension` or `twilio`; legacy bindings can return a legacy provider value."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The Teams Phone Extension Foundry connection name. Omitted for other providers."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. Omitted for other providers."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The provider-specific phone number. It is optional display metadata for Teams Phone Extension and the dialed E.164 number for Twilio."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID. Omitted for other providers and older bindings that do not contain it."
           },
           "identifier": {
             "type": "string",
-            "description": "The provider-specific dialed identifier."
+            "description": "The legacy provider-specific dialed identifier retained for existing clients."
+          },
+          "display_phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The legacy optional display phone number alias retained for existing clients."
           },
           "status": {
             "$ref": "#/components/schemas/TelephonyBindingStatus",
@@ -82757,7 +82988,7 @@
           },
           "connection_name": {
             "type": "string",
-            "description": "The Foundry connection that configures provider access. Secrets are referenced, not returned."
+            "description": "The legacy generic Foundry connection name retained for existing clients. Secrets are referenced, not returned."
           },
           "incoming_call_url": {
             "type": "string",
@@ -82984,13 +83215,63 @@
           {
             "type": "string",
             "enum": [
-              "azure-communication-service",
+              "teams-phone-extension",
               "twilio",
+              "azure-communication-service",
+              "acs",
               "infobip"
             ]
           }
         ],
-        "description": "A telephony provider supported by an agent binding. The legacy input value `acs` is accepted for compatibility, but responses use `azure-communication-service`. Known values are stable; additional values may be added over time.",
+        "description": "A telephony provider supported by an agent binding. New bindings use `teams-phone-extension` or `twilio`. Legacy provider values remain accepted so existing clients and stored bindings continue to work. Known values are stable; additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyProviderConfig": {
+        "type": "object",
+        "properties": {
+          "connection_name": {
+            "type": "string",
+            "description": "The Foundry connection name."
+          },
+          "acs_connection_name": {
+            "type": "string",
+            "description": "Legacy Azure Communication Service connection-name alias."
+          },
+          "acs_resource_id": {
+            "type": "string",
+            "description": "Legacy Azure Communication Service resource identifier."
+          },
+          "acs_endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "Legacy Azure Communication Service endpoint."
+          },
+          "mi_client_id": {
+            "type": "string",
+            "description": "Legacy managed identity client identifier."
+          },
+          "cognitive_service_customer_id": {
+            "type": "string",
+            "description": "Legacy cognitive services customer identifier."
+          },
+          "account_ref": {
+            "type": "string",
+            "description": "Legacy provider account reference."
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "Legacy Foundry project connection reference."
+          },
+          "credential_secret_ref": {
+            "type": "string",
+            "description": "Legacy credential secret reference."
+          }
+        },
+        "description": "Legacy provider configuration accepted as a compatibility input. New clients use the provider-specific top-level connection field.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "VoiceAgents=V1Preview"
@@ -83991,6 +84272,33 @@
             "$ref": "#/components/schemas/TelephonyBindingStatus",
             "description": "The new lifecycle status."
           },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The replacement Teams Phone Extension Foundry connection name."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. It must match the existing immutable value when supplied."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The replacement Teams display phone number. For Twilio it must match the immutable binding number. Omit it to preserve the current value; use a blank Teams value to clear it."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The replacement display label. Omit it to preserve the current value; use a blank value to clear it."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID. It must match the immutable existing value when supplied."
+          },
+          "display_phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Legacy optional display phone number alias. New clients use `phone_number`."
+          },
           "transfer_targets": {
             "type": "array",
             "items": {
@@ -84000,7 +84308,11 @@
           },
           "connection_name": {
             "type": "string",
-            "description": "The replacement Foundry connection that configures provider access."
+            "description": "Legacy replacement generic Foundry connection name. New clients use the provider-specific connection field."
+          },
+          "provider_config": {
+            "$ref": "#/components/schemas/TelephonyProviderConfig",
+            "description": "Legacy nested provider configuration. New clients use the provider-specific top-level connection field."
           }
         },
         "description": "The request to update an existing telephony binding.",
