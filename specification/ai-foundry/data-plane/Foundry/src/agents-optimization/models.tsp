@@ -410,8 +410,8 @@ model AgentOptimizationCandidate {
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
   candidate_id: string;
 
-  @doc("Identifier of the parent optimization job.")
-  job_id: string;
+  @doc("Identifier of the parent optimization job. Populated on GET /candidates/{id} detail; omitted from LIST responses where the parent is already implied by the URL.")
+  job_id?: string;
 
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;

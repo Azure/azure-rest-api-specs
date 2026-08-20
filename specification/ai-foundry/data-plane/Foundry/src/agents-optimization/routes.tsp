@@ -90,10 +90,22 @@ interface AgentOptimizationJobs {
   /**
    * Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
   @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.agents_optimization_v3_preview>;
+  @delete
+  delete is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+    {
+      /** The ID of the job to delete. */
+      @path jobId: string;
+
+      /** When true, force-deletes even if the job is in a non-terminal state (cancels first). Defaults to false, in which case a 409 Conflict is returned for non-terminal jobs. */
+      @query force?: boolean;
+    },
+    NoContentResponse
+  >;
 }
 
 // ---------------------------------------------------------------------------
