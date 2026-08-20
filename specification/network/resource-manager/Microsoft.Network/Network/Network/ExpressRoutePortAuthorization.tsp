@@ -112,7 +112,7 @@ interface ExpressRoutePortAuthorizations {
    * Gets the authorization key associated with the specified express route port authorization.
    */
   @added(Versions.v2026_01_01)
-  @action("listkeys")
+  @action("listKeys")
   listKeys is ExpressRoutePortAuthorizationOps.ActionSync<
     ExpressRoutePortAuthorization,
     void,

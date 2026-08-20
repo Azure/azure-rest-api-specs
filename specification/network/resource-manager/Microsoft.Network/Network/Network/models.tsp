@@ -10914,7 +10914,7 @@ model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "GET and LIST return a masked authorizationKey value; the unmasked key is only returned by the listkeys POST action. The property has shipped in prior GA API versions and cannot be removed without a breaking change."
   authorizationKey?: string;
 
   /**
@@ -12178,7 +12178,7 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "GET and LIST return a masked authorizationKey value; the unmasked key is only returned by the listkeys POST action. The property has shipped in prior GA API versions and cannot be removed without a breaking change."
   @visibility(Lifecycle.Read)
   authorizationKey?: string;
 
