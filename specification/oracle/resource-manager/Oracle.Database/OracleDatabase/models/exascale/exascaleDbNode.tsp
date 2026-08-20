@@ -4,6 +4,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Oracle.Database;
 
@@ -72,6 +73,7 @@ model ExascaleDbNodeProperties {
   totalCpuCoreCount?: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v20241201_preview)
 @doc("ExascaleDbNode action response")
 model DbActionResponse {
