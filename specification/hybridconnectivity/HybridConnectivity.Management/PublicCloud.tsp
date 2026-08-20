@@ -231,10 +231,6 @@ model GcpCloudProfile {
   @doc("The organization properties of the GCP organization.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   organizationProperties?: GcpOrganizationProperties;
-
-  @doc("Boolean value that indicates whether the connector connects to a GCP organization or project. True represents organization, whereas false represents a single project.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  isOrganization?: boolean = false;
 }
 
 @added(Versions.v2027_01_01)
