@@ -1997,6 +1997,97 @@ model MonitorLog {
 }
 
 /**
+ * Log collection using the Azure Monitor Log Ingestion API (Data Collection Rule based).
+ * This supersedes the legacy HTTP Data Collector `MonitorLog` for firewalls that have migrated
+ * to the modern DCR ingestion path. When this block is supplied, all four fields are required.
+ */
+@added(Versions.v2026_07_29_preview)
+model MonitorLogV2 {
+  /**
+   * ARM resource ID of the Data Collection Rule (DCR) that governs how these logs are transformed and routed.
+   */
+  dcrId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * HTTPS logs ingestion endpoint that receives the data (the DCR's logs ingestion endpoint or its Data Collection Endpoint).
+   */
+  logIngestionEndpoint: url;
+
+  /**
+   * Immutable ID of the Data Collection Rule (the value that begins with `dcr-`).
+   */
+  dcrImmutableId: string;
+
+  /**
+   * DCR input stream that receives the data. For a custom table this is typically `Custom-<TableName>`.
+   */
+  streamName: string;
+}
+
+/**
+ * Log Destination for the Azure Monitor Log Ingestion (Data Collection Rule) method. Carries the DCR-based `monitorConfigurationsV2`.
+ */
+@added(Versions.v2026_07_29_preview)
+model LogDestinationV2 {
+  /**
+   * Storage account configurations
+   */
+  storageConfigurations?: StorageAccount;
+
+  /**
+   * Event Hub configurations
+   */
+  eventHubConfigurations?: EventHub;
+
+  /**
+   * Azure Monitor Log Ingestion (Data Collection Rule) configuration for this destination.
+   */
+  monitorConfigurationsV2?: MonitorLogV2;
+}
+
+/**
+ * Log Ingestion Settings for a firewall (Azure Monitor Log Ingestion / Data Collection Rule based).
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync proxy resource: log ingestion settings are forwarded to the partner synchronously (no async provisioning), so there is intentionally no provisioningState field — consistent with the firewall's other sync child resources."
+@added(Versions.v2026_07_29_preview)
+model LogIngestionSettingsProperties {
+  /**
+   * One of possible log type
+   */
+  logType?: LogType;
+
+  /**
+   * Log option SAME/INDIVIDUAL
+   */
+  logOption?: LogOption;
+
+  /**
+   * Application Insight details
+   */
+  applicationInsights?: ApplicationInsights;
+
+  /**
+   * Common destination configurations
+   */
+  commonDestination?: LogDestinationV2;
+
+  /**
+   * Traffic destination configurations
+   */
+  trafficLogDestination?: LogDestinationV2;
+
+  /**
+   * Threat destination configurations
+   */
+  threatLogDestination?: LogDestinationV2;
+
+  /**
+   * Decrypt destination configurations
+   */
+  decryptLogDestination?: LogDestinationV2;
+}
+
+/**
  * Support information for the resource
  */
 model SupportInfo {
@@ -2286,6 +2377,7 @@ model CustomCaptureConfigurationsFilter {
   @doc("Network protocol — TCP or UDP.")
   protocol: CustomCaptureConfigurationsProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Source IPv4 address in dotted format (e.g., 10.0.0.5).")
   sourceIpAddress: string;
 
@@ -2294,6 +2386,7 @@ model CustomCaptureConfigurationsFilter {
   @maxValue(65535)
   sourcePort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Destination IPv4 address in dotted format (e.g., 52.39.204.87).")
   destinationIpAddress: string;
 
