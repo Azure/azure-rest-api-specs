@@ -22,7 +22,6 @@ using Microsoft.RoleAssignment;
 using Microsoft.RoleDefinitions;
 using Microsoft.RoleManagementAlerts;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [
@@ -91,7 +90,7 @@ union RoleManagementScopeType {
 @@alternateType(
   Microsoft.RoleAssignment.RoleAssignmentProperties.principalType,
   Microsoft.Common.PrincipalType,
-  "java,python"
+  "csharp,java,python"
 );
 
 // Restore C# GA resource, model, and extensible-enum names.

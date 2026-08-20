@@ -58,6 +58,7 @@ union SpeechGenerationResponseFormat {
   pcm: "pcm",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A representation of the request options that control the behavior of a text-to-speech operation.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model SpeechGenerationOptions {
@@ -87,6 +88,7 @@ model SpeechGenerationOptions {
   `model`?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A representation of a response for a text-to-speech operation.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model SpeechGenerationResponse {
