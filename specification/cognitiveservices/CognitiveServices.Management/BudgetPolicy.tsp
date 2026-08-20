@@ -15,7 +15,7 @@ namespace Microsoft.CognitiveServices;
 /**
  * A budget policy owned by a Cognitive Services account.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 @parentResource(Account)
 model BudgetPolicy
   is Azure.ResourceManager.ProxyResource<BudgetPolicyProperties> {
@@ -38,7 +38,7 @@ model BudgetPolicy
  * The customer-authored settings of a budget policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Budget policies are synchronously persisted proxy resources and the service contract does not expose provisioningState."
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyProperties {
   /**
    * An optional human-readable name for the policy.
@@ -58,7 +58,7 @@ model BudgetPolicyProperties {
 /**
  * The properties that can be changed on a budget policy.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyPatchProperties {
   /**
    * An optional human-readable name for the policy. Set this property to null to clear it.
@@ -79,7 +79,7 @@ model BudgetPolicyPatchProperties {
 /**
  * The request used to update a budget policy.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyPatch {
   /**
    * The budget policy properties to update.
@@ -90,7 +90,7 @@ model BudgetPolicyPatch {
 /**
  * A budget limit and the population to which it applies.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetRule {
   /**
    * The stable rule identifier, unique within the policy without regard to case.
@@ -147,7 +147,7 @@ model BudgetRule {
 /**
  * Trusted request attributes and allowed values used to select matching requests.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetMatch {
   /**
    * The stable Foundry agent IDs to match.
@@ -185,14 +185,14 @@ model BudgetMatch {
 /**
  * A non-empty value used to match a trusted request attribute.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 @minLength(1)
 scalar BudgetMatchValue extends string;
 
 /**
  * A built-in request dimension used to partition budget consumption.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetDimension {
   /**
    * The kind of request dimension.
@@ -206,7 +206,7 @@ model BudgetDimension {
  * The supported budget counter dimensions.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown counter dimensions, so the public contract is intentionally closed."
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 union BudgetDimensionType {
   /**
    * Consumption is partitioned by the stable Foundry agent ID.
@@ -233,7 +233,7 @@ union BudgetDimensionType {
  * The supported unit for budget amounts and thresholds.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown budget units, so the public contract is intentionally closed."
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 union BudgetUnit {
   /**
    * Estimated cost in United States dollars.
@@ -245,7 +245,7 @@ union BudgetUnit {
  * The calendar-aligned UTC renewal periods for recurring budget rules.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown renewal periods, so the public contract is intentionally closed."
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 union BudgetPeriod {
   /**
    * Renews at the start of the next UTC minute.
@@ -281,7 +281,7 @@ union BudgetPeriod {
 /**
  * An action evaluated when budget consumption reaches a threshold.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetThreshold {
   /**
    * How the threshold value is interpreted.
@@ -304,7 +304,7 @@ model BudgetThreshold {
  * The supported threshold value interpretations.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown threshold types, so the public contract is intentionally closed."
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 union BudgetThresholdType {
   /**
    * The value is a percentage of the configured rule amount.
@@ -321,7 +321,7 @@ union BudgetThresholdType {
  * The supported actions when a threshold is reached.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown threshold actions, so the public contract is intentionally closed."
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 union BudgetThresholdAction {
   /**
    * Records the threshold crossing without notifying the customer or blocking requests.
@@ -337,7 +337,7 @@ union BudgetThresholdAction {
 /**
  * A page of budget policies.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyListResult {
   /**
    * The link used to get the next page of budget policies.
@@ -356,7 +356,7 @@ model BudgetPolicyListResult {
 /**
  * Conditional request headers accepted when creating or replacing a budget policy.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyCreateOrUpdateHeaders {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -374,7 +374,7 @@ model BudgetPolicyCreateOrUpdateHeaders {
 /**
  * The conditional request header accepted when updating or deleting a budget policy.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyIfMatchHeader {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -386,7 +386,7 @@ model BudgetPolicyIfMatchHeader {
 /**
  * The entity tag returned with a budget policy.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 model BudgetPolicyEtagHeader {
   /**
    * The current entity tag for the budget policy.
@@ -398,7 +398,7 @@ model BudgetPolicyEtagHeader {
 /**
  * Operations for managing budget policies owned by an account.
  */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface BudgetPolicies {
   /**

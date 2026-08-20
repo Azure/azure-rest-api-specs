@@ -1705,7 +1705,7 @@ model AccountProperties {
   /**
    * The full resource IDs of budget policies directly attached to this account.
    */
-  @added(Versions.v2026_08_31_preview)
+  @added(Versions.v2026_09_15_preview)
   @maxItems(20)
   budgetPolicyIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -3356,7 +3356,7 @@ model DeploymentProperties {
   /**
    * The full resource IDs of budget policies directly attached to this deployment.
    */
-  @added(Versions.v2026_08_31_preview)
+  @added(Versions.v2026_09_15_preview)
   @maxItems(20)
   budgetPolicyIds?: Azure.Core.armResourceIdentifier<[
     {
