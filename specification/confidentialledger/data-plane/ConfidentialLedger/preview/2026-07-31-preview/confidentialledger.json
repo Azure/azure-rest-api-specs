@@ -1946,12 +1946,15 @@
           "description": "The receipt certifying the committed transaction."
         },
         "state": {
-          "$ref": "#/definitions/ConfidentialLedgerQueryState",
-          "description": "State of the ledger query."
+          "$ref": "#/definitions/TransactionState",
+          "description": "State of the write transaction."
         },
-        "transactionId": {
-          "type": "string",
-          "description": "A unique identifier for the committed transaction."
+        "applicationClaims": {
+          "type": "array",
+          "description": "List of application claims.",
+          "items": {
+            "$ref": "#/definitions/ApplicationClaim"
+          }
         }
       },
       "required": [

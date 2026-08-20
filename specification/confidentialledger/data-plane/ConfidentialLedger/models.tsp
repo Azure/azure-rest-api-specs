@@ -467,14 +467,14 @@ model LedgerWriteResultBody {
   receipt?: ReceiptContents;
 
   /**
-   * State of the ledger query.
+   * State of the write transaction.
    */
-  state?: ConfidentialLedgerQueryState;
+  state?: TransactionState;
 
   /**
-   * A unique identifier for the committed transaction.
+   * List of application claims.
    */
-  transactionId?: string;
+  applicationClaims?: ApplicationClaim[];
 }
 
 /**
