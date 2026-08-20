@@ -129,7 +129,7 @@ enum Versions {
    * The 2026-07-15 API version.
    */
   v2026_07_15: "2026-07-15",
-  
+
   /**
    * The 2026-09-01-preview API version.
    */
