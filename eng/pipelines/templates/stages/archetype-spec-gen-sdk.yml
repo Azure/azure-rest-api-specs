@@ -356,7 +356,7 @@ stages:
 
         - task: PowerShell@2
           displayName: Create pull request
-          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'), eq(variables['SpecRepoCommit'], 'main'), not(endsWith(variables['SdkRepoName'], '-pr')))
           inputs:
             pwsh: true
             workingDirectory: $(SdkRepoDirectory)
