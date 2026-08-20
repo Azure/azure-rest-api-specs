@@ -2458,7 +2458,7 @@
         }
       },
       "put": {
-        "operationId": "CertificatePolicies_CreateOrUpdate",
+        "operationId": "CertificatePolicies_CreateOrReplace",
         "tags": [
           "CertificatePolicies"
         ],
@@ -2545,7 +2545,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update a Certificate Policy": {
+          "Create or Replace a Certificate Policy": {
             "$ref": "./examples/CreateOrReplace_CertificatePolicy.json"
           }
         },
@@ -2737,7 +2737,7 @@
         "tags": [
           "CertificateAuthorities"
         ],
-        "description": "Revokes a Certificate Authority of type `ICA` and issuer type `Internal`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.",
+        "description": "Revokes a Certificate Authority of type `ICA` and issuer type `External`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10231,7 +10231,15 @@
         },
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The resource ID of the user-assigned managed identity. Required when type is UserAssigned."
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity. Required when type is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -13869,7 +13877,15 @@
         },
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The resource ID of the user-assigned managed identity. Required when type is UserAssigned."
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity. Required when type is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       },
       "required": [

@@ -393,7 +393,11 @@ model InboundCallerIdentity {
   type: InboundCallerIdentityType;
 
   @doc("The resource ID of the user-assigned managed identity. Required when type is UserAssigned.")
-  userAssignedIdentity?: string;
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_11_01)
@@ -415,7 +419,11 @@ model OutboundIdentity {
   type: OutboundIdentityType;
 
   @doc("The resource ID of the user-assigned managed identity. Required when type is UserAssigned.")
-  userAssignedIdentity?: string;
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_11_01)

@@ -28,7 +28,8 @@ model RegistryDevice is TrackedResource<RegistryDeviceProperties> {
   @maxLength(63)
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  // etag not included in TrackedResource
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is a read-only top-level envelope property intentionally exposed on this resource and is not part of the TrackedResource base."
   @doc("Resource etag.")
   @visibility(Lifecycle.Read)
   etag?: string;

@@ -204,7 +204,7 @@ interface CertificateAuthorities {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @doc("Revokes a Certificate Authority of type `ICA` and issuer type `Internal`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.")
+  @doc("Revokes a Certificate Authority of type `ICA` and issuer type `External`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.")
   revokeAndRotate is ArmResourceActionNoContentAsync<
     CertificateAuthority,
     void

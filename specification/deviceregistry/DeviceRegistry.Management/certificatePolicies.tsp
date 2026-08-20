@@ -63,7 +63,7 @@ alias CertificatePolicyPropertiesUpdate = {
 @armResourceOperations
 interface CertificatePolicies {
   get is ArmResourceRead<CertificatePolicy>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CertificatePolicy>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CertificatePolicy>;
   delete is ArmResourceDeleteWithoutOkAsync<CertificatePolicy>;
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
