@@ -472,7 +472,7 @@ model LedgerWriteResultBody {
   state?: TransactionState;
 
   /**
-   * List of application claims.
+   * The list of application claims.
    */
   applicationClaims?: ApplicationClaim[];
 }
