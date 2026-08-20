@@ -709,6 +709,261 @@ union TelephonyCallStatus {
   failed: "failed",
 }
 
+@doc("The provider-neutral phase reached by an inbound telephony call.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallPhase {
+  string,
+
+  @doc("The provider webhook was received.")
+  received: "received",
+
+  @doc("The provider webhook was validated.")
+  validated: "validated",
+
+  @doc("The call was admitted to a configured agent binding.")
+  admitted: "admitted",
+
+  @doc("The provider was asked to answer the call.")
+  answering: "answering",
+
+  @doc("The provider reported that the call was answered.")
+  answered: "answered",
+
+  @doc("The provider media channel was connected.")
+  media_connected: "media_connected",
+
+  @doc("The voice-agent session was ready.")
+  agent_session_ready: "agent_session_ready",
+
+  @doc("Media was actively bridged between the caller and the voice agent.")
+  bridging: "bridging",
+
+  @doc("A mid-call management command was in progress.")
+  managing: "managing",
+
+  @doc("The call completed.")
+  completed: "completed",
+
+  @doc("The call was rejected before admission or answer.")
+  rejected: "rejected",
+
+  @doc("The call failed.")
+  failed: "failed",
+}
+
+@doc("The source of a telephony lifecycle timestamp.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallTimestampSource {
+  string,
+
+  @doc("The telephony provider supplied the timestamp.")
+  provider: "provider",
+
+  @doc("The Foundry telephony gateway observed the event.")
+  gateway: "gateway",
+
+  @doc("The service derived the timestamp from another observation.")
+  derived: "derived",
+
+  @doc("The timestamp came from a record created before detailed timing was available.")
+  legacy: "legacy",
+}
+
+@doc("The timestamp used as the basis for call duration.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallDurationBasis {
+  string,
+
+  @doc("Duration starts when the provider reports the call as answered.")
+  answered: "answered",
+
+  @doc("Duration starts when the inbound webhook is received because no answered timestamp is available.")
+  received: "received",
+
+  @doc("Duration uses the legacy connected timestamp.")
+  legacy_connected: "legacy_connected",
+
+  @doc("Duration uses the legacy call-start timestamp.")
+  legacy_started: "legacy_started",
+}
+
+@doc("Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyCallTiming {
+  @doc("When the provider webhook was received, as Unix time in milliseconds.")
+  received_at_ms?: int64;
+
+  @doc("When webhook validation completed, as Unix time in milliseconds.")
+  validated_at_ms?: int64;
+
+  @doc("When the call was admitted to an agent binding, as Unix time in milliseconds.")
+  admitted_at_ms?: int64;
+
+  @doc("When the service requested that the provider answer the call, as Unix time in milliseconds.")
+  answer_requested_at_ms?: int64;
+
+  @doc("When the provider reported that the call was answered, as Unix time in milliseconds.")
+  answered_at_ms?: int64;
+
+  @doc("When the provider media channel connected, as Unix time in milliseconds.")
+  media_connected_at_ms?: int64;
+
+  @doc("When the voice-agent session became ready, as Unix time in milliseconds.")
+  agent_session_ready_at_ms?: int64;
+
+  @doc("When caller audio was first observed, as Unix time in milliseconds.")
+  first_caller_audio_at_ms?: int64;
+
+  @doc("When agent audio was first observed, as Unix time in milliseconds.")
+  first_agent_audio_at_ms?: int64;
+
+  @doc("When the call reached a terminal state, as Unix time in milliseconds.")
+  ended_at_ms?: int64;
+
+  @doc("The timestamp used as the basis for duration.")
+  duration_basis?: TelephonyCallDurationBasis;
+
+  @doc("The source of the lifecycle timestamps.")
+  timestamp_source: TelephonyCallTimestampSource;
+}
+
+@doc("The mode used to expose a telephony call as a customer-facing Foundry trace.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallTraceMode {
+  string,
+
+  @doc("The trace was created while the voice-agent conversation was live.")
+  live: "live",
+
+  @doc("The trace summarizes a trusted call that ended before a live voice-agent conversation was created.")
+  post_call: "post_call",
+}
+
+@doc("The availability status of a customer-facing telephony call trace.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallTraceStatus {
+  string,
+
+  @doc("Trace creation has not completed.")
+  pending: "pending",
+
+  @doc("Trace creation is in progress.")
+  emitting: "emitting",
+
+  @doc("The trace is available.")
+  available: "available",
+
+  @doc("Tracing was disabled or no trace listener recorded the call.")
+  not_recorded: "not_recorded",
+
+  @doc("The call was not eligible for a customer-facing trace.")
+  not_applicable: "not_applicable",
+
+  @doc("Trace creation failed.")
+  failed: "failed",
+}
+
+@doc("Correlation from a durable telephony call record to its customer-facing Foundry trace.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyCallTrace {
+  @doc("The trace availability status.")
+  status: TelephonyCallTraceStatus;
+
+  @doc("The W3C trace identifier, when a trace was recorded.")
+  trace_id?: string;
+
+  @doc("The root span identifier, when a trace was recorded.")
+  root_span_id?: string;
+
+  @doc("The voice-agent conversation identifier, when a conversation was created.")
+  conversation_id?: string;
+
+  @doc("Whether the trace was emitted live or after the call ended.")
+  mode?: TelephonyCallTraceMode;
+}
+
+@doc("The outcome of one telephony lifecycle observation.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallLifecycleEventOutcome {
+  string,
+
+  @doc("The event was observed without a success or failure result.")
+  observed: "observed",
+
+  @doc("The operation started.")
+  started: "started",
+
+  @doc("The operation succeeded.")
+  succeeded: "succeeded",
+
+  @doc("The operation failed.")
+  failed: "failed",
+
+  @doc("The operation or call was rejected.")
+  rejected: "rejected",
+
+  @doc("The operation was cancelled.")
+  cancelled: "cancelled",
+}
+
+@doc("The component that supplied a telephony lifecycle observation.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+union TelephonyCallLifecycleEventSource {
+  string,
+
+  @doc("The Foundry telephony gateway supplied the observation.")
+  gateway: "gateway",
+
+  @doc("Azure Communication Services supplied the observation.")
+  azure_communication_services: "azure_communication_services",
+
+  @doc("Twilio supplied the observation.")
+  twilio: "twilio",
+
+  @doc("The voice-agent runtime supplied the observation.")
+  voice_agent: "voice_agent",
+}
+
+@doc("A bounded durable observation in the lifecycle of one telephony call.")
+@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+model TelephonyCallLifecycleEvent {
+  @doc("The service-assigned order of the event within the call record.")
+  sequence: int64;
+
+  @doc("The stable provider-neutral event name.")
+  name: string;
+
+  @doc("The component that supplied the observation.")
+  source: TelephonyCallLifecycleEventSource;
+
+  @doc("The outcome of the observed lifecycle operation.")
+  outcome: TelephonyCallLifecycleEventOutcome;
+
+  @doc("When the service observed the event, as Unix time in milliseconds.")
+  observed_at_ms: int64;
+
+  @doc("When the event occurred according to the provider, as Unix time in milliseconds.")
+  occurred_at_ms?: int64;
+
+  @doc("The source of the event timestamp.")
+  timestamp_source: TelephonyCallTimestampSource;
+
+  @doc("A stable service-generated reason associated with the event.")
+  reason?: string;
+
+  @doc("The provider event identifier used for idempotency, when supplied.")
+  provider_event_id?: string;
+
+  @doc("The provider event sequence, when supplied.")
+  provider_sequence?: int64;
+
+  @doc("The provider status code associated with the event.")
+  provider_status_code?: int32;
+
+  @doc("The provider subcode associated with the event.")
+  provider_sub_code?: int32;
+}
+
 @doc("A durable history record for an inbound call to a voice agent.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
 model TelephonyCallRecord {
@@ -733,11 +988,23 @@ model TelephonyCallRecord {
   @doc("The lifecycle status of the call.")
   status: TelephonyCallStatus;
 
+  @doc("The provider-neutral lifecycle phase reached by the call.")
+  phase: TelephonyCallPhase;
+
   @doc("The Unix timestamp (in seconds) for when the call started.")
   started_at: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the call connected.")
   connected_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the provider reported the call as answered.")
+  answered_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the provider media channel connected.")
+  media_connected_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the voice-agent session became ready.")
+  agent_session_ready_at?: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the call ended.")
   ended_at?: FoundryTimestamp;
@@ -756,6 +1023,21 @@ model TelephonyCallRecord {
 
   @doc("The provider message associated with the terminal result.")
   provider_message?: string;
+
+  @doc("The W3C trace identifier, when a customer-facing trace was recorded.")
+  trace_id?: string;
+
+  @doc("Detailed provider-neutral call timing. Returned by the call detail operation.")
+  timing?: TelephonyCallTiming;
+
+  @doc("Correlation to the customer-facing Foundry trace. Returned by the call detail operation.")
+  trace?: TelephonyCallTrace;
+
+  @doc("The bounded lifecycle timeline. Returned by the call detail operation.")
+  events?: TelephonyCallLifecycleEvent[];
+
+  @doc("Whether older lifecycle events were omitted because the bounded event limit was reached. Returned by the call detail operation.")
+  events_truncated?: boolean;
 }
 
 @doc("A page of inbound telephony call records for one voice agent.")
