@@ -728,6 +728,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties,
+  "PostgreSqlFlexibleServersPrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
