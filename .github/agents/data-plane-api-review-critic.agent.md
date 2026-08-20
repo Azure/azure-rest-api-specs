@@ -5,8 +5,7 @@ description: Internal subagent. Invoked automatically by the Data-Plane API Revi
 # terminal access. Its only output is a critique block returned to the Reviewer.
 tools:
   - github/get_file_contents
-  - github/get_pull_request
-  - github/list_pull_request_files
+  - github/pull_request_read
   - search
   - search/codebase
   - web/fetch

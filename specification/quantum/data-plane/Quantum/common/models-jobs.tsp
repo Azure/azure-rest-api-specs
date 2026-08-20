@@ -169,6 +169,7 @@ model JobUpdateOptions {
 }
 
 /** Response returned when a job update succeeds. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model JobUpdateResponse {
   /** The name of the job. */
