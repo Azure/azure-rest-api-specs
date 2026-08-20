@@ -9,7 +9,25 @@
         "environment": "test"
       },
       "properties": {
-        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/exampleenv"
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/exampleenv",
+        "telemetryConfig": {
+          "endpoints": [
+            {
+              "kind": "LogAnalytics",
+              "dceEndpoint": "https://example-dce-a1b2.eastus-1.ingest.monitor.azure.com",
+              "dcrImmutableId": "dcr-8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f",
+              "tableName": "Custom-SandboxLogs_CL",
+              "auth": {
+                "kind": "SystemAssignedManagedIdentity"
+              },
+              "data": [
+                "ContainerStdoutStderr",
+                "Metrics"
+              ]
+            }
+          ],
+          "metricsIntervalSeconds": 30
+        }
       }
     }
   },
@@ -26,6 +44,24 @@
         "properties": {
           "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/exampleenv",
           "defaultDomain": "icycliff-79e92900.eastus.azurecontainerapps.io",
+          "telemetryConfig": {
+            "endpoints": [
+              {
+                "kind": "LogAnalytics",
+                "dceEndpoint": "https://example-dce-a1b2.eastus-1.ingest.monitor.azure.com",
+                "dcrImmutableId": "dcr-8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f",
+                "tableName": "Custom-SandboxLogs_CL",
+                "auth": {
+                  "kind": "SystemAssignedManagedIdentity"
+                },
+                "data": [
+                  "ContainerStdoutStderr",
+                  "Metrics"
+                ]
+              }
+            ],
+            "metricsIntervalSeconds": 30
+          },
           "provisioningState": "Succeeded"
         }
       }

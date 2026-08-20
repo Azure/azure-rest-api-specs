@@ -625,6 +625,188 @@
     }
   },
   "definitions": {
+    "ApplicationInsightsTelemetryEndpoint": {
+      "type": "object",
+      "description": "A telemetry endpoint that sends telemetry to an Application Insights resource.",
+      "properties": {
+        "auth": {
+          "$ref": "#/definitions/TelemetryApplicationInsightsAuth",
+          "description": "The authentication used when sending telemetry to the endpoint."
+        }
+      },
+      "required": [
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationInsights"
+    },
+    "LogAnalyticsTelemetryEndpoint": {
+      "type": "object",
+      "description": "A telemetry endpoint that sends telemetry to an Azure Monitor Log Analytics workspace through the Logs Ingestion API.",
+      "properties": {
+        "dceEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the data collection endpoint that receives the telemetry."
+        },
+        "dcrImmutableId": {
+          "type": "string",
+          "description": "The immutable ID of the data collection rule that processes the telemetry."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The name of the target stream in the data collection rule."
+        },
+        "auth": {
+          "$ref": "#/definitions/TelemetryAuth",
+          "description": "The managed identity used to authenticate to the data collection endpoint."
+        }
+      },
+      "required": [
+        "dceEndpoint",
+        "dcrImmutableId",
+        "tableName",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "LogAnalytics"
+    },
+    "LogColumnDef": {
+      "type": "object",
+      "description": "A single column in a custom log output schema.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/LogColumnDefKind",
+          "description": "The kind of the custom log output column."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "LogColumnDefKind": {
+      "type": "string",
+      "description": "The kind of a custom log output column.",
+      "enum": [
+        "Value",
+        "Ref"
+      ],
+      "x-ms-enum": {
+        "name": "LogColumnDefKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Value",
+            "value": "Value",
+            "description": "A column whose value is a literal string."
+          },
+          {
+            "name": "Ref",
+            "value": "Ref",
+            "description": "A column whose value is resolved from a sandbox attribute."
+          }
+        ]
+      }
+    },
+    "LogColumnRef": {
+      "type": "string",
+      "description": "A sandbox attribute that a custom log output column can reference.",
+      "enum": [
+        "LogContent",
+        "LogStream",
+        "SandboxId",
+        "Region",
+        "ContainerName"
+      ],
+      "x-ms-enum": {
+        "name": "LogColumnRef",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogContent",
+            "value": "LogContent",
+            "description": "The contents of the container log line."
+          },
+          {
+            "name": "LogStream",
+            "value": "LogStream",
+            "description": "The container output stream the log line was written to, either `stdout` or `stderr`."
+          },
+          {
+            "name": "SandboxId",
+            "value": "SandboxId",
+            "description": "The ID of the sandbox that produced the record."
+          },
+          {
+            "name": "Region",
+            "value": "Region",
+            "description": "The Azure region the sandbox is running in."
+          },
+          {
+            "name": "ContainerName",
+            "value": "ContainerName",
+            "description": "The name of the container that produced the record."
+          }
+        ]
+      }
+    },
+    "OtlpTelemetryEndpoint": {
+      "type": "object",
+      "description": "A telemetry endpoint that accepts the OpenTelemetry Protocol (OTLP).",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the OpenTelemetry Protocol endpoint."
+        },
+        "protocol": {
+          "$ref": "#/definitions/TelemetryProtocol",
+          "description": "The protocol used to send telemetry to the endpoint."
+        },
+        "auth": {
+          "$ref": "#/definitions/TelemetryHeaderAuth",
+          "description": "The authentication used when sending telemetry to the endpoint. When omitted, requests are sent without an authentication header."
+        }
+      },
+      "required": [
+        "endpoint",
+        "protocol"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "OTLP"
+    },
+    "RefLogColumnDef": {
+      "type": "object",
+      "description": "A custom log output column whose value is resolved from a sandbox attribute.",
+      "properties": {
+        "refName": {
+          "$ref": "#/definitions/LogColumnRef",
+          "description": "The sandbox attribute to resolve."
+        }
+      },
+      "required": [
+        "refName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LogColumnDef"
+        }
+      ],
+      "x-ms-discriminator-value": "Ref"
+    },
     "SandboxGroup": {
       "type": "object",
       "description": "A SandboxGroup resource, representing a group of sandboxes that share configuration defaults and quotas.",
@@ -693,6 +875,10 @@
               }
             ]
           }
+        },
+        "telemetryConfig": {
+          "$ref": "#/definitions/TelemetryConfig",
+          "description": "The telemetry configuration for sandboxes in the sandbox group. When omitted, telemetry is not forwarded to any endpoint."
         }
       }
     },
@@ -716,6 +902,10 @@
           "type": "string",
           "description": "The default domain of the linked Azure Container Apps environment. Sandbox endpoints use subdomains of this domain. This read-only property is populated by the service and is omitted when no environment is linked.",
           "readOnly": true
+        },
+        "telemetryConfig": {
+          "$ref": "#/definitions/TelemetryConfig",
+          "description": "The telemetry configuration for sandboxes in the sandbox group. When omitted, telemetry is not forwarded to any endpoint."
         },
         "provisioningState": {
           "$ref": "#/definitions/SandboxGroupProvisioningState",
@@ -771,6 +961,288 @@
         ]
       },
       "readOnly": true
+    },
+    "TelemetryApplicationInsightsAuth": {
+      "type": "object",
+      "description": "Authentication for an Application Insights telemetry endpoint.",
+      "properties": {
+        "secretId": {
+          "type": "string",
+          "description": "The name of the sandbox group secret that holds the Application Insights connection string."
+        },
+        "secretKey": {
+          "type": "string",
+          "description": "The key within the sandbox group secret whose value is the Application Insights connection string."
+        }
+      },
+      "required": [
+        "secretId",
+        "secretKey"
+      ]
+    },
+    "TelemetryAuth": {
+      "type": "object",
+      "description": "The managed identity used to authenticate to a telemetry endpoint.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TelemetryAuthKind",
+          "description": "The kind of managed identity used to authenticate to the telemetry endpoint."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TelemetryAuthKind": {
+      "type": "string",
+      "description": "The kind of managed identity used to authenticate to a telemetry endpoint.",
+      "enum": [
+        "ManagedIdentity",
+        "SystemAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryAuthKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "A user-assigned managed identity."
+          },
+          {
+            "name": "SystemAssignedManagedIdentity",
+            "value": "SystemAssignedManagedIdentity",
+            "description": "The system-assigned managed identity of the sandbox group."
+          }
+        ]
+      }
+    },
+    "TelemetryConfig": {
+      "type": "object",
+      "description": "The telemetry configuration for sandboxes in a sandbox group.",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "description": "The endpoints that sandbox telemetry is sent to. At least one endpoint must be specified.",
+          "items": {
+            "$ref": "#/definitions/TelemetryEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricsIntervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval, in seconds, at which sandbox metrics are collected. Defaults to 15 seconds when not specified.",
+          "minimum": 2
+        }
+      },
+      "required": [
+        "endpoints"
+      ]
+    },
+    "TelemetryData": {
+      "type": "string",
+      "description": "A category of telemetry that can be sent to a telemetry endpoint.",
+      "enum": [
+        "ContainerStdoutStderr",
+        "ContainerOtel",
+        "Metrics",
+        "NetworkEgressDecisions"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryData",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContainerStdoutStderr",
+            "value": "ContainerStdoutStderr",
+            "description": "Standard output and standard error written by containers in the sandbox."
+          },
+          {
+            "name": "ContainerOtel",
+            "value": "ContainerOtel",
+            "description": "OpenTelemetry data emitted by containers in the sandbox."
+          },
+          {
+            "name": "Metrics",
+            "value": "Metrics",
+            "description": "Resource usage metrics for the sandbox."
+          },
+          {
+            "name": "NetworkEgressDecisions",
+            "value": "NetworkEgressDecisions",
+            "description": "A record of each decision made by the network egress policy of the sandbox."
+          }
+        ]
+      }
+    },
+    "TelemetryEndpoint": {
+      "type": "object",
+      "description": "A destination that sandbox telemetry is sent to.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TelemetryEndpointKind",
+          "description": "The kind of the telemetry endpoint."
+        },
+        "data": {
+          "type": "array",
+          "description": "The categories of telemetry sent to this endpoint. When empty, every category is sent.",
+          "items": {
+            "$ref": "#/definitions/TelemetryData"
+          }
+        },
+        "columns": {
+          "type": "object",
+          "description": "A custom output schema for log records, keyed by the name of the output column to produce. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape.",
+          "additionalProperties": {
+            "$ref": "#/definitions/LogColumnDef"
+          }
+        },
+        "dynamicJsonColumns": {
+          "type": "boolean",
+          "description": "Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`.",
+          "default": false
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "data"
+      ]
+    },
+    "TelemetryEndpointKind": {
+      "type": "string",
+      "description": "The kind of a telemetry endpoint.",
+      "enum": [
+        "OTLP",
+        "ApplicationInsights",
+        "LogAnalytics"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryEndpointKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OTLP",
+            "value": "OTLP",
+            "description": "An endpoint that accepts the OpenTelemetry Protocol (OTLP)."
+          },
+          {
+            "name": "ApplicationInsights",
+            "value": "ApplicationInsights",
+            "description": "An Application Insights resource."
+          },
+          {
+            "name": "LogAnalytics",
+            "value": "LogAnalytics",
+            "description": "An Azure Monitor Log Analytics workspace, written through the Logs Ingestion API."
+          }
+        ]
+      }
+    },
+    "TelemetryHeaderAuth": {
+      "type": "object",
+      "description": "Authentication for an OpenTelemetry Protocol telemetry endpoint. The referenced secret value is sent as an HTTP request header.",
+      "properties": {
+        "headerName": {
+          "type": "string",
+          "description": "The name of the HTTP request header to send, for example `Authorization`."
+        },
+        "secretId": {
+          "type": "string",
+          "description": "The name of the sandbox group secret that holds the header value."
+        },
+        "secretKey": {
+          "type": "string",
+          "description": "The key within the sandbox group secret whose value is sent as the header value."
+        }
+      },
+      "required": [
+        "headerName",
+        "secretId",
+        "secretKey"
+      ]
+    },
+    "TelemetryManagedIdentityAuth": {
+      "type": "object",
+      "description": "Authentication that uses a user-assigned managed identity.",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity. The identity must be assigned to the sandbox group.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryAuth"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
+    "TelemetryProtocol": {
+      "type": "string",
+      "description": "The protocol used to send telemetry to an OpenTelemetry Protocol endpoint.",
+      "enum": [
+        "Grpc",
+        "Http"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Grpc",
+            "value": "Grpc",
+            "description": "gRPC."
+          },
+          {
+            "name": "Http",
+            "value": "Http",
+            "description": "HTTP."
+          }
+        ]
+      }
+    },
+    "TelemetrySystemAssignedManagedIdentityAuth": {
+      "type": "object",
+      "description": "Authentication that uses the system-assigned managed identity of the sandbox group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryAuth"
+        }
+      ],
+      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+    },
+    "ValueLogColumnDef": {
+      "type": "object",
+      "description": "A custom log output column whose value is a literal string.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The literal value written to every log record."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LogColumnDef"
+        }
+      ],
+      "x-ms-discriminator-value": "Value"
     },
     "VnetConnection": {
       "type": "object",

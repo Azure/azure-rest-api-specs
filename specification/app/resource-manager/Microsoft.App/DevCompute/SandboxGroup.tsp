@@ -34,6 +34,9 @@ model SandboxGroupProperties {
   @visibility(Lifecycle.Read)
   defaultDomain?: string;
 
+  /** The telemetry configuration for sandboxes in the sandbox group. When omitted, telemetry is not forwarded to any endpoint. */
+  telemetryConfig?: TelemetryConfig;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description is on the referenced type to avoid emitting a sibling of $ref."
   @visibility(Lifecycle.Read)
   provisioningState?: SandboxGroupProvisioningState;
@@ -95,5 +98,236 @@ model SandboxGroupPatch {
 
 /** SandboxGroup resource specific properties for patch requests. */
 model SandboxGroupPatchProperties {
-  ...PickProperties<SandboxGroupProperties, "environmentId">;
+  ...PickProperties<
+    SandboxGroupProperties,
+    "environmentId" | "telemetryConfig"
+  >;
+}
+
+/** The telemetry configuration for sandboxes in a sandbox group. */
+model TelemetryConfig {
+  /** The endpoints that sandbox telemetry is sent to. At least one endpoint must be specified. */
+  @identifiers(#[])
+  endpoints: TelemetryEndpoint[];
+
+  /** The interval, in seconds, at which sandbox metrics are collected. Defaults to 15 seconds when not specified. */
+  @minValue(2)
+  metricsIntervalSeconds?: int32;
+}
+
+/** The kind of a telemetry endpoint. */
+union TelemetryEndpointKind {
+  string,
+
+  /** An endpoint that accepts the OpenTelemetry Protocol (OTLP). */
+  OTLP: "OTLP",
+
+  /** An Application Insights resource. */
+  ApplicationInsights: "ApplicationInsights",
+
+  /** An Azure Monitor Log Analytics workspace, written through the Logs Ingestion API. */
+  LogAnalytics: "LogAnalytics",
+}
+
+/** A destination that sandbox telemetry is sent to. */
+@discriminator("kind")
+model TelemetryEndpoint {
+  /** The kind of the telemetry endpoint. */
+  kind: TelemetryEndpointKind;
+
+  /** The categories of telemetry sent to this endpoint. When empty, every category is sent. */
+  data: TelemetryData[];
+
+  /** A custom output schema for log records, keyed by the name of the output column to produce. Applies to `ContainerStdoutStderr` telemetry, and additionally to `Metrics` telemetry on an OpenTelemetry Protocol endpoint. When omitted, records are written in their default shape. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Output column names are chosen by the customer, so the schema is an open key/value map."
+  columns?: Record<LogColumnDef>;
+
+  /** Whether to parse JSON log lines and merge their top-level keys into the output record. Reserved keys, and keys already produced by an entry in `columns`, are not overwritten. Requires `ContainerStdoutStderr` in `data`. */
+  dynamicJsonColumns?: boolean = false;
+}
+
+/** A telemetry endpoint that accepts the OpenTelemetry Protocol (OTLP). */
+model OtlpTelemetryEndpoint extends TelemetryEndpoint {
+  /** The kind of the telemetry endpoint. */
+  kind: "OTLP";
+
+  /** The URL of the OpenTelemetry Protocol endpoint. */
+  endpoint: url;
+
+  /** The protocol used to send telemetry to the endpoint. */
+  protocol: TelemetryProtocol;
+
+  /** The authentication used when sending telemetry to the endpoint. When omitted, requests are sent without an authentication header. */
+  auth?: TelemetryHeaderAuth;
+}
+
+/** A telemetry endpoint that sends telemetry to an Application Insights resource. */
+model ApplicationInsightsTelemetryEndpoint extends TelemetryEndpoint {
+  /** The kind of the telemetry endpoint. */
+  kind: "ApplicationInsights";
+
+  /** The authentication used when sending telemetry to the endpoint. */
+  auth: TelemetryApplicationInsightsAuth;
+}
+
+/** A telemetry endpoint that sends telemetry to an Azure Monitor Log Analytics workspace through the Logs Ingestion API. */
+model LogAnalyticsTelemetryEndpoint extends TelemetryEndpoint {
+  /** The kind of the telemetry endpoint. */
+  kind: "LogAnalytics";
+
+  /** The URL of the data collection endpoint that receives the telemetry. */
+  dceEndpoint: url;
+
+  /** The immutable ID of the data collection rule that processes the telemetry. */
+  dcrImmutableId: string;
+
+  /** The name of the target stream in the data collection rule. */
+  tableName: string;
+
+  /** The managed identity used to authenticate to the data collection endpoint. */
+  auth: TelemetryAuth;
+}
+
+/** A category of telemetry that can be sent to a telemetry endpoint. */
+union TelemetryData {
+  string,
+
+  /** Standard output and standard error written by containers in the sandbox. */
+  ContainerStdoutStderr: "ContainerStdoutStderr",
+
+  /** OpenTelemetry data emitted by containers in the sandbox. */
+  ContainerOtel: "ContainerOtel",
+
+  /** Resource usage metrics for the sandbox. */
+  Metrics: "Metrics",
+
+  /** A record of each decision made by the network egress policy of the sandbox. */
+  NetworkEgressDecisions: "NetworkEgressDecisions",
+}
+
+/** The protocol used to send telemetry to an OpenTelemetry Protocol endpoint. */
+union TelemetryProtocol {
+  string,
+
+  /** gRPC. */
+  Grpc: "Grpc",
+
+  /** HTTP. */
+  Http: "Http",
+}
+
+/** Authentication for an OpenTelemetry Protocol telemetry endpoint. The referenced secret value is sent as an HTTP request header. */
+model TelemetryHeaderAuth {
+  /** The name of the HTTP request header to send, for example `Authorization`. */
+  headerName: string;
+
+  /** The name of the sandbox group secret that holds the header value. */
+  secretId: string;
+
+  /** The key within the sandbox group secret whose value is sent as the header value. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is the name of a key within the referenced secret, not the secret value, and it is returned in read responses."
+  secretKey: string;
+}
+
+/** Authentication for an Application Insights telemetry endpoint. */
+model TelemetryApplicationInsightsAuth {
+  /** The name of the sandbox group secret that holds the Application Insights connection string. */
+  secretId: string;
+
+  /** The key within the sandbox group secret whose value is the Application Insights connection string. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is the name of a key within the referenced secret, not the secret value, and it is returned in read responses."
+  secretKey: string;
+}
+
+/** The kind of managed identity used to authenticate to a telemetry endpoint. */
+union TelemetryAuthKind {
+  string,
+
+  /** A user-assigned managed identity. */
+  ManagedIdentity: "ManagedIdentity",
+
+  /** The system-assigned managed identity of the sandbox group. */
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+}
+
+/** The managed identity used to authenticate to a telemetry endpoint. */
+@discriminator("kind")
+model TelemetryAuth {
+  /** The kind of managed identity used to authenticate to the telemetry endpoint. */
+  kind: TelemetryAuthKind;
+}
+
+/** Authentication that uses a user-assigned managed identity. */
+model TelemetryManagedIdentityAuth extends TelemetryAuth {
+  /** The kind of managed identity used to authenticate to the telemetry endpoint. */
+  kind: "ManagedIdentity";
+
+  /** The resource ID of the user-assigned managed identity. The identity must be assigned to the sandbox group. */
+  identity: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/** Authentication that uses the system-assigned managed identity of the sandbox group. */
+model TelemetrySystemAssignedManagedIdentityAuth extends TelemetryAuth {
+  /** The kind of managed identity used to authenticate to the telemetry endpoint. */
+  kind: "SystemAssignedManagedIdentity";
+}
+
+/** The kind of a custom log output column. */
+union LogColumnDefKind {
+  string,
+
+  /** A column whose value is a literal string. */
+  Value: "Value",
+
+  /** A column whose value is resolved from a sandbox attribute. */
+  Ref: "Ref",
+}
+
+/** A single column in a custom log output schema. */
+@discriminator("kind")
+model LogColumnDef {
+  /** The kind of the custom log output column. */
+  kind: LogColumnDefKind;
+}
+
+/** A custom log output column whose value is a literal string. */
+model ValueLogColumnDef extends LogColumnDef {
+  /** The kind of the custom log output column. */
+  kind: "Value";
+
+  /** The literal value written to every log record. */
+  value: string;
+}
+
+/** A custom log output column whose value is resolved from a sandbox attribute. */
+model RefLogColumnDef extends LogColumnDef {
+  /** The kind of the custom log output column. */
+  kind: "Ref";
+
+  /** The sandbox attribute to resolve. */
+  refName: LogColumnRef;
+}
+
+/** A sandbox attribute that a custom log output column can reference. */
+union LogColumnRef {
+  string,
+
+  /** The contents of the container log line. */
+  LogContent: "LogContent",
+
+  /** The container output stream the log line was written to, either `stdout` or `stderr`. */
+  LogStream: "LogStream",
+
+  /** The ID of the sandbox that produced the record. */
+  SandboxId: "SandboxId",
+
+  /** The Azure region the sandbox is running in. */
+  Region: "Region",
+
+  /** The name of the container that produced the record. */
+  ContainerName: "ContainerName",
 }
