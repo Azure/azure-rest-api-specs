@@ -458,7 +458,7 @@ union SliTypeMatchState {
  */
 @doc("Report generation status.")
 @added(Versions.v2026_08_31_preview)
-union ReportGenerationStatus {
+union DrillReportGenerationStatus {
   string,
 
   @doc("Report generation has not been attempted yet.")
@@ -479,9 +479,24 @@ union ReportGenerationStatus {
  */
 @doc("Format of a Drill Run report.")
 @added(Versions.v2026_08_31_preview)
-union ReportFormat {
+union DrillReportFormat {
   string,
 
   @doc("Human readable HTML report.")
   Html: "Html",
+}
+
+/**
+ * Enum for the finalization state of a Drill Run report.
+ */
+@doc("Finalization state of a Drill Run report.")
+@added(Versions.v2026_08_31_preview)
+union DrillReportFinalizationState {
+  string,
+
+  @doc("The report is not finalized and may still change.")
+  NotFinalized: "NotFinalized",
+
+  @doc("The report is finalized and immutable.")
+  Finalized: "Finalized",
 }

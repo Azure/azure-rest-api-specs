@@ -64,7 +64,11 @@ using Azure.ResourceManager;
   "DrillRunTestFailoverContent",
   "csharp"
 );
-@@clientName(ReportDownloadUrlRequest, "ReportDownloadUrlContent", "csharp");
+@@clientName(
+  ListReportDownloadUrlRequest,
+  "ListReportDownloadUrlContent",
+  "csharp"
+);
 
 // CSharp: AZC0030 — *Response -> *Result
 @@clientName(
@@ -82,10 +86,18 @@ using Azure.ResourceManager;
   "UpdateRecoveryResourcesResult",
   "csharp"
 );
-@@clientName(ReportDownloadUrlResponse, "ReportDownloadUrlResult", "csharp");
+@@clientName(
+  ListReportDownloadUrlResponse,
+  "ListReportDownloadUrlResult",
+  "csharp"
+);
 
 // CSharp: AZC0030 — *Url -> *Uri
-@@clientName(ReportDownloadUrlResponse.downloadUrl, "downloadUri", "csharp");
+@@clientName(
+  ListReportDownloadUrlResponse.downloadUrl,
+  "downloadUri",
+  "csharp"
+);
 
 // CSharp: AZC0032 — *Data is reserved (collides with auto-generated *Data POCOs)
 @@clientName(GoalsData, "ResilienceManagementGoalsInfo", "csharp");

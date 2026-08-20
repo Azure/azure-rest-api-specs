@@ -1139,7 +1139,7 @@
             "description": "The content of the action request",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ReportDownloadUrlRequest"
+              "$ref": "#/definitions/ListReportDownloadUrlRequest"
             }
           }
         ],
@@ -1147,7 +1147,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ReportDownloadUrlResponse"
+              "$ref": "#/definitions/ListReportDownloadUrlResponse"
             }
           },
           "default": {
@@ -6049,6 +6049,85 @@
         "drillType"
       ]
     },
+    "DrillReportFinalizationState": {
+      "type": "string",
+      "description": "Finalization state of a Drill Run report.",
+      "enum": [
+        "NotFinalized",
+        "Finalized"
+      ],
+      "x-ms-enum": {
+        "name": "DrillReportFinalizationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotFinalized",
+            "value": "NotFinalized",
+            "description": "The report is not finalized and may still change."
+          },
+          {
+            "name": "Finalized",
+            "value": "Finalized",
+            "description": "The report is finalized and immutable."
+          }
+        ]
+      }
+    },
+    "DrillReportFormat": {
+      "type": "string",
+      "description": "Format of a Drill Run report.",
+      "enum": [
+        "Html"
+      ],
+      "x-ms-enum": {
+        "name": "DrillReportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Html",
+            "value": "Html",
+            "description": "Human readable HTML report."
+          }
+        ]
+      }
+    },
+    "DrillReportGenerationStatus": {
+      "type": "string",
+      "description": "Report generation status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DrillReportGenerationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Report generation has not been attempted yet."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Report generation is currently running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Report generation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Report generation failed. Details are captured in the lastError field."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "DrillResource": {
       "type": "object",
       "description": "Drill Resource",
@@ -6619,7 +6698,7 @@
       "description": "Public, read-only view of the report generated for a Drill Run. Exposes status and pointers only - internal storage locations are never surfaced.",
       "properties": {
         "generationStatus": {
-          "$ref": "#/definitions/ReportGenerationStatus",
+          "$ref": "#/definitions/DrillReportGenerationStatus",
           "description": "Overall report generation status for the Drill Run.",
           "readOnly": true
         },
@@ -6636,7 +6715,7 @@
           "type": "array",
           "description": "Formats the report is currently available for download in.",
           "items": {
-            "$ref": "#/definitions/ReportFormat"
+            "$ref": "#/definitions/DrillReportFormat"
           },
           "readOnly": true
         },
@@ -6651,9 +6730,9 @@
           "description": "Schema version of the generated report content.",
           "readOnly": true
         },
-        "isFinalized": {
-          "type": "boolean",
-          "description": "Indicates whether the report is finalized and immutable.",
+        "finalizationState": {
+          "$ref": "#/definitions/DrillReportFinalizationState",
+          "description": "Finalization state of the report. A finalized report is immutable.",
           "readOnly": true
         },
         "lastError": {
@@ -8625,6 +8704,39 @@
         }
       }
     },
+    "ListReportDownloadUrlRequest": {
+      "type": "object",
+      "description": "Request to mint a short-lived, read-only download URL for a Drill Run report.",
+      "properties": {
+        "format": {
+          "$ref": "#/definitions/DrillReportFormat",
+          "description": "Format of the report to download. Defaults to Html when not specified."
+        }
+      }
+    },
+    "ListReportDownloadUrlResponse": {
+      "type": "object",
+      "description": "Response containing a short-lived, read-only download URL for a Drill Run report.",
+      "properties": {
+        "format": {
+          "$ref": "#/definitions/DrillReportFormat",
+          "description": "Format of the report the download URL refers to.",
+          "readOnly": true
+        },
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Short-lived, read-only URL to download the report.",
+          "readOnly": true
+        },
+        "expiryTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp at which the download URL expires.",
+          "readOnly": true
+        }
+      }
+    },
     "MarkAsCompleteRequest": {
       "type": "object",
       "description": "Request body for MarkAsComplete API.",
@@ -10188,94 +10300,6 @@
         ]
       }
     },
-    "ReportDownloadUrlRequest": {
-      "type": "object",
-      "description": "Request to mint a short-lived, read-only download URL for a Drill Run report.",
-      "properties": {
-        "format": {
-          "$ref": "#/definitions/ReportFormat",
-          "description": "Format of the report to download. Defaults to Html when not specified."
-        }
-      }
-    },
-    "ReportDownloadUrlResponse": {
-      "type": "object",
-      "description": "Response containing a short-lived, read-only download URL for a Drill Run report.",
-      "properties": {
-        "format": {
-          "$ref": "#/definitions/ReportFormat",
-          "description": "Format of the report the download URL refers to.",
-          "readOnly": true
-        },
-        "downloadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Short-lived, read-only URL to download the report.",
-          "readOnly": true
-        },
-        "expiryTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp at which the download URL expires.",
-          "readOnly": true
-        }
-      }
-    },
-    "ReportFormat": {
-      "type": "string",
-      "description": "Format of a Drill Run report.",
-      "enum": [
-        "Html"
-      ],
-      "x-ms-enum": {
-        "name": "ReportFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Html",
-            "value": "Html",
-            "description": "Human readable HTML report."
-          }
-        ]
-      }
-    },
-    "ReportGenerationStatus": {
-      "type": "string",
-      "description": "Report generation status.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "ReportGenerationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Report generation has not been attempted yet."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Report generation is currently running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Report generation completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Report generation failed. Details are captured in the lastError field."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "ReportStageStatus": {
       "type": "object",
       "description": "Report generation status for a single Drill Run stage.",
@@ -10285,7 +10309,7 @@
           "description": "Name of the Drill Run stage this status applies to."
         },
         "generationStatus": {
-          "$ref": "#/definitions/ReportGenerationStatus",
+          "$ref": "#/definitions/DrillReportGenerationStatus",
           "description": "Report generation status for this stage.",
           "readOnly": true
         },

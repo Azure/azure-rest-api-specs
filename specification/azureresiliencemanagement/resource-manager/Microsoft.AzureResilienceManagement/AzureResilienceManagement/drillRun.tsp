@@ -192,8 +192,8 @@ interface DrillRuns {
   @doc("This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp and grants access to that single report only.")
   listReportDownloadUrl is ArmResourceActionSync<
     DrillRun,
-    ReportDownloadUrlRequest,
-    ReportDownloadUrlResponse,
+    ListReportDownloadUrlRequest,
+    ListReportDownloadUrlResponse,
     ServiceGroupParameters,
     OptionalRequestBody = true
   >;
