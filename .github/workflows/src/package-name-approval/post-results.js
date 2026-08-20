@@ -199,7 +199,7 @@ function buildCommentBody({
     } else if (isConfigured) {
       displayName = `\`${configuredName}\``;
       displayNs = `\`${allConfiguredNamespaces?.[language] ?? "—"}\``;
-      status = "✅ Unchanged";
+      status = "⏳ Pending _(unchanged)_";
     } else {
       displayName = "_(not yet configured)_";
       displayNs = "—";
@@ -336,21 +336,13 @@ export default async function postResults({ github, context, core }) {
     const approvedLabel = `package-name-${language}-approved`;
     if (existingLabels.includes(approvedLabel)) continue;
 
-    // Skip pending for languages that are configured but unchanged (state 2)
-    const isChanged = language in results.namespacesFound;
-    const isConfigured = language in results.allConfiguredPackageNames;
-    if (isConfigured && !isChanged) continue;
-
+    // All Tier 1 languages get pending — even configured-unchanged ones need to
+    // re-confirm alignment when any other language's name changes.
     labelsToAdd.add(`package-name-${language}-pending`);
   }
 
-  // Don't re-add package-name-review-required if everything needing approval is already approved
-  const languagesNeedingApproval = allLanguages.filter((lang) => {
-    const isChanged = lang in results.namespacesFound;
-    const isConfigured = lang in results.allConfiguredPackageNames;
-    return isChanged || !isConfigured;
-  });
-  const allApproved = languagesNeedingApproval.length > 0 && languagesNeedingApproval.every((lang) =>
+  // Don't re-add package-name-review-required if all Tier 1 languages are already approved
+  const allApproved = allLanguages.length > 0 && allLanguages.every((lang) =>
     existingLabels.includes(`package-name-${lang}-approved`),
   );
   if (allApproved) {
