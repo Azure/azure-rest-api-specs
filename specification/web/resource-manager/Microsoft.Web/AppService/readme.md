@@ -109,6 +109,15 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
     - preview/2026-09-01-preview/openapi.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: openapi.json
+      reason: 'False positive from a known LintDiff/Spectral limitation. The rule is evaluated against the resolved document, and the resolver replaces the object holding $ref, description and readOnly with the $ref target, discarding the sibling readOnly. BuilderAppProperties.provisioningState is emitted with readOnly set to true. Related issue - https://github.com/Azure/azure-openapi-validator/issues/637'
+      where:
+          - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].get.responses.200.schema
+          - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].put.responses.200.schema
+          - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].put.responses.201.schema
+          - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}"].patch.responses.200.schema
 ```
 
 ### Tag: package-2026-07
