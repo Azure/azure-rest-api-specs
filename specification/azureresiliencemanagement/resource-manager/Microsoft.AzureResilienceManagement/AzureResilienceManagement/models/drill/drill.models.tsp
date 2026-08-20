@@ -540,7 +540,7 @@ model DrillStartRequest {
   @doc("Mode of starting the Drill")
   mode: DrillMode;
 
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Inputs needed for the Recovery Orchestration Plan")
   @removed(Versions.v2026_04_01_preview)
   recoveryPlanInputs: {
@@ -558,6 +558,7 @@ model DrillEndRequest {
   attestationNotes: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body of Drill actions")
 model DrillActionResponse {
   @doc("JobId of the Drill")
@@ -609,6 +610,7 @@ model IncludeOrUpdateResource {
   faultProperties?: FaultProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body of the AddOrUpdateResources API.")
 @removed(Versions.v2026_04_01_preview)
 model AddOrUpdateResourcesResponse {
@@ -828,6 +830,7 @@ model DrillResourceQualification {
   resourceQualificationDetails: ResourceQualificationDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("ValidateForExecution post action response.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionResponse {

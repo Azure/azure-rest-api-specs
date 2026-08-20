@@ -3804,6 +3804,7 @@ model DeploymentVersionChange {
 /**
  * Metrics Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MetricsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3858,6 +3859,7 @@ model Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesData
 /**
  * Rankings Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RankingsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3905,6 +3907,7 @@ model RankingsResponseTablesPropertiesItemsMetricsItem {
 /**
  * Continents Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ContinentsResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continents?: ContinentsResponseContinentsItem[];
@@ -3929,6 +3932,7 @@ model ContinentsResponseCountryOrRegionsItem {
 /**
  * Resources Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourcesResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpoints?: ResourcesResponseEndpointsItem[];
@@ -3975,6 +3979,7 @@ model ResourcesResponseCustomDomainsItem {
 /**
  * Waf Metrics Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WafMetricsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4029,6 +4034,7 @@ model Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesD
 /**
  * Waf Rankings Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WafRankingsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
