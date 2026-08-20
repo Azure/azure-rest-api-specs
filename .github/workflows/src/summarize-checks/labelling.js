@@ -1017,6 +1017,28 @@ const rulesPri1Suppressions = [
   },
 ];
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri1TypeSpecSuppressions = [
+  // Gates the dedicated TypeSpec suppression category, independent of the
+  // autorest/README `SuppressionReviewRequired` rule above. Mirrors the
+  // Namespace Approval pattern (see `rulesPri1Namespace`): the prerequisite
+  // `TypeSpecSuppressionReviewRequired` label is applied by the TypeSpec
+  // Suppressions workflow when a suppression in scope of the check-rules file is
+  // added or changed, and merge is blocked until a reviewer applies
+  // `Approved-TypeSpecSuppression`. The rule is dormant until that workflow
+  // starts applying the prerequisite label (label gating is rolled out
+  // separately so nothing blocks merges initially).
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["TypeSpecSuppressionReviewRequired"],
+    anyRequiredLabels: ["Approved-TypeSpecSuppression"],
+    troubleshootingGuide:
+      `This PR introduced TypeSpec suppressions that require review. Inspect the suppression details in the ` +
+      `<b>TypeSpec Suppressions Review</b> comment on this PR and ask the appropriate reviewer to apply the ` +
+      `<code>Approved-TypeSpecSuppression</code> label. ${diagramTsg(1, true)}.`,
+  },
+];
+
 /**
  * This collection has "SDK breaking changes" labels rules introduced in February 2024.
  * For description of the "SDK breaking changes" labels, see:
@@ -1182,6 +1204,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
+  .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri1Namespace)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)

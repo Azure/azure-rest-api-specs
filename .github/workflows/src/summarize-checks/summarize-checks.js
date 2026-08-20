@@ -39,6 +39,7 @@ import {
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
+  typeSpecSuppressionsTsg,
 } from "./tsgs.js";
 
 import fs from "fs/promises";
@@ -183,6 +184,12 @@ const CHECK_METADATA = [
     name: "Swagger LintDiff",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 5,
+    name: "TypeSpec Suppressions",
+    suppressionLabels: ["Approved-TypeSpecSuppression"],
+    troubleshootingGuide: typeSpecSuppressionsTsg,
   },
   {
     precedence: 5,
