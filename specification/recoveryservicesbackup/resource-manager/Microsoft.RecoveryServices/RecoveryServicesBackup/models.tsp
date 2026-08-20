@@ -288,6 +288,7 @@ union SoftDeleteFeatureState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union SourceSideScanStatus {
   string,
 
@@ -299,6 +300,36 @@ union SourceSideScanStatus {
 
   /** Source side scan is not applicable */
   NotApplicable: "NotApplicable",
+
+  /** Source side scan configuration failed */
+  @added(Versions.v2026_07_01)
+  ConfigurationFailed: "ConfigurationFailed",
+}
+
+/**
+ * Source scan configuration status for enabling or disabling source scan
+ */
+@added(Versions.v2026_07_01)
+union SourceScanAction {
+  string,
+
+  /** Enable source scan */
+  Enable: "Enable",
+
+  /** Disable source scan */
+  Disable: "Disable",
+}
+
+/**
+ * Request to configure source scan for a protected item
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2026_07_01)
+model ProtectedItemConfigureSourceScanRequest {
+  /**
+   * Source scan action to perform
+   */
+  sourceScanAction?: SourceScanAction;
 }
 
 /**
@@ -309,6 +340,7 @@ union SourceSideScanStatus {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union SourceSideScanSummary {
   string,
 
@@ -323,6 +355,10 @@ union SourceSideScanSummary {
 
   /** Scan summary indicates healthy state */
   Healthy: "Healthy",
+
+  /** No threats reported */
+  @added(Versions.v2026_07_01)
+  NoThreatsReported: "NoThreatsReported",
 }
 
 /**
@@ -333,6 +369,7 @@ union SourceSideScanSummary {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 model SourceSideScanInfo {
   /**
    * Threat status of the container
@@ -353,6 +390,7 @@ model SourceSideScanInfo {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union ThreatStatus {
   string,
 
@@ -380,6 +418,7 @@ union ThreatStatus {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union ThreatState {
   string,
 
@@ -404,6 +443,7 @@ union ThreatState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 union ThreatSeverity {
   string,
 
@@ -428,6 +468,7 @@ union ThreatSeverity {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@added(Versions.v2026_07_01)
 model ThreatInfo {
   /**
    * Threat Subject
@@ -779,6 +820,7 @@ union PolicyType {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union VMWorkloadPolicyType {
   string,
 
@@ -892,6 +934,7 @@ union ProtectedItemState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union ProtectionLevel {
   string,
 
@@ -910,6 +953,7 @@ union ProtectionLevel {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union InstanceProtectionReadiness {
   string,
 
@@ -1057,6 +1101,7 @@ union RestorePointQueryType {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
@@ -1065,6 +1110,7 @@ union RestorePointQueryType {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1355,6 +1401,7 @@ union ContainerType {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -2432,6 +2479,13 @@ model ProtectedItem {
   softDeleteRetentionPeriodInDays?: int32;
 
   /**
+   * Source location of the protected item datasource.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  sourceLocation?: string;
+
+  /**
    * ID of the vault which protects this item
    */
   @visibility(Lifecycle.Read)
@@ -2445,6 +2499,7 @@ model ProtectedItem {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @added(Versions.v2026_07_01)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
 
@@ -2480,6 +2535,7 @@ model RecoveryPoint {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @added(Versions.v2026_07_01)
   threatStatus?: ThreatStatus;
 
   /**
@@ -2490,6 +2546,7 @@ model RecoveryPoint {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @added(Versions.v2026_07_01)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
 }
@@ -2986,6 +3043,13 @@ model ProtectionContainer {
    * Type of the protectable object associated with this container
    */
   protectableObjectType?: string;
+
+  /**
+   * Source location of the container
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  sourceLocation?: string;
 }
 
 /**
@@ -3298,6 +3362,7 @@ model UnlockDeleteResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3313,6 +3378,7 @@ model UpdateRecoveryPointRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3328,6 +3394,7 @@ model PatchRecoveryPointInput {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3699,6 +3766,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4747,6 +4815,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   parentProtectedItem?: string;
 
   /**
@@ -4757,6 +4826,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4769,6 +4839,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5296,6 +5367,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5468,6 +5540,7 @@ model BmsrpQueryObject {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   baseSnapshotRPId?: string;
 
   /**
@@ -5479,6 +5552,7 @@ model BmsrpQueryObject {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   baseRPDatasourceId?: string;
 
   /**
@@ -5490,6 +5564,7 @@ model BmsrpQueryObject {
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   getLatestRPOnly?: boolean;
 }
 
@@ -5914,6 +5989,7 @@ model DailySchedule {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -6161,8 +6237,41 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "IaasVMRecoveryPoint";
+
+  /**
+   * Data disk metadata for the VM recovery point
+   */
+  @added(Versions.v2026_07_01)
+  dataDiskMetadata?: DataDiskDetails;
 }
 
+/**
+ * Data disk details
+ */
+@added(Versions.v2026_07_01)
+model DataDiskDetails {
+  /**
+   * List of data disks in the VM which are encrypted at the time of backup. This will be used to provide Disk Encryption Set Id for each data disk.
+   */
+  @identifiers(#[])
+  encryptedDataDisks?: DiskDetails[];
+}
+
+/**
+ * Disk details
+ */
+@added(Versions.v2026_07_01)
+model DiskDetails {
+  /**
+   * LUN of the disk
+   */
+  lun?: int32;
+
+  /**
+   * Disk name of the disk
+   */
+  diskName?: string;
+}
 /**
  * BEK is bitlocker key.
  * KEK is encryption key for BEK
@@ -6262,6 +6371,62 @@ model SecuredVMDetails {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   securedVMOsDiskEncryptionSetId?: string;
+
+  /**
+   * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk.
+   */
+  @added(Versions.v2026_07_01)
+  dataDiskEncryptionSettings?: DataDiskEncryptionSettings;
+}
+
+/**
+ * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk.
+ */
+@added(Versions.v2026_07_01)
+model DataDiskEncryptionSettings {
+  /**
+   * Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.
+   */
+  @identifiers(#[])
+  perDiskEncryptionSetIds?: PerDiskEncryptionSetId[];
+
+  /**
+   * Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored.
+   */
+  dataDiskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+
+  /**
+   * Managed Identity resource Id used to encrypt the data disk during restore.
+   */
+  dataDiskEncryptionIdentity?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.
+ */
+@added(Versions.v2026_07_01)
+model PerDiskEncryptionSetId {
+  /**
+   *  LUN for Secured VM Data Disk
+   */
+  lun?: int32;
+
+  /**
+   *  Disk Encryption Set Id for Secured VM Data Disk
+   */
+  diskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 }
 
 /**
@@ -7878,6 +8043,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -8906,6 +9072,7 @@ model ClientDiscoveryResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -8930,6 +9097,7 @@ union CrossTenantProvisioningState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -8977,6 +9145,7 @@ model CrossTenantVaultMappingProperties {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -8990,6 +9159,7 @@ model RemoveCrossTenantVaultMappingRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union VaultMappingState {
   string,
 
@@ -9008,6 +9178,7 @@ union VaultMappingState {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9027,6 +9198,7 @@ model CrossTenantVaultMappingStatusResponse {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9041,6 +9213,7 @@ model VaultCredentialCertificateRequest {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9056,6 +9229,7 @@ model VaultCredentialCertificateCreateOptions {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -9075,6 +9249,7 @@ model VaultCredentialCertificateResponse
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 union AuthType {
   string,
 
@@ -9089,6 +9264,7 @@ union AuthType {
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.

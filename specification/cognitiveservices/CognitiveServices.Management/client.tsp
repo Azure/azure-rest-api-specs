@@ -49,7 +49,9 @@ using Azure.ResourceManager;
   "python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op checkDomainAvailabilityCustom(
   ...ApiVersionParameter,
@@ -65,7 +67,9 @@ op checkDomainAvailabilityCustom(
   checkDomainAvailabilityCustom,
   "javascript"
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op checkSkuAvailabilityCustom(
   ...ApiVersionParameter,
@@ -78,7 +82,9 @@ op checkSkuAvailabilityCustom(
   kind: string,
 ): SkuAvailabilityListResult;
 @@override(checkSkuAvailability, checkSkuAvailabilityCustom, "javascript");
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op calculateModelCapacityCustom(
   ...ApiVersionParameter,
@@ -93,7 +99,9 @@ op calculateModelCapacityCustom(
 
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op regenerateKeyCustom(
   ...ApiVersionParameter,
@@ -1095,6 +1103,11 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(
+  AccountProperties.a365LoggingEnabled,
+  "IsA365LoggingEnabled",
+  "csharp"
+);
+@@clientName(
   ManagedComputeDeploymentProvisioningDetails.lastOperationTimestamp,
   "LastOperationOn",
   "csharp"
@@ -1103,7 +1116,7 @@ op regenerateKeyCustom(
 
 // Type changes: use standard ARM types for etag, location, identity
 @@alternateType(Compute.etag, eTag, "csharp");
-@@alternateType(Compute.location, azureLocation, "csharp");
+@@alternateType(ComputeProperties.location, azureLocation, "csharp");
 @@alternateType(
   Compute.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
