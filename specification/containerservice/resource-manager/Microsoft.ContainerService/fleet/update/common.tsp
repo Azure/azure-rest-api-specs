@@ -114,8 +114,7 @@ model ScheduledStartConfiguration {
 model UpdateGroup {
   @doc("""
     Name of the group.
-    It serves as an identifier and must match a group name of an existing fleet member unless
-    MemberSelector is specified. When MemberSelector is set, Name is only used as an identifier.
+    It must match a group name of an existing fleet member.
     """)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -159,8 +158,10 @@ model UpdateGroup {
 
   @doc("""
     Select the members of the group.
-      * If specified, label-based selection will override group name based selection.
-      * If not specified, group name based selection will be used.
+      * If specified, label-based selection will override group name based selection,
+        and Name is only used as an identifier.
+      * If not specified, group name based selection will be used, and Name must match a
+        group name of an existing fleet member.
     """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_06_02_preview)
