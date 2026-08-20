@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "type": "Microsoft.Network/expressRouteCircuits",
+    "api-version": "2026-01-01",
+    "circuitName": "expressRouteCircuit1",
+    "parameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "bandwidthInGbps": 5,
+        "enableDirectPortRateLimit": true,
+        "expressRouteLag": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/lagName"
+        }
+      },
+      "sku": {
+        "name": "Premium_MeteredData",
+        "family": "MeteredData",
+        "tier": "Premium"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "expressRouteCircuit1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuit1",
+        "etag": "W/\"75acaf40-7411-4909-82de-23af323d5feb\"",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "location": "eastus2euap",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceGuid": "d648197a-4bc0-4935-a7f8-85b941938514",
+          "peerings": [],
+          "authorizations": [],
+          "circuitProvisioningState": "Disabled",
+          "allowClassicOperations": false,
+          "serviceKey": "a0466ed3-8a36-4036-9aab-25cb33c6e5a1",
+          "serviceProviderProvisioningState": "Provisioned",
+          "allowGlobalReach": false,
+          "globalReachEnabled": false,
+          "expressRouteLag": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/test"
+          },
+          "enableDirectPortRateLimit": false,
+          "bandwidthInGbps": 5.0,
+          "resiliencyLevel": "Standard"
+        },
+        "sku": {
+          "name": "Standard_MeteredData",
+          "tier": "Standard",
+          "family": "MeteredData"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "expressRouteCircuit1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuit1",
+        "etag": "W/\"60da45f2-8d7e-42a3-b2b4-8cae7d07d35b\"",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "location": "eastus2euap",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceGuid": "d648197a-4bc0-4935-a7f8-85b941938514",
+          "peerings": [],
+          "authorizations": [],
+          "circuitProvisioningState": "Disabled",
+          "allowClassicOperations": false,
+          "serviceKey": "00000000-0000-0000-0000-000000000000",
+          "serviceProviderProvisioningState": "NotProvisioned",
+          "allowGlobalReach": false,
+          "globalReachEnabled": false,
+          "expressRouteLag": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteLags/test"
+          },
+          "enableDirectPortRateLimit": true,
+          "bandwidthInGbps": 5.0,
+          "resiliencyLevel": "Standard"
+        },
+        "sku": {
+          "name": "Premium_MeteredData",
+          "tier": "Premium",
+          "family": "MeteredData"
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_CreateOrUpdate",
+  "title": "Create ExpressRouteCircuit on ExpressRouteLag"
+}
