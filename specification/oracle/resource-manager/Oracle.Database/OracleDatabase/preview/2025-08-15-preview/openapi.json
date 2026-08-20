@@ -1255,13 +1255,13 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
+            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
+          },
+          {
             "$ref": "#/parameters/GiVersionFilter.shape"
           },
           {
             "$ref": "#/parameters/GiVersionFilter.zone"
-          },
-          {
-            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
           }
         ],
         "responses": {
@@ -13548,6 +13548,13 @@
           }
         ]
       }
+    },
+    "LongTermBackUpRetentionPeriod": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Retention period, in days, for long-term backups",
+      "minimum": 90,
+      "maximum": 3650
     },
     "LongTermBackUpScheduleDetails": {
       "type": "object",
