@@ -248,7 +248,50 @@ export default async function postResults({ github, context, core }) {
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
 
   if (!results) {
-    core.info("No package name results to process, exiting gracefully");
+    core.info("No package name results to process");
+
+    // Clean up if package-name labels were previously applied but config was reverted.
+    // Without this, removing package name entries from tspconfig leaves stale pending
+    // labels and a blocking status check.
+    const { data: pr } = await github.rest.pulls.get({
+      owner,
+      repo,
+      pull_number: issue_number,
+    });
+    const existingLabels = pr.labels.map(
+      (/** @type {{ name?: string }} */ label) => label.name ?? "",
+    );
+
+    if (existingLabels.includes("package-name-review-required")) {
+      core.info("Cleaning up stale package-name labels (config was reverted)");
+      const packageNameLabels = existingLabels.filter(
+        (l) => l.startsWith("package-name-"),
+      );
+      for (const label of packageNameLabels) {
+        await removeLabelIfPresent(github, owner, repo, issue_number, label);
+      }
+
+      // Update status check to success
+      await github.rest.repos.createCommitStatus({
+        owner,
+        repo,
+        sha: pr.head.sha,
+        state: "success",
+        context: "Package Name Approval",
+        description: "No package name review required (config reverted)",
+      });
+
+      // Update bot comment
+      await commentOrUpdate(
+        github,
+        core,
+        owner,
+        repo,
+        issue_number,
+        "## Package Name Review\n\n✅ No package name changes detected. Previously detected package name configuration was reverted.\n\n<!-- package-name-review-bot -->",
+        "package-name-review-bot",
+      );
+    }
     return;
   }
 
