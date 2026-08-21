@@ -207,7 +207,13 @@ function buildCommentBody({
     }
 
     const formatResult = formatMap.get(language);
-    const formatStatus = !isChanged ? "—" : !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
+    const formatStatus = !isChanged
+      ? "—"
+      : !formatResult
+        ? "—"
+        : formatResult.valid
+          ? "✅"
+          : "⚠️ Invalid";
     body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
       approversConfig,
       isMgmt,
@@ -264,9 +270,7 @@ export default async function postResults({ github, context, core }) {
 
     if (existingLabels.includes("package-name-review-required")) {
       core.info("Cleaning up stale package-name labels (config was reverted)");
-      const packageNameLabels = existingLabels.filter(
-        (l) => l.startsWith("package-name-"),
-      );
+      const packageNameLabels = existingLabels.filter((l) => l.startsWith("package-name-"));
       for (const label of packageNameLabels) {
         await removeLabelIfPresent(github, owner, repo, issue_number, label);
       }
@@ -385,9 +389,9 @@ export default async function postResults({ github, context, core }) {
   }
 
   // Don't re-add package-name-review-required if all Tier 1 languages are already approved
-  const allApproved = allLanguages.length > 0 && allLanguages.every((lang) =>
-    existingLabels.includes(`package-name-${lang}-approved`),
-  );
+  const allApproved =
+    allLanguages.length > 0 &&
+    allLanguages.every((lang) => existingLabels.includes(`package-name-${lang}-approved`));
   if (allApproved) {
     labelsToAdd.delete("package-name-review-required");
   }
