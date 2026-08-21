@@ -1,0 +1,108 @@
+{
+  "operationId": "BuilderApps_ListByResourceGroup",
+  "title": "ListBuilderAppsByResourceGroup",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront",
+            "name": "contoso-storefront",
+            "type": "Microsoft.Web/builderApps",
+            "location": "westus3",
+            "tags": {
+              "team": "storefront"
+            },
+            "properties": {
+              "source": {
+                "type": "github",
+                "repositoryId": 123456789,
+                "repositoryFullName": "contoso/storefront",
+                "branch": "main"
+              },
+              "provisioningState": "Succeeded",
+              "runtime": {
+                "url": "https://contoso-storefront.westus3.builderapps.azure.com",
+                "activeRunId": "r_3f9a2c",
+                "activeDeploymentId": "dep_8b41d7",
+                "components": [
+                  {
+                    "name": "web",
+                    "role": "web",
+                    "source": "framework",
+                    "path": "/",
+                    "artifacts": [
+                      "static",
+                      "compute"
+                    ],
+                    "commitSha": "b17e9c4a6d2f8e1b0c5a7d3f9e2b4c6a8d0f1e37"
+                  }
+                ]
+              },
+              "variables": [
+                {
+                  "name": "LOG_LEVEL",
+                  "source": "inline"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-09-01T17:32:04.123Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-09-01T18:10:55.456Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-docs",
+            "name": "contoso-docs",
+            "type": "Microsoft.Web/builderApps",
+            "location": "westus3",
+            "properties": {
+              "source": {
+                "type": "github",
+                "repositoryId": 987654321,
+                "repositoryFullName": "contoso/docs",
+                "branch": "release"
+              },
+              "provisioningState": "Succeeded",
+              "runtime": {
+                "url": "https://contoso-docs.westus3.builderapps.azure.com",
+                "activeRunId": "r_7c1e05",
+                "activeDeploymentId": "dep_2a6f93",
+                "components": [
+                  {
+                    "name": "site",
+                    "role": "static",
+                    "source": "framework",
+                    "path": "/",
+                    "artifacts": [
+                      "static"
+                    ],
+                    "commitSha": "4d2c8a1f7b3e9605d8c2a4f6e1b3d5c7a9f0e2b8"
+                  }
+                ]
+              }
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-09-01T12:04:31.001Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-09-01T12:04:31.001Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps?api-version=2026-09-01-preview&$skipToken=ey"
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "operationId": "BuilderApps_Update",
+  "title": "UpdateBuilderApp",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-09-01-preview",
+    "name": "contoso-storefront",
+    "properties": {
+      "tags": {
+        "team": "storefront",
+        "costCenter": "8675309"
+      },
+      "properties": {
+        "variables": [
+          {
+            "name": "LOG_LEVEL",
+            "value": "debug"
+          },
+          {
+            "name": "STRIPE_KEY",
+            "source": "keyVault",
+            "keyVaultRef": "https://contoso-kv.vault.azure.net/secrets/stripe",
+            "role": "apiKey"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront",
+        "name": "contoso-storefront",
+        "type": "Microsoft.Web/builderApps",
+        "location": "westus3",
+        "tags": {
+          "team": "storefront",
+          "costCenter": "8675309"
+        },
+        "properties": {
+          "source": {
+            "type": "github",
+            "repositoryId": 123456789,
+            "repositoryFullName": "contoso/storefront",
+            "branch": "main"
+          },
+          "provisioningState": "Succeeded",
+          "runtime": {
+            "url": "https://contoso-storefront.westus3.builderapps.azure.com",
+            "activeRunId": "r_3f9a2c",
+            "activeDeploymentId": "dep_8b41d7",
+            "components": [
+              {
+                "name": "web",
+                "role": "web",
+                "source": "framework",
+                "path": "/",
+                "artifacts": [
+                  "static",
+                  "compute"
+                ],
+                "commitSha": "b17e9c4a6d2f8e1b0c5a7d3f9e2b4c6a8d0f1e37"
+              }
+            ]
+          },
+          "variables": [
+            {
+              "name": "LOG_LEVEL",
+              "source": "inline"
+            },
+            {
+              "name": "STRIPE_KEY",
+              "source": "keyVault",
+              "keyVaultRef": "https://contoso-kv.vault.azure.net/secrets/stripe",
+              "role": "apiKey"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-09-01T17:32:04.123Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-02T09:14:22.789Z"
+        }
+      }
+    }
+  }
+}
