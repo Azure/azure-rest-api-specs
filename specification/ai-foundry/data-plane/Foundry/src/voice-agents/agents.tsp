@@ -694,7 +694,7 @@ model CreateVoiceAgentRequest {
 @doc("The request to update a voice agent by adding a new version.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model UpdateVoiceAgentRequest {
-  ...OmitProperties<CreateVoiceAgentVersionRequest, "draft" | "capabilities">;
+  ...OmitProperties<CreateVoiceAgentVersionRequest, "draft" | "digital_worker_type">;
 }
 
 @doc("""

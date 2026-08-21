@@ -29419,20 +29419,6 @@
           }
         ]
       },
-      "AgentCapability": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "DigitalWorker"
-            ]
-          }
-        ],
-        "description": "A capability supported by an agent."
-      },
       "AgentCard": {
         "type": "object",
         "required": [
@@ -29672,7 +29658,8 @@
           "WorkflowAgents=V1Preview",
           "ExternalAgents=V1Preview",
           "DraftAgents=V1Preview",
-          "VoiceAgents=V1Preview"
+          "VoiceAgents=V1Preview",
+          "DigitalWorker=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
       },
@@ -29942,13 +29929,6 @@
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
           },
-          "capabilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentCapability"
-            },
-            "description": "The capabilities supported by the agent."
-          },
           "state_source": {
             "$ref": "#/components/schemas/AgentStateSource",
             "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
@@ -29969,6 +29949,15 @@
           "agent_endpoint": {
             "$ref": "#/components/schemas/AgentEndpointConfig",
             "description": "The endpoint configuration for the agent"
+          },
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "instance_identity": {
             "$ref": "#/components/schemas/AgentIdentity",
@@ -34184,12 +34173,14 @@
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
           },
-          "capabilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentCapability"
-            },
-            "description": "The capabilities supported by the agent."
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "draft": {
             "type": "boolean",
@@ -34346,12 +34337,14 @@
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
           },
-          "capabilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentCapability"
-            },
-            "description": "The capabilities supported by the agent."
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "draft": {
             "type": "boolean",
@@ -34548,12 +34541,14 @@
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
           },
-          "capabilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentCapability"
-            },
-            "description": "The capabilities supported by the agent."
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "draft": {
             "type": "boolean",
@@ -34608,12 +34603,14 @@
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
           },
-          "capabilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentCapability"
-            },
-            "description": "The capabilities supported by the agent."
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "draft": {
             "type": "boolean",
@@ -35742,6 +35739,20 @@
             ]
           }
         ]
+      },
+      "DigitalWorkerType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "m365"
+            ]
+          }
+        ],
+        "description": "The type of digital worker."
       },
       "Dimension": {
         "type": "object",
@@ -82918,13 +82929,6 @@
             "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
             "readOnly": true
           },
-          "capabilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentCapability"
-            },
-            "description": "The capabilities supported by the agent."
-          },
           "state_source": {
             "$ref": "#/components/schemas/AgentStateSource",
             "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
@@ -82933,6 +82937,15 @@
           "agent_endpoint": {
             "$ref": "#/components/schemas/AgentEndpointConfig",
             "description": "The endpoint configuration for the agent"
+          },
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "instance_identity": {
             "$ref": "#/components/schemas/AgentIdentity",
