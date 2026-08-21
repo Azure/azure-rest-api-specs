@@ -69,6 +69,17 @@ interface EdgeMachines {
     EdgeMachineValidateRequest,
     EdgeMachineValidateResponse
   >;
+
+  /**
+   * Trigger an on-demand refresh of applicable updates for the edge machine.
+   * Creates or updates the default EdgeMachineUpdate child resource with the latest set of applicable updates.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
+  @added(Versions.v2026_10_01)
+  refreshApplicableUpdates is ArmResourceActionNoContentAsync<
+    EdgeMachine,
+    void
+  >;
 }
 
 @@doc(EdgeMachine.name, "Name of Device");

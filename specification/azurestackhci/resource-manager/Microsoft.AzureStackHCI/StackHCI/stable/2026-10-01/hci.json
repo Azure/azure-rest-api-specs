@@ -40,6 +40,9 @@
   },
   "tags": [
     {
+      "name": "OsImages"
+    },
+    {
       "name": "Operations"
     },
     {
@@ -804,6 +807,95 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/osImages": {
+      "get": {
+        "operationId": "OsImages_ListBySubscriptionLocationResource",
+        "tags": [
+          "OsImages"
+        ],
+        "description": "List all os images.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OsImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/OsImages_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/osImages/{osImageName}": {
+      "get": {
+        "operationId": "OsImages_Get",
+        "tags": [
+          "OsImages"
+        ],
+        "description": "Get a os image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "osImageName",
+            "in": "path",
+            "description": "The name of the OsImage",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OsImage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_Get_MaximumSet": {
+            "$ref": "./examples/OsImages_Get_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -6550,6 +6642,68 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/refreshApplicableUpdates": {
+      "post": {
+        "operationId": "EdgeMachines_RefreshApplicableUpdates",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "Trigger an on-demand refresh of applicable updates for the edge machine.\nCreates or updates the default EdgeMachineUpdate child resource with the latest set of applicable updates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh edge machine applicable updates": {
+            "$ref": "./examples/EdgeMachines_RefreshApplicableUpdates.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/validate": {
       "post": {
         "operationId": "EdgeMachines_Validate",
@@ -6878,6 +7032,54 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/locations/{location}/validateOwnershipVouchers": {
+      "post": {
+        "operationId": "OwnershipVouchers_Validate",
+        "description": "Validates ownership vouchers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "validationRequest",
+            "in": "body",
+            "description": "Ownership vouchers to be validated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateOwnershipVouchersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOwnershipVouchersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate ownership vouchers in a given resource group": {
+            "$ref": "./examples/ValidateOwnershipVouchers_ByResourceGroup.json"
+          }
+        }
       }
     }
   },
@@ -7318,6 +7520,30 @@
           "$ref": "#/definitions/ArcConnectivityProperties",
           "description": "contains connectivity related configuration for ARC resources"
         }
+      }
+    },
+    "Architecture": {
+      "type": "string",
+      "description": "Represents the CPU architecture of a machine or an OS image.",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "x-ms-enum": {
+        "name": "Architecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Amd64",
+            "value": "amd64",
+            "description": "64-bit x86 architecture."
+          },
+          {
+            "name": "Arm64",
+            "value": "arm64",
+            "description": "64-bit Arm architecture."
+          }
+        ]
       }
     },
     "AssemblyInfo": {
@@ -9000,6 +9226,33 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "error details.",
           "readOnly": true
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The progress percentage of the step.",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        },
+        "additionalData": {
+          "type": "array",
+          "description": "Additional metadata associated with the step.",
+          "items": {
+            "$ref": "#/definitions/Metadata"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "recommendedSteps": {
+          "type": "array",
+          "description": "Recommended steps to resolve failures in this step.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -9406,6 +9659,11 @@
           "description": "Size in bytes.",
           "readOnly": true
         },
+        "storageType": {
+          "$ref": "#/definitions/DiskStorageType",
+          "description": "Storage type of the disk.",
+          "readOnly": true
+        },
         "diskType": {
           "$ref": "#/definitions/DiskType",
           "description": "Type of the disk.",
@@ -9477,6 +9735,30 @@
             "name": "Unknown",
             "value": "Unknown",
             "description": "Disk state is unknown."
+          }
+        ]
+      }
+    },
+    "DiskStorageType": {
+      "type": "string",
+      "description": "Storage type of the disk.",
+      "enum": [
+        "SAN",
+        "S2D"
+      ],
+      "x-ms-enum": {
+        "name": "DiskStorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SAN",
+            "value": "SAN",
+            "description": "SAN storage."
+          },
+          {
+            "name": "S2D",
+            "value": "S2D",
+            "description": "Storage Spaces Direct storage."
           }
         ]
       }
@@ -12354,6 +12636,11 @@
           "type": "string",
           "description": "Process type of the machine",
           "readOnly": true
+        },
+        "architecture": {
+          "$ref": "#/definitions/Architecture",
+          "description": "CPU architecture of the machine, for example amd64 or arm64.",
+          "readOnly": true
         }
       }
     },
@@ -14042,6 +14329,24 @@
       },
       "readOnly": true
     },
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata associated with a deployment step.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the metadata entry."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the metadata entry."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
     "NetworkAdapter": {
       "type": "object",
       "description": "Network adapter configuration.",
@@ -14821,7 +15126,8 @@
       "enum": [
         "Provision",
         "Update",
-        "ReImage"
+        "ReImage",
+        "Reset"
       ],
       "x-ms-enum": {
         "name": "OSOperationType",
@@ -14841,6 +15147,11 @@
             "name": "ReImage",
             "value": "ReImage",
             "description": "OS ReImage operation"
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "OS Reset operation"
           }
         ]
       }
@@ -15087,6 +15398,72 @@
         }
       }
     },
+    "OsImage": {
+      "type": "object",
+      "description": "Represents a os image resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OsImageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OsImageListResult": {
+      "type": "object",
+      "description": "The response of a OsImage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OsImage items on this page",
+          "items": {
+            "$ref": "#/definitions/OsImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OsImageProperties": {
+      "type": "object",
+      "description": "Represents properties of a os image resource.",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string",
+          "description": "Represents validated solution recipe version of a os image."
+        },
+        "composedImageVersion": {
+          "type": "string",
+          "description": "Represents composed image version of a os image."
+        },
+        "composedImageIsoUrl": {
+          "type": "string",
+          "description": "Represents composed image iso download url of a os image."
+        },
+        "composedImageIsoHash": {
+          "type": "string",
+          "description": "Represents composed image iso hash of a os image."
+        },
+        "architecture": {
+          "$ref": "#/definitions/Architecture",
+          "description": "Represents the CPU architecture of an OS image, for example amd64 or arm64."
+        },
+        "solutionType": {
+          "$ref": "#/definitions/SolutionType",
+          "description": "The solution type (OS family) of the OS image, for example AzureLinux or HCI."
+        }
+      }
+    },
     "OsProfile": {
       "type": "object",
       "description": "OS configurations for HCI device.",
@@ -15172,7 +15549,8 @@
           "enum": [
             "Provision",
             "Update",
-            "ReImage"
+            "ReImage",
+            "Reset"
           ],
           "x-ms-enum": {
             "name": "OSOperationType",
@@ -15192,6 +15570,11 @@
                 "name": "ReImage",
                 "value": "ReImage",
                 "description": "OS ReImage operation"
+              },
+              {
+                "name": "Reset",
+                "value": "Reset",
+                "description": "OS Reset operation"
               }
             ]
           }
@@ -15302,6 +15685,10 @@
         "azureMachineId": {
           "type": "string",
           "description": "Azure Machine Id of the Ownership voucher"
+        },
+        "architecture": {
+          "$ref": "#/definitions/Architecture",
+          "description": "CPU architecture of the device, for example amd64 or arm64."
         },
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
@@ -17209,6 +17596,30 @@
         ]
       }
     },
+    "SolutionType": {
+      "type": "string",
+      "description": "Represents the solution type (OS family) of an OS image.",
+      "enum": [
+        "AzureLinux",
+        "HCI"
+      ],
+      "x-ms-enum": {
+        "name": "SolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "AzureLinux OS."
+          },
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "HCI OS."
+          }
+        ]
+      }
+    },
     "State": {
       "type": "string",
       "description": "Represents the current state of the update as it relates to this stamp. This includes phases such as preparation, installation, scanning, and error handling, providing insight into the update's progress and any issues encountered.",
@@ -18269,6 +18680,43 @@
       "required": [
         "userName",
         "secretType"
+      ]
+    },
+    "ValidateOwnershipVouchersRequest": {
+      "type": "object",
+      "description": "Validate Ownership Voucher Request",
+      "properties": {
+        "ownershipVoucherDetails": {
+          "type": "array",
+          "description": "Ownership Voucher Details.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/OwnershipVoucherDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ownershipVoucherDetails"
+      ]
+    },
+    "ValidateOwnershipVouchersResponse": {
+      "type": "object",
+      "description": "Validate Ownership Voucher Response",
+      "properties": {
+        "ownershipVoucherValidationDetails": {
+          "type": "array",
+          "description": "Ownership Voucher Validation Details.",
+          "items": {
+            "$ref": "#/definitions/OwnershipVoucherValidationDetails"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "ownershipVoucherValidationDetails"
       ]
     },
     "ValidateRequest": {

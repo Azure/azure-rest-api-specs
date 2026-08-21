@@ -4242,6 +4242,46 @@ model DeploymentStep {
   @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /**
+   * The progress percentage of the step.
+   */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  @maxValue(100)
+  percentComplete?: int32;
+
+  /**
+   * Additional metadata associated with the step.
+   */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["key"])
+  additionalData?: Metadata[];
+
+  /**
+   * Recommended steps to resolve failures in this step.
+   */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  recommendedSteps?: string[];
+}
+
+/**
+ * Metadata associated with a deployment step.
+ */
+@added(Versions.v2026_10_01)
+model Metadata {
+  /**
+   * The key of the metadata entry.
+   */
+  key: string;
+
+  /**
+   * The value of the metadata entry.
+   */
+  value: string;
 }
 
 /**
@@ -7935,6 +7975,13 @@ model HardwareProfile {
    */
   @visibility(Lifecycle.Read)
   processorType?: string;
+
+  /**
+   * CPU architecture of the machine, for example amd64 or arm64.
+   */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  architecture?: Architecture;
 }
 
 /**
@@ -8696,6 +8743,48 @@ union OSOperationType {
    * OS ReImage operation
    */
   ReImage: "ReImage",
+
+  /**
+   * OS Reset operation
+   */
+  @added(Versions.v2026_10_01)
+  Reset: "Reset",
+}
+
+/**
+ * Represents the CPU architecture of a machine or an OS image.
+ */
+@added(Versions.v2026_10_01)
+union Architecture {
+  string,
+
+  /**
+   * 64-bit x86 architecture.
+   */
+  Amd64: "amd64",
+
+  /**
+   * 64-bit Arm architecture.
+   */
+  Arm64: "arm64",
+}
+
+/**
+ * Represents the solution type (OS family) of an OS image.
+ */
+@added(Versions.v2026_10_01)
+union SolutionType {
+  string,
+
+  /**
+   * AzureLinux OS.
+   */
+  AzureLinux: "AzureLinux",
+
+  /**
+   * HCI OS.
+   */
+  HCI: "HCI",
 }
 
 /**
@@ -9046,7 +9135,7 @@ model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "OsImage is a read-only catalog proxy resource exposing available OS images; it has no lifecycle and therefore no provisioningState."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model OsImageProperties {
   /**
    * Represents validated solution recipe version of a os image.
@@ -9068,6 +9157,18 @@ model OsImageProperties {
    * Represents composed image iso hash of a os image.
    */
   composedImageIsoHash?: string;
+
+  /**
+   * Represents the CPU architecture of an OS image, for example amd64 or arm64.
+   */
+  @added(Versions.v2026_10_01)
+  architecture?: Architecture;
+
+  /**
+   * The solution type (OS family) of the OS image, for example AzureLinux or HCI.
+   */
+  @added(Versions.v2026_10_01)
+  solutionType?: SolutionType;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -9143,7 +9244,7 @@ model PlatformPayload {
 /**
  * Validate Ownership Voucher Request
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model ValidateOwnershipVouchersRequest {
   /**
    * Ownership Voucher Details.
@@ -9156,7 +9257,7 @@ model ValidateOwnershipVouchersRequest {
 /**
  * Validate Ownership Voucher Response
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model ValidateOwnershipVouchersResponse {
   /**
    * Ownership Voucher Validation Details.
@@ -9204,6 +9305,12 @@ model OwnershipVoucherValidationDetails {
    * Azure Machine Id of the Ownership voucher
    */
   azureMachineId?: string;
+
+  /**
+   * CPU architecture of the device, for example amd64 or arm64.
+   */
+  @added(Versions.v2026_10_01)
+  architecture?: Architecture;
 
   /**
    * Error details if the validation failed.
@@ -10548,6 +10655,11 @@ model DiskReportedProperties {
   @visibility(Lifecycle.Read)
   sizeInBytes?: string;
 
+  /** Storage type of the disk. */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  storageType?: DiskStorageType;
+
   /** Type of the disk. */
   @visibility(Lifecycle.Read)
   diskType?: DiskType;
@@ -10600,6 +10712,20 @@ union DiskType {
 
   /** Other disk type. */
   Other: "Other",
+}
+
+/**
+ * Storage type of the disk.
+ */
+@added(Versions.v2026_10_01)
+union DiskStorageType {
+  string,
+
+  /** SAN storage. */
+  SAN: "SAN",
+
+  /** Storage Spaces Direct storage. */
+  S2D: "S2D",
 }
 
 /**

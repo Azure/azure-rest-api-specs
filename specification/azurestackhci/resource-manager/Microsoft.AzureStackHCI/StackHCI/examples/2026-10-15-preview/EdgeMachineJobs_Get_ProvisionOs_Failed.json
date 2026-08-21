@@ -121,7 +121,14 @@
                   "description": "DownloadWorkItem with ID : 1b9ab2b7-b5aa-4a9c-bd99-308204664ba4 timed out. If you see this internal error, contact Microsoft Support.",
                   "startTimeUtc": "2026-05-25T06:39:21.9170413Z",
                   "endTimeUtc": "2026-05-25T07:39:23.2833341Z",
-                  "status": "Succeeded"
+                  "status": "Succeeded",
+                  "percentComplete": 100,
+                  "additionalData": [
+                    {
+                      "key": "DownloadProgress",
+                      "value": "{\"status\":\"Succeeded\",\"percentComplete\":100}"
+                    }
+                  ]
                 },
                 {
                   "name": "SBEDiscoveryDownload",
@@ -168,7 +175,11 @@
                         "target": "BootIntoTargetOS"
                       }
                     ]
-                  }
+                  },
+                  "recommendedSteps": [
+                    "Verify the edge machine has stable network connectivity to the OS image location and retry the ProvisionOs job.",
+                    "Ensure the required outbound endpoints are reachable and not throttled by a proxy or firewall."
+                  ]
                 },
                 {
                   "name": "ValidateStagedArtifacts",
