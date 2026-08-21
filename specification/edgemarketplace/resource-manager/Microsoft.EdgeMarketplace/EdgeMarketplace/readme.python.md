@@ -13,7 +13,7 @@ package-version: 24-10-01
 clear-output-folder: true
 ```
 
-``` yaml $(python)
+```yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace
 ```
