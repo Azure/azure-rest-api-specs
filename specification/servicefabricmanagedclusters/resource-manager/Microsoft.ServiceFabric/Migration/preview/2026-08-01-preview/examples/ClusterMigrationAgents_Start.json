@@ -16,13 +16,18 @@
         "location": "eastus",
         "properties": {
           "migrationId": "11111111-2222-3333-4444-555555555555",
-          "sourceClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusters/mySourceCluster",
-          "targetClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myTargetCluster",
+          "sourceClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceRg/providers/Microsoft.ServiceFabric/clusters/mengsftest6",
+          "targetClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/targetRg/providers/Microsoft.ServiceFabric/managedClusters/mengsftest6",
           "nodeTypes": [
             {
-              "name": "nt1",
+              "name": "SF",
               "isPrimary": true,
               "vmInstanceCount": 5
+            },
+            {
+              "name": "BE",
+              "isPrimary": false,
+              "vmInstanceCount": 3
             }
           ],
           "rollbackOnFailure": false,
@@ -32,11 +37,123 @@
           "migrationMode": "Forward",
           "stages": [
             {
-              "name": "PrepareTargetCluster",
+              "name": "Initialization",
               "index": 1,
               "forward": {
                 "status": "InProgress",
-                "startedTime": "2026-06-01T18:00:00Z",
+                "startedTime": "2026-08-01T18:00:00Z",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Prepare cluster mengsftest6 for migration",
+              "index": 2,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Create new managed cluster resource mengsftest6",
+              "index": 3,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Update new cluster with migration settings",
+              "index": 4,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Configure cluster with node bootstrap settings (clusterManifest, cab)",
+              "index": 5,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Deploy new node type SF",
+              "index": 6,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Deploy new node type BE",
+              "index": 7,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Upgrade cluster with new configurations",
+              "index": 8,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Migrate nodes in BE node type",
+              "index": 9,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Delete nodes in BE node type",
+              "index": 10,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Migrate seed nodes to new cluster",
+              "index": 11,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Migrate nodes in SF node type",
+              "index": 12,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Delete nodes in SF node type",
+              "index": 13,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Delete old cluster mengsftest6",
+              "index": 14,
+              "forward": {
+                "status": "None",
+                "retryCount": 0
+              }
+            },
+            {
+              "name": "Finalize migration",
+              "index": 15,
+              "forward": {
+                "status": "None",
                 "retryCount": 0
               }
             }
