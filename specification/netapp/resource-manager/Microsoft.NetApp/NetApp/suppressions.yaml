@@ -161,3 +161,10 @@
   reason: Extra swaggers left behind when versions were removed from TypeSpec
   paths:
     - ./preview/2025-09-01-preview/netapp.json
+
+# The SDK emitters intentionally remain pinned to the latest preview version.
+- tool: TypeSpecValidation
+  rules: [StaleApiVersionPin]
+  reason: SDK emitters intentionally remain pinned to 2026-06-15-preview.
+  paths:
+    - .
