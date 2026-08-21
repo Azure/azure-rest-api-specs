@@ -5344,6 +5344,152 @@
         }
       }
     },
+    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json": {
+      "get": {
+        "operationId": "AgentInvocations_getAgentInvocationAsyncApiSpecJson",
+        "summary": "Get an agent invocation AsyncAPI spec (JSON)",
+        "description": "Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven\ninvocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the\ncompanion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.\n\nBefore serving the document, the service performs baseline validation checks including\ndocument size limits, external reference restrictions, and structural validity checks.\nValidation failures return 400.\n\nReturns 404 if the agent version does not publish an AsyncAPI specification.\nPublishing is optional; when published, JSON and YAML representations may be served as\nseparately stored artifacts.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "unevaluatedProperties": {}
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ]
+      }
+    },
+    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml": {
+      "get": {
+        "operationId": "AgentInvocations_getAgentInvocationAsyncApiSpecYaml",
+        "summary": "Get an agent invocation AsyncAPI spec (YAML)",
+        "description": "Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven\ninvocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path\nextension is authoritative for the returned content type (no `Accept` negotiation).\n\nBefore serving the document, the service performs baseline validation checks including\ndocument size limits, external reference restrictions, and structural validity checks.\nValidation failures return 400.\n\nReturns 404 if the agent version does not publish an AsyncAPI specification, or if only\na JSON representation is published for that version.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "type": "object",
+                  "unevaluatedProperties": {}
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ]
+      }
+    },
     "/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream": {
       "get": {
         "operationId": "Agents_getSessionLogStream",
