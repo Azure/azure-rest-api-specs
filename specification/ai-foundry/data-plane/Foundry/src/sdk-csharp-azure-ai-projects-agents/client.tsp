@@ -25,6 +25,12 @@ namespace Azure.AI.Projects {
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
 
+  // The Realtime message base now owns the `message` discriminator in the
+  // OpenAI hierarchy. Do not regenerate duplicate leaf properties in C#.
+  @@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!csharp");
+  @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
+  @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
@@ -326,6 +332,9 @@ namespace Azure.AI.Projects {
   @@access(Agents.createAgentVersionFromCode, Access.internal);
   @@access(Agents.downloadAgentCode, Access.internal);
 
+  // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
+  @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
+
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
   // --------------------------------------------------------------------------------
@@ -391,14 +400,5 @@ namespace Azure.AI.Projects {
   @@clientName(
     AgentOptimizationDatasetItem.desired_num_turns,
     "DesiredTurnCount"
-  );
-
-  // Keep the Voice Agent wire hierarchy local while aligning its generated C#
-  // root with the OpenAI Realtime conversation-item hierarchy.
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The upstream OpenAI package has disconnected message and conversation-item roots; rebase the Voice extension root until that hierarchy is normalized upstream."
-  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-    VoiceConversationItem,
-    OpenAI.RealtimeConversationItem,
-    "csharp"
   );
 }

@@ -138,54 +138,11 @@ model VoiceResponse extends OmitProperties<
   completed_at?: FoundryTimestamp;
 }
 
-// Message content parts reuse OpenAI's Realtime message content models directly (per-role, inline
-// `text`/`audio`/`image_url`/`transcript`/`detail` fields, matching the OpenAI GA wire format exactly,
-// including base64 inline audio), already available in this program via
-// ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's realtime models.tsp:
-//   - OpenAI.RealtimeConversationItemMessageSystemContent (system: input_text only)
-//   - OpenAI.RealtimeConversationItemMessageUserContent (user: input_text | input_audio | input_image)
-//   - OpenAI.RealtimeConversationItemMessageAssistantContent (assistant: output_text | output_audio)
-// See the three role variants (VoiceSystemMessageItem, VoiceUserMessageItem, VoiceAssistantMessageItem)
-// below, each of which extends its OpenAI role-specific message model directly.
-
 // ---------------------------------------------------------------------------
-// Conversation items — OpenAI Realtime fields with Foundry persistence data
+// Conversation items — OpenAI Realtime hierarchy with Foundry persistence data
 // ---------------------------------------------------------------------------
 
-@doc("The type of a persisted voice conversation item.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceConversationItemType {
-  string,
-
-  @doc("A message item.")
-  message: "message",
-
-  @doc("A function-call request item.")
-  function_call: "function_call",
-
-  @doc("A function-call output item.")
-  function_call_output: "function_call_output",
-
-  @doc("An MCP list-tools item.")
-  mcp_list_tools: "mcp_list_tools",
-
-  @doc("An MCP call item.")
-  mcp_call: "mcp_call",
-
-  @doc("An MCP approval request item.")
-  mcp_approval_request: "mcp_approval_request",
-
-  @doc("An MCP approval response item.")
-  mcp_approval_response: "mcp_approval_response",
-}
-
-@doc("A persisted item in a voice conversation.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationItem {
-  @doc("The type of the conversation item.")
-  type: VoiceConversationItemType;
-
+alias VoiceConversationItemPersistence = {
   @doc("The Unix timestamp (in seconds) for when the item was persisted.")
   @visibility(Lifecycle.Read)
   created_at?: FoundryTimestamp;
@@ -193,91 +150,92 @@ model VoiceConversationItem {
   @doc("The id of the response that produced this item, when applicable.")
   @visibility(Lifecycle.Read)
   response_id?: string;
-}
+};
 
-@doc("A persisted message item in a voice conversation.")
-@discriminator("role")
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Voice conversation items extend the corresponding OpenAI Realtime item models and are selected by their inherited `type` and `role` properties."
+@doc("A persisted item in a voice conversation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceMessageItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.message;
-
-  @doc("The role of the message sender.")
-  role: OpenAI.RealtimeConversationItemMessageType;
+@oneOf
+union VoiceConversationItem {
+  system: VoiceSystemMessageItem,
+  user: VoiceUserMessageItem,
+  assistant: VoiceAssistantMessageItem,
+  function_call: VoiceFunctionCallItem,
+  function_call_output: VoiceFunctionCallOutputItem,
+  mcp_list_tools: VoiceMcpListToolsItem,
+  mcp_call: VoiceMcpCallItem,
+  mcp_approval_request: VoiceMcpApprovalRequestItem,
+  mcp_approval_response: VoiceMcpApprovalResponseItem,
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("A system message item. Only `input_text` content is valid for system messages.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceSystemMessageItem extends VoiceMessageItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemMessageSystem,
-    "type" | "role"
-  >;
-  role: OpenAI.RealtimeConversationItemMessageType.system;
+model VoiceSystemMessageItem
+  extends OpenAI.RealtimeConversationItemMessageSystem {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceUserMessageItem extends VoiceMessageItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemMessageUser,
-    "type" | "role"
-  >;
-  role: OpenAI.RealtimeConversationItemMessageType.user;
+model VoiceUserMessageItem extends OpenAI.RealtimeConversationItemMessageUser {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAssistantMessageItem extends VoiceMessageItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemMessageAssistant,
-    "type" | "role"
-  >;
-  role: OpenAI.RealtimeConversationItemMessageType.assistant;
+model VoiceAssistantMessageItem
+  extends OpenAI.RealtimeConversationItemMessageAssistant {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("A function call request item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceFunctionCallItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeConversationItemFunctionCall, "type">;
-  type: VoiceConversationItemType.function_call;
+model VoiceFunctionCallItem
+  extends OpenAI.RealtimeConversationItemFunctionCall {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("A function call output item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceFunctionCallOutputItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeConversationItemFunctionCallOutput, "type">;
-  type: VoiceConversationItemType.function_call_output;
+model VoiceFunctionCallOutputItem
+  extends OpenAI.RealtimeConversationItemFunctionCallOutput {
+  ...VoiceConversationItemPersistence;
 
   @doc("The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`.")
   name?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("An MCP list-tools item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceMcpListToolsItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeMCPListTools, "type">;
-  type: VoiceConversationItemType.mcp_list_tools;
+model VoiceMcpListToolsItem extends OpenAI.RealtimeMCPListTools {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("An MCP call item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceMcpCallItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeMCPToolCall, "type">;
-  type: VoiceConversationItemType.mcp_call;
+model VoiceMcpCallItem extends OpenAI.RealtimeMCPToolCall {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("An MCP approval request item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceMcpApprovalRequestItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeMCPApprovalRequest, "type">;
-  type: VoiceConversationItemType.mcp_approval_request;
+model VoiceMcpApprovalRequestItem extends OpenAI.RealtimeMCPApprovalRequest {
+  ...VoiceConversationItemPersistence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the matching OpenAI Realtime leaf preserves one SDK inheritance path while adding Foundry persistence fields."
 @doc("An MCP approval response item (client-created).")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceMcpApprovalResponseItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeMCPApprovalResponse, "type">;
-  type: VoiceConversationItemType.mcp_approval_response;
+model VoiceMcpApprovalResponseItem extends OpenAI.RealtimeMCPApprovalResponse {
+  ...VoiceConversationItemPersistence;
 }
 
 // ---------------------------------------------------------------------------
