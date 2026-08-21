@@ -50,7 +50,7 @@ model CustomAIModelProperties {
   baseModel: BaseModelReference;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Azure resource id of the ModelSource to use when pulling artifacts. Required for `MicrosoftFoundry` sources and for gated/private `HuggingFace` repositories; omitted for public models. Immutable after creation.")
+  @doc("Azure resource id of the ModelSource to use when pulling artifacts. Used to determine model location and access. Immutable after creation.")
   modelSourceResourceId: ModelSourceResourceId;
 
   @doc("Optional. Free-form description of the model. Mutable.")
