@@ -23,7 +23,42 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ``` yaml
 directive:
   - suppress: AvoidAdditionalProperties
-  - from: configurationmanager.json
+    from: configurationmanager.json
+    where:
+      - $.definitions.ConfigTemplateSchemaProperties.properties.value
+      - $.definitions.ConfigTemplateVersionProperties.properties.configurations
+      - $.definitions.ExecutionProperties.properties.specification
+      - $.definitions.ExecutionPropertiesUpdate.properties.specification
+      - $.definitions.ExecutionV2Properties.properties.specification
+      - $.definitions.SchemaVersionProperties.properties.value
+      - $.definitions.SolutionSchemaProperties.properties.value
+      - $.definitions.SolutionDeploymentProperties.properties.input
+      - $.definitions.SolutionDeploymentProperties.properties.output
+      - $.definitions.SolutionTemplateVersionProperties.properties.configurations      
+      - $.definitions.SolutionTemplateVersionProperties.properties.specification
+      - $.definitions.SolutionTemplateVersionPropertiesUpdate.properties.specification
+      - $.definitions.SolutionVersionProperties.properties.configuration
+      - $.definitions.SolutionVersionProperties.properties.specification
+      - $.definitions.SolutionVersionProperties.properties.targetLevelConfiguration
+      - $.definitions.SolutionVersionPropertiesUpdate.properties.specification
+      - $.definitions.SolutionVersionSnapshot.properties.specification
+      - $.definitions.SolutionDeploymentUpdateProperties.properties.input
+      - $.definitions.StageSpec.properties.specification
+      - $.definitions.StageSpecTemplate.properties.specification
+      - $.definitions.StageStatus.properties.inputs
+      - $.definitions.StageStatus.properties.outputs
+      - $.definitions.TargetProperties.properties.targetSpecification
+      - $.definitions.TargetSnapshot.properties.targetSpecification
+      - $.definitions.TargetTemplateProperties.properties.targetSpec
+      - $.definitions.TargetTemplatePropertiesUpdate.properties.targetSpec
+      - $.definitions.TargetUpdateProperties.properties.targetSpecification
+      - $.definitions.TaskSpec.properties.specification
+      - $.definitions.WorkflowExecuteParameter.properties.inputs
+      - $.definitions.WorkflowTemplateReviewParameter.properties.stageTargetMap
+      - $.definitions.WorkflowVersionProperties.properties.specification
+      - $.definitions.WorkflowVersionPropertiesUpdate.properties.specification
+      - $.definitions.WorkflowVersionV2Properties.properties.specification
+      - $.definitions.WorkflowVersionV2PropertiesUpdate.properties.specification
     reason: RP depends on another service called k8s bridge which is facing issues during serialization of data. The changes required in that service will not be implemented before our public preview, so we need to go ahead with using Record which adds this. Check https://msazure.visualstudio.com/One/_workitems/edit/31068512
 ```
 
@@ -38,7 +73,25 @@ These are the global settings for the configurationmanager.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-03-01
+tag: package-2026-06-01
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - stable/2026-06-01/configurationmanager.json
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/configurationmanager.json
 ```
 
 ### Tag: package-2026-03-01
@@ -48,15 +101,6 @@ These settings apply only when `--tag=package-2026-03-01` is specified on the co
 ```yaml $(tag) == 'package-2026-03-01'
 input-file:
   - stable/2026-03-01/configurationmanager.json
-```
-
-### Tag: package-2025-08-15-preview
-
-These settings apply only when `--tag=package-2025-08-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-08-15-preview'
-input-file:
-  - preview/2025-08-15-preview/configurationmanager.json
 ```
 
 ### Tag: package-2025-08-01
@@ -77,6 +121,42 @@ input-file:
   - stable/2025-06-01/configurationmanager.json
 ```
 
+### Tag: package-2025-08-15-preview
+
+These settings apply only when `--tag=package-2025-08-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-15-preview'
+input-file:
+  - preview/2025-08-15-preview/configurationmanager.json
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - preview/2025-01-01-preview/configurationmanager.json
+```
+
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - preview/2024-08-01-preview/configurationmanager.json
+```
+
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+  - preview/2024-06-01-preview/configurationmanager.json
+```
+
 ---
 
 ---
@@ -86,25 +166,14 @@ directive:
   - suppress: OperationsAPIImplementation
     from: configurationmanager.json
     reason: RP is in Public and PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
-  
-  - suppress: PostResponseCodes
+  - suppress: ProvisioningStateSpecifiedForLROPut
     from: configurationmanager.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/linkToHierarchies"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/unLinkFromHierarchies"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/removeVersion"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkDeploySolution"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkPublishSolution"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkReviewSolution"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/installSolution"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/uninstallSolution"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/removeRevision"].post
-    reason: |
-      False positive. These are fire-and-forget LRO POST actions generated from the
-      recommended TypeSpec template ArmResourceActionNoResponseContentAsync, which
-      emits {202, default}. The LintDiff PostResponseCodes rule still requires
-      {202, 204, default}, a known mismatch between the recommended template and
-      the validator.
+      - $.definitions.HierarchyConfigurationMetadataProperties
+      - $.definitions.HierarchyConfigurationMetadataVersionProperties
+      - $.definitions.SolutionMetadataProperties
+      - $.definitions.SolutionMetadataVersionProperties
+    reason: Adding provisioning state will break polymorphism
 
 ```
 ---
@@ -120,8 +189,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
+  # - repo: azure-sdk-for-go
+  # - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -145,7 +214,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)

@@ -7,11 +7,7 @@ import "@typespec/openapi";
 import "./ProvisioningState.tsp";
 import "./SchemaVersion.tsp";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
+using Rest;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
