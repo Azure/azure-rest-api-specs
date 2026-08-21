@@ -558,9 +558,33 @@ model VoiceEndOfUtteranceDetection {
   timeout_ms?: duration;
 }
 
+@doc("A bundled Voice Live profile for Azure semantic voice activity detection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAzureSemanticVadProfile {
+  string,
+
+  @doc("Disables profile expansion and uses explicit turn-detection settings.")
+  none: null,
+
+  @doc("Preserves the current default turn-detection behavior.")
+  classic: "classic",
+
+  @doc("Prioritizes fast turn detection.")
+  eager: "eager",
+
+  @doc("Balances turn-detection latency and tolerance for pauses.")
+  normal: "normal",
+
+  @doc("Prioritizes tolerance for longer pauses.")
+  patient: "patient",
+}
+
 /** Options shared by Azure semantic voice activity detection configurations. */
 #suppress "@azure-tools/typespec-azure-core/known-encoding" "The existing voice-agent wire contract requires integer-millisecond durations."
 alias VoiceAzureSemanticVadOptions = {
+  @doc("The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.")
+  profile?: VoiceAzureSemanticVadProfile = VoiceAzureSemanticVadProfile.classic;
+
   @doc("Activation threshold for voice activity detection, from 0 to 1.")
   @minValue(0)
   @maxValue(1)

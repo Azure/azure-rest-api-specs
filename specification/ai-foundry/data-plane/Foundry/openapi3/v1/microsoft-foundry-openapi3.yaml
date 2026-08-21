@@ -84662,6 +84662,10 @@ components:
           type: string
           enum:
             - azure_semantic_vad_en
+        profile:
+          $ref: '#/components/schemas/VoiceAzureSemanticVadProfile'
+          description: The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.
+          default: classic
         threshold:
           type: number
           format: float
@@ -84716,6 +84720,10 @@ components:
           type: string
           enum:
             - azure_semantic_vad_multilingual
+        profile:
+          $ref: '#/components/schemas/VoiceAzureSemanticVadProfile'
+          description: The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.
+          default: classic
         threshold:
           type: number
           format: float
@@ -84766,6 +84774,20 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAzureSemanticVadProfile:
+      anyOf:
+        - type: string
+        - type: 'null'
+        - type: string
+          enum:
+            - classic
+            - eager
+            - normal
+            - patient
+      description: A bundled Voice Live profile for Azure semantic voice activity detection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAzureSemanticVadTurnDetection:
       type: object
       required:
@@ -84775,6 +84797,10 @@ components:
           type: string
           enum:
             - azure_semantic_vad
+        profile:
+          $ref: '#/components/schemas/VoiceAzureSemanticVadProfile'
+          description: The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.
+          default: classic
         threshold:
           type: number
           format: float

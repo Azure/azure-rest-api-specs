@@ -872,44 +872,6 @@
       "type": "object",
       "description": "Server Speech Detection (Azure semantic VAD, default variant).",
       "properties": {
-        "profile": {
-          "type": "string",
-          "description": "Selects a bundled VAD configuration. Defaults to `classic` when omitted.\nSet to `null` to disable profile expansion and use explicit field values.",
-          "default": "classic",
-          "enum": [
-            "classic",
-            "eager",
-            "normal",
-            "patient"
-          ],
-          "x-ms-enum": {
-            "name": "AzureSemanticVadProfile",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "classic",
-                "value": "classic",
-                "description": "Preserves the current default VAD behavior."
-              },
-              {
-                "name": "eager",
-                "value": "eager",
-                "description": "Prioritizes fast turn detection."
-              },
-              {
-                "name": "normal",
-                "value": "normal",
-                "description": "Balances turn-detection latency and tolerance for pauses."
-              },
-              {
-                "name": "patient",
-                "value": "patient",
-                "description": "Prioritizes tolerance for longer pauses."
-              }
-            ]
-          },
-          "x-nullable": true
-        },
         "threshold": {
           "type": "number",
           "format": "float",
@@ -975,44 +937,6 @@
       "type": "object",
       "description": "Server Speech Detection (Azure semantic VAD, English-only).",
       "properties": {
-        "profile": {
-          "type": "string",
-          "description": "Selects a bundled VAD configuration. Defaults to `classic` when omitted.\nSet to `null` to disable profile expansion and use explicit field values.",
-          "default": "classic",
-          "enum": [
-            "classic",
-            "eager",
-            "normal",
-            "patient"
-          ],
-          "x-ms-enum": {
-            "name": "AzureSemanticVadProfile",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "classic",
-                "value": "classic",
-                "description": "Preserves the current default VAD behavior."
-              },
-              {
-                "name": "eager",
-                "value": "eager",
-                "description": "Prioritizes fast turn detection."
-              },
-              {
-                "name": "normal",
-                "value": "normal",
-                "description": "Balances turn-detection latency and tolerance for pauses."
-              },
-              {
-                "name": "patient",
-                "value": "patient",
-                "description": "Prioritizes tolerance for longer pauses."
-              }
-            ]
-          },
-          "x-nullable": true
-        },
         "threshold": {
           "type": "number",
           "format": "float",
@@ -1071,44 +995,6 @@
       "type": "object",
       "description": "Server Speech Detection (Azure semantic VAD).",
       "properties": {
-        "profile": {
-          "type": "string",
-          "description": "Selects a bundled VAD configuration. Defaults to `classic` when omitted.\nSet to `null` to disable profile expansion and use explicit field values.",
-          "default": "classic",
-          "enum": [
-            "classic",
-            "eager",
-            "normal",
-            "patient"
-          ],
-          "x-ms-enum": {
-            "name": "AzureSemanticVadProfile",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "classic",
-                "value": "classic",
-                "description": "Preserves the current default VAD behavior."
-              },
-              {
-                "name": "eager",
-                "value": "eager",
-                "description": "Prioritizes fast turn detection."
-              },
-              {
-                "name": "normal",
-                "value": "normal",
-                "description": "Balances turn-detection latency and tolerance for pauses."
-              },
-              {
-                "name": "patient",
-                "value": "patient",
-                "description": "Prioritizes tolerance for longer pauses."
-              }
-            ]
-          },
-          "x-nullable": true
-        },
         "threshold": {
           "type": "number",
           "format": "float",
@@ -1169,43 +1055,6 @@
         }
       ],
       "x-ms-discriminator-value": "azure_semantic_vad_multilingual"
-    },
-    "AzureSemanticVadProfile": {
-      "type": "string",
-      "description": "Profile selectors for Voice Live-managed Azure semantic VAD.",
-      "enum": [
-        "classic",
-        "eager",
-        "normal",
-        "patient"
-      ],
-      "x-ms-enum": {
-        "name": "AzureSemanticVadProfile",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "classic",
-            "value": "classic",
-            "description": "Preserves the current default VAD behavior."
-          },
-          {
-            "name": "eager",
-            "value": "eager",
-            "description": "Prioritizes fast turn detection."
-          },
-          {
-            "name": "normal",
-            "value": "normal",
-            "description": "Balances turn-detection latency and tolerance for pauses."
-          },
-          {
-            "name": "patient",
-            "value": "patient",
-            "description": "Prioritizes tolerance for longer pauses."
-          }
-        ]
-      },
-      "x-nullable": true
     },
     "AzureStandardVoice": {
       "type": "object",

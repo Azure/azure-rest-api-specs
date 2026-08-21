@@ -844,27 +844,6 @@ union TurnDetectionType {
   azure_semantic_vad_multilingual: "azure_semantic_vad_multilingual",
 }
 
-/** Profile selectors for Voice Live-managed Azure semantic VAD. */
-@added(Versions.v2026_07_15)
-union AzureSemanticVadProfile {
-  string,
-
-  /** Disables profile expansion and preserves field-by-field VAD configuration. */
-  none: null,
-
-  /** Preserves the current default VAD behavior. */
-  classic: "classic",
-
-  /** Prioritizes fast turn detection. */
-  eager: "eager",
-
-  /** Balances turn-detection latency and tolerance for pauses. */
-  normal: "normal",
-
-  /** Prioritizes tolerance for longer pauses. */
-  patient: "patient",
-}
-
 /** Base model for VAD-based turn detection. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
@@ -900,14 +879,6 @@ model ServerVad extends TurnDetection {
 @usage(DualUsage)
 model AzureSemanticVad extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad;
-
-  /**
-   * Selects a bundled VAD configuration. Defaults to `classic` when omitted.
-   * Set to `null` to disable profile expansion and use explicit field values.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null disables profile expansion without disabling turn detection."
-  @added(Versions.v2026_07_15)
-  profile?: AzureSemanticVadProfile = AzureSemanticVadProfile.classic;
 
   /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
@@ -948,14 +919,6 @@ model AzureSemanticVad extends TurnDetection {
 model AzureSemanticVadEn extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_en;
 
-  /**
-   * Selects a bundled VAD configuration. Defaults to `classic` when omitted.
-   * Set to `null` to disable profile expansion and use explicit field values.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null disables profile expansion without disabling turn detection."
-  @added(Versions.v2026_07_15)
-  profile?: AzureSemanticVadProfile = AzureSemanticVadProfile.classic;
-
   /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
@@ -991,14 +954,6 @@ model AzureSemanticVadEn extends TurnDetection {
 @usage(DualUsage)
 model AzureSemanticVadMultilingual extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_multilingual;
-
-  /**
-   * Selects a bundled VAD configuration. Defaults to `classic` when omitted.
-   * Set to `null` to disable profile expansion and use explicit field values.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null disables profile expansion without disabling turn detection."
-  @added(Versions.v2026_07_15)
-  profile?: AzureSemanticVadProfile = AzureSemanticVadProfile.classic;
 
   /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
