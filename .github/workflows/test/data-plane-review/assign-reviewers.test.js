@@ -18,7 +18,7 @@ import assignReviewers, {
 
 /** Mock protected-labels config (as yaml.load would return). Gates the sign-off label. */
 const protectedLabelsConfig = {
-  "APIStewardshipBoard-SignedOff": ["username1", "username2"],
+  "data-plane-review-signoff": ["username1", "username2"],
 };
 
 function setupConfigMock() {
