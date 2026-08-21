@@ -113,7 +113,7 @@ model CrossTenantVaultMapping
     Resource = CrossTenantVaultMapping,
     KeyName = "mappingName",
     SegmentName = "crossTenantVaultMappings",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z][A-Za-z0-9]{1,99}$"
   >;
 }
 
