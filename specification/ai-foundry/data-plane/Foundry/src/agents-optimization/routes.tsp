@@ -121,6 +121,7 @@ interface AgentOptimizationJobCandidates {
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  @list
   listCandidates is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
     {
