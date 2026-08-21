@@ -323,6 +323,7 @@ union SourceScanAction {
 /**
  * Request to configure source scan for a protected item
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_07_01)
 model ProtectedItemConfigureSourceScanRequest {
   /**
