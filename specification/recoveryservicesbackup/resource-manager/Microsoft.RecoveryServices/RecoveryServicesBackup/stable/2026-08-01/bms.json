@@ -2143,9 +2143,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/fetchInstantItemRecoveryOperationResult": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/listInstantItemRecoveryOperationResult": {
       "post": {
-        "operationId": "ItemLevelRecoveryConnections_FetchInstantItemRecoveryOperationResult",
+        "operationId": "ItemLevelRecoveryConnections_ListInstantItemRecoveryOperationResult",
         "tags": [
           "ItemLevelRecoveryConnections"
         ],
@@ -2201,7 +2201,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstantItemRecoveryOperationResultRequestResource"
+              "$ref": "#/definitions/InstantItemRecoveryOperationResultRequest"
             }
           }
         ],
@@ -2220,8 +2220,8 @@
           }
         },
         "x-ms-examples": {
-          "Fetch the Instant Item Recovery operation result (mount scripts) for an active ILR session": {
-            "$ref": "./examples/AzureIaasVm/FetchInstantItemRecoveryOperationResult.json"
+          "List the Instant Item Recovery operation result (mount scripts) for an active ILR session": {
+            "$ref": "./examples/AzureIaasVm/ListInstantItemRecoveryOperationResult.json"
           }
         }
       }
@@ -10820,28 +10820,15 @@
     },
     "InstantItemRecoveryOperationResultRequest": {
       "type": "object",
-      "description": "Parameters for the fetchInstantItemRecoveryOperationResult action.",
+      "description": "Parameters for the listInstantItemRecoveryOperationResult action.",
       "properties": {
-        "operationId": {
+        "provisionInstantItemRecoveryOperationId": {
           "type": "string",
           "description": "Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved."
         }
       },
       "required": [
-        "operationId"
-      ]
-    },
-    "InstantItemRecoveryOperationResultRequestResource": {
-      "type": "object",
-      "description": "Request wrapping the parameters for the fetchInstantItemRecoveryOperationResult action.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InstantItemRecoveryOperationResultRequest",
-          "description": "InstantItemRecoveryOperationResultRequestResource properties"
-        }
-      },
-      "required": [
-        "properties"
+        "provisionInstantItemRecoveryOperationId"
       ]
     },
     "InstantItemRecoveryTarget": {

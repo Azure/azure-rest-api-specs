@@ -3162,25 +3162,14 @@ model ILRRequest {
 }
 
 /**
- * Request wrapping the parameters for the fetchInstantItemRecoveryOperationResult action.
- */
-@added(Versions.v2026_08_01)
-model InstantItemRecoveryOperationResultRequestResource {
-  /**
-   * InstantItemRecoveryOperationResultRequestResource properties
-   */
-  properties: InstantItemRecoveryOperationResultRequest;
-}
-
-/**
- * Parameters for the fetchInstantItemRecoveryOperationResult action.
+ * Parameters for the listInstantItemRecoveryOperationResult action.
  */
 @added(Versions.v2026_08_01)
 model InstantItemRecoveryOperationResultRequest {
   /**
    * Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved.
    */
-  operationId: string;
+  provisionInstantItemRecoveryOperationId: string;
 }
 
 /**

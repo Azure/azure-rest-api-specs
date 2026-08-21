@@ -145,10 +145,10 @@ interface ItemLevelRecoveryConnections {
    * Fetches the mount scripts (iSCSI connection details) for an active Instant Item Recovery (ILR) session on the recovery point. Required from API version 2026-08-01 onwards; replaces the scripts previously returned inline in the operationsStatus (ILR provision) response.
    */
   @added(Versions.v2026_08_01)
-  @action("fetchInstantItemRecoveryOperationResult")
-  fetchInstantItemRecoveryOperationResult is ArmResourceActionSync<
+  @action("listInstantItemRecoveryOperationResult")
+  listInstantItemRecoveryOperationResult is ArmResourceActionSync<
     RecoveryPointResource,
-    InstantItemRecoveryOperationResultRequestResource,
+    InstantItemRecoveryOperationResultRequest,
     ArmResponse<InstantItemRecoveryTarget>
   >;
 }
