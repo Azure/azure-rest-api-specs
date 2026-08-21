@@ -98,7 +98,7 @@ interface AppAttachPackages {
 
 /**
  * Operations for expanding MSIX files associated with App Attach packages.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 @armResourceOperations

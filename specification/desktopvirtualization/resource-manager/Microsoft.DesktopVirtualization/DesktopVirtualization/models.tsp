@@ -2727,6 +2727,7 @@ model HostPoolProperties {
 
   /**
    * The automatic update settings for supported first-party extensions.
+   * @Introduced in 2026-08-01-preview
    */
   @added(Versions.vLatestPreview)
   firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
@@ -2734,16 +2735,19 @@ model HostPoolProperties {
 
 /**
  * The automatic update settings for supported first-party extensions.
+ * @Introduced in 2026-08-01-preview
  */
 model FirstPartyExtensionAutoUpdateSettings {
   /**
    * Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.
+   * @Introduced in 2026-08-01-preview
    */
   @encodedName("application/json", "MicrosoftMultimediaRedirection")
   microsoftMultimediaRedirection?: boolean;
 
   /**
    * Whether automatic updates are enabled for the Teams Media Optimization extension.
+   * @Introduced in 2026-08-01-preview
    */
   @encodedName("application/json", "TeamsMediaOptimization")
   teamsMediaOptimization?: boolean;
@@ -3859,6 +3863,7 @@ model HostPoolPatchProperties {
 
   /**
    * The automatic update settings for supported first-party extensions.
+    * @Introduced in 2026-08-01-preview
    */
   @added(Versions.vLatestPreview)
   firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
@@ -5554,7 +5559,7 @@ model ProvisioningStatusProperty {
 
 /**
  * The source of the MSIX package.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 union MsixPackageSource {
@@ -5583,7 +5588,7 @@ union MsixPackageSource {
 
 /**
  * The output file type for the expanded MSIX file.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 union OutputFileType {
@@ -5602,7 +5607,7 @@ union OutputFileType {
 
 /**
  * Properties for expanding MSIX files.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 model ExpandMsixFileRequestProperties {
@@ -5644,7 +5649,7 @@ model ExpandMsixFileRequestProperties {
 
 /**
  * Request body for expanding MSIX files.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 model ExpandMsixFileRequest {
@@ -5656,7 +5661,7 @@ model ExpandMsixFileRequest {
 
 /**
  * Details about a file expansion failure.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 model ExpandMsixFileFailure {
@@ -5673,7 +5678,7 @@ model ExpandMsixFileFailure {
 
 /**
  * Result of expanding MSIX files.
- * @Introduced in 2026-08-01-preview
+ * @Introduced in 2026-02-01-preview
  */
 @added(Versions.vLatestPreview)
 model ExpandMsixFileResult {
