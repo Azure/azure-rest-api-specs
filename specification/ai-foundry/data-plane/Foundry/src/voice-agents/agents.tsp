@@ -864,6 +864,7 @@ union VoiceOutputModality {
   avatar: "avatar",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   The inputs for generating a voice agent. Only `kind` and `name` are always required.
   The authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.

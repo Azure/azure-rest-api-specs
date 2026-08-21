@@ -101,6 +101,7 @@ model VoiceResponseAudio {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
   `output` projection may be omitted; retrieve the
@@ -128,8 +129,18 @@ model VoiceResponse extends OmitProperties<
   @doc("A set of key-value pairs attached to the response.")
   metadata?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches OpenAI.RealtimeResponse.output_modalities: an inline literal array, not exported as a named union upstream."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
+  @doc("The output modalities used for the response, e.g. `[\"text\", \"audio\"]`. Audio output always includes a text transcript.")
+  output_modalities?: ("text" | "audio")[];
+
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The contract represents this as an integer token count or the literal string 'inf'."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
+  @doc("The maximum number of output tokens allowed for the response; an integer or the literal `inf`.")
+  max_output_tokens?: int32 | "inf";
 
   @doc("The Unix timestamp (in seconds) for when the response was created.")
   created_at?: FoundryTimestamp;
@@ -278,6 +289,7 @@ union VoiceAudioCodec {
   pcma: "pcma",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
@@ -317,6 +329,7 @@ model VoiceItemAudioResponse {
   blob_uri?: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioStreamResponse {
@@ -339,6 +352,7 @@ model VoiceRecordingChannelLayout {
   right: "agent";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
   agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
