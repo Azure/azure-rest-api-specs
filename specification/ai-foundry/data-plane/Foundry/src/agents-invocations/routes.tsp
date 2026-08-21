@@ -6,6 +6,14 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+/**
+ * An AsyncAPI document, as defined by the AsyncAPI Specification (https://www.asyncapi.com/).
+ * The document is a structured object whose shape is owned by the AsyncAPI specification and is
+ * therefore not modeled here. Serialization format (JSON or YAML) is selected by the request path
+ * and is conveyed by the `content-type` response header; it does not change the body type.
+ */
+alias AsyncApiDocument = Record<unknown>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Invocations")
 interface AgentInvocations {
@@ -55,7 +63,9 @@ interface AgentInvocations {
     },
     {
       @header contentType: "application/json";
-      @body spec: Record<unknown>;
+
+      /** The AsyncAPI document, serialized as JSON. */
+      @body spec: AsyncApiDocument;
     }
   >;
 
@@ -83,7 +93,9 @@ interface AgentInvocations {
     },
     {
       @header contentType: "application/yaml";
-      @body spec: string;
+
+      /** The AsyncAPI document, serialized as YAML. */
+      @body spec: AsyncApiDocument;
     }
   >;
 
