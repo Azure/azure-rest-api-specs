@@ -102,7 +102,7 @@ interface AgentOptimizationJobs {
       @path jobId: string;
 
       /** When true, force-deletes even if the job is in a non-terminal state (cancels first). Defaults to false, in which case a 409 Conflict is returned for non-terminal jobs. */
-      @query force?: boolean;
+      @query force?: boolean = false;
     },
     NoContentResponse
   >;
