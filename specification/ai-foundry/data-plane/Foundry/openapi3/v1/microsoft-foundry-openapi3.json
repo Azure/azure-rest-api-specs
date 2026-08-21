@@ -607,6 +607,17 @@
             }
           },
           {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "description": "When true, force-deletes even if the job is in a non-terminal state (cancels first). Defaults to false, in which case a 409 Conflict is returned for non-terminal jobs.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -30408,7 +30419,7 @@
           "avg_latency_ms": {
             "type": "number",
             "format": "double",
-            "description": "Average end-to-end latency per task in milliseconds."
+            "description": "Average end-to-end latency per task. Wire representation: milliseconds as a float."
           },
           "eval_id": {
             "type": "string",
@@ -30743,7 +30754,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 20,
-            "description": "Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. Default: 2.",
+            "description": "Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. If omitted, the service defaults to 2.",
             "default": 2
           },
           "eval_model": {
@@ -30763,7 +30774,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 50,
-            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Default: 5.",
+            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. If omitted, the service defaults to 5.",
             "default": 5
           },
           "reflection_minibatch_size": {
@@ -30771,7 +30782,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 100,
-            "description": "Number of items sampled per reflective minibatch. Default: 3.",
+            "description": "Number of items sampled per reflective minibatch. If omitted, the service defaults to 3.",
             "default": 3
           },
           "max_concurrent_agent_runs": {
@@ -30779,7 +30790,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). Default: 1 (sequential).",
+            "description": "Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). If omitted, the service defaults to 1 (sequential).",
             "default": 1
           },
           "target_attributes": {
@@ -31071,7 +31082,7 @@
           "elapsed_seconds": {
             "type": "number",
             "format": "double",
-            "description": "Wall-clock time elapsed in seconds since the job began executing."
+            "description": "Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float."
           },
           "in_progress_candidate": {
             "$ref": "#/components/schemas/AgentOptimizationInProgressCandidateInfo",
@@ -31153,17 +31164,17 @@
           "avg_latency_ms": {
             "type": "number",
             "format": "double",
-            "description": "Average per-call latency in milliseconds."
+            "description": "Average per-call latency. Wire representation: milliseconds as a float."
           },
           "p50_latency_ms": {
             "type": "number",
             "format": "double",
-            "description": "p50 (median) per-call latency in milliseconds. Omitted when the sample was too small to compute."
+            "description": "p50 (median) per-call latency. Omitted when the sample was too small to compute. Wire representation: milliseconds as a float."
           },
           "p95_latency_ms": {
             "type": "number",
             "format": "double",
-            "description": "p95 per-call latency in milliseconds. Omitted when the sample was too small to compute."
+            "description": "p95 per-call latency. Omitted when the sample was too small to compute. Wire representation: milliseconds as a float."
           },
           "call_count": {
             "type": "integer",
@@ -31207,7 +31218,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 20,
-            "description": "Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. Default: 2.",
+            "description": "Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. If omitted, the service defaults to 2.",
             "default": 2
           },
           "eval_model": {
@@ -31227,7 +31238,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 50,
-            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Default: 5.",
+            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. If omitted, the service defaults to 5.",
             "default": 5
           },
           "reflection_minibatch_size": {
@@ -31235,7 +31246,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 100,
-            "description": "Number of items sampled per reflective minibatch. Default: 3.",
+            "description": "Number of items sampled per reflective minibatch. If omitted, the service defaults to 3.",
             "default": 3
           },
           "max_concurrent_agent_runs": {
@@ -31243,7 +31254,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). Default: 1 (sequential).",
+            "description": "Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). If omitted, the service defaults to 1 (sequential).",
             "default": 1
           },
           "target_attributes": {
@@ -31334,7 +31345,8 @@
       "AgentOptimizationTokenUsageEntry": {
         "type": "object",
         "required": [
-          "layer"
+          "layer",
+          "model"
         ],
         "properties": {
           "layer": {
@@ -31343,7 +31355,7 @@
           },
           "model": {
             "type": "string",
-            "description": "Model deployment name that served the calls. Null when unattributed."
+            "description": "Model deployment name that served the calls. Empty string when the source sample didn't attribute a model."
           },
           "input_tokens": {
             "type": "integer",
@@ -31363,12 +31375,12 @@
           "cached_tokens": {
             "type": "integer",
             "format": "int64",
-            "description": "Input tokens served from the model's cache. Included in input_tokens (not additive). Null when the model did not report this metric."
+            "description": "Input tokens served from the model's cache. Included in input_tokens (not additive). Defaults to 0 when the model did not report this metric."
           },
           "reasoning_tokens": {
             "type": "integer",
             "format": "int64",
-            "description": "Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Null when the model did not report this metric."
+            "description": "Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Defaults to 0 when the model did not report this metric."
           }
         },
         "description": "Aggregated token usage attributable to a single layer of the optimization loop.",
