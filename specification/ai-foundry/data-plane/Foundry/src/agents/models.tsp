@@ -728,6 +728,7 @@ model AgentEndpointConfig {
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 
   @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
+  @visibility(Lifecycle.Read)
   publish_approval_status?: PublishApprovalStatus;
 }
 
