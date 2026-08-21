@@ -23,7 +23,9 @@ const VoiceAgentConversationRequiredPreviews = #{
 interface VoiceAgentWebSocket {
   /**
    * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value.
+   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. Supply the
+   * `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
+   * query parameter.
    *
    * If the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`
    * upgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with
@@ -33,11 +35,19 @@ interface VoiceAgentWebSocket {
   @summary("Connect to a voice agent")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice")
-  connectVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
+  connectVoiceAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent. */
       @path agent_name: string;
+
+      /**
+       * A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
+       * WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
+       * required.
+       */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
 
       /** An optional identifier used to correlate the voice session. */
       @query agent_session_id?: string;
