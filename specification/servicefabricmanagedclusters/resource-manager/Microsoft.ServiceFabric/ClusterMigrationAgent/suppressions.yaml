@@ -1,0 +1,6 @@
+# Avocado PR-mode checks look for a nearest readme before checking out the PR
+# source branch. This folder and its readme.md are both introduced by this PR,
+# so suppress the false MISSING_README report for the new folder.
+- tool: SwaggerAvocado
+  path: ./**
+  reason: readme.md is introduced with this new ClusterMigrationAgent TypeSpec project in the same PR.
