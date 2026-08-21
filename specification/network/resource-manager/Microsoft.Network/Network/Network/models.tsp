@@ -12371,7 +12371,6 @@ model ExpressRouteLagLink extends SubResource {
   /**
    * Name of child link resource that is unique among child link resources of the parent.
    */
-  @visibility(Lifecycle.Read)
   name: string;
 
   /**
@@ -12449,7 +12448,6 @@ model ExpressRouteLagMember extends SubResource {
   /**
    * Name of child member resource that is unique among child member resources of the parent.
    */
-  @visibility(Lifecycle.Read)
   name: string;
 
   /**
