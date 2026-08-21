@@ -692,10 +692,73 @@ model ProtocolConfiguration {
   invocations_ws?: InvocationsWsProtocolConfiguration;
 }
 
+@doc("An access boundary for the activity protocol.")
+union ActivityProtocolAccessBoundary {
+  string,
+
+  @doc("Allows read access to one-on-one developer conversations.")
+  read_1on1_developers: "read.1on1.developers",
+
+  @doc("Allows read access to one-on-one manager conversations.")
+  read_1on1_manager: "read.1on1.manager",
+
+  @doc("Allows read access to allowlisted one-on-one conversations.")
+  read_1on1_allowlisted: "read.1on1.allowlisted",
+
+  @doc("Allows read access to tenant-wide one-on-one conversations.")
+  read_1on1_tenant: "read.1on1.tenant",
+
+  @doc("Allows write access to one-on-one developer conversations.")
+  write_1on1_developers: "write.1on1.developers",
+
+  @doc("Allows write access to one-on-one manager conversations.")
+  write_1on1_manager: "write.1on1.manager",
+
+  @doc("Allows write access to allowlisted one-on-one conversations.")
+  write_1on1_allowlisted: "write.1on1.allowlisted",
+
+  @doc("Allows write access to tenant-wide one-on-one conversations.")
+  write_1on1_tenant: "write.1on1.tenant",
+
+  @doc("Allows read access to developer group conversations.")
+  read_group_developers: "read.group.developers",
+
+  @doc("Allows read access to allowlisted group conversations.")
+  read_group_allowlisted: "read.group.allowlisted",
+
+  @doc("Allows read access to group conversations where a manager is invited.")
+  read_group_manager_invited: "read.group.manager-invited",
+
+  @doc("Allows read access to group conversations where a manager is present.")
+  read_group_manager_present: "read.group.manager-present",
+
+  @doc("Allows read access to tenant-wide group conversations.")
+  read_group_tenant: "read.group.tenant",
+
+  @doc("Allows write access to developer group conversations.")
+  write_group_developers: "write.group.developers",
+
+  @doc("Allows write access to allowlisted group conversations.")
+  write_group_allowlisted: "write.group.allowlisted",
+
+  @doc("Allows write access to group conversations where a manager is invited.")
+  write_group_manager_invited: "write.group.manager-invited",
+
+  @doc("Allows write access to group conversations where a manager is present.")
+  write_group_manager_present: "write.group.manager-present",
+
+  @doc("Allows write access to tenant-wide group conversations.")
+  write_group_tenant: "write.group.tenant",
+}
+
 @doc("Configuration specific to the activity protocol.")
 model ActivityProtocolConfiguration {
   @doc("Whether to enable the M365 public endpoint for the activity protocol.")
   enable_m365_public_endpoint?: boolean;
+
+  @doc("The access boundaries for the activity protocol.")
+  @visibility(Lifecycle.Read)
+  access_boundaries?: ActivityProtocolAccessBoundary[];
 }
 
 @doc("Configuration specific to the responses protocol.")
