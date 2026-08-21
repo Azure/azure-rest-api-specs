@@ -89313,7 +89313,6 @@
         "required": [
           "event_id",
           "type",
-          "conversation_id",
           "session"
         ],
         "properties": {
@@ -89331,7 +89330,7 @@
           },
           "conversation_id": {
             "type": "string",
-            "description": "The id of the persisted conversation. Only present when conversation persistence is enabled for the session."
+            "description": "The session-scoped conversation id. When present, the same value is used in `session.created`, `response.created`, and `response.done`, regardless of whether conversation persistence is enabled."
           },
           "session": {
             "$ref": "#/components/schemas/VoiceAgentSessionResponseConfig",
