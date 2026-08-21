@@ -13453,6 +13453,18 @@ model IpamPoolProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * Minimum number of IP addresses required for allocations from this IpamPool to be compliant. Must be less than or equal to the maximum allocation size. If not specified or empty, no minimum is enforced.
+   */
+  @added(Versions.v2026_01_01)
+  minAllocationSize?: string;
+
+  /**
+   * Maximum number of IP addresses allowed for allocations from this IpamPool to be compliant. Must be greater than or equal to the minimum allocation size. If not specified or empty, no maximum is enforced.
+   */
+  @added(Versions.v2026_01_01)
+  maxAllocationSize?: string;
 }
 
 /**
@@ -13608,6 +13620,18 @@ model IpamPoolUpdateProperties {
    * String representing a friendly name for the resource.
    */
   displayName?: string;
+
+  /**
+   * Minimum number of IP addresses required for allocations from this IpamPool to be compliant. Must be less than or equal to the maximum allocation size. Omit to leave the current value unchanged; set to an empty string to clear it.
+   */
+  @added(Versions.v2026_01_01)
+  minAllocationSize?: string;
+
+  /**
+   * Maximum number of IP addresses allowed for allocations from this IpamPool to be compliant. Must be greater than or equal to the minimum allocation size. Omit to leave the current value unchanged; set to an empty string to clear it.
+   */
+  @added(Versions.v2026_01_01)
+  maxAllocationSize?: string;
 }
 
 /**
