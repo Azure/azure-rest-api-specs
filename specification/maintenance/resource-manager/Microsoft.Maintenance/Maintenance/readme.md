@@ -137,6 +137,18 @@ input-file:
 
 ---
 
+## Resource-group route casing
+
+New Maintenance resource-group-scoped APIs use lowercase `resourcegroups`. The
+service-wide segment override in `back-compatible.tsp` applies this convention
+automatically.
+
+Legacy camelCase routes preserve their published contracts with an explicit
+`@route`. The known exception is
+`MaintenanceConfigurationsForResourceGroupRoutes.list`, which retains
+`resourceGroups`. Any future legacy exception must declare its route explicitly
+rather than changing the service-wide lowercase default.
+
 # Code Generation
 
 ## Swagger to SDK
