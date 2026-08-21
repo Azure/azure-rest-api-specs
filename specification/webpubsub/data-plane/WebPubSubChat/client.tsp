@@ -12,10 +12,22 @@ model WebPubSubChatServiceClientOptions {
   hub: string;
 }
 
-@@clientName(WebPubSubChat.Chat, "WebPubSubChatService");
+@client({
+  name: "WebPubSubChatServiceClient",
+  service: WebPubSubChat,
+})
+interface WebPubSubChatServiceClient
+  extends WebPubSubChat.WebPubSubChatServiceClient {}
+
+@@clientName(WebPubSubChat.ChatMessage, "WebPubSubChatMessage", "csharp");
+@@clientName(
+  WebPubSubChat.MessageContent,
+  "WebPubSubChatMessageContent",
+  "csharp"
+);
 
 @@clientInitialization(
-  WebPubSubChat.Chat,
+  WebPubSubChatServiceClient,
   {
     parameters: WebPubSubChatServiceClientOptions,
   }
