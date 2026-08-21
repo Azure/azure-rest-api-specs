@@ -314,6 +314,57 @@ interface AgentEndpointConversations {
   >;
 
   /**
+   * Returns metadata for a conversation item's complete generated audio. This artifact is separate from the
+   * canonical heard-audio segment and exists only when playback was interrupted after the service generated the
+   * complete response audio. Returns `404` when the conversation, item, or generated audio was not persisted.
+   */
+  @summary("Get a voice agent conversation item's generated audio metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
+  @added(Versions.v1)
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationItemGeneratedAudio is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose complete generated audio metadata is retrieved. */
+      @path item_id: string;
+    },
+    VoiceItemAudioResponse
+  >;
+
+  /**
+   * Streams a conversation item's complete generated audio as a WAV (`audio/wav`) byte stream through the service.
+   * This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the bytes are not
+   * proxied, so this route returns `409 Conflict`. Returns `404` when the conversation, item, or generated audio was
+   * not persisted.
+   */
+  @summary("Stream a voice agent conversation item's generated audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
+  @added(Versions.v1)
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationItemGeneratedAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose complete generated audio is streamed. */
+      @path item_id: string;
+    },
+    VoiceAudioStreamResponse
+  >;
+
+  /**
    * Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
    * on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
    * for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
