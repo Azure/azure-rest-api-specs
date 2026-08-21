@@ -1,0 +1,43 @@
+{
+  "operationId": "OracleSubscriptions_Update",
+  "title": "OracleSubscriptions_update",
+  "parameters": {
+    "api-version": "2026-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "properties": {},
+    "plan": {
+      "name": "resource1",
+      "publisher": "publisher1",
+      "product": "product1",
+      "promotionCode": "none",
+      "version": "alpha"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/resources/resource1",
+        "type": "Oracle.Database/resource",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "saasSubscriptionId": "saas1",
+          "cloudAccountId": "ocid1..aaaaaa",
+          "cloudAccountState": "Pending"
+        },
+        "plan": {
+          "name": "resource1",
+          "publisher": "publisher1",
+          "product": "product1",
+          "promotionCode": "none",
+          "version": "alpha"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 10000000,
+        "Location": "eastus"
+      }
+    }
+  }
+}
