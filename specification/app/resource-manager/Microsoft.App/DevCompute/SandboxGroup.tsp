@@ -171,7 +171,7 @@ model OtlpTelemetryEndpoint extends TelemetryEndpoint {
   protocol: TelemetryProtocol;
 
   /** The authentication used when sending telemetry to the endpoint. When omitted, requests are sent without an authentication header. */
-  auth?: TelemetryHeaderAuth;
+  authentication?: TelemetryHeaderAuth;
 }
 
 /** A telemetry endpoint that sends telemetry to an Application Insights resource. */
@@ -180,7 +180,7 @@ model ApplicationInsightsTelemetryEndpoint extends TelemetryEndpoint {
   kind: "ApplicationInsights";
 
   /** The authentication used when sending telemetry to the endpoint. */
-  auth: TelemetryApplicationInsightsAuth;
+  authentication: TelemetryApplicationInsightsAuth;
 }
 
 /** A telemetry endpoint that sends telemetry to an Azure Monitor Log Analytics workspace through the Logs Ingestion API. */
@@ -189,16 +189,16 @@ model LogAnalyticsTelemetryEndpoint extends TelemetryEndpoint {
   kind: "LogAnalytics";
 
   /** The URL of the data collection endpoint that receives the telemetry. */
-  dceEndpoint: url;
+  dataCollectionEndpoint: url;
 
   /** The immutable ID of the data collection rule that processes the telemetry. */
-  dcrImmutableId: string;
+  dataCollectionRuleImmutableId: string;
 
   /** The name of the target stream in the data collection rule. */
   tableName: string;
 
   /** The managed identity used to authenticate to the data collection endpoint. */
-  auth: TelemetryAuth;
+  authentication: TelemetryAuth;
 }
 
 /** A category of telemetry that can be sent to a telemetry endpoint. */
@@ -250,31 +250,31 @@ model TelemetryApplicationInsightsAuth {
   secretKeyName: string;
 }
 
-/** The kind of managed identity used to authenticate to a telemetry endpoint. */
-union TelemetryAuthKind {
+/** The type of managed identity used to authenticate to a telemetry endpoint. */
+union TelemetryAuthType {
   string,
 
   /** A user-assigned managed identity. */
-  ManagedIdentity: "ManagedIdentity",
+  UserAssigned: "UserAssigned",
 
   /** The system-assigned managed identity of the sandbox group. */
-  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+  SystemAssigned: "SystemAssigned",
 }
 
 /** The managed identity used to authenticate to a telemetry endpoint. */
-@discriminator("kind")
+@discriminator("type")
 model TelemetryAuth {
-  /** The kind of managed identity used to authenticate to the telemetry endpoint. */
-  kind: TelemetryAuthKind;
+  /** The type of managed identity used to authenticate to the telemetry endpoint. */
+  type: TelemetryAuthType;
 }
 
 /** Authentication that uses a user-assigned managed identity. */
-model TelemetryManagedIdentityAuth extends TelemetryAuth {
-  /** The kind of managed identity used to authenticate to the telemetry endpoint. */
-  kind: "ManagedIdentity";
+model TelemetryUserAssignedIdentityAuth extends TelemetryAuth {
+  /** The type of managed identity used to authenticate to the telemetry endpoint. */
+  type: "UserAssigned";
 
   /** The resource ID of the user-assigned managed identity. The identity must be assigned to the sandbox group. */
-  identity: armResourceIdentifier<[
+  identityResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
@@ -282,9 +282,9 @@ model TelemetryManagedIdentityAuth extends TelemetryAuth {
 }
 
 /** Authentication that uses the system-assigned managed identity of the sandbox group. */
-model TelemetrySystemAssignedManagedIdentityAuth extends TelemetryAuth {
-  /** The kind of managed identity used to authenticate to the telemetry endpoint. */
-  kind: "SystemAssignedManagedIdentity";
+model TelemetrySystemAssignedIdentityAuth extends TelemetryAuth {
+  /** The type of managed identity used to authenticate to the telemetry endpoint. */
+  type: "SystemAssigned";
 }
 
 /** The kind of a custom log output column. */

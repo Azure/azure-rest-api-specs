@@ -14,15 +14,29 @@
           "endpoints": [
             {
               "kind": "LogAnalytics",
-              "dceEndpoint": "https://example-dce-a1b2.eastus-1.ingest.monitor.azure.com",
-              "dcrImmutableId": "dcr-8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f",
+              "dataCollectionEndpoint": "https://example-dce-a1b2.eastus-1.ingest.monitor.azure.com",
+              "dataCollectionRuleImmutableId": "dcr-8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f",
               "tableName": "Custom-SandboxLogs_CL",
-              "auth": {
-                "kind": "SystemAssignedManagedIdentity"
+              "authentication": {
+                "type": "UserAssigned",
+                "identityResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleidentity"
               },
               "data": [
                 "ContainerStdoutStderr",
                 "Metrics"
+              ]
+            },
+            {
+              "kind": "OTLP",
+              "endpoint": "https://example-collector.contoso.com/otlp",
+              "protocol": "Grpc",
+              "authentication": {
+                "headerName": "Authorization",
+                "secretId": "telemetry-secrets",
+                "secretKeyName": "collectorToken"
+              },
+              "data": [
+                "ContainerOtel"
               ]
             }
           ],
@@ -48,15 +62,29 @@
             "endpoints": [
               {
                 "kind": "LogAnalytics",
-                "dceEndpoint": "https://example-dce-a1b2.eastus-1.ingest.monitor.azure.com",
-                "dcrImmutableId": "dcr-8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f",
+                "dataCollectionEndpoint": "https://example-dce-a1b2.eastus-1.ingest.monitor.azure.com",
+                "dataCollectionRuleImmutableId": "dcr-8c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f",
                 "tableName": "Custom-SandboxLogs_CL",
-                "auth": {
-                  "kind": "SystemAssignedManagedIdentity"
+                "authentication": {
+                  "type": "UserAssigned",
+                  "identityResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleidentity"
                 },
                 "data": [
                   "ContainerStdoutStderr",
                   "Metrics"
+                ]
+              },
+              {
+                "kind": "OTLP",
+                "endpoint": "https://example-collector.contoso.com/otlp",
+                "protocol": "Grpc",
+                "authentication": {
+                  "headerName": "Authorization",
+                  "secretId": "telemetry-secrets",
+                  "secretKeyName": "collectorToken"
+                },
+                "data": [
+                  "ContainerOtel"
                 ]
               }
             ],

@@ -629,13 +629,13 @@
       "type": "object",
       "description": "A telemetry endpoint that sends telemetry to an Application Insights resource.",
       "properties": {
-        "auth": {
+        "authentication": {
           "$ref": "#/definitions/TelemetryApplicationInsightsAuth",
           "description": "The authentication used when sending telemetry to the endpoint."
         }
       },
       "required": [
-        "auth"
+        "authentication"
       ],
       "allOf": [
         {
@@ -672,12 +672,12 @@
       "type": "object",
       "description": "A telemetry endpoint that sends telemetry to an Azure Monitor Log Analytics workspace through the Logs Ingestion API.",
       "properties": {
-        "dceEndpoint": {
+        "dataCollectionEndpoint": {
           "type": "string",
           "format": "uri",
           "description": "The URL of the data collection endpoint that receives the telemetry."
         },
-        "dcrImmutableId": {
+        "dataCollectionRuleImmutableId": {
           "type": "string",
           "description": "The immutable ID of the data collection rule that processes the telemetry."
         },
@@ -685,16 +685,16 @@
           "type": "string",
           "description": "The name of the target stream in the data collection rule."
         },
-        "auth": {
+        "authentication": {
           "$ref": "#/definitions/TelemetryAuth",
           "description": "The managed identity used to authenticate to the data collection endpoint."
         }
       },
       "required": [
-        "dceEndpoint",
-        "dcrImmutableId",
+        "dataCollectionEndpoint",
+        "dataCollectionRuleImmutableId",
         "tableName",
-        "auth"
+        "authentication"
       ],
       "allOf": [
         {
@@ -801,7 +801,7 @@
           "$ref": "#/definitions/TelemetryProtocol",
           "description": "The protocol used to send telemetry to the endpoint."
         },
-        "auth": {
+        "authentication": {
           "$ref": "#/definitions/TelemetryHeaderAuth",
           "description": "The authentication used when sending telemetry to the endpoint. When omitted, requests are sent without an authentication header."
         }
@@ -1013,35 +1013,35 @@
       "type": "object",
       "description": "The managed identity used to authenticate to a telemetry endpoint.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/TelemetryAuthKind",
-          "description": "The kind of managed identity used to authenticate to the telemetry endpoint."
+        "type": {
+          "$ref": "#/definitions/TelemetryAuthType",
+          "description": "The type of managed identity used to authenticate to the telemetry endpoint."
         }
       },
-      "discriminator": "kind",
+      "discriminator": "type",
       "required": [
-        "kind"
+        "type"
       ]
     },
-    "TelemetryAuthKind": {
+    "TelemetryAuthType": {
       "type": "string",
-      "description": "The kind of managed identity used to authenticate to a telemetry endpoint.",
+      "description": "The type of managed identity used to authenticate to a telemetry endpoint.",
       "enum": [
-        "ManagedIdentity",
-        "SystemAssignedManagedIdentity"
+        "UserAssigned",
+        "SystemAssigned"
       ],
       "x-ms-enum": {
-        "name": "TelemetryAuthKind",
+        "name": "TelemetryAuthType",
         "modelAsString": true,
         "values": [
           {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
+            "name": "UserAssigned",
+            "value": "UserAssigned",
             "description": "A user-assigned managed identity."
           },
           {
-            "name": "SystemAssignedManagedIdentity",
-            "value": "SystemAssignedManagedIdentity",
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
             "description": "The system-assigned managed identity of the sandbox group."
           }
         ]
@@ -1194,33 +1194,6 @@
         "secretKeyName"
       ]
     },
-    "TelemetryManagedIdentityAuth": {
-      "type": "object",
-      "description": "Authentication that uses a user-assigned managed identity.",
-      "properties": {
-        "identity": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the user-assigned managed identity. The identity must be assigned to the sandbox group.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "identity"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TelemetryAuth"
-        }
-      ],
-      "x-ms-discriminator-value": "ManagedIdentity"
-    },
     "TelemetryProtocol": {
       "type": "string",
       "description": "The protocol used to send telemetry to an OpenTelemetry Protocol endpoint.",
@@ -1245,7 +1218,7 @@
         ]
       }
     },
-    "TelemetrySystemAssignedManagedIdentityAuth": {
+    "TelemetrySystemAssignedIdentityAuth": {
       "type": "object",
       "description": "Authentication that uses the system-assigned managed identity of the sandbox group.",
       "allOf": [
@@ -1253,7 +1226,34 @@
           "$ref": "#/definitions/TelemetryAuth"
         }
       ],
-      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+      "x-ms-discriminator-value": "SystemAssigned"
+    },
+    "TelemetryUserAssignedIdentityAuth": {
+      "type": "object",
+      "description": "Authentication that uses a user-assigned managed identity.",
+      "properties": {
+        "identityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity. The identity must be assigned to the sandbox group.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identityResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryAuth"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssigned"
     },
     "ValueLogColumn": {
       "type": "object",
