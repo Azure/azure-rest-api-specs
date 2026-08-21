@@ -60,6 +60,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
+  @armResourceList(ResourceProviderOperationListResult)
   list(
     ...ApiVersionParameter,
 
@@ -78,5 +79,5 @@ enum Versions {
    * The latest public preview API version.
    */
   @previewVersion
-  vLatestPreview: "2026-04-01-preview",
+  vLatestPreview: "2026-08-01-preview",
 }
