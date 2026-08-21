@@ -86,7 +86,7 @@ interface ImageOperations {
 @added(ContentSafety.Versions.v2026_09_01_preview)
 interface UnifiedOperations {
   @summary("Unified Moderate")
-  @doc("A synchronous API that evaluates a prompt, completion, proposed tool call, or completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
+  @doc("A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
   @route("/unifiedModerate")
   @post
   unifiedModerate is Azure.Core.RpcOperation<

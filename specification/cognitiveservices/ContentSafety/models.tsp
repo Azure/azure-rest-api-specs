@@ -280,17 +280,17 @@ model TextProtectedMaterialAnalysisResult {
 union UnifiedModerateSource {
   string,
 
-  @doc("A prompt submitted to a model or agent.")
-  Prompt: "Prompt",
+  @doc("Input submitted to a model or agent.")
+  Input: "input",
 
-  @doc("A completion produced by a model or agent.")
-  Completion: "Completion",
+  @doc("Output produced by a model or agent.")
+  Output: "output",
 
   @doc("A proposed tool invocation before it is executed.")
-  PreToolCall: "PreToolCall",
+  PreToolCall: "pre_tool_call",
 
   @doc("A tool result after the invocation completes.")
-  PostToolCall: "PostToolCall",
+  PostToolCall: "post_tool_call",
 }
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
@@ -335,7 +335,7 @@ model UnifiedModerateOptions {
   @doc("The content to evaluate. Plain text is provided directly. Structured content is serialized as a JSON-encoded string and is deserialized and validated by the service.")
   content: string;
 
-  @doc("The tool name. Required and nonempty for tool-call sources and not allowed for prompt or completion sources.")
+  @doc("The tool name. Required and nonempty for tool-call sources and not allowed for input or output sources.")
   @minLength(1)
   toolName?: string;
 

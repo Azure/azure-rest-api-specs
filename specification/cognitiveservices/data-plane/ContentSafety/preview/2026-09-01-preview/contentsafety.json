@@ -788,7 +788,7 @@
       "post": {
         "operationId": "UnifiedOperations_UnifiedModerate",
         "summary": "Unified Moderate",
-        "description": "A synchronous API that evaluates a prompt, completion, proposed tool call, or completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.",
+        "description": "A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1898,7 +1898,7 @@
         },
         "toolName": {
           "type": "string",
-          "description": "The tool name. Required and nonempty for tool-call sources and not allowed for prompt or completion sources.",
+          "description": "The tool name. Required and nonempty for tool-call sources and not allowed for input or output sources.",
           "minLength": 1
         },
         "toolCallId": {
@@ -1959,33 +1959,33 @@
       "type": "string",
       "description": "The workload event source evaluated by Unified Moderate.",
       "enum": [
-        "Prompt",
-        "Completion",
-        "PreToolCall",
-        "PostToolCall"
+        "input",
+        "output",
+        "pre_tool_call",
+        "post_tool_call"
       ],
       "x-ms-enum": {
         "name": "UnifiedModerateSource",
         "modelAsString": true,
         "values": [
           {
-            "name": "Prompt",
-            "value": "Prompt",
-            "description": "A prompt submitted to a model or agent."
+            "name": "Input",
+            "value": "input",
+            "description": "Input submitted to a model or agent."
           },
           {
-            "name": "Completion",
-            "value": "Completion",
-            "description": "A completion produced by a model or agent."
+            "name": "Output",
+            "value": "output",
+            "description": "Output produced by a model or agent."
           },
           {
             "name": "PreToolCall",
-            "value": "PreToolCall",
+            "value": "pre_tool_call",
             "description": "A proposed tool invocation before it is executed."
           },
           {
             "name": "PostToolCall",
-            "value": "PostToolCall",
+            "value": "post_tool_call",
             "description": "A tool result after the invocation completes."
           }
         ]
