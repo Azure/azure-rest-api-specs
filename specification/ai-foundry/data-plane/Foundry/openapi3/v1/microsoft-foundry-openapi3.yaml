@@ -82033,7 +82033,7 @@ components:
           x-stainless-const: true
         session:
           $ref: '#/components/schemas/VoiceAgentSessionUpdateConfig'
-          description: The stable realtime session fields to update.
+          description: The stable realtime session fields to update. Configure an Azure semantic VAD profile through `audio.input.turn_detection.profile`.
       description: The `session.update` client event.
     VoiceAgentCreateConversationItem:
       anyOf:
@@ -83000,7 +83000,7 @@ components:
         item_id:
           type: string
           description: The ID of the user message item that will be created when speech stops.
-      description: The `input_audio_buffer.speech_started` server event.
+      description: The `input_audio_buffer.speech_started` server event emitted when turn detection detects speech, including when an Azure semantic VAD profile is configured.
     VoiceAgentServerEventInputAudioBufferSpeechStopped:
       type: object
       required:
@@ -83027,7 +83027,7 @@ components:
         item_id:
           type: string
           description: The ID of the user message item that will be created.
-      description: The `input_audio_buffer.speech_stopped` server event.
+      description: The `input_audio_buffer.speech_stopped` server event emitted when turn detection detects the end of speech, including when an Azure semantic VAD profile is configured.
     VoiceAgentServerEventInputAudioBufferTimeoutTriggered:
       type: object
       required:
@@ -83055,7 +83055,7 @@ components:
         item_id:
           type: string
           description: The ID of the item associated with this segment.
-      description: The `input_audio_buffer.timeout_triggered` server event.
+      description: The `input_audio_buffer.timeout_triggered` server event emitted when the configured input audio idle timeout ends input, including with an Azure semantic VAD profile.
     VoiceAgentServerEventMcpListToolsCompleted:
       type: object
       required:
@@ -84662,6 +84662,10 @@ components:
           type: string
           enum:
             - azure_semantic_vad_en
+        profile:
+          $ref: '#/components/schemas/VoiceAzureSemanticVadProfile'
+          description: The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.
+          default: classic
         threshold:
           type: number
           format: float
@@ -84716,6 +84720,10 @@ components:
           type: string
           enum:
             - azure_semantic_vad_multilingual
+        profile:
+          $ref: '#/components/schemas/VoiceAzureSemanticVadProfile'
+          description: The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.
+          default: classic
         threshold:
           type: number
           format: float
@@ -84766,6 +84774,20 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAzureSemanticVadProfile:
+      anyOf:
+        - type: string
+        - type: 'null'
+        - type: string
+          enum:
+            - classic
+            - eager
+            - normal
+            - patient
+      description: A bundled Voice Live profile for Azure semantic voice activity detection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAzureSemanticVadTurnDetection:
       type: object
       required:
@@ -84775,6 +84797,10 @@ components:
           type: string
           enum:
             - azure_semantic_vad
+        profile:
+          $ref: '#/components/schemas/VoiceAzureSemanticVadProfile'
+          description: The bundled VAD profile. Defaults to classic. Set to null to disable profile expansion.
+          default: classic
         threshold:
           type: number
           format: float

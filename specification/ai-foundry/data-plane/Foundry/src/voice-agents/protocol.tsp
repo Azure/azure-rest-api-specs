@@ -400,7 +400,7 @@ model VoiceAgentClientEventResponseCreate {
 model VoiceAgentClientEventSessionUpdate {
   ...OmitProperties<OpenAI.RealtimeClientEventSessionUpdate, "session">;
 
-  @doc("The stable realtime session fields to update.")
+  @doc("The stable realtime session fields to update. Configure an Azure semantic VAD profile through `audio.input.turn_detection.profile`.")
   session: VoiceAgentSessionUpdateConfig;
 }
 
@@ -497,19 +497,19 @@ model VoiceAgentServerEventInputAudioBufferCommitted {
   ...OpenAI.RealtimeServerEventInputAudioBufferCommitted;
 }
 
-@doc("The `input_audio_buffer.speech_started` server event.")
+@doc("The `input_audio_buffer.speech_started` server event emitted when turn detection detects speech, including when an Azure semantic VAD profile is configured.")
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentServerEventInputAudioBufferSpeechStarted {
   ...OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted;
 }
 
-@doc("The `input_audio_buffer.speech_stopped` server event.")
+@doc("The `input_audio_buffer.speech_stopped` server event emitted when turn detection detects the end of speech, including when an Azure semantic VAD profile is configured.")
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentServerEventInputAudioBufferSpeechStopped {
   ...OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped;
 }
 
-@doc("The `input_audio_buffer.timeout_triggered` server event.")
+@doc("The `input_audio_buffer.timeout_triggered` server event emitted when the configured input audio idle timeout ends input, including with an Azure semantic VAD profile.")
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentServerEventInputAudioBufferTimeoutTriggered {
   ...OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered;
