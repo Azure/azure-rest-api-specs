@@ -60,6 +60,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
+  @armResourceList(ResourceProviderOperationListResult)
   list(
     ...ApiVersionParameter,
 

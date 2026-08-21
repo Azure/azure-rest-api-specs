@@ -5651,6 +5651,7 @@ model ExpandMsixFileRequestProperties {
  * Request body for expanding MSIX files.
  * @Introduced in 2026-02-01-preview
  */
+@clientName("ExpandMsixFileContent", "csharp")
 @added(Versions.vLatestPreview)
 model ExpandMsixFileRequest {
   /**
