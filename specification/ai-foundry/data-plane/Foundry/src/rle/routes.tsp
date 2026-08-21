@@ -20,9 +20,8 @@ namespace Azure.AI.Projects;
 @route("rl_environments")
 @tag("ReinforcementLearning")
 interface RLEnvironments {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a non-standard `create` collection action so a service-assigned id is returned without a client-supplied PUT."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service mints the id, so create is a non-standard collection-root POST rather than a client-supplied PUT."
   @doc("Create a new hosted RLE environment, or a new version of an existing one.")
-  @route("create")
   @post
   createEnvironment is FoundryDataPlaneOperation<
     {
@@ -32,7 +31,7 @@ interface RLEnvironments {
     RLEnvironment
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with opaque cursor pagination."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with continuation-token pagination."
   @doc("List all hosted RLE environments in the project.")
   @get
   listEnvironments is FoundryDataPlaneOperation<
@@ -45,13 +44,9 @@ interface RLEnvironments {
       @query
       limit?: int32;
 
-      @doc("Opaque cursor for paging forward. Returns items after the given cursor.")
+      @doc("Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.")
       @query
-      after?: string;
-
-      @doc("Opaque cursor for paging backward. Returns items before the given cursor.")
-      @query
-      before?: string;
+      continuationToken?: string;
 
       @doc("Sort order for the page. Defaults to descending by creation time.")
       @query
@@ -107,7 +102,7 @@ interface RLEnvironments {
     NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a list of versions with opaque cursor pagination."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a list of versions with continuation-token pagination."
   @doc("List historical versions of a hosted RLE environment.")
   @route("{name}/versions")
   @get
@@ -121,13 +116,9 @@ interface RLEnvironments {
       @query
       limit?: int32;
 
-      @doc("Opaque cursor for paging forward. Returns items after the given cursor.")
+      @doc("Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.")
       @query
-      after?: string;
-
-      @doc("Opaque cursor for paging backward. Returns items before the given cursor.")
-      @query
-      before?: string;
+      continuationToken?: string;
 
       @doc("Sort order for the page. Defaults to ascending by version.")
       @query
@@ -168,7 +159,7 @@ interface RLEInstanceGroups {
     RLEInstanceGroup
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with opaque cursor pagination."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with continuation-token pagination."
   @doc("List RLE instance groups under the given environment version.")
   @get
   listInstanceGroups is FoundryDataPlaneOperation<
@@ -185,13 +176,9 @@ interface RLEInstanceGroups {
       @query
       limit?: int32;
 
-      @doc("Opaque cursor for paging forward. Returns items after the given cursor.")
+      @doc("Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.")
       @query
-      after?: string;
-
-      @doc("Opaque cursor for paging backward. Returns items before the given cursor.")
-      @query
-      before?: string;
+      continuationToken?: string;
 
       @doc("Sort order for the page. Defaults to descending by creation time.")
       @query

@@ -45,7 +45,7 @@ union RLEnvironmentVersionBump {
   patch: "Patch",
 }
 
-@doc("Sort order for opaque cursor pagination.")
+@doc("Sort order for continuation-token pagination.")
 union RLEPaginationOrder {
   string,
 
@@ -69,9 +69,9 @@ model RLEnvironment {
   @visibility(Lifecycle.Read)
   projectId: string;
 
-  @doc("Caller-provided display name for the environment. Optional on create.")
+  @doc("Display name for the environment. Assigned by the service when not supplied on create.")
   @visibility(Lifecycle.Read)
-  name?: string;
+  name: string;
 
   @doc("Container image reference (Azure Container Registry path) that backs the environment.")
   @visibility(Lifecycle.Read)
@@ -110,58 +110,22 @@ model CreateRLEnvironmentRequest {
   versionBump?: RLEnvironmentVersionBump;
 }
 
-@doc("Response for listing hosted RLE environments, using opaque cursor pagination.")
+@doc("A page of hosted RLE environments, with an opaque continuation token for fetching the next page.")
 model ListRLEnvironmentsResponse {
   @doc("Environments on this page.")
   data: RLEnvironment[];
 
-  @doc("Opaque cursor of the first item on this page, for paging backward.")
-  @encodedName("application/json", "first_id")
-  firstId?: string;
-
-  @doc("Opaque cursor of the last item on this page, for paging forward.")
-  @encodedName("application/json", "last_id")
-  lastId?: string;
-
-  @doc("True when more environments are available beyond this page.")
-  @encodedName("application/json", "has_more")
-  hasMore: boolean;
+  @doc("Opaque token for fetching the next page. Absent when there are no more results.")
+  nextContinuationToken?: string;
 }
 
-@doc("A historical version snapshot of a hosted RLE environment.")
-model RLEnvironmentVersion {
-  @doc("Identifier of the parent RLE environment.")
-  environmentId: string;
-
-  @doc("Foundry project identifier that owns the parent environment.")
-  projectId: string;
-
-  @doc("Version identifier for this snapshot.")
-  version: string;
-
-  @doc("Container image reference (Azure Container Registry path) for this version.")
-  acrImagePath: string;
-
-  @doc("Timestamp this version was created, in UTC.")
-  createdAtUtc: utcDateTime;
-}
-
-@doc("Response for listing versions of a hosted RLE environment, using opaque cursor pagination.")
+@doc("A page of environment versions, with an opaque continuation token for fetching the next page.")
 model ListRLEnvironmentVersionsResponse {
-  @doc("Environment versions on this page.")
-  data: RLEnvironmentVersion[];
+  @doc("Environment versions on this page. Each item is a full environment snapshot for a specific version.")
+  data: RLEnvironment[];
 
-  @doc("Opaque cursor of the first item on this page, for paging backward.")
-  @encodedName("application/json", "first_id")
-  firstId?: string;
-
-  @doc("Opaque cursor of the last item on this page, for paging forward.")
-  @encodedName("application/json", "last_id")
-  lastId?: string;
-
-  @doc("True when more versions are available beyond this page.")
-  @encodedName("application/json", "has_more")
-  hasMore: boolean;
+  @doc("Opaque token for fetching the next page. Absent when there are no more results.")
+  nextContinuationToken?: string;
 }
 
 // ============================================================================
@@ -241,22 +205,13 @@ model CreateRLEInstanceGroupRequest {
   resourceProfile?: RLEInstanceGroupResourceProfile;
 }
 
-@doc("Response for listing RLE instance groups, using opaque cursor pagination.")
+@doc("A page of RLE instance groups, with an opaque continuation token for fetching the next page.")
 model ListRLEInstanceGroupsResponse {
   @doc("Instance groups on this page.")
   data: RLEInstanceGroup[];
 
-  @doc("Opaque cursor of the first item on this page, for paging backward.")
-  @encodedName("application/json", "first_id")
-  firstId?: string;
-
-  @doc("Opaque cursor of the last item on this page, for paging forward.")
-  @encodedName("application/json", "last_id")
-  lastId?: string;
-
-  @doc("True when more instance groups are available beyond this page.")
-  @encodedName("application/json", "has_more")
-  hasMore: boolean;
+  @doc("Opaque token for fetching the next page. Absent when there are no more results.")
+  nextContinuationToken?: string;
 }
 
 // ============================================================================
