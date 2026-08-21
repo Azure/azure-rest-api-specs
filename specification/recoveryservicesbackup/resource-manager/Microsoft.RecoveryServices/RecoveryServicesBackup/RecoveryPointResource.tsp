@@ -142,10 +142,7 @@ interface ItemLevelRecoveryConnections {
   >;
 
   /**
-   * Fetches the mount scripts for an active Instant Item Recovery (ILR) session on the recovery point.
-   * The mount scripts contain the iSCSI connection details required to browse and recover files and folders.
-   * This dedicated action returns the scripts that were previously embedded inline in the
-   * operationsStatus (ILR provision) response, and must be used to retrieve them from API version 2026-08-01 onwards.
+   * Fetches the mount scripts (iSCSI connection details) for an active Instant Item Recovery (ILR) session on the recovery point. Required from API version 2026-08-01 onwards; replaces the scripts previously returned inline in the operationsStatus (ILR provision) response.
    */
   @added(Versions.v2026_08_01)
   @action("fetchInstantItemRecoveryOperationResult")
