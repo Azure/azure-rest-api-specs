@@ -55,6 +55,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2026-08-31-preview
+
+These settings apply only when `--tag=package-preview-2026-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08-31-preview'
+input-file:
+  - preview/2026-08-31-preview/bms.json
+```
+
 ### Tag: package-2026-07-01
 
 These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
@@ -605,6 +614,30 @@ directive:
     from: bms.json
     where: $.definitions.RecoveryPointResource
     reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: bms.json
+    where: $.definitions.JobResource
+    reason: JobResource is an existing resource whose shape and tracked-resource status are unchanged from prior API versions. The cross-tenant child-jobs pass-through API (backupCrossTenantVaultMappings/{name}/backupJobs/{jobName}/backupChildJobs) exposes this existing resource for read-only retrieval of jobs from the source vault; it does not introduce a new tracked resource or a new writable resource path beyond the third nesting level, so the constraint the rule enforces does not apply to this read-only pass-through.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: bms.json
+    where: $.definitions.IaaSVMBulkRestoreRequest.properties.skipPreOLRBackup
+    reason: skipPreOLRBackup preserves the exact wire property name used by the service's IaaS VM restore requests (OLR = Original Location Restore, an established Azure Backup domain acronym). Renaming the acronym to satisfy strict camelCase would break wire compatibility with the service and existing clients.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: bms.json
+    where: $.definitions.BulkRestoreRecoveryPointsResponse
+    reason: BulkRestoreRecoveryPointsResponse is the payload of the bulk recovery-point-discovery operation-result GET, not an ARM resource. The service returns a dictionary (ResourceDictionary<RecoveryPoint>) keyed by the source protected item's ARM ID; this is a transient operation result with no ARM resource identity, so it has no id/name/type and none can be added without diverging from the shipped wire.
+  - suppress: BodyTopLevelProperties
+    from: bms.json
+    where: $.definitions.BulkRestoreRecoveryPointsResponse
+    reason: BulkRestoreRecoveryPointsResponse is a dictionary-shaped operation-result payload whose top-level members (value = map of protected-item ARM ID to recovery point, and nextLink) are dictated by the service's ResourceDictionary<RecoveryPoint> wire contract. It is not an ARM resource envelope, so its top-level properties cannot be limited to the ARM resource property set.
+  - suppress: AvoidAdditionalProperties
+    from: bms.json
+    where: $.definitions.BulkRestoreRecoveryPointsResponse.properties.value
+    reason: The value member of BulkRestoreRecoveryPointsResponse is a dynamic map keyed by the source protected item's ARM ID (service ResourceDictionary<RecoveryPoint>). The key set is caller-supplied and unbounded, so the response is inherently an additionalProperties map and cannot be expressed as a fixed-property object without diverging from the shipped wire.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: bms.json
+    where: $.definitions.CrossTenantBackupManagementUsageList
+    reason: CrossTenantBackupManagementUsageList is a list of backup-management usage summaries (BackupManagementUsage), which are non-resource metering records with no id/name/type. It is a usage/metrics collection returned by the pass-through summaries GET, not a collection of ARM resources, so ARM resource-identity properties do not apply to it.
   - suppress: LroErrorContent
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from exceptions to custom error CloudError. Changing this would be breaking change for our service.

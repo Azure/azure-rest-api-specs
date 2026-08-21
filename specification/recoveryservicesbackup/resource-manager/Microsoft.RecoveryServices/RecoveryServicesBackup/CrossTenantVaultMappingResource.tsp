@@ -28,6 +28,7 @@ namespace Microsoft.RecoveryServices;
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @parentResource(VaultResource)
 model CrossTenantVaultMapping
   is ProxyResource<CrossTenantVaultMappingProperties> {
@@ -47,6 +48,7 @@ model CrossTenantVaultMapping
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultMappings {
   /**
@@ -92,6 +94,7 @@ interface CrossTenantVaultMappings {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultMappingStatus {
   /**
@@ -163,6 +166,18 @@ alias CrossTenantVaultMappingParentParameters = {
 };
 
 /**
+ * Path segment parameters extending the mapping parent down to a backup fabric.
+ */
+alias CrossTenantFabricParentParameters = {
+  ...CrossTenantVaultMappingParentParameters;
+
+  @doc("Fabric name associated with the backed up items.")
+  @path
+  @segment("backupFabrics")
+  fabricName: string;
+};
+
+/**
  * Path segment parameters extending the mapping parent down to a backup protection container.
  */
 alias CrossTenantContainerParentParameters = {
@@ -203,6 +218,18 @@ alias CrossTenantVaultCredentialParentParameters = {
   certificateName: string;
 };
 
+/**
+ * Path segment parameters extending the mapping parent down to a backup job.
+ */
+alias CrossTenantJobParentParameters = {
+  ...CrossTenantVaultMappingParentParameters;
+
+  @doc("Name of the parent cross-tenant backup job.")
+  @path
+  @segment("backupJobs")
+  jobName: string;
+};
+
 // LegacyOperations alias for routes parented at /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/<child>
 // The first arg captures the parent path; the second declares the child segment used by @segmentOf for list URLs.
 alias BackupProtectedItemsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -224,6 +251,7 @@ alias BackupProtectedItemsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface BackupProtectedItemsFromCrossTenantVault {
   /**
@@ -244,6 +272,7 @@ interface BackupProtectedItemsFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ProtectedItemFromCrossTenantVault {
   /**
@@ -290,6 +319,7 @@ alias CrossTenantVaultRecoveryPointsOps = Azure.ResourceManager.Legacy.LegacyOpe
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultRecoveryPoints {
   /**
@@ -309,6 +339,7 @@ interface CrossTenantVaultRecoveryPoints {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultRecoveryPoint {
   /**
@@ -323,6 +354,7 @@ interface CrossTenantVaultRecoveryPoint {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface RestoresFromCrossTenantVault {
   /**
@@ -337,6 +369,182 @@ interface RestoresFromCrossTenantVault {
     void,
     Response = ArmAcceptedLroResponse | ArmNoContentResponse
   >;
+}
+
+// LegacyOperations alias for routes parented at the bulk restore fabric resource,
+// child = backupFabrics/{fabricName}. Used by bulk restore actions.
+alias CrossTenantBulkRestoreFabricOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("Fabric name associated with the bulk restore operation.")
+    @path
+    @segment("backupFabrics")
+    @key
+    fabricName: string;
+  },
+  ResourceName = "CrossTenantBulkRestoreFabric"
+>;
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface BulkRestoresFromCrossTenantVault {
+  /**
+   * Triggers a bulk restore from the source vault in a different tenant. This is an asynchronous operation.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @action("restore")
+  @tag("CrossTenant")
+  trigger is CrossTenantBulkRestoreFabricOps.ActionAsync<
+    RecoveryPointResource,
+    RestoreRequestResource,
+    void,
+    Response = ArmAcceptedLroResponse | ArmNoContentResponse
+  >;
+
+  /**
+   * Triggers a bulk restore pre-check from the source vault in a different tenant. This is an asynchronous operation.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @action("preCheckRestore")
+  @tag("CrossTenant")
+  preCheck is CrossTenantBulkRestoreFabricOps.ActionAsync<
+    RecoveryPointResource,
+    RestoreRequestResource,
+    void,
+    Response = ArmAcceptedLroResponse | ArmNoContentResponse
+  >;
+}
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface RecoveryPointsFromCrossTenantVault {
+  /**
+   * Triggers recovery point discovery for bulk restore from the source vault in a different tenant. This is an asynchronous operation.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @action("getRecoveryPoints")
+  @tag("CrossTenant")
+  list is CrossTenantBulkRestoreFabricOps.ActionAsync<
+    RecoveryPointResource,
+    FetchRPForBulkRestoreRequest,
+    void,
+    Response = ArmAcceptedLroResponse | ArmNoContentResponse
+  >;
+}
+
+// LegacyOperations alias for routes parented at the fabric resource,
+// child = recoveryPointOperationResults/{operationId}.
+alias RecoveryPointOperationResultsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantFabricParentParameters;
+  },
+  {
+    @doc("OperationID which represents the recovery point discovery operation whose result needs to be fetched.")
+    @path
+    @segment("recoveryPointOperationResults")
+    @key
+    operationId: string;
+  },
+  ResourceName = "RecoveryPointOperationResultsFromCrossTenantVault"
+>;
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface RecoveryPointOperationResultsFromCrossTenantVault {
+  /**
+   * Fetches the result of a bulk recovery point discovery operation.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @tag("CrossTenant")
+  get is RecoveryPointOperationResultsFromCrossTenantVaultOps.Read<
+    RecoveryPointResource,
+    Response =
+      | ArmResponse<BulkRestoreRecoveryPointsResponse>
+      | ArmAcceptedResponse<
+          "Accepted",
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+  >;
+}
+
+// LegacyOperations alias for routes parented at the fabric resource,
+// child = operationsStatus/{operationId}.
+alias BulkRestoreOperationStatusesFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantFabricParentParameters;
+  },
+  {
+    @doc("OperationID represents the bulk restore operation whose status needs to be fetched.")
+    @path
+    @segment("operationsStatus")
+    @key
+    operationId: string;
+  },
+  ResourceName = "BulkRestoreOperationStatusesFromCrossTenantVault"
+>;
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface BulkRestoreOperationStatusesFromCrossTenantVault {
+  /**
+   * Fetches the status of a bulk restore operation.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @tag("CrossTenant")
+  get is BulkRestoreOperationStatusesFromCrossTenantVaultOps.Read<OperationStatus>;
+}
+
+// LegacyOperations alias for routes parented at the fabric resource,
+// child = validateBulkRestoreOperationsStatus/{operationId}.
+alias BulkRestorePreCheckOperationStatusesFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantFabricParentParameters;
+  },
+  {
+    @doc("OperationID represents the bulk restore pre-check operation whose status needs to be fetched.")
+    @path
+    @segment("validateBulkRestoreOperationsStatus")
+    @key
+    operationId: string;
+  },
+  ResourceName = "BulkRestorePreCheckOperationStatusesFromCrossTenantVault"
+>;
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface BulkRestorePreCheckOperationStatusesFromCrossTenantVault {
+  /**
+   * Fetches the status of a bulk restore pre-check operation.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @tag("CrossTenant")
+  get is BulkRestorePreCheckOperationStatusesFromCrossTenantVaultOps.Read<OperationStatus>;
 }
 
 // LegacyOperations alias for routes parented at the protected-item resource
@@ -360,6 +568,7 @@ alias ProtectedItemOperationResultsFromCrossTenantVaultOps = Azure.ResourceManag
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ProtectedItemOperationResultsFromCrossTenantVault {
   /**
@@ -402,6 +611,7 @@ alias ProtectedItemOperationStatusesFromCrossTenantVaultOps = Azure.ResourceMana
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ProtectedItemOperationStatusesFromCrossTenantVault {
   /**
@@ -434,6 +644,7 @@ alias BackupJobsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOpe
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface BackupJobsFromCrossTenantVault {
   /**
@@ -454,6 +665,7 @@ interface BackupJobsFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface JobDetailsFromCrossTenantVault {
   /**
@@ -463,10 +675,104 @@ interface JobDetailsFromCrossTenantVault {
   get is BackupJobsFromCrossTenantVaultOps.Read<JobResource>;
 }
 
+// LegacyOperations alias for routes parented at a cross-tenant backup job,
+// child = backupChildJobs/{childJobName}.
+alias BackupChildJobsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantJobParentParameters;
+  },
+  {
+    @doc("Name of the child job whose details are to be fetched.")
+    @path
+    @segment("backupChildJobs")
+    @key
+    childJobName: string;
+  },
+  ResourceName = "BackupChildJobsFromCrossTenantVault"
+>;
+
 @added(Versions.v2026_03_31_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface BackupChildJobsFromCrossTenantVault {
+  /**
+   * Provides a pageable list of cross-tenant backup child jobs.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @tag("CrossTenant")
+  list is BackupChildJobsFromCrossTenantVaultOps.List<
+    JobResource,
+    Parameters = {
+      ...ListFilterParameter;
+      ...ListSkipTokenParameter;
+    },
+    Response = ArmResponse<CrossTenantJobResourceList>
+  >;
+}
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface ChildJobDetailsFromCrossTenantVault {
+  /**
+   * Gets extended information associated with a cross-tenant backup child job.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @tag("CrossTenant")
+  get is BackupChildJobsFromCrossTenantVaultOps.Read<JobResource>;
+}
+
+// LegacyOperations alias for routes parented at the mapping resource,
+// child = backupUsageSummaries.
+alias BackupUsageSummariesFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("Backup usage summary name.")
+    @path
+    @segment("backupUsageSummaries")
+    @key
+    usageName: string;
+  },
+  ResourceName = "BackupUsageSummariesFromCrossTenantVault"
+>;
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
+@armResourceOperations
+interface BackupUsageSummariesFromCrossTenantVault {
+  /**
+   * Fetches backup management usage summaries from the source vault in a different tenant.
+   */
+  @added(Versions.v2026_08_31_preview)
+  @tag("CrossTenant")
+  list is BackupUsageSummariesFromCrossTenantVaultOps.List<
+    CrossTenantVaultMapping,
+    Parameters = {
+      ...ListFilterParameter;
+      ...ListSkipTokenParameter;
+    },
+    Response = ArmResponse<CrossTenantBackupManagementUsageList>
+  >;
+}
+
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_31_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface OperationFromCrossTenantVault {
   /**
@@ -486,6 +792,7 @@ interface OperationFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ValidateOperationFromCrossTenantVault {
   /**
@@ -522,6 +829,7 @@ alias ValidateOperationResultFromCrossTenantVaultOps = Azure.ResourceManager.Leg
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ValidateOperationResultFromCrossTenantVault {
   /**
@@ -564,6 +872,7 @@ alias ValidateOperationStatusFromCrossTenantVaultOps = Azure.ResourceManager.Leg
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface ValidateOperationStatusFromCrossTenantVault {
   /**
@@ -580,6 +889,7 @@ interface ValidateOperationStatusFromCrossTenantVault {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantProtectedItemResourceList {
   /**
    * List of resources.
@@ -602,6 +912,7 @@ model CrossTenantProtectedItemResourceList {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantRecoveryPointResourceList {
   /**
    * List of resources.
@@ -624,6 +935,7 @@ model CrossTenantRecoveryPointResourceList {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantJobResourceList {
   /**
    * List of resources.
@@ -631,6 +943,25 @@ model CrossTenantJobResourceList {
   @pageItems
   @identifiers(#[])
   value?: JobResource[];
+
+  /**
+   * The uri to fetch the next page of resources.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of backup management usage summaries for cross-tenant restore operations.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantBackupManagementUsageList {
+  /**
+   * List of backup management usage summaries.
+   */
+  @pageItems
+  @identifiers(#[])
+  value?: BackupManagementUsage[];
 
   /**
    * The uri to fetch the next page of resources.
@@ -679,6 +1010,7 @@ alias CrossTenantVaultCredentialOps = Azure.ResourceManager.Legacy.LegacyOperati
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultCredential {
   /**
@@ -718,6 +1050,7 @@ alias CrossTenantVaultCredentialOperationResultsOps = Azure.ResourceManager.Lega
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultCredentialOperationResults {
   /**
@@ -761,6 +1094,7 @@ alias CrossTenantVaultCredentialOperationStatusesOps = Azure.ResourceManager.Leg
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface CrossTenantVaultCredentialOperationStatuses {
   /**
