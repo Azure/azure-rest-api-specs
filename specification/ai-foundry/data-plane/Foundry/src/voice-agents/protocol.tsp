@@ -126,6 +126,9 @@ union VoiceAgentServerEvent {
   response_output_text_delta: OpenAI.RealtimeServerEventResponseTextDelta,
   response_output_text_done: OpenAI.RealtimeServerEventResponseTextDone,
   session_created: OpenAI.RealtimeServerEventSessionCreated,
+  session_subagent_started: VoiceAgentServerEventSessionSubagentStarted,
+  session_subagent_completed: VoiceAgentServerEventSessionSubagentCompleted,
+  session_subagent_aborted: VoiceAgentServerEventSessionSubagentAborted,
   session_updated: OpenAI.RealtimeServerEventSessionUpdated,
   error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
@@ -400,6 +403,78 @@ model VoiceAgentClientEventSessionUpdate {
   OpenAI.RealtimeServerEventSessionUpdated.session,
   VoiceAgentSessionResponse
 );
+
+@doc("Fields shared by server events that report the lifecycle of a subagent consultation.")
+model VoiceAgentServerEventSessionSubagentLifecycle {
+  @doc("The server-generated event identifier.")
+  event_id: string;
+
+  @doc("The identifier of the subagent consultation.")
+  consultation_id: string;
+
+  @doc("The identifier of the function call that initiated the consultation.")
+  call_id: string;
+
+  @doc("The name of the consulted subagent.")
+  subagent_name: string;
+}
+
+@doc("The reason a subagent consultation was aborted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSubagentAbortReason {
+  string,
+
+  @doc("The requested subagent was not configured for the voice agent.")
+  unknown_target: "unknown_target",
+
+  @doc("The subagent invocation exceeded its configured timeout.")
+  timeout: "timeout",
+
+  @doc("The consultation was cancelled because the voice session ended.")
+  cancelled: "cancelled",
+
+  @doc("The consultation was stopped at the user's request.")
+  stopped_by_user: "stopped_by_user",
+
+  @doc("The consultation was replaced by a newer request.")
+  superseded: "superseded",
+
+  @doc("The consultation failed.")
+  failed: "failed",
+}
+
+@doc("The `session.subagent.started` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionSubagentStarted {
+  @doc("The event type. Always `session.subagent.started`.")
+  type: "session.subagent.started";
+
+  ...VoiceAgentServerEventSessionSubagentLifecycle;
+}
+
+@doc("The `session.subagent.completed` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionSubagentCompleted {
+  @doc("The event type. Always `session.subagent.completed`.")
+  type: "session.subagent.completed";
+
+  ...VoiceAgentServerEventSessionSubagentLifecycle;
+}
+
+@doc("The `session.subagent.aborted` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionSubagentAborted {
+  @doc("The event type. Always `session.subagent.aborted`.")
+  type: "session.subagent.aborted";
+
+  ...VoiceAgentServerEventSessionSubagentLifecycle;
+
+  @doc("The reason the consultation was aborted.")
+  reason: VoiceAgentSubagentAbortReason;
+}
 
 @doc("The `session.avatar.connect` client event.")
 @usage(VoiceAgentClientEventUsage)
