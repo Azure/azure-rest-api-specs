@@ -66,6 +66,60 @@
   },
   "tags": [],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/suiteOffers/{providerId}/quotaUsages": {
+      "get": {
+        "operationId": "SuiteOffers_ListQuotaUsages",
+        "description": "List quota usages for the given suite offer provider in the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "providerId",
+            "in": "path",
+            "description": "The unique identifier for the provider.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuotaUsageData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get suite offer quota usages.": {
+            "$ref": "./examples/SuiteOffers_ListQuotaUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
       "get": {
         "operationId": "Jobs_List",
@@ -2010,6 +2064,27 @@
         "value"
       ]
     },
+    "PagedQuotaUsageData": {
+      "type": "object",
+      "description": "Paged collection of QuotaUsageData items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaUsageData items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaUsageData"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedSessionDetails": {
       "type": "object",
       "description": "Paged collection of SessionDetails items",
@@ -2182,6 +2257,71 @@
         "period"
       ]
     },
+    "QuotaUsage": {
+      "type": "object",
+      "description": "The accumulated quota usage values for a suite offer provider.",
+      "properties": {
+        "standardMinutesLifetime": {
+          "type": "number",
+          "format": "double",
+          "description": "The accumulated standard-priority minutes used over the lifetime.",
+          "readOnly": true
+        },
+        "highMinutesLifetime": {
+          "type": "number",
+          "format": "double",
+          "description": "The accumulated high-priority minutes used over the lifetime.",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaUsageData": {
+      "type": "object",
+      "description": "Quota usage data for a suite offer provider.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the quota usage record.",
+          "readOnly": true
+        },
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier for the provider.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/SuiteOfferScope",
+          "description": "The scope at which the quota usage is applied.",
+          "readOnly": true
+        },
+        "usage": {
+          "$ref": "#/definitions/QuotaUsage",
+          "description": "The accumulated quota usage values.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the quota usage was last modified.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata associated with the quota usage.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "providerId",
+        "scope",
+        "usage",
+        "lastModifiedTime"
+      ]
+    },
     "SasUriResponse": {
       "type": "object",
       "description": "SAS URI operation response.",
@@ -2298,6 +2438,42 @@
             "name": "TimedOut",
             "value": "TimedOut",
             "description": "The session timed out."
+          }
+        ]
+      }
+    },
+    "SuiteOfferScope": {
+      "type": "string",
+      "description": "The scope at which the suite offer quota usage is applied.",
+      "enum": [
+        "Job",
+        "Workspace",
+        "Subscription",
+        "Target"
+      ],
+      "x-ms-enum": {
+        "name": "SuiteOfferScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Job",
+            "value": "Job",
+            "description": "The usage is applied at the job level."
+          },
+          {
+            "name": "Workspace",
+            "value": "Workspace",
+            "description": "The usage is applied at the Quantum Workspace level."
+          },
+          {
+            "name": "Subscription",
+            "value": "Subscription",
+            "description": "The usage is applied at the Azure Subscription level."
+          },
+          {
+            "name": "Target",
+            "value": "Target",
+            "description": "The usage is applied at the target level."
           }
         ]
       }
