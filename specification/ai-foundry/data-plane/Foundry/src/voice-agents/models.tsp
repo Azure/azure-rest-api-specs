@@ -1055,26 +1055,11 @@ model TelephonyCallRecordList {
   next_cursor?: string;
 }
 
-@doc("A command that can be applied to an active telephony call.")
+@doc("A request to transfer an active telephony call to a configured target.")
 @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-union TelephonyCallManageCommand {
-  string,
-
-  @doc("Hang up the call.")
-  hangup: "hangup",
-
-  @doc("Transfer the call to a configured transfer target.")
-  transfer: "transfer",
-}
-
-@doc("A request to manage an active telephony call.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
-model TelephonyCallManageRequest {
-  @doc("The operation to perform on the call.")
-  command: TelephonyCallManageCommand;
-
-  @doc("For a transfer command, the name of a transfer target configured for the voice agent.")
-  target?: string;
+model TelephonyCallTransferRequest {
+  @doc("The name of a transfer target configured for the voice agent.")
+  target: string;
 }
 
 @doc("The telephony transfer targets configured for one voice agent.")
