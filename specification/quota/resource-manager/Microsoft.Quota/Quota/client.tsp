@@ -91,8 +91,7 @@ using Microsoft.Quota;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesCreateOrUpdate(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -113,36 +112,7 @@ op currentQuotaLimitBasesCreateOrUpdate(
 @@override(
   CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,python,go"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op currentQuotaLimitBasesCreateOrUpdateForJs(
-  ...Azure.ResourceManager.ApiVersionParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.Quota",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scope: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  createQuotaRequest: CurrentQuotaLimitBase,
-): CurrentQuotaLimitBase;
-
-@@override(
-  CurrentQuotaLimitBases.createOrUpdate,
-  currentQuotaLimitBasesCreateOrUpdateForJs,
-  "javascript"
+  "java,python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
@@ -150,8 +120,7 @@ op currentQuotaLimitBasesCreateOrUpdateForJs(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesGet(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -169,33 +138,7 @@ op currentQuotaLimitBasesGet(
 @@override(
   CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,python,go"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op currentQuotaLimitBasesGetForJs(
-  ...Azure.ResourceManager.ApiVersionParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.Quota",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scope: string,
-): CurrentQuotaLimitBase;
-
-@@override(
-  CurrentQuotaLimitBases.get,
-  currentQuotaLimitBasesGetForJs,
-  "javascript"
+  "java,python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
@@ -203,8 +146,7 @@ op currentQuotaLimitBasesGetForJs(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentQuotaLimitBasesUpdate(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
+  ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -225,36 +167,7 @@ op currentQuotaLimitBasesUpdate(
 @@override(
   CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,python,go"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op currentQuotaLimitBasesUpdateForJs(
-  ...Azure.ResourceManager.ApiVersionParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.Quota",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scope: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  createQuotaRequest: CurrentQuotaLimitBase,
-): CurrentQuotaLimitBase;
-
-@@override(
-  CurrentQuotaLimitBases.update,
-  currentQuotaLimitBasesUpdateForJs,
-  "javascript"
+  "java,python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
@@ -262,29 +175,6 @@ op currentQuotaLimitBasesUpdateForJs(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op quotaRequestStatusGet(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.Quota",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  id: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scope: string,
-): QuotaRequestDetails;
-
-@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python,go");
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op quotaRequestStatusGetForJs(
   ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -300,36 +190,17 @@ op quotaRequestStatusGetForJs(
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(QuotaRequestStatus.get, quotaRequestStatusGetForJs, "javascript");
+@@override(
+  QuotaRequestStatus.get,
+  quotaRequestStatusGet,
+  "java,python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op currentUsagesBasesGet(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.Quota",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scope: string,
-): CurrentUsagesBase;
-
-@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python,go");
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op currentUsagesBasesGetForJs(
   ...Azure.ResourceManager.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -345,4 +216,8 @@ op currentUsagesBasesGetForJs(
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(CurrentUsagesBases.get, currentUsagesBasesGetForJs, "javascript");
+@@override(
+  CurrentUsagesBases.get,
+  currentUsagesBasesGet,
+  "java,python,go,javascript"
+);
