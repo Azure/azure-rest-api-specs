@@ -85201,6 +85201,9 @@ components:
         - $ref: '#/components/schemas/VoiceAgentServerEventResponseTextDelta'
         - $ref: '#/components/schemas/VoiceAgentServerEventResponseTextDone'
         - $ref: '#/components/schemas/VoiceAgentServerEventSessionCreated'
+        - $ref: '#/components/schemas/VoiceAgentServerEventSessionSubagentStarted'
+        - $ref: '#/components/schemas/VoiceAgentServerEventSessionSubagentCompleted'
+        - $ref: '#/components/schemas/VoiceAgentServerEventSessionSubagentAborted'
         - $ref: '#/components/schemas/VoiceAgentServerEventSessionUpdated'
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEventError'
         - $ref: '#/components/schemas/VoiceAgentServerEventWarning'
@@ -86591,6 +86594,121 @@ components:
           $ref: '#/components/schemas/VoiceAgentSessionResponseConfig'
           description: The initial effective voice-agent session configuration.
       description: The `session.created` server event.
+    VoiceAgentServerEventSessionSubagentAborted:
+      type: object
+      required:
+        - type
+        - event_id
+        - consultation_id
+        - call_id
+        - subagent_name
+        - reason
+      properties:
+        type:
+          type: string
+          enum:
+            - session.subagent.aborted
+          description: The event type. Always `session.subagent.aborted`.
+        event_id:
+          type: string
+          description: The server-generated event identifier.
+        consultation_id:
+          type: string
+          description: The identifier of the subagent consultation.
+        call_id:
+          type: string
+          description: The identifier of the function call that initiated the consultation.
+        subagent_name:
+          type: string
+          description: The name of the consulted subagent.
+        reason:
+          $ref: '#/components/schemas/VoiceAgentSubagentAbortReason'
+          description: The reason the consultation was aborted.
+      description: The `session.subagent.aborted` server event.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentServerEventSessionSubagentCompleted:
+      type: object
+      required:
+        - type
+        - event_id
+        - consultation_id
+        - call_id
+        - subagent_name
+      properties:
+        type:
+          type: string
+          enum:
+            - session.subagent.completed
+          description: The event type. Always `session.subagent.completed`.
+        event_id:
+          type: string
+          description: The server-generated event identifier.
+        consultation_id:
+          type: string
+          description: The identifier of the subagent consultation.
+        call_id:
+          type: string
+          description: The identifier of the function call that initiated the consultation.
+        subagent_name:
+          type: string
+          description: The name of the consulted subagent.
+      description: The `session.subagent.completed` server event.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentServerEventSessionSubagentLifecycle:
+      type: object
+      required:
+        - event_id
+        - consultation_id
+        - call_id
+        - subagent_name
+      properties:
+        event_id:
+          type: string
+          description: The server-generated event identifier.
+        consultation_id:
+          type: string
+          description: The identifier of the subagent consultation.
+        call_id:
+          type: string
+          description: The identifier of the function call that initiated the consultation.
+        subagent_name:
+          type: string
+          description: The name of the consulted subagent.
+      description: Fields shared by server events that report the lifecycle of a subagent consultation.
+    VoiceAgentServerEventSessionSubagentStarted:
+      type: object
+      required:
+        - type
+        - event_id
+        - consultation_id
+        - call_id
+        - subagent_name
+      properties:
+        type:
+          type: string
+          enum:
+            - session.subagent.started
+          description: The event type. Always `session.subagent.started`.
+        event_id:
+          type: string
+          description: The server-generated event identifier.
+        consultation_id:
+          type: string
+          description: The identifier of the subagent consultation.
+        call_id:
+          type: string
+          description: The identifier of the function call that initiated the consultation.
+        subagent_name:
+          type: string
+          description: The name of the consulted subagent.
+      description: The `session.subagent.started` server event.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentServerEventSessionUpdated:
       type: object
       required:
@@ -86834,6 +86952,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
       description: A static interim response selected from configured text.
+    VoiceAgentSubagentAbortReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - unknown_target
+            - timeout
+            - cancelled
+            - stopped_by_user
+            - superseded
+            - failed
+      description: The reason a subagent consultation was aborted.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentTool:
       type: object
       required:
