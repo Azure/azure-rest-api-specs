@@ -1419,7 +1419,6 @@ interface File {
       ...LeaseResponseHeaders;
       ...NfsResponseHeaders;
       ...LinkCountResponseHeader;
-
       @body hardLinks: HardLinkList;
     }
   >;
