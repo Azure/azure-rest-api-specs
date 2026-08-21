@@ -295,7 +295,7 @@ model ConfigurationAssignmentsForResourceGroupWriteNameParameters {
   ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>;
 
   // Stable 2023-04-01 omits the name pattern on PUT, PATCH, and DELETE.
-  // Keep the empty pattern so writes match that contract while GET retains `^.+$`.
+  // Omit the name pattern on writes to match that contract while GET retains `^.+$`.
   ...KeysOf<ResourceNameParameter<
     Resource = ConfigurationAssignment,
     KeyName = "configurationAssignmentName",
@@ -304,6 +304,7 @@ model ConfigurationAssignmentsForResourceGroupWriteNameParameters {
   >>;
 }
 
+/** GET operations retain the `^.+$` name pattern from the existing contract. */
 @armResourceOperations
 interface ConfigurationAssignmentsForResourceGroupReadOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -312,6 +313,7 @@ interface ConfigurationAssignmentsForResourceGroupReadOps
       ConfigurationAssignmentsForResourceGroupReadNameParameters
     > {}
 
+/** Write operations omit the name pattern to match the stable 2023-04-01 contract. */
 @armResourceOperations
 interface ConfigurationAssignmentsForResourceGroupWriteOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
