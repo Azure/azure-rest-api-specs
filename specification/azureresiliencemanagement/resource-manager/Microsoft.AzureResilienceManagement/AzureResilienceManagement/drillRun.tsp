@@ -178,7 +178,7 @@ interface DrillRuns {
   generateReport is ArmResourceActionAsync<
     DrillRun,
     void,
-    DrillRunReport,
+    DrillReportSummary,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &

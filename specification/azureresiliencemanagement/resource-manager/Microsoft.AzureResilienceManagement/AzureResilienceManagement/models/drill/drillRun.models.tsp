@@ -78,15 +78,15 @@ model DrillRunProperties extends JobProperties {
   @visibility(Lifecycle.Read)
   currentActiveOperationId?: string;
 
-  @doc("Report generated for this Drill Run.")
+  @doc("Summary of report generation for this Drill Run.")
   @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Read)
-  report?: DrillRunReport;
+  report?: DrillReportSummary;
 }
 
 @added(Versions.v2026_08_31_preview)
-@doc("Public, read-only view of the report generated for a Drill Run. Exposes status and pointers only - internal storage locations are never surfaced.")
-model DrillRunReport {
+@doc("Public, read-only summary of report generation for a Drill Run. Exposes status and pointers only - the report content and internal storage locations are never surfaced.")
+model DrillReportSummary {
   @doc("Overall report generation status for the Drill Run.")
   @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Read)

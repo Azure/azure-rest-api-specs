@@ -1064,7 +1064,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DrillRunReport"
+              "$ref": "#/definitions/DrillReportSummary"
             }
           },
           "202": {
@@ -6128,6 +6128,55 @@
       },
       "readOnly": true
     },
+    "DrillReportSummary": {
+      "type": "object",
+      "description": "Public, read-only summary of report generation for a Drill Run. Exposes status and pointers only - the report content and internal storage locations are never surfaced.",
+      "properties": {
+        "generationStatus": {
+          "$ref": "#/definitions/DrillReportGenerationStatus",
+          "description": "Overall report generation status for the Drill Run.",
+          "readOnly": true
+        },
+        "stageStatuses": {
+          "type": "array",
+          "description": "Per-stage report generation statuses.",
+          "items": {
+            "$ref": "#/definitions/ReportStageStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "availableFormats": {
+          "type": "array",
+          "description": "Formats the report is currently available for download in.",
+          "items": {
+            "$ref": "#/definitions/DrillReportFormat"
+          },
+          "readOnly": true
+        },
+        "lastGeneratedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last successful report generation.",
+          "readOnly": true
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "Schema version of the generated report content.",
+          "readOnly": true
+        },
+        "finalizationState": {
+          "$ref": "#/definitions/DrillReportFinalizationState",
+          "description": "Finalization state of the report. A finalized report is immutable.",
+          "readOnly": true
+        },
+        "lastError": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Error from the last failed report generation attempt.",
+          "readOnly": true
+        }
+      }
+    },
     "DrillResource": {
       "type": "object",
       "description": "Drill Resource",
@@ -6681,8 +6730,8 @@
           "readOnly": true
         },
         "report": {
-          "$ref": "#/definitions/DrillRunReport",
-          "description": "Report generated for this Drill Run.",
+          "$ref": "#/definitions/DrillReportSummary",
+          "description": "Summary of report generation for this Drill Run.",
           "readOnly": true
         }
       },
@@ -6692,55 +6741,6 @@
         }
       ],
       "x-ms-discriminator-value": "DrillRun"
-    },
-    "DrillRunReport": {
-      "type": "object",
-      "description": "Public, read-only view of the report generated for a Drill Run. Exposes status and pointers only - internal storage locations are never surfaced.",
-      "properties": {
-        "generationStatus": {
-          "$ref": "#/definitions/DrillReportGenerationStatus",
-          "description": "Overall report generation status for the Drill Run.",
-          "readOnly": true
-        },
-        "stageStatuses": {
-          "type": "array",
-          "description": "Per-stage report generation statuses.",
-          "items": {
-            "$ref": "#/definitions/ReportStageStatus"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "availableFormats": {
-          "type": "array",
-          "description": "Formats the report is currently available for download in.",
-          "items": {
-            "$ref": "#/definitions/DrillReportFormat"
-          },
-          "readOnly": true
-        },
-        "lastGeneratedTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the last successful report generation.",
-          "readOnly": true
-        },
-        "schemaVersion": {
-          "type": "string",
-          "description": "Schema version of the generated report content.",
-          "readOnly": true
-        },
-        "finalizationState": {
-          "$ref": "#/definitions/DrillReportFinalizationState",
-          "description": "Finalization state of the report. A finalized report is immutable.",
-          "readOnly": true
-        },
-        "lastError": {
-          "$ref": "#/definitions/ErrorDetails",
-          "description": "Error from the last failed report generation attempt.",
-          "readOnly": true
-        }
-      }
     },
     "DrillRunReprotectRequest": {
       "type": "object",
