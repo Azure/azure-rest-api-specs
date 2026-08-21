@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/provisioningState.tsp";
 import "./registryDevices.tsp";
-import "../../../common/deviceAttributeTypes.tsp";
+import "./common/deviceAttributeTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,7 +18,7 @@ namespace Microsoft.DeviceRegistry;
 // Device attribute resource (control-plane proxy resource)
 // The discriminated property models (`DeviceAttributeProperties` and its
 // `reportedBy` subtypes) and the Azure Device Update payload models are
-// defined in specification/deviceregistry/common/deviceAttributeTypes.tsp.
+// defined in ./common/deviceAttributeTypes.tsp.
 // ──────────────────────────────────────────────
 
 @added(Versions.v2026_11_02_preview)

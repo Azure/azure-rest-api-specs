@@ -152,7 +152,7 @@ model JobRunResultItem {
 
 // The Azure Device Update install-result models (InstallResult, UpdateStepResult,
 // InstallResultOutcome, InstallResultFailureOrigin) are shared with the device attribute
-// payload and are defined in specification/deviceregistry/common/deviceAttributeTypes.tsp.
+// payload and are defined in ./common/deviceAttributeTypes.tsp.
 @@added(InstallResult, Versions.v2026_11_02_preview);
 @@added(UpdateStepResult, Versions.v2026_11_02_preview);
 @@added(InstallResultOutcome, Versions.v2026_11_02_preview);

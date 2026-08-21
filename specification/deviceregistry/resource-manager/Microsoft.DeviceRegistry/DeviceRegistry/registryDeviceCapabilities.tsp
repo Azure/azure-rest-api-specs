@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./registryDevices.tsp";
-import "../../../common/deviceCapabilityTypes.tsp";
+import "./common/deviceCapabilityTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -16,7 +16,7 @@ namespace Microsoft.DeviceRegistry;
 // ──────────────────────────────────────────────
 // Device capability resource (control-plane proxy resource)
 // Shared types are defined in
-// specification/deviceregistry/common/deviceCapabilityTypes.tsp.
+// ./common/deviceCapabilityTypes.tsp.
 // ──────────────────────────────────────────────
 
 @added(Versions.v2026_11_02_preview)

@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./registryDevices.tsp";
-import "../../../common/deviceAuthenticationProfileTypes.tsp";
+import "./common/deviceAuthenticationProfileTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -16,7 +16,7 @@ namespace Microsoft.DeviceRegistry;
 // ──────────────────────────────────────────────
 // Device authentication profile resource (control-plane proxy resource)
 // Shared types are defined in
-// specification/deviceregistry/common/deviceAuthenticationProfileTypes.tsp.
+// ./common/deviceAuthenticationProfileTypes.tsp.
 // ──────────────────────────────────────────────
 
 @added(Versions.v2026_11_02_preview)

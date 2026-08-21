@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/provisioningState.tsp";
-import "../../../common/groupTypes.tsp";
+import "./common/groupTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

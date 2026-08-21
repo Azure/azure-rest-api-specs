@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/provisioningState.tsp";
 import "./common/status.tsp";
-import "../../../common/deviceTypes.tsp";
+import "./common/deviceTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
