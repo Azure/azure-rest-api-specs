@@ -59,6 +59,7 @@ interface Agents {
   @tag("Agents")
   createAgentFromCode is FoundryDataPlaneOperation<
     {
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** The unique name that identifies the agent. Max 63 chars, must start and end with alphanumeric, hyphens allowed in the middle. */
@@ -70,6 +71,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
+      /** The content multipart request content. */
       @multipartBody content: CreateAgentFromCodeContent;
     },
     AgentObject
@@ -124,12 +126,14 @@ interface Agents {
       @path
       agent_name: string;
 
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
+      /** The content multipart request content. */
       @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentObject
@@ -336,7 +340,7 @@ interface Agents {
   /**
    * Applies a merge-patch update to the specified agent endpoint configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
@@ -348,7 +352,9 @@ interface Agents {
       @path
       agent_name: string;
 
+      /** The content type of the request body. */
       @header("Content-Type") contentType: "application/merge-patch+json";
+
       ...PatchAgentRequest;
     },
     AgentObject
@@ -379,12 +385,14 @@ interface Agents {
       @path
       agent_name: string;
 
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
       /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
+      /** The content multipart request content. */
       @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
@@ -427,6 +435,7 @@ interface Agents {
   @summary("Enable an agent")
   @post
   @route("/agents/{agent_name}:enable")
+  @tag("Agents")
   enableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to enable. */
@@ -443,6 +452,7 @@ interface Agents {
   @summary("Disable an agent")
   @post
   @route("/agents/{agent_name}:disable")
+  @tag("Agents")
   disableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to disable. */
