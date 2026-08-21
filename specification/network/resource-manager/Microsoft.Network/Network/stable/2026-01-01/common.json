@@ -8924,7 +8924,9 @@
       "type": "string",
       "description": "MigrationType for the virtual network gateway.",
       "enum": [
-        "UpgradeDeploymentToStandardIP"
+        "UpgradeDeploymentToStandardIP",
+        "UpgradeGatewayToDualStack",
+        "MigrateGatewayForPointToSiteProfile"
       ],
       "x-ms-enum": {
         "name": "VirtualNetworkGatewayMigrationType",
@@ -8934,6 +8936,16 @@
             "name": "UpgradeDeploymentToStandardIP",
             "value": "UpgradeDeploymentToStandardIP",
             "description": "Indicates that it is a migration process from basic IP CSES to standard IP VMSS."
+          },
+          {
+            "name": "UpgradeGatewayToDualStack",
+            "value": "UpgradeGatewayToDualStack",
+            "description": "Indicates a migration process to upgrade the virtual network gateway to dual stack (IPv4 and IPv6)."
+          },
+          {
+            "name": "MigrateGatewayForPointToSiteProfile",
+            "value": "MigrateGatewayForPointToSiteProfile",
+            "description": "Indicates a migration process for the virtual network gateway's point-to-site profile."
           }
         ]
       }

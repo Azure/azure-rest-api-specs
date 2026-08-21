@@ -4848,6 +4848,18 @@ union VirtualNetworkGatewayMigrationType {
    * Indicates that it is a migration process from basic IP CSES to standard IP VMSS.
    */
   UpgradeDeploymentToStandardIP: "UpgradeDeploymentToStandardIP",
+
+  /**
+   * Indicates a migration process to upgrade the virtual network gateway to dual stack (IPv4 and IPv6).
+   */
+  @added(Versions.v2026_01_01)
+  UpgradeGatewayToDualStack: "UpgradeGatewayToDualStack",
+
+  /**
+   * Indicates a migration process for the virtual network gateway's point-to-site profile.
+   */
+  @added(Versions.v2026_01_01)
+  MigrateGatewayForPointToSiteProfile: "MigrateGatewayForPointToSiteProfile",
 }
 
 /**
