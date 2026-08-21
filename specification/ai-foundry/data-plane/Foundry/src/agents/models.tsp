@@ -737,19 +737,19 @@ union PublishApprovalStatus {
   string,
 
   @doc("The agent has never been published to the Microsoft 365 store, so there is nothing to review.")
-  NotPublished: "NotPublished",
+  not_published: "not_published",
 
   @doc("The published title is awaiting a review decision.")
-  Pending: "Pending",
+  pending: "pending",
 
   @doc("The title passed review, as of this read.")
-  Approved: "Approved",
+  approved: "approved",
 
   @doc("The title was rejected in review, as of this read.")
-  Rejected: "Rejected",
+  rejected: "rejected",
 
   @doc("The agent is published at a scope that does not go through Microsoft Agent Certification. Only tenant-scoped titles are reviewed.")
-  NoApprovalNeeded: "NoApprovalNeeded",
+  no_approval_needed: "no_approval_needed",
 }
 
 model AgentIdentity {
