@@ -57476,7 +57476,15 @@
         },
         "identityResourceId": {
           "type": "string",
-          "description": "Per-connection override for the user-assigned managed identity resource ID.\nUsed when multiple connections target different backends that require\ndifferent identities."
+          "format": "arm-id",
+          "description": "Per-connection override for the user-assigned managed identity resource ID.\nUsed when multiple connections target different backends that require\ndifferent identities.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         },
         "credentialInjection": {
           "$ref": "#/definitions/HttpCredentialInjection",
@@ -57659,8 +57667,7 @@
             "description": "The resource create request has been accepted."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "VirtualDirectory": {
       "type": "object",

@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -9,7 +8,6 @@ import "./Site.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Web;
@@ -66,9 +64,7 @@ union VirtualConnectionsEnabledState {
 }
 
 /** The resource provisioning state. */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "The OpenAPI validator requires readOnly on the referenced provisioning-state definition; TypeSpec lifecycle visibility cannot be applied to a union."
 @added(Versions.v2026_09_01)
-@extension("readOnly", true)
 union VirtualConnectionsProvisioningState {
   ResourceProvisioningState,
 
@@ -131,7 +127,11 @@ model VirtualConnection {
    * Used when multiple connections target different backends that require
    * different identities.
    */
-  identityResourceId?: string;
+  identityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 
   /**
    * How to inject a standalone credential into upstream HTTP requests.
