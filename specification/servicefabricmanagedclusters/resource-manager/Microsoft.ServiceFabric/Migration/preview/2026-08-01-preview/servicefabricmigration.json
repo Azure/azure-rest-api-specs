@@ -590,6 +590,57 @@
         "value"
       ]
     },
+    "ClusterMigrationAgentMode": {
+      "type": "string",
+      "description": "The direction in which the migration stages are currently executing.",
+      "enum": [
+        "Forward",
+        "RollingBack"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterMigrationAgentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Forward",
+            "value": "Forward",
+            "description": "Stages are executing in roll forward order."
+          },
+          {
+            "name": "RollingBack",
+            "value": "RollingBack",
+            "description": "Stages are executing in rollback order."
+          }
+        ]
+      }
+    },
+    "ClusterMigrationAgentNodeTypeDescription": {
+      "type": "object",
+      "description": "Describes a node type that participates in the migration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the node type. The name cannot be changed, added, or removed after the migration is created.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "Indicates whether the node type hosts the system services of the cluster. This value cannot be\nchanged after the migration is created."
+        },
+        "vmInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of virtual machine instances to provision for this node type on the target managed cluster.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "isPrimary",
+        "vmInstanceCount"
+      ]
+    },
     "ClusterMigrationAgentProperties": {
       "type": "object",
       "description": "The properties of a cluster migration agent resource.",
@@ -636,14 +687,14 @@
           "description": "The node types that are migrated to the target managed cluster. At least one node type is required.\nNode types cannot be added or removed after the migration is created.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/MigrationNodeTypeDescription"
+            "$ref": "#/definitions/ClusterMigrationAgentNodeTypeDescription"
           },
           "x-ms-identifiers": [
             "name"
           ]
         },
         "retryPolicy": {
-          "$ref": "#/definitions/MigrationRetryPolicy",
+          "$ref": "#/definitions/ClusterMigrationAgentRetryPolicy",
           "description": "The policy applied when a migration stage fails."
         },
         "rollbackOnFailure": {
@@ -660,7 +711,7 @@
             "Manual"
           ],
           "x-ms-enum": {
-            "name": "MigrationStartMode",
+            "name": "ClusterMigrationAgentStartMode",
             "modelAsString": true,
             "values": [
               {
@@ -682,12 +733,12 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/MigrationStatus",
+          "$ref": "#/definitions/ClusterMigrationAgentStatus",
           "description": "The current state of the migration.",
           "readOnly": true
         },
         "migrationMode": {
-          "$ref": "#/definitions/MigrationMode",
+          "$ref": "#/definitions/ClusterMigrationAgentMode",
           "description": "The direction in which the migration stages are currently executing.",
           "readOnly": true
         },
@@ -695,7 +746,7 @@
           "type": "array",
           "description": "The status of every stage of the migration plan, ordered from the first stage to the last.",
           "items": {
-            "$ref": "#/definitions/MigrationStage"
+            "$ref": "#/definitions/ClusterMigrationAgentStage"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -770,71 +821,7 @@
       },
       "readOnly": true
     },
-    "ClusterMigrationAgentTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in ClusterMigrationAgent resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MigrationMode": {
-      "type": "string",
-      "description": "The direction in which the migration stages are currently executing.",
-      "enum": [
-        "Forward",
-        "RollingBack"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Forward",
-            "value": "Forward",
-            "description": "Stages are executing in roll forward order."
-          },
-          {
-            "name": "RollingBack",
-            "value": "RollingBack",
-            "description": "Stages are executing in rollback order."
-          }
-        ]
-      }
-    },
-    "MigrationNodeTypeDescription": {
-      "type": "object",
-      "description": "Describes a node type that participates in the migration.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the node type. The name cannot be changed, added, or removed after the migration is created.",
-          "minLength": 1,
-          "maxLength": 1024
-        },
-        "isPrimary": {
-          "type": "boolean",
-          "description": "Indicates whether the node type hosts the system services of the cluster. This value cannot be\nchanged after the migration is created."
-        },
-        "vmInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of virtual machine instances to provision for this node type on the target managed cluster.",
-          "minimum": 1
-        }
-      },
-      "required": [
-        "name",
-        "isPrimary",
-        "vmInstanceCount"
-      ]
-    },
-    "MigrationRetryPolicy": {
+    "ClusterMigrationAgentRetryPolicy": {
       "type": "object",
       "description": "Describes how a failed migration stage is retried before the migration is considered failed.",
       "properties": {
@@ -859,7 +846,7 @@
         }
       }
     },
-    "MigrationStage": {
+    "ClusterMigrationAgentStage": {
       "type": "object",
       "description": "The status of a single stage of the migration plan.",
       "properties": {
@@ -876,12 +863,12 @@
           "readOnly": true
         },
         "forward": {
-          "$ref": "#/definitions/MigrationStageProgress",
+          "$ref": "#/definitions/ClusterMigrationAgentStageProgress",
           "description": "The progress of the roll forward execution of the stage. Not reported until the stage runs.",
           "readOnly": true
         },
         "rollback": {
-          "$ref": "#/definitions/MigrationStageProgress",
+          "$ref": "#/definitions/ClusterMigrationAgentStageProgress",
           "description": "The progress of the rollback execution of the stage. Not reported until the stage is rolled back.",
           "readOnly": true
         }
@@ -891,17 +878,17 @@
         "index"
       ]
     },
-    "MigrationStageProgress": {
+    "ClusterMigrationAgentStageProgress": {
       "type": "object",
       "description": "The progress of a migration stage in one direction.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MigrationStageStatus",
+          "$ref": "#/definitions/ClusterMigrationAgentStageStatus",
           "description": "The execution state of the stage in this direction.",
           "readOnly": true
         },
         "result": {
-          "$ref": "#/definitions/MigrationStageResult",
+          "$ref": "#/definitions/ClusterMigrationAgentStageResult",
           "description": "The outcome of the stage. Reported only once the stage finished running.",
           "readOnly": true
         },
@@ -945,7 +932,7 @@
         "status"
       ]
     },
-    "MigrationStageResult": {
+    "ClusterMigrationAgentStageResult": {
       "type": "string",
       "description": "The outcome of a migration stage that finished running.",
       "enum": [
@@ -953,7 +940,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "MigrationStageResult",
+        "name": "ClusterMigrationAgentStageResult",
         "modelAsString": true,
         "values": [
           {
@@ -970,7 +957,7 @@
       },
       "readOnly": true
     },
-    "MigrationStageStatus": {
+    "ClusterMigrationAgentStageStatus": {
       "type": "string",
       "description": "The execution state of a migration stage in a single direction.",
       "enum": [
@@ -979,7 +966,7 @@
         "Completed"
       ],
       "x-ms-enum": {
-        "name": "MigrationStageStatus",
+        "name": "ClusterMigrationAgentStageStatus",
         "modelAsString": true,
         "values": [
           {
@@ -1000,7 +987,7 @@
         ]
       }
     },
-    "MigrationStatus": {
+    "ClusterMigrationAgentStatus": {
       "type": "string",
       "description": "The observable state of a migration.",
       "enum": [
@@ -1012,7 +999,7 @@
         "RolledBack"
       ],
       "x-ms-enum": {
-        "name": "MigrationStatus",
+        "name": "ClusterMigrationAgentStatus",
         "modelAsString": true,
         "values": [
           {
@@ -1048,6 +1035,19 @@
         ]
       },
       "readOnly": true
+    },
+    "ClusterMigrationAgentTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ClusterMigrationAgent resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {}

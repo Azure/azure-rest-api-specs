@@ -14,7 +14,7 @@ namespace Microsoft.ServiceFabric;
 /**
  * The observable state of a migration.
  */
-union MigrationStatus {
+union ClusterMigrationAgentStatus {
   string,
 
   /**
@@ -51,7 +51,7 @@ union MigrationStatus {
 /**
  * The direction in which the migration stages are currently executing.
  */
-union MigrationMode {
+union ClusterMigrationAgentMode {
   string,
 
   /**
@@ -68,7 +68,7 @@ union MigrationMode {
 /**
  * Controls how a migration transitions from NotStarted to InProgress once provisioning completes.
  */
-union MigrationStartMode {
+union ClusterMigrationAgentStartMode {
   string,
 
   /**
@@ -85,7 +85,7 @@ union MigrationStartMode {
 /**
  * The execution state of a migration stage in a single direction.
  */
-union MigrationStageStatus {
+union ClusterMigrationAgentStageStatus {
   string,
 
   /**
@@ -107,7 +107,7 @@ union MigrationStageStatus {
 /**
  * The outcome of a migration stage that finished running.
  */
-union MigrationStageResult {
+union ClusterMigrationAgentStageResult {
   string,
 
   /**
@@ -124,7 +124,7 @@ union MigrationStageResult {
 /**
  * Describes a node type that participates in the migration.
  */
-model MigrationNodeTypeDescription {
+model ClusterMigrationAgentNodeTypeDescription {
   /**
    * The name of the node type. The name cannot be changed, added, or removed after the migration is created.
    */
@@ -148,7 +148,7 @@ model MigrationNodeTypeDescription {
 /**
  * Describes how a failed migration stage is retried before the migration is considered failed.
  */
-model MigrationRetryPolicy {
+model ClusterMigrationAgentRetryPolicy {
   /**
    * The maximum number of times a stage is retried before the migration fails.
    */
@@ -169,18 +169,18 @@ model MigrationRetryPolicy {
 /**
  * The progress of a migration stage in one direction.
  */
-model MigrationStageProgress {
+model ClusterMigrationAgentStageProgress {
   /**
    * The execution state of the stage in this direction.
    */
   @visibility(Lifecycle.Read)
-  status: MigrationStageStatus;
+  status: ClusterMigrationAgentStageStatus;
 
   /**
    * The outcome of the stage. Reported only once the stage finished running.
    */
   @visibility(Lifecycle.Read)
-  result?: MigrationStageResult;
+  result?: ClusterMigrationAgentStageResult;
 
   /**
    * The reason the stage failed. Reported only when the stage failed.
@@ -222,7 +222,7 @@ model MigrationStageProgress {
 /**
  * The status of a single stage of the migration plan.
  */
-model MigrationStage {
+model ClusterMigrationAgentStage {
   /**
    * The name of the stage.
    */
@@ -242,13 +242,13 @@ model MigrationStage {
    * The progress of the roll forward execution of the stage. Not reported until the stage runs.
    */
   @visibility(Lifecycle.Read)
-  forward?: MigrationStageProgress;
+  forward?: ClusterMigrationAgentStageProgress;
 
   /**
    * The progress of the rollback execution of the stage. Not reported until the stage is rolled back.
    */
   @visibility(Lifecycle.Read)
-  rollback?: MigrationStageProgress;
+  rollback?: ClusterMigrationAgentStageProgress;
 }
 
 /**
@@ -291,12 +291,12 @@ model ClusterMigrationAgentProperties {
    */
   @identifiers(#["name"])
   @minItems(1)
-  nodeTypes: MigrationNodeTypeDescription[];
+  nodeTypes: ClusterMigrationAgentNodeTypeDescription[];
 
   /**
    * The policy applied when a migration stage fails.
    */
-  retryPolicy?: MigrationRetryPolicy;
+  retryPolicy?: ClusterMigrationAgentRetryPolicy;
 
   /**
    * Indicates whether the migration automatically rolls back when a stage fails.
@@ -306,7 +306,7 @@ model ClusterMigrationAgentProperties {
   /**
    * Controls how the migration is started once provisioning completes.
    */
-  startMode?: MigrationStartMode = MigrationStartMode.Auto;
+  startMode?: ClusterMigrationAgentStartMode = ClusterMigrationAgentStartMode.Auto;
 
   /**
    * The provisioning state of the cluster migration agent resource.
@@ -318,20 +318,20 @@ model ClusterMigrationAgentProperties {
    * The current state of the migration.
    */
   @visibility(Lifecycle.Read)
-  status?: MigrationStatus;
+  status?: ClusterMigrationAgentStatus;
 
   /**
    * The direction in which the migration stages are currently executing.
    */
   @visibility(Lifecycle.Read)
-  migrationMode?: MigrationMode;
+  migrationMode?: ClusterMigrationAgentMode;
 
   /**
    * The status of every stage of the migration plan, ordered from the first stage to the last.
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
-  stages?: MigrationStage[];
+  stages?: ClusterMigrationAgentStage[];
 
   /**
    * The time at which the cluster migration agent resource was created, in UTC.
