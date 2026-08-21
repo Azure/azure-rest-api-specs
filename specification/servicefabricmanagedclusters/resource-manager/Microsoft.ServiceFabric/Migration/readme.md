@@ -34,14 +34,14 @@ These are the global settings for the ServiceFabricMigrationManagementClient API
 title: ServiceFabricMigrationManagementClient
 description: Service Fabric Migration Management Client
 openapi-type: arm
-tag: package-2026-06-preview
+tag: package-2026-08-preview
 ```
 
-### Tag: package-2026-06-preview
+### Tag: package-2026-08-preview
 
-These settings apply only when `--tag=package-2026-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-06-preview'
+```yaml $(tag) == 'package-2026-08-preview'
 input-file:
-  - preview/2026-06-01-preview/servicefabricmigration.json
+  - preview/2026-08-01-preview/servicefabricmigration.json
 ```

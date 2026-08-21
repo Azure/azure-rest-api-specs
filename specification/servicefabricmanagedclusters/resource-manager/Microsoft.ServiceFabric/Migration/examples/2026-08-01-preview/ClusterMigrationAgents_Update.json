@@ -1,11 +1,16 @@
 {
-  "title": "Start a migration",
-  "operationId": "ClusterMigrationAgents_Start",
+  "title": "Update the tags of a migration",
+  "operationId": "ClusterMigrationAgents_Update",
   "parameters": {
-    "api-version": "2026-06-01-preview",
+    "api-version": "2026-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
-    "clusterMigrationAgentName": "myClusterMigrationAgent"
+    "clusterMigrationAgentName": "myClusterMigrationAgent",
+    "properties": {
+      "tags": {
+        "wave": "2"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -14,6 +19,9 @@
         "name": "myClusterMigrationAgent",
         "type": "Microsoft.ServiceFabric/clusterMigrationAgents",
         "location": "eastus",
+        "tags": {
+          "wave": "2"
+        },
         "properties": {
           "migrationId": "11111111-2222-3333-4444-555555555555",
           "sourceClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ServiceFabric/clusters/mySourceCluster",
@@ -26,30 +34,18 @@
             }
           ],
           "rollbackOnFailure": false,
-          "startMode": "Manual",
+          "startMode": "Auto",
           "provisioningState": "Succeeded",
-          "status": "InProgress",
-          "migrationMode": "Forward",
-          "stages": [
-            {
-              "name": "PrepareTargetCluster",
-              "index": 1,
-              "forward": {
-                "status": "InProgress",
-                "startedTime": "2026-06-01T18:00:00Z",
-                "retryCount": 0
-              }
-            }
-          ],
+          "status": "NotStarted",
           "createdTime": "2026-06-01T17:55:00Z",
-          "lastUpdatedTime": "2026-06-01T18:00:00Z"
+          "lastUpdatedTime": "2026-06-01T18:20:00Z"
         }
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/clusterMigrationAgentOperations/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/clusterMigrationAgentOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-06-01-preview"
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/clusterMigrationAgentOperationResults/00000000-1111-2222-3333-444444444444?api-version=2026-08-01-preview",
+        "Retry-After": 30
       }
     }
   }

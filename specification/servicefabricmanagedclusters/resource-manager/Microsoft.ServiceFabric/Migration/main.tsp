@@ -23,7 +23,7 @@ namespace Microsoft.ServiceFabric;
  */
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_06_01_preview: "2026-06-01-preview",
+  v2026_08_01_preview: "2026-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
