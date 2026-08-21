@@ -115,6 +115,12 @@
     },
     {
       "name": "DbVersions"
+    },
+    {
+      "name": "GoldenGateConnections"
+    },
+    {
+      "name": "GoldenGateDeployments"
     }
   ],
   "paths": {
@@ -359,6 +365,74 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ExascaleDbStorageVaultListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/goldenGateConnections": {
+      "get": {
+        "operationId": "GoldenGateConnections_ListBySubscription",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "List GoldenGateConnection resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/goldenGateDeployments": {
+      "get": {
+        "operationId": "GoldenGateDeployments_ListBySubscription",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "List GoldenGateDeployment resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeploymentListResult"
             }
           },
           "default": {
@@ -1112,13 +1186,13 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
-          },
-          {
             "$ref": "#/parameters/GiVersionFilter.shape"
           },
           {
             "$ref": "#/parameters/GiVersionFilter.zone"
+          },
+          {
+            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
           }
         ],
         "responses": {
@@ -5613,6 +5687,1018 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateConnections": {
+      "get": {
+        "operationId": "GoldenGateConnections_ListByResourceGroup",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "List GoldenGateConnection resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateConnections/{goldenGateConnectionName}": {
+      "get": {
+        "operationId": "GoldenGateConnections_Get",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Get a GoldenGateConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GoldenGateConnections_CreateOrUpdate",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Create a GoldenGateConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GoldenGateConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'GoldenGateConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GoldenGateConnections_Update",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Update a GoldenGateConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GoldenGateConnections_Delete",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Delete a GoldenGateConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateConnections/{goldenGateConnectionName}/assignDeployment": {
+      "post": {
+        "operationId": "GoldenGateConnections_AssignDeployment",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Assign a GoldenGate deployment to a connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssignUnassignDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedDeployment"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateConnections/{goldenGateConnectionName}/assignedDeployments": {
+      "get": {
+        "operationId": "GoldenGateConnections_ListAssignedDeploymentsByParent",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "List assigned deployments by GoldenGate connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateConnections/{goldenGateConnectionName}/assignedDeployments/{assignmentId}": {
+      "get": {
+        "operationId": "GoldenGateConnections_GetAssignedDeployment",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Get assigned deployment by GoldenGate connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "description": "Assigned Deployment assignment OCID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateConnections/{goldenGateConnectionName}/unassignDeployment": {
+      "post": {
+        "operationId": "GoldenGateConnections_UnassignDeployment",
+        "tags": [
+          "GoldenGateConnections"
+        ],
+        "description": "Unassign a GoldenGate deployment from a connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateConnectionName",
+            "in": "path",
+            "description": "The name of the GoldenGateConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssignUnassignDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedDeployment"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateDeployments": {
+      "get": {
+        "operationId": "GoldenGateDeployments_ListByResourceGroup",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "List GoldenGateDeployment resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateDeployments/{goldenGateDeploymentName}": {
+      "get": {
+        "operationId": "GoldenGateDeployments_Get",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Get a GoldenGateDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GoldenGateDeployments_CreateOrUpdate",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Create a GoldenGateDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GoldenGateDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'GoldenGateDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GoldenGateDeployments_Update",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Update a GoldenGateDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeploymentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GoldenGateDeployment"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GoldenGateDeployments_Delete",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Delete a GoldenGateDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateDeployments/{goldenGateDeploymentName}/assignConnection": {
+      "post": {
+        "operationId": "GoldenGateDeployments_AssignConnection",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Assign a GoldenGate connection to a deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssignUnassignConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedConnection"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateDeployments/{goldenGateDeploymentName}/assignedConnections": {
+      "get": {
+        "operationId": "GoldenGateDeployments_ListAssignedConnectionsByParent",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "List assigned connections by GoldenGate deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateDeployments/{goldenGateDeploymentName}/assignedConnections/{assignmentId}": {
+      "get": {
+        "operationId": "GoldenGateDeployments_GetAssignedConnection",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Get assigned connection by GoldenGate deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "description": "Assigned Connection assignment OCID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/goldenGateDeployments/{goldenGateDeploymentName}/unassignConnection": {
+      "post": {
+        "operationId": "GoldenGateDeployments_UnassignConnection",
+        "tags": [
+          "GoldenGateDeployments"
+        ],
+        "description": "Unassign a GoldenGate connection from a deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "goldenGateDeploymentName",
+            "in": "path",
+            "description": "The name of the GoldenGateDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssignUnassignConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssignedConnection"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/networkAnchors": {
       "get": {
         "operationId": "NetworkAnchors_ListByResourceGroup",
@@ -6257,6 +7343,104 @@
           "description": "The Oracle REST Data Services (ORDS) version."
         }
       }
+    },
+    "AssignUnassignConnection": {
+      "type": "object",
+      "description": "The payload for assigning or unassigning a connection on a deployment.",
+      "properties": {
+        "connectionId": {
+          "$ref": "#/definitions/GoldenGateConnectionResourceId",
+          "description": "The Azure resource ID of the connection to assign or unassign."
+        }
+      },
+      "required": [
+        "connectionId"
+      ]
+    },
+    "AssignUnassignDeployment": {
+      "type": "object",
+      "description": "The payload for assigning or unassigning a deployment on a connection.",
+      "properties": {
+        "deploymentId": {
+          "$ref": "#/definitions/GoldenGateDeploymentResourceId",
+          "description": "The Azure resource ID of the deployment to assign or unassign."
+        }
+      },
+      "required": [
+        "deploymentId"
+      ]
+    },
+    "AssignedConnection": {
+      "type": "object",
+      "description": "Assigned Connection resource belonging to GoldenGate Deployment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentConnectionAssignmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AssignedConnectionListResult": {
+      "type": "object",
+      "description": "The response of a AssignedConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AssignedConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/AssignedConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssignedDeployment": {
+      "type": "object",
+      "description": "Assigned Deployment resource belonging to GoldenGate Connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentConnectionAssignmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AssignedDeploymentListResult": {
+      "type": "object",
+      "description": "The response of a AssignedDeployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AssignedDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/AssignedDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AutonomousDatabase": {
       "type": "object",
@@ -8090,6 +9274,36 @@
         "azureSubscriptionIds"
       ]
     },
+    "BackupScheduleType": {
+      "type": "object",
+      "description": "Backup schedule type.",
+      "properties": {
+        "bucketName": {
+          "type": "string",
+          "description": "Bucket name."
+        },
+        "compartmentId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Compartment ID."
+        },
+        "frequencyBackupScheduled": {
+          "$ref": "#/definitions/FrequencyType",
+          "description": "Backup schedule frequency."
+        },
+        "isMetadataOnly": {
+          "type": "boolean",
+          "description": "Indicates whether the backup contains metadata only."
+        },
+        "namespaceName": {
+          "type": "string",
+          "description": "Namespace."
+        },
+        "timeBackupScheduled": {
+          "type": "string",
+          "description": "Scheduled backup time."
+        }
+      }
+    },
     "BaseDbSystemShapes": {
       "type": "string",
       "description": "Allowed values for BaseDb System Shapes",
@@ -8104,6 +9318,36 @@
             "name": "VMStandardX86",
             "value": "VM.Standard.x86",
             "description": "Vm Standard X86"
+          }
+        ]
+      }
+    },
+    "CategoryType": {
+      "type": "string",
+      "description": "Category.",
+      "enum": [
+        "DataReplication",
+        "StreamAnalytics",
+        "DataTransforms"
+      ],
+      "x-ms-enum": {
+        "name": "CategoryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataReplication",
+            "value": "DataReplication",
+            "description": "Data replication."
+          },
+          {
+            "name": "StreamAnalytics",
+            "value": "StreamAnalytics",
+            "description": "Stream analytics."
+          },
+          {
+            "name": "DataTransforms",
+            "value": "DataTransforms",
+            "description": "Data transforms."
           }
         ]
       }
@@ -8803,8 +10047,7 @@
         "hostname": {
           "type": "string",
           "description": "The hostname for the cloud VM cluster.",
-          "minLength": 1,
-          "maxLength": 23,
+          "x-ms-client-name": "hostnameV2",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9281,6 +10524,144 @@
         "totalStorageInGbs"
       ]
     },
+    "ConnectionBaseProperties": {
+      "type": "object",
+      "description": "GoldenGate Connection base resource model.",
+      "properties": {
+        "connectionType": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "The connection type to be created."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The connection display name.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "resourceAnchorId": {
+          "$ref": "#/definitions/ResourceAnchorResourceId",
+          "description": "The corresponding resource anchor Azure ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkAnchorId": {
+          "$ref": "#/definitions/NetworkAnchorResourceId",
+          "description": "The corresponding network anchor Azure ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "compartmentId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the compartment being referenced.",
+          "readOnly": true
+        },
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the connection being referenced.",
+          "readOnly": true
+        },
+        "routingMethod": {
+          "$ref": "#/definitions/RoutingMethod",
+          "description": "Controls the network traffic direction to the target."
+        },
+        "vaultId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The customer's vault OCID."
+        },
+        "keyId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The customer's master key OCID."
+        },
+        "doesUseSecretIds": {
+          "type": "boolean",
+          "description": "Indicates whether secret OCIDs are used for credential fields."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AzureResourceProvisioningState",
+          "description": "Connection provisioning state.",
+          "readOnly": true
+        },
+        "lifecycleState": {
+          "$ref": "#/definitions/ConnectionLifecycleState",
+          "description": "The connection lifecycle state.",
+          "readOnly": true
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "The description of lifecycle state in detail.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The date time the resource was created in OCI.",
+          "readOnly": true
+        },
+        "timeUpdated": {
+          "type": "string",
+          "description": "The date time the resource was last updated in OCI.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "connectionType",
+      "required": [
+        "connectionType",
+        "displayName",
+        "resourceAnchorId",
+        "networkAnchorId"
+      ]
+    },
+    "ConnectionLifecycleState": {
+      "type": "string",
+      "description": "Possible lifecycle states for connection.",
+      "enum": [
+        "CREATING",
+        "UPDATING",
+        "ACTIVE",
+        "DELETING",
+        "DELETED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionLifecycleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "CREATING",
+            "description": "Indicates that the resource is in creating state."
+          },
+          {
+            "name": "Updating",
+            "value": "UPDATING",
+            "description": "Indicates that the resource is in updating state."
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE",
+            "description": "Indicates that the resource is in active state."
+          },
+          {
+            "name": "Deleting",
+            "value": "DELETING",
+            "description": "Indicates that the resource is in deleting state."
+          },
+          {
+            "name": "Deleted",
+            "value": "DELETED",
+            "description": "Indicates that the resource is in deleted state."
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED",
+            "description": "Indicates that the resource is in failed state."
+          }
+        ]
+      }
+    },
     "ConnectionStringType": {
       "type": "object",
       "description": "Connection strings to connect to an Oracle Autonomous Database.",
@@ -9321,6 +10702,186 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "Known values for connection type.",
+      "enum": [
+        "GOLDENGATE",
+        "KAFKA",
+        "KAFKA_SCHEMA_REGISTRY",
+        "MYSQL",
+        "JAVA_MESSAGE_SERVICE",
+        "MICROSOFT_SQLSERVER",
+        "OCI_OBJECT_STORAGE",
+        "ORACLE",
+        "AZURE_DATA_LAKE_STORAGE",
+        "POSTGRESQL",
+        "AZURE_SYNAPSE_ANALYTICS",
+        "SNOWFLAKE",
+        "AMAZON_S3",
+        "HDFS",
+        "ORACLE_NOSQL",
+        "MONGODB",
+        "AMAZON_KINESIS",
+        "AMAZON_REDSHIFT",
+        "DB2",
+        "REDIS",
+        "ELASTICSEARCH",
+        "GENERIC",
+        "GOOGLE_CLOUD_STORAGE",
+        "GOOGLE_BIGQUERY",
+        "DATABRICKS",
+        "GOOGLE_PUBSUB",
+        "MICROSOFT_FABRIC",
+        "ICEBERG"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GoldenGate",
+            "value": "GOLDENGATE",
+            "description": "A GoldenGate Connection"
+          },
+          {
+            "name": "Kafka",
+            "value": "KAFKA",
+            "description": "A Kafka Connection"
+          },
+          {
+            "name": "KafkaSchemaRegistry",
+            "value": "KAFKA_SCHEMA_REGISTRY",
+            "description": "A Kafka (e.g. Confluent) Schema Registry Connection"
+          },
+          {
+            "name": "MySQL",
+            "value": "MYSQL",
+            "description": "A MySQL Connection"
+          },
+          {
+            "name": "JavaMessageService",
+            "value": "JAVA_MESSAGE_SERVICE",
+            "description": "A Java Message Service Connection"
+          },
+          {
+            "name": "MicrosoftSqlServer",
+            "value": "MICROSOFT_SQLSERVER",
+            "description": "A Microsoft SQL Server Connection"
+          },
+          {
+            "name": "OciObjectStorage",
+            "value": "OCI_OBJECT_STORAGE",
+            "description": "An OCI Object Storage Connection"
+          },
+          {
+            "name": "Oracle",
+            "value": "ORACLE",
+            "description": "An Oracle Database Connection"
+          },
+          {
+            "name": "AzureDataLakeStorage",
+            "value": "AZURE_DATA_LAKE_STORAGE",
+            "description": "An Azure Data Lake Storage Connection"
+          },
+          {
+            "name": "PostgreSql",
+            "value": "POSTGRESQL",
+            "description": "A PostgreSQL Database Connection"
+          },
+          {
+            "name": "AzureSynapseAnalytics",
+            "value": "AZURE_SYNAPSE_ANALYTICS",
+            "description": "An Azure Synapse Analytics Connection"
+          },
+          {
+            "name": "Snowflake",
+            "value": "SNOWFLAKE",
+            "description": "A Snowflake Connection"
+          },
+          {
+            "name": "AmazonS3",
+            "value": "AMAZON_S3",
+            "description": "An Amazon S3 Connection"
+          },
+          {
+            "name": "Hdfs",
+            "value": "HDFS",
+            "description": "A Hadoop Distributed File System Connection"
+          },
+          {
+            "name": "OracleNoSQL",
+            "value": "ORACLE_NOSQL",
+            "description": "An Oracle NoSQL Connection"
+          },
+          {
+            "name": "MongoDbConnection",
+            "value": "MONGODB",
+            "description": "A MongoDB Connection"
+          },
+          {
+            "name": "AmazonKinesis",
+            "value": "AMAZON_KINESIS",
+            "description": "An Amazon Kinesis Connection"
+          },
+          {
+            "name": "AmazonRedshift",
+            "value": "AMAZON_REDSHIFT",
+            "description": "An Amazon Redshift Connection"
+          },
+          {
+            "name": "Db2Connection",
+            "value": "DB2",
+            "description": "A DB2 Connection"
+          },
+          {
+            "name": "Redis",
+            "value": "REDIS",
+            "description": "A Redis Database Connection"
+          },
+          {
+            "name": "Elasticsearch",
+            "value": "ELASTICSEARCH",
+            "description": "An Elasticsearch Connection"
+          },
+          {
+            "name": "Generic",
+            "value": "GENERIC",
+            "description": "A Generic Connection"
+          },
+          {
+            "name": "GoogleCloudStorage",
+            "value": "GOOGLE_CLOUD_STORAGE",
+            "description": "A Google Cloud Storage Connection"
+          },
+          {
+            "name": "GoogleBigQuery",
+            "value": "GOOGLE_BIGQUERY",
+            "description": "A Google BigQuery Connection"
+          },
+          {
+            "name": "Databricks",
+            "value": "DATABRICKS",
+            "description": "A Databricks Connection"
+          },
+          {
+            "name": "GooglePubSub",
+            "value": "GOOGLE_PUBSUB",
+            "description": "A Google PubSub Connection"
+          },
+          {
+            "name": "MicrosoftFabric",
+            "value": "MICROSOFT_FABRIC",
+            "description": "A Microsoft Fabric Connection"
+          },
+          {
+            "name": "Iceberg",
+            "value": "ICEBERG",
+            "description": "An Iceberg Connection"
+          }
+        ]
       }
     },
     "ConnectionUrlType": {
@@ -9409,6 +10970,30 @@
             "name": "Tpurgent",
             "value": "Tpurgent",
             "description": "TPurgent group"
+          }
+        ]
+      }
+    },
+    "CredentialType": {
+      "type": "string",
+      "description": "Credential type.",
+      "enum": [
+        "GoldenGate",
+        "IAM"
+      ],
+      "x-ms-enum": {
+        "name": "CredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GoldenGate",
+            "value": "GoldenGate",
+            "description": "The GoldenGate credential."
+          },
+          {
+            "name": "Iam",
+            "value": "IAM",
+            "description": "The IAM credential."
           }
         ]
       }
@@ -11116,6 +12701,537 @@
         }
       }
     },
+    "DeploymentConnectionAssignmentProperties": {
+      "type": "object",
+      "description": "Deployment-connection assignment properties.",
+      "properties": {
+        "connectionId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the connection being referenced.",
+          "readOnly": true
+        },
+        "deploymentId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the deployment being referenced.",
+          "readOnly": true
+        },
+        "compartmentId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the compartment being referenced.",
+          "readOnly": true
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The deployment name.",
+          "readOnly": true
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "The connection name.",
+          "readOnly": true
+        },
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the assignment being referenced.",
+          "readOnly": true
+        },
+        "lifecycleState": {
+          "$ref": "#/definitions/GoldenGateConnectionAssignmentLifecycleState",
+          "description": "The assignment lifecycle state.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The time the assignment was created.",
+          "readOnly": true
+        },
+        "timeUpdated": {
+          "type": "string",
+          "description": "The time the assignment was last updated.",
+          "readOnly": true
+        },
+        "aliasName": {
+          "type": "string",
+          "description": "The assignment alias name.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AzureResourceProvisioningState",
+          "description": "Deployment-connection assignment provisioning state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectionId",
+        "deploymentId"
+      ]
+    },
+    "DeploymentLifecycleState": {
+      "type": "string",
+      "description": "Deployment lifecycle state enum.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Active",
+        "InActive",
+        "Deleting",
+        "Deleted",
+        "Failed",
+        "Needs Attention",
+        "In Progress",
+        "Canceling",
+        "Canceled",
+        "Succeeded",
+        "Waiting"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentLifecycleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Indicates that the resource is in creating state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Indicates that the resource is in updating state."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Indicates that the resource is in active state."
+          },
+          {
+            "name": "InActive",
+            "value": "InActive",
+            "description": "Indicates that the resource is in inactive state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Indicates that the resource is in deleting state."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Indicates that the resource is in deleted state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the resource is in failed state."
+          },
+          {
+            "name": "NeedsAttention",
+            "value": "Needs Attention",
+            "description": "Indicates that the resource is in needs-attention state."
+          },
+          {
+            "name": "InProgress",
+            "value": "In Progress",
+            "description": "Indicates that the resource is in in-progress state."
+          },
+          {
+            "name": "Canceling",
+            "value": "Canceling",
+            "description": "Indicates that the resource is in canceling state."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Indicates that the resource is in canceled state."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the resource is in succeeded state."
+          },
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "Indicates that the resource is in waiting state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "description": "GoldenGate Deployment resource model.",
+      "properties": {
+        "backupSchedule": {
+          "$ref": "#/definitions/BackupScheduleType",
+          "description": "Backup schedule.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "compartment": {
+          "$ref": "#/definitions/Ocid",
+          "description": "OCI compartment.",
+          "readOnly": true
+        },
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the deployment being referenced.",
+          "readOnly": true
+        },
+        "cpuCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of OCPUs to be made available for this deployment.",
+          "minimum": 1,
+          "maximum": 24,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "description": "The deployment category.",
+          "default": "DataReplication",
+          "enum": [
+            "DataReplication",
+            "StreamAnalytics",
+            "DataTransforms"
+          ],
+          "x-ms-enum": {
+            "name": "CategoryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DataReplication",
+                "value": "DataReplication",
+                "description": "Data replication."
+              },
+              {
+                "name": "StreamAnalytics",
+                "value": "StreamAnalytics",
+                "description": "Stream analytics."
+              },
+              {
+                "name": "DataTransforms",
+                "value": "DataTransforms",
+                "description": "Data transforms."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentType": {
+          "type": "string",
+          "description": "The type of deployment.",
+          "default": "DatabaseOracle",
+          "enum": [
+            "Ogg",
+            "DatabaseOracle",
+            "BigData",
+            "DatabaseMicrosoftSQLServer",
+            "DatabaseMySQL",
+            "DatabasePostGreSQL",
+            "DatabaseDB2ZOS",
+            "DATABASE_DB2I",
+            "GGSA",
+            "DataTransforms"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Ogg",
+                "value": "Ogg",
+                "description": "The OGG deployment."
+              },
+              {
+                "name": "DatabaseOracle",
+                "value": "DatabaseOracle",
+                "description": "The Oracle database deployment."
+              },
+              {
+                "name": "BigData",
+                "value": "BigData",
+                "description": "The big data deployment."
+              },
+              {
+                "name": "DatabaseMicrosoftSqlServer",
+                "value": "DatabaseMicrosoftSQLServer",
+                "description": "The Microsoft SQL Server database deployment."
+              },
+              {
+                "name": "DatabaseMySql",
+                "value": "DatabaseMySQL",
+                "description": "The MySQL database deployment."
+              },
+              {
+                "name": "DatabasePostGreSql",
+                "value": "DatabasePostGreSQL",
+                "description": "The PostgreSQL database deployment."
+              },
+              {
+                "name": "DatabaseDB2ZOS",
+                "value": "DatabaseDB2ZOS",
+                "description": "The DB2 z/OS database deployment."
+              },
+              {
+                "name": "DatabaseDB2I",
+                "value": "DATABASE_DB2I",
+                "description": "The DB2 i database deployment."
+              },
+              {
+                "name": "Ggsa",
+                "value": "GGSA",
+                "description": "The GGSA deployment."
+              },
+              {
+                "name": "DataTransforms",
+                "value": "DataTransforms",
+                "description": "The data transforms deployment."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "HTTPS link to OCI resource exposed to Azure Customer via Azure Interface.",
+          "readOnly": true
+        },
+        "environmentType": {
+          "$ref": "#/definitions/SetupType",
+          "description": "Environment type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isAutoScalingEnabled": {
+          "type": "boolean",
+          "description": "Indicates if auto scaling is enabled for the deployment's CPU core count.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "ingressIps": {
+          "type": "array",
+          "description": "Connection IP address.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "isPublic": {
+          "type": "boolean",
+          "description": "True if this object is publicly available.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "licenseModel": {
+          "$ref": "#/definitions/LicenseModel",
+          "description": "The Oracle license model that applies to a Deployment.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Describes the object's current state in detail.",
+          "readOnly": true
+        },
+        "lifecycleState": {
+          "$ref": "#/definitions/DeploymentLifecycleState",
+          "description": "Possible lifecycle states.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The date time the resource was created in OCI.",
+          "readOnly": true
+        },
+        "timeUpdated": {
+          "type": "string",
+          "description": "The date time the resource was last updated in OCI.",
+          "readOnly": true
+        },
+        "maintenanceConfiguration": {
+          "$ref": "#/definitions/MaintenanceConfigurationType",
+          "description": "Maintenance configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindowType",
+          "description": "Maintenance window.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "networkAnchorId": {
+          "$ref": "#/definitions/NetworkAnchorResourceId",
+          "description": "Azure network anchor ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "oggData": {
+          "$ref": "#/definitions/OggDeploymentDetails",
+          "description": "Deployment data for creating an OGG deployment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "description": "The private IP address of VCN representing the access point for the associated endpoint service in the GoldenGate service VCN",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AzureResourceProvisioningState",
+          "description": "Deployment provisioning state.",
+          "readOnly": true
+        },
+        "resourceAnchorId": {
+          "$ref": "#/definitions/ResourceAnchorResourceId",
+          "description": "Corresponding Azure resource anchor ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageUtilizationInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage utilization in bytes.",
+          "readOnly": true
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone of the deployment, for example, UTC.",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The current version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "displayName",
+        "networkAnchorId",
+        "resourceAnchorId"
+      ]
+    },
+    "DeploymentType": {
+      "type": "string",
+      "description": "Deployment type enum.",
+      "enum": [
+        "Ogg",
+        "DatabaseOracle",
+        "BigData",
+        "DatabaseMicrosoftSQLServer",
+        "DatabaseMySQL",
+        "DatabasePostGreSQL",
+        "DatabaseDB2ZOS",
+        "DATABASE_DB2I",
+        "GGSA",
+        "DataTransforms"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ogg",
+            "value": "Ogg",
+            "description": "The OGG deployment."
+          },
+          {
+            "name": "DatabaseOracle",
+            "value": "DatabaseOracle",
+            "description": "The Oracle database deployment."
+          },
+          {
+            "name": "BigData",
+            "value": "BigData",
+            "description": "The big data deployment."
+          },
+          {
+            "name": "DatabaseMicrosoftSqlServer",
+            "value": "DatabaseMicrosoftSQLServer",
+            "description": "The Microsoft SQL Server database deployment."
+          },
+          {
+            "name": "DatabaseMySql",
+            "value": "DatabaseMySQL",
+            "description": "The MySQL database deployment."
+          },
+          {
+            "name": "DatabasePostGreSql",
+            "value": "DatabasePostGreSQL",
+            "description": "The PostgreSQL database deployment."
+          },
+          {
+            "name": "DatabaseDB2ZOS",
+            "value": "DatabaseDB2ZOS",
+            "description": "The DB2 z/OS database deployment."
+          },
+          {
+            "name": "DatabaseDB2I",
+            "value": "DATABASE_DB2I",
+            "description": "The DB2 i database deployment."
+          },
+          {
+            "name": "Ggsa",
+            "value": "GGSA",
+            "description": "The GGSA deployment."
+          },
+          {
+            "name": "DataTransforms",
+            "value": "DataTransforms",
+            "description": "The data transforms deployment."
+          }
+        ]
+      }
+    },
     "DisasterRecoveryConfigurationDetails": {
       "type": "object",
       "description": "Configurations of a Disaster Recovery Details",
@@ -12625,6 +14741,36 @@
         }
       }
     },
+    "FrequencyType": {
+      "type": "string",
+      "description": "Frequency type enum.",
+      "enum": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "FrequencyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "The daily frequency."
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "The weekly frequency."
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "The monthly frequency."
+          }
+        ]
+      }
+    },
     "GenerateAutonomousDatabaseWalletDetails": {
       "type": "object",
       "description": "Autonomous Database Generate Wallet resource model.",
@@ -12781,6 +14927,300 @@
         "version"
       ]
     },
+    "GoldenGateConnection": {
+      "type": "object",
+      "description": "GoldenGate Connection resource model.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionBaseProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GoldenGateConnectionAssignmentLifecycleState": {
+      "type": "string",
+      "description": "Possible lifecycle states for connection assignments",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "FAILED",
+        "UPDATING",
+        "DELETING",
+        "DELETED"
+      ],
+      "x-ms-enum": {
+        "name": "GoldenGateConnectionAssignmentLifecycleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "CREATING",
+            "description": "Indicates that the resource is in creating state"
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE",
+            "description": "Indicates that the resource is in active state"
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED",
+            "description": "Indicates that the resource is in failed state"
+          },
+          {
+            "name": "Updating",
+            "value": "UPDATING",
+            "description": "Indicates that the resource is in updating state"
+          },
+          {
+            "name": "Deleting",
+            "value": "DELETING",
+            "description": "Indicates that the resource is in deleting state"
+          },
+          {
+            "name": "Deleted",
+            "value": "DELETED",
+            "description": "Indicates that the resource is in deleted state"
+          }
+        ]
+      }
+    },
+    "GoldenGateConnectionListResult": {
+      "type": "object",
+      "description": "The response of a GoldenGateConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GoldenGateConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/GoldenGateConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GoldenGateConnectionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource ID of a GoldenGate Connection.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Oracle.Database/goldenGateConnections"
+          }
+        ]
+      }
+    },
+    "GoldenGateConnectionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the GoldenGateConnection.",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/GoldenGateConnectionUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GoldenGateConnectionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the GoldenGateConnection.",
+      "properties": {
+        "connectionType": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "The connection type to be created."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The connection display name.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "routingMethod": {
+          "$ref": "#/definitions/RoutingMethod",
+          "description": "Controls the network traffic direction to the target."
+        },
+        "vaultId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The customer's vault OCID."
+        },
+        "keyId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The customer's master key OCID."
+        },
+        "doesUseSecretIds": {
+          "type": "boolean",
+          "description": "Indicates whether secret OCIDs are used for credential fields."
+        }
+      }
+    },
+    "GoldenGateDeployment": {
+      "type": "object",
+      "description": "GoldenGate Deployment resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GoldenGateDeploymentListResult": {
+      "type": "object",
+      "description": "The response of a GoldenGateDeployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GoldenGateDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/GoldenGateDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GoldenGateDeploymentResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource ID of a GoldenGate Deployment.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Oracle.Database/goldenGateDeployments"
+          }
+        ]
+      }
+    },
+    "GoldenGateDeploymentUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the GoldenGateDeployment.",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/GoldenGateDeploymentUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GoldenGateDeploymentUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the GoldenGateDeployment.",
+      "properties": {
+        "backupSchedule": {
+          "$ref": "#/definitions/BackupScheduleType",
+          "description": "Backup schedule.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "cpuCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of OCPUs to be made available for this deployment.",
+          "minimum": 1,
+          "maximum": 24,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "licenseModel": {
+          "$ref": "#/definitions/LicenseModel",
+          "description": "The Oracle license model that applies to a Deployment.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maintenanceConfiguration": {
+          "$ref": "#/definitions/MaintenanceConfigurationType",
+          "description": "Maintenance configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindowType",
+          "description": "Maintenance window.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "GridImageType": {
       "type": "string",
       "description": "GridImageType enum",
@@ -12803,6 +15243,50 @@
             "description": "Custom image"
           }
         ]
+      }
+    },
+    "GroupToRolesMappingDetails": {
+      "type": "object",
+      "description": "Group-to-roles mapping properties.",
+      "properties": {
+        "administratorGroupId": {
+          "type": "string",
+          "description": "The OCID of the IDP group which will be mapped to goldengate role administratorGroup.It grants full access to the user, including the ability to alter general, non-security related operational parameters and profiles of the server.",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "operatorGroupId": {
+          "type": "string",
+          "description": "The OCID of the IDP group which will be mapped to goldengate role operatorGroup.It allows users to perform only operational actions, like starting and stopping resources. Operators cannot alter the operational parameters or profiles of the MA server.",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "The OCID of the IDP group which will be mapped to goldengate role securityGroup.It grants administration of security related objects and invoke security related service requests. This role has full privileges.",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "userGroupId": {
+          "type": "string",
+          "description": "The OCID of the IDP group which will be mapped to goldengate role userGroup. It allows information-only service requests, which do not alter or affect the operation of either the MA. Examples of query and read-only information include performance metric information and resource status and monitoring information",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "identityDomainId": {
+          "type": "string",
+          "description": "The OCID of the Identity Domain when IAM credential store is used.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "The base64 encoded content of the PEM file containing the private key.",
+          "minLength": 0,
+          "maxLength": 8192,
+          "x-ms-secret": true
+        }
       }
     },
     "HardwareType": {
@@ -12919,6 +15403,143 @@
         ]
       }
     },
+    "KafkaBootstrapServer": {
+      "type": "object",
+      "description": "The Kafka bootstrap server with host name, and an optional port.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The name or address of a host.",
+          "minLength": 1,
+          "maxLength": 800
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port of an endpoint usually specified for a connection.",
+          "minimum": 0,
+          "maximum": 65536
+        }
+      },
+      "required": [
+        "host"
+      ]
+    },
+    "KafkaConnectionDetails": {
+      "type": "object",
+      "description": "The metadata of a Kafka Connection.",
+      "properties": {
+        "technologyType": {
+          "$ref": "#/definitions/KafkaConnectionTechnologyType",
+          "description": "The Kafka technology type."
+        },
+        "bootstrapServers": {
+          "type": "array",
+          "description": "The list of KafkaBootstrapServer objects specified by host/port.",
+          "items": {
+            "$ref": "#/definitions/KafkaBootstrapServer"
+          },
+          "x-ms-identifiers": []
+        },
+        "securityProtocol": {
+          "type": "string",
+          "description": "The Kafka security protocol used to connect to the broker."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username used to authenticate to Kafka."
+        },
+        "passwordSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the password is stored."
+        },
+        "trustStoreSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the truststore is stored."
+        },
+        "trustStorePasswordSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the truststore password is stored."
+        },
+        "keyStoreSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the keystore is stored."
+        },
+        "keyStorePasswordSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the keystore password is stored."
+        },
+        "sslKeyPasswordSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the SSL key password is stored."
+        },
+        "consumerProperties": {
+          "type": "string",
+          "description": "The additional consumer properties in string format."
+        },
+        "producerProperties": {
+          "type": "string",
+          "description": "The additional producer properties in string format."
+        },
+        "streamPoolId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the stream pool being referenced."
+        },
+        "clusterId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Kafka cluster being referenced."
+        },
+        "shouldUseResourcePrincipal": {
+          "type": "boolean",
+          "description": "Indicates if resource principal should be used for authentication."
+        }
+      },
+      "required": [
+        "technologyType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "KAFKA"
+    },
+    "KafkaConnectionTechnologyType": {
+      "type": "string",
+      "description": "Allowed values for Kafka technology type.",
+      "enum": [
+        "APACHE_KAFKA",
+        "AZURE_EVENT_HUBS",
+        "CONFLUENT_KAFKA",
+        "OCI_STREAMING"
+      ],
+      "x-ms-enum": {
+        "name": "KafkaConnectionTechnologyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApacheKafka",
+            "value": "APACHE_KAFKA",
+            "description": "The Apache Kafka type."
+          },
+          {
+            "name": "AzureEventHubs",
+            "value": "AZURE_EVENT_HUBS",
+            "description": "The Azure Event Hubs type."
+          },
+          {
+            "name": "ConfluentKafka",
+            "value": "CONFLUENT_KAFKA",
+            "description": "The Confluent Kafka type."
+          },
+          {
+            "name": "OciStreaming",
+            "value": "OCI_STREAMING",
+            "description": "The OCI Streaming type."
+          }
+        ]
+      }
+    },
     "LicenseModel": {
       "type": "string",
       "description": "LicenseModel enum",
@@ -12970,6 +15591,36 @@
         "isDisabled": {
           "type": "boolean",
           "description": "Indicates if the long-term backup schedule should be deleted. The default value is `FALSE`."
+        }
+      }
+    },
+    "MaintenanceConfigurationType": {
+      "type": "object",
+      "description": "Maintenance configuration type.",
+      "properties": {
+        "bundleReleaseUpgradePeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bundle release period."
+        },
+        "interimReleaseUpgradePeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interim release upgrade period in days."
+        },
+        "isInterimReleaseAutoUpgradeEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether interim release auto-upgrade is enabled."
+        },
+        "majorReleaseUpgradePeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Major release upgrade period in days."
+        },
+        "securityPatchUpgradePeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Security patch upgrade period in days."
         }
       }
     },
@@ -13041,6 +15692,88 @@
           "type": "boolean",
           "description": "is Monthly Patching Enabled"
         }
+      }
+    },
+    "MaintenanceWindowType": {
+      "type": "object",
+      "description": "Maintenance window.",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/DayOfWeekName",
+          "description": "The day of week."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start time in UTC."
+        }
+      }
+    },
+    "MicrosoftFabricConnectionDetails": {
+      "type": "object",
+      "description": "The metadata of a Microsoft Fabric Connection.",
+      "properties": {
+        "technologyType": {
+          "$ref": "#/definitions/MicrosoftFabricConnectionTechnologyType",
+          "description": "The Microsoft Fabric technology type."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Azure tenant ID of the application.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Azure client ID of the application.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "clientSecretSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the client secret is stored."
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Microsoft Fabric service endpoint.",
+          "maxLength": 261
+        }
+      },
+      "required": [
+        "technologyType",
+        "tenantId",
+        "clientId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "MICROSOFT_FABRIC"
+    },
+    "MicrosoftFabricConnectionTechnologyType": {
+      "type": "string",
+      "description": "Allowed values for Microsoft Fabric technology type.",
+      "enum": [
+        "MICROSOFT_FABRIC_LAKEHOUSE",
+        "MICROSOFT_FABRIC_MIRROR"
+      ],
+      "x-ms-enum": {
+        "name": "MicrosoftFabricConnectionTechnologyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftFabricLakehouse",
+            "value": "MICROSOFT_FABRIC_LAKEHOUSE",
+            "description": "The Microsoft Fabric Lakehouse type."
+          },
+          {
+            "name": "MicrosoftFabricMirror",
+            "value": "MICROSOFT_FABRIC_MIRROR",
+            "description": "The Microsoft Fabric Mirror type."
+          }
+        ]
       }
     },
     "Month": {
@@ -13478,6 +16211,60 @@
       "minLength": 1,
       "maxLength": 255
     },
+    "OggDeploymentDetails": {
+      "type": "object",
+      "description": "OGG deployment details.",
+      "properties": {
+        "adminPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The password associated with the GoldenGate deployment console username. The password must be 8 to 30 characters long and must contain at least 1 uppercase, 1 lowercase, 1 numeric, and 1 special character. Special characters such as '$', '^', or '?' are not allowed.",
+          "minLength": 1,
+          "maxLength": 30,
+          "x-ms-secret": true
+        },
+        "adminUsername": {
+          "type": "string",
+          "description": "The GoldenGate deployment console username.",
+          "minLength": 0,
+          "maxLength": 512
+        },
+        "certificate": {
+          "type": "string",
+          "description": "The base64 encoded content of the PEM file containing the SSL certificate.",
+          "minLength": 0,
+          "maxLength": 65536
+        },
+        "credentialStore": {
+          "$ref": "#/definitions/CredentialType",
+          "description": "The type of credential store for OGG."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The name given to the GoldenGate service deployment.",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "groupToRolesMapping": {
+          "$ref": "#/definitions/GroupToRolesMappingDetails",
+          "description": "Defines the IDP Groups to GoldenGate roles mapping."
+        },
+        "oggVersion": {
+          "type": "string",
+          "description": "OGG version.",
+          "minLength": 1
+        },
+        "passwordSecretId": {
+          "type": "string",
+          "description": "The OCID of the Secret where the deployment password is stored.",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "deploymentName"
+      ]
+    },
     "OpenModeType": {
       "type": "string",
       "description": "Open mode type enum.",
@@ -13546,6 +16333,130 @@
             "name": "FailedDisabling",
             "value": "FailedDisabling",
             "description": "FailedDisabling status"
+          }
+        ]
+      }
+    },
+    "OracleConnectionDetails": {
+      "type": "object",
+      "description": "The metadata of an Oracle Database Connection.",
+      "properties": {
+        "technologyType": {
+          "$ref": "#/definitions/OracleConnectionTechnologyType",
+          "description": "The Oracle technology type."
+        },
+        "sessionMode": {
+          "$ref": "#/definitions/SessionMode",
+          "description": "The mode of the database connection session to be established by the data client."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username that is used to connect the associated system of the given technology."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string used to connect the associated database."
+        },
+        "authenticationMode": {
+          "type": "string",
+          "description": "The authentication mode used to connect the associated database."
+        },
+        "passwordSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the password is stored."
+        },
+        "walletSecretId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Secret where the wallet is stored."
+        },
+        "databaseId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the associated database."
+        },
+        "privateIp": {
+          "type": "string",
+          "description": "The private IP of the associated database endpoint."
+        }
+      },
+      "required": [
+        "technologyType",
+        "username"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ORACLE"
+    },
+    "OracleConnectionTechnologyType": {
+      "type": "string",
+      "description": "Allowed values for Oracle technology type.",
+      "enum": [
+        "AMAZON_RDS_ORACLE",
+        "OCI_AUTONOMOUS_DATABASE",
+        "ORACLE_DATABASE",
+        "ORACLE_EXADATA",
+        "ORACLE_EXADATA_DATABASE_AT_AZURE",
+        "ORACLE_EXADATA_DATABASE_AT_GOOGLE_CLOUD",
+        "ORACLE_EXADATA_DATABASE_AT_AWS",
+        "ORACLE_AUTONOMOUS_DATABASE_AT_AZURE",
+        "ORACLE_AUTONOMOUS_DATABASE_AT_GOOGLE_CLOUD",
+        "ORACLE_AUTONOMOUS_DATABASE_AT_AWS"
+      ],
+      "x-ms-enum": {
+        "name": "OracleConnectionTechnologyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AmazonRdsOracle",
+            "value": "AMAZON_RDS_ORACLE",
+            "description": "Oracle databases hosted on Amazon RDS."
+          },
+          {
+            "name": "OciAutonomousDatabase",
+            "value": "OCI_AUTONOMOUS_DATABASE",
+            "description": "OCI Autonomous Database."
+          },
+          {
+            "name": "OracleDatabase",
+            "value": "ORACLE_DATABASE",
+            "description": "On-premise Oracle database."
+          },
+          {
+            "name": "OracleExadata",
+            "value": "ORACLE_EXADATA",
+            "description": "On-premise Exadata database."
+          },
+          {
+            "name": "OracleExadataDatabaseAtAzure",
+            "value": "ORACLE_EXADATA_DATABASE_AT_AZURE",
+            "description": "Exadata database on Azure."
+          },
+          {
+            "name": "OracleExadataDatabaseAtGoogleCloud",
+            "value": "ORACLE_EXADATA_DATABASE_AT_GOOGLE_CLOUD",
+            "description": "Exadata database on GCP."
+          },
+          {
+            "name": "OracleExadataDatabaseAtAws",
+            "value": "ORACLE_EXADATA_DATABASE_AT_AWS",
+            "description": "Exadata database on AWS."
+          },
+          {
+            "name": "OracleAutonomousDatabaseAtAzure",
+            "value": "ORACLE_AUTONOMOUS_DATABASE_AT_AZURE",
+            "description": "Autonomous database on Azure."
+          },
+          {
+            "name": "OracleAutonomousDatabaseAtGoogleCloud",
+            "value": "ORACLE_AUTONOMOUS_DATABASE_AT_GOOGLE_CLOUD",
+            "description": "Autonomous database on GCP."
+          },
+          {
+            "name": "OracleAutonomousDatabaseAtAws",
+            "value": "ORACLE_AUTONOMOUS_DATABASE_AT_AWS",
+            "description": "Autonomous database on AWS."
           }
         ]
       }
@@ -14240,6 +17151,36 @@
         ]
       }
     },
+    "RoutingMethod": {
+      "type": "string",
+      "description": "Allowed network traffic routing method.",
+      "enum": [
+        "SHARED_SERVICE_ENDPOINT",
+        "SHARED_DEPLOYMENT_ENDPOINT",
+        "DEDICATED_ENDPOINT"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SharedServiceEndpoint",
+            "value": "SHARED_SERVICE_ENDPOINT",
+            "description": "Indicates that traffic flows through the GoldenGate service network to public hosts."
+          },
+          {
+            "name": "SharedDeploymentEndpoint",
+            "value": "SHARED_DEPLOYMENT_ENDPOINT",
+            "description": "Indicates that traffic flows from the assigned deployment's private endpoint through the deployment's subnet."
+          },
+          {
+            "name": "DedicatedEndpoint",
+            "value": "DEDICATED_ENDPOINT",
+            "description": "Indicates that a dedicated private endpoint is created in the target VCN subnet for the connection."
+          }
+        ]
+      }
+    },
     "SaasSubscriptionDetails": {
       "type": "object",
       "description": "SaaS Subscription Details model",
@@ -14354,6 +17295,30 @@
         }
       }
     },
+    "SessionMode": {
+      "type": "string",
+      "description": "Allowed modes for database connection session.",
+      "enum": [
+        "DIRECT",
+        "REDIRECT"
+      ],
+      "x-ms-enum": {
+        "name": "SessionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Direct",
+            "value": "DIRECT",
+            "description": "For a non-RAC database."
+          },
+          {
+            "name": "Redirect",
+            "value": "REDIRECT",
+            "description": "For a RAC database."
+          }
+        ]
+      }
+    },
     "SessionModeType": {
       "type": "string",
       "description": "Session mode type enum.",
@@ -14374,6 +17339,30 @@
             "name": "Redirect",
             "value": "Redirect",
             "description": "Redirect session mode"
+          }
+        ]
+      }
+    },
+    "SetupType": {
+      "type": "string",
+      "description": "Setup type enum.",
+      "enum": [
+        "Production",
+        "DevelopmentOrTesting"
+      ],
+      "x-ms-enum": {
+        "name": "SetupType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production setup."
+          },
+          {
+            "name": "DevelopmentOrTesting",
+            "value": "DevelopmentOrTesting",
+            "description": "Development or testing setup."
           }
         ]
       }

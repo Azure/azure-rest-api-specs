@@ -1112,13 +1112,13 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
-          },
-          {
             "$ref": "#/parameters/GiVersionFilter.shape"
           },
           {
             "$ref": "#/parameters/GiVersionFilter.zone"
+          },
+          {
+            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
           }
         ],
         "responses": {
@@ -8803,8 +8803,7 @@
         "hostname": {
           "type": "string",
           "description": "The hostname for the cloud VM cluster.",
-          "minLength": 1,
-          "maxLength": 23,
+          "x-ms-client-name": "hostnameV2",
           "x-ms-mutability": [
             "read",
             "create"

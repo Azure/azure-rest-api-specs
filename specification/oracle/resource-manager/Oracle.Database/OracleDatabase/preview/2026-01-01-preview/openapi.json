@@ -115,6 +115,9 @@
     },
     {
       "name": "DbVersions"
+    },
+    {
+      "name": "ManagedIdentityResources"
     }
   ],
   "paths": {
@@ -1112,13 +1115,13 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
-          },
-          {
             "$ref": "#/parameters/GiVersionFilter.shape"
           },
           {
             "$ref": "#/parameters/GiVersionFilter.zone"
+          },
+          {
+            "$ref": "#/parameters/GiVersionFilter.shapeAttribute"
           }
         ],
         "responses": {
@@ -1374,6 +1377,40 @@
           "Get Exadata System Version": {
             "$ref": "./examples/systemVersions_get.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/managedIdentityResources": {
+      "get": {
+        "operationId": "ManagedIdentityResources_ListBySubscription",
+        "tags": [
+          "ManagedIdentityResources"
+        ],
+        "description": "List ManagedIdentityResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5613,6 +5650,277 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/managedIdentityResources": {
+      "get": {
+        "operationId": "ManagedIdentityResources_ListByResourceGroup",
+        "tags": [
+          "ManagedIdentityResources"
+        ],
+        "description": "List ManagedIdentityResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/managedIdentityResources/{managedIdentityResourceName}": {
+      "get": {
+        "operationId": "ManagedIdentityResources_Get",
+        "tags": [
+          "ManagedIdentityResources"
+        ],
+        "description": "Get a ManagedIdentityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedIdentityResourceName",
+            "in": "path",
+            "description": "The name of the ManagedIdentityResource",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedIdentityResources_CreateOrUpdate",
+        "tags": [
+          "ManagedIdentityResources"
+        ],
+        "description": "Create a ManagedIdentityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedIdentityResourceName",
+            "in": "path",
+            "description": "The name of the ManagedIdentityResource",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedIdentityResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedIdentityResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedIdentityResources_Update",
+        "tags": [
+          "ManagedIdentityResources"
+        ],
+        "description": "Update a ManagedIdentityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedIdentityResourceName",
+            "in": "path",
+            "description": "The name of the ManagedIdentityResource",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentityResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedIdentityResources_Delete",
+        "tags": [
+          "ManagedIdentityResources"
+        ],
+        "description": "Delete a ManagedIdentityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedIdentityResourceName",
+            "in": "path",
+            "description": "The name of the ManagedIdentityResource",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/networkAnchors": {
       "get": {
         "operationId": "NetworkAnchors_ListByResourceGroup",
@@ -8802,7 +9110,7 @@
         },
         "hostname": {
           "type": "string",
-          "description": "The hostname for the cloud VM cluster.",
+          "description": "The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.",
           "minLength": 1,
           "maxLength": 23,
           "x-ms-mutability": [
@@ -13019,6 +13327,107 @@
         "isMonthlyPatchingEnabled": {
           "type": "boolean",
           "description": "is Monthly Patching Enabled"
+        }
+      }
+    },
+    "ManagedIdentityMetadata": {
+      "type": "object",
+      "description": "Metadata associated with a managed identity resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A short, non-sensitive description of the managed identity resource. Do not include secrets or customer data. Maximum length is 1024 characters.",
+          "maxLength": 1024
+        }
+      }
+    },
+    "ManagedIdentityResource": {
+      "type": "object",
+      "description": "ManagedIdentityResource resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedIdentityResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedIdentityResourceListResult": {
+      "type": "object",
+      "description": "The response of a ManagedIdentityResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedIdentityResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedIdentityResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedIdentityResourceProperties": {
+      "type": "object",
+      "description": "ManagedIdentityResource resource model",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/ManagedIdentityMetadata",
+          "description": "Optional metadata for the managed identity resource. This is intended only for small, non-sensitive descriptive information and MUST NOT contain arbitrary customer payload or secrets.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AzureResourceProvisioningState",
+          "description": "Managed Identity Resources provisioning state",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentityResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ManagedIdentityResource.",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
