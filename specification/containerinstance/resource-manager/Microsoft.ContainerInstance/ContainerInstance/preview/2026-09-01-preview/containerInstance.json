@@ -5232,9 +5232,9 @@
             "create"
           ]
         },
-        "sandboxGroupResourceId": {
-          "$ref": "#/definitions/SandboxGroupResourceId",
-          "description": "The ARM resource ID of the sandbox group associated with the node pool. Set at create time and immutable thereafter.",
+        "aiAgentGroupResourceId": {
+          "$ref": "#/definitions/AiAgentGroupResourceId",
+          "description": "The ARM resource ID of the AI agents group associated with the node pool. Set at create time and immutable thereafter.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5279,7 +5279,7 @@
       "required": [
         "aksClusterResourceId",
         "managedIdentityResourceId",
-        "sandboxGroupResourceId"
+        "aiAgentGroupResourceId"
       ]
     },
     "ManagedVirtualNodePoolUpdate": {
@@ -5850,14 +5850,14 @@
         "requests"
       ]
     },
-    "SandboxGroupResourceId": {
+    "AiAgentGroupResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.ContainerInstance/sandboxGroups"
+            "type": "Microsoft.ContainerInstance/aiAgentsGroups"
           }
         ]
       }

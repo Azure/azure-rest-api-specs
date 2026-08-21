@@ -55,10 +55,10 @@ scalar ManagedIdentityResourceId
   ]>;
 
 @added(Versions.v2026_09_01_preview)
-scalar SandboxGroupResourceId
+scalar AiAgentGroupResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.ContainerInstance/sandboxGroups",
+      type: "Microsoft.ContainerInstance/aiAgentsGroups",
     }
   ]>;
 
@@ -86,10 +86,10 @@ model ManagedVirtualNodePoolProperties {
   managedIdentityResourceId: ManagedIdentityResourceId;
 
   /**
-   * The ARM resource ID of the sandbox group associated with the node pool. Set at create time and immutable thereafter.
+   * The ARM resource ID of the AI agents group associated with the node pool. Set at create time and immutable thereafter.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  sandboxGroupResourceId: SandboxGroupResourceId;
+  aiAgentGroupResourceId: AiAgentGroupResourceId;
 
   /**
    * Minimum number of nodes maintained by the pool.
