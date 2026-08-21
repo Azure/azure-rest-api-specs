@@ -28,6 +28,7 @@ namespace Microsoft.NetApp;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_08_01)
 @parentResource(ElasticAccount)
 model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
   ...ResourceNameParameter<
@@ -53,6 +54,7 @@ model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_08_01)
 model ElasticBackupVaultProperties {
   /**
    * Azure lifecycle management.
@@ -77,6 +79,7 @@ interface ElasticBackupVaults {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
   get is ArmResourceRead<ElasticBackupVault>;
 
   /**
@@ -93,6 +96,7 @@ interface ElasticBackupVaults {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupVault>;
 
   /**
@@ -109,6 +113,7 @@ interface ElasticBackupVaults {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
   update is ArmCustomPatchAsync<
     ElasticBackupVault,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -133,6 +138,7 @@ interface ElasticBackupVaults {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupVault>;
   /**
    * List and describe all Elastic Backup Vaults in the elastic account.
@@ -148,6 +154,7 @@ interface ElasticBackupVaults {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupVault>;
 }
 
