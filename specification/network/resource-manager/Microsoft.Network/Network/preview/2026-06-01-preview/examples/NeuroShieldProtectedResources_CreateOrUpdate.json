@@ -1,0 +1,45 @@
+{
+  "operationId": "NeuroShieldProtectedResources_CreateOrUpdate",
+  "title": "Create or update protected resource",
+  "description": "Creates or updates a protected resource under a NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "protectedResourceName": "vm-01",
+    "api-version": "2026-06-01-preview",
+    "neuroShieldName": "myNeuroShield",
+    "resource": {
+      "properties": {
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vm-01",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vm-01",
+        "type": "microsoft.network/neuroShields/protectedResources",
+        "properties": {
+          "provisioningState": "Creating",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+          "extensionStatus": "NotInstalled",
+          "agentHealthStatus": "Unknown"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "vm-01",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vm-01",
+        "type": "microsoft.network/neuroShields/protectedResources",
+        "properties": {
+          "provisioningState": "Creating",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+          "extensionStatus": "NotInstalled",
+          "agentHealthStatus": "Unknown"
+        }
+      }
+    }
+  }
+}

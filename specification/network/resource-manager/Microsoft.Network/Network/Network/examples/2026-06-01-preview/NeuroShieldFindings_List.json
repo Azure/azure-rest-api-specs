@@ -1,0 +1,33 @@
+{
+  "operationId": "NeuroShieldFindings_List",
+  "title": "List findings",
+  "description": "Lists findings under a protected resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "protectedResourceName": "vm-01",
+    "api-version": "2026-06-01-preview",
+    "neuroShieldName": "myNeuroShield"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "CVE-2026-12345",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vm-01/findings/CVE-2026-12345",
+            "type": "microsoft.network/neuroShields/protectedResources/findings",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "cveId": "CVE-2026-12345",
+              "severity": "High",
+              "description": "Kernel package vulnerability detected on vm-01.",
+              "detectedTime": "2026-05-28T10:15:00Z",
+              "status": "Active"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

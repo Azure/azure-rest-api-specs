@@ -1,0 +1,42 @@
+{
+  "operationId": "NeuroShields_Update",
+  "title": "Update NeuroShield resource",
+  "description": "Updates tags or properties of a NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-06-01-preview",
+    "neuroShieldName": "myNeuroShield",
+    "If-Match": "\"neuroshield-etag\"",
+    "properties": {
+      "tags": {
+        "env": "production"
+      },
+      "properties": {
+        "responseMode": "Auto",
+        "severityThreshold": "High",
+        "description": "Updated NeuroShield resource"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myNeuroShield",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield",
+        "type": "microsoft.network/neuroShields",
+        "location": "eastus",
+        "tags": {
+          "env": "production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "11111111-1111-1111-1111-111111111111",
+          "responseMode": "Auto",
+          "severityThreshold": "High",
+          "description": "Updated NeuroShield resource"
+        }
+      }
+    }
+  }
+}

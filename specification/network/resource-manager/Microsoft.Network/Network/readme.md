@@ -417,6 +417,25 @@ directive:
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
 
+### Tag: package-2026-06-01-preview
+
+These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01-preview'
+input-file:
+  - preview/2026-06-01-preview/common.json
+  - preview/2026-06-01-preview/neuroShield.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: common.json
+    reason: This file contains shared Network definitions only; the NeuroShield operations are implemented in neuroShield.json.
+  - code: DescriptionMustNotBeNodeName
+    from: common.json
+    reason: >-
+      The legacy Network feature split emits inherited shared enums whose descriptions match their values;
+      changing them is outside the NeuroShield API surface.
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
@@ -4667,6 +4686,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: neuroShield.json
+    reason: The TypeSpec resource envelope uses visibility to distinguish the PUT request from the response, which the validator does not account for when comparing schemas.
+  - suppress: PostResponseCodes
+    from: neuroShield.json
+    reason: The standard TypeSpec ArmResourceActionAsync pattern emits a 200 response without a schema for void long-running actions.
   - suppress: ResourceNameRestriction
     from: virtualWan.json
     reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.

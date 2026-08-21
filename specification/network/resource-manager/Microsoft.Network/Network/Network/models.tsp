@@ -12244,7 +12244,6 @@ model ExpressRouteProviderPortProperties {
  * Parameters for updating ExpressRouteLag tags or identity.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRouteLag Update Tags or Identity Request")
@@ -12514,7 +12513,6 @@ model ExpressRouteLagMemberPropertiesFormat {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "LOA is the standard acronym for 'Letter of Authorization' and is used consistently in service operations."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @added(Versions.v2025_09_01)
 model GenerateExpressRouteLagsLOARequest {
@@ -16856,7 +16854,6 @@ model NetworkVirtualAppliancePrepareMigrationProperties {
  * Parameters supplied to prepare the migration of a Network Virtual Appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualAppliancePrepareMigrationRequest {
@@ -16883,7 +16880,6 @@ model NetworkVirtualApplianceExecuteMigrationProperties {
  * Parameters supplied to execute the migration of a Network Virtual Appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceExecuteMigrationRequest {
@@ -16910,7 +16906,6 @@ model NetworkVirtualApplianceCommitMigrationProperties {
  * Parameters supplied to commit the migration of a Network Virtual Appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Network uses legacy feature-file output splitting (tspconfig output-splitting: legacy-feature-files); Azure.ResourceManager.Legacy.feature is required to place this NVA migration type in the virtualNetwork.json feature file, consistent with the established Microsoft.Network Swagger layout."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceCommitMigrationRequest {
@@ -20411,7 +20406,6 @@ model VirtualNetworkDdosProtectionStatusResult
  * Request body for the MoveIpConfigurations operation.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_09_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model MoveIpConfigurationsRequest {
@@ -27884,6 +27878,615 @@ model ConnectionAnalyzerQueryStatusResult {
   diagnosticOperationResults?: DiagnosticOperationResult[];
 }
 
+/**
+ * Provisioning states of a resource.
+ */
+@added(Versions.v2026_06_01_preview)
+union ProvisioningStateNeuroShield {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * Resource is being created.
+   */
+  Creating: "Creating",
+
+  /**
+   * Resource is being updated.
+   */
+  Updating: "Updating",
+
+  /**
+   * Resource is being deleted.
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * Properties of the NeuroShield resource.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldProperties {
+  /**
+   * Provisioning state of the NeuroShield resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateNeuroShield;
+
+  /**
+   * System-generated GUID for the NeuroShield resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /**
+   * Response mode that controls mitigation serving behavior.
+   */
+  responseMode?: NeuroShieldResponseMode;
+
+  /**
+   * Minimum severity level for mitigation generation.
+   */
+  severityThreshold?: NeuroShieldSeverityThreshold;
+
+  /**
+   * Human-readable description of the NeuroShield resource.
+   */
+  description?: string;
+}
+
+/**
+ * Response modes for mitigation serving behavior.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldResponseMode {
+  string,
+
+  /**
+   * Automatically queues and serves mitigations.
+   */
+  Auto: "Auto",
+
+  /**
+   * Requires explicit customer approval before serving mitigations.
+   */
+  Manual: "Manual",
+
+  /**
+   * Detection only mode with no mitigation generation.
+   */
+  AlertOnly: "AlertOnly",
+}
+
+/**
+ * Severity threshold used for finding and mitigation generation.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldSeverityThreshold {
+  string,
+
+  /**
+   * Critical severity threshold.
+   */
+  Critical: "Critical",
+
+  /**
+   * High severity threshold.
+   */
+  High: "High",
+
+  /**
+   * Medium severity threshold.
+   */
+  Medium: "Medium",
+
+  /**
+   * Low severity threshold.
+   */
+  Low: "Low",
+}
+
+/**
+ * Properties to patch on a NeuroShield resource.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldPatchProperties {
+  /**
+   * Response mode that controls mitigation serving behavior.
+   */
+  responseMode?: NeuroShieldResponseMode;
+
+  /**
+   * Minimum severity level for mitigation generation.
+   */
+  severityThreshold?: NeuroShieldSeverityThreshold;
+
+  /**
+   * Human-readable description of the NeuroShield resource.
+   */
+  description?: string;
+}
+
+/**
+ * Patch request body for updating a NeuroShield resource.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldPatch {
+  ...TagsObject;
+
+  /**
+   * Patch properties for the NeuroShield resource.
+   */
+  properties?: NeuroShieldPatchProperties;
+}
+
+/**
+ * ARM tracked resource representing a NeuroShield instance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM resource envelope."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Uses the package's ChildResource and TrackedResource ARM envelope pattern for nested NeuroShield resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Resource envelope inheritance is required to emit standard ARM id, name, type, and systemData fields."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-06-01-preview follows this project-wide convention."
+@added(Versions.v2026_06_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+model NeuroShieldResource extends CommonTrackedResource {
+  /**
+   * Properties of the NeuroShield resource.
+   */
+  properties: NeuroShieldProperties;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("neuroShieldName")
+  @segment("neuroShields")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Extension deployment status for a protected resource.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldExtensionStatus {
+  string,
+
+  /**
+   * Extension is not installed.
+   */
+  NotInstalled: "NotInstalled",
+
+  /**
+   * Extension installation is in progress.
+   */
+  Installing: "Installing",
+
+  /**
+   * Extension is installed and running.
+   */
+  Installed: "Installed",
+
+  /**
+   * Extension installation failed.
+   */
+  Failed: "Failed",
+}
+
+/**
+ * Runtime health status of the Neuron agent.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldAgentHealthStatus {
+  string,
+
+  /**
+   * Agent has never sent a heartbeat.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Agent heartbeat is within the expected interval.
+   */
+  Healthy: "Healthy",
+
+  /**
+   * VMSS aggregate status where some agents are healthy and others are not.
+   */
+  PartiallyHealthy: "PartiallyHealthy",
+
+  /**
+   * Agent heartbeat is stale beyond the expected interval.
+   */
+  Unhealthy: "Unhealthy",
+}
+
+/**
+ * Properties of a protected resource.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldProtectedResourceProperties {
+  /**
+   * Provisioning state of the protected resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateNeuroShield;
+
+  /**
+   * ARM resource ID of the target virtual machine or virtual machine scale set.
+   */
+  targetResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    },
+    {
+      type: "Microsoft.Compute/virtualMachineScaleSets";
+    }
+  ]>;
+
+  /**
+   * Deployment status of the Neuron VM extension.
+   */
+  @visibility(Lifecycle.Read)
+  extensionStatus?: NeuroShieldExtensionStatus;
+
+  /**
+   * Runtime health status of the Neuron agent.
+   */
+  @visibility(Lifecycle.Read)
+  agentHealthStatus?: NeuroShieldAgentHealthStatus;
+
+  /**
+   * Last successful heartbeat timestamp from the Neuron agent.
+   */
+  @visibility(Lifecycle.Read)
+  lastHeartbeatTime?: utcDateTime;
+}
+
+/**
+ * ARM proxy child resource representing a protected resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM child-resource envelope."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Nested protected resources are modeled as ARM child resources with parent-linked resource identity."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ProxyResource inheritance is required to emit the standard ARM nested-resource envelope."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-06-01-preview follows this project-wide convention."
+@added(Versions.v2026_06_01_preview)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+@parentResource(NeuroShieldResource)
+model NeuroShieldProtectedResource
+  is Azure.ResourceManager.ProxyResource<NeuroShieldProtectedResourceProperties> {
+  /**
+   * The name of the protected resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("protectedResourceName")
+  @segment("protectedResources")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Paged list of protected resources.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldProtectedResourceListResult {
+  /**
+   * List of protected resources in the current page.
+   */
+  @pageItems
+  value?: NeuroShieldProtectedResource[];
+
+  /**
+   * URL to the next page of results.
+   */
+  nextLink?: url;
+}
+
+/**
+ * Runtime operational status for findings.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldFindingStatus {
+  string,
+
+  /**
+   * No mitigation has resolved the finding yet.
+   */
+  Active: "Active",
+
+  /**
+   * One or more mitigation actions are currently running.
+   */
+  MitigationInProgress: "MitigationInProgress",
+
+  /**
+   * The finding has at least one successful mitigation.
+   */
+  Mitigated: "Mitigated",
+
+  /**
+   * All mitigations were attempted without successful resolution.
+   */
+  MitigationsExhausted: "MitigationsExhausted",
+
+  /**
+   * Mitigation execution is blocked by communication failure.
+   */
+  Unreachable: "Unreachable",
+}
+
+/**
+ * Provisioning states for system-generated child resources.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldSystemChildProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * Child resource is being deleted.
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * Properties of a finding resource.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldFindingProperties {
+  /**
+   * Provisioning state of the finding resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NeuroShieldSystemChildProvisioningState;
+
+  /**
+   * CVE identifier associated with this finding.
+   */
+  @visibility(Lifecycle.Read)
+  cveId?: string;
+
+  /**
+   * Severity of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  severity?: NeuroShieldSeverityThreshold;
+
+  /**
+   * Description of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /**
+   * Detection timestamp for the finding.
+   */
+  @visibility(Lifecycle.Read)
+  detectedTime?: utcDateTime;
+
+  /**
+   * Runtime operational status of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  status?: NeuroShieldFindingStatus;
+}
+
+/**
+ * ARM proxy child resource representing a finding.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM child-resource envelope."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "System-generated findings are modeled as nested ARM child resources under protected resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ProxyResource inheritance is required to emit the standard ARM nested-resource envelope."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-06-01-preview follows this project-wide convention."
+@added(Versions.v2026_06_01_preview)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+@parentResource(NeuroShieldProtectedResource)
+model NeuroShieldFinding
+  is Azure.ResourceManager.ProxyResource<NeuroShieldFindingProperties> {
+  /**
+   * The system-generated identifier of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("findingId")
+  @segment("findings")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Paged list of finding resources.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldFindingListResult {
+  /**
+   * List of finding resources in the current page.
+   */
+  @pageItems
+  value?: NeuroShieldFinding[];
+
+  /**
+   * URL to the next page of results.
+   */
+  nextLink?: url;
+}
+
+/**
+ * Runtime operational status for mitigations.
+ */
+@added(Versions.v2026_06_01_preview)
+union NeuroShieldMitigationStatus {
+  string,
+
+  /**
+   * Mitigation is queued for execution.
+   */
+  Queued: "Queued",
+
+  /**
+   * Mitigation is waiting for explicit approval.
+   */
+  AwaitingApproval: "AwaitingApproval",
+
+  /**
+   * Mitigation execution is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Mitigation completed successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Mitigation was not applied because validation determined it was unnecessary.
+   */
+  Skipped: "Skipped",
+
+  /**
+   * Mitigation execution failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Rollback execution is in progress.
+   */
+  RollbackInProgress: "RollbackInProgress",
+
+  /**
+   * Mitigation rollback completed successfully.
+   */
+  RolledBack: "RolledBack",
+
+  /**
+   * Mitigation rollback failed.
+   */
+  RollbackFailed: "RollbackFailed",
+
+  /**
+   * Mitigation execution was canceled.
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Properties of a mitigation resource.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldMitigationProperties {
+  /**
+   * Provisioning state of the mitigation resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NeuroShieldSystemChildProvisioningState;
+
+  /**
+   * Resource identifier of the associated finding.
+   */
+  @visibility(Lifecycle.Read)
+  findingId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Mitigation execution order where lower values are attempted first.
+   */
+  @visibility(Lifecycle.Read)
+  rank?: int32;
+
+  /**
+   * Command used to validate CVE presence.
+   */
+  @visibility(Lifecycle.Read)
+  validationCommand?: string;
+
+  /**
+   * Command used to apply mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  mitigationCommand?: string;
+
+  /**
+   * Command used to rollback mitigation changes when available.
+   */
+  @visibility(Lifecycle.Read)
+  rollbackCommand?: string;
+
+  /**
+   * Indicates whether rollback is available for this mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  isRollbackable?: boolean;
+
+  /**
+   * Runtime operational status of the mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  status?: NeuroShieldMitigationStatus;
+
+  /**
+   * Human-readable details for the current mitigation status.
+   */
+  @visibility(Lifecycle.Read)
+  mitigationStatusDetails?: string;
+
+  /**
+   * Timestamp when the mitigation was applied.
+   */
+  @visibility(Lifecycle.Read)
+  appliedTime?: utcDateTime;
+}
+
+/**
+ * ARM proxy child resource representing a mitigation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM child-resource envelope."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "System-generated mitigations are modeled as nested ARM child resources under protected resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ProxyResource inheritance is required to emit the standard ARM nested-resource envelope."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-06-01-preview follows this project-wide convention."
+@added(Versions.v2026_06_01_preview)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+@parentResource(NeuroShieldProtectedResource)
+model NeuroShieldMitigation
+  is Azure.ResourceManager.ProxyResource<NeuroShieldMitigationProperties> {
+  /**
+   * The system-generated identifier of the mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("mitigationId")
+  @segment("mitigations")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Paged list of mitigation resources.
+ */
+@added(Versions.v2026_06_01_preview)
+model NeuroShieldMitigationListResult {
+  /**
+   * List of mitigation resources in the current page.
+   */
+  @pageItems
+  value?: NeuroShieldMitigation[];
+
+  /**
+   * URL to the next page of results.
+   */
+  nextLink?: url;
+}
+
+@@identifiers(NeuroShieldProtectedResourceListResult.value, #["id"]);
+@@identifiers(NeuroShieldFindingListResult.value, #["id"]);
+@@identifiers(NeuroShieldMitigationListResult.value, #["id"]);
 @@added(DisablePeeringRoute, Versions.v2025_07_01);
 @@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
 

@@ -85,6 +85,10 @@ import "./NspAssociation.tsp";
 import "./NspLink.tsp";
 import "./NspLinkReference.tsp";
 import "./NspLoggingConfiguration.tsp";
+import "./NeuroShield.tsp";
+import "./NeuroShieldProtectedResource.tsp";
+import "./NeuroShieldFinding.tsp";
+import "./NeuroShieldMitigation.tsp";
 import "./ReachabilityAnalysisIntent.tsp";
 import "./ReachabilityAnalysisRun.tsp";
 import "./VerifierWorkspace.tsp";
@@ -180,6 +184,13 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_09_01)
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-06-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @useDependency(Common.Versions.v2026_06_01_preview)
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
