@@ -51,6 +51,7 @@ interface AgentInvocations {
    * Publishing is optional; when published, JSON and YAML representations may be served as
    * separately stored artifacts.
    */
+  @summary("Get an agent invocation AsyncAPI spec (JSON)")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json")
   getAgentInvocationAsyncApiSpecJson is FoundryDataPlaneOperation<
@@ -62,6 +63,7 @@ interface AgentInvocations {
       @path agent_version: string;
     },
     {
+      /** The content type of the response body. */
       @header contentType: "application/json";
 
       /** The AsyncAPI document, serialized as JSON. */
@@ -81,6 +83,7 @@ interface AgentInvocations {
    * Returns 404 if the agent version does not publish an AsyncAPI specification, or if only
    * a JSON representation is published for that version.
    */
+  @summary("Get an agent invocation AsyncAPI spec (YAML)")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml")
   getAgentInvocationAsyncApiSpecYaml is FoundryDataPlaneOperation<
@@ -92,6 +95,7 @@ interface AgentInvocations {
       @path agent_version: string;
     },
     {
+      /** The content type of the response body. */
       @header contentType: "application/yaml";
 
       /** The AsyncAPI document, serialized as YAML. */
