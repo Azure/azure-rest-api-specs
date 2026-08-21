@@ -1077,8 +1077,6 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@clientName(SourceControlProperties.repoUrl, "RepoUri", "csharp");
-
 @@clientName(
   SourceControlOperationState,
   "ContainerAppSourceControlOperationState",

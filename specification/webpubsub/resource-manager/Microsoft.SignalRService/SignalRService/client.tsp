@@ -93,7 +93,11 @@ using Http;
   "WebPubSubSharedPrivateLinkStatus",
   "csharp"
 );
-
+@@clientName(
+  PrivateLinkServiceConnectionState,
+  "WebPubSubPrivateLinkServiceConnectionState",
+  "csharp"
+);
 @@clientName(WebPubSubResource, "WebPubSub", "csharp");
 @@clientName(WebPubSubProperties.disableAadAuth, "IsAadAuthDisabled", "csharp");
 @@clientName(
@@ -120,11 +124,6 @@ using Http;
 @@clientName(
   PrivateEndpointConnection,
   "WebPubSubPrivateEndpointConnection",
-  "csharp"
-);
-@@clientName(
-  PrivateLinkServiceConnectionState,
-  "WebPubSubPrivateLinkServiceConnectionState",
   "csharp"
 );
 @@clientName(

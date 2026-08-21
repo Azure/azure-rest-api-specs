@@ -726,7 +726,6 @@ using Microsoft.RecoveryServices;
   utcDateTime,
   "csharp"
 );
-@@clientName(InMageRcmFailbackSyncDetails.startTime, "StartOn", "csharp");
 @@alternateType(InMageRcmFailbackSyncDetails.startTime, utcDateTime, "csharp");
 @@clientName(
   InMageRcmFailbackSyncDetails.lastRefreshTime,
@@ -3967,8 +3966,7 @@ using Microsoft.RecoveryServices;
   Azure.Core.azureLocation,
   "csharp"
 );
-// --- url alternateType + rename ---
-@@clientName(ManagedRunCommandScriptInput.scriptUrl, "ScriptUri", "csharp");
+// --- url alternateType ---
 @@alternateType(ManagedRunCommandScriptInput.scriptUrl, url, "csharp");
 
 // --- Step 6 round 4: property casing renames (armID cascades) ---
