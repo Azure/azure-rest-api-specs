@@ -113,7 +113,7 @@ op currentQuotaLimitBasesCreateOrUpdate(
 @@override(
   CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,python"
+  "java,python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
@@ -140,7 +140,7 @@ op currentQuotaLimitBasesGet(
 @@override(
   CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,python"
+  "java,python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
@@ -170,7 +170,7 @@ op currentQuotaLimitBasesUpdate(
 @@override(
   CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,python"
+  "java,python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
@@ -194,7 +194,11 @@ op quotaRequestStatusGet(
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
+@@override(
+  QuotaRequestStatus.get,
+  quotaRequestStatusGet,
+  "java,python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
@@ -217,4 +221,8 @@ op currentUsagesBasesGet(
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python");
+@@override(
+  CurrentUsagesBases.get,
+  currentUsagesBasesGet,
+  "java,python,go,javascript"
+);
