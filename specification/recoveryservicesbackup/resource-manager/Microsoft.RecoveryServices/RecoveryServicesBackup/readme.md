@@ -632,7 +632,7 @@ directive:
     reason: BulkRestoreRecoveryPointsResponse is a dictionary-shaped operation-result payload whose top-level members (value = map of protected-item ARM ID to recovery point, and nextLink) are dictated by the service's ResourceDictionary<RecoveryPoint> wire contract. It is not an ARM resource envelope, so its top-level properties cannot be limited to the ARM resource property set.
   - suppress: AvoidAdditionalProperties
     from: bms.json
-    where: $.definitions.BulkRestoreRecoveryPointsResponse
+    where: $.definitions.BulkRestoreRecoveryPointsResponse.properties.value
     reason: The value member of BulkRestoreRecoveryPointsResponse is a dynamic map keyed by the source protected item's ARM ID (service ResourceDictionary<RecoveryPoint>). The key set is caller-supplied and unbounded, so the response is inherently an additionalProperties map and cannot be expressed as a fixed-property object without diverging from the shipped wire.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: bms.json
