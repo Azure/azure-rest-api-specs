@@ -149,6 +149,13 @@ Legacy camelCase routes preserve their published contracts with an explicit
 `resourceGroups`. Any future legacy exception must declare its route explicitly
 rather than changing the service-wide lowercase default.
 
+`MaintenanceConfigurationsForResourceGroupRoutes.list` also pins the existing
+`MaintenanceConfigurationsForResourceGroup_List` operation ID and uses an
+explicit response union instead of an ARM list-operation template. This
+preserves the published route and response contract, but the operation will not
+automatically inherit future changes to the ARM templates. Review such template
+changes explicitly before applying them to this compatibility operation.
+
 # Code Generation
 
 ## Swagger to SDK
