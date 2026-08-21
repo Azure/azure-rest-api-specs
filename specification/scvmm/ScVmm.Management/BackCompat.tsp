@@ -5,49 +5,56 @@ import "@azure-tools/typespec-azure-resource-manager";
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
 
 using Microsoft.ScVmm;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AvailabilitySet.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Cloud.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   GuestAgent.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   VirtualMachineInstance.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   VirtualMachineTemplate.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   VirtualNetwork.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   VmInstanceHybridIdentityMetadata.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   VmmServer.properties,
-  "autorest"
+  "autorest,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
-  "autorest"
+  "autorest,csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  VmInstanceHybridIdentityMetadata.properties,
+  "csharp"
 );

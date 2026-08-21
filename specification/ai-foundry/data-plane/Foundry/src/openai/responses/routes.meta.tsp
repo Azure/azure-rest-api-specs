@@ -2296,11 +2296,7 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(
-  Azure.AI.Projects.Responses.listInputItems,
-  "x-ms-list",
-  true
-);
+@@extension(Azure.AI.Projects.Responses.listInputItems, "x-ms-list", true);
 
 @@extension(
   Azure.AI.Projects.Responses.Compactconversation,

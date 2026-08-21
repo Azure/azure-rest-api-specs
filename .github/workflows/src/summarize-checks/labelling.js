@@ -1156,6 +1156,25 @@ const rulesPri3Blockers = [
   },
 ];
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri1Namespace = [
+  // When package-name-review-required is present, require package-name-approved before merge.
+  // See .github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md for details.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["package-name-review-required"],
+    allPrerequisiteAbsentLabels: ["package-name-approved"],
+    anyRequiredLabels: ["package-name-approved"],
+    troubleshootingGuide:
+      "This PR modifies SDK package name configuration in <code>tspconfig.yaml</code> and requires " +
+      "package name approval from language architects before it can be merged.<br/>" +
+      "Check the <b>Package Name Review Required</b> comment on this PR for a detailed status table " +
+      "showing which languages are pending and who can approve.<br/>" +
+      "Architects: apply <code>package-name-&lt;language&gt;-approved</code> labels for each language. " +
+      "For management-plane PRs, <code>package-name-approved-all</code> can be used to approve all languages at once.",
+  },
+];
+
 export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0NotReadyForArmReview)
   .concat(rulesPri0ArmRpaas)
@@ -1163,6 +1182,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
+  .concat(rulesPri1Namespace)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);

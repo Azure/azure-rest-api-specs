@@ -247,6 +247,7 @@ model FlexProperties {
   @maxItems(5)
   vmSizeProfiles: Array<VmSizeProfile>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The operating system type for the VMs")
   osType: OsType;
 
@@ -346,6 +347,10 @@ model RetryPolicy {
 
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Details that could optimize the user's request")
+  optimizationPreference?: OptimizationPreference;
+
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
 
@@ -741,6 +746,7 @@ model GetOperationStatusResponse {
   results: Array<ResourceOperation>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Static read response for the singleton bulk VM operations proxy endpoint")
 model BulkVmOperationsReadResponse {
   @doc("Fully qualified resource ID for the singleton bulk VM operations proxy resource")
@@ -772,6 +778,7 @@ model CancelOperationsResponse {
 
 // ----------- BulkOperationErrors ---------
 @@identifiers(ListBulkOperationErrorsResponse.value, #[]);
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from listing bulk operation errors")
 model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;

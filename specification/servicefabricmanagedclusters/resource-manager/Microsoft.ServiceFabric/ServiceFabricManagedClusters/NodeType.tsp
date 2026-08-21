@@ -564,6 +564,7 @@ model NodeTypeProperties {
   /**
    * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_02_01)
   enableResilientEphemeralOsDisk?: boolean;
 
@@ -892,6 +893,7 @@ model VaultCertificate {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl: string;
 
   /**

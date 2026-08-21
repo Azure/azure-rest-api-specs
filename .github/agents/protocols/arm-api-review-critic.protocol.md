@@ -81,7 +81,7 @@ it MAY use a **compact-mode** payload to reduce dispatch size:
   findings with their prior-iteration Critic verdicts, labeled
   `## Carry-over verdicts`.
 - **Re-pin the session SHA** before each compact-mode dispatch: run
-  `gh pr view <n> --json headRefOid` (or `get_pull_request`) to confirm
+  `gh pr view <n> --json headRefOid` (or `pull_request_read(method: "get")`) to confirm
   `head.sha` still equals the pinned session SHA. If it has moved, abort
   per the session-invalidation rule.
 - **File-drift check (`carry-over-stale`).** For each carry-over finding,
@@ -285,6 +285,8 @@ The catalog has been reduced to **6 non-overridable reasons** (marked
 | `session-sha-moved`            | Re-validation 1                 | **Yes** (kills session) | Only legal action: restart from Reviewer Step 1 or abandon.                                                    |
 | `session-sha-unreachable`      | Re-validation 1                 | **Yes** (kills session) | Only legal action: restart from Reviewer Step 1 or abandon.                                                    |
 | `missing-inputs`               | Input validation                | No                      | Reviewer fixes the input block (see canonical format) and re-dispatches.                                       |
+| `approval-label-mismatch`      | Re-validation 0                 | No                      | Reviewer refreshes the exact approval-label inventory from PR metadata and re-dispatches.                      |
+| `approval-context-missing`     | Re-validation 0                 | No                      | Reviewer adds or corrects the finding-specific approval context and re-dispatches.                             |
 
 "Non-overridable" means the `critic: override` per-comment marker
 (human-supplied `override-reason`) does NOT clear the FAIL. The Reviewer's

@@ -1454,6 +1454,8 @@ op remediationsListDeploymentsAtManagementGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op remediationsListForManagementGroup(
   ...ApiVersionParameter,
+
+  @path
   managementGroupsNamespace: ManagementGroupsNamespaceType,
 
   @path

@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model Datastore
-  is Azure.ResourceManager.ProxyResource<DatastoreProperties, false> {
+model Datastore is Azure.ResourceManager.ProxyResource<
+  DatastoreProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Datastore,
     KeyName = "name",

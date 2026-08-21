@@ -55,6 +55,11 @@ enum Versions {
    * The 2025-07-01 API version.
    */
   v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  v2025_09_01: "2025-09-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -94,6 +99,10 @@ enum Features {
   /** Interconnect group resource type for managing interconnect groups. */
   @added(Versions.v2025_07_01)
   interconnectGroup,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2025_09_01)
+  firstPartyServiceTag,
 }
 
 /**
@@ -256,6 +265,12 @@ union LoadBalancerSkuName {
    * Gateway
    */
   Gateway: "Gateway",
+
+  /**
+   * Service load balancer SKU.
+   */
+  @added(Versions.v2025_09_01)
+  Service: "Service",
 }
 
 /**
@@ -290,6 +305,19 @@ union LoadBalancerScope {
    * Private
    */
   Private: "Private",
+}
+
+/**
+ * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+ */
+@added(Versions.v2025_09_01)
+union LoadBalancerMode {
+  string,
+
+  /**
+   * Advanced mode, which enables additional capabilities on a Standard SKU load balancer.
+   */
+  Advanced: "Advanced",
 }
 
 /**
@@ -1417,6 +1445,13 @@ model PublicIPAddressPropertiesFormat {
    * Specify what happens to the public IP address when the VM using it is deleted
    */
   deleteOption?: DeleteOptions;
+
+  /**
+   * Whether the public IP address SKU has been upgraded from Standard to StandardV2.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  upgradedToV2?: boolean;
 }
 
 /**
@@ -1484,6 +1519,16 @@ model IpTag {
    * The value of the IP tag associated with the public IP. Example: SQL.
    */
   tag?: string;
+
+  /**
+   * The resource ID of the first party service tag associated with the IP tag.
+   */
+  @added(Versions.v2025_09_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -2001,6 +2046,12 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @added(Versions.v2025_07_01)
   ddosSettings?: DdosFrontendIpConfigurationSettings;
+
+  /**
+   * Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings.
+   */
+  @added(Versions.v2025_09_01)
+  enableConnectionTracking?: boolean;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
@@ -3375,7 +3426,7 @@ model LoadBalancingRulePropertiesFormat {
   disableOutboundSnat?: boolean;
 
   /**
-   * Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol.
+   * Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence.
    */
   enableConnectionTracking?: boolean;
 
@@ -3995,6 +4046,13 @@ model LoadBalancerPropertiesFormat {
    * Indicates the scope of the load balancer: external (Public) or internal (Private).
    */
   scope?: LoadBalancerScope;
+
+  /**
+   * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  mode?: LoadBalancerMode;
 }
 
 /**

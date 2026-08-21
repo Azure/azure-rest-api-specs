@@ -264,5 +264,8 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.ItemCustomToolCallOutput, Access.public);
   @@usage(OpenAI.ItemCustomToolCallOutput, Usage.input | Usage.output);
-  @@clientName(OpenAI.ItemCustomToolCallOutput, "OutputItemCustomToolCallOutput");
+  @@clientName(
+    OpenAI.ItemCustomToolCallOutput,
+    "OutputItemCustomToolCallOutput"
+  );
 }

@@ -14,8 +14,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a HostPool definition.
  */
-model HostPool
-  is Azure.ResourceManager.TrackedResource<HostPoolProperties, false> {
+model HostPool is Azure.ResourceManager.TrackedResource<
+  HostPoolProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = HostPool,
     KeyName = "hostPoolName",

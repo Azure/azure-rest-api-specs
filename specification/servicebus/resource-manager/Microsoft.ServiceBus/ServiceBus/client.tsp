@@ -71,6 +71,8 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 @@clientName(NWRuleSetIpRules, "ServiceBusNetworkRuleSetIPRules", "csharp");
+@@clientName(IpAddressType, "ServiceBusIPAddressType", "csharp");
+@@clientName(SBNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NetworkRuleIPAction, "ServiceBusNetworkRuleIPAction", "csharp");
 @@clientName(
   NWRuleSetVirtualNetworkRules,
@@ -159,6 +161,7 @@ using Microsoft.ServiceBus;
   "csharp"
 );
 @@clientName(FailOver, "ServiceBusNamespaceFailOver", "csharp");
+@@clientName(FailOverProperties.force, "IsForced", "csharp");
 @@clientName(
   SBNamespaces.privateLinkResourcesGet,
   "GetPrivateLinkResources",

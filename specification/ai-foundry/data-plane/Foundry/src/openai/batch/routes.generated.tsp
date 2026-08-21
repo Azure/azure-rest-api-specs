@@ -56,7 +56,7 @@ interface Batches {
     {
       /** The request body. */
       @body
-      body: OpenAI.CreateBatchParametersBody;
+      body: OpenAI.CreateBatchRequest;
     },
     OpenAI.Batch
   >;

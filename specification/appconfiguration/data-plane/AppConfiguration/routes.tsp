@@ -173,16 +173,15 @@ op deleteKeyValue is AppConfigOperation<
     ...SyncTokenHeader;
     ...IfMatchHeader;
   },
+  | (Body<KeyValue> &
+      AppConfigResponseHeaders &
+      ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">)
+  | {
+      @statusCode
+      statusCode: 204;
 
-    | (Body<KeyValue> &
-        AppConfigResponseHeaders &
-        ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">)
-    | {
-        @statusCode
-        statusCode: 204;
-
-        ...SyncTokenHeader;
-      }
+      ...SyncTokenHeader;
+    }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"

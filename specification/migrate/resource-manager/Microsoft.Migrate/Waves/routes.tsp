@@ -22,6 +22,7 @@ namespace Microsoft.Migrate;
 
 @armResourceOperations
 interface MigrateProjects {
+  @doc("A long-running resource action.")
   @added(ApiVersions.v2025_12_01_preview)
   generateWavePlan is ArmResourceActionAsync<
     MigrateProject,
