@@ -91,7 +91,7 @@ using Microsoft.Maintenance;
   MaintenanceConfigurations
 );
 @@clientLocation(
-  MaintenanceConfigurationOperationGroup.list,
+  MaintenanceConfigurationsForResourceGroupRoutes.list,
   "MaintenanceConfigurationsForResourceGroup"
 );
 @@clientLocation(
@@ -142,6 +142,15 @@ using Microsoft.Maintenance;
 );
 @@clientLocation(UpdatesOperationGroup.listParent, "Updates");
 @@clientLocation(UpdatesOperationGroup.list, "Updates");
+
+// All new Maintenance resource-group-scoped APIs inherit lowercase `resourcegroups` from this
+// override. Legacy camelCase routes must preserve their published contract with an explicit
+// `@route`; the known exception is MaintenanceConfigurationsForResourceGroupRoutes.list.
+// Add future exceptions explicitly rather than changing this service-wide default.
+@@TypeSpec.Rest.segment(
+  Azure.ResourceManager.ResourceGroupParameter.resourceGroupName,
+  "resourcegroups"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.OperationDisplay,

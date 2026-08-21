@@ -10,6 +10,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maintenance;
+
+// Common-types v5 emits this resource's id as arm-id, which is a known cross-version finding.
+// Remove this note after 2025-10-01 is GA and becomes the v5 stable comparison baseline.
 /**
  * Configuration Assignment
  */
@@ -263,28 +266,60 @@ interface ConfigurationAssignmentsForSubscriptions {
     ErrorType = MaintenanceError
   >;
 }
+/** Scope parameters shared by resource-group configuration assignment operations. */
+model ConfigurationAssignmentsForResourceGroupScopeParameters {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+}
+
+/** Parent resource parameters shared by resource-group configuration assignment operations. */
+model ConfigurationAssignmentsForResourceGroupParentParameters {
+  ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>;
+  ...ParentKeysOf<ConfigurationAssignment>;
+}
+
+/** Configuration assignment name parameters used by the GET operation. */
+model ConfigurationAssignmentsForResourceGroupReadNameParameters {
+  ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>;
+  ...KeysOf<ResourceNameParameter<
+    Resource = ConfigurationAssignment,
+    KeyName = "configurationAssignmentName",
+    SegmentName = "configurationAssignments",
+    NamePattern = "^.+$"
+  >>;
+}
+
+/** Configuration assignment name parameters used by write operations. */
+model ConfigurationAssignmentsForResourceGroupWriteNameParameters {
+  ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>;
+
+  // Stable 2023-04-01 omits the name pattern on PUT, PATCH, and DELETE.
+  // Omit the name pattern on writes to match that contract while GET retains `^.+$`.
+  ...KeysOf<ResourceNameParameter<
+    Resource = ConfigurationAssignment,
+    KeyName = "configurationAssignmentName",
+    SegmentName = "configurationAssignments",
+    NamePattern = ""
+  >>;
+}
+
+/** GET operations retain the `^.+$` name pattern from the existing contract. */
 @armResourceOperations
-interface ConfigurationAssignmentsForResourceGroupOps
+interface ConfigurationAssignmentsForResourceGroupReadOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
-        ...ParentKeysOf<ConfigurationAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ConfigurationAssignment,
-          KeyName = "configurationAssignmentName",
-          SegmentName = "configurationAssignments",
-          NamePattern = "^.+$"
-        >>,
-      },
-      "MaintenanceResourceGroupConfigurationAssignment"
+      ConfigurationAssignmentsForResourceGroupScopeParameters,
+      ConfigurationAssignmentsForResourceGroupParentParameters,
+      ConfigurationAssignmentsForResourceGroupReadNameParameters
+    > {}
+
+/** Write operations omit the name pattern to match the stable 2023-04-01 contract. */
+@armResourceOperations
+interface ConfigurationAssignmentsForResourceGroupWriteOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      ConfigurationAssignmentsForResourceGroupScopeParameters,
+      ConfigurationAssignmentsForResourceGroupParentParameters,
+      ConfigurationAssignmentsForResourceGroupWriteNameParameters
     > {}
 
 @armResourceOperations
@@ -292,7 +327,7 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Get configuration assignment for resource..
    */
-  get is ConfigurationAssignmentsForResourceGroupOps.Read<
+  get is ConfigurationAssignmentsForResourceGroupReadOps.Read<
     ConfigurationAssignment,
     ErrorType = MaintenanceError
   >;
@@ -300,7 +335,7 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<
+  createOrUpdate is ConfigurationAssignmentsForResourceGroupWriteOps.CreateOrUpdateSync<
     ConfigurationAssignment,
     ErrorType = MaintenanceError
   >;
@@ -309,7 +344,7 @@ interface ConfigurationAssignmentsForResourceGroup {
    * Register configuration for resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ConfigurationAssignmentsForResourceGroupOps.CustomPatchSync<
+  update is ConfigurationAssignmentsForResourceGroupWriteOps.CustomPatchSync<
     ConfigurationAssignment,
     PatchModel = ConfigurationAssignment,
     ErrorType = MaintenanceError
@@ -318,7 +353,7 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Unregister configuration for resource.
    */
-  delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
+  delete is ConfigurationAssignmentsForResourceGroupWriteOps.DeleteSync<
     ConfigurationAssignment,
     Response =
       | ArmResponse<ConfigurationAssignment>

@@ -137,6 +137,25 @@ input-file:
 
 ---
 
+## Resource-group route casing
+
+New Maintenance resource-group-scoped APIs use lowercase `resourcegroups`. The
+service-wide segment override in `back-compatible.tsp` applies this convention
+automatically.
+
+Legacy camelCase routes preserve their published contracts with an explicit
+`@route`. The known exception is
+`MaintenanceConfigurationsForResourceGroupRoutes.list`, which retains
+`resourceGroups`. Any future legacy exception must declare its route explicitly
+rather than changing the service-wide lowercase default.
+
+`MaintenanceConfigurationsForResourceGroupRoutes.list` also pins the existing
+`MaintenanceConfigurationsForResourceGroup_List` operation ID and uses an
+explicit response union instead of an ARM list-operation template. This
+preserves the published route and response contract, but the operation will not
+automatically inherit future changes to the ARM templates. Review such template
+changes explicitly before applying them to this compatibility operation.
+
 # Code Generation
 
 ## Swagger to SDK
@@ -197,6 +216,48 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: maintenance.json
     reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: maintenance.json
+    reason: >-
+      ConfigurationAssignment is an existing proxy extension resource whose compatibility contract includes location.
+      This suppression is intentionally limited to the item GET and PUT operations currently flagged by the validator;
+      DELETE and collection operations are not suppressed because they produce no finding.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].put
+  - suppress: PathForTrackedResourceTypes
+    from: maintenance.json
+    reason: These existing subscription-level APIs cannot move under a resource group without breaking their REST contracts.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/{resourceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"]
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: maintenance.json
+    reason: MaintenanceConfiguration already has DELETE on its mutable resource-group route; the shared read-only public route causes this false positive.
+    where:
+      - $.definitions.MaintenanceConfiguration
+  - suppress: AvoidAdditionalProperties
+    from: maintenance.json
+    reason: extensionProperties is an intentional open string dictionary for extension-defined keys.
+    where:
+      - $.definitions.MaintenanceConfigurationProperties.properties.extensionProperties
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    from: maintenance.json
+    reason: The existing operations response uses legacy local models whose replacement would change the compatibility contract.
+    where:
+      - $.paths["/providers/Microsoft.Maintenance/operations"].get.responses["200"].schema.$ref
+  - suppress: PatchBodyParametersSchema
+    from: maintenance.json
+    reason: rebootSetting has an existing default shared by PUT and PATCH; removing it would change generated SDK default behavior.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations/{resourceName}"].patch.parameters[*].schema.properties.properties
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: maintenance.json
+    reason: ListUpdatesResult is a pageable response envelope, not an ARM resource.
+    where:
+      - $.definitions.ListUpdatesResult
   - suppress: ResourceNameRestriction
     from: maintenance.json
     reason: Maintenance RP accept any string, no special restriction required.

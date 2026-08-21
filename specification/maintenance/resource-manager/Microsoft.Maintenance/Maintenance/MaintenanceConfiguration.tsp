@@ -10,6 +10,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maintenance;
+
+// Common-types v5 emits this resource's id as arm-id, which is a known cross-version finding.
+// Remove this note after 2025-10-01 is GA and becomes the v5 stable comparison baseline.
 /**
  * Maintenance configuration record type
  */
@@ -142,17 +145,6 @@ interface MaintenanceConfigurationOperationGroup {
   >;
 
   /**
-   * Get Configuration records within a subscription and resource group
-   */
-  @segment("maintenanceConfigurations")
-  list is Extension.ListByTarget<
-    Extension.ResourceGroup,
-    MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
-    Error = MaintenanceError
-  >;
-
-  /**
    * Get Configuration records within a subscription
    */
   @segment("maintenanceConfigurations")
@@ -162,6 +154,28 @@ interface MaintenanceConfigurationOperationGroup {
     Response = ArmResponse<ListMaintenanceConfigurationsResult>,
     Error = MaintenanceError
   >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface intentionally uses an explicit route to preserve legacy path casing."
+interface MaintenanceConfigurationsForResourceGroupRoutes {
+  /**
+   * Get Configuration records within a subscription and resource group
+   */
+  // Stable 2023-04-01 uses camelCase `resourceGroups` for this collection operation.
+  // Preserve it as the explicit exception to Maintenance's lowercase route convention.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Explicit route preserves the legacy resourceGroups casing for this operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing operation ID for backward compatibility."
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations")
+  @get
+  @list
+  @armResourceList(MaintenanceConfiguration)
+  @tag("MaintenanceConfigurationOperationGroup")
+  @operationId("MaintenanceConfigurationsForResourceGroup_List")
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+  ): ArmResponse<ListMaintenanceConfigurationsResult> | MaintenanceError;
 }
 
 @@doc(MaintenanceConfiguration.name, "Maintenance Configuration Name");
