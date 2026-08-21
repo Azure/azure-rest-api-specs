@@ -11377,6 +11377,12 @@ model ExpressRouteCircuitPropertiesFormat {
   expressRoutePort?: SubResource;
 
   /**
+   * The reference to the ExpressRouteLag resource when the circuit is provisioned on an ExpressRouteLag resource.
+   */
+  @added(Versions.v2026_01_01)
+  expressRouteLag?: SubResource;
+
+  /**
    * The bandwidth of the circuit when the circuit is provisioned on an ExpressRoutePort resource.
    */
   bandwidthInGbps?: float32;
@@ -12303,6 +12309,13 @@ model ExpressRouteLagPropertiesFormat {
    */
   @summary("ExpressRouteLagLink Sub-Resources")
   links?: ExpressRouteLagLink[];
+
+  /**
+   * Reference the ExpressRoute circuit(s) that are provisioned on this ExpressRouteLag resource.
+   */
+  @added(Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  circuits?: SubResource[];
 
   /**
    * The date and time when the ExpressRouteLag was allocated.
