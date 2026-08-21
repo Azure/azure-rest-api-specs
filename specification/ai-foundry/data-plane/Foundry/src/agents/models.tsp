@@ -726,6 +726,29 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
+  publish_approval_status?: PublishApprovalStatus;
+}
+
+@doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")
+union PublishApprovalStatus {
+  string,
+
+  @doc("The agent has never been published to the Microsoft 365 store, so there is nothing to review.")
+  NotPublished: "NotPublished",
+
+  @doc("The published title is awaiting a review decision.")
+  Pending: "Pending",
+
+  @doc("The title passed review, as of this read.")
+  Approved: "Approved",
+
+  @doc("The title was rejected in review, as of this read.")
+  Rejected: "Rejected",
+
+  @doc("The agent is published at a scope that does not go through Microsoft Agent Certification. Only tenant-scoped titles are reviewed.")
+  NoApprovalNeeded: "NoApprovalNeeded",
 }
 
 model AgentIdentity {
