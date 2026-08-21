@@ -867,6 +867,122 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
 }
 
 /**
+ * The type of metadata associated with the image.
+ */
+@added(Versions.v2026_03_03)
+union MetadataType {
+  string,
+
+  /**
+   * Metadata related to secrets provisioning for the image.
+   */
+  SecretsProvisioningImageMetadata: "SecretsProvisioningImageMetadata",
+
+  /**
+   * Metadata related to user-provided secrets provisioning for the image.
+   */
+  UserProvidedSecretsProvisioningMetadata: "UserProvidedSecretsProvisioningMetadata",
+}
+
+/**
+ * Describes a key-value pair for image metadata.
+ */
+@added(Versions.v2026_03_03)
+model MetadataKeyValue {
+  /**
+   * The metadata key. Known keys emitted by the service include 'Linux.AzureSecretsProvisioning.Enabled', 'OS.Name', and '{componentName}.Version' (e.g., 'AzureGuestAgent.Version'). All values are non-sensitive configuration; no secrets, credentials, or cryptographic material transit this field.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "metadataKey is a dictionary-style key name (e.g. 'OS.Name'), not a cryptographic key or secret. The suffix match on 'key' is a false positive."
+  metadataKey: string;
+
+  /**
+   * The metadata value. Contains non-sensitive configuration such as capability flags ('true'/'false'), OS names ('Linux', 'Windows'), and version strings (e.g., '1.0.0').
+   */
+  metadataValue?: string;
+}
+
+/**
+ * Describes the metadata profile of an image.
+ */
+@added(Versions.v2026_03_03)
+model ImageMetadataProfile {
+  /**
+   * The type of metadata.
+   */
+  type: MetadataType;
+
+  /**
+   * The list of public metadata key-value pairs. Contains non-sensitive image capability metadata such as supported OS, component names, and versions. No secret material is emitted in this list.
+   */
+  @identifiers(#["metadataKey"])
+  publicMetadataList?: MetadataKeyValue[];
+
+  /**
+   * The list of internal metadata key-value pairs. Contains non-sensitive service-internal metadata for diagnostics and tracking. No secret material is emitted in this list.
+   */
+  @identifiers(#["metadataKey"])
+  internalMetadataList?: MetadataKeyValue[];
+}
+
+/**
+ * The name of a component involved in secrets provisioning.
+ */
+@added(Versions.v2026_03_03)
+union SecretsProvisioningComponentName {
+  string,
+
+  /** The guest operating system. */
+  OS: "OS",
+
+  /** The cloud-init provisioning agent. */
+  CloudInit: "CloudInit",
+
+  /** The Azure guest agent. */
+  AzureGuestAgent: "AzureGuestAgent",
+
+  /** The secrets provisioning library. */
+  SecretsProvisioningLibrary: "SecretsProvisioningLibrary",
+}
+
+/**
+ * Describes a component involved in secrets provisioning.
+ */
+@added(Versions.v2026_03_03)
+model SecretsProvisioningComponent {
+  /**
+   * The name of the component.
+   */
+  name?: SecretsProvisioningComponentName;
+
+  /**
+   * The version of the component.
+   */
+  version?: string;
+}
+
+/**
+ * Describes the secrets provisioning settings for a gallery image version.
+ */
+@added(Versions.v2026_03_03)
+model SecretsProvisioningSettings {
+  /**
+   * Specifies whether the image version supports secrets provisioning.
+   */
+  isSupported?: boolean;
+
+  /**
+   * The name of the operating system (e.g., "mariner").
+   */
+  osName?: string;
+
+  /**
+   * The list of component versions involved in secrets provisioning.
+   */
+  @identifiers(#["name"])
+  components?: SecretsProvisioningComponent[];
+}
+
+/**
  * Describes the properties of a gallery image version.
  */
 model GalleryImageVersionProperties {
@@ -912,6 +1028,14 @@ model GalleryImageVersionProperties {
    */
   @visibility(Lifecycle.Read)
   validationsProfile?: ValidationsProfile;
+
+  /**
+   * The image metadata profiles associated with the gallery image version.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["type"])
+  imageMetadataProfiles?: ImageMetadataProfile[];
 }
 
 /**
@@ -1361,6 +1485,12 @@ model ImageVersionSecurityProfile {
    * Contains UEFI settings for the image version.
    */
   uefiSettings?: GalleryImageVersionUefiSettings;
+
+  /**
+   * Specifies the secrets provisioning settings for the gallery image version. Used on create or update to configure secrets provisioning.
+   */
+  @added(Versions.v2026_03_03)
+  secretsProvisioningSettings?: SecretsProvisioningSettings;
 }
 
 /**
