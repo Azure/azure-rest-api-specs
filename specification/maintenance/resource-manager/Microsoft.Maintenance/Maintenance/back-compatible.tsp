@@ -91,7 +91,7 @@ using Microsoft.Maintenance;
   MaintenanceConfigurations
 );
 @@clientLocation(
-  MaintenanceConfigurationOperationGroup.list,
+  MaintenanceConfigurationsForResourceGroupRoutes.list,
   "MaintenanceConfigurationsForResourceGroup"
 );
 @@clientLocation(
@@ -142,6 +142,13 @@ using Microsoft.Maintenance;
 );
 @@clientLocation(UpdatesOperationGroup.listParent, "Updates");
 @@clientLocation(UpdatesOperationGroup.list, "Updates");
+
+// All current and future Maintenance resource-group-scoped routes intentionally use lowercase
+// `resourcegroups`. Operations that must preserve legacy camelCase declare an explicit route.
+@@TypeSpec.Rest.segment(
+  Azure.ResourceManager.ResourceGroupParameter.resourceGroupName,
+  "resourcegroups"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.OperationDisplay,
