@@ -1,0 +1,43 @@
+{
+  "operationId": "NeuroShieldProtectedResources_List",
+  "title": "List protected resources",
+  "description": "Lists all protected resources under a NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-01-01",
+    "neuroShieldName": "myNeuroShield"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vm-01",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vm-01",
+            "type": "microsoft.network/neuroShields/protectedResources",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+              "extensionStatus": "Installed",
+              "agentHealthStatus": "Healthy",
+              "lastHeartbeatTime": "2026-05-28T10:30:00Z"
+            }
+          },
+          {
+            "name": "vmss-prod",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vmss-prod",
+            "type": "microsoft.network/neuroShields/protectedResources",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss-prod",
+              "extensionStatus": "Failed",
+              "agentHealthStatus": "Unhealthy",
+              "lastHeartbeatTime": "2026-05-28T09:40:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

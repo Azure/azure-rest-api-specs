@@ -63,6 +63,7 @@ input-file:
   - stable/2026-01-01/networkingOperations.json
   - stable/2026-01-01/networkManager.json
   - stable/2026-01-01/networkSecurityPerimeter.json
+  - stable/2026-01-01/neuroShield.json
   - stable/2026-01-01/networkWatcher.json
   - stable/2026-01-01/serviceGateway.json
   - stable/2026-01-01/virtualNetwork.json
@@ -4899,6 +4900,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: neuroShield.json
+    reason: The TypeSpec resource envelope uses visibility to distinguish the PUT request from the response, which the validator does not account for when comparing schemas.
+  - suppress: PostResponseCodes
+    from: neuroShield.json
+    reason: The standard TypeSpec ArmResourceActionAsync pattern emits a 200 response without a schema for void long-running actions.
   - suppress: ResourceNameRestriction
     from: virtualWan.json
     reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
