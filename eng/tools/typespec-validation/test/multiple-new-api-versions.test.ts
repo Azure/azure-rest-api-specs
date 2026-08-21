@@ -1,45 +1,16 @@
-import {
-  generateTypeSpecMetadata,
-  type TypeSpecMetadata,
-} from "@azure-tools/specs-shared/typespec-metadata";
+import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { context } from "../src/index.ts";
 import {
-  compareApiVersionsAsc,
-  evaluateApiVersionPolicy,
+  evaluateMultipleNewApiVersions,
   MultipleNewApiVersionsRule,
 } from "../src/rules/multiple-new-api-versions.ts";
 import * as utils from "../src/utils.ts";
+import { javaEmitter, metadata, pythonEmitter, serviceYaml } from "./api-version-fixtures.ts";
 
 vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: vi.fn(),
 }));
-
-function serviceYaml(...versions: string[]) {
-  return `versions:\n${versions
-    .map((version) => `  - version: ${version}\n    source: typespec`)
-    .join("\n")}\n`;
-}
-
-function metadata(apiVersions: Record<string, string | undefined>): TypeSpecMetadata {
-  return {
-    emitterVersion: "0.3.0",
-    generatedAt: "2026-08-18T00:00:00.000Z",
-    typespec: {
-      namespace: "Contoso.Management",
-      type: "management",
-    },
-    languages: Object.fromEntries(
-      Object.entries(apiVersions).map(([emitterName, apiVersion]) => [
-        emitterName,
-        [{ emitterName, apiVersion }],
-      ]),
-    ),
-  };
-}
-
-const pythonEmitter = "@azure-tools/typespec-python";
-const javaEmitter = "@azure-tools/typespec-java";
 
 describe("MultipleNewApiVersionsRule", function () {
   beforeEach(() => {
@@ -53,48 +24,22 @@ describe("MultipleNewApiVersionsRule", function () {
     vi.mocked(generateTypeSpecMetadata).mockReset();
   });
 
-  it("does not generate metadata when no TypeSpec API version was added", async function () {
-    vi.spyOn(utils, "readFileAtCommit").mockResolvedValue(serviceYaml("2025-01-01"));
-
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("No new TypeSpec API versions");
-    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
-  });
-
-  it("generates metadata when one TypeSpec API version was added", async function () {
+  it("skips when only one API version was added", async function () {
     vi.spyOn(utils, "readFileAtCommit")
       .mockResolvedValueOnce(serviceYaml("2025-01-01"))
       .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01"));
-    vi.mocked(generateTypeSpecMetadata).mockResolvedValue(
-      metadata({ [pythonEmitter]: "2026-01-01" }),
-    );
 
     const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
 
     expect(result.success).toBe(true);
-    expect(result.stdOutput).not.toContain("Warning:");
-    expect(generateTypeSpecMetadata).toHaveBeenCalledOnce();
+    expect(result.stdOutput).toContain("Only one new API version was added");
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
   });
 
-  it("ignores swagger-sourced versions when finding newly added versions", async function () {
+  it("passes when every emitter targets the oldest new version", async function () {
     vi.spyOn(utils, "readFileAtCommit")
       .mockResolvedValueOnce(serviceYaml("2025-01-01"))
-      .mockResolvedValueOnce(
-        `${serviceYaml("2025-01-01")}  - version: 2026-01-01\n    source: swagger\n`,
-      );
-
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
-
-    expect(result.success).toBe(true);
-    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
-  });
-
-  it("treats all head TypeSpec versions as new when service.yaml is absent at base", async function () {
-    vi.spyOn(utils, "readFileAtCommit")
-      .mockResolvedValueOnce(undefined)
-      .mockResolvedValueOnce(serviceYaml("2026-01-01"));
+      .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01", "2026-02-01"));
     vi.mocked(generateTypeSpecMetadata).mockResolvedValue(
       metadata({ [pythonEmitter]: "2026-01-01" }),
     );
@@ -102,51 +47,28 @@ describe("MultipleNewApiVersionsRule", function () {
     const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
 
     expect(result.success).toBe(true);
+    expect(result.stdOutput).toBe("All SDK language emitters target 2026-01-01.");
     expect(generateTypeSpecMetadata).toHaveBeenCalledOnce();
   });
 
-  it("skips projects without service.yaml at head", async function () {
-    vi.spyOn(utils, "readFileAtCommit").mockResolvedValue(undefined);
-
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("Warning: service.yaml does not exist at head");
-    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
-  });
-
-  it("skips comparison when validating all specs", async function () {
-    context.checkingAllSpecs = true;
-    const readFileAtCommit = vi.spyOn(utils, "readFileAtCommit");
-
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("Validating all specs");
-    expect(readFileAtCommit).not.toHaveBeenCalled();
-    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
-  });
-
-  it("skips when no commits are provided", async function () {
-    delete context.baseCommitish;
-    delete context.headCommitish;
-    const readFileAtCommit = vi.spyOn(utils, "readFileAtCommit");
-
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("No commits to compare");
-    expect(result.stdOutput).toContain(
-      `npx tsv specification/foo/Foo '{"baseCommitish":"{commitShaOfMain}","headCommitish":"{headShaOfLocalBranch}"}'`,
+  it("fails and includes the reproduce hint when an emitter is not pinned", async function () {
+    vi.spyOn(utils, "readFileAtCommit")
+      .mockResolvedValueOnce(serviceYaml("2025-01-01"))
+      .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01", "2026-02-01"));
+    vi.mocked(generateTypeSpecMetadata).mockResolvedValue(
+      metadata({ [pythonEmitter]: "2026-02-01" }),
     );
-    expect(readFileAtCommit).not.toHaveBeenCalled();
-    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
+
+    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+
+    expect(result.success).toBe(false);
+    expect(result.errorOutput).toContain("To reproduce locally:");
   });
 
   it("fails when metadata generation fails", async function () {
     vi.spyOn(utils, "readFileAtCommit")
       .mockResolvedValueOnce(serviceYaml("2025-01-01"))
-      .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01"));
+      .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01", "2026-02-01"));
     vi.mocked(generateTypeSpecMetadata).mockRejectedValue(new Error("metadata failed"));
 
     const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
@@ -154,75 +76,15 @@ describe("MultipleNewApiVersionsRule", function () {
     expect(result.success).toBe(false);
     expect(result.errorOutput).toContain("metadata failed");
   });
+
+  it("is suppressable", function () {
+    expect(new MultipleNewApiVersionsRule().suppressable).toBe(true);
+  });
 });
 
-describe("evaluateApiVersionPolicy", function () {
-  it("warns for each emitter targeting an older version when one version is added", function () {
-    const result = evaluateApiVersionPolicy(
-      metadata({
-        [pythonEmitter]: "2025-01-01",
-        [javaEmitter]: "2026-01-01",
-      }),
-      ["2026-01-01"],
-    );
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain(`Warning: ${pythonEmitter}`);
-    expect(result.stdOutput).not.toContain(`Warning: ${javaEmitter}`);
-  });
-
-  it("does not warn for non-date API-version values", function () {
-    const result = evaluateApiVersionPolicy(metadata({ [pythonEmitter]: "all" }), ["2026-01-01"]);
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toBe("No SDK emitter targets an API version older than 2026-01-01.");
-  });
-
-  it("does not warn when an emitter reports no API version", function () {
-    const result = evaluateApiVersionPolicy(metadata({ [pythonEmitter]: undefined }), [
-      "2026-01-01",
-    ]);
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toBe("No SDK emitter targets an API version older than 2026-01-01.");
-  });
-
-  it("reports an emitter with no API version as not set", function () {
-    const result = evaluateApiVersionPolicy(metadata({ [pythonEmitter]: undefined }), [
-      "2026-02-01-preview",
-      "2026-01-01",
-    ]);
-
-    expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain(`${pythonEmitter}: <not set> (expected 2026-01-01)`);
-  });
-
-  it("skips multiple-service projects when one version is added", function () {
-    const result = evaluateApiVersionPolicy(
-      metadata({ [pythonEmitter]: "multiple-versions", [javaEmitter]: "multiple-versions" }),
-      ["2026-01-01"],
-    );
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toBe(
-      "Warning: This rule does not support multiple-service project scenarios.",
-    );
-  });
-
-  it("skips multiple-service projects instead of failing when multiple versions are added", function () {
-    const result = evaluateApiVersionPolicy(
-      metadata({ [pythonEmitter]: "multiple-versions", [javaEmitter]: "multiple-versions" }),
-      ["2026-02-01-preview", "2026-01-01"],
-    );
-
-    expect(result.success).toBe(true);
-    expect(result.stdOutput).toBe(
-      "Warning: This rule does not support multiple-service project scenarios.",
-    );
-  });
-
+describe("evaluateMultipleNewApiVersions", function () {
   it("requires all configured SDK emitters to target the oldest newly added version", function () {
-    const result = evaluateApiVersionPolicy(
+    const result = evaluateMultipleNewApiVersions(
       metadata({
         [pythonEmitter]: "2026-01-01",
         [javaEmitter]: "2026-02-01-preview",
@@ -232,6 +94,12 @@ describe("evaluateApiVersionPolicy", function () {
 
     expect(result.success).toBe(false);
     expect(result.errorOutput).toContain("ERROR: This pull request adds multiple API versions");
+    expect(result.errorOutput).toContain(
+      "the SDKs will be generated from API version 2026-02-01-preview",
+    );
+    expect(result.errorOutput).toContain(
+      'To generate and release the SDKs from 2026-01-01 first, every SDK language emitter must set "api-version" to 2026-01-01',
+    );
     expect(result.errorOutput).toContain(`${javaEmitter}: 2026-02-01-preview`);
     expect(result.errorOutput).toContain("expected 2026-01-01");
     expect(result.errorOutput).toContain(
@@ -240,7 +108,7 @@ describe("evaluateApiVersionPolicy", function () {
   });
 
   it("passes when all configured SDK emitters target the oldest new version", function () {
-    const result = evaluateApiVersionPolicy(
+    const result = evaluateMultipleNewApiVersions(
       metadata({
         [pythonEmitter]: "2026-01-01",
         [javaEmitter]: "2026-01-01",
@@ -251,23 +119,25 @@ describe("evaluateApiVersionPolicy", function () {
     expect(result.success).toBe(true);
   });
 
+  it("reports an emitter with no API version as not set", function () {
+    const result = evaluateMultipleNewApiVersions(metadata({ [pythonEmitter]: undefined }), [
+      "2026-02-01-preview",
+      "2026-01-01",
+    ]);
+
+    expect(result.success).toBe(false);
+    expect(result.errorOutput).toContain(`${pythonEmitter}: <not set> (expected 2026-01-01)`);
+  });
+
   it("skips validation when no SDK language emitters are configured", function () {
-    const result = evaluateApiVersionPolicy(metadata({}), ["2026-02-01-preview", "2026-01-01"]);
+    const result = evaluateMultipleNewApiVersions(metadata({}), [
+      "2026-02-01-preview",
+      "2026-01-01",
+    ]);
 
     expect(result.success).toBe(true);
     expect(result.stdOutput).toBe(
       "Warning: No SDK language emitters are configured; skipping API-version validation.",
     );
-  });
-});
-
-describe("compareApiVersionsAsc", function () {
-  it("sorts oldest first and treats preview as older than stable on the same date", function () {
-    const versions = ["2026-01-01", "2025-01-01", "2026-01-01-preview"];
-    expect(versions.sort(compareApiVersionsAsc)).toEqual([
-      "2025-01-01",
-      "2026-01-01-preview",
-      "2026-01-01",
-    ]);
   });
 });
