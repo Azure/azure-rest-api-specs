@@ -137,11 +137,6 @@ model VoiceResponse extends OmitProperties<
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The contract represents this as an integer token count or the literal string 'inf'."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
-  @doc("The maximum number of output tokens allowed for the response; an integer or the literal `inf`.")
-  max_output_tokens?: int32 | "inf";
-
   @doc("The Unix timestamp (in seconds) for when the response was created.")
   created_at?: FoundryTimestamp;
 
