@@ -25,6 +25,7 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../agents-microsoft365/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 import "../agents-optimization/routes.tsp";
@@ -77,6 +78,37 @@ using Azure.AI.Projects;
   Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
+);
+
+// Microsoft 365 publishing operations live on the Agents sub-client. These relocations are here
+// rather than in sdk-common/ops-relocation-agents.tsp because that file is also imported by the
+// Java Agents client, which does not surface the Microsoft 365 routes.
+@@clientLocation(
+  Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
+  Azure.AI.Projects.Agents
+);
+@@clientLocation(
+  Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365AppPackage,
+  Azure.AI.Projects.Agents
+);
+@@clientLocation(
+  Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365PublishDefaults,
+  Azure.AI.Projects.Agents
+);
+
+// Microsoft 365 publishing operations are relocated onto the Agents sub-client, so drop the
+// redundant "Agent" from the publish method name.
+@@clientName(
+  Microsoft365Publishing.publishAgentToMicrosoft365,
+  "publish_to_microsoft365"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365AppPackage,
+  "get_microsoft365_package"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365PublishDefaults,
+  "get_microsoft365_publish_defaults"
 );
 
 // Exclude these operations entirely from the Python SDK.
