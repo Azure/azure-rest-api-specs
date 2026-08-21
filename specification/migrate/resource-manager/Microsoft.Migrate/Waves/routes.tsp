@@ -13,6 +13,9 @@ import "./WebModels/MigrationEntity/MigrationEntity.tsp";
 import "./WebModels/MigrationEntityGroup/MigrationEntityGroups.tsp";
 import "./WebModels/Tasks/Tasks.tsp";
 import "./WebModels/Tasks/TaskSummary.tsp";
+import "./WebModels/Runbook/Runbook.tsp";
+import "./WebModels/RunbookExecution/RunbookExecution.tsp";
+import "./Common/ArmModels/Artifact.tsp";
 import "./Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
@@ -106,6 +109,10 @@ interface MigrationEntities {
   @added(ApiVersions.v2025_03_30_preview)
   create is ArmResourceCreateOrUpdateAsync<MigrationEntity>;
 
+  @added(ApiVersions.v2026_08_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<MigrationEntity, MigrationEntityPatch>;
+
   @added(ApiVersions.v2025_03_30_preview)
   get is ArmResourceRead<MigrationEntity>;
 
@@ -152,5 +159,139 @@ interface Tasks {
     MigrateProject,
     TaskSummaryRequest,
     TaskSummaryResponse
+  >;
+}
+
+@armResourceOperations
+interface Runbooks {
+  @added(ApiVersions.v2026_08_01_preview)
+  create is ArmResourceCreateOrUpdateAsync<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  get is ArmResourceRead<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  listByParent is ArmResourceListByParent<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  delete is ArmResourceDeleteWithoutOkAsync<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("execute")
+  execute is ArmResourceActionAsync<Runbook, void, RunbookExecution>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("regenerate")
+  regenerate is ArmResourceActionAsync<Runbook, void, Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateUploadUrl")
+  generateUploadUrl is ArmResourceActionSync<
+    Runbook,
+    ArtifactUploadUrlRequest,
+    ArtifactUploadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateDownloadUrl")
+  generateDownloadUrl is ArmResourceActionSync<
+    Runbook,
+    ArtifactDownloadUrlRequest,
+    ArtifactDownloadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("validateInput")
+  validateInput is ArmResourceActionAsync<Runbook, void, Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("addStep")
+  addStep is ArmResourceActionAsync<Runbook, RunbookStepAddRequest, Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("updateStep")
+  updateStep is ArmResourceActionAsync<
+    Runbook,
+    RunbookStepUpdateRequest,
+    Runbook
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("deleteStep")
+  deleteStep is ArmResourceActionAsync<
+    Runbook,
+    RunbookStepDeleteRequest,
+    Runbook
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("mergeWorkstreams")
+  mergeWorkstreams is ArmResourceActionAsync<
+    Runbook,
+    RunbookWorkstreamsMergeRequest,
+    Runbook
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("splitWorkstream")
+  splitWorkstream is ArmResourceActionAsync<
+    Runbook,
+    RunbookWorkstreamSplitRequest,
+    Runbook
+  >;
+}
+
+@armResourceOperations
+interface RunbookExecutions {
+  @added(ApiVersions.v2026_08_01_preview)
+  get is ArmResourceRead<RunbookExecution>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  listByParent is ArmResourceListByParent<RunbookExecution>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  update is ArmResourcePatchAsync<
+    RunbookExecution,
+    RunbookExecutionPatchProperties
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateDownloadUrl")
+  generateDownloadUrl is ArmResourceActionSync<
+    RunbookExecution,
+    ArtifactDownloadUrlRequest,
+    ArtifactDownloadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateUploadUrl")
+  generateUploadUrl is ArmResourceActionSync<
+    RunbookExecution,
+    ArtifactUploadUrlRequest,
+    ArtifactUploadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("performAction")
+  performAction is ArmResourceActionAsync<
+    RunbookExecution,
+    RunbookExecutionActionRequest,
+    RunbookExecution
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("updateStepStatus")
+  updateStepStatus is ArmResourceActionAsync<
+    RunbookExecution,
+    RunbookExecutionActionRequest,
+    RunbookExecution
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("provideApproval")
+  provideApproval is ArmResourceActionAsync<
+    RunbookExecution,
+    RunbookExecutionActionRequest,
+    RunbookExecution
   >;
 }
