@@ -46,6 +46,9 @@
       "name": "AppAttachPackages"
     },
     {
+      "name": "AppAttachMsixFile"
+    },
+    {
       "name": "StartMenuItems"
     },
     {
@@ -675,6 +678,93 @@
             "$ref": "./examples/AppAttachPackage_Delete.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}/expandMsixFile": {
+      "post": {
+        "operationId": "AppAttachMsixFile_Expand",
+        "tags": [
+          "AppAttachMsixFile"
+        ],
+        "description": "Expands MSIX files from the specified sources and outputs them to the designated file share paths.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appAttachPackageName",
+            "in": "path",
+            "description": "The name of the App Attach package",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpandMsixFileRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExpandMsixFileResult"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppAttachMsixFile_Expand_Post": {
+            "$ref": "./examples/AppAttachMsixFile_Expand_Post.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
@@ -7483,6 +7573,99 @@
         ]
       }
     },
+    "ExpandMsixFileFailure": {
+      "type": "object",
+      "description": "Details about a file expansion failure.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The name of the file that failed to expand."
+        },
+        "error": {
+          "type": "string",
+          "description": "The error message describing why the expansion failed."
+        }
+      }
+    },
+    "ExpandMsixFileRequest": {
+      "type": "object",
+      "description": "Request body for expanding MSIX files.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpandMsixFileRequestProperties",
+          "description": "Properties for expanding MSIX files."
+        }
+      }
+    },
+    "ExpandMsixFileRequestProperties": {
+      "type": "object",
+      "description": "Properties for expanding MSIX files.",
+      "properties": {
+        "msixFileUri": {
+          "type": "array",
+          "description": "List of URIs to MSIX files to expand.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "msixFileShare": {
+          "type": "string",
+          "description": "The file share path containing MSIX files."
+        },
+        "msixUncPath": {
+          "type": "array",
+          "description": "List of UNC paths to MSIX files.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputFileSharePath": {
+          "type": "array",
+          "description": "List of output file share paths where expanded files will be stored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "msixPackageSource": {
+          "$ref": "#/definitions/MsixPackageSource",
+          "description": "The source of the MSIX package."
+        },
+        "outputFileType": {
+          "$ref": "#/definitions/OutputFileType",
+          "description": "The output file type for the expanded MSIX file."
+        },
+        "hostpoolArmPath": {
+          "type": "string",
+          "description": "The ARM path of the host pool is used to route the request to the appropriate region."
+        }
+      }
+    },
+    "ExpandMsixFileResult": {
+      "type": "object",
+      "description": "Result of expanding MSIX files.",
+      "properties": {
+        "successes": {
+          "type": "array",
+          "description": "List of successfully expanded files.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failures": {
+          "type": "array",
+          "description": "List of files that failed to expand.",
+          "items": {
+            "$ref": "#/definitions/ExpandMsixFileFailure"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
     "ExpandMsixImage": {
       "type": "object",
       "description": "Represents the definition of contents retrieved after expanding the MSIX Image.",
@@ -8836,6 +9019,42 @@
         }
       }
     },
+    "MsixPackageSource": {
+      "type": "string",
+      "description": "The source of the MSIX package.",
+      "enum": [
+        "MicrosoftStore",
+        "Winget",
+        "PrivateWPMRepo",
+        "CustomerInput"
+      ],
+      "x-ms-enum": {
+        "name": "MsixPackageSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftStore",
+            "value": "MicrosoftStore",
+            "description": "Package sourced from Microsoft Store."
+          },
+          {
+            "name": "Winget",
+            "value": "Winget",
+            "description": "Package sourced from Winget."
+          },
+          {
+            "name": "PrivateWPMRepo",
+            "value": "PrivateWPMRepo",
+            "description": "Package sourced from private WPM repo."
+          },
+          {
+            "name": "CustomerInput",
+            "value": "CustomerInput",
+            "description": "Package sourced from customer input."
+          }
+        ]
+      }
+    },
     "NetworkInfoPatchProperties": {
       "type": "object",
       "description": "Network information.",
@@ -8877,6 +9096,30 @@
           "$ref": "#/definitions/ServiceSpecification",
           "description": "Service specification payload"
         }
+      }
+    },
+    "OutputFileType": {
+      "type": "string",
+      "description": "The output file type for the expanded MSIX file.",
+      "enum": [
+        "CIM",
+        "VHDX"
+      ],
+      "x-ms-enum": {
+        "name": "OutputFileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CIM",
+            "value": "CIM",
+            "description": "CIM file format."
+          },
+          {
+            "name": "VHDX",
+            "value": "VHDX",
+            "description": "VHDX file format."
+          }
+        ]
       }
     },
     "PersonalDesktopAssignmentType": {
