@@ -2,16 +2,19 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
 /** A SandboxGroup resource, representing a group of sandboxes that share configuration defaults and quotas. */
+@added(Versions.v2026_07_01)
 model SandboxGroup is TrackedResource<SandboxGroupProperties> {
   ...ResourceNameParameter<
     Resource = SandboxGroup,
@@ -22,6 +25,7 @@ model SandboxGroup is TrackedResource<SandboxGroupProperties> {
 }
 
 /** SandboxGroup resource specific properties. */
+@added(Versions.v2026_07_01)
 model SandboxGroupProperties {
   /** The resource ID of the Azure Container Apps environment to link to the sandbox group. A sandbox group can be linked after creation, but the link cannot then be changed or removed. For subsequent create-or-update (PUT) requests, specify the same environment ID; omitting or changing it returns 409 Conflict. Omitting it from an update (PATCH) request leaves the existing link unchanged. */
   environmentId?: armResourceIdentifier<[
@@ -40,6 +44,7 @@ model SandboxGroupProperties {
 }
 
 /** Provisioning state of the SandboxGroup. */
+@added(Versions.v2026_07_01)
 @lroStatus
 union SandboxGroupProvisioningState {
   string,
@@ -55,6 +60,7 @@ union SandboxGroupProvisioningState {
   Deleting: "Deleting",
 }
 
+@added(Versions.v2026_07_01)
 @armResourceOperations
 interface SandboxGroups {
   /** Get the properties of a SandboxGroup. */
@@ -84,6 +90,7 @@ interface SandboxGroups {
 }
 
 /** A SandboxGroup resource for use in patch requests. */
+@added(Versions.v2026_07_01)
 model SandboxGroupPatch {
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are defined as an open key/value map per ARM contract."
@@ -94,6 +101,7 @@ model SandboxGroupPatch {
 }
 
 /** SandboxGroup resource specific properties for patch requests. */
+@added(Versions.v2026_07_01)
 model SandboxGroupPatchProperties {
   ...PickProperties<SandboxGroupProperties, "environmentId">;
 }

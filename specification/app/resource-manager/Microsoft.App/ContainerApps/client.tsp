@@ -42,6 +42,16 @@ namespace Customizations;
 );
 @@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
 @@clientName(
+  CheckMigrationEligibilityRequest,
+  "CheckMigrationEligibilityContent",
+  "csharp"
+);
+@@clientName(
+  CheckMigrationEligibilityResponse,
+  "CheckMigrationEligibilityResult",
+  "csharp"
+);
+@@clientName(
   RuntimeJavaJavaAgentLogging.loggerSettings,
   "LoggerSettings",
   "csharp"
