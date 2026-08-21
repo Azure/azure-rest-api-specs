@@ -693,15 +693,6 @@
             "name"
           ]
         },
-        "retryPolicy": {
-          "$ref": "#/definitions/ClusterMigrationAgentRetryPolicy",
-          "description": "The policy applied when a migration stage fails."
-        },
-        "rollbackOnFailure": {
-          "type": "boolean",
-          "description": "Indicates whether the migration automatically rolls back when a stage fails.",
-          "default": false
-        },
         "startMode": {
           "type": "string",
           "description": "Controls how the migration is started once provisioning completes.",
@@ -767,6 +758,7 @@
         }
       },
       "required": [
+        "migrationId",
         "sourceClusterResourceId",
         "targetClusterResourceId",
         "nodeTypes"
@@ -820,31 +812,6 @@
         ]
       },
       "readOnly": true
-    },
-    "ClusterMigrationAgentRetryPolicy": {
-      "type": "object",
-      "description": "Describes how a failed migration stage is retried before the migration is considered failed.",
-      "properties": {
-        "maxRetry": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of times a stage is retried before the migration fails.",
-          "default": 10,
-          "minimum": 0
-        },
-        "retryInterval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The initial interval waited between two attempts of the same stage, in ISO 8601 duration format.",
-          "default": "PT1M"
-        },
-        "maxRetryInterval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The upper bound applied to the retry interval as it backs off, in ISO 8601 duration format.",
-          "default": "PT1H"
-        }
-      }
     },
     "ClusterMigrationAgentStage": {
       "type": "object",

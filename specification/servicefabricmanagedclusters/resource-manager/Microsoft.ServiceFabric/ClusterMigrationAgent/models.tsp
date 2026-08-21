@@ -146,27 +146,6 @@ model ClusterMigrationAgentNodeTypeDescription {
 }
 
 /**
- * Describes how a failed migration stage is retried before the migration is considered failed.
- */
-model ClusterMigrationAgentRetryPolicy {
-  /**
-   * The maximum number of times a stage is retried before the migration fails.
-   */
-  @minValue(0)
-  maxRetry?: int32 = 10;
-
-  /**
-   * The initial interval waited between two attempts of the same stage, in ISO 8601 duration format.
-   */
-  retryInterval?: duration = duration.fromISO("PT1M");
-
-  /**
-   * The upper bound applied to the retry interval as it backs off, in ISO 8601 duration format.
-   */
-  maxRetryInterval?: duration = duration.fromISO("PT1H");
-}
-
-/**
  * The progress of a migration stage in one direction.
  */
 model ClusterMigrationAgentStageProgress {
@@ -259,7 +238,7 @@ model ClusterMigrationAgentProperties {
    * The service generated identifier of the migration.
    */
   @visibility(Lifecycle.Read)
-  migrationId?: string;
+  migrationId: string;
 
   /**
    * The resource identifier of the classic Service Fabric cluster to migrate from. The source and the
@@ -292,16 +271,6 @@ model ClusterMigrationAgentProperties {
   @identifiers(#["name"])
   @minItems(1)
   nodeTypes: ClusterMigrationAgentNodeTypeDescription[];
-
-  /**
-   * The policy applied when a migration stage fails.
-   */
-  retryPolicy?: ClusterMigrationAgentRetryPolicy;
-
-  /**
-   * Indicates whether the migration automatically rolls back when a stage fails.
-   */
-  rollbackOnFailure?: boolean = false;
 
   /**
    * Controls how the migration is started once provisioning completes.
