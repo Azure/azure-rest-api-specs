@@ -7,6 +7,7 @@ import "./common.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -25,6 +26,18 @@ model Scenario is Azure.ResourceManager.ProxyResource<ScenarioProperties> {
 
 /**
  * Model that represents the properties of the scenario.
+ *
+ * A scenario's structure comes from exactly one of two sources, and they are
+ * mutually exclusive:
+ *
+ * - **Template-based**: `createdFrom` references a scenario template version,
+ *   and that template is the authoritative source for the scenario's structure.
+ *   Inline `parameters` and `actions` are not used.
+ * - **Inline**: `createdFrom` is absent, and the scenario's structure is taken
+ *   from the `parameters` and `actions` supplied in the request.
+ *
+ * Supplying neither source is rejected. This constraint cannot be expressed in
+ * the schema and is enforced at request validation.
  */
 model ScenarioProperties {
   /**
@@ -36,13 +49,14 @@ model ScenarioProperties {
   /**
    * Resource ID of the template version this scenario was created from (optional).
    */
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   createdFrom?: string;
 
   /**
-   * Version of the scenario.
+   * Version of the scenario, supplied by the author. Defaults to `1.0` when not
+   * supplied on create. This is the scenario's own version and is independent of
+   * the version of any template it was created from.
    */
-  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
@@ -51,17 +65,25 @@ model ScenarioProperties {
   description?: string;
 
   /**
-   * Parameter definitions for the scenario.
+   * Parameter definitions for the scenario. Used as the scenario's parameter
+   * definitions when `createdFrom` is not supplied; not used when it is,
+   * because the referenced template is then the authoritative source for the
+   * scenario's structure.
    */
+  @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @identifiers(#["name"])
-  parameters: ScenarioParameter[];
+  parameters?: ScenarioParameter[];
 
   /**
-   * Array of actions that define the scenario's orchestration.
+   * Array of actions that define the scenario's orchestration. Used as the
+   * scenario's actions when `createdFrom` is not supplied; not used when it is,
+   * because the referenced template is then the authoritative source for the
+   * scenario's structure. When supplied, at least one action must be present.
    */
+  @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @minItems(1)
   @identifiers(#["name"])
-  actions: ScenarioAction[];
+  actions?: ScenarioAction[];
 
   /**
    * The recommendation information for this scenario.
@@ -99,6 +121,61 @@ model ScenarioParameter {
    * Description of the parameter.
    */
   description?: string;
+
+  /**
+   * Format validation applied to the parameter's value, and examples of values that satisfy it.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  format?: ScenarioParameterFormat;
+}
+
+/**
+ * Model that represents the format validation applied to a scenario parameter's value.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioParameterFormat {
+  /**
+   * The built-in format the value is validated against.
+   */
+  formatType?: ParameterFormatType;
+
+  /**
+   * Human-readable examples of values that satisfy the format.
+   */
+  examples?: string[];
+}
+
+/**
+ * Enum of the built-in formats a scenario parameter's value can be validated against.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union ParameterFormatType {
+  string,
+
+  /**
+   * The value must be an Azure resource ID.
+   */
+  AzureResourceId: "AzureResourceId",
+
+  /**
+   * The value must be an Azure region name.
+   */
+  AzureRegion: "AzureRegion",
+
+  /**
+   * The value must be an Azure availability zone.
+   */
+  AzureZone: "AzureZone",
+
+  /**
+   * The value must be an ISO 8601 duration.
+   */
+  Duration: "Duration",
+
+  /**
+   * The value must be well-formed JSON.
+   */
+  Json: "Json",
 }
 
 /**
