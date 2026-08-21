@@ -673,7 +673,7 @@ model VoiceAgentServerEventResponseTextDone {
 model VoiceAgentServerEventSessionCreated {
   ...OmitProperties<OpenAI.RealtimeServerEventSessionCreated, "session">;
 
-  @doc("The session-scoped conversation id. When present, the same value is used in `session.created`, `response.created`, and `response.done`, regardless of whether conversation persistence is enabled.")
+  @doc("The session-scoped conversation id. When present, the same value is used in `session.created`, `response.created`, and `response.done`.")
   conversation_id?: string;
 
   @doc("The initial effective voice-agent session configuration.")
