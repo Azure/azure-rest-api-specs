@@ -348,6 +348,51 @@ describe("update labels", () => {
         targetBranch: "main",
       },
     },
+    {
+      description:
+        "Should add data-plane-review-requested for a data-plane PR with a new API version",
+      existingLabels: ["other-label"],
+      expectedLabelsToAdd: [
+        "TypeSpec",
+        "data-plane",
+        "new-api-version",
+        "data-plane-review-requested",
+      ],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
+      description:
+        "Shouldn't add data-plane-review-requested when the review is already signed off",
+      existingLabels: ["other-label", "data-plane-review-signoff"],
+      expectedLabelsToAdd: ["TypeSpec", "data-plane", "new-api-version"],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",

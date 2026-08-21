@@ -9,7 +9,7 @@ import { ALLOWED_BOT_LOGINS } from "../protected-labels/check-label.js";
  * (see `.github/workflows/src/summarize-checks/labelling.js`), so intake, assignment, and
  * the gate share one name. Kept as a constant so it can be changed in one place.
  */
-export const TRIGGER_LABEL = "APIStewardshipBoard-ReviewRequested";
+export const TRIGGER_LABEL = "data-plane-review-requested";
 
 /** Path (relative to repo root) to the protected-labels config that lists the sign-off approvers. */
 const PROTECTED_LABELS_PATH = ".github/protected-labels.yml";
@@ -19,7 +19,7 @@ const PROTECTED_LABELS_PATH = ".github/protected-labels.yml";
  * fulfilled {@link TRIGGER_LABEL}. {@link TRIGGER_LABEL} is machine-applied and not gated.
  * Its authorized-users list in `protected-labels.yml` also gates who may apply it.
  */
-export const SIGNOFF_LABEL = "APIStewardshipBoard-SignedOff";
+export const SIGNOFF_LABEL = "data-plane-review-signoff";
 
 /**
  * GitHub team requested as reviewer on intake. The team has code-review auto-assignment

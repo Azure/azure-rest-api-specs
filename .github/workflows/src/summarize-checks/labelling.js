@@ -487,6 +487,17 @@ export function processImpactAssessment(labelContext, impactAssessment) {
   const dataplaneLabel = new Label("data-plane", labelContext.present);
   dataplaneLabel.shouldBePresent = impactAssessment.dataPlaneRequired || false;
 
+  // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
+  // data-plane PR introduces a new API version (i.e. when both `data-plane` and
+  // `new-api-version` would be present). This single label is what the merge gate, native
+  // reviewer assignment, and the review queue all key off. See rulesPri0dataPlane below and
+  // .github/workflows/src/data-plane-review/assign-reviewers.js (TRIGGER_LABEL).
+  const dataPlaneReviewRequestedLabel = new Label(
+    "data-plane-review-requested",
+    labelContext.present,
+  );
+  dataPlaneReviewRequestedLabel.shouldBePresent = false;
+
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
   typeSpecLabel.shouldBePresent = impactAssessment.typeSpecChanged || false;
 
@@ -533,10 +544,18 @@ export function processImpactAssessment(labelContext, impactAssessment) {
   let specReviewApplies = !impactAssessment.isDraft && isBranchInScopeOfSpecReview;
   if (specReviewApplies) {
     if (impactAssessment.isNewApiVersion) {
-      // Note that in case of data-plane PRs, the addition of this label will result
-      // in API stewardship board review being required.
-      // See requiredLabelsRules.ts.
       newApiVersionLabel.shouldBePresent = true;
+
+      // For data-plane PRs, a new API version requires API stewardship review. Apply the
+      // intake label unless the review has already been signed off: assign-reviewers.js
+      // clears this label on sign-off, and re-adding it here would re-request the reviewer
+      // team. See rulesPri0dataPlane below.
+      if (
+        impactAssessment.dataPlaneRequired &&
+        !labelContext.present.has("data-plane-review-signoff")
+      ) {
+        dataPlaneReviewRequestedLabel.shouldBePresent = true;
+      }
     }
 
     armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
@@ -550,6 +569,7 @@ export function processImpactAssessment(labelContext, impactAssessment) {
   }
 
   dataplaneLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  dataPlaneReviewRequestedLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   resourceManagerLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
@@ -823,19 +843,17 @@ const rulesPri0dataPlane = [
   },
   // For context on this rule see https://github.com/Azure/azure-sdk-tools/issues/6184
   // and https://github.com/Azure/azure-sdk-tools/issues/6612
-  // This rule says:
   //
-  //   IF (the label APIStewardshipBoard-ReviewRequested is present)
-  //   OR (both labels data-plane AND new-api-version are present),
-  //   THEN (require label APIStewardshipBoard-SignedOff)
+  //   IF the label data-plane-review-requested is present,
+  //   THEN require the label data-plane-review-signoff.
   //
-  // TODO: need to implement, in the prSummary.ts, addition of the APIStewardshipBoard-ReviewRequested label
-  // Once done, remove "data-plane" and "new-api-version" from here.
+  // data-plane-review-requested is auto-applied in processImpactAssessment above whenever a
+  // data-plane PR introduces a new API version, so the previous data-plane + new-api-version
+  // fallback prerequisite is no longer needed.
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["APIStewardshipBoard-ReviewRequested"],
-    allPrerequisiteLabels: ["data-plane", "new-api-version"],
-    anyRequiredLabels: ["APIStewardshipBoard-SignedOff"],
+    anyPrerequisiteLabels: ["data-plane-review-requested"],
+    anyRequiredLabels: ["data-plane-review-signoff"],
     troubleshootingGuide:
       `Your PR requires an API stewardship board review as it introduces a new API version (label: <code>new-api-version</code>). ` +
       `Send an email to ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link for offline review.`,
