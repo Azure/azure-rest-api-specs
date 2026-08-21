@@ -1,0 +1,97 @@
+{
+  "operationId": "HealthReportIngestion_IngestHealthReport",
+  "title": "Ingest an entity health report",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview",
+    "entityName": "frontend-web-app",
+    "body": {
+      "signalName": "request-latency-p95",
+      "healthState": "Degraded",
+      "value": 240,
+      "evaluationRules": {
+        "degradedRule": {
+          "operator": "GreaterThan",
+          "threshold": 200
+        },
+        "unhealthyRule": {
+          "operator": "GreaterThanOrEqual",
+          "threshold": 500
+        }
+      },
+      "expiresInMinutes": 60,
+      "additionalContext": "p95 latency exceeded the degraded threshold."
+    }
+  },
+  "responses": {
+    "202": {},
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidHealthReport"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidHealthReport",
+          "message": "The health report payload is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "HealthModelNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "HealthModelNotFound",
+          "message": "The requested health model was not found."
+        }
+      }
+    },
+    "413": {
+      "headers": {
+        "x-ms-error-code": "PayloadTooLarge"
+      },
+      "body": {
+        "error": {
+          "code": "PayloadTooLarge",
+          "message": "The health report payload exceeds 32 KiB."
+        }
+      }
+    },
+    "415": {
+      "headers": {
+        "x-ms-error-code": "UnsupportedMediaType"
+      },
+      "body": {
+        "error": {
+          "code": "UnsupportedMediaType",
+          "message": "The request content type is not supported."
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": "60",
+        "x-ms-error-code": "TooManyRequests"
+      },
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Too many health reports were submitted."
+        }
+      }
+    },
+    "503": {
+      "headers": {
+        "Retry-After": "60",
+        "x-ms-error-code": "ServiceUnavailable"
+      },
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The health report ingestion service is temporarily unavailable."
+        }
+      }
+    }
+  }
+}
