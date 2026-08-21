@@ -1,6 +1,14 @@
 # Foundry data-plane TypeSpec
 
-This folder contains the TypeSpec for all data-plane REST APIs of the Foundry service.
+> see https://aka.ms/autorest
+
+This folder contains the TypeSpec sources for all data-plane REST APIs of the Microsoft Foundry service. The spec is authored in TypeSpec (see `main.tsp` and the `src/` tree); OpenAPI 3 documents under `openapi3/` are generated outputs. SDKs are generated directly from TypeSpec via `tspconfig.yaml`, not from this AutoRest configuration.
+
+## AutoRest configuration
+
+``` yaml
+openapi-type: data-plane
+```
 
 ## Contributing
 
