@@ -13,6 +13,7 @@ import { MultipleNewApiVersionsRule } from "./rules/multiple-new-api-versions.ts
 import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
+import { StaleApiVersionPinRule } from "./rules/stale-api-version-pin.ts";
 import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -122,6 +123,7 @@ export async function main() {
     new FormatRule(),
     new SdkTspConfigValidationRule(),
     new MultipleNewApiVersionsRule(),
+    new StaleApiVersionPinRule(),
   ];
 
   const result = await runRules(rules, absolutePath, suppressions);
