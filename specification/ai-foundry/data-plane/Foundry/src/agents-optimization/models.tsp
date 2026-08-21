@@ -224,7 +224,7 @@ model AgentOptimizationConfig {
 @doc("Tuning knobs for an optimization job.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
 model AgentOptimizationOptions {
-  @doc("Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. Default: 2.")
+  @doc("Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. If omitted, the service defaults to 2.")
   @minValue(1)
   @maxValue(20)
   max_candidates?: int32 = 2;
@@ -238,17 +238,17 @@ model AgentOptimizationOptions {
   @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
 
-  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. Default: 5.")
+  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. If omitted, the service defaults to 5.")
   @minValue(1)
   @maxValue(50)
   max_stalls?: int32 = 5;
 
-  @doc("Number of items sampled per reflective minibatch. Default: 3.")
+  @doc("Number of items sampled per reflective minibatch. If omitted, the service defaults to 3.")
   @minValue(1)
   @maxValue(100)
   reflection_minibatch_size?: int32 = 3;
 
-  @doc("Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). Default: 1 (sequential).")
+  @doc("Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). If omitted, the service defaults to 1 (sequential).")
   @minValue(1)
   @maxValue(10)
   max_concurrent_agent_runs?: int32 = 1;
@@ -394,8 +394,9 @@ model AgentOptimizationJobProgress {
   @doc("Best score observed so far across all candidates.")
   best_score?: float64;
 
-  @doc("Wall-clock time elapsed in seconds since the job began executing.")
-  elapsed_seconds: float64;
+  @doc("Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.")
+  @encode(DurationKnownEncoding.seconds, float64)
+  elapsed_seconds: duration;
 
   @doc("Metadata for the candidate currently under evaluation. Dropped on terminal states.")
   in_progress_candidate?: AgentOptimizationInProgressCandidateInfo;
@@ -431,8 +432,9 @@ model AgentOptimizationCandidate {
   @doc("Average total tokens consumed per task.")
   avg_tokens?: float64;
 
-  @doc("Average end-to-end latency per task in milliseconds.")
-  avg_latency_ms?: float64;
+  @doc("Average end-to-end latency per task. Wire representation: milliseconds as a float.")
+  @encode(DurationKnownEncoding.milliseconds, float64)
+  avg_latency_ms?: duration;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   eval_id?: string;
@@ -503,14 +505,17 @@ model AgentOptimizationLatencyUsageEntry {
   @doc("Model deployment name that served the calls.")
   `model`: string;
 
-  @doc("Average per-call latency in milliseconds.")
-  avg_latency_ms: float64;
+  @doc("Average per-call latency. Wire representation: milliseconds as a float.")
+  @encode(DurationKnownEncoding.milliseconds, float64)
+  avg_latency_ms: duration;
 
-  @doc("p50 (median) per-call latency in milliseconds. Omitted when the sample was too small to compute.")
-  p50_latency_ms?: float64;
+  @doc("p50 (median) per-call latency. Omitted when the sample was too small to compute. Wire representation: milliseconds as a float.")
+  @encode(DurationKnownEncoding.milliseconds, float64)
+  p50_latency_ms?: duration;
 
-  @doc("p95 per-call latency in milliseconds. Omitted when the sample was too small to compute.")
-  p95_latency_ms?: float64;
+  @doc("p95 per-call latency. Omitted when the sample was too small to compute. Wire representation: milliseconds as a float.")
+  @encode(DurationKnownEncoding.milliseconds, float64)
+  p95_latency_ms?: duration;
 
   @doc("Total number of calls contributing to this entry.")
   call_count: int64;
