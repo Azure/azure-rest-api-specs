@@ -13,12 +13,12 @@
       "description": "Updated precheck instructions.",
       "dependsOn": [
         {
-          "mode": "MigrationEntity",
+          "waitFor": "MappedEntities",
           "stepId": "step-00",
-          "entityMap": [
+          "entityPairs": [
             {
-              "from": "me1",
-              "to": "me2"
+              "dependentEntity": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/migrateProjects/MyMigrateProject/migrationEntities/me1",
+              "waitsFor": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/migrateProjects/MyMigrateProject/migrationEntities/me2"
             }
           ]
         }

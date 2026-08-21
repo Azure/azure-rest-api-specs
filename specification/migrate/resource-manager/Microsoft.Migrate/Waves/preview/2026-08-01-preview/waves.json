@@ -1842,13 +1842,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactDownloadUrlRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RunbookExecutionDownloadUrlResponse"
+              "$ref": "#/definitions/ArtifactDownloadUrlResponse"
             }
           },
           "default": {
@@ -1865,9 +1874,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/generateInputDownloadUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/generateUploadUrl": {
       "post": {
-        "operationId": "RunbookExecutions_GenerateInputDownloadUrl",
+        "operationId": "RunbookExecutions_GenerateUploadUrl",
         "tags": [
           "RunbookExecutions"
         ],
@@ -1905,13 +1914,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactUploadUrlRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RunbookExecutionInputDownloadUrlResponse"
+              "$ref": "#/definitions/ArtifactUploadUrlResponse"
             }
           },
           "default": {
@@ -1922,71 +1940,8 @@
           }
         },
         "x-ms-examples": {
-          "RunbookExecutions_GenerateInputDownloadUrl_MaximumSet": {
-            "$ref": "./examples/RunbookExecutions_GenerateInputDownloadUrl_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/executions/{runbookExecutionName}/generateInputUploadUrl": {
-      "post": {
-        "operationId": "RunbookExecutions_GenerateInputUploadUrl",
-        "tags": [
-          "RunbookExecutions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Migrate Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "runbookName",
-            "in": "path",
-            "description": "Runbook ARM name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "runbookExecutionName",
-            "in": "path",
-            "description": "Runbook execution ARM name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RunbookExecutionInputUploadUrlResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RunbookExecutions_GenerateInputUploadUrl_MaximumSet": {
-            "$ref": "./examples/RunbookExecutions_GenerateInputUploadUrl_MaximumSet_Gen.json"
+          "RunbookExecutions_GenerateUploadUrl_MaximumSet": {
+            "$ref": "./examples/RunbookExecutions_GenerateUploadUrl_MaximumSet_Gen.json"
           }
         }
       }
@@ -2261,9 +2216,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateInputUploadUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateDownloadUrl": {
       "post": {
-        "operationId": "Runbooks_GenerateInputUploadUrl",
+        "operationId": "Runbooks_GenerateDownloadUrl",
         "tags": [
           "Runbooks"
         ],
@@ -2293,13 +2248,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactDownloadUrlRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RunbookInputUploadUrlResponse"
+              "$ref": "#/definitions/ArtifactDownloadUrlResponse"
             }
           },
           "default": {
@@ -2310,8 +2274,72 @@
           }
         },
         "x-ms-examples": {
-          "Runbooks_GenerateInputUploadUrl_MaximumSet": {
-            "$ref": "./examples/Runbooks_GenerateInputUploadUrl_MaximumSet_Gen.json"
+          "Runbooks_GenerateDownloadUrl_MaximumSet": {
+            "$ref": "./examples/Runbooks_GenerateDownloadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/runbooks/{runbookName}/generateUploadUrl": {
+      "post": {
+        "operationId": "Runbooks_GenerateUploadUrl",
+        "tags": [
+          "Runbooks"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "description": "Runbook ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactUploadUrlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactUploadUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runbooks_GenerateUploadUrl_MaximumSet": {
+            "$ref": "./examples/Runbooks_GenerateUploadUrl_MaximumSet_Gen.json"
           }
         }
       }
@@ -3344,6 +3372,153 @@
       },
       "required": [
         "query"
+      ]
+    },
+    "ArtifactDirectoryDownloadUrlRequest": {
+      "type": "object",
+      "description": "Request payload for downloading an artifact directory.",
+      "properties": {
+        "includeMetadata": {
+          "type": "boolean",
+          "description": "Whether to include artifact metadata in the download.",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactDownloadUrlRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "Directory"
+    },
+    "ArtifactDownloadMode": {
+      "type": "string",
+      "description": "The artifact download mode.",
+      "enum": [
+        "Directory",
+        "File"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactDownloadMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Directory",
+            "value": "Directory",
+            "description": "Downloads an artifact directory."
+          },
+          {
+            "name": "File",
+            "value": "File",
+            "description": "Downloads an artifact file."
+          }
+        ]
+      }
+    },
+    "ArtifactDownloadUrlRequest": {
+      "type": "object",
+      "description": "Base request payload for generating an artifact download URL.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/ArtifactDownloadMode",
+          "description": "Artifact download mode."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
+    },
+    "ArtifactDownloadUrlResponse": {
+      "type": "object",
+      "description": "Artifact download URL response.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/ArtifactDownloadMode",
+          "description": "Artifact download mode."
+        },
+        "artifactName": {
+          "type": "string",
+          "description": "Name of the artifact."
+        },
+        "path": {
+          "type": "string",
+          "description": "Downloaded directory or file path."
+        },
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for downloading artifact content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the download URL."
+        }
+      },
+      "required": [
+        "mode",
+        "artifactName",
+        "path",
+        "downloadUrl",
+        "expiresAt"
+      ]
+    },
+    "ArtifactFileDownloadUrlRequest": {
+      "type": "object",
+      "description": "Request payload for downloading an artifact file.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path of the artifact file to download."
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactDownloadUrlRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "File"
+    },
+    "ArtifactUploadUrlRequest": {
+      "type": "object",
+      "description": "Request payload for generating an artifact upload URL.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path of the artifact content to upload."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "ArtifactUploadUrlResponse": {
+      "type": "object",
+      "description": "Artifact upload URL response.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path of the artifact content to upload."
+        },
+        "uploadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for uploading artifact content."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time for the upload URL."
+        }
+      },
+      "required": [
+        "path",
+        "uploadUrl",
+        "expiresAt"
       ]
     },
     "AzureResourceProperties": {
@@ -4672,66 +4847,6 @@
         "action"
       ]
     },
-    "RunbookExecutionDownloadUrlResponse": {
-      "type": "object",
-      "description": "Runbook execution download URL response.",
-      "properties": {
-        "downloadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Download URL for runbook execution artifacts."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration time for the download URL."
-        }
-      },
-      "required": [
-        "downloadUrl",
-        "expiresAt"
-      ]
-    },
-    "RunbookExecutionInputDownloadUrlResponse": {
-      "type": "object",
-      "description": "Runbook execution input download URL response.",
-      "properties": {
-        "downloadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Download URL for runbook execution input content."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration time for the download URL."
-        }
-      },
-      "required": [
-        "downloadUrl",
-        "expiresAt"
-      ]
-    },
-    "RunbookExecutionInputUploadUrlResponse": {
-      "type": "object",
-      "description": "Runbook execution input upload URL response.",
-      "properties": {
-        "uploadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Upload URL for runbook execution input content."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration time for the upload URL."
-        }
-      },
-      "required": [
-        "uploadUrl",
-        "expiresAt"
-      ]
-    },
     "RunbookExecutionListResult": {
       "type": "object",
       "description": "The response of a RunbookExecution list operation.",
@@ -4813,26 +4928,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "RunbookInputUploadUrlResponse": {
-      "type": "object",
-      "description": "Runbook input upload URL response.",
-      "properties": {
-        "uploadUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Upload URL for runbook input content."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration time for the upload URL."
-        }
-      },
-      "required": [
-        "uploadUrl",
-        "expiresAt"
       ]
     },
     "RunbookListResult": {
@@ -5015,70 +5110,93 @@
       "type": "object",
       "description": "Dependency relationship for a runbook step.",
       "properties": {
-        "mode": {
-          "$ref": "#/definitions/RunbookStepDependencyMode",
-          "description": "Dependency mode between source and target steps."
+        "waitFor": {
+          "$ref": "#/definitions/RunbookStepDependencyWaitFor",
+          "description": "What must complete in the target step before the dependent step can run."
         },
         "stepId": {
           "type": "string",
           "description": "Target step identifier this step depends on."
         },
-        "entityMap": {
+        "entityPairs": {
           "type": "array",
-          "description": "Entity mapping for migration entity mode dependencies.",
+          "description": "Explicit migration entity pairs for mapped entity dependencies.",
           "items": {
-            "$ref": "#/definitions/RunbookStepEntityMapEntry"
+            "$ref": "#/definitions/RunbookStepEntityPair"
           },
           "x-ms-identifiers": [
-            "from",
-            "to"
+            "dependentEntity",
+            "waitsFor"
           ]
         }
       },
       "required": [
+        "waitFor",
         "stepId"
       ]
     },
-    "RunbookStepDependencyMode": {
+    "RunbookStepDependencyWaitFor": {
       "type": "string",
-      "description": "Dependency mode between runbook steps.",
+      "description": "What must complete in a target step before the dependent step can run.",
       "enum": [
         "Step",
-        "MigrationEntity"
+        "Entity",
+        "MappedEntities"
       ],
       "x-ms-enum": {
-        "name": "RunbookStepDependencyMode",
+        "name": "RunbookStepDependencyWaitFor",
         "modelAsString": true,
         "values": [
           {
             "name": "Step",
             "value": "Step",
-            "description": "Step-level dependency."
+            "description": "Waits for the entire target step to complete."
           },
           {
-            "name": "MigrationEntity",
-            "value": "MigrationEntity",
-            "description": "Migration entity-level dependency."
+            "name": "Entity",
+            "value": "Entity",
+            "description": "Waits for the same entity in the target step."
+          },
+          {
+            "name": "MappedEntities",
+            "value": "MappedEntities",
+            "description": "Waits according to explicit entity pairs."
           }
         ]
       }
     },
-    "RunbookStepEntityMapEntry": {
+    "RunbookStepEntityPair": {
       "type": "object",
-      "description": "Entity mapping entry for runbook step dependency.",
+      "description": "Migration entity pair for a mapped runbook step dependency.",
       "properties": {
-        "from": {
+        "dependentEntity": {
           "type": "string",
-          "description": "Source migration entity identifier."
+          "format": "arm-id",
+          "description": "Migration entity identifier in the dependent step.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+              }
+            ]
+          }
         },
-        "to": {
+        "waitsFor": {
           "type": "string",
-          "description": "Target migration entity identifier."
+          "format": "arm-id",
+          "description": "Migration entity identifier in the target step.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+              }
+            ]
+          }
         }
       },
       "required": [
-        "from",
-        "to"
+        "dependentEntity",
+        "waitsFor"
       ]
     },
     "RunbookStepRef": {
@@ -5149,20 +5267,21 @@
         "stepIds": {
           "type": "array",
           "description": "Runbook step IDs to move to the new workstream.",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
         },
-        "newWorkstreamName": {
+        "displayName": {
           "type": "string",
-          "description": "Name of the new workstream.",
+          "description": "Display name for the new workstream.",
           "maxLength": 64
         }
       },
       "required": [
         "sourceWorkstreamId",
         "stepIds",
-        "newWorkstreamName"
+        "displayName"
       ]
     },
     "RunbookWorkstreamsMergeRequest": {
@@ -5172,19 +5291,20 @@
         "workstreamIds": {
           "type": "array",
           "description": "Workstream IDs to merge.",
+          "minItems": 2,
           "items": {
             "type": "string"
           }
         },
-        "newWorkstreamName": {
+        "displayName": {
           "type": "string",
-          "description": "New workstream name for the merged output.",
+          "description": "Display name for the merged workstream.",
           "maxLength": 64
         }
       },
       "required": [
         "workstreamIds",
-        "newWorkstreamName"
+        "displayName"
       ]
     },
     "ServerMigrationSpecificProperties": {

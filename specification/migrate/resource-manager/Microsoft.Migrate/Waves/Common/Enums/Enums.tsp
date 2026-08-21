@@ -40,3 +40,15 @@ union PlanSource {
 
   string,
 }
+
+@doc("The artifact download mode.")
+@added(ApiVersions.v2026_08_01_preview)
+union ArtifactDownloadMode {
+  @doc("Downloads an artifact directory.")
+  Directory: "Directory",
+
+  @doc("Downloads an artifact file.")
+  File: "File",
+
+  string,
+}

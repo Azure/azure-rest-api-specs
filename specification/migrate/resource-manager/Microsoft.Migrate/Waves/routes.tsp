@@ -15,6 +15,7 @@ import "./WebModels/Tasks/Tasks.tsp";
 import "./WebModels/Tasks/TaskSummary.tsp";
 import "./WebModels/Runbook/Runbook.tsp";
 import "./WebModels/RunbookExecution/RunbookExecution.tsp";
+import "./Common/ArmModels/Artifact.tsp";
 import "./Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
@@ -184,11 +185,19 @@ interface Runbooks {
   regenerate is ArmResourceActionAsync<Runbook, void, Runbook>;
 
   @added(ApiVersions.v2026_08_01_preview)
-  @action("generateInputUploadUrl")
-  generateInputUploadUrl is ArmResourceActionSync<
+  @action("generateUploadUrl")
+  generateUploadUrl is ArmResourceActionSync<
     Runbook,
-    void,
-    RunbookInputUploadUrlResponse
+    ArtifactUploadUrlRequest,
+    ArtifactUploadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @action("generateDownloadUrl")
+  generateDownloadUrl is ArmResourceActionSync<
+    Runbook,
+    ArtifactDownloadUrlRequest,
+    ArtifactDownloadUrlResponse
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
@@ -250,24 +259,16 @@ interface RunbookExecutions {
   @action("generateDownloadUrl")
   generateDownloadUrl is ArmResourceActionSync<
     RunbookExecution,
-    void,
-    RunbookExecutionDownloadUrlResponse
+    ArtifactDownloadUrlRequest,
+    ArtifactDownloadUrlResponse
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
-  @action("generateInputUploadUrl")
-  generateInputUploadUrl is ArmResourceActionSync<
+  @action("generateUploadUrl")
+  generateUploadUrl is ArmResourceActionSync<
     RunbookExecution,
-    void,
-    RunbookExecutionInputUploadUrlResponse
-  >;
-
-  @added(ApiVersions.v2026_08_01_preview)
-  @action("generateInputDownloadUrl")
-  generateInputDownloadUrl is ArmResourceActionSync<
-    RunbookExecution,
-    void,
-    RunbookExecutionInputDownloadUrlResponse
+    ArtifactUploadUrlRequest,
+    ArtifactUploadUrlResponse
   >;
 
   @added(ApiVersions.v2026_08_01_preview)

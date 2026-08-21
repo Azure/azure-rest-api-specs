@@ -134,14 +134,17 @@ union RunbookExecutionAction {
   string,
 }
 
-@doc("Dependency mode between runbook steps.")
+@doc("What must complete in a target step before the dependent step can run.")
 @added(ApiVersions.v2026_08_01_preview)
-union RunbookStepDependencyMode {
-  @doc("Step-level dependency.")
+union RunbookStepDependencyWaitFor {
+  @doc("Waits for the entire target step to complete.")
   Step: "Step",
 
-  @doc("Migration entity-level dependency.")
-  MigrationEntity: "MigrationEntity",
+  @doc("Waits for the same entity in the target step.")
+  Entity: "Entity",
+
+  @doc("Waits according to explicit entity pairs.")
+  MappedEntities: "MappedEntities",
 
   string,
 }

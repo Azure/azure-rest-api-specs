@@ -92,14 +92,14 @@ model RunbookStepAddRequest {
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookManualStepAddRequest extends RunbookStepAddRequest {
   @doc("Discriminator for a manual runbook step.")
-  stepRef: "common.manual";
+  stepRef: RunbookStepRef.Manual;
 }
 
 @doc("Request payload for adding an approval runbook step.")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookApprovalStepAddRequest extends RunbookStepAddRequest {
   @doc("Discriminator for an approval runbook step.")
-  stepRef: "common.approval";
+  stepRef: RunbookStepRef.Approval;
 
   @doc("Migration entity Azure resource identifiers associated with this approval step.")
   migrationEntityIds?: armResourceIdentifier<[
@@ -138,36 +138,45 @@ model RunbookStepDeleteRequest {
 @doc("Dependency relationship for a runbook step.")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookStepDependency {
-  @doc("Dependency mode between source and target steps.")
-  mode?: RunbookStepDependencyMode;
+  @doc("What must complete in the target step before the dependent step can run.")
+  waitFor: RunbookStepDependencyWaitFor;
 
   @doc("Target step identifier this step depends on.")
   stepId: string;
 
-  @doc("Entity mapping for migration entity mode dependencies.")
-  @identifiers(#["from", "to"])
-  entityMap?: RunbookStepEntityMapEntry[];
+  @doc("Explicit migration entity pairs for mapped entity dependencies.")
+  @identifiers(#["dependentEntity", "waitsFor"])
+  entityPairs?: RunbookStepEntityPair[];
 }
 
-@doc("Entity mapping entry for runbook step dependency.")
+@doc("Migration entity pair for a mapped runbook step dependency.")
 @added(ApiVersions.v2026_08_01_preview)
-model RunbookStepEntityMapEntry {
-  @doc("Source migration entity identifier.")
-  from: string;
+model RunbookStepEntityPair {
+  @doc("Migration entity identifier in the dependent step.")
+  dependentEntity: armResourceIdentifier<[
+    {
+      type: "Microsoft.Migrate/migrateProjects/migrationEntities";
+    }
+  ]>;
 
-  @doc("Target migration entity identifier.")
-  to: string;
+  @doc("Migration entity identifier in the target step.")
+  waitsFor: armResourceIdentifier<[
+    {
+      type: "Microsoft.Migrate/migrateProjects/migrationEntities";
+    }
+  ]>;
 }
 
 @doc("Request payload for merging runbook workstreams.")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookWorkstreamsMergeRequest {
   @doc("Workstream IDs to merge.")
+  @minItems(2)
   workstreamIds: string[];
 
-  @doc("New workstream name for the merged output.")
+  @doc("Display name for the merged workstream.")
   @maxLength(64)
-  newWorkstreamName: string;
+  displayName: string;
 }
 
 @doc("Request payload for splitting a runbook workstream.")
@@ -177,19 +186,10 @@ model RunbookWorkstreamSplitRequest {
   sourceWorkstreamId: string;
 
   @doc("Runbook step IDs to move to the new workstream.")
+  @minItems(1)
   stepIds: string[];
 
-  @doc("Name of the new workstream.")
+  @doc("Display name for the new workstream.")
   @maxLength(64)
-  newWorkstreamName: string;
-}
-
-@doc("Runbook input upload URL response.")
-@added(ApiVersions.v2026_08_01_preview)
-model RunbookInputUploadUrlResponse {
-  @doc("Upload URL for runbook input content.")
-  uploadUrl: url;
-
-  @doc("Expiration time for the upload URL.")
-  expiresAt: utcDateTime;
+  displayName: string;
 }

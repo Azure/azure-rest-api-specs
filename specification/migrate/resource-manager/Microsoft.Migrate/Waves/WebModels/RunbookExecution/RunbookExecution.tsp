@@ -74,33 +74,3 @@ model RunbookExecutionActionRequest {
     }
   ]>[];
 }
-
-@doc("Runbook execution download URL response.")
-@added(ApiVersions.v2026_08_01_preview)
-model RunbookExecutionDownloadUrlResponse {
-  @doc("Download URL for runbook execution artifacts.")
-  downloadUrl: url;
-
-  @doc("Expiration time for the download URL.")
-  expiresAt: utcDateTime;
-}
-
-@doc("Runbook execution input upload URL response.")
-@added(ApiVersions.v2026_08_01_preview)
-model RunbookExecutionInputUploadUrlResponse {
-  @doc("Upload URL for runbook execution input content.")
-  uploadUrl: url;
-
-  @doc("Expiration time for the upload URL.")
-  expiresAt: utcDateTime;
-}
-
-@doc("Runbook execution input download URL response.")
-@added(ApiVersions.v2026_08_01_preview)
-model RunbookExecutionInputDownloadUrlResponse {
-  @doc("Download URL for runbook execution input content.")
-  downloadUrl: url;
-
-  @doc("Expiration time for the download URL.")
-  expiresAt: utcDateTime;
-}
