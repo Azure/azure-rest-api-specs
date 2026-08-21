@@ -162,6 +162,11 @@ using Microsoft.IoTOperations;
   "csharp"
 );
 
+// Surface the RFC3339 timestamp properties as DateTimeOffset in the C# SDK
+// without changing the wire contract (service still emits/accepts strings).
+@@alternateType(ResourceHealthStatus.lastTransitionTime, utcDateTime, "csharp");
+@@alternateType(ResourceHealthStatus.lastUpdateTime, utcDateTime, "csharp");
+
 @@clientName(
   Versions.`2024-11-01`,
   "$DO_NOT_NORMALIZE$V2024-11-01",
