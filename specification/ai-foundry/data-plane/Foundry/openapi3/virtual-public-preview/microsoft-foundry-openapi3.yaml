@@ -42269,6 +42269,7 @@ components:
         - ExternalAgents=V1Preview
         - DraftAgents=V1Preview
         - VoiceAgents=V1Preview
+        - DigitalWorker=V1Preview
         - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
@@ -42640,6 +42641,12 @@ components:
         agent_endpoint:
           $ref: '#/components/schemas/AgentEndpointConfig'
           description: The endpoint configuration for the agent
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         instance_identity:
           $ref: '#/components/schemas/AgentIdentity'
           description: The instance identity of the agent
@@ -45750,6 +45757,12 @@ components:
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         draft:
           type: boolean
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
@@ -45882,6 +45895,12 @@ components:
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         draft:
           type: boolean
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
@@ -46024,6 +46043,12 @@ components:
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         draft:
           type: boolean
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
@@ -46068,6 +46093,12 @@ components:
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         draft:
           type: boolean
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
@@ -46902,6 +46933,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/Message'
       description: A message authored by a developer to guide the model during evaluation.
+    DigitalWorkerType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - m365
+      description: The type of digital worker.
     Dimension:
       type: object
       required:
@@ -82349,6 +82387,12 @@ components:
         agent_endpoint:
           $ref: '#/components/schemas/AgentEndpointConfig'
           description: The endpoint configuration for the agent
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         instance_identity:
           $ref: '#/components/schemas/AgentIdentity'
           description: The instance identity of the agent
