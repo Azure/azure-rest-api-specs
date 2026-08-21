@@ -7243,6 +7243,9 @@
         "x-ms-examples": {
           "Get a virtual machine scale set lifecycle hook event.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Get.json"
+          },
+          "Get an abandoned virtual machine scale set lifecycle hook event.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Get_Abandoned.json"
           }
         }
       },
@@ -16885,7 +16888,8 @@
       "enum": [
         "Waiting",
         "Approved",
-        "Rejected"
+        "Rejected",
+        "Abandoned"
       ],
       "x-ms-enum": {
         "name": "LifecycleHookActionState",
@@ -16905,6 +16909,11 @@
             "name": "Rejected",
             "value": "Rejected",
             "description": "The lifecycle hook for the target resource is rejected."
+          },
+          {
+            "name": "Abandoned",
+            "value": "Abandoned",
+            "description": "A terminal state that indicates the lifecycle hook for the target resource is no longer relevant & was abandoned by the platform. No further action on the target is expected from the customer."
           }
         ]
       }
@@ -21021,7 +21030,8 @@
       "description": "The states that a virtual machine scale set lifecycle hook event can be in. This is not settable by the customer. It is set only by the platform.",
       "enum": [
         "Active",
-        "Completed"
+        "Completed",
+        "Abandoned"
       ],
       "x-ms-enum": {
         "name": "VMScaleSetLifecycleHookEventState",
@@ -21036,6 +21046,11 @@
             "name": "Completed",
             "value": "Completed",
             "description": "The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state."
+          },
+          {
+            "name": "Abandoned",
+            "value": "Abandoned",
+            "description": "A terminal state that indicates the lifecycle hook event is no longer relevant & was abandoned by the platform. No further action on the event is expected from the customer."
           }
         ]
       }
