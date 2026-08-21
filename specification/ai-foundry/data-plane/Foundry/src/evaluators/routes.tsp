@@ -20,6 +20,57 @@ alias ListEvaluatorVersionsParameters = {
   limit?: int32 = 20;
 };
 
+/** Query parameters for listing evaluator diagnostics grouped by evaluator version. */
+alias ListEvaluatorDiagnosticsParameters = {
+  @doc("The maximum number of evaluator-version groups to return. The default is 20 and the supported range is 1 through 100.")
+  @Http.query
+  @minValue(1)
+  @maxValue(100)
+  limit?: int32 = 20;
+
+  @doc("Sort order for evaluator-version groups and their nested changes. Version groups use evaluator-version ordering; nested changes use `occurred_at` and preserve service write order for ties. The default is `desc`.")
+  @Http.query
+  order?: PageOrder = "desc";
+
+  @doc("An evaluator-version cursor for the next page.")
+  @Http.query
+  @continuationToken
+  after?: string;
+
+  @doc("An evaluator-version cursor for the previous page.")
+  @Http.query
+  before?: string;
+
+  @doc("Inclusive lower bound for the diagnostic change occurrence time.")
+  @Http.query
+  start_time?: utcDateTime;
+
+  @doc("Inclusive upper bound for the diagnostic change occurrence time.")
+  @Http.query
+  end_time?: utcDateTime;
+
+  @doc("Inclusive lower evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
+  @Http.query
+  from_version?: string;
+
+  @doc("Inclusive upper evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
+  @Http.query
+  to_version?: string;
+
+  @doc("Filter diagnostic changes for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.")
+  @Http.query
+  dimension_id?: string;
+
+  @doc("Filter diagnostic changes that apply to one canonical functional evaluator state.")
+  @Http.query
+  @pattern("^[0-9a-f]{64}$")
+  content_hash?: string;
+
+  @doc("Filter by one or more diagnostic change shapes by repeating the query parameter.")
+  @Http.query(#{ explode: true })
+  type?: EvaluatorDiagnosticChangeKind[];
+};
+
 @tag("Evaluators")
 interface Evaluators {
   // GET /evaluators/{name}/versions
@@ -45,6 +96,34 @@ interface Evaluators {
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
     Azure.Core.Page<EvaluatorVersion>
+  >;
+
+  /**
+   * Returns append-only diagnostic changes for the specified evaluator,
+   * grouped by evaluator version.
+   *
+   * Time, version, dimension, content-hash, and change-shape filters are intersected.
+   * Time and version bounds are inclusive. Version bounds use evaluator-version
+   * ordering rather than lexical ordering. Filters apply to nested changes, and
+   * version groups with no matching changes are omitted. Repeat `type` to select
+   * multiple diagnostic change shapes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are an append-only change collection grouped by evaluator version rather than a standard resource collection."
+  @summary("List evaluator diagnostics")
+  @route("/evaluators/{name}/diagnostics")
+  @get
+  @list
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  listDiagnostics is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("The evaluator name.")
+      @path
+      name: string;
+
+      ...ListEvaluatorDiagnosticsParameters;
+    },
+    EvaluatorDiagnosticsPage
   >;
 
   // GET /evaluators/{name}/versions/{version}
