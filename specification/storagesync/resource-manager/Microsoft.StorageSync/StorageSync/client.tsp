@@ -16,11 +16,6 @@ using Microsoft.StorageSync;
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp,javascript"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Flatten update properties to produce the intended C# patch property name."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  CloudEndpointUpdateParameters.properties,
-  "csharp"
-);
 
 @@clientName(RestoreFileSpec.isdir, "IsDirectory", "csharp");
 @@clientName(

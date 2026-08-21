@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
@@ -1093,6 +1095,9 @@ model CloudEndpointUpdateParameters {
   /**
    * The properties of the cloud endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required to keep CloudEndpointUpdateParameters consistent with existing flattened parameter models."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "x-ms-client-flatten is required to keep CloudEndpointUpdateParameters consistent with existing flattened parameter models."
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: CloudEndpointUpdateProperties;
 }
 
