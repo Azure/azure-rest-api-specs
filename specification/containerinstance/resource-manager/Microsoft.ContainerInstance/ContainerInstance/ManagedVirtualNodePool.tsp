@@ -62,6 +62,14 @@ scalar AiAgentGroupResourceId
     }
   ]>;
 
+@added(Versions.v2026_09_01_preview)
+scalar SubnetResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets",
+    }
+  ]>;
+
 /**
  * Properties of a managed virtual node pool.
  */
@@ -90,6 +98,12 @@ model ManagedVirtualNodePoolProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   aiAgentGroupResourceId: AiAgentGroupResourceId;
+
+  /**
+   * The ARM resource ID of the subnet used by container groups in the node pool.
+   */
+  @visibility(Lifecycle.Read)
+  subnetResourceId?: SubnetResourceId;
 
   /**
    * Minimum number of nodes maintained by the pool.

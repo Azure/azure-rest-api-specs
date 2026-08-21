@@ -2758,7 +2758,7 @@
     "AksClusterResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "description": "The ARM resource ID of the AKS cluster.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -5140,7 +5140,7 @@
     "ManagedIdentityResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "description": "The ARM resource ID of the managed identity.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -5239,6 +5239,11 @@
             "read",
             "create"
           ]
+        },
+        "subnetResourceId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The ARM resource ID of the subnet used by container groups in the node pool.",
+          "readOnly": true
         },
         "minNodes": {
           "type": "integer",
@@ -5853,7 +5858,7 @@
     "AiAgentGroupResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "description": "The ARM resource ID of the AiAgentGroup.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -5991,6 +5996,18 @@
             "name"
           ]
         }
+      }
+    },
+    "SubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource ID of the subnet.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
       }
     },
     "SubnetReference": {
