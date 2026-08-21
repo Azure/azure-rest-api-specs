@@ -1,0 +1,211 @@
+{
+  "title": "Get CapacitySettings",
+  "operationId": "CapacitySettings_Get",
+  "parameters": {
+    "api-version": "2026-10-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "capacitySettingsName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/capacitySettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/clusters/capacitySettings",
+        "properties": {
+          "appliedPolicy": {
+            "cpuOvercommitRatio": 1.5,
+            "systemReservationRatio": 0.1,
+            "failureDomainReservationCount": 1,
+            "reservedNodes": [
+              "machine-2"
+            ]
+          },
+          "reportedCapacity": {
+            "lastUpdated": "2026-05-10T00:00:00Z",
+            "storage": {
+              "totalBytes": 4398046511104,
+              "consumedBytes": 1099511627776,
+              "effectiveAvailableBytes": 3298534883328,
+              "lastUpdated": "2026-05-10T00:00:00Z"
+            },
+            "cpu": {
+              "physicalCoreCount": 96,
+              "logicalCoreCount": 192,
+              "processorCount": 6,
+              "socketCount": 6,
+              "cpuOvercommitRatio": 1.5,
+              "totalEffectiveVirtualCpuCapacity": 288,
+              "workloadAllocatedVirtualCpu": 64,
+              "policyReservedVirtualCpu": 48,
+              "systemReservedVirtualCpu": 24,
+              "aggregateAvailableVirtualCpu": 152,
+              "lastUpdated": "2026-05-10T00:00:00Z"
+            },
+            "memory": {
+              "totalBytes": 824633720832,
+              "workloadAllocatedBytes": 137438953472,
+              "policyReservedBytes": 274877906944,
+              "systemReservedBytes": 51539607552,
+              "aggregateAvailableBytes": 360777252864,
+              "lastUpdated": "2026-05-10T00:00:00Z"
+            },
+            "gpu": {
+              "totalGpuCount": 6,
+              "assignableGpuCount": 4,
+              "consumedGpuCount": 2,
+              "totalPartitionCount": 12,
+              "consumedPartitionCount": 4,
+              "effectiveAvailablePartitionCount": 8,
+              "lastUpdated": "2026-05-10T00:00:00Z"
+            },
+            "networking": {
+              "totalLogicalNetworkCount": 3,
+              "availableLogicalNetworkCount": 2,
+              "staticLogicalNetworkCount": 2,
+              "dhcpLogicalNetworkCount": 1,
+              "totalStaticIpAddressCount": 254,
+              "allocatedStaticIpAddressCount": 32,
+              "effectiveAvailableStaticIpAddressCount": 222,
+              "lastUpdated": "2026-05-10T00:00:00Z"
+            },
+            "machines": [
+              {
+                "machineName": "machine-0",
+                "edgeMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-0",
+                "arcMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-0",
+                "machineState": "Active",
+                "connectivityStatus": "Connected",
+                "cpu": {
+                  "physicalCoreCount": 32,
+                  "logicalCoreCount": 64,
+                  "processorCount": 2,
+                  "socketCount": 2,
+                  "effectiveVirtualCpuCapacity": 96,
+                  "systemReservedVirtualCpu": 8,
+                  "workloadAllocatedVirtualCpu": 24,
+                  "policyReservedVirtualCpu": 0,
+                  "availableVirtualCpu": 64
+                },
+                "memory": {
+                  "totalBytes": 274877906944,
+                  "systemReservedBytes": 17179869184,
+                  "workloadAllocatedBytes": 68719476736,
+                  "policyReservedBytes": 0,
+                  "availableBytes": 188978561024
+                },
+                "gpu": {
+                  "totalGpuCount": 2,
+                  "assignableGpuCount": 2,
+                  "consumedGpuCount": 0,
+                  "totalPartitionCount": 4,
+                  "consumedPartitionCount": 1,
+                  "effectiveAvailablePartitionCount": 3
+                }
+              },
+              {
+                "machineName": "machine-1",
+                "edgeMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1",
+                "arcMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-1",
+                "machineState": "Active",
+                "connectivityStatus": "Connected",
+                "cpu": {
+                  "physicalCoreCount": 32,
+                  "logicalCoreCount": 64,
+                  "processorCount": 2,
+                  "socketCount": 2,
+                  "effectiveVirtualCpuCapacity": 96,
+                  "systemReservedVirtualCpu": 8,
+                  "workloadAllocatedVirtualCpu": 40,
+                  "policyReservedVirtualCpu": 0,
+                  "availableVirtualCpu": 48
+                },
+                "memory": {
+                  "totalBytes": 274877906944,
+                  "systemReservedBytes": 17179869184,
+                  "workloadAllocatedBytes": 68719476736,
+                  "policyReservedBytes": 0,
+                  "availableBytes": 188978561024
+                },
+                "gpu": {
+                  "totalGpuCount": 2,
+                  "assignableGpuCount": 2,
+                  "consumedGpuCount": 0,
+                  "totalPartitionCount": 4,
+                  "consumedPartitionCount": 3,
+                  "effectiveAvailablePartitionCount": 1
+                }
+              },
+              {
+                "machineName": "machine-2",
+                "edgeMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-2",
+                "arcMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-2",
+                "machineState": "Reserved",
+                "connectivityStatus": "Connected",
+                "cpu": {
+                  "physicalCoreCount": 32,
+                  "logicalCoreCount": 64,
+                  "processorCount": 2,
+                  "socketCount": 2,
+                  "effectiveVirtualCpuCapacity": 96,
+                  "systemReservedVirtualCpu": 8,
+                  "workloadAllocatedVirtualCpu": 0,
+                  "policyReservedVirtualCpu": 48,
+                  "availableVirtualCpu": 40
+                },
+                "memory": {
+                  "totalBytes": 274877906944,
+                  "systemReservedBytes": 17179869184,
+                  "workloadAllocatedBytes": 0,
+                  "policyReservedBytes": 274877906944,
+                  "availableBytes": 34359738368
+                },
+                "gpu": {
+                  "totalGpuCount": 2,
+                  "assignableGpuCount": 0,
+                  "consumedGpuCount": 2,
+                  "totalPartitionCount": 4,
+                  "consumedPartitionCount": 0,
+                  "effectiveAvailablePartitionCount": 4
+                }
+              }
+            ],
+            "workloads": [
+              {
+                "workloadId": "5e5c8a1e-0f4c-4b8a-9d3a-1a2b3c4d5e6f",
+                "workloadName": "vm-app-01",
+                "resourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/virtualMachineInstances/vm-app-01",
+                "workloadType": "VirtualMachine",
+                "machineName": "machine-0",
+                "workloadState": "Running",
+                "virtualCpu": 8,
+                "memoryBytes": 17179869184
+              },
+              {
+                "workloadId": "6f6d9b2f-1e5d-4c9b-ae4b-2b3c4d5e6f70",
+                "workloadName": "vm-app-02",
+                "workloadType": "VirtualMachine",
+                "machineName": "machine-1",
+                "workloadState": "Running",
+                "virtualCpu": 16,
+                "memoryBytes": 34359738368
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "lastUpdated": "2026-05-10T00:00:00Z"
+        },
+        "systemData": {
+          "createdAt": "2026-04-01T17:18:19.1234567Z",
+          "createdBy": "system",
+          "createdByType": "Application",
+          "lastModifiedAt": "2026-05-10T00:00:00Z",
+          "lastModifiedBy": "system",
+          "lastModifiedByType": "Application"
+        }
+      }
+    }
+  }
+}

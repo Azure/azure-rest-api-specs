@@ -11245,3 +11245,807 @@ model HciConfigureLocalAvailabilityZoneJobProperties
   /** Configuration for local availability zones including naming prefix and zone-to-node mappings. */
   localAvailabilityZoneConfiguration: LocalAvailabilityZoneConfiguration;
 }
+
+////////////////////////////////////////////////////////////////
+//////////////// Network Profile Models ////////////////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Network Profile properties. The resource is a service hydrated projection that merges the
+ * desired networking configuration of the cluster with the state observed on the nodes.
+ */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileProperties {
+  /** Lifecycle state of the network profile projection. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Last time the reconciled snapshot was refreshed across all sections. */
+  @visibility(Lifecycle.Read)
+  lastSyncTimestamp?: utcDateTime;
+
+  /** Outcome of the last reconciliation pass. */
+  @visibility(Lifecycle.Read)
+  lastSyncStatus?: NetworkProfileSyncStatus;
+
+  /** Reconciled cluster uniform networking snapshot. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: NetworkProfileReportedProperties;
+
+  /** Snapshot of the desired networking configuration. */
+  @visibility(Lifecycle.Read)
+  desiredSnapshot?: NetworkProfileDesiredSnapshot;
+
+  /** Explicit desired versus observed deltas with scope and severity. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["propertyPath"])
+  drift?: NetworkProfileDriftEntry[];
+}
+
+/** Network Profile properties reported by the cluster. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileReportedProperties {
+  /** Cluster identity, management IP and subnet, topology pattern, and live migration policy. */
+  @visibility(Lifecycle.Read)
+  cluster?: NetworkProfileClusterIdentity;
+
+  /** Network ATC intents applied identically on every node. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  intents?: NetworkProfileIntent[];
+
+  /** Management network adapter name, VLAN, and MAC address per management adapter. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["nicName"])
+  managementNetworks?: NetworkProfileManagementNetwork[];
+
+  /** Storage VLAN and RDMA technology per storage adapter. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["networkAdapterName"])
+  storageNetworks?: NetworkProfileStorageNetwork[];
+
+  /** Whether the storage adapters between nodes are connected without a switch. */
+  @visibility(Lifecycle.Read)
+  storageConnectivitySwitchless?: boolean;
+
+  /** Whether automatic storage IP assignment is enabled across the cluster. */
+  @visibility(Lifecycle.Read)
+  enableStorageAutoIp?: boolean;
+
+  /** Cluster wide infrastructure networking. */
+  @visibility(Lifecycle.Read)
+  infrastructureNetwork?: NetworkProfileInfrastructureNetwork;
+
+  /** Fleet wide Arc gateway connectivity policy. */
+  @visibility(Lifecycle.Read)
+  arcGateway?: NetworkProfileArcGateway;
+}
+
+/** Cluster identity values that are identical regardless of which node reports them. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileClusterIdentity {
+  /** Cluster name. */
+  clusterName?: string;
+
+  /** Cluster management IP address. */
+  clusterIpAddress?: string;
+
+  /** Name of the Network ATC intent that carries the cluster IP. */
+  clusterIpIntentName?: string;
+
+  /** Management subnet expressed in CIDR notation. */
+  subnet?: string;
+
+  /** Cluster topology pattern, for example Standard or HyperConverged. */
+  clusterPattern?: string;
+
+  /** Live migration policy configured at cluster scope. */
+  liveMigrationPolicy?: NetworkProfileLiveMigrationPolicy;
+}
+
+/** Live migration policy configured at cluster scope and applied uniformly to every node. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileLiveMigrationPolicy {
+  /** Whether the network used for virtual machine live migration is selected automatically. */
+  autoSelectMigrationNetwork?: boolean;
+
+  /** Whether the performance option used for virtual machine live migration is selected automatically. */
+  autoSelectVmMigrationPerformance?: boolean;
+
+  /** Maximum number of simultaneous virtual machine live migrations allowed on the cluster. */
+  maxVmMigration?: int32;
+
+  /** Performance option used for virtual machine live migration. */
+  vmMigrationPerformance?: string;
+
+  /** Maximum bandwidth available for SMB live migration traffic. */
+  maxSmbMigrationBandwidth?: string;
+}
+
+/** A Network ATC intent applied identically on every node of the cluster. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileIntent {
+  /** Name of the network intent. */
+  name?: string;
+
+  /** Network traffic types carried by the intent. */
+  trafficType?: NetworkProfileTrafficType[];
+
+  /** Names of the physical adapters bound to the intent. */
+  memberAdapters?: string[];
+
+  /** Whether the intent carries management traffic. */
+  isManagementType?: boolean;
+
+  /** Whether the intent carries compute traffic. */
+  isComputeType?: boolean;
+
+  /** Whether the intent carries storage traffic. */
+  isStorageType?: boolean;
+
+  /** Whether adapter property overrides apply to the intent. */
+  overrideAdapterProperty?: boolean;
+
+  /** Adapter property overrides applied to the intent. */
+  adapterPropertyOverrides?: DeploymentSettingAdapterPropertyOverrides;
+
+  /** Whether QoS policy overrides apply to the intent. */
+  overrideQosPolicy?: boolean;
+
+  /** QoS policy overrides applied to the intent. */
+  qosPolicyOverrides?: QosPolicyOverrides;
+
+  /** Whether virtual switch configuration overrides apply to the intent. */
+  overrideVirtualSwitchConfiguration?: boolean;
+
+  /** Virtual switch configuration overrides applied to the intent. */
+  virtualSwitchConfigurationOverrides?: DeploymentSettingVirtualSwitchConfigurationOverrides;
+}
+
+/** Management network adapter details reported by the cluster. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileManagementNetwork {
+  /** Name of the management network adapter. */
+  nicName?: string;
+
+  /** ID specified for the management VLAN. */
+  vlanId?: string;
+
+  /** MAC address of the management network adapter. */
+  macAddress?: string;
+}
+
+/** Storage network details reported by the cluster. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileStorageNetwork {
+  /** Name of the storage network adapter bound to the storage network. */
+  networkAdapterName?: string;
+
+  /** ID specified for the VLAN storage network. */
+  vlanId?: string;
+
+  /** RDMA technology used by the storage network. */
+  rdmaTechnology?: string;
+}
+
+/** Cluster wide infrastructure networking reported by the cluster. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileInfrastructureNetwork {
+  /** Subnet mask that matches the management IP address space. */
+  subnetMask?: string;
+
+  /** ID specified for the management network VLAN. */
+  vlanId?: string;
+
+  /** Default gateway used for the management IP address space. */
+  gateway?: string;
+
+  /** Whether DHCP is used for hosts and cluster IPs instead of static IP pools. */
+  useDhcp?: boolean;
+
+  /** IP addresses of the DNS servers configured for the cluster. */
+  dnsServers?: string[];
+
+  /** Specifies how DNS servers are configured for the infrastructure network. */
+  dnsServerConfig?: DnsServerConfig;
+
+  /** Names of the DNS zones configured for the cluster. */
+  dnsZones?: string[];
+
+  /** Ranges of IP addresses from which addresses are allocated for nodes. */
+  @identifiers(#["startingAddress"])
+  ipPools?: IpPools[];
+}
+
+/** Arc gateway connectivity policy applied uniformly across the cluster. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileArcGateway {
+  /** Azure resource ID of the Arc gateway. */
+  gatewayResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/gateways";
+    }
+  ]>;
+
+  /** Public endpoint URL of the Arc gateway. */
+  gatewayEndpoint?: url;
+
+  /** Type of the Arc gateway. */
+  gatewayType?: string;
+
+  /** Features allowed through the Arc gateway. */
+  allowedFeatures?: string[];
+}
+
+/** The desired proxy configuration captured in a network profile snapshot. */
+@added(Versions.v2026_10_15_preview)
+model ProxyConfigurationDetail {
+  /** Connection URI of the proxy server. Required when isEnabled is true. */
+  connectionUri?: string;
+
+  /** Port number of the proxy server. Required when isEnabled is true. */
+  port?: string;
+
+  /** List of addresses or patterns that should bypass the proxy. */
+  bypassList?: string[];
+
+  /** Whether the proxy should be active on the device. */
+  isEnabled?: boolean;
+}
+
+/** Snapshot of the desired networking configuration used as the baseline for drift detection. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileDesiredSnapshot {
+  /** Host network configuration captured from the deployment settings of the cluster. */
+  hostNetwork?: DeploymentSettingHostNetwork;
+
+  /** Infrastructure network configuration captured from the deployment settings. */
+  infrastructureNetwork?: InfrastructureNetwork;
+
+  /** Proxy configuration desired on every node of the cluster. */
+  proxy?: ProxyConfigurationDetail;
+
+  /** Time at which the desired configuration snapshot was captured. */
+  capturedAt?: utcDateTime;
+}
+
+/** A single desired versus observed delta detected during reconciliation. */
+@added(Versions.v2026_10_15_preview)
+model NetworkProfileDriftEntry {
+  /** Dotted path to the diverged field. */
+  propertyPath?: string;
+
+  /** Value taken from the desired configuration snapshot. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The diverged value can be any JSON type because the drift entry is addressed by an arbitrary property path."
+  desiredValue?: unknown;
+
+  /** Value reported by the cluster nodes. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The diverged value can be any JSON type because the drift entry is addressed by an arbitrary property path."
+  observedValue?: unknown;
+
+  /** Where the drift was detected. */
+  scope?: string;
+
+  /** Time at which the drift was first observed. */
+  firstDetectedAt?: utcDateTime;
+
+  /** Severity of the detected drift. */
+  severity?: NetworkProfileDriftSeverity;
+}
+
+/** Outcome of the last network profile reconciliation pass. */
+@added(Versions.v2026_10_15_preview)
+union NetworkProfileSyncStatus {
+  string,
+
+  /** The last reconciliation pass completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The last reconciliation pass failed. */
+  Failed: "Failed",
+
+  /** The last reconciliation pass refreshed only part of the snapshot. */
+  Partial: "Partial",
+}
+
+/** Network traffic type carried by a Network ATC intent. */
+@added(Versions.v2026_10_15_preview)
+union NetworkProfileTrafficType {
+  string,
+
+  /** The intent carries management traffic. */
+  Management: "Management",
+
+  /** The intent carries compute traffic. */
+  Compute: "Compute",
+
+  /** The intent carries storage traffic. */
+  Storage: "Storage",
+}
+
+/** Severity of a detected configuration drift. */
+@added(Versions.v2026_10_15_preview)
+union NetworkProfileDriftSeverity {
+  string,
+
+  /** The drift is informational and requires no action. */
+  Informational: "Informational",
+
+  /** The drift may affect cluster networking and should be reviewed. */
+  Warning: "Warning",
+
+  /** The drift affects cluster networking and requires remediation. */
+  Error: "Error",
+}
+
+////////////////////////////////////////////////////////////////
+//////////////// Capacity Settings Models //////////////////////
+////////////////////////////////////////////////////////////////
+
+/** Properties of the Capacity Settings singleton child resource. */
+@added(Versions.v2026_10_15_preview)
+model CapacitySettingProperties {
+  /** Placement settings currently applied to capacity calculations. */
+  appliedPolicy?: AppliedCapacityPolicy;
+
+  /** The latest aggregate capacity snapshot reported by the cluster. */
+  @visibility(Lifecycle.Read)
+  reportedCapacity?: ReportedCapacitySnapshot;
+
+  /** Provisioning state of the Capacity Settings resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Last time the top-level Capacity Settings projection was refreshed. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/** Cluster-wide placement policy used by capacity calculations. */
+@added(Versions.v2026_10_15_preview)
+model AppliedCapacityPolicy {
+  /** Cluster-wide CPU overcommit ratio. Default: 1.0. */
+  @minValue(1.0)
+  cpuOvercommitRatio?: float32;
+
+  /** Cluster-wide system reservation ratio. Default: 0.05. */
+  @minValue(0.05)
+  systemReservationRatio?: float32;
+
+  /** Number of failure domains to reserve. Default: 0. */
+  @minValue(0)
+  failureDomainReservationCount?: int32;
+
+  /** Explicit node names or machine references held back from placement. */
+  reservedNodes?: string[];
+}
+
+/** Aggregate, placement-oriented capacity snapshot reported by the cluster. */
+@added(Versions.v2026_10_15_preview)
+model ReportedCapacitySnapshot {
+  /** Last time the aggregate snapshot was updated. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+
+  /** Storage capacity aggregated from eligible user Cluster Volume resources. */
+  @visibility(Lifecycle.Read)
+  storage?: CapacityStorageSnapshot;
+
+  /** CPU capacity summary. */
+  @visibility(Lifecycle.Read)
+  cpu?: CapacityCpuSnapshot;
+
+  /** Memory capacity summary. */
+  @visibility(Lifecycle.Read)
+  memory?: CapacityMemorySnapshot;
+
+  /** GPU capacity summary. */
+  @visibility(Lifecycle.Read)
+  gpu?: CapacityGpuSnapshot;
+
+  /** Workload networking capacity summary. */
+  @visibility(Lifecycle.Read)
+  networking?: CapacityNetworkingSnapshot;
+
+  /** Per-machine capacity breakdown for cluster nodes. */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["machineName"])
+  machines?: CapacityMachineSnapshot[];
+
+  /** Placement-relevant workload allocation records. */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["workloadId"])
+  workloads?: CapacityWorkloadConsumption[];
+}
+
+/** Cluster-wide storage capacity aggregate derived from eligible user volumes. */
+@added(Versions.v2026_10_15_preview)
+model CapacityStorageSnapshot {
+  /** Sum of reported volume sizes. */
+  @visibility(Lifecycle.Read)
+  totalBytes?: int64;
+
+  /** Sum of consumed bytes across user volumes. */
+  @visibility(Lifecycle.Read)
+  consumedBytes?: int64;
+
+  /** Sum of remaining bytes across user volumes. */
+  @visibility(Lifecycle.Read)
+  effectiveAvailableBytes?: int64;
+
+  /** Last storage update time. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/** Cluster-wide CPU capacity summary. */
+@added(Versions.v2026_10_15_preview)
+model CapacityCpuSnapshot {
+  /** Physical CPU core count aggregated across cluster machines. */
+  @visibility(Lifecycle.Read)
+  physicalCoreCount?: int32;
+
+  /** Logical CPU core count aggregated across cluster machines. */
+  @visibility(Lifecycle.Read)
+  logicalCoreCount?: int32;
+
+  /** Processor package count aggregated across cluster machines. */
+  @visibility(Lifecycle.Read)
+  processorCount?: int32;
+
+  /** CPU socket count aggregated across cluster machines. */
+  @visibility(Lifecycle.Read)
+  socketCount?: int32;
+
+  /** Effective cluster policy value. */
+  @visibility(Lifecycle.Read)
+  cpuOvercommitRatio?: float32;
+
+  /** Total cluster vCPU supply after applying the overcommit ratio. */
+  @visibility(Lifecycle.Read)
+  totalEffectiveVirtualCpuCapacity?: int32;
+
+  /** vCPU already allocated to workloads. */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedVirtualCpu?: int32;
+
+  /** vCPU withheld by policy. */
+  @visibility(Lifecycle.Read)
+  policyReservedVirtualCpu?: int32;
+
+  /** vCPU reserved for host OS and platform services. */
+  @visibility(Lifecycle.Read)
+  systemReservedVirtualCpu?: int64;
+
+  /** Total remaining vCPU across nodes. */
+  @visibility(Lifecycle.Read)
+  aggregateAvailableVirtualCpu?: int32;
+
+  /** Last CPU inventory or consumption update. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/** Cluster-wide memory capacity summary. */
+@added(Versions.v2026_10_15_preview)
+model CapacityMemorySnapshot {
+  /** Total memory across cluster machines, in bytes. */
+  @visibility(Lifecycle.Read)
+  totalBytes?: int64;
+
+  /** Memory allocated to workloads across the cluster. */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedBytes?: int64;
+
+  /** Memory withheld by policy. */
+  @visibility(Lifecycle.Read)
+  policyReservedBytes?: int64;
+
+  /** Memory reserved for host OS and platform services. */
+  @visibility(Lifecycle.Read)
+  systemReservedBytes?: int64;
+
+  /** Total remaining memory across nodes. */
+  @visibility(Lifecycle.Read)
+  aggregateAvailableBytes?: int64;
+
+  /** Last memory update time. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/** Cluster-wide GPU capacity summary. */
+@added(Versions.v2026_10_15_preview)
+model CapacityGpuSnapshot {
+  /** Total GPU resources discovered across edge machines. */
+  @visibility(Lifecycle.Read)
+  totalGpuCount?: int32;
+
+  /** Count of assignable GPUs. */
+  @visibility(Lifecycle.Read)
+  assignableGpuCount?: int32;
+
+  /** Count of consumed GPUs. */
+  @visibility(Lifecycle.Read)
+  consumedGpuCount?: int32;
+
+  /** Total GPU-P partition count. */
+  @visibility(Lifecycle.Read)
+  totalPartitionCount?: int32;
+
+  /** Consumed GPU-P partition count. */
+  @visibility(Lifecycle.Read)
+  consumedPartitionCount?: int32;
+
+  /** GPU-P partitions available for placement. */
+  @visibility(Lifecycle.Read)
+  effectiveAvailablePartitionCount?: int32;
+
+  /** Last GPU inventory update time. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/** Cluster-wide workload networking capacity summary. */
+@added(Versions.v2026_10_15_preview)
+model CapacityNetworkingSnapshot {
+  /** Count of workload logical networks known to the cluster. */
+  @visibility(Lifecycle.Read)
+  totalLogicalNetworkCount?: int32;
+
+  /** Count of workload logical networks that can accept new interfaces. */
+  @visibility(Lifecycle.Read)
+  availableLogicalNetworkCount?: int32;
+
+  /** Count of workload logical networks using static IP address pools. */
+  @visibility(Lifecycle.Read)
+  staticLogicalNetworkCount?: int32;
+
+  /** Count of workload logical networks using DHCP. */
+  @visibility(Lifecycle.Read)
+  dhcpLogicalNetworkCount?: int32;
+
+  /** Total allocatable static IP addresses. */
+  @visibility(Lifecycle.Read)
+  totalStaticIpAddressCount?: int32;
+
+  /** Allocated static IP addresses. */
+  @visibility(Lifecycle.Read)
+  allocatedStaticIpAddressCount?: int32;
+
+  /** Remaining allocatable static IP addresses. */
+  @visibility(Lifecycle.Read)
+  effectiveAvailableStaticIpAddressCount?: int32;
+
+  /** Last logical network or IP pool capacity update time. */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/** Per-machine capacity breakdown. */
+@added(Versions.v2026_10_15_preview)
+model CapacityMachineSnapshot {
+  /** Cluster node name as reported by Arc. */
+  @visibility(Lifecycle.Read)
+  machineName?: string;
+
+  /** ARM resource ID of the corresponding EdgeMachine resource. */
+  @visibility(Lifecycle.Read)
+  edgeMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/edgeMachines";
+    }
+  ]>;
+
+  /** ARM resource ID of the corresponding Arc for Server machine. */
+  @visibility(Lifecycle.Read)
+  arcMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/machines";
+    }
+  ]>;
+
+  /** Cluster-perspective state of the machine. */
+  @visibility(Lifecycle.Read)
+  machineState?: CapacityMachineState;
+
+  /** Connectivity status reported by Arc. */
+  @visibility(Lifecycle.Read)
+  connectivityStatus?: CapacityMachineConnectivityStatus;
+
+  /** Node-local CPU capacity breakdown. */
+  @visibility(Lifecycle.Read)
+  cpu?: MachineCpuCapacity;
+
+  /** Node-local memory capacity breakdown. */
+  @visibility(Lifecycle.Read)
+  memory?: MachineMemoryCapacity;
+
+  /** Node-local GPU capacity breakdown. */
+  @visibility(Lifecycle.Read)
+  gpu?: MachineGpuCapacity;
+}
+
+/** Cluster-perspective state of a machine for capacity and placement. */
+@added(Versions.v2026_10_15_preview)
+union CapacityMachineState {
+  string,
+
+  /** The machine is an active placement target. */
+  Active: "Active",
+
+  /** The machine is explicitly reserved. */
+  Reserved: "Reserved",
+
+  /** The machine is being drained. */
+  Draining: "Draining",
+
+  /** The machine is in maintenance. */
+  Maintenance: "Maintenance",
+
+  /** The machine is excluded from placement. */
+  Excluded: "Excluded",
+
+  /** The machine is in an unknown state. */
+  Unknown: "Unknown",
+}
+
+/** Connectivity status reported by Arc for a cluster machine. */
+@added(Versions.v2026_10_15_preview)
+union CapacityMachineConnectivityStatus {
+  string,
+
+  /** The machine is connected to Arc. */
+  Connected: "Connected",
+
+  /** The machine is disconnected from Arc. */
+  Disconnected: "Disconnected",
+
+  /** The machine has expired Arc credentials. */
+  Expired: "Expired",
+
+  /** The connectivity status is unknown. */
+  Unknown: "Unknown",
+}
+
+/** Node-local CPU capacity values used for fit-aware placement. */
+@added(Versions.v2026_10_15_preview)
+model MachineCpuCapacity {
+  /** Physical CPU core count on the machine. */
+  @visibility(Lifecycle.Read)
+  physicalCoreCount?: int32;
+
+  /** Logical CPU core count on the machine. */
+  @visibility(Lifecycle.Read)
+  logicalCoreCount?: int32;
+
+  /** Processor package count on the machine. */
+  @visibility(Lifecycle.Read)
+  processorCount?: int32;
+
+  /** CPU socket count on the machine. */
+  @visibility(Lifecycle.Read)
+  socketCount?: int32;
+
+  /** Node-local vCPU supply after applying policy. */
+  @visibility(Lifecycle.Read)
+  effectiveVirtualCpuCapacity?: int32;
+
+  /** Service-computed host and platform reserve. */
+  @visibility(Lifecycle.Read)
+  systemReservedVirtualCpu?: int32;
+
+  /** vCPU already allocated to workloads. */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedVirtualCpu?: int32;
+
+  /** vCPU withheld by policy. */
+  @visibility(Lifecycle.Read)
+  policyReservedVirtualCpu?: int32;
+
+  /** Node-local vCPU available for placement. */
+  @visibility(Lifecycle.Read)
+  availableVirtualCpu?: int32;
+}
+
+/** Node-local memory capacity values used for fit-aware placement. */
+@added(Versions.v2026_10_15_preview)
+model MachineMemoryCapacity {
+  /** Total memory on the machine, in bytes. */
+  @visibility(Lifecycle.Read)
+  totalBytes?: int64;
+
+  /** Memory withheld for host OS and platform services. */
+  @visibility(Lifecycle.Read)
+  systemReservedBytes?: int64;
+
+  /** Memory allocated to workloads. */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedBytes?: int64;
+
+  /** Memory withheld by policy. */
+  @visibility(Lifecycle.Read)
+  policyReservedBytes?: int64;
+
+  /** Node-local memory available for placement. */
+  @visibility(Lifecycle.Read)
+  availableBytes?: int64;
+}
+
+/** Node-local GPU capacity values used for placement. */
+@added(Versions.v2026_10_15_preview)
+model MachineGpuCapacity {
+  /** Total GPUs on this machine. */
+  @visibility(Lifecycle.Read)
+  totalGpuCount?: int32;
+
+  /** Count of assignable GPUs. */
+  @visibility(Lifecycle.Read)
+  assignableGpuCount?: int32;
+
+  /** Count of consumed GPUs. */
+  @visibility(Lifecycle.Read)
+  consumedGpuCount?: int32;
+
+  /** Total GPU-P partition count. */
+  @visibility(Lifecycle.Read)
+  totalPartitionCount?: int32;
+
+  /** Consumed GPU-P partition count. */
+  @visibility(Lifecycle.Read)
+  consumedPartitionCount?: int32;
+
+  /** GPU-P partitions available for placement. */
+  @visibility(Lifecycle.Read)
+  effectiveAvailablePartitionCount?: int32;
+}
+
+/** Placement-relevant workload allocation record. */
+@added(Versions.v2026_10_15_preview)
+model CapacityWorkloadConsumption {
+  /** Stable device-reported workload identifier. */
+  @visibility(Lifecycle.Read)
+  workloadId?: string;
+
+  /** Hyper-V VM name reported by the node. */
+  @visibility(Lifecycle.Read)
+  workloadName?: string;
+
+  /** Optional ARM resource ID for the workload. */
+  @visibility(Lifecycle.Read)
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /** Workload type. */
+  @visibility(Lifecycle.Read)
+  workloadType?: string;
+
+  /** Cluster node name that currently hosts the workload. */
+  @visibility(Lifecycle.Read)
+  machineName?: string;
+
+  /** Hyper-V VM state reported by the node. */
+  @visibility(Lifecycle.Read)
+  workloadState?: string;
+
+  /** Configured virtual processor count. */
+  @visibility(Lifecycle.Read)
+  virtualCpu?: int32;
+
+  /** Maximum memory the VM can consume, in bytes. */
+  @visibility(Lifecycle.Read)
+  memoryBytes?: int64;
+}
+
+/** Patch shape for Day N edits to Capacity Settings. */
+@added(Versions.v2026_10_15_preview)
+model CapacitySettingPatch {
+  /** The patchable properties of the Capacity Settings resource. */
+  properties?: CapacitySettingPatchProperties;
+}
+
+/** Patchable properties of the Capacity Settings resource for Day N edits. */
+@added(Versions.v2026_10_15_preview)
+model CapacitySettingPatchProperties {
+  /** Updated placement policy to apply to capacity calculations. */
+  appliedPolicy?: AppliedCapacityPolicy;
+}

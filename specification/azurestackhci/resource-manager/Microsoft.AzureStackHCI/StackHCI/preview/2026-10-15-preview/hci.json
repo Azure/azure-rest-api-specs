@@ -64,6 +64,12 @@
       "name": "Clusters"
     },
     {
+      "name": "CapacitySettings"
+    },
+    {
+      "name": "NetworkProfiles"
+    },
+    {
       "name": "DeploymentSettings"
     },
     {
@@ -2615,6 +2621,323 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/capacitySettings": {
+      "get": {
+        "operationId": "CapacitySettings_ListByClusters",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "List the Capacity Settings singletons under a cluster. The collection contains the\nsingle `default` resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacitySettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Capacity Settings by Cluster": {
+            "$ref": "./examples/ListCapacitySettingsByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/capacitySettings/{capacitySettingsName}": {
+      "get": {
+        "operationId": "CapacitySettings_Get",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Get the Capacity Settings singleton for a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get CapacitySettings": {
+            "$ref": "./examples/GetCapacitySettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CapacitySettings_CreateOrUpdate",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Create or update the Capacity Settings singleton for a cluster. Only\n`appliedPolicy` fields are client-settable; reported capacity and provisioning\nstate remain service-owned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CapacitySetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'CapacitySetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Capacity Settings": {
+            "$ref": "./examples/CreateOrUpdateCapacitySettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CapacitySettings_Update",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Update the applied capacity policy on the Capacity Settings singleton (Day N\nedits). Only `appliedPolicy` fields are updatable; reported capacity and\nprovisioning state remain service-owned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacitySettingPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Capacity Settings policy (Day N edit)": {
+            "$ref": "./examples/UpdateCapacitySettings.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CapacitySettings_Delete",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Delete the Capacity Settings singleton for a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Capacity Settings": {
+            "$ref": "./examples/DeleteCapacitySettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/changeRing": {
       "post": {
         "operationId": "Clusters_ChangeRing",
@@ -3267,6 +3590,9 @@
           "ClusterJobs_Get_AddServerJob": {
             "$ref": "./examples/ClusterJobs_Get_AddServerJob.json"
           },
+          "ClusterJobs_Get_ConfigureLocalAvailabilityZone": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureLocalAvailabilityZoneJob.json"
+          },
           "ClusterJobs_Get_ConfigureSdnIntegrationJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureSdnIntegrationJob.json"
           },
@@ -3366,6 +3692,9 @@
           "ClusterJobs_CreateOrUpdate_ConfigureCVMJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
           },
+          "ClusterJobs_CreateOrUpdate_ConfigureLocalAvailabilityZone": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureLocalAvailabilityZone.json"
+          },
           "ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable.json"
           },
@@ -3450,6 +3779,243 @@
         "x-ms-examples": {
           "ClusterJobs_Delete": {
             "$ref": "./examples/ClusterJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/networkProfiles": {
+      "get": {
+        "operationId": "NetworkProfiles_ListByCluster",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "List NetworkProfile resources by Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_ListByCluster": {
+            "$ref": "./examples/NetworkProfiles_ListByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/networkProfiles/{networkProfileName}": {
+      "get": {
+        "operationId": "NetworkProfiles_Get",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Get a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Get": {
+            "$ref": "./examples/NetworkProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkProfiles_Create",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Create a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Create": {
+            "$ref": "./examples/NetworkProfiles_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkProfiles_Delete",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Delete a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Delete": {
+            "$ref": "./examples/NetworkProfiles_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9480,6 +10046,37 @@
         "serverResourceId"
       ]
     },
+    "AppliedCapacityPolicy": {
+      "type": "object",
+      "description": "Cluster-wide placement policy used by capacity calculations.",
+      "properties": {
+        "cpuOvercommitRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide CPU overcommit ratio. Default: 1.0.",
+          "minimum": 1
+        },
+        "systemReservationRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide system reservation ratio. Default: 0.05.",
+          "minimum": 0.05
+        },
+        "failureDomainReservationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of failure domains to reserve. Default: 0.",
+          "minimum": 0
+        },
+        "reservedNodes": {
+          "type": "array",
+          "description": "Explicit node names or machine references held back from placement.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ApplyConfigurationNetworkAdapterJobProperties": {
       "type": "object",
       "description": "Properties for applying network adapter configuration.",
@@ -10025,6 +10622,529 @@
             "description": "The system will notify the user when update content becomes available."
           }
         ]
+      }
+    },
+    "CapacityCpuSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide CPU capacity summary.",
+      "properties": {
+        "physicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical CPU core count aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "logicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical CPU core count aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "processorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Processor package count aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "socketCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU socket count aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "cpuOvercommitRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Effective cluster policy value.",
+          "readOnly": true
+        },
+        "totalEffectiveVirtualCpuCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total cluster vCPU supply after applying the overcommit ratio.",
+          "readOnly": true
+        },
+        "workloadAllocatedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU already allocated to workloads.",
+          "readOnly": true
+        },
+        "policyReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU withheld by policy.",
+          "readOnly": true
+        },
+        "systemReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int64",
+          "description": "vCPU reserved for host OS and platform services.",
+          "readOnly": true
+        },
+        "aggregateAvailableVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total remaining vCPU across nodes.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last CPU inventory or consumption update.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityGpuSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide GPU capacity summary.",
+      "properties": {
+        "totalGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total GPU resources discovered across edge machines.",
+          "readOnly": true
+        },
+        "assignableGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of assignable GPUs.",
+          "readOnly": true
+        },
+        "consumedGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of consumed GPUs.",
+          "readOnly": true
+        },
+        "totalPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total GPU-P partition count.",
+          "readOnly": true
+        },
+        "consumedPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Consumed GPU-P partition count.",
+          "readOnly": true
+        },
+        "effectiveAvailablePartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPU-P partitions available for placement.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last GPU inventory update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityMachineConnectivityStatus": {
+      "type": "string",
+      "description": "Connectivity status reported by Arc for a cluster machine.",
+      "enum": [
+        "Connected",
+        "Disconnected",
+        "Expired",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityMachineConnectivityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The machine is connected to Arc."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The machine is disconnected from Arc."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The machine has expired Arc credentials."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The connectivity status is unknown."
+          }
+        ]
+      }
+    },
+    "CapacityMachineSnapshot": {
+      "type": "object",
+      "description": "Per-machine capacity breakdown.",
+      "properties": {
+        "machineName": {
+          "type": "string",
+          "description": "Cluster node name as reported by Arc.",
+          "readOnly": true
+        },
+        "edgeMachineResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the corresponding EdgeMachine resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/edgeMachines"
+              }
+            ]
+          }
+        },
+        "arcMachineResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the corresponding Arc for Server machine.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        },
+        "machineState": {
+          "$ref": "#/definitions/CapacityMachineState",
+          "description": "Cluster-perspective state of the machine.",
+          "readOnly": true
+        },
+        "connectivityStatus": {
+          "$ref": "#/definitions/CapacityMachineConnectivityStatus",
+          "description": "Connectivity status reported by Arc.",
+          "readOnly": true
+        },
+        "cpu": {
+          "$ref": "#/definitions/MachineCpuCapacity",
+          "description": "Node-local CPU capacity breakdown.",
+          "readOnly": true
+        },
+        "memory": {
+          "$ref": "#/definitions/MachineMemoryCapacity",
+          "description": "Node-local memory capacity breakdown.",
+          "readOnly": true
+        },
+        "gpu": {
+          "$ref": "#/definitions/MachineGpuCapacity",
+          "description": "Node-local GPU capacity breakdown.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityMachineState": {
+      "type": "string",
+      "description": "Cluster-perspective state of a machine for capacity and placement.",
+      "enum": [
+        "Active",
+        "Reserved",
+        "Draining",
+        "Maintenance",
+        "Excluded",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityMachineState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The machine is an active placement target."
+          },
+          {
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "The machine is explicitly reserved."
+          },
+          {
+            "name": "Draining",
+            "value": "Draining",
+            "description": "The machine is being drained."
+          },
+          {
+            "name": "Maintenance",
+            "value": "Maintenance",
+            "description": "The machine is in maintenance."
+          },
+          {
+            "name": "Excluded",
+            "value": "Excluded",
+            "description": "The machine is excluded from placement."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The machine is in an unknown state."
+          }
+        ]
+      }
+    },
+    "CapacityMemorySnapshot": {
+      "type": "object",
+      "description": "Cluster-wide memory capacity summary.",
+      "properties": {
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total memory across cluster machines, in bytes.",
+          "readOnly": true
+        },
+        "workloadAllocatedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory allocated to workloads across the cluster.",
+          "readOnly": true
+        },
+        "policyReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory withheld by policy.",
+          "readOnly": true
+        },
+        "systemReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory reserved for host OS and platform services.",
+          "readOnly": true
+        },
+        "aggregateAvailableBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total remaining memory across nodes.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last memory update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityNetworkingSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide workload networking capacity summary.",
+      "properties": {
+        "totalLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks known to the cluster.",
+          "readOnly": true
+        },
+        "availableLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks that can accept new interfaces.",
+          "readOnly": true
+        },
+        "staticLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks using static IP address pools.",
+          "readOnly": true
+        },
+        "dhcpLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks using DHCP.",
+          "readOnly": true
+        },
+        "totalStaticIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total allocatable static IP addresses.",
+          "readOnly": true
+        },
+        "allocatedStaticIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allocated static IP addresses.",
+          "readOnly": true
+        },
+        "effectiveAvailableStaticIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Remaining allocatable static IP addresses.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last logical network or IP pool capacity update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacitySetting": {
+      "type": "object",
+      "description": "Capacity Settings singleton child resource of a cluster. Exposes placement-oriented\ncapacity information for Azure Local clusters, including the applied capacity policy\nand the latest reported capacity snapshot collated by the service.\n\nThe resource is hydrated by the service during cluster deployment with the\nconventional singleton name `default`. The v1 API supports GET (single), LIST,\nPUT (createOrUpdate), PATCH (for Day N policy edits), and DELETE.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacitySettingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CapacitySettingListResult": {
+      "type": "object",
+      "description": "The response of a CapacitySetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapacitySetting items on this page",
+          "items": {
+            "$ref": "#/definitions/CapacitySetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapacitySettingPatch": {
+      "type": "object",
+      "description": "Patch shape for Day N edits to Capacity Settings.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacitySettingPatchProperties",
+          "description": "The patchable properties of the Capacity Settings resource."
+        }
+      }
+    },
+    "CapacitySettingPatchProperties": {
+      "type": "object",
+      "description": "Patchable properties of the Capacity Settings resource for Day N edits.",
+      "properties": {
+        "appliedPolicy": {
+          "$ref": "#/definitions/AppliedCapacityPolicy",
+          "description": "Updated placement policy to apply to capacity calculations."
+        }
+      }
+    },
+    "CapacitySettingProperties": {
+      "type": "object",
+      "description": "Properties of the Capacity Settings singleton child resource.",
+      "properties": {
+        "appliedPolicy": {
+          "$ref": "#/definitions/AppliedCapacityPolicy",
+          "description": "Placement settings currently applied to capacity calculations."
+        },
+        "reportedCapacity": {
+          "$ref": "#/definitions/ReportedCapacitySnapshot",
+          "description": "The latest aggregate capacity snapshot reported by the cluster.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the Capacity Settings resource.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the top-level Capacity Settings projection was refreshed.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityStorageSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide storage capacity aggregate derived from eligible user volumes.",
+      "properties": {
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of reported volume sizes.",
+          "readOnly": true
+        },
+        "consumedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of consumed bytes across user volumes.",
+          "readOnly": true
+        },
+        "effectiveAvailableBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of remaining bytes across user volumes.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last storage update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityWorkloadConsumption": {
+      "type": "object",
+      "description": "Placement-relevant workload allocation record.",
+      "properties": {
+        "workloadId": {
+          "type": "string",
+          "description": "Stable device-reported workload identifier.",
+          "readOnly": true
+        },
+        "workloadName": {
+          "type": "string",
+          "description": "Hyper-V VM name reported by the node.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Optional ARM resource ID for the workload.",
+          "readOnly": true
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type.",
+          "readOnly": true
+        },
+        "machineName": {
+          "type": "string",
+          "description": "Cluster node name that currently hosts the workload.",
+          "readOnly": true
+        },
+        "workloadState": {
+          "type": "string",
+          "description": "Hyper-V VM state reported by the node.",
+          "readOnly": true
+        },
+        "virtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Configured virtual processor count.",
+          "readOnly": true
+        },
+        "memoryBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum memory the VM can consume, in bytes.",
+          "readOnly": true
+        }
       }
     },
     "ChangeRingRequest": {
@@ -18219,6 +19339,144 @@
       },
       "readOnly": true
     },
+    "MachineCpuCapacity": {
+      "type": "object",
+      "description": "Node-local CPU capacity values used for fit-aware placement.",
+      "properties": {
+        "physicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical CPU core count on the machine.",
+          "readOnly": true
+        },
+        "logicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical CPU core count on the machine.",
+          "readOnly": true
+        },
+        "processorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Processor package count on the machine.",
+          "readOnly": true
+        },
+        "socketCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU socket count on the machine.",
+          "readOnly": true
+        },
+        "effectiveVirtualCpuCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Node-local vCPU supply after applying policy.",
+          "readOnly": true
+        },
+        "systemReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Service-computed host and platform reserve.",
+          "readOnly": true
+        },
+        "workloadAllocatedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU already allocated to workloads.",
+          "readOnly": true
+        },
+        "policyReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU withheld by policy.",
+          "readOnly": true
+        },
+        "availableVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Node-local vCPU available for placement.",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineGpuCapacity": {
+      "type": "object",
+      "description": "Node-local GPU capacity values used for placement.",
+      "properties": {
+        "totalGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total GPUs on this machine.",
+          "readOnly": true
+        },
+        "assignableGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of assignable GPUs.",
+          "readOnly": true
+        },
+        "consumedGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of consumed GPUs.",
+          "readOnly": true
+        },
+        "totalPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total GPU-P partition count.",
+          "readOnly": true
+        },
+        "consumedPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Consumed GPU-P partition count.",
+          "readOnly": true
+        },
+        "effectiveAvailablePartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPU-P partitions available for placement.",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineMemoryCapacity": {
+      "type": "object",
+      "description": "Node-local memory capacity values used for fit-aware placement.",
+      "properties": {
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total memory on the machine, in bytes.",
+          "readOnly": true
+        },
+        "systemReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory withheld for host OS and platform services.",
+          "readOnly": true
+        },
+        "workloadAllocatedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory allocated to workloads.",
+          "readOnly": true
+        },
+        "policyReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory withheld by policy.",
+          "readOnly": true
+        },
+        "availableBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Node-local memory available for placement.",
+          "readOnly": true
+        }
+      }
+    },
     "Metadata": {
       "type": "object",
       "description": "Metadata associated with a deployment step.",
@@ -18703,6 +19961,529 @@
             "name": "wifi",
             "value": "wifi",
             "description": "Wi-Fi interface."
+          }
+        ]
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "Network Profile details - child resource of Cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkProfileProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkProfileArcGateway": {
+      "type": "object",
+      "description": "Arc gateway connectivity policy applied uniformly across the cluster.",
+      "properties": {
+        "gatewayResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the Arc gateway.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/gateways"
+              }
+            ]
+          }
+        },
+        "gatewayEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Public endpoint URL of the Arc gateway."
+        },
+        "gatewayType": {
+          "type": "string",
+          "description": "Type of the Arc gateway."
+        },
+        "allowedFeatures": {
+          "type": "array",
+          "description": "Features allowed through the Arc gateway.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkProfileClusterIdentity": {
+      "type": "object",
+      "description": "Cluster identity values that are identical regardless of which node reports them.",
+      "properties": {
+        "clusterName": {
+          "type": "string",
+          "description": "Cluster name."
+        },
+        "clusterIpAddress": {
+          "type": "string",
+          "description": "Cluster management IP address."
+        },
+        "clusterIpIntentName": {
+          "type": "string",
+          "description": "Name of the Network ATC intent that carries the cluster IP."
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Management subnet expressed in CIDR notation."
+        },
+        "clusterPattern": {
+          "type": "string",
+          "description": "Cluster topology pattern, for example Standard or HyperConverged."
+        },
+        "liveMigrationPolicy": {
+          "$ref": "#/definitions/NetworkProfileLiveMigrationPolicy",
+          "description": "Live migration policy configured at cluster scope."
+        }
+      }
+    },
+    "NetworkProfileDesiredSnapshot": {
+      "type": "object",
+      "description": "Snapshot of the desired networking configuration used as the baseline for drift detection.",
+      "properties": {
+        "hostNetwork": {
+          "$ref": "#/definitions/DeploymentSettingHostNetwork",
+          "description": "Host network configuration captured from the deployment settings of the cluster."
+        },
+        "infrastructureNetwork": {
+          "$ref": "#/definitions/InfrastructureNetwork",
+          "description": "Infrastructure network configuration captured from the deployment settings."
+        },
+        "proxy": {
+          "$ref": "#/definitions/ProxyConfigurationDetail",
+          "description": "Proxy configuration desired on every node of the cluster."
+        },
+        "capturedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the desired configuration snapshot was captured."
+        }
+      }
+    },
+    "NetworkProfileDriftEntry": {
+      "type": "object",
+      "description": "A single desired versus observed delta detected during reconciliation.",
+      "properties": {
+        "propertyPath": {
+          "type": "string",
+          "description": "Dotted path to the diverged field."
+        },
+        "desiredValue": {
+          "description": "Value taken from the desired configuration snapshot."
+        },
+        "observedValue": {
+          "description": "Value reported by the cluster nodes."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Where the drift was detected."
+        },
+        "firstDetectedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the drift was first observed."
+        },
+        "severity": {
+          "$ref": "#/definitions/NetworkProfileDriftSeverity",
+          "description": "Severity of the detected drift."
+        }
+      }
+    },
+    "NetworkProfileDriftSeverity": {
+      "type": "string",
+      "description": "Severity of a detected configuration drift.",
+      "enum": [
+        "Informational",
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkProfileDriftSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "The drift is informational and requires no action."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The drift may affect cluster networking and should be reviewed."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The drift affects cluster networking and requires remediation."
+          }
+        ]
+      }
+    },
+    "NetworkProfileInfrastructureNetwork": {
+      "type": "object",
+      "description": "Cluster wide infrastructure networking reported by the cluster.",
+      "properties": {
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask that matches the management IP address space."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the management network VLAN."
+        },
+        "gateway": {
+          "type": "string",
+          "description": "Default gateway used for the management IP address space."
+        },
+        "useDhcp": {
+          "type": "boolean",
+          "description": "Whether DHCP is used for hosts and cluster IPs instead of static IP pools."
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "IP addresses of the DNS servers configured for the cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsServerConfig": {
+          "$ref": "#/definitions/DnsServerConfig",
+          "description": "Specifies how DNS servers are configured for the infrastructure network."
+        },
+        "dnsZones": {
+          "type": "array",
+          "description": "Names of the DNS zones configured for the cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipPools": {
+          "type": "array",
+          "description": "Ranges of IP addresses from which addresses are allocated for nodes.",
+          "items": {
+            "$ref": "#/definitions/IpPools"
+          },
+          "x-ms-identifiers": [
+            "startingAddress"
+          ]
+        }
+      }
+    },
+    "NetworkProfileIntent": {
+      "type": "object",
+      "description": "A Network ATC intent applied identically on every node of the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network intent."
+        },
+        "trafficType": {
+          "type": "array",
+          "description": "Network traffic types carried by the intent.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileTrafficType"
+          }
+        },
+        "memberAdapters": {
+          "type": "array",
+          "description": "Names of the physical adapters bound to the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isManagementType": {
+          "type": "boolean",
+          "description": "Whether the intent carries management traffic."
+        },
+        "isComputeType": {
+          "type": "boolean",
+          "description": "Whether the intent carries compute traffic."
+        },
+        "isStorageType": {
+          "type": "boolean",
+          "description": "Whether the intent carries storage traffic."
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "Whether adapter property overrides apply to the intent."
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/DeploymentSettingAdapterPropertyOverrides",
+          "description": "Adapter property overrides applied to the intent."
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "Whether QoS policy overrides apply to the intent."
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides",
+          "description": "QoS policy overrides applied to the intent."
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "Whether virtual switch configuration overrides apply to the intent."
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/DeploymentSettingVirtualSwitchConfigurationOverrides",
+          "description": "Virtual switch configuration overrides applied to the intent."
+        }
+      }
+    },
+    "NetworkProfileListResult": {
+      "type": "object",
+      "description": "The response of a NetworkProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkProfileLiveMigrationPolicy": {
+      "type": "object",
+      "description": "Live migration policy configured at cluster scope and applied uniformly to every node.",
+      "properties": {
+        "autoSelectMigrationNetwork": {
+          "type": "boolean",
+          "description": "Whether the network used for virtual machine live migration is selected automatically."
+        },
+        "autoSelectVmMigrationPerformance": {
+          "type": "boolean",
+          "description": "Whether the performance option used for virtual machine live migration is selected automatically."
+        },
+        "maxVmMigration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of simultaneous virtual machine live migrations allowed on the cluster."
+        },
+        "vmMigrationPerformance": {
+          "type": "string",
+          "description": "Performance option used for virtual machine live migration."
+        },
+        "maxSmbMigrationBandwidth": {
+          "type": "string",
+          "description": "Maximum bandwidth available for SMB live migration traffic."
+        }
+      }
+    },
+    "NetworkProfileManagementNetwork": {
+      "type": "object",
+      "description": "Management network adapter details reported by the cluster.",
+      "properties": {
+        "nicName": {
+          "type": "string",
+          "description": "Name of the management network adapter."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the management VLAN."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address of the management network adapter."
+        }
+      }
+    },
+    "NetworkProfileProperties": {
+      "type": "object",
+      "description": "Network Profile properties. The resource is a service hydrated projection that merges the\ndesired networking configuration of the cluster with the state observed on the nodes.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Lifecycle state of the network profile projection.",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the reconciled snapshot was refreshed across all sections.",
+          "readOnly": true
+        },
+        "lastSyncStatus": {
+          "$ref": "#/definitions/NetworkProfileSyncStatus",
+          "description": "Outcome of the last reconciliation pass.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/NetworkProfileReportedProperties",
+          "description": "Reconciled cluster uniform networking snapshot.",
+          "readOnly": true
+        },
+        "desiredSnapshot": {
+          "$ref": "#/definitions/NetworkProfileDesiredSnapshot",
+          "description": "Snapshot of the desired networking configuration.",
+          "readOnly": true
+        },
+        "drift": {
+          "type": "array",
+          "description": "Explicit desired versus observed deltas with scope and severity.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileDriftEntry"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "propertyPath"
+          ]
+        }
+      }
+    },
+    "NetworkProfileReportedProperties": {
+      "type": "object",
+      "description": "Network Profile properties reported by the cluster.",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/NetworkProfileClusterIdentity",
+          "description": "Cluster identity, management IP and subnet, topology pattern, and live migration policy.",
+          "readOnly": true
+        },
+        "intents": {
+          "type": "array",
+          "description": "Network ATC intents applied identically on every node.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileIntent"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "managementNetworks": {
+          "type": "array",
+          "description": "Management network adapter name, VLAN, and MAC address per management adapter.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileManagementNetwork"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "nicName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "Storage VLAN and RDMA technology per storage adapter.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileStorageNetwork"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Whether the storage adapters between nodes are connected without a switch.",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Whether automatic storage IP assignment is enabled across the cluster.",
+          "readOnly": true
+        },
+        "infrastructureNetwork": {
+          "$ref": "#/definitions/NetworkProfileInfrastructureNetwork",
+          "description": "Cluster wide infrastructure networking.",
+          "readOnly": true
+        },
+        "arcGateway": {
+          "$ref": "#/definitions/NetworkProfileArcGateway",
+          "description": "Fleet wide Arc gateway connectivity policy.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkProfileStorageNetwork": {
+      "type": "object",
+      "description": "Storage network details reported by the cluster.",
+      "properties": {
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter bound to the storage network."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network."
+        },
+        "rdmaTechnology": {
+          "type": "string",
+          "description": "RDMA technology used by the storage network."
+        }
+      }
+    },
+    "NetworkProfileSyncStatus": {
+      "type": "string",
+      "description": "Outcome of the last network profile reconciliation pass.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Partial"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkProfileSyncStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The last reconciliation pass completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last reconciliation pass failed."
+          },
+          {
+            "name": "Partial",
+            "value": "Partial",
+            "description": "The last reconciliation pass refreshed only part of the snapshot."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "NetworkProfileTrafficType": {
+      "type": "string",
+      "description": "Network traffic type carried by a Network ATC intent.",
+      "enum": [
+        "Management",
+        "Compute",
+        "Storage"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkProfileTrafficType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Management",
+            "value": "Management",
+            "description": "The intent carries management traffic."
+          },
+          {
+            "name": "Compute",
+            "value": "Compute",
+            "description": "The intent carries compute traffic."
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "The intent carries storage traffic."
           }
         ]
       }
@@ -20305,6 +22086,31 @@
       },
       "readOnly": true
     },
+    "ProxyConfigurationDetail": {
+      "type": "object",
+      "description": "The desired proxy configuration captured in a network profile snapshot.",
+      "properties": {
+        "connectionUri": {
+          "type": "string",
+          "description": "Connection URI of the proxy server. Required when isEnabled is true."
+        },
+        "port": {
+          "type": "string",
+          "description": "Port number of the proxy server. Required when isEnabled is true."
+        },
+        "bypassList": {
+          "type": "array",
+          "description": "List of addresses or patterns that should bypass the proxy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether the proxy should be active on the device."
+        }
+      }
+    },
     "Publisher": {
       "type": "object",
       "description": "Publisher details.",
@@ -20859,6 +22665,65 @@
         "serverName",
         "serverResourceId"
       ]
+    },
+    "ReportedCapacitySnapshot": {
+      "type": "object",
+      "description": "Aggregate, placement-oriented capacity snapshot reported by the cluster.",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the aggregate snapshot was updated.",
+          "readOnly": true
+        },
+        "storage": {
+          "$ref": "#/definitions/CapacityStorageSnapshot",
+          "description": "Storage capacity aggregated from eligible user Cluster Volume resources.",
+          "readOnly": true
+        },
+        "cpu": {
+          "$ref": "#/definitions/CapacityCpuSnapshot",
+          "description": "CPU capacity summary.",
+          "readOnly": true
+        },
+        "memory": {
+          "$ref": "#/definitions/CapacityMemorySnapshot",
+          "description": "Memory capacity summary.",
+          "readOnly": true
+        },
+        "gpu": {
+          "$ref": "#/definitions/CapacityGpuSnapshot",
+          "description": "GPU capacity summary.",
+          "readOnly": true
+        },
+        "networking": {
+          "$ref": "#/definitions/CapacityNetworkingSnapshot",
+          "description": "Workload networking capacity summary.",
+          "readOnly": true
+        },
+        "machines": {
+          "type": "array",
+          "description": "Per-machine capacity breakdown for cluster nodes.",
+          "items": {
+            "$ref": "#/definitions/CapacityMachineSnapshot"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "machineName"
+          ]
+        },
+        "workloads": {
+          "type": "array",
+          "description": "Placement-relevant workload allocation records.",
+          "items": {
+            "$ref": "#/definitions/CapacityWorkloadConsumption"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "workloadId"
+          ]
+        }
+      }
     },
     "ReportedProperties": {
       "type": "object",
