@@ -36005,6 +36005,20 @@
           ]
         }
       },
+      "Microsoft365AgenticUserCommunicationProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "activityProtocol"
+            ]
+          }
+        ],
+        "description": "The protocol used to communicate with the agentic user."
+      },
       "Microsoft365AgenticUserTemplate": {
         "type": "object",
         "properties": {
@@ -36017,19 +36031,34 @@
             "description": "Name of the agentic-user template file embedded in the generated app package."
           },
           "schemaVersion": {
-            "type": "string",
-            "description": "Schema version of the agentic-user template."
+            "$ref": "#/components/schemas/Microsoft365AgenticUserTemplateSchemaVersion",
+            "description": "Schema version of the agentic-user template.",
+            "default": "0.1.0-preview"
           },
           "agentIdentityBlueprintId": {
             "type": "string",
             "description": "Blueprint identity client id used for the agentic user."
           },
           "communicationProtocol": {
-            "type": "string",
-            "description": "Communication protocol used by the agentic user."
+            "$ref": "#/components/schemas/Microsoft365AgenticUserCommunicationProtocol",
+            "description": "Communication protocol used by the agentic user. When omitted, Microsoft 365 defaults to\n`activityProtocol`."
           }
         },
         "description": "An agentic-user template describing how the agent participates as an agentic user in Microsoft 365.\nOnly used when `useAgenticUserTemplate` is true on the publish request."
+      },
+      "Microsoft365AgenticUserTemplateSchemaVersion": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "0.1.0-preview"
+            ]
+          }
+        ],
+        "description": "Schema version of the Microsoft 365 agentic-user template embedded in the generated Teams app\npackage. Extensible: Microsoft 365 may add versions independently of this API."
       },
       "Microsoft365PublishDefaults": {
         "type": "object",

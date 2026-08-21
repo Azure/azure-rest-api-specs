@@ -20,6 +20,25 @@ union Microsoft365PublishScope {
   tenant: "Tenant",
 }
 
+/**
+ * Schema version of the Microsoft 365 agentic-user template embedded in the generated Teams app
+ * package. Extensible: Microsoft 365 may add versions independently of this API.
+ */
+union Microsoft365AgenticUserTemplateSchemaVersion {
+  string,
+
+  /** Development preview version of the agentic-user template schema. */
+  v0_1_0_preview: "0.1.0-preview",
+}
+
+/** The protocol used to communicate with the agentic user. */
+union Microsoft365AgenticUserCommunicationProtocol {
+  string,
+
+  /** The Microsoft 365 Activity Protocol. */
+  activityProtocol: "activityProtocol",
+}
+
 // ---------------------------------------------------------------------------
 // Request models
 // ---------------------------------------------------------------------------
@@ -36,13 +55,16 @@ model Microsoft365AgenticUserTemplate {
   file?: string;
 
   /** Schema version of the agentic-user template. */
-  schemaVersion?: string;
+  schemaVersion?: Microsoft365AgenticUserTemplateSchemaVersion = "0.1.0-preview";
 
   /** Blueprint identity client id used for the agentic user. */
   agentIdentityBlueprintId?: string;
 
-  /** Communication protocol used by the agentic user. */
-  communicationProtocol?: string;
+  /**
+   * Communication protocol used by the agentic user. When omitted, Microsoft 365 defaults to
+   * `activityProtocol`.
+   */
+  communicationProtocol?: Microsoft365AgenticUserCommunicationProtocol;
 }
 
 /**
