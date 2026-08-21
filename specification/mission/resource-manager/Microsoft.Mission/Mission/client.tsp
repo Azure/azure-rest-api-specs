@@ -94,6 +94,37 @@ union VirtualEnclavePrincipalType {
   ServicePrincipal: "ServicePrincipal",
 }
 
+@doc("The resource action for an approval callback.")
+union VirtualEnclaveApprovalCallbackResourceAction {
+  string,
+
+  @doc("Create the resource.")
+  Create: "Create",
+
+  @doc("Delete the resource.")
+  Delete: "Delete",
+
+  @doc("Update the resource.")
+  Update: "Update",
+
+  @doc("Reset the resource.")
+  Reset: "Reset",
+}
+
+@doc("The resource action for an approval deletion callback.")
+union VirtualEnclaveApprovalDeletionCallbackResourceAction {
+  string,
+
+  @doc("Create the resource.")
+  Create: "Create",
+
+  @doc("Delete the resource.")
+  Delete: "Delete",
+
+  @doc("Update the resource.")
+  Update: "Update",
+}
+
 @@alternateType(
   GovernedServiceItem.option,
   VirtualEnclaveGovernedServiceItemOption,
@@ -120,6 +151,16 @@ union VirtualEnclavePrincipalType {
   "csharp"
 );
 @@alternateType(Principal.type, VirtualEnclavePrincipalType, "csharp");
+@@alternateType(
+  ApprovalCallbackRequest.resourceRequestAction,
+  VirtualEnclaveApprovalCallbackResourceAction,
+  "csharp"
+);
+@@alternateType(
+  ApprovalDeletionCallbackRequest.resourceRequestAction,
+  VirtualEnclaveApprovalDeletionCallbackResourceAction,
+  "csharp"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "VirtualEnclaveManagedOnBehalfOfBroker",
