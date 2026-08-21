@@ -1122,6 +1122,18 @@
           }
         },
         "x-ms-examples": {
+          "Re-register Azure Storage ProtectionContainers switching to System Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_ReRegister_SwitchToSAMI.json"
+          },
+          "Re-register Azure Storage ProtectionContainers switching to User Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_ReRegister_SwitchToUAMI.json"
+          },
+          "Register Azure Storage ProtectionContainers with System Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_Register_WithSAMI.json"
+          },
+          "Register Azure Storage ProtectionContainers with User Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_Register_WithUAMI.json"
+          },
           "RegisterAzure Storage ProtectionContainers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Register.json"
           }
@@ -1815,6 +1827,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Configure Source Scan for Protected Item": {
+            "$ref": "./examples/AzureIaasVm/ConfigureSourceScan.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2475,6 +2492,12 @@
           }
         },
         "x-ms-examples": {
+          "Restore Azure File Share to Original Location with Managed Identity": {
+            "$ref": "./examples/AzureStorage/TriggerRestore_AzureFileShare_WithSAMI.json"
+          },
+          "Restore Azure File Share to Original Location with User Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/TriggerRestore_AzureFileShare_WithUAMI.json"
+          },
           "Restore Disks with IaasVMRestoreRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreRequest.json"
           },
@@ -2489,6 +2512,12 @@
           },
           "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_IdentityBasedRestoreDetails.json"
+          },
+          "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails and Data Disk Encryption Settings": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_DataDiskEncryption_SingleEntry.json"
+          },
+          "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails and per disk encryption settings": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_DataDiskEncryption.json"
           },
           "Restore to New Azure IaasVm with IaasVMRestoreWithRehydrationRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreWithRehydrationRequest.json"
@@ -3735,6 +3764,9 @@
         "x-ms-examples": {
           "List Backup Protection Containers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_List.json"
+          },
+          "List Backup Protection Containers with Access Type": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_List_WithAccessType.json"
           }
         },
         "x-ms-pageable": {
