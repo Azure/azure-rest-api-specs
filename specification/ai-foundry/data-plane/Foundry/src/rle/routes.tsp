@@ -28,7 +28,7 @@ interface RLEnvironments {
       @doc("The environment to create.")
       @body body: CreateRLEnvironmentRequest;
     },
-    RLEnvironment
+    ResourceCreatedResponse<RLEnvironment>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with continuation-token pagination."
@@ -156,7 +156,7 @@ interface RLEInstanceGroups {
       @doc("The instance group to create.")
       @body body: CreateRLEInstanceGroupRequest;
     },
-    RLEInstanceGroup
+    ResourceCreatedResponse<RLEInstanceGroup>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with continuation-token pagination."
@@ -264,7 +264,7 @@ interface RLEInstances {
       @path
       instanceGroupId: string;
     },
-    RLEInstance
+    ResourceCreatedResponse<RLEInstance>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
