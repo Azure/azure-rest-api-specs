@@ -1,13 +1,11 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 import "../openai/realtime/models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
@@ -676,7 +674,6 @@ model VoiceAgentServerEventSessionCreated {
   ...OmitProperties<OpenAI.RealtimeServerEventSessionCreated, "session">;
 
   @doc("The id of the persisted conversation. Only present when conversation persistence is enabled for the session.")
-  @madeRequired(Versions.v1)
   conversation_id: string;
 
   @doc("The initial effective voice-agent session configuration.")

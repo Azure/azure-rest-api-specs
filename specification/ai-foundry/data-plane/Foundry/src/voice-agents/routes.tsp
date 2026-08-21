@@ -321,7 +321,6 @@ interface AgentEndpointConversations {
   @summary("Get a voice agent conversation item's generated audio metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
-  @added(Versions.v1)
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
   getAgentConversationItemGeneratedAudio is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -347,7 +346,6 @@ interface AgentEndpointConversations {
   @summary("Stream a voice agent conversation item's generated audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
-  @added(Versions.v1)
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
   getAgentConversationItemGeneratedAudioContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
