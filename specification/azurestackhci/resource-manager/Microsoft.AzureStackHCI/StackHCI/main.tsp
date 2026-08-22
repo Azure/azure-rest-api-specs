@@ -19,6 +19,8 @@ import "./Operations.tsp";
 import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
+import "./CapacitySetting.tsp";
+import "./NetworkProfile.tsp";
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
@@ -40,6 +42,8 @@ import "./DevicePool.tsp";
 import "./EdgeMachineGpu.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./EdgeMachineStorage.tsp";
+import "./EdgeMachineSecuritySettings.tsp";
+import "./EdgeMachineDeploymentSetting.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
@@ -58,7 +62,7 @@ namespace Microsoft.AzureStackHCI;
  * The available API versions.
  *
  * This enum lists only the currently active API versions. Retired preview
- * versions (e.g. 2025-11-01-preview through 2026-04-01-preview) are
+ * versions (e.g. 2025-11-01-preview through 2026-05-01-preview) are
  * intentionally omitted — each new preview fully supersedes the previous one,
  * and customers are expected to adopt the latest preview. Including every
  * shipped preview would require extensive `@added`/`@removed` decorator
@@ -83,7 +87,12 @@ enum Versions {
   v2026_04_30: "2026-04-30",
 
   /**
-   * The 2026-05-01-preview API version.
+   * The 2026-10-01 API version.
    */
-  v2026_05_01_preview: "2026-05-01-preview",
+  v2026_10_01: "2026-10-01",
+
+  /**
+   * The 2026-10-15-preview API version.
+   */
+  v2026_10_15_preview: "2026-10-15-preview",
 }

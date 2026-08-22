@@ -1,0 +1,252 @@
+{
+  "title": "NetworkProfiles_Get",
+  "operationId": "NetworkProfiles_Get",
+  "parameters": {
+    "api-version": "2026-10-15-preview",
+    "subscriptionId": "6D37FF61-4C93-4377-B06B-FC6D6D561A7D",
+    "resourceGroupName": "rghci",
+    "clusterName": "HciCluster1",
+    "networkProfileName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6D37FF61-4C93-4377-B06B-FC6D6D561A7D/resourceGroups/rghci/providers/Microsoft.AzureStackHCI/clusters/HciCluster1/networkProfiles/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/clusters/networkProfiles",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "lastSyncTimestamp": "2026-06-03T09:42:00Z",
+          "lastSyncStatus": "Succeeded",
+          "reportedProperties": {
+            "cluster": {
+              "clusterName": "HciCluster1",
+              "clusterIpAddress": "10.57.48.10",
+              "clusterIpIntentName": "Management_Compute",
+              "subnet": "10.57.48.0/24",
+              "clusterPattern": "HyperConverged",
+              "liveMigrationPolicy": {
+                "autoSelectMigrationNetwork": true,
+                "autoSelectVmMigrationPerformance": false,
+                "maxVmMigration": 4,
+                "vmMigrationPerformance": "SMB",
+                "maxSmbMigrationBandwidth": "6250000000"
+              }
+            },
+            "intents": [
+              {
+                "name": "Management_Compute",
+                "trafficType": [
+                  "Management",
+                  "Compute"
+                ],
+                "memberAdapters": [
+                  "Port1",
+                  "Port2"
+                ],
+                "isManagementType": true,
+                "isComputeType": true,
+                "isStorageType": false,
+                "overrideAdapterProperty": false,
+                "overrideQosPolicy": false,
+                "overrideVirtualSwitchConfiguration": false
+              },
+              {
+                "name": "Storage",
+                "trafficType": [
+                  "Storage"
+                ],
+                "memberAdapters": [
+                  "Port3",
+                  "Port4"
+                ],
+                "isManagementType": false,
+                "isComputeType": false,
+                "isStorageType": true,
+                "overrideAdapterProperty": true,
+                "adapterPropertyOverrides": {
+                  "jumboPacket": "9014",
+                  "networkDirect": "Enabled",
+                  "networkDirectTechnology": "RoCEv2"
+                },
+                "overrideQosPolicy": true,
+                "qosPolicyOverrides": {
+                  "priorityValue8021Action_Cluster": "7",
+                  "priorityValue8021Action_SMB": "3",
+                  "bandwidthPercentage_SMB": "50"
+                },
+                "overrideVirtualSwitchConfiguration": true,
+                "virtualSwitchConfigurationOverrides": {
+                  "enableIov": "True",
+                  "loadBalancingAlgorithm": "Dynamic"
+                }
+              }
+            ],
+            "managementNetworks": [
+              {
+                "nicName": "Port1",
+                "vlanId": "711",
+                "macAddress": "00-15-5D-40-2A-01"
+              },
+              {
+                "nicName": "Port2",
+                "vlanId": "711",
+                "macAddress": "00-15-5D-40-2A-02"
+              }
+            ],
+            "storageNetworks": [
+              {
+                "networkAdapterName": "SMB1",
+                "vlanId": "711",
+                "rdmaTechnology": "RoCEv2"
+              },
+              {
+                "networkAdapterName": "SMB2",
+                "vlanId": "712",
+                "rdmaTechnology": "RoCEv2"
+              }
+            ],
+            "storageConnectivitySwitchless": false,
+            "enableStorageAutoIp": true,
+            "infrastructureNetwork": {
+              "subnetMask": "255.255.255.0",
+              "vlanId": "711",
+              "gateway": "10.57.48.1",
+              "useDhcp": false,
+              "dnsServers": [
+                "10.57.50.90"
+              ],
+              "dnsServerConfig": "UseDnsServer",
+              "dnsZones": [
+                "contoso.com"
+              ],
+              "ipPools": [
+                {
+                  "startingAddress": "10.57.48.60",
+                  "endingAddress": "10.57.48.66"
+                }
+              ]
+            },
+            "arcGateway": {
+              "gatewayResourceId": "/subscriptions/6D37FF61-4C93-4377-B06B-FC6D6D561A7D/resourceGroups/rghci/providers/Microsoft.HybridCompute/gateways/hciArcGateway1",
+              "gatewayEndpoint": "https://hciarcgateway1.gw.arc.azure.com",
+              "gatewayType": "Public",
+              "allowedFeatures": [
+                "*"
+              ]
+            }
+          },
+          "desiredSnapshot": {
+            "hostNetwork": {
+              "intents": [
+                {
+                  "name": "Management_Compute",
+                  "trafficType": [
+                    "Management",
+                    "Compute"
+                  ],
+                  "adapter": [
+                    "Port1",
+                    "Port2"
+                  ],
+                  "overrideVirtualSwitchConfiguration": false,
+                  "overrideQosPolicy": false,
+                  "overrideAdapterProperty": false
+                },
+                {
+                  "name": "Storage",
+                  "trafficType": [
+                    "Storage"
+                  ],
+                  "adapter": [
+                    "Port3",
+                    "Port4"
+                  ],
+                  "overrideVirtualSwitchConfiguration": true,
+                  "virtualSwitchConfigurationOverrides": {
+                    "enableIov": "True",
+                    "loadBalancingAlgorithm": "Dynamic"
+                  },
+                  "overrideQosPolicy": true,
+                  "qosPolicyOverrides": {
+                    "priorityValue8021Action_Cluster": "7",
+                    "priorityValue8021Action_SMB": "3",
+                    "bandwidthPercentage_SMB": "50"
+                  },
+                  "overrideAdapterProperty": true,
+                  "adapterPropertyOverrides": {
+                    "jumboPacket": "9014",
+                    "networkDirect": "Enabled",
+                    "networkDirectTechnology": "RoCEv2"
+                  }
+                }
+              ],
+              "storageNetworks": [
+                {
+                  "name": "Storage1Network",
+                  "networkAdapterName": "SMB1",
+                  "vlanId": "711"
+                },
+                {
+                  "name": "Storage2Network",
+                  "networkAdapterName": "SMB2",
+                  "vlanId": "712"
+                }
+              ],
+              "storageConnectivitySwitchless": false,
+              "enableStorageAutoIp": true
+            },
+            "infrastructureNetwork": {
+              "subnetMask": "255.255.255.0",
+              "gateway": "10.57.48.1",
+              "ipPools": [
+                {
+                  "startingAddress": "10.57.48.60",
+                  "endingAddress": "10.57.48.66"
+                }
+              ],
+              "dnsServerConfig": "UseDnsServer",
+              "dnsZones": [
+                {
+                  "dnsZoneName": "contoso.com",
+                  "dnsForwarder": [
+                    "10.57.50.90"
+                  ]
+                }
+              ],
+              "dnsServers": [
+                "10.57.50.90"
+              ],
+              "useDhcp": false
+            },
+            "proxy": {
+              "connectionUri": "http://proxy.contoso.com",
+              "port": "8080",
+              "bypassList": [
+                "localhost",
+                "10.57.48.0/24"
+              ],
+              "isEnabled": true
+            },
+            "capturedAt": "2026-06-03T09:40:00Z"
+          },
+          "drift": [
+            {
+              "propertyPath": "infrastructureNetwork.dnsServers",
+              "desiredValue": [
+                "10.57.50.90"
+              ],
+              "observedValue": [
+                "10.57.50.90",
+                "10.57.50.91"
+              ],
+              "scope": "node:HciCluster1-node02",
+              "firstDetectedAt": "2026-06-02T18:15:00Z",
+              "severity": "Warning"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

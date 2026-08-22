@@ -1,0 +1,78 @@
+{
+  "title": "Create or update Capacity Settings",
+  "operationId": "CapacitySettings_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-10-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "capacitySettingsName": "default",
+    "resource": {
+      "properties": {
+        "appliedPolicy": {
+          "cpuOvercommitRatio": 1.5,
+          "systemReservationRatio": 0.1,
+          "failureDomainReservationCount": 1,
+          "reservedNodes": [
+            "machine-2"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/capacitySettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/clusters/capacitySettings",
+        "properties": {
+          "appliedPolicy": {
+            "cpuOvercommitRatio": 1.5,
+            "systemReservationRatio": 0.1,
+            "failureDomainReservationCount": 1,
+            "reservedNodes": [
+              "machine-2"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "lastUpdated": "2026-05-10T00:05:00Z"
+        },
+        "systemData": {
+          "createdAt": "2026-04-01T17:18:19.1234567Z",
+          "createdBy": "system",
+          "createdByType": "Application",
+          "lastModifiedAt": "2026-05-10T00:05:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/capacitySettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/clusters/capacitySettings",
+        "properties": {
+          "appliedPolicy": {
+            "cpuOvercommitRatio": 1.5,
+            "systemReservationRatio": 0.1,
+            "failureDomainReservationCount": 1,
+            "reservedNodes": [
+              "machine-2"
+            ]
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdAt": "2026-04-01T17:18:19.1234567Z",
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-04-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}
