@@ -1096,6 +1096,9 @@ model SandboxRequest {
   /** Optional identity settings that control which managed identities from the group are available to this sandbox and in which lifecycle phases. When null or empty, the default delegation behavior applies (delegated-only when any delegated identity exists). */
   identitySettings?: IdentitySetting[];
 
+  /** telemetryConfig value. */
+  telemetryConfig?: TelemetryConfig;
+
   /** Optional list of volumes to mount in the sandbox. When SandboxSource? SandboxRequest.SourcesRef.Snapshot is set, the listed volumes are attached after the sandbox is restored from the snapshot — semantically equivalent to restoring the sandbox first and then calling the dynamic add-volume-mount API. In that mode the volumes must all be data disks, the snapshot must be non-pod, and the snapshot must not already have its own attached volumes; cluster placement is constrained to a cluster that already holds the referenced data disks (cross-cluster download is not supported). Those rules are enforced downstream after the snapshot/volume Cosmos lookups. */
   volumes?: SandboxVolume[];
 
@@ -1267,6 +1270,55 @@ model LinuxCapabilities {
 
   /** drop value. */
   drop?: string[];
+}
+
+/** Defines a single column in a custom log output schema. Polymorphic on `kind` discriminator: `"Value"` or `"Ref"`. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic log-column union."
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union LogColumnDef {
+  /** Value variant. */
+  Value: LogColumnDefValueLogColumnDef,
+
+  /** Ref variant. */
+  Ref: LogColumnDefRefLogColumnDef,
+}
+
+/** A column whose value is resolved from a well-known ADC attribute at runtime. */
+model LogColumnDefRefLogColumnDef {
+  /** kind value. */
+  kind?: "Ref";
+
+  /** The ADC attribute to resolve. */
+  refName: LogColumnRef;
+}
+
+/** A column whose value is a literal string provided by the partner. */
+model LogColumnDefValueLogColumnDef {
+  /** kind value. */
+  kind?: "Value";
+
+  /** The static value injected into every log record. */
+  value: string;
+}
+
+/** Well-known ADC attributes that can be referenced by custom columns. */
+union LogColumnRef {
+  string,
+
+  /** Serialized LogColumnRef value. */
+  LogContent: "LogContent",
+
+  /** Serialized LogColumnRef value. */
+  LogStream: "LogStream",
+
+  /** Serialized LogColumnRef value. */
+  SandboxId: "SandboxId",
+
+  /** Serialized LogColumnRef value. */
+  Region: "Region",
+
+  /** Serialized LogColumnRef value. */
+  ContainerName: "ContainerName",
 }
 
 /** MegaBytes wire value. */
@@ -1600,6 +1652,233 @@ model TdsEgressSection {
 
   /** rules value. */
   rules: TdsEgressRule[];
+}
+
+/** Authentication for an ApplicationInsights telemetry endpoint via secret reference. The connection string is resolved at runtime from the referenced user-managed secret. */
+model TelemetryApplicationInsightsAuth {
+  /** Reference to a user-managed secret containing key-value pairs. */
+  secretId: string;
+
+  /** The key within the secret whose value is the Application Insights connection string. */
+  secretKey: string;
+}
+
+/** Base type for telemetry authentication that uses a `kind` discriminator. Supports user-assigned and system-assigned managed identity; designed for future auth kinds (e.g., workload identity). */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-authentication union."
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union TelemetryAuth {
+  /** ManagedIdentity variant. */
+  ManagedIdentity: TelemetryAuthTelemetryManagedIdentityAuth,
+
+  /** SystemAssignedManagedIdentity variant. */
+  SystemAssignedManagedIdentity: TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth,
+}
+
+/** User-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the specified user-assigned MI. */
+model TelemetryAuthTelemetryManagedIdentityAuth {
+  /** kind value. */
+  kind?: "ManagedIdentity";
+
+  /** Full ARM resource ID of a user-assigned managed identity (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{name}). */
+  identity: string;
+}
+
+/** System-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the sandbox group's system-assigned MI. No explicit identity resource ID is needed - the Identity Proxy defaults to the system-assigned identity. */
+model TelemetryAuthTelemetrySystemAssignedManagedIdentityAuth {
+  /** kind value. */
+  kind?: "SystemAssignedManagedIdentity";
+}
+
+/** Configures telemetry collection for a sandbox. Passed in sandbox creation requests. */
+model TelemetryConfig {
+  /** One or more telemetry endpoints to route data to. */
+  endpoints: TelemetryEndpoint[];
+
+  /** Optional metrics collection interval in seconds. Must be &gt;= 2. Defaults to 15 if not specified. */
+  @minValue(2)
+  metricsIntervalSeconds?: int32;
+}
+
+/** Specifies which category of telemetry data to route to an endpoint. */
+union TelemetryData {
+  string,
+
+  /** Serialized TelemetryData value. */
+  ContainerStdoutStderr: "ContainerStdoutStderr",
+
+  /** Serialized TelemetryData value. */
+  ContainerOtel: "ContainerOtel",
+
+  /** Serialized TelemetryData value. */
+  Metrics: "Metrics",
+
+  /** Serialized TelemetryData value. */
+  NetworkEgressDecisions: "NetworkEgressDecisions",
+}
+
+/** Base type for telemetry endpoint configuration. Polymorphic on `kind` discriminator. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-endpoint union."
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union TelemetryEndpoint {
+  /** OTLP variant. */
+  OTLP: TelemetryEndpointOtlpTelemetryEndpoint,
+
+  /** ApplicationInsights variant. */
+  ApplicationInsights: TelemetryEndpointApplicationInsightsTelemetryEndpoint,
+
+  /** LogAnalytics variant. */
+  LogAnalytics: TelemetryEndpointLogAnalyticsTelemetryEndpoint,
+
+  /** LogAnalyticsLegacy variant. */
+  LogAnalyticsLegacy: TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint,
+}
+
+/** Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints. */
+model TelemetryEndpointApplicationInsightsTelemetryEndpoint {
+  /** kind value. */
+  kind?: "ApplicationInsights";
+
+  /** auth value. */
+  auth: TelemetryApplicationInsightsAuth;
+
+  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
+  data: TelemetryData[];
+
+  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  columns?: Record<LogColumnDef>;
+
+  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  dynamicJsonColumns?: boolean = false;
+}
+
+/** Log Analytics Legacy (Data Collector API) telemetry endpoint configuration. */
+model TelemetryEndpointLogAnalyticsLegacyTelemetryEndpoint {
+  /** kind value. */
+  kind?: "LogAnalyticsLegacy";
+
+  /** The Log Analytics workspace ID. */
+  workspaceId: string;
+
+  /** The custom log table name (e.g., "ContainerAppConsoleLogs"). */
+  tableName: string;
+
+  /** Polymorphic secret reference for the shared key. Resolved at runtime from Key Vault. May be a TelemetrySecretRef (sandboxGroup-scoped legacy secret) or a TelemetryAppSecretRef (artifactApp-local inline secret). */
+  auth: TelemetrySecretReference;
+
+  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
+  data: TelemetryData[];
+
+  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  columns?: Record<LogColumnDef>;
+
+  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  dynamicJsonColumns?: boolean = false;
+}
+
+/** Azure Monitor Log Analytics telemetry endpoint configuration. Uses the Logs Ingestion API via Data Collection Endpoint (DCE) and Data Collection Rule (DCR). Authentication is handled by the customer's managed identity (user-assigned or system-assigned) via Identity Proxy. */
+model TelemetryEndpointLogAnalyticsTelemetryEndpoint {
+  /** kind value. */
+  kind?: "LogAnalytics";
+
+  /** Data Collection Endpoint URL. */
+  dceEndpoint: url;
+
+  /** Data Collection Rule immutable ID. */
+  dcrImmutableId: string;
+
+  /** Target stream name in the DCR. */
+  tableName: string;
+
+  /** Required managed identity authentication. The identity must be assigned to the sandbox group. */
+  auth: TelemetryAuth;
+
+  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
+  data: TelemetryData[];
+
+  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  columns?: Record<LogColumnDef>;
+
+  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  dynamicJsonColumns?: boolean = false;
+}
+
+/** OTLP telemetry endpoint configuration. */
+model TelemetryEndpointOtlpTelemetryEndpoint {
+  /** kind value. */
+  kind?: "OTLP";
+
+  /** OTLP endpoint URL (e.g., "https://customer.monitor.azure.com/otlp"). */
+  endpoint: url;
+
+  /** `Grpc` or `Http`. */
+  protocol: TelemetryProtocol;
+
+  /** auth value. */
+  auth?: TelemetryHeaderAuth;
+
+  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
+  data: TelemetryData[];
+
+  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  columns?: Record<LogColumnDef>;
+
+  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  dynamicJsonColumns?: boolean = false;
+}
+
+/** Authentication configuration for an OTLP telemetry endpoint. The egress proxy injects the resolved secret value as an HTTP header. */
+model TelemetryHeaderAuth {
+  /** HTTP header to inject (e.g., "x-api-key", "Authorization"). */
+  headerName: string;
+
+  /** Reference to a user-managed secret containing key-value pairs. */
+  secretId: string;
+
+  /** The key within the secret whose value should be used as the header value. */
+  secretKey: string;
+}
+
+/** Specifies the protocol used to send telemetry data to an OTLP endpoint. */
+union TelemetryProtocol {
+  string,
+
+  /** Serialized TelemetryProtocol value. */
+  Grpc: "Grpc",
+
+  /** Serialized TelemetryProtocol value. */
+  Http: "Http",
+}
+
+/** Base type for telemetry endpoint secret references. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-secret union."
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union TelemetrySecretReference {
+  /** References a sandbox-group GlobalSecret by identifier and key. */
+  GlobalSecret: TelemetrySecretRef,
+
+  /** References a secret in the parent artifact app's local secret bundle. */
+  AppSecret: TelemetryAppSecretRef,
+}
+
+/** Reference to a sandbox-group GlobalSecret. */
+model TelemetrySecretRef {
+  /** Secret-reference kind. Optional for compatibility with legacy payloads. */
+  kind?: "GlobalSecret";
+
+  /** Identifier of the sandbox-group secret. */
+  secretId: string;
+
+  /** Key within the secret whose value should be used. */
+  secretKey: string;
+}
+
+/** Reference to a secret in the parent artifact app. */
+model TelemetryAppSecretRef {
+  /** Secret-reference kind. */
+  kind: "AppSecret";
+
+  /** Name of the secret in the parent artifact app's secret bundle. */
+  secretRef: string;
 }
 
 /** TenantId wire value. */
