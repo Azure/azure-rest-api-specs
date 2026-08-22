@@ -47,6 +47,12 @@
     },
     {
       "name": "FirewallPolicyKubeSelectorGroups"
+    },
+    {
+      "name": "FirewallPolicySecurityProfiles"
+    },
+    {
+      "name": "FirewallPolicySecurityProfileGroups"
     }
   ],
   "paths": {
@@ -1379,6 +1385,515 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups": {
+      "get": {
+        "operationId": "FirewallPolicySecurityProfileGroups_List",
+        "tags": [
+          "FirewallPolicySecurityProfileGroups"
+        ],
+        "description": "Lists all FirewallPolicySecurityProfileGroups in a FirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfileGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all FirewallPolicySecurityProfileGroups for a given FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicySecurityProfileGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}": {
+      "get": {
+        "operationId": "FirewallPolicySecurityProfileGroups_Get",
+        "tags": [
+          "FirewallPolicySecurityProfileGroups"
+        ],
+        "description": "Gets the specified FirewallPolicySecurityProfileGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityProfileGroupName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfileGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FirewallPolicySecurityProfileGroup": {
+            "$ref": "./examples/FirewallPolicySecurityProfileGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirewallPolicySecurityProfileGroups_CreateOrUpdate",
+        "tags": [
+          "FirewallPolicySecurityProfileGroups"
+        ],
+        "description": "Creates or updates the specified FirewallPolicySecurityProfileGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityProfileGroupName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update FirewallPolicySecurityProfileGroup operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfileGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirewallPolicySecurityProfileGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfileGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirewallPolicySecurityProfileGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfileGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FirewallPolicySecurityProfileGroup": {
+            "$ref": "./examples/FirewallPolicySecurityProfileGroupPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirewallPolicySecurityProfileGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FirewallPolicySecurityProfileGroups_Delete",
+        "tags": [
+          "FirewallPolicySecurityProfileGroups"
+        ],
+        "description": "Deletes the specified FirewallPolicySecurityProfileGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityProfileGroupName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete FirewallPolicySecurityProfileGroup": {
+            "$ref": "./examples/FirewallPolicySecurityProfileGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles": {
+      "get": {
+        "operationId": "FirewallPolicySecurityProfiles_List",
+        "tags": [
+          "FirewallPolicySecurityProfiles"
+        ],
+        "description": "Lists all FirewallPolicySecurityProfiles in a FirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all FirewallPolicySecurityProfiles for a given FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicySecurityProfileList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}": {
+      "get": {
+        "operationId": "FirewallPolicySecurityProfiles_Get",
+        "tags": [
+          "FirewallPolicySecurityProfiles"
+        ],
+        "description": "Gets the specified FirewallPolicySecurityProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityProfileName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FirewallPolicySecurityProfile": {
+            "$ref": "./examples/FirewallPolicySecurityProfileGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirewallPolicySecurityProfiles_CreateOrUpdate",
+        "tags": [
+          "FirewallPolicySecurityProfiles"
+        ],
+        "description": "Creates or updates the specified FirewallPolicySecurityProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityProfileName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update FirewallPolicySecurityProfile operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirewallPolicySecurityProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirewallPolicySecurityProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicySecurityProfile"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FirewallPolicySecurityProfile": {
+            "$ref": "./examples/FirewallPolicySecurityProfilePut.json"
+          },
+          "Create FirewallPolicySecurityProfile of kind PromptInjectionProtection": {
+            "$ref": "./examples/FirewallPolicySecurityProfilePromptInjectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirewallPolicySecurityProfile"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FirewallPolicySecurityProfiles_Delete",
+        "tags": [
+          "FirewallPolicySecurityProfiles"
+        ],
+        "description": "Deletes the specified FirewallPolicySecurityProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityProfileName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete FirewallPolicySecurityProfile": {
+            "$ref": "./examples/FirewallPolicySecurityProfileDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/signatureOverrides": {
       "get": {
         "operationId": "FirewallPolicyIdpsSignaturesOverrides_List",
@@ -1758,6 +2273,54 @@
         }
       ]
     },
+    "FirewallPolicyAdvancedApplicationThreatProtectionProfileProperties": {
+      "type": "object",
+      "description": "Security profile that inspects traffic for application layer threats.",
+      "properties": {
+        "mode": {
+          "$ref": "./common.json#/definitions/FirewallPolicyThreatProtectionMode",
+          "description": "The enforcement mode applied to traffic that matches this profile."
+        },
+        "confidenceLevelByAction": {
+          "$ref": "#/definitions/FirewallPolicyConfidenceLevelByAction",
+          "description": "The detection confidence level at which each action is taken."
+        }
+      },
+      "required": [
+        "mode",
+        "confidenceLevelByAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AdvancedApplicationThreatProtection"
+    },
+    "FirewallPolicyAdvancedMalwareThreatProtectionProfileProperties": {
+      "type": "object",
+      "description": "Security profile that inspects traffic for malware.",
+      "properties": {
+        "mode": {
+          "$ref": "./common.json#/definitions/FirewallPolicyThreatProtectionMode",
+          "description": "The enforcement mode applied to traffic that matches this profile."
+        },
+        "confidenceLevelByAction": {
+          "$ref": "#/definitions/FirewallPolicyConfidenceLevelByAction",
+          "description": "The detection confidence level at which each action is taken."
+        }
+      },
+      "required": [
+        "mode",
+        "confidenceLevelByAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AdvancedMalwareThreatProtection"
+    },
     "FirewallPolicyCertificateAuthority": {
       "type": "object",
       "description": "Trusted Root certificates properties for tls.",
@@ -1771,6 +2334,54 @@
           "description": "Name of the CA certificate."
         }
       }
+    },
+    "FirewallPolicyConfidenceLevelByAction": {
+      "type": "object",
+      "description": "The minimum detection confidence level, as a percentage, required for each action.",
+      "properties": {
+        "alert": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum confidence level, as a percentage, at which a detection is alerted on.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "deny": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum confidence level, as a percentage, at which a detection is denied.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "alert",
+        "deny"
+      ]
+    },
+    "FirewallPolicyDataLossPreventionProfileProperties": {
+      "type": "object",
+      "description": "Security profile that inspects traffic for sensitive data.",
+      "properties": {
+        "mode": {
+          "$ref": "./common.json#/definitions/FirewallPolicyDataLossPreventionMode",
+          "description": "The enforcement mode applied to traffic that matches this profile."
+        },
+        "vendor": {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileVendor",
+          "description": "The data classification vendor that backs this profile."
+        }
+      },
+      "required": [
+        "mode",
+        "vendor"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DataLossPrevention"
     },
     "FirewallPolicyDraft": {
       "type": "object",
@@ -2156,6 +2767,140 @@
         }
       }
     },
+    "FirewallPolicyPromptExtraction": {
+      "type": "object",
+      "description": "How prompts are extracted from inspected traffic.",
+      "properties": {
+        "providerMode": {
+          "$ref": "./common.json#/definitions/FirewallPolicyPromptInjectionProviderMode",
+          "description": "How the large language model API schema is determined."
+        },
+        "providers": {
+          "type": "array",
+          "description": "The large language model API schema families to extract prompts from. Required when providerMode is Predefined, and ignored otherwise. Specifying a single provider per profile gives the most accurate extraction, because some provider schemas differ only subtly from one another.",
+          "items": {
+            "$ref": "./common.json#/definitions/FirewallPolicyPromptInjectionProvider"
+          }
+        }
+      },
+      "required": [
+        "providerMode"
+      ]
+    },
+    "FirewallPolicyPromptInjectionBackend": {
+      "type": "object",
+      "description": "The prompt inspection service that evaluates extracted prompts.",
+      "properties": {
+        "vendor": {
+          "$ref": "./common.json#/definitions/FirewallPolicyPromptInjectionBackendVendor",
+          "description": "The vendor that performs prompt inspection."
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The endpoint of the prompt inspection service. This may be a Traffic Manager FQDN, for which performance routing is recommended, or the URL of a single Azure AI Content Safety resource."
+        },
+        "auth": {
+          "$ref": "#/definitions/FirewallPolicyPromptInjectionBackendAuth",
+          "description": "How the firewall authenticates to the prompt inspection service."
+        }
+      },
+      "required": [
+        "vendor",
+        "endpoint",
+        "auth"
+      ]
+    },
+    "FirewallPolicyPromptInjectionBackendAuth": {
+      "type": "object",
+      "description": "How the firewall authenticates to the prompt inspection service.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/FirewallPolicyPromptInjectionBackendAuthType",
+          "description": "The mechanism used to authenticate to the prompt inspection service."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FirewallPolicyPromptInjectionProtectionProfileProperties": {
+      "type": "object",
+      "description": "Security profile that inspects large language model traffic for prompt injection attacks.",
+      "properties": {
+        "mode": {
+          "$ref": "./common.json#/definitions/FirewallPolicyThreatProtectionMode",
+          "description": "The enforcement mode applied to traffic that matches this profile."
+        },
+        "direction": {
+          "$ref": "./common.json#/definitions/FirewallPolicyPromptInjectionDirection",
+          "description": "The traffic direction to inspect."
+        },
+        "failAction": {
+          "type": "string",
+          "description": "The action taken when the prompt inspection backend is unreachable or throttled.",
+          "default": "FailOpen",
+          "enum": [
+            "FailOpen",
+            "FailClose"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallPolicyPromptInjectionFailAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FailOpen",
+                "value": "FailOpen",
+                "description": "Allow the traffic."
+              },
+              {
+                "name": "FailClose",
+                "value": "FailClose",
+                "description": "Block the traffic."
+              }
+            ]
+          }
+        },
+        "backend": {
+          "$ref": "#/definitions/FirewallPolicyPromptInjectionBackend",
+          "description": "The prompt inspection service that evaluates extracted prompts."
+        },
+        "promptExtraction": {
+          "$ref": "#/definitions/FirewallPolicyPromptExtraction",
+          "description": "How prompts are extracted from inspected traffic. When omitted, the schema is auto-detected."
+        }
+      },
+      "required": [
+        "mode",
+        "backend"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PromptInjectionProtection"
+    },
+    "FirewallPolicyPromptInjectionUserAssignedIdentityAuth": {
+      "type": "object",
+      "description": "Authentication to the prompt inspection service using a user-assigned managed identity.",
+      "properties": {
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/FirewallPolicyUserAssignedManagedIdentitySettings",
+          "description": "The user-assigned managed identity used to authenticate to the prompt inspection service."
+        }
+      },
+      "required": [
+        "userAssignedManagedIdentitySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicyPromptInjectionBackendAuth"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
+    },
     "FirewallPolicyPropertiesFormat": {
       "type": "object",
       "description": "Firewall Policy definition.",
@@ -2180,6 +2925,26 @@
             "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
+        },
+        "securityProfiles": {
+          "type": "array",
+          "description": "List of references to FirewallPolicySecurityProfiles.",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "securityProfileGroups": {
+          "type": "array",
+          "description": "List of references to FirewallPolicySecurityProfileGroups.",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "globalSecurityProfileGroup": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the firewall policy security profile group applied to all traffic that no rule-level or rule-collection-level security profile group applies to."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
@@ -2253,6 +3018,27 @@
         }
       }
     },
+    "FirewallPolicyPurviewVendorSettings": {
+      "type": "object",
+      "description": "Microsoft Purview settings used to classify inspected traffic.",
+      "properties": {
+        "tenantId": {
+          "$ref": "./common.json#/definitions/uuid",
+          "description": "The Microsoft Entra tenant that owns the Microsoft Purview account."
+        },
+        "userObjectIds": {
+          "type": "array",
+          "description": "The Microsoft Entra object IDs of the users whose Microsoft Purview policies are applied.",
+          "items": {
+            "$ref": "./common.json#/definitions/uuid"
+          }
+        }
+      },
+      "required": [
+        "tenantId",
+        "userObjectIds"
+      ]
+    },
     "FirewallPolicyRule": {
       "type": "object",
       "description": "Properties of a rule.",
@@ -2268,6 +3054,10 @@
         "ruleType": {
           "$ref": "./common.json#/definitions/FirewallPolicyRuleType",
           "description": "Rule Type."
+        },
+        "securityProfileGroup": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the firewall policy security profile group applied to this rule. Takes precedence over the security profile group set on the containing rule collection."
         }
       },
       "discriminator": "ruleType",
@@ -2310,6 +3100,10 @@
           "description": "Priority of the Firewall Policy Rule Collection resource.",
           "minimum": 100,
           "maximum": 65000
+        },
+        "securityProfileGroup": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the firewall policy security profile group applied to every rule in this collection. A security profile group set on an individual rule takes precedence over this one."
         }
       },
       "discriminator": "ruleCollectionType",
@@ -2459,6 +3253,138 @@
         }
       }
     },
+    "FirewallPolicySecurityProfile": {
+      "type": "object",
+      "description": "Firewall Policy Security Profile resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileProperties",
+          "description": "The properties of the firewall policy security profile."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "FirewallPolicySecurityProfileGroup": {
+      "type": "object",
+      "description": "Firewall Policy Security Profile Group resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallPolicySecurityProfileGroupProperties",
+          "description": "The properties of the firewall policy security profile group."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "FirewallPolicySecurityProfileGroupListResult": {
+      "type": "object",
+      "description": "The response of a FirewallPolicySecurityProfileGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirewallPolicySecurityProfileGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicySecurityProfileGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FirewallPolicySecurityProfileGroupProperties": {
+      "type": "object",
+      "description": "Properties of the firewall policy security profile group.",
+      "properties": {
+        "securityProfileIds": {
+          "type": "array",
+          "description": "References to the firewall policy security profiles included in this group. At most one profile of each kind may be referenced.",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall policy security profile group resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "securityProfileIds"
+      ]
+    },
+    "FirewallPolicySecurityProfileListResult": {
+      "type": "object",
+      "description": "The response of a FirewallPolicySecurityProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirewallPolicySecurityProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicySecurityProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FirewallPolicySecurityProfileProperties": {
+      "type": "object",
+      "description": "Properties of the firewall policy security profile.",
+      "properties": {
+        "kind": {
+          "$ref": "./common.json#/definitions/FirewallPolicySecurityProfileKind",
+          "description": "The kind of protection this security profile provides."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall policy security profile resource.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "FirewallPolicySecurityProfileVendor": {
+      "type": "object",
+      "description": "The vendor that backs a data loss prevention security profile.",
+      "properties": {
+        "purview": {
+          "$ref": "#/definitions/FirewallPolicyPurviewVendorSettings",
+          "description": "Microsoft Purview settings used to classify inspected traffic."
+        }
+      }
+    },
     "FirewallPolicySku": {
       "type": "object",
       "description": "SKU of Firewall policy.",
@@ -2498,6 +3424,27 @@
           "description": "The CA used for intermediate CA generation."
         }
       }
+    },
+    "FirewallPolicyUserAssignedManagedIdentitySettings": {
+      "type": "object",
+      "description": "A user-assigned managed identity used by a firewall policy.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The user-assigned managed identity. It must also be assigned to the parent firewall policy so that Azure Resource Manager can perform the linked access check, and it must be granted the Cognitive Services User role on the target Azure AI Content Safety resources.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
     },
     "IDPSQueryObject": {
       "type": "object",

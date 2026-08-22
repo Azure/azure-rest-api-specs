@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dlpAndAntiMalware",
+            "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfileGroups/dlpAndAntiMalware",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "securityProfileIds": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/dlp"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/antiMalware"
+                }
+              ]
+            }
+          },
+          {
+            "name": "dlpOnly",
+            "etag": "W/\"e2f1c40a-5d8b-4c6a-9f2e-1a3b4c5d6e7f\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfileGroups/dlpOnly",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "securityProfileIds": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/dlp"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FirewallPolicySecurityProfileGroups_List",
+  "title": "List all FirewallPolicySecurityProfileGroups for a given FirewallPolicy"
+}

@@ -12581,6 +12581,26 @@ model FirewallPolicyPropertiesFormat {
   kubeSelectorGroups?: SubResource[];
 
   /**
+   * List of references to FirewallPolicySecurityProfiles.
+   */
+  @added(Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  securityProfiles?: SubResource[];
+
+  /**
+   * List of references to FirewallPolicySecurityProfileGroups.
+   */
+  @added(Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  securityProfileGroups?: SubResource[];
+
+  /**
+   * Reference to the firewall policy security profile group applied to all traffic that no rule-level or rule-collection-level security profile group applies to.
+   */
+  @added(Versions.v2026_01_01)
+  globalSecurityProfileGroup?: SubResource;
+
+  /**
    * The provisioning state of the firewall policy resource.
    */
   @visibility(Lifecycle.Read)
@@ -13111,6 +13131,477 @@ model FirewallPolicyKubeSelectorGroupProperties {
 }
 
 /**
+ * The kind of protection a firewall policy security profile provides.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicySecurityProfileKind {
+  string,
+
+  /**
+   * Inspects traffic for sensitive data using a data classification vendor.
+   */
+  DataLossPrevention: "DataLossPrevention",
+
+  /**
+   * Inspects traffic for malware using advanced threat protection.
+   */
+  AdvancedMalwareThreatProtection: "AdvancedMalwareThreatProtection",
+
+  /**
+   * Inspects traffic for application layer threats using advanced threat protection.
+   */
+  AdvancedApplicationThreatProtection: "AdvancedApplicationThreatProtection",
+
+  /**
+   * Inspects large language model traffic for prompt injection attacks.
+   */
+  PromptInjectionProtection: "PromptInjectionProtection",
+}
+
+/**
+ * The enforcement mode of a data loss prevention security profile.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyDataLossPreventionMode {
+  string,
+
+  /**
+   * Matching traffic is logged but allowed.
+   */
+  Audit: "Audit",
+
+  /**
+   * Matching traffic is blocked.
+   */
+  Enforce: "Enforce",
+}
+
+/**
+ * The enforcement mode of an advanced threat protection security profile.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyThreatProtectionMode {
+  string,
+
+  /**
+   * Matching traffic is alerted on but allowed.
+   */
+  AlertOnly: "AlertOnly",
+
+  /**
+   * Matching traffic is alerted on, and denied once the deny confidence level is reached.
+   */
+  AlertAndDeny: "AlertAndDeny",
+
+  /**
+   * Inspection is disabled and traffic is neither alerted on nor denied.
+   */
+  Off: "Off",
+}
+
+/**
+ * The traffic direction a prompt injection security profile inspects.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptInjectionDirection {
+  string,
+
+  /**
+   * Inspect the client to large language model direction only.
+   */
+  Request: "Request",
+
+  /**
+   * Inspect the large language model to client direction only.
+   */
+  Response: "Response",
+
+  /**
+   * Inspect both directions.
+   */
+  RequestAndResponse: "RequestAndResponse",
+}
+
+/**
+ * The action taken when the prompt inspection backend is unreachable or throttled.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptInjectionFailAction {
+  string,
+
+  /**
+   * Allow the traffic.
+   */
+  FailOpen: "FailOpen",
+
+  /**
+   * Block the traffic.
+   */
+  FailClose: "FailClose",
+}
+
+/**
+ * The vendor that performs prompt inspection.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptInjectionBackendVendor {
+  string,
+
+  /**
+   * Azure AI Content Safety.
+   */
+  AzureContentSafety: "AzureContentSafety",
+}
+
+/**
+ * The mechanism used to authenticate to the prompt inspection backend.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptInjectionBackendAuthType {
+  string,
+
+  /**
+   * Authenticate using a user-assigned managed identity.
+   */
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
+}
+
+/**
+ * How the large language model API schema is determined when extracting prompts.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptInjectionProviderMode {
+  string,
+
+  /**
+   * The firewall detects the schema from the destination FQDN and URL path at runtime, falling back to heuristic structural detection and then to a whole-body scan.
+   */
+  AutoDetect: "AutoDetect",
+
+  /**
+   * The firewall uses the built-in schema for the explicitly named provider family.
+   */
+  Predefined: "Predefined",
+}
+
+/**
+ * A large language model API schema family that prompts can be extracted from.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptInjectionProvider {
+  string,
+
+  /**
+   * OpenAI Chat Completions and Responses APIs.
+   */
+  OpenAI: "OpenAI",
+
+  /**
+   * Azure OpenAI Chat Completions API.
+   */
+  AzureOpenAI: "AzureOpenAI",
+
+  /**
+   * Anthropic Claude Messages API.
+   */
+  Anthropic: "Anthropic",
+}
+
+/**
+ * Properties of the firewall policy security profile.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicySecurityProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+@discriminator("kind")
+model FirewallPolicySecurityProfileProperties {
+  /**
+   * The kind of protection this security profile provides.
+   */
+  kind: FirewallPolicySecurityProfileKind;
+
+  /**
+   * The provisioning state of the firewall policy security profile resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Security profile that inspects traffic for sensitive data.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyDataLossPreventionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyDataLossPreventionProfileProperties
+  extends FirewallPolicySecurityProfileProperties {
+  /**
+   * The kind of protection this security profile provides.
+   */
+  kind: "DataLossPrevention";
+
+  /**
+   * The enforcement mode applied to traffic that matches this profile.
+   */
+  mode: FirewallPolicyDataLossPreventionMode;
+
+  /**
+   * The data classification vendor that backs this profile.
+   */
+  vendor: FirewallPolicySecurityProfileVendor;
+}
+
+/**
+ * Security profile that inspects traffic for malware.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyAdvancedMalwareThreatProtectionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyAdvancedMalwareThreatProtectionProfileProperties
+  extends FirewallPolicySecurityProfileProperties {
+  /**
+   * The kind of protection this security profile provides.
+   */
+  kind: "AdvancedMalwareThreatProtection";
+
+  /**
+   * The enforcement mode applied to traffic that matches this profile.
+   */
+  mode: FirewallPolicyThreatProtectionMode;
+
+  /**
+   * The detection confidence level at which each action is taken.
+   */
+  confidenceLevelByAction: FirewallPolicyConfidenceLevelByAction;
+}
+
+/**
+ * Security profile that inspects traffic for application layer threats.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyAdvancedApplicationThreatProtectionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyAdvancedApplicationThreatProtectionProfileProperties
+  extends FirewallPolicySecurityProfileProperties {
+  /**
+   * The kind of protection this security profile provides.
+   */
+  kind: "AdvancedApplicationThreatProtection";
+
+  /**
+   * The enforcement mode applied to traffic that matches this profile.
+   */
+  mode: FirewallPolicyThreatProtectionMode;
+
+  /**
+   * The detection confidence level at which each action is taken.
+   */
+  confidenceLevelByAction: FirewallPolicyConfidenceLevelByAction;
+}
+
+/**
+ * The minimum detection confidence level, as a percentage, required for each action.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyConfidenceLevelByAction belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyConfidenceLevelByAction {
+  /**
+   * The minimum confidence level, as a percentage, at which a detection is alerted on.
+   */
+  @maxValue(100)
+  @minValue(0)
+  alert: int32;
+
+  /**
+   * The minimum confidence level, as a percentage, at which a detection is denied.
+   */
+  @maxValue(100)
+  @minValue(0)
+  deny: int32;
+}
+
+/**
+ * The vendor that backs a data loss prevention security profile.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicySecurityProfileVendor belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicySecurityProfileVendor {
+  /**
+   * Microsoft Purview settings used to classify inspected traffic.
+   */
+  purview?: FirewallPolicyPurviewVendorSettings;
+}
+
+/**
+ * Microsoft Purview settings used to classify inspected traffic.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPurviewVendorSettings belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyPurviewVendorSettings {
+  /**
+   * The Microsoft Entra tenant that owns the Microsoft Purview account.
+   */
+  tenantId: Azure.Core.uuid;
+
+  /**
+   * The Microsoft Entra object IDs of the users whose Microsoft Purview policies are applied.
+   */
+  userObjectIds: Azure.Core.uuid[];
+}
+
+/**
+ * Security profile that inspects large language model traffic for prompt injection attacks.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionProtectionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyPromptInjectionProtectionProfileProperties
+  extends FirewallPolicySecurityProfileProperties {
+  /**
+   * The kind of protection this security profile provides.
+   */
+  kind: "PromptInjectionProtection";
+
+  /**
+   * The enforcement mode applied to traffic that matches this profile.
+   */
+  mode: FirewallPolicyThreatProtectionMode;
+
+  /**
+   * The traffic direction to inspect.
+   */
+  direction?: FirewallPolicyPromptInjectionDirection;
+
+  /**
+   * The action taken when the prompt inspection backend is unreachable or throttled.
+   */
+  failAction?: FirewallPolicyPromptInjectionFailAction = FirewallPolicyPromptInjectionFailAction.FailOpen;
+
+  /**
+   * The prompt inspection service that evaluates extracted prompts.
+   */
+  backend: FirewallPolicyPromptInjectionBackend;
+
+  /**
+   * How prompts are extracted from inspected traffic. When omitted, the schema is auto-detected.
+   */
+  promptExtraction?: FirewallPolicyPromptExtraction;
+}
+
+/**
+ * The prompt inspection service that evaluates extracted prompts.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionBackend belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyPromptInjectionBackend {
+  /**
+   * The vendor that performs prompt inspection.
+   */
+  vendor: FirewallPolicyPromptInjectionBackendVendor;
+
+  /**
+   * The endpoint of the prompt inspection service. This may be a Traffic Manager FQDN, for which performance routing is recommended, or the URL of a single Azure AI Content Safety resource.
+   */
+  endpoint: url;
+
+  /**
+   * How the firewall authenticates to the prompt inspection service.
+   */
+  auth: FirewallPolicyPromptInjectionBackendAuth;
+}
+
+/**
+ * How the firewall authenticates to the prompt inspection service.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionBackendAuth belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+@discriminator("type")
+model FirewallPolicyPromptInjectionBackendAuth {
+  /**
+   * The mechanism used to authenticate to the prompt inspection service.
+   */
+  type: FirewallPolicyPromptInjectionBackendAuthType;
+}
+
+/**
+ * Authentication to the prompt inspection service using a user-assigned managed identity.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionUserAssignedIdentityAuth belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyPromptInjectionUserAssignedIdentityAuth
+  extends FirewallPolicyPromptInjectionBackendAuth {
+  /**
+   * The mechanism used to authenticate to the prompt inspection service.
+   */
+  type: "UserAssignedManagedIdentity";
+
+  /**
+   * The user-assigned managed identity used to authenticate to the prompt inspection service.
+   */
+  userAssignedManagedIdentitySettings: FirewallPolicyUserAssignedManagedIdentitySettings;
+}
+
+/**
+ * A user-assigned managed identity used by a firewall policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyUserAssignedManagedIdentitySettings belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyUserAssignedManagedIdentitySettings {
+  /**
+   * The user-assigned managed identity. It must also be assigned to the parent firewall policy so that Azure Resource Manager can perform the linked access check, and it must be granted the Cognitive Services User role on the target Azure AI Content Safety resources.
+   */
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * How prompts are extracted from inspected traffic.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptExtraction belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicyPromptExtraction {
+  /**
+   * How the large language model API schema is determined.
+   */
+  providerMode: FirewallPolicyPromptInjectionProviderMode;
+
+  /**
+   * The large language model API schema families to extract prompts from. Required when providerMode is Predefined, and ignored otherwise. Specifying a single provider per profile gives the most accurate extraction, because some provider schemas differ only subtly from one another.
+   */
+  providers?: FirewallPolicyPromptInjectionProvider[];
+}
+
+/**
+ * Properties of the firewall policy security profile group.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicySecurityProfileGroupProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@added(Versions.v2026_01_01)
+model FirewallPolicySecurityProfileGroupProperties {
+  /**
+   * References to the firewall policy security profiles included in this group. At most one profile of each kind may be referenced.
+   */
+  securityProfileIds: SubResource[];
+
+  /**
+   * The provisioning state of the firewall policy security profile group resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
  * Properties of the rule collection.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -13133,6 +13624,12 @@ model FirewallPolicyRuleCollection {
   @maxValue(65000)
   @minValue(100)
   priority?: int32;
+
+  /**
+   * Reference to the firewall policy security profile group applied to every rule in this collection. A security profile group set on an individual rule takes precedence over this one.
+   */
+  @added(Versions.v2026_01_01)
+  securityProfileGroup?: SubResource;
 }
 
 /**
@@ -26204,6 +26701,12 @@ model FirewallPolicyRule {
    * Rule Type.
    */
   ruleType: FirewallPolicyRuleType;
+
+  /**
+   * Reference to the firewall policy security profile group applied to this rule. Takes precedence over the security profile group set on the containing rule collection.
+   */
+  @added(Versions.v2026_01_01)
+  securityProfileGroup?: SubResource;
 }
 
 /**
