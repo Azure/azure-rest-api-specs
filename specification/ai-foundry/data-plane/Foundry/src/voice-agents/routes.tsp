@@ -34,6 +34,7 @@ interface VoiceAgentWebSocket {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
   @summary("Connect to a voice agent")
   @get
+  @sharedRoute
   @route("/agents/{agent_name}/endpoint/protocols/voice")
   connectVoiceAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -71,6 +72,16 @@ interface VoiceAgentWebSocket {
     },
     VoiceAgentWebSocketUpgradeResponse
   >;
+
+  /** Mock endpoint used to ground the Voice Agent WebSocket protocol models. */
+  @removed(Versions.v1)
+  @route("/agents/{agent_name}/endpoint/protocols/voice")
+  @sharedRoute
+  websocketProtocol(
+    @path agent_name: string,
+    ...FoundryDataPlaneApiVersionParameter,
+    clientEvent: VoiceAgentClientEvent,
+  ): VoiceAgentServerEvent;
 }
 
 /**
