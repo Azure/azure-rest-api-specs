@@ -428,6 +428,7 @@ namespace Azure.AI.Projects {
     /**
      * The definition of azure function and its parameters.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     function: {
       /**
        * The name of the function to be called.
@@ -889,7 +890,7 @@ namespace Azure.AI.Projects {
      * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
@@ -917,7 +918,7 @@ namespace Azure.AI.Projects {
      * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
@@ -1003,7 +1004,7 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")

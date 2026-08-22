@@ -244,6 +244,7 @@ model VoiceAgentResponseEventContentPart {
   format?: VoiceAudioFormat;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract, including conversation_id, while replacing audio and output."
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 model VoiceAgentRealtimeResponse extends OmitProperties<
@@ -794,6 +795,7 @@ model VoiceAgentServerEventResponseVideoDelta {
   delta: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response that switches an HTTP connection to the voice-agent WebSocket protocol.")
 model VoiceAgentWebSocketUpgradeResponse {
   @statusCode
