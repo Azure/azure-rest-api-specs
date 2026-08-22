@@ -1,0 +1,62 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+options:
+  "@azure-tools/typespec-java":
+    api-version: "2025-11-15-preview"
+    package-dir: "azure-ai-agents"
+    namespace: "com.azure.ai.agents"
+    service-name: "Agents"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    generate-samples: false
+    custom-types-subpackage: "implementation.models"
+    rename-model:
+      MCPToolAllowedTools1: MCPToolAllowedTools
+      MCPToolRequireApproval1: MCPToolRequireApproval
+    customization-class: customizations/src/main/java/AgentsCustomizations.java
+    flavor: azure
+  "@typespec/json-schema":
+    emitAllModels: true
+    emitAllRefs: false
+    emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
+    file-type: json
+    bundleId: azure-ai-agents-v2.json
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/ai/Azure.AI.Projects/.external-readonly/"
+      - "specification/ai/Azure.AI.Projects/agents/"
+      - "specification/ai/Azure.AI.Projects/common/"
+      - "specification/ai/Azure.AI.Projects/connections/"
+      - "specification/ai/Azure.AI.Projects/datasets/"
+      - "specification/ai/Azure.AI.Projects/indexes/"
+      - "specification/ai/Azure.AI.Projects/deployments/"
+      - "specification/ai/Azure.AI.Projects/red-teams/"
+      - "specification/ai/Azure.AI.Projects/evaluationrules/"
+      - "specification/ai/Azure.AI.Projects/openai-evaluations/"
+      - "specification/ai/Azure.AI.Projects/evaluation_taxonomies/"
+      - "specification/ai/Azure.AI.Projects/evaluators/"
+      - "specification/ai/Azure.AI.Projects/insights/"
+      - "specification/ai/Azure.AI.Projects/schedules/"
+      - "specification/ai/Azure.AI.Projects/memory_stores/"
+      - "specification/ai/Azure.AI.Projects/conversations/"
+      - "specification/ai/Azure.AI.Projects/responses/"
+      - "specification/ai/Azure.AI.Projects/tools/"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
+    "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>, and not Record<string>. But this needs further investigation"
+    "@azure-tools/typespec-azure-core/use-standard-names": "PUT operations that return 200 should start with 'replace' or 'createOrReplace'"
+    # The set of rules, disabled because of .external-readonly contains non compliant code.
+    "@azure-tools/typespec-azure-core/documentation-required": "Some OpenAI models do not contain docstrings."
+    "@azure-tools/typespec-azure-core/no-nullable": "Some OpenAI models still contain <> | null notation."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "OpenAI incompliance"
+    "@azure-tools/typespec-azure-core/no-openapi": ".external-readonly uses OpenAI."
+    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "OpenAI contains multiple discriminators."
+    "@azure-tools/typespec-azure-core/no-unknown": "unknowns are used in OpenAI package."
+    "@azure-tools/typespec-azure-core/no-query-explode": "Explode is used in OpenAI package."
+    "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."
