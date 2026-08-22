@@ -34,27 +34,18 @@ describe("SDK PR build-failed labeling pipeline", () => {
     expect(initializationIndex).toBeLessThan(generationIndex);
   });
 
-  test("applies the emitted label to the submitted SDK pull request", () => {
-    const task = getTask("Add build-failed label");
+  test("passes the emitted label when creating the SDK pull request", () => {
+    const task = getTask("Create pull request");
 
-    expect(task).toContain("filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1");
-    expect(task).toContain('-IssueNumber "$(Submitted.PullRequest.Number)"');
-    expect(task).toContain('-Labels "$(BuildFailedLabel)"');
+    expect(task).toContain(
+      "filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1",
+    );
+    expect(task).toContain('-PRLabels "$(BuildFailedLabel)"');
     expect(task).toContain('-AuthToken "$(GH_TOKEN)"');
   });
 
-  test("runs only after an SDK pull request exists and a label was emitted", () => {
-    const createPullRequestIndex = pipelineTemplate.indexOf("displayName: Create pull request");
-    const buildFailedLabelIndex = pipelineTemplate.indexOf("displayName: Add build-failed label");
-    const autoReleaseLabelIndex = pipelineTemplate.indexOf("displayName: Add auto-release label");
-    const task = getTask("Add build-failed label");
-
-    expect(buildFailedLabelIndex).toBeGreaterThan(createPullRequestIndex);
-    expect(buildFailedLabelIndex).toBeLessThan(autoReleaseLabelIndex);
-    expect(task).toContain("succeeded()");
-    expect(task).toContain("eq(variables['HasChanges'], 'true')");
-    expect(task).toContain("ne(variables['Build.Reason'], 'PullRequest')");
-    expect(task).toContain("not(endsWith(variables['SdkRepoName'], '-pr'))");
-    expect(task).toContain("ne(variables['BuildFailedLabel'], '')");
+  test("does not add the build-failed label after pull request creation", () => {
+    expect(pipelineTemplate).not.toContain("displayName: Add build-failed label");
+    expect(pipelineTemplate).not.toContain('-Labels "$(BuildFailedLabel)"');
   });
 });

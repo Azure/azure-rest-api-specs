@@ -378,22 +378,9 @@ stages:
               -AuthToken "$(GH_TOKEN)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
+              -PRLabels "$(BuildFailedLabel)"
               -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
               -UpdateExistingPullRequest $true
-
-        - task: PowerShell@2
-          displayName: Add build-failed label
-          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')), ne(variables['BuildFailedLabel'], ''))
-          inputs:
-            pwsh: true
-            workingDirectory: $(SdkRepoDirectory)
-            filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
-            arguments: >
-              -RepoOwner "azure"
-              -RepoName "$(SdkRepoName)"
-              -IssueNumber "$(Submitted.PullRequest.Number)"
-              -Labels "$(BuildFailedLabel)"
-              -AuthToken "$(GH_TOKEN)"
 
         - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
           - task: PowerShell@2
