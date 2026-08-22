@@ -50,6 +50,15 @@ scalar string4096 extends string;
 @doc("String with max length validation of 256 characters")
 scalar string256 extends string;
 
+@minLength(1)
+@maxLength(256)
+scalar dimensionFilter256 extends string;
+
+@minLength(1)
+@maxLength(2048)
+@doc("String with max length validation of 2048 characters")
+scalar string2048 extends string;
+
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
@@ -354,9 +363,8 @@ model ResourceMetricSignalDefinitionProperties
   dimension?: string;
 
   @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
-  @minLength(1)
-  @maxLength(256)
-  dimensionFilter?: string;
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
+  dimensionFilter?: string2048;
 }
 
 @doc("Log Analytics Query Signal Definition properties")
@@ -1590,9 +1598,7 @@ model SignalConfiguration {
   timeGrain?: string;
 
   @doc("Optional dimension filter to apply to the metric.")
-  @minLength(1)
-  @maxLength(256)
-  dimensionFilter?: string;
+  dimensionFilter?: string2048;
 
   @doc("Evaluation rules with recommended thresholds.")
   evaluationRules?: EvaluationRule;
