@@ -8,6 +8,9 @@ import { extractInputs } from "../context.js";
 import { loadApproversConfig } from "./approvers.js";
 import { removeLabelIfPresent } from "./labels.js";
 
+const TIER1_DATA_PLANE = ["dotnet", "java", "python", "typescript"];
+const TIER1_MGMT = ["dotnet", "java", "python", "typescript", "go"];
+
 const FormatValidationResultSchema = z.object({
   valid: z.boolean(),
   namespace: z.string(),
@@ -132,6 +135,35 @@ export function parseCommentTable(body) {
 }
 
 /**
+ * @param {Map<string, { namespace: string, status: string }>} previousTable
+ * @param {Record<string, string>} namespacesFound
+ * @param {string[]} existingLabels
+ * @param {boolean} isMgmt
+ * @returns {string[]}
+ */
+export function getResetLanguages(previousTable, namespacesFound, existingLabels, isMgmt) {
+  const changedLanguages = Object.entries(namespacesFound)
+    .filter(([language, namespace]) => {
+      const previous = previousTable.get(language);
+      return previous && previous.namespace !== namespace;
+    })
+    .map(([language]) => language);
+
+  if (changedLanguages.length === 0) {
+    return [];
+  }
+
+  const tier1 = isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
+  const languagesToReset = new Set([
+    ...tier1,
+    ...changedLanguages.filter((language) => !tier1.includes(language)),
+  ]);
+  return [...languagesToReset].filter((language) =>
+    existingLabels.includes(`package-name-${language}-approved`),
+  );
+}
+
+/**
  * @param {Object} params
  * @param {import("./approvers.js").ApproversConfig} params.approversConfig
  * @param {Record<string, string>} params.namespacesFound
@@ -241,22 +273,30 @@ export default async function postResults({ github, context, core }) {
     /** @type {Map<string, { namespace: string, status: string }>} */
     const previousTable = existingBody ? parseCommentTable(existingBody) : new Map();
 
+    resetLanguages = getResetLanguages(
+      previousTable,
+      results.namespacesFound,
+      existingLabels,
+      results.isMgmt,
+    );
+    for (const language of resetLanguages) {
+      const approvedLabel = `package-name-${language}-approved`;
+      core.info(`Resetting approval for ${language} after a package name change`);
+      await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
+      existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
+    }
+
     for (const language of languages) {
       const prev = previousTable.get(language);
       const newNs = results.namespacesFound[language];
 
-      if (prev && prev.namespace !== newNs) {
-        // Package name genuinely changed from a previously-recorded value
-        const approvedLabel = `package-name-${language}-approved`;
-        if (existingLabels.includes(approvedLabel)) {
-          core.info(
-            `Package name changed for ${language}: "${prev.namespace}" → "${newNs}", resetting approval`,
-          );
-          await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
-          existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
-          resetLanguages.push(language);
-        }
-      } else if (prev && prev.status && !prev.status.includes("Pending")) {
+      if (
+        prev &&
+        prev.namespace === newNs &&
+        prev.status &&
+        !prev.status.includes("Pending") &&
+        !resetLanguages.includes(language)
+      ) {
         // Package name unchanged and previously approved: preserve status
         core.info(`Package name unchanged for ${language}: "${newNs}", preserving approval`);
         preservedApprovals.set(language, prev);
@@ -287,7 +327,9 @@ export default async function postResults({ github, context, core }) {
   if (results.isDataPlane) {
     labelsToAdd.add("data-plane");
   }
-  for (const language of languages) {
+  const tier1 = results.isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
+  const allLanguages = [...new Set([...tier1, ...languages])];
+  for (const language of allLanguages) {
     // Skip adding pending label if language is already approved
     const approvedLabel = `package-name-${language}-approved`;
     if (!existingLabels.includes(approvedLabel)) {
@@ -296,10 +338,10 @@ export default async function postResults({ github, context, core }) {
   }
 
   // Don't re-add package-name-review-required if everything is already approved
-  const allApproved = languages.every((lang) =>
+  const allApproved = allLanguages.every((lang) =>
     existingLabels.includes(`package-name-${lang}-approved`),
   );
-  if (allApproved && languages.length > 0) {
+  if (allApproved && allLanguages.length > 0) {
     labelsToAdd.delete("package-name-review-required");
   }
 

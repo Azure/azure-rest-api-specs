@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { parseCommentTable } from "../../src/package-name-approval/post-results.js";
+import {
+  getResetLanguages,
+  parseCommentTable,
+} from "../../src/package-name-approval/post-results.js";
 
 // Import only the pure functions we can test without heavy mocking
 // buildCommentBody and getApprovers are the key testable units
@@ -105,42 +108,8 @@ describe("post-results", () => {
     });
   });
 
-  describe("selective reset logic", () => {
-    /**
-     * Helper that mirrors the production reset logic from post-results.js.
-     * Only resets a language when:
-     *  1. A previous entry exists (prev !== undefined)
-     *  2. The namespace actually changed (prev.namespace !== newNs)
-     *  3. The language was previously approved (has approved label)
-     *
-     * First-time detections (!prev) are treated as new pending, not reset.
-     *
-     * @param {Map<string, { namespace: string, status: string }>} previousTable
-     * @param {Record<string, string>} newNamespaces
-     * @param {string[] | undefined} [existingLabels]
-     * @returns {{ resetLanguages: string[], preservedApprovals: Map<string, { namespace: string, status: string }> }}
-     */
-    function computeResets(previousTable, newNamespaces, existingLabels) {
-      /** @type {string[]} */
-      const resetLanguages = [];
-      /** @type {Map<string, { namespace: string, status: string }>} */
-      const preservedApprovals = new Map();
-      const labels = existingLabels ?? [];
-      for (const [language, newNs] of Object.entries(newNamespaces)) {
-        const prev = previousTable.get(language);
-        if (prev && prev.namespace !== newNs) {
-          const approvedLabel = `package-name-${language}-approved`;
-          if (labels.includes(approvedLabel)) {
-            resetLanguages.push(language);
-          }
-        } else if (prev && prev.status && !prev.status.includes("Pending")) {
-          preservedApprovals.set(language, prev);
-        }
-      }
-      return { resetLanguages, preservedApprovals };
-    }
-
-    it("should reset only the language whose Package name changed and was approved", () => {
+  describe("Tier 1 reset logic", () => {
+    it("should reset every approved Tier 1 language when a package name changes", () => {
       const previousTable = new Map([
         [
           "java",
@@ -156,20 +125,13 @@ describe("post-results", () => {
         java: "com.azure.resourcemanager.network", // changed
         dotnet: "Azure.ResourceManager.Compute", // unchanged
       };
-
       const existingLabels = ["package-name-java-approved", "package-name-dotnet-approved"];
-      const { resetLanguages, preservedApprovals } = computeResets(
-        previousTable,
-        newNamespaces,
-        existingLabels,
-      );
+      const resetLanguages = getResetLanguages(previousTable, newNamespaces, existingLabels, false);
 
-      expect(resetLanguages).toEqual(["java"]);
-      expect(preservedApprovals.size).toBe(1);
-      expect(preservedApprovals.get("dotnet")?.status).toBe("✅ Approved by @approver2");
+      expect(resetLanguages).toEqual(["dotnet", "java"]);
     });
 
-    it("should not reset a changed namespace if it was not previously approved", () => {
+    it("should reset approved Tier 1 languages when the changed language is pending", () => {
       const previousTable = new Map([
         ["java", { namespace: "com.azure.resourcemanager.compute", status: "⏳ Pending" }],
         [
@@ -177,61 +139,66 @@ describe("post-results", () => {
           { namespace: "Azure.ResourceManager.Compute", status: "✅ Approved by @approver2" },
         ],
       ]);
-
       const newNamespaces = {
-        java: "com.azure.resourcemanager.network", // changed but was pending, not approved
-        dotnet: "Azure.ResourceManager.Compute", // unchanged
+        java: "com.azure.resourcemanager.network",
+        dotnet: "Azure.ResourceManager.Compute",
       };
 
-      const existingLabels = ["package-name-dotnet-approved"]; // java has no approved label
-      const { resetLanguages, preservedApprovals } = computeResets(
+      const resetLanguages = getResetLanguages(
         previousTable,
         newNamespaces,
-        existingLabels,
+        ["package-name-dotnet-approved"],
+        false,
       );
 
-      expect(resetLanguages).toEqual([]);
-      expect(preservedApprovals.size).toBe(1);
-      expect(preservedApprovals.get("dotnet")?.status).toBe("✅ Approved by @approver2");
+      expect(resetLanguages).toEqual(["dotnet"]);
     });
 
-    it("should not reset new languages not in previous comment (first detection)", () => {
+    it("should reset the Go approval for management plane package name changes", () => {
+      const previousTable = new Map([
+        ["java", { namespace: "com.azure.compute", status: "✅ Approved by @approver1" }],
+      ]);
+      const newNamespaces = { java: "com.azure.network" };
+      const existingLabels = ["package-name-go-approved"];
+
+      const resetLanguages = getResetLanguages(previousTable, newNamespaces, existingLabels, true);
+
+      expect(resetLanguages).toEqual(["go"]);
+    });
+
+    it("should not reset new languages not in previous comment", () => {
       const previousTable = new Map([
         [
           "java",
           { namespace: "com.azure.resourcemanager.compute", status: "✅ Approved by @approver1" },
         ],
       ]);
-
       const newNamespaces = {
         java: "com.azure.resourcemanager.compute",
-        python: "azure-mgmt-compute", // new language, no previous entry
+        python: "azure-mgmt-compute",
       };
 
-      const existingLabels = ["package-name-java-approved"];
-      const { resetLanguages, preservedApprovals } = computeResets(
+      const resetLanguages = getResetLanguages(
         previousTable,
         newNamespaces,
-        existingLabels,
+        ["package-name-java-approved"],
+        false,
       );
 
-      // python is new (no prev), should NOT be reset
       expect(resetLanguages).toEqual([]);
-      expect(preservedApprovals.get("java")?.status).toBe("✅ Approved by @approver1");
     });
 
-    it("should not reset any when no previous comment exists (first run)", () => {
-      /** @type {Map<string, { namespace: string, status: string }> } */
-      const previousTable = new Map(); // empty - first run
+    it("should not reset any languages when no previous comment exists", () => {
+      const resetLanguages = getResetLanguages(
+        new Map(),
+        {
+          java: "com.azure.resourcemanager.compute",
+          dotnet: "Azure.ResourceManager.Compute",
+        },
+        [],
+        false,
+      );
 
-      const newNamespaces = {
-        java: "com.azure.resourcemanager.compute",
-        dotnet: "Azure.ResourceManager.Compute",
-      };
-
-      const { resetLanguages } = computeResets(previousTable, newNamespaces, []);
-
-      // First detection: everything is new pending, nothing to reset
       expect(resetLanguages).toEqual([]);
     });
 
@@ -253,17 +220,12 @@ describe("post-results", () => {
       };
 
       const existingLabels = ["package-name-java-approved", "package-name-dotnet-approved"];
-      const { resetLanguages, preservedApprovals } = computeResets(
-        previousTable,
-        newNamespaces,
-        existingLabels,
-      );
+      const resetLanguages = getResetLanguages(previousTable, newNamespaces, existingLabels, false);
 
       expect(resetLanguages).toEqual([]);
-      expect(preservedApprovals.size).toBe(2);
     });
 
-    it("should only reset the single changed language when multiple exist", () => {
+    it("should retain reset behavior for approved non-Tier 1 languages that changed", () => {
       const previousTable = new Map([
         [
           "java",
@@ -282,6 +244,7 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute",
         python: "azure-mgmt-compute",
         typescript: "@azure/arm-compute-2", // only TS changed
+        rust: "azure-resourcemanager-compute",
       };
 
       const existingLabels = [
@@ -289,15 +252,15 @@ describe("post-results", () => {
         "package-name-dotnet-approved",
         "package-name-python-approved",
         "package-name-typescript-approved",
+        "package-name-rust-approved",
       ];
-      const { resetLanguages, preservedApprovals } = computeResets(
-        previousTable,
-        newNamespaces,
-        existingLabels,
-      );
+      previousTable.set("rust", {
+        namespace: "azure-resourcemanager-compute-v1",
+        status: "✅ Approved by @approver5",
+      });
+      const resetLanguages = getResetLanguages(previousTable, newNamespaces, existingLabels, false);
 
-      expect(resetLanguages).toEqual(["typescript"]);
-      expect(preservedApprovals.size).toBe(3);
+      expect(resetLanguages).toEqual(["dotnet", "java", "python", "typescript", "rust"]);
     });
   });
 
