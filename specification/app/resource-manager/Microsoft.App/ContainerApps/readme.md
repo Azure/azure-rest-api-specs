@@ -50,6 +50,15 @@ directive:
       Do not introduce breaking changes in GA services
 ```
 
+### Tag: package-preview-2026-03-02-preview
+
+These settings apply only when `--tag=package-preview-2026-03-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-02-preview'
+input-file:
+  - preview/2026-03-02-preview/openapi.json
+```
+
 ### Tag: package-preview-2025-10-02-preview
 
 These settings apply only when `--tag=package-preview-2025-10-02-preview` is specified on the command line.
