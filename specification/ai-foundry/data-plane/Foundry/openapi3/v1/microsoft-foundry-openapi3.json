@@ -15,6 +15,9 @@
       "name": "Voice Agent Versions"
     },
     {
+      "name": "Agent Telephony"
+    },
+    {
       "name": "AgentServer Task Storage"
     },
     {
@@ -3877,6 +3880,1197 @@
               }
             }
           }
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony": {
+      "post": {
+        "operationId": "AgentTelephony_createTelephonyBinding",
+        "summary": "Create an agent telephony binding",
+        "description": "Creates a telephony binding for the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the binding.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyBinding"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "AgentTelephony_listTelephonyBindings",
+        "summary": "List agent telephony bindings",
+        "description": "Returns the telephony bindings owned by the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent whose bindings are listed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "required": false,
+            "description": "Filters bindings by provider.",
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyProvider"
+            },
+            "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filters bindings by lifecycle status.",
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyBindingStatus"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "The maximum number of bindings to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 100
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor returned by the previous page.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyBindingList"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/calls": {
+      "get": {
+        "operationId": "AgentTelephony_listTelephonyCalls",
+        "summary": "List agent telephony calls",
+        "description": "Returns the durable inbound call history for the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent whose calls are listed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "required": false,
+            "description": "Filters calls by provider.",
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyProvider"
+            },
+            "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filters calls by lifecycle status.",
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCallStatus"
+            },
+            "explode": false
+          },
+          {
+            "name": "started_after",
+            "in": "query",
+            "required": false,
+            "description": "Includes calls that started at or after this Unix timestamp in seconds.",
+            "schema": {
+              "$ref": "#/components/schemas/FoundryTimestamp"
+            },
+            "explode": false
+          },
+          {
+            "name": "started_before",
+            "in": "query",
+            "required": false,
+            "description": "Includes calls that started at or before this Unix timestamp in seconds.",
+            "schema": {
+              "$ref": "#/components/schemas/FoundryTimestamp"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "The maximum number of call records to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 100
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor returned by the previous page.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallRecordList"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/calls/{call_id}": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyCall",
+        "summary": "Get an agent telephony call",
+        "description": "Retrieves a durable inbound call record owned by the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the call record.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "required": true,
+            "description": "The service-generated call identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallRecord"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/calls/{call_id}:end": {
+      "post": {
+        "operationId": "AgentTelephony_endTelephonyCall",
+        "summary": "End an active agent telephony call",
+        "description": "Ends an active inbound call owned by the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the active call.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "required": true,
+            "description": "The service-generated call identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallRecord"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/calls/{call_id}:transfer": {
+      "post": {
+        "operationId": "AgentTelephony_transferTelephonyCall",
+        "summary": "Transfer an active agent telephony call",
+        "description": "Transfers an active inbound call to a configured target for the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the active call.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "call_id",
+            "in": "path",
+            "required": true,
+            "description": "The service-generated call identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallRecord"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TelephonyCallTransferRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/transfer_targets": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyTransferTargets",
+        "summary": "Get agent telephony transfer targets",
+        "description": "Returns all transfer targets configured for the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent whose transfer targets are retrieved.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "The entity tag to send in the `If-Match` header when replacing the transfer targets.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyTransferTargets"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "put": {
+        "operationId": "AgentTelephony_replaceTelephonyTransferTargets",
+        "summary": "Replace agent telephony transfer targets",
+        "description": "Replaces all transfer targets configured for the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent whose transfer targets are replaced.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity tag returned by the latest read. The replacement fails if the transfer targets changed since that read.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "The entity tag to send in the `If-Match` header when replacing the transfer targets.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyTransferTargets"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TelephonyTransferTargets"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/{binding_id}": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyBinding",
+        "summary": "Get an agent telephony binding",
+        "description": "Retrieves a telephony binding owned by the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the binding.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "description": "The binding identifier in `{provider}:{identifier}` form.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyBinding"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "patch": {
+        "operationId": "AgentTelephony_updateTelephonyBinding",
+        "summary": "Update an agent telephony binding",
+        "description": "Updates a telephony binding owned by the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the binding.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "description": "The binding identifier in `{provider}:{identifier}` form.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyBinding"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTelephonyBindingRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "put": {
+        "operationId": "AgentTelephony_putTelephonyBinding",
+        "summary": "Put an agent telephony binding update",
+        "description": "Updates an existing telephony binding owned by the voice agent named in the path using PUT.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the binding.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "description": "The binding identifier in `{provider}:{identifier}` form.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyBinding"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTelephonyBindingRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentTelephony_deleteTelephonyBinding",
+        "summary": "Delete an agent telephony binding",
+        "description": "Deletes a telephony binding owned by the voice agent named in the path.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that owns the binding.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "description": "The binding identifier in `{provider}:{identifier}` form.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       }
     },
@@ -31445,6 +32639,11 @@
         ],
         "description": "Enum describing allowed operation states."
       },
+      "Azure.Core.eTag": {
+        "type": "string",
+        "format": "eTag",
+        "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+      },
       "Azure.Core.uuid": {
         "type": "string",
         "format": "uuid",
@@ -34501,6 +35700,148 @@
         "required": [
           "files"
         ]
+      },
+      "CreateTeamsPhoneExtensionTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "provider",
+          "azure_communication_service_connection_name",
+          "resource_account_object_id"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "teams-phone-extension"
+            ],
+            "description": "The Microsoft Teams Phone Extension provider."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The Teams Phone Extension Foundry connection name."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
+        "description": "The request to create a Microsoft Teams Phone Extension binding.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider. New bindings use `teams-phone-extension` or `twilio`; legacy aliases remain accepted for existing clients."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Legacy provider identifier. New Teams Phone Extension requests use `resource_account_object_id`; new Twilio requests use `phone_number`."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The Teams Phone Extension Foundry connection name. Required when `provider` is `teams-phone-extension`."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. Required when `provider` is `twilio`."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The provider-specific phone number. It is optional display metadata for Teams Phone Extension and a required E.164 number for Twilio."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "An optional display label for the binding."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID. Required when `provider` is `teams-phone-extension`."
+          },
+          "display_phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Legacy optional display phone number alias. New clients use `phone_number`."
+          },
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "The destinations to which the voice agent may transfer calls. This compatibility field replaces the agent-scoped transfer-target configuration when supplied."
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Legacy generic Foundry connection name. New clients use the provider-specific connection field."
+          },
+          "provider_config": {
+            "$ref": "#/components/schemas/TelephonyProviderConfig",
+            "description": "Legacy nested provider configuration. New clients use the provider-specific top-level connection field."
+          }
+        },
+        "discriminator": {
+          "propertyName": "provider",
+          "mapping": {
+            "teams-phone-extension": "#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest",
+            "twilio": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
+          }
+        },
+        "description": "The compatibility request to bind a telephony identifier to the voice agent named in the request path. New clients use a provider-specific request model selected by `provider`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTwilioTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "twilio"
+            ],
+            "description": "The Twilio provider."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. Required for new clients; legacy connection aliases remain accepted for compatibility."
+          },
+          "phone_number": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "The Twilio E.164 phone number. Required for new clients; the legacy `identifier` alias remains accepted for compatibility."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
+        "description": "The request to create a Twilio binding. New clients supply the provider-specific fields; legacy `identifier` and connection aliases remain accepted.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "CreateVoiceAgentRequest": {
         "type": "object",
@@ -82236,6 +83577,841 @@
         ],
         "description": "The transport protocol for telemetry export."
       },
+      "TelephonyBinding": {
+        "type": "object",
+        "required": [
+          "id",
+          "project_id",
+          "provider",
+          "identifier",
+          "status",
+          "transfer_targets",
+          "connection_name",
+          "incoming_call_url"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The binding identifier in `{provider}:{identifier}` form."
+          },
+          "project_id": {
+            "type": "string",
+            "description": "The Foundry project that owns the binding."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider. New bindings return `teams-phone-extension` or `twilio`; legacy bindings can return a legacy provider value."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The Teams Phone Extension Foundry connection name. Omitted for other providers."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. Omitted for other providers."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The provider-specific phone number. It is optional display metadata for Teams Phone Extension and the dialed E.164 number for Twilio."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID. Omitted for other providers and older bindings that do not contain it."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The legacy provider-specific dialed identifier retained for existing clients."
+          },
+          "display_phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The legacy optional display phone number alias retained for existing clients."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "The agent-scoped destinations to which the voice agent may transfer calls."
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "The legacy generic Foundry connection name retained for existing clients. Secrets are referenced, not returned."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The current ETag for optimistic-concurrency updates."
+          }
+        },
+        "description": "A telephony identifier bound to the voice agent named in the request path.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyBindingList": {
+        "type": "object",
+        "required": [
+          "data",
+          "has_more"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyBinding"
+            },
+            "description": "The telephony bindings in this page."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Whether another page of bindings is available."
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "The cursor to pass as `after` to retrieve the next page."
+          }
+        },
+        "description": "A page of telephony bindings for one voice agent.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyBindingStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "active",
+              "suspended"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of a telephony binding.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallDurationBasis": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "answered",
+              "received",
+              "legacy_connected",
+              "legacy_started"
+            ]
+          }
+        ],
+        "description": "The timestamp used as the basis for call duration.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallLifecycleEvent": {
+        "type": "object",
+        "required": [
+          "sequence",
+          "name",
+          "source",
+          "outcome",
+          "observed_at_ms",
+          "timestamp_source"
+        ],
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The service-assigned order of the event within the call record."
+          },
+          "name": {
+            "type": "string",
+            "description": "The stable provider-neutral event name."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TelephonyCallLifecycleEventSource",
+            "description": "The component that supplied the observation."
+          },
+          "outcome": {
+            "$ref": "#/components/schemas/TelephonyCallLifecycleEventOutcome",
+            "description": "The outcome of the observed lifecycle operation."
+          },
+          "observed_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the service observed the event, as Unix time in milliseconds."
+          },
+          "occurred_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the event occurred according to the provider, as Unix time in milliseconds."
+          },
+          "timestamp_source": {
+            "$ref": "#/components/schemas/TelephonyCallTimestampSource",
+            "description": "The source of the event timestamp."
+          },
+          "reason": {
+            "type": "string",
+            "description": "A stable service-generated reason associated with the event."
+          },
+          "provider_event_id": {
+            "type": "string",
+            "description": "The provider event identifier used for idempotency, when supplied."
+          },
+          "provider_sequence": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The provider event sequence, when supplied."
+          },
+          "provider_status_code": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The provider status code associated with the event."
+          },
+          "provider_sub_code": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The provider subcode associated with the event."
+          }
+        },
+        "description": "A bounded durable observation in the lifecycle of one telephony call.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallLifecycleEventOutcome": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "observed",
+              "started",
+              "succeeded",
+              "failed",
+              "rejected",
+              "cancelled"
+            ]
+          }
+        ],
+        "description": "The outcome of one telephony lifecycle observation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallLifecycleEventSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "azure_communication_services",
+              "twilio",
+              "voice_agent"
+            ]
+          }
+        ],
+        "description": "The component that supplied a telephony lifecycle observation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallPhase": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "received",
+              "validated",
+              "admitted",
+              "answering",
+              "answered",
+              "media_connected",
+              "agent_session_ready",
+              "bridging",
+              "managing",
+              "completed",
+              "rejected",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The provider-neutral phase reached by an inbound telephony call.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallRecord": {
+        "type": "object",
+        "required": [
+          "id",
+          "agent_name",
+          "provider",
+          "status",
+          "phase",
+          "started_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The service-generated call identifier."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The name of the voice agent that handled the call."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "provider_call_id": {
+            "type": "string",
+            "description": "The provider-assigned call identifier, when available."
+          },
+          "caller_number": {
+            "type": "string",
+            "description": "The caller's phone number, when supplied by the provider."
+          },
+          "provider_number": {
+            "type": "string",
+            "description": "The Azure Communication Service or Twilio number that received the call."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyCallStatus",
+            "description": "The lifecycle status of the call."
+          },
+          "phase": {
+            "$ref": "#/components/schemas/TelephonyCallPhase",
+            "description": "The provider-neutral lifecycle phase reached by the call."
+          },
+          "started_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the call started."
+          },
+          "connected_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the call connected."
+          },
+          "answered_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the provider reported the call as answered."
+          },
+          "media_connected_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the provider media channel connected."
+          },
+          "agent_session_ready_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the voice-agent session became ready."
+          },
+          "ended_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the call ended."
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The call duration in seconds."
+          },
+          "end_reason": {
+            "type": "string",
+            "description": "The service-generated reason that the call ended."
+          },
+          "provider_status_code": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The provider status code associated with the terminal result."
+          },
+          "provider_sub_code": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The provider subcode associated with the terminal result."
+          },
+          "provider_message": {
+            "type": "string",
+            "description": "The provider message associated with the terminal result."
+          },
+          "trace_id": {
+            "type": "string",
+            "description": "The W3C trace identifier, when a customer-facing trace was recorded."
+          },
+          "timing": {
+            "$ref": "#/components/schemas/TelephonyCallTiming",
+            "description": "Detailed provider-neutral call timing. Returned by the call detail operation."
+          },
+          "trace": {
+            "$ref": "#/components/schemas/TelephonyCallTrace",
+            "description": "Correlation to the customer-facing Foundry trace. Returned by the call detail operation."
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyCallLifecycleEvent"
+            },
+            "description": "The bounded lifecycle timeline. Returned by the call detail operation."
+          },
+          "events_truncated": {
+            "type": "boolean",
+            "description": "Whether older lifecycle events were omitted because the bounded event limit was reached. Returned by the call detail operation."
+          }
+        },
+        "description": "A durable history record for an inbound call to a voice agent.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallRecordList": {
+        "type": "object",
+        "required": [
+          "data",
+          "has_more"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyCallRecord"
+            },
+            "description": "The call records in this page."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Whether another page of call records is available."
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "The cursor to pass as `after` to retrieve the next page."
+          }
+        },
+        "description": "A page of inbound telephony call records for one voice agent.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "success",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of an inbound telephony call.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallTimestampSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "provider",
+              "gateway",
+              "derived",
+              "legacy"
+            ]
+          }
+        ],
+        "description": "The source of a telephony lifecycle timestamp.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallTiming": {
+        "type": "object",
+        "required": [
+          "timestamp_source"
+        ],
+        "properties": {
+          "received_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the provider webhook was received, as Unix time in milliseconds."
+          },
+          "validated_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When webhook validation completed, as Unix time in milliseconds."
+          },
+          "admitted_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the call was admitted to an agent binding, as Unix time in milliseconds."
+          },
+          "answer_requested_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the service requested that the provider answer the call, as Unix time in milliseconds."
+          },
+          "answered_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the provider reported that the call was answered, as Unix time in milliseconds."
+          },
+          "media_connected_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the provider media channel connected, as Unix time in milliseconds."
+          },
+          "agent_session_ready_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the voice-agent session became ready, as Unix time in milliseconds."
+          },
+          "first_caller_audio_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When caller audio was first observed, as Unix time in milliseconds."
+          },
+          "first_agent_audio_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When agent audio was first observed, as Unix time in milliseconds."
+          },
+          "ended_at_ms": {
+            "type": "integer",
+            "format": "int64",
+            "description": "When the call reached a terminal state, as Unix time in milliseconds."
+          },
+          "duration_basis": {
+            "$ref": "#/components/schemas/TelephonyCallDurationBasis",
+            "description": "The timestamp used as the basis for duration."
+          },
+          "timestamp_source": {
+            "$ref": "#/components/schemas/TelephonyCallTimestampSource",
+            "description": "The source of the lifecycle timestamps."
+          }
+        },
+        "description": "Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallTrace": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/TelephonyCallTraceStatus",
+            "description": "The trace availability status."
+          },
+          "trace_id": {
+            "type": "string",
+            "description": "The W3C trace identifier, when a trace was recorded."
+          },
+          "root_span_id": {
+            "type": "string",
+            "description": "The root span identifier, when a trace was recorded."
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The voice-agent conversation identifier, when a conversation was created."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/TelephonyCallTraceMode",
+            "description": "Whether the trace was emitted live or after the call ended."
+          }
+        },
+        "description": "Correlation from a durable telephony call record to its customer-facing Foundry trace.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallTraceMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "live",
+              "post_call"
+            ]
+          }
+        ],
+        "description": "The mode used to expose a telephony call as a customer-facing Foundry trace.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallTraceStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "pending",
+              "emitting",
+              "available",
+              "not_recorded",
+              "not_applicable",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The availability status of a customer-facing telephony call trace.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallTransferRequest": {
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "description": "The name of a transfer target configured for the voice agent."
+          }
+        },
+        "description": "A request to transfer an active telephony call to a configured target.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyProvider": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "teams-phone-extension",
+              "twilio",
+              "azure-communication-service",
+              "acs",
+              "infobip"
+            ]
+          }
+        ],
+        "description": "A telephony provider supported by an agent binding. New bindings use `teams-phone-extension` or `twilio`. Legacy provider values remain accepted so existing clients and stored bindings continue to work. Known values are stable; additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyProviderConfig": {
+        "type": "object",
+        "properties": {
+          "connection_name": {
+            "type": "string",
+            "description": "The Foundry connection name."
+          },
+          "acs_connection_name": {
+            "type": "string",
+            "description": "Legacy Azure Communication Service connection-name alias."
+          },
+          "acs_resource_id": {
+            "type": "string",
+            "description": "Legacy Azure Communication Service resource identifier."
+          },
+          "acs_endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "Legacy Azure Communication Service endpoint."
+          },
+          "mi_client_id": {
+            "type": "string",
+            "description": "Legacy managed identity client identifier."
+          },
+          "cognitive_service_customer_id": {
+            "type": "string",
+            "description": "Legacy cognitive services customer identifier."
+          },
+          "account_ref": {
+            "type": "string",
+            "description": "Legacy provider account reference."
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "Legacy Foundry project connection reference."
+          },
+          "credential_secret_ref": {
+            "type": "string",
+            "description": "Legacy credential secret reference."
+          }
+        },
+        "description": "Legacy provider configuration accepted as a compatibility input. New clients use the provider-specific top-level connection field.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferDestination": {
+        "type": "object",
+        "required": [
+          "kind",
+          "value"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/TelephonyTransferDestinationKind",
+            "description": "The destination type."
+          },
+          "value": {
+            "type": "string",
+            "description": "The destination value, such as an E.164 phone number, Teams user identifier, or SIP URI."
+          }
+        },
+        "description": "The provider-specific destination for a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferDestinationKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "pstn",
+              "teams",
+              "sip"
+            ]
+          }
+        ],
+        "description": "A destination type supported by a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferTarget": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "destination"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The unique name exposed to the voice agent for this transfer target."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description that helps the voice agent decide when to use this target."
+          },
+          "destination": {
+            "$ref": "#/components/schemas/TelephonyTransferDestination",
+            "description": "The provider-specific transfer destination."
+          }
+        },
+        "description": "A named destination to which the voice agent may transfer a call.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferTargets": {
+        "type": "object",
+        "required": [
+          "transfer_targets"
+        ],
+        "properties": {
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration."
+          }
+        },
+        "description": "The telephony transfer targets configured for one voice agent.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
         "required": [
@@ -83124,6 +85300,70 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "Models=V1Preview"
+          ]
+        }
+      },
+      "UpdateTelephonyBindingRequest": {
+        "type": "object",
+        "required": [
+          "etag"
+        ],
+        "properties": {
+          "etag": {
+            "type": "string",
+            "description": "The ETag returned by the latest read. Updates with a stale ETag fail."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The new lifecycle status."
+          },
+          "azure_communication_service_connection_name": {
+            "type": "string",
+            "description": "The replacement Teams Phone Extension Foundry connection name."
+          },
+          "twilio_connection_name": {
+            "type": "string",
+            "description": "The Twilio Foundry connection name. It must match the existing immutable value when supplied."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The replacement Teams display phone number. For Twilio it must match the immutable binding number. Omit it to preserve the current value; use a blank Teams value to clear it."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The replacement display label. Omit it to preserve the current value; use a blank value to clear it."
+          },
+          "resource_account_object_id": {
+            "type": "string",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID. It must match the immutable existing value when supplied."
+          },
+          "display_phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Legacy optional display phone number alias. New clients use `phone_number`."
+          },
+          "transfer_targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelephonyTransferTarget"
+            },
+            "description": "Replacement transfer targets. This compatibility field updates the agent-scoped configuration; an empty array clears all targets."
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Legacy replacement generic Foundry connection name. New clients use the provider-specific connection field."
+          },
+          "provider_config": {
+            "$ref": "#/components/schemas/TelephonyProviderConfig",
+            "description": "Legacy nested provider configuration. New clients use the provider-specific top-level connection field."
+          }
+        },
+        "description": "The request to update an existing telephony binding.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview"
           ]
         }
       },
