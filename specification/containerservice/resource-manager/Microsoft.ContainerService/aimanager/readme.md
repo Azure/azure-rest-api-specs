@@ -49,6 +49,10 @@ suppressions:
     from: aimanagers.json
     where: $.definitions.ModelDeploymentOverrides.properties.values
     reason: Free-form override key/value pairs documented per release.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.BaseModelReference.properties.config
+    reason: Verbatim user-supplied config.json from the upstream model repository. Key set is model-specific and unbounded; the platform forwards it to the dataplane and reads only sizing and configuration hints from it.
 ```
 
 ### Tag: package-2026-05-02-preview

@@ -87,7 +87,6 @@ interface AIManagerNamespaces {
     ArmResponse<CredentialResults>
   >;
 
-  @added(Versions.v2026_05_02_preview)
   @doc("Returns the namespace-scoped LLM gateway endpoint and the current API keys.")
   @post
   @action("listAccessKeys")
@@ -97,7 +96,6 @@ interface AIManagerNamespaces {
     ArmResponse<NamespaceAccessInfo>
   >;
 
-  @added(Versions.v2026_05_02_preview)
   @doc("Rotates the namespace-scoped LLM gateway API keys. A new key is generated and installed as `primaryKey`, and the previous `primaryKey` overwrites `secondaryKey` so clients can roll over without downtime. Returns the updated access info.")
   @post
   @action("rotateKeys")
@@ -108,7 +106,6 @@ interface AIManagerNamespaces {
   >;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Access information for an AI Manager namespace, including the OpenAI-compatible gateway endpoint and the API keys used to authenticate against it.")
 model NamespaceAccessInfo {
   @visibility(Lifecycle.Read)

@@ -11,7 +11,23 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ContainerService;
 
-@added(Versions.v2026_05_02_preview)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
+@doc("The ARM resource id of a Microsoft Foundry project. The account is the parent of this resource and is derived from it.")
+scalar FoundryProjectResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects",
+    }
+  ]>;
+
+@doc("The ARM resource id of a user-assigned managed identity.")
+scalar UserAssignedIdentityResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities",
+    }
+  ]>;
+
 @doc("A model source registered with an AI Manager. Describes an external model registry (e.g. Hugging Face) and the credentials the platform uses to pull artifacts from it.")
 @resource("modelSources")
 @parentResource(AIManager)
@@ -25,7 +41,6 @@ model ModelSource is ProxyResource<ModelSourceProperties> {
   ...EntityTagProperty;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Model source properties.")
 model ModelSourceProperties {
   @visibility(Lifecycle.Read)
@@ -42,32 +57,39 @@ model ModelSourceProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models).")
   credential?: CredentialValue;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Read)
+  @doc("Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation.")
+  microsoftFoundry?: MicrosoftFoundrySource;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The type of a model source.")
 union ModelSourceType {
   string,
 
   @doc("A Hugging Face model registry.")
   HuggingFace: "HuggingFace",
+
+  @doc("A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project).")
+  MicrosoftFoundry: "MicrosoftFoundry",
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("""
-  A credential value. Exactly one variant must be set.
-  
-  In the current API version, only the `inline` variant is supported. Future
-  API versions are expected to add additional credential kinds (for example,
-  managed identity and Key Vault secret references) as sibling variants on
-  this model.
+  A credential value used for accessing gated or private models.
   """)
 model CredentialValue {
   @doc("An inline credential containing a secret value supplied in the request payload.")
   inline?: InlineCredential;
+
+  @doc("""
+      A user-assigned managed identity the platform authenticates as. Required for `MicrosoftFoundry` sources and
+      the user must grant the `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d) on the Foundry project.
+      See https://aka.ms/aks/aim-modelsource for more details.
+      The platform federates this identity to an in-cluster puller ServiceAccount (Workload Identity) at deployment time.
+    """)
+  managedIdentity?: ManagedIdentityCredential;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("A credential provided inline.")
 model InlineCredential {
   @secret
@@ -76,7 +98,30 @@ model InlineCredential {
   value: string;
 }
 
-@added(Versions.v2026_05_02_preview)
+@doc("A credential backed by a user-owned user-assigned managed identity. The platform authenticates to the model source as this identity via Workload Identity; no secret is stored.")
+model ManagedIdentityCredential {
+  @doc("The Azure resource id of the user-assigned managed identity to authenticate with. Only user-assigned identities are supported.")
+  resourceId: UserAssignedIdentityResourceId;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
+@doc("""
+  Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`
+  ModelSource. Only the project Azure id is required; the Foundry account and its
+  data-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform
+  from the project (the account is the project's parent resource).
+  
+  Authentication uses the user-assigned managed identity referenced in the
+  ModelSource `credential.managedIdentity`, which the user must grant the
+  `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)
+  on this project. See https://aka.ms/aks/aim-modelsource for more details.
+  """)
+model MicrosoftFoundrySource {
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The ARM resource id of the Foundry project. The scope on which the referenced managed identity must hold the `Foundry User` role. The account and endpoint host are derived from this id.")
+  projectResourceId: FoundryProjectResourceId;
+}
+
 @armResourceOperations
 interface ModelSources {
   get is ArmResourceRead<ModelSource>;
