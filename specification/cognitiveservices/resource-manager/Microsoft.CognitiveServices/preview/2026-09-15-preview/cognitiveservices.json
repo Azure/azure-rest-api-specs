@@ -142,6 +142,9 @@
       "name": "ManagedComputeCapacities"
     },
     {
+      "name": "BudgetPolicies"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -2360,6 +2363,312 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/budgetPolicies": {
+      "get": {
+        "operationId": "BudgetPolicies_List",
+        "tags": [
+          "BudgetPolicies"
+        ],
+        "description": "Lists the budget policies owned by an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/budgetPolicies/{budgetPolicyName}": {
+      "get": {
+        "operationId": "BudgetPolicies_Get",
+        "tags": [
+          "BudgetPolicies"
+        ],
+        "description": "Gets a budget policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "budgetPolicyName",
+            "in": "path",
+            "description": "The name of the BudgetPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the budget policy."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "BudgetPolicies_CreateOrUpdate",
+        "tags": [
+          "BudgetPolicies"
+        ],
+        "description": "Creates or replaces a budget policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "budgetPolicyName",
+            "in": "path",
+            "description": "The name of the BudgetPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          },
+          {
+            "$ref": "#/parameters/BudgetPolicyCreateOrUpdateHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/BudgetPolicyCreateOrUpdateHeaders.ifNoneMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the budget policy."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the budget policy."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "BudgetPolicies_Update",
+        "tags": [
+          "BudgetPolicies"
+        ],
+        "description": "Updates selected properties of a budget policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "budgetPolicyName",
+            "in": "path",
+            "description": "The name of the BudgetPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          },
+          {
+            "$ref": "#/parameters/BudgetPolicyIfMatchHeader"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicyPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the budget policy."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BudgetPolicies_Delete",
+        "tags": [
+          "BudgetPolicies"
+        ],
+        "description": "Deletes a budget policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "budgetPolicyName",
+            "in": "path",
+            "description": "The name of the BudgetPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          },
+          {
+            "$ref": "#/parameters/BudgetPolicyIfMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts": {
@@ -12028,6 +12337,23 @@
             "read",
             "create"
           ]
+        },
+        "budgetPolicyIds": {
+          "type": "array",
+          "description": "The full resource IDs of budget policies directly attached to this account.",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts/budgetPolicies"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -13244,6 +13570,437 @@
           "type": "string"
         }
       }
+    },
+    "BudgetDimension": {
+      "type": "object",
+      "description": "A built-in request dimension used to partition budget consumption.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/BudgetDimensionType",
+          "description": "The kind of request dimension.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "BudgetDimensionType": {
+      "type": "string",
+      "description": "The supported budget counter dimensions.",
+      "enum": [
+        "agent",
+        "identity",
+        "session",
+        "project"
+      ],
+      "x-ms-enum": {
+        "name": "BudgetDimensionType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Agent",
+            "value": "agent",
+            "description": "Consumption is partitioned by the stable Foundry agent ID."
+          },
+          {
+            "name": "Identity",
+            "value": "identity",
+            "description": "Consumption is partitioned by the authenticated principal object ID."
+          },
+          {
+            "name": "Session",
+            "value": "session",
+            "description": "Consumption is partitioned by the Foundry session ID."
+          },
+          {
+            "name": "Project",
+            "value": "project",
+            "description": "Consumption is partitioned by the Foundry project resource ID."
+          }
+        ]
+      }
+    },
+    "BudgetMatch": {
+      "type": "object",
+      "description": "Trusted request attributes and allowed values used to select matching requests.",
+      "properties": {
+        "foundry.caller.agent.id": {
+          "type": "array",
+          "description": "The stable Foundry agent IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/BudgetMatchValue"
+          },
+          "x-ms-client-name": "agentIds"
+        },
+        "foundry.caller.identity.oid": {
+          "type": "array",
+          "description": "The authenticated principal object IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/BudgetMatchValue"
+          },
+          "x-ms-client-name": "identityObjectIds"
+        },
+        "foundry.caller.session.id": {
+          "type": "array",
+          "description": "The Foundry session IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/BudgetMatchValue"
+          },
+          "x-ms-client-name": "sessionIds"
+        },
+        "foundry.caller.project.id": {
+          "type": "array",
+          "description": "The Foundry project resource IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/BudgetMatchValue"
+          },
+          "x-ms-client-name": "projectIds"
+        }
+      }
+    },
+    "BudgetMatchValue": {
+      "type": "string",
+      "description": "A non-empty value used to match a trusted request attribute.",
+      "minLength": 1
+    },
+    "BudgetPeriod": {
+      "type": "string",
+      "description": "The calendar-aligned UTC renewal periods for recurring budget rules.",
+      "enum": [
+        "minute",
+        "hour",
+        "day",
+        "week",
+        "month",
+        "year"
+      ],
+      "x-ms-enum": {
+        "name": "BudgetPeriod",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Minute",
+            "value": "minute",
+            "description": "Renews at the start of the next UTC minute."
+          },
+          {
+            "name": "Hour",
+            "value": "hour",
+            "description": "Renews at the start of the next UTC hour."
+          },
+          {
+            "name": "Day",
+            "value": "day",
+            "description": "Renews daily at 00:00 UTC."
+          },
+          {
+            "name": "Week",
+            "value": "week",
+            "description": "Renews Monday at 00:00 UTC."
+          },
+          {
+            "name": "Month",
+            "value": "month",
+            "description": "Renews on the first day of each month at 00:00 UTC."
+          },
+          {
+            "name": "Year",
+            "value": "year",
+            "description": "Renews January 1 at 00:00 UTC."
+          }
+        ]
+      }
+    },
+    "BudgetPolicy": {
+      "type": "object",
+      "description": "A budget policy owned by a Cognitive Services account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BudgetPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag used for optimistic concurrency.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BudgetPolicyEtagHeader": {
+      "type": "object",
+      "description": "The entity tag returned with a budget policy."
+    },
+    "BudgetPolicyListResult": {
+      "type": "object",
+      "description": "A page of budget policies.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of budget policies."
+        },
+        "value": {
+          "type": "array",
+          "description": "The budget policies in this page.",
+          "items": {
+            "$ref": "#/definitions/BudgetPolicy"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "BudgetPolicyPatch": {
+      "type": "object",
+      "description": "The request used to update a budget policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BudgetPolicyPatchProperties",
+          "description": "The budget policy properties to update."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "BudgetPolicyPatchProperties": {
+      "type": "object",
+      "description": "The properties that can be changed on a budget policy.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "An optional human-readable name for the policy. Set this property to null to clear it.",
+          "maxLength": 128,
+          "x-nullable": true
+        },
+        "rules": {
+          "type": "array",
+          "description": "The complete replacement set of budget rules.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/BudgetRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "BudgetPolicyProperties": {
+      "type": "object",
+      "description": "The customer-authored settings of a budget policy.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "An optional human-readable name for the policy.",
+          "maxLength": 128
+        },
+        "rules": {
+          "type": "array",
+          "description": "The budget rules enforced by the policy.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/BudgetRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "BudgetRule": {
+      "type": "object",
+      "description": "A budget limit and the population to which it applies.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The stable rule identifier, unique within the policy without regard to case.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "counterKey": {
+          "type": "array",
+          "description": "The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/BudgetDimension"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "unit": {
+          "$ref": "#/definitions/BudgetUnit",
+          "description": "The unit used for the budget amount and absolute thresholds."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum consumption allowed by this rule, expressed in the selected unit."
+        },
+        "period": {
+          "$ref": "#/definitions/BudgetPeriod",
+          "description": "The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules."
+        },
+        "recurring": {
+          "type": "boolean",
+          "description": "Whether the budget renews. The default is true.",
+          "default": true
+        },
+        "match": {
+          "$ref": "#/definitions/BudgetMatch",
+          "description": "Trusted request attributes and allowed values used to select matching requests."
+        },
+        "thresholds": {
+          "type": "array",
+          "description": "The actions evaluated as consumption approaches the configured amount.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/BudgetThreshold"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "counterKey",
+        "unit",
+        "amount",
+        "thresholds"
+      ]
+    },
+    "BudgetThreshold": {
+      "type": "object",
+      "description": "An action evaluated when budget consumption reaches a threshold.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/BudgetThresholdType",
+          "description": "How the threshold value is interpreted."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The threshold value. Percentage values range from 0 through 100, and absolute values cannot exceed the rule amount.",
+          "minimum": 0
+        },
+        "action": {
+          "type": "string",
+          "description": "The action taken when the threshold is reached. The default is audit.",
+          "default": "audit",
+          "enum": [
+            "audit",
+            "alert"
+          ],
+          "x-ms-enum": {
+            "name": "BudgetThresholdAction",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Audit",
+                "value": "audit",
+                "description": "Records the threshold crossing without notifying the customer or blocking requests."
+              },
+              {
+                "name": "Alert",
+                "value": "alert",
+                "description": "Emits a customer-facing alert without blocking requests."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "BudgetThresholdAction": {
+      "type": "string",
+      "description": "The supported actions when a threshold is reached.",
+      "enum": [
+        "audit",
+        "alert"
+      ],
+      "x-ms-enum": {
+        "name": "BudgetThresholdAction",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "audit",
+            "description": "Records the threshold crossing without notifying the customer or blocking requests."
+          },
+          {
+            "name": "Alert",
+            "value": "alert",
+            "description": "Emits a customer-facing alert without blocking requests."
+          }
+        ]
+      }
+    },
+    "BudgetThresholdType": {
+      "type": "string",
+      "description": "The supported threshold value interpretations.",
+      "enum": [
+        "percentage",
+        "absolute"
+      ],
+      "x-ms-enum": {
+        "name": "BudgetThresholdType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Percentage",
+            "value": "percentage",
+            "description": "The value is a percentage of the configured rule amount."
+          },
+          {
+            "name": "Absolute",
+            "value": "absolute",
+            "description": "The value is expressed in the rule's unit."
+          }
+        ]
+      }
+    },
+    "BudgetUnit": {
+      "type": "string",
+      "enum": [
+        "usd"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-nullable": false
     },
     "BuiltInAuthorizationScheme": {
       "type": "string",
@@ -15856,6 +16613,23 @@
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
           "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
+        },
+        "budgetPolicyIds": {
+          "type": "array",
+          "description": "The full resource IDs of budget policies directly attached to this deployment.",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts/budgetPolicies"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -21444,5 +22218,33 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "BudgetPolicyCreateOrUpdateHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Proceeds only when the current entity tag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "BudgetPolicyCreateOrUpdateHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "Proceeds only when the current entity tag does not match this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "BudgetPolicyIfMatchHeader": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Proceeds only when the current entity tag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    }
+  }
 }
