@@ -419,7 +419,11 @@ model JavaVoiceMcpApprovalResponseItem {
 
 @@clientName(JavaVoiceSystemMessageItem, "VoiceSystemMessageItem", "java");
 @@clientName(JavaVoiceUserMessageItem, "VoiceUserMessageItem", "java");
-@@clientName(JavaVoiceAssistantMessageItem, "VoiceAssistantMessageItem", "java");
+@@clientName(
+  JavaVoiceAssistantMessageItem,
+  "VoiceAssistantMessageItem",
+  "java"
+);
 @@clientName(JavaVoiceFunctionCallItem, "VoiceFunctionCallItem", "java");
 @@clientName(
   JavaVoiceFunctionCallOutputItem,
@@ -439,26 +443,14 @@ model JavaVoiceMcpApprovalResponseItem {
   "java"
 );
 
-@@alternateType(
-  VoiceSystemMessageItem,
-  JavaVoiceSystemMessageItem,
-  "java"
-);
-@@alternateType(
-  VoiceUserMessageItem,
-  JavaVoiceUserMessageItem,
-  "java"
-);
+@@alternateType(VoiceSystemMessageItem, JavaVoiceSystemMessageItem, "java");
+@@alternateType(VoiceUserMessageItem, JavaVoiceUserMessageItem, "java");
 @@alternateType(
   VoiceAssistantMessageItem,
   JavaVoiceAssistantMessageItem,
   "java"
 );
-@@alternateType(
-  VoiceFunctionCallItem,
-  JavaVoiceFunctionCallItem,
-  "java"
-);
+@@alternateType(VoiceFunctionCallItem, JavaVoiceFunctionCallItem, "java");
 @@alternateType(
   VoiceFunctionCallOutputItem,
   JavaVoiceFunctionCallOutputItem,
