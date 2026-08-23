@@ -368,18 +368,114 @@ using Azure.AI.Projects;
 // across the polymorphic item hierarchy.
 @@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
 
-// The OpenAI leaf models repeat discriminator properties already provided by
-// their normalized bases. Exclude the duplicate leaf declarations so Java
-// subclasses do not access private discriminator fields from their parents.
-@@scope(OpenAI.RealtimeConversationItemMessageSystem.role, "!java");
-@@scope(OpenAI.RealtimeConversationItemMessageUser.role, "!java");
-@@scope(OpenAI.RealtimeConversationItemMessageAssistant.role, "!java");
-@@scope(OpenAI.RealtimeConversationItemFunctionCall.type, "!java");
-@@scope(OpenAI.RealtimeConversationItemFunctionCallOutput.type, "!java");
-@@scope(OpenAI.RealtimeMCPListTools.type, "!java");
-@@scope(OpenAI.RealtimeMCPToolCall.type, "!java");
-@@scope(OpenAI.RealtimeMCPApprovalRequest.type, "!java");
-@@scope(OpenAI.RealtimeMCPApprovalResponse.type, "!java");
+// Java compatibility shapes flatten the normalized OpenAI hierarchy. The Java
+// emitter currently generates private discriminator fields for inherited
+// models, which prevents child serializers from compiling.
+model JavaVoiceSystemMessageItem {
+  ...OpenAI.RealtimeConversationItemMessageSystem;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceUserMessageItem {
+  ...OpenAI.RealtimeConversationItemMessageUser;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceAssistantMessageItem {
+  ...OpenAI.RealtimeConversationItemMessageAssistant;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceFunctionCallItem {
+  ...OpenAI.RealtimeConversationItemFunctionCall;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceFunctionCallOutputItem {
+  ...OpenAI.RealtimeConversationItemFunctionCallOutput;
+  ...VoiceConversationItemPersistence;
+  name?: string;
+}
+
+model JavaVoiceMcpListToolsItem {
+  ...OpenAI.RealtimeMCPListTools;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceMcpCallItem {
+  ...OpenAI.RealtimeMCPToolCall;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceMcpApprovalRequestItem {
+  ...OpenAI.RealtimeMCPApprovalRequest;
+  ...VoiceConversationItemPersistence;
+}
+
+model JavaVoiceMcpApprovalResponseItem {
+  ...OpenAI.RealtimeMCPApprovalResponse;
+  ...VoiceConversationItemPersistence;
+}
+
+@@clientName(JavaVoiceSystemMessageItem, "VoiceSystemMessageItem", "java");
+@@clientName(JavaVoiceUserMessageItem, "VoiceUserMessageItem", "java");
+@@clientName(JavaVoiceAssistantMessageItem, "VoiceAssistantMessageItem", "java");
+@@clientName(JavaVoiceFunctionCallItem, "VoiceFunctionCallItem", "java");
+@@clientName(
+  JavaVoiceFunctionCallOutputItem,
+  "VoiceFunctionCallOutputItem",
+  "java"
+);
+@@clientName(JavaVoiceMcpListToolsItem, "VoiceMcpListToolsItem", "java");
+@@clientName(JavaVoiceMcpCallItem, "VoiceMcpCallItem", "java");
+@@clientName(
+  JavaVoiceMcpApprovalRequestItem,
+  "VoiceMcpApprovalRequestItem",
+  "java"
+);
+@@clientName(
+  JavaVoiceMcpApprovalResponseItem,
+  "VoiceMcpApprovalResponseItem",
+  "java"
+);
+
+@@alternateType(
+  VoiceSystemMessageItem,
+  JavaVoiceSystemMessageItem,
+  "java"
+);
+@@alternateType(
+  VoiceUserMessageItem,
+  JavaVoiceUserMessageItem,
+  "java"
+);
+@@alternateType(
+  VoiceAssistantMessageItem,
+  JavaVoiceAssistantMessageItem,
+  "java"
+);
+@@alternateType(
+  VoiceFunctionCallItem,
+  JavaVoiceFunctionCallItem,
+  "java"
+);
+@@alternateType(
+  VoiceFunctionCallOutputItem,
+  JavaVoiceFunctionCallOutputItem,
+  "java"
+);
+@@alternateType(VoiceMcpListToolsItem, JavaVoiceMcpListToolsItem, "java");
+@@alternateType(VoiceMcpCallItem, JavaVoiceMcpCallItem, "java");
+@@alternateType(
+  VoiceMcpApprovalRequestItem,
+  JavaVoiceMcpApprovalRequestItem,
+  "java"
+);
+@@alternateType(
+  VoiceMcpApprovalResponseItem,
+  JavaVoiceMcpApprovalResponseItem,
+  "java"
+);
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
@@ -412,6 +508,22 @@ using Azure.AI.Projects;
 // Erase strongly-typed payloads on the namespace / tool_search Tool variants.
 @@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
 @@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
+
+// Preserve the manually maintained timezone models in azure-sdk-for-java.
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
+model TimeZoneType {}
+
+@@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(
+  OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
 
 // ---- Expandable enum overrides ------------------------------------------------
 // Convert fixed OpenAI enums / inline literal unions to expandable string enums
