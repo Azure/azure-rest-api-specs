@@ -129,11 +129,6 @@ model VoiceResponse extends OmitProperties<
   @doc("A set of key-value pairs attached to the response.")
   metadata?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches OpenAI.RealtimeResponse.output_modalities: an inline literal array, not exported as a named union upstream."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
-  @doc("The output modalities used for the response, e.g. `[\"text\", \"audio\"]`. Audio output always includes a text transcript.")
-  output_modalities?: ("text" | "audio")[];
-
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
 
