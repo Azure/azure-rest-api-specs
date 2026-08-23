@@ -501,22 +501,6 @@ model JavaVoiceMcpApprovalResponseItem {
 @@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
 @@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
 
-// Preserve the manually maintained timezone models in azure-sdk-for-java.
-@alternateType(
-  {
-    identity: "java.util.TimeZone",
-  },
-  "java"
-)
-model TimeZoneType {}
-
-@@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
-@@alternateType(
-  OpenAI.WebSearchApproximateLocation.timezone,
-  TimeZoneType,
-  "java"
-);
-
 // ---- Expandable enum overrides ------------------------------------------------
 // Convert fixed OpenAI enums / inline literal unions to expandable string enums
 // by defining open unions (with `string` base) and mapping via @@alternateType.
