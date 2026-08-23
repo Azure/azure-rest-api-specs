@@ -82987,55 +82987,11 @@
           ]
         }
       },
-      "VoiceAudioFormat": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceAudioFormatType",
-            "description": "The audio format type, e.g. 'audio/pcm' (16-bit PCM), 'audio/pcmu' (G.711 mu-law), or 'audio/pcma' (G.711 A-law)."
-          },
-          "rate": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The sample rate in Hz. Applies to 'audio/pcm' (e.g. 24000); omit for telephony G.711 formats (8 kHz)."
-          }
-        },
-        "description": "An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAudioFormatType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "audio/pcm",
-              "audio/pcmu",
-              "audio/pcma"
-            ]
-          }
-        ],
-        "description": "The audio format type. Values follow the OpenAI Realtime wire schema and are exempt from the snake_case enum-value rule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAudioInputConfig": {
         "type": "object",
         "properties": {
           "format": {
-            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The input audio format."
           },
           "noise_reduction": {
@@ -83094,7 +83050,7 @@
         "type": "object",
         "properties": {
           "format": {
-            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM."
           },
           "voice": {

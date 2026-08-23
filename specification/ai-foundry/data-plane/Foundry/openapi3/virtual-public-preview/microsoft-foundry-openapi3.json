@@ -1983,7 +1983,7 @@
                 "type": "object",
                 "properties": {
                   "clientEvent": {
-                    "$ref": "#/components/schemas/VoiceAgentClientEvent"
+                    "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
                   }
                 },
                 "required": [
@@ -71831,6 +71831,459 @@
         "description": "Parameters used to decline an incoming SIP call handled by the Realtime API.",
         "title": "Realtime call reject request"
       },
+      "OpenAI.RealtimeClientEvent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "conversation.item.create": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemCreate",
+            "conversation.item.delete": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemDelete",
+            "conversation.item.retrieve": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemRetrieve",
+            "conversation.item.truncate": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemTruncate",
+            "input_audio_buffer.append": "#/components/schemas/OpenAI.RealtimeClientEventInputAudioBufferAppend",
+            "input_audio_buffer.clear": "#/components/schemas/OpenAI.RealtimeClientEventInputAudioBufferClear",
+            "output_audio_buffer.clear": "#/components/schemas/OpenAI.RealtimeClientEventOutputAudioBufferClear",
+            "input_audio_buffer.commit": "#/components/schemas/OpenAI.RealtimeClientEventInputAudioBufferCommit",
+            "response.cancel": "#/components/schemas/OpenAI.RealtimeClientEventResponseCancel",
+            "response.create": "#/components/schemas/OpenAI.RealtimeClientEventResponseCreate",
+            "session.update": "#/components/schemas/OpenAI.RealtimeClientEventSessionUpdate",
+            "session.avatar.connect": "#/components/schemas/VoiceAgentClientEventSessionAvatarConnect"
+          }
+        },
+        "description": "A realtime client event."
+      },
+      "OpenAI.RealtimeClientEventConversationItemCreate": {
+        "type": "object",
+        "required": [
+          "type",
+          "item"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.create"
+            ],
+            "description": "The event type, must be `conversation.item.create`.",
+            "x-stainless-const": true
+          },
+          "previous_item_id": {
+            "type": "string",
+            "description": "The ID of the preceding item after which the new item will be inserted. If not set, the new item will be appended to the end of the conversation.\n  If set to `root`, the new item will be added to the beginning of the conversation.\n  If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added."
+          },
+          "item": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Add a new Item to the Conversation's context, including messages, function\ncalls, and function call responses. This event can be used both to populate a\n\"history\" of the conversation and to add new items mid-stream, but has the\ncurrent limitation that it cannot populate assistant audio messages.\nIf successful, the server will respond with a `conversation.item.created`\nevent, otherwise an `error` event will be sent.",
+        "x-oaiMeta": {
+          "name": "conversation.item.create",
+          "group": "realtime",
+          "example": "{\n  \"type\": \"conversation.item.create\",\n  \"item\": {\n    \"type\": \"message\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"hi\"\n      }\n    ]\n  }\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventConversationItemDelete": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_id"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.delete"
+            ],
+            "description": "The event type, must be `conversation.item.delete`.",
+            "x-stainless-const": true
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item to delete."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event when you want to remove any item from the conversation\nhistory. The server will respond with a `conversation.item.deleted` event,\nunless the item does not exist in the conversation history, in which case the\nserver will respond with an error.",
+        "x-oaiMeta": {
+          "name": "conversation.item.delete",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"event_901\",\n    \"type\": \"conversation.item.delete\",\n    \"item_id\": \"item_003\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventConversationItemRetrieve": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_id"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.retrieve"
+            ],
+            "description": "The event type, must be `conversation.item.retrieve`.",
+            "x-stainless-const": true
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the item to retrieve."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event when you want to retrieve the server's representation of a specific item in the conversation history. This is useful, for example, to inspect user audio after noise cancellation and VAD.\nThe server will respond with a `conversation.item.retrieved` event,\nunless the item does not exist in the conversation history, in which case the\nserver will respond with an error.",
+        "x-oaiMeta": {
+          "name": "conversation.item.retrieve",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"event_901\",\n    \"type\": \"conversation.item.retrieve\",\n    \"item_id\": \"item_003\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventConversationItemTruncate": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_id",
+          "content_index",
+          "audio_end_ms"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.truncate"
+            ],
+            "description": "The event type, must be `conversation.item.truncate`.",
+            "x-stainless-const": true
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the assistant message item to truncate. Only assistant message\n  items can be truncated."
+          },
+          "content_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the content part to truncate. Set this to `0`."
+          },
+          "audio_end_ms": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "Inclusive duration up to which audio is truncated, in milliseconds. If\n  the audio_end_ms is greater than the actual audio duration, the server\n  will respond with an error."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event to truncate a previous assistant message’s audio. The server\nwill produce audio faster than realtime, so this event is useful when the user\ninterrupts to truncate audio that has already been sent to the client but not\nyet played. This will synchronize the server's understanding of the audio with\nthe client's playback.\nTruncating audio will delete the server-side text transcript to ensure there\nis not text in the context that hasn't been heard by the user.\nIf successful, the server will respond with a `conversation.item.truncated`\nevent.",
+        "x-oaiMeta": {
+          "name": "conversation.item.truncate",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"event_678\",\n    \"type\": \"conversation.item.truncate\",\n    \"item_id\": \"item_002\",\n    \"content_index\": 0,\n    \"audio_end_ms\": 1500\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventInputAudioBufferAppend": {
+        "type": "object",
+        "required": [
+          "type",
+          "audio"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio_buffer.append"
+            ],
+            "description": "The event type, must be `input_audio_buffer.append`.",
+            "x-stainless-const": true
+          },
+          "audio": {
+            "type": "string",
+            "description": "Base64-encoded audio bytes. This must be in the format specified by the\n  `input_audio_format` field in the session configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event to append audio bytes to the input audio buffer. The audio\nbuffer is temporary storage you can write to and later commit. A \"commit\" will create a new\nuser message item in the conversation history from the buffer content and clear the buffer.\nInput audio transcription (if enabled) will be generated when the buffer is committed.\nIf VAD is enabled the audio buffer is used to detect speech and the server will decide\nwhen to commit. When Server VAD is disabled, you must commit the audio buffer\nmanually. Input audio noise reduction operates on writes to the audio buffer.\nThe client may choose how much audio to place in each event up to a maximum\nof 15 MiB, for example streaming smaller chunks from the client may allow the\nVAD to be more responsive. Unlike most other client events, the server will\nnot send a confirmation response to this event.",
+        "x-oaiMeta": {
+          "name": "input_audio_buffer.append",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"event_456\",\n    \"type\": \"input_audio_buffer.append\",\n    \"audio\": \"Base64EncodedAudioData\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventInputAudioBufferClear": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio_buffer.clear"
+            ],
+            "description": "The event type, must be `input_audio_buffer.clear`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event to clear the audio bytes in the buffer. The server will\nrespond with an `input_audio_buffer.cleared` event.",
+        "x-oaiMeta": {
+          "name": "input_audio_buffer.clear",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"event_012\",\n    \"type\": \"input_audio_buffer.clear\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventInputAudioBufferCommit": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_audio_buffer.commit"
+            ],
+            "description": "The event type, must be `input_audio_buffer.commit`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event to commit the user input audio buffer, which will create a  new user message item in the conversation. This event will produce an error  if the input audio buffer is empty. When in Server VAD mode, the client does  not need to send this event, the server will commit the audio buffer  automatically.\nCommitting the input audio buffer will trigger input audio transcription  (if enabled in session configuration), but it will not create a response  from the model. The server will respond with an `input_audio_buffer.committed` event.",
+        "x-oaiMeta": {
+          "name": "input_audio_buffer.commit",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"event_789\",\n    \"type\": \"input_audio_buffer.commit\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventOutputAudioBufferClear": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "The unique ID of the client event used for error handling."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "output_audio_buffer.clear"
+            ],
+            "description": "The event type, must be `output_audio_buffer.clear`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "**WebRTC/SIP Only:** Emit to cut off the current audio response. This will trigger the server to\nstop generating audio and emit a `output_audio_buffer.cleared` event. This\nevent should be preceded by a `response.cancel` client event to stop the\ngeneration of the current response.\n[Learn more](/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
+        "x-oaiMeta": {
+          "name": "output_audio_buffer.clear",
+          "group": "realtime",
+          "example": "{\n    \"event_id\": \"optional_client_event_id\",\n    \"type\": \"output_audio_buffer.clear\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventResponseCancel": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.cancel"
+            ],
+            "description": "The event type, must be `response.cancel`.",
+            "x-stainless-const": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "A specific response ID to cancel - if not provided, will cancel an\n  in-progress response in the default conversation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event to cancel an in-progress response. The server will respond\nwith a `response.done` event with a status of `response.status=cancelled`. If\nthere is no response to cancel, the server will respond with an error. It's safe\nto call `response.cancel` even if no response is in progress, an error will be\nreturned the session will remain unaffected.",
+        "x-oaiMeta": {
+          "name": "response.cancel",
+          "group": "realtime",
+          "example": "{\n    \"type\": \"response.cancel\",\n    \"response_id\": \"resp_12345\"\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventResponseCreate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.create"
+            ],
+            "description": "The event type, must be `response.create`.",
+            "x-stainless-const": true
+          },
+          "response": {
+            "$ref": "#/components/schemas/VoiceAgentResponseCreateParams"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "This event instructs the server to create a Response, which means triggering\nmodel inference. When in Server VAD mode, the server will create Responses\nautomatically.\nA Response will include at least one Item, and may have two, in which case\nthe second will be a function call. These Items will be appended to the\nconversation history by default.\nThe server will respond with a `response.created` event, events for Items\nand content created, and finally a `response.done` event to indicate the\nResponse is complete.\nThe `response.create` event includes inference configuration like\n`instructions` and `tools`. If these are set, they will override the Session's\nconfiguration for this Response only.\nResponses can be created out-of-band of the default Conversation, meaning that they can\nhave arbitrary input, and it's possible to disable writing the output to the Conversation.\nOnly one Response can write to the default Conversation at a time, but otherwise multiple\nResponses can be created in parallel. The `metadata` field is a good way to disambiguate\nmultiple simultaneous Responses.\nClients can set `conversation` to `none` to create a Response that does not write to the default\nConversation. Arbitrary input can be provided with the `input` field, which is an array accepting\nraw Items and references to existing Items.",
+        "x-oaiMeta": {
+          "name": "response.create",
+          "group": "realtime",
+          "example": "// Trigger a response with the default Conversation and no special parameters\n{\n  \"type\": \"response.create\",\n}\n\n// Trigger an out-of-band response that does not write to the default Conversation\n{\n  \"type\": \"response.create\",\n  \"response\": {\n    \"instructions\": \"Provide a concise answer.\",\n    \"tools\": [], // clear any session tools\n    \"conversation\": \"none\",\n    \"output_modalities\": [\"text\"],\n    \"metadata\": {\n      \"response_purpose\": \"summarization\"\n    },\n    \"input\": [\n      {\n        \"type\": \"item_reference\",\n        \"id\": \"item_12345\"\n      },\n      {\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"input_text\",\n            \"text\": \"Summarize the above message in one sentence.\"\n          }\n        ]\n      }\n    ]\n  }\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventSessionUpdate": {
+        "type": "object",
+        "required": [
+          "type",
+          "session"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event. This is an arbitrary string that a client may assign. It will be passed back if there is an error with the event, but the corresponding `session.updated` event will not include it."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.update"
+            ],
+            "description": "The event type, must be `session.update`.",
+            "x-stainless-const": true
+          },
+          "session": {
+            "$ref": "#/components/schemas/RealtimeSessionCreateRequestUnion",
+            "description": "Update the Realtime session. Choose either a realtime\n  session or a transcription session."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
+          }
+        ],
+        "description": "Send this event to update the session’s configuration.\nThe client may send this event at any time to update any field\nexcept for `voice` and `model`. `voice` can be updated only if there have been no other audio outputs yet.\nWhen the server receives a `session.update`, it will respond\nwith a `session.updated` event showing the full, effective configuration.\nOnly the fields that are present in the `session.update` are updated. To clear a field like\n`instructions`, pass an empty string. To clear a field like `tools`, pass an empty array.\nTo clear a field like `turn_detection`, pass `null`.",
+        "x-oaiMeta": {
+          "name": "session.update",
+          "group": "realtime",
+          "example": "{\n  \"type\": \"session.update\",\n  \"session\": {\n    \"type\": \"realtime\",\n    \"instructions\": \"You are a creative assistant that helps with design tasks.\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"name\": \"display_color_palette\",\n        \"description\": \"Call this function when a user asks for a color palette.\",\n        \"parameters\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"theme\": {\n              \"type\": \"string\",\n              \"description\": \"Description of the theme for the color scheme.\"\n            },\n            \"colors\": {\n              \"type\": \"array\",\n              \"description\": \"Array of five hex color codes based on the theme.\",\n              \"items\": {\n                \"type\": \"string\",\n                \"description\": \"Hex color code\"\n              }\n            }\n          },\n          \"required\": [\n            \"theme\",\n            \"colors\"\n          ]\n        }\n      }\n    ],\n    \"tool_choice\": \"auto\"\n  }\n}\n"
+        }
+      },
+      "OpenAI.RealtimeClientEventType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "conversation.item.create",
+              "conversation.item.delete",
+              "conversation.item.retrieve",
+              "conversation.item.truncate",
+              "input_audio_buffer.append",
+              "input_audio_buffer.clear",
+              "output_audio_buffer.clear",
+              "input_audio_buffer.commit",
+              "response.cancel",
+              "response.create",
+              "session.update"
+            ]
+          }
+        ]
+      },
       "OpenAI.RealtimeConversationItem": {
         "type": "object",
         "required": [
@@ -86270,6 +86723,16 @@
         },
         "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
       },
+      "RealtimeSessionCreateRequestUnion": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGA"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGA"
+          }
+        ]
+      },
       "RecurrenceSchedule": {
         "type": "object",
         "required": [
@@ -89963,313 +90426,6 @@
         },
         "description": "The avatar video resolution."
       },
-      "VoiceAgentClientEvent": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventConversationItemCreate"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventConversationItemDelete"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventConversationItemRetrieve"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventConversationItemTruncate"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventInputAudioBufferAppend"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventInputAudioBufferClear"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventInputAudioBufferCommit"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventOutputAudioBufferClear"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventResponseCancel"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventResponseCreate"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventSessionUpdate"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentClientEventSessionAvatarConnect"
-          }
-        ],
-        "description": "A stable v1 message sent by a client over a voice-agent WebSocket."
-      },
-      "VoiceAgentClientEventConversationItemCreate": {
-        "type": "object",
-        "required": [
-          "type",
-          "item"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "conversation.item.create"
-            ],
-            "description": "The event type, must be `conversation.item.create`.",
-            "x-stainless-const": true
-          },
-          "previous_item_id": {
-            "type": "string",
-            "description": "The ID of the preceding item after which the new item will be inserted. If not set, the new item will be appended to the end of the conversation.\n  If set to `root`, the new item will be added to the beginning of the conversation.\n  If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added."
-          },
-          "item": {
-            "$ref": "#/components/schemas/VoiceConversationItem",
-            "description": "The conversation item to create."
-          }
-        },
-        "description": "The `conversation.item.create` client event."
-      },
-      "VoiceAgentClientEventConversationItemDelete": {
-        "type": "object",
-        "required": [
-          "type",
-          "item_id"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "conversation.item.delete"
-            ],
-            "description": "The event type, must be `conversation.item.delete`.",
-            "x-stainless-const": true
-          },
-          "item_id": {
-            "type": "string",
-            "description": "The ID of the item to delete."
-          }
-        },
-        "description": "The `conversation.item.delete` client event."
-      },
-      "VoiceAgentClientEventConversationItemRetrieve": {
-        "type": "object",
-        "required": [
-          "type",
-          "item_id"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "conversation.item.retrieve"
-            ],
-            "description": "The event type, must be `conversation.item.retrieve`.",
-            "x-stainless-const": true
-          },
-          "item_id": {
-            "type": "string",
-            "description": "The ID of the item to retrieve."
-          }
-        },
-        "description": "The `conversation.item.retrieve` client event."
-      },
-      "VoiceAgentClientEventConversationItemTruncate": {
-        "type": "object",
-        "required": [
-          "type",
-          "item_id",
-          "content_index",
-          "audio_end_ms"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "conversation.item.truncate"
-            ],
-            "description": "The event type, must be `conversation.item.truncate`.",
-            "x-stainless-const": true
-          },
-          "item_id": {
-            "type": "string",
-            "description": "The ID of the assistant message item to truncate. Only assistant message\n  items can be truncated."
-          },
-          "content_index": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "description": "The index of the content part to truncate. Set this to `0`."
-          },
-          "audio_end_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "description": "Inclusive duration up to which audio is truncated, in milliseconds. If\n  the audio_end_ms is greater than the actual audio duration, the server\n  will respond with an error."
-          }
-        },
-        "description": "The `conversation.item.truncate` client event."
-      },
-      "VoiceAgentClientEventInputAudioBufferAppend": {
-        "type": "object",
-        "required": [
-          "type",
-          "audio"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "input_audio_buffer.append"
-            ],
-            "description": "The event type, must be `input_audio_buffer.append`.",
-            "x-stainless-const": true
-          },
-          "audio": {
-            "type": "string",
-            "description": "Base64-encoded audio bytes. This must be in the format specified by the\n  `input_audio_format` field in the session configuration."
-          }
-        },
-        "description": "The `input_audio_buffer.append` client event."
-      },
-      "VoiceAgentClientEventInputAudioBufferClear": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "input_audio_buffer.clear"
-            ],
-            "description": "The event type, must be `input_audio_buffer.clear`.",
-            "x-stainless-const": true
-          }
-        },
-        "description": "The `input_audio_buffer.clear` client event."
-      },
-      "VoiceAgentClientEventInputAudioBufferCommit": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "input_audio_buffer.commit"
-            ],
-            "description": "The event type, must be `input_audio_buffer.commit`.",
-            "x-stainless-const": true
-          }
-        },
-        "description": "The `input_audio_buffer.commit` client event."
-      },
-      "VoiceAgentClientEventOutputAudioBufferClear": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "description": "The unique ID of the client event used for error handling."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "output_audio_buffer.clear"
-            ],
-            "description": "The event type, must be `output_audio_buffer.clear`.",
-            "x-stainless-const": true
-          }
-        },
-        "description": "The `output_audio_buffer.clear` client event."
-      },
-      "VoiceAgentClientEventResponseCancel": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "response.cancel"
-            ],
-            "description": "The event type, must be `response.cancel`.",
-            "x-stainless-const": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "A specific response ID to cancel - if not provided, will cancel an\n  in-progress response in the default conversation."
-          }
-        },
-        "description": "The `response.cancel` client event."
-      },
-      "VoiceAgentClientEventResponseCreate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "response.create"
-            ],
-            "description": "The event type, must be `response.create`.",
-            "x-stainless-const": true
-          },
-          "response": {
-            "$ref": "#/components/schemas/VoiceAgentResponseCreateParams",
-            "description": "Parameters for the new response."
-          }
-        },
-        "description": "The `response.create` client event."
-      },
       "VoiceAgentClientEventSessionAvatarConnect": {
         "type": "object",
         "required": [
@@ -90293,34 +90449,12 @@
             "description": "The client's SDP offer for avatar media negotiation."
           }
         },
-        "description": "The `session.avatar.connect` client event."
-      },
-      "VoiceAgentClientEventSessionUpdate": {
-        "type": "object",
-        "required": [
-          "type",
-          "session"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "Optional client-generated ID used to identify this event. This is an arbitrary string that a client may assign. It will be passed back if there is an error with the event, but the corresponding `session.updated` event will not include it."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "session.update"
-            ],
-            "description": "The event type, must be `session.update`.",
-            "x-stainless-const": true
-          },
-          "session": {
-            "$ref": "#/components/schemas/VoiceAgentSessionUpdateConfig",
-            "description": "The stable realtime session fields to update."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
-        },
-        "description": "The `session.update` client event."
+        ],
+        "description": "The `session.avatar.connect` client event."
       },
       "VoiceAgentDefinition": {
         "type": "object",
@@ -90979,7 +91113,7 @@
             "type": "string"
           },
           "format": {
-            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The audio format, when this is an audio content part."
           }
         },
@@ -93281,97 +93415,6 @@
         },
         "description": "The effective stable realtime session settings returned by the voice-agent service."
       },
-      "VoiceAgentSessionUpdateConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "realtime"
-            ],
-            "description": "The session type. Always `realtime`."
-          },
-          "instructions": {
-            "type": "string",
-            "description": "Instructions applied throughout the session."
-          },
-          "temperature": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 2,
-            "description": "The sampling temperature for compatible cascaded pipelines."
-          },
-          "max_output_tokens": {
-            "$ref": "#/components/schemas/VoiceAgentMaxOutputTokens",
-            "description": "The maximum output-token count for one response."
-          },
-          "output_modalities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceOutputModality"
-            },
-            "description": "The output modalities enabled for the session."
-          },
-          "audio": {
-            "$ref": "#/components/schemas/VoiceAudioConfig",
-            "description": "The input- and output-audio settings for the session."
-          },
-          "avatar": {
-            "$ref": "#/components/schemas/VoiceAgentSessionAvatarConfig",
-            "description": "The avatar settings for the session."
-          },
-          "animation": {
-            "$ref": "#/components/schemas/VoiceAgentAnimationConfig",
-            "description": "Animation settings for the session."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentTool"
-            },
-            "description": "Tools available to the session."
-          },
-          "tool_choice": {
-            "$ref": "#/components/schemas/VoiceAgentToolChoice",
-            "description": "Tool-selection behavior for the session."
-          },
-          "reasoning": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeReasoning",
-            "description": "Reasoning settings for compatible realtime models."
-          },
-          "parallel_tool_calls": {
-            "type": "boolean",
-            "description": "Whether the model may call multiple tools in parallel."
-          },
-          "include": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentSessionIncludeOption"
-            },
-            "description": "Additional fields to include in service outputs."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Up to 16 string key-value pairs attached to the session."
-          },
-          "interim_response": {
-            "$ref": "#/components/schemas/VoiceAgentInterimResponse",
-            "description": "Interim-response settings for latency and tool execution."
-          },
-          "greeting": {
-            "$ref": "#/components/schemas/VoiceGreetingConfig",
-            "description": "A proactive assistant greeting started after session configuration."
-          }
-        },
-        "description": "The stable realtime session settings accepted in a `session.update` client event."
-      },
       "VoiceAgentStaticInterimResponseConfig": {
         "type": "object",
         "required": [
@@ -93667,55 +93710,11 @@
           ]
         }
       },
-      "VoiceAudioFormat": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceAudioFormatType",
-            "description": "The audio format type, e.g. 'audio/pcm' (16-bit PCM), 'audio/pcmu' (G.711 mu-law), or 'audio/pcma' (G.711 A-law)."
-          },
-          "rate": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The sample rate in Hz. Applies to 'audio/pcm' (e.g. 24000); omit for telephony G.711 formats (8 kHz)."
-          }
-        },
-        "description": "An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAudioFormatType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "audio/pcm",
-              "audio/pcmu",
-              "audio/pcma"
-            ]
-          }
-        ],
-        "description": "The audio format type. Values follow the OpenAI Realtime wire schema and are exempt from the snake_case enum-value rule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAudioInputConfig": {
         "type": "object",
         "properties": {
           "format": {
-            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The input audio format."
           },
           "noise_reduction": {
@@ -93774,7 +93773,7 @@
         "type": "object",
         "properties": {
           "format": {
-            "$ref": "#/components/schemas/VoiceAudioFormat",
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
             "description": "The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM."
           },
           "voice": {

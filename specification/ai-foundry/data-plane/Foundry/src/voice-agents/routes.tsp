@@ -80,7 +80,7 @@ interface VoiceAgentWebSocket {
   websocketProtocol(
     @path agent_name: string,
     ...FoundryDataPlaneApiVersionParameter,
-    clientEvent: VoiceAgentClientEvent,
+    clientEvent: OpenAI.RealtimeClientEvent,
   ): VoiceAgentServerEvent;
 }
 
