@@ -143,14 +143,6 @@ interface ValidationTestRuns {
   @doc("Get a validation test run details")
   get is ArmResourceRead<ValidationTestRun>;
 
-  @doc("Create or update a validation test run. Internal-only: available in 2026-07-01-preview, removed starting 2026-08-01-preview.")
-  @removed(Versions.v2026_08_01_preview)
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ValidationTestRun>;
-
-  @doc("Delete a validation test run. Internal-only: available in 2026-07-01-preview, removed starting 2026-08-01-preview.")
-  @removed(Versions.v2026_08_01_preview)
-  delete is ArmResourceDeleteWithoutOkAsync<ValidationTestRun>;
-
   @doc("List validation test runs for an execution plan run")
   listByExecutionPlanRun is ArmResourceListByParent<ValidationTestRun>;
 }
