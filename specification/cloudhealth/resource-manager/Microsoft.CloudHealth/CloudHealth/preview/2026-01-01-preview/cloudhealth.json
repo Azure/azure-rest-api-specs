@@ -2193,8 +2193,10 @@
           "maxLength": 256
         },
         "dimensionFilter": {
-          "$ref": "#/definitions/dimensionFilter256",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set."
+          "type": "string",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "minLength": 1,
+          "maxLength": 256
         },
         "displayName": {
           "type": "string",
@@ -3578,8 +3580,10 @@
           "maxLength": 256
         },
         "dimensionFilter": {
-          "$ref": "#/definitions/dimensionFilter256",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set."
+          "type": "string",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "minLength": 1,
+          "maxLength": 256
         }
       },
       "required": [
@@ -3989,11 +3993,6 @@
       "type": "string",
       "description": "Type for authentication setting resource name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
-    },
-    "dimensionFilter256": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256
     },
     "discoveryRuleName": {
       "type": "string",
