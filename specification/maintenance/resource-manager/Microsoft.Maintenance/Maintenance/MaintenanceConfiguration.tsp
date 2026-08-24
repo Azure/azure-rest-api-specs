@@ -11,8 +11,8 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maintenance;
 
-// Common-types v5 emits this resource's id as arm-id, which is a known cross-version finding.
-// Remove this note after 2025-10-01 is GA and becomes the v5 stable comparison baseline.
+// Common-types v5 emits this resource's id as arm-id, which is an expected difference
+// when 2025-11-01 is compared with older stable API versions.
 /**
  * Maintenance configuration record type
  */

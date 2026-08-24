@@ -55,7 +55,6 @@ interface ScheduledEventOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom action POST that acknowledges a list of ScheduledEvents; not a standard ARM resource lifecycle operation."
-  @added(Versions.v2025_10_01_preview)
   @summary("Post ScheduledEvents List Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents")
   @post

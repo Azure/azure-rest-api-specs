@@ -181,7 +181,6 @@ model ScheduledEventsApproveResponse {
 /**
  * ScheduledEvents Id List
  */
-@added(Versions.v2025_10_01_preview)
 model ScheduledEventsIdList {
   /**
    * The list of ScheduledEvents Id.
@@ -192,7 +191,6 @@ model ScheduledEventsIdList {
 /**
  * An error response received from the Azure Maintenance service.
  */
-@added(Versions.v2025_10_01_preview)
 @error
 model ScheduledEventsListAcknowledgeError {
   /**
@@ -204,7 +202,6 @@ model ScheduledEventsListAcknowledgeError {
 /**
  * An error response details received from the Azure Maintenance service.
  */
-@added(Versions.v2025_10_01_preview)
 model ScheduledEventsListAcknowledgeErrorDetails {
   /**
    * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
@@ -226,7 +223,6 @@ model ScheduledEventsListAcknowledgeErrorDetails {
 /**
  * An error response details received from the Azure Maintenance service for each ScheduledEvents.
  */
-@added(Versions.v2025_10_01_preview)
 model ScheduledEventsAcknowledgeErrorDetails {
   /**
    * ScheduledEvents Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)
@@ -423,8 +419,8 @@ model InputLinuxParameters {
  * Definition of a Resource
  */
 model Resource {
-  // Common-types v5 emits this id as arm-id, which is a known cross-version finding.
-  // Remove this note after 2025-10-01 is GA and becomes the v5 stable comparison baseline.
+  // Common-types v5 emits this id as arm-id, which is an expected difference
+  // when 2025-11-01 is compared with older stable API versions.
   /**
    * Fully qualified identifier of the resource
    */
