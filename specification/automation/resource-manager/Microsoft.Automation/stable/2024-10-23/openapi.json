@@ -4695,6 +4695,17 @@
             "description": "Resource 'DscNodeConfiguration' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/DscNodeConfiguration"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -5526,7 +5537,18 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted."
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5579,7 +5601,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted."
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -6764,21 +6797,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "Resource operation accepted."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7307,7 +7326,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted."
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
