@@ -1,0 +1,51 @@
+# Data-Plane API Review - Assign Reviewers
+#
+# When the `APIStewardshipBoard-ReviewRequested` label is applied to a data-plane PR,
+# request review from the `azure-data-plane-api-reviewers` team. The team has GitHub
+# code-review auto-assignment enabled, so GitHub delegates the request to one team
+# member using the team's routing algorithm. Removing the label is intentionally not
+# handled: native delegation owns the individual reviewer, so the workflow never removes
+# a reviewer it did not pick, and it does not subscribe to `unlabeled` events. Applying
+# `APIStewardshipBoard-SignedOff` clears the request label.
+name: "Data-Plane API Review - Assign Reviewers"
+
+on:
+  pull_request_target:
+    types:
+      - labeled
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+# Serialize runs per PR so racing label events do not interleave. Do not cancel
+# in-progress runs: a cancelled run could drop a team request mid-flight.
+concurrency:
+  group: data-plane-review-assignment-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  assign-reviewers:
+    name: Assign Data-Plane Review Team
+    runs-on: ubuntu-24.04
+    steps:
+      # IMPORTANT: This workflow uses pull_request_target, which runs with repo write
+      # permissions. Only base-branch code is checked out below, and no PR-head code is
+      # ever executed - the job only calls the GitHub REST API via github-script.
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Assign data-plane review team
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: assignReviewers } =
+              await import('${{ github.workspace }}/.github/workflows/src/data-plane-review/assign-reviewers.js');
+            await assignReviewers({ github, context, core });
