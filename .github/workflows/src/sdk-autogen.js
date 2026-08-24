@@ -2,6 +2,7 @@ const COMMAND = "/sdk-autogen";
 const DEFAULT_BRANCH = "main";
 const WRITE_PERMISSIONS = new Set(["admin", "maintain", "write"]);
 
+/** @type {Readonly<Record<string, Readonly<SdkLanguageConfig>>>} */
 const LANGUAGE_CONFIGS = Object.freeze({
   javascript: Object.freeze({
     owner: "Azure",
@@ -13,7 +14,16 @@ const LANGUAGE_CONFIGS = Object.freeze({
 });
 
 /**
- * @param {string} body
+ * @typedef {object} SdkLanguageConfig
+ * @property {string} owner
+ * @property {string} repository
+ * @property {string} titlePrefix
+ * @property {string} customAgent
+ * @property {string} assignmentCheck
+ */
+
+/**
+ * @param {unknown} body
  * @returns {{ language: string, branch: string }}
  */
 export function parseSdkAutogenCommand(body) {
@@ -100,9 +110,12 @@ export async function runSdkAutogen({ github, context, core }) {
     throw new Error(`${COMMAND} can only be invoked from a pull request comment`);
   }
 
-  const { language, branch } = parseSdkAutogenCommand(context.payload.comment?.body);
-  const username = context.payload.comment?.user?.login;
-  if (!username) {
+  const comment = /** @type {{ body?: unknown, user?: { login?: unknown } } | undefined} */ (
+    context.payload.comment
+  );
+  const { language, branch } = parseSdkAutogenCommand(comment?.body);
+  const username = comment?.user?.login;
+  if (typeof username !== "string" || !username) {
     throw new Error("Unable to identify the command author");
   }
 
@@ -126,6 +139,9 @@ export async function runSdkAutogen({ github, context, core }) {
   }
 
   const config = LANGUAGE_CONFIGS[language];
+  if (!config) {
+    throw new Error(`Unsupported SDK language: ${language}`);
+  }
   await github.rest.repos.getBranch({
     owner: config.owner,
     repo: config.repository,
