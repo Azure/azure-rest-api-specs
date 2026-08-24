@@ -197,6 +197,11 @@ model VoiceAgentSessionResponseConfig {
   expires_at?: FoundryTimestamp | null;
 }
 
+@doc("The effective session configuration returned in voice-agent session lifecycle events.")
+union VoiceAgentSessionResponse {
+  voice_agent: VoiceAgentSessionResponseConfig,
+}
+
 @doc("Parameters accepted by a voice-agent `response.create` event.")
 model VoiceAgentResponseCreateParams {
   ...OmitProperties<
@@ -371,7 +376,7 @@ model VoiceAgentClientEventConversationItemCreate {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@changePropertyType(
   OpenAI.RealtimeServerEventSessionCreated.session,
-  VoiceAgentSessionResponseConfig
+  VoiceAgentSessionResponse
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
@@ -386,7 +391,7 @@ model VoiceAgentClientEventConversationItemCreate {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@changePropertyType(
   OpenAI.RealtimeServerEventSessionUpdated.session,
-  VoiceAgentSessionResponseConfig
+  VoiceAgentSessionResponse
 );
 
 @doc("The `session.avatar.connect` client event.")
