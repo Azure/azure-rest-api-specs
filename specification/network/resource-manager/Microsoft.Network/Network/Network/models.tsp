@@ -743,6 +743,34 @@ union ApplicationGatewayWafRuleSensitivityTypes {
   High: "High",
 }
 
+/**
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules.
+ */
+@added(Versions.v2026_01_01)
+union ApplicationGatewayWafRuleParanoiaLevel {
+  string,
+
+  /**
+   * Baseline detection rules.
+   */
+  PL1: "PL1",
+
+  /**
+   * Adds stricter detection rules.
+   */
+  PL2: "PL2",
+
+  /**
+   * Adds aggressive detection rules.
+   */
+  PL3: "PL3",
+
+  /**
+   * Strictest detection rules.
+   */
+  PL4: "PL4",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
@@ -9007,6 +9035,12 @@ model ApplicationGatewayFirewallRuleSetPropertiesFormat {
   ruleSetVersion: string;
 
   /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_01_01)
+  displayName?: string;
+
+  /**
    * The rule groups of the web application firewall rule set.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -9071,6 +9105,12 @@ model ApplicationGatewayFirewallRule {
    * The string representation of the web application firewall rule sensitivity.
    */
   sensitivity?: ApplicationGatewayWafRuleSensitivityTypes;
+
+  /**
+   * OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules.
+   */
+  @added(Versions.v2026_01_01)
+  paranoiaLevel?: ApplicationGatewayWafRuleParanoiaLevel;
 
   /**
    * The description of the web application firewall rule.
@@ -9183,6 +9223,12 @@ model DefaultRuleSetPropertyFormat {
    * The version of the web application firewall rule set type.
    */
   ruleSetVersion?: string;
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_01_01)
+  displayName?: string;
 }
 
 /**
@@ -9205,6 +9251,12 @@ model ApplicationGatewayFirewallManifestRuleSet {
    * The rule set status
    */
   status?: ApplicationGatewayRuleSetStatusOptions;
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_01_01)
+  displayName?: string;
 
   /**
    * Tier of an application gateway that support the rule set.
