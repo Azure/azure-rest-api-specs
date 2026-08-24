@@ -1,3 +1,19 @@
+import "@azure-tools/typespec-azure-core";
+
+using Azure.Core.Experimental;
+
+/* Hotfix until we merge a new version of the upstream library with this already fixed. */
+union RealtimeSessionCreateRequestUnion {
+  OpenAI.RealtimeSessionCreateRequestGA,
+  OpenAI.RealtimeTranscriptionSessionCreateRequestGA,
+}
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@changePropertyType(
+  OpenAI.RealtimeClientEventSessionUpdate.session,
+  RealtimeSessionCreateRequestUnion
+);
+
 namespace OpenAI {
   scalar integer extends TypeSpec.int64;
   scalar numeric extends TypeSpec.float64;

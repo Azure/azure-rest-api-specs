@@ -334,7 +334,7 @@ model VoiceAudioConfig {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioInputConfig {
   @doc("The input audio format.")
-  format?: VoiceAudioFormat;
+  format?: OpenAI.RealtimeAudioFormats;
 
   @doc("Input noise reduction. Set to null to disable.")
   noise_reduction?: VoiceNoiseReduction | null;
@@ -388,7 +388,7 @@ union VoiceType {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioOutputConfig {
   @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
-  format?: VoiceAudioFormat;
+  format?: OpenAI.RealtimeAudioFormats;
 
   @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.")
   voice?: string;
@@ -442,31 +442,6 @@ model VoiceAudioOutputConfig {
 union VoiceAudioTimestampType {
   @doc("Word-level timestamps.")
   word: "word",
-}
-
-@doc("An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAudioFormat {
-  @doc("The audio format type, e.g. 'audio/pcm' (16-bit PCM), 'audio/pcmu' (G.711 mu-law), or 'audio/pcma' (G.711 A-law).")
-  type: VoiceAudioFormatType;
-
-  @doc("The sample rate in Hz. Applies to 'audio/pcm' (e.g. 24000); omit for telephony G.711 formats (8 kHz).")
-  rate?: int32;
-}
-
-@doc("The audio format type. Values follow the OpenAI Realtime wire schema and are exempt from the snake_case enum-value rule.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAudioFormatType {
-  string,
-
-  @doc("16-bit PCM.")
-  pcm: "audio/pcm",
-
-  @doc("G.711 mu-law (telephony).")
-  pcmu: "audio/pcmu",
-
-  @doc("G.711 A-law (telephony).")
-  pcma: "audio/pcma",
 }
 
 @doc("Input audio noise reduction configuration.")
