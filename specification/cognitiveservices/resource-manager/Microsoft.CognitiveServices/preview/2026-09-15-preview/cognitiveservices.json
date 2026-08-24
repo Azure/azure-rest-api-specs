@@ -15822,7 +15822,7 @@
       ],
       "x-ms-enum": {
         "name": "CostControlDimensionType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Agent",
@@ -15982,7 +15982,7 @@
       ],
       "x-ms-enum": {
         "name": "CostControlPeriod",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Minute",
@@ -16135,7 +16135,7 @@
           ],
           "x-ms-enum": {
             "name": "CostControlThresholdAction",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Audit",
@@ -16165,7 +16165,7 @@
       ],
       "x-ms-enum": {
         "name": "CostControlThresholdAction",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Audit",
@@ -16189,7 +16189,7 @@
       ],
       "x-ms-enum": {
         "name": "CostControlThresholdType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Percentage",
@@ -16206,13 +16206,21 @@
     },
     "CostControlUnit": {
       "type": "string",
+      "description": "The supported unit for cost control amounts and thresholds.",
       "enum": [
         "usd"
       ],
       "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-nullable": false
+        "name": "CostControlUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Usd",
+            "value": "usd",
+            "description": "Estimated cost in United States dollars."
+          }
+        ]
+      }
     },
     "CreatedByType": {
       "type": "string",

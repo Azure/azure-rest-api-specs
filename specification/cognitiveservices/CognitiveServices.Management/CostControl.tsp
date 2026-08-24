@@ -211,9 +211,10 @@ model CostControlDimension {
 /**
  * The supported cost control counter dimensions.
  */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown counter dimensions, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
 union CostControlDimensionType {
+  string,
+
   /**
    * Consumption is partitioned by the stable Foundry agent ID.
    */
@@ -248,9 +249,10 @@ union CostControlDimensionType {
 /**
  * The supported unit for cost control amounts and thresholds.
  */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown cost control units, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
 union CostControlUnit {
+  string,
+
   /**
    * Estimated cost in United States dollars.
    */
@@ -260,9 +262,10 @@ union CostControlUnit {
 /**
  * The calendar-aligned UTC renewal periods for recurring cost control rules.
  */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown renewal periods, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
 union CostControlPeriod {
+  string,
+
   /**
    * Renews at the start of the next UTC minute.
    */
@@ -319,9 +322,10 @@ model CostControlThreshold {
 /**
  * The supported threshold value interpretations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown threshold types, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
 union CostControlThresholdType {
+  string,
+
   /**
    * The value is a percentage of the configured rule amount.
    */
@@ -336,9 +340,10 @@ union CostControlThresholdType {
 /**
  * The supported actions when a threshold is reached.
  */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown threshold actions, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
 union CostControlThresholdAction {
+  string,
+
   /**
    * Records the threshold crossing without notifying the customer or blocking requests.
    */
