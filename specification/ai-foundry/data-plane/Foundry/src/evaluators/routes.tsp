@@ -22,7 +22,7 @@ alias ListEvaluatorVersionsParameters = {
 
 /** Query parameters for listing evaluator diagnostics grouped by evaluator version. */
 alias ListEvaluatorDiagnosticsParameters = {
-  @doc("The maximum number of evaluator-version groups to return. The default is 20 and the supported range is 1 through 100.")
+  @doc("The maximum number of evaluator-version groups to return. The value must be between 1 and 100, inclusive. The default is 20.")
   @Http.query
   @minValue(1)
   @maxValue(100)

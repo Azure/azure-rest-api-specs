@@ -8888,7 +8888,7 @@
             "name": "limit",
             "in": "query",
             "required": false,
-            "description": "The maximum number of evaluator-version groups to return. The default is 20 and the supported range is 1 through 100.",
+            "description": "The maximum number of evaluator-version groups to return. The value must be between 1 and 100, inclusive. The default is 20.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -81178,28 +81178,28 @@
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Normalized non-redundancy among rubric dimensions. Higher values indicate greater diversity."
+            "description": "Normalized non-redundancy among rubric dimensions. The value must be between 0.0 and 1.0, inclusive. Higher values indicate greater diversity."
           },
           "coverage": {
             "type": "number",
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Normalized coverage of concepts found in the evaluator-generation sources."
+            "description": "Normalized coverage of concepts found in the evaluator-generation sources. The value must be between 0.0 and 1.0, inclusive."
           },
           "negative_vs_positive": {
             "type": "number",
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Failure-path coverage normalized against the service's configured target fraction. A value of 1.0 means the target was met or exceeded."
+            "description": "Failure-path coverage normalized against the service's configured target fraction. The value must be between 0.0 and 1.0, inclusive. A value of 1.0 means the target was met or exceeded."
           },
           "overall": {
             "type": "number",
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Normalized aggregate health score. Omitted when required component signals are unavailable."
+            "description": "Normalized aggregate health score. The value must be between 0.0 and 1.0, inclusive. Omitted when required component signals are unavailable."
           },
           "confidence": {
             "$ref": "#/components/schemas/RubricHealthConfidence",
