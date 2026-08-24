@@ -3540,6 +3540,11 @@
           "$ref": "#/definitions/ApplicationGatewayAutoscaleConfiguration",
           "description": "Autoscale Configuration."
         },
+        "reservedCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The reserved capacity of the application gateway resource. Applicable to the Basic_v2 and Basic_WAF_v2 SKU tiers."
+        },
         "privateLinkConfigurations": {
           "type": "array",
           "description": "PrivateLink configurations on application gateway.",
@@ -5107,6 +5112,10 @@
             "$ref": "#/definitions/ApplicationGatewayForContainersReferenceDefinition"
           },
           "readOnly": true
+        },
+        "tier": {
+          "$ref": "./common.json#/definitions/WebApplicationFirewallPolicyTier",
+          "description": "Tier of a web application firewall policy."
         }
       },
       "required": [
