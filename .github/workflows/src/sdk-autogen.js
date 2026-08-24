@@ -1,66 +1,93 @@
+import { aiProjectsLibrary } from "./sdk-autogen/ai-projects.js";
+
 const COMMAND = "/sdk-autogen";
 const DEFAULT_BRANCH = "main";
 const WRITE_PERMISSIONS = new Set(["admin", "maintain", "write"]);
+const USAGE = `${COMMAND} <library> <lang> [<lang repo branch>]`;
 
-/** @type {Readonly<Record<string, Readonly<SdkLanguageConfig>>>} */
-const LANGUAGE_CONFIGS = Object.freeze({
-  javascript: Object.freeze({
-    owner: "Azure",
-    repository: "azure-sdk-for-js",
-    titlePrefix: "ai-projects",
-    customAgent: "ai-projects-regen",
-    assignmentCheck: "ai-projects-typespec-regen:v1",
-  }),
+/** @typedef {import("./sdk-autogen/ai-projects.js").SdkLibraryConfig} SdkLibraryConfig */
+
+/** @type {Readonly<Record<string, Readonly<SdkLibraryConfig>>>} */
+const LIBRARY_CONFIGS = Object.freeze({
+  [aiProjectsLibrary.name]: aiProjectsLibrary,
 });
 
 /**
- * @typedef {object} SdkLanguageConfig
- * @property {string} owner
- * @property {string} repository
- * @property {string} titlePrefix
- * @property {string} customAgent
- * @property {string} assignmentCheck
+ * @param {string} library
+ * @returns {Readonly<SdkLibraryConfig>}
  */
+function getLibraryConfig(library) {
+  const config = LIBRARY_CONFIGS[library];
+  if (!config) {
+    throw new Error(
+      `Unsupported SDK library: ${library}. Supported libraries: ${Object.keys(LIBRARY_CONFIGS).join(", ")}`,
+    );
+  }
+  return config;
+}
+
+/**
+ * @param {Readonly<SdkLibraryConfig>} libraryConfig
+ * @param {string} library
+ * @param {string} language
+ * @returns {Readonly<import("./sdk-autogen/ai-projects.js").SdkLanguageConfig>}
+ */
+function getLanguageConfig(libraryConfig, library, language) {
+  const config = libraryConfig.languages[language];
+  if (!config) {
+    throw new Error(
+      `Unsupported SDK language for ${library}: ${language}. Supported languages: ${Object.keys(libraryConfig.languages).join(", ")}`,
+    );
+  }
+  return config;
+}
 
 /**
  * @param {unknown} body
- * @returns {{ language: string, branch: string }}
+ * @returns {{ library: string, language: string, branch: string }}
  */
 export function parseSdkAutogenCommand(body) {
   if (typeof body !== "string" || body.includes("\n") || body.includes("\r")) {
-    throw new Error(`Usage: ${COMMAND} <lang> [<lang repo branch>]`);
+    throw new Error(`Usage: ${USAGE}`);
   }
 
-  const match = body.match(/^\/sdk-autogen(?:[ \t]+([^ \t]+))?(?:[ \t]+([^ \t]+))?[ \t]*$/);
-  if (!match || !match[1]) {
-    throw new Error(`Usage: ${COMMAND} <lang> [<lang repo branch>]`);
+  const match = body.match(
+    /^\/sdk-autogen(?:[ \t]+([^ \t]+))?(?:[ \t]+([^ \t]+))?(?:[ \t]+([^ \t]+))?[ \t]*$/,
+  );
+  if (!match || !match[1] || !match[2]) {
+    throw new Error(`Usage: ${USAGE}`);
   }
 
-  const language = match[1].toLowerCase();
-  if (!Object.hasOwn(LANGUAGE_CONFIGS, language)) {
-    throw new Error(`Unsupported SDK language: ${match[1]}. Supported languages: javascript`);
-  }
+  const library = match[1].toLowerCase();
+  const libraryConfig = getLibraryConfig(library);
+  const language = match[2].toLowerCase();
+  getLanguageConfig(libraryConfig, library, language);
 
-  const branch = match[2] ?? DEFAULT_BRANCH;
+  const branch = match[3] ?? DEFAULT_BRANCH;
   if (!/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(branch)) {
     throw new Error(`Invalid SDK repository branch: ${branch}`);
   }
 
-  return { language, branch };
+  return { library, language, branch };
 }
 
 /**
  * @param {object} options
+ * @param {string} options.library
  * @param {string} options.language
  * @param {string} options.branch
  * @param {string} options.headSha
  * @param {string} options.pullRequestUrl
  */
-export function buildSdkAutogenIssueRequest({ language, branch, headSha, pullRequestUrl }) {
-  const config = LANGUAGE_CONFIGS[language];
-  if (!config) {
-    throw new Error(`Unsupported SDK language: ${language}`);
-  }
+export function buildSdkAutogenIssueRequest({
+  library,
+  language,
+  branch,
+  headSha,
+  pullRequestUrl,
+}) {
+  const libraryConfig = getLibraryConfig(library);
+  const config = getLanguageConfig(libraryConfig, library, language);
   if (!/^[0-9a-f]{40}$/.test(headSha)) {
     throw new Error(`Invalid pull request head commit: ${headSha}`);
   }
@@ -113,7 +140,7 @@ export async function runSdkAutogen({ github, context, core }) {
   const comment = /** @type {{ body?: unknown, user?: { login?: unknown } } | undefined} */ (
     context.payload.comment
   );
-  const { language, branch } = parseSdkAutogenCommand(comment?.body);
+  const { library, language, branch } = parseSdkAutogenCommand(comment?.body);
   const username = comment?.user?.login;
   if (typeof username !== "string" || !username) {
     throw new Error("Unable to identify the command author");
@@ -138,10 +165,8 @@ export async function runSdkAutogen({ github, context, core }) {
     throw new Error(`${COMMAND} can only be invoked on an open pull request`);
   }
 
-  const config = LANGUAGE_CONFIGS[language];
-  if (!config) {
-    throw new Error(`Unsupported SDK language: ${language}`);
-  }
+  const libraryConfig = getLibraryConfig(library);
+  const config = getLanguageConfig(libraryConfig, library, language);
   await github.rest.repos.getBranch({
     owner: config.owner,
     repo: config.repository,
@@ -149,6 +174,7 @@ export async function runSdkAutogen({ github, context, core }) {
   });
 
   const request = buildSdkAutogenIssueRequest({
+    library,
     language,
     branch,
     headSha: pullRequest.head.sha,

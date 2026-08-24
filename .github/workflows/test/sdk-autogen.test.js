@@ -19,14 +19,16 @@ function invokeSdkAutogen(args) {
 
 describe("sdk-autogen", () => {
   it("defaults the target branch to main", () => {
-    expect(parseSdkAutogenCommand("/sdk-autogen javascript")).toEqual({
+    expect(parseSdkAutogenCommand("/sdk-autogen ai-projects javascript")).toEqual({
+      library: "ai-projects",
       language: "javascript",
       branch: "main",
     });
   });
 
   it("accepts an explicit target branch", () => {
-    expect(parseSdkAutogenCommand("/sdk-autogen JavaScript feature/regen-v2")).toEqual({
+    expect(parseSdkAutogenCommand("/sdk-autogen AI-Projects JavaScript feature/regen-v2")).toEqual({
+      library: "ai-projects",
       language: "javascript",
       branch: "feature/regen-v2",
     });
@@ -34,15 +36,30 @@ describe("sdk-autogen", () => {
 
   it.each([
     "/sdk-autogen",
-    "/sdk-autogen python",
-    "/sdk-autogen javascript branch extra",
-    "/sdk-autogen javascript invalid branch",
+    "/sdk-autogen ai-projects",
+    "/sdk-autogen unknown javascript",
+    "/sdk-autogen ai-projects python",
+    "/sdk-autogen ai-projects javascript branch extra",
+    "/sdk-autogen ai-projects javascript invalid branch",
   ])("rejects an unsupported command: %s", (command) => {
     expect(() => parseSdkAutogenCommand(command)).toThrow();
   });
 
+  it("reports the supported library", () => {
+    expect(() => parseSdkAutogenCommand("/sdk-autogen unknown javascript")).toThrow(
+      "Unsupported SDK library: unknown. Supported libraries: ai-projects",
+    );
+  });
+
+  it("reports the languages supported by the selected library", () => {
+    expect(() => parseSdkAutogenCommand("/sdk-autogen ai-projects python")).toThrow(
+      "Unsupported SDK language for ai-projects: python. Supported languages: javascript",
+    );
+  });
+
   it("builds the JavaScript issue and Copilot assignment payload", () => {
     const request = buildSdkAutogenIssueRequest({
+      library: "ai-projects",
       language: "javascript",
       branch: "feature/regen-v2",
       headSha: HEAD_SHA,
@@ -100,7 +117,10 @@ ${PULL_REQUEST_URL}`);
       repo: { owner: "Azure", repo: "azure-rest-api-specs" },
       payload: {
         issue: { number: 123, pull_request: {} },
-        comment: { body: "/sdk-autogen javascript", user: { login: "maintainer" } },
+        comment: {
+          body: "/sdk-autogen ai-projects javascript",
+          user: { login: "maintainer" },
+        },
       },
     };
     const core = { info: vi.fn(), setOutput };
@@ -150,7 +170,10 @@ ${PULL_REQUEST_URL}`);
       repo: { owner: "Azure", repo: "azure-rest-api-specs" },
       payload: {
         issue: { number: 123, pull_request: {} },
-        comment: { body: "/sdk-autogen javascript", user: { login: "reader" } },
+        comment: {
+          body: "/sdk-autogen ai-projects javascript",
+          user: { login: "reader" },
+        },
       },
     };
 
