@@ -1,7 +1,7 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -63,7 +63,6 @@ alias AgentInsightMonitorCreatedResponse = ResourceCreatedResponse<AgentInsightM
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent Insights uses project-standard FoundryDataPlanePreviewOperation templates for Foundry data-plane preview routing and error handling."
 @tag("Agent Insight Monitors")
-@removed(Versions.v1)
 interface AgentInsightMonitors {
   /** List Agent Insights monitors, optionally filtered by agent name. */
   @get
@@ -146,9 +145,9 @@ interface AgentInsightMonitors {
   >;
 
   /** Start an Agent Insights run for a monitor. */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Run creation returns Operation-Location and Location headers through the project-standard JobCreatedResponse envelope."
   @post
   @route("/agent_insight_monitors/{monitor_id}/runs")
+  @pollingOperation(AgentInsightMonitors.getRun)
   createRun is FoundryDataPlanePreviewOperation<
     AgentInsightsPreviewKey,
     {

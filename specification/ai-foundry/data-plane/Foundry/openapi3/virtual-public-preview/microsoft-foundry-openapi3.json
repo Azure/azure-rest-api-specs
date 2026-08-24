@@ -34510,7 +34510,7 @@
           },
           "category": {
             "type": "string",
-            "description": "The category of the issue.",
+            "description": "An open, service-generated category label for the issue. Clients must accept previously unseen values.",
             "readOnly": true
           },
           "status": {
@@ -34572,8 +34572,8 @@
             "description": "Up to 200 most recent traces linked to this insight as supporting evidence."
           },
           "recommended_actions": {
-            "$ref": "#/components/schemas/AgentInsightRecommendedActions",
-            "description": "Recommended actions for remediating this insight."
+            "$ref": "#/components/schemas/AgentInsightRecommendedAction",
+            "description": "The recommended remediation for this insight."
           }
         },
         "description": "Additional insight details. Omitted unless details are requested."
@@ -34610,7 +34610,10 @@
           },
           "currency": {
             "type": "string",
-            "description": "Currency for the estimated cost amount, for example `USD`."
+            "enum": [
+              "USD"
+            ],
+            "description": "Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars."
           }
         },
         "description": "Estimated Agent Insights cost."
@@ -34931,7 +34934,7 @@
         ],
         "description": "The customer-renderable kind of an agent insight's proposed fix."
       },
-      "AgentInsightRecommendedActions": {
+      "AgentInsightRecommendedAction": {
         "type": "object",
         "required": [
           "proposed_fix"
@@ -34939,10 +34942,10 @@
         "properties": {
           "proposed_fix": {
             "$ref": "#/components/schemas/AgentInsightProposedFix",
-            "description": "A recommended fix for the issue represented by the insight."
+            "description": "The single recommended fix for the issue represented by the insight."
           }
         },
-        "description": "Recommended actions for an agent insight."
+        "description": "The recommended remediation for an agent insight."
       },
       "AgentInsightRun": {
         "type": "object",
@@ -35067,7 +35070,7 @@
             ]
           }
         ],
-        "description": "Public error categories returned for a failed Agent Insights run."
+        "description": "Public error categories returned for a failed Agent Insights run. Named values are the current stable categories; clients must accept previously unseen values."
       },
       "AgentInsightRunResult": {
         "type": "object",

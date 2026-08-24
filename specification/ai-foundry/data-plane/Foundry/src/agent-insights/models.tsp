@@ -2,7 +2,7 @@ import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -10,7 +10,6 @@ namespace Azure.AI.Projects;
 scalar AgentInsightsTimestamp extends utcDateTime;
 
 /** The lifecycle status of an agent insight. */
-@removed(Versions.v1)
 union AgentInsightStatus {
   string,
 
@@ -25,7 +24,6 @@ union AgentInsightStatus {
 }
 
 /** The severity of an agent insight. */
-@removed(Versions.v1)
 union AgentInsightSeverity {
   string,
 
@@ -40,7 +38,6 @@ union AgentInsightSeverity {
 }
 
 /** Identifies where an Agent Insights overview came from. */
-@removed(Versions.v1)
 union AgentInsightOverviewSource {
   string,
 
@@ -52,7 +49,6 @@ union AgentInsightOverviewSource {
 }
 
 /** A highlighted trace that provides evidence for an agent insight. */
-@removed(Versions.v1)
 model AgentInsightHighlightedTrace {
   /** The trace identifier. */
   @key("trace_id")
@@ -73,7 +69,6 @@ model AgentInsightHighlightedTrace {
 }
 
 /** A lightweight trace reference linked to an agent insight as supporting evidence. */
-@removed(Versions.v1)
 model AgentInsightLinkedTrace {
   /** The trace identifier. */
   @key("trace_id")
@@ -86,7 +81,6 @@ model AgentInsightLinkedTrace {
 }
 
 /** The customer-renderable kind of an agent insight's proposed fix. */
-@removed(Versions.v1)
 union AgentInsightProposedFixKind {
   string,
 
@@ -101,7 +95,6 @@ union AgentInsightProposedFixKind {
 }
 
 /** The Prompt surface changed by a proposed fix. */
-@removed(Versions.v1)
 union AgentInsightPromptSurface {
   string,
 
@@ -113,7 +106,6 @@ union AgentInsightPromptSurface {
 }
 
 /** A customer-renderable change in a proposed fix. */
-@removed(Versions.v1)
 model AgentInsightProposedFixChange {
   /** The source path changed by a code change. */
   path?: string;
@@ -138,7 +130,6 @@ model AgentInsightProposedFixChange {
 }
 
 /** A recommended fix for an agent insight. */
-@removed(Versions.v1)
 model AgentInsightProposedFix {
   /** The proposed-fix discriminator. */
   kind: AgentInsightProposedFixKind;
@@ -150,15 +141,13 @@ model AgentInsightProposedFix {
   changes?: AgentInsightProposedFixChange[];
 }
 
-/** Recommended actions for an agent insight. */
-@removed(Versions.v1)
-model AgentInsightRecommendedActions {
-  /** A recommended fix for the issue represented by the insight. */
+/** The recommended remediation for an agent insight. */
+model AgentInsightRecommendedAction {
+  /** The single recommended fix for the issue represented by the insight. */
   proposed_fix: AgentInsightProposedFix;
 }
 
 /** Additional insight details. Omitted unless details are requested. */
-@removed(Versions.v1)
 model AgentInsightDetails {
   /** Up to 5 highlighted traces that provide evidence for this insight. */
   @maxItems(5)
@@ -168,12 +157,11 @@ model AgentInsightDetails {
   @maxItems(200)
   linked_traces: AgentInsightLinkedTrace[];
 
-  /** Recommended actions for remediating this insight. */
-  recommended_actions: AgentInsightRecommendedActions;
+  /** The recommended remediation for this insight. */
+  recommended_actions: AgentInsightRecommendedAction;
 }
 
 /** A persisted issue discovered from an agent's traces. */
-@removed(Versions.v1)
 model AgentInsight {
   /** The insight identifier. */
   @visibility(Lifecycle.Read)
@@ -199,7 +187,7 @@ model AgentInsight {
   @visibility(Lifecycle.Read)
   severity: AgentInsightSeverity;
 
-  /** The category of the issue. */
+  /** An open, service-generated category label for the issue. Clients must accept previously unseen values. */
   @visibility(Lifecycle.Read)
   category: string;
 
@@ -229,14 +217,12 @@ model AgentInsight {
 }
 
 /** Fields that can be updated on an agent insight. */
-@removed(Versions.v1)
 model AgentInsightUpdate {
   /** The lifecycle status to apply to the insight. */
   status?: AgentInsightStatus;
 }
 
-/** Public error categories returned for a failed Agent Insights run. */
-@removed(Versions.v1)
+/** Public error categories returned for a failed Agent Insights run. Named values are the current stable categories; clients must accept previously unseen values. */
 union AgentInsightRunErrorCode {
   string,
 
@@ -260,7 +246,6 @@ union AgentInsightRunErrorCode {
 }
 
 /** Structured error information for an Agent Insights run failure. */
-@removed(Versions.v1)
 model AgentInsightError {
   /** Stable, machine-readable error category. */
   code: AgentInsightRunErrorCode;
@@ -270,7 +255,6 @@ model AgentInsightError {
 }
 
 /** Structured reason why scheduled generation is suspended for a monitor. */
-@removed(Versions.v1)
 model AgentInsightSuspension {
   /** Stable, machine-readable suspension category. */
   code: string;
@@ -286,7 +270,6 @@ model AgentInsightSuspension {
 }
 
 /** The effective overview for an Agent Insights monitor. */
-@removed(Versions.v1)
 model AgentInsightsOverview {
   /** The overview content. */
   content: string;
@@ -299,24 +282,21 @@ model AgentInsightsOverview {
 }
 
 /** A user-provided overview that becomes effective immediately and seeds the next generation. */
-@removed(Versions.v1)
 model AgentInsightsOverviewOverride {
   /** The nonblank overview content, limited to 64 KiB when encoded as UTF-8. */
   content: string;
 }
 
 /** Estimated Agent Insights cost. */
-@removed(Versions.v1)
 model AgentInsightEstimatedCost {
   /** Estimated cost amount. */
   amount: float64;
 
-  /** Currency for the estimated cost amount, for example `USD`. */
-  currency: string;
+  /** Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars. */
+  currency: "USD";
 }
 
 /** A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights. */
-@removed(Versions.v1)
 model AgentInsightMonitor {
   /** The monitor identifier. */
   @key("monitor_id")
@@ -363,7 +343,6 @@ model AgentInsightMonitor {
 }
 
 /** Fields accepted when creating an Agent Insights monitor for an agent. */
-@removed(Versions.v1)
 model AgentInsightMonitorCreate {
   /** The agent this monitor should analyze. */
   agent_name: string;
@@ -381,7 +360,6 @@ model AgentInsightMonitorCreate {
 }
 
 /** Fields that can be updated on an Agent Insights monitor. */
-@removed(Versions.v1)
 model AgentInsightMonitorUpdate {
   /** Whether scheduled insight generation is armed for the monitor. */
   enabled?: boolean;
@@ -402,7 +380,6 @@ model AgentInsightMonitorUpdate {
 }
 
 /** The trigger that started an agent insight run. */
-@removed(Versions.v1)
 union AgentInsightRunTrigger {
   string,
 
@@ -414,7 +391,6 @@ union AgentInsightRunTrigger {
 }
 
 /** The public lifecycle status of an Agent Insights run. */
-@removed(Versions.v1)
 union AgentInsightRunStatus {
   string,
 
@@ -425,17 +401,19 @@ union AgentInsightRunStatus {
   in_progress: "in_progress",
 
   /** The run completed successfully. */
+  @lroSucceeded
   succeeded: "succeeded",
 
   /** The run failed. */
+  @lroFailed
   failed: "failed",
 
   /** The run was canceled by the caller. */
+  @lroCanceled
   canceled: "canceled",
 }
 
 /** Inputs used when creating an agent insight run. */
-@removed(Versions.v1)
 model AgentInsightRunCreate {
   /** Optional number of hours of trace history to analyze. Defaults to 168. */
   @minValue(3)
@@ -444,7 +422,6 @@ model AgentInsightRunCreate {
 }
 
 /** Result statistics produced when an agent insight run succeeds. */
-@removed(Versions.v1)
 model AgentInsightRunResult {
   /** The number of traces in the analyzed time window. */
   traces_in_window: int32;
@@ -466,7 +443,6 @@ model AgentInsightRunResult {
 }
 
 /** Token usage for an Agent Insights run. */
-@removed(Versions.v1)
 model AgentInsightTokenUsage {
   /** The number of input tokens used by the run. */
   input_tokens: int32;
@@ -482,7 +458,6 @@ model AgentInsightTokenUsage {
 }
 
 /** A long-running run that analyzes one agent's traces and updates that agent's insights. */
-@removed(Versions.v1)
 model AgentInsightRun {
   /** Server-assigned unique identifier. */
   @visibility(Lifecycle.Read)
@@ -505,6 +480,7 @@ model AgentInsightRun {
 
   /** Current lifecycle status. */
   @visibility(Lifecycle.Read)
+  @lroStatus
   status: AgentInsightRunStatus;
 
   /** Error details — populated only on failure. */

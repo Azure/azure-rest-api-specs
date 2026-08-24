@@ -32,6 +32,7 @@ import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
