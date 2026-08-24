@@ -1703,13 +1703,13 @@ model AccountProperties {
   agentHostingConfigurations?: AgentHostingConfiguration[];
 
   /**
-   * The full resource IDs of budget policies directly attached to this account.
+   * The full resource IDs of cost controls directly attached to this account.
    */
   @added(Versions.v2026_09_15_preview)
   @maxItems(20)
-  budgetPolicyIds?: Azure.Core.armResourceIdentifier<[
+  costControlIds?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.CognitiveServices/accounts/budgetPolicies";
+      type: "Microsoft.CognitiveServices/accounts/costControls";
     }
   ]>[];
 }
@@ -3354,13 +3354,13 @@ model DeploymentProperties {
   routing?: DeploymentRouting;
 
   /**
-   * The full resource IDs of budget policies directly attached to this deployment.
+   * The full resource IDs of cost controls directly attached to this deployment.
    */
   @added(Versions.v2026_09_15_preview)
   @maxItems(20)
-  budgetPolicyIds?: Azure.Core.armResourceIdentifier<[
+  costControlIds?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.CognitiveServices/accounts/budgetPolicies";
+      type: "Microsoft.CognitiveServices/accounts/costControls";
     }
   ]>[];
 }

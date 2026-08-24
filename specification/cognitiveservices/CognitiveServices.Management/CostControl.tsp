@@ -13,87 +13,87 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * A budget policy owned by a Cognitive Services account.
+ * A cost control owned by a Cognitive Services account.
  */
 @added(Versions.v2026_09_15_preview)
 @parentResource(Account)
-model BudgetPolicy
-  is Azure.ResourceManager.ProxyResource<BudgetPolicyProperties> {
+model CostControl
+  is Azure.ResourceManager.ProxyResource<CostControlProperties> {
   ...ResourceNameParameter<
-    Resource = BudgetPolicy,
-    KeyName = "budgetPolicyName",
-    SegmentName = "budgetPolicies",
+    Resource = CostControl,
+    KeyName = "costControlName",
+    SegmentName = "costControls",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
   >;
 
   /**
    * The entity tag used for optimistic concurrency.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The service returns etag on the budget policy resource envelope and uses it for conditional updates and deletes."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The service returns etag on the cost control resource envelope and uses it for conditional updates and deletes."
   @visibility(Lifecycle.Read)
   etag?: string;
 }
 
 /**
- * The customer-authored settings of a budget policy.
+ * The customer-authored settings of a cost control.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Budget policies are synchronously persisted proxy resources and the service contract does not expose provisioningState."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyProperties {
+model CostControlProperties {
   /**
-   * An optional human-readable name for the policy.
+   * An optional human-readable name for the cost control.
    */
   @maxLength(128)
   displayName?: string;
 
   /**
-   * The budget rules enforced by the policy.
+   * The rules enforced by the cost control.
    */
   @minItems(1)
   @maxItems(50)
   @identifiers(#["name"])
-  rules: BudgetRule[];
+  rules: CostControlRule[];
 }
 
 /**
- * The properties that can be changed on a budget policy.
+ * The properties that can be changed on a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyPatchProperties {
+model CostControlPatchProperties {
   /**
-   * An optional human-readable name for the policy. Set this property to null to clear it.
+   * An optional human-readable name for the cost control. Set this property to null to clear it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted displayName from an explicit null in PATCH so callers can clear the value."
   @maxLength(128)
   displayName?: string | null;
 
   /**
-   * The complete replacement set of budget rules.
+   * The complete replacement set of cost control rules.
    */
   @minItems(1)
   @maxItems(50)
   @identifiers(#["name"])
-  rules?: BudgetRule[];
+  rules?: CostControlRule[];
 }
 
 /**
- * The request used to update a budget policy.
+ * The request used to update a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyPatch {
+model CostControlPatch {
   /**
-   * The budget policy properties to update.
+   * The cost control properties to update.
    */
-  properties: BudgetPolicyPatchProperties;
+  properties: CostControlPatchProperties;
 }
 
 /**
- * A budget limit and the population to which it applies.
+ * A cost limit and the population to which it applies.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetRule {
+model CostControlRule {
   /**
-   * The stable rule identifier, unique within the policy without regard to case.
+   * The stable rule identifier, unique within the cost control without regard to case.
    */
   @key
   @maxLength(64)
@@ -107,12 +107,12 @@ model BudgetRule {
   @minItems(1)
   @maxItems(1)
   @identifiers(#["type"])
-  counterKey: BudgetDimension[];
+  counterKey: CostControlDimension[];
 
   /**
-   * The unit used for the budget amount and absolute thresholds.
+   * The unit used for the cost control amount and absolute thresholds.
    */
-  unit: BudgetUnit;
+  unit: CostControlUnit;
 
   /**
    * The maximum consumption allowed by this rule, expressed in the selected unit.
@@ -123,17 +123,17 @@ model BudgetRule {
   /**
    * The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules.
    */
-  period?: BudgetPeriod;
+  period?: CostControlPeriod;
 
   /**
-   * Whether the budget renews. The default is true.
+   * Whether the cost control renews. The default is true.
    */
   recurring?: boolean = true;
 
   /**
    * Trusted request attributes and allowed values used to select matching requests.
    */
-  match?: BudgetMatch;
+  match?: CostControlMatch;
 
   /**
    * The actions evaluated as consumption approaches the configured amount.
@@ -141,21 +141,21 @@ model BudgetRule {
   @minItems(1)
   @maxItems(10)
   @identifiers(#[])
-  thresholds: BudgetThreshold[];
+  thresholds: CostControlThreshold[];
 }
 
 /**
- * Trusted request attributes and allowed values used to select matching requests.
+ * Up to four trusted request attributes and their allowed values used to select matching requests.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetMatch {
+model CostControlMatch {
   /**
    * The stable Foundry agent IDs to match.
    */
   @encodedName("application/json", "foundry.caller.agent.id")
   @minItems(1)
   @maxItems(20)
-  agentIds?: BudgetMatchValue[];
+  agentIds?: CostControlMatchValue[];
 
   /**
    * The authenticated principal object IDs to match.
@@ -163,7 +163,7 @@ model BudgetMatch {
   @encodedName("application/json", "foundry.caller.identity.oid")
   @minItems(1)
   @maxItems(20)
-  identityObjectIds?: BudgetMatchValue[];
+  identityObjectIds?: CostControlMatchValue[];
 
   /**
    * The Foundry session IDs to match.
@@ -171,15 +171,15 @@ model BudgetMatch {
   @encodedName("application/json", "foundry.caller.session.id")
   @minItems(1)
   @maxItems(20)
-  sessionIds?: BudgetMatchValue[];
+  sessionIds?: CostControlMatchValue[];
 
   /**
    * The Foundry project resource IDs to match.
    */
-  @encodedName("application/json", "foundry.caller.project.id")
+  @encodedName("application/json", "foundry.project.id")
   @minItems(1)
   @maxItems(20)
-  projectIds?: BudgetMatchValue[];
+  projectIds?: CostControlMatchValue[];
 }
 
 /**
@@ -187,27 +187,33 @@ model BudgetMatch {
  */
 @added(Versions.v2026_09_15_preview)
 @minLength(1)
-scalar BudgetMatchValue extends string;
+scalar CostControlMatchValue extends string;
 
 /**
- * A built-in request dimension used to partition budget consumption.
+ * A request dimension used to partition cost control consumption.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetDimension {
+model CostControlDimension {
   /**
    * The kind of request dimension.
    */
   @key
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  type: BudgetDimensionType;
+  type: CostControlDimensionType;
+
+  /**
+   * The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.
+   */
+  @maxLength(128)
+  attribute?: string;
 }
 
 /**
- * The supported budget counter dimensions.
+ * The supported cost control counter dimensions.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown counter dimensions, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
-union BudgetDimensionType {
+union CostControlDimensionType {
   /**
    * Consumption is partitioned by the stable Foundry agent ID.
    */
@@ -227,14 +233,24 @@ union BudgetDimensionType {
    * Consumption is partitioned by the Foundry project resource ID.
    */
   Project: "project",
+
+  /**
+   * Consumption is partitioned by the owning Cognitive Services account.
+   */
+  Account: "account",
+
+  /**
+   * Consumption is partitioned by a custom request attribute.
+   */
+  Custom: "custom",
 }
 
 /**
- * The supported unit for budget amounts and thresholds.
+ * The supported unit for cost control amounts and thresholds.
  */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown budget units, so the public contract is intentionally closed."
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown cost control units, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
-union BudgetUnit {
+union CostControlUnit {
   /**
    * Estimated cost in United States dollars.
    */
@@ -242,11 +258,11 @@ union BudgetUnit {
 }
 
 /**
- * The calendar-aligned UTC renewal periods for recurring budget rules.
+ * The calendar-aligned UTC renewal periods for recurring cost control rules.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown renewal periods, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
-union BudgetPeriod {
+union CostControlPeriod {
   /**
    * Renews at the start of the next UTC minute.
    */
@@ -279,14 +295,14 @@ union BudgetPeriod {
 }
 
 /**
- * An action evaluated when budget consumption reaches a threshold.
+ * An action evaluated when cost control consumption reaches a threshold.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetThreshold {
+model CostControlThreshold {
   /**
    * How the threshold value is interpreted.
    */
-  type: BudgetThresholdType;
+  type: CostControlThresholdType;
 
   /**
    * The threshold value. Percentage values range from 0 through 100, and absolute values cannot exceed the rule amount.
@@ -297,7 +313,7 @@ model BudgetThreshold {
   /**
    * The action taken when the threshold is reached. The default is audit.
    */
-  action?: BudgetThresholdAction = BudgetThresholdAction.Audit;
+  action?: CostControlThresholdAction = CostControlThresholdAction.Audit;
 }
 
 /**
@@ -305,7 +321,7 @@ model BudgetThreshold {
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown threshold types, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
-union BudgetThresholdType {
+union CostControlThresholdType {
   /**
    * The value is a percentage of the configured rule amount.
    */
@@ -322,7 +338,7 @@ union BudgetThresholdType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown threshold actions, so the public contract is intentionally closed."
 @added(Versions.v2026_09_15_preview)
-union BudgetThresholdAction {
+union CostControlThresholdAction {
   /**
    * Records the threshold crossing without notifying the customer or blocking requests.
    */
@@ -335,29 +351,29 @@ union BudgetThresholdAction {
 }
 
 /**
- * A page of budget policies.
+ * A page of cost controls.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyListResult {
+model CostControlListResult {
   /**
-   * The link used to get the next page of budget policies.
+   * The link used to get the next page of cost controls.
    */
   @nextLink
   nextLink?: string;
 
   /**
-   * The budget policies in this page.
+   * The cost controls in this page.
    */
   @pageItems
   @identifiers(#["name"])
-  value?: BudgetPolicy[];
+  value?: CostControl[];
 }
 
 /**
- * Conditional request headers accepted when creating or replacing a budget policy.
+ * Conditional request headers accepted when creating or replacing a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyCreateOrUpdateHeaders {
+model CostControlCreateOrUpdateHeaders {
   /**
    * Proceeds only when the current entity tag matches this value.
    */
@@ -372,10 +388,10 @@ model BudgetPolicyCreateOrUpdateHeaders {
 }
 
 /**
- * The conditional request header accepted when updating or deleting a budget policy.
+ * The conditional request header accepted when updating or deleting a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyIfMatchHeader {
+model CostControlIfMatchHeader {
   /**
    * Proceeds only when the current entity tag matches this value.
    */
@@ -384,67 +400,67 @@ model BudgetPolicyIfMatchHeader {
 }
 
 /**
- * The entity tag returned with a budget policy.
+ * The entity tag returned with a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model BudgetPolicyEtagHeader {
+model CostControlEtagHeader {
   /**
-   * The current entity tag for the budget policy.
+   * The current entity tag for the cost control.
    */
   @header("ETag")
   eTag: string;
 }
 
 /**
- * Operations for managing budget policies owned by an account.
+ * Operations for managing cost controls owned by an account.
  */
 @added(Versions.v2026_09_15_preview)
 @armResourceOperations
-interface BudgetPolicies {
+interface CostControls {
   /**
-   * Gets a budget policy.
+   * Gets a cost control.
    */
   get is ArmResourceRead<
-    BudgetPolicy,
-    Response = ArmResponse<BudgetPolicy> & BudgetPolicyEtagHeader
+    CostControl,
+    Response = ArmResponse<CostControl> & CostControlEtagHeader
   >;
 
   /**
-   * Creates or replaces a budget policy.
+   * Creates or replaces a cost control.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    BudgetPolicy,
-    Parameters = BudgetPolicyCreateOrUpdateHeaders,
+    CostControl,
+    Parameters = CostControlCreateOrUpdateHeaders,
     Response =
-      | (ArmResourceUpdatedResponse<BudgetPolicy> & BudgetPolicyEtagHeader)
-      | (ArmResourceCreatedSyncResponse<BudgetPolicy> & BudgetPolicyEtagHeader)
+      | (ArmResourceUpdatedResponse<CostControl> & CostControlEtagHeader)
+      | (ArmResourceCreatedSyncResponse<CostControl> & CostControlEtagHeader)
   >;
 
   /**
-   * Updates selected properties of a budget policy.
+   * Updates selected properties of a cost control.
    */
   update is ArmCustomPatchSync<
-    BudgetPolicy,
-    BudgetPolicyPatch,
-    Parameters = BudgetPolicyIfMatchHeader,
-    Response = ArmResponse<BudgetPolicy> & BudgetPolicyEtagHeader
+    CostControl,
+    CostControlPatch,
+    Parameters = CostControlIfMatchHeader,
+    Response = ArmResponse<CostControl> & CostControlEtagHeader
   >;
 
   /**
-   * Deletes a budget policy.
+   * Deletes a cost control.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The synchronous service endpoint returns 200 on successful deletion and does not return 204."
   delete is ArmResourceDeleteSync<
-    BudgetPolicy,
-    Parameters = BudgetPolicyIfMatchHeader,
+    CostControl,
+    Parameters = CostControlIfMatchHeader,
     Response = ArmDeletedResponse
   >;
 
   /**
-   * Lists the budget policies owned by an account.
+   * Lists the cost controls owned by an account.
    */
   list is ArmResourceListByParent<
-    BudgetPolicy,
-    Response = BudgetPolicyListResult
+    CostControl,
+    Response = CostControlListResult
   >;
 }
