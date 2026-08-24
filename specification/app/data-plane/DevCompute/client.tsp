@@ -211,3 +211,258 @@ namespace AzureDevCompute;
   "VolumeResponseDataDiskVolumeResult",
   "csharp"
 );
+@@clientName(DeleteConnectionsResponse, "DeleteConnectionsResult", "csharp");
+@@clientName(ListConnectionResponse, "ListConnectionResult", "csharp");
+@@clientName(GetConnectionResponse, "GetConnectionResult", "csharp");
+@@clientName(
+  PostConnectionsAuthorizeResponse,
+  "PostConnectionsAuthorizeResult",
+  "csharp"
+);
+@@clientName(
+  PostConnectionsConsentLinkResponse,
+  "PostConnectionsConsentLinkResult",
+  "csharp"
+);
+@@clientName(
+  PostConnectionsRefreshResponse,
+  "PostConnectionsRefreshResult",
+  "csharp"
+);
+@@clientName(
+  PutConnectionsPolicyRulesResponse,
+  "PutConnectionsPolicyRulesResult",
+  "csharp"
+);
+@@clientName(ListContentPackageResponse, "ListContentPackageResult", "csharp");
+@@clientName(GetContentPackageResponse, "GetContentPackageResult", "csharp");
+@@clientName(
+  PostContentpackagesUploadResponse,
+  "PostContentpackagesUploadResult",
+  "csharp"
+);
+@@clientName(DeleteCredentialsResponse, "DeleteCredentialsResult", "csharp");
+@@clientName(ListCredentialResponse, "ListCredentialResult", "csharp");
+@@clientName(GetCredentialResponse, "GetCredentialResult", "csharp");
+@@clientName(PutCredentialsResponse, "PutCredentialsResult", "csharp");
+@@clientName(ListDiskImageResponse, "ListDiskImageResult", "csharp");
+@@clientName(
+  GetDiskimagesOperationsResponse,
+  "GetDiskimagesOperationsResult",
+  "csharp"
+);
+@@clientName(
+  ListPublicDiskImageResponse,
+  "ListPublicDiskImageResult",
+  "csharp"
+);
+@@clientName(GetPublicDiskImageResponse, "GetPublicDiskImageResult", "csharp");
+@@clientName(GetDiskImageResponse, "GetDiskImageResult", "csharp");
+@@clientName(
+  PostDiskimagesDockerfileResponse,
+  "PostDiskimagesDockerfileResult",
+  "csharp"
+);
+@@clientName(
+  PostDiskimagesDockerfileAsyncResponse,
+  "PostDiskimagesDockerfileAsyncResult",
+  "csharp"
+);
+@@clientName(PutDiskimagesResponse, "PutDiskimagesResult", "csharp");
+@@clientName(
+  PutDiskimagesAsyncPreviewResponse,
+  "PutDiskimagesAsyncPreviewResult",
+  "csharp"
+);
+@@clientName(PutDiskimagesAsyncResponse, "PutDiskimagesAsyncResult", "csharp");
+@@clientName(PutDiskimagesV2Response, "PutDiskimagesV2Result", "csharp");
+@@clientName(
+  PutDiskimagesV2AsyncResponse,
+  "PutDiskimagesV2AsyncResult",
+  "csharp"
+);
+@@clientName(
+  DeleteEgressPoliciesResponse,
+  "DeleteEgressPoliciesResult",
+  "csharp"
+);
+@@clientName(ListEgressPolicyResponse, "ListEgressPolicyResult", "csharp");
+@@clientName(GetEgressPolicyResponse, "GetEgressPolicyResult", "csharp");
+@@clientName(
+  DeleteSandboxesFilesResponse,
+  "DeleteSandboxesFilesResult",
+  "csharp"
+);
+@@clientName(GetSandboxesFilesResponse, "GetSandboxesFilesResult", "csharp");
+@@clientName(
+  GetSandboxesFilesListResponse,
+  "GetSandboxesFilesListResult",
+  "csharp"
+);
+@@clientName(
+  GetSandboxesFilesStatResponse,
+  "GetSandboxesFilesStatResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesFilesMkdirResponse,
+  "PostSandboxesFilesMkdirResult",
+  "csharp"
+);
+@@clientName(PutSandboxesFilesResponse, "PutSandboxesFilesResult", "csharp");
+@@clientName(GetSandboxesCountResponse, "GetSandboxesCountResult", "csharp");
+@@clientName(GetSandboxesStatsResponse, "GetSandboxesStatsResult", "csharp");
+@@clientName(
+  PostSandboxesDisableResponse,
+  "PostSandboxesDisableResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesEnableResponse,
+  "PostSandboxesEnableResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesExecuteCommandResponse,
+  "PostSandboxesExecuteCommandResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesExecuteShellCommandResponse,
+  "PostSandboxesExecuteShellCommandResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesGenerateSandboxTokenResponse,
+  "PostSandboxesGenerateSandboxTokenResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesLifecycleResponse,
+  "PostSandboxesLifecycleResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesResumeResponse,
+  "PostSandboxesResumeResult",
+  "csharp"
+);
+@@clientName(PostSandboxesStopResponse, "PostSandboxesStopResult", "csharp");
+@@clientName(
+  PostSandboxesStopAsyncResponse,
+  "PostSandboxesStopAsyncResult",
+  "csharp"
+);
+@@clientName(PutSandboxesBatchResponse, "PutSandboxesBatchResult", "csharp");
+@@clientName(
+  GetSandboxesEgressDecisionsResponse,
+  "GetSandboxesEgressDecisionsResult",
+  "csharp"
+);
+@@clientName(
+  GetSandboxesEgressDecisions2Response,
+  "GetSandboxesEgressDecisions2Result",
+  "csharp"
+);
+@@clientName(GetSandboxesPortsResponse, "GetSandboxesPortsResult", "csharp");
+@@clientName(
+  PatchSandboxesPortsResponse,
+  "PatchSandboxesPortsResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesConnectionsAddResponse,
+  "PostSandboxesConnectionsAddResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesEgresspolicyResponse,
+  "PostSandboxesEgresspolicyResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesPortsAddResponse,
+  "PostSandboxesPortsAddResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesPortsRemoveResponse,
+  "PostSandboxesPortsRemoveResult",
+  "csharp"
+);
+@@clientName(PutSandboxesPortsResponse, "PutSandboxesPortsResult", "csharp");
+@@clientName(
+  PostSandboxesCommitResponse,
+  "PostSandboxesCommitResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesDownloadContentPackageResponse,
+  "PostSandboxesDownloadContentPackageResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesPodVolumesAddResponse,
+  "PostSandboxesPodVolumesAddResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesPodVolumesAdd2Response,
+  "PostSandboxesPodVolumesAdd2Result",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesSnapshotResponse,
+  "PostSandboxesSnapshotResult",
+  "csharp"
+);
+@@clientName(
+  PostSandboxesVolumesAddResponse,
+  "PostSandboxesVolumesAddResult",
+  "csharp"
+);
+@@clientName(
+  GetSandboxesExecStreamResponse,
+  "GetSandboxesExecStreamResult",
+  "csharp"
+);
+@@clientName(
+  GetSandboxesLogstreamResponse,
+  "GetSandboxesLogstreamResult",
+  "csharp"
+);
+@@clientName(
+  GetSandboxesProcessesStreamResponse,
+  "GetSandboxesProcessesStreamResult",
+  "csharp"
+);
+@@clientName(DeleteSecretsResponse, "DeleteSecretsResult", "csharp");
+@@clientName(GetSecretsResponse, "GetSecretsResult", "csharp");
+@@clientName(GetSecretsKeysResponse, "GetSecretsKeysResult", "csharp");
+@@clientName(PostSecretsPeekResponse, "PostSecretsPeekResult", "csharp");
+@@clientName(ListSnapshotResponse, "ListSnapshotResult", "csharp");
+@@clientName(GetSnapshotsCountResponse, "GetSnapshotsCountResult", "csharp");
+@@clientName(GetSnapshotResponse, "GetSnapshotResult", "csharp");
+@@clientName(DeleteVolumesResponse, "DeleteVolumesResult", "csharp");
+@@clientName(DeleteVolumesFilesResponse, "DeleteVolumesFilesResult", "csharp");
+@@clientName(ListVolumeResponse, "ListVolumeResult", "csharp");
+@@clientName(GetVolumesCountResponse, "GetVolumesCountResult", "csharp");
+@@clientName(GetVolumeResponse, "GetVolumeResult", "csharp");
+@@clientName(GetVolumesFilesResponse, "GetVolumesFilesResult", "csharp");
+@@clientName(
+  GetVolumesFilesDownloadResponse,
+  "GetVolumesFilesDownloadResult",
+  "csharp"
+);
+@@clientName(
+  PostVolumesFilesMkdirResponse,
+  "PostVolumesFilesMkdirResult",
+  "csharp"
+);
+@@clientName(PostVolumesForkResponse, "PostVolumesForkResult", "csharp");
+@@clientName(PutVolumesResponse, "PutVolumesResult", "csharp");
+@@clientName(
+  PutVolumesFilesUploadResponse,
+  "PutVolumesFilesUploadResult",
+  "csharp"
+);

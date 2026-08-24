@@ -5582,9 +5582,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/DiskImageOperationResponse"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "400": {
@@ -5617,7 +5624,8 @@
           "DiskimagesOperations_PutDiskimagesAsyncPreview - Creates a disk image asynchronously from an OCI image reference.": {
             "$ref": "./examples/DiskimagesOperations_PutDiskimagesAsyncPreview.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/dockerfile": {
@@ -5731,9 +5739,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/DiskImageOperationResponse"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "400": {
@@ -5766,7 +5781,8 @@
           "DiskimagesOperations_PostDiskimagesDockerfileAsync - Builds a disk image from a Dockerfile (asynchronous).": {
             "$ref": "./examples/DiskimagesOperations_PostDiskimagesDockerfileAsync.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/operations/{operationId}": {
@@ -6064,9 +6080,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/DiskImageOperationResponse"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "400": {
@@ -6099,7 +6122,8 @@
           "DiskimagesOperations_PutDiskimagesV2Async - Creates a disk image asynchronously from a discriminated V2 source model.": {
             "$ref": "./examples/DiskimagesOperations_PutDiskimagesV2Async.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies": {
@@ -13391,13 +13415,38 @@
       "type": "object",
       "description": "OK.",
       "properties": {
-        "body": {
-          "$ref": "#/definitions/DiskImageOperationResponse",
-          "description": "Response body."
+        "operationId": {
+          "$ref": "#/definitions/AsyncOperationId",
+          "description": "operationId value."
+        },
+        "status": {
+          "$ref": "#/definitions/AsyncOperationStatus",
+          "description": "status value."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "errorMessage value."
+        },
+        "diskImage": {
+          "$ref": "#/definitions/DiskImageResponse",
+          "description": "diskImage value."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "createdAt value."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "updatedAt value."
         }
       },
       "required": [
-        "body"
+        "operationId",
+        "status",
+        "createdAt",
+        "updatedAt"
       ]
     },
     "GetEgressPolicyResponse": {

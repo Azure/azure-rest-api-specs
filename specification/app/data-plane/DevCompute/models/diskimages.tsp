@@ -6,6 +6,7 @@ namespace AzureDevCompute {
   scalar AsyncOperationId extends string;
 
   /** Status of an asynchronous operation. IMPORTANT: Always use explicit integer values. Never reorder or reassign existing values. */
+  @Azure.Core.lroStatus
   union AsyncOperationStatus {
     /** StringValue variant. */
     StringValue: string,
@@ -17,9 +18,11 @@ namespace AzureDevCompute {
     InProgress: "InProgress",
 
     /** Succeeded variant. */
+    @Azure.Core.lroSucceeded
     Succeeded: "Succeeded",
 
     /** Failed variant. */
+    @Azure.Core.lroFailed
     Failed: "Failed",
   }
 
@@ -254,15 +257,18 @@ namespace AzureDevCompute {
   /** DiskImageOperationResponse wire model. */
   model DiskImageOperationResponse {
     /** operationId value. */
+    @Azure.Core.pollingOperationParameter("operationId")
     operationId: AsyncOperationId;
 
     /** status value. */
     status: AsyncOperationStatus;
 
     /** errorMessage value. */
+    @Azure.Core.lroErrorResult
     errorMessage?: string;
 
     /** diskImage value. */
+    @Azure.Core.lroResult
     diskImage?: DiskImageResponse;
 
     /** createdAt value. */

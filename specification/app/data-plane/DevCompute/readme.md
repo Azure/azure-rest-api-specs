@@ -11,6 +11,15 @@ This is the AutoRest configuration file for the DevCompute Data Plane API.
 ```yaml
 openapi-type: data-plane
 tag: package-2026-09-01
+suppressions:
+  - code: LroExtension
+    from: devcompute.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages/{id}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/{id}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/stop/async"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots/{id}"].delete
+    reason: These operations use non-standard accepted responses without an LRO polling header or a standard polling endpoint.
 ```
 
 ### Tag: package-2026-09-01

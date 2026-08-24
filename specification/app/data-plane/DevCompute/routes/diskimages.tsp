@@ -44,8 +44,7 @@ model GetDiskimagesOperationsResponse {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
-  @body body: DiskImageOperationResponse;
+  ...DiskImageOperationResponse;
 }
 
 /** Errors returned by getDiskimagesOperations. */
@@ -386,9 +385,10 @@ interface DiskimagesOperations {
   /** Builds a disk image from a Dockerfile (asynchronous). */
   @removed(ApiVersions.v2026_09_01)
   @summary("Builds a disk image from a Dockerfile (asynchronous).")
+  @pollingOperation(DiskimagesOperations.getDiskimagesOperations)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/dockerfile/async")
   @post
-  postDiskimagesDockerfileAsync is Foundations.Operation<
+  postDiskimagesDockerfileAsync is Foundations.LongRunningOperation<
     {
       ...AzureResourceScope;
 
@@ -439,10 +439,11 @@ interface DiskimagesOperations {
   /** Creates a disk image asynchronously from an OCI image reference. */
   @removed(ApiVersions.v2026_09_01)
   @summary("Creates a disk image asynchronously from an OCI image reference.")
+  @pollingOperation(DiskimagesOperations.getDiskimagesOperations)
   @sharedRoute
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/async")
   @put
-  putDiskimagesAsyncPreview is Foundations.Operation<
+  putDiskimagesAsyncPreview is Foundations.LongRunningOperation<
     {
       ...AzureResourceScope;
 
@@ -457,10 +458,11 @@ interface DiskimagesOperations {
   /** Creates a disk image asynchronously from an OCI image reference. */
   @added(ApiVersions.v2026_09_01)
   @summary("Creates a disk image asynchronously from an OCI image reference.")
+  @pollingOperation(DiskimagesOperations.getDiskimagesOperations)
   @sharedRoute
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/async")
   @put
-  putDiskimagesAsync is Foundations.Operation<
+  putDiskimagesAsync is Foundations.LongRunningOperation<
     {
       ...AzureResourceScope;
 
@@ -492,9 +494,10 @@ interface DiskimagesOperations {
   /** Creates a disk image asynchronously from a discriminated V2 source model. */
   @removed(ApiVersions.v2026_09_01)
   @summary("Creates a disk image asynchronously from a discriminated V2 source model.")
+  @pollingOperation(DiskimagesOperations.getDiskimagesOperations)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/v2/async")
   @put
-  putDiskimagesV2Async is Foundations.Operation<
+  putDiskimagesV2Async is Foundations.LongRunningOperation<
     {
       ...AzureResourceScope;
 
