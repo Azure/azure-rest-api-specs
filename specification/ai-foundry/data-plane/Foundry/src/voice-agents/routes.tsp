@@ -368,3 +368,221 @@ interface AgentEndpointConversations {
     VoiceAudioStreamResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
+@tag("Agent Telephony")
+interface AgentTelephony {
+  /** Creates a telephony binding for the voice agent named in the path. */
+  @summary("Create an agent telephony binding")
+  @post
+  @route("/agents/{agent_name}/telephony_bindings")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  createTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The provider-specific binding to create. */
+      @body body: CreateTelephonyBindingRequest;
+    },
+    TelephonyBindingCreatedResponse
+  >;
+
+  /** Returns the telephony bindings owned by the voice agent named in the path. */
+  @summary("List agent telephony bindings")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony_bindings")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  listTelephonyBindings is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose bindings are listed. */
+      @path agent_name: string;
+
+      /** Filters bindings by provider. */
+      @query provider?: TelephonyProvider;
+
+      /** Filters bindings by lifecycle status. */
+      @query status?: TelephonyBindingStatus;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<TelephonyBindingListItem>
+  >;
+
+  /** Retrieves a telephony binding owned by the voice agent named in the path. */
+  @summary("Get an agent telephony binding")
+  @get
+  @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  getTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+    },
+    TelephonyBindingResponse
+  >;
+
+  /** Updates a telephony binding owned by the voice agent named in the path. */
+  @summary("Update an agent telephony binding")
+  @patch
+  @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  updateTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+
+      /** The content type for the JSON Merge Patch body. */
+      @header("Content-Type") contentType: "application/merge-patch+json";
+
+      ...TelephonyIfMatchHeader;
+
+      /** The binding properties to update. */
+      @body body: UpdateTelephonyBindingRequest;
+    },
+    TelephonyBindingResponse
+  >;
+
+  /** Deletes a telephony binding owned by the voice agent named in the path. */
+  @summary("Delete an agent telephony binding")
+  @delete
+  @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+
+      ...TelephonyIfMatchHeader;
+    },
+    NoContentResponse
+  >;
+
+  /** Returns the durable inbound call history for the voice agent named in the path. */
+  @summary("List agent telephony calls")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony_calls")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  listTelephonyCalls is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose calls are listed. */
+      @path agent_name: string;
+
+      /** Filters calls by provider. */
+      @query provider?: TelephonyProvider;
+
+      /** Filters calls by lifecycle status. */
+      @query status?: TelephonyCallStatus;
+
+      /** Includes calls that started at or after this Unix timestamp in seconds. */
+      @query started_after?: TelephonyTimestamp;
+
+      /** Includes calls that started at or before this Unix timestamp in seconds. */
+      @query started_before?: TelephonyTimestamp;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<TelephonyCallSummary>
+  >;
+
+  /** Retrieves a durable inbound call record owned by the voice agent named in the path. */
+  @summary("Get an agent telephony call")
+  @get
+  @route("/agents/{agent_name}/telephony_calls/{call_id}")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  getTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the call record. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: TelephonyCallId;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Transfers an active inbound call to a configured target for the voice agent named in the path. */
+  @summary("Transfer an active agent telephony call")
+  @post
+  @route("/agents/{agent_name}/telephony_calls/{call_id}:transfer")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  transferTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the active call. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: TelephonyCallId;
+
+      ...TelephonyCallTransferRequest;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Ends an active inbound call owned by the voice agent named in the path. */
+  @summary("End an active agent telephony call")
+  @post
+  @route("/agents/{agent_name}/telephony_calls/{call_id}:end")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  endTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the active call. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: TelephonyCallId;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Returns all transfer targets configured for the voice agent named in the path. */
+  @summary("Get agent telephony transfer targets")
+  @get
+  @route("/agents/{agent_name}/telephony_transfer_targets")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  getTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose transfer targets are retrieved. */
+      @path agent_name: string;
+    },
+    TelephonyTransferTargetsResponse
+  >;
+
+  /** Replaces all transfer targets configured for the voice agent named in the path. */
+  @summary("Replace agent telephony transfer targets")
+  @put
+  @route("/agents/{agent_name}/telephony_transfer_targets")
+  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  replaceTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose transfer targets are replaced. */
+      @path agent_name: string;
+
+      ...TelephonyIfMatchHeader;
+      ...TelephonyTransferTargets;
+    },
+    TelephonyTransferTargetsResponse
+  >;
+}
