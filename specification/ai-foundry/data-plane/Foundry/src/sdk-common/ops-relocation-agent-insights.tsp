@@ -1,5 +1,5 @@
-// This file moves Agent Insights preview operations to Azure.AI.Projects.Beta for the
-// Python and JavaScript SDKs. Other language entry points do not import Agent Insights.
+// This file moves Agent Insights preview operations to Azure.AI.Projects.Beta for SDKs
+// that expose preview operations through a beta subclient.
 
 using Azure.ClientGenerator.Core;
 
