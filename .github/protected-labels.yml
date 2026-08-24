@@ -17,6 +17,21 @@ global-approvers:
   - samvaity
   - praveenkuttappan
 
+# Data-plane REST stewardship reviewers. Gated here as the only users who may apply the
+# sign-off label, the approval that clears the merge gate.
+#
+# This list manually mirrors the GitHub team `azure-data-plane-api-reviewers`
+# (https://github.com/orgs/Azure/teams/azure-data-plane-api-reviewers/members). Finding
+# (#45487): the default Actions GITHUB_TOKEN cannot read org membership, so resolving the
+# team live would mean building up a purpose-built GitHub App with org Members:Read.
+# Since this low cost effort and the list changes rarely, the simpler path
+# fits better for now, so we mirror the members by hand. Keep this in sync when team
+# membership changes.
+APIStewardshipBoard-SignedOff:
+  - JonathanGiles
+  - heaths
+  - weidongxu-microsoft
+
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:
   management-plane:
