@@ -91,6 +91,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get role assignments for a scope": {
+            "$ref": "./examples/ListRoleAssignments-example.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -132,6 +137,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified role assignment": {
+            "$ref": "./examples/GetRoleAssignments-example.json"
           }
         }
       },
@@ -180,6 +190,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a role assignment": {
+            "$ref": "./examples/PutRoleAssignments-example.json"
+          }
         }
       },
       "delete": {
@@ -217,6 +232,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a role assignment": {
+            "$ref": "./examples/DeleteRoleAssignments-example.json"
           }
         }
       }
@@ -257,6 +277,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all role definitions that are applicable at scope and above": {
+            "$ref": "./examples/ListRoleDefinitions-example.json"
           }
         },
         "x-ms-pageable": {
@@ -300,6 +325,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified role definition": {
+            "$ref": "./examples/GetRoleDefinition-example.json"
           }
         }
       },
@@ -348,6 +378,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a custom role definition": {
+            "$ref": "./examples/PutRoleDefinition-example.json"
+          }
         }
       },
       "delete": {
@@ -385,6 +420,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a custom role definition": {
+            "$ref": "./examples/DeleteRoleDefinition-example.json"
           }
         }
       }
@@ -432,6 +472,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a full backup": {
+            "$ref": "./examples/FullBackup-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -467,6 +512,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the status of a full backup operation": {
+            "$ref": "./examples/FullBackup-pending-example.json"
+          }
         }
       }
     },
@@ -492,6 +542,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get EKM connection": {
+            "$ref": "./examples/GetEkmConnection-example.json"
           }
         }
       },
@@ -527,6 +582,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update EKM connection": {
+            "$ref": "./examples/UpdateEkmConnection-example.json"
+          }
         }
       },
       "delete": {
@@ -550,6 +610,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete EKM connection": {
+            "$ref": "./examples/DeleteEkmConnection-example.json"
           }
         }
       }
@@ -577,6 +642,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get EKM proxy client certificate": {
+            "$ref": "./examples/GetEkmCertificate-example.json"
+          }
         }
       }
     },
@@ -602,6 +672,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check EKM connection": {
+            "$ref": "./examples/CheckEkmConnection-example.json"
           }
         }
       }
@@ -638,6 +713,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create EKM connection": {
+            "$ref": "./examples/CreateEkmConnection-example.json"
           }
         }
       }
@@ -692,6 +772,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restores all key versions of a given key": {
+            "$ref": "./examples/SelectiveRestore-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -739,6 +824,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check whether the customer can perform a full backup operation": {
+            "$ref": "./examples/PreFullBackup-example.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -790,6 +880,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Check whether the customer can perform a full restore operation": {
+            "$ref": "./examples/PreFullRestore-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -839,6 +934,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restore all key materials from a previously stored Azure Blob Storage backup": {
+            "$ref": "./examples/FullRestore-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -874,6 +974,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the status of restore operation": {
+            "$ref": "./examples/Restore-pending-example.json"
+          }
         }
       }
     },
@@ -899,6 +1004,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List account settings": {
+            "$ref": "./examples/ListSettings-example.json"
           }
         }
       }
@@ -928,6 +1038,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get key vault account setting": {
+            "$ref": "./examples/GetSetting-example.json"
           }
         }
       },
@@ -966,6 +1081,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update key vault account setting": {
+            "$ref": "./examples/UpdateSetting-example.json"
+          }
         }
       }
     }
@@ -999,6 +1119,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a selective restore operation": {
+            "$ref": "./examples/SelectiveRestore-pending-example.json"
           }
         }
       }
