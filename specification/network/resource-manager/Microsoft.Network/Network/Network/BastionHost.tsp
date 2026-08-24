@@ -72,13 +72,23 @@ interface BastionHosts {
   >;
 
   /**
-   * Updates Tags for BastionHost resource
+   * Updates the BastionHost resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01)
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
+  @renamedFrom(Versions.v2026_01_01, "updateTags")
+  update is ArmCustomPatchAsync<
     BastionHost,
-    PatchModel = TagsObject,
+    PatchModel = {
+      /**
+       * The identity of the BastionHost, if configured.
+       */
+      @added(Versions.v2026_01_01)
+      identity?: Common.ManagedServiceIdentity;
+
+      ...TagsObject;
+    },
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BastionHost> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
@@ -210,9 +220,15 @@ interface BastionHosts {
   BastionHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Bastion Host operation."
 );
+@@typeChangedFrom(
+  BastionHosts.update::parameters.properties,
+  Versions.v2026_01_01,
+  TagsObject
+);
+
 @@doc(
-  BastionHosts.updateTags::parameters.properties,
-  "Parameters supplied to update BastionHost tags."
+  BastionHosts.update::parameters.properties,
+  "Parameters supplied to update the BastionHost resource."
 );
 @@doc(
   BastionHosts.putBastionShareableLink::parameters.body,

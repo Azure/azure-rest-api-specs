@@ -2522,11 +2522,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "BastionHosts_UpdateTags",
+        "operationId": "BastionHosts_Update",
         "tags": [
           "BastionHosts"
         ],
-        "description": "Updates Tags for BastionHost resource",
+        "description": "Updates the BastionHost resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2547,10 +2547,23 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to update BastionHost tags.",
+            "description": "Parameters supplied to update the BastionHost resource.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
+              "type": "object",
+              "properties": {
+                "identity": {
+                  "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+                  "description": "The identity of the BastionHost, if configured."
+                },
+                "tags": {
+                  "type": "object",
+                  "description": "Resource tags.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         ],
@@ -2580,11 +2593,6 @@
             "schema": {
               "$ref": "./common.json#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Patch Bastion Host": {
-            "$ref": "./examples/BastionHostPatch.json"
           }
         },
         "x-ms-long-running-operation-options": {
