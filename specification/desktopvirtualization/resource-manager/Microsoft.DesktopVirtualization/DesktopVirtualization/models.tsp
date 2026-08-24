@@ -3863,7 +3863,7 @@ model HostPoolPatchProperties {
 
   /**
    * The automatic update settings for supported first-party extensions.
-    * @Introduced in 2026-08-01-preview
+   * @Introduced in 2026-08-01-preview
    */
   @added(Versions.vLatestPreview)
   firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
