@@ -27,15 +27,35 @@ union VoiceAgentWebSocketSubprotocol {
 @usage(VoiceAgentWebSocketMessageUsage)
 @oneOf
 union VoiceAgentWebSocketMessage {
-  client: OpenAI.RealtimeClientEvent,
+  client: VoiceAgentClientEvent,
   server: VoiceAgentServerEvent,
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Client WebSocket messages are selected by their `type` property."
+@doc("A stable v1 message sent by a client over a voice-agent WebSocket.")
+@usage(VoiceAgentClientEventUsage)
+@oneOf
+union VoiceAgentClientEvent {
+  conversation_item_create: VoiceAgentClientEventConversationItemCreate,
+  conversation_item_delete: OpenAI.RealtimeClientEventConversationItemDelete,
+  conversation_item_retrieve: OpenAI.RealtimeClientEventConversationItemRetrieve,
+  conversation_item_truncate: OpenAI.RealtimeClientEventConversationItemTruncate,
+  input_audio_buffer_append: OpenAI.RealtimeClientEventInputAudioBufferAppend,
+  input_audio_buffer_clear: OpenAI.RealtimeClientEventInputAudioBufferClear,
+  output_audio_buffer_clear: OpenAI.RealtimeClientEventOutputAudioBufferClear,
+  input_audio_buffer_commit: OpenAI.RealtimeClientEventInputAudioBufferCommit,
+  response_cancel: OpenAI.RealtimeClientEventResponseCancel,
+  response_create: OpenAI.RealtimeClientEventResponseCreate,
+  session_update: VoiceAgentClientEventSessionUpdate,
+  session_avatar_connect: VoiceAgentClientEventSessionAvatarConnect,
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
 @doc("A stable v1 message sent by the service over a voice-agent WebSocket.")
 @usage(VoiceAgentServerEventUsage)
 @oneOf
-// This diverges from the upstream OpenAI RT in that is adding a few types (this is ok), and missing a few other ('conversation.created, "input_audio_buffer.dtmf_event_received"), need to confirm if this is intentional or inadvertent
+// `conversation.created` is replaced by `session.created.conversation_id`, the canonical persisted-conversation id.
+// `input_audio_buffer.dtmf_event_received` is telephony-only and excluded with the rest of the telephony call-control surface.
 union VoiceAgentServerEvent {
   conversation_item_added: OpenAI.RealtimeServerEventConversationItemAdded,
   conversation_item_created: OpenAI.RealtimeServerEventConversationItemCreated,
@@ -294,16 +314,19 @@ model VoiceAgentClientEventConversationItemCreate {
   item: VoiceConversationItem;
 }
 
+@doc("The `session.update` client event.")
+@usage(VoiceAgentClientEventUsage)
+model VoiceAgentClientEventSessionUpdate {
+  ...OmitProperties<OpenAI.RealtimeClientEventSessionUpdate, "session">;
+
+  @doc("The voice-agent session settings to update.")
+  session: VoiceAgentSessionUpdate;
+}
+
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@changePropertyType(
   OpenAI.RealtimeClientEventResponseCreate.response,
   VoiceAgentResponseCreateParams
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeClientEventSessionUpdate.session,
-  VoiceAgentSessionUpdate
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."

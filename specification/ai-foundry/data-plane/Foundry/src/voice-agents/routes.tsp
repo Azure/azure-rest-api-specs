@@ -72,16 +72,6 @@ interface VoiceAgentWebSocket {
     },
     VoiceAgentWebSocketUpgradeResponse
   >;
-
-  /** Mock endpoint used to ground the Voice Agent WebSocket protocol models. */
-  @removed(Versions.v1)
-  @route("/agents/{agent_name}/endpoint/protocols/voice")
-  @sharedRoute
-  websocketProtocol(
-    @path agent_name: string,
-    ...FoundryDataPlaneApiVersionParameter,
-    clientEvent: OpenAI.RealtimeClientEvent,
-  ): VoiceAgentServerEvent;
 }
 
 /**
@@ -98,7 +88,8 @@ interface VoiceAgentWebSocket {
 interface AgentEndpointConversations {
   /**
    * Returns the conversations persisted for the specified voice agent endpoint.
-   * Conversations are present only when the agent definition has `store = true`.
+   * Conversations are present when the session's effective `store` setting is `true`, whether inherited from the
+   * agent definition or enabled by the WebSocket session override.
    */
   @summary("List voice agent conversations")
   @get

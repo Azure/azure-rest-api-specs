@@ -737,7 +737,9 @@ model VoiceAgentAvatarVideoBackground {
 
 @doc("Avatar video encoder and presentation settings.")
 model VoiceAgentAvatarVideoParams {
+  @doc("The target video bitrate in bits per second.")
   bitrate?: int32 = 2000000;
+
   crop?: VoiceAgentAvatarVideoCrop;
   resolution?: VoiceAgentAvatarVideoResolution;
   background?: VoiceAgentAvatarVideoBackground;

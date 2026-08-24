@@ -1936,70 +1936,13 @@
         "tags": [
           "Voice Agent WebSocket"
         ]
-      },
-      "post": {
-        "operationId": "VoiceAgentWebSocket_websocketProtocol",
-        "description": "Mock endpoint used to ground the Voice Agent WebSocket protocol models.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A stable v1 message sent by the service over a voice-agent WebSocket.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VoiceAgentServerEvent"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Voice Agent WebSocket"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "clientEvent": {
-                    "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
-                  }
-                },
-                "required": [
-                  "clientEvent"
-                ]
-              }
-            }
-          }
-        }
       }
     },
     "/agents/{agent_name}/endpoint/protocols/voice/conversations": {
       "get": {
         "operationId": "AgentEndpointConversations_listAgentConversations",
         "summary": "List voice agent conversations",
-        "description": "Returns the conversations persisted for the specified voice agent endpoint.\nConversations are present only when the agent definition has `store = true`.",
+        "description": "Returns the conversations persisted for the specified voice agent endpoint.\nConversations are present when the session's effective `store` setting is `true`, whether inherited from the\nagent definition or enabled by the WebSocket session override.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -31346,6 +31289,30 @@
         ],
         "description": "An agent implementing the A2A protocol."
       },
+      "A2AToolBase": {
+        "type": "object",
+        "properties": {
+          "base_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Base URL of the agent."
+          },
+          "agent_card_path": {
+            "type": "string",
+            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "send_credentials_for_agent_card": {
+            "type": "boolean",
+            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
+            "default": false
+          }
+        },
+        "description": "Common configuration for an agent implementing the A2A protocol."
+      },
       "A2AToolCall": {
         "type": "object",
         "required": [
@@ -32436,6 +32403,35 @@
         ],
         "description": "The status of an agent identity, applicable to both the agent instance identity and the agent blueprint."
       },
+      "AgentJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The source type for this source, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          }
+        },
+        "description": "Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate prompt source entry to `sources[]` to provide supplementary text alongside the agent. Reusable shape spread into per-context discriminated subtypes."
+      },
       "AgentKind": {
         "anyOf": [
           {
@@ -32525,6 +32521,16 @@
             "$ref": "#/components/schemas/AgentCard"
           }
         }
+      },
+      "AgentObjectType": {
+        "type": "string",
+        "enum": [
+          "agent",
+          "agent.version",
+          "agent.deleted",
+          "agent.version.deleted",
+          "agent.container"
+        ]
       },
       "AgentOptimizationCandidate": {
         "type": "object",
@@ -34857,6 +34863,45 @@
           }
         },
         "description": "A content filter result indicating severity level and whether content was filtered."
+      },
+      "AzureCreateResponseDetails": {
+        "type": "object",
+        "required": [
+          "agent_reference"
+        ],
+        "properties": {
+          "agent_reference": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentReference"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The agent used for this response"
+          }
+        },
+        "description": "Azure specific fields returned in a \"Response\" object"
+      },
+      "AzureCreateResponseOptions": {
+        "type": "object",
+        "properties": {
+          "agent_reference": {
+            "$ref": "#/components/schemas/AgentReference",
+            "description": "The agent to use for generating the response."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+          },
+          "user_security_context": {
+            "$ref": "#/components/schemas/AzureUserSecurityContext",
+            "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
+          }
+        },
+        "description": "Azure specific fields used in the creation of \"Response\" object (i.e. \"AgentReference\")"
       },
       "AzureFunctionBinding": {
         "type": "object",
@@ -37663,6 +37708,35 @@
           ]
         }
       },
+      "DatasetJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "The source type for this source, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the dataset. If not specified, the latest version is used."
+          }
+        },
+        "description": "Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes."
+      },
       "DatasetReference": {
         "type": "object",
         "required": [
@@ -38460,6 +38534,13 @@
         },
         "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
+      "EvalObjectType": {
+        "type": "string",
+        "enum": [
+          "eval.deleted"
+        ],
+        "description": "The object type for evaluation deletion responses."
+      },
       "EvalResult": {
         "type": "object",
         "required": [
@@ -38813,6 +38894,59 @@
           }
         ],
         "description": "The evaluation status for an evaluation run output item result."
+      },
+      "EvalRunOutputItemSample": {
+        "type": "object",
+        "required": [
+          "input",
+          "output",
+          "finish_reason",
+          "model",
+          "usage",
+          "error",
+          "temperature",
+          "max_completion_tokens",
+          "top_p",
+          "seed"
+        ],
+        "properties": {
+          "input": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvalRunOutputItemSampleInput"
+            }
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvalRunOutputItemSampleOutput"
+            }
+          },
+          "finish_reason": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "usage": {
+            "$ref": "#/components/schemas/OpenAI.EvalRunOutputItemSampleUsage"
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.EvalApiError"
+          },
+          "temperature": {
+            "$ref": "#/components/schemas/OpenAI.numeric"
+          },
+          "max_completion_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "top_p": {
+            "$ref": "#/components/schemas/OpenAI.numeric"
+          },
+          "seed": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          }
+        }
       },
       "EvalRunOutputItemSampleInput": {
         "type": "object",
@@ -41445,6 +41579,21 @@
         "format": "int32",
         "description": "A duration encoded as an integer number of milliseconds."
       },
+      "FoundryFeaturesOptInKeys": {
+        "type": "string",
+        "enum": [
+          "Evaluations=V1Preview",
+          "Schedules=V1Preview",
+          "RedTeams=V1Preview",
+          "Insights=V1Preview",
+          "MemoryStores=V1Preview",
+          "Routines=V2Preview",
+          "Skills=V1Preview",
+          "DataGenerationJobs=V1Preview",
+          "Models=V1Preview",
+          "AgentsOptimization=V2Preview"
+        ]
+      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -41752,6 +41901,48 @@
           ]
         }
       },
+      "GraderAzureAIEvaluator": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "evaluator_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_evaluator"
+            ],
+            "description": "The object type, which is always `azure_ai_evaluator`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the grader."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "description": "The name of the evaluator."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "description": "The version of the evaluator. Latest version if not specified."
+          },
+          "initialization_parameters": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The initialization parameters for the evaluation. Must support structured outputs."
+          },
+          "data_mapping": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "The model to use for the evaluation. Must support structured outputs."
+          }
+        },
+        "description": "Grader Azure AI Evaluator definition for foundry evaluators."
+      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -42003,6 +42194,20 @@
           }
         },
         "description": "Index resource Definition"
+      },
+      "IndexResource": {
+        "type": "object",
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "An index connection ID in an IndexResource attached to this agent."
+          },
+          "index_name": {
+            "type": "string",
+            "description": "The name of an index in an IndexResource attached to this agent."
+          }
+        },
+        "description": "A Index resource."
       },
       "IndexType": {
         "anyOf": [
@@ -43484,6 +43689,20 @@
           }
         },
         "description": "A memory store that can store and retrieve user memories.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "MemoryStoreObjectType": {
+        "type": "string",
+        "enum": [
+          "memory_store",
+          "memory_store.deleted",
+          "memory_store.scope.deleted",
+          "memory_store.item.deleted"
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "MemoryStores=V1Preview"
@@ -54216,8 +54435,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "duration": "#/components/schemas/OpenAI.TranscriptTextUsageDuration",
-            "tokens": "#/components/schemas/OpenAI.TranscriptTextUsageTokens"
+            "tokens": "#/components/schemas/OpenAI.TranscriptTextUsageTokens",
+            "duration": "#/components/schemas/OpenAI.TranscriptTextUsageDuration"
           }
         },
         "description": "Token usage statistics for the request."
@@ -73319,6 +73538,7 @@
             "output_audio_buffer.started": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStarted",
             "output_audio_buffer.stopped": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStopped",
             "output_audio_buffer.cleared": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferCleared",
+            "conversation.item.added": "#/components/schemas/OpenAI.RealtimeServerEventConversationItemAdded",
             "conversation.item.done": "#/components/schemas/OpenAI.RealtimeServerEventConversationItemDone",
             "input_audio_buffer.timeout_triggered": "#/components/schemas/OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered",
             "conversation.item.input_audio_transcription.segment": "#/components/schemas/OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment",
@@ -73331,7 +73551,6 @@
             "response.mcp_call.completed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallCompleted",
             "response.mcp_call.failed": "#/components/schemas/OpenAI.RealtimeServerEventResponseMCPCallFailed",
             "error": "#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError",
-            "warning": "#/components/schemas/VoiceAgentServerEventWarning",
             "session.avatar.connecting": "#/components/schemas/VoiceAgentServerEventSessionAvatarConnecting",
             "session.avatar.switch_to_speaking": "#/components/schemas/VoiceAgentServerEventSessionAvatarSwitchToSpeaking",
             "session.avatar.switch_to_idle": "#/components/schemas/VoiceAgentServerEventSessionAvatarSwitchToIdle",
@@ -73342,7 +73561,7 @@
             "response.animation_viseme.delta": "#/components/schemas/VoiceAgentServerEventResponseAnimationVisemeDelta",
             "response.animation_viseme.done": "#/components/schemas/VoiceAgentServerEventResponseAnimationVisemeDone",
             "response.video.delta": "#/components/schemas/VoiceAgentServerEventResponseVideoDelta",
-            "conversation.item.added": "#/components/schemas/OpenAI.RealtimeServerEventConversationItemAdded"
+            "warning": "#/components/schemas/VoiceAgentServerEventWarning"
           }
         },
         "description": "A realtime server event."
@@ -85845,6 +86064,20 @@
           }
         }
       },
+      "PendingUploadCredentialType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "SAS"
+            ]
+          }
+        ],
+        "description": "The type of credential used to access the storage account."
+      },
       "PendingUploadRequest": {
         "type": "object",
         "required": [
@@ -85898,6 +86131,22 @@
           }
         },
         "description": "Represents the response for a pending upload request"
+      },
+      "PendingUploadType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "None",
+              "BlobReference",
+              "TemporaryBlobReference"
+            ]
+          }
+        ],
+        "description": "The type of pending upload."
       },
       "ProceduralMemoryItem": {
         "type": "object",
@@ -86201,6 +86450,31 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "PromptJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ],
+            "description": "The source type for this source, which is Prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
+          }
+        },
+        "description": "Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes."
       },
       "ProtocolConfiguration": {
         "type": "object",
@@ -86644,6 +86918,12 @@
             "preview_tool"
           ]
         }
+      },
+      "ResponseObjectType": {
+        "type": "string",
+        "enum": [
+          "response"
+        ]
       },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
@@ -88152,6 +88432,20 @@
           }
         ]
       },
+      "SyntheticDataGenItemGenerationParamsType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "synthetic_data_gen_preview"
+            ]
+          }
+        ],
+        "description": "The types of parameters for synthetic data generation item generation."
+      },
       "SyntheticDataGenerationPreviewEvalRunDataSource": {
         "type": "object",
         "required": [
@@ -88285,6 +88579,28 @@
           }
         },
         "description": "Base class for targets with discriminator support."
+      },
+      "TargetAttribute": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "instruction",
+              "model",
+              "skill",
+              "tool"
+            ]
+          }
+        ],
+        "description": "Agent attribute that can be optimized.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "TargetCompletionEvalRunDataSource": {
         "type": "object",
@@ -88704,6 +89020,22 @@
           ]
         }
       },
+      "ToolArgumentBinding": {
+        "type": "object",
+        "required": [
+          "argument_name"
+        ],
+        "properties": {
+          "tool_name": {
+            "type": "string",
+            "description": "The name of the tool to participate in the argument binding. If not provided, then all tools with matching arguments will participate in binding."
+          },
+          "argument_name": {
+            "type": "string",
+            "description": "The name of the argument within the tool."
+          }
+        }
+      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -88771,6 +89103,20 @@
           }
         },
         "description": "A project connection resource."
+      },
+      "ToolProjectConnectionList": {
+        "type": "object",
+        "properties": {
+          "project_connections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolProjectConnection"
+            },
+            "maxItems": 1,
+            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+          }
+        },
+        "description": "A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools."
       },
       "ToolSearchToolboxTool": {
         "type": "object",
@@ -89317,6 +89663,47 @@
           ]
         }
       },
+      "TracesJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "start_time"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The source type for this source, which is Traces."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
+          },
+          "start_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
+          },
+          "end_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          }
+        },
+        "description": "Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes."
+      },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
         "required": [
@@ -89758,6 +90145,14 @@
           }
         }
       },
+      "Versions": {
+        "type": "string",
+        "enum": [
+          "virtual-public-preview",
+          "v1"
+        ],
+        "description": "Microsoft Foundry API versions"
+      },
       "VoiceAgentAnimationConfig": {
         "type": "object",
         "properties": {
@@ -89925,6 +90320,7 @@
           "bitrate": {
             "type": "integer",
             "format": "int32",
+            "description": "The target video bitrate in bits per second.",
             "default": 2000000
           },
           "crop": {
@@ -89966,6 +90362,78 @@
         },
         "description": "The avatar video resolution."
       },
+      "VoiceAgentClientEvent": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEventConversationItemCreate"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemDelete"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemRetrieve"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventConversationItemTruncate"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventInputAudioBufferAppend"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventInputAudioBufferClear"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventOutputAudioBufferClear"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventInputAudioBufferCommit"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventResponseCancel"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeClientEventResponseCreate"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEventSessionUpdate"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEventSessionAvatarConnect"
+          }
+        ],
+        "description": "A stable v1 message sent by a client over a voice-agent WebSocket."
+      },
+      "VoiceAgentClientEventConversationItemCreate": {
+        "type": "object",
+        "required": [
+          "type",
+          "item"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation.item.create"
+            ],
+            "description": "The event type, must be `conversation.item.create`.",
+            "x-stainless-const": true
+          },
+          "previous_item_id": {
+            "type": "string",
+            "description": "The ID of the preceding item after which the new item will be inserted. If not set, the new item will be appended to the end of the conversation.\n  If set to `root`, the new item will be added to the beginning of the conversation.\n  If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added."
+          },
+          "item": {
+            "$ref": "#/components/schemas/VoiceConversationItem",
+            "description": "The conversation item to create."
+          }
+        },
+        "description": "The `conversation.item.create` client event."
+      },
       "VoiceAgentClientEventSessionAvatarConnect": {
         "type": "object",
         "required": [
@@ -89995,6 +90463,33 @@
           }
         ],
         "description": "The `session.avatar.connect` client event."
+      },
+      "VoiceAgentClientEventSessionUpdate": {
+        "type": "object",
+        "required": [
+          "type",
+          "session"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "Optional client-generated ID used to identify this event. This is an arbitrary string that a client may assign. It will be passed back if there is an error with the event, but the corresponding `session.updated` event will not include it."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "session.update"
+            ],
+            "description": "The event type, must be `session.update`.",
+            "x-stainless-const": true
+          },
+          "session": {
+            "$ref": "#/components/schemas/VoiceAgentSessionUpdate",
+            "description": "The voice-agent session settings to update."
+          }
+        },
+        "description": "The `session.update` client event."
       },
       "VoiceAgentDefinition": {
         "type": "object",
@@ -91483,6 +91978,101 @@
         },
         "description": "The effective stable realtime session settings returned by the voice-agent service."
       },
+      "VoiceAgentSessionUpdate": {
+        "$ref": "#/components/schemas/VoiceAgentSessionUpdateConfig",
+        "description": "The session configuration accepted by a voice-agent session update event."
+      },
+      "VoiceAgentSessionUpdateConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "realtime"
+            ],
+            "description": "The session type. Always `realtime`."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions applied throughout the session."
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 2,
+            "description": "The sampling temperature for compatible cascaded pipelines."
+          },
+          "max_output_tokens": {
+            "$ref": "#/components/schemas/VoiceAgentMaxOutputTokens",
+            "description": "The maximum output-token count for one response."
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceOutputModality"
+            },
+            "description": "The output modalities enabled for the session."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAudioConfig",
+            "description": "The input- and output-audio settings for the session."
+          },
+          "avatar": {
+            "$ref": "#/components/schemas/VoiceAgentSessionAvatarConfig",
+            "description": "The avatar settings for the session."
+          },
+          "animation": {
+            "$ref": "#/components/schemas/VoiceAgentAnimationConfig",
+            "description": "Animation settings for the session."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "Tools available to the session."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/VoiceAgentToolChoice",
+            "description": "Tool-selection behavior for the session."
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeReasoning",
+            "description": "Reasoning settings for compatible realtime models."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether the model may call multiple tools in parallel."
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentSessionIncludeOption"
+            },
+            "description": "Additional fields to include in service outputs."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Up to 16 string key-value pairs attached to the session."
+          },
+          "interim_response": {
+            "$ref": "#/components/schemas/VoiceAgentInterimResponse",
+            "description": "Interim-response settings for latency and tool execution."
+          },
+          "greeting": {
+            "$ref": "#/components/schemas/VoiceGreetingConfig",
+            "description": "A proactive assistant greeting started after session configuration."
+          }
+        },
+        "description": "The stable realtime session settings accepted in a `session.update` client event."
+      },
       "VoiceAgentStaticInterimResponseConfig": {
         "type": "object",
         "required": [
@@ -91685,6 +92275,17 @@
           }
         ],
         "description": "Turn-detection settings accepted by a stable voice-agent session."
+      },
+      "VoiceAgentWebSocketMessage": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentClientEvent"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentServerEvent"
+          }
+        ],
+        "description": "A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields."
       },
       "VoiceAgentWebSocketSubprotocol": {
         "type": "string",
@@ -93771,6 +94372,68 @@
           ]
         }
       },
+      "_AgentIncludable": {
+        "type": "string",
+        "enum": [
+          "memory_search_call.results"
+        ]
+      },
+      "_AgentItemType": {
+        "type": "string",
+        "enum": [
+          "structured_outputs",
+          "oauth_consent_request",
+          "memory_search_call",
+          "memory_command_preview_call",
+          "memory_command_preview_call_output",
+          "workflow_action",
+          "a2a_preview_call",
+          "a2a_preview_call_output",
+          "bing_grounding_call",
+          "bing_grounding_call_output",
+          "sharepoint_grounding_preview_call",
+          "sharepoint_grounding_preview_call_output",
+          "azure_ai_search_call",
+          "azure_ai_search_call_output",
+          "bing_custom_search_preview_call",
+          "bing_custom_search_preview_call_output",
+          "openapi_call",
+          "openapi_call_output",
+          "browser_automation_preview_call",
+          "browser_automation_preview_call_output",
+          "fabric_dataagent_preview_call",
+          "fabric_dataagent_preview_call_output",
+          "azure_function_call",
+          "azure_function_call_output"
+        ]
+      },
+      "_AgentToolType": {
+        "type": "string",
+        "enum": [
+          "a2a",
+          "azure_ai_search",
+          "azure_function",
+          "bing_grounding",
+          "capture_structured_outputs",
+          "openapi",
+          "memory_search"
+        ]
+      },
+      "_PreviewAgentToolType": {
+        "type": "string",
+        "enum": [
+          "a2a_preview",
+          "bing_custom_search_preview",
+          "browser_automation_preview",
+          "fabric_dataagent_preview",
+          "sharepoint_grounding_preview",
+          "memory_search_preview",
+          "work_iq_preview",
+          "fabric_iq_preview",
+          "toolbox_search_preview",
+          "web_iq_preview"
+        ]
+      },
       "integer": {
         "type": "integer",
         "format": "int64"
@@ -93814,6 +94477,10 @@
           }
         ],
         "description": "Evaluation target for generating responses using a given model and dataset."
+      },
+      "numeric": {
+        "type": "number",
+        "format": "double"
       }
     },
     "securitySchemes": {
