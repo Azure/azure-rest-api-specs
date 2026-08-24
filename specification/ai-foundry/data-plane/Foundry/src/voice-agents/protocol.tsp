@@ -59,6 +59,7 @@ union VoiceAgentClientEvent {
   response_create: VoiceAgentClientEventResponseCreate,
   session_update: VoiceAgentClientEventSessionUpdate,
   session_avatar_connect: VoiceAgentClientEventSessionAvatarConnect,
+  rtc_call_sdp_create: VoiceAgentClientEventRtcCallSdpCreate,
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
@@ -110,6 +111,8 @@ union VoiceAgentServerEvent {
   error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
   session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
+  rtc_call_sdp_created: VoiceAgentServerEventRtcCallSdpCreated,
+  rtc_call_error: VoiceAgentServerEventRtcCallError,
   session_avatar_switch_to_speaking: VoiceAgentServerEventSessionAvatarSwitchToSpeaking,
   session_avatar_switch_to_idle: VoiceAgentServerEventSessionAvatarSwitchToIdle,
   response_audio_timestamp_delta: VoiceAgentServerEventResponseAudioTimestampDelta,
