@@ -3,6 +3,12 @@
     "api-version": "2026-01-01",
     "bastionHostName": "bastionhosttenant",
     "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bastionidentity": {}
+        }
+      },
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
@@ -55,6 +61,14 @@
         "tags": {
           "tag1": "value1",
           "tag2": "value2"
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bastionidentity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
         }
       }
     },
@@ -64,6 +78,6 @@
       }
     }
   },
-  "operationId": "BastionHosts_UpdateTags",
+  "operationId": "BastionHosts_Update",
   "title": "Patch Bastion Host"
 }
