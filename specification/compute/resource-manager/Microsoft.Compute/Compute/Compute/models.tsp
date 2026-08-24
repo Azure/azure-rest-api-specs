@@ -3089,11 +3089,10 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matches Microsoft.Network's privateIPAddressPrefixLength, which is nullable so callers can explicitly clear an allocated prefix."
   @added(Versions.v2026_09_01)
   @minValue(1)
   @maxValue(128)
-  privateIPAddressPrefixLength?: int32 | null;
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
@@ -4425,7 +4424,7 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matches Microsoft.Network's privateIPAddressPrefixLength, which is nullable so callers can explicitly clear an allocated prefix."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
   @added(Versions.v2026_09_01)
   @minValue(1)
   @maxValue(128)
@@ -6238,11 +6237,10 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matches Microsoft.Network's privateIPAddressPrefixLength, which is nullable so callers can explicitly clear an allocated prefix."
   @added(Versions.v2026_09_01)
   @minValue(1)
   @maxValue(128)
-  privateIPAddressPrefixLength?: int32 | null;
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * Specifies an array of references to application security group.
