@@ -1,0 +1,66 @@
+{
+  "operationId": "SandboxNetworkingOperations_GetSandboxesEgressDecisions2",
+  "title": "SandboxNetworkingOperations_GetSandboxesEgressDecisions2 - Gets egress decisions for a sandbox.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "networkEgress": {
+          "allowed": [
+            {
+              "timestamp": "2026-08-24T12:00:00Z"
+            }
+          ],
+          "denied": [
+            {
+              "timestamp": "2026-08-24T12:00:00Z"
+            }
+          ]
+        },
+        "statefulTcp": {
+          "connections": [
+            {
+              "timestamp": "2026-08-24T12:00:00Z"
+            }
+          ]
+        },
+        "lastUpdated": "2026-08-24T12:00:00Z"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "operationId": "SandboxLifecycleOperations_GetSandboxesStats",
+  "title": "SandboxLifecycleOperations_GetSandboxesStats - Gets resource usage statistics for a sandbox.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tokenUsage": {
+          "totalInputTokens": 1,
+          "totalOutputTokens": 1,
+          "requestCount": 1
+        },
+        "cpu": {
+          "user": 1,
+          "nice": 1,
+          "system": 1,
+          "idle": 1,
+          "iowait": 1,
+          "irq": 1,
+          "softirq": 1,
+          "steal": 1,
+          "loadAvg1": 1,
+          "loadAvg5": 1,
+          "loadAvg15": 1
+        },
+        "memory": {
+          "totalBytes": 1,
+          "availableBytes": 1,
+          "usedBytes": 1
+        },
+        "network": {
+          "rxBytes": 1,
+          "txBytes": 1,
+          "rxPackets": 1,
+          "txPackets": 1
+        },
+        "disk": [
+          {
+            "mountPoint": "example-value",
+            "filesystem": "example-value",
+            "totalBytes": 1,
+            "usedBytes": 1,
+            "availableBytes": 1,
+            "label": "example-value"
+          }
+        ],
+        "uptimeSecs": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

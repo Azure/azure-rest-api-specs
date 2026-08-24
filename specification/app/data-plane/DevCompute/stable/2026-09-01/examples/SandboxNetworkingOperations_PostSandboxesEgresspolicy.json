@@ -1,0 +1,221 @@
+{
+  "operationId": "SandboxNetworkingOperations_PostSandboxesEgresspolicy",
+  "title": "SandboxNetworkingOperations_PostSandboxesEgresspolicy - Sets the egress policy for a sandbox.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource",
+    "body": {
+      "http": {
+        "defaultAction": "Allow",
+        "hostRules": [
+          {
+            "pattern": "example-value"
+          }
+        ],
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example.com"
+            }
+          }
+        ],
+        "trafficInspection": "Legacy",
+        "enforcementMode": "Enforced",
+        "defaultForward": {
+          "url": "https://example.com/resource"
+        }
+      },
+      "defaultAction": "Allow",
+      "hostRules": [
+        {
+          "pattern": "example-value",
+          "action": "Allow"
+        }
+      ],
+      "rules": [
+        {
+          "name": "example-resource",
+          "match": {
+            "host": "example.com"
+          },
+          "action": {
+            "type": "Allow"
+          },
+          "proxyActions": [
+            "example-value"
+          ],
+          "source": "example-value",
+          "hookRef": {
+            "endpoint": "example-value"
+          }
+        }
+      ],
+      "tds": {
+        "defaultAction": "Allow",
+        "credentials": [
+          {
+            "name": "example-resource",
+            "kind": "SqlPassword"
+          }
+        ],
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example.com"
+            }
+          }
+        ]
+      },
+      "transportRules": {
+        "defaultAction": "Allow",
+        "rules": [
+          {
+            "action": "Allow",
+            "protocol": "Tcp",
+            "destination": "example-value",
+            "port": 8080
+          }
+        ]
+      },
+      "trafficInspection": "Legacy",
+      "enforcementMode": "Enforced",
+      "validationWarnings": [
+        {
+          "code": "example-value",
+          "message": "example-value"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "http": {
+          "defaultAction": "Allow",
+          "hostRules": [
+            {
+              "pattern": "example-value"
+            }
+          ],
+          "rules": [
+            {
+              "name": "example-resource",
+              "match": {
+                "host": "example.com"
+              }
+            }
+          ],
+          "trafficInspection": "Legacy",
+          "enforcementMode": "Enforced",
+          "defaultForward": {
+            "url": "https://example.com/resource"
+          }
+        },
+        "defaultAction": "Allow",
+        "hostRules": [
+          {
+            "pattern": "example-value",
+            "action": "Allow"
+          }
+        ],
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example.com"
+            },
+            "action": {
+              "type": "Allow"
+            },
+            "proxyActions": [
+              "example-value"
+            ],
+            "source": "example-value",
+            "hookRef": {
+              "endpoint": "example-value"
+            }
+          }
+        ],
+        "tds": {
+          "defaultAction": "Allow",
+          "credentials": [
+            {
+              "name": "example-resource",
+              "kind": "SqlPassword"
+            }
+          ],
+          "rules": [
+            {
+              "name": "example-resource",
+              "match": {
+                "host": "example.com"
+              }
+            }
+          ]
+        },
+        "transportRules": {
+          "defaultAction": "Allow",
+          "rules": [
+            {
+              "action": "Allow",
+              "protocol": "Tcp",
+              "destination": "example-value",
+              "port": 8080
+            }
+          ]
+        },
+        "trafficInspection": "Legacy",
+        "enforcementMode": "Enforced",
+        "validationWarnings": [
+          {
+            "code": "example-value",
+            "message": "example-value"
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

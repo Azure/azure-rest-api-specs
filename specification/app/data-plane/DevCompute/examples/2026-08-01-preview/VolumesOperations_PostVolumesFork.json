@@ -1,0 +1,73 @@
+{
+  "operationId": "VolumesOperations_PostVolumesFork",
+  "title": "VolumesOperations_PostVolumesFork - Forks a data disk volume.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "volumeName": "example-volume",
+    "body": {
+      "destinationVolumeName": "example-volume",
+      "labels": {
+        "exampleKey": "example-value"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "AzureBlobByo",
+        "volumeName": "example-volume",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "storageContainerResourceId": "example-armstoragecontainer",
+        "auth": {
+          "kind": "ManagedIdentity",
+          "identity": {
+            "kind": "SystemAssigned"
+          }
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

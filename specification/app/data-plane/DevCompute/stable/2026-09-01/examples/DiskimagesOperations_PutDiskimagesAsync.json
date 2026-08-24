@@ -1,0 +1,77 @@
+{
+  "operationId": "DiskimagesOperations_PutDiskimagesAsync",
+  "title": "DiskimagesOperations_PutDiskimagesAsync - Creates a disk image asynchronously from an OCI image reference.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "body": {
+      "source": {
+        "kind": "blob",
+        "blobSourceUri": "https://example.com/resource"
+      },
+      "name": "example-resource",
+      "labels": {
+        "exampleKey": "example-value"
+      },
+      "vnetConnectionName": "example-vnetconnection"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "operationId": "example-operation",
+        "status": "Pending",
+        "errorMessage": "example-value",
+        "diskImage": {
+          "id": "example-disk-image",
+          "name": "example-resource",
+          "labels": {
+            "exampleKey": "example-value"
+          },
+          "image": {
+            "base": "example-value"
+          },
+          "status": {
+            "state": "example-value",
+            "createdAt": "2026-08-24T12:00:00Z",
+            "updatedAt": "2026-08-24T12:00:00Z"
+          },
+          "sizeInMB": "example-value"
+        },
+        "createdAt": "2026-08-24T12:00:00Z",
+        "updatedAt": "2026-08-24T12:00:00Z"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "429": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

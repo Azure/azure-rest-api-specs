@@ -1,0 +1,53 @@
+{
+  "operationId": "SandboxFilesOperations_GetSandboxesFilesStat",
+  "title": "SandboxFilesOperations_GetSandboxesFilesStat - Gets metadata for a file or directory in a running sandbox, including size, permissions, and timestamps.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-resource",
+        "path": "/workspace/example.txt",
+        "size": 1,
+        "mode": 1,
+        "isDir": true,
+        "isSymlink": true,
+        "symlinkTarget": "example-value",
+        "modifiedTime": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    }
+  }
+}

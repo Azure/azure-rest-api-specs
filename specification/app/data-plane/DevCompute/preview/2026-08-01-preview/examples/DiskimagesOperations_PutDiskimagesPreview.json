@@ -1,0 +1,122 @@
+{
+  "operationId": "DiskimagesOperations_PutDiskimagesPreview",
+  "title": "DiskimagesOperations_PutDiskimagesPreview - Creates a new disk image from an OCI image reference.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "body": {
+      "name": "example-resource",
+      "labels": {
+        "exampleKey": "example-value"
+      },
+      "vmmType": "cloudhypervisor",
+      "image": {
+        "base": "example-value",
+        "entrypoint": [
+          "example-value"
+        ],
+        "cmd": [
+          "example-value"
+        ]
+      },
+      "registryCredentials": {
+        "username": "example-user",
+        "token": "example-token"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-disk-image",
+        "name": "example-resource",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "image": {
+          "base": "example-value",
+          "entrypoint": [
+            "example-value"
+          ],
+          "cmd": [
+            "example-value"
+          ]
+        },
+        "status": {
+          "state": "example-value",
+          "errorMessage": "example-value",
+          "createdAt": "2026-08-24T12:00:00Z",
+          "updatedAt": "2026-08-24T12:00:00Z"
+        },
+        "sizeInMB": "example-value",
+        "dockerfileContent": "example content"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "example-disk-image",
+        "name": "example-resource",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "image": {
+          "base": "example-value",
+          "entrypoint": [
+            "example-value"
+          ],
+          "cmd": [
+            "example-value"
+          ]
+        },
+        "status": {
+          "state": "example-value",
+          "errorMessage": "example-value",
+          "createdAt": "2026-08-24T12:00:00Z",
+          "updatedAt": "2026-08-24T12:00:00Z"
+        },
+        "sizeInMB": "example-value",
+        "dockerfileContent": "example content"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "429": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

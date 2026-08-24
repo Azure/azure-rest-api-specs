@@ -1,0 +1,82 @@
+{
+  "operationId": "DiskimagesOperations_PostDiskimagesDockerfileAsync",
+  "title": "DiskimagesOperations_PostDiskimagesDockerfileAsync - Builds a disk image from a Dockerfile (asynchronous).",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "body": {
+      "name": "example-resource",
+      "dockerfile": "example-value",
+      "vmmType": "cloudhypervisor",
+      "labels": {
+        "exampleKey": "example-value"
+      },
+      "buildArgs": {
+        "exampleKey": "example-value"
+      },
+      "secrets": {
+        "exampleKey": "example-value"
+      },
+      "contextContentPackageId": "example-content-package"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "operationId": "example-operation",
+        "status": "Pending",
+        "errorMessage": "example-value",
+        "diskImage": {
+          "id": "example-disk-image",
+          "name": "example-resource",
+          "labels": {
+            "exampleKey": "example-value"
+          },
+          "image": {
+            "base": "example-value"
+          },
+          "status": {
+            "state": "example-value",
+            "createdAt": "2026-08-24T12:00:00Z",
+            "updatedAt": "2026-08-24T12:00:00Z"
+          },
+          "sizeInMB": "example-value",
+          "dockerfileContent": "example content"
+        },
+        "createdAt": "2026-08-24T12:00:00Z",
+        "updatedAt": "2026-08-24T12:00:00Z"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "429": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "operationId": "SandboxLifecycleOperations_PutSandboxesBatch",
+  "title": "SandboxLifecycleOperations_PutSandboxesBatch - Creates multiple sandboxes in a single batch request.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "body": {
+      "count": 1,
+      "sandbox": {
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "vmmType": "cloudhypervisor",
+        "entrypoint": [
+          "example-value"
+        ],
+        "cmd": [
+          "example-value"
+        ],
+        "environment": {
+          "exampleKey": "example-value"
+        },
+        "sourcesRef": {},
+        "resources": {
+          "cpu": "example-value",
+          "memory": "example-value"
+        },
+        "connections": [
+          "example-value"
+        ],
+        "gatewayConnections": [
+          {
+            "resourceId": "example-resource"
+          }
+        ],
+        "credentialRefs": [
+          "example-value"
+        ],
+        "ports": [
+          {
+            "port": 8080
+          }
+        ],
+        "egressPolicy": {},
+        "egressPolicyId": "example-egresspolicy",
+        "sandboxGroupId": "example-sandboxgroup",
+        "presetSandboxType": "None",
+        "anthropicApiKey": "example-value",
+        "presetProperties": {},
+        "lifecycle": {
+          "autoSuspendPolicy": {
+            "enabled": true
+          },
+          "autoDeletePolicy": {
+            "enabled": true
+          }
+        },
+        "agentIdentity": {
+          "tenantId": "example-tenant",
+          "agentId": "example-agent"
+        },
+        "identitySettings": [
+          {
+            "identity": "example-value"
+          }
+        ],
+        "telemetryConfig": {
+          "endpoints": [
+            "example-value"
+          ]
+        },
+        "volumes": [
+          {
+            "volumeName": "example-volume",
+            "mountpoint": "example-value"
+          }
+        ],
+        "projectId": "example-project",
+        "contentPackageDownloads": [
+          {
+            "contentPackageId": "example-content-package",
+            "targetPath": "/workspace/example.txt"
+          }
+        ],
+        "vnetConnectionName": "example-vnetconnection",
+        "customerVnetConnectionName": "example-customervnetconnection",
+        "systemVnetConnectionName": "example-systemvnetconnection",
+        "executionTokens": {},
+        "isDelegationBackingResource": true
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "totalRequested": 1,
+        "succeeded": 1,
+        "failed": 1,
+        "sandboxes": [
+          {
+            "id": "example-resource",
+            "labels": {
+              "exampleKey": "example-value"
+            },
+            "vmmType": "cloudhypervisor",
+            "entrypoint": [
+              "example-value"
+            ],
+            "cmd": [
+              "example-value"
+            ],
+            "sourcesRef": {},
+            "resources": {
+              "cpu": "example-value",
+              "memory": "example-value"
+            },
+            "createdAt": "2026-08-24T12:00:00Z",
+            "state": "Running",
+            "stateDetails": {
+              "stoppedReason": "Idle",
+              "stoppedAt": "2026-08-24T12:00:00Z"
+            },
+            "snapshotId": "example-snapshot",
+            "coldStorageSizeInMB": "example-value",
+            "ports": [
+              {
+                "port": 8080,
+                "url": "https://example.com/resource"
+              }
+            ],
+            "connections": [
+              "example-value"
+            ],
+            "gatewayConnections": [
+              {
+                "resourceId": "example-resource"
+              }
+            ],
+            "credentialRefs": [
+              "example-value"
+            ],
+            "egressPolicy": {},
+            "sandboxGroupId": "example-sandboxgroup",
+            "region": "example-value",
+            "lifecycle": {
+              "autoSuspendPolicy": {
+                "enabled": true
+              },
+              "autoDeletePolicy": {
+                "enabled": true
+              }
+            },
+            "debug": {},
+            "appUrl": "https://example.com/resource",
+            "managementUrl": "https://example.com/resource",
+            "tokens": {
+              "exampleKey": {
+                "token": "example-token",
+                "expiresAt": "2026-08-24T12:00:00Z"
+              }
+            },
+            "agentIdentity": {
+              "tenantId": "example-tenant",
+              "agentId": "example-agent"
+            },
+            "volumes": [
+              {
+                "volumeName": "example-volume",
+                "mountpoint": "example-value"
+              }
+            ],
+            "contentPackageDownloads": [
+              {
+                "contentPackageId": "example-content-package",
+                "targetPath": "/workspace/example.txt"
+              }
+            ],
+            "vnetConnectionName": "example-vnetconnection",
+            "customerVnetConnectionName": "example-customervnetconnection",
+            "systemVnetConnectionName": "example-systemvnetconnection",
+            "identitySettings": [
+              {
+                "identity": "example-value"
+              }
+            ],
+            "outboundIpAddresses": [
+              "192.0.2.10"
+            ],
+            "containerStatuses": [
+              {
+                "name": "example-podcontainer",
+                "state": "Unknown",
+                "ready": true,
+                "started": true,
+                "restartCount": 1
+              }
+            ]
+          }
+        ],
+        "errors": [
+          "example-value"
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "429": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

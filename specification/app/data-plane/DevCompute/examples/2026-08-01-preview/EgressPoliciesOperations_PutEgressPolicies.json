@@ -1,0 +1,115 @@
+{
+  "operationId": "EgressPoliciesOperations_PutEgressPolicies",
+  "title": "EgressPoliciesOperations_PutEgressPolicies - Creates or updates a named egress policy.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "policyId": "example-policy",
+    "body": {
+      "name": "example-resource",
+      "description": "example-value",
+      "defaultAction": "Allow",
+      "enforcementMode": "Enforced",
+      "rules": [
+        {
+          "name": "example-resource",
+          "match": {
+            "host": "example.com"
+          },
+          "action": {
+            "type": "Allow"
+          },
+          "proxyActions": [
+            "example-value"
+          ],
+          "source": "example-value",
+          "hookRef": {
+            "endpoint": "example-value"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-resource",
+        "name": "example-resource",
+        "description": "example-value",
+        "defaultAction": "Allow",
+        "enforcementMode": "Enforced",
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example.com"
+            },
+            "action": {
+              "type": "Allow"
+            },
+            "proxyActions": [
+              "example-value"
+            ],
+            "source": "example-value",
+            "hookRef": {
+              "endpoint": "example-value"
+            }
+          }
+        ],
+        "createdAt": "2026-08-24T12:00:00Z",
+        "updatedAt": "2026-08-24T12:00:00Z"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "example-resource",
+        "name": "example-resource",
+        "description": "example-value",
+        "defaultAction": "Allow",
+        "enforcementMode": "Enforced",
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example.com"
+            },
+            "action": {
+              "type": "Allow"
+            },
+            "proxyActions": [
+              "example-value"
+            ],
+            "source": "example-value",
+            "hookRef": {
+              "endpoint": "example-value"
+            }
+          }
+        ],
+        "createdAt": "2026-08-24T12:00:00Z",
+        "updatedAt": "2026-08-24T12:00:00Z"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

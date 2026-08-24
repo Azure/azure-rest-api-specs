@@ -57,3 +57,69 @@ model AzureResourceScope {
   /** ADC sandbox group name. */
   @path sandboxGroupName: string;
 }
+
+/** EntityTagHeaderValue wire model. */
+model EntityTagHeaderValue {
+  /** tag value. */
+  tag?: StringSegment;
+
+  /** isWeak value. */
+  isWeak?: boolean;
+}
+
+/** FileStreamResult wire model. */
+model FileStreamResult {
+  /** fileStream value. */
+  fileStream?: Stream;
+
+  /** contentType value. */
+  contentType?: string;
+
+  /** fileDownloadName value. */
+  fileDownloadName?: string;
+
+  /** lastModified value. */
+  lastModified?: utcDateTime;
+
+  /** entityTag value. */
+  entityTag?: EntityTagHeaderValue;
+
+  /** enableRangeProcessing value. */
+  enableRangeProcessing?: boolean;
+}
+
+/** AbsoluteDirectoryPath wire model. */
+scalar AbsoluteDirectoryPath extends string;
+
+/** AbsoluteFilePath wire model. */
+scalar AbsoluteFilePath extends string;
+
+/** Bytes wire model. */
+scalar Bytes extends bytes;
+
+/** Strongly-typed connection identifier. ConnectionId is intentionally string-based rather than Guid-based because existing Cosmos DB documents contain connection IDs in mixed formats — some with hyphens (Guid "D" format: a1b2c3d4-e5f6-...) and some without (Guid "N" format: a1b2c3d4e5f6...). Converting to a Guid-backed typed ID would normalize all lookups to the "D" format via Guid.ToString(), breaking reads/deletes of documents stored with the "N" format since Cosmos DB performs exact string matching on document IDs. */
+scalar ConnectionId extends string;
+
+/** SandboxId wire model. */
+scalar SandboxId extends string;
+
+/** Stream wire model. */
+scalar Stream extends bytes;
+
+/** StringSegment wire model. */
+model StringSegment {
+  /** buffer value. */
+  buffer?: string;
+
+  /** offset value. */
+  offset?: int32;
+
+  /** length value. */
+  length?: int32;
+
+  /** value value. */
+  value?: string;
+
+  /** hasValue value. */
+  hasValue?: boolean;
+}
