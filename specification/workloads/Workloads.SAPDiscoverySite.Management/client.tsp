@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
+using Microsoft.Workloads;
 
 @@clientName(Microsoft.Workloads, "MigrationDiscoverySapMgmtClient", "python");
 
@@ -29,87 +30,42 @@ using Azure.Core;
 @@clientName(Microsoft.Workloads.SAPMigrateError, "SapMigrateError", "java");
 
 // Preserve the names shipped by the previous C# SDK generator.
-@@clientName(
-  Microsoft.Workloads.ConfigurationData,
-  "ConfigurationDetail",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.DataSource,
-  "SapDiscoveryDataSource",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.DatabaseType,
-  "SapDiscoveryDatabaseType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.ErrorDefinition,
-  "SapDiscoveryErrorDetail",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.ExcelPerformanceData,
-  "ExcelPerformanceDetail",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.ExtendedLocation,
-  "SapDiscoveryExtendedLocation",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.NativePerformanceData,
-  "NativePerformanceDetail",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.OperatingSystem,
-  "SapDiscoveryOperatingSystem",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.PerformanceData,
-  "PerformanceDetail",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.ProvisioningState,
-  "SapDiscoveryProvisioningState",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Workloads.SAPDiscoverySite,
-  "SapDiscoverySite",
-  "csharp"
-);
-@@clientName(Microsoft.Workloads.SAPInstance, "SapInstance", "csharp");
-@@clientName(Microsoft.Workloads.SAPMigrateError, "SapMigrateError", "csharp");
-@@clientName(
-  Microsoft.Workloads.ServerInstance,
-  "SapDiscoveryServerInstance",
-  "csharp"
-);
-@@clientName(Microsoft.Workloads.DatabaseType.Db2, "DB2", "csharp");
-@@clientName(Microsoft.Workloads.DatabaseType.HANA, "Hana", "csharp");
-@@clientName(Microsoft.Workloads.DatabaseType.SAPASE, "SapAse", "csharp");
-@@clientName(Microsoft.Workloads.DatabaseType.SAPDB, "SapDB", "csharp");
-@@clientName(Microsoft.Workloads.DatabaseType.SAPMaxDB, "SapMaxDB", "csharp");
-@@clientName(
-  Microsoft.Workloads.ExtendedLocation.type,
-  "ExtendedLocationType",
-  "csharp"
-);
-@@clientName(Microsoft.Workloads.OperatingSystem.IBMAIX, "IbmAix", "csharp");
-@@clientName(Microsoft.Workloads.OperatingSystem.SUSE, "Suse", "csharp");
-@@clientName(Microsoft.Workloads.SapInstanceType.APP, "App", "csharp");
-@@clientName(Microsoft.Workloads.SapInstanceType.ASCS, "Ascs", "csharp");
-@@clientName(Microsoft.Workloads.SapInstanceType.SCS, "Scs", "csharp");
-@@clientName(Microsoft.Workloads.SapInstanceType.WEBDISP, "Webdisp", "csharp");
+@@clientName(ConfigurationData, "ConfigurationDetail", "csharp");
+@@clientName(DataSource, "SapDiscoveryDataSource", "csharp");
+@@clientName(DatabaseType, "SapDiscoveryDatabaseType", "csharp");
+@@clientName(ErrorDefinition, "SapDiscoveryErrorDetail", "csharp");
+@@clientName(ExcelPerformanceData, "ExcelPerformanceDetail", "csharp");
+@@clientName(ExtendedLocation, "SapDiscoveryExtendedLocation", "csharp");
+@@clientName(NativePerformanceData, "NativePerformanceDetail", "csharp");
+@@clientName(OperatingSystem, "SapDiscoveryOperatingSystem", "csharp");
+@@clientName(PerformanceData, "PerformanceDetail", "csharp");
+@@clientName(ProvisioningState, "SapDiscoveryProvisioningState", "csharp");
+@@clientName(SAPDiscoverySite, "SapDiscoverySite", "csharp");
+@@clientName(SAPInstance, "SapInstance", "csharp");
+@@clientName(SAPMigrateError, "SapMigrateError", "csharp");
+@@clientName(ServerInstance, "SapDiscoveryServerInstance", "csharp");
+@@clientName(DatabaseType.Db2, "DB2", "csharp");
+@@clientName(DatabaseType.HANA, "Hana", "csharp");
+@@clientName(DatabaseType.SAPASE, "SapAse", "csharp");
+@@clientName(DatabaseType.SAPDB, "SapDB", "csharp");
+@@clientName(DatabaseType.SAPMaxDB, "SapMaxDB", "csharp");
+@@clientName(ExtendedLocation.type, "ExtendedLocationType", "csharp");
+@@clientName(OperatingSystem.IBMAIX, "IbmAix", "csharp");
+@@clientName(OperatingSystem.SUSE, "Suse", "csharp");
+@@clientName(SapInstanceType.APP, "App", "csharp");
+@@clientName(SapInstanceType.ASCS, "Ascs", "csharp");
+@@clientName(SapInstanceType.SCS, "Scs", "csharp");
+@@clientName(SapInstanceType.WEBDISP, "Webdisp", "csharp");
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
+  "csharp"
+);
+
+// to keep exact same property name as previous GA
+@@clientName(
+  ExcelPerformanceData.totalSourceDbSizeGB,
+  exact("TotalSourceDbSizeGB"),
   "csharp"
 );
