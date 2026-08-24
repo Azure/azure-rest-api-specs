@@ -8,12 +8,6 @@ import { extractInputs } from "../context.js";
 import { loadApproversConfig } from "./approvers.js";
 import { removeLabelIfPresent } from "./labels.js";
 
-// All Tier 1 languages must approve package names regardless of which languages
-// have configuration in tspconfig.yaml. This prevents names being approved for a
-// subset of languages without cross-language alignment.
-const TIER1_DATA_PLANE = ["dotnet", "java", "python", "typescript"];
-const TIER1_MGMT = ["dotnet", "java", "python", "typescript", "go"];
-
 const FormatValidationResultSchema = z.object({
   valid: z.boolean(),
   namespace: z.string(),
@@ -259,14 +253,11 @@ export default async function postResults({ github, context, core }) {
     // Only clean up labels if the code workflow completed successfully (meaning no package
     // name changes were found). A missing artifact from a failed workflow run does NOT mean
     // config was reverted — it could be a compilation or detection failure.
-    const { data: workflowRun } = await github.rest.actions.getWorkflowRun({
-      owner,
-      repo,
-      run_id,
-    });
-    if (workflowRun.conclusion !== "success") {
+    // The conclusion is available directly from the workflow_run event payload.
+    const workflowConclusion = context.payload.workflow_run?.conclusion;
+    if (workflowConclusion !== "success") {
       core.info(
-        `Code workflow run ${run_id} concluded with "${workflowRun.conclusion}", skipping cleanup`,
+        `Code workflow run ${run_id} concluded with "${workflowConclusion}", skipping cleanup`,
       );
       return;
     }
@@ -300,16 +291,21 @@ export default async function postResults({ github, context, core }) {
         description: "No package name review required (config reverted)",
       });
 
-      // Update bot comment
-      await commentOrUpdate(
-        github,
-        core,
+      // Delete the bot comment — configuration was reverted, table is no longer relevant
+      const comments = await github.paginate(github.rest.issues.listComments, {
         owner,
         repo,
         issue_number,
-        "## Package Name Review\n\n✅ No package name changes detected. Previously detected package name configuration was reverted.\n\n<!-- package-name-review-bot -->",
-        "package-name-review-bot",
+        per_page: PER_PAGE_MAX,
+      });
+      const botComment = comments.find(
+        (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
+          comment.user?.type === "Bot" &&
+          (comment.body?.includes("<!-- package-name-review-bot -->") ?? false),
       );
+      if (botComment) {
+        await github.rest.issues.deleteComment({ owner, repo, comment_id: botComment.id });
+      }
     }
     return;
   }
@@ -362,13 +358,22 @@ export default async function postResults({ github, context, core }) {
         core.info(`Package name unchanged for ${language}: "${newNs}", preserving approval`);
         preservedApprovals.set(language, prev);
       }
-      // No previous entry (!prev) means first detection — treat as new pending (no reset)
+      // No previous entry (!prev) means first detection — treat as new pending (no reset).
+      // This covers the "not yet configured" → "configured" transition: parseCommentTable
+      // cannot parse rows without backtick-wrapped names, so prev will be undefined.
+      // By design, adding a NEW language config does not cascade-reset other approvals —
+      // only CHANGING an existing name triggers cross-language re-review.
     }
 
     // If any Tier 1 language name changed, reset ALL Tier 1 approvals for cross-language
     // re-review. This ensures architects re-confirm naming alignment across the board.
+    // Note: resetLanguages.push(lang) below is safe — we iterate `tier1`, not `resetLanguages`.
+    // After this loop, resetLanguages contains both originally-changed AND cascade-reset languages,
+    // which buildCommentBody uses to display the reset warning.
     if (resetLanguages.length > 0) {
-      const tier1 = results.isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
+      const tier1 = results.isMgmt
+        ? (approversConfig.tier1?.["management-plane"] ?? [])
+        : (approversConfig.tier1?.["data-plane"] ?? []);
       for (const lang of tier1) {
         if (resetLanguages.includes(lang)) continue; // already reset above
         const approvedLabel = `package-name-${lang}-approved`;
@@ -396,7 +401,9 @@ export default async function postResults({ github, context, core }) {
   }
 
   // Use Tier 1 order first for consistent table rendering, then any extra detected languages
-  const tier1 = results.isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
+  const tier1 = results.isMgmt
+    ? (approversConfig.tier1?.["management-plane"] ?? [])
+    : (approversConfig.tier1?.["data-plane"] ?? []);
   const extraLanguages = languages.filter((l) => !tier1.includes(l));
   const allLanguages = [...tier1, ...extraLanguages];
 

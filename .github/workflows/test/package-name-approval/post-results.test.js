@@ -436,41 +436,50 @@ describe("post-results", () => {
       expect(result.has("python")).toBe(false);
     });
 
-    it("validate-approval regex should match unchanged status rows", () => {
+    it("structural table update should approve unchanged and pending status rows", () => {
       const body = [
         "| dotnet | `Azure.Messaging.EventGrid` | `Azure.Messaging.EventGrid` | — | ⏳ Pending _(unchanged)_ | @approver1 |",
         "| java | `azure-messaging-eventgrid` | `com.azure.messaging.eventgrid` | — | ⏳ Pending | @approver2 |",
       ].join("\n");
 
-      // This is the updated regex from validate-approval.js
-      const dotnetRegex = new RegExp(
-        `(\\| dotnet[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
-        "gi",
-      );
-      const javaRegex = new RegExp(
-        `(\\| java[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
-        "gi",
-      );
+      // Simulate structural table update (same logic as validate-approval.js)
+      const lines = body.split("\n");
+      const langsToUpdate = new Set(["dotnet", "java"]);
+      for (let i = 0; i < lines.length; i++) {
+        const cells = lines[i].split("|");
+        if (cells.length < 7) continue;
+        const langCell = cells[1].trim().toLowerCase();
+        const statusCell = cells[5];
+        if (!statusCell || statusCell.includes("Approved")) continue;
+        if (langsToUpdate.has(langCell)) {
+          cells[5] = " ✅ Approved by @architect ";
+          lines[i] = cells.join("|");
+        }
+      }
+      const result = lines.join("\n");
 
-      const result = body
-        .replace(dotnetRegex, "$1 ✅ Approved by @approver1 $2")
-        .replace(javaRegex, "$1 ✅ Approved by @approver2 $2");
-
-      expect(result).toContain("✅ Approved by @approver1");
-      expect(result).toContain("✅ Approved by @approver2");
+      expect(result).toContain("✅ Approved by @architect");
       expect(result).not.toContain("⏳ Pending");
     });
 
-    it("validate-approval regex should not match already approved rows", () => {
+    it("structural table update should not modify already approved rows", () => {
       const body =
         "| dotnet | `Azure.Foo` | `Azure.Foo` | — | ✅ Approved by @someone | @approver1 |";
 
-      const regex = new RegExp(
-        `(\\| dotnet[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
-        "gi",
-      );
+      const lines = body.split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        const cells = lines[i].split("|");
+        if (cells.length < 7) continue;
+        const statusCell = cells[5];
+        if (!statusCell || statusCell.includes("Approved")) continue;
+        cells[5] = " ✅ Approved by @other ";
+        lines[i] = cells.join("|");
+      }
+      const result = lines.join("\n");
 
-      expect(regex.test(body)).toBe(false);
+      // Should remain unchanged — already approved
+      expect(result).toContain("Approved by @someone");
+      expect(result).not.toContain("Approved by @other");
     });
   });
 });
