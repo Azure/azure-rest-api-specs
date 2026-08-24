@@ -179,6 +179,11 @@ model VoiceAgentSessionUpdateConfig {
   greeting?: VoiceGreetingConfig;
 }
 
+@doc("The session configuration accepted by a voice-agent session update event.")
+union VoiceAgentSessionUpdate {
+  voice_agent: VoiceAgentSessionUpdateConfig,
+}
+
 @doc("The effective stable realtime session settings returned by the voice-agent service.")
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentSessionResponseConfig {
@@ -298,7 +303,7 @@ model VoiceAgentClientEventConversationItemCreate {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@changePropertyType(
   OpenAI.RealtimeClientEventSessionUpdate.session,
-  VoiceAgentSessionUpdateConfig
+  VoiceAgentSessionUpdate
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
