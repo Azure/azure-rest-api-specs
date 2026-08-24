@@ -6095,25 +6095,28 @@
           "description": "Resource identifier of the associated finding.",
           "readOnly": true
         },
-        "rank": {
+        "cveId": {
+          "type": "string",
+          "description": "CVE identifier addressed by this mitigation.",
+          "readOnly": true
+        },
+        "virtualMachineArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the virtual machine targeted by this mitigation.",
+          "readOnly": true
+        },
+        "score": {
           "type": "integer",
           "format": "int32",
-          "description": "Mitigation execution order where lower values are attempted first.",
+          "description": "Safety and completeness score from 0 to 100.",
+          "minimum": 0,
+          "maximum": 100,
           "readOnly": true
         },
-        "validationCommand": {
+        "commandsSummary": {
           "type": "string",
-          "description": "Command used to validate CVE presence.",
-          "readOnly": true
-        },
-        "mitigationCommand": {
-          "type": "string",
-          "description": "Command used to apply mitigation.",
-          "readOnly": true
-        },
-        "rollbackCommand": {
-          "type": "string",
-          "description": "Command used to rollback mitigation changes when available.",
+          "description": "User-friendly summary of the commands run by this mitigation.",
           "readOnly": true
         },
         "isRollbackable": {
@@ -6126,7 +6129,7 @@
           "description": "Runtime operational status of the mitigation.",
           "readOnly": true
         },
-        "mitigationStatusDetails": {
+        "statusDetails": {
           "type": "string",
           "description": "Human-readable details for the current mitigation status.",
           "readOnly": true
@@ -6139,7 +6142,13 @@
         }
       },
       "required": [
-        "findingId"
+        "findingId",
+        "cveId",
+        "virtualMachineArmId",
+        "score",
+        "commandsSummary",
+        "isRollbackable",
+        "status"
       ]
     },
     "NeuroShieldMitigationStatus": {
@@ -6276,7 +6285,10 @@
           "type": "string",
           "description": "Human-readable description of the NeuroShield resource."
         }
-      }
+      },
+      "required": [
+        "responseMode"
+      ]
     },
     "NeuroShieldProtectedResourceProperties": {
       "type": "object",
@@ -6328,8 +6340,7 @@
       "description": "Response modes for mitigation serving behavior.",
       "enum": [
         "Auto",
-        "Manual",
-        "AlertOnly"
+        "Manual"
       ],
       "x-ms-enum": {
         "name": "NeuroShieldResponseMode",
@@ -6344,11 +6355,6 @@
             "name": "Manual",
             "value": "Manual",
             "description": "Requires explicit customer approval before serving mitigations."
-          },
-          {
-            "name": "AlertOnly",
-            "value": "AlertOnly",
-            "description": "Detection only mode with no mitigation generation."
           }
         ]
       }

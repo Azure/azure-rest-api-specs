@@ -27927,7 +27927,7 @@ model NeuroShieldProperties {
   /**
    * Response mode that controls mitigation serving behavior.
    */
-  responseMode?: NeuroShieldResponseMode;
+  responseMode: NeuroShieldResponseMode;
 
   /**
    * Minimum severity level for mitigation generation.
@@ -27957,10 +27957,6 @@ union NeuroShieldResponseMode {
    */
   Manual: "Manual",
 
-  /**
-   * Detection only mode with no mitigation generation.
-   */
-  AlertOnly: "AlertOnly",
 }
 
 /**
@@ -28166,8 +28162,12 @@ model NeuroShieldProtectedResourceProperties {
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.neuroShield)
 @parentResource(NeuroShieldResource)
-model NeuroShieldProtectedResource
-  is Azure.ResourceManager.ProxyResource<NeuroShieldProtectedResourceProperties> {
+model NeuroShieldProtectedResource extends CommonProxyResource {
+  /**
+   * Properties of the protected resource.
+   */
+  properties: NeuroShieldProtectedResourceProperties;
+
   /**
    * The name of the protected resource.
    */
@@ -28401,46 +28401,48 @@ model NeuroShieldMitigationProperties {
   findingId: Azure.Core.armResourceIdentifier;
 
   /**
-   * Mitigation execution order where lower values are attempted first.
+   * CVE identifier addressed by this mitigation.
    */
   @visibility(Lifecycle.Read)
-  rank?: int32;
+  cveId: string;
 
   /**
-   * Command used to validate CVE presence.
+   * ARM resource ID of the virtual machine targeted by this mitigation.
    */
   @visibility(Lifecycle.Read)
-  validationCommand?: string;
+  virtualMachineArmId: Azure.Core.armResourceIdentifier;
 
   /**
-   * Command used to apply mitigation.
+   * Safety and completeness score from 0 to 100.
    */
+  @minValue(0)
+  @maxValue(100)
   @visibility(Lifecycle.Read)
-  mitigationCommand?: string;
+  score: int32;
 
   /**
-   * Command used to rollback mitigation changes when available.
+   * User-friendly summary of the commands run by this mitigation.
    */
   @visibility(Lifecycle.Read)
-  rollbackCommand?: string;
+  commandsSummary: string;
 
   /**
    * Indicates whether rollback is available for this mitigation.
    */
   @visibility(Lifecycle.Read)
-  isRollbackable?: boolean;
+  isRollbackable: boolean;
 
   /**
    * Runtime operational status of the mitigation.
    */
   @visibility(Lifecycle.Read)
-  status?: NeuroShieldMitigationStatus;
+  status: NeuroShieldMitigationStatus;
 
   /**
    * Human-readable details for the current mitigation status.
    */
   @visibility(Lifecycle.Read)
-  mitigationStatusDetails?: string;
+  statusDetails?: string;
 
   /**
    * Timestamp when the mitigation was applied.

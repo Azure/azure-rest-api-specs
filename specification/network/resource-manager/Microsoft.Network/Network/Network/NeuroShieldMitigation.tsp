@@ -57,15 +57,13 @@ interface NeuroShieldMitigations {
    */
   @summary("Cancels a mitigation.")
   @action("cancel")
-  cancel is ArmResourceActionAsync<
+  cancel is ArmResourceActionSync<
     NeuroShieldMitigation,
     void,
     Response = {
       @body body: void;
     },
-    Error = CloudError,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    Error = CloudError
   >;
 
   /**

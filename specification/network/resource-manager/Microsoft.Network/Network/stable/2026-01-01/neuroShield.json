@@ -1128,20 +1128,6 @@
           "200": {
             "description": "Azure operation completed successfully."
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1153,11 +1139,7 @@
           "Cancel mitigation": {
             "$ref": "./examples/NeuroShieldMitigations_Cancel.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/execute": {
@@ -1401,9 +1383,12 @@
           "description": "Properties of the protected resource."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "./common.json#/definitions/CommonProxyResource"
         }
       ]
     },
