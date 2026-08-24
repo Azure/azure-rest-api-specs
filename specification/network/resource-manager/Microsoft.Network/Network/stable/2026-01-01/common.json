@@ -1342,6 +1342,42 @@
         ]
       }
     },
+    "ApplicationGatewayWafRuleParanoiaLevel": {
+      "type": "string",
+      "description": "OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules.",
+      "enum": [
+        "PL1",
+        "PL2",
+        "PL3",
+        "PL4"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayWafRuleParanoiaLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PL1",
+            "value": "PL1",
+            "description": "Baseline detection rules."
+          },
+          {
+            "name": "PL2",
+            "value": "PL2",
+            "description": "Adds stricter detection rules."
+          },
+          {
+            "name": "PL3",
+            "value": "PL3",
+            "description": "Adds aggressive detection rules."
+          },
+          {
+            "name": "PL4",
+            "value": "PL4",
+            "description": "Strictest detection rules."
+          }
+        ]
+      }
+    },
     "ApplicationGatewayWafRuleSensitivityTypes": {
       "type": "string",
       "description": "The string representation of the web application firewall rule sensitivity.",
@@ -9481,7 +9517,9 @@
       "type": "string",
       "description": "MigrationType for the virtual network gateway.",
       "enum": [
-        "UpgradeDeploymentToStandardIP"
+        "UpgradeDeploymentToStandardIP",
+        "UpgradeGatewayToDualStack",
+        "MigrateGatewayForPointToSiteProfile"
       ],
       "x-ms-enum": {
         "name": "VirtualNetworkGatewayMigrationType",
@@ -9491,6 +9529,16 @@
             "name": "UpgradeDeploymentToStandardIP",
             "value": "UpgradeDeploymentToStandardIP",
             "description": "Indicates that it is a migration process from basic IP CSES to standard IP VMSS."
+          },
+          {
+            "name": "UpgradeGatewayToDualStack",
+            "value": "UpgradeGatewayToDualStack",
+            "description": "Indicates a migration process to upgrade the virtual network gateway to dual stack (IPv4 and IPv6)."
+          },
+          {
+            "name": "MigrateGatewayForPointToSiteProfile",
+            "value": "MigrateGatewayForPointToSiteProfile",
+            "description": "Indicates a migration process for the virtual network gateway's point-to-site profile."
           }
         ]
       }
