@@ -28,6 +28,10 @@ interface VoiceAgentWebSocket {
    * If the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`
    * upgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with
    * `error.code = agent_disabled`. This failure is terminal until the caller enables the agent.
+   *
+   * When `transport=webrtc`, the WebRTC voice agent must be enabled: if it is not, the handshake fails with
+   * `404 Not Found`. WebRTC does not support bring-your-own-model (BYOM) or hosted-agent voice agents; those
+   * requests fail with `400 Bad Request`.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
   @summary("Connect to a voice agent")
@@ -41,6 +45,14 @@ interface VoiceAgentWebSocket {
 
       /** An optional identifier used to correlate the voice session. */
       @query agent_session_id?: string;
+
+      /**
+       * Selects the connection transport. Omit or send `websocket` for the default, where signaling and audio are
+       * exchanged as JSON events over this WebSocket. Send `webrtc` to negotiate a WebRTC connection: the WebSocket
+       * then carries only SDP signaling (`rtc.call.sdp.create` / `rtc.call.sdp.created`) while media and the data
+       * channel are peer-to-peer.
+       */
+      @query transport?: VoiceAgentTransport;
 
       /**
        * Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
