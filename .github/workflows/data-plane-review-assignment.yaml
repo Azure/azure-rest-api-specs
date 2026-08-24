@@ -1,12 +1,20 @@
 # Data-Plane API Review - Assign Reviewers
 #
-# When the `APIStewardshipBoard-ReviewRequested` label is applied to a data-plane PR,
-# request review from the `azure-data-plane-api-reviewers` team. The team has GitHub
-# code-review auto-assignment enabled, so GitHub delegates the request to one team
-# member using the team's routing algorithm. Removing the label is intentionally not
-# handled: native delegation owns the individual reviewer, so the workflow never removes
-# a reviewer it did not pick, and it does not subscribe to `unlabeled` events. Applying
-# `APIStewardshipBoard-SignedOff` clears the request label.
+# Requests review from the `azure-data-plane-api-reviewers` team when a data-plane PR needs
+# stewardship review. The team has GitHub code-review auto-assignment enabled, so GitHub
+# delegates the request to one team member using the team's routing algorithm.
+#
+# Two triggers, because the `data-plane-review-requested` intake label can arrive two ways:
+#   - `pull_request_target: labeled` handles labels applied by a human (manual request) and
+#     the `data-plane-review-signoff` sign-off that clears the request label.
+#   - `workflow_run` on "Summarize Checks" handles the auto-applied intake label: Summarize
+#     Checks applies it with the default GITHUB_TOKEN, and labels applied by that token do
+#     not re-trigger `labeled` workflows, so this reconciles the reviewer request from the
+#     PR's live labels after Summarize Checks completes.
+#
+# Removing the label is intentionally not handled: native delegation owns the individual
+# reviewer, so the workflow never removes a reviewer it did not pick, and it does not
+# subscribe to `unlabeled` events.
 name: "Data-Plane API Review - Assign Reviewers"
 
 on:
@@ -15,21 +23,40 @@ on:
       - labeled
     branches:
       - main
+  workflow_run:
+    workflows:
+      - "Summarize Checks"
+    types:
+      - completed
 
 permissions:
+  actions: read # extractInputs reads issue-number/head-sha handoff artifacts on workflow_run
   contents: read
   pull-requests: write
 
-# Serialize runs per PR so racing label events do not interleave. Do not cancel
-# in-progress runs: a cancelled run could drop a team request mid-flight.
+# Serialize runs per PR so racing events do not interleave. `pull_request_target` keys on the
+# PR number directly; `workflow_run` keys on the triggering run's head SHA (the PR number is
+# only resolved inside the job). Do not cancel in-progress runs: a cancelled run could drop a
+# team request mid-flight.
 concurrency:
-  group: data-plane-review-assignment-${{ github.event.pull_request.number }}
+  group: >-
+    data-plane-review-assignment-${{
+      github.event.pull_request.number || github.event.workflow_run.head_sha
+    }}
   cancel-in-progress: false
 
 jobs:
   assign-reviewers:
     name: Assign Data-Plane Review Team
-    runs-on: ubuntu-24.04
+    # For workflow_run, skip runs of Summarize Checks that did not succeed: a failed or
+    # cancelled run may not have applied labels, and there is nothing to reconcile.
+    if: >-
+      ${{ github.event_name == 'pull_request_target' ||
+          github.event.workflow_run.conclusion == 'success' }}
+    # ubuntu-slim: this job only calls the GitHub REST API via github-script (no build), and
+    # runs on every Summarize Checks completion, so keep the runner minimal. Matches the other
+    # label-reaction workflows (arm-auto-signoff-status, update-labels).
+    runs-on: ubuntu-slim
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write
       # permissions. Only base-branch code is checked out below, and no PR-head code is

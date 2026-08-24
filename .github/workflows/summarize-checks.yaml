@@ -87,3 +87,21 @@ jobs:
           path: ${{ steps.summarize-checks.outputs.summary }}
           # If the file doesn't exist, just don't add the artifact
           if-no-files-found: ignore
+
+      # PR identity handoff for downstream workflow_run consumers (e.g. Data-Plane API
+      # Review - Assign Reviewers). Labels applied above use the default GITHUB_TOKEN, which
+      # does not re-trigger `labeled` workflows, so those consumers react to this run's
+      # completion and resolve the PR from these artifacts via extractInputs.
+      - if: ${{ always() && steps.summarize-checks.outputs.issue_number }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.summarize-checks.outputs.issue_number }}
+
+      - if: ${{ always() && steps.summarize-checks.outputs.head_sha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.summarize-checks.outputs.head_sha }}

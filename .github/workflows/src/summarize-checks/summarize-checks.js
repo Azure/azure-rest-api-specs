@@ -267,6 +267,15 @@ export default async function summarizeChecks({ github, context, core }) {
     return;
   }
 
+  // Publish the PR identity as step outputs so the workflow can upload `issue-number` /
+  // `head-sha` handoff artifacts. Downstream workflow_run consumers (e.g. data-plane review
+  // assignment, which must react to the labels applied below but cannot see labels set with
+  // the default GITHUB_TOKEN) resolve the PR from these artifacts via extractInputs.
+  core.setOutput("issue_number", issue_number);
+  if (head_sha) {
+    core.setOutput("head_sha", head_sha);
+  }
+
   const targetBranch =
     context.eventName === "pull_request_target"
       ? /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (context.payload)

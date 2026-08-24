@@ -94,18 +94,32 @@ async function loadAuthorizedSigners() {
 }
 
 /**
- * Assign the stewardship review team or complete the review, based on a label event.
+ * Assign the stewardship review team or complete the review.
  *
- * Runs on `pull_request_target` `labeled` events. On {@link TRIGGER_LABEL} added:
- * requests {@link REVIEWER_TEAM} as a reviewer; the team's code-review auto-assignment
- * then delegates to one member. On {@link SIGNOFF_LABEL} added: clears the fulfilled
- * {@link TRIGGER_LABEL}. Label removal is not handled: the workflow does not subscribe to
- * `unlabeled` events, because native delegation owns the individual reviewer and the
- * automation never removes a reviewer it did not pick.
+ * Two entry paths:
+ *
+ * 1. `pull_request_target` `labeled` events. On {@link TRIGGER_LABEL} added: requests
+ *    {@link REVIEWER_TEAM} as a reviewer; the team's code-review auto-assignment then
+ *    delegates to one member. On {@link SIGNOFF_LABEL} added: clears the fulfilled
+ *    {@link TRIGGER_LABEL}. This path covers manually applied labels and human sign-off.
+ *
+ * 2. `workflow_run` completion of "Summarize Checks" (see {@link assignFromWorkflowRun}).
+ *    {@link TRIGGER_LABEL} is applied by Summarize Checks with the default `GITHUB_TOKEN`,
+ *    and labels applied by that token do NOT re-trigger `labeled` workflows. So the intake
+ *    label alone would never reach path 1. Summarize Checks hands off here on completion
+ *    instead, and this path reconciles the reviewer request from the PR's live labels.
+ *
+ * Label removal is not handled: the workflow does not subscribe to `unlabeled` events,
+ * because native delegation owns the individual reviewer and the automation never removes
+ * a reviewer it did not pick.
  *
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
 export default async function assignReviewers({ github, context, core }) {
+  if (context.eventName === "workflow_run") {
+    return await assignFromWorkflowRun({ github, context, core });
+  }
+
   const payload = /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent} */ (
     context.payload
   );
@@ -131,13 +145,80 @@ export default async function assignReviewers({ github, context, core }) {
   }
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
-  await requestReviewerTeam({ github, core, owner, repo, prNumber: issue_number, payload });
+  await requestReviewerTeam({
+    github,
+    core,
+    owner,
+    repo,
+    prNumber: issue_number,
+    requestedTeams: payload.pull_request.requested_teams,
+  });
+}
+
+/**
+ * Reconcile the reviewer request after "Summarize Checks" completes. Summarize Checks
+ * applies {@link TRIGGER_LABEL} with the default `GITHUB_TOKEN`, which does not re-trigger
+ * `labeled` workflows, so this workflow_run handoff is the only path that reacts to the
+ * auto-applied intake label.
+ *
+ * Because the workflow_run event carries no label payload, the decision is driven entirely
+ * by the PR's live state: request {@link REVIEWER_TEAM} only when the PR is open, not a
+ * draft, still carries {@link TRIGGER_LABEL}, is not already signed off, and does not
+ * already have the team requested. Every condition is idempotent, so the repeated Summarize
+ * Checks completions across a PR's life converge on a single team request.
+ *
+ * @param {Pick<import("@actions/github-script").AsyncFunctionArguments, "github" | "context" | "core">} args
+ */
+async function assignFromWorkflowRun({ github, context, core }) {
+  const { owner, repo, issue_number } = await extractInputs(github, context, core);
+  if (!issue_number) {
+    core.info("No pull request resolved from the workflow_run event; nothing to assign.");
+    return;
+  }
+
+  const { data: pr } = await github.rest.pulls.get({
+    owner,
+    repo,
+    pull_number: issue_number,
+  });
+
+  if (pr.state !== "open" || pr.draft) {
+    core.info(
+      `PR #${issue_number} is ${pr.draft ? "a draft" : `'${pr.state}'`}; not requesting review.`,
+    );
+    return;
+  }
+
+  const labelNames = (pr.labels ?? []).map((label) =>
+    typeof label === "string" ? label : (label?.name ?? ""),
+  );
+
+  if (!labelNames.includes(TRIGGER_LABEL)) {
+    core.info(`'${TRIGGER_LABEL}' not present on PR #${issue_number}; nothing to assign.`);
+    return;
+  }
+
+  if (labelNames.includes(SIGNOFF_LABEL)) {
+    core.info(`PR #${issue_number} is already signed off; not requesting review.`);
+    return;
+  }
+
+  await requestReviewerTeam({
+    github,
+    core,
+    owner,
+    repo,
+    prNumber: issue_number,
+    requestedTeams: /** @type {{ slug?: string }[]} */ (
+      /** @type {unknown} */ (pr.requested_teams ?? [])
+    ),
+  });
 }
 
 /**
  * Request {@link REVIEWER_TEAM} as a reviewer so the team's code-review auto-assignment
  * delegates to one member. Skips the request if the team is already pending on the PR so
- * repeated label events do not queue a second delegation.
+ * repeated events do not queue a second delegation.
  *
  * @param {object} params
  * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} params.github
@@ -145,15 +226,12 @@ export default async function assignReviewers({ github, context, core }) {
  * @param {string} params.owner
  * @param {string} params.repo
  * @param {number} params.prNumber
- * @param {import("@octokit/webhooks-types").PullRequestLabeledEvent} params.payload
+ * @param {{ slug?: string }[] | undefined} params.requestedTeams - teams already requested on the PR
  */
-async function requestReviewerTeam({ github, core, owner, repo, prNumber, payload }) {
+async function requestReviewerTeam({ github, core, owner, repo, prNumber, requestedTeams }) {
   // requested_teams lists teams whose request is still pending (before delegation swaps the
   // team for a member). If our team is already pending, another run already requested it.
-  const requestedTeams = /** @type {{ slug?: string }[]} */ (
-    /** @type {unknown} */ (payload.pull_request.requested_teams ?? [])
-  );
-  const alreadyRequested = requestedTeams.some(
+  const alreadyRequested = (requestedTeams ?? []).some(
     (t) => (t.slug ?? "").toLowerCase() === REVIEWER_TEAM.toLowerCase(),
   );
   if (alreadyRequested) {

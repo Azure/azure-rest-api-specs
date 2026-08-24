@@ -71,6 +71,52 @@ function createPayload({
   };
 }
 
+/**
+ * Build a `workflow_run: completed` payload for the "Summarize Checks" handoff. The
+ * `workflow_run.event` is `pull_request_target`, so extractInputs resolves the PR number
+ * directly from `pull_requests` without any API call.
+ *
+ * @param {object} [opts]
+ * @param {number} [opts.prNumber]
+ */
+function createWorkflowRunPayload({ prNumber = 42 } = {}) {
+  return {
+    action: "completed",
+    workflow_run: {
+      event: "pull_request_target",
+      head_sha: "abc123",
+      id: 999,
+      repository: { owner: { login: "owner" }, name: "repo", id: 1 },
+      head_repository: { owner: { login: "owner" }, name: "repo", id: 1 },
+      pull_requests: [{ number: prNumber, base: { repo: { id: 1 } } }],
+    },
+  };
+}
+
+/**
+ * Set the PR returned by the live `pulls.get` read used by the workflow_run handoff.
+ *
+ * @param {ReturnType<typeof createMockGithub>} github
+ * @param {object} pr
+ * @param {string} [pr.state]
+ * @param {boolean} [pr.draft]
+ * @param {string[]} [pr.labels]
+ * @param {{ slug: string }[]} [pr.requestedTeams]
+ */
+function setPullRequest(
+  github,
+  { state = "open", draft = false, labels = [], requestedTeams = [] },
+) {
+  /** @type {any} */ (github.rest.pulls).get = vi.fn().mockResolvedValue({
+    data: {
+      state,
+      draft,
+      labels: labels.map((name) => ({ name })),
+      requested_teams: requestedTeams,
+    },
+  });
+}
+
 describe("assign-reviewers", () => {
   /** @type {ReturnType<typeof createMockGithub>} */
   let github;
@@ -130,6 +176,76 @@ describe("assign-reviewers", () => {
     await assignReviewers(args());
 
     expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+  });
+
+  describe("workflow_run handoff", () => {
+    beforeEach(() => {
+      context.eventName = "workflow_run";
+    });
+
+    it("requests the reviewer team when the request label is present and not signed off", async () => {
+      context.payload = createWorkflowRunPayload();
+      setPullRequest(github, { labels: [TRIGGER_LABEL, "data-plane"] });
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).toHaveBeenCalledWith(
+        expect.objectContaining({
+          owner: "owner",
+          repo: "repo",
+          pull_number: 42,
+          team_reviewers: [REVIEWER_TEAM],
+        }),
+      );
+    });
+
+    it("does not request the team when the request label is absent", async () => {
+      context.payload = createWorkflowRunPayload();
+      setPullRequest(github, { labels: ["data-plane"] });
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+    });
+
+    it("does not request the team when the PR is already signed off", async () => {
+      context.payload = createWorkflowRunPayload();
+      setPullRequest(github, { labels: [TRIGGER_LABEL, SIGNOFF_LABEL] });
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+    });
+
+    it("does not re-request the team when it is already a requested reviewer", async () => {
+      context.payload = createWorkflowRunPayload();
+      setPullRequest(github, {
+        labels: [TRIGGER_LABEL],
+        requestedTeams: [{ slug: REVIEWER_TEAM }],
+      });
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+    });
+
+    it("does not request the team on a draft PR", async () => {
+      context.payload = createWorkflowRunPayload();
+      setPullRequest(github, { draft: true, labels: [TRIGGER_LABEL] });
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+    });
+
+    it("does not request the team on a closed PR", async () => {
+      context.payload = createWorkflowRunPayload();
+      setPullRequest(github, { state: "closed", labels: [TRIGGER_LABEL] });
+
+      await assignReviewers(args());
+
+      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+    });
   });
 
   describe("sign-off", () => {
