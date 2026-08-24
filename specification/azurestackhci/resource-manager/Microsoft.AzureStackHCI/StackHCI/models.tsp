@@ -7546,8 +7546,8 @@ model HardwareProfile {
   cpuCores?: int64;
 
   /**
-   * The logical (SMT/hyper-threaded) core count synchronized from Arc Machine DetectedProperties.
-   * Arc Machine remains the source of truth for capacity computation.
+   * The logical (SMT/hyper-threaded) core count reported by the edge device agent.
+   * When present, preferred over the HC RP-derived value for capacity computation.
    */
   @visibility(Lifecycle.Read)
   logicalCoreCount?: int32;
