@@ -66,6 +66,11 @@ using Microsoft.Compute;
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
+@@clientName(
+  CapacityRecommendationParameters,
+  "BulkActionsCapacityRecommendationParametersContent",
+  "csharp"
+);
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
@@ -206,6 +211,26 @@ using Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
+@@clientName(
+  BulkCreateCustomResource,
+  "BulkCreateCustomResolvedItem",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationParameters.availabilityZones,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.availabilityZones,
+  "isSplitByAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.recommendationRequestedAtUtc,
+  "recommendationRequestedAt",
+  "csharp"
+);
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
@@ -451,8 +476,8 @@ using Microsoft.Compute;
 );
 @@clientName(DelayRequest, "DelayRequestContent", "csharp");
 @@clientName(
-  RecurringScheduledActionsExecutionParameters,
-  "RecurringScheduledActionsExecutionParametersContent",
+  ScheduledActionsExecutionParameters,
+  "ScheduledActionsExecutionParametersContent",
   "csharp"
 );
 @@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");

@@ -369,7 +369,9 @@ namespace Customizations {
 // not pick them up (which would add them as new swagger paths).
 namespace Customizations {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotChannelsUpdate(
     ...ApiVersionParameter,
@@ -415,7 +417,9 @@ namespace Customizations {
   @@override(BotChannels.update, BotChannelsUpdate, "javascript");
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotsUpdate(
     ...ApiVersionParameter,
