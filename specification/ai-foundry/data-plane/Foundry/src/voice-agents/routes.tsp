@@ -50,9 +50,6 @@ interface VoiceAgentWebSocket {
       @query("foundry_features")
       foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
 
-      /** An optional identifier used to correlate the voice session. */
-      @query agent_session_id?: string;
-
       /**
        * Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
        * persisted voice agent definition's configured `store` value. If supplied, this value overrides the
@@ -66,9 +63,6 @@ interface VoiceAgentWebSocket {
       /** The requested WebSocket subprotocol. Omit this header or request exactly `realtime`. */
       @header("Sec-WebSocket-Protocol")
       websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
-
-      /** A JSON object that maps structured-input names to their values for this session. */
-      @header("x-ms-voice-structured-inputs") structured_inputs?: string;
     },
     VoiceAgentWebSocketUpgradeResponse
   >;

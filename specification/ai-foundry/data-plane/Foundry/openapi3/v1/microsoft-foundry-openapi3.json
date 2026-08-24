@@ -1838,16 +1838,6 @@
             "explode": false
           },
           {
-            "name": "agent_session_id",
-            "in": "query",
-            "required": false,
-            "description": "An optional identifier used to correlate the voice session.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
             "name": "store",
             "in": "query",
             "required": false,
@@ -1874,15 +1864,6 @@
             "description": "The requested WebSocket subprotocol. Omit this header or request exactly `realtime`.",
             "schema": {
               "$ref": "#/components/schemas/VoiceAgentWebSocketSubprotocol"
-            }
-          },
-          {
-            "name": "x-ms-voice-structured-inputs",
-            "in": "header",
-            "required": false,
-            "description": "A JSON object that maps structured-input names to their values for this session.",
-            "schema": {
-              "type": "string"
             }
           },
           {
