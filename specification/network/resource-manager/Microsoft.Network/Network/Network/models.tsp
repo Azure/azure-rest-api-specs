@@ -108,6 +108,18 @@ union ApplicationGatewayTier {
    * Basic
    */
   Basic: "Basic",
+
+  /**
+   * Basic tier Application Gateway.
+   */
+  @added(Versions.v2026_01_01)
+  Basic_v2: "Basic_v2",
+
+  /**
+   * Basic tier Application Gateway with WAF enabled.
+   */
+  @added(Versions.v2026_01_01)
+  Basic_WAF_v2: "Basic_WAF_v2",
 }
 
 /**
@@ -25645,14 +25657,14 @@ union WebApplicationFirewallPolicyTier {
   string,
 
   /**
-   * Basic tier web application firewall policy.
-   */
-  Basic: "Basic",
-
-  /**
    * Standard tier web application firewall policy.
    */
   Standard: "Standard",
+
+  /**
+   * Basic tier web application firewall policy.
+   */
+  Basic: "Basic",
 }
 
 /**
