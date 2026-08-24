@@ -13,6 +13,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
 
   "@azure-tools/typespec-python":
+    service-dir: "sdk/resources"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-msi"
     namespace: "azure.mgmt.msi"
     generate-test: true
@@ -52,3 +53,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

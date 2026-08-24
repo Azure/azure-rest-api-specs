@@ -163,6 +163,7 @@ interface DscNodes {
 
 @@doc(DscNode.name, "The node id.");
 @@doc(DscNode.properties, "The properties of a DscNode.");
-@@doc(DscNodes.update::parameters.properties,
+@@doc(
+  DscNodes.update::parameters.properties,
   "Parameters supplied to the update dsc node."
 );

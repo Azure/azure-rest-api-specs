@@ -15,6 +15,7 @@ namespace Microsoft.Authorization;
 /**
  * Role Eligibility schedule request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model RoleEligibilityScheduleRequest
@@ -94,15 +95,19 @@ interface RoleEligibilityScheduleRequests {
   >;
 }
 
-@@doc(RoleEligibilityScheduleRequest.name,
+@@doc(
+  RoleEligibilityScheduleRequest.name,
   "The name (guid) of the role eligibility schedule request to get."
 );
-@@doc(RoleEligibilityScheduleRequest.properties,
+@@doc(
+  RoleEligibilityScheduleRequest.properties,
   "Role eligibility schedule request properties."
 );
-@@doc(RoleEligibilityScheduleRequests.create::parameters.resource,
+@@doc(
+  RoleEligibilityScheduleRequests.create::parameters.resource,
   "Parameters for the role eligibility schedule request."
 );
-@@doc(RoleEligibilityScheduleRequests.validate::parameters.body,
+@@doc(
+  RoleEligibilityScheduleRequests.validate::parameters.body,
   "Parameters for the role eligibility schedule request."
 );

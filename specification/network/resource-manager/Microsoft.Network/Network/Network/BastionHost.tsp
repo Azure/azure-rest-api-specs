@@ -82,7 +82,10 @@ interface BastionHosts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     BastionHost,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -195,24 +198,31 @@ interface BastionHosts {
 
 @@doc(BastionHost.name, "The name of the Bastion Host.");
 @@doc(BastionHost.properties, "Represents the bastion host resource.");
-@@doc(BastionHosts.createOrUpdate::parameters.resource,
+@@doc(
+  BastionHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Bastion Host operation."
 );
-@@doc(BastionHosts.updateTags::parameters.properties,
+@@doc(
+  BastionHosts.updateTags::parameters.properties,
   "Parameters supplied to update BastionHost tags."
 );
-@@doc(BastionHosts.putBastionShareableLink::parameters.body,
+@@doc(
+  BastionHosts.putBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
-@@doc(BastionHosts.deleteBastionShareableLink::parameters.body,
+@@doc(
+  BastionHosts.deleteBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
-@@doc(BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
+@@doc(
+  BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
   "Post request for Delete Bastion Shareable Link By Token endpoint."
 );
-@@doc(BastionHosts.getBastionShareableLink::parameters.body,
+@@doc(
+  BastionHosts.getBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
-@@doc(BastionHosts.disconnectActiveSessions::parameters.body,
+@@doc(
+  BastionHosts.disconnectActiveSessions::parameters.body,
   "The list of sessionids to disconnect."
 );

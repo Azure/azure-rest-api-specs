@@ -14,8 +14,10 @@ namespace Microsoft.Cache;
  * Response to put/get patch schedules for Redis cache.
  */
 @parentResource(RedisResource)
-model RedisPatchSchedule
-  is Azure.ResourceManager.ProxyResource<ScheduleEntries, false> {
+model RedisPatchSchedule is Azure.ResourceManager.ProxyResource<
+  ScheduleEntries,
+  false
+> {
   ...ResourceNameParameter<
     Resource = RedisPatchSchedule,
     SegmentName = "patchSchedules",
@@ -79,12 +81,15 @@ interface RedisPatchSchedules {
   listByRedisResource is ArmResourceListByParent<RedisPatchSchedule>;
 }
 
-@@doc(RedisPatchSchedule.name,
+@@doc(
+  RedisPatchSchedule.name,
   "Default string modeled as parameter for auto generation to work correctly."
 );
-@@doc(RedisPatchSchedule.properties,
+@@doc(
+  RedisPatchSchedule.properties,
   "List of patch schedules for a Redis cache."
 );
-@@doc(RedisPatchSchedules.createOrUpdate::parameters.resource,
+@@doc(
+  RedisPatchSchedules.createOrUpdate::parameters.resource,
   "Parameters to set the patching schedule for Redis cache."
 );

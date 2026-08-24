@@ -1,0 +1,1330 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BlobAuditing"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings": {
+      "get": {
+        "operationId": "ServerBlobAuditingPolicies_ListByServer",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Lists auditing settings of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List auditing settings of a server": {
+            "$ref": "./examples/ServerAuditingSettingsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "operationId": "ServerBlobAuditingPolicies_Get",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Gets a server's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server's blob auditing policy": {
+            "$ref": "./examples/ServerBlobAuditingGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServerBlobAuditingPolicies_CreateOrUpdate",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Creates or updates a server's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Properties of blob auditing policy",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServerBlobAuditingPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a server's blob auditing policy with all parameters": {
+            "$ref": "./examples/ServerBlobAuditingCreateMax.json"
+          },
+          "Update a server's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ServerBlobAuditingCreateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerBlobAuditingPolicy"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings": {
+      "get": {
+        "operationId": "DatabaseBlobAuditingPolicies_ListByDatabase",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Lists auditing settings of a database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List audit settings of a database": {
+            "$ref": "./examples/DatabaseAuditingSettingsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "operationId": "DatabaseBlobAuditingPolicies_Get",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Gets a database's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a database's blob auditing policy": {
+            "$ref": "./examples/DatabaseBlobAuditingGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseBlobAuditingPolicies_CreateOrUpdate",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Creates or updates a database's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database blob auditing policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DatabaseBlobAuditingPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'DatabaseBlobAuditingPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a database's azure monitor auditing policy with minimal parameters": {
+            "$ref": "./examples/DatabaseAzureMonitorAuditingCreateMin.json"
+          },
+          "Create or update a database's blob auditing policy with all parameters": {
+            "$ref": "./examples/DatabaseBlobAuditingCreateMax.json"
+          },
+          "Create or update a database's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/DatabaseBlobAuditingCreateMin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings": {
+      "get": {
+        "operationId": "ExtendedDatabaseBlobAuditingPolicies_ListByDatabase",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Lists extended auditing settings of a database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List extended auditing settings of a database": {
+            "$ref": "./examples/DatabaseExtendedAuditingSettingsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "operationId": "ExtendedDatabaseBlobAuditingPolicies_Get",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Gets an extended database's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an extended database's blob auditing policy": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExtendedDatabaseBlobAuditingPolicies_CreateOrUpdate",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Creates or updates an extended database's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The extended database blob auditing policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExtendedDatabaseBlobAuditingPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExtendedDatabaseBlobAuditingPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an extended database's azure monitor auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedDatabaseAzureMonitorAuditingCreateMin.json"
+          },
+          "Create or update an extended database's blob auditing policy with all parameters": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMax.json"
+          },
+          "Create or update an extended database's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/extendedAuditingSettings": {
+      "get": {
+        "operationId": "ExtendedServerBlobAuditingPolicies_ListByServer",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Lists extended auditing settings of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List extended auditing settings of a server": {
+            "$ref": "./examples/ServerExtendedAuditingSettingsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/extendedAuditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "operationId": "ExtendedServerBlobAuditingPolicies_Get",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Gets an extended server's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server's blob extended auditing policy": {
+            "$ref": "./examples/ExtendedServerBlobAuditingGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExtendedServerBlobAuditingPolicies_CreateOrUpdate",
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Creates or updates an extended server's blob auditing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Properties of extended blob auditing policy",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExtendedServerBlobAuditingPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a server's extended blob auditing policy with all parameters": {
+            "$ref": "./examples/ExtendedServerBlobAuditingCreateMax.json"
+          },
+          "Update a server's extended blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedServerBlobAuditingCreateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ExtendedServerBlobAuditingPolicy"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseBlobAuditingPolicy": {
+      "type": "object",
+      "description": "A database blob auditing policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource kind.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseBlobAuditingPolicyListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseBlobAuditingPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseBlobAuditingPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseBlobAuditingPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a database blob auditing policy.",
+      "properties": {
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account."
+        },
+        "auditActionsAndGroups": {
+          "type": "array",
+          "description": "Specifies the Actions-Groups and Actions to audit.\n\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\n\nBATCH_COMPLETED_GROUP,\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\nFAILED_DATABASE_AUTHENTICATION_GROUP.\n\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\n\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\n\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\nBACKUP_RESTORE_GROUP\nDATABASE_LOGOUT_GROUP\nDATABASE_OBJECT_CHANGE_GROUP\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\nDATABASE_OPERATION_GROUP\nDATABASE_PERMISSION_CHANGE_GROUP\nDATABASE_PRINCIPAL_CHANGE_GROUP\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\nFAILED_DATABASE_AUTHENTICATION_GROUP\nSCHEMA_OBJECT_ACCESS_GROUP\nSCHEMA_OBJECT_CHANGE_GROUP\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\nUSER_CHANGE_PASSWORD_GROUP\nBATCH_STARTED_GROUP\nBATCH_COMPLETED_GROUP\nDBCC_GROUP\nDATABASE_OWNERSHIP_CHANGE_GROUP\nDATABASE_CHANGE_GROUP\nLEDGER_OPERATION_GROUP\n\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\n\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\n\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\nSELECT\nUPDATE\nINSERT\nDELETE\nEXECUTE\nRECEIVE\nREFERENCES\n\nThe general form for defining an action to be audited is:\n{action} ON {object} BY {principal}\n\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\n\nFor example:\nSELECT on dbo.myTable by public\nSELECT on DATABASE::myDatabase by public\nSELECT on SCHEMA::mySchema by public\n\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isStorageSecondaryKeyInUse": {
+          "type": "boolean",
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key."
+        },
+        "isAzureMonitorTargetEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether audit events are sent to Azure Monitor.\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\n\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\nNote that for server level audit you should use the 'master' database as {databaseName}.\n\nDiagnostic Settings URI format:\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\n\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)"
+        },
+        "queueDelayMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        },
+        "isManagedIdentityInUse": {
+          "type": "boolean",
+          "description": "Specifies whether Managed Identity is used to access blob storage"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/BlobAuditingPolicyState",
+          "description": "Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required."
+        },
+        "storageEndpoint": {
+          "type": "string",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required."
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Specifies the identifier key of the auditing storage account.\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\nPrerequisites for using managed identity authentication:\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "storageAccountSubscriptionId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Specifies the blob storage subscription Id."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "ExtendedDatabaseBlobAuditingPolicy": {
+      "type": "object",
+      "description": "An extended database blob auditing policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtendedDatabaseBlobAuditingPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ExtendedDatabaseBlobAuditingPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExtendedDatabaseBlobAuditingPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtendedDatabaseBlobAuditingPolicyProperties": {
+      "type": "object",
+      "description": "Properties of an extended database blob auditing policy.",
+      "properties": {
+        "predicateExpression": {
+          "type": "string",
+          "description": "Specifies condition of where clause when creating an audit."
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account."
+        },
+        "auditActionsAndGroups": {
+          "type": "array",
+          "description": "Specifies the Actions-Groups and Actions to audit.\n\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\n\nBATCH_COMPLETED_GROUP,\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\nFAILED_DATABASE_AUTHENTICATION_GROUP.\n\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\n\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\n\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\nBACKUP_RESTORE_GROUP\nDATABASE_LOGOUT_GROUP\nDATABASE_OBJECT_CHANGE_GROUP\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\nDATABASE_OPERATION_GROUP\nDATABASE_PERMISSION_CHANGE_GROUP\nDATABASE_PRINCIPAL_CHANGE_GROUP\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\nFAILED_DATABASE_AUTHENTICATION_GROUP\nSCHEMA_OBJECT_ACCESS_GROUP\nSCHEMA_OBJECT_CHANGE_GROUP\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\nUSER_CHANGE_PASSWORD_GROUP\nBATCH_STARTED_GROUP\nBATCH_COMPLETED_GROUP\nDBCC_GROUP\nDATABASE_OWNERSHIP_CHANGE_GROUP\nDATABASE_CHANGE_GROUP\nLEDGER_OPERATION_GROUP\n\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\n\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\n\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\nSELECT\nUPDATE\nINSERT\nDELETE\nEXECUTE\nRECEIVE\nREFERENCES\n\nThe general form for defining an action to be audited is:\n{action} ON {object} BY {principal}\n\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\n\nFor example:\nSELECT on dbo.myTable by public\nSELECT on DATABASE::myDatabase by public\nSELECT on SCHEMA::mySchema by public\n\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isStorageSecondaryKeyInUse": {
+          "type": "boolean",
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key."
+        },
+        "isAzureMonitorTargetEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether audit events are sent to Azure Monitor.\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\n\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\nNote that for server level audit you should use the 'master' database as {databaseName}.\n\nDiagnostic Settings URI format:\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\n\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)"
+        },
+        "queueDelayMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        },
+        "isManagedIdentityInUse": {
+          "type": "boolean",
+          "description": "Specifies whether Managed Identity is used to access blob storage"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/BlobAuditingPolicyState",
+          "description": "Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required."
+        },
+        "storageEndpoint": {
+          "type": "string",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required."
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Specifies the identifier key of the auditing storage account.\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\nPrerequisites for using managed identity authentication:\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "storageAccountSubscriptionId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Specifies the blob storage subscription Id."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "ExtendedServerBlobAuditingPolicy": {
+      "type": "object",
+      "description": "An extended server blob auditing policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtendedServerBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtendedServerBlobAuditingPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ExtendedServerBlobAuditingPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExtendedServerBlobAuditingPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtendedServerBlobAuditingPolicyProperties": {
+      "type": "object",
+      "description": "Properties of an extended server blob auditing policy.",
+      "properties": {
+        "isDevopsAuditEnabled": {
+          "type": "boolean",
+          "description": "Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled', 'IsAzureMonitorTargetEnabled' as true and 'IsDevopsAuditEnabled' as true\n\nWhen using REST API to configure auditing, Diagnostic Settings with 'DevOpsOperationsAudit' diagnostic logs category on the master database should also be created.\n\nDiagnostic Settings URI format:\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/master/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\n\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)"
+        },
+        "predicateExpression": {
+          "type": "string",
+          "description": "Specifies condition of where clause when creating an audit."
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account."
+        },
+        "auditActionsAndGroups": {
+          "type": "array",
+          "description": "Specifies the Actions-Groups and Actions to audit.\n\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\n\nBATCH_COMPLETED_GROUP,\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\nFAILED_DATABASE_AUTHENTICATION_GROUP.\n\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\n\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\n\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\nBACKUP_RESTORE_GROUP\nDATABASE_LOGOUT_GROUP\nDATABASE_OBJECT_CHANGE_GROUP\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\nDATABASE_OPERATION_GROUP\nDATABASE_PERMISSION_CHANGE_GROUP\nDATABASE_PRINCIPAL_CHANGE_GROUP\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\nFAILED_DATABASE_AUTHENTICATION_GROUP\nSCHEMA_OBJECT_ACCESS_GROUP\nSCHEMA_OBJECT_CHANGE_GROUP\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\nUSER_CHANGE_PASSWORD_GROUP\nBATCH_STARTED_GROUP\nBATCH_COMPLETED_GROUP\nDBCC_GROUP\nDATABASE_OWNERSHIP_CHANGE_GROUP\nDATABASE_CHANGE_GROUP\nLEDGER_OPERATION_GROUP\n\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\n\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\n\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\nSELECT\nUPDATE\nINSERT\nDELETE\nEXECUTE\nRECEIVE\nREFERENCES\n\nThe general form for defining an action to be audited is:\n{action} ON {object} BY {principal}\n\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\n\nFor example:\nSELECT on dbo.myTable by public\nSELECT on DATABASE::myDatabase by public\nSELECT on SCHEMA::mySchema by public\n\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isStorageSecondaryKeyInUse": {
+          "type": "boolean",
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key."
+        },
+        "isAzureMonitorTargetEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether audit events are sent to Azure Monitor.\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\n\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\nNote that for server level audit you should use the 'master' database as {databaseName}.\n\nDiagnostic Settings URI format:\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\n\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)"
+        },
+        "queueDelayMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        },
+        "isManagedIdentityInUse": {
+          "type": "boolean",
+          "description": "Specifies whether Managed Identity is used to access blob storage"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/BlobAuditingPolicyState",
+          "description": "Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required."
+        },
+        "storageEndpoint": {
+          "type": "string",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required."
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Specifies the identifier key of the auditing storage account.\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\nPrerequisites for using managed identity authentication:\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "storageAccountSubscriptionId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Specifies the blob storage subscription Id."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "ServerBlobAuditingPolicy": {
+      "type": "object",
+      "description": "A server blob auditing policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerBlobAuditingPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ServerBlobAuditingPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerBlobAuditingPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerBlobAuditingPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerBlobAuditingPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a server blob auditing policy.",
+      "properties": {
+        "isDevopsAuditEnabled": {
+          "type": "boolean",
+          "description": "Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled', 'IsAzureMonitorTargetEnabled' as true and 'IsDevopsAuditEnabled' as true\n\nWhen using REST API to configure auditing, Diagnostic Settings with 'DevOpsOperationsAudit' diagnostic logs category on the master database should also be created.\n\nDiagnostic Settings URI format:\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/master/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\n\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)"
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account."
+        },
+        "auditActionsAndGroups": {
+          "type": "array",
+          "description": "Specifies the Actions-Groups and Actions to audit.\n\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\n\nBATCH_COMPLETED_GROUP,\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\nFAILED_DATABASE_AUTHENTICATION_GROUP.\n\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\n\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\n\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\nBACKUP_RESTORE_GROUP\nDATABASE_LOGOUT_GROUP\nDATABASE_OBJECT_CHANGE_GROUP\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\nDATABASE_OPERATION_GROUP\nDATABASE_PERMISSION_CHANGE_GROUP\nDATABASE_PRINCIPAL_CHANGE_GROUP\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\nFAILED_DATABASE_AUTHENTICATION_GROUP\nSCHEMA_OBJECT_ACCESS_GROUP\nSCHEMA_OBJECT_CHANGE_GROUP\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\nUSER_CHANGE_PASSWORD_GROUP\nBATCH_STARTED_GROUP\nBATCH_COMPLETED_GROUP\nDBCC_GROUP\nDATABASE_OWNERSHIP_CHANGE_GROUP\nDATABASE_CHANGE_GROUP\nLEDGER_OPERATION_GROUP\n\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\n\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\n\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\nSELECT\nUPDATE\nINSERT\nDELETE\nEXECUTE\nRECEIVE\nREFERENCES\n\nThe general form for defining an action to be audited is:\n{action} ON {object} BY {principal}\n\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\n\nFor example:\nSELECT on dbo.myTable by public\nSELECT on DATABASE::myDatabase by public\nSELECT on SCHEMA::mySchema by public\n\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isStorageSecondaryKeyInUse": {
+          "type": "boolean",
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key."
+        },
+        "isAzureMonitorTargetEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether audit events are sent to Azure Monitor.\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\n\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\nNote that for server level audit you should use the 'master' database as {databaseName}.\n\nDiagnostic Settings URI format:\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\n\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)"
+        },
+        "queueDelayMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647."
+        },
+        "isManagedIdentityInUse": {
+          "type": "boolean",
+          "description": "Specifies whether Managed Identity is used to access blob storage"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/BlobAuditingPolicyState",
+          "description": "Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required."
+        },
+        "storageEndpoint": {
+          "type": "string",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required."
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Specifies the identifier key of the auditing storage account.\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\nPrerequisites for using managed identity authentication:\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "storageAccountSubscriptionId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Specifies the blob storage subscription Id."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    }
+  },
+  "parameters": {}
+}

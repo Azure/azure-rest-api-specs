@@ -49,15 +49,18 @@ interface SandboxCustomImages {
   update is ArmCustomPatchAsync<
     SandboxCustomImage,
     PatchModel = SandboxCustomImage,
-    Response = ArmResponse<SandboxCustomImage> | ArmResourceCreatedResponse<SandboxCustomImage> | (ArmAcceptedLroResponse<
-      "Update accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = SandboxCustomImage> &
-        ArmAsyncOperationHeader<FinalResult = SandboxCustomImage> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: SandboxCustomImage;
-    })
+    Response =
+      | ArmResponse<SandboxCustomImage>
+      | ArmResourceCreatedResponse<SandboxCustomImage>
+      | (ArmAcceptedLroResponse<
+          "Update accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = SandboxCustomImage> &
+            ArmAsyncOperationHeader<FinalResult = SandboxCustomImage> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: SandboxCustomImage;
+        })
   >;
 
   /**
@@ -66,9 +69,12 @@ interface SandboxCustomImages {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SandboxCustomImage,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -82,9 +88,11 @@ interface SandboxCustomImages {
 
 @@doc(SandboxCustomImage.name, "The name of the sandbox custom image.");
 @@doc(SandboxCustomImage.properties, "A sandbox custom image.");
-@@doc(SandboxCustomImages.createOrUpdate::parameters.resource,
+@@doc(
+  SandboxCustomImages.createOrUpdate::parameters.resource,
   "The sandbox custom image parameters."
 );
-@@doc(SandboxCustomImages.update::parameters.properties,
+@@doc(
+  SandboxCustomImages.update::parameters.properties,
   "The sandbox custom image parameters."
 );

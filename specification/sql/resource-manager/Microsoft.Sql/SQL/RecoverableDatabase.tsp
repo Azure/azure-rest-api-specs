@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A recoverable database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.RecoverableDatabases)
 model RecoverableDatabase
   is Azure.ResourceManager.ProxyResource<RecoverableDatabaseProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model RecoverableDatabase
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.RecoverableDatabases)
 interface RecoverableDatabases {
   /**
    * Gets a recoverable database.

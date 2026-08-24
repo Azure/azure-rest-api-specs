@@ -43,8 +43,8 @@
     Not ready to split as independent services.
   rules: [FolderStructure]
   paths:
-    - PolicyTrackedResources
-    - PolicyInsights
+    - PolicyTrackedResourcesApi
+    - PolicyInsightsApi
 
 - tool: TypeSpecValidation
   reason: >
@@ -56,6 +56,7 @@
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
+    - options.@azure-typespec/http-client-csharp-mgmt.*
   paths: 
-    - PolicyTrackedResources/tspconfig.yaml
-    - PolicyInsights/tspconfig.yaml
+    - PolicyTrackedResourcesApi/tspconfig.yaml
+    - PolicyInsightsApi/tspconfig.yaml

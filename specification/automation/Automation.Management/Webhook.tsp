@@ -79,9 +79,11 @@ interface Webhooks {
 
 @@doc(Webhook.name, "The webhook name.");
 @@doc(Webhook.properties, "Gets or sets the webhook properties.");
-@@doc(Webhooks.createOrUpdate::parameters.resource,
+@@doc(
+  Webhooks.createOrUpdate::parameters.resource,
   "The create or update parameters for webhook."
 );
-@@doc(Webhooks.update::parameters.properties,
+@@doc(
+  Webhooks.update::parameters.properties,
   "The update parameters for webhook."
 );

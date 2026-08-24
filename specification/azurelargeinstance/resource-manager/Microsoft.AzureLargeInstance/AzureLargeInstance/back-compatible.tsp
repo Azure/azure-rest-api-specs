@@ -4,12 +4,14 @@ using Microsoft.AzureLargeInstance;
 using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureLargeInstance.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AzureLargeInstance.properties,
   "autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureLargeStorageInstance.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AzureLargeStorageInstance.properties,
   "autorest"
 );
 
@@ -23,18 +25,23 @@ using Azure.ClientGenerator.Core;
 @@clientLocation(AzureLargeInstances.restart, "AzureLargeInstance");
 @@clientLocation(AzureLargeInstances.shutdown, "AzureLargeInstance");
 @@clientLocation(AzureLargeStorageInstances.get, "AzureLargeStorageInstance");
-@@clientLocation(AzureLargeStorageInstances.create,
+@@clientLocation(
+  AzureLargeStorageInstances.create,
   "AzureLargeStorageInstance"
 );
-@@clientLocation(AzureLargeStorageInstances.update,
+@@clientLocation(
+  AzureLargeStorageInstances.update,
   "AzureLargeStorageInstance"
 );
-@@clientLocation(AzureLargeStorageInstances.delete,
+@@clientLocation(
+  AzureLargeStorageInstances.delete,
   "AzureLargeStorageInstance"
 );
-@@clientLocation(AzureLargeStorageInstances.listByResourceGroup,
+@@clientLocation(
+  AzureLargeStorageInstances.listByResourceGroup,
   "AzureLargeStorageInstance"
 );
-@@clientLocation(AzureLargeStorageInstances.listBySubscription,
+@@clientLocation(
+  AzureLargeStorageInstances.listBySubscription,
   "AzureLargeStorageInstance"
 );

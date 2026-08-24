@@ -105,6 +105,7 @@ alias knowledgeBaseNamePath = {
 
 alias querySourceAuthorizationHeader = {
   /** Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @header("x-ms-query-source-authorization")
   querySourceAuthorization?: string;
@@ -112,6 +113,7 @@ alias querySourceAuthorizationHeader = {
 
 alias enableElevatedReadHeader = {
   /** A value that enables elevated read that bypass document level permission checks for the query operation. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @header("x-ms-enable-elevated-read")
   enableElevatedRead?: boolean;
@@ -233,6 +235,7 @@ alias SearchKnowledgeBaseOperation<
 >;
 
 /** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /** The error object. */

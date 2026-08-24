@@ -69,12 +69,15 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   >;
 }
 
-@@doc(StaticSiteBasicAuthPropertiesARMResource.name,
+@@doc(
+  StaticSiteBasicAuthPropertiesARMResource.name,
   "name of the basic auth entry."
 );
-@@doc(StaticSiteBasicAuthPropertiesARMResource.properties,
+@@doc(
+  StaticSiteBasicAuthPropertiesARMResource.properties,
   "StaticSiteBasicAuthPropertiesARMResource resource specific properties"
 );
-@@doc(StaticSiteBasicAuthPropertiesARMResources.createOrUpdateBasicAuth::parameters.resource,
+@@doc(
+  StaticSiteBasicAuthPropertiesARMResources.createOrUpdateBasicAuth::parameters.resource,
   "A JSON representation of the basic auth properties."
 );

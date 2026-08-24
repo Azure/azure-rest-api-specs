@@ -4,9 +4,9 @@ import { devNull } from "node:os";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createDummySwagger } from "../src/command-helpers.js";
-import { validateBreakingChange } from "../src/commands.js";
-import { runOad } from "../src/run-oad.js";
+import { createDummySwagger } from "../src/command-helpers.ts";
+import { validateBreakingChange } from "../src/commands.ts";
+import { runOad } from "../src/run-oad.ts";
 
 const serviceParent = "specification/foo/data-plane/";
 
@@ -18,12 +18,12 @@ vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   };
 });
 
-vi.mock("../src/run-oad.js", () => ({
+vi.mock("../src/run-oad.ts", () => ({
   runOad: vi.fn(),
 }));
 
-vi.mock("../src/command-helpers.js", async () => {
-  const actual = await vi.importActual("../src/command-helpers.js");
+vi.mock("../src/command-helpers.ts", async () => {
+  const actual = await vi.importActual("../src/command-helpers.ts");
   return {
     ...actual,
     createDummySwagger: vi.fn(),

@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TspGeneratedServiceClient",
+    "version": "2026-05-01",
+    "description": "Service generated from TypeSpec source via @azure-tools/typespec-autorest. Used to verify that TSP-REQUIRED-V1 does not flag TypeSpec-generated swagger."
+  },
+  "x-typespec-generated": [
+    {
+      "emitter": "@azure-tools/typespec-autorest"
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{ "azure_auth": ["user_impersonation"] }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": { "user_impersonation": "impersonate your user account" }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TspGeneratedService/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Gets a widget resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource retrieved successfully.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WidgetProperties",
+          "description": "The widget resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WidgetProperties": {
+      "type": "object",
+      "description": "The widget resource properties.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the widget.",
+          "readOnly": true,
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "x-ms-enum": { "name": "ProvisioningState", "modelAsString": true }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WidgetNameParameter": {
+      "name": "widgetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The widget resource name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

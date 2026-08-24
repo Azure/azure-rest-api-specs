@@ -77,8 +77,11 @@ interface Clusters {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -116,13 +119,16 @@ interface Clusters {
   >;
 }
 
-@@doc(Cluster.name,
+@@doc(
+  Cluster.name,
   "The name of the Redis Enterprise cluster. Name must be 1-60 characters long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor consecutive hyphens"
 );
 @@doc(Cluster.properties, "Other properties of the cluster.");
-@@doc(Clusters.create::parameters.resource,
+@@doc(
+  Clusters.create::parameters.resource,
   "Parameters supplied to the Create Redis Enterprise operation."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "Parameters supplied to the Update Redis Enterprise operation."
 );

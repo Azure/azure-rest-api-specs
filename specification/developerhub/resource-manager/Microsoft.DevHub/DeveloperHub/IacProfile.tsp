@@ -106,11 +106,13 @@ interface IacProfiles {
 @@doc(IacProfile.name, "The name of the IacProfile.");
 @@doc(IacProfile.properties, "Properties of a IacProfile.");
 @@doc(IacProfiles.createOrUpdate::parameters.resource, "");
-@@doc(IacProfiles.updateTags::parameters.properties,
+@@doc(
+  IacProfiles.updateTags::parameters.properties,
   "Parameters supplied to the Update TagsObject Tags operation."
 );
 @@doc(IacProfiles.export::parameters.body, "");
 @@doc(IacProfiles.scale::parameters.body, "");
-@@doc(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+@@doc(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   "A unique read-only string that changes whenever the resource is updated."
 );

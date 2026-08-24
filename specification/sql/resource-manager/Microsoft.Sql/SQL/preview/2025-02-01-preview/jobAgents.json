@@ -1,0 +1,538 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "JobAgents"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents": {
+      "get": {
+        "operationId": "JobAgents_ListByServer",
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Gets a list of job agents in a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List job agents in a server": {
+            "$ref": "./examples/ListJobAgentsByServer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}": {
+      "get": {
+        "operationId": "JobAgents_Get",
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Gets a job agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a job agent": {
+            "$ref": "./examples/GetJobAgent.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JobAgents_CreateOrUpdate",
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Creates or updates a job agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested job agent resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'JobAgent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "201": {
+            "description": "Resource 'JobAgent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a job agent": {
+            "$ref": "./examples/CreateOrUpdateJobAgent.json"
+          },
+          "Create or update a job agent with identity": {
+            "$ref": "./examples/CreateOrUpdateJobAgentWithIdentity.json"
+          },
+          "Create or update a job agent with sku.": {
+            "$ref": "./examples/CreateOrUpdateJobAgentWithSku.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/JobAgent"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "JobAgents_Update",
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Updates a job agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The update to the job agent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAgentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a job agent's identity.": {
+            "$ref": "./examples/UpdateJobAgentWithIdentity.json"
+          },
+          "Update a job agent's sku.": {
+            "$ref": "./examples/UpdateJobAgentWithSku.json"
+          },
+          "Update a job agent's tags.": {
+            "$ref": "./examples/UpdateJobAgent.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/JobAgent"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "JobAgents_Delete",
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Deletes a job agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a job agent": {
+            "$ref": "./examples/DeleteJobAgent.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "JobAgent": {
+      "type": "object",
+      "description": "An Azure SQL job agent.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobAgentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "identity": {
+          "$ref": "#/definitions/JobAgentIdentity",
+          "description": "The identity of the job agent."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "JobAgentIdentity": {
+      "type": "object",
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "properties": {
+        "tenantId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "The job agent identity tenant id"
+        },
+        "type": {
+          "$ref": "./common.json#/definitions/JobAgentIdentityType",
+          "description": "The job agent identity type"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The resource ids of the user assigned identities to use",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobAgentUserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "JobAgentListResult": {
+      "type": "object",
+      "description": "The response of a JobAgent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobAgent items on this page",
+          "items": {
+            "$ref": "#/definitions/JobAgent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobAgentProperties": {
+      "type": "object",
+      "description": "Properties of a job agent.",
+      "properties": {
+        "databaseId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the database to store job metadata in.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/JobAgentState",
+          "description": "The state of the job agent.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "databaseId"
+      ]
+    },
+    "JobAgentUpdate": {
+      "type": "object",
+      "description": "An update to an Azure SQL job agent.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/JobAgentIdentity",
+          "description": "Managed identity assigned to job agent"
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JobAgentUserAssignedIdentity": {
+      "type": "object",
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "properties": {
+        "principalId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "The Azure Active Directory principal id.",
+          "readOnly": true
+        },
+        "clientId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "The Azure Active Directory client id.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

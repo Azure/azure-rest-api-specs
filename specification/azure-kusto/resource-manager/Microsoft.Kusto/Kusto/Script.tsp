@@ -40,12 +40,15 @@ interface Scripts {
   @tag("Scripts")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Script,
-    Response = ArmResourceUpdatedResponse<Script> | ArmResourceCreatedResponse<Script> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Script> &
-      ArmAsyncOperationHeader<FinalResult = Script> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Script;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Script>
+      | ArmResourceCreatedResponse<Script>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Script> &
+          ArmAsyncOperationHeader<FinalResult = Script> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Script;
+        })
   >;
 
   /**
@@ -57,15 +60,17 @@ interface Scripts {
   update is ArmCustomPatchAsync<
     Script,
     PatchModel = Script,
-    Response = ArmResponse<Script> | (ArmAcceptedLroResponse<
-      "Update accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = Script> &
-        ArmAsyncOperationHeader<FinalResult = Script> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: Script;
-    })
+    Response =
+      | ArmResponse<Script>
+      | (ArmAcceptedLroResponse<
+          "Update accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = Script> &
+            ArmAsyncOperationHeader<FinalResult = Script> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: Script;
+        })
   >;
 
   /**
@@ -75,9 +80,12 @@ interface Scripts {
   @tag("Scripts")
   delete is ArmResourceDeleteWithoutOkAsync<
     Script,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -92,9 +100,11 @@ interface Scripts {
 
 @@doc(Script.name, "The name of the Kusto database script.");
 @@doc(Script.properties, "The database script.");
-@@doc(Scripts.createOrUpdate::parameters.resource,
+@@doc(
+  Scripts.createOrUpdate::parameters.resource,
   "The Kusto Script parameters contains the KQL to run."
 );
-@@doc(Scripts.update::parameters.properties,
+@@doc(
+  Scripts.update::parameters.properties,
   "The Kusto Script parameters contains to the KQL to run."
 );

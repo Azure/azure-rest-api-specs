@@ -107,12 +107,15 @@ interface FirewallPolicyIdpsSignaturesOverrides {
 }
 
 @@doc(SignaturesOverrides.name, "");
-@@doc(SignaturesOverrides.properties,
+@@doc(
+  SignaturesOverrides.properties,
   "Will contain the properties of the resource (the actual signature overrides)"
 );
-@@doc(FirewallPolicyIdpsSignaturesOverrides.put::parameters.resource,
+@@doc(
+  FirewallPolicyIdpsSignaturesOverrides.put::parameters.resource,
   "Will contain all properties of the object to put"
 );
-@@doc(FirewallPolicyIdpsSignaturesOverrides.patch::parameters.properties,
+@@doc(
+  FirewallPolicyIdpsSignaturesOverrides.patch::parameters.properties,
   "Will contain all properties of the object to put"
 );

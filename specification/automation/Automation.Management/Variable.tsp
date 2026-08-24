@@ -70,9 +70,11 @@ interface Variables {
 
 @@doc(Variable.name, "The name of variable.");
 @@doc(Variable.properties, "Gets or sets the properties of the variable.");
-@@doc(Variables.createOrUpdate::parameters.resource,
+@@doc(
+  Variables.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update variable operation."
 );
-@@doc(Variables.update::parameters.properties,
+@@doc(
+  Variables.update::parameters.properties,
   "The parameters supplied to the update variable operation."
 );

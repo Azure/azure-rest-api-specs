@@ -105,9 +105,11 @@ interface NotificationHubResources {
 @@minLength(NotificationHubResource.name, 1);
 @@doc(NotificationHubResource.name, "Notification Hub name");
 @@doc(NotificationHubResource.properties, "NotificationHub properties.");
-@@doc(NotificationHubResources.createOrUpdate::parameters.resource,
+@@doc(
+  NotificationHubResources.createOrUpdate::parameters.resource,
   "Request content."
 );
-@@doc(NotificationHubResources.update::parameters.properties,
+@@doc(
+  NotificationHubResources.update::parameters.properties,
   "Request content."
 );

@@ -4,28 +4,28 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AzureMonitorExporter;
 
-@@clientName(AzureMonitorExporter, "ApplicationInsightsClient");
+@@clientName(AzureMonitorExporter, "ApplicationInsightsClient", "!autorest");
 @@clientName(AzureMonitorExporter, "ApplicationInsightsRestClient", "csharp");
 @@clientName(AzureMonitorExporter, "AzureMonitorClient", "python");
 
-@@clientName(Base, "MonitorBase");
-@@clientName(Domain, "MonitorDomain");
-@@clientName(DomainKind, "MonitorDomainKind");
-@@clientName(EventData, "TelemetryEventData");
-@@clientName(DataPoint, "MetricDataPoint");
-@@clientName(ExceptionData, "TelemetryExceptionData");
-@@clientName(ExceptionDetails, "TelemetryExceptionDetails");
-@@clientName(ErrorDetails, "TelemetryErrorDetails");
-@@clientName(TelemetryEnvelope, "TelemetryItem");
+@@clientName(Base, "MonitorBase", "!autorest");
+@@clientName(Domain, "MonitorDomain", "!autorest");
+@@clientName(DomainKind, "MonitorDomainKind", "!autorest");
+@@clientName(EventData, "TelemetryEventData", "!autorest");
+@@clientName(DataPoint, "MetricDataPoint", "!autorest");
+@@clientName(ExceptionData, "TelemetryExceptionData", "!autorest");
+@@clientName(ExceptionDetails, "TelemetryExceptionDetails", "!autorest");
+@@clientName(ErrorDetails, "TelemetryErrorDetails", "!autorest");
+@@clientName(TelemetryEnvelope, "TelemetryItem", "!autorest");
 
-@@clientName(TelemetryEnvelope.ver, "version");
-@@clientName(TelemetryEnvelope.seq, "sequence");
-@@clientName(TelemetryEnvelope.iKey, "instrumentationKey");
+@@clientName(TelemetryEnvelope.ver, "version", "!autorest");
+@@clientName(TelemetryEnvelope.seq, "sequence", "!autorest");
+@@clientName(TelemetryEnvelope.iKey, "instrumentationKey", "!autorest");
 
-@@clientName(Domain.ver, "version");
+@@clientName(Domain.ver, "version", "!autorest");
 
-@@clientName(DataPoint.ns, "namespace");
-@@clientName(DataPoint.kind, "dataPointType");
+@@clientName(DataPoint.ns, "namespace", "!autorest");
+@@clientName(DataPoint.kind, "dataPointType", "!autorest");
 
 // Some models not used in an operation should still be made public.
 

@@ -23,6 +23,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./Pool.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -60,6 +61,7 @@ interface Operations
       CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists available operations for the Microsoft.Batch provider"
 );

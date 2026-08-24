@@ -29,7 +29,6 @@ model Sli is ProxyResource<SliResource> {
 // InheritanceCheckTests expects all classes ending in "Resource" to extend
 // ArmResource, but this model is a plain POCO.
 @doc("Defines the root level properties of an SLI resource.")
-@clientName("SliResourceProperties", "csharp")
 model SliResource {
   @visibility(Lifecycle.Read)
   @doc("Indicates the provisioning status of the last operation.")

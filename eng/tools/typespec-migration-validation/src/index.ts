@@ -1,15 +1,17 @@
 import { sortOpenAPIDocument } from "@azure-tools/typespec-autorest";
 import fs from "fs";
+import { writeFile } from "fs/promises";
 import { diff } from "json-diff";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { configuration } from "./configuration.js";
-import { processDocument } from "./document.js";
-import { generatePrompts } from "./fix/troubleshooting.js";
-import { mergeFiles, readFileContent } from "./helper.js";
-import { addIgnorePath, processIgnoreList } from "./ignore.js";
-import { jsonOutput } from "./jsonOutput.js";
-import { logError, logHeader, logWarning } from "./log.js";
+import { compareDocuments, printDiff } from "./compare.ts";
+import { configuration } from "./configuration.ts";
+import { processDocument } from "./document.ts";
+import { generatePrompts } from "./fix/troubleshooting.ts";
+import { mergeFiles, readFileContent } from "./helper.ts";
+import { addIgnorePath, processIgnoreList } from "./ignore.ts";
+import { jsonOutput } from "./jsonOutput.ts";
+import { logError, logHeader, logWarning } from "./log.ts";
 import {
   findChangedPaths,
   findDifferences,
@@ -17,9 +19,7 @@ import {
   formatChangedPathsReport,
   formatDifferenceReport,
   formatModifiedValuesReport,
-} from "./summary.js";
-import { compareDocuments, printDiff } from "./compare.js";
-import { writeFile } from "fs/promises";
+} from "./summary.ts";
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -81,7 +81,7 @@ function parseArguments() {
       alias: "out",
       describe: "Output folder for analysis results",
       type: "string",
-    })    
+    })
     .option("reportFile", {
       alias: "r",
       describe: "Path to the report file",
@@ -97,7 +97,8 @@ function parseArguments() {
       type: "boolean",
     })
     .option("ignoreDefinitionCase", {
-      description: "Sort definitions case-insensitively. Use this when definitions in Swagger specification is not in PascalCase.",
+      description:
+        "Sort definitions case-insensitively. Use this when definitions in Swagger specification is not in PascalCase.",
       type: "boolean",
     })
     .option("jsonOutput", {
@@ -181,20 +182,18 @@ function sortDefinitionsCaseInsensitive(document: any): any {
 
   const sortedDefinitions: any = {};
   const definitionKeys = Object.keys(document.definitions);
-  
+
   // Sort keys case-insensitively
-  const sortedKeys = definitionKeys.sort((a, b) => 
-    a.toLowerCase().localeCompare(b.toLowerCase())
-  );
-  
+  const sortedKeys = definitionKeys.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
   // Rebuild definitions object with sorted keys
   for (const key of sortedKeys) {
     sortedDefinitions[key] = document.definitions[key];
   }
-  
+
   return {
     ...document,
-    definitions: sortedDefinitions
+    definitions: sortedDefinitions,
   };
 }
 
@@ -203,7 +202,15 @@ export async function main() {
 
   // If using add-ignore command, the command handler will exit the process
 
-  const { oldPath, newPath, reportFile, outputFolder, ignoreDescription, ignorePathCase, ignoreDefinitionCase } = args;
+  const {
+    oldPath,
+    newPath,
+    reportFile,
+    outputFolder,
+    ignoreDescription,
+    ignorePathCase,
+    ignoreDefinitionCase,
+  } = args;
   configuration.ignoreDescription = ignoreDescription;
   if (ignorePathCase !== undefined) {
     configuration.ignorePathCase = ignorePathCase;
@@ -253,37 +260,31 @@ export async function main() {
   logHeader("Comparing finished.");
 
   let outputMarkdown = "";
-  const compareResult = compareDocuments(
-    mergedOldfile,
-    newFile,
-  );
+  const compareResult = compareDocuments(mergedOldfile, newFile);
   if (compareResult.length === 0) {
     logHeader("No differences found.");
-  }
-  else {
+  } else {
     outputMarkdown += "| Type | Level | Message |\n";
     outputMarkdown += "| ---- | ----- | ------- |\n";
     for (const diff of compareResult) {
       outputMarkdown += printDiff(diff);
     }
     console.log(outputMarkdown);
-  }  
+  }
 
   if (outputFolder) {
     let report: string = "";
     const diffForFile = diff(sortedOldFile, sortedNewFile);
     if (diffForFile === undefined || Object.keys(diffForFile).length === 0) {
       return;
-    }      
+    }
 
     // // TO-DELETE: Read the diff file from disk
     // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
 
     const changedPaths = findChangedPaths(diffForFile);
     if (changedPaths.length > 0) {
-      logWarning(
-        `Found ${changedPaths.length} changed paths in the diff.`,
-      );
+      logWarning(`Found ${changedPaths.length} changed paths in the diff.`);
       const changedPathsReport = formatChangedPathsReport(changedPaths);
       report += changedPathsReport;
     }
@@ -309,7 +310,7 @@ export async function main() {
         });
       }
     }
-    
+
     if (args.jsonOutput) {
       fs.writeFileSync(`${outputFolder}/tsmv_output.json`, JSON.stringify(jsonOutput, null, 2));
       logHeader(`JSON output written to ${outputFolder}/tsmv_output.json`);
@@ -317,8 +318,7 @@ export async function main() {
         `---- Start of Json Output ----\n${JSON.stringify(jsonOutput, null, 2)}\n---- End of Json Output ----`,
       );
     }
-  }
-  else if (reportFile) {
+  } else if (reportFile) {
     if (compareResult.length > 0) {
       await writeFile(reportFile, outputMarkdown);
     }

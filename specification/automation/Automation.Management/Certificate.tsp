@@ -73,12 +73,15 @@ interface Certificates {
 }
 
 @@doc(Certificate.name, "The name of certificate.");
-@@doc(Certificate.properties,
+@@doc(
+  Certificate.properties,
   "Gets or sets the properties of the certificate."
 );
-@@doc(Certificates.createOrUpdate::parameters.resource,
+@@doc(
+  Certificates.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update certificate operation."
 );
-@@doc(Certificates.update::parameters.properties,
+@@doc(
+  Certificates.update::parameters.properties,
   "The parameters supplied to the update certificate operation."
 );

@@ -94,15 +94,19 @@ interface HybridRunbookWorkers {
 }
 
 @@doc(HybridRunbookWorker.name, "The hybrid runbook worker id");
-@@doc(HybridRunbookWorker.properties,
+@@doc(
+  HybridRunbookWorker.properties,
   "Gets or sets the hybrid worker group properties."
 );
-@@doc(HybridRunbookWorkers.create::parameters.resource,
+@@doc(
+  HybridRunbookWorkers.create::parameters.resource,
   "The create or update parameters for hybrid runbook worker."
 );
-@@doc(HybridRunbookWorkers.patch::parameters.properties,
+@@doc(
+  HybridRunbookWorkers.patch::parameters.properties,
   "The create or update parameters for hybrid runbook worker."
 );
-@@doc(HybridRunbookWorkers.move::parameters.body,
+@@doc(
+  HybridRunbookWorkers.move::parameters.body,
   "The hybrid runbook worker move parameters"
 );

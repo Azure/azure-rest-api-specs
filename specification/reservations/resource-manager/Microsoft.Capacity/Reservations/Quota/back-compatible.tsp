@@ -19,11 +19,13 @@ using Quota;
 
 @@clientLocation(CurrentQuotaLimitBases.get, "Quota");
 @@clientLocation(CurrentQuotaLimitBases.createOrUpdate, "Quota");
-@@clientName(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
+@@clientName(
+  CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "createQuotaRequest"
 );
 @@clientLocation(CurrentQuotaLimitBases.update, "Quota");
-@@clientName(CurrentQuotaLimitBases.update::parameters.properties,
+@@clientName(
+  CurrentQuotaLimitBases.update::parameters.properties,
   "createQuotaRequest"
 );
 @@clientLocation(CurrentQuotaLimitBases.list, "Quota");

@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
 /**
  * An object that represents a machine learning workspace.
  */
-model Workspace
-  is Azure.ResourceManager.ProxyResource<WorkspaceProperties, false> {
+model Workspace is Azure.ResourceManager.ProxyResource<
+  WorkspaceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
@@ -60,8 +62,10 @@ interface Workspaces {
   @summary("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Workspace>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Workspace>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -82,7 +86,10 @@ interface Workspaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = WorkspacesDeleteParameters,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -240,6 +247,9 @@ interface Workspaces {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @action("listConnectionModels")
   @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
@@ -254,6 +264,9 @@ interface Workspaces {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @summary("Get all the deployments under the workspace scope")
   @list
   @get
@@ -308,18 +321,23 @@ interface Workspaces {
 
 @@doc(Workspace.name, "Azure Machine Learning Workspace Name");
 @@doc(Workspace.properties, "Additional attributes of the entity.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a machine learning workspace."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "The parameters for updating a machine learning workspace."
 );
-@@doc(Workspaces.diagnose::parameters.body,
+@@doc(
+  Workspaces.diagnose::parameters.body,
   "The parameter of diagnosing workspace health"
 );
-@@doc(Workspaces.provisionManagedNetwork::parameters.body,
+@@doc(
+  Workspaces.provisionManagedNetwork::parameters.body,
   "Managed Network Provisioning Options for a machine learning workspace."
 );
-@@doc(Workspace.sku,
+@@doc(
+  Workspace.sku,
   "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
 );

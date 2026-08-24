@@ -226,13 +226,16 @@ interface ScopeAccessReviewScheduleDefinitions {
   >;
 }
 
-@@doc(AccessReviewScheduleDefinition.name,
+@@doc(
+  AccessReviewScheduleDefinition.name,
   "The id of the access review schedule definition."
 );
 @@doc(AccessReviewScheduleDefinition.properties, "Access Review properties.");
-@@doc(AccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
+@@doc(
+  AccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
   "Access review schedule definition properties."
 );
-@@doc(ScopeAccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
+@@doc(
+  ScopeAccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
   "Access review schedule definition properties."
 );

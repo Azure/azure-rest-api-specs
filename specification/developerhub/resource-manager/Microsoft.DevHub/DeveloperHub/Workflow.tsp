@@ -86,6 +86,7 @@ interface Workflows {
 @@doc(Workflow.name, "The name of the workflow resource.");
 @@doc(Workflow.properties, "Properties of a workflow.");
 @@doc(Workflows.createOrUpdate::parameters.resource, "");
-@@doc(Workflows.updateTags::parameters.properties,
+@@doc(
+  Workflows.updateTags::parameters.properties,
   "Parameters supplied to the Update Workflow Tags operation."
 );

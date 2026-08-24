@@ -49,8 +49,10 @@ interface ProtectionContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   register is ArmResourceCreateOrUpdateAsync<
     ProtectionContainerResource,
-    Response = ArmResourceUpdatedResponse<ProtectionContainerResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ProtectionContainerResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -61,7 +63,10 @@ interface ProtectionContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unregister is ArmResourceDeleteSync<
     ProtectionContainerResource,
-    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | AcceptedResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -150,16 +155,22 @@ interface ProtectionContainerOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ProtectionContainerOperationResultOps.Read<
     ProtectionContainerResource,
-    Response = ArmResponse<ProtectionContainerResource> | AcceptedResponse | ArmNoContentResponse
+    Response =
+      | ArmResponse<ProtectionContainerResource>
+      | AcceptedResponse
+      | ArmNoContentResponse
   >;
 }
 
-@@doc(ProtectionContainerResource.name,
+@@doc(
+  ProtectionContainerResource.name,
   "Name of the container whose details need to be fetched."
 );
-@@doc(ProtectionContainerResource.properties,
+@@doc(
+  ProtectionContainerResource.properties,
   "ProtectionContainerResource properties"
 );
-@@doc(ProtectionContainers.register::parameters.resource,
+@@doc(
+  ProtectionContainers.register::parameters.resource,
   "Request body for operation"
 );

@@ -1,0 +1,34 @@
+{
+  "operationId": "NGroups_ListByResourceGroup",
+  "title": "NGroupsListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01",
+    "resourceGroupName": "demo"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "updateProfile": {
+                "updateMode": "Manual"
+              },
+              "containerGroupProfiles": [],
+              "provisioningState": "Succeeded",
+              "elasticProfile": {
+                "maintainDesiredCount": true,
+                "desiredCount": 1
+              }
+            },
+            "name": "demo-ngroup",
+            "type": "Microsoft.ContainerInstance/ngroups",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/ngroups/demo-ngroup"
+          }
+        ]
+      }
+    }
+  }
+}

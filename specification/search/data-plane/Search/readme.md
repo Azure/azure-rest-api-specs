@@ -4,7 +4,6 @@
 
 This is the AutoRest configuration file for AI Search.
 
-
 ---
 
 ## Getting Started
@@ -21,27 +20,19 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information
-These are the global settings for SearchServiceClient and SearchIndexClient.
 
 These are the global settings for the AI Search API.
 
-### Tag: package-2026-04-01
-
-These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2026-04-01'
-input-file:
-  - stable/2026-04-01/search.json
-suppressions:
-  - code: LroExtension
-    from: search.json
-    reason: Legacy swagger file
-```
+<!-- VERSIONING NOTE:
+When adding a new API version:
+  1. Add a new "### Tag: package-<version>" section AFTER this common block (before the previous latest tag).
+  2. Update the `tag:` value in this common block below as the new version so it becomes the default.
+-->
 
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2025-11-01-preview
+tag: package-2026-05-01-preview
 
 directive:
   - where:
@@ -180,6 +171,32 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/search.json
+suppressions:
+  - code: LroExtension
+    from: search.json
+    reason: Legacy swagger file
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/search.json
+suppressions:
+  - code: LroExtension
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Tag: package-2025-11-01-preview

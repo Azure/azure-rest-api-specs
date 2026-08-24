@@ -48,10 +48,12 @@ interface Clusters {
   @tag("Cluster")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
-      @bodyRoot
-      _: Cluster;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Cluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
+          @bodyRoot
+          _: Cluster;
+        }),
     Error = ErrorModel
   >;
 
@@ -65,10 +67,12 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterUpdateParameters,
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster>> & {
-      @bodyRoot
-      _: Cluster;
-    }),
+    Response =
+      | ArmResponse<Cluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster>> & {
+          @bodyRoot
+          _: Cluster;
+        }),
     Error = ErrorModel
   >;
 
@@ -110,10 +114,12 @@ interface Clusters {
 @@doc(Cluster.name, "The name of the cluster resource.");
 @@doc(Cluster.properties, "The cluster resource properties");
 @@doc(Clusters.createOrUpdate::parameters.resource, "The cluster resource.");
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The parameters which contains the property value and property name which used to update the cluster configuration."
 );
-@@doc(Clusters.listUpgradableVersions::parameters.body,
+@@doc(
+  Clusters.listUpgradableVersions::parameters.body,
   "The upgrade path description with target version."
 );
 

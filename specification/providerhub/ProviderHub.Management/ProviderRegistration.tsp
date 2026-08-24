@@ -128,19 +128,24 @@ interface ProviderRegistrations {
   >;
 }
 
-@@doc(ProviderRegistration.name,
+@@doc(
+  ProviderRegistration.name,
   "The name of the resource provider hosted within ProviderHub."
 );
 @@doc(ProviderRegistration.properties, "");
-@@doc(ProviderRegistrations.createOrUpdate::parameters.resource,
+@@doc(
+  ProviderRegistrations.createOrUpdate::parameters.resource,
   "The provider registration properties supplied to the CreateOrUpdate operation."
 );
-@@doc(ProviderRegistrations.checkinManifest::parameters.body,
+@@doc(
+  ProviderRegistrations.checkinManifest::parameters.body,
   "The required body parameters supplied to the checkin manifest operation."
 );
-@@doc(ProviderRegistrations.deleteResources::parameters.body,
+@@doc(
+  ProviderRegistrations.deleteResources::parameters.body,
   "The properties supplied to the DeleteResources operation."
 );
-@@doc(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest::parameters.body,
+@@doc(
+  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest::parameters.body,
   ""
 );

@@ -50,7 +50,10 @@ interface InboundNatRules {
   @tag("LoadBalancers")
   delete is ArmResourceDeleteWithoutOkAsync<
     InboundNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -62,9 +65,11 @@ interface InboundNatRules {
 }
 
 @@doc(InboundNatRule.name, "The name of the inbound NAT rule.");
-@@doc(InboundNatRule.properties,
+@@doc(
+  InboundNatRule.properties,
   "Properties of load balancer inbound NAT rule."
 );
-@@doc(InboundNatRules.createOrUpdate::parameters.resource,
+@@doc(
+  InboundNatRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update inbound NAT rule operation."
 );

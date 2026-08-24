@@ -130,7 +130,8 @@ interface Peerings {
 
 @@doc(Peering.name, "The name of the peering.");
 @@doc(Peering.properties, "The properties that define a peering.");
-@@doc(Peerings.createOrUpdate::parameters.resource,
+@@doc(
+  Peerings.createOrUpdate::parameters.resource,
   "The properties needed to create or update a peering."
 );
 @@doc(Peerings.update::parameters.properties, "The resource tags.");

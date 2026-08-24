@@ -32,13 +32,12 @@ model HybridConnection
 
 @@minLength(HybridConnectionNameParameter.name, 1);
 @@doc(HybridConnectionNameParameter.name, "The hybrid connection name.");
-model HybridConnectionNameParameter
-  is ResourceNameParameter<
-    Resource = HybridConnection,
-    KeyName = "hybridConnectionName",
-    SegmentName = "hybridConnections",
-    NamePattern = ""
-  >;
+model HybridConnectionNameParameter is ResourceNameParameter<
+  Resource = HybridConnection,
+  KeyName = "hybridConnectionName",
+  SegmentName = "hybridConnections",
+  NamePattern = ""
+>;
 
 @armResourceOperations
 interface HybridConnectionOperationGroup {
@@ -70,6 +69,7 @@ interface HybridConnectionOperationGroup {
 @@minLength(HybridConnection.name, 1);
 @@doc(HybridConnection.name, "The hybrid connection name.");
 @@doc(HybridConnection.properties, "Properties of the HybridConnection.");
-@@doc(HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
   "Parameters supplied to create a hybrid connection."
 );

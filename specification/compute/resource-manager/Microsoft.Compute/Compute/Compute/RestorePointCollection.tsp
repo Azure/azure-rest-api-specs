@@ -80,12 +80,15 @@ interface RestorePointCollections {
 }
 
 @@doc(RestorePointCollection.name, "The name of the restore point collection.");
-@@doc(RestorePointCollection.properties,
+@@doc(
+  RestorePointCollection.properties,
   "The restore point collection properties."
 );
-@@doc(RestorePointCollections.createOrUpdate::parameters.resource,
+@@doc(
+  RestorePointCollections.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create or Update restore point collection operation."
 );
-@@doc(RestorePointCollections.update::parameters.properties,
+@@doc(
+  RestorePointCollections.update::parameters.properties,
   "Parameters supplied to the Update restore point collection operation."
 );

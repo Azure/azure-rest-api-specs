@@ -125,9 +125,11 @@ alias ReachabilityAnalysisIntentsListParameters = {
 };
 
 @@doc(ReachabilityAnalysisIntent.name, "Reachability Analysis Intent name.");
-@@doc(ReachabilityAnalysisIntent.properties,
+@@doc(
+  ReachabilityAnalysisIntent.properties,
   "Represents the Reachability Analysis Intent properties."
 );
-@@doc(ReachabilityAnalysisIntents.create::parameters.resource,
+@@doc(
+  ReachabilityAnalysisIntents.create::parameters.resource,
   "Reachability Analysis Intent object to create/update."
 );
