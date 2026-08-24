@@ -2248,6 +2248,10 @@
           "$ref": "./common.json#/definitions/ApplicationGatewayRuleSetStatusOptions",
           "description": "The rule set status"
         },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)')."
+        },
         "tiers": {
           "type": "array",
           "description": "Tier of an application gateway that support the rule set.",
@@ -2294,6 +2298,10 @@
         "sensitivity": {
           "$ref": "./common.json#/definitions/ApplicationGatewayWafRuleSensitivityTypes",
           "description": "The string representation of the web application firewall rule sensitivity."
+        },
+        "paranoiaLevel": {
+          "$ref": "./common.json#/definitions/ApplicationGatewayWafRuleParanoiaLevel",
+          "description": "OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules."
         },
         "description": {
           "type": "string",
@@ -2361,6 +2369,10 @@
         "ruleSetVersion": {
           "type": "string",
           "description": "The version of the web application firewall rule set type."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)')."
         },
         "ruleGroups": {
           "type": "array",
@@ -4466,6 +4478,10 @@
         "ruleSetVersion": {
           "type": "string",
           "description": "The version of the web application firewall rule set type."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)')."
         }
       }
     },
@@ -4705,7 +4721,8 @@
           "type": "array",
           "description": "List of rules within the rule group",
           "items": {
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
