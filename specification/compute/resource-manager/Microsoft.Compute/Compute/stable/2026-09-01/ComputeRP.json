@@ -13946,6 +13946,30 @@
         ]
       }
     },
+    "SkuDistributionMode": {
+      "type": "string",
+      "description": "Specifies how VM SKUs are distributed across instances in the virtual machine scale set.",
+      "enum": [
+        "Heterogeneous",
+        "Homogeneous"
+      ],
+      "x-ms-enum": {
+        "name": "SkuDistributionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Heterogeneous",
+            "value": "Heterogeneous",
+            "description": "VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior."
+          },
+          {
+            "name": "Homogeneous",
+            "value": "Homogeneous",
+            "description": "All VMs use a single SKU selected from the SkuProfile list."
+          }
+        ]
+      }
+    },
     "AlternativeOption": {
       "type": "object",
       "description": "Describes the alternative option specified by the Publisher for this image when this image is deprecated.",
@@ -20043,6 +20067,10 @@
         "allocationStrategy": {
           "$ref": "#/definitions/AllocationStrategy",
           "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated."
+        },
+        "skuDistributionMode": {
+          "$ref": "#/definitions/SkuDistributionMode",
+          "description": "Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list."
         },
         "automaticSkuMigrationPolicy": {
           "$ref": "#/definitions/AutomaticSkuMigrationPolicy",
