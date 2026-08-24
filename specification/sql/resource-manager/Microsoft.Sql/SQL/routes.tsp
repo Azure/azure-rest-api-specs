@@ -100,6 +100,20 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
+
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2026_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2026_08_01_preview)
+      $top?: int64;
     }
   >;
   /**
@@ -139,6 +153,20 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @query("databaseState")
       databaseState?: DatabaseState;
+
+      /**
+       * An opaque token that identifies a starting point in the collection.
+       */
+      @query("$skiptoken")
+      @added(Versions.v2026_08_01_preview)
+      $skiptoken?: string;
+
+      /**
+       * The number of elements to return from the collection.
+       */
+      @query("$top")
+      @added(Versions.v2026_08_01_preview)
+      $top?: int64;
     }
   >;
   /**
