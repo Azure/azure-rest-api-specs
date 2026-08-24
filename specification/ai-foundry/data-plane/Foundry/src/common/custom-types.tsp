@@ -14,6 +14,18 @@ union RealtimeSessionCreateRequestUnion {
   RealtimeSessionCreateRequestUnion
 );
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@changePropertyType(
+  OpenAI.RealtimeServerEventSessionCreated.session,
+  RealtimeSessionCreateRequestUnion
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@changePropertyType(
+  OpenAI.RealtimeServerEventSessionUpdated.session,
+  RealtimeSessionCreateRequestUnion
+);
+
 namespace OpenAI {
   scalar integer extends TypeSpec.int64;
   scalar numeric extends TypeSpec.float64;

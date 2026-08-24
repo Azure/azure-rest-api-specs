@@ -17,6 +17,9 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
+@@usage(OpenAI.RealtimeClientEvent, VoiceAgentClientEventUsage);
+@@usage(OpenAI.RealtimeServerEvent, VoiceAgentServerEventUsage);
+
 @doc("The WebSocket subprotocol supported by a voice-agent connection.")
 union VoiceAgentWebSocketSubprotocol {
   realtime: "realtime",
@@ -28,68 +31,7 @@ union VoiceAgentWebSocketSubprotocol {
 @oneOf
 union VoiceAgentWebSocketMessage {
   client: OpenAI.RealtimeClientEvent,
-  server: VoiceAgentServerEvent,
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
-@doc("A stable v1 message sent by the service over a voice-agent WebSocket.")
-@usage(VoiceAgentServerEventUsage)
-@oneOf
-// This diverges from the upstream OpenAI RT in that is adding a few types (this is ok), and missing a few other ('conversation.created, "input_audio_buffer.dtmf_event_received"), need to confirm if this is intentional or inadvertant
-union VoiceAgentServerEvent {
-  conversation_item_added: OpenAI.RealtimeServerEventConversationItemAdded,
-  conversation_item_created: OpenAI.RealtimeServerEventConversationItemCreated,
-  conversation_item_deleted: OpenAI.RealtimeServerEventConversationItemDeleted,
-  conversation_item_done: OpenAI.RealtimeServerEventConversationItemDone,
-  conversation_item_input_audio_transcription_completed: OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
-  conversation_item_input_audio_transcription_delta: OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
-  conversation_item_input_audio_transcription_failed: OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
-  conversation_item_input_audio_transcription_segment: OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment,
-  conversation_item_retrieved: OpenAI.RealtimeServerEventConversationItemRetrieved,
-  conversation_item_truncated: OpenAI.RealtimeServerEventConversationItemTruncated,
-  input_audio_buffer_cleared: OpenAI.RealtimeServerEventInputAudioBufferCleared,
-  input_audio_buffer_committed: OpenAI.RealtimeServerEventInputAudioBufferCommitted,
-  input_audio_buffer_speech_started: OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
-  input_audio_buffer_speech_stopped: OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
-  input_audio_buffer_timeout_triggered: OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered,
-  mcp_list_tools_completed: OpenAI.RealtimeServerEventMCPListToolsCompleted,
-  mcp_list_tools_failed: OpenAI.RealtimeServerEventMCPListToolsFailed,
-  mcp_list_tools_in_progress: OpenAI.RealtimeServerEventMCPListToolsInProgress,
-  output_audio_buffer_cleared: OpenAI.RealtimeServerEventOutputAudioBufferCleared,
-  rate_limits_updated: OpenAI.RealtimeServerEventRateLimitsUpdated,
-  response_output_audio_delta: OpenAI.RealtimeServerEventResponseAudioDelta,
-  response_output_audio_done: OpenAI.RealtimeServerEventResponseAudioDone,
-  response_output_audio_transcript_delta: OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
-  response_output_audio_transcript_done: OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
-  response_content_part_added: OpenAI.RealtimeServerEventResponseContentPartAdded,
-  response_content_part_done: OpenAI.RealtimeServerEventResponseContentPartDone,
-  response_created: OpenAI.RealtimeServerEventResponseCreated,
-  response_done: OpenAI.RealtimeServerEventResponseDone,
-  response_function_call_arguments_delta: OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
-  response_function_call_arguments_done: OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
-  response_mcp_call_arguments_delta: OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
-  response_mcp_call_arguments_done: OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
-  response_mcp_call_completed: OpenAI.RealtimeServerEventResponseMCPCallCompleted,
-  response_mcp_call_failed: OpenAI.RealtimeServerEventResponseMCPCallFailed,
-  response_mcp_call_in_progress: OpenAI.RealtimeServerEventResponseMCPCallInProgress,
-  response_output_item_added: OpenAI.RealtimeServerEventResponseOutputItemAdded,
-  response_output_item_done: OpenAI.RealtimeServerEventResponseOutputItemDone,
-  response_output_text_delta: OpenAI.RealtimeServerEventResponseTextDelta,
-  response_output_text_done: OpenAI.RealtimeServerEventResponseTextDone,
-  session_created: OpenAI.RealtimeServerEventSessionCreated,
-  session_updated: OpenAI.RealtimeServerEventSessionUpdated,
-  error: OpenAI.RealtimeServerEventError,
-  warning: VoiceAgentServerEventWarning,
-  session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
-  session_avatar_switch_to_speaking: VoiceAgentServerEventSessionAvatarSwitchToSpeaking,
-  session_avatar_switch_to_idle: VoiceAgentServerEventSessionAvatarSwitchToIdle,
-  response_audio_timestamp_delta: VoiceAgentServerEventResponseAudioTimestampDelta,
-  response_audio_timestamp_done: VoiceAgentServerEventResponseAudioTimestampDone,
-  response_animation_blendshapes_delta: VoiceAgentServerEventResponseAnimationBlendshapesDelta,
-  response_animation_blendshapes_done: VoiceAgentServerEventResponseAnimationBlendshapesDone,
-  response_animation_viseme_delta: VoiceAgentServerEventResponseAnimationVisemeDelta,
-  response_animation_viseme_done: VoiceAgentServerEventResponseAnimationVisemeDone,
-  response_video_delta: VoiceAgentServerEventResponseVideoDelta,
+  server: OpenAI.RealtimeServerEvent,
 }
 
 @doc("An animation output produced by a voice-agent session.")
@@ -211,22 +153,23 @@ model VoiceAgentResponseCreateParams {
   audio?: PickProperties<VoiceAudioConfig, "output">;
 
   @doc("Conversation items used as inline response input.")
-  input?: VoiceConversationItem[];
+  input?: OpenAI.RealtimeConversationItem[];
 
   @doc("A pre-generated assistant message used to begin the response.")
-  pre_generated_assistant_message?: VoiceAssistantMessageItem | null;
+  pre_generated_assistant_message?: OpenAI.RealtimeConversationItem | null;
 
   @doc("Interim-response settings for this response.")
   interim_response?: VoiceAgentInterimResponse | null;
 }
 
-@doc("A content part carried by a `response.content_part.*` server event.")
-model VoiceAgentResponseEventContentPart {
-  ...OpenAI.RealtimeServerEventResponseContentPartDonePart;
-
-  @doc("The audio format, when this is an audio content part.")
-  format?: OpenAI.RealtimeAudioFormats;
-}
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart,
+  {
+    @doc("The audio format, when this is an audio content part.")
+    format?: OpenAI.RealtimeAudioFormats,
+  }
+);
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract, including conversation_id, while replacing audio and output."
@@ -239,7 +182,7 @@ model VoiceAgentRealtimeResponse extends OmitProperties<
   audio?: VoiceResponseAudio;
 
   @doc("The items produced by the live response.")
-  output?: VoiceConversationItem[];
+  output?: OpenAI.RealtimeConversationItem[];
 }
 
 @doc("A time-stamped word in an input-audio transcription.")
@@ -275,15 +218,6 @@ model VoiceAgentTranscriptionPhrase {
   confidence?: float32 | null;
 }
 
-@doc("The `conversation.item.create` client event.")
-@usage(VoiceAgentClientEventUsage)
-model VoiceAgentClientEventConversationItemCreate {
-  ...OmitProperties<OpenAI.RealtimeClientEventConversationItemCreate, "item">;
-
-  @doc("The conversation item to create.")
-  item: VoiceConversationItem;
-}
-
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@changePropertyType(
   OpenAI.RealtimeClientEventResponseCreate.response,
@@ -297,24 +231,6 @@ model VoiceAgentClientEventConversationItemCreate {
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventConversationItemAdded.item,
-  VoiceConversationItem
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventConversationItemCreated.item,
-  VoiceConversationItem
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventConversationItemDone.item,
-  VoiceConversationItem
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
   {
@@ -324,24 +240,12 @@ model VoiceAgentClientEventConversationItemCreate {
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventConversationItemRetrieved.item,
-  VoiceConversationItem
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeServerEventConversationItemTruncated,
   {
     @doc("The assistant message after truncation, when the service returns the updated item.")
-    item?: VoiceAssistantMessageItem,
+    item?: OpenAI.RealtimeConversationItem,
   }
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventResponseContentPartDone.part,
-  VoiceAgentResponseEventContentPart
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
@@ -354,18 +258,6 @@ model VoiceAgentClientEventConversationItemCreate {
 @@changePropertyType(
   OpenAI.RealtimeServerEventResponseDone.response,
   VoiceAgentRealtimeResponse
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventResponseOutputItemAdded.item,
-  VoiceConversationItem
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
-@@changePropertyType(
-  OpenAI.RealtimeServerEventResponseOutputItemDone.item,
-  VoiceConversationItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."

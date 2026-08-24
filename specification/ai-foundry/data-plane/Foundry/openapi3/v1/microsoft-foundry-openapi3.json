@@ -2534,7 +2534,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/VoiceConversationItem"
+                        "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -2649,7 +2649,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceConversationItem"
+                  "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
                 }
               }
             }
@@ -3249,7 +3249,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/VoiceConversationItem"
+                        "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -67317,16 +67317,21 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "message": "#/components/schemas/OpenAI.RealtimeConversationItemMessage",
             "function_call": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall",
             "function_call_output": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput",
             "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
             "mcp_list_tools": "#/components/schemas/OpenAI.RealtimeMCPListTools",
             "mcp_call": "#/components/schemas/OpenAI.RealtimeMCPToolCall",
-            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest",
-            "message": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
           }
         },
-        "description": "A single item within a Realtime conversation."
+        "description": "A single item within a Realtime conversation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemFunctionCall": {
         "type": "object",
@@ -67376,6 +67381,16 @@
           "arguments": {
             "type": "string",
             "description": "The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{\"arg1\": \"value1\", \"arg2\": 42}`."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -67384,7 +67399,12 @@
           }
         ],
         "description": "A function call item in a Realtime conversation.",
-        "title": "Realtime function call item"
+        "title": "Realtime function call item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemFunctionCallOutput": {
         "type": "object",
@@ -67430,6 +67450,20 @@
           "output": {
             "type": "string",
             "description": "The output of the function call, this is free text and can contain any information or simply be empty."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
           }
         },
         "allOf": [
@@ -67438,7 +67472,12 @@
           }
         ],
         "description": "A function call output item in a Realtime conversation.",
-        "title": "Realtime function call output item"
+        "title": "Realtime function call output item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessage": {
         "type": "object",
@@ -67460,9 +67499,9 @@
         "discriminator": {
           "propertyName": "role",
           "mapping": {
+            "system": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem",
             "user": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUser",
-            "assistant": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant",
-            "system": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem"
+            "assistant": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant"
           }
         },
         "allOf": [
@@ -67522,6 +67561,16 @@
               "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent"
             },
             "description": "The content of the message."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -67530,7 +67579,12 @@
           }
         ],
         "description": "An assistant message item in a Realtime conversation.",
-        "title": "Realtime assistant message item"
+        "title": "Realtime assistant message item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageAssistantContent": {
         "type": "object",
@@ -67604,6 +67658,16 @@
               "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent"
             },
             "description": "The content of the message."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -67612,7 +67676,12 @@
           }
         ],
         "description": "A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. \"the user is now asking about a different topic\"), use system messages.",
-        "title": "Realtime system message item"
+        "title": "Realtime system message item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageSystemContent": {
         "type": "object",
@@ -67695,6 +67764,16 @@
               "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent"
             },
             "description": "The content of the message."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -67703,7 +67782,12 @@
           }
         ],
         "description": "A user message item in a Realtime conversation.",
-        "title": "Realtime user message item"
+        "title": "Realtime user message item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageUserContent": {
         "type": "object",
@@ -67889,6 +67973,16 @@
           "arguments": {
             "type": "string",
             "description": "A JSON string of arguments for the tool."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -67897,7 +67991,12 @@
           }
         ],
         "description": "A Realtime item requesting human approval of a tool invocation.",
-        "title": "Realtime MCP approval request"
+        "title": "Realtime MCP approval request",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMCPApprovalResponse": {
         "type": "object",
@@ -67937,6 +68036,16 @@
                 "type": "null"
               }
             ]
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -67945,7 +68054,12 @@
           }
         ],
         "description": "A Realtime item responding to an MCP approval request.",
-        "title": "Realtime MCP approval response"
+        "title": "Realtime MCP approval response",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMCPError": {
         "type": "object",
@@ -68025,6 +68139,16 @@
               "$ref": "#/components/schemas/OpenAI.MCPListToolsTool"
             },
             "description": "The tools available on the server."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -68033,7 +68157,12 @@
           }
         ],
         "description": "A Realtime item listing tools available on an MCP server.",
-        "title": "Realtime MCP list tools"
+        "title": "Realtime MCP list tools",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMCPProtocolError": {
         "type": "object",
@@ -68120,6 +68249,16 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
@@ -68128,7 +68267,12 @@
           }
         ],
         "description": "A Realtime item representing an invocation of a tool on an MCP server.",
-        "title": "Realtime MCP tool call"
+        "title": "Realtime MCP tool call",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMCPToolExecutionError": {
         "type": "object",
@@ -82902,32 +83046,6 @@
         ],
         "description": "The WebSocket subprotocol supported by a voice-agent connection."
       },
-      "VoiceAssistantMessageItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant"
-          }
-        ],
-        "description": "An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAudioCodec": {
         "anyOf": [
           {
@@ -83549,43 +83667,6 @@
           ]
         }
       },
-      "VoiceConversationItem": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceSystemMessageItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceUserMessageItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAssistantMessageItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceFunctionCallItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceFunctionCallOutputItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceMcpListToolsItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceMcpCallItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceMcpApprovalRequestItem"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceMcpApprovalResponseItem"
-          }
-        ],
-        "description": "A persisted item in a voice conversation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceConversationStatus": {
         "anyOf": [
           {
@@ -83671,62 +83752,6 @@
           }
         ],
         "description": "The sensitivity threshold for semantic end-of-utterance detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceFunctionCallItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall"
-          }
-        ],
-        "description": "A function call request item.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceFunctionCallOutputItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput"
-          }
-        ],
-        "description": "A function call output item.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -83909,110 +83934,6 @@
           ]
         }
       },
-      "VoiceMcpApprovalRequestItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
-          }
-        ],
-        "description": "An MCP approval request item.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceMcpApprovalResponseItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse"
-          }
-        ],
-        "description": "An MCP approval response item (client-created).",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceMcpCallItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPToolCall"
-          }
-        ],
-        "description": "An MCP call item.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceMcpListToolsItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPListTools"
-          }
-        ],
-        "description": "An MCP list-tools item.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceModelType": {
         "anyOf": [
           {
@@ -84187,7 +84108,7 @@
           "output": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VoiceConversationItem"
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
             },
             "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list."
           },
@@ -84415,32 +84336,6 @@
           ]
         }
       },
-      "VoiceSystemMessageItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem"
-          }
-        ],
-        "description": "A system message item. Only `input_text` content is valid for system messages.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceSystemTool": {
         "type": "object",
         "required": [
@@ -84610,32 +84505,6 @@
           }
         ],
         "description": "The voice implementation. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceUserMessageItem": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUser"
-          }
-        ],
-        "description": "A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

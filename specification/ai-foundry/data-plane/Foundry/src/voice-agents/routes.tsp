@@ -81,7 +81,7 @@ interface VoiceAgentWebSocket {
     @path agent_name: string,
     ...FoundryDataPlaneApiVersionParameter,
     clientEvent: OpenAI.RealtimeClientEvent,
-  ): VoiceAgentServerEvent;
+  ): OpenAI.RealtimeServerEvent;
 }
 
 /**
@@ -228,7 +228,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversationItem>
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -252,7 +252,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversationItem>
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -278,7 +278,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    VoiceConversationItem
+    OpenAI.RealtimeConversationItem
   >;
 
   /**
