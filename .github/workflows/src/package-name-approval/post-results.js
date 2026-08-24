@@ -254,7 +254,9 @@ export default async function postResults({ github, context, core }) {
     // name changes were found). A missing artifact from a failed workflow run does NOT mean
     // config was reverted — it could be a compilation or detection failure.
     // The conclusion is available directly from the workflow_run event payload.
-    const workflowConclusion = context.payload.workflow_run?.conclusion;
+    const workflowConclusion = /** @type {{ workflow_run?: { conclusion?: string } }} */ (
+      context.payload
+    ).workflow_run?.conclusion;
     if (workflowConclusion !== "success") {
       core.info(
         `Code workflow run ${run_id} concluded with "${workflowConclusion}", skipping cleanup`,
