@@ -2111,6 +2111,7 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(Job, "BackupGenericJob", "csharp");
 @@clientName(ProtectionContainer, "BackupGenericProtectionContainer", "csharp");
+@@alternateType(ProtectionContainer.sourceLocation, azureLocation, "csharp");
 @@clientName(ProtectionIntent, "BackupGenericProtectionIntent", "csharp");
 @@alternateType(ProtectionIntent.itemId, armResourceIdentifier, "csharp");
 @@alternateType(ProtectionIntent.policyId, armResourceIdentifier, "csharp");
@@ -2395,6 +2396,11 @@ op protectionPolicyOperationStatusesGet(
 );
 @@alternateType(SecuredVMDetails.securedVMOsDiskEncryptionSetId,
   armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  IaasVMRestoreRequestProperties.securedVMDetails,
+  "SecuredVmDetails",
   "csharp"
 );
 @@clientName(IaasVMRestoreWithRehydrationRequest,
@@ -2930,6 +2936,7 @@ op protectionPolicyOperationStatusesGet(
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(ProtectedItem.sourceLocation, azureLocation, "csharp");
 @@alternateType(ContainerIdentityInfo.aadTenantId, uuid, "csharp");
 @@clientName(DPMProtectedItemExtendedInfo.oldestRecoveryPoint,
   "OldestRecoverOn",
