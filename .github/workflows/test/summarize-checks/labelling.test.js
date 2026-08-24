@@ -375,9 +375,41 @@ describe("update labels", () => {
     },
     {
       description:
-        "Shouldn't add data-plane-review-requested when the review is already signed off",
+        "Should add data-plane-review-requested even when an (unverified) sign-off label is already present",
       existingLabels: ["other-label", "data-plane-review-signoff"],
-      expectedLabelsToAdd: ["TypeSpec", "data-plane", "new-api-version"],
+      expectedLabelsToAdd: [
+        "TypeSpec",
+        "data-plane",
+        "new-api-version",
+        "data-plane-review-requested",
+      ],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        typeSpecChanged: true,
+        isNewApiVersion: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
+      description:
+        "Shouldn't remove data-plane-review-requested when a sign-off label is present (presence is not proof of sign-off)",
+      existingLabels: [
+        "other-label",
+        "data-plane",
+        "new-api-version",
+        "data-plane-review-requested",
+        "data-plane-review-signoff",
+        "TypeSpec",
+      ],
+      expectedLabelsToAdd: [],
       expectedLabelsToRemove: [],
       impactAssessment: {
         suppressionReviewRequired: false,

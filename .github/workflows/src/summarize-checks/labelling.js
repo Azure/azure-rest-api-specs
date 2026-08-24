@@ -546,14 +546,15 @@ export function processImpactAssessment(labelContext, impactAssessment) {
     if (impactAssessment.isNewApiVersion) {
       newApiVersionLabel.shouldBePresent = true;
 
-      // For data-plane PRs, a new API version requires API stewardship review. Apply the
-      // intake label unless the review has already been signed off: assign-reviewers.js
-      // clears this label on sign-off, and re-adding it here would re-request the reviewer
-      // team. See rulesPri0dataPlane below.
-      if (
-        impactAssessment.dataPlaneRequired &&
-        !labelContext.present.has("data-plane-review-signoff")
-      ) {
+      // For data-plane PRs, a new API version requires API stewardship review, so apply the
+      // intake label. This is a pure classification of PR content and never keys off the
+      // protected data-plane-review-signoff label. Reading that protected label here would
+      // be unsafe: an unauthorized user can transiently apply it before the Protected Labels
+      // workflow reverts it, and neither that application nor its reversal (both via the
+      // default token) re-runs this workflow, so its presence is not proof of sign-off.
+      // The gate in rulesPri0dataPlane requires signoff whenever this label is present, and
+      // assign-reviewers.js clears this label only on an authorization-verified sign-off.
+      if (impactAssessment.dataPlaneRequired) {
         dataPlaneReviewRequestedLabel.shouldBePresent = true;
       }
     }
