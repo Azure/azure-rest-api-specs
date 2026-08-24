@@ -83,7 +83,10 @@ interface ManagedEnvironments {
   @summary("Delete a Managed Environment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -154,15 +157,19 @@ interface ManagedEnvironments {
 }
 
 @@doc(ManagedEnvironment.name, "Name of the Environment.");
-@@doc(ManagedEnvironment.properties,
+@@doc(
+  ManagedEnvironment.properties,
   "Managed environment resource specific properties"
 );
-@@doc(ManagedEnvironments.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedEnvironments.createOrUpdate::parameters.resource,
   "Configuration details of the Environment."
 );
-@@doc(ManagedEnvironments.update::parameters.properties,
+@@doc(
+  ManagedEnvironments.update::parameters.properties,
   "Configuration details of the Environment."
 );
-@@doc(ManagedEnvironments.checkNameAvailability::parameters.body,
+@@doc(
+  ManagedEnvironments.checkNameAvailability::parameters.body,
   "The check name availability request."
 );
