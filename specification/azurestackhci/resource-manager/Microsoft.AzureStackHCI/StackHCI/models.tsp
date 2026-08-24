@@ -7546,6 +7546,13 @@ model HardwareProfile {
   cpuCores?: int64;
 
   /**
+   * The logical (SMT/hyper-threaded) core count synchronized from Arc Machine DetectedProperties.
+   * Arc Machine remains the source of truth for capacity computation.
+   */
+  @visibility(Lifecycle.Read)
+  logicalCoreCount?: int32;
+
+  /**
    * Number of cpu sockets in the machine
    */
   @visibility(Lifecycle.Read)
