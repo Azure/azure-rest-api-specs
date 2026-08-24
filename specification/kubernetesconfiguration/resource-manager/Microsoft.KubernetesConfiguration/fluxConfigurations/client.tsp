@@ -122,7 +122,11 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(BucketPatchDefinition, "FluxBucketPatch", "csharp");
 @@clientName(GitRepositoryDefinition, "FluxGitRepository", "csharp");
 @@clientName(GitRepositoryPatchDefinition, "FluxGitRepositoryPatch", "csharp");
-@@clientName(KustomizationDefinition, "Kustomization", "csharp");
+@@clientName(
+  KustomizationDefinition,
+  "FluxConfigurationsKustomization",
+  "csharp"
+);
 @@clientName(KustomizationPatchDefinition, "KustomizationPatch", "csharp");
 @@clientName(LayerSelectorDefinition, "FluxLayerSelector", "csharp");
 @@clientName(LayerSelectorPatchDefinition, "FluxLayerSelectorPatch", "csharp");
