@@ -563,6 +563,9 @@
           },
           "Get BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/GetBackupVaultWithMSI.json"
+          },
+          "Get BackupVault with Cost Management Settings": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithCostManagementSettings.json"
           }
         }
       },
@@ -649,6 +652,9 @@
           },
           "Create BackupVault With CMK": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
+          },
+          "Create BackupVault With Cost Management Settings": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithCostManagementSettings.json"
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
@@ -742,6 +748,9 @@
           },
           "Patch BackupVault with CMK": {
             "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCMK.json"
+          },
+          "Patch BackupVault with Cost Management Settings": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCostManagementSettings.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1041,6 +1050,9 @@
           },
           "Create BackupInstance to perform critical operation With MUA": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ResourceGuardEnabled.json"
+          },
+          "Create BackupInstance with GenericBackupDatasourceParameters": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstanceWithGenericParameters.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1637,6 +1649,9 @@
           },
           "Trigger Restore With Rehydration": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithRehydration.json"
+          },
+          "Trigger Restore with GenericRestoreDatasourceCriteria": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithGenericParameters.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5561,6 +5576,10 @@
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
         },
+        "costManagementSettings": {
+          "$ref": "#/definitions/CostManagementSettings",
+          "description": "Cost Management Settings of the vault"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the BackupVault resource",
@@ -5983,6 +6002,16 @@
       "required": [
         "objectType"
       ]
+    },
+    "CostManagementSettings": {
+      "type": "object",
+      "description": "Cost Management Settings of the vault",
+      "properties": {
+        "granularityLevel": {
+          "$ref": "#/definitions/GranularityLevel",
+          "description": "Settings for granularity level"
+        }
+      }
     },
     "CrossRegionRestoreDetails": {
       "type": "object",
@@ -6502,6 +6531,10 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
+        },
+        "costManagementSettings": {
+          "$ref": "#/definitions/CostManagementSettings",
+          "description": "Cost Management Settings of the vault"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7033,6 +7066,73 @@
           "type": "string",
           "description": "ARM Path of BackupInstance"
         }
+      }
+    },
+    "GenericBackupDatasourceParameters": {
+      "type": "object",
+      "description": "Generic parameters to be used during configuration of backup",
+      "properties": {
+        "resourceSelectors": {
+          "type": "array",
+          "description": "List of resource selectors to be backed up during configuration of backup",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "resourceSelectors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "GenericBackupDatasourceParameters"
+    },
+    "GenericRestoreDatasourceCriteria": {
+      "type": "object",
+      "description": "Generic criteria to be used during restore",
+      "properties": {
+        "resourceSelectors": {
+          "$ref": "#/definitions/ResourceListSelectionCriteria",
+          "description": "List of resource identifiers that need to be restored"
+        }
+      },
+      "required": [
+        "resourceSelectors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
+    },
+    "GranularityLevel": {
+      "type": "string",
+      "enum": [
+        "VaultLevel",
+        "ProtectedItemLevel",
+        "ProtectedItemWithParentTag"
+      ],
+      "x-ms-enum": {
+        "name": "GranularityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VaultLevel",
+            "value": "VaultLevel"
+          },
+          {
+            "name": "ProtectedItemLevel",
+            "value": "ProtectedItemLevel"
+          },
+          {
+            "name": "ProtectedItemWithParentTag",
+            "value": "ProtectedItemWithParentTag"
+          }
+        ]
       }
     },
     "IdentityDetails": {
@@ -7850,6 +7950,10 @@
           "$ref": "#/definitions/FeatureSettings",
           "description": "Feature Settings"
         },
+        "costManagementSettings": {
+          "$ref": "#/definitions/CostManagementSettings",
+          "description": "Cost Management Settings of the vault"
+        },
         "resourceGuardOperationRequests": {
           "type": "array",
           "description": "ResourceGuardOperationRequests on which LAC check will be performed",
@@ -8380,6 +8484,34 @@
         {
           "$ref": "#/definitions/DppTrackedResourceList"
         }
+      ]
+    },
+    "ResourceListSelectionCriteria": {
+      "type": "object",
+      "description": "Specifies the list of resources to be restored",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "Type of the specific object - used for deserializing"
+        },
+        "resourceIdentifiers": {
+          "type": "array",
+          "description": "List of resource identifiers to restore from",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceNameOverrides": {
+          "type": "object",
+          "description": "This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "objectType",
+        "resourceIdentifiers"
       ]
     },
     "ResourceMoveDetails": {

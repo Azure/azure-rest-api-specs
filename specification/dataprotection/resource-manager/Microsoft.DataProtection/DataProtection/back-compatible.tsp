@@ -116,7 +116,7 @@ using Microsoft.DataProtection;
   "!csharp"
 );
 @@clientLocation(
-  BackupInstanceResources.resumeProtectionWithRequest,
+  BackupInstanceResources.resumeProtectionPreview,
   BackupInstances,
   "!csharp"
 );
@@ -379,7 +379,7 @@ using Microsoft.DataProtection;
   "parameters"
 );
 @@clientName(
-  BackupInstanceResources.resumeProtectionWithRequest::parameters.body,
+  BackupInstanceResources.resumeProtectionPreview::parameters.body,
   "parameters"
 );
 @@clientName(
