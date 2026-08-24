@@ -1,20 +1,16 @@
 # Data-Plane API Review - Assign Reviewers
 #
-# Requests review from the `azure-data-plane-api-reviewers` team when a data-plane PR needs
+# Requests review from the `azure-data-plane-api-reviewers` team on data-plane PRs that need
 # stewardship review. The team has GitHub code-review auto-assignment enabled, so GitHub
-# delegates the request to one team member using the team's routing algorithm.
+# picks the individual member; this workflow only requests the team.
 #
-# Two triggers, because the `data-plane-review-requested` intake label can arrive two ways:
-#   - `pull_request_target: labeled` handles labels applied by a human (manual request) and
-#     the `data-plane-review-signoff` sign-off that clears the request label.
-#   - `workflow_run` on "Summarize Checks" handles the auto-applied intake label: Summarize
-#     Checks applies it with the default GITHUB_TOKEN, and labels applied by that token do
-#     not re-trigger `labeled` workflows, so this reconciles the reviewer request from the
-#     PR's live labels after Summarize Checks completes.
+# Two triggers, because the `data-plane-review-requested` label can arrive two ways:
+#   - `pull_request_target: labeled` — manual label, plus the sign-off that clears it.
+#   - `workflow_run` on "Summarize Checks" — the auto-applied label. It is applied with the
+#     default GITHUB_TOKEN, which does not re-trigger `labeled` workflows, so this path
+#     reconciles the request from the PR's live labels instead.
 #
-# Removing the label is intentionally not handled: native delegation owns the individual
-# reviewer, so the workflow never removes a reviewer it did not pick, and it does not
-# subscribe to `unlabeled` events.
+# `unlabeled` is not handled: native delegation owns the individual reviewer.
 name: "Data-Plane API Review - Assign Reviewers"
 
 on:
@@ -48,14 +44,12 @@ concurrency:
 jobs:
   assign-reviewers:
     name: Assign Data-Plane Review Team
-    # For workflow_run, skip runs of Summarize Checks that did not succeed: a failed or
-    # cancelled run may not have applied labels, and there is nothing to reconcile.
+    # Skip Summarize Checks runs that did not succeed: nothing to reconcile.
     if: >-
       ${{ github.event_name == 'pull_request_target' ||
           github.event.workflow_run.conclusion == 'success' }}
-    # ubuntu-slim: this job only calls the GitHub REST API via github-script (no build), and
-    # runs on every Summarize Checks completion, so keep the runner minimal. Matches the other
-    # label-reaction workflows (arm-auto-signoff-status, update-labels).
+    # ubuntu-slim: REST-only job (no build) that runs on every Summarize Checks completion,
+    # matching the other label-reaction workflows (arm-auto-signoff-status, update-labels).
     runs-on: ubuntu-slim
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write

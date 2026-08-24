@@ -94,24 +94,16 @@ async function loadAuthorizedSigners() {
 }
 
 /**
- * Assign the stewardship review team or complete the review.
+ * Assign the stewardship review team, or complete the review on sign-off.
  *
  * Two entry paths:
+ * 1. `pull_request_target: labeled` — a manual {@link TRIGGER_LABEL} requests the team; a
+ *    {@link SIGNOFF_LABEL} clears the fulfilled request label.
+ * 2. `workflow_run` on "Summarize Checks" — reconciles the team request for the
+ *    auto-applied {@link TRIGGER_LABEL} (see {@link assignFromWorkflowRun}).
  *
- * 1. `pull_request_target` `labeled` events. On {@link TRIGGER_LABEL} added: requests
- *    {@link REVIEWER_TEAM} as a reviewer; the team's code-review auto-assignment then
- *    delegates to one member. On {@link SIGNOFF_LABEL} added: clears the fulfilled
- *    {@link TRIGGER_LABEL}. This path covers manually applied labels and human sign-off.
- *
- * 2. `workflow_run` completion of "Summarize Checks" (see {@link assignFromWorkflowRun}).
- *    {@link TRIGGER_LABEL} is applied by Summarize Checks with the default `GITHUB_TOKEN`,
- *    and labels applied by that token do NOT re-trigger `labeled` workflows. So the intake
- *    label alone would never reach path 1. Summarize Checks hands off here on completion
- *    instead, and this path reconciles the reviewer request from the PR's live labels.
- *
- * Label removal is not handled: the workflow does not subscribe to `unlabeled` events,
- * because native delegation owns the individual reviewer and the automation never removes
- * a reviewer it did not pick.
+ * `unlabeled` is intentionally not handled: native delegation owns the individual reviewer,
+ * so the automation never removes a reviewer it did not pick.
  *
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
@@ -156,16 +148,13 @@ export default async function assignReviewers({ github, context, core }) {
 }
 
 /**
- * Reconcile the reviewer request after "Summarize Checks" completes. Summarize Checks
- * applies {@link TRIGGER_LABEL} with the default `GITHUB_TOKEN`, which does not re-trigger
- * `labeled` workflows, so this workflow_run handoff is the only path that reacts to the
- * auto-applied intake label.
+ * Reconcile the team request after "Summarize Checks" completes. The intake label is
+ * auto-applied with the default `GITHUB_TOKEN`, which does not re-trigger `labeled`
+ * workflows, so this is the only path that reacts to it.
  *
- * Because the workflow_run event carries no label payload, the decision is driven entirely
- * by the PR's live state: request {@link REVIEWER_TEAM} only when the PR is open, not a
- * draft, still carries {@link TRIGGER_LABEL}, is not already signed off, and does not
- * already have the team requested. Every condition is idempotent, so the repeated Summarize
- * Checks completions across a PR's life converge on a single team request.
+ * The event carries no label payload, so the decision reads live PR state: request the team
+ * only when the PR is open, non-draft, still carries {@link TRIGGER_LABEL}, is not signed
+ * off, and does not already have the team requested. All conditions are idempotent.
  *
  * @param {Pick<import("@actions/github-script").AsyncFunctionArguments, "github" | "context" | "core">} args
  */
