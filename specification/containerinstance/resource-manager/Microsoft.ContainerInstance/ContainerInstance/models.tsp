@@ -17,6 +17,7 @@ namespace Microsoft.ContainerInstance;
  * Response for network dependencies, always empty list.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NetworkDependenciesResponse is string[];
 
 /**

@@ -120,6 +120,7 @@ using Microsoft.DataProtection;
   BackupInstances,
   "!csharp"
 );
+
 @@clientLocation(
   BackupInstanceResources.stopProtection,
   BackupInstances,

@@ -1707,6 +1707,7 @@ model NodeImageVersion {
   /**
    * The operating system of the node image. Example: AKSUbuntu
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   os?: string;
 
   /**
@@ -2645,6 +2646,7 @@ model BastionProfile {
    *
    * This field cannot be updated. To change IP address after creation, please disable and re-enable the managed bastion with the new public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   publicIpAddressId?: Azure.Core.armResourceIdentifier<[
     {
@@ -2789,6 +2791,7 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @added(Versions.v2026_05_02_preview)
   outboundIPPrefixes?: {
     /**
@@ -2806,6 +2809,7 @@ model ManagedClusterNATGatewayProfile {
    * Desired outbound IP resources for the managed NAT Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @added(Versions.v2026_05_02_preview)
   outboundIPs?: {
     /**
