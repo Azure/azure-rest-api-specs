@@ -8,6 +8,15 @@ import {
 const HEAD_SHA = "0123456789abcdef0123456789abcdef01234567";
 const PULL_REQUEST_URL = "https://github.com/Azure/azure-rest-api-specs/pull/123";
 
+/**
+ * @param {unknown} args
+ */
+function invokeSdkAutogen(args) {
+  return runSdkAutogen(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (args),
+  );
+}
+
 describe("sdk-autogen", () => {
   it("defaults the target branch to main", () => {
     expect(parseSdkAutogenCommand("/sdk-autogen javascript")).toEqual({
@@ -96,7 +105,7 @@ ${PULL_REQUEST_URL}`);
     };
     const core = { info: vi.fn(), setOutput };
 
-    await expect(runSdkAutogen({ github, context, core })).resolves.toEqual({
+    await expect(invokeSdkAutogen({ github, context, core })).resolves.toEqual({
       issueNumber: 456,
       issueUrl: "https://github.com/Azure/azure-sdk-for-js/issues/456",
     });
@@ -109,11 +118,13 @@ ${PULL_REQUEST_URL}`);
       "POST /repos/{owner}/{repo}/issues",
       expect.objectContaining({
         title: `[ai-projects] regen from ${HEAD_SHA} against main`,
-        body: expect.stringContaining(PULL_REQUEST_URL),
-        agent_assignment: expect.objectContaining({
-          base_branch: "main",
-          custom_agent: "ai-projects-regen",
-        }),
+        body: /** @type {unknown} */ (expect.stringContaining(PULL_REQUEST_URL)),
+        agent_assignment: /** @type {unknown} */ (
+          expect.objectContaining({
+            base_branch: "main",
+            custom_agent: "ai-projects-regen",
+          })
+        ),
       }),
     );
     expect(setOutput).toHaveBeenCalledWith(
@@ -144,7 +155,7 @@ ${PULL_REQUEST_URL}`);
     };
 
     await expect(
-      runSdkAutogen({ github, context, core: { info: vi.fn(), setOutput: vi.fn() } }),
+      invokeSdkAutogen({ github, context, core: { info: vi.fn(), setOutput: vi.fn() } }),
     ).rejects.toThrow("reader must have write access");
     expect(request).not.toHaveBeenCalled();
   });
