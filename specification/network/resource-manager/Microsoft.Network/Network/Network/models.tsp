@@ -26129,7 +26129,8 @@ model ManagedRuleSetRuleGroup {
   /**
    * List of rules within the rule group
    */
-  rules?: string[];
+  @typeChangedFrom(Versions.v2026_01_01, string[])
+  rules?: int32[];
 }
 
 /**
