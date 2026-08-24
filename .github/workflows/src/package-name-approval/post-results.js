@@ -256,6 +256,21 @@ export default async function postResults({ github, context, core }) {
   if (!results) {
     core.info("No package name results to process");
 
+    // Only clean up labels if the code workflow completed successfully (meaning no package
+    // name changes were found). A missing artifact from a failed workflow run does NOT mean
+    // config was reverted — it could be a compilation or detection failure.
+    const { data: workflowRun } = await github.rest.actions.getWorkflowRun({
+      owner,
+      repo,
+      run_id,
+    });
+    if (workflowRun.conclusion !== "success") {
+      core.info(
+        `Code workflow run ${run_id} concluded with "${workflowRun.conclusion}", skipping cleanup`,
+      );
+      return;
+    }
+
     // Clean up if package-name labels were previously applied but config was reverted.
     // Without this, removing package name entries from tspconfig leaves stale pending
     // labels and a blocking status check.
@@ -350,8 +365,22 @@ export default async function postResults({ github, context, core }) {
       // No previous entry (!prev) means first detection — treat as new pending (no reset)
     }
 
-    // Only remove global approval labels if any language was actually reset
+    // If any Tier 1 language name changed, reset ALL Tier 1 approvals for cross-language
+    // re-review. This ensures architects re-confirm naming alignment across the board.
     if (resetLanguages.length > 0) {
+      const tier1 = results.isMgmt ? TIER1_MGMT : TIER1_DATA_PLANE;
+      for (const lang of tier1) {
+        if (resetLanguages.includes(lang)) continue; // already reset above
+        const approvedLabel = `package-name-${lang}-approved`;
+        if (existingLabels.includes(approvedLabel)) {
+          core.info(
+            `Resetting ${lang} approval for cross-language re-review (${resetLanguages.join(", ")} changed)`,
+          );
+          await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
+          existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
+          resetLanguages.push(lang);
+        }
+      }
       for (const label of ["package-name-approved-all", "package-name-approved"]) {
         if (existingLabels.includes(label)) {
           await removeLabelIfPresent(github, owner, repo, issue_number, label);

@@ -416,4 +416,61 @@ describe("post-results", () => {
       expect(labelsToAdd.has("package-name-review-required")).toBe(true);
     });
   });
+
+  describe("three-state Tier 1 rendering", () => {
+    it("should parse unchanged status from table rows", () => {
+      const body = [
+        "| Language | Package Name | Namespace | Format | Status | Approvers |",
+        "|----------|--------------|-----------|--------|--------|----------|",
+        "| dotnet | `Azure.Messaging.EventGrid` | `Azure.Messaging.EventGrid` | — | ⏳ Pending _(unchanged)_ | @approver1 |",
+        "| java | `azure-messaging-eventgrid` | `com.azure.messaging.eventgrid` | — | ⏳ Pending | @approver2 |",
+        "| python | _(not yet configured)_ | — | — | ⏳ Pending | @approver3 |",
+      ].join("\n");
+
+      const result = parseCommentTable(body);
+
+      // parseCommentTable only matches rows with backtick-wrapped package names
+      // "not yet configured" rows are not parseable (by design — they have no name to track)
+      expect(result.get("dotnet")?.status).toBe("⏳ Pending _(unchanged)_");
+      expect(result.get("java")?.status).toBe("⏳ Pending");
+      expect(result.has("python")).toBe(false);
+    });
+
+    it("validate-approval regex should match unchanged status rows", () => {
+      const body = [
+        "| dotnet | `Azure.Messaging.EventGrid` | `Azure.Messaging.EventGrid` | — | ⏳ Pending _(unchanged)_ | @approver1 |",
+        "| java | `azure-messaging-eventgrid` | `com.azure.messaging.eventgrid` | — | ⏳ Pending | @approver2 |",
+      ].join("\n");
+
+      // This is the updated regex from validate-approval.js
+      const dotnetRegex = new RegExp(
+        `(\\| dotnet[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
+        "gi",
+      );
+      const javaRegex = new RegExp(
+        `(\\| java[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
+        "gi",
+      );
+
+      const result = body
+        .replace(dotnetRegex, "$1 ✅ Approved by @approver1 $2")
+        .replace(javaRegex, "$1 ✅ Approved by @approver2 $2");
+
+      expect(result).toContain("✅ Approved by @approver1");
+      expect(result).toContain("✅ Approved by @approver2");
+      expect(result).not.toContain("⏳ Pending");
+    });
+
+    it("validate-approval regex should not match already approved rows", () => {
+      const body =
+        "| dotnet | `Azure.Foo` | `Azure.Foo` | — | ✅ Approved by @someone | @approver1 |";
+
+      const regex = new RegExp(
+        `(\\| dotnet[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
+        "gi",
+      );
+
+      expect(regex.test(body)).toBe(false);
+    });
+  });
 });

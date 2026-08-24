@@ -188,7 +188,7 @@ async function handleLabeled({
     // Update the triggered language(s) first
     for (const lang of langsToApprove) {
       const rowRegex = new RegExp(
-        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
+        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
         "gi",
       );
       body = body.replace(rowRegex, `$1 ✅ Approved by @${actor} $2`);
@@ -201,7 +201,7 @@ async function handleLabeled({
       .filter((lang) => lang !== "approved" && lang !== "all");
     for (const lang of approvedLangs) {
       const rowRegex = new RegExp(
-        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
+        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending(?:\\s*_\\(unchanged\\)_)?\\s*(\\|)`,
         "gi",
       );
       body = body.replace(rowRegex, `$1 ✅ Approved $2`);
