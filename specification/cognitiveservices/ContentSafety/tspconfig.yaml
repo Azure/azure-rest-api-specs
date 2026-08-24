@@ -6,27 +6,22 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contentsafety.json"
     azure-resource-provider-folder: "data-plane"
-    emit-lro-options: "none"
+    emit-lro-options: "final-state-only"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentsafety"
     package-version: "1.0.0"
     namespace: "azure.ai.contentsafety"
-    package-pprint-name: '"Azure AI Content Safety"'
+    package-pprint-name: "Azure AI Content Safety"
     flavor: azure
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.AI.ContentSafety"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.ContentSafety
@@ -44,4 +39,3 @@ options:
     namespace: com.azure.ai.contentsafety
     partial-update: true
     flavor: azure
-    api-version: "2023-10-01"

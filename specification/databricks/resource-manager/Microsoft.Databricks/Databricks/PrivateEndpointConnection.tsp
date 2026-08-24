@@ -15,11 +15,10 @@ namespace Microsoft.Databricks;
  * The private endpoint connection of a workspace.
  */
 @parentResource(Workspace)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<
-    PrivateEndpointConnectionProperties,
-    false
-  > {
+model PrivateEndpointConnection is Azure.ResourceManager.ProxyResource<
+  PrivateEndpointConnectionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",

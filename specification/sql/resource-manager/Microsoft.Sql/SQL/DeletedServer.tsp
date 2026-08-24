@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -36,7 +37,7 @@ alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** The name of the deleted server. */

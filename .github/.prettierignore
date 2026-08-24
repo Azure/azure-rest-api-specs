@@ -11,6 +11,10 @@ specification
 # auto-generated agentic workflow lock files
 workflows/*.lock.yml
 
+# auto-generated agentic maintenance workflow
+# cspell:ignore agentics
+workflows/agentics-maintenance.yml
+
 # unmanaged files and folders
 **/*instructions.md
 chatmodes
@@ -27,3 +31,9 @@ workflows/post-apiview.yml
 
 # synced GitHub skills
 .github/skills/azsdk-common-*
+
+# eval run artifacts -- gitignored (.github/skills/.gitignore) but Prettier does
+# not read .gitignore, so without this `npm run format:check` fails locally for
+# anyone who has run the eval suite. CI never sees them (fresh checkout).
+skills/evals/*/results
+skills/evals/*/session-state

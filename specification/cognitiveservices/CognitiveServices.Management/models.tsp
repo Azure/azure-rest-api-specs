@@ -50,6 +50,10 @@ union ProvisioningState {
   Canceled: "Canceled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: DNS records are being resolved during account creation"
   ResolvingDNS: "ResolvingDNS",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is unreachable"
+  @added(Versions.v2026_07_15_preview)
+  ExtensionUnreachable: "ExtensionUnreachable",
 }
 
 /**
@@ -200,6 +204,7 @@ union QuotaUsageStatus {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -1579,6 +1584,12 @@ model AccountProperties {
    */
   storedCompletionsDisabled?: boolean;
 
+  /**
+   * Specifies whether A365 logging is enabled. Defaults to true. Set to false to opt out.
+   */
+  @added(Versions.v2026_07_15_preview)
+  a365LoggingEnabled?: boolean;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The quota limit for AccountProperties"
   @visibility(Lifecycle.Read)
   quotaLimit?: QuotaLimit;
@@ -1647,6 +1658,9 @@ model AccountProperties {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1663,6 +1677,135 @@ model AccountProperties {
    * Specifies the projects, by project name, that are associated with this resource.
    */
   associatedProjects?: string[];
+
+  /**
+   * Reusable default agent capability settings inherited by child projects.
+   */
+  @added(Versions.v2026_07_15_preview)
+  capabilitySettings?: CapabilitySettings;
+
+  /**
+   * Customer-owned AKS hosting configurations for Foundry agents. This property can only be specified when the account is created; an existing account without a hosting configuration cannot add one later. This API version supports exactly one configuration, while the array shape is reserved for future API versions that may support multiple configurations. Once set, the configuration cannot be changed, removed, or reordered. Account update requests should omit this property or send the complete existing value unchanged. Responses only include hosting configuration types defined by the requested API version.
+   */
+  @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minItems(1)
+  @maxItems(1)
+  @identifiers(#["name"])
+  agentHostingConfigurations?: AgentHostingConfiguration[];
+}
+
+/**
+ * Extensible agent capability configuration. Carries the Azure resource IDs of the agent storage dependencies. Modeled as an object so future capability-backed resources can be added without changing the account or project contract.
+ */
+@added(Versions.v2026_07_15_preview)
+model CapabilitySettings {
+  /**
+   * Azure resource ID of the document store used by agent runtime state.
+   */
+  documentStore?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DocumentDB/databaseAccounts";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the vector store used by agent retrieval and indexing.
+   */
+  vectorStore?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Search/searchServices";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the blob store used by agent file and artifact storage.
+   */
+  blobStore?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+}
+
+/**
+ * Base configuration for hosting Foundry agents.
+ */
+@added(Versions.v2026_07_15_preview)
+@discriminator("hostingType")
+model AgentHostingConfiguration {
+  /**
+   * Unique name of the hosting configuration within the Foundry account.
+   */
+  @minLength(1)
+  @maxLength(64)
+  name: string;
+
+  /**
+   * Type of infrastructure used to host Foundry agents.
+   */
+  hostingType: AgentHostingType;
+}
+
+/**
+ * Configuration for hosting Foundry agents on an Azure Kubernetes Service managed cluster.
+ */
+@added(Versions.v2026_07_15_preview)
+model ManagedClusterAgentHostingConfiguration
+  extends AgentHostingConfiguration {
+  /**
+   * Type of infrastructure used to host Foundry agents.
+   */
+  hostingType: "ManagedCluster";
+
+  /**
+   * Azure resource ID of the user-assigned managed identity used by the Foundry resource provider to manage the hosting configuration. The identity must be assigned to the Foundry account in identity.userAssignedIdentities.
+   */
+  hostingManagementIdentityResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane.
+   */
+  workloadIdentityResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the customer-owned AKS managed cluster that runs the hosted agent workloads.
+   */
+  clusterResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/managedClusters";
+    }
+  ]>;
+
+  /**
+   * Azure resource ID of the customer-owned storage account used by the hosted agents. The storage account must be in the same subscription and region as the AKS cluster, and its data-plane endpoint must be reachable from the workload network.
+   */
+  storageAccountResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+}
+
+/**
+ * Type of infrastructure used to host Foundry agents.
+ */
+@added(Versions.v2026_07_15_preview)
+union AgentHostingType {
+  string,
+
+  /**
+   * Agents are hosted on an Azure Kubernetes Service managed cluster.
+   */
+  ManagedCluster: "ManagedCluster",
 }
 
 /**
@@ -1672,6 +1815,9 @@ model AccountProperties {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1694,6 +1840,9 @@ union FoundryAutoUpgradeMode {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2327,6 +2476,7 @@ model Usage {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2337,6 +2487,7 @@ model Usage {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeId?: string | null;
 }
 
@@ -2860,6 +3011,7 @@ model ModelSkuCapacityProperties {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeId?: string | null;
 
   /**
@@ -2870,6 +3022,7 @@ model ModelSkuCapacityProperties {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeType?: QuotaScopeType | null;
 }
 
@@ -3078,6 +3231,20 @@ model DeploymentProperties {
   `model`?: DeploymentModel;
 
   /**
+   * The resource ID of the context cache container associated with this deployment.
+   */
+  @added(Versions.v2026_07_15_preview)
+  contextCacheContainerId?: string;
+
+  /**
+   * Speculative decoding settings for the deployment. This configuration applies to Fireworks model formats.
+   */
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  speculativeDecoding?: DeploymentSpeculativeDecoding;
+
+  /**
    * Properties of Cognitive Services account deployment model. (Deprecated, please use Deployment.sku instead.)
    */
   scaleSettings?: DeploymentScaleSettings;
@@ -3152,6 +3319,25 @@ model DeploymentProperties {
    * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
+}
+
+/**
+ * Speculative decoding settings for a deployment.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model DeploymentSpeculativeDecoding {
+  /**
+   * Draft model used to generate speculative decoding tokens.
+   */
+  draftModel: DeploymentModel;
+
+  /**
+   * The number of draft tokens attempted per speculation step.
+   */
+  @minValue(1)
+  draftTokenCount?: int32 = 4;
 }
 
 /**
@@ -3259,6 +3445,9 @@ model SkuResource {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model PatchResourceSku {
   /**
    * The resource model definition representing SKU
@@ -3415,6 +3604,15 @@ model RaiPolicyProperties {
    */
   @identifiers(#[])
   safetyProviders?: SafetyProviderConfig[];
+
+  /**
+   * Egress (outbound network) policy controlling which external endpoints sandboxed
+   * agents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions.
+   */
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  egressPolicy?: RaiEgressPolicyConfig;
 }
 
 /**
@@ -3613,6 +3811,7 @@ model RaiTopicProperties {
   /**
    * Sample blob url for the custom topic.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sampleBlobUrl?: string;
 
   /**
@@ -4099,6 +4298,13 @@ model ProjectProperties {
    */
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
+
+  /**
+   * Effective agent capability settings for the project. Optional partial override of the account defaults; omitted fields inherit from the parent account when present. Settable only at create time.
+   */
+  @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  capabilitySettings?: CapabilitySettings;
 }
 
 /**
@@ -4461,6 +4667,7 @@ model ManagedNetworkSettings {
    * Public IP address assigned to the Azure Firewall.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'firewallPublicIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   firewallPublicIpAddress?: string | null;
 
@@ -4538,6 +4745,7 @@ model AgenticApplicationProperties extends ResourceBase {
    * The application's dedicated invocation endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'baseUrl' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   baseUrl?: string | null;
 
   /**
@@ -5080,6 +5288,7 @@ model ConnectionOAuth2 {
   /**
    * Required by Concur connection category
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   authUrl?: url;
 
   /**
@@ -5327,6 +5536,7 @@ model AgentCard {
    * URL for the Agent's documentation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'documentationUrl' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   documentationUrl?: string | null;
 
   /**
@@ -5493,6 +5703,7 @@ model RaiBlockListResult {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkAddRequest' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is Array<RaiBlocklistItemBulkRequest>;
 
@@ -5665,6 +5876,7 @@ model RaiPolicyListResult {
  * The list of Cognitive Services RaiBlocklist Items Names.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
 /**
@@ -5672,6 +5884,9 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
@@ -5699,6 +5914,17 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Deployment capabilities represented as key-value pairs.
+   * Example: { assetsV2: "true" }.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'ManagedComputeDeploymentProperties' to support extensible key-value pairs matching service behavior"
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read)
+  capabilities?: Record<string>;
 
   /**
    * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
@@ -5748,6 +5974,9 @@ model ManagedComputeDeploymentProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -5766,6 +5995,9 @@ model ManagedComputeDeploymentProvisioningDetails {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
@@ -5788,6 +6020,9 @@ model ManagedComputeDeploymentRoutes {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentListResult {
   /**
    * The link used to get the next page of managed compute deployments.
@@ -5808,6 +6043,9 @@ model ManagedComputeDeploymentListResult {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union ComputeProvisioningState {
   string,
 
@@ -5850,14 +6088,17 @@ union ComputeProvisioningState {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union VmPriority {
   string,
 
   /** Regular VM priority. */
   Regular: "Regular",
 
-  /** Low-priority VM. */
-  LowPriority: "LowPriority",
+  /** Spot VM priority. */
+  Spot: "Spot",
 }
 
 /**
@@ -5865,6 +6106,9 @@ union VmPriority {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model Pool {
   /**
    * The name of the pool.
@@ -5874,7 +6118,7 @@ model Pool {
   /**
    * The VM priority of the pool.
    */
-  vmPriority: VmPriority;
+  vmPriority?: VmPriority;
 
   /**
    * The instance type (VM SKU) used in the pool.
@@ -5892,6 +6136,9 @@ model Pool {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union ComputeType {
   string,
 
@@ -5908,12 +6155,21 @@ union ComputeType {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @discriminator("computeType")
 model ComputeProperties {
   /**
    * The type of compute resource.
    */
   computeType: ComputeType;
+
+  /**
+   * The location of the compute resource.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
 
   /**
    * Provisioning state of the compute resource.
@@ -5939,6 +6195,9 @@ model ComputeProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ClusterComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -5961,6 +6220,9 @@ model ClusterComputeProperties extends ComputeProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -5999,6 +6261,9 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model SshSettings {
   /**
    * The SSH public key for authenticating to the compute instance.
@@ -6016,10 +6281,14 @@ model SshSettings {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ConnectivityEndpoints {
   /**
    * The public IP address of the compute instance.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
@@ -6035,6 +6304,9 @@ model ConnectivityEndpoints {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute list.
@@ -6054,6 +6326,9 @@ model ComputeListResult {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model WorkbenchProperties {
   /**
    * ARM resource ID of the parent cluster that hosts this workbench.
@@ -6116,6 +6391,9 @@ model WorkbenchProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model WorkbenchListResult {
   /**
    * The link used to get the next page of workbench list.
@@ -6135,6 +6413,9 @@ model WorkbenchListResult {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentInfo {
   /**
    * Full ARM resource ID of the deployment.
@@ -6167,6 +6448,9 @@ model ManagedComputeDeploymentInfo {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeUsage {
   /**
    * Fully qualified resource ID for the managed compute usage.
@@ -6218,6 +6502,9 @@ model ManagedComputeUsage {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeUsageListResult {
   /**
    * The link used to get the next page of managed compute usages.
@@ -6238,6 +6525,9 @@ model ManagedComputeUsageListResult {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesRequest {
   /**
    * The list of hypothetical deployments to evaluate against Azure Policy.
@@ -6250,6 +6540,9 @@ model EvaluateDeploymentPoliciesRequest {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesDeployment {
   /**
    * The name of the hypothetical deployment.
@@ -6267,6 +6560,9 @@ model EvaluateDeploymentPoliciesDeployment {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesDeploymentProperties {
   /**
    * The model to evaluate.
@@ -6284,6 +6580,9 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesResponse {
   /**
    * Per-deployment policy evaluation results, keyed by deployment name.
@@ -6297,6 +6596,9 @@ model EvaluateDeploymentPoliciesResponse {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union PolicyEvaluationOutcome {
   string,
 
@@ -6315,6 +6617,9 @@ union PolicyEvaluationOutcome {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model DeploymentPolicyEvaluationResult {
   /**
    * The evaluation outcome.
@@ -6338,6 +6643,9 @@ model DeploymentPolicyEvaluationResult {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model PolicyAssignmentEvaluationDetails {
   /**
    * The policy assignment ID.
@@ -6381,6 +6689,9 @@ model PolicyAssignmentEvaluationDetails {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model PolicyExpressionEvaluationDetails {
   /**
    * The policy expression.
@@ -6419,6 +6730,9 @@ model PolicyExpressionEvaluationDetails {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ManagedComputeCapacity is a read-only resource that does not have a provisioning state"
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
@@ -6429,6 +6743,7 @@ model ManagedComputeCapacityProperties {
   /**
    * The Azure region where the capacity is available.
    */
+  @removed(Versions.v2026_05_01)
   @visibility(Lifecycle.Read)
   location?: string;
 
@@ -6451,6 +6766,9 @@ model ManagedComputeCapacityProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model DeploymentSizeCapacity {
   /**
    * The number of accelerators required per model instance.
@@ -6476,6 +6794,9 @@ model DeploymentSizeCapacity {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ManagedComputeCapacityListResult {
   /**
    * The link used to get the next page of managed compute capacities.
@@ -6490,4 +6811,328 @@ model ManagedComputeCapacityListResult {
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   value?: ManagedComputeCapacity[];
+}
+
+/**
+ * The enforcement mode for egress rules.
+ * If omitted on create, the server defaults to Enforced.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+union RaiEgressMode {
+  string,
+
+  /** Rules are enforced. Matching traffic is allowed or denied per rule actions. */
+  Enforced: "Enforced",
+
+  /**
+   * Rules are evaluated and logged but not enforced. Traffic is always forwarded regardless of
+   * rule action. A would-be Deny is logged but not applied. Transform and Rewrite actions are
+   * still applied to matching traffic (only Deny enforcement is suppressed).
+   */
+  Audit: "Audit",
+}
+
+/**
+ * The default action when no user-defined egress rules match.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+union RaiEgressDefaultAction {
+  string,
+
+  /** Allow traffic by default when no rules match. */
+  Allow: "Allow",
+
+  /** Deny traffic by default when no rules match. */
+  Deny: "Deny",
+}
+
+/**
+ * URL scheme for rewrite targets. Only HTTP and HTTPS are supported.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+union RaiEgressScheme {
+  string,
+
+  /** HTTP scheme. */
+  Http: "http",
+
+  /** HTTPS scheme. */
+  Https: "https",
+}
+
+/**
+ * The kind of action an egress rule takes when it matches.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+union RaiEgressRuleActionType {
+  string,
+
+  /** Allow the matched traffic. */
+  Allow: "Allow",
+
+  /** Deny the matched traffic. */
+  Deny: "Deny",
+
+  /** Forward the matched traffic after applying header transforms. Requires at least one header. */
+  Transform: "Transform",
+
+  /** Redirect the matched traffic to a new destination, optionally applying header transforms. Requires a rewrite target. */
+  Rewrite: "Rewrite",
+}
+
+/**
+ * The operation to apply to a header in a Transform or Rewrite action.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+union RaiEgressHeaderOperation {
+  string,
+
+  /** Set or overwrite the header value, creating it if it does not exist. */
+  Set: "Set",
+
+  /** Add the header only if it is not already present. */
+  Insert: "Insert",
+
+  /** Remove the header if present. */
+  Remove: "Remove",
+}
+
+/**
+ * A reference to a stored secret used as a header value.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressSecretRef {
+  /** Identifier of the secret to inject. */
+  secretId: string;
+
+  /** Optional key within the secret. */
+  @secret
+  secretKey?: string;
+
+  /** Optional format for the resolved value; "{value}" is the placeholder, e.g. "Bearer {value}". */
+  format?: string;
+}
+
+/**
+ * A reference to a managed-identity token used as a header value.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressManagedIdentityRef {
+  /** The resource/audience the token is requested for. */
+  resource: string;
+
+  /** Optional format for the resolved token; "{value}" is the placeholder, e.g. "Bearer {value}". */
+  format?: string;
+}
+
+/**
+ * A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressHeaderValueRef {
+  /** Resolve the value from a stored secret. */
+  secretRef?: RaiEgressSecretRef;
+
+  /** Resolve the value from a managed-identity token. */
+  managedIdentityRef?: RaiEgressManagedIdentityRef;
+}
+
+/**
+ * A header transformation applied to matched traffic.
+ * For Set or Insert operations, exactly one of value or valueRef must be provided.
+ * For Remove operations, neither value nor valueRef should be set.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressHeaderTransform {
+  /** The operation to perform on this header. */
+  operation: RaiEgressHeaderOperation;
+
+  /** The HTTP header name (e.g., "Authorization", "X-Custom-Auth"). */
+  name: string;
+
+  /**
+   * A static header value. Write-only: accepted on create/update, never returned on read.
+   * If omitted on update, the existing value is preserved. Use this for non-sensitive values;
+   * for credentials, use valueRef instead.
+   */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  value?: string;
+
+  /** A dynamic header value resolved at request time from a secret or managed identity. */
+  valueRef?: RaiEgressHeaderValueRef;
+}
+
+/**
+ * Where a Rewrite action sends matched traffic. At least one field must be set;
+ * omitted fields retain the original request values. This constraint is enforced
+ * by the server (400 Bad Request if all fields are omitted).
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressRewriteTarget {
+  /** Target scheme. Original scheme is kept if omitted. */
+  scheme?: RaiEgressScheme;
+
+  /** Target host. Original host is kept if omitted. */
+  host?: string;
+
+  /** Target path (literal string). Original path (and query) is kept if omitted. */
+  path?: string;
+}
+
+/**
+ * The action an egress rule takes when it matches.
+ * - Allow/Deny: no additional fields needed; headers and rewrite must not be set.
+ * - Transform: headers is required with at least one entry; rewrite must not be set.
+ * - Rewrite: rewrite is required with at least one of scheme/host/path;
+ *   headers is optional for injecting headers alongside the redirect.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressRuleAction {
+  /** The kind of action. */
+  actionType: RaiEgressRuleActionType;
+
+  /**
+   * Header transforms to apply. Required for Transform; optional for Rewrite;
+   * not allowed for Allow or Deny.
+   */
+  @identifiers(#["name"])
+  headers?: RaiEgressHeaderTransform[];
+
+  /** Destination override. Required for Rewrite; not allowed otherwise. */
+  rewrite?: RaiEgressRewriteTarget;
+}
+
+/**
+ * The type of an egress rule, determining what kind of traffic matching it performs.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+union RaiEgressRuleType {
+  string,
+
+  /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
+  Fqdn: "Fqdn",
+}
+
+/**
+ * The match criteria for an egress rule.
+ * If both host and path are omitted, the rule matches all traffic.
+ * Host uses DNS wildcard syntax (e.g., "\*.openai.com" matches "api.openai.com").
+ * Path uses URI prefix matching with an asterisk as a single-segment wildcard.
+ * For example, "/v1/\*" matches "/v1/chat".
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressRuleMatch {
+  /**
+   * Host pattern to match using DNS wildcard syntax (e.g., "\*.openai.com").
+   * A leading "\*." matches any subdomain. Omit to match all hosts.
+   */
+  host?: string;
+
+  /**
+   * Path pattern to match using URI prefix matching.
+   * An asterisk serves as a single-segment wildcard.
+   * For example, "/v1/\*" matches "/v1/chat". Omit to match all paths.
+   */
+  path?: string;
+}
+
+/**
+ * A single egress rule. Rules are evaluated in order; first match wins.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressRule {
+  /**
+   * Name of the rule. Must be unique within the policy.
+   */
+  name: string;
+
+  /**
+   * Description of the rule.
+   */
+  description?: string;
+
+  /**
+   * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
+   */
+  ruleType: RaiEgressRuleType;
+
+  /**
+   * The match criteria for this rule.
+   */
+  match?: RaiEgressRuleMatch;
+
+  /**
+   * The action to take when this rule matches, including the action type and any
+   * type-specific configuration (headers for Transform, rewrite target for Rewrite).
+   */
+  action: RaiEgressRuleAction;
+}
+
+/**
+ * Egress (outbound network) policy configuration nested within an RAI policy.
+ * Controls which external endpoints sandboxed agents can reach and what
+ * transformations (header injection, URL rewrite) are applied to matching traffic.
+ */
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+model RaiEgressPolicyConfig {
+  /**
+   * The enforcement mode for egress rules.
+   * If omitted on create, the server defaults to Enforced. On subsequent GET
+   * requests, the server always returns the effective mode.
+   */
+  mode?: RaiEgressMode;
+
+  /**
+   * The default action when no user-defined rules match.
+   * Deny blocks unmatched traffic; Allow permits it. Transform and Rewrite rules
+   * are always applied to their matched traffic regardless of this setting —
+   * defaultAction only governs traffic that does not match any rule.
+   * If omitted on create, the server defaults to Deny (fail-closed). On subsequent
+   * GET requests, the server always returns the effective value.
+   */
+  defaultAction?: RaiEgressDefaultAction;
+
+  /**
+   * Description of the egress policy.
+   */
+  description?: string;
+
+  /**
+   * Ordered list of egress rules. First matching rule wins.
+   * Rules are evaluated in declaration order; the first rule whose match criteria
+   * are satisfied determines the action taken on the request.
+   */
+  @identifiers(#["name"])
+  rules?: RaiEgressRule[];
 }

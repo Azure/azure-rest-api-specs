@@ -20,6 +20,9 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
@@ -35,13 +38,6 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  /**
-   * The location of the compute resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'location' on the ProxyResource envelope to track compute region independently from the parent account"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
 
   /**
    * Resource tags.
@@ -65,6 +61,9 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
 
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @armResourceOperations
 interface Computes {
   /**
@@ -76,15 +75,15 @@ interface Computes {
   /**
    * Creates or updates a compute associated with the Cognitive Services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Compute create/scale is an async long-running operation: the service returns 202 Accepted on success and 4xx on failure. It never returns 200 or 201, so the response set intentionally includes only 202 to match the service contract."
   @tag("Computes")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Compute>;
-
-  /**
-   * Updates a compute associated with the Cognitive Services account.
-   */
-  @tag("Computes")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Compute, PatchModel = Compute>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Compute,
+    Response = ArmAcceptedLroResponse<
+      "Resource creation accepted.",
+      ArmCombinedLroHeaders
+    >
+  >;
 
   /**
    * Deletes the specified compute associated with the Cognitive Services account.
@@ -137,7 +136,3 @@ interface Computes {
   "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
 );
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
-@@doc(
-  Computes.update::parameters.properties,
-  "The compute properties to update."
-);

@@ -59,6 +59,10 @@ namespace ComputeCombine;
 // PurchasePlan needs input usage for premium layer constructor and setters
 @@usage(PurchasePlan, Azure.ClientGenerator.Core.Usage.input, "java");
 
+// ResourceSku.apiVersions is a list of supported API versions for a SKU, not the service API version.
+// Suppress the name-based heuristic that incorrectly treats it as the service API version parameter.
+@@apiVersion(ResourceSku.apiVersions, false);
+
 // Property name changes: retain old Java names for ComputeGallery and ComputeSku models
 @@clientName(AccessControlRulesIdentity.userName, "username", "java");
 @@clientName(ResourceSkuCosts.meterID, "meterId", "java");
@@ -71,6 +75,37 @@ namespace ComputeCombine;
 );
 
 // ── C# type renames for backward compatibility (migration from AutoRest) ──
+
+// C# naming fixes for Azure.ResourceManager.Compute 1.15.0 stable API review.
+@@clientName(ConfidentialVMVersion, "ConfidentialVmVersion", "csharp");
+@@clientName(
+  DiskSecurityProfile.confidentialVMVersion,
+  "ConfidentialVmVersion",
+  "csharp"
+);
+@@clientName(ImmutabilityPolicyData, "ImmutabilityPolicyContent", "csharp");
+@@clientName(
+  ImmutabilityPolicyLockData,
+  "ImmutabilityPolicyLockContent",
+  "csharp"
+);
+@@clientName(
+  Snapshots.updateImmutabilityPolicy::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
+  Snapshots.updateImmutabilityPolicyLock::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ExternalHealthPolicy, "ComputeExternalHealthPolicy", "csharp");
+@@clientName(StorageAlignmentStatus, "ComputeStorageAlignmentStatus", "csharp");
+@@clientName(
+  StorageFaultDomainAlignmentType,
+  "ComputeStorageFaultDomainAlignmentType",
+  "csharp"
+);
 
 // Common namespace types
 // Common.SubResource has a writable id → maps to ComputeWriteableSubResourceData (matches old AutoRest).
@@ -449,6 +484,26 @@ namespace ComputeCombine;
 @@clientName(
   ComputeGallery.Galleries.gallerySharingProfileUpdate,
   "UpdateSharingProfile",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.SharedGalleryInvites.gallerySharingAccept,
+  "AcceptGallerySharing",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.SharedGalleryInvites.gallerySharingReject,
+  "RejectGallerySharing",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.TenantLevelSharedGalleryInvites.tenantLevelGallerySharingAccept,
+  "AcceptTenantLevelGallerySharing",
+  "csharp"
+);
+@@clientName(
+  ComputeGallery.TenantLevelSharedGalleryInvites.tenantLevelGallerySharingReject,
+  "RejectTenantLevelGallerySharing",
   "csharp"
 );
 @@clientName(
@@ -897,7 +952,10 @@ model VMSizePropertiesWithAdditionalProperties {
 // `OperatingSystemTypes` (closed enum, Windows/Linux) was named `SupportedOperatingSystemType`
 // in the old SDK; the union `OperatingSystemType` kept its spec name (extensible struct).
 @@clientName(OperatingSystemTypes, "SupportedOperatingSystemType", "csharp");
-@@clientName(ReservationType, "CapacityReservationType", "csharp");
+// Breaking change in v2026-04-01: the `ReservationType` union (on capacity reservation groups,
+// added in v2025-04-01) previously shipped in the .NET SDK as `CapacityReservationType`. The
+// alias is removed so the csharp name matches the spec, freeing `CapacityReservationType` for
+// the new VM instance-view union added in v2026-04-01.
 @@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
 @@clientName(
   VMGalleryApplication,
@@ -1179,7 +1237,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventState,
-  "VmScaleSetLifecycleHookEventState",
+  "VirtualMachineScaleSetLifecycleHookEventState",
   "csharp"
 );
 @@clientName(
@@ -1189,7 +1247,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventProperties,
-  "VmScaleSetLifecycleHookEventProperties",
+  "VirtualMachineScaleSetLifecycleHookEventProperties",
   "csharp"
 );
 @@clientName(
@@ -1204,10 +1262,25 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventType,
-  "VmScaleSetLifecycleHookEventType",
+  "VirtualMachineScaleSetLifecycleHookEventType",
   "csharp"
 );
-@@clientName(LifecycleHook.type, "VmScaleSetLifecycleHookEventType", "csharp");
+@@clientName(LifecycleHook, "VirtualMachineScaleSetLifecycleHook", "csharp");
+@@clientName(
+  LifecycleHookAction,
+  "VirtualMachineScaleSetLifecycleHookAction",
+  "csharp"
+);
+@@clientName(
+  LifecycleHookActionState,
+  "VirtualMachineScaleSetLifecycleHookActionState",
+  "csharp"
+);
+@@clientName(
+  LifecycleHook.type,
+  "VirtualMachineScaleSetLifecycleHookEventType",
+  "csharp"
+);
 @@clientName(
   VMScaleSetLifecycleHookEventUpdate,
   "VirtualMachineScaleSetLifecycleHookEventPatch",
@@ -2095,6 +2168,11 @@ union ComputeUsageUnit {
 @@clientName(DiskProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
 @@clientName(DiskProperties.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
 @@clientName(
+  ManagedDiskProperties.diskIOPSReadOnly,
+  "DiskIopsReadOnly",
+  "csharp"
+);
+@@clientName(
   DiskUpdateProperties.diskIOPSReadOnly,
   "DiskIopsReadOnly",
   "csharp"
@@ -2327,6 +2405,97 @@ union ComputeUsageUnit {
   SupportedSecurityOption.TrustedLaunchAndConfidentialVMSupported,
   "TrustedLaunchAndConfidentialVmSupported",
   "csharp"
+);
+
+// ════════════════════════════════════════════════════════════════════════════
+// region: Compute ↔ ComputeDisk — collision disambiguation (all languages)
+// The Compute namespace (VM/VMSS) redeclares two unions that already exist in
+// the ComputeDisk namespace:
+//   Compute.NetworkAccessPolicy        vs ComputeDisk.NetworkAccessPolicy
+//   Compute.AvailabilityPolicyDiskDelay vs ComputeDisk.AvailabilityPolicyDiskDelay
+// Since Compute and ComputeDisk are both aggregated into the same flattened
+// SDK client, these names collide and fail
+// @azure-tools/typespec-client-generator-core/duplicate-client-name across
+// java/csharp/python/go/javascript. Rename the newer Compute-side names in
+// every language scope to preserve the already-shipped ComputeDisk SDK API surface.
+// ════════════════════════════════════════════════════════════════════════════
+
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "csharp"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "java"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "python"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "go"
+);
+@@clientName(
+  Compute.NetworkAccessPolicy,
+  "VirtualMachineDiskNetworkAccessPolicy",
+  "javascript"
+);
+
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "csharp"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "java"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "python"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "go"
+);
+@@clientName(
+  Compute.AvailabilityPolicyDiskDelay,
+  "VirtualMachineDiskDelayAction",
+  "javascript"
+);
+
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "csharp"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "java"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "python"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "go"
+);
+@@clientName(
+  Compute.ManagedDiskProperties,
+  "VirtualMachineDiskProperties",
+  "javascript"
 );
 
 // ════════════════════════════════════════════════════════════════════════════

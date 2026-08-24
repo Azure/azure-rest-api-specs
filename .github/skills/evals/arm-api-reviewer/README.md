@@ -9,7 +9,7 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 arm-api-reviewer/
 ├── run-evals.ps1          # One-click script: clone, build, run, report
 ├── .vally.yaml            # Project config; filename fixed by the vally CLI
-├── vally/                 # Eval definitions (16 files)
+├── vally/                 # Eval definitions (17 files)
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
 │   ├── eval-operations.yaml
@@ -25,8 +25,9 @@ arm-api-reviewer/
 │   ├── eval-citation-and-parity.yaml
 │   ├── eval-typespec-required.yaml
 │   ├── eval-fast-path-triage.yaml
-│   └── eval-protocol-safety.yaml
-├── fixtures/              # Test fixtures (36 data files + README)
+│   ├── eval-protocol-safety.yaml
+│   └── eval-pattern-validation.yaml
+├── fixtures/              # Test fixtures (40 data files + README)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -38,40 +39,42 @@ arm-api-reviewer/
 
 ## Test Categories
 
-| ID     | Category                      | Count | Description                                                                                                                                                                                                                                                                   |
-| ------ | ----------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 01xxxx | ARM resource structure        | 3     | Missing CRUD ops, missing provisioningState, inline types                                                                                                                                                                                                                     |
-| 02xxxx | Property design               | 4     | Secrets, naming, descriptions, enums                                                                                                                                                                                                                                          |
-| 03xxxx | Operations                    | 4     | PATCH, PUT, DELETE, LRO violations                                                                                                                                                                                                                                            |
-| 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                 |
-| 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                    |
-| 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                                                                                                                                                                                                                            |
-| 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                      |
-| 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                   |
-| 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                               |
-| 10xxxx | Classification                | 1     | NEW vs EXISTING issue tagging                                                                                                                                                                                                                                                 |
-| 11xxxx | Report format                 | 2     | Line numbers, rule IDs, structured output; critic invisible on clean                                                                                                                                                                                                          |
-| 12xxxx | TypeSpec required             | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK                                                                                                                                                                                                                   |
-| 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                                                                                                                          |
-| 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                        |
-| 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                            |
-| 16xxxx | Protocol safety               | 10    | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
+| ID     | Category                      | Count | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------ | ----------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 01xxxx | ARM resource structure        | 3     | Missing CRUD ops, missing provisioningState, inline types                                                                                                                                                                                                                                                                                                                                                               |
+| 02xxxx | Property design               | 4     | Secrets, naming, descriptions, enums                                                                                                                                                                                                                                                                                                                                                                                    |
+| 03xxxx | Operations                    | 4     | PATCH, PUT, DELETE, LRO violations                                                                                                                                                                                                                                                                                                                                                                                      |
+| 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                                                                                                                                                           |
+| 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                                                                                                                                                              |
+| 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                                                                                                                                                                                                                                                                                                                                                                      |
+| 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                                                                                                                                                                |
+| 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                                                                                                                                                             |
+| 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                                                                                                                                                                         |
+| 10xxxx | Classification                | 1     | NEW vs EXISTING issue tagging                                                                                                                                                                                                                                                                                                                                                                                           |
+| 11xxxx | Report format                 | 2     | Line numbers, rule IDs, structured output; critic invisible on clean                                                                                                                                                                                                                                                                                                                                                    |
+| 12xxxx | TypeSpec required             | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK                                                                                                                                                                                                                                                                                                                                                             |
+| 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                                                                                                                                                                                                                                                                    |
+| 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                                                                                                                                                                  |
+| 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                                                                                                                                                                      |
+| 16xxxx | Protocol safety               | 14    | Subagent auto-unavailable; empty-response not pass; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan; issue-comment PR target resolution; cross-session top-level deduplication; contradiction clarification |
+| 17xxxx | Pattern constraint validation | 3     | Denylist `[^...]` pattern on path param (blocking); denylist on existing vs new property (warning vs blocking); TypeSpec `@pattern` denylist (blocking)                                                                                                                                                                                                                                                                 |
 
-Total: 51 stimuli across 16 eval files.
+Total: 58 stimuli across 17 eval files.
 
 ## Fixtures
 
-All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
+All 40 fixture data files live in `fixtures/` (plus a `README.md`). See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated
+- **16 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded
+  violations + 1 TypeSpec-generated + 1 denylist pattern
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
-- **4 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
-- **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
+- **5 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers, denylist pattern violations
+- **12 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection + 1 pair for denylist pattern severity
 
 ## Quick Start
 
@@ -85,7 +88,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (48 stimuli, sequential -- safest)
+# Run the full suite (58 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -115,20 +118,70 @@ The script will:
 
 Run `Get-Help .\run-evals.ps1 -Detailed` for all parameters.
 
+## Framework version
+
+This suite runs **locally only** today. No workflow in this repo wires it into
+CI: nothing under `.github/workflows/` invokes `run-evals.ps1` or the shard
+runner, so the numbers quoted in this README come from local runs.
+
+There are two ways vally gets acquired, and they are pinned differently:
+
+| Path                                         | Source                                                                  | Version                                       |
+| -------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------- |
+| Local (`run-evals.ps1`)                      | `git clone https://github.com/microsoft/vally` built from source        | **Unpinned** -- tracks the default branch     |
+| CI shard runner (`eng/common/scripts/eval/`) | `@microsoft/vally-cli` from npm, installed from the committed lock file | **Pinned** (see that folder's `package.json`) |
+
+`run-evals.ps1` clones without a ref and runs `git pull --ff-only` on an
+existing clone, so a local run always uses whatever is at the tip of vally's
+default branch. That is convenient for inner-loop work but means **local
+results are not guaranteed to reproduce**: a vally change to grader semantics
+or the copilot-sdk executor can move scores without any change in this repo.
+When a score shifts unexpectedly, check whether vally moved before assuming
+the reviewer guidance regressed, and record the vally commit alongside any
+score you intend to treat as a baseline (`git -C <vally-repo> rev-parse --short HEAD`).
+
+To reproduce against the version CI would use, pass `-VallyRepo` pointing at a
+clone checked out to the tag matching the pinned `@microsoft/vally-cli`
+version in `eng/common/scripts/eval/package.json`. That folder is synced from
+`Azure/azure-sdk-tools`; bump the pin there, not here. If this suite is later
+added to CI, it should go through that same pinned shard runner so local and
+CI agree.
+
 ## Running Manually with the vally CLI
 
 If you prefer to invoke the CLI directly (e.g., on Linux/macOS or in CI),
 clone [microsoft/vally](https://github.com/microsoft/vally) and
 run `npm install && npm run build`.
 
-The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
-auto-discovery (via `paths.skills`), eval file location, and a named suite for
-running the full eval suite in a single command. (The file is named
-`.vally.yaml` because that is the filename the vally CLI looks
-for; do not rename it.) Execution config (`model`, `judge_model`, `runs`,
-`timeout`) is set in each individual eval YAML file. Skills are discovered
-automatically -- individual eval files do not need to declare
-`environment.skills`.
+The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures the eval
+file location and a named suite for running the full eval suite in a single
+command. (The file is named `.vally.yaml` because that is the filename the vally
+CLI looks for; do not rename it.) Execution config (`model`, `judge_model`,
+`runs`, `timeout`) is set in each individual eval YAML file.
+
+Each eval file declares the skill under test **once**, at the file root:
+
+```yaml
+environment:
+  skills:
+    - "../../../azure-api-review"
+```
+
+vally merges the root environment into every stimulus environment (skills, files
+and commands are concatenated), so individual stimuli only carry their own
+`files` mappings. The path is resolved relative to the eval file, not to the
+working directory or to `.vally.yaml`.
+
+This block is required -- `paths.skills` in `.vally.yaml` does **not** load
+skills on its own; vally only performs skill discovery when `--skill-dir` is
+passed on the command line, and neither `run-evals.ps1` nor the CI shard runner
+(`eng/common/scripts/eval/invoke-eval-shard.ts`) passes it. Declaring it in the
+eval file is also fail-loud: vally aborts the run when a declared skill directory
+has no `SKILL.md`, so a typo cannot silently produce a skill-free run. Do not
+remove it when adding stimuli to a file, and include it when adding a new eval
+file -- a file without `environment.skills` runs against a bare model and
+measures general model knowledge rather than the reviewer's guidance and rule
+definitions.
 
 ```bash
 cd .github/skills/evals/arm-api-reviewer
@@ -137,7 +190,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 48 stimuli, 5 concurrent workers)
+# Run the full suite (all 58 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
@@ -202,7 +255,10 @@ to complete. There are three levels, applied in priority order:
 | `prompt`             | LLM-as-judge evaluation of agent output against `rubric` criteria |
 
 Vally eval files also use `constraints.expect_skills` to verify the
-`azure-api-review` skill is activated during each stimulus.
+`azure-api-review` skill is activated during each stimulus. That constraint is an
+assertion about the result, not a loader -- the skill itself is loaded by the
+eval file's root `environment.skills` (see
+[Running Manually with the vally CLI](#running-manually-with-the-vally-cli)).
 
 ## Including Test Reports in PRs
 
@@ -215,6 +271,12 @@ results in your PR description or as a comment:
    `results/<timestamp>/` directory to your PR.
 3. Summarize pass/fail counts in the PR description so reviewers can quickly
    assess the impact of your changes.
+
+> **Baseline:** results recorded before the eval files declared
+> `environment.skills` were produced without the `azure-api-review` skill loaded
+> and describe bare-model behaviour on the stimulus prompts. They are not
+> comparable to skill-loaded results -- the first skill-loaded run establishes a
+> new baseline rather than showing a regression or improvement.
 
 ## Non-Deterministic Tests
 

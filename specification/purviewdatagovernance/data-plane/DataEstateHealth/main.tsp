@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
  */
 @service(#{ title: "PurviewDataEstateHealth" })
 @server(
-  "{endpoint}/datagovernance/dataestate",
+  "{endpoint}/datagovernance/health",
   "Purview Data Estate Health Service provides health monitoring, data quality assessments, governance controls, and estate management across Azure data assets.",
   {
     @doc("The endpoint of the Purview Data Estate Health service. Example: https://api.purview-service.microsoft.com/")
