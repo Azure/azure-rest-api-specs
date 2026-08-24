@@ -1,0 +1,108 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["./start-mcp.ps1"]
+      timeout: 60000
+# Execution configuration
+config:
+  runs: 1                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+- prompt: |
+    Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore those operationIds that do not contain underscores or begin with a lowercase letter.
+  name: 004003-delete-and-restore-operationId-decorator
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BastionHost.tsp
+      dest: BastionHost.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BgpConnection.tsp
+      dest: BgpConnection.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRouteGateway.tsp
+      dest: ExpressRouteGateway.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRoutePort.tsp
+      dest: ExpressRoutePort.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRouteProviderPort.tsp
+      dest: ExpressRouteProviderPort.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/NetworkInterface.tsp
+      dest: NetworkInterface.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/P2SVpnGateway.tsp
+      dest: P2SVpnGateway.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/package.json
+      dest: package.json
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/Route.tsp
+      dest: Route.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnServerConfigurationPolicyGroup.tsp
+      dest: VpnServerConfigurationPolicyGroup.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnSiteLinkConnection.tsp
+      dest: VpnSiteLinkConnection.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: Underscore operationIds should be removed (e.g. BgpConnection has only underscore ones)
+  - type: file-not-matches
+    config:
+      path: BgpConnection.tsp
+      pattern: '@operationId\('
+  - type: file-not-matches
+    config:
+      path: NetworkInterface.tsp
+      pattern: '@operationId\('
+  # VP2: Non-standard PascalCase operationIds restored with @operationId
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '@operationId\("PutBastionShareableLink"\)'
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '@operationId\("GetActiveSessions"\)'
+  - type: file-matches
+    config:
+      path: ExpressRouteProviderPort.tsp
+      pattern: '@operationId\("ExpressRouteProviderPort"\)'
+  # VP3: Restored operationIds keep their #suppress comment
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '#suppress.*no-openapi|#suppress.*operationId'
+  # Underscore one in ExpressRouteProviderPort should be removed
+  - type: file-not-matches
+    config:
+      path: ExpressRouteProviderPort.tsp
+      pattern: '@operationId\("ExpressRouteProviderPortsLocation_List"\)'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+scoring:
+  weights:
+    tool-calls: 1
+    prompt: 1
+    file-not-matches: 3
+    file-matches: 4
+  threshold: 1.0
